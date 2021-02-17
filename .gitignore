@@ -1,0 +1,96 @@
+# .git ignore samples
+###################
+/*eurekai
+
+*__pycache__
+
+# IDE
+/*.idea
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/*
+*.wpr
+*.wpu
+pax_global_header
+.project
+.pydevproject
+.settings/*
+*.wpr
+*.wpu
+
+# exception to the rule
+.gitkeep
+
+# Byte-compiled / optimized / DLL files / log file 
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.bash
+*.log
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+*.rar
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+Pipfile*
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coveragec
+.coverage.*
+.cache
+
+# celery 
+celery_start
+celerybeat*
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# env
+.python-version
+.env
+.hdfscli.cfg
+.venv/
+venv/
+ENV/
+env*/
+
+*local*
+
+node_modules/
+*.bat
+*.pid
+data/
+*.code-workspace
+*.cfg
+*.vscode
+
+media/
