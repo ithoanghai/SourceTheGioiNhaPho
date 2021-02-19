@@ -20,5 +20,6 @@ services:
       - .:/app
     ports:
       - "8888:8888"
+      - "2222:22"
     depends_on:
       - db
