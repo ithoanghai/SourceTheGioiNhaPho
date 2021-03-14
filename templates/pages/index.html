@@ -1,10 +1,35 @@
 {% extends 'base.html' %} 
 
 {% load humanize %}
+{% load i18n %}
 
-{% block title %} | Welcome {% endblock %}
+{% block title %} | Welcome'{% endblock %}
 
 {% block content %}
+    {% get_current_language as LANGUAGE_CODE %}
+    <!-- Current language: {{ LANGUAGE_CODE }} -->
+    <p>{% translate "hoanghai" %}</p>
+
+    {% language 'vi' %}
+        {% get_current_language as LANGUAGE_CODE %}
+        <!-- Current language: {{ LANGUAGE_CODE }} -->
+        <p>_("Welcome to our page")</p>
+    {% endlanguage %}
+    {% get_language_info for LANGUAGE_CODE as lang %}
+    {% get_language_info for "vi" as lang %}
+    Language code: {{ lang.code }}<br>
+    Name of language: {{ lang.name_local }}<br>
+    Name in English: {{ lang.name }}<br>
+    Bi-directional: {{ lang.bidi }}<br>
+    Name in the active language: {{ lang.name_translated }}
+
+    {% translate "View this category in:" %}
+    {% for lang_code, lang_name in languages %}
+        {% language lang_code %}
+        <a href="{% url 'category' slug=category.slug %}">{{ lang_name }}</a>
+        {% endlanguage %}
+    {% endfor %}
+
 <!-- Showcase -->
 <section id="showcase">
     <div class="container text-center">

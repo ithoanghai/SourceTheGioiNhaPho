@@ -1,5 +1,5 @@
 """
-WSGI config for realestate project.
+WSGI config for TownhouseWorldRealestate project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'realestate.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TownhouseWorldRealestate.settings')
 
 application = get_wsgi_application()
