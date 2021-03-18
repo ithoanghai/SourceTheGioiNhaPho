@@ -1,10 +1,13 @@
-{% load text_money %}
+{#{% load text_money %}#}
+{% load humanize i18n %}
 
 <div class="card listing-preview">
-    <img class="card-img-top" src="{{ listing.photo_main.url }}" alt="">
+    {% with listing.main_photo as photo %}
+        <img class="card-img-top" src="{{ photo.url }}" alt="">
+    {% endwith %}
     <div class="card-img-overlay">
         <h2>
-            <span class="badge badge-secondary text-white">{{ listing.price | text_money }}</span>
+            <span class="badge badge-secondary text-white">{{ listing.price | intword }}</span>
         </h2>
     </div>
     <div class="card-body">
@@ -17,15 +20,15 @@
         <hr>
         <div class="row py-2 text-secondary">
             <div class="col-6">
-                <i class="fas fa-th-large"></i> Diện tích: {{ listing.sqft }}</div>
+                <i class="fas fa-th-large"></i> {% trans "Diện tích" %}: {{ listing.area }}</div>
             <div class="col-6">
-                <i class="fas fa-car"></i> Để xe {{ listing.garage }}</div>
+                <i class="fas fa-car"></i> {% trans "Để xe" %}: {{ listing.garage }}</div>
         </div>
         <div class="row py-2 text-secondary">
             <div class="col-6">
-                <i class="fas fa-bed"></i> Phòng ngủ: {{ listing.bedrooms }}</div>
+                <i class="fas fa-bed"></i> {% trans "Phòng ngủ" %}: {{ listing.bedrooms }}</div>
             <div class="col-6">
-                <i class="fas fa-bath"></i> Bathrooms phongf ngu  ta t: {{ listing.bathrooms }}</div>
+                <i class="fas fa-bath"></i> {% trans "Nhà tắm" %}: {{ listing.bathrooms }}</div>
         </div>
         <hr>
         <div class="row py-2 text-secondary">
@@ -37,6 +40,6 @@
                 <i class="fas fa-clock"></i> {{ listing.list_date | timesince }}</div>
         </div>
         <hr>
-        <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
+        <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">{% trans "Xêm thêm thông tin" %}</a>
     </div>
 </div>

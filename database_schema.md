@@ -13,7 +13,7 @@
 - bedrooms: INT
 - bathrooms: INT
 - garage: INT [0]
-- sqft: INT
+- area: FLOAT
 - lot_size: FLOAT
 - is_published: BOOL [true]
 - list_date: DATE

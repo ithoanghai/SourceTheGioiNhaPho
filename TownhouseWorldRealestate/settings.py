@@ -98,9 +98,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-# https://docs.djangoproject.com/en/2.1/topics/i18n/
+# https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = 'vi'
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('vi', 'Tiếng Việt')
+]
 
 TIME_ZONE = 'UTC'
 

@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
 
-{% load humanize %}
+{% load humanize i18n %}
 {% block title %} | Welcome {% endblock %}
 
 {% block content %}
@@ -76,14 +76,13 @@
       <div class="row">
         {% if listings %}
           {% for listing in listings %}
-            <!-- Listing 1 -->
             <div class="col-md-6 col-lg-4 mb-4">
                 {% include 'listings/_preview.html' %}
             </div>
           {% endfor %}
         {% else %}
           <div class="col-md-12">
-            <p>No Listings Available</p>
+            <p>{% trans "Không có kết quả phù hợp!" %}</p>
           </div>
         {% endif %}
 
