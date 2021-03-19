@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -51,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'TownhouseWorldRealestate.urls'
@@ -66,6 +69,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'django.template.context_processors.i18n',  # this one
             ],
         },
     },
@@ -82,7 +87,7 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME', 'real_estate'),
         'USER': os.getenv('DB_USER', 'postgres'),
         'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
-        'HOST': os.getenv('DB_HOST', 'db'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
 
     }
 }
@@ -98,13 +103,21 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-# https://docs.djangoproject.com/en/3.1/topics/i18n/
+# https://docs.djangoproject.com/en/2.1/topics/i18n/
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale/'),
+)
 
-LANGUAGE_CODE = 'vi'
-
+LANGUAGE_CODE = 'en-us'
 LANGUAGES = [
-    ('en', 'English'),
-    ('vi', 'Tiếng Việt')
+    ('vi', _('Vietnamese')),
+    ('en-us', _('English')),
+]
+
+COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE_CONTEXT = [
+    {"LANGUAGE_BIDI": True},
+    {"LANGUAGE_BIDI": False},
 ]
 
 TIME_ZONE = 'UTC'
@@ -114,6 +127,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/deployment/
