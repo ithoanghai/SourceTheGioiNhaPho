@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% load humanize i18n %}
 {% block title %} | Welcome {% endblock %}
@@ -10,28 +10,27 @@
       <div class="home-search p-5">
         <div class="overlay p-5">
           <h1 class="display-4 mb-4">
-            Property Searching Just Got So Easy
+            {% trans "Tìm kiếm nhà phố dễ dàng" %}
           </h1>
-          <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores eveniet vel nostrum magnam
-            voluptatum tempore! Consectetur, id commodi!</p>
+          <p class="lead">{% trans "Hàng ngàn căn nhà phố, nhà riêng trong kho hàng của chúng tôi giúp bạn tìm kiếm ngôi nhà ở mở ước" %}</p>
           <div class="search">
             <form action="{% url 'search' %}">
               <!-- Form Row 1 -->
               <div class="form-row">
                 <div class="col-md-4 mb-3">
-                  <label class="sr-only">Keywords</label>
-                  <input type="text" name="keywords" class="form-control" placeholder="Keyword (Pool, Garage, etc)">
+                  <label class="sr-only">{% trans "Từ khóa" %}</label>
+                  <input type="text" name="keywords" class="form-control" placeholder="{% trans "Từ khóa (khu vực, địa chỉ)" %}">
                 </div>
 
                 <div class="col-md-4 mb-3">
-                  <label class="sr-only">City</label>
-                  <input type="text" name="city" class="form-control" placeholder="City">
+                  <label class="sr-only">{% trans "Thành phố" %}</label>
+                  <input type="text" name="city" class="form-control" placeholder="{% trans "Thành phố" %}">
                 </div>
 
                 <div class="col-md-4 mb-3">
-                  <label class="sr-only">State</label>
+                  <label class="sr-only">{% trans "Quận huyện" %}</label>
                   <select name="state" class="form-control">
-                    <option selected="true" disabled="disabled">State (All)</option>
+                    <option selected="true" disabled="disabled">{% trans "Quận huyện" %}</option>
                     {% for key,value in state_choices.items %}
                       <option value="{{ key }}">{{ value }}</option>
                     {% endfor %}
@@ -41,9 +40,9 @@
               <!-- Form Row 2 -->
               <div class="form-row">
                 <div class="col-md-6 mb-3">
-                  <label class="sr-only">Bedrooms</label>
+                  <label class="sr-only">{% trans "Phòng ngủ" %}</label>
                   <select name="bedrooms" class="form-control">
-                    <option selected="true" disabled="disabled">Bedrooms (All)</option>
+                    <option selected="true" disabled="disabled">{% trans "Tất cả phòng ngủ" %}</option>
                     {% for key,value in bedroom_choices.items %}
                       <option value="{{ key }}">{{ value }}</option>
                     {% endfor %}
@@ -51,14 +50,14 @@
                 </div>
                 <div class="col-md-6 mb-3">
                   <select name="price" class="form-control" id="type">
-                    <option selected="true" disabled="disabled">Max Price (Any)</option>
+                    <option selected="true" disabled="disabled">{% trans "Giá tối đa (tất cả)" %}</option>
                     {% for key,value in price_choices.items %}
                       <option value="{{ key }}">{{ value }}</option>
                     {% endfor %}
                   </select>
                 </div>
               </div>
-              <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
+              <button class="btn btn-secondary btn-block mt-4" type="submit">{% trans "Tìm kiếm" %}</button>
             </form>
           </div>
         </div>
@@ -72,12 +71,12 @@
   <!-- Listings -->
   <section id="listings" class="py-5">
     <div class="container">
-      <h3 class="text-center mb-3">Latest Listings</h3>
+      <h3 class="text-center mb-3">{% trans "Nhà mới nhất" %}</h3>
       <div class="row">
         {% if listings %}
           {% for listing in listings %}
             <div class="col-md-6 col-lg-4 mb-4">
-                {% include 'listings/_preview.html' %}
+                {% include 'listings/_listing_card.html' %}
             </div>
           {% endfor %}
         {% else %}

@@ -3,11 +3,11 @@ from django.shortcuts import render
 from FunctionModule.listings.choices import price_choices, bedroom_choices, state_choices
 from FunctionModule.listings.models import Listing
 from FunctionModule.realtors.models import Realtor
+from django.urls import reverse_lazy
 
 
 def index(request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)[:3]
-
     context = {
         'listings': listings,
         'state_choices': state_choices,
