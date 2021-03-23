@@ -29,12 +29,21 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-INSTALLED_APPS = [
+MODULES = [
     'FunctionModule.pages.apps.PagesConfig',
     'FunctionModule.listings.apps.ListingsConfig',
     'FunctionModule.realtors.apps.RealtorsConfig',
     'FunctionModule.accounts.apps.AccountsConfig',
     'FunctionModule.contacts.apps.ContactsConfig',
+    'FunctionModule.cadastral.apps.CadastralConfig',
+]
+
+THIRD_PARTIES = [
+    'location_field.apps.DefaultConfig',
+    'ajax_select',
+]
+
+BUILT_IN_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
 ]
+
+INSTALLED_APPS = BUILT_IN_APPS + THIRD_PARTIES + MODULES
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,7 +94,7 @@ WSGI_APPLICATION = 'TownhouseWorldRealestate.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': os.getenv('DB_NAME', 'real_estate'),
         'USER': os.getenv('DB_USER', 'postgres'),
         'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
@@ -147,4 +158,11 @@ from django.contrib.messages import constants as messages
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
+}
+
+LOCATION_FIELD = {
+    'map.provider': 'google',
+    'search.provider': 'nominatim',
+    # 'provider.mapbox.access_token': 'pk.eyJ1Ijoia2llbm5ndXllbjExMDEiLCJhIjoiY2ttaHRqZTgzMGF0YzJ3bXVvYW9ncnh0ZiJ9.xar2mZcYZJ1qK4i2mRDa0Q',
+    'provider.google.api_key': os.getenv('GOOGLE_MAP_API_KEY', 'AIzaSyDmaAApf34vXAuXCPWvMAKJQ50t5ZzGVzA')
 }

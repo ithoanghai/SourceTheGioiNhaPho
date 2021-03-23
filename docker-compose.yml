@@ -3,16 +3,18 @@ version: "3.9"
 services:
   redis:
      image: 'redis:latest'
+     restart: on-failure
   db:
-    image: postgres
+    image: 'kartoza/postgis:13-3.1'
     environment:
-      - POSTGRES_DB=real_estate
+      - POSTGRES_DBNAME=real_estate
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
     - ./data/db:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    restart: on-failure
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8888

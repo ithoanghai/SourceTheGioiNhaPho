@@ -2,7 +2,7 @@ FROM python:3
 ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 RUN apt-get -qq update \
-    && apt-get -y install openssh-server
+    && apt-get -y install openssh-server gdal-bin
 RUN mkdir -p /webapp \
     && mkdir -p ~/.ssh && mkdir /var/run/sshd \
     && echo 'root:docker' | chpasswd \

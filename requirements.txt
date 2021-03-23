@@ -5,4 +5,7 @@ Pillow==8.1.0
 pycryptodome==3.10.1
 whitenoise==5.2.0
 psycopg2-binary==2.8.6
-
+django-location-field==2.1.0
+# djangorestframework==3.12.2
+django-ajax-selects==2.1.0
+django-embed-video==1.4.0
