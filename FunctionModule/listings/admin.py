@@ -29,8 +29,14 @@ class ListingAdmin(admin.ModelAdmin):
             'all': ('css/admin/listing.css',)
         }
 
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        if request.user.is_superuser:
+            return queryset
+        else:
+            return queryset.filter(user=request.user.id)
+
     def get_exclude(self, request, obj=None):
-        # print(reverse('ajax_lookup', kwargs={'channel': 'districts'}))
         excluded = super().get_exclude(request, obj)
         to_exclude = ['list_date']
         if obj is None:
