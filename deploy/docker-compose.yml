@@ -1,0 +1,59 @@
+version: '3.9'
+
+services:
+  db:
+    image: 'kartoza/postgis:13-3.1'
+    environment:
+      - POSTGRES_DBNAME=real_estate
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=bBtv7V96uSV590
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: on-failure
+  redis:
+    image: 'redis:6.2'
+    restart: on-failure
+  nginx:
+    restart: always
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - './deploy/nginx/conf.d.production:/etc/nginx/conf.d'
+      - './deploy/nginx/nginx.conf:/etc/nginx/nginx.conf'
+      - './staticfiles:/staticfiles'
+      - './media:/media'
+      - '/data/certbot/conf:/etc/letsencrypt'
+      - '/data/certbot/www:/var/www/certbot'
+    depends_on:
+      - web
+    command: "nginx -s reload"
+    network_mode: "host"
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - '/home/cbidev/data/certbot/conf:/etc/letsencrypt'
+      - '/home/cbidev/data/certbot/www:/var/www/certbot'
+    entrypoint: "/bin/sh -c 'certbot renew'"
+  web:
+    restart: always
+    build:
+      context: .
+      dockerfile: deploy/dockerfile.production
+    command: bash -c "gunicorn --bind 0.0.0.0:8000 TownhouseWorldRealestate.wsgi:application -k gevent"
+    environment:
+    - DEBUG=0
+    - USE_DOCKER=yes
+    env_file:
+    - .env
+    volumes:
+      - ./:/app
+    expose:
+      - "8888"
+    depends_on:
+      - db
+      - redis
+#    tty: true
