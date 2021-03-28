@@ -17,3 +17,5 @@ RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/s
 COPY requirements.txt /app
 RUN pip install -r requirements.txt
 COPY . /app
+# RUN useradd --create-home appuser
+# USER appuser
