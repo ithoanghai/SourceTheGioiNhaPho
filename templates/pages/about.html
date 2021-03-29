@@ -1,17 +1,16 @@
 {% extends 'base.html' %} 
 
-{% load static %}
+{% load static i18n %}
 
-{% block title %} | About Us {% endblock %}
+{% block title %} | {%  trans "Giới thiệu" %} {% endblock %}
 
 {% block content %}
 <section id="showcase-inner" class="py-5 text-white">
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="display-4">About Real Estate</h1>
-          <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, pariatur!</p>
-        </div>
+          <h1 class="display-5">{% trans "Giới thiệu Thế giới Nhà Phố" %}</h1>
+          <p class="lead">{% trans " Ra đời chính thức từ năm 2020, Thế giới Nhà Phố là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Thế giới Nhà Phố, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Thế giới Nhà Phố còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở. " %}  </div>
       </div>
     </div>
   </section>
@@ -23,9 +22,9 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a href="{% url 'index' %}">
-              <i class="fas fa-home"></i> Home</a>
+              <i class="fas fa-home"></i> {% trans "Trang chủ" %}</a>
           </li>
-          <li class="breadcrumb-item active"> About</li>
+          <li class="breadcrumb-item active"> {% trans "Về chúng tôi" %}</li>
         </ol>
       </nav>
     </div>
@@ -35,12 +34,10 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8">
-          <h2>We Search For The Perfect Home</h2>
-          <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, pariatur!</p>
+          <h2>Tìm kiếm ngôi nhà lý tưởng</h2>
+          <p class="lead">Hàng ngàn nhà đất mới cập nhật liên tục!</p>
           <img src="{% static 'img/about.jpg' %}" alt="">
-          <p class="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis esse officia repudiandae ad saepe ex, amet
-            neque quod accusamus rem quia magnam magni dolorum facilis ullam minima perferendis? Exercitationem at quaerat
-            commodi id libero eveniet harum perferendis laborum molestias quia.</p>
+          <p class="mt-4">Theo dõi thông tin nhà đất mới nhất, đăng ký xem nhà miễn phí và thương lượng mức giá mong muốn. Với lợi thế về công nghệ và dịch vụ hoàn hảo, Thế giới Nhà Phố giúp bạn tiết kiệm đáng kể chi phí, công sức và thời gian.</p>
         </div>
         <div class="col-md-4">
           {% if mvp_realtors %}
@@ -63,16 +60,16 @@
 
   <!-- Work -->
   <section id="work" class="bg-dark text-white text-center">
-    <h2 class="display-4">We Work For You</h2>
-    <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem velit aperiam, unde aliquid at similique!</h4>
+    <h2 class="display-4">Hàng ngàn ngôi nhà lý tưởng</h2>
+    <h4>Chuyên viên của chúng tôi đồng hành cùng bạn ở mỗi bước để tìm ra giải pháp hợp lý nhất nhằm giúp bạn có được ngôi nhà ưng ý!</h4>
     <hr>
-    <a href="{% url 'listings' %}" class="btn btn-secondary text-white btn-lg">View Our Featured Listings</a>
+    <a href="{% url 'listings' %}" class="btn btn-secondary text-white btn-lg">Xem danh sách sản phẩm</a>
   </section>
 
   <!-- Team -->
   <section id="team" class="py-5">
     <div class="container">
-      <h2 class="text-center">Our Team</h2>
+      <h2 class="text-center">Đội ngũ chuyên viên chuyên nghiệp</h2>
       <div class="row text-center">
         {% if realtors %}
           {% for realtor in realtors %}
@@ -80,7 +77,7 @@
               <img src="{{ realtor.photo.url }}" alt="" class="rounded-circle mb-3">
               <h4>{{ realtor.name }}</h4>
               <p class="text-success">
-                <i class="fas fa-award text-success mb-3"></i> Realtor</p>
+                <i class="fas fa-award text-success mb-3"></i> Chuyên viên</p>
               <hr>
               <p>
                 <i class="fas fa-phone"></i> {{ realtor.phone }}</p>
@@ -90,7 +87,7 @@
           {% endfor %}
         {% else %}
           <div class="col-md-12">
-            <p>No Realtors Available</p>
+            <p>Các chuyên viên tạm thời nghỉ tư vấn</p>
           </div>
         {% endif %}       
       </div>

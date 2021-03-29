@@ -451,18 +451,6 @@ pre {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto; }
-  @media (min-width: 576px) {
-    .container {
-      max-width: 540px; } }
-  @media (min-width: 768px) {
-    .container {
-      max-width: 720px; } }
-  @media (min-width: 992px) {
-    .container {
-      max-width: 960px; } }
-  @media (min-width: 1200px) {
-    .container {
-      max-width: 1140px; } }
 
 .container-fluid {
   width: 100%;
@@ -4278,7 +4266,8 @@ button.close {
   vertical-align: text-top !important; }
 
 .bg-primary {
-  background-color: #10284e !important; }
+  background: rgb(129, 152, 233) !important;
+   }
 
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
@@ -4286,7 +4275,7 @@ button.bg-primary:focus {
   background-color: #071224 !important; }
 
 .bg-secondary {
-  background-color: #30caa0 !important; }
+  background-color: #3995e5 !important; }
 
 a.bg-secondary:hover, a.bg-secondary:focus,
 button.bg-secondary:hover,
