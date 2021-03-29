@@ -12,5 +12,5 @@ COPY requirements.txt ./
 RUN pip install -r requirements.txt
 COPY . /app
 
-RUN useradd --create-home appuser
-USER appuser
+#RUN useradd --create-home appuser
+#USER appuser
