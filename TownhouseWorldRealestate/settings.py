@@ -30,10 +30,10 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 MODULES = [
+    'FunctionModule.accounts.apps.AccountsConfig',
     'FunctionModule.pages.apps.PagesConfig',
     'FunctionModule.listings.apps.ListingsConfig',
     'FunctionModule.realtors.apps.RealtorsConfig',
-    'FunctionModule.accounts.apps.AccountsConfig',
     'FunctionModule.contacts.apps.ContactsConfig',
     'FunctionModule.cadastral.apps.CadastralConfig',
 ]
@@ -41,6 +41,7 @@ MODULES = [
 THIRD_PARTIES = [
     'location_field.apps.DefaultConfig',
     'ajax_select',
+    'rolepermissions',
 ]
 
 BUILT_IN_APPS = [
@@ -111,6 +112,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', },
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', },
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', },
+]
+
+AUTH_USER_MODEL = 'accounts.User'
+
+AUTHENTICATION_BACKENDS = [
+    'FunctionModule.accounts.auth.RealEstateAuthBackend',
+    'django.contrib.auth.backends.ModelBackend'
 ]
 
 # Internationalization

@@ -19,11 +19,12 @@ services:
     build: .
     environment:
       - DB_HOST=db
-    command: python manage.py runserver 0.0.0.0:8888
+    command:  bash -c "service ssh restart;python manage.py runserver 0.0.0.0:8888"
     volumes:
       - .:/app
     ports:
       - "8888:8888"
+      - "8889:8889"
       - "2222:22"
     depends_on:
       - db

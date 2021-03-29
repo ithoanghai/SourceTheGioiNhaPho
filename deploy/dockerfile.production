@@ -1,0 +1,16 @@
+FROM python:3
+RUN apt-get -qq update \
+    && apt-get -y --no-install-recommends install apt-utils \
+    && apt-get -y install curl libgdal-dev\
+    && apt-get -qqy install python-gdal \
+    && apt-get -y install pypy gdal-bin
+RUN pip install gunicorn gevent uwsgi
+
+RUN mkdir -p /app
+WORKDIR /app
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+COPY . /app
+
+#RUN useradd --create-home appuser
+#USER appuser
