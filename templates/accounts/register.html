@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-
-{% block title %} | Register Account {% endblock %}
+{% load i18n %}
+{% block title %} | {% trans "Đăng ký gia nhập Nhà Phố" %} {% endblock %}
 
 {% block content %}
 <section id="register" class="bg-light py-5">
@@ -10,7 +10,7 @@
           <div class="card">
             <div class="card-header bg-primary text-white">
               <h4>
-                <i class="fas fa-user-plus"></i> Register</h4>
+                <i class="fas fa-user-plus"></i> {% trans "Đăng ký gia nhập Nhà Phố" %}</h4>
             </div>
             <div class="card-body">
               <!-- Alerts -->
@@ -18,30 +18,34 @@
               <form action="{% url 'register' %}" method="POST">
                   {% csrf_token %}
                   <div class="form-group">
-                      <label for="first_name">First Name</label>
+                      <label for="first_name">{% trans "Họ đệm" %}</label>
                       <input type="text" name="first_name" class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label for="last_name">Last Name</label>
+                      <label for="last_name">{% trans "Tên" %}</label>
                       <input type="text" name="last_name" class="form-control" required>
                     </div>
                 <div class="form-group">
-                  <label for="username">Username</label>
+                  <label for="username">{% trans "Tên tài khoản" %}</label>
                   <input type="text" name="username" class="form-control" required>
                 </div>
-                <div class="form-group">
-                  <label for="email">Email</label>
+                  <div class="form-group">
+                  <label for="email">{% trans "Số điện thoại" %}</label>
                   <input type="email" name="email" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label for="password2">Password</label>
+                  <label for="email">{% trans "Email" %}</label>
+                  <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="password2">{% trans "Mật khẩu" %}</label>
                   <input type="password" name="password" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label for="password">Confirm Password</label>
+                  <label for="password">{% trans "Xác nhận mật khẩu" %}</label>
                   <input type="password" name="password2" class="form-control" required>
                 </div>
-                <input type="submit" value="Register" class="btn btn-secondary btn-block">
+                <input type="submit" value="{% trans "Đăng ký gia nhập" %}" class="btn btn-secondary btn-block">
               </form>
             </div>
           </div>

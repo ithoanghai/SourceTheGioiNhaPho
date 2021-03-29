@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n%}
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container">
@@ -17,7 +17,7 @@
               class="nav-item mr-3"
             {% endif %}
           >
-            <a class="nav-link" href="{% url 'index' %}">Home</a>
+            <a class="nav-link" href="{% url 'index' %}">{% trans "Trang chủ"%}</a>
           </li>
           <li
             {% if 'about' in request.path %}
@@ -26,7 +26,7 @@
               class="nav-item mr-3"
             {% endif %}
           >
-            <a class="nav-link" href="{% url 'about' %}">About</a>
+            <a class="nav-link" href="{% url 'about' %}">{% trans "Giới thiệu" %}</a>
           </li>
           <li
             {% if 'listings' in request.path %}
@@ -35,11 +35,15 @@
               class="nav-item mr-3"
             {% endif %}
           >
-            <a class="nav-link" href="{% url 'listings' %}">Featured Listings</a>
+            <a class="nav-link" href="{% url 'listings' %}">{% trans "Danh mục SP" %}</a>
           </li>
         </ul>
 
         <ul class="navbar-nav ml-auto">
+        <a class="nav-link" href="{% url 'login' %}">
+                <i class="fas fa-coins"></i>
+                {% trans "Đăng Bán/Cho thuê" %}
+                </a>
           {% if user.is_authenticated %}
             <li
             {% if 'dashboard' in request.path %}
@@ -49,11 +53,11 @@
             {% endif %}
             >
               <a class="nav-link" href="{% url 'dashboard' %}">
-               Welcome {{ user.username }} (Dashboard)</a>
+               {% trans "Chào mừng" %} {{ user.username }}</a>
             </li>
             <li class="nav-item mr-3">
               <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
-                <i class="fas fa-sign-out-alt"></i> Logout
+                <i class="fas fa-sign-out-alt"></i> {% trans "Đăng xuất" %}
               </a>
               <form action="{% url 'logout' %}" method="POST" id="logout">
                 {% csrf_token %}
@@ -69,7 +73,7 @@
             {% endif %}
             >
               <a class="nav-link" href="{% url 'register' %}">
-                <i class="fas fa-user-plus"></i> Register</a>
+                <i class="fas fa-user-plus"></i> {% trans "Gia nhập Nhà Phố" %}</a>
             </li>
             <li
             {% if 'login' in request.path %}
@@ -80,8 +84,8 @@
             >
               <a class="nav-link" href="{% url 'login' %}">
                 <i class="fas fa-sign-in-alt"></i>
-
-                Login</a>
+                {% trans "Đăng nhập" %}
+                </a>
             </li>
           {% endif %}
         </ul>
