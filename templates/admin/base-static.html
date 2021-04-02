@@ -1,0 +1,97 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title> Quản trị hệ thống Thế giới Nhà phố {% block title %}{% endblock %}</title>
+
+    <link href="/static/admin/css/styles.css" rel="stylesheet"/>
+    <link href="{% static 'admin/css/admin-dashboard.css' %}" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+
+            {% include 'admin/includes/sidebar-inner.html' %}
+
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <!-- Header -->
+        {% block header %}
+            <div id="header">
+                <!-- Brand -->
+                <a class="navbar-brand pt-0" href="/admin">
+                    <img src="{% static 'img/logo.png' %}" width="80px" class="navbar-brand-img" alt="...">
+                </a>
+                <div id="branding">
+                    {% block branding %}{% endblock %}
+                </div>
+                {% block usertools %}
+                    {% if has_permission %}
+                        <div id="user-tools">
+                            {% block welcome-msg %}
+                                {% translate 'Chào mừng bạn,' %}
+                                <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+                            {% endblock %}
+                            {% block userlinks %}
+                                {% if site_url %}
+                                    <a href="{{ site_url }}">{% translate 'Xem trang' %}</a> /
+                                {% endif %}
+                                {% if user.is_active and user.is_staff %}
+                                    {% url 'django-admindocs-docroot' as docsroot %}
+                                    {% if docsroot %}
+                                        <a href="{{ docsroot }}">{% translate 'Tài liệu' %}</a> /
+                                    {% endif %}
+                                {% endif %}
+                                {% if user.has_usable_password %}
+                                    <a href="{% url 'admin:password_change' %}">{% translate 'Đổi mật khẩu' %}</a> /
+                                {% endif %}
+                                <a href="{% url 'admin:logout' %}">{% translate 'Đăng xuất' %}</a>
+                            {% endblock %}
+                        </div>
+                    {% endif %}
+                {% endblock %}
+                {% block nav-global %}{% endblock %}
+                    {% include 'admin/includes/navigation.html' %}
+            </div>
+        {% endblock %}
+        <!-- END Header -->
+
+        {% block breadcrumbs %}
+            <div class="breadcrumbs">
+                <a href="{% url 'admin:index' %}">{% translate 'Trang chủ' %}</a>
+                {% if title %} &rsaquo; {{ title }}{% endif %}
+            </div>
+        {% endblock %}
+
+        <div class="main-content">
+            {% block content %}{% block object-tools %}{% endblock %}
+                {{ content }}
+            {% endblock content %}
+        </div>
+
+        {% include 'admin/includes/footer.html' %}
+
+    </div>
+</div>
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+    <!-- Scripts for Admin -->
+    {% include "admin/includes/scripts.html" %}
+ {% endblock javascripts %}
+
+
+</body>
+</html>
+    

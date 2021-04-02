@@ -1,0 +1,130 @@
+{% load i18n %}
+
+{% if app_list %}
+    {% for app in app_list %}
+        <div class="app-{{ app.app_label }} module{% if app.app_url in request.path %} current-app{% endif %}">
+            <table>
+                <div style=" text-transform: uppercase; font-size: 12px; padding: 5px 5px 5px 5px">
+                    <a href="{{ app.app_url }}" class="nav-link"
+                       title="{% blocktranslate with name=app.name %}Đối tượng {{ name }} của ứng dụng{% endblocktranslate %}">{{ app.name }}</a>
+                </div>
+                {% for model in app.models %}
+                    <tr style="font-size: 14px" class="model-{{ model.object_name }}{% if model.admin_url in request.path %} current-model{% endif %}">
+                        {% if model.admin_url %}
+                            <th scope="row"><a class="nav-link" href="{{ model.admin_url }}"{% if model.admin_url in request.path %}
+                                               aria-current="page"{% endif %}>{{ model.name }}</a></th>
+                        {% else %}
+                            <th scope="row">{{ model.name }}</th>
+                        {% endif %}
+
+                        {% if model.add_url %}
+                            <td><a class="nav-link" href="{{ model.add_url }}" class="addlink">{% translate 'Thêm' %}</a></td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if model.admin_url and show_changelinks %}
+                            {% if model.view_only %}
+                                <td><a class="nav-link" href="{{ model.admin_url }}" class="viewlink">{% translate 'Xem' %}</a></td>
+                            {% else %}
+                                <td><a class="nav-link" href="{{ model.admin_url }}" class="changelink">{% translate 'Sửa' %}</a></td>
+                            {% endif %}
+                        {% elif show_changelinks %}
+                            <td></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endfor %}
+    <div style="text-transform: uppercase; font-size: 12px; padding: 5px 5px 5px 5px">
+        {% translate 'Cấu hình giao diện' %}</div>
+    <div style="font-size: 14px; width: 100%">
+        <a style="display: flex; position: relative;" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts"
+           aria-expanded="false"
+           aria-controls="collapseLayouts">
+            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+            {% translate 'Giao diện' %}
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link" href="{% url 'admin:index' %}">{% translate 'Mặc định' %}</a>
+                <a class="nav-link" href="{% url 'layout1' %}">{% translate 'Giao diện 1' %}</a>
+                <a class="nav-link" href="{% url 'layout2' %}">{% translate 'Giao diện 2' %}</a>
+            </nav>
+        </div>
+        <a style="display: flex; position: relative;" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false"
+           aria-controls="collapsePages">
+            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+            {% translate 'Trang khác' %}
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth"
+                   aria-expanded="false" aria-controls="pagesCollapseAuth">
+                    {% translate 'Xác thực người dùng' %}
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
+                     data-parent="#sidenavAccordionPages">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{% url 'admin:login' %}">{% translate 'Đăng nhập' %}</a>
+                        <a class="nav-link" href="/register">Register</a>
+                        <a class="nav-link"
+                           href="{% url 'admin:password_change' %}">{% translate 'Thay đổi mật khẩu' %}</a>
+                    </nav>
+                </div>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError"
+                   aria-expanded="false" aria-controls="pagesCollapseError">
+                    {% translate 'Trang áo lỗi' %}
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
+                     data-parent="#sidenavAccordionPages">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="/admin/error403">403 Page</a>
+                        <a class="nav-link" href="/admin/error404">404 Page</a>
+                        <a class="nav-link" href="/admin/error500">500 Page</a>
+                    </nav>
+                </div>
+            </nav>
+        </div>
+    </div>
+       <hr/>
+    <div style="text-transform: uppercase; font-size: 12px;  padding: 5px 5px 5px 5px">{% translate 'Tính năng khác' %}</div>
+    <div style="font-size: 14px; width: 100%">
+        <a  style="display: flex; position: relative;" class="nav-link {% if 'charts' in segment %} active {% endif %}" href="/admin/chart">
+            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+            {% translate 'Biểu đồ thống kê' %}
+        </a>
+        <a  style="display: flex; position: relative;" class="nav-link {% if 'tables' in segment %} active {% endif %}" href="/admin/table">
+            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+            {% translate 'Bảng biểu' %}
+        </a>
+        <a  style="display: flex; position: relative;" class="nav-link {% if 'maps' in segment %} active {% endif %}" href="/admin/map">
+            <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
+            {% translate 'Bản đồ' %}
+        </a>
+        <a  style="display: flex; position: relative;" class="nav-link {% if 'page-blank' in segment %} active {% endif %}" href="/admin/pageblank">
+            <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
+            {% translate 'Trang trắng' %}
+        </a>
+    </div>
+    <hr/>
+    <div style=" padding: 5px 5px 5px 5px">
+        <a  style="display: flex; position: relative;" style="text-transform: uppercase; font-size: 12px;"
+            href="{% url 'admin:logout' %}">
+            <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
+            {% translate 'Đăng xuất' %}
+        </a>
+    </div>
+
+
+{% else %}
+    <p>{% translate 'Bạn không có quyền xem hoặc sửa bất cứ tính năng nào.' %}</p>
+{% endif %}
+
+
+

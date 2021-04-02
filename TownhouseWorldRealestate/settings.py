@@ -36,6 +36,7 @@ MODULES = [
     'FunctionModule.realtors.apps.RealtorsConfig',
     'FunctionModule.contacts.apps.ContactsConfig',
     'FunctionModule.cadastral.apps.CadastralConfig',
+
 ]
 
 THIRD_PARTIES = [
@@ -87,6 +88,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'TownhouseWorldRealestate.wsgi.application'
 
