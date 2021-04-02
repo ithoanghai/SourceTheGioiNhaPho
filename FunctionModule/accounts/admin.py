@@ -78,6 +78,5 @@ class GroupAdmin(admin.ModelAdmin):
     form = GroupAdminForm
     filter_horizontal = ['permissions']
 
-
 admin.site.register(Group, GroupAdmin)
 admin.site.register(User, AccountAdmin)

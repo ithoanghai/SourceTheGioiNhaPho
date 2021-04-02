@@ -24,9 +24,9 @@ class ListingAdmin(admin.ModelAdmin):
     form = ListingAdminForm
 
     class Media:
-        js = ('js/admin/text_money.js', 'js/admin/address_select.js')
+        js = ('admin/js/text_money.js', 'admin/js/address_select.js')
         css = {
-            'all': ('css/admin/listing.css',)
+            'all': ('admin/css/listing.css',)
         }
 
     def get_queryset(self, request):
