@@ -3,14 +3,13 @@ from django.template import loader
 from django.http import HttpResponse
 from django import template
 
-
 from FunctionModule.listings.choices import price_choices, bedroom_choices, state_choices
 from FunctionModule.listings.models import Listing
 from FunctionModule.realtors.models import Realtor
 from django.urls import reverse_lazy
 
 from django.contrib.admin import site
-from django.contrib.auth.models import User
+
 
 def index(request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)[:3]
@@ -41,12 +40,12 @@ def about(request):
 
 """Admin url here"""
 def dashboard(request):
-    return  redirect(request, 'admin/admin_login')
+    app_list = site.get_app_list(request)
+    context = {
+        'available_apps': app_list
+    }
 
-def admin_login(request):
-
-    return  render(request, 'admin/login.html')
-
+    return render(request, 'admin/index.html', context)
 
 def layout1(request):
     app_list = site.get_app_list(request)
@@ -126,7 +125,7 @@ def profile(request):
     context = {
         'available_apps': app_list
     }
-    return render(request, 'admin/profile.html', context)
+    return render(request, 'admin/includes/profile.html', context)
 
 def table(request):
     app_list = site.get_app_list(request)

@@ -1,133 +1,94 @@
-{% load static i18n %}
+{% load static i18n%}
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-primary sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}">
-            <img src="{% static 'img/logo-ko-chu.png' %}" class="logo" style="width: 40px"
-                 alt="Thế giới Nhà Phố: Tín - Tâm - Thành">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="dropdown">
-                <a class="nav-link" href="{% url 'index' %}" style="color: #792424">{% trans "Trang chủ" %}</a>
-            </div>
-            <div class="dropdown">
-                <div type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                    {% trans "Mua" %}
-                </div>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'listings' %}">{% trans "Tất cả BĐS bán" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Mặt phố" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Nhà phố" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Chung cư" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Biệt thự" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Đất nền" %}</a>
-                    <hr>
-                    <a class="dropdown-item" href="#">{% trans "Đặt mua" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Giới thiệu người mua" %}</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <div type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                    {% trans "Thuê" %}
-                </div>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'listings' %}">{% trans "Tất cả BĐS cho thuê" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Mặt phố cho thuê" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Nhà phố cho thuê" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Căn hộ cho thuê" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Biệt thự cho thuê" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Mặt bằng cho thuê" %}</a>
-                    <hr>
-                    <a class="dropdown-item" href="#">{% trans "Đặt thuê" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Giới thiệu người thuê" %}</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <div type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                    {% trans "Bán/Cho thuê" %}
-                </div>
-                <div class="dropdown-menu">
-                    <h2 class="dropdown-header" style="background-color: #bbbbbb; opacity: 0.8">{% trans "BÁN" %}</h2>
-                    <a class="dropdown-item" href="#">{% trans "Đăng bán" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Ký gửi bán" %}</a>
-                     <h2 class="dropdown-header"  style="background-color: #bbbbbb; opacity: 0.8">{% trans "CHO THUÊ" %}</h2>
-                    <a class="dropdown-item" href="#">{% trans "Đăng cho thuê" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Ký gửi cho thuê" %}</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <div type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                    {% trans "Hỗ trợ bạn" %}
-                </div>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">{% trans "Hướng dẫn Mua/đặt mua nhà" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Hướng dẫn Bán/ký gửi nhà" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Hướng dẫn Thuê/đặt thuê nhà" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Hướng dẫn Cho thuê/ ký gửi thuê" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Hướng dẫm Gia nhập TGNP" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Mặt bằng cho thuê" %}</a>
-                    <hr>
-                    <a class="dropdown-item" href="#">{% trans "Liên hệ/Phản ánh" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Tài liệu BĐS" %}</a>
-                    <a class="dropdown-item" href="#">{% trans "Giới thiệu Thế giới Nhà Phố" %}</a>
-                </div>
-            </div>
-        </div>
-
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <img src="{% static 'img/logo.png' %}" class="logo" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav">
+          <li
+            {% if '/' == request.path %}
+              class="nav-item active mr-3"
+            {% else %}
+              class="nav-item mr-3"
+            {% endif %}
+          >
+            <a class="nav-link" href="{% url 'index' %}">{% trans "Trang chủ"%}</a>
+          </li>
+          <li
+            {% if 'about' in request.path %}
+              class="nav-item active mr-3"
+            {% else %}
+              class="nav-item mr-3"
+            {% endif %}
+          >
+            <a class="nav-link" href="{% url 'about' %}">{% trans "Giới thiệu" %}</a>
+          </li>
+          <li
+            {% if 'listings' in request.path %}
+              class="nav-item active mr-3"
+            {% else %}
+              class="nav-item mr-3"
+            {% endif %}
+          >
+            <a class="nav-link" href="{% url 'listings' %}">{% trans "Danh mục SP" %}</a>
+          </li>
+        </ul>
 
         <ul class="navbar-nav ml-auto">
-            {% if user.is_authenticated %}
-                <li
-                        {% if 'dashboard' in request.path %}
-                            class="nav-item active mr-3"
-                        {% else %}
-                            class="nav-item mr-3"
-                        {% endif %}
-                >
-                    <a class="nav-link" href="{% url 'dashboard' %}">
-                        {% trans "Chào mừng" %} {{ user.username }}</a>
-                </li>
-                <li class="nav-item mr-3">
-                    <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link"
-                       style="color: #792424">
-                        <i class="fas fa-sign-out-alt"></i> {% trans "Đăng xuất" %}
-                    </a>
-                    <form action="{% url 'logout' %}" method="POST" id="logout">
-                        {% csrf_token %}
-                        <input type="hidden">
-                    </form>
-                </li>
+        <a class="nav-link" href="{% url 'login' %}">
+                <i class="fas fa-coins"></i>
+                {% trans "Đăng Bán/Cho thuê" %}
+                </a>
+          {% if user.is_authenticated %}
+            <li
+            {% if 'dashboard' in request.path %}
+              class="nav-item active mr-3"
             {% else %}
-                <li
-                        {% if 'register' in request.path %}
-                            class="nav-item active mr-3"
-                        {% else %}
-                            class="nav-item mr-3"
-                        {% endif %}
-                >
-                    <a class="nav-link" href="{% url 'register' %}" style="color: #792424">
-                        <i class="fas fa-user-plus"></i> {% trans "Đăng ký gia nhập TGNP" %}</a>
-                </li>
-                <li
-                        {% if 'login' in request.path %}
-                            class="nav-item active mr-3"
-                        {% else %}
-                            class="nav-item mr-3"
-                        {% endif %}
-                >
-                    <a class="nav-link" href="{% url 'login' %}" style="color: #792424">
-                        <i class="fas fa-sign-in-alt"></i>
-                        {% trans "Đăng nhập" %}
-                    </a>
-                </li>
+              class="nav-item mr-3"
             {% endif %}
+            >
+              <a class="nav-link" href="{% url 'dashboard' %}">
+               {% trans "Chào mừng" %} {{ user.username }}</a>
+            </li>
+            <li class="nav-item mr-3">
+              <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> {% trans "Đăng xuất" %}
+              </a>
+              <form action="{% url 'logout' %}" method="POST" id="logout">
+                {% csrf_token %}
+                <input type="hidden">
+              </form>
+            </li>
+          {% else %}
+            <li
+            {% if 'register' in request.path %}
+              class="nav-item active mr-3"
+            {% else %}
+              class="nav-item mr-3"
+            {% endif %}
+            >
+              <a class="nav-link" href="{% url 'register' %}">
+                <i class="fas fa-user-plus"></i> {% trans "Gia nhập Nhà Phố" %}</a>
+            </li>
+            <li
+            {% if 'login' in request.path %}
+              class="nav-item active mr-3"
+            {% else %}
+              class="nav-item mr-3"
+            {% endif %}
+            >
+              <a class="nav-link" href="{% url 'login' %}">
+                <i class="fas fa-sign-in-alt"></i>
+                {% trans "Đăng nhập" %}
+                </a>
+            </li>
+          {% endif %}
         </ul>
+      </div>
     </div>
-    </div>
-</nav>
+  </nav>

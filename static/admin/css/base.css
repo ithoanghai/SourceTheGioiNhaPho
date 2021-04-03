@@ -544,7 +544,7 @@ a.button {
     float: right;
     border: none;
     font-weight: 400;
-    /*background: var(--default-button-bg);*/
+    background: var(--default-button-bg);
 }
 
 .button.default:active, input[type=submit].default:active,
