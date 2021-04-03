@@ -2,15 +2,15 @@
 
 {% load humanize i18n %}
 
-{% block title %} |  {% trans "Danh sách nhà" %} {% endblock %}
+{% block title %} |  {% trans "Danh sách sản phẩm" %} {% endblock %}
 
 {% block content %}
-<section id="showcase-inner" class="py-5 text-white">
+<section id="showcase-inner" class="py-5  text-white">
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="display-4">{% trans "Xem danh sách nhà" %}</h1>
-          <p class="lead">!</p>
+          <h1 class="display-5">{% trans "Xem danh sách nhà" %}</h1>
+          <p class="lead">Hàng nghìn căn nhà được chúng tôi cập nhật liên tục!</p>
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@
             <a href="{% url 'index' %}">
               <i class="fas fa-home"></i> {% trans "Trang chủ" %}</a>
           </li>
-          <li class="breadcrumb-item active"> {% trans "Danh sách nhà" %}</li>
+          <li class="breadcrumb-item active"> {% trans "Danh sách sản phẩm" %}</li>
         </ol>
       </nav>
     </div>

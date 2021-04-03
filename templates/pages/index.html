@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 
 {% load humanize i18n %}
-{% block title %} | Welcome {% endblock %}
+{% block title %} | {% trans "Chào mừng" %} {% endblock %}
 
 {% block content %}
 <!-- Showcase -->
 <section id="showcase">
-    <div class="container text-center">
-      <div class="home-search p-5">
-        <div class="overlay p-5">
-          <h1 class="display-4 mb-4">
-            {% trans "Tìm kiếm nhà phố dễ dàng" %}
+    <div class="container " >
+      <div class="home-search p-1" style="text-align: center;">
+        <div class="overlay p-1">
+          <h1 class="display-5">
+            {% trans "TÌM NGÔI NHÀ TỐT NHẤT" %}
           </h1>
-          <p class="lead">{% trans "Hàng ngàn căn nhà phố, nhà riêng trong kho hàng của chúng tôi giúp bạn tìm kiếm ngôi nhà ở mở ước" %}</p>
+          <p class="lead mb-5">{% trans "Hàng ngàn căn nhà trong kho hàng giúp bạn tìm kiếm ngôi nhà mơ ước" %}</p>
           <div class="search">
             <form action="{% url 'search' %}">
               <!-- Form Row 1 -->
@@ -93,25 +93,22 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-md-4">
-          <i class="fas fa-comment fa-4x mr-4"></i>
+          <i class="fas fa-comment fa-4x mr-5"></i>
           <hr>
-          <h3>Consulting Services</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-            hic dignissimos ratione ea quae.</p>
+          <h4>{% trans "Tư vấn tận tâm, miễn phí" %}</h4>
+          <p>{%  trans "Với đội ngũ chuyên viên giàu kinh nghiệm, nhiệt tình, tận tâm, chúng tôi sẵn sàng giải đáp bất cứ câu hỏi nào của bạn và không thu bất cứ khoản phí tư vấn nào. Hãy liên hệ, gọi chúng tôi bất cứ lúc nào." %}</p>
         </div>
         <div class="col-md-4">
-          <i class="fas fa-home fa-4x mr-4"></i>
+          <i class="fas fa-home fa-4x mr-5"></i>
           <hr>
-          <h3>Propery Management</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-            hic dignissimos ratione ea quae.</p>
+          <h4>{% trans "Kho hàng phong phú" %}</h4>
+          <p>{% trans "Với hàng nghìn ngôi nhà trong kho, với cách quản lý khoa học, thông tin chính xác, tin cậy, được kiểm chứng. Chúng tôi tin rằng sẽ giúp bạn tìm kiếm được ngôi nhà phù hợp nhất chỉ với vài thao tác đơn giản." %}</p>
         </div>
         <div class="col-md-4">
-          <i class="fas fa-suitcase fa-4x mr-4"></i>
+          <i class="fas fa-suitcase fa-4x mr-5"></i>
           <hr>
-          <h3>Renting & Selling</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-            hic dignissimos ratione ea quae.</p>
+          <h3>{% trans "Bán/Cho thuê & Đầu tư" %}</h3>
+          <p>{% trans "Thế giới Nhà Phố cung cấp 3 dịch vụ chính: Bán/Ký gửi bán sản phẩm bất động sản - Cho thuê/ Ký gửi cho thuê nhà/Căn hộ - Đầu tư BĐS. Khi tham gia hệ sinh thái Thế giới Nhà Phố, dù bạn là người mua, người bán, người ký gửi hay người đầu tư, các bạn sẽ hài lòng với mục tiêu của mình." %}</p>
         </div>
       </div>
     </div>

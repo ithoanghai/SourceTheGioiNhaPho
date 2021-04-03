@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %} | User Dashboard {% endblock %}
+{% block title %} | {% trans "Quản lý tài khoản" %} {% endblock %}
 
 {% block content %}
 <section id="showcase-inner" class="py-5 text-white">
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="display-4">User Dashboard</h1>
-          <p class="lead">Manage your  Real Estate account</p>
+          <h1 class="display-4">{% trans "Trang quản lý tài khoản thành viên" %}</h1>
+          <p class="lead">{% trans "Quản lý tài khoản thành viên Nhà Phố" %}</p>
         </div>
       </div>
     </div>
@@ -21,9 +22,9 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a href="{% url 'index' %}">
-              <i class="fas fa-home"></i> Home</a>
+              <i class="fas fa-home"></i> {% trans "Trang chủ" %}</a>
           </li>
-          <li class="breadcrumb-item active"> Dashboard</li>
+          <li class="breadcrumb-item active"> {% trans "Quản lý tài khoản" %}</li>
         </ol>
       </nav>
     </div>
@@ -36,14 +37,14 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>Welcome {{ user.first_name }}</h2>
+          <h2>{% trans "Chào mừng" %} {{ user.first_name }}</h2>
           {% if contacts %}
-            <p>Here are the property listings that you have inquired about</p>
+            <p>{% trans "Danh sách sản phẩm đã yêu cầu" %}</p>
             <table class="table">
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Property</th>
+                  <th scope="col">{% trans "Thuộc tính" %}</th>
                   <th></th>
                 </tr>
               </thead>
@@ -53,14 +54,14 @@
                     <td>{{ contact.id }}</td>
                     <td>{{ contact.listing }}</td>
                     <td>
-                      <a class="btn btn-light" href="{% url 'listing' contact.listing_id %}">View Listing</a>
+                      <a class="btn btn-light" href="{% url 'listing' contact.listing_id %}">{% trans "Xem danh sách" %}</a>
                     </td>
                   </tr>
                 {% endfor %}
               </tbody>
             </table>
           {% else %}
-            <p>You have not made any inquiries</p>
+            <p>{% trans "Bạn chưa có tương tác sản phẩm nào" %}</p>
           {% endif %}
         </div>
       </div>

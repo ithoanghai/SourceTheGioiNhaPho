@@ -1,0 +1,13 @@
+{% load static i18n %}
+          <div class="sb-sidenav-menu sticky" id="nav-sidebar">
+                <button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="{% translate 'Toggle navigation' %}"></button>
+
+                <input type="search" id="nav-filter"
+                         placeholder="{% translate 'Gõ để tìm chức năng...' %}"
+                         aria-label="{% translate 'Tìm chức năng hệ thống' %}">
+                  {% include 'admin/app_list.html' with app_list=available_apps show_changelinks=True %}
+
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Tài khoản đăng nhập: {{ request.user.username }}</div>
+            </div>
