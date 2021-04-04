@@ -1,0 +1,45 @@
+{% load humanize i18n %}
+<div class="search">
+    <form action="{% url 'search' %}">
+        <!-- Form Row 1 -->
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label class="sr-only">{% trans "Từ khóa" %}</label>
+                <input type="text" name="keywords" class="form-control"
+                       placeholder="{% trans "Từ khóa (khu vực, địa chỉ)" %}">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="sr-only">{% trans "Thành phố" %}</label>
+                <select name="state" class="form-control">
+                    {% for key, value in state_data.items %}
+                        <option value="{{ key }}" {% if key == 01 %}selected{% endif %}>{{ value.name }}</option>
+                    {% endfor %}
+                    <option></option>
+                </select>
+            </div>
+
+        </div>
+        <!-- Form Row 2 -->
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label class="sr-only">{% trans "Phòng ngủ" %}</label>
+                <select name="bedrooms" class="form-control">
+                    <option selected="true" disabled="disabled">{% trans "Chọn số phòng ngủ" %}</option>
+                    {% for key,value in bedroom_choices.items %}
+                        <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <select name="price" class="form-control" id="type">
+                    <option selected="true" disabled="disabled">{% trans "Chọn giá tối đa" %}</option>
+                    {% for key,value in price_choices.items %}
+                        <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-secondary btn-block mt-4" type="submit">{% trans "Tìm kiếm" %}</button>
+    </form>
+</div>
