@@ -42,9 +42,7 @@
             </div>
           {% endfor %}
         {% else %}
-          <div class="col-md-12">
-            <p>{% trans "Không có kết quả phù hợp!" %}</p>
-          </div>
+          {% include 'partials/_noResultComponent.html' %}
         {% endif %}
       </div>
 

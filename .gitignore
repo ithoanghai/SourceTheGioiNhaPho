@@ -94,3 +94,4 @@ data/
 *.vscode
 
 media/
+*.sh

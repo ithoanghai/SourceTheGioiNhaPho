@@ -13,53 +13,7 @@
             {% trans "TÌM NGÔI NHÀ TỐT NHẤT" %}
           </h1>
           <p class="lead mb-5">{% trans "Hàng ngàn căn nhà trong kho hàng giúp bạn tìm kiếm ngôi nhà mơ ước" %}</p>
-          <div class="search">
-            <form action="{% url 'search' %}">
-              <!-- Form Row 1 -->
-              <div class="form-row">
-                <div class="col-md-4 mb-3">
-                  <label class="sr-only">{% trans "Từ khóa" %}</label>
-                  <input type="text" name="keywords" class="form-control" placeholder="{% trans "Từ khóa (khu vực, địa chỉ)" %}">
-                </div>
-
-                <div class="col-md-4 mb-3">
-                  <label class="sr-only">{% trans "Thành phố" %}</label>
-                  <input type="text" name="city" class="form-control" placeholder="{% trans "Thành phố" %}">
-                </div>
-
-                <div class="col-md-4 mb-3">
-                  <label class="sr-only">{% trans "Quận huyện" %}</label>
-                  <select name="state" class="form-control">
-                    <option selected="true" disabled="disabled">{% trans "Quận huyện" %}</option>
-                    {% for key,value in state_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-              </div>
-              <!-- Form Row 2 -->
-              <div class="form-row">
-                <div class="col-md-6 mb-3">
-                  <label class="sr-only">{% trans "Phòng ngủ" %}</label>
-                  <select name="bedrooms" class="form-control">
-                    <option selected="true" disabled="disabled">{% trans "Tất cả phòng ngủ" %}</option>
-                    {% for key,value in bedroom_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <select name="price" class="form-control" id="type">
-                    <option selected="true" disabled="disabled">{% trans "Giá tối đa (tất cả)" %}</option>
-                    {% for key,value in price_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-              </div>
-              <button class="btn btn-secondary btn-block mt-4" type="submit">{% trans "Tìm kiếm" %}</button>
-            </form>
-          </div>
+          {% include "partials/_searchComponent.html" %}
         </div>
       </div>
     </div>
@@ -80,9 +34,7 @@
             </div>
           {% endfor %}
         {% else %}
-          <div class="col-md-12">
-            <p>{% trans "Không có kết quả phù hợp!" %}</p>
-          </div>
+          {% include 'partials/_noResultComponent.html' %}
         {% endif %}
 
       </div>

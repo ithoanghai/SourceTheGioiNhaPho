@@ -43,6 +43,7 @@ THIRD_PARTIES = [
     'location_field.apps.DefaultConfig',
     'ajax_select',
     'rolepermissions',
+    'debug_toolbar',
 ]
 
 BUILT_IN_APPS = [
@@ -65,8 +66,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
     'django.middleware.locale.LocaleMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'TownhouseWorldRealestate.urls'
@@ -82,7 +83,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
                 'django.template.context_processors.i18n',  # this one
             ],
         },
@@ -176,3 +176,10 @@ LOCATION_FIELD = {
     # 'provider.mapbox.access_token': 'pk.eyJ1Ijoia2llbm5ndXllbjExMDEiLCJhIjoiY2ttaHRqZTgzMGF0YzJ3bXVvYW9ncnh0ZiJ9.xar2mZcYZJ1qK4i2mRDa0Q',
     'provider.google.api_key': os.getenv('GOOGLE_MAP_API_KEY', 'AIzaSyDmaAApf34vXAuXCPWvMAKJQ50t5ZzGVzA')
 }
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+    '172.17.0.1',
+    '172.24.0.1',
+    '*'
+]
