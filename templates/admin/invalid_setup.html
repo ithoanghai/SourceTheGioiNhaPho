@@ -3,11 +3,11 @@
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
-<a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+<a href="{% url 'admin:index' %}">{% translate 'Trang chủ' %}</a>
 &rsaquo; {{ title }}
 </div>
 {% endblock %}
 
 {% block content %}
-<p>{% translate 'Something’s wrong with your database installation. Make sure the appropriate database tables have been created, and make sure the database is readable by the appropriate user.' %}</p>
+<p>{% translate 'Đã xảy ra lỗi với cơ sở dữ liệu của bạn. Đảm bảo các bảng cơ sở dữ liệu và người dùng chính xác. ' %}</p>
 {% endblock %}
