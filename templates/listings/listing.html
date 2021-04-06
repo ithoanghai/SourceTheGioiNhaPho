@@ -9,9 +9,10 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="display-4">{{ listing.title }}</h1>
-          <p class="lead">
-            <i class="fas fa-map-marker"></i> {{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}</p>
+          <h6 class="display-5">{{ listing.title }}</h6>
+              <p>
+                <i class="fas fa-map-marker text-secondary"></i> {{ listing.street}}  {{ listing.district }}  {{ listing.state }} {{ listing.city }}
+            </p>
         </div>
       </div>
     </div>
@@ -44,7 +45,7 @@
       <div class="row">
         <div class="col-md-9">
         {% with listing.photos|first as photo %}
-            <img src="{{ photo.url }}" alt="" class="img-main img-fluid mb-3">
+            <img src="{{ photo.url }}" alt="" class="img-main img-fluid mb-3" style="height: 300px; width: auto">
         {% endwith %}
         <div class="row mb-5 thumbs">
             {% for photo in listing.photos %}
@@ -64,7 +65,7 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item text-secondary">
                   <i class="fas fa-money-bill-alt"></i> {% trans "Giá chào" %}:
-                  <span class="float-right">${{ listing.price | intword }}</span>
+                  <span class="float-right">{{ listing.price }} tỷ</span>
                 </li>
                 <li class="list-group-item text-secondary">
                   <i class="fas fa-bed"></i> {% trans "Phòng ngủ" %}:
@@ -118,6 +119,7 @@
             <div class="card-body">
               <h5 class="card-title">{% trans "Người đăng" %}</h5>
               <h6 class="text-secondary">{{ listing.realtor }}</h6>
+               <div><i class="fas fa-clock"></i> {{ listing.list_date | timesince }}</div>
             </div>
           </div>
           <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">{% trans "Liên hệ" %}</button>

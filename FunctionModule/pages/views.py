@@ -19,7 +19,7 @@ def get_client_ip(request):
 
 
 from django.contrib.admin import site
-
+from django.contrib.auth.models import User
 
 def index(request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)[:3]
@@ -52,12 +52,12 @@ def about(request):
 
 
 def dashboard(request):
-    app_list = site.get_app_list(request)
-    context = {
-        'available_apps': app_list
-    }
+    return  redirect(request, 'admin/admin_login')
 
-    return render(request, 'admin/index.html', context)
+def admin_login(request):
+
+    return  render(request, 'admin/login.html')
+
 
 
 def layout1(request):
@@ -145,7 +145,7 @@ def profile(request):
     context = {
         'available_apps': app_list
     }
-    return render(request, 'admin/includes/profile.html', context)
+    return render(request, 'admin/profile.html', context)
 
 
 def table(request):
