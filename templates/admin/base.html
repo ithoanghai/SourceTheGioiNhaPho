@@ -17,7 +17,7 @@
     <!-- Favicon - loaded as static -->
     <link href="{% static 'img/favicon.ico' %}" rel="icon" type="image/x-icon"/>
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %} " type="image/x-icon"/>
-        <script src="{% static 'admin/js/nav_sidebar.js' %}" defer></script>
+
     {% block extrastyle %}{% endblock %}
     {% block extrahead %}{% endblock %}
     {% block responsive %}
@@ -141,6 +141,7 @@
 
 <!-- Specific JS goes HERE -->
 {% block javascripts %}
+    <script src="{% static 'admin/js/nav_sidebar.js' %}" defer></script>
     <!-- Scripts for Admin -->
     {% include "admin/includes/scripts.html" %}
  {% endblock javascripts %}
