@@ -8,6 +8,8 @@ from FunctionModule.listings.choices import price_choices, bedroom_choices
 from FunctionModule.listings.models import Listing
 from FunctionModule.realtors.models import Realtor
 
+from django.contrib.admin import site
+
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -31,6 +33,7 @@ def index(request):
     }
 
     return render(request, 'home/index.html', context)
+
 
 
 def about(request):
@@ -67,7 +70,6 @@ def layout1(request):
     }
     return render(request, 'admin/includes/index-static.html', context)
 
-
 def layout2(request):
     app_list = site.get_app_list(request)
     context = {
@@ -75,20 +77,17 @@ def layout2(request):
     }
     return render(request, 'admin/includes/index-light.html', context)
 
-
 def error403(request):
     context = {
 
     }
     return render(request, 'admin/page-403.html', context)
 
-
 def error404(request):
     context = {
 
     }
     return render(request, 'admin/page-404.html', context)
-
 
 def error500(request):
     context = {
@@ -123,7 +122,6 @@ def pages(request):
         html_template = loader.get_template('admin/page-500.html')
         return HttpResponse(html_template.render(context, request))
 
-
 def chart(request):
     app_list = site.get_app_list(request)
     context = {
@@ -131,14 +129,12 @@ def chart(request):
     }
     return render(request, 'admin/charts.html', context)
 
-
 def map(request):
     app_list = site.get_app_list(request)
     context = {
         'available_apps': app_list
     }
     return render(request, 'admin/maps.html', context)
-
 
 def profile(request):
     app_list = site.get_app_list(request)
@@ -154,7 +150,6 @@ def table(request):
         'available_apps': app_list
     }
     return render(request, 'admin/tables.html', context)
-
 
 def pageblank(request):
     app_list = site.get_app_list(request)
