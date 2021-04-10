@@ -1,48 +1,27 @@
 {% load static i18n %}
 <!DOCTYPE html>
-<html lang="en">
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  <link rel="icon" href="{% static 'img/favicon.ico' %} " type="image/x-icon"/>
-  <link rel="shortcut icon" href="{% static 'img/favicon.ico' %} "  type="image/x-icon"/>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{% static 'css/all.css' %}">
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-  <!-- Custom -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <!-- Lightbox -->
-  <link rel="stylesheet" href="{% static 'css/lightbox.min.css' %}">
-
-  <link rel="stylesheet" href="{% static 'css/rever.css' %}">
-
-  {% block header %}
-  {% endblock %}
-
-  <title> Thế giới nhà phố {% block title %}{% endblock %}</title>
+   {% include 'partials/_head.html' %}
 </head>
 
 <body>
   <!-- Top Bar -->
-  {% include 'partials/_topbar.html' %}
+{% comment %}  {% include 'partials/_topbar.html' %}{% endcomment %}
   <!-- NavBar -->
   {% include 'partials/_navbar.html' %}
+    <!-- Banner -->
+  {% include 'partials/_banner.html' %}
     <!-- Main Content -->
   {% block content %} {% endblock %}
   <!-- Footer -->
   {% include 'partials/_footer.html' %}
 
-  <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
-  <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>
-  <script src="{% static 'js/lightbox.min.js' %} "></script>
-  <script src="{% static 'js/main.js' %} "></script>
-
-  {% block body_end %}
-  {% endblock %}
+    <!-- Scripts -->
+  {% include 'partials/_scripts.html' %}
 
 </body>
 
