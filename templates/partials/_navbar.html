@@ -1,94 +1,44 @@
-{% load static i18n%}
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="{% url 'index' %}">
-        <img src="{% static 'img/logo.png' %}" class="logo" alt="">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <ul class="navbar-nav">
-          <li
-            {% if '/' == request.path %}
-              class="nav-item active mr-3"
-            {% else %}
-              class="nav-item mr-3"
-            {% endif %}
-          >
-            <a class="nav-link" href="{% url 'index' %}">{% trans "Trang chủ"%}</a>
-          </li>
-          <li
-            {% if 'about' in request.path %}
-              class="nav-item active mr-3"
-            {% else %}
-              class="nav-item mr-3"
-            {% endif %}
-          >
-            <a class="nav-link" href="{% url 'about' %}">{% trans "Giới thiệu" %}</a>
-          </li>
-          <li
-            {% if 'listings' in request.path %}
-              class="nav-item active mr-3"
-            {% else %}
-              class="nav-item mr-3"
-            {% endif %}
-          >
-            <a class="nav-link" href="{% url 'listings' %}">{% trans "Danh mục SP" %}</a>
-          </li>
-        </ul>
+{% load static i18n %}
 
-        <ul class="navbar-nav ml-auto">
-        <a class="nav-link" href="{% url 'login' %}">
-                <i class="fas fa-coins"></i>
-                {% trans "Đăng Bán/Cho thuê" %}
-                </a>
-          {% if user.is_authenticated %}
-            <li
-            {% if 'dashboard' in request.path %}
-              class="nav-item active mr-3"
-            {% else %}
-              class="nav-item mr-3"
-            {% endif %}
-            >
-              <a class="nav-link" href="{% url 'dashboard' %}">
-               {% trans "Chào mừng" %} {{ user.username }}</a>
-            </li>
-            <li class="nav-item mr-3">
-              <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
-                <i class="fas fa-sign-out-alt"></i> {% trans "Đăng xuất" %}
-              </a>
-              <form action="{% url 'logout' %}" method="POST" id="logout">
-                {% csrf_token %}
-                <input type="hidden">
-              </form>
-            </li>
-          {% else %}
-            <li
-            {% if 'register' in request.path %}
-              class="nav-item active mr-3"
-            {% else %}
-              class="nav-item mr-3"
-            {% endif %}
-            >
-              <a class="nav-link" href="{% url 'register' %}">
-                <i class="fas fa-user-plus"></i> {% trans "Gia nhập Nhà Phố" %}</a>
-            </li>
-            <li
-            {% if 'login' in request.path %}
-              class="nav-item active mr-3"
-            {% else %}
-              class="nav-item mr-3"
-            {% endif %}
-            >
-              <a class="nav-link" href="{% url 'login' %}">
-                <i class="fas fa-sign-in-alt"></i>
-                {% trans "Đăng nhập" %}
-                </a>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
+    <div class="banner-top-bg">
+  {% comment %}      <script type="deferjs"
+                src="../maps.googleapis.com/maps/api/jsbc52?key=AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg&amp;libraries=drawing,places,geometry&amp;language=vi"></script>
+{% endcomment %}
+        {% include 'partials/_menu.html' %}
+
+        <div class="banner-cover">
+            <img srcset="{% static 'img/banner_trang_chupsd.png' %}"
+                 src="{% static 'img/banner_trang_chupsd.png' %}" alt="Thế giới Nhà Phố">
+        </div>
+        <div class="banner-content" style="">
+            <div class="banner-content-inner">
+                <h1 class="heading-01">Tìm kiếm ngôi nhà mơ ước</h1>
+                <h5 class="heading-04">Hàng ngàn căn nhà trong kho giúp bạn tìm kiếm ngôi nhà mơ ước</h5>
+                <form class="search-desktop-component" action="https://rever.vn/s/mua" keyword="TP. Hồ Chí Minh"
+                      init-title="TP. Hồ Chí Minh" placeholder="Nhập địa điểm, khu dân cư, tòa nhà">
+                    <div class="tab-container">
+                        <div class="tab">
+                            <input type="radio" name="service-type" value="mua" checked id="buy-house">
+                            <label for="buy-house">Mua nhà</label>
+                        </div>
+                        <div class="tab">
+                            <input type="radio" name="service-type" value="thue" id="rent-house">
+                            <label for="rent-house">Thuê nhà</label>
+                        </div>
+                    </div>
+                    <input type="hidden" placeholder="Nhập địa điểm, khu dân cư, tòa nhà" id="hidServiceTypeChecked"/>
+                    <div class="search-container">
+                        <i class="zmdi zmdi-search" style="opacity: 0.3"></i>
+                        <input class="search-input" style="cursor: progress" disabled type="search" autocomplete="off"
+                               spellcheck="false" dir="auto" placeholder="TP. Hồ Chí Minh">
+                        <button type="submit" class="btn-primary btn-ultra btn-red btn-search">
+                            <i class="zmdi zmdi-search"></i>
+                            <span>Tìm Kiếm</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
     </div>
-  </nav>
