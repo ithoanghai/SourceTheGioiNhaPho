@@ -8,6 +8,9 @@ urlpatterns = [
     path('about', views.about, name ='about'),
     # Matches any html file
     #re_path('^.*\.*', views.pages, name='pages'),
+    #url menu
+    path('search', views.search, name='search'),
+    path('searchurban', views.searchurban, name='search_urban'),
 
     #Url for Backend
     #path('admin/', admin.site.urls), #for Backend from default lib

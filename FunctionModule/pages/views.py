@@ -1,6 +1,6 @@
 from django import template
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.template import loader
 
 from FunctionModule.cadastral.constants import state_data
@@ -50,10 +50,33 @@ def about(request):
 
     return render(request, 'about/about.html', context)
 
+def search(request):
+       """'listing': get_object_or_404(Listing, house_type=house_type)"""
+       tran = request.GET.get('trantype', '')
+       housetype = request.GET.get('housetype', '')
+       listings = Listing.objects.order_by('-list_date').filter(transaction_type=tran, house_type=housetype)[:3]
+       context = {
+           'listings': listings,
+           'state_data': state_data,
+           'bedroom_choices': bedroom_choices,
+           'price_choices': price_choices,
+       }
+
+       return render(request, 'home/search.html', context)
+
+
+def searchurban(request):
+    listings = Listing.objects.order_by('-list_date').filter(urban_area = '')[:3]
+    context = {
+        'listings': listings,
+        'state_data': state_data,
+        'bedroom_choices': bedroom_choices,
+        'price_choices': price_choices,
+    }
+
+    return render(request, 'home/search.html', context)
 
 """Admin url here"""
-
-
 def dashboard(request):
     return  redirect(request, 'admin/admin_login')
 

@@ -9,13 +9,22 @@ from embed_video.fields import EmbedVideoField
 from FunctionModule.cadastral.constants import state_data, district_data
 from FunctionModule.realtors.models import Realtor
 
+class TransactionType(models.TextChoices):
+    SELL = 'sell', _("Bán")
+    FOR_RENT = 'for_rent', _("Cho thuê")
+    PROJECT = 'project', _("Dự án")
+
 
 class HouseType(models.TextChoices):
+    STREET_HOUSE = 'street_house', _("Nhà mặt phố")
     CITY_HOUSE = 'city_house', _("Nhà phố")
+    SHOP_HOUSE = 'shop_house', _("Cửa hàng")
+    BUILDING = 'building', _("Toà nhà")
+    OFFICE = 'office', _("Văn phòng")
+    APARTMENT = 'apartment', _("Căn hộ")
     VILLA = 'villa', _("Biệt thự")
     LAND = 'land', _("Đất nền")
-    APARTMENT = 'apartment', _("Chung cư")
-    PROJECT = 'project', _("Dự án")
+
 
 
 class RegistrationType(models.TextChoices):
@@ -35,11 +44,14 @@ city_choices.sort()
 
 
 class Listing(models.Model):
+    transaction_type = models.CharField(max_length=20, choices=TransactionType.choices, default=TransactionType.SELL,
+                                  verbose_name=_("Hình thức giao dịch"))
     realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, verbose_name=_("Đầu chủ"))
     state = models.CharField(max_length=50, choices=city_choices, default="01",
                              verbose_name=_("Thành phố/Tỉnh"), )
     district = models.CharField(max_length=50, verbose_name=_("Quận/Huyện"))
     ward = models.CharField(max_length=50, verbose_name=_("Phường/Xã"), blank=True)
+    urban_area = models.CharField(max_length=100, verbose_name=_("Khu đô thị/Khu dân cư"), blank=True)
     street = models.CharField(max_length=125, verbose_name=_("Phố"), help_text=_("Tên đường, phố"), null = True)
     address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ"),  help_text=_("Số nhà/hẻm/ngách/ngõ"))
     area = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Diện tích"))
