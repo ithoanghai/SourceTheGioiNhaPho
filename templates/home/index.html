@@ -1,10 +1,249 @@
 {% extends 'base.html' %}
 
 {% load static humanize i18n %}
-{% block title %} | {% trans "Chào mừng" %} {% endblock %}
+
+{% block head %}
+
+<title> Thế giới Nhà Phố {% block title %}| Mua bán, cho thuê nhà đất, căn hộ, đất nền và văn phòng {% endblock %}</title>
+
+<script>
+  /*@shinsenter/defer.js*/
+  !function(e,i,t,n,r,o){o=/p/.test(i.readyState);var c=0<=navigator.userAgent.indexOf('Firefox');function f(e,t){o?n(e,t||32):r.push(e,t)}function a(e,t,n,r){return t&&i.getElementById(t)||(r=i.createElement(e||'SCRIPT'),t&&(r.id=t),n&&(r.onload=n),i.head.appendChild(r)),r||{}}e.addEventListener('on'+t in e?t:'load',function(){for(o=1;r[0];)f(r.shift(),r.shift())}),f._=a,e.defer=f,e.deferscript=function(e,t,n,r){f(function(){a('',t,r).src=e},n)},e.deferPreload=function(e,t){if(t=t||'script',c){var n=i.createElement('object');n.data=e,n.width=0,n.height=0,i.body.append(n)}else{var r=i.createElement('link');r.setAttribute('rel','preload'),r.href=e,r.as=t,i.head.append(r)}}}(this,document,'pageshow',setTimeout,[]),function(s,n){var u='IntersectionObserver',d='lazied',l='data-',h=l+d,p='load',m='forEach',y='getAttribute',v='setAttribute',b=Function(),g=s.defer||b,f=g._||b;function E(e,t){return[].slice.call((t||n).querySelectorAll(e))}function e(a){return function(e,t,i,o,c,f){g(function(n,t){function r(n){!1!==(o||b).call(n,n)&&((f||['srcset','src','style'])[m](function(e,t){(t=n[y](l+e))&&n[v](e,t)}),E('SOURCE',n)[m](r),p in n&&n[p]()),n.className+=' '+(i||d)}t=u in s?(n=new s[u](function(e){e[m](function(e,t){e.isIntersecting&&(t=e.target)&&(n.unobserve(t),r(t))})},c)).observe.bind(n):r,E(e||a+'['+l+'src]:not(['+h+'])')[m](function(e){e[y](h)||(e[v](h,a),t(e))})},t)}}function t(){g(function(t,n,r,i,o){function c(e,t){for(i in t=t||!1,e.parentNode.removeChild(e),e.removeAttribute('type'),n=f(e.nodeName),t&&(n.async=1),e)'string'==typeof(o=e[i])&&n[i]!=o&&(n[i]=o);return n}t=E((r='[type=deferjs]')+':not('+(i='[async]')+')'),E(r+i).forEach(function(e){c(e,!0)}),t.forEach(function(e){e.src&&s.deferPreload(e.src)}),function e(){0!=t&&(r=t.shift(),n=c(r),r.src?n.onload=n.onerror=e:g(e,.1))}()},4)}t(),s.deferstyle=function(t,n,e,r){g(function(e){(e=f('LINK',n,r)).rel='stylesheet',e.href=t},e)},s.deferimg=e('IMG'),s.deferiframe=e('IFRAME'),g.all=t}(this,document);
+</script>
+
+<script>deferscript('cdn.jsdelivr.net/npm/%40shinsenter/defer.js%401.1.7/dist/polyfill.min.js', 'polyfill-js', 1)</script>
+<style>
+  img.lazy, img.lazy-background{
+    filter: blur(15px);
+  }
+</style>
+<script>
+  function objValue(obj,is, value) { //Access 1 object bằng key
+    if (typeof is == 'string')
+      return objValue(obj,is.split('.'), value);
+    else if (is.length==1 && value!==undefined)
+      return obj[is[0]] = value;
+    else if (is.length==0)
+      return obj;
+    else if(typeof obj === "undefined")
+      return undefined
+    else
+      return objValue(obj[is[0]],is.slice(1), value);
+  }
+
+  function waitFor(objAcc, callback, timeout){
+    if(typeof callback !== "function"){
+      return
+    }
+    timeout = timeout || 0
+    var startTime = new Date().getTime()
+    function check(){
+      if(typeof objValue(window, objAcc) !== "undefined"){
+        callback()
+      }else{
+        if(timeout > 0 && new Date().getTime() - startTime > timeout){ //Vượt quá timeout
+          console.error("wait for " + objAcc + " has timeout!")
+        }else{
+          setTimeout(check, 500)
+        }
+      }
+    }
+    check()
+  }
+
+  function applyImageLazyLoad(scope){
+    scope = scope || document
+    var lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
+
+    if ("IntersectionObserver" in window) {
+      let ops = {
+        rootMargin: "450px",
+        threshold: 0.1
+      }
+
+      let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            let lazyImage = entry.target;
+            lazyImage.src = lazyImage.dataset.src;
+            if(!!lazyImage.dataset.srcset){
+              lazyImage.srcset = lazyImage.dataset.srcset;
+            }
+            lazyImage.classList.remove("lazy");
+            lazyImageObserver.unobserve(lazyImage);
+          }
+        });
+      }, ops);
+
+      lazyImages.forEach(function(lazyImage) {
+        lazyImageObserver.observe(lazyImage);
+      });
+
+      //Lazy for background
+      var lazyBackgrounds = [].slice.call(scope.querySelectorAll(".lazy-background"));
+      let lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            entry.target.classList.remove("lazy-background");
+            lazyBackgroundObserver.unobserve(entry.target);
+          }
+        });
+      }, ops);
+      lazyBackgrounds.forEach(function(lazyBackground) {
+        lazyBackgroundObserver.observe(lazyBackground);
+      });
+    } else { //Không support observer
+      let lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
+      let active = false;
+
+      const lazyLoad = function() {
+        if (active === false) {
+          active = true;
+
+          setTimeout(function() {
+            lazyImages.forEach(function(lazyImage) {
+              if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                lazyImage.src = lazyImage.dataset.src;
+                lazyImage.srcset = lazyImage.dataset.srcset;
+                lazyImage.classList.remove("lazy");
+
+                lazyImages = lazyImages.filter(function(image) {
+                  return image !== lazyImage;
+                });
+
+                if (lazyImages.length === 0) {
+                  document.removeEventListener("scroll", lazyLoad);
+                  window.removeEventListener("resize", lazyLoad);
+                  window.removeEventListener("orientationchange", lazyLoad);
+                }
+              }
+            });
+
+            active = false;
+          }, 200);
+        }
+      };
+
+      document.addEventListener("scroll", lazyLoad);
+      window.addEventListener("resize", lazyLoad);
+      window.addEventListener("orientationchange", lazyLoad);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    applyImageLazyLoad(document)
+  });
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="UTF-8" />
+<meta name="description" content="Với Thế giới Nhà Phố, việc mua bán, cho thuê, đầu tư bất động sản, nhà đất trở nên hiệu quả và tin cậy hơn. Bạn sẽ dễ dàng tìm được ngôi nhà ưng ý nhất với giá hợp lý." />
+<meta name="keywords" content="Rever, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa" />
+<meta name="author" content="rever.vn" />
+<link rel="canonical" href="index.html" />
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<meta property="fb:app_id" content="" />
+<meta property="og:url" content="https://thegioinhaphovietnam.com.vn/" />
+<meta property="og:title" content="Thế giới Nhà ph | Mua bán, cho thuê nhà đất, căn hộ, đất nền và văn phòng" />
+<meta property="og:description" content="Với Thế giới Nhà Phố, việc mua bán, cho thuê, đầu tư bất động sản, nhà đất trở nên hiệu quả và tin cậy hơn. Bạn sẽ dễ dàng tìm được ngôi nhà ưng ý nhất với giá hợp lý." />
+<meta property="og:image" content="../images/rever-thumbnail.jpg" />
+<meta property="og:image:url" content="../images/rever-thumbnail.jpg" />
+<meta property="og:image:width" content="600" />
+<meta property="og:image:height" content="320" />
+<meta property="og:site_name" content="rever.vn" />
+<meta property="og:rich_attachment" content="true" />
+<meta property="og:type" content="article" />
+<meta property="hotline" content="0964399436" />
+<style>
+    [v-cloak] { display:none !important; } /* Ẩn các element khi vue chưa load */
+    picture img {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    /*hide tracking img*/
+    img[src^="//analytics.rever.vn/fap"],img[src^="/fap/debug/track"] {
+        display: none;
+    }
+    ._hj_feedback_container button { /* Fix lỗi hotjar */
+      text-align: center;
+    }
+</style>
+
+<script>
+    window["_au_api"] = "thue/api.html";
+    window['fap_url'] = "../s3-cdn.rever.vn/p/v2.33.55/js/fap.min90ca.js?v=1617780824171";
+    window['fap.server'] = '//analytics.rever.vn/fap';
+    window['favorite_api'] = 'mapi/index.html';
+    window['googleClientId'] = '539423642927.apps.googleusercontent.com';
+    window['staticUrl'] = '../s3-cdn.rever.vn/p/v2.33.55';
+    window['hotline'] = '0964399436';
+
+    window['isLoggedIn'] = false;
+</script>
+
+
+<script>
+    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var t=analytics.methods[e];analytics[t]=analytics.factory(t)}analytics.load=function(e,t){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.defer=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+e+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=t};analytics.SNIPPET_VERSION="4.1.0";
+      analytics.load("4LCsqFQzVAmMhPA650qKAAbZoHweHzHt", { integrations: { 'Mixpanel': false} });
+    }}();
+  </script>
+<script type="deferjs">
+    //Track thêm tags
+      var tagTrackings = []
+
+      var pageviewProperties = { }
+
+      analytics.page(Object.assign({
+        domain: location.hostname,
+        tags: tagTrackings.length > 0 ? tagTrackings : undefined
+      }, pageviewProperties));
+
+      analytics.ready(function(){
+        //window.mixpanel.init("31bae2b919cfc12821646533a62aee1b")
+        //window.track("Page View")
+      })
+  </script>
+
+<script>(function(c,a){if(!a.__SV){var b=window;try{var d,m,j,k=b.location,f=k.hash;d=function(a,b){return(m=a.match(RegExp(b+"=([^&]*)")))?m[1]:null};f&&d(f,"state")&&(j=JSON.parse(decodeURIComponent(d(f,"state"))),"mpeditor"===j.action&&(b.sessionStorage.setItem("_mpcehash",f),history.replaceState(j.desiredHash||"",c.title,k.pathname+k.search)))}catch(n){}var l,h;window.mixpanel=a;a._i=[];a.init=function(b,d,g){function c(b,i){var a=i.split(".");2==a.length&&(b=b[a[0]],i=a[1]);b[i]=function(){b.push([i].concat(Array.prototype.slice.call(arguments,
+    0)))}}var e=a;"undefined"!==typeof g?e=a[g]=[]:g="mixpanel";e.people=e.people||[];e.toString=function(b){var a="mixpanel";"mixpanel"!==g&&(a+="."+g);b||(a+=" (stub)");return a};e.people.toString=function(){return e.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+    for(h=0;h<l.length;h++)c(e,l[h]);var f="set set_once union unset remove delete".split(" ");e.get_group=function(){function a(c){b[c]=function(){call2_args=arguments;call2=[c].concat(Array.prototype.slice.call(call2_args,0));e.push([d,call2])}}for(var b={},d=["get_group"].concat(Array.prototype.slice.call(arguments,0)),c=0;c<f.length;c++)a(f[c]);return b};a._i.push([b,d,g])};a.__SV=1.2;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.defer=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?
+    MIXPANEL_CUSTOM_LIB_URL:"file:"===c.location.protocol&&"//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js";d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d)}})(document,window.mixpanel||[]);
+    mixpanel.init("31bae2b919cfc12821646533a62aee1b");
+  </script>
+<script type="deferjs">
+    mixpanel.track("Page View")
+  </script>
+
+
+<script>
+  window.hsConversationsSettings = {
+    loadImmediately: false // Delay the load of the chat widget
+  };
+</script>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: '323161212360067',
+      cookie: true,                     // Enable cookies to allow the server to access the session.
+      xfbml: true,                     // Parse social plugins on this webpage.
+      version: 'v8.0'           // Use this Graph API version for this call.
+    });
+  }
+</script>
+<script async defer type="deferjs" crossorigin="anonymous" src="../connect.facebook.net/en_US/sdk.js"></script>
+
+<meta name="ahrefs-site-verification" content="b3a10354398a2c17b3410f4506518ba93e519af05a49ba8d75ccb03d7059bbe6">
+
+<link rel="stylesheet" type="text/css" href="{% static "css/index-merge.min90ca.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
+
+{% endblock %}
 
 {% block content %}
-
 
    {% comment %} <noscript>
         <iframe src="../www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
@@ -20,7 +259,7 @@
   "contactPoint": [
     {
       "@type": "ContactPoint",
-      "telephone": "1800 234 546",
+      "telephone": "0964399436",
       "contactType": "customer service"
     }
   ],
@@ -93,11 +332,11 @@
         .btn-install {
             position: relative;
             display: inline-block;
-            min-width: -webkit-fit-content;
-            min-width: -moz-fit-content;
+            min-width: -webkit-min-content;
+            min-width: -moz-min-content;
             min-width: fit-content;
-            max-width: -webkit-fit-content;
-            max-width: -moz-fit-content;
+            max-width: max-content;
+            max-width: max-content;
             max-width: fit-content;
             width: 100%;
             padding: 8px 10px 7px;
@@ -232,10 +471,10 @@
                 <i class="zmdi zmdi-close"></i>
             </button>
             <a href="javascript:void(0)" class="cover">
-                <img src="../s3-cdn.rever.vn/p/v2.33.55/images/logo-rever.svg" alt="Rever">
+                <img src="../images/logo-rever.svg" alt="Rever">
             </a>
             <div class="banner-app-info">
-                <a href="javascript:void(0)">Rever</a>
+                <a href="javascript:void(0)">Thế giới Nhà Phố</a>
                 <p>Mua bán nhà dễ dàng</p>
                 <div class="rating-star">
                     <i class="zmdi zmdi-star evaluated"></i>
@@ -382,7 +621,6 @@
         </div>
     </section>
 
-
     <section class="container col-12">
         <div class="inner pd-bot-60 block-project project-hot-trend">
             <h2 class="heading-03">
@@ -437,7 +675,7 @@
                         <a href="du-an/the-9-stellars.html" title="The 9 Stellars" data-imp-click>
                             <p class="status-top-left">Giá tốt</p>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/ZxePTRKuBKlbVwEnzAime3KAcueHU_lBBc1UumZHhww=/450x300/image.jpg"
                                  class="lazy"
                                  data-srcset="https://photo.rever.vn/v2/get/ZxePTRKuBKlbVwEnzAime3KAcueHU_lBBc1UumZHhww=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/ZxePTRKuBKlbVwEnzAime3KAcueHU_lBBc1UumZHhww=/900x600/image.jpg 2x"
@@ -479,7 +717,7 @@
                         <a href="du-an/grand-marina-saigon.html" title="Grand Marina Saigon" data-imp-click>
                             <p class="status-top-left">Giá tốt</p>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/+DYBu3DYUH+zhZjLBeu6mMM0kz67jcUVInDpR0P_Ldw=/450x300/image.jpg"
                                  class="lazy"
                                  data-srcset="https://photo.rever.vn/v2/get/+DYBu3DYUH+zhZjLBeu6mMM0kz67jcUVInDpR0P_Ldw=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/+DYBu3DYUH+zhZjLBeu6mMM0kz67jcUVInDpR0P_Ldw=/900x600/image.jpg 2x"
@@ -522,7 +760,7 @@
                         <a href="du-an/the-rivana.html" title="The Rivana" data-imp-click>
                             <p class="status-top-left">Giá tốt</p>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/m8sgt22ufK23zAKaupTzeH+7CNCkH1fORnYxoVSNMIE=/450x300/image.jpg"
                                  class="lazy"
                                  data-srcset="https://photo.rever.vn/v2/get/m8sgt22ufK23zAKaupTzeH+7CNCkH1fORnYxoVSNMIE=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/m8sgt22ufK23zAKaupTzeH+7CNCkH1fORnYxoVSNMIE=/900x600/image.jpg 2x"
@@ -564,7 +802,7 @@
                         <a href="du-an/celesta-rise.html" title="Celesta Rise" data-imp-click>
                             <p class="status-top-left">Giá tốt</p>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/LPkBEdqGP7dVIOXYA0BIijDPDn0jQk5vS9fHWY+lq3Y=/450x300/image.jpg"
                                  class="lazy"
                                  data-srcset="https://photo.rever.vn/photo/v2/get/LPkBEdqGP7dVIOXYA0BIijDPDn0jQk5vS9fHWY+lq3Y=/450x300/image.jpg 1x, https://photo.rever.vn/photo/v2/get/LPkBEdqGP7dVIOXYA0BIijDPDn0jQk5vS9fHWY+lq3Y=/900x600/image.jpg 2x"
@@ -606,7 +844,7 @@
                         <a href="du-an/eco-green-sai-gon.html" title="Eco Green Sài Gòn" data-imp-click>
                             <p class="status-top-left">Giá tốt</p>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/iOqZrqVc3CobtCE8zlYogGDuUnCbTZtlyoH2_rfCIVE=/450x300/image.jpg"
                                  class="lazy"
                                  data-srcset="https://photo.rever.vn/photo/v2/get/iOqZrqVc3CobtCE8zlYogGDuUnCbTZtlyoH2_rfCIVE=/450x300/image.jpg 1x, https://photo.rever.vn/photo/v2/get/iOqZrqVc3CobtCE8zlYogGDuUnCbTZtlyoH2_rfCIVE=/900x600/image.jpg 2x"
@@ -650,24 +888,6 @@
         </div>
     </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <section class="container col-12">
         <div class="inner pd-top-bottom-block block-project" style="padding-top: 0">
             <h2 class="heading-03">
@@ -680,7 +900,7 @@
                         <a href="mua/can-ho-dao-kim-cuong-tang-trung-don-view-thanh-pho-sam-uat.html"
                            title="Căn hộ Đảo Kim Cương tầng trung, đón view thành phố sầm uất." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/9v039CkDTGGWuXm_cRTlbDPeCcMiV4YTAEgMPsCkKYg=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/9v039CkDTGGWuXm_cRTlbDPeCcMiV4YTAEgMPsCkKYg=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/9v039CkDTGGWuXm_cRTlbDPeCcMiV4YTAEgMPsCkKYg=/900x600/image.jpg 2x"
                                  alt="Căn hộ Đảo Kim Cương tầng trung, đón view thành phố sầm uất."
@@ -730,7 +950,7 @@
                         <a href="mua/can-ho-the-sun-avenue-noi-that-co-ban-don-view-noi-khu.html"
                            title="Căn hộ The Sun Avenue nội thất cơ bản, đón view nội khu." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/HxsJH08ezBWo508zzc1p+qHSsC0qJdj7VymMtnPLReE=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/HxsJH08ezBWo508zzc1p+qHSsC0qJdj7VymMtnPLReE=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/HxsJH08ezBWo508zzc1p+qHSsC0qJdj7VymMtnPLReE=/900x600/image.jpg 2x"
                                  alt="Căn hộ The Sun Avenue nội thất cơ bản, đón view nội khu."
@@ -777,7 +997,7 @@
                         <a href="mua/can-ho-the-sun-avenue-ban-cong-huong-dong-bac-view-thoang-dang.html"
                            title="Căn hộ The Sun Avenue ban công hướng Đông Bắc, view thoáng đãng." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/PhBG6C8MbqDh04wzWMfJaEOBNAfVZxHZAvEc3eRmM9o=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/PhBG6C8MbqDh04wzWMfJaEOBNAfVZxHZAvEc3eRmM9o=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/PhBG6C8MbqDh04wzWMfJaEOBNAfVZxHZAvEc3eRmM9o=/900x600/image.jpg 2x"
                                  alt="Căn hộ The Sun Avenue ban công hướng Đông Bắc, view thoáng đãng."
@@ -824,7 +1044,7 @@
                         <a href="mua/can-ho-day-du-noi-that-the-sun-avenue-huong-tay-nam.html"
                            title="Căn hộ đầy đủ nội thất The Sun Avenue hướng Tây Nam." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/vTmcmuOut7T+5OUgLSbepyHXGKHyQXs7ru16OV3LWqU=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/vTmcmuOut7T+5OUgLSbepyHXGKHyQXs7ru16OV3LWqU=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/vTmcmuOut7T+5OUgLSbepyHXGKHyQXs7ru16OV3LWqU=/900x600/image.jpg 2x"
                                  alt="Căn hộ đầy đủ nội thất The Sun Avenue hướng Tây Nam."
@@ -870,7 +1090,7 @@
                         <a href="mua/office-tel-the-sun-avenue-tang-3-noi-that-co-ban.html"
                            title="Office-tel The Sun Avenue tầng 3, nội thất cơ bản." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/P6BLc8YqZlBuBufx1KdttgYvEGfg6IBO__m5ucWyYgQ=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/P6BLc8YqZlBuBufx1KdttgYvEGfg6IBO__m5ucWyYgQ=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/P6BLc8YqZlBuBufx1KdttgYvEGfg6IBO__m5ucWyYgQ=/900x600/image.jpg 2x"
                                  alt="Office-tel The Sun Avenue tầng 3, nội thất cơ bản."
@@ -915,7 +1135,7 @@
                         <a href="mua/can-ho-the-sun-avenue-tang-thap-tien-ich-sieu-thi-day-du.html"
                            title="Căn hộ The Sun Avenue tầng thấp, tiện ích siêu thị đầy đủ." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/OcO7wgiqOC1mK2jS_GrPXq_9Cp+DZTXu2Paf2gwvcT0=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/OcO7wgiqOC1mK2jS_GrPXq_9Cp+DZTXu2Paf2gwvcT0=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/OcO7wgiqOC1mK2jS_GrPXq_9Cp+DZTXu2Paf2gwvcT0=/900x600/image.jpg 2x"
                                  alt="Căn hộ The Sun Avenue tầng thấp, tiện ích siêu thị đầy đủ."
@@ -975,7 +1195,7 @@
                         <a href="mua/ban-can-ho-tang-cao-icon-56-view-thanh-pho-noi-that-day-du.html"
                            title="Bán căn hộ tầng cao ICON 56, view thành phố, nội thất đầy đủ." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/uYS57n767f6vn2eiRG2FHKbZOW88B15XKl1K+oWIe4U=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/uYS57n767f6vn2eiRG2FHKbZOW88B15XKl1K+oWIe4U=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/uYS57n767f6vn2eiRG2FHKbZOW88B15XKl1K+oWIe4U=/900x600/image.jpg 2x"
                                  alt="Bán căn hộ tầng cao ICON 56, view thành phố, nội thất đầy đủ."
@@ -1023,7 +1243,7 @@
                            title="Bán căn hộ The Gold View 1 phòng ngủ, tháp A, đầy đủ nội thất, view kênh Bến Nghé và Quận 1"
                            data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/WbfPmaT50vzBQEK99SVo5EV7UUUpuvsIDWRgrO3EZqg=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/photo/v2/get/WbfPmaT50vzBQEK99SVo5EV7UUUpuvsIDWRgrO3EZqg=/450x300/image.jpg 1x, https://photo.rever.vn/photo/v2/get/WbfPmaT50vzBQEK99SVo5EV7UUUpuvsIDWRgrO3EZqg=/900x600/image.jpg 2x"
                                  alt="Bán căn hộ The Gold View 1 phòng ngủ, tháp A, đầy đủ nội thất, view kênh Bến Nghé và Quận 1"
@@ -1072,7 +1292,7 @@
                         <a href="mua/ban-can-ho-noi-that-day-du-view-thanh-pho-the-gold-view.html"
                            title="Bán căn hộ nội thất đầy đủ, view thành phố The Gold View" data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/_6QgBSojo7SPG5n5a0mIZXn4r9DCSdKeb+GUBMFh0K8=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/_6QgBSojo7SPG5n5a0mIZXn4r9DCSdKeb+GUBMFh0K8=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/_6QgBSojo7SPG5n5a0mIZXn4r9DCSdKeb+GUBMFh0K8=/900x600/image.jpg 2x"
                                  alt="Bán căn hộ nội thất đầy đủ, view thành phố The Gold View"
@@ -1119,7 +1339,7 @@
                         <a href="mua/can-ho-saigon-royal-huong-cua-tay-nam-noi-that-co-ban.html"
                            title="Căn hộ Saigon Royal hướng cửa Tây Nam, nội thất cơ bản." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/DwyZhzbHIQIzxORsTn48EdR+gmdQvDhSM0DGHxU3LNU=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/DwyZhzbHIQIzxORsTn48EdR+gmdQvDhSM0DGHxU3LNU=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/DwyZhzbHIQIzxORsTn48EdR+gmdQvDhSM0DGHxU3LNU=/900x600/image.jpg 2x"
                                  alt="Căn hộ Saigon Royal hướng cửa Tây Nam, nội thất cơ bản."
@@ -1167,7 +1387,7 @@
                            title="Căn hộ Saigon Royal tầng thấp hướng cửa Đông Nam, view nội khu yên tĩnh."
                            data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/XPKWfv32HsaN6EonXEHpxrMHc6wBk8s4cyKm0WBMJXg=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/XPKWfv32HsaN6EonXEHpxrMHc6wBk8s4cyKm0WBMJXg=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/XPKWfv32HsaN6EonXEHpxrMHc6wBk8s4cyKm0WBMJXg=/900x600/image.jpg 2x"
                                  alt="Căn hộ Saigon Royal tầng thấp hướng cửa Đông Nam, view nội khu yên tĩnh."
@@ -1216,7 +1436,7 @@
                         <a href="mua/can-ho-masteri-millennium-tang-cao-huong-dong-bac-thoang-mat.html"
                            title="Căn hộ Masteri Millennium tầng cao hướng Đông Bắc thoáng mát." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/LUddWmmwtjYDQkS_qWA_HLlGufV1LS1eSXPE4Ou+Ng0=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/LUddWmmwtjYDQkS_qWA_HLlGufV1LS1eSXPE4Ou+Ng0=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/LUddWmmwtjYDQkS_qWA_HLlGufV1LS1eSXPE4Ou+Ng0=/900x600/image.jpg 2x"
                                  alt="Căn hộ Masteri Millennium tầng cao hướng Đông Bắc thoáng mát."
@@ -1267,8 +1487,8 @@
     <section class="container col-12">
         <div class="inner pd-top-bottom-block quickly-sell">
             <div class="quickly-sell-cover">
-                <img data-src="https://s3-cdn.rever.vn/p/v2.33.55/images/background-quick-sell-small@1x.jpg"
-                     data-srcset="https://s3-cdn.rever.vn/p/v2.33.55/images/background-quick-sell-small@1x.jpg 600w, https://s3-cdn.rever.vn/p/v2.33.55/images/background-quick-sell-large@2x.jpg 1920w"
+                <img data-src="https://images/background-quick-sell-small@1x.jpg"
+                     data-srcset="https://images/background-quick-sell-small@1x.jpg 600w, https://images/background-quick-sell-large@2x.jpg 1920w"
                      class="lazy" alt="Rever">
             </div>
             <div class="detail-block">
@@ -1306,7 +1526,7 @@
                         <a href="mua/can-ho-urban-hill-q7-day-du-tien-ich-ban-cong-huong-bac.html"
                            title="Căn hộ Urban Hill Q7, đầy đủ tiện ích, ban công hướng Bắc." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/9GvOWiQ2X5U5MN7btccya_MTSTb4pAzab7pmm+WHiY8=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/9GvOWiQ2X5U5MN7btccya_MTSTb4pAzab7pmm+WHiY8=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/9GvOWiQ2X5U5MN7btccya_MTSTb4pAzab7pmm+WHiY8=/900x600/image.jpg 2x"
                                  alt="Căn hộ Urban Hill Q7, đầy đủ tiện ích, ban công hướng Bắc."
@@ -1353,7 +1573,7 @@
                         <a href="mua/can-ho-cosmo-city-tang-trung-day-du-noi-that-hien-dai.html"
                            title="Căn hộ Cosmo City tầng trung, đầy đủ nội thất hiện đại." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/3qz+K2PRcPMlrwaz0exk2HDyE4nqICt16iN022Sf06I=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/3qz+K2PRcPMlrwaz0exk2HDyE4nqICt16iN022Sf06I=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/3qz+K2PRcPMlrwaz0exk2HDyE4nqICt16iN022Sf06I=/900x600/image.jpg 2x"
                                  alt="Căn hộ Cosmo City tầng trung, đầy đủ nội thất hiện đại."
@@ -1400,7 +1620,7 @@
                         <a href="mua/can-ho-q7-boulevard-tang-thap-2-phong-ngu-noi-that-co-ban.html"
                            title="Căn hộ Q7 Boulevard tầng thấp, 2 phòng ngủ, nội thất cơ bản." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/QsM6ATni33p1qhvUe3FsYcXHXeTdTxBCjmxZSGKR6pA=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/photo/v2/get/QsM6ATni33p1qhvUe3FsYcXHXeTdTxBCjmxZSGKR6pA=/450x300/image.jpg 1x, https://photo.rever.vn/photo/v2/get/QsM6ATni33p1qhvUe3FsYcXHXeTdTxBCjmxZSGKR6pA=/900x600/image.jpg 2x"
                                  alt="Căn hộ Q7 Boulevard tầng thấp, 2 phòng ngủ, nội thất cơ bản."
@@ -1448,7 +1668,7 @@
                         <a href="mua/ban-can-ho-urban-hill-quan-7-dien-tich-76-81m2-1.html"
                            title="Bán căn hộ Urban Hill quận 7 diện tích 76.81m2" data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/mzZ3DhlL8fj291gOU5kH+HV6iU1x+0FpBMxbZCizrXo=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/photo/v2/get/mzZ3DhlL8fj291gOU5kH+HV6iU1x+0FpBMxbZCizrXo=/450x300/image.jpg 1x, https://photo.rever.vn/photo/v2/get/mzZ3DhlL8fj291gOU5kH+HV6iU1x+0FpBMxbZCizrXo=/900x600/image.jpg 2x"
                                  alt="Bán căn hộ Urban Hill quận 7 diện tích 76.81m2"
@@ -1492,7 +1712,7 @@
                         <a href="mua/ban-can-ho-tang-thap-e-home-5-the-bridgeview-noi-that-co-ban.html"
                            title="Bán căn hộ tầng thấp E-home 5 The Bridgeview, nội thất cơ bản." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/ByUL66V2gqEKeId5W7EbrjzolgycYgW8hY29XVmdZzc=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/photo/v2/get/ByUL66V2gqEKeId5W7EbrjzolgycYgW8hY29XVmdZzc=/450x300/image.jpg 1x, https://photo.rever.vn/photo/v2/get/ByUL66V2gqEKeId5W7EbrjzolgycYgW8hY29XVmdZzc=/900x600/image.jpg 2x"
                                  alt="Bán căn hộ tầng thấp E-home 5 The Bridgeview, nội thất cơ bản."
@@ -1539,7 +1759,7 @@
                         <a href="mua/can-ho-river-panorama-2-tang-trung-noi-that-co-ban-3.html"
                            title="Căn hộ River Panorama 2 tầng trung, nội thất cơ bản" data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/pZMR5ghJZDbk4j_N7K1buU8w45Yau8U7iKXsoPL7SQE=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/pZMR5ghJZDbk4j_N7K1buU8w45Yau8U7iKXsoPL7SQE=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/pZMR5ghJZDbk4j_N7K1buU8w45Yau8U7iKXsoPL7SQE=/900x600/image.jpg 2x"
                                  alt="Căn hộ River Panorama 2 tầng trung, nội thất cơ bản"
@@ -1598,7 +1818,7 @@
                         <a href="mua/can-ho-vinhomes-grand-park-tang-cao-huong-cua-dong-nam-2-phong-ngu.html"
                            title="Căn hộ Vinhomes Grand Park tầng cao hướng cửa Đông Nam, 2 phòng ngủ." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/a7HrgqrRPsiHqHs39_rXx0L+AX7febbCoYLESTYLcUY=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/a7HrgqrRPsiHqHs39_rXx0L+AX7febbCoYLESTYLcUY=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/a7HrgqrRPsiHqHs39_rXx0L+AX7febbCoYLESTYLcUY=/900x600/image.jpg 2x"
                                  alt="Căn hộ Vinhomes Grand Park tầng cao hướng cửa Đông Nam, 2 phòng ngủ."
@@ -1646,7 +1866,7 @@
                         <a href="mua/can-ho-vinhomes-grand-park-ban-giao-noi-that-co-ban-view-noi-khu-2.html"
                            title="Căn hộ Vinhomes Grand Park bàn giao nội thất cơ bản, view nội khu." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/nh6irMjAKjjeNs4YNoa2JnQaMJ61oPr9DGf3J9cnG9k=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/nh6irMjAKjjeNs4YNoa2JnQaMJ61oPr9DGf3J9cnG9k=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/nh6irMjAKjjeNs4YNoa2JnQaMJ61oPr9DGf3J9cnG9k=/900x600/image.jpg 2x"
                                  alt="Căn hộ Vinhomes Grand Park bàn giao nội thất cơ bản, view nội khu."
@@ -1694,7 +1914,7 @@
                         <a href="mua/can-ho-vinhomes-grand-park-view-song-ban-giao-noi-that-day-du.html"
                            title="Căn hộ Vinhomes Grand Park view sông, bàn giao nội thất đầy đủ." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/0fMjlqbZCILi160f9noMJUIS2UUbm18H3SOoXY5u7KU=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/0fMjlqbZCILi160f9noMJUIS2UUbm18H3SOoXY5u7KU=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/0fMjlqbZCILi160f9noMJUIS2UUbm18H3SOoXY5u7KU=/900x600/image.jpg 2x"
                                  alt="Căn hộ Vinhomes Grand Park view sông, bàn giao nội thất đầy đủ."
@@ -1741,7 +1961,7 @@
                         <a href="mua/can-ho-vinhomes-grand-park-noi-that-day-du-ban-cong-don-gio.html"
                            title="Căn hộ Vinhomes Grand Park nội thất đầy đủ, ban công đón gió." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/xcvfTp+PvZTuBqCcdEi5W8QPA78aKAiu+yh7ks2i12M=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/xcvfTp+PvZTuBqCcdEi5W8QPA78aKAiu+yh7ks2i12M=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/xcvfTp+PvZTuBqCcdEi5W8QPA78aKAiu+yh7ks2i12M=/900x600/image.jpg 2x"
                                  alt="Căn hộ Vinhomes Grand Park nội thất đầy đủ, ban công đón gió."
@@ -1788,7 +2008,7 @@
                         <a href="mua/can-ho-vinhomes-grand-park-2-phong-ngu-tang-cao-don-view-noi-khu-1.html"
                            title="Căn hộ Vinhomes Grand Park 2 phòng ngủ, tầng cao đón view nội khu." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/+kvYYQBm6RYMHRUSbVwb_+w3sfDkeNST65mz9OKTllc=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/+kvYYQBm6RYMHRUSbVwb_+w3sfDkeNST65mz9OKTllc=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/+kvYYQBm6RYMHRUSbVwb_+w3sfDkeNST65mz9OKTllc=/900x600/image.jpg 2x"
                                  alt="Căn hộ Vinhomes Grand Park 2 phòng ngủ, tầng cao đón view nội khu."
@@ -1836,7 +2056,7 @@
                         <a href="mua/can-ho-tang-trung-vinhomes-grand-park-don-view-truong.html"
                            title="Căn hộ tầng trung Vinhomes Grand Park đón view trường." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/NlBQz53OwNPNHw9w2M+ozq1zJ4vDwKRaRrkz5ZpGyqM=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/NlBQz53OwNPNHw9w2M+ozq1zJ4vDwKRaRrkz5ZpGyqM=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/NlBQz53OwNPNHw9w2M+ozq1zJ4vDwKRaRrkz5ZpGyqM=/900x600/image.jpg 2x"
                                  alt="Căn hộ tầng trung Vinhomes Grand Park đón view trường."
@@ -1897,7 +2117,7 @@
                            title="Bán căn hộ Vinhomes Central Park 1 phòng ngủ, tháp Landmark 6, đầy đủ nội thất, view hồ bơi"
                            data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/v8sk9SE1y2nK_3JXnI6QTTHkVu3QjXppv4rCaiqqIJM=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/v8sk9SE1y2nK_3JXnI6QTTHkVu3QjXppv4rCaiqqIJM=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/v8sk9SE1y2nK_3JXnI6QTTHkVu3QjXppv4rCaiqqIJM=/900x600/image.jpg 2x"
                                  alt="Bán căn hộ Vinhomes Central Park 1 phòng ngủ, tháp Landmark 6, đầy đủ nội thất, view hồ bơi"
@@ -1946,7 +2166,7 @@
                         <a href="mua/can-ho-vinhomes-central-park-view-thanh-pho-tuyet-dep.html"
                            title="Căn hộ Vinhomes Central Park view thành phố tuyệt đẹp." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/AQux6sSMBNzJgruA86d5laNCqsWo7oBZQxbXkRDslSU=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/AQux6sSMBNzJgruA86d5laNCqsWo7oBZQxbXkRDslSU=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/AQux6sSMBNzJgruA86d5laNCqsWo7oBZQxbXkRDslSU=/900x600/image.jpg 2x"
                                  alt="Căn hộ Vinhomes Central Park view thành phố tuyệt đẹp."
@@ -1994,7 +2214,7 @@
                         <a href="mua/can-ho-wilton-tower-tang-thap-noi-that-day-du-view-thanh-pho.html"
                            title="Căn hộ Wilton Tower tầng thấp nội thất đầy đủ, view thành phố." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/k6iDWn+buTYesHWHq5uJbu0tNpz7h3RkLy4KoLRF_qM=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/k6iDWn+buTYesHWHq5uJbu0tNpz7h3RkLy4KoLRF_qM=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/k6iDWn+buTYesHWHq5uJbu0tNpz7h3RkLy4KoLRF_qM=/900x600/image.jpg 2x"
                                  alt="Căn hộ Wilton Tower tầng thấp nội thất đầy đủ, view thành phố."
@@ -2041,7 +2261,7 @@
                         <a href="mua/can-ho-vinhomes-central-park-tang-cao-view-nhin-ra-noi-khu-tuyet-dep.html"
                            title="Căn hộ Vinhomes Central Park tầng cao view nhìn ra nội khu tuyệt đẹp." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/2u83Xea4ukj237TBMsF5N8bRRCEt4auGTAuzQmjdpPQ=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/2u83Xea4ukj237TBMsF5N8bRRCEt4auGTAuzQmjdpPQ=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/2u83Xea4ukj237TBMsF5N8bRRCEt4auGTAuzQmjdpPQ=/900x600/image.jpg 2x"
                                  alt="Căn hộ Vinhomes Central Park tầng cao view nhìn ra nội khu tuyệt đẹp."
@@ -2090,7 +2310,7 @@
                         <a href="mua/can-ho-vinhomes-central-park-view-trung-tam-thanh-pho-sam-uat.html"
                            title="Căn hộ Vinhomes Central Park view trung tâm thành phố sầm uất." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/+m2GZMYEzIYV7z+WfVscArCKrQAXGmZd0TAE6O_TkYQ=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/+m2GZMYEzIYV7z+WfVscArCKrQAXGmZd0TAE6O_TkYQ=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/+m2GZMYEzIYV7z+WfVscArCKrQAXGmZd0TAE6O_TkYQ=/900x600/image.jpg 2x"
                                  alt="Căn hộ Vinhomes Central Park view trung tâm thành phố sầm uất."
@@ -2138,7 +2358,7 @@
                         <a href="mua/can-ho-vinhomes-central-park-huong-dong-bac-noi-that-day-du-1.html"
                            title="Căn hộ Vinhomes Central Park hướng Đông Bắc, nội thất đầy đủ." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/V7O5jegepnCrPl7IKDnbRX10iktCNCruNtOHsBYUlac=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/V7O5jegepnCrPl7IKDnbRX10iktCNCruNtOHsBYUlac=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/V7O5jegepnCrPl7IKDnbRX10iktCNCruNtOHsBYUlac=/900x600/image.jpg 2x"
                                  alt="Căn hộ Vinhomes Central Park hướng Đông Bắc, nội thất đầy đủ."
@@ -2199,7 +2419,7 @@
                         <a href="thue/can-ho-vinhomes-central-park-huong-dong-nam-day-du-noi-that.html"
                            title="Căn hộ Vinhomes Central Park hướng Đông Nam, đầy đủ nội thất." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/GJocaro4pNDIuhI0yS4PiS0Ui6xRS2Cw0QxLyrEbZok=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/GJocaro4pNDIuhI0yS4PiS0Ui6xRS2Cw0QxLyrEbZok=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/GJocaro4pNDIuhI0yS4PiS0Ui6xRS2Cw0QxLyrEbZok=/900x600/image.jpg 2x"
                                  alt="Căn hộ Vinhomes Central Park hướng Đông Nam, đầy đủ nội thất."
@@ -2247,7 +2467,7 @@
                         <a href="thue/can-ho-vinhomes-central-park-ban-cong-huong-dong-bac.html"
                            title="Căn hộ Vinhomes Central Park ban công hướng Đông Bắc." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/QTMe9ckCrSbLNaa6dugMBbXB6j5mO55tj0pp6juGNfY=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/QTMe9ckCrSbLNaa6dugMBbXB6j5mO55tj0pp6juGNfY=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/QTMe9ckCrSbLNaa6dugMBbXB6j5mO55tj0pp6juGNfY=/900x600/image.jpg 2x"
                                  alt="Căn hộ Vinhomes Central Park ban công hướng Đông Bắc."
@@ -2294,7 +2514,7 @@
                         <a href="thue/can-ho-tang-29-vinhomes-central-park-day-du-noi-that.html"
                            title="Căn hộ tầng 29 Vinhomes Central Park đầy đủ nội thất " data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/VDzXMOKYQGMk2oHD1n7arlLlAA8jbIElQ+H2mDIW7JA=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/VDzXMOKYQGMk2oHD1n7arlLlAA8jbIElQ+H2mDIW7JA=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/VDzXMOKYQGMk2oHD1n7arlLlAA8jbIElQ+H2mDIW7JA=/900x600/image.jpg 2x"
                                  alt="Căn hộ tầng 29 Vinhomes Central Park đầy đủ nội thất "
@@ -2341,7 +2561,7 @@
                         <a href="thue/can-ho-tang-27-vinhomes-central-park-view-thoang-mat.html"
                            title="Căn hộ tầng 27 Vinhomes Central Park view thoáng mát" data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/foIK6qQrBALpTt9qaGYfdAJfd1fEM30dE2u7KA92QsE=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/foIK6qQrBALpTt9qaGYfdAJfd1fEM30dE2u7KA92QsE=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/foIK6qQrBALpTt9qaGYfdAJfd1fEM30dE2u7KA92QsE=/900x600/image.jpg 2x"
                                  alt="Căn hộ tầng 27 Vinhomes Central Park view thoáng mát"
@@ -2388,7 +2608,7 @@
                         <a href="thue/can-ho-vinhomes-central-park-tang-thap-view-noi-khu.html"
                            title="Căn hộ Vinhomes Central Park tầng thấp, view nội khu." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/fwMZg1ayxKgOqEClTY2IL4IKsinvCsUi_DnAzf20NGY=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/fwMZg1ayxKgOqEClTY2IL4IKsinvCsUi_DnAzf20NGY=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/fwMZg1ayxKgOqEClTY2IL4IKsinvCsUi_DnAzf20NGY=/900x600/image.jpg 2x"
                                  alt="Căn hộ Vinhomes Central Park tầng thấp, view nội khu."
@@ -2434,7 +2654,7 @@
                         <a href="thue/can-ho-tang-33-vinhomes-central-park-ban-giao-noi-that-day-du.html"
                            title="Căn hộ tầng 33 Vinhomes Central Park bàn giao nội thất đầy đủ" data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/rc6juc_DfZ_tWZRSeJzdYBCoEUmzdlyye5qkOfRNhGA=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/rc6juc_DfZ_tWZRSeJzdYBCoEUmzdlyye5qkOfRNhGA=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/rc6juc_DfZ_tWZRSeJzdYBCoEUmzdlyye5qkOfRNhGA=/900x600/image.jpg 2x"
                                  alt="Căn hộ tầng 33 Vinhomes Central Park bàn giao nội thất đầy đủ"
@@ -2495,7 +2715,7 @@
                         <a href="thue/can-ho-3-phong-ngu-90m2-the-sun-avenue-block-01.html"
                            title="Căn hộ 3 phòng ngủ 90m2 The Sun Avenue - Block 01" data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/qAnLE68SmtriStbtdbGTcr4R33HjXjWrfHlqNeRQ+yo=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/qAnLE68SmtriStbtdbGTcr4R33HjXjWrfHlqNeRQ+yo=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/qAnLE68SmtriStbtdbGTcr4R33HjXjWrfHlqNeRQ+yo=/900x600/image.jpg 2x"
                                  alt="Căn hộ 3 phòng ngủ 90m2 The Sun Avenue - Block 01"
@@ -2540,7 +2760,7 @@
                         <a href="thue/can-ho-officetel-the-sun-avenue-ban-giao-noi-that-co-ban.html"
                            title="Căn hộ Officetel The Sun Avenue bàn giao nội thất cơ bản." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/G4hjYHD63mUne8vx_8cVBm+Lc4iVx3v03kal2DQXf2s=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/G4hjYHD63mUne8vx_8cVBm+Lc4iVx3v03kal2DQXf2s=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/G4hjYHD63mUne8vx_8cVBm+Lc4iVx3v03kal2DQXf2s=/900x600/image.jpg 2x"
                                  alt="Căn hộ Officetel The Sun Avenue bàn giao nội thất cơ bản."
@@ -2587,7 +2807,7 @@
                         <a href="thue/can-ho-the-sun-avenue-tang-trung-kem-noi-that-day-du.html"
                            title="Căn hộ The Sun Avenue tầng trung, kèm nội thất đầy đủ." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/JK__u+O8QEe2rRGNoPFA8GOVsykVSsEYtEzXUEk5l04=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/JK__u+O8QEe2rRGNoPFA8GOVsykVSsEYtEzXUEk5l04=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/JK__u+O8QEe2rRGNoPFA8GOVsykVSsEYtEzXUEk5l04=/900x600/image.jpg 2x"
                                  alt="Căn hộ The Sun Avenue tầng trung, kèm nội thất đầy đủ."
@@ -2633,7 +2853,7 @@
                         <a href="thue/can-ho-the-sun-avenue-day-du-noi-that-don-view-noi-khu.html"
                            title="Căn hộ The Sun Avenue đầy đủ nội thất, đón view nội khu." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/ggehz9VT5DITf_W+7YPfFgfTWZD51INrerRWr_IXxMk=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/ggehz9VT5DITf_W+7YPfFgfTWZD51INrerRWr_IXxMk=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/ggehz9VT5DITf_W+7YPfFgfTWZD51INrerRWr_IXxMk=/900x600/image.jpg 2x"
                                  alt="Căn hộ The Sun Avenue đầy đủ nội thất, đón view nội khu."
@@ -2679,7 +2899,7 @@
                         <a href="thue/can-ho-the-sun-avenue-don-view-noi-khu-noi-that-day-du.html"
                            title="Căn hộ The Sun Avenue đón view nội khu, nội thất đầy đủ." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/RSgANcIKfqMOfoU2ug5EfXoxtRZWnsk5dFRXkst+zgU=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/RSgANcIKfqMOfoU2ug5EfXoxtRZWnsk5dFRXkst+zgU=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/RSgANcIKfqMOfoU2ug5EfXoxtRZWnsk5dFRXkst+zgU=/900x600/image.jpg 2x"
                                  alt="Căn hộ The Sun Avenue đón view nội khu, nội thất đầy đủ."
@@ -2725,7 +2945,7 @@
                         <a href="thue/can-ho-the-sun-avenue-don-view-noi-khu-day-du-noi-that-1.html"
                            title="Căn hộ The Sun Avenue đón view nội khu, đầy đủ nội thất." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/YtuBNe3t6yj6TGxa4IzwxF4B6XnwcEXVfpDamN1lgvQ=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/YtuBNe3t6yj6TGxa4IzwxF4B6XnwcEXVfpDamN1lgvQ=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/YtuBNe3t6yj6TGxa4IzwxF4B6XnwcEXVfpDamN1lgvQ=/900x600/image.jpg 2x"
                                  alt="Căn hộ The Sun Avenue đón view nội khu, đầy đủ nội thất."
@@ -2785,7 +3005,7 @@
                         <a href="thue/can-ho-office-tel-river-gate-cua-huong-tay-bac-day-du-tien-nghi.html"
                            title="Căn hộ Office-tel River Gate cửa hướng Tây Bắc, đầy đủ tiện nghi." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/TM8kJWE9r2j9MFXgXH3aeidiK3CvUstJb5JVd4zhdZ8=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/TM8kJWE9r2j9MFXgXH3aeidiK3CvUstJb5JVd4zhdZ8=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/TM8kJWE9r2j9MFXgXH3aeidiK3CvUstJb5JVd4zhdZ8=/900x600/image.jpg 2x"
                                  alt="Căn hộ Office-tel River Gate cửa hướng Tây Bắc, đầy đủ tiện nghi."
@@ -2832,7 +3052,7 @@
                         <a href="thue/can-ho-tang-cao-the-tresor-huong-dong-bac-view-thoang-mat.html"
                            title="Căn hộ tầng cao The Tresor hướng Đông Bắc, view thoáng mát." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/V2XsL6jtFsPCH5Ijy_34amIlywVK8oS9PXGkkbmByaI=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/V2XsL6jtFsPCH5Ijy_34amIlywVK8oS9PXGkkbmByaI=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/V2XsL6jtFsPCH5Ijy_34amIlywVK8oS9PXGkkbmByaI=/900x600/image.jpg 2x"
                                  alt="Căn hộ tầng cao The Tresor hướng Đông Bắc, view thoáng mát."
@@ -2879,7 +3099,7 @@
                         <a href="thue/can-ho-icon-56-tang-trung-noi-that-hien-dai-tien-nghi.html"
                            title="Căn hộ Icon 56 tầng trung, nội thất hiện đại tiện nghi." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/VxKVNnnKRx_KdN5Cqf2Bx0xSBektQhwHrpXywAdsnFk=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/VxKVNnnKRx_KdN5Cqf2Bx0xSBektQhwHrpXywAdsnFk=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/VxKVNnnKRx_KdN5Cqf2Bx0xSBektQhwHrpXywAdsnFk=/900x600/image.jpg 2x"
                                  alt="Căn hộ Icon 56 tầng trung, nội thất hiện đại tiện nghi."
@@ -2925,7 +3145,7 @@
                         <a href="thue/office-tel-masteri-millennium-1-phong-ngu-noi-that-co-ban.html"
                            title="Office-tel Masteri Millennium 1 phòng ngủ, nội thất cơ bản." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/1JlOALgGpqH4QdQuBm4rRgu+aMAP+Ihx_w9IHenxMcg=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/photo/v2/get/1JlOALgGpqH4QdQuBm4rRgu+aMAP+Ihx_w9IHenxMcg=/450x300/image.jpg 1x, https://photo.rever.vn/photo/v2/get/1JlOALgGpqH4QdQuBm4rRgu+aMAP+Ihx_w9IHenxMcg=/900x600/image.jpg 2x"
                                  alt="Office-tel Masteri Millennium 1 phòng ngủ, nội thất cơ bản."
@@ -2972,7 +3192,7 @@
                         <a href="thue/can-ho-officetel-the-tresor-tang-thap-ban-giao-noi-that-co-ban.html"
                            title="Căn hộ Officetel The Tresor tầng thấp, bàn giao nội thất cơ bản." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/zLzTSn00S9BhVtADgC+lhR_7SLOwwKE_f5M7MO56pTc=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/zLzTSn00S9BhVtADgC+lhR_7SLOwwKE_f5M7MO56pTc=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/zLzTSn00S9BhVtADgC+lhR_7SLOwwKE_f5M7MO56pTc=/900x600/image.jpg 2x"
                                  alt="Căn hộ Officetel The Tresor tầng thấp, bàn giao nội thất cơ bản."
@@ -3019,7 +3239,7 @@
                         <a href="thue/officetel-saigon-royal-tang-07-ban-cong-tay-bac-thoang-dang.html"
                            title="Officetel Saigon Royal tầng 07 ban công Tây Bắc thoáng đãng" data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/k+XL2c1Ow9jBI7NHu70miKxln8CTVkBScvC+gOra3s0=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/k+XL2c1Ow9jBI7NHu70miKxln8CTVkBScvC+gOra3s0=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/k+XL2c1Ow9jBI7NHu70miKxln8CTVkBScvC+gOra3s0=/900x600/image.jpg 2x"
                                  alt="Officetel Saigon Royal tầng 07 ban công Tây Bắc thoáng đãng"
@@ -3080,7 +3300,7 @@
                            title="Căn hộ Officetel Sunrise City View nội thất cơ bản, view nội khu."
                            data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/P5pAB1O_JQU6pT_HefRGJk8bCRuAQ0buvJPXk6z86jI=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/P5pAB1O_JQU6pT_HefRGJk8bCRuAQ0buvJPXk6z86jI=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/P5pAB1O_JQU6pT_HefRGJk8bCRuAQ0buvJPXk6z86jI=/900x600/image.jpg 2x"
                                  alt="Căn hộ Officetel Sunrise City View nội thất cơ bản, view nội khu."
@@ -3128,7 +3348,7 @@
                            title="Cho thuê mặt bằng kinh doanh đường Đào Trí, phường Phú Thuận, quận 7, diện tích 85m2, khu dân cư hiện đại, sầm uất."
                            data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/f_QkgTng_xr46u1KpNBQ5uZzU9b2OK89RSeGuPMAWS0=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/photo/v2/get/f_QkgTng_xr46u1KpNBQ5uZzU9b2OK89RSeGuPMAWS0=/450x300/image.jpg 1x, https://photo.rever.vn/photo/v2/get/f_QkgTng_xr46u1KpNBQ5uZzU9b2OK89RSeGuPMAWS0=/900x600/image.jpg 2x"
                                  alt="Cho thuê mặt bằng kinh doanh đường Đào Trí, phường Phú Thuận, quận 7, diện tích 85m2, khu dân cư hiện đại, sầm uất."
@@ -3177,7 +3397,7 @@
                            title="Cho thuê nhà phố mặt đường Nguyễn Văn Quỳ, phường 7, quận 7, diện tích đất 175m2, đầy đủ nội thất."
                            data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/pcYRSzYC2UbQbHZITN3Dov0ioVX99BXW3cdcx3uF_bc=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/photo/v2/get/pcYRSzYC2UbQbHZITN3Dov0ioVX99BXW3cdcx3uF_bc=/450x300/image.jpg 1x, https://photo.rever.vn/photo/v2/get/pcYRSzYC2UbQbHZITN3Dov0ioVX99BXW3cdcx3uF_bc=/900x600/image.jpg 2x"
                                  alt="Cho thuê nhà phố mặt đường Nguyễn Văn Quỳ, phường 7, quận 7, diện tích đất 175m2, đầy đủ nội thất."
@@ -3226,7 +3446,7 @@
                         <a href="thue/nha-pho-khu-dan-cu-ven-song-dien-tich-su-dung-329m2-huong-nam.html"
                            title="Nhà phố khu dân cư ven sông diện tích sử dụng 329m2, hướng Nam." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/YIbVaDhlvhYez3lMNpycJrzZdozXoxFm3LjPh8hNCDw=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/YIbVaDhlvhYez3lMNpycJrzZdozXoxFm3LjPh8hNCDw=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/YIbVaDhlvhYez3lMNpycJrzZdozXoxFm3LjPh8hNCDw=/900x600/image.jpg 2x"
                                  alt="Nhà phố khu dân cư ven sông diện tích sử dụng 329m2, hướng Nam."
@@ -3273,7 +3493,7 @@
                         <a href="thue/can-ho-chung-cu-hung-vuong-2-day-du-noi-that-cua-chinh-huong-nam.html"
                            title="Căn hộ chung cư Hưng Vượng 2 đầy đủ nội thất, cửa chính hướng Nam." data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/SsK1SsS6RkTRQvqTe6mY3p0JcxjV83NyDUSlm5BogGM=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/SsK1SsS6RkTRQvqTe6mY3p0JcxjV83NyDUSlm5BogGM=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/SsK1SsS6RkTRQvqTe6mY3p0JcxjV83NyDUSlm5BogGM=/900x600/image.jpg 2x"
                                  alt="Căn hộ chung cư Hưng Vượng 2 đầy đủ nội thất, cửa chính hướng Nam."
@@ -3321,7 +3541,7 @@
                         <a href="thue/nha-pho-mat-tien-duong-cao-trieu-phat-rong-12m-thuan-tien-kinh-doanh.html"
                            title="Nhà phố mặt tiền đường Cao Triều Phát rộng 12m, thuận tiện kinh doanh" data-imp-click>
 
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/v2/get/ZdvFrzW+bKnDvV+UKm2X5Ozkd860D_1gL+_mvNiyGWs=/450x300/image.jpg"
                                  data-srcset="https://photo.rever.vn/v2/get/ZdvFrzW+bKnDvV+UKm2X5Ozkd860D_1gL+_mvNiyGWs=/450x300/image.jpg 1x, https://photo.rever.vn/v2/get/ZdvFrzW+bKnDvV+UKm2X5Ozkd860D_1gL+_mvNiyGWs=/900x600/image.jpg 2x"
                                  alt="Nhà phố mặt tiền đường Cao Triều Phát rộng 12m, thuận tiện kinh doanh"
@@ -3381,7 +3601,7 @@
                 <div class="item">
                     <div class="card">
                         <a href="chu-dau-tu/khang-dien.html">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/rvqTbiShT1YbYBo_UcQttcttpVI7tsVwl3n9x4F+gOI=/450x300/image.jpg"
                                  class="lazy" alt="Khang Điền" title="Khang Điền">
                         </a>
@@ -3390,7 +3610,7 @@
                 <div class="item">
                     <div class="card">
                         <a href="chu-dau-tu/capitaland.html">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/dkdE8lPe9AnGgtnLD+UF0DTJO7zwH0Xhb1JCprWcw9c=/450x300/image.jpg"
                                  class="lazy" alt="Capitaland" title="Capitaland">
                         </a>
@@ -3399,7 +3619,7 @@
                 <div class="item">
                     <div class="card">
                         <a href="chu-dau-tu/tien-phuoc.html">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/bqC8UyldjS_mUEGrGzlEPpwZyAKbdilkKF8HnMFRqLs=/450x300/image.jpg"
                                  class="lazy" alt="Tiến Phước" title="Tiến Phước">
                         </a>
@@ -3408,7 +3628,7 @@
                 <div class="item">
                     <div class="card">
                         <a href="chu-dau-tu/keppel-land.html">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/C+wvp1aV6tHJRVOHkOCHhXB82UYp9a5XJEiIQftFE4M=/450x300/image.jpg"
                                  class="lazy" alt="Keppel Land" title="Keppel Land">
                         </a>
@@ -3417,7 +3637,7 @@
                 <div class="item">
                     <div class="card">
                         <a href="chu-dau-tu/novaland.html">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/yzjcTFb3a9Bofk1bslCqUz9e+8Q3kSqM_HqoAJ4P_WQ=/450x300/image.jpg"
                                  class="lazy" alt="Novaland" title="Novaland">
                         </a>
@@ -3426,7 +3646,7 @@
                 <div class="item">
                     <div class="card">
                         <a href="chu-dau-tu/thao-dien-investment.html">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/4T24W1e7II_lsus_thTpJTTJO7zwH0Xhb1JCprWcw9c=/450x300/image.jpg"
                                  class="lazy" alt="Thảo Điền Investment" title="Thảo Điền Investment">
                         </a>
@@ -3435,7 +3655,7 @@
                 <div class="item">
                     <div class="card">
                         <a href="chu-dau-tu/vingroup.html">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/LKrMUOOdXyWV96TPsxgo6sh03OJA7w_RuLtXzfXF1ZM=/450x300/image.jpg"
                                  class="lazy" alt="Vingroup" title="Vingroup">
                         </a>
@@ -3444,7 +3664,7 @@
                 <div class="item">
                     <div class="card">
                         <a href="chu-dau-tu/sunshine-2.html">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/FIZL_RmbHDgm4YJD86NK18Bel2ogWGWB03bDlkpIAMA=/450x300/image.jpg"
                                  class="lazy" alt="Sunshine" title="Sunshine">
                         </a>
@@ -3453,7 +3673,7 @@
                 <div class="item">
                     <div class="card">
                         <a href="chu-dau-tu/hkl.html">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/M3frjHv_aj+w79dCdmZCsQ+sgOCB2Nzdm8P_sVTZ27M=/450x300/image.jpg"
                                  class="lazy" alt="Hongkong Land" title="Hongkong Land">
                         </a>
@@ -3462,7 +3682,7 @@
                 <div class="item">
                     <div class="card">
                         <a href="chu-dau-tu/frasers-property.html">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/L4uGG9SAQqjcYEsWftYpdIJ+AH07GvbhLZs6Kprsmic=/450x300/image.jpg"
                                  class="lazy" alt="Frasers Centrepoint Limited (FCL)"
                                  title="Frasers Centrepoint Limited (FCL)">
@@ -3472,7 +3692,7 @@
                 <div class="item">
                     <div class="card">
                         <a href="chu-dau-tu/son-kim-land.html">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/jEy4qTQKmxa5IMTWg6OvUQK6PwNHNAgNlu1R6D6zKVk=/450x300/image.png"
                                  class="lazy" alt="SonKim Land" title="SonKim Land">
                         </a>
@@ -3481,7 +3701,7 @@
                 <div class="item">
                     <div class="card">
                         <a href="chu-dau-tu/dat-xanh-group.html">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/77YFWvWFxz1pcGK9pCpJ_qBQdwLMEyvmK77og1XQWBk=/450x300/image.jpg"
                                  class="lazy" alt="Đất Xanh Group" title="Đất Xanh Group">
                         </a>
@@ -3506,7 +3726,7 @@
                     <article class="item">
                         <div class="cover-image">
                             <a href="../blog.rever.vn/10-van-de-anh-huong-truc-tiep-den-chat-luong-song-ma-nguoi-mua-chung-cu-hay-bo-quen.html">
-                                <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                                <img src="../images/1px.png"
                                      data-src="https://photo.rever.vn/photo/v2/get/pqgOWho_MV6PBalDMMIyow7RgAg4XSAYEfHx_x7V6Nk=/750x500/image.jpg"
                                      data-srcset="https://photo.rever.vn/photo/v2/get/pqgOWho_MV6PBalDMMIyow7RgAg4XSAYEfHx_x7V6Nk=/750x500/image.jpg 1x, https://photo.rever.vn/photo/v2/get/pqgOWho_MV6PBalDMMIyow7RgAg4XSAYEfHx_x7V6Nk=/1200x800/image.jpg 2x"
                                      alt="Người sắp mua chung cư: Phải cực kỳ lưu ý 10 vấn đề quan trọng này!"
@@ -3527,7 +3747,7 @@
                     <article class="item">
                         <div class="cover-image">
                             <a href="../blog.rever.vn/13-cau-hoi-ban-nhat-dinh-phai-biet-de-khong-phai-hoi-han-khi-mua-nha-lan-dau.html">
-                                <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                                <img src="../images/1px.png"
                                      data-src="https://photo.rever.vn/photo/v2/get/w8mkb981xdxby6kKtKyGiCt__UGeFxckURwO6kO0Cb4=/750x500/image.jpg"
                                      data-srcset="https://photo.rever.vn/photo/v2/get/w8mkb981xdxby6kKtKyGiCt__UGeFxckURwO6kO0Cb4=/750x500/image.jpg 1x, https://photo.rever.vn/photo/v2/get/w8mkb981xdxby6kKtKyGiCt__UGeFxckURwO6kO0Cb4=/1200x800/image.jpg 2x"
                                      alt="13 câu hỏi bạn nhất định phải biết để không phải hối hận khi mua nhà lần đầu"
@@ -3546,7 +3766,7 @@
                     <article class="item">
                         <div class="cover-image">
                             <a href="../blog.rever.vn/7-cau-hoi-ban-nhat-dinh-phai-lam-ro-truoc-khi-vay-mua-nha-tu-ngan-hang.html">
-                                <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                                <img src="../images/1px.png"
                                      data-src="https://photo.rever.vn/photo/v2/get/aDjgouA9H7rfFmP+D1HDqfJNRasB9Du_m9OaBR2Xwik=/750x500/image.jpg"
                                      data-srcset="https://photo.rever.vn/photo/v2/get/aDjgouA9H7rfFmP+D1HDqfJNRasB9Du_m9OaBR2Xwik=/750x500/image.jpg 1x, https://photo.rever.vn/photo/v2/get/aDjgouA9H7rfFmP+D1HDqfJNRasB9Du_m9OaBR2Xwik=/1200x800/image.jpg 2x"
                                      alt="7 câu hỏi bạn nhất định phải làm rõ trước khi vay mua nhà từ ngân hàng"
@@ -3565,7 +3785,7 @@
                     <article class="item">
                         <div class="cover-image">
                             <a href="../blog.rever.vn/cap-nhat-tien-do-thi-cong-du-an-picity-high-park-quan-12.html">
-                                <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                                <img src="../images/1px.png"
                                      data-src="https://photo.rever.vn/photo/v2/get/c6n9u5d2TbEQxL23nAP9lqBK1wri2+YkFSQJ9ui+AS4=/750x500/image.jpg"
                                      data-srcset="https://photo.rever.vn/photo/v2/get/c6n9u5d2TbEQxL23nAP9lqBK1wri2+YkFSQJ9ui+AS4=/750x500/image.jpg 1x, https://photo.rever.vn/photo/v2/get/c6n9u5d2TbEQxL23nAP9lqBK1wri2+YkFSQJ9ui+AS4=/1200x800/image.jpg 2x"
                                      alt="Cập nhật tiến độ thi công dự án Picity High Park (Mới Nhất)"
@@ -3583,7 +3803,7 @@
                     <article class="item">
                         <div class="cover-image">
                             <a href="../blog.rever.vn/dot-nhap-cong-truong-3-dai-du-an-cua-masterise-homes-xem-trien-khai-toi-dau.html">
-                                <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                                <img src="../images/1px.png"
                                      data-src="https://photo.rever.vn/photo/v2/get/XBxjKsFuXPG1G4pVZLUXIhbZLerTcJSeDQzT4DuBYUc=/750x500/image.jpeg"
                                      data-srcset="https://photo.rever.vn/photo/v2/get/XBxjKsFuXPG1G4pVZLUXIhbZLerTcJSeDQzT4DuBYUc=/750x500/image.jpeg 1x, https://photo.rever.vn/photo/v2/get/XBxjKsFuXPG1G4pVZLUXIhbZLerTcJSeDQzT4DuBYUc=/1200x800/image.jpeg 2x"
                                      alt="&quot;Đột nhập&quot; công trường 3 đại dự án của Masterise Homes xem triển khai đến đâu?"
@@ -3632,12 +3852,12 @@
 
                     <div class="download-option">
                         <a class="app-store" target="_blank" href="../apps.apple.com/vn/app/rever/id1101768201.html">
-                            <img data-src="https://s3-cdn.rever.vn/p/v2.33.55/images/appstore-btn-v2.jpg" class="lazy"
+                            <img data-src="https://images/appstore-btn-v2.jpg" class="lazy"
                                  alt="Rever">
                         </a>
                         <a class="andoird" target="_blank"
                            href="../play.google.com/store/apps/detailsece3.html?id=com.rever.app.android">
-                            <img data-src="https://s3-cdn.rever.vn/p/v2.33.55/images/appandroid-btn-v2.jpg" class="lazy"
+                            <img data-src="https://images/appandroid-btn-v2.jpg" class="lazy"
                                  alt="Rever">
                         </a>
                     </div>
@@ -3657,7 +3877,7 @@
                 <article class="projectCard">
                     <div class="cover-image">
                         <a href="khu-dan-cu/khu-do-thi-moi-thu-thiem-2.html" title="Khu đô thị mới Thủ Thiêm">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/72b_s6DG3djFnHJT7nVQdB3PcAyjcTqK67hi7gISTRI=/450x300/image.jpg"
                                  class="lazy"
                                  data-srcset="https://photo.rever.vn/photo/v2/get/72b_s6DG3djFnHJT7nVQdB3PcAyjcTqK67hi7gISTRI=/450x300/image.jpg 1x, https://photo.rever.vn/photo/v2/get/72b_s6DG3djFnHJT7nVQdB3PcAyjcTqK67hi7gISTRI=/900x600/image.jpg 2x"
@@ -3680,7 +3900,7 @@
                 <article class="projectCard">
                     <div class="cover-image">
                         <a href="khu-dan-cu/diamond-island-dao-kim-cuong.html" title="Diamond Island - Đảo Kim Cương">
-                            <img src="../s3-cdn.rever.vn/p/v2.33.55/images/1px.png"
+                            <img src="../images/1px.png"
                                  data-src="https://photo.rever.vn/photo/v2/get/jOzcVPdEvQ8crwzLCvILZpt0TtsusYMhIHHot1_w3Mw=/450x300/image.jpg"
                                  class="lazy"
                                  data-srcset="https://photo.rever.vn/photo/v2/get/jOzcVPdEvQ8crwzLCvILZpt0TtsusYMhIHHot1_w3Mw=/450x300/image.jpg 1x, https://photo.rever.vn/photo/v2/get/jOzcVPdEvQ8crwzLCvILZpt0TtsusYMhIHHot1_w3Mw=/900x600/image.jpg 2x"
@@ -3774,22 +3994,6 @@
         </div>
     </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <style>
         #msform a.butt-primary[disabled] {
             opacity: 0.4
@@ -3803,11 +4007,11 @@
                         <form id="msform" onsubmit="return false">
                             <fieldset style="display: block">
                                 <h2 class="popup-title-w-back height-title popup-font-tiempos" id="title-head">Phản hồi
-                                    của bạn về Rever.vn (<span v-text="step"></span>/3)</h2>
+                                    của bạn về Thegioinhaphovietnam.com.vn (<span v-text="step"></span>/3)</h2>
                                 <button @click="hideModal()" class="popup-close-btn"><i
                                         class="zmdi zmdi-hc-2x zmdi-close"></i></button>
                                 <div v-show="step == 1" class="contain" id="step-form-1">
-                                    <div class="intro">Bạn có sẵn sàng giới thiệu Rever cho người khác?</div>
+                                    <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?</div>
                                     <div class="choose-number">
                                         <ul>
                                             <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
@@ -3818,12 +4022,12 @@
                                         </ul>
                                     </div>
                                     <div class="emotion">
-                                        <img :src="'https://s3-cdn.rever.vn/p/v2.33.55/images/' + step1Icon" alt="">
+                                        <img :src="'https://images/' + step1Icon" alt="">
                                         <p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
                                     </div>
                                 </div>
                                 <div v-show="step == 2" class="contain" id="step-form-2">
-                                    <div class="intro">Bạn có thấy Rever.vn dễ sử dụng không?</div>
+                                    <div class="intro">Bạn có thấy Thegioinhaphovietnam.com.vn dễ sử dụng không?</div>
                                     <div class="row row-fb pd-t-39 pd-bt-68 center-item">
                                         <button :class="{active : step2.rate == 'hard'}"
                                                 @click="selectStep2Rate('hard')"
@@ -3959,7 +4163,7 @@
                         </button>
                     </div>
                     <div class="popup-contain">
-                        <img class="img-success" src="../s3-cdn.rever.vn/p/v2.33.55/images/icon-success.svg">
+                        <img class="img-success" src="../images/icon-success.svg">
                         <div class="send-success">
                             <h3>Đã gửi thành công!</h3>
                             <p>Cảm ơn bạn đã gửi phản hồi cho Rever, ý kiến của bạn sẽ giúp Rever.vn từng bước nâng cao
@@ -3975,6 +4179,50 @@
         </div>
     </div>
 
+{% endblock %}
 
 
+{% block scripts %}
+
+{% comment %}    <script>
+        window.RFeedback = {
+            API: "https://rever.vn/mapi",
+            email: "",
+            name: "",
+            phone: "",
+            ip: "10.244.0.0"
+        }
+    </script>{% endcomment %}
+
+    <script src="{% static 'js/index-merged.min90ca.js' %} "></script>
+    <script src="{% static 'js/favorite.min90ca.js' %} "></script>
+    {% comment %}<script src="{% static 'js/tracking-and-external.min90ca.js' %} "></script>{% endcomment %}
+
+{% comment %}    <script type="deferjs">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "3y09hfteky");
+
+    </script>{% endcomment %}
+
+
+ {% comment %}   <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+ {% endcomment %} {% comment %}  <script type="deferjs" src="../www.google.com/recaptcha/apib091.js?render=explicit"></script>{% endcomment %}
+
+{% comment %}
+    <script>
+        adroll_adv_id = "VHUFKBW42JH37IACSQW3PD";
+        adroll_pix_id = "734MVFGRZFAB7JCBBH46O6";
+    </script>
+{% endcomment %}
+
+
+
+{% comment %}    <script type="deferjs" id="hs-script-loader" src="../js.hs-scripts.com/2775524.js"></script>{% endcomment %}
+
+  <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
+ {% comment %} <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>{% endcomment %}
+  <script src="{% static 'js/main.js' %} "></script>
 {% endblock %}

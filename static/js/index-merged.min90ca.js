@@ -22971,7 +22971,7 @@
                                 window.location.reload()
                             } else console.error("Logout fail", t)
                         })
-                    }, initGAPI: function () {
+                    } /*initGAPI: function () {
                         var t = this;
                         gapi.load("auth2", function () {
                             t.googleAuth = gapi.auth2.init({
@@ -22988,7 +22988,7 @@
                                 }
                             }) : console.error("Chưa thiết lập window.isLoggedIn để check user có login hay không")
                         })
-                    }, startProcess: function () {
+                    }*/, startProcess: function () {
                         this.processing = !0
                     }, endProcess: function () {
                         this.processing = !1
@@ -23012,7 +23012,7 @@
                     }
                 },
                 created: function () {
-                    this.formBck = c.b.deepCopy(this.form), this.currentStateBck = c.b.deepCopy(this.currentState)
+                     this.formBck = c.b.deepCopy(this.form), this.currentStateBck = c.b.deepCopy(this.currentState)
                 },
                 mounted: function () {
                     var t = this;

@@ -12,13 +12,13 @@
   <!-- Top Bar -->
 {% comment %}  {% include 'partials/_topbar.html' %}{% endcomment %}
   <!-- NavBar -->
-  {% include 'partials/_navbar.html' %}
+{% comment %}  {% include 'partials/_navbar.html' %}
     <!-- Banner -->
-  {% include 'partials/_banner.html' %}
+  {% include 'partials/_banner.html' %}{% endcomment %}
     <!-- Main Content -->
   {% block content %} {% endblock %}
   <!-- Footer -->
-  {% include 'partials/_footer.html' %}
+{% comment %}  {% include 'partials/_footer.html' %}{% endcomment %}
 
     <!-- Scripts -->
   {% block scripts %} {% endblock %}

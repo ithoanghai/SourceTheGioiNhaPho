@@ -1,26 +1,38 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.template import loader
-from django.http import HttpResponse
 from django import template
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
+from django.template import loader
 
-from FunctionModule.listings.choices import price_choices, bedroom_choices, state_choices
+from FunctionModule.cadastral.constants import state_data
+from FunctionModule.listings.choices import price_choices, bedroom_choices
 from FunctionModule.listings.models import Listing
 from FunctionModule.realtors.models import Realtor
-from django.urls import reverse_lazy
 
 from django.contrib.admin import site
 
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
+from django.contrib.admin import site
+from django.contrib.auth.models import User
 
 def index(request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)[:3]
     context = {
         'listings': listings,
-        'state_choices': state_choices,
+        'state_data': state_data,
         'bedroom_choices': bedroom_choices,
         'price_choices': price_choices,
     }
 
-    return render(request, 'pages/index.html', context)
+    return render(request, 'home/index.html', context)
 
 
 
@@ -36,16 +48,43 @@ def about(request):
         'mvp_realtors': mvp_realtors
     }
 
-    return render(request, 'pages/about.html', context)
+    return render(request, 'about/about.html', context)
+
+def search(request):
+       """'listing': get_object_or_404(Listing, house_type=house_type)"""
+       tran = request.GET.get('trantype', '')
+       housetype = request.GET.get('housetype', '')
+       listings = Listing.objects.order_by('-list_date').filter(transaction_type=tran, house_type=housetype)[:3]
+       context = {
+           'listings': listings,
+           'state_data': state_data,
+           'bedroom_choices': bedroom_choices,
+           'price_choices': price_choices,
+       }
+
+       return render(request, 'home/search.html', context)
+
+
+def searchurban(request):
+    listings = Listing.objects.order_by('-list_date').filter(urban_area = '')[:3]
+    context = {
+        'listings': listings,
+        'state_data': state_data,
+        'bedroom_choices': bedroom_choices,
+        'price_choices': price_choices,
+    }
+
+    return render(request, 'home/search.html', context)
 
 """Admin url here"""
 def dashboard(request):
-    app_list = site.get_app_list(request)
-    context = {
-        'available_apps': app_list
-    }
+    return  redirect(request, 'admin/admin_login')
 
-    return render(request, 'admin/index.html', context)
+def admin_login(request):
+
+    return  render(request, 'admin/login.html')
+
+
 
 def layout1(request):
     app_list = site.get_app_list(request)
@@ -91,7 +130,7 @@ def pages(request):
             'segment': load_template,
             'available_apps': app_list
         }
-        #context['segment'] = load_template
+        # context['segment'] = load_template
 
         html_template = loader.get_template(load_template)
         return HttpResponse(html_template.render(context, request))
@@ -125,7 +164,8 @@ def profile(request):
     context = {
         'available_apps': app_list
     }
-    return render(request, 'admin/includes/profile.html', context)
+    return render(request, 'admin/profile.html', context)
+
 
 def table(request):
     app_list = site.get_app_list(request)
