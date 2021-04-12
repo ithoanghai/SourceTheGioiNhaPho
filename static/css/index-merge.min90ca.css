@@ -2865,8 +2865,10 @@ body {
 }
 
 #footer {
-    width: 100%;
-    background: #000111;
+    height: 100%;
+    background-image: url("../img/backgroundfooter.png" );
+    background-repeat: no-repeat;
+    background-size: cover;
     color: #fff
 }
 
