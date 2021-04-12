@@ -76,6 +76,15 @@ def searchurban(request):
 
     return render(request, 'home/search.html', context)
 
+
+def detail(request):
+    listing_id = request.GET.get('id', '')
+    context = {
+        'listing': get_object_or_404(Listing, pk=listing_id)
+    }
+
+    return render(request, 'home/detail.html', context)
+
 """Admin url here"""
 def dashboard(request):
     return  redirect(request, 'admin/admin_login')
