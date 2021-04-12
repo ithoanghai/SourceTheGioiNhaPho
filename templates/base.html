@@ -14,10 +14,11 @@
   <!-- NavBar -->
   {% include 'partials/_navbar.html' %}
     <!-- Banner -->
-  {% include 'partials/_banner.html' %}
+  {% comment %}{% include 'partials/_banner.html' %}{% endcomment %}
     <!-- Main Content -->
   {% block content %} {% endblock %}
-  <!-- Footer -->
+
+    <!-- Footer -->
   {% include 'partials/_footer.html' %}
 
     <!-- Scripts -->

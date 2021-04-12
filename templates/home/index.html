@@ -4,288 +4,63 @@
 
 {% block head %}
 
-<title> Thế giới Nhà Phố {% block title %}| Mua bán, cho thuê nhà đất, căn hộ, đất nền và văn phòng {% endblock %}</title>
+    <title> Thế giới Nhà Phố {% block title %}| Mua bán, cho thuê nhà đất, căn hộ, đất nền và văn
+        phòng {% endblock %}</title>
 
-<script>
-  /*@shinsenter/defer.js*/
-  !function(e,i,t,n,r,o){o=/p/.test(i.readyState);var c=0<=navigator.userAgent.indexOf('Firefox');function f(e,t){o?n(e,t||32):r.push(e,t)}function a(e,t,n,r){return t&&i.getElementById(t)||(r=i.createElement(e||'SCRIPT'),t&&(r.id=t),n&&(r.onload=n),i.head.appendChild(r)),r||{}}e.addEventListener('on'+t in e?t:'load',function(){for(o=1;r[0];)f(r.shift(),r.shift())}),f._=a,e.defer=f,e.deferscript=function(e,t,n,r){f(function(){a('',t,r).src=e},n)},e.deferPreload=function(e,t){if(t=t||'script',c){var n=i.createElement('object');n.data=e,n.width=0,n.height=0,i.body.append(n)}else{var r=i.createElement('link');r.setAttribute('rel','preload'),r.href=e,r.as=t,i.head.append(r)}}}(this,document,'pageshow',setTimeout,[]),function(s,n){var u='IntersectionObserver',d='lazied',l='data-',h=l+d,p='load',m='forEach',y='getAttribute',v='setAttribute',b=Function(),g=s.defer||b,f=g._||b;function E(e,t){return[].slice.call((t||n).querySelectorAll(e))}function e(a){return function(e,t,i,o,c,f){g(function(n,t){function r(n){!1!==(o||b).call(n,n)&&((f||['srcset','src','style'])[m](function(e,t){(t=n[y](l+e))&&n[v](e,t)}),E('SOURCE',n)[m](r),p in n&&n[p]()),n.className+=' '+(i||d)}t=u in s?(n=new s[u](function(e){e[m](function(e,t){e.isIntersecting&&(t=e.target)&&(n.unobserve(t),r(t))})},c)).observe.bind(n):r,E(e||a+'['+l+'src]:not(['+h+'])')[m](function(e){e[y](h)||(e[v](h,a),t(e))})},t)}}function t(){g(function(t,n,r,i,o){function c(e,t){for(i in t=t||!1,e.parentNode.removeChild(e),e.removeAttribute('type'),n=f(e.nodeName),t&&(n.async=1),e)'string'==typeof(o=e[i])&&n[i]!=o&&(n[i]=o);return n}t=E((r='[type=deferjs]')+':not('+(i='[async]')+')'),E(r+i).forEach(function(e){c(e,!0)}),t.forEach(function(e){e.src&&s.deferPreload(e.src)}),function e(){0!=t&&(r=t.shift(),n=c(r),r.src?n.onload=n.onerror=e:g(e,.1))}()},4)}t(),s.deferstyle=function(t,n,e,r){g(function(e){(e=f('LINK',n,r)).rel='stylesheet',e.href=t},e)},s.deferimg=e('IMG'),s.deferiframe=e('IFRAME'),g.all=t}(this,document);
-</script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="UTF-8"/>
+    <meta name="description"
+          content="Với Thế giới Nhà Phố, việc mua bán, cho thuê, đầu tư bất động sản, nhà đất trở nên hiệu quả và tin cậy hơn. Bạn sẽ dễ dàng tìm được ngôi nhà ưng ý nhất với giá hợp lý."/>
+    <meta name="keywords"
+          content="Rever, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
+    <meta name="author" content="rever.vn"/>
+    <link rel="canonical" href="index.html"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-<script>deferscript('cdn.jsdelivr.net/npm/%40shinsenter/defer.js%401.1.7/dist/polyfill.min.js', 'polyfill-js', 1)</script>
-<style>
-  img.lazy, img.lazy-background{
-    filter: blur(15px);
-  }
-</style>
-<script>
-  function objValue(obj,is, value) { //Access 1 object bằng key
-    if (typeof is == 'string')
-      return objValue(obj,is.split('.'), value);
-    else if (is.length==1 && value!==undefined)
-      return obj[is[0]] = value;
-    else if (is.length==0)
-      return obj;
-    else if(typeof obj === "undefined")
-      return undefined
-    else
-      return objValue(obj[is[0]],is.slice(1), value);
-  }
-
-  function waitFor(objAcc, callback, timeout){
-    if(typeof callback !== "function"){
-      return
-    }
-    timeout = timeout || 0
-    var startTime = new Date().getTime()
-    function check(){
-      if(typeof objValue(window, objAcc) !== "undefined"){
-        callback()
-      }else{
-        if(timeout > 0 && new Date().getTime() - startTime > timeout){ //Vượt quá timeout
-          console.error("wait for " + objAcc + " has timeout!")
-        }else{
-          setTimeout(check, 500)
+    <meta property="fb:app_id" content=""/>
+    <meta property="og:url" content="https://thegioinhaphovietnam.com.vn/"/>
+    <meta property="og:title" content="Thế giới Nhà ph | Mua bán, cho thuê nhà đất, căn hộ, đất nền và văn phòng"/>
+    <meta property="og:description"
+          content="Với Thế giới Nhà Phố, việc mua bán, cho thuê, đầu tư bất động sản, nhà đất trở nên hiệu quả và tin cậy hơn. Bạn sẽ dễ dàng tìm được ngôi nhà ưng ý nhất với giá hợp lý."/>
+    <meta property="og:image" content="../images/rever-thumbnail.jpg"/>
+    <meta property="og:image:url" content="../images/rever-thumbnail.jpg"/>
+    <meta property="og:image:width" content="600"/>
+    <meta property="og:image:height" content="320"/>
+    <meta property="og:site_name" content="rever.vn"/>
+    <meta property="og:rich_attachment" content="true"/>
+    <meta property="og:type" content="article"/>
+    <meta property="hotline" content="0964399436"/>
+    <style>
+        [v-cloak] {
+            display: none !important;
         }
-      }
-    }
-    check()
-  }
 
-  function applyImageLazyLoad(scope){
-    scope = scope || document
-    var lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
-
-    if ("IntersectionObserver" in window) {
-      let ops = {
-        rootMargin: "450px",
-        threshold: 0.1
-      }
-
-      let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            let lazyImage = entry.target;
-            lazyImage.src = lazyImage.dataset.src;
-            if(!!lazyImage.dataset.srcset){
-              lazyImage.srcset = lazyImage.dataset.srcset;
-            }
-            lazyImage.classList.remove("lazy");
-            lazyImageObserver.unobserve(lazyImage);
-          }
-        });
-      }, ops);
-
-      lazyImages.forEach(function(lazyImage) {
-        lazyImageObserver.observe(lazyImage);
-      });
-
-      //Lazy for background
-      var lazyBackgrounds = [].slice.call(scope.querySelectorAll(".lazy-background"));
-      let lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            entry.target.classList.remove("lazy-background");
-            lazyBackgroundObserver.unobserve(entry.target);
-          }
-        });
-      }, ops);
-      lazyBackgrounds.forEach(function(lazyBackground) {
-        lazyBackgroundObserver.observe(lazyBackground);
-      });
-    } else { //Không support observer
-      let lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
-      let active = false;
-
-      const lazyLoad = function() {
-        if (active === false) {
-          active = true;
-
-          setTimeout(function() {
-            lazyImages.forEach(function(lazyImage) {
-              if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
-                lazyImage.src = lazyImage.dataset.src;
-                lazyImage.srcset = lazyImage.dataset.srcset;
-                lazyImage.classList.remove("lazy");
-
-                lazyImages = lazyImages.filter(function(image) {
-                  return image !== lazyImage;
-                });
-
-                if (lazyImages.length === 0) {
-                  document.removeEventListener("scroll", lazyLoad);
-                  window.removeEventListener("resize", lazyLoad);
-                  window.removeEventListener("orientationchange", lazyLoad);
-                }
-              }
-            });
-
-            active = false;
-          }, 200);
+        /* Ẩn các element khi vue chưa load */
+        picture img {
+            display: inline-block;
+            vertical-align: middle;
         }
-      };
 
-      document.addEventListener("scroll", lazyLoad);
-      window.addEventListener("resize", lazyLoad);
-      window.addEventListener("orientationchange", lazyLoad);
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", function() {
-    applyImageLazyLoad(document)
-  });
-</script>
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta charset="UTF-8" />
-<meta name="description" content="Với Thế giới Nhà Phố, việc mua bán, cho thuê, đầu tư bất động sản, nhà đất trở nên hiệu quả và tin cậy hơn. Bạn sẽ dễ dàng tìm được ngôi nhà ưng ý nhất với giá hợp lý." />
-<meta name="keywords" content="Rever, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa" />
-<meta name="author" content="rever.vn" />
-<link rel="canonical" href="index.html" />
-<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-<meta property="fb:app_id" content="" />
-<meta property="og:url" content="https://thegioinhaphovietnam.com.vn/" />
-<meta property="og:title" content="Thế giới Nhà ph | Mua bán, cho thuê nhà đất, căn hộ, đất nền và văn phòng" />
-<meta property="og:description" content="Với Thế giới Nhà Phố, việc mua bán, cho thuê, đầu tư bất động sản, nhà đất trở nên hiệu quả và tin cậy hơn. Bạn sẽ dễ dàng tìm được ngôi nhà ưng ý nhất với giá hợp lý." />
-<meta property="og:image" content="../images/rever-thumbnail.jpg" />
-<meta property="og:image:url" content="../images/rever-thumbnail.jpg" />
-<meta property="og:image:width" content="600" />
-<meta property="og:image:height" content="320" />
-<meta property="og:site_name" content="rever.vn" />
-<meta property="og:rich_attachment" content="true" />
-<meta property="og:type" content="article" />
-<meta property="hotline" content="0964399436" />
-<style>
-    [v-cloak] { display:none !important; } /* Ẩn các element khi vue chưa load */
-    picture img {
-        display: inline-block;
-        vertical-align: middle;
-    }
-    /*hide tracking img*/
-    img[src^="//analytics.rever.vn/fap"],img[src^="/fap/debug/track"] {
-        display: none;
-    }
-    ._hj_feedback_container button { /* Fix lỗi hotjar */
-      text-align: center;
-    }
-</style>
-
-<script>
-    window["_au_api"] = "thue/api.html";
-    window['fap_url'] = "../s3-cdn.rever.vn/p/v2.33.55/js/fap.min90ca.js?v=1617780824171";
-    window['fap.server'] = '//analytics.rever.vn/fap';
-    window['favorite_api'] = 'mapi/index.html';
-    window['googleClientId'] = '539423642927.apps.googleusercontent.com';
-    window['staticUrl'] = '../s3-cdn.rever.vn/p/v2.33.55';
-    window['hotline'] = '0964399436';
-
-    window['isLoggedIn'] = false;
-</script>
-
-
-<script>
-    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var t=analytics.methods[e];analytics[t]=analytics.factory(t)}analytics.load=function(e,t){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.defer=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+e+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=t};analytics.SNIPPET_VERSION="4.1.0";
-      analytics.load("4LCsqFQzVAmMhPA650qKAAbZoHweHzHt", { integrations: { 'Mixpanel': false} });
-    }}();
-  </script>
-<script type="deferjs">
-    //Track thêm tags
-      var tagTrackings = []
-
-      var pageviewProperties = { }
-
-      analytics.page(Object.assign({
-        domain: location.hostname,
-        tags: tagTrackings.length > 0 ? tagTrackings : undefined
-      }, pageviewProperties));
-
-      analytics.ready(function(){
-        //window.mixpanel.init("31bae2b919cfc12821646533a62aee1b")
-        //window.track("Page View")
-      })
-  </script>
-
-<script>(function(c,a){if(!a.__SV){var b=window;try{var d,m,j,k=b.location,f=k.hash;d=function(a,b){return(m=a.match(RegExp(b+"=([^&]*)")))?m[1]:null};f&&d(f,"state")&&(j=JSON.parse(decodeURIComponent(d(f,"state"))),"mpeditor"===j.action&&(b.sessionStorage.setItem("_mpcehash",f),history.replaceState(j.desiredHash||"",c.title,k.pathname+k.search)))}catch(n){}var l,h;window.mixpanel=a;a._i=[];a.init=function(b,d,g){function c(b,i){var a=i.split(".");2==a.length&&(b=b[a[0]],i=a[1]);b[i]=function(){b.push([i].concat(Array.prototype.slice.call(arguments,
-    0)))}}var e=a;"undefined"!==typeof g?e=a[g]=[]:g="mixpanel";e.people=e.people||[];e.toString=function(b){var a="mixpanel";"mixpanel"!==g&&(a+="."+g);b||(a+=" (stub)");return a};e.people.toString=function(){return e.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
-    for(h=0;h<l.length;h++)c(e,l[h]);var f="set set_once union unset remove delete".split(" ");e.get_group=function(){function a(c){b[c]=function(){call2_args=arguments;call2=[c].concat(Array.prototype.slice.call(call2_args,0));e.push([d,call2])}}for(var b={},d=["get_group"].concat(Array.prototype.slice.call(arguments,0)),c=0;c<f.length;c++)a(f[c]);return b};a._i.push([b,d,g])};a.__SV=1.2;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.defer=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?
-    MIXPANEL_CUSTOM_LIB_URL:"file:"===c.location.protocol&&"//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js";d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d)}})(document,window.mixpanel||[]);
-    mixpanel.init("31bae2b919cfc12821646533a62aee1b");
-  </script>
-<script type="deferjs">
-    mixpanel.track("Page View")
-  </script>
-
-
-<script>
-  window.hsConversationsSettings = {
-    loadImmediately: false // Delay the load of the chat widget
-  };
-</script>
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId: '323161212360067',
-      cookie: true,                     // Enable cookies to allow the server to access the session.
-      xfbml: true,                     // Parse social plugins on this webpage.
-      version: 'v8.0'           // Use this Graph API version for this call.
-    });
-  }
-</script>
-<script async defer type="deferjs" crossorigin="anonymous" src="../connect.facebook.net/en_US/sdk.js"></script>
-
-<meta name="ahrefs-site-verification" content="b3a10354398a2c17b3410f4506518ba93e519af05a49ba8d75ccb03d7059bbe6">
-
-<link rel="stylesheet" type="text/css" href="{% static "css/index-merge.min90ca.css" %}">
-<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
-
-{% endblock %}
-
-{% block content %}
-
-   {% comment %} <noscript>
-        <iframe src="../www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
-                height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Organization",
-  "url": "https://rever.vn",
-  "logo": "https://rever.vn/static/images/rever-thumbnail.jpg",
-  "contactPoint": [
-    {
-      "@type": "ContactPoint",
-      "telephone": "0964399436",
-      "contactType": "customer service"
-    }
-  ],
-  "sameAs": [
-    "https://www.facebook.com/rever.vn",
-    "../www.linkedin.com/company/rever-real-estate.html",
-    "../www.instagram.com/rever.vn/index.html",
-    "../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html"
-  ]
-}
-</script>
-    <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@id": "https://rever.vn/#website",
-        "@type": "WebSite",
-        "url": "https://rever.vn/",
-        "name": "Rever",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://rever.vn/s/{search_term_string}",
-            "query-input": "required name=search_term_string"
+        /*hide tracking img*/
+        img[src^="//analytics.rever.vn/fap"], img[src^="/fap/debug/track"] {
+            display: none;
         }
-    }
-</script>{% endcomment %}
 
+        ._hj_feedback_container button { /* Fix lỗi hotjar */
+            text-align: center;
+        }
+    </style>
+
+    <meta name="ahrefs-site-verification" content="b3a10354398a2c17b3410f4506518ba93e519af05a49ba8d75ccb03d7059bbe6">
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/index-merge.min90ca.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
+    <style>
+        img.lazy, img.lazy-background {
+            filter: blur(15px);
+        }
+    </style>
     <style>
         .banner-app-rever {
             position: relative;
@@ -464,6 +239,9 @@
             }
         }
     </style>
+{% endblock %}
+
+{% block content %}
 
     <div class="banner-app-rever" id="rever-banner-prompt" style="display: none">
         <div class="banner-app-content">
@@ -487,126 +265,6 @@
         </div>
         <a href="javascript:void(0)" class="btn-install">Mở</a>
     </div>
-{% comment %}    <script>
-        window.AppPrompt = (function () {
-            var APP_PROMP_KEY = "app_banner_prompt"
-            var wrapper = document.getElementById('rever-banner-prompt')
-            var btnAdd = wrapper.querySelector('.btn-install')
-            var deferredPrompt;
-            var promptInfo = {
-                lastHide: 0, //Thời gian cuối ẩn form
-                numHide: 0 //Số lần ẩn form
-            }
-            var androidUrl = "../play.google.com/store/apps/detailsece3.html?id=com.rever.app.android"
-            var iosUrl = "../apps.apple.com/vn/app/rever/id1101768201.html"
-            var isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
-            var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
-            var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
-            var os = isIOS ? "ios" : "android"
-            if (!isMobile) {
-                return
-            }
-
-            // if(localStorage){ //lấy thông tin cũ
-            //   let info = localStorage.getItem(APP_PROMP_KEY)
-            //   if(info){
-            //     try{
-            //       promptInfo = {
-            //         ...promptInfo,
-            //         ...JSON.parse(info)
-            //       }
-            //     }catch(e){}
-            //   }
-            // }
-            // //Kiểm tra lần ẩn cuối cùng
-            // let hideDuration = promptInfo.numHide*2*24*60*60000 //Mỗi lần hide sẽ cộng thêm 2 ngày
-            // let currTime = +new Date()
-            // if(promptInfo.lastHide > 0 && currTime < promptInfo.lastHide + hideDuration){
-            //   return
-            // }
-
-            function showBanner() {
-                // var scrollPos = window.pageYOffset || document.documentElement.scrollTop
-                wrapper.style.display = 'flex';
-                window.ga && ga('send', 'event', 'Smart App Banner', 'Show', os);
-                // if(scrollPos == 0){
-                //   document.documentElement.scrollTop = 65
-                // }
-            }
-
-            function closeBanner() {
-                wrapper.style.display = 'none';
-                window.ga && ga('send', 'event', 'Smart App Banner', 'Close', os);
-            }
-
-            function savePrompInfo() {
-                // if(localStorage){
-                //   localStorage.setItem(APP_PROMP_KEY, JSON.stringify(promptInfo))
-                // }
-            }
-
-            //wrapper.style.display = 'flex';
-            document.addEventListener('DOMContentLoaded', function () {
-                setTimeout(function () {
-                    if (!deferredPrompt && isMobile) {
-                        showBanner()
-                    }
-                }, 1000)
-            });
-
-            window.addEventListener('beforeinstallprompt', function (e) {
-                // Prevent Chrome 67 and earlier from automatically showing the prompt
-                e.preventDefault();
-                // Stash the event so it can be triggered later.
-                deferredPrompt = e;
-                // Update UI notify the user they can add to home screen
-                showBanner()
-            });
-
-            btnAdd.addEventListener('click', function (e) {
-                window.ga && ga('send', 'event', 'Smart App Banner', 'Click Install', os);
-
-                //Lưu lại promp info
-                promptInfo.lastHide = 0
-                promptInfo.numHide = 0
-                savePrompInfo()
-
-                // hide our user interface that shows our A2HS button
-                //closeBanner()
-                if (deferredPrompt) {
-                    // Show the prompt
-                    deferredPrompt.prompt();
-                    // Wait for the user to respond to the prompt
-                    deferredPrompt.userChoice
-                        .then(function (choiceResult) {
-                            if (choiceResult.outcome === 'accepted') {
-                                console.log('User accepted the A2HS prompt');
-                            } else {
-                                console.log('User dismissed the A2HS prompt');
-                            }
-                            deferredPrompt = null;
-                        });
-                } else {
-                    if (isIOS && iosUrl) {
-                        window.open(iosUrl, "_blank")
-                    } else if (!isIOS && androidUrl) {
-                        window.open(androidUrl, "_blank")
-                    }
-                }
-            });
-
-            return {
-                closePrompt: function (evt) {
-                    closeBanner()
-
-                    //Lưu lại prompt info
-                    promptInfo.lastHide = +new Date()
-                    promptInfo.numHide++
-                    savePrompInfo()
-                }
-            }
-        })()
-    </script>{% endcomment %}
 
     <section class="container col-12">
         <div class="inner text-center-index block-introduce">
@@ -4183,8 +3841,531 @@
 
 
 {% block scripts %}
+        <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
+    {% comment %} <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>{% endcomment %}
+    <script src="{% static 'js/main.js' %} "></script>
 
-{% comment %}    <script>
+         <noscript>
+        <iframe src="../www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "url": "https://rever.vn",
+  "logo": "https://rever.vn/static/images/rever-thumbnail.jpg",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "0964399436",
+      "contactType": "customer service"
+    }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/rever.vn",
+    "../www.linkedin.com/company/rever-real-estate.html",
+    "../www.instagram.com/rever.vn/index.html",
+    "../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html"
+  ]
+}
+</script>
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@id": "https://rever.vn/#website",
+        "@type": "WebSite",
+        "url": "https://rever.vn/",
+        "name": "Rever",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://rever.vn/s/{search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+</script>
+
+        <script>
+        window.AppPrompt = (function () {
+            var APP_PROMP_KEY = "app_banner_prompt"
+            var wrapper = document.getElementById('rever-banner-prompt')
+            var btnAdd = wrapper.querySelector('.btn-install')
+            var deferredPrompt;
+            var promptInfo = {
+                lastHide: 0, //Thời gian cuối ẩn form
+                numHide: 0 //Số lần ẩn form
+            }
+            var androidUrl = "../play.google.com/store/apps/detailsece3.html?id=com.rever.app.android"
+            var iosUrl = "../apps.apple.com/vn/app/rever/id1101768201.html"
+            var isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+            var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+            var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+            var os = isIOS ? "ios" : "android"
+            if (!isMobile) {
+                return
+            }
+
+            // if(localStorage){ //lấy thông tin cũ
+            //   let info = localStorage.getItem(APP_PROMP_KEY)
+            //   if(info){
+            //     try{
+            //       promptInfo = {
+            //         ...promptInfo,
+            //         ...JSON.parse(info)
+            //       }
+            //     }catch(e){}
+            //   }
+            // }
+            // //Kiểm tra lần ẩn cuối cùng
+            // let hideDuration = promptInfo.numHide*2*24*60*60000 //Mỗi lần hide sẽ cộng thêm 2 ngày
+            // let currTime = +new Date()
+            // if(promptInfo.lastHide > 0 && currTime < promptInfo.lastHide + hideDuration){
+            //   return
+            // }
+
+            function showBanner() {
+                // var scrollPos = window.pageYOffset || document.documentElement.scrollTop
+                wrapper.style.display = 'flex';
+                window.ga && ga('send', 'event', 'Smart App Banner', 'Show', os);
+                // if(scrollPos == 0){
+                //   document.documentElement.scrollTop = 65
+                // }
+            }
+
+            function closeBanner() {
+                wrapper.style.display = 'none';
+                window.ga && ga('send', 'event', 'Smart App Banner', 'Close', os);
+            }
+
+            function savePrompInfo() {
+                // if(localStorage){
+                //   localStorage.setItem(APP_PROMP_KEY, JSON.stringify(promptInfo))
+                // }
+            }
+
+            //wrapper.style.display = 'flex';
+            document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(function () {
+                    if (!deferredPrompt && isMobile) {
+                        showBanner()
+                    }
+                }, 1000)
+            });
+
+            window.addEventListener('beforeinstallprompt', function (e) {
+                // Prevent Chrome 67 and earlier from automatically showing the prompt
+                e.preventDefault();
+                // Stash the event so it can be triggered later.
+                deferredPrompt = e;
+                // Update UI notify the user they can add to home screen
+                showBanner()
+            });
+
+            btnAdd.addEventListener('click', function (e) {
+                window.ga && ga('send', 'event', 'Smart App Banner', 'Click Install', os);
+
+                //Lưu lại promp info
+                promptInfo.lastHide = 0
+                promptInfo.numHide = 0
+                savePrompInfo()
+
+                // hide our user interface that shows our A2HS button
+                //closeBanner()
+                if (deferredPrompt) {
+                    // Show the prompt
+                    deferredPrompt.prompt();
+                    // Wait for the user to respond to the prompt
+                    deferredPrompt.userChoice
+                        .then(function (choiceResult) {
+                            if (choiceResult.outcome === 'accepted') {
+                                console.log('User accepted the A2HS prompt');
+                            } else {
+                                console.log('User dismissed the A2HS prompt');
+                            }
+                            deferredPrompt = null;
+                        });
+                } else {
+                    if (isIOS && iosUrl) {
+                        window.open(iosUrl, "_blank")
+                    } else if (!isIOS && androidUrl) {
+                        window.open(androidUrl, "_blank")
+                    }
+                }
+            });
+
+            return {
+                closePrompt: function (evt) {
+                    closeBanner()
+
+                    //Lưu lại prompt info
+                    promptInfo.lastHide = +new Date()
+                    promptInfo.numHide++
+                    savePrompInfo()
+                }
+            }
+        })()
+    </script>
+    
+    <script>
+        /*@shinsenter/defer.js*/
+        !function (e, i, t, n, r, o) {
+            o = /p/.test(i.readyState);
+            var c = 0 <= navigator.userAgent.indexOf('Firefox');
+
+            function f(e, t) {
+                o ? n(e, t || 32) : r.push(e, t)
+            }
+
+            function a(e, t, n, r) {
+                return t && i.getElementById(t) || (r = i.createElement(e || 'SCRIPT'), t && (r.id = t), n && (r.onload = n), i.head.appendChild(r)), r || {}
+            }
+
+            e.addEventListener('on' + t in e ? t : 'load', function () {
+                for (o = 1; r[0];) f(r.shift(), r.shift())
+            }), f._ = a, e.defer = f, e.deferscript = function (e, t, n, r) {
+                f(function () {
+                    a('', t, r).src = e
+                }, n)
+            }, e.deferPreload = function (e, t) {
+                if (t = t || 'script', c) {
+                    var n = i.createElement('object');
+                    n.data = e, n.width = 0, n.height = 0, i.body.append(n)
+                } else {
+                    var r = i.createElement('link');
+                    r.setAttribute('rel', 'preload'), r.href = e, r.as = t, i.head.append(r)
+                }
+            }
+        }(this, document, 'pageshow', setTimeout, []), function (s, n) {
+            var u = 'IntersectionObserver', d = 'lazied', l = 'data-', h = l + d, p = 'load', m = 'forEach',
+                y = 'getAttribute', v = 'setAttribute', b = Function(), g = s.defer || b, f = g._ || b;
+
+            function E(e, t) {
+                return [].slice.call((t || n).querySelectorAll(e))
+            }
+
+            function e(a) {
+                return function (e, t, i, o, c, f) {
+                    g(function (n, t) {
+                        function r(n) {
+                            !1 !== (o || b).call(n, n) && ((f || ['srcset', 'src', 'style'])[m](function (e, t) {
+                                (t = n[y](l + e)) && n[v](e, t)
+                            }), E('SOURCE', n)[m](r), p in n && n[p]()), n.className += ' ' + (i || d)
+                        }
+
+                        t = u in s ? (n = new s[u](function (e) {
+                            e[m](function (e, t) {
+                                e.isIntersecting && (t = e.target) && (n.unobserve(t), r(t))
+                            })
+                        }, c)).observe.bind(n) : r, E(e || a + '[' + l + 'src]:not([' + h + '])')[m](function (e) {
+                            e[y](h) || (e[v](h, a), t(e))
+                        })
+                    }, t)
+                }
+            }
+
+            function t() {
+                g(function (t, n, r, i, o) {
+                    function c(e, t) {
+                        for (i in t = t || !1, e.parentNode.removeChild(e), e.removeAttribute('type'), n = f(e.nodeName), t && (n.async = 1), e) 'string' == typeof (o = e[i]) && n[i] != o && (n[i] = o);
+                        return n
+                    }
+
+                    t = E((r = '[type=deferjs]') + ':not(' + (i = '[async]') + ')'), E(r + i).forEach(function (e) {
+                        c(e, !0)
+                    }), t.forEach(function (e) {
+                        e.src && s.deferPreload(e.src)
+                    }), function e() {
+                        0 != t && (r = t.shift(), n = c(r), r.src ? n.onload = n.onerror = e : g(e, .1))
+                    }()
+                }, 4)
+            }
+
+            t(), s.deferstyle = function (t, n, e, r) {
+                g(function (e) {
+                    (e = f('LINK', n, r)).rel = 'stylesheet', e.href = t
+                }, e)
+            }, s.deferimg = e('IMG'), s.deferiframe = e('IFRAME'), g.all = t
+        }(this, document);
+    </script>
+
+    <script>deferscript('cdn.jsdelivr.net/npm/%40shinsenter/defer.js%401.1.7/dist/polyfill.min.js', 'polyfill-js', 1)</script>
+    <script>
+        function objValue(obj, is, value) { //Access 1 object bằng key
+            if (typeof is == 'string')
+                return objValue(obj, is.split('.'), value);
+            else if (is.length == 1 && value !== undefined)
+                return obj[is[0]] = value;
+            else if (is.length == 0)
+                return obj;
+            else if (typeof obj === "undefined")
+                return undefined
+            else
+                return objValue(obj[is[0]], is.slice(1), value);
+        }
+
+        function waitFor(objAcc, callback, timeout) {
+            if (typeof callback !== "function") {
+                return
+            }
+            timeout = timeout || 0
+            var startTime = new Date().getTime()
+
+            function check() {
+                if (typeof objValue(window, objAcc) !== "undefined") {
+                    callback()
+                } else {
+                    if (timeout > 0 && new Date().getTime() - startTime > timeout) { //Vượt quá timeout
+                        console.error("wait for " + objAcc + " has timeout!")
+                    } else {
+                        setTimeout(check, 500)
+                    }
+                }
+            }
+
+            check()
+        }
+
+        function applyImageLazyLoad(scope) {
+            scope = scope || document
+            var lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
+
+            if ("IntersectionObserver" in window) {
+                let ops = {
+                    rootMargin: "450px",
+                    threshold: 0.1
+                }
+
+                let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            if (!!lazyImage.dataset.srcset) {
+                                lazyImage.srcset = lazyImage.dataset.srcset;
+                            }
+                            lazyImage.classList.remove("lazy");
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                }, ops);
+
+                lazyImages.forEach(function (lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+
+                //Lazy for background
+                var lazyBackgrounds = [].slice.call(scope.querySelectorAll(".lazy-background"));
+                let lazyBackgroundObserver = new IntersectionObserver(function (entries, observer) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("visible");
+                            entry.target.classList.remove("lazy-background");
+                            lazyBackgroundObserver.unobserve(entry.target);
+                        }
+                    });
+                }, ops);
+                lazyBackgrounds.forEach(function (lazyBackground) {
+                    lazyBackgroundObserver.observe(lazyBackground);
+                });
+            } else { //Không support observer
+                let lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
+                let active = false;
+
+                const lazyLoad = function () {
+                    if (active === false) {
+                        active = true;
+
+                        setTimeout(function () {
+                            lazyImages.forEach(function (lazyImage) {
+                                if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                                    lazyImage.src = lazyImage.dataset.src;
+                                    lazyImage.srcset = lazyImage.dataset.srcset;
+                                    lazyImage.classList.remove("lazy");
+
+                                    lazyImages = lazyImages.filter(function (image) {
+                                        return image !== lazyImage;
+                                    });
+
+                                    if (lazyImages.length === 0) {
+                                        document.removeEventListener("scroll", lazyLoad);
+                                        window.removeEventListener("resize", lazyLoad);
+                                        window.removeEventListener("orientationchange", lazyLoad);
+                                    }
+                                }
+                            });
+
+                            active = false;
+                        }, 200);
+                    }
+                };
+
+                document.addEventListener("scroll", lazyLoad);
+                window.addEventListener("resize", lazyLoad);
+                window.addEventListener("orientationchange", lazyLoad);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            applyImageLazyLoad(document)
+        });
+    </script>
+    <script>
+        window["_au_api"] = "thue/api.html";
+        window['fap_url'] = "../s3-cdn.rever.vn/p/v2.33.55/js/fap.min90ca.js?v=1617780824171";
+        window['fap.server'] = '//analytics.rever.vn/fap';
+        window['favorite_api'] = 'mapi/index.html';
+        window['googleClientId'] = '539423642927.apps.googleusercontent.com';
+        window['staticUrl'] = '../s3-cdn.rever.vn/p/v2.33.55';
+        window['hotline'] = '0964399436';
+
+        window['isLoggedIn'] = false;
+    </script>
+
+
+    <script>
+        !function () {
+            var analytics = window.analytics = window.analytics || [];
+            if (!analytics.initialize) if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice."); else {
+                analytics.invoked = !0;
+                analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on", "addSourceMiddleware", "addIntegrationMiddleware"];
+                analytics.factory = function (e) {
+                    return function () {
+                        var t = Array.prototype.slice.call(arguments);
+                        t.unshift(e);
+                        analytics.push(t);
+                        return analytics
+                    }
+                };
+                for (var e = 0; e < analytics.methods.length; e++) {
+                    var t = analytics.methods[e];
+                    analytics[t] = analytics.factory(t)
+                }
+                analytics.load = function (e, t) {
+                    var n = document.createElement("script");
+                    n.type = "text/javascript";
+                    n.async = !0;
+                    n.defer = !0;
+                    n.src = "https://cdn.segment.com/analytics.js/v1/" + e + "/analytics.min.js";
+                    var a = document.getElementsByTagName("script")[0];
+                    a.parentNode.insertBefore(n, a);
+                    analytics._loadOptions = t
+                };
+                analytics.SNIPPET_VERSION = "4.1.0";
+                analytics.load("4LCsqFQzVAmMhPA650qKAAbZoHweHzHt", {integrations: {'Mixpanel': false}});
+            }
+        }();
+    </script>
+    <script type="deferjs">
+    //Track thêm tags
+      var tagTrackings = []
+
+      var pageviewProperties = { }
+
+      analytics.page(Object.assign({
+        domain: location.hostname,
+        tags: tagTrackings.length > 0 ? tagTrackings : undefined
+      }, pageviewProperties));
+
+      analytics.ready(function(){
+        //window.mixpanel.init("31bae2b919cfc12821646533a62aee1b")
+        //window.track("Page View")
+      })
+
+    </script>
+
+    <script>(function (c, a) {
+        if (!a.__SV) {
+            var b = window;
+            try {
+                var d, m, j, k = b.location, f = k.hash;
+                d = function (a, b) {
+                    return (m = a.match(RegExp(b + "=([^&]*)"))) ? m[1] : null
+                };
+                f && d(f, "state") && (j = JSON.parse(decodeURIComponent(d(f, "state"))), "mpeditor" === j.action && (b.sessionStorage.setItem("_mpcehash", f), history.replaceState(j.desiredHash || "", c.title, k.pathname + k.search)))
+            } catch (n) {
+            }
+            var l, h;
+            window.mixpanel = a;
+            a._i = [];
+            a.init = function (b, d, g) {
+                function c(b, i) {
+                    var a = i.split(".");
+                    2 == a.length && (b = b[a[0]], i = a[1]);
+                    b[i] = function () {
+                        b.push([i].concat(Array.prototype.slice.call(arguments,
+                            0)))
+                    }
+                }
+
+                var e = a;
+                "undefined" !== typeof g ? e = a[g] = [] : g = "mixpanel";
+                e.people = e.people || [];
+                e.toString = function (b) {
+                    var a = "mixpanel";
+                    "mixpanel" !== g && (a += "." + g);
+                    b || (a += " (stub)");
+                    return a
+                };
+                e.people.toString = function () {
+                    return e.toString(1) + ".people (stub)"
+                };
+                l = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+                for (h = 0; h < l.length; h++) c(e, l[h]);
+                var f = "set set_once union unset remove delete".split(" ");
+                e.get_group = function () {
+                    function a(c) {
+                        b[c] = function () {
+                            call2_args = arguments;
+                            call2 = [c].concat(Array.prototype.slice.call(call2_args, 0));
+                            e.push([d, call2])
+                        }
+                    }
+
+                    for (var b = {}, d = ["get_group"].concat(Array.prototype.slice.call(arguments, 0)), c = 0; c < f.length; c++) a(f[c]);
+                    return b
+                };
+                a._i.push([b, d, g])
+            };
+            a.__SV = 1.2;
+            b = c.createElement("script");
+            b.type = "text/javascript";
+            b.async = !0;
+            b.defer = !0;
+            b.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ?
+                MIXPANEL_CUSTOM_LIB_URL : "file:" === c.location.protocol && "//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js";
+            d = c.getElementsByTagName("script")[0];
+            d.parentNode.insertBefore(b, d)
+        }
+    })(document, window.mixpanel || []);
+    mixpanel.init("31bae2b919cfc12821646533a62aee1b");
+    </script>
+    <script type="deferjs">
+    mixpanel.track("Page View")
+
+    </script>
+
+
+    <script>
+        window.hsConversationsSettings = {
+            loadImmediately: false // Delay the load of the chat widget
+        };
+    </script>
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '323161212360067',
+                cookie: true,                     // Enable cookies to allow the server to access the session.
+                xfbml: true,                     // Parse social plugins on this webpage.
+                version: 'v8.0'           // Use this Graph API version for this call.
+            });
+        }
+    </script>
+    <script async defer type="deferjs" crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+
+        <script>
         window.RFeedback = {
             API: "https://rever.vn/mapi",
             email: "",
@@ -4192,13 +4373,13 @@
             phone: "",
             ip: "10.244.0.0"
         }
-    </script>{% endcomment %}
+    </script>
 
     <script src="{% static 'js/index-merged.min90ca.js' %} "></script>
     <script src="{% static 'js/favorite.min90ca.js' %} "></script>
     {% comment %}<script src="{% static 'js/tracking-and-external.min90ca.js' %} "></script>{% endcomment %}
 
-{% comment %}    <script type="deferjs">
+    {% comment %}    <script type="deferjs">
   (function(c,l,a,r,i,t,y){
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
     t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
@@ -4208,10 +4389,11 @@
     </script>{% endcomment %}
 
 
- {% comment %}   <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
- {% endcomment %} {% comment %}  <script type="deferjs" src="../www.google.com/recaptcha/apib091.js?render=explicit"></script>{% endcomment %}
+    {% comment %}   <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+ {% endcomment %}
+    {% comment %}  <script type="deferjs" src="../www.google.com/recaptcha/apib091.js?render=explicit"></script>{% endcomment %}
 
-{% comment %}
+    {% comment %}
     <script>
         adroll_adv_id = "VHUFKBW42JH37IACSQW3PD";
         adroll_pix_id = "734MVFGRZFAB7JCBBH46O6";
@@ -4220,9 +4402,6 @@
 
 
 
-{% comment %}    <script type="deferjs" id="hs-script-loader" src="../js.hs-scripts.com/2775524.js"></script>{% endcomment %}
+    {% comment %}    <script type="deferjs" id="hs-script-loader" src="../js.hs-scripts.com/2775524.js"></script>{% endcomment %}
 
-  <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
- {% comment %} <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>{% endcomment %}
-  <script src="{% static 'js/main.js' %} "></script>
 {% endblock %}

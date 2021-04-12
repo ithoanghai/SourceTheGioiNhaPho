@@ -11,14 +11,14 @@
 <body>
   <!-- Top Bar -->
 {% comment %}  {% include 'partials/_topbar.html' %}{% endcomment %}
-  <!-- NavBar -->
-{% comment %}  {% include 'partials/_navbar.html' %}
+  <!-- Search menu -->
+    {% include 'partials/_menusearch.html' %}
     <!-- Banner -->
-  {% include 'partials/_banner.html' %}{% endcomment %}
+{% comment %}  {% include 'partials/_banner.html' %}{% endcomment %}
     <!-- Main Content -->
   {% block content %} {% endblock %}
   <!-- Footer -->
-{% comment %}  {% include 'partials/_footer.html' %}{% endcomment %}
+  {% include 'partials/_footer.html' %}
 
     <!-- Scripts -->
   {% block scripts %} {% endblock %}

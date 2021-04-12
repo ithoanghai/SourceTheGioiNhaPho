@@ -2252,7 +2252,7 @@
                         value: t.serviceType,
                         expression: "serviceType"
                     }],
-                    attrs: {type: "radio", name: "service-type", id: "buy"},
+                    attrs: {type: "radio", name: "tran-type", id: "buy"},
                     domProps: {
                         value: t.SERVICE_TYPE.FOR_SALE,
                         checked: !t.rentTabChecked,
@@ -2272,7 +2272,7 @@
                         value: t.serviceType,
                         expression: "serviceType"
                     }],
-                    attrs: {type: "radio", name: "service-type", id: "rent"},
+                    attrs: {type: "radio", name: "tran-type", id: "rent"},
                     domProps: {
                         value: t.SERVICE_TYPE.RENTAL,
                         checked: t.rentTabChecked,
@@ -2292,7 +2292,7 @@
                         value: t.isSearchProject,
                         expression: "isSearchProject"
                     }],
-                    attrs: {type: "radio", name: "service-type", id: "project"},
+                    attrs: {type: "radio", name: "tran-type", id: "project"},
                     domProps: {value: !0, checked: t.isSearchProject, checked: t._q(t.isSearchProject, !0)},
                     on: {
                         change: function (e) {
@@ -25067,7 +25067,7 @@
                     var s = o.b.getInputValueIfAvailable("form[name=info] input[name=id]");
                     if (r) {
                         e = s;
-                        var u = o.b.getInputValueIfAvailable("form[name=info] input[name=service-type]");
+                        var u = o.b.getInputValueIfAvailable("form[name=info] input[name=tran-type]");
                         u == a.b.RENT ? n = "sale" : u == a.b.SALE ? n = "rent" : console.log("Service type invalid, type = " + u)
                     }
                 }
@@ -26076,7 +26076,7 @@
             render: function () {
                 var t = this, e = t.$createElement, n = t._self._c || e;
                 return n("form", {
-                    attrs: {id: "suggest-form", action: "/s/mua"}, on: {
+                    attrs: {id: "suggest-form", action: "search"}, on: {
                         submit: function (e) {
                             return e.preventDefault(), t.doSubmit(e)
                         }
@@ -26088,7 +26088,7 @@
                         value: t.serviceType,
                         expression: "serviceType"
                     }],
-                    attrs: {type: "radio", name: "service-type", id: "buy-house"},
+                    attrs: {type: "radio", name: "tran-type", id: "buy-house"},
                     domProps: {value: t.SERVICE_TYPE.FOR_SALE, checked: t._q(t.serviceType, t.SERVICE_TYPE.FOR_SALE)},
                     on: {
                         change: function (e) {
@@ -26102,7 +26102,7 @@
                         value: t.serviceType,
                         expression: "serviceType"
                     }],
-                    attrs: {type: "radio", name: "service-type", id: "rent-house"},
+                    attrs: {type: "radio", name: "tran-type", id: "rent-house"},
                     domProps: {value: t.SERVICE_TYPE.RENTAL, checked: t._q(t.serviceType, t.SERVICE_TYPE.RENTAL)},
                     on: {
                         change: function (e) {

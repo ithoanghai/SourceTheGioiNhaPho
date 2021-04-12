@@ -332,12 +332,9 @@
         }
     </style>
 
-        <script type="deferjs" src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
-
-{% endblock %}
+ {% endblock %}
 
 {% block content %}
-    {% include 'partials/_menusearch.html' %}
 
     <input id="markerwithlabel" type="hidden"
            value="https://s3-cdn.rever.vn/p/v2.33.55/js/markerwithlabel-0.0.1.min.js?v=1617780824171">
@@ -2147,13 +2144,12 @@
 
     </div>
 
-    {% include 'partials/_footer.html' %}
 {% endblock %}
-
 
 {% block scripts %}
 
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+       <script type="deferjs" src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
 
     <script>
         window.AppPrompt = (function () {
