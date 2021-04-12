@@ -65,54 +65,6 @@
     <link rel="stylesheet" href="{% static 'css/pop-up.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/search-new.min90ca.css' %}"/>
 
-
-{% endblock %}
-
-{% block content %}
-    {% include 'partials/_menusearch.html' %}
-
-    <input id="elInitSearchPage" type="hidden" value="true"/>
-
-    <noscript>
-        <iframe src="../../../www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
-                height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Organization",
-  "url": "https://rever.vn",
-  "logo": "https://rever.vn/static/images/rever-thumbnail.jpg",
-  "contactPoint": [
-    {
-      "@type": "ContactPoint",
-      "telephone": "0964399436",
-      "contactType": "customer service"
-    }
-  ],
-  "sameAs": [
-    "https://www.facebook.com/rever.vn",
-    "../../../www.linkedin.com/company/rever-real-estate.html",
-    "../../../www.instagram.com/rever.vn/index.html",
-    "../../../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html"
-  ]
-}
-</script>
-    <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@id": "https://rever.vn/#website",
-        "@type": "WebSite",
-        "url": "https://rever.vn/",
-        "name": "Rever",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://rever.vn/s/{search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
-    }
-</script>
     <style>
         .banner-app-rever {
             position: relative;
@@ -291,6 +243,21 @@
             }
         }
     </style>
+    <style>
+        #search-content .search-container .search-result > div .result-body .row.grid .projectCard-list.box .cover-image .btn-favorite {
+            display: block;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <input id="elInitSearchPage" type="hidden" value="true"/>
+
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
 
     <div class="banner-app-rever" id="rever-banner-prompt" style="display: none">
         <div class="banner-app-content">
@@ -314,149 +281,7 @@
         </div>
         <a href="javascript:void(0)" class="btn-install">Mở</a>
     </div>
-    <script>
-        window.AppPrompt = (function () {
-            var APP_PROMP_KEY = "app_banner_prompt"
-            var wrapper = document.getElementById('rever-banner-prompt')
-            var btnAdd = wrapper.querySelector('.btn-install')
-            var deferredPrompt;
-            var promptInfo = {
-                lastHide: 0, //Thời gian cuối ẩn form
-                numHide: 0 //Số lần ẩn form
-            }
-            var androidUrl = "../../../play.google.com/store/apps/detailsece3.html?id=com.rever.app.android"
-            var iosUrl = "../../../apps.apple.com/vn/app/rever/id1101768201.html"
-            var isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
-            var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
-            var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
-            var os = isIOS ? "ios" : "android"
-            if (!isMobile) {
-                return
-            }
 
-            // if(localStorage){ //lấy thông tin cũ
-            //   let info = localStorage.getItem(APP_PROMP_KEY)
-            //   if(info){
-            //     try{
-            //       promptInfo = {
-            //         ...promptInfo,
-            //         ...JSON.parse(info)
-            //       }
-            //     }catch(e){}
-            //   }
-            // }
-            // //Kiểm tra lần ẩn cuối cùng
-            // let hideDuration = promptInfo.numHide*2*24*60*60000 //Mỗi lần hide sẽ cộng thêm 2 ngày
-            // let currTime = +new Date()
-            // if(promptInfo.lastHide > 0 && currTime < promptInfo.lastHide + hideDuration){
-            //   return
-            // }
-
-            function showBanner() {
-                // var scrollPos = window.pageYOffset || document.documentElement.scrollTop
-                wrapper.style.display = 'flex';
-                window.ga && ga('send', 'event', 'Smart App Banner', 'Show', os);
-                // if(scrollPos == 0){
-                //   document.documentElement.scrollTop = 65
-                // }
-            }
-
-            function closeBanner() {
-                wrapper.style.display = 'none';
-                window.ga && ga('send', 'event', 'Smart App Banner', 'Close', os);
-            }
-
-            function savePrompInfo() {
-                // if(localStorage){
-                //   localStorage.setItem(APP_PROMP_KEY, JSON.stringify(promptInfo))
-                // }
-            }
-
-            //wrapper.style.display = 'flex';
-            document.addEventListener('DOMContentLoaded', function () {
-                setTimeout(function () {
-                    if (!deferredPrompt && isMobile) {
-                        showBanner()
-                    }
-                }, 1000)
-            });
-
-            window.addEventListener('beforeinstallprompt', function (e) {
-                // Prevent Chrome 67 and earlier from automatically showing the prompt
-                e.preventDefault();
-                // Stash the event so it can be triggered later.
-                deferredPrompt = e;
-                // Update UI notify the user they can add to home screen
-                showBanner()
-            });
-
-            btnAdd.addEventListener('click', function (e) {
-                window.ga && ga('send', 'event', 'Smart App Banner', 'Click Install', os);
-
-                //Lưu lại promp info
-                promptInfo.lastHide = 0
-                promptInfo.numHide = 0
-                savePrompInfo()
-
-                // hide our user interface that shows our A2HS button
-                //closeBanner()
-                if (deferredPrompt) {
-                    // Show the prompt
-                    deferredPrompt.prompt();
-                    // Wait for the user to respond to the prompt
-                    deferredPrompt.userChoice
-                        .then(function (choiceResult) {
-                            if (choiceResult.outcome === 'accepted') {
-                                console.log('User accepted the A2HS prompt');
-                            } else {
-                                console.log('User dismissed the A2HS prompt');
-                            }
-                            deferredPrompt = null;
-                        });
-                } else {
-                    if (isIOS && iosUrl) {
-                        window.open(iosUrl, "_blank")
-                    } else if (!isIOS && androidUrl) {
-                        window.open(androidUrl, "_blank")
-                    }
-                }
-            });
-
-            return {
-                closePrompt: function (evt) {
-                    closeBanner()
-
-                    //Lưu lại prompt info
-                    promptInfo.lastHide = +new Date()
-                    promptInfo.numHide++
-                    savePrompInfo()
-                }
-            }
-        })()
-    </script>
-
-
-    <script type="text/javascript">
-        var callbackInitMap = function () {
-            if (window.vinitMap) {
-                window.vinitMap();
-            }
-            if (window.initMap) {
-                initMap.call(this);
-            } else {
-                setTimeout(callbackInitMap, 500);
-            }
-        }
-
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js50aa?key=AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg&amp;libraries=drawing,places,geometry&amp;language=vi&amp;callback=callbackInitMap"></script>
-    <script async defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
-    <style>
-        #search-content .search-container .search-result > div .result-body .row.grid .projectCard-list.box .cover-image .btn-favorite {
-            display: block;
-        }
-    </style>
     <div id="search-content" class="block-search-noresult page--search" single-project=""
          init-params="{&#10;  &quot;service_type&quot; : 2,&#10;  &quot;neighborhood_id&quot; : &quot;1576833711767_2408&quot;,&#10;  &quot;page&quot; : 1,&#10;  &quot;size&quot; : 20,&#10;  &quot;keyword&quot; : &quot;ho-chi-minh&quot;,&#10;  &quot;title&quot; : &quot;Hồ Chí Minh&quot;,&#10;  &quot;search_mode&quot; : 1,&#10;  &quot;filter_price_path&quot; : &quot;sell_price_vnd&quot;,&#10;  &quot;service_types&quot; : [ 2, 3 ],&#10;  &quot;invalid&quot; : false,&#10;  &quot;bounding_box_valid&quot; : false&#10;}"
          boundary="[ [ 10.9916992, 106.3567159 ], [ 10.9696228, 106.3731933 ], [ 10.9736078, 106.4120833 ], [ 10.9420509, 106.4533261 ], [ 10.9012996, 106.5332267 ], [ 10.7889841, 106.5044774 ], [ 10.7565046, 106.4635618 ], [ 10.729944, 106.4871515 ], [ 10.731384, 106.4889945 ], [ 10.7252664, 106.4993573 ], [ 10.7267473, 106.5014603 ], [ 10.717173, 106.5090768 ], [ 10.7236517, 106.5201512 ], [ 10.7175842, 106.5294895 ], [ 10.708544, 106.5270968 ], [ 10.6879736, 106.5337388 ], [ 10.6855772, 106.5354875 ], [ 10.6871444, 106.5471528 ], [ 10.6854183, 106.5506169 ], [ 10.6753994, 106.5536761 ], [ 10.6706472, 106.5521382 ], [ 10.6677294, 106.5534667 ], [ 10.6577256, 106.5491702 ], [ 10.656988, 106.5561224 ], [ 10.6525576, 106.5551415 ], [ 10.6495172, 106.5574264 ], [ 10.6495368, 106.5589327 ], [ 10.6517, 106.5590122 ], [ 10.6530953, 106.5651391 ], [ 10.6563794, 106.5661982 ], [ 10.6563672, 106.5693996 ], [ 10.6538992, 106.5734088 ], [ 10.6498283, 106.5732432 ], [ 10.648798, 106.5768524 ], [ 10.6501528, 106.5790364 ], [ 10.6533484, 106.5781627 ], [ 10.6554758, 106.5799537 ], [ 10.6552439, 106.5830471 ], [ 10.6528223, 106.5859374 ], [ 10.6532129, 106.59028 ], [ 10.6501231, 106.5914692 ], [ 10.6507798, 106.5953075 ], [ 10.6536758, 106.5950212 ], [ 10.6504159, 106.6003002 ], [ 10.6581826, 106.6049676 ], [ 10.6473324, 106.62453 ], [ 10.6410982, 106.621169 ], [ 10.6396164, 106.625215 ], [ 10.6417594, 106.6292802 ], [ 10.636965, 106.6305147 ], [ 10.6355129, 106.6288637 ], [ 10.6300129, 106.6305326 ], [ 10.6263837, 106.6297799 ], [ 10.6282499, 106.6321728 ], [ 10.6250023, 106.6355682 ], [ 10.626392, 106.6418366 ], [ 10.6347284, 106.6462811 ], [ 10.6329868, 106.653253 ], [ 10.6370742, 106.6521771 ], [ 10.6393607, 106.653976 ], [ 10.6385404, 106.6563179 ], [ 10.6434719, 106.6564521 ], [ 10.6404356, 106.6619359 ], [ 10.6392799, 106.6696371 ], [ 10.6444475, 106.6740096 ], [ 10.6454257, 106.6792711 ], [ 10.6509296, 106.6850937 ], [ 10.6565691, 106.6853929 ], [ 10.6553656, 106.6875585 ], [ 10.6486478, 106.6907933 ], [ 10.6498628, 106.6962707 ], [ 10.6539706, 106.7006379 ], [ 10.6500677, 106.7073205 ], [ 10.6502259, 106.7123094 ], [ 10.6457417, 106.7186937 ], [ 10.6458269, 106.7224484 ], [ 10.6412777, 106.7237035 ], [ 10.6353735, 106.7307295 ], [ 10.6288844, 106.7332404 ], [ 10.6282855, 106.7290657 ], [ 10.6244284, 106.7283726 ], [ 10.6227848, 106.7317806 ], [ 10.6165984, 106.7292082 ], [ 10.6161848, 106.7275447 ], [ 10.6120491, 106.7291316 ], [ 10.6121361, 106.7316087 ], [ 10.6099603, 106.7327945 ], [ 10.6090137, 106.7283681 ], [ 10.6113314, 106.7264952 ], [ 10.6117188, 106.7236747 ], [ 10.606911, 106.722 ], [ 10.6059224, 106.7189372 ], [ 10.5998061, 106.7218323 ], [ 10.5960004, 106.7203811 ], [ 10.5934888, 106.72337 ], [ 10.5883371, 106.7232422 ], [ 10.5854276, 106.725134 ], [ 10.5855519, 106.7270246 ], [ 10.5800465, 106.7287025 ], [ 10.5802693, 106.7327542 ], [ 10.5823035, 106.734799 ], [ 10.586141, 106.7352949 ], [ 10.5863966, 106.736842 ], [ 10.5827996, 106.7395014 ], [ 10.5787291, 106.7350589 ], [ 10.5774085, 106.7355638 ], [ 10.5790717, 106.7412316 ], [ 10.5762661, 106.7457147 ], [ 10.5639214, 106.7418966 ], [ 10.5156365, 106.7455554 ], [ 10.4996183, 106.7369811 ], [ 10.4964386, 106.7334951 ], [ 10.4925941, 106.73842 ], [ 10.4537878, 106.7611567 ], [ 10.4184025, 106.7925066 ], [ 10.39784709402413, 106.81081764550783 ], [ 10.391949319103944, 106.82902374375001 ], [ 10.4036031623291, 106.86461756875002 ], [ 10.389168927462057, 106.87348808964845 ], [ 10.37203233611501, 106.87274557343753 ], [ 10.372880332158294, 106.89735307031249 ], [ 10.379131652828825, 106.91921398515623 ], [ 10.403149276165498, 106.97349292968747 ], [ 10.421910643004122, 106.98140632773435 ], [ 10.43399207966574, 106.95240404238277 ], [ 10.449486372622836, 106.937902899707 ], [ 10.46938732537221, 106.94438523852537 ], [ 10.45620185771326, 106.96872036054685 ], [ 10.45742141743161, 106.98040831831052 ], [ 10.469444587720552, 106.98248323896482 ], [ 10.47525962430809, 106.9921262443359 ], [ 10.489061592303134, 106.99311257246092 ], [ 10.5049271, 106.9993458 ], [ 10.5089371, 107.0061458 ], [ 10.5225871, 107.0133458 ], [ 10.5368118, 107.0270534 ], [ 10.5444213, 107.0267082 ], [ 10.5494584, 107.0134265 ], [ 10.5568353, 107.0112462 ], [ 10.5639263, 107.0143531 ], [ 10.5801975, 107.0259087 ], [ 10.5884412, 107.0268288 ], [ 10.6038971, 107.0191458 ], [ 10.6130075, 107.0082867 ], [ 10.6099432, 107.0064605 ], [ 10.6108245, 107.0022063 ], [ 10.6087938, 107.0024645 ], [ 10.6070001, 107.0005059 ], [ 10.6077893, 106.9981438 ], [ 10.6054216, 106.9959167 ], [ 10.6046794, 106.9903366 ], [ 10.6005472, 106.9905627 ], [ 10.5957231, 106.9862101 ], [ 10.587777, 106.987199 ], [ 10.5792082, 106.9837328 ], [ 10.5819196, 106.9796263 ], [ 10.5823359, 106.9749271 ], [ 10.5893028, 106.9687519 ], [ 10.5935822, 106.9605119 ], [ 10.5973811, 106.9466067 ], [ 10.5967216, 106.9413844 ], [ 10.5999071, 106.9378418 ], [ 10.6031088, 106.9280846 ], [ 10.60997, 106.9212549 ], [ 10.6081576, 106.9112835 ], [ 10.6246678, 106.9034546 ], [ 10.6298742, 106.8972622 ], [ 10.6364673, 106.8934871 ], [ 10.6407423, 106.8848701 ], [ 10.6467688, 106.8834745 ], [ 10.6482995, 106.8807228 ], [ 10.6479942, 106.8727718 ], [ 10.6432194, 106.8700124 ], [ 10.6416352, 106.8637306 ], [ 10.6365542, 106.860336 ], [ 10.639602, 106.8513656 ], [ 10.6379857, 106.8431314 ], [ 10.6364764, 106.8410216 ], [ 10.6294349, 106.838705 ], [ 10.6269608, 106.8354265 ], [ 10.6278335, 106.8262785 ], [ 10.6385342, 106.8154857 ], [ 10.6551022, 106.8082433 ], [ 10.670253, 106.7875207 ], [ 10.6763353, 106.7739876 ], [ 10.6840916, 106.7657553 ], [ 10.6975937, 106.7544018 ], [ 10.7074537, 106.751422 ], [ 10.7219417, 106.7528834 ], [ 10.7431427, 106.7686561 ], [ 10.7493683, 106.7773151 ], [ 10.760408, 106.8013778 ], [ 10.7712239, 106.8066849 ], [ 10.7797015, 106.8163172 ], [ 10.7808709, 106.8217297 ], [ 10.7778482, 106.8250649 ], [ 10.7725292, 106.8256022 ], [ 10.7634726, 106.8230167 ], [ 10.7595803, 106.8248281 ], [ 10.7606319, 106.8289198 ], [ 10.771997, 106.8390248 ], [ 10.7754044, 106.8465768 ], [ 10.7741461, 106.8536416 ], [ 10.766716, 106.8609354 ], [ 10.764637, 106.8652882 ], [ 10.7648269, 106.8694652 ], [ 10.7687001, 106.8738005 ], [ 10.7736419, 106.8733521 ], [ 10.7844494, 106.8649947 ], [ 10.7884521, 106.8642654 ], [ 10.8021248, 106.8786841 ], [ 10.8065311, 106.8815567 ], [ 10.8106588, 106.8815533 ], [ 10.8198366, 106.8771366 ], [ 10.8446686, 106.8542362 ], [ 10.8623002, 106.8468264 ], [ 10.8653569, 106.8467022 ], [ 10.8760167, 106.8509868 ], [ 10.8844572, 106.8436148 ], [ 10.8989977, 106.8403608 ], [ 10.898335, 106.8339333 ], [ 10.8949756, 106.8298537 ], [ 10.8928774, 106.8238948 ], [ 10.8882349, 106.8241281 ], [ 10.8857514, 106.819402 ], [ 10.8810661, 106.8171911 ], [ 10.8791337, 106.8130176 ], [ 10.8731176, 106.8086063 ], [ 10.8749365, 106.8052247 ], [ 10.872072, 106.7985932 ], [ 10.8735451, 106.7979771 ], [ 10.8736127, 106.7951302 ], [ 10.8719805, 106.7889262 ], [ 10.8671889, 106.7882764 ], [ 10.8682665, 106.7803318 ], [ 10.8771956, 106.7821065 ], [ 10.8811856, 106.7806065 ], [ 10.8938263, 106.768444 ], [ 10.8848699, 106.764477 ], [ 10.8812944, 106.7604753 ], [ 10.8787461, 106.7619127 ], [ 10.8724278, 106.7603164 ], [ 10.8701679, 106.7631529 ], [ 10.8676588, 106.7622019 ], [ 10.86576, 106.7539 ], [ 10.86371, 106.7519 ], [ 10.8656401, 106.748625 ], [ 10.8717037, 106.7459912 ], [ 10.873882, 106.7464238 ], [ 10.8754996, 106.7513234 ], [ 10.8772876, 106.750346 ], [ 10.8774339, 106.7471082 ], [ 10.8800647, 106.7446482 ], [ 10.8816265, 106.7449812 ], [ 10.8803038, 106.7431587 ], [ 10.8810178, 106.739691 ], [ 10.8794121, 106.738424 ], [ 10.8805112, 106.7341768 ], [ 10.8846816, 106.7368466 ], [ 10.8857356, 106.7318217 ], [ 10.8906676, 106.7330997 ], [ 10.8902321, 106.7274826 ], [ 10.89642, 106.7177 ], [ 10.88977, 106.713 ], [ 10.88713, 106.7143 ], [ 10.88793, 106.7174 ], [ 10.88129, 106.7178 ], [ 10.87767, 106.7122 ], [ 10.87651, 106.7212 ], [ 10.87197, 106.7233813 ], [ 10.87284, 106.7154 ], [ 10.86853, 106.7153 ], [ 10.86587, 106.7132 ], [ 10.86896, 106.6995 ], [ 10.88067, 106.6898 ], [ 10.88591, 106.6894 ], [ 10.89412, 106.6942 ], [ 10.8975, 106.6944 ], [ 10.91118, 106.6902 ], [ 10.92124, 106.6849 ], [ 10.9239, 106.6808 ], [ 10.92102, 106.6698 ], [ 10.92268, 106.6632 ], [ 10.92746, 106.6553 ], [ 10.93312, 106.6508 ], [ 10.93742, 106.6502 ], [ 10.94943, 106.6525 ], [ 10.96449, 106.6489 ], [ 10.97444, 106.6502 ], [ 10.98004, 106.6486 ], [ 10.98104, 106.6443 ], [ 10.97744, 106.636 ], [ 10.98029, 106.6261 ], [ 10.9898, 106.6162 ], [ 10.99293, 106.6163 ], [ 11.00186, 106.621 ], [ 11.00892, 106.6196 ], [ 11.01159, 106.6163 ], [ 11.01184, 106.6088 ], [ 11.01598, 106.5979 ], [ 11.02817, 106.5952 ], [ 11.0396483, 106.602983 ], [ 11.04339, 106.6012 ], [ 11.04559, 106.5983 ], [ 11.04507, 106.5946 ], [ 11.03692, 106.5908 ], [ 11.03638, 106.5868 ], [ 11.03809, 106.5829 ], [ 11.04803, 106.5795 ], [ 11.05461, 106.5727 ], [ 11.05205, 106.5697 ], [ 11.04504, 106.5667 ], [ 11.04577, 106.552 ], [ 11.04704, 106.5489 ], [ 11.05337, 106.5444 ], [ 11.05745, 106.5348 ], [ 11.07338, 106.5238 ], [ 11.0807, 106.5268 ], [ 11.08852, 106.5339 ], [ 11.09055, 106.5338 ], [ 11.09223, 106.5291 ], [ 11.08953, 106.5242 ], [ 11.09005, 106.5224 ], [ 11.10017, 106.5162 ], [ 11.10203, 106.517 ], [ 11.10362, 106.5241 ], [ 11.10586, 106.5263 ], [ 11.11415, 106.5278 ], [ 11.12104, 106.5267 ], [ 11.12181, 106.5212 ], [ 11.12542, 106.5159 ], [ 11.14221, 106.5073 ], [ 11.14023, 106.5017 ], [ 11.14395, 106.4902 ], [ 11.14145, 106.4807 ], [ 11.1431978, 106.4720786 ], [ 11.14843, 106.4673468 ], [ 11.1540598, 106.471015 ], [ 11.1559189, 106.4661575 ], [ 11.1595357, 106.4630308 ], [ 11.1573701, 106.4597497 ], [ 11.1593817, 106.4551763 ], [ 11.1570123, 106.4518178 ], [ 11.1508223, 106.4516639 ], [ 11.1525042, 106.4558749 ], [ 11.1514856, 106.4576577 ], [ 11.1427992, 106.4569614 ], [ 11.1356914, 106.4512271 ], [ 11.1348708, 106.4473617 ], [ 11.129081, 106.4476377 ], [ 11.1257481, 106.4440344 ], [ 11.1143875, 106.442003 ], [ 11.1104252, 106.4377202 ], [ 11.0996847, 106.433975 ], [ 11.0985509, 106.4309571 ], [ 11.0918193, 106.4306484 ], [ 11.0917618, 106.426622 ], [ 11.0658478, 106.4260412 ], [ 11.065145, 106.4234201 ], [ 11.0618572, 106.421544 ], [ 11.0524421, 106.4217407 ], [ 11.0479427, 106.4247837 ], [ 11.0470166, 106.4227776 ], [ 11.0410804, 106.4230056 ], [ 11.0352711, 106.4211304 ], [ 11.0324923, 106.413171 ], [ 11.0220931, 106.4085531 ], [ 11.0146319, 106.4087412 ], [ 11.0084883, 106.4139 ], [ 10.9985733, 106.3882865 ], [ 10.9976786, 106.380802 ], [ 10.9992232, 106.3743791 ], [ 10.9965338, 106.3624232 ], [ 10.9917289, 106.3567711 ], [ 10.9916992, 106.3567159 ] ]"
@@ -3844,6 +3669,179 @@
 {% block scripts %}
 
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+        <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "url": "https://rever.vn",
+  "logo": "https://rever.vn/static/images/rever-thumbnail.jpg",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "0964399436",
+      "contactType": "customer service"
+    }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/rever.vn",
+    "../../../www.linkedin.com/company/rever-real-estate.html",
+    "../../../www.instagram.com/rever.vn/index.html",
+    "../../../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html"
+  ]
+}
+</script>
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@id": "https://rever.vn/#website",
+        "@type": "WebSite",
+        "url": "https://rever.vn/",
+        "name": "Rever",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://rever.vn/s/{search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+</script>
+        <script>
+        window.AppPrompt = (function () {
+            var APP_PROMP_KEY = "app_banner_prompt"
+            var wrapper = document.getElementById('rever-banner-prompt')
+            var btnAdd = wrapper.querySelector('.btn-install')
+            var deferredPrompt;
+            var promptInfo = {
+                lastHide: 0, //Thời gian cuối ẩn form
+                numHide: 0 //Số lần ẩn form
+            }
+            var androidUrl = "../../../play.google.com/store/apps/detailsece3.html?id=com.rever.app.android"
+            var iosUrl = "../../../apps.apple.com/vn/app/rever/id1101768201.html"
+            var isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+            var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+            var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+            var os = isIOS ? "ios" : "android"
+            if (!isMobile) {
+                return
+            }
+
+            // if(localStorage){ //lấy thông tin cũ
+            //   let info = localStorage.getItem(APP_PROMP_KEY)
+            //   if(info){
+            //     try{
+            //       promptInfo = {
+            //         ...promptInfo,
+            //         ...JSON.parse(info)
+            //       }
+            //     }catch(e){}
+            //   }
+            // }
+            // //Kiểm tra lần ẩn cuối cùng
+            // let hideDuration = promptInfo.numHide*2*24*60*60000 //Mỗi lần hide sẽ cộng thêm 2 ngày
+            // let currTime = +new Date()
+            // if(promptInfo.lastHide > 0 && currTime < promptInfo.lastHide + hideDuration){
+            //   return
+            // }
+
+            function showBanner() {
+                // var scrollPos = window.pageYOffset || document.documentElement.scrollTop
+                wrapper.style.display = 'flex';
+                window.ga && ga('send', 'event', 'Smart App Banner', 'Show', os);
+                // if(scrollPos == 0){
+                //   document.documentElement.scrollTop = 65
+                // }
+            }
+
+            function closeBanner() {
+                wrapper.style.display = 'none';
+                window.ga && ga('send', 'event', 'Smart App Banner', 'Close', os);
+            }
+
+            function savePrompInfo() {
+                // if(localStorage){
+                //   localStorage.setItem(APP_PROMP_KEY, JSON.stringify(promptInfo))
+                // }
+            }
+
+            //wrapper.style.display = 'flex';
+            document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(function () {
+                    if (!deferredPrompt && isMobile) {
+                        showBanner()
+                    }
+                }, 1000)
+            });
+
+            window.addEventListener('beforeinstallprompt', function (e) {
+                // Prevent Chrome 67 and earlier from automatically showing the prompt
+                e.preventDefault();
+                // Stash the event so it can be triggered later.
+                deferredPrompt = e;
+                // Update UI notify the user they can add to home screen
+                showBanner()
+            });
+
+            btnAdd.addEventListener('click', function (e) {
+                window.ga && ga('send', 'event', 'Smart App Banner', 'Click Install', os);
+
+                //Lưu lại promp info
+                promptInfo.lastHide = 0
+                promptInfo.numHide = 0
+                savePrompInfo()
+
+                // hide our user interface that shows our A2HS button
+                //closeBanner()
+                if (deferredPrompt) {
+                    // Show the prompt
+                    deferredPrompt.prompt();
+                    // Wait for the user to respond to the prompt
+                    deferredPrompt.userChoice
+                        .then(function (choiceResult) {
+                            if (choiceResult.outcome === 'accepted') {
+                                console.log('User accepted the A2HS prompt');
+                            } else {
+                                console.log('User dismissed the A2HS prompt');
+                            }
+                            deferredPrompt = null;
+                        });
+                } else {
+                    if (isIOS && iosUrl) {
+                        window.open(iosUrl, "_blank")
+                    } else if (!isIOS && androidUrl) {
+                        window.open(androidUrl, "_blank")
+                    }
+                }
+            });
+
+            return {
+                closePrompt: function (evt) {
+                    closeBanner()
+
+                    //Lưu lại prompt info
+                    promptInfo.lastHide = +new Date()
+                    promptInfo.numHide++
+                    savePrompInfo()
+                }
+            }
+        })()
+    </script>
+
+
+    <script type="text/javascript">
+        var callbackInitMap = function () {
+            if (window.vinitMap) {
+                window.vinitMap();
+            }
+            if (window.initMap) {
+                initMap.call(this);
+            } else {
+                setTimeout(callbackInitMap, 500);
+            }
+        }
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js50aa?key=AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg&amp;libraries=drawing,places,geometry&amp;language=vi&amp;callback=callbackInitMap"></script>
+    <script async defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
 
     <script async defer src="{% static 'js/external90ca.js' %}"></script>
     <script>
