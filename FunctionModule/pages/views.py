@@ -85,6 +85,12 @@ def detail(request):
 
     return render(request, 'home/detail.html', context)
 
+def sell_with_us(request):
+    context = {
+    }
+
+    return render(request, 'home/sellwithus.html', context)
+
 """Admin url here"""
 def dashboard(request):
     return  redirect(request, 'admin/admin_login')

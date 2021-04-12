@@ -335,6 +335,8 @@
  {% endblock %}
 
 {% block content %}
+  <!-- Search menu -->
+    {% include 'partials/_menusearch.html' %}
 
     <input id="markerwithlabel" type="hidden"
            value="https://s3-cdn.rever.vn/p/v2.33.55/js/markerwithlabel-0.0.1.min.js?v=1617780824171">
@@ -347,7 +349,7 @@
                     <i class="zmdi zmdi-close"></i>
                 </button>
                 <a href="javascript:void(0)" class="cover">
-                    <img src="../../s3-cdn.rever.vn/p/v2.33.55/images/logo-rever.svg" alt="Rever">
+                    <img src="{% static 'img/logo.svg' %}" alt="Thế giới Nhà Phố">
                 </a>
                 <div class="banner-app-info">
                     <a href="javascript:void(0)">Rever</a>
@@ -1408,7 +1410,7 @@
                         </div>
                         <div class="about-3d">
                             <h3>Tuyệt vời khi trình diễn với 3d nhập vai</h3>
-                            <p>Công nghệ 3d nhập vai của Rever mang lại trải nghiệm có độ tin cậy tuyệt đối với khách
+                            <p>Công nghệ 3d nhập vai của Thế giới Nhà Phốmang lại trải nghiệm có độ tin cậy tuyệt đối với khách
                                 hàng khi xem trực tuyến ở tất cả mọi nơi. Kết hợp đội ngũ nhân viên được đào tạo chuyên
                                 nghiệp đã giúp cho tốc độ bán nhanh hơn gấp đôi so với thị trường.</p>
                         </div>
@@ -1971,7 +1973,7 @@
                                     <button @click="hideModal()" class="popup-close-btn"><i
                                             class="zmdi zmdi-hc-2x zmdi-close"></i></button>
                                     <div v-show="step == 1" class="contain" id="step-form-1">
-                                        <div class="intro">Bạn có sẵn sàng giới thiệu Rever cho người khác?</div>
+                                        <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phốcho người khác?</div>
                                         <div class="choose-number">
                                             <ul>
                                                 <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
@@ -2057,7 +2059,7 @@
                             </div>
                             <div class="content">
                                 <div class="intro-sm">
-                                    <p>Bạn có sẵn sàng giới thiệu Rever cho người khác?</p>
+                                    <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phốcho người khác?</p>
                                     <div class="choose-number">
                                         <ul>
                                             <li v-for="i in 10" @click="selectStep1Rate(i)">
@@ -2068,7 +2070,7 @@
                                     </div>
                                 </div>
                                 <div class="use-easy">
-                                    <p>Bạn thấy Rever có dễ sử dụng không?</p>
+                                    <p>Bạn thấy Thế giới Nhà Phốcó dễ sử dụng không?</p>
                                     <div class="row pt-15 center-item">
                                         <button :class="{active : step2.rate == 'hard'}"
                                                 @click="selectStep2Rate('hard')"

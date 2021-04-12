@@ -12273,7 +12273,7 @@
                                 return e.preventDefault(), t.resetForm(e)
                             }
                         }
-                    })]), t._v(" "), t._m(3), t._v(" "), n("p", {staticClass: "login--title mb-16"}, [t._v("Đăng kí hoàn tất!")]), t._v(" "), n("p", {staticClass: "intro"}, [t._v("Tài khoản của bạn tại Rever đã được đăng kí! ")]), t._v(" "), n("div", {staticClass: "butt-groups"}, [n("a", {
+                    })]), t._v(" "), t._m(3), t._v(" "), n("p", {staticClass: "login--title mb-16"}, [t._v("Đăng kí hoàn tất!")]), t._v(" "), n("p", {staticClass: "intro"}, [t._v("Tài khoản của bạn tại Thế giới Nhà Phốđã được đăng kí! ")]), t._v(" "), n("div", {staticClass: "butt-groups"}, [n("a", {
                         staticClass: "small-butt-red butt-primary",
                         attrs: {href: "javascript:void(0)"},
                         on: {click: t.hidePopup}
