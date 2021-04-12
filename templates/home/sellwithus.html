@@ -1,426 +1,1189 @@
-<head>
-<title>Đăng tin nhà đất với Rever</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta charset="UTF-8" />
-<meta name="description" content="Bạn đang có nhu cầu bán nhà? Hãy để Rever hỗ trợ bạn với gói Dịch vụ môi giới cho người bán đi kèm các dịch vụ bổ sung giúp làm nổi bật nhà đất đăng bán với chi phí tiết kiệm nhất so với thị trường. Bán nhà với Rever để được đội ngũ hỗ trợ mọi lúc, dịch vụ nhanh chóng, mang lại trải nghiệm bán nhà hoàn hảo. " />
-<meta name="keywords" content="Rever, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa" />
-<meta name="author" content="rever.vn" />
-<link rel="canonical" href="ban-nha-voi-rever.html" />
-<link rel="shortcut icon" type="image/x-icon" href="../s3-cdn.rever.vn/p/v2.33.55/favicon.ico" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+{% extends 'base_common.html' %}
 
-<link rel="manifest" href="manifest.json">
-<meta property="fb:app_id" content="265437617126890" />
-<meta property="og:url" content="ban-nha-voi-rever.html" />
-<meta property="og:title" content="Đăng tin nhà đất với Rever" />
-<meta property="og:description" content="Bạn đang có nhu cầu bán nhà? Hãy để Rever hỗ trợ bạn với gói Dịch vụ môi giới cho người bán đi kèm các dịch vụ bổ sung giúp làm nổi bật nhà đất đăng bán với chi phí tiết kiệm nhất so với thị trường. Bán nhà với Rever để được đội ngũ hỗ trợ mọi lúc, dịch vụ nhanh chóng, mang lại trải nghiệm bán nhà hoàn hảo. " />
-<meta property="og:image" content="../s3-cdn.rever.vn/p/images/rever-thumbnail.jpg" />
-<meta property="og:image:url" content="../s3-cdn.rever.vn/p/images/rever-thumbnail.jpg" />
-<meta property="og:image:width" content="600" />
-<meta property="og:image:height" content="320" />
-<meta property="og:site_name" content="rever.vn" />
-<meta property="og:rich_attachment" content="true" />
-<meta property="og:type" content="article" />
-<meta property="static-url" content="../s3-cdn.rever.vn/p/v2.33.55" />
-<meta property="hotline" content="1800 234 546" />
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css/material-design-iconic-font.2.min90ca.css?v=1617780824171">
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css/fontawsome-5.5.0.all.css">
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css2/pages/footer.min90ca.css?v=1617780824171" />
+{% load static humanize i18n %}
 
+{% block head %}
 
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css2/popup-new/popup-rever-new.min90ca.css?v=1617780824171" />
-<script src="../s3-cdn.rever.vn/p/v2.33.55/js/jQuery-2.1.4.min90ca.js?v=1617780824171"></script>
-<style>
-    [v-cloak] { display:none !important; } /* Ẩn các element khi vue chưa load */
-    picture img {
-        display: inline-block;
-        vertical-align: middle;
-    }
-    /*hide tracking img*/
-    img[src^="//analytics.rever.vn/fap"],img[src^="/fap/debug/track"] {
-        display: none;
-    }
-    ._hj_feedback_container button { /* Fix lỗi hotjar */
-      text-align: center;
-    }
-</style>
-<script async defer src="../s3-cdn.rever.vn/p/import/external90ca.js?v=1617780824171"></script>
-<script>
-    window["_au_api"] = "thue/api.html";
-    window['fap_url'] = "../s3-cdn.rever.vn/p/v2.33.55/js/fap.min90ca.js?v=1617780824171";
-    window['fap.server'] = '//analytics.rever.vn/fap';
-    window['favorite_api'] = 'mapi/index.html';
-    window['googleClientId'] = '539423642927.apps.googleusercontent.com';
-    window['staticUrl'] = '../s3-cdn.rever.vn/p/v2.33.55';
-    window['hotline'] = '1800 234 546';
+    <title> Thế giới Nhà Phố {% block title %}| Đăng bán BĐS {% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="UTF-8"/>
+    <meta name="description"
+          content="Bạn đang có nhu cầu bán nhà? Hãy để Thế giới Nhà Phố hỗ trợ bạn với gói Dịch vụ môi giới cho người bán đi kèm các dịch vụ bổ sung giúp làm nổi bật nhà đất đăng bán với chi phí tiết kiệm nhất so với thị trường. Bán nhà với Thế giới Nhà Phốđể được đội ngũ hỗ trợ mọi lúc, dịch vụ nhanh chóng, mang lại trải nghiệm bán nhà hoàn hảo. "/>
+    <meta name="keywords"
+          content="Rever, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
+    <meta name="author" content="thegioinhaphovietnam.com.vn"/>
+    <link rel="canonical" href="sellwithus"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-    window['isLoggedIn'] = false;
-</script>
-<script async defer src="../s3-cdn.rever.vn/p/import/tracking.min90ca.js?v=1617780824171"></script>
+    <meta property="fb:app_id" content=""/>
+    <meta property="og:url" content="sellwithus"/>
+    <meta property="og:title" content="Đăng tin nhà đất với Rever"/>
+    <meta property="og:description"
+          content="Bạn đang có nhu cầu bán nhà? Hãy để Thế giới Nhà Phố hỗ trợ bạn với gói Dịch vụ môi giới cho người bán đi kèm các dịch vụ bổ sung giúp làm nổi bật nhà đất đăng bán với chi phí tiết kiệm nhất so với thị trường. Bán nhà với Thế giới Nhà Phốđể được đội ngũ hỗ trợ mọi lúc, dịch vụ nhanh chóng, mang lại trải nghiệm bán nhà hoàn hảo. "/>
+    <meta property="og:image" content="../images/rever-thumbnail.jpg"/>
+    <meta property="og:image:url" content="..//images/rever-thumbnail.jpg"/>
+    <meta property="og:image:width" content="600"/>
+    <meta property="og:image:height" content="320"/>
+    <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
+    <meta property="og:rich_attachment" content="true"/>
+    <meta property="og:type" content="article"/>
+    <meta property="static-url" content=""/>
+    <meta property="hotline" content="0964399436"/>
 
-<script>
-    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var t=analytics.methods[e];analytics[t]=analytics.factory(t)}analytics.load=function(e,t){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.defer=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+e+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=t};analytics.SNIPPET_VERSION="4.1.0";
-      analytics.load("4LCsqFQzVAmMhPA650qKAAbZoHweHzHt", { integrations: { 'Mixpanel': false} });
-    }}();
-  </script>
-<script>
-    //Track thêm tags
-      var tagTrackings = []
-      
-      var pageviewProperties = { }
+    <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/popup-new.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style01.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/mobile.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/temp90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/flexslider.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/header-live.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/service.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/menu.min90ca.css' %}"/>
 
-      analytics.page(Object.assign({
-        domain: location.hostname,
-        tags: tagTrackings.length > 0 ? tagTrackings : undefined
-      }, pageviewProperties));
-
-      analytics.ready(function(){
-        //window.mixpanel.init("31bae2b919cfc12821646533a62aee1b")
-        //window.track("Page View")
-      })
-  </script>
-
-<script>(function(c,a){if(!a.__SV){var b=window;try{var d,m,j,k=b.location,f=k.hash;d=function(a,b){return(m=a.match(RegExp(b+"=([^&]*)")))?m[1]:null};f&&d(f,"state")&&(j=JSON.parse(decodeURIComponent(d(f,"state"))),"mpeditor"===j.action&&(b.sessionStorage.setItem("_mpcehash",f),history.replaceState(j.desiredHash||"",c.title,k.pathname+k.search)))}catch(n){}var l,h;window.mixpanel=a;a._i=[];a.init=function(b,d,g){function c(b,i){var a=i.split(".");2==a.length&&(b=b[a[0]],i=a[1]);b[i]=function(){b.push([i].concat(Array.prototype.slice.call(arguments,
-    0)))}}var e=a;"undefined"!==typeof g?e=a[g]=[]:g="mixpanel";e.people=e.people||[];e.toString=function(b){var a="mixpanel";"mixpanel"!==g&&(a+="."+g);b||(a+=" (stub)");return a};e.people.toString=function(){return e.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
-    for(h=0;h<l.length;h++)c(e,l[h]);var f="set set_once union unset remove delete".split(" ");e.get_group=function(){function a(c){b[c]=function(){call2_args=arguments;call2=[c].concat(Array.prototype.slice.call(call2_args,0));e.push([d,call2])}}for(var b={},d=["get_group"].concat(Array.prototype.slice.call(arguments,0)),c=0;c<f.length;c++)a(f[c]);return b};a._i.push([b,d,g])};a.__SV=1.2;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.defer=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?
-    MIXPANEL_CUSTOM_LIB_URL:"file:"===c.location.protocol&&"//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js";d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d)}})(document,window.mixpanel||[]);
-    mixpanel.init("31bae2b919cfc12821646533a62aee1b");
-  </script>
-<script>
-    mixpanel.track("Page View")
-  </script>
-
-
-<script>
-  window.hsConversationsSettings = {
-    loadImmediately: false // Delay the load of the chat widget
-  };
-</script>
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId: '323161212360067',
-      cookie: true,                     // Enable cookies to allow the server to access the session.
-      xfbml: true,                     // Parse social plugins on this webpage.
-      version: 'v8.0'           // Use this Graph API version for this call.
-    });
-  }
-</script>
-<script async defer crossorigin="anonymous" src="../connect.facebook.net/en_US/sdk.js"></script>
-
-<script>
-  (function () {
-    var formQueue = [];
-
-    function queuedForm(opt) {
-      if (formQueue && !(hbspt && hbspt.forms && hbspt.forms.deps)) {
-        formQueue.push(opt);
-      }
-    }
-
-    var awaitTimeout = 0;
-    var awaitHSForm = function () {
-      awaitHSForm.called = true;
-      if (formQueue && hbspt && hbspt.forms && hbspt.forms.deps) {
-        formQueue.forEach(function (_opt) {
-          hbspt.forms.create(_opt);
-        });
-        clearTimeout(awaitTimeout);
-        delete formQueue;
-      } else {
-        awaitTimeout = setTimeout(awaitHSForm, 500);
-      }
-    };
-    window['hbspt'] = {
-      forms: {
-        create: function (opt) {
-          if (!awaitHSForm.called) {
-            awaitHSForm();
-          }
-          queuedForm(opt);
+    <style>
+        [v-cloak] {
+            display: none !important;
         }
-      }
-    };
-  })();
 
-</script>
-<!--[if lte IE 8]>
-  <script charset="utf-8" async defer type="text/javascript"
-          src="https://rever.vn/public/externaljs"></script>
-  <![endif]-->
-<script charset="utf-8" async defer type="text/javascript" src="../js.hsforms.net/forms/v2.js"></script>
-<script>
-  function createHSForm(opt) {
-    function getClientId() {
-      try {
-        return ga.getAll()[0].get('clientId');
-      } catch (e) {
-        return ""
-      }
-    }
-
-    var optFS = opt['onFormSubmit'];
-    var defaultOpt = Object.create(opt);
-    defaultOpt.onFormSubmit = function () {
-      var $gaClientId = $('[name=ga_client_id]');
-      if ($gaClientId[0]) {
-        $gaClientId.val(getClientId());
-      }
-      if (typeof optFS === 'function') {
-        optFS.apply(this, arguments)
-      }
-    };
-    return hbspt.forms.create(defaultOpt);
-  }
-  var dialogManager = (function DialogService() {
-    var fact = this;
-    fact.bodyClassSpecs = "mdialog-body";
-    fact.bodyLoadingClass = "mdialog-loading";
-    fact.cachedBodyStyle = null;
-    fact.default = {
-      zindex: 99999,
-      width: 300,
-      minHeight: 100,
-      background: "rgba(0,0,0,.5)",
-      opacity: 0.5
-    };
-    fact.key = {
-      cachedStyle: "cached-style"
-    };
-    var v0 = 0.05;
-    var a = 0.0002;
-    fact.show = function (selectorId, options, hideFn, showFn) {
-      options = $.extend(true, {
-        outSideClick: true
-      }, options || {});
-      options.maxWidth = "100%";
-      var dialog, oldStyle = document.body.getAttribute("style");
-      document.body.setAttribute(fact.key.cachedStyle, oldStyle);
-      if (selectorId && typeof selectorId === 'string') {
-        dialog = $(document.getElementById(selectorId));
-      } else {
-        dialog = selectorId;
-      }
-      dialog.css("opacity", 0);
-      dialog.css("overflow-y", "auto");
-      dialog.css("overflow-x", "hidden");
-      dialog.addClass("opened");
-      var bodyClass = (options ? options.body : "") || ".body";
-      dialog.find(bodyClass).css(options);
-      dialog.find(bodyClass).addClass(fact.bodyClassSpecs)
-      dialog[0] ? dialog[0]["$dialogCallback"] = hideFn : null;
-      dialog[0] ? dialog[0]["$dialogInitTime"] = +new Date() : null;
-      if (options && options.close) {
-        dialog.find(bodyClass + " " + options.close).off().click(function (e) {
-          e.preventDefault();
-          fact.hide(selectorId, hideFn);
-        });
-      }
-      if (options && options.outSideClick) {
-        dialog.off().click(function () {
-          fact.hide(selectorId, hideFn);
-        });
-      }
-      dialog.find(bodyClass).click(function (e) {
-        e.stopPropagation();
-      });
-      //.preventParentScroll();
-      fact.animation(dialog, 0, 0, 1, function () {
-        showFn ? showFn() : null;
-      });
-      fact.loadingEnd(dialog);
-      return dialog;
-    };
-    fact.animation = function (dialog, opa, t, delta, callback) {
-      dialog.css("opacity", opa);
-      if ((delta > 0 && opa > 1) || (delta < 0 && opa < 0)) {
-        if (callback) {
-          callback();
+        /* Ẩn các element khi vue chưa load */
+        picture img {
+            display: inline-block;
+            vertical-align: middle;
         }
-        return;
-      }
-      setTimeout(function () {
-        opa += delta * (v0 * t + 1 / 2 * a * t * t);
-        fact.animation(dialog, opa, t + 1, delta, callback);
-      }, 10);
-    };
-    fact.hide = function (selectorId, fn) {
-      var dialog;
-      if (!selectorId) {
-        dialog = $(".mdialog.opened");
-      } else if (typeof selectorId === 'string') {
-        dialog = $(document.getElementById(selectorId));
-      } else {
-        dialog = selectorId;
-      }
-      fact.animation(dialog, 1, 0, -1, function () {
-        dialog.removeClass("opened");
-        fn ? fn(dialog) : null;
-      });
-    };
-    fact.loadingStart = function (selectorId) {
-      var dialog;
-      if (!selectorId) {
-        dialog = $(".mdialog.opened");
-      } else if (typeof selectorId === 'string') {
-        dialog = $(document.getElementById(selectorId));
-      } else {
-        dialog = selectorId;
-      }
-      dialog.find("." + fact.bodyClassSpecs).addClass(fact.bodyLoadingClass);
-    };
-    fact.loadingEnd = function (selectorId) {
-      var dialog;
-      if (!selectorId) {
-        dialog = $(".mdialog.opened");
-      } else if (typeof selectorId === 'string') {
-        dialog = $(document.getElementById(selectorId));
-      } else {
-        dialog = selectorId;
-      }
-      dialog.find("." + fact.bodyClassSpecs + "." + fact.bodyLoadingClass).removeClass(fact.bodyLoadingClass);
-    };
-    $(window).keydown(function (e) {
-      var openedDialog = $(".mdialog.opened");
-      if (openedDialog.length && e.keyCode == 27) {
-        var arr = [];
-        arr.length = openedDialog.length;
-        for (var i = 0; i < openedDialog.length; i++) {
-          for (var j = i; j < openedDialog.length; j++) {
-            if (openedDialog[i]["$dialogInitTime"] > openedDialog[j]["$dialogInitTime"]) {
-              arr[j] = openedDialog[i];
-              arr[i] = openedDialog[j];
-            } else {
-              arr[i] = openedDialog[i];
-              arr[j] = openedDialog[j];
+
+        /*hide tracking img*/
+        img[src^="//analytics.rever.vn/fap"], img[src^="/fap/debug/track"] {
+            display: none;
+        }
+
+        ._hj_feedback_container button { /* Fix lỗi hotjar */
+            text-align: center;
+        }
+    </style>
+     <style>
+        #msform a.butt-primary[disabled] {
+            opacity: 0.4
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<div id="wrap">
+  <!-- Search menu -->
+    {% include 'partials/_menusearch.html' %}
+
+     <div class="cta-bottom-wrapper">
+        <div class="cta-bottom-inner">
+            <div class="phone">
+                <a class="cta-hotline" href="tel:1800234546"><span class="font-icon fone-b font-20"> </span> <strong>1800
+                    234 546</strong></a>
+            </div>
+            <div>
+                <a class="cta-form" href="#" data-action="request-service">ĐĂNG KÝ NGAY</a>
+            </div>
+        </div>
+    </div>
+    <div class="s-menu">
+        <div class="width-1600">
+            <div class="s-menu-wrapper">
+                <ul>
+                    <li class="s-menu-items ">
+                        <a href="services.html">Tất cả dịch vụ</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="vi-sao-chon-rever.html">Vì sao chọn Rever?</a>
+                    </li>
+                    <li class="s-menu-items active">
+                        <a href="sellwithus">Bán BĐS với Thế giới Nhà Phố</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="mua-nha-voi-rever.html">Mua với Rever</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="thue-nha-voi-rever.html">Thuê với Rever</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="chuyen-vien-rever.html">Chuyên viên Rever</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="rever-photo.html">Chụp hình</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="3d.html">Thực tế ảo</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="thu-tuc-giay-to.html">Hành chính</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="sticky-header">
+        <div class="stickyTrigger is-stuck sticky-sMenu">
+            <div class="s-menu-wrapper">
+                <ul>
+                    <li class="s-menu-items ">
+                        <a href="services.html">Tất cả dịch vụ</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="vi-sao-chon-rever.html">Vì sao chọn Rever?</a>
+                    </li>
+                    <li class="s-menu-items active">
+                        <a href="sellwithus">Bán với TG Nhà Phố</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="mua-nha-voi-rever.html">Mua với Rever</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="thue-nha-voi-rever.html">Thuê với Rever</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="chuyen-vien-rever.html">Chuyên viên Rever</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="rever-photo.html">Chụp hình</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="3d.html">Thực tế ảo</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="thu-tuc-giay-to.html">Hành chính</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
+                    </li>
+                    <li class="s-btn-contact">
+                        <a href="javascript:void(0)" data-action="request-service">Đăng ký ngay</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="s-banner-bg"
+         style="background: url({% static 'images/service-sale-banner.jpg' %}) 50% 50% / cover no-repeat;">
+        <div class="s-banner-bg-inner">
+            <div class="s-banner-header-wrapper">
+                <h1>Bán nhà nhanh chóng và dễ dàng cùng Rever</h1>
+                <div class="sumary">Bán nhà đất với các dịch vụ hỗ trợ nhanh chóng và tiện lợi, với chi phí thấp và đội
+                    ngũ hỗ trợ mọi lúc.
+                </div>
+                <div class="btn-contact">
+                    <a class="s-btn-red mgb-0" data-action="request-service">Đăng ký ngay</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="background-gray service-dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <div class="item-service-sale">
+                        <div class="cover">
+                            <img src="{% static 'images/icon_x2.svg' %}" alt="Rever">
+                        </div>
+                        <h3>Dịch vụ nhanh X2 so với thị trường</h3>
+                        <p>80% bất động sản độc quyền tại Thế giới Nhà Phốđược bán trong 90 ngày</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="item-service-sale">
+                        <div class="cover">
+                            <img src="{% static 'images/icon_dashboard.svg' %}" alt="Rever">
+                        </div>
+                        <h3>Bảng điều khiển cho người bán</h3>
+                        <p>Người bán có thể theo dõi tiến độ bán nhà trực tuyến (Độc quyền chỉ có tại Rever)</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="item-service-sale">
+                        <div class="cover">
+                            <img src="{% static 'images/icon_service.svg' %}" alt="Rever">
+                        </div>
+                        <h3>Trải nghiệm hoàn hảo</h3>
+                        <p>Giúp quá trình bán nhà thuận tiện, dễ dàng và nhanh chóng</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-padding-50 s-sale-rever">
+        <div class="container">
+            <div class="row">
+                <h2 class="s-heading">Vì sao nên chọn Rever?</h2>
+            </div>
+            <div class="row">
+                <div class="service-sale-compare">
+                    <div class="col-left">
+                        <span class="line-header"></span>
+                        <h3 class="title">Thị trường</h3>
+                        <ul>
+                            <li>Đăng kê, tìm người mua, hoàn tất thủ tục<i class="zmdi zmdi-check color-blue-min"></i>
+                            </li>
+                            <li>Không hỗ trợ định giá<i class="zmdi zmdi-close"></i></li>
+                            <li>Không hỗ trợ tiếp thị<i class="zmdi zmdi-close"></i></li>
+                            <li>Không theo dõi được tiến trình bán nhà<i class="zmdi zmdi-close"></i></li>
+                            <li>Không có các dịch vụ bổ sung<i class="zmdi zmdi-close"></i></li>
+                        </ul>
+                    </div>
+                    <div class="col-right">
+                        <span class="line-header"></span>
+                        <h3 class="title">Rever</h3>
+                        <ul>
+                            <li><i class="zmdi zmdi-check"></i>Đăng kê, tìm người mua, hoàn tất thủ tục</li>
+                            <li><i class="zmdi zmdi-check"></i>Tư vấn chiến lược giá, giúp bán được giá tốt</li>
+                            <li><i class="zmdi zmdi-check"></i>Quảng cáo, giúp tiếp cận khách hàng tiềm năng</li>
+                            <li><i class="zmdi zmdi-check"></i>Có bảng điều khiển riêng, chỉ có ở Rever</li>
+                            <li><i class="zmdi zmdi-check"></i>Đi kèm các dịch vụ bổ sung, tiết kiệm hơn</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-contact mt-40">
+            <a class="s-btn-red mgb-0" data-action="request-service">Đăng ký ngay</a>
+        </div>
+    </section>
+    <section class="about-service-photo service-sale">
+        <div class="container">
+            <div class="w-60">
+                <div class="row">
+                    <h3 class="col-12 s-heading">Cam kết dịch vụ</h3>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <span class="line-header"></span>
+                        <div class="title">Cam kết với khách hàng</div>
+                        <ul class="product-received">
+                            <li><i class="zmdi zmdi-check"></i>Đặt khách hàng làm trọng tâm trong mọi quyết định</li>
+                            <li><i class="zmdi zmdi-check"></i>Những điều đã nói là những điều được làm</li>
+                            <li><i class="zmdi zmdi-check"></i>Đảm bảo thực thi (Miễn phí các dịch vụ cao cấp nếu không
+                                bán được nhà)
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        <span class="line-header"></span>
+                        <div class="title">Tiêu chuẩn môi giới</div>
+                        <ul class="product-received">
+                            <li><i class="zmdi zmdi-check"></i>Chứng nhận đảm bảo chuyên môn (RED 16)</li>
+                            <li><i class="zmdi zmdi-check"></i>Có chứng chỉ nghề môi giới</li>
+                            <li><i class="zmdi zmdi-check"></i>Hài lòng khách hàng trong 3 tháng (CSAT>4)</li>
+                        </ul>
+                    </div>
+                    <div class="service-image-mobile">
+                        <img src="{% static 'images/service-pack-mobile.jpg' %}" alt="Rever admin">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="package" class="service-pack">
+        <div class="container">
+            <div class="row">
+                <h3 class="title font-tiempos">Các gói dịch vụ</h3>
+                <p class="desc">Chọn gói dịch vụ phù hợp với mong muốn và nhu cầu của bạn. Gói bạch kim sẽ giúp bạn bán
+                    được nhà nhanh nhất.</p>
+                <div class="service-pack-grid">
+                    <div class="service-pack-item">
+                        <div class="service-pack-content">
+                            <div class="head">
+                                <div class="cover">
+                                    <img src="{% static 'images/icon-paper-airplanes.svg' %}"
+                                         alt="Rever">
+                                </div>
+                                <h4 class="title">Bạc</h4>
+                                <ul class="list">
+                                    <li>Tư vấn chiến lược giá</li>
+                                    <li>Đăng kê</li>
+                                    <li>Quảng cáo</li>
+                                    <li>Tìm người mua</li>
+                                    <li>Hoàn tất thủ tục</li>
+                                    <li>Bảng điều khiển</li>
+                                </ul>
+                            </div>
+                            <div class="bottom">
+                                <div class="charge">Phí 1%</div>
+                                <p class="text-vat">(Đã bao gồm VAT)</p>
+                                <a href="javascript:void(0)" data-desc-prefix="[ĐK gói Bạc] "
+                                   data-action="request-service" class="s-btn-red">Đăng ký ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-pack-item">
+                        <div class="service-pack-content">
+                            <div class="head">
+                                <div class="cover">
+                                    <img src="{% static 'images/icon-airplanes.svg' %}" alt="Rever">
+                                </div>
+                                <h4 class="title">Vàng</h4>
+                                <ul class="list">
+                                    <li>Tư vấn chiến lược giá</li>
+                                    <li>Đăng kê</li>
+                                    <li>Quảng cáo</li>
+                                    <li>Tìm người mua</li>
+                                    <li>Hoàn tất thủ tục</li>
+                                    <li>Bảng điều khiển</li>
+                                    <li class="color-blue-min">Hiển thị ưu tiên</li>
+                                    <li class="color-blue-min">Chụp hình chuyên nghiệp</li>
+
+                                    <li class="color-blue-min">Đăng kê thêm 2 kênh</li>
+                                </ul>
+                            </div>
+                            <div class="bottom">
+                                <div class="charge">Phí 1.3%</div>
+                                <p class="text-vat">(Đã bao gồm VAT)</p>
+                                <a href="javascript:void(0)" data-desc-prefix="[ĐK gói Vàng] "
+                                   data-action="request-service" class="s-btn-red">Đăng ký ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-pack-item">
+                        <div class="service-pack-content">
+                            <div class="head">
+                                <div class="cover">
+                                    <img src="{% static 'images/icon-rocket.svg' %}" alt="Rever">
+                                </div>
+                                <h4 class="title color-red">Bạch kim</h4>
+                                <ul class="list">
+                                    <li>Tư vấn chiến lược giá</li>
+                                    <li>Đăng kê</li>
+                                    <li>Quảng cáo</li>
+                                    <li>Tìm người mua</li>
+                                    <li>Hoàn tất thủ tục</li>
+                                    <li>Bảng điều khiển</li>
+                                    <li class="color-blue-min">Hiển thị ưu tiên</li>
+                                    <li class="color-blue-min">Chụp hình chuyên nghiệp</li>
+                                    <li class="color-blue-min">Đăng kê thêm 5 kênh</li>
+                                    <li class="color-blue-min">Thực tế ảo (3D)</li>
+                                    <li class="color-blue-min">Chạy Google, facebook</li>
+                                </ul>
+                            </div>
+                            <div class="bottom">
+                                <div class="charge color-red">Phí 1.5%</div>
+                                <p class="text-vat">(Đã bao gồm VAT)</p>
+                                <a href="javascript:void(0)" data-desc-prefix="[ĐK gói bạch kim] "
+                                   data-action="request-service" class="s-btn-red">Đăng ký ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="background-gray service-sale-photo">
+        <div class="container">
+            <div class="row">
+                <h2 class="s-feature-heading">Miễn phí các dịch vụ bổ sung</h2>
+                <div class="grid grid--2col grid--center">
+                    <div class="grid-item">
+                        <span class="line-header"></span>
+                        <h2 class="s-heading">Dịch vụ chụp ảnh chuyên nghiệp</h2>
+                        <ul class="list-check-red">
+                            <li><i class="zmdi zmdi-check"></i>Đi kèm khi chọn gói&nbsp;<strong>Vàng</strong>&nbsp;&&nbsp;<strong>Bạch
+                                kim</strong></li>
+                            <li><i class="zmdi zmdi-check"></i>Hình ảnh chất lượng cao, chuyên nghiệp</li>
+                            <li><i class="zmdi zmdi-check"></i>Tiết kiệm đến&nbsp;<strong>1.000.000 đồng</strong>&nbsp;so
+                                với thị trường
+                            </li>
+                        </ul>
+                        <a href="rever-photo.html" class="color-lipstick looking-for" target="_blank">Tìm hiểu thêm&nbsp;<i
+                                class="zmdi zmdi-chevron-right"></i></a>
+                    </div>
+                    <div class="grid-item grid-item--image">
+                        <img src="{% static 'images/service-sale-free.png' %}" alt="Deep Clean">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg-charcoal service-sale-3dview">
+        <div class="container">
+            <div class="row">
+                <div class="grid grid--2col grid--center grid--reverse">
+                    <div class="grid-item">
+                        <span class="line-header"></span>
+                        <h2 class="s-heading">Dịch vụ thực tế ảo (3D)</h2>
+                        <ul class="list-check-blue">
+                            <li><i class="zmdi zmdi-check"></i>Đi kèm khi chọn gói&nbsp;<strong>Bạch kim</strong></li>
+                            <li><i class="zmdi zmdi-check"></i>Trải nghiệm xem nhà như thật, chốt giao dịch nhanh</li>
+                            <li><i class="zmdi zmdi-check"></i>Tiết kiệm đến&nbsp;<strong>5.000.000 đồng</strong>&nbsp;so
+                                với thị trường
+                            </li>
+                        </ul>
+                        <a href="3d.html" class="looking-for" target="_blank">Tìm hiểu thêm&nbsp;<i
+                                class="zmdi zmdi-chevron-right"></i></a>
+                    </div>
+                    <div class="grid-item grid-item--image view-3d-img">
+                        <img src="{% static 'images/service-3dview.png' %}" id="demo-apart"
+                             alt="Deep Clean">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="width1140 s-padding-tb">
+            <div class="s-heading">Đánh giá của chủ nhà</div>
+            <div id="customer" class="s-customer-rating">
+                <div class="flex-viewport flexslider slider-cus">
+                    <ul class="slides">
+                        <li>
+                            <p class="description">Tôi đã mua các gói đăng rao nhà đất trên các website bất động sản lớn
+                                nhưng không bán được nhà. Tuy nhiên, khi tôi mua gói dịch vụ Môi giới cho người bán của
+                                Rever, tôi đã bán được trong vòng một tháng. Tôi đã chọn gói Bạch kim và tiết kiệm được
+                                khá nhiều chi phí. Đặc biệt, tôi rất thích hình ảnh và mô hình 3D của Rever. Nó giúp tin
+                                rao của nhà tôi rất chuyên nghiệp và chỉn chu.</p>
+                            <div class="customer">
+                                <div class="avatar">
+                                        <img src="{% static 'images/service/reviewers/2-pham-huu-nghia.jpg' %}" alt="" draggable="false">
+
+                                </div>
+                                <div class="info">
+                                    <p class="name">Phạm Hữu Nghĩa</p>
+                                    <p>Chủ căn hộ Estella Heights, Quận 2</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="description">Tôi có một căn hộ dịch vụ cần gửi bán, vì vậy tôi chọn gói Bạch Kim
+                                của dịch vụ Môi giới cho người bán tại Rever. Gói dịch vụ giúp tôi tiết kiệm thời gian
+                                và chi phí khá nhiều vì bao gồm cả đăng kê trên các website bất động sản khác ngoài Thế
+                                giới Nhà Phốvà chạy quảng cáo trên Google và Facebook. Nhà của tôi đã bán được với giá
+                                tốt trong khoảng thời gian ngắn.</p>
+                            <div class="customer">
+                                <div class="avatar">
+                                    <img src="{% static 'images/service/reviewers/do-hong-ngoc.jpg' %}" alt="" draggable="false">
+                                </div>
+                                <div class="info">
+                                    <p class="name">Đỗ Hồng Ngọc</p>
+                                    <p>Chủ căn hộ Vista Verde, Quận 2</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="description">Căn hộ là tài sản có giá trị lớn đầu tiên của tôi. Vì vậy, tôi chưa
+                                có kinh nghiệm làm thế nào để rao bán nhà cũng như các thủ tục giấy tờ phải làm ra sao.
+                                Lúc đó tôi đã tìm thấy dịch vụ Môi giới cho người bán của Rever. Tôi đã chọn gói Bạc vì
+                                chưa chắc dịch vụ có tốt như quảng cáo không. Sau đó, tôi rất bất ngờ vì bán được nhà
+                                rất nhanh. Đội ngũ Thế giới Nhà Phốcòn tư vấn và hỗ trợ tôi rất nhiệt tình. Nếu có cơ
+                                hội lần sau, tôi sẽ chọn các gói cao hơn.</p>
+                            <div class="customer">
+                                <div class="avatar">
+                                    <img src="{% static 'images/service/reviewers/le-hung-phu.jpg' %}" alt="" draggable="false">
+                                </div>
+                                <div class="info">
+                                    <p class="name">Lê Hùng Phú</p>
+                                    <p>Chủ căn hộ Masteri Millennium, Quận 4</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section
+            style=" background: url({% static 'images/service-sale-post-bg.jpg' %}) 50% 50% / cover no-repeat;">
+        <div class="width1140 s-padding-tb">
+            <div class="s-subcription-inner">
+                <div class="title">Đăng kê với Thế giới Nhà Phốđể bán nhanh gấp 2 lần thị trường và tiết kiệm nhiều hơn
+                    với những dịch vụ đi kèm chất lượng cao. Đăng ký thông tin ngay, chúng tôi sẽ liên hệ tư vấn và hẹn
+                    gặp sau ít phút!
+                </div>
+                <div class="btn-contact">
+                    <a class="s-btn-red mgb-0" data-action="request-service">Đăng ký ngay</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="mdialog" id="contact-now-form" style="background: none">
+        <div class="popup-520" style="overflow: visible;">
+            <div class="header-w-close">
+                <button class="close-popup-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                <h3 class="font-tiempos">Đăng ký dịch vụ môi giới cho người bán</h3>
+            </div>
+            <div class="form-info" id="contact-now-form-body">
+            </div>
+        </div>
+    </div>
+    <div class="full-3d-tour">
+        <div class="full-3d-tour-render">
+            <iframe width="100%" height="100%" src="#" frameborder="0" allowfullscreen allow="vr"></iframe>
+        </div>
+        <p class="close-3d-tour"></p>
+    </div>
+
+    <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
+        <div class="popup-feedback-fixed">
+            <div class="popup-body-fb">
+                <div v-show="state == 'composing'" class="popup-contain">
+                    <div class="visible-pc">
+                        <form id="msform" onsubmit="return false">
+                            <fieldset style="display: block">
+                                <h2 class="popup-title-w-back height-title popup-font-tiempos" id="title-head">Phản hồi
+                                    của bạn về Rever.vn (<span v-text="step"></span>/3)</h2>
+                                <button @click="hideModal()" class="popup-close-btn"><i
+                                        class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                                <div v-show="step == 1" class="contain" id="step-form-1">
+                                    <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phốcho người khác?</div>
+                                    <div class="choose-number">
+                                        <ul>
+                                            <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
+                                                @mouseleave="onMouseLeaveRate(i)" @click="selectStep1Rate(i)">
+                                                <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                                                   v-text="i"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="emotion">
+                                        <img :src="'../images/' + step1Icon" alt="">
+                                        <p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
+                                    </div>
+                                </div>
+                                <div v-show="step == 2" class="contain" id="step-form-2">
+                                    <div class="intro">Bạn có thấy Rever.vn dễ sử dụng không?</div>
+                                    <div class="row row-fb pd-t-39 pd-bt-68 center-item">
+                                        <button :class="{active : step2.rate == 'hard'}"
+                                                @click="selectStep2Rate('hard')"
+                                                class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                                        </button>
+                                        <button :class="{active : step2.rate == 'normal'}"
+                                                @click="selectStep2Rate('normal')"
+                                                class="large-butt-grey btn-use pd-use-btn mgr-r-20">Bình thường
+                                        </button>
+                                        <button :class="{active : step2.rate == 'easy'}"
+                                                @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ sử
+                                            dụng
+                                        </button>
+                                    </div>
+                                </div>
+                                <div v-show="step == 3" class="contain">
+                                    <div class="intro">Bạn muốn Rever.vn cần cải thiện thêm về điều gì?</div>
+                                    <div class="checkbox-option">
+                                        <div class="checkbox-pc">
+                                            <div class="row-fb">
+                                                <div>
+                                                    <label class="container-cb">Giao diện đẹp hơn
+                                                        <input type="checkbox" v-model="step3.improve.ui">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                    <label class="container-cb">Nội dung chính xác hơn
+                                                        <input type="checkbox" v-model="step3.improve.content">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="container-cb">Thêm tính năng
+                                                        <input type="checkbox" v-model="step3.improve.feature">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                    <label class="container-cb">Khác (vui lòng nhập)
+                                                        <input type="checkbox" v-model="step3.improve.other"
+                                                               @change="onSelectOtherMsg('')">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="share-rv">
+                                            <p style="font-size: initial">Ý kiến khác</p>
+                                            <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg"
+                                                      :disabled="!step3.improve.other"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a @click="gotoStep(step - 1)" v-show="step > 1"
+                                   class="butt-primary butt-transparent prev" href="javascript:void(0)"
+                                   id="prev">Trước</a>
+                                <a @click="onClickNext()" v-show="step < 3" :disabled="!canNext"
+                                   class="butt-primary btn-grey next" href="javascript:void(0)" id="next">Tiếp</a>
+                                <button @click="onClickSend" v-show="step == 3" class="butt-primary btn-grey">
+                                    <span v-show="!isSending" class="send">Gửi</span>
+                                    <span v-show="isSending">Đang gửi...</span>
+                                </button>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="visible-sm">
+                        <div class="header-sm">
+                            <button @click="hideModal()" class="popup-close-btn-sm"><i
+                                    class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                            <h4>Phản hồi của bạn về Rever.vn</h4>
+                        </div>
+                        <div class="content">
+                            <div class="intro-sm">
+                                <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phốcho người khác?</p>
+                                <div class="choose-number">
+                                    <ul>
+                                        <li v-for="i in 10" @click="selectStep1Rate(i)">
+                                            <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                                               v-text="i"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="use-easy">
+                                <p>Bạn thấy Thế giới Nhà Phốcó dễ sử dụng không?</p>
+                                <div class="row pt-15 center-item">
+                                    <button :class="{active : step2.rate == 'hard'}" @click="selectStep2Rate('hard')"
+                                            class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                                    </button>
+                                    <button :class="{active : step2.rate == 'normal'}"
+                                            @click="selectStep2Rate('normal')"
+                                            class="large-butt-grey btn-use pd-use-btn">Bình thường
+                                    </button>
+                                    <button :class="{active : step2.rate == 'easy'}" @click="selectStep2Rate('easy')"
+                                            class="large-butt-grey btn-use">Dễ sử dụng
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="improve">
+                                <p>Bạn muốn Rever.vn cần cải thiện thêm về điều gì?</p>
+                                <div class="checkbox-sm">
+                                    <label class="container-cb">Giao diện đẹp hơn
+                                        <input type="checkbox" v-model="step3.improve.ui">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container-cb">Nội dung chính xác hơn
+                                        <input type="checkbox" v-model="step3.improve.content">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container-cb">Thêm tính năng
+                                        <input type="checkbox" v-model="step3.improve.feature">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container-cb">Khác (vui lòng nhập)
+                                        <input type="checkbox" v-model="step3.improve.other"
+                                               @change="onSelectOtherMsg('2')">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="note">
+                                <p>Ý kiến khác</p>
+                                <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg2"
+                                          :disabled="!step3.improve.other"></textarea>
+                            </div>
+                        </div>
+                        <div class="btn">
+                            <button @click="onClickSend" class="butt-primary btn-red">Gửi phản hồi</button>
+                        </div>
+                    </div>
+                </div>
+                <div v-show="state == 'finished'" class="popup-fb-success">
+                    <div class="popup-header">
+                        <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về Rever.vn</h2>
+                        <button @click="hideModal()" class="popup-close-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i>
+                        </button>
+                    </div>
+                    <div class="popup-contain">
+                        <img class="img-success" src="../s3-cdn.rever.vn/p/v2.33.55/images/icon-success.svg">
+                        <div class="send-success">
+                            <h3>Đã gửi thành công!</h3>
+                            <p>Cảm ơn bạn đã gửi phản hồi cho Rever, ý kiến của bạn sẽ giúp Rever.vn từng bước nâng cao
+                                chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7): <strong>1800
+                                    234 546</strong></p>
+                        </div>
+                    </div>
+                    <div class="popup-footer">
+                        <a @click="hideModal()" class="butt-primary butt-red btn-red" href="javascript:void(0)">Đóng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script type="deferjs" src="{% static 'js/external90ca.js' %}"></script>
+    <script async defer src="{% static 'js/tracking.min90ca.js' %}"></script>
+    <script async defer src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
+    <script async defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
+    <script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script>
+    <script async defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
+    <script defer src="{% static 'js/feedback-modal.min90ca.js' %}"></script>
+    <script src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
+    <script async defer src="{% static 'js/service-sale.min90ca.js' %}"></script>
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script charset="utf-8" async defer type="text/javascript" src="https://js.hsforms.net/forms/v2.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js50aa?key=AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg&amp;libraries=drawing,places,geometry&amp;language=vi&amp;callback=callbackInitMap"></script>
+    <script defer src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
+     <script defer id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
+    <script type="text/javascript" src="https://www.googleadservices.com/pagead/f.txt"></script>
+
+    <script>
+        window["_au_api"] = "thue/api.html";
+        window['fap_url'] = "{% static 'js/fap.min90ca.js' %}";
+        window['fap.server'] = '//analytics.rever.vn/fap';
+        window['favorite_api'] = 'mapi/index.html';
+        window['googleClientId'] = '539423642927.apps.googleusercontent.com';
+        window['staticUrl'] = '../s3-cdn.rever.vn/p/v2.33.55';
+        window['hotline'] = '1800 234 546';
+
+        window['isLoggedIn'] = false;
+    </script>
+    <script>
+        !function () {
+            var analytics = window.analytics = window.analytics || [];
+            if (!analytics.initialize) if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice."); else {
+                analytics.invoked = !0;
+                analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on", "addSourceMiddleware", "addIntegrationMiddleware"];
+                analytics.factory = function (e) {
+                    return function () {
+                        var t = Array.prototype.slice.call(arguments);
+                        t.unshift(e);
+                        analytics.push(t);
+                        return analytics
+                    }
+                };
+                for (var e = 0; e < analytics.methods.length; e++) {
+                    var t = analytics.methods[e];
+                    analytics[t] = analytics.factory(t)
+                }
+                analytics.load = function (e, t) {
+                    var n = document.createElement("script");
+                    n.type = "text/javascript";
+                    n.async = !0;
+                    n.defer = !0;
+                    n.src = "https://cdn.segment.com/analytics.js/v1/" + e + "/analytics.min.js";
+                    var a = document.getElementsByTagName("script")[0];
+                    a.parentNode.insertBefore(n, a);
+                    analytics._loadOptions = t
+                };
+                analytics.SNIPPET_VERSION = "4.1.0";
+                analytics.load("4LCsqFQzVAmMhPA650qKAAbZoHweHzHt", {integrations: {'Mixpanel': false}});
             }
-          }
+        }();
+    </script>
+    <script>
+        //Track thêm tags
+        var tagTrackings = []
+
+        var pageviewProperties = {}
+
+        analytics.page(Object.assign({
+            domain: location.hostname,
+            tags: tagTrackings.length > 0 ? tagTrackings : undefined
+        }, pageviewProperties));
+
+        analytics.ready(function () {
+            //window.mixpanel.init("31bae2b919cfc12821646533a62aee1b")
+            //window.track("Page View")
+        })
+    </script>
+    <script>(function (c, a) {
+        if (!a.__SV) {
+            var b = window;
+            try {
+                var d, m, j, k = b.location, f = k.hash;
+                d = function (a, b) {
+                    return (m = a.match(RegExp(b + "=([^&]*)"))) ? m[1] : null
+                };
+                f && d(f, "state") && (j = JSON.parse(decodeURIComponent(d(f, "state"))), "mpeditor" === j.action && (b.sessionStorage.setItem("_mpcehash", f), history.replaceState(j.desiredHash || "", c.title, k.pathname + k.search)))
+            } catch (n) {
+            }
+            var l, h;
+            window.mixpanel = a;
+            a._i = [];
+            a.init = function (b, d, g) {
+                function c(b, i) {
+                    var a = i.split(".");
+                    2 == a.length && (b = b[a[0]], i = a[1]);
+                    b[i] = function () {
+                        b.push([i].concat(Array.prototype.slice.call(arguments,
+                            0)))
+                    }
+                }
+
+                var e = a;
+                "undefined" !== typeof g ? e = a[g] = [] : g = "mixpanel";
+                e.people = e.people || [];
+                e.toString = function (b) {
+                    var a = "mixpanel";
+                    "mixpanel" !== g && (a += "." + g);
+                    b || (a += " (stub)");
+                    return a
+                };
+                e.people.toString = function () {
+                    return e.toString(1) + ".people (stub)"
+                };
+                l = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+                for (h = 0; h < l.length; h++) c(e, l[h]);
+                var f = "set set_once union unset remove delete".split(" ");
+                e.get_group = function () {
+                    function a(c) {
+                        b[c] = function () {
+                            call2_args = arguments;
+                            call2 = [c].concat(Array.prototype.slice.call(call2_args, 0));
+                            e.push([d, call2])
+                        }
+                    }
+
+                    for (var b = {}, d = ["get_group"].concat(Array.prototype.slice.call(arguments, 0)), c = 0; c < f.length; c++) a(f[c]);
+                    return b
+                };
+                a._i.push([b, d, g])
+            };
+            a.__SV = 1.2;
+            b = c.createElement("script");
+            b.type = "text/javascript";
+            b.async = !0;
+            b.defer = !0;
+            b.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ?
+                MIXPANEL_CUSTOM_LIB_URL : "file:" === c.location.protocol && "//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js";
+            d = c.getElementsByTagName("script")[0];
+            d.parentNode.insertBefore(b, d)
         }
-        var lastedOpen = arr[arr.length - 1];
-        if (lastedOpen) {
-          fact.hide($(lastedOpen), lastedOpen ? lastedOpen["$dialogCallback"] : null);
+    })(document, window.mixpanel || []);
+    mixpanel.init("31bae2b919cfc12821646533a62aee1b");
+    </script>
+    <script>
+        mixpanel.track("Page View")
+    </script>
+    <script>
+        window.hsConversationsSettings = {
+            loadImmediately: false // Delay the load of the chat widget
+        };
+    </script>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '323161212360067',
+                cookie: true,                     // Enable cookies to allow the server to access the session.
+                xfbml: true,                     // Parse social plugins on this webpage.
+                version: 'v8.0'           // Use this Graph API version for this call.
+            });
         }
-      }
-    });
-    fact.initStyles = function () {
-      var css = "";
-      var style = document.createElement("STYLE");
-      var head = document.head || document.getElementsByTagName("head")[0];
-      style.type = "text/css";
-      if (style.styleSheet) {
-        style.styleSheet.cssText = css;
-      } else {
-        style.appendChild(document.createTextNode(this.getCss()));
-      }
-      head.appendChild(style);
-    };
-    fact.getCss = function () {
-      var options = fact.default;
-      var css = "";
-      var dialog = {};
-      dialog["display"] = "none";
-      dialog["position"] = "fixed";
-      dialog["top"] = "0";
-      dialog["height"] = "100%";
-      dialog["left"] = "0";
-      dialog["width"] = "100%";
-      dialog["z-index"] = options.zindex;
-      dialog["background"] = options.background;
-      css += fact.assignStyle(".mdialog", dialog);
-      css += ".mdialog.opened{display: block;}";
-      var body = {};
-      body["width"] = options.width + "px";
-      body["min-height"] = options.minHeight + "px";
-      body["background"] = "#fff";
-      body["margin"] = "60px auto 140px auto";
-      css += fact.assignStyle(".mdialog .body", body);
-      var bodySpecs = {};
-      bodySpecs["position"] = "relative"
-      css += fact.assignStyle("." + fact.bodyLoadingClass, bodySpecs);
-      var loadingFrame = {};
-      loadingFrame["content"] = "' '";
-      loadingFrame["top"] = 0;
-      loadingFrame["left"] = 0;
-      loadingFrame["width"] = "100%";
-      loadingFrame["height"] = "100%";
-      loadingFrame["position"] = "absolute";
-      loadingFrame["background"] = "#fff";
-      loadingFrame["opacity"] = 0.4;
-      loadingFrame["z-index"] = 1;
-      css += fact.assignStyle("." + fact.bodyLoadingClass + ":before", loadingFrame);
-      var loading = {};
-      loading["content"] = "' '";
-      loading["border"] = "2px solid #303339";
-      loading["border-top"] = "2px solid #fff;";
-      loading["border-radius"] = "50%";
-      loading["width"] = "30px";
-      loading["height"] = "30px";
-      loading["position"] = "absolute";
-      loading["top"] = "calc(50% - 15px)";
-      loading["left"] = "calc(50% - 15px)";
-      loading["-webkit-animation"] = "spin 2s linear infinite";
-      loading["animation"] = "spin 2s linear infinite";
-      loading["z-index"] = 1;
-      css += fact.assignStyle("." + fact.bodyLoadingClass + ":after", loading);
-      css += "@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }";
-      return css;
-    };
-    fact.assignStyle = function (name, cssobj) {
-      var res = name + "{";
-      for (var key in cssobj) {
-        var val = cssobj[key];
-        res += key + ":" + val + ";";
-      }
-      res += "}";
-      return res;
-    };
-    fact.initStyles();
-    return fact;
-  })();
+    </script>
+    <script>
+        (function () {
+            var formQueue = [];
 
-  if (!window['showDialog']) {
-    window['showDialog'] = function (id, closeClass, bodyClass) {
-      dialogManager.show("contact-now", {
-        close: closeClass,
-        body: bodyClass
-      }, function hideFn() {
-      }, function showFn(dialog) {
-        $('#' + id).find("input").first().focus();
-        $(bodyClass).css("max-width", "").css("width", "100%")
-            .find(".popup-contact").scrollTop(0);
-      });
-    }
-  }
-</script>
-</head>
-<body>
+            function queuedForm(opt) {
+                if (formQueue && !(hbspt && hbspt.forms && hbspt.forms.deps)) {
+                    formQueue.push(opt);
+                }
+            }
 
-<noscript><iframe src="../www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+            var awaitTimeout = 0;
+            var awaitHSForm = function () {
+                awaitHSForm.called = true;
+                if (formQueue && hbspt && hbspt.forms && hbspt.forms.deps) {
+                    formQueue.forEach(function (_opt) {
+                        hbspt.forms.create(_opt);
+                    });
+                    clearTimeout(awaitTimeout);
+                    delete formQueue;
+                } else {
+                    awaitTimeout = setTimeout(awaitHSForm, 500);
+                }
+            };
+            window['hbspt'] = {
+                forms: {
+                    create: function (opt) {
+                        if (!awaitHSForm.called) {
+                            awaitHSForm();
+                        }
+                        queuedForm(opt);
+                    }
+                }
+            };
+        })();
 
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Organization",
-  "url": "https://rever.vn",
-  "logo": "https://rever.vn/static/images/rever-thumbnail.jpg",
-  "contactPoint": [
+    </script>
+    <!--[if lte IE 8]>
+    <script charset="utf-8" async defer type="text/javascript"
+            src="https://rever.vn/public/externaljs"></script>
+    <![endif]-->
+    <script>
+        function createHSForm(opt) {
+            function getClientId() {
+                try {
+                    return ga.getAll()[0].get('clientId');
+                } catch (e) {
+                    return ""
+                }
+            }
+
+            var optFS = opt['onFormSubmit'];
+            var defaultOpt = Object.create(opt);
+            defaultOpt.onFormSubmit = function () {
+                var $gaClientId = $('[name=ga_client_id]');
+                if ($gaClientId[0]) {
+                    $gaClientId.val(getClientId());
+                }
+                if (typeof optFS === 'function') {
+                    optFS.apply(this, arguments)
+                }
+            };
+            return hbspt.forms.create(defaultOpt);
+        }
+
+        var dialogManager = (function DialogService() {
+            var fact = this;
+            fact.bodyClassSpecs = "mdialog-body";
+            fact.bodyLoadingClass = "mdialog-loading";
+            fact.cachedBodyStyle = null;
+            fact.default = {
+                zindex: 99999,
+                width: 300,
+                minHeight: 100,
+                background: "rgba(0,0,0,.5)",
+                opacity: 0.5
+            };
+            fact.key = {
+                cachedStyle: "cached-style"
+            };
+            var v0 = 0.05;
+            var a = 0.0002;
+            fact.show = function (selectorId, options, hideFn, showFn) {
+                options = $.extend(true, {
+                    outSideClick: true
+                }, options || {});
+                options.maxWidth = "100%";
+                var dialog, oldStyle = document.body.getAttribute("style");
+                document.body.setAttribute(fact.key.cachedStyle, oldStyle);
+                if (selectorId && typeof selectorId === 'string') {
+                    dialog = $(document.getElementById(selectorId));
+                } else {
+                    dialog = selectorId;
+                }
+                dialog.css("opacity", 0);
+                dialog.css("overflow-y", "auto");
+                dialog.css("overflow-x", "hidden");
+                dialog.addClass("opened");
+                var bodyClass = (options ? options.body : "") || ".body";
+                dialog.find(bodyClass).css(options);
+                dialog.find(bodyClass).addClass(fact.bodyClassSpecs)
+                dialog[0] ? dialog[0]["$dialogCallback"] = hideFn : null;
+                dialog[0] ? dialog[0]["$dialogInitTime"] = +new Date() : null;
+                if (options && options.close) {
+                    dialog.find(bodyClass + " " + options.close).off().click(function (e) {
+                        e.preventDefault();
+                        fact.hide(selectorId, hideFn);
+                    });
+                }
+                if (options && options.outSideClick) {
+                    dialog.off().click(function () {
+                        fact.hide(selectorId, hideFn);
+                    });
+                }
+                dialog.find(bodyClass).click(function (e) {
+                    e.stopPropagation();
+                });
+                //.preventParentScroll();
+                fact.animation(dialog, 0, 0, 1, function () {
+                    showFn ? showFn() : null;
+                });
+                fact.loadingEnd(dialog);
+                return dialog;
+            };
+            fact.animation = function (dialog, opa, t, delta, callback) {
+                dialog.css("opacity", opa);
+                if ((delta > 0 && opa > 1) || (delta < 0 && opa < 0)) {
+                    if (callback) {
+                        callback();
+                    }
+                    return;
+                }
+                setTimeout(function () {
+                    opa += delta * (v0 * t + 1 / 2 * a * t * t);
+                    fact.animation(dialog, opa, t + 1, delta, callback);
+                }, 10);
+            };
+            fact.hide = function (selectorId, fn) {
+                var dialog;
+                if (!selectorId) {
+                    dialog = $(".mdialog.opened");
+                } else if (typeof selectorId === 'string') {
+                    dialog = $(document.getElementById(selectorId));
+                } else {
+                    dialog = selectorId;
+                }
+                fact.animation(dialog, 1, 0, -1, function () {
+                    dialog.removeClass("opened");
+                    fn ? fn(dialog) : null;
+                });
+            };
+            fact.loadingStart = function (selectorId) {
+                var dialog;
+                if (!selectorId) {
+                    dialog = $(".mdialog.opened");
+                } else if (typeof selectorId === 'string') {
+                    dialog = $(document.getElementById(selectorId));
+                } else {
+                    dialog = selectorId;
+                }
+                dialog.find("." + fact.bodyClassSpecs).addClass(fact.bodyLoadingClass);
+            };
+            fact.loadingEnd = function (selectorId) {
+                var dialog;
+                if (!selectorId) {
+                    dialog = $(".mdialog.opened");
+                } else if (typeof selectorId === 'string') {
+                    dialog = $(document.getElementById(selectorId));
+                } else {
+                    dialog = selectorId;
+                }
+                dialog.find("." + fact.bodyClassSpecs + "." + fact.bodyLoadingClass).removeClass(fact.bodyLoadingClass);
+            };
+            $(window).keydown(function (e) {
+                var openedDialog = $(".mdialog.opened");
+                if (openedDialog.length && e.keyCode == 27) {
+                    var arr = [];
+                    arr.length = openedDialog.length;
+                    for (var i = 0; i < openedDialog.length; i++) {
+                        for (var j = i; j < openedDialog.length; j++) {
+                            if (openedDialog[i]["$dialogInitTime"] > openedDialog[j]["$dialogInitTime"]) {
+                                arr[j] = openedDialog[i];
+                                arr[i] = openedDialog[j];
+                            } else {
+                                arr[i] = openedDialog[i];
+                                arr[j] = openedDialog[j];
+                            }
+                        }
+                    }
+                    var lastedOpen = arr[arr.length - 1];
+                    if (lastedOpen) {
+                        fact.hide($(lastedOpen), lastedOpen ? lastedOpen["$dialogCallback"] : null);
+                    }
+                }
+            });
+            fact.initStyles = function () {
+                var css = "";
+                var style = document.createElement("STYLE");
+                var head = document.head || document.getElementsByTagName("head")[0];
+                style.type = "text/css";
+                if (style.styleSheet) {
+                    style.styleSheet.cssText = css;
+                } else {
+                    style.appendChild(document.createTextNode(this.getCss()));
+                }
+                head.appendChild(style);
+            };
+            fact.getCss = function () {
+                var options = fact.default;
+                var css = "";
+                var dialog = {};
+                dialog["display"] = "none";
+                dialog["position"] = "fixed";
+                dialog["top"] = "0";
+                dialog["height"] = "100%";
+                dialog["left"] = "0";
+                dialog["width"] = "100%";
+                dialog["z-index"] = options.zindex;
+                dialog["background"] = options.background;
+                css += fact.assignStyle(".mdialog", dialog);
+                css += ".mdialog.opened{display: block;}";
+                var body = {};
+                body["width"] = options.width + "px";
+                body["min-height"] = options.minHeight + "px";
+                body["background"] = "#fff";
+                body["margin"] = "60px auto 140px auto";
+                css += fact.assignStyle(".mdialog .body", body);
+                var bodySpecs = {};
+                bodySpecs["position"] = "relative"
+                css += fact.assignStyle("." + fact.bodyLoadingClass, bodySpecs);
+                var loadingFrame = {};
+                loadingFrame["content"] = "' '";
+                loadingFrame["top"] = 0;
+                loadingFrame["left"] = 0;
+                loadingFrame["width"] = "100%";
+                loadingFrame["height"] = "100%";
+                loadingFrame["position"] = "absolute";
+                loadingFrame["background"] = "#fff";
+                loadingFrame["opacity"] = 0.4;
+                loadingFrame["z-index"] = 1;
+                css += fact.assignStyle("." + fact.bodyLoadingClass + ":before", loadingFrame);
+                var loading = {};
+                loading["content"] = "' '";
+                loading["border"] = "2px solid #303339";
+                loading["border-top"] = "2px solid #fff;";
+                loading["border-radius"] = "50%";
+                loading["width"] = "30px";
+                loading["height"] = "30px";
+                loading["position"] = "absolute";
+                loading["top"] = "calc(50% - 15px)";
+                loading["left"] = "calc(50% - 15px)";
+                loading["-webkit-animation"] = "spin 2s linear infinite";
+                loading["animation"] = "spin 2s linear infinite";
+                loading["z-index"] = 1;
+                css += fact.assignStyle("." + fact.bodyLoadingClass + ":after", loading);
+                css += "@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }";
+                return css;
+            };
+            fact.assignStyle = function (name, cssobj) {
+                var res = name + "{";
+                for (var key in cssobj) {
+                    var val = cssobj[key];
+                    res += key + ":" + val + ";";
+                }
+                res += "}";
+                return res;
+            };
+            fact.initStyles();
+            return fact;
+        })();
+
+        if (!window['showDialog']) {
+            window['showDialog'] = function (id, closeClass, bodyClass) {
+                dialogManager.show("contact-now", {
+                    close: closeClass,
+                    body: bodyClass
+                }, function hideFn() {
+                }, function showFn(dialog) {
+                    $('#' + id).find("input").first().focus();
+                    $(bodyClass).css("max-width", "").css("width", "100%")
+                        .find(".popup-contact").scrollTop(0);
+                });
+            }
+        }
+    </script>
+
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+
+    <script type="application/ld+json">
     {
-      "@type": "ContactPoint",
-      "telephone": "1800 234 546",
-      "contactType": "customer service"
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://rever.vn",
+      "logo": "https://rever.vn/static/images/rever-thumbnail.jpg",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "1800 234 546",
+          "contactType": "customer service"
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/rever.vn",
+        "../www.linkedin.com/company/rever-real-estate.html",
+        "../www.instagram.com/rever.vn/index.html",
+        "../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html"
+      ]
     }
-  ],
-  "sameAs": [
-    "https://www.facebook.com/rever.vn",
-    "../www.linkedin.com/company/rever-real-estate.html",
-    "../www.instagram.com/rever.vn/index.html",
-    "../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html"
-  ]
-}
-</script>
-<script type="application/ld+json">
+    </script>
+    <script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@id": "https://rever.vn/#website",
@@ -434,1364 +1197,103 @@
         }
     }
 </script>
-<div id="wrap">
 
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css/jquery-ui.min.css" />
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css/font-awesome.min.css" />
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css/style01.min90ca.css?v=1617780824171" />
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css/style.min90ca.css?v=1617780824171" />
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css/mobile.min90ca.css?v=1617780824171" />
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css/temp90ca.css?v=1617780824171" />
-
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css2/layout/header-live.min90ca.css?v=1617780824171" />
-<script type="text/javascript">
-  var callbackInitMap = function () {
-    if (window.vinitMap) {
-      window.vinitMap();
-    }
-    if (window.initMap) {
-      initMap.call(this);
-    } else {
-      setTimeout(callbackInitMap, 500);
-    }
-  }
-</script>
-<script async defer src="../maps.googleapis.com/maps/api/js50aa?key=AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg&amp;libraries=drawing,places,geometry&amp;language=vi&amp;callback=callbackInitMap"></script>
-<script async defer src="../s3-cdn.rever.vn/p/v2.33.55/app_v2/suggest-v2.min90ca.js?v=1617780824171"></script>
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css/flexslider.min.css" />
-<header class="main-header">
-<div class="col-left">
-<div class="logo-large">
-<a data-mix-header-click="group: logo, action: click_logo" href="index.html" title="Rever logo">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/logo-r-red.svg" alt="Rever">
-</a>
-</div>
-<div class="logo">
-<a href="index.html" data-mix-header-click="group: logo, action: click_logo" title="Rever logo">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/logo-r-red.svg" alt="Rever">
-
-</a>
-<div class="main-nav-menu">
-<div class="main-nav-menu__head">
-<a href="index.html" class="logo">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/logo-r-red.svg" alt="Rever">
-</a>
-<button class="close__main-menu">
-<i class="zmdi zmdi-close"></i>
-</button>
-</div>
-<div class="login">
-
-<div class="user-login">
-<a href="#login" data-mix-header-click="group: authen, action: click_login" title="Đăng nhập / Đăng ký" class="btn-primary btn-black-outline btn-medium btn-login">Đăng
-nhập</a>
-<a href="#register" data-mix-header-click="group: authen, action: click_sign_up" class="btn-primary btn-red-outline btn-medium btn-signup">Đăng ký</a>
-</div>
-
-
-
-</div>
-<ul>
-<li>
-<a href="index.html">
-<span>Trang chủ</span>
-</a>
-</li>
-<li class="sub-menu">
-<a>
-<span>Mua</span>
-<i class="zmdi zmdi-chevron-down"></i>
-</a>
-<ul>
-<li>
-<a href="s/ho-chi-minh/mua.html" data-mix-header-click="group: buy, action: select_all_buy">Tất cả nhà đất bán</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/mua/can-ho.html" data-mix-header-click="group: buy, action: select_apartment_buy">Căn
-hộ</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/mua/shop-house.html" data-mix-header-click="group: buy, action: select_shophouse_buy">Shophouse</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/mua/nha-pho.html" data-mix-header-click="group: buy, action: select_house_buy">Nhà
-phố</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/mua/biet-thu.html" data-mix-header-click="group: buy, action: select_villa_buy">Biệt
-thự</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/mua/dat-nen.html" data-mix-header-click="group: buy, action: select_land_buy">Đất
-nền</a>
-</li>
-<li>
-<a href="chuyen-vien.html" data-mix-header-click="group: buy, action: select_agent_buy">Gặp chuyên viên tư vấn</a>
-</li>
-<li>
-<a href="khu-dan-cu.html" data-mix-header-click="group: buy, action: select_zone_buy">Khu dân cư</a>
-</li>
-<li>
-<a href="mua-nha-voi-rever.html" data-mix-header-click="group: buy, action: select_lp_buy">Mua với Rever</a>
-</li>
-<li>
-<a href="vi-sao-chon-rever.html" data-mix-header-click="group: buy, action: select_pr_buy">Vì sao chọn Rever?</a>
-</li>
-</ul>
-</li>
-<li class="sub-menu">
-<a>
-<span>Thuê</span>
-<i class="zmdi zmdi-chevron-down"></i>
-</a>
-<ul>
-<li>
-<a href="s/ho-chi-minh/thue.html" data-mix-header-click="group: rent, action: select_all_rent">Tất cả nhà cho thuê</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/thue/can-ho.html" data-mix-header-click="group: rent, action: select_apartment_rent">Căn hộ
-cho thuê</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/thue/shop-house.html" data-mix-header-click="group: rent, action: select_shophouse_rent">Shophouse
-cho thuê</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/thue/nha-pho.html" data-mix-header-click="group: rent, action: select_house_rent">Nhà
-phố cho thuê</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/thue/biet-thu.html" data-mix-header-click="group: rent, action: select_villa_rent">Biệt thự
-cho thuê</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/thue/van-phong.html" data-mix-header-click="group: rent, action: select_office_rent">Văn phòng
-cho thuê</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/thue/land-business.html" data-mix-header-click="group: rent, action: select_land_rent">Mặt
-bằng cho thuê</a>
-</li>
-<li>
-<a href="chuyen-vien.html" data-mix-header-click="group: rent, action: select_agent_rent">Gặp chuyên viên tư vấn</a>
-</li>
-<li>
-<a href="khu-dan-cu.html" data-mix-header-click="group: rent, action: select_zone_buy">Khu dân cư</a>
-</li>
-<li>
-<a href="thue-nha-voi-rever.html" data-mix-header-click="group: rent, action: select_lp_rent">Thuê với Rever</a>
-</li>
-<li>
-<a href="vi-sao-chon-rever.html" data-mix-header-click="group: rent, action: select_pr_rent">Vì sao chọn Rever?</a>
-</li>
-</ul>
-</li>
-<li class="sub-menu">
-<a>
-<span>Dự án</span>
-<i class="zmdi zmdi-chevron-down"></i>
-</a>
-<ul>
-<li>
-<a href="du-an.html" data-mix-header-click="group: rent, action: select_all_project">Tất cả dự án</a>
-</li>
-<li>
-<a href="s/quan-2/du-an/mua.html" data-mix-header-click="group: rent, action: select_district_two_project">
-Dự án Quận 2
-</a>
-</li>
-<li>
-<a href="s/quan-4/du-an/mua.html" data-mix-header-click="group: rent, action: select_district_four_project">
-Dự án Quận 4
-</a>
-</li>
-<li>
-<a href="s/quan-7/du-an/mua.html" data-mix-header-click="group: rent, action: select_district_seven_project">
-Dự án Quận 7
-</a>
-</li>
-<li>
-<a href="s/quan-9/du-an/mua.html" data-mix-header-click="group: rent, action: select_district_nine_project">
-Dự án Quận 9
-</a>
-</li>
-<li>
-<a href="s/quan-binh-thanh/du-an/mua.html" data-mix-header-click="group: rent, action: select_district_binhthanh_project">
-Dự án Quận Bình Thạnh
-</a>
-</li>
-<li>
-<a href="chuyen-vien.html" data-mix-header-click="group: rent, action: select_agent_project">Gặp chuyên viên tư vấn</a>
-</li>
-<li>
-<a href="chu-dau-tu.html" data-mix-header-click="group: rent, action: select_investor_project">Danh mục Chủ đầu tư</a>
-</li>
-</ul>
-</li>
-<li class="sub-menu">
-<a>
-<span>Bán & Cho thuê</span>
-<i class="zmdi zmdi-chevron-down"></i>
-</a>
-<ul>
-<li>
-<a href="ban-nha-voi-rever.html" data-mix-header-click="group: sell_lease, action: select_post_sell_lease">Đăng bán</a>
-</li>
-
-
-
-<li>
-<a href="chuyen-vien.html" data-mix-header-click="group: sell_lease, action: select_agent_sell_lease">Gặp chuyên viên tư vấn</a>
-</li>
-<li>
-<a href="rever-photo.html" data-mix-header-click="group: sell_lease, action: select_photo_sell_lease">Rever Photo</a>
-</li>
-<li>
-<a href="vi-sao-chon-rever.html" data-mix-header-click="group: sell_lease, action: select_pr_sell_lease">Vì sao chọn Rever?</a>
-</li>
-</ul>
-</li>
-<li class="sub-menu">
-<a>
-<span>Thông tin</span>
-<i class="zmdi zmdi-chevron-down"></i>
-</a>
-<ul>
-<li>
-<a href="../blog.rever.vn/index.html" data-mix-header-click="group: info, action: select_blog_info">Blog</a>
-</li>
-<li>
-<a href="../blog.rever.vn/topic/th%e1%bb%8b-tr%c6%b0%e1%bb%9dng.html" data-mix-header-click="group: info, action: select_market_info">Thông tin thị trường</a>
-</li>
-<li>
-<a href="../blog.rever.vn/topic/ph%c3%a2n-t%c3%adch.html" data-mix-header-click="group: info, action: select_analysis_info">Báo cáo & Phân tích</a>
-</li>
-<li>
-<a href="huong-dan-mua-nha.html" data-mix-header-click="group: info, action: select_guideline_buy_info">Hướng dẫn mua nhà</a>
-</li>
-<li>
-<a href="huong-dan-ban-nha.html" data-mix-header-click="group: info, action: select_guideline_sell_info">Hướng dẫn bán nhà</a>
-</li>
-<li>
-<a href="../offer.rever.vn/index.html" data-mix-header-click="group: info, action: select_material_info">Tải tài liệu</a>
-</li>
-<li>
-<a href="../help.rever.vn/index.html" data-mix-header-click="group: info, action: select_helpcenter_info">Trung tâm trợ giúp</a>
-</li>
-<li>
-<a target="_blank" href="../academy.rever.vn/index.html" data-mix-header-click="group: info, action: select_academy_info">Rever Academy</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="ban-nha-voi-rever.html">Đăng tin nhà đất</a>
-</li>
-<li>
-<a id="install-app">
-<span>Cài đặt ứng dụng</span>
-<i class="zmdi zmdi-smartphone-download"></i>
-</a>
-<input id="app-mobile-ios" type="hidden" value="https://itunes.apple.com/vn/app/rever/id1101768201" />
-<input id="app-mobile-android" type="hidden" value="https://play.google.com/store/apps/details?id=com.rever.app.android" />
-</li>
-<li>
-<a href="tel:1800234546" data-mix-header-click="group: hotline, action: click_hotline">
-<span>Hotline: <strong>1800 234 546</strong></span>
-</a>
-</li>
-</ul>
-</div>
-<div class="main-nav-menu__overlay"></div>
-</div>
-<div class="search-desktop-component" keyword="" init-search-page="false" placeholder="Nhập địa điểm, khu dân cư, tòa nhà"></div>
-</div>
-<div class="col-right">
-<div class="top-menu">
-<ul>
-<li>
-<a href="tel:1800234546" data-mix-header-click="group: hotline, action: click_hotline">
-<i class="zmdi zmdi-phone"></i>
-<span>1800 234 546</span>
-</a>
-<a href="javascript:void(0)" class="menu-humber" style="opacity: 0.7">
-<i class="zmdi zmdi-menu"></i>
-</a>
-</li>
-<li class="sub-menu">
-<a>Mua<i class="zmdi zmdi-chevron-down"></i></a>
-<ul>
-<li>
-<a href="s/ho-chi-minh/mua.html" data-mix-header-click="group: buy, action: select_all_buy">Tất cả nhà đất bán</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/mua/can-ho.html" data-mix-header-click="group: buy, action: select_apartment_buy">Căn
-hộ</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/mua/shop-house.html" data-mix-header-click="group: buy, action: select_shophouse_buy">Shophouse</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/mua/nha-pho.html" data-mix-header-click="group: buy, action: select_house_buy">Nhà
-phố</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/mua/biet-thu.html" data-mix-header-click="group: buy, action: select_villa_buy">Biệt
-thự</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/mua/dat-nen.html" data-mix-header-click="group: buy, action: select_land_buy">Đất
-nền</a>
-</li>
-<li class="divide"></li>
-<li>
-<a href="chuyen-vien.html" data-mix-header-click="group: buy, action: select_agent_buy">Gặp chuyên viên tư vấn</a>
-</li>
-<li>
-<a href="khu-dan-cu.html" data-mix-header-click="group: buy, action: select_zone_buy">Khu dân cư</a>
-</li>
-<li>
-<a href="mua-nha-voi-rever.html" data-mix-header-click="group: buy, action: select_lp_buy">Mua với Rever</a>
-</li>
-<li>
-<a href="vi-sao-chon-rever.html" data-mix-header-click="group: buy, action: select_pr_buy">Vì sao chọn Rever?</a>
-</li>
-</ul>
-</li>
-<li class="sub-menu">
-<a>Thuê<i class="zmdi zmdi-chevron-down"></i></a>
-<ul>
-<li>
-<a href="s/ho-chi-minh/thue.html" data-mix-header-click="group: rent, action: select_all_rent">Tất cả nhà cho thuê</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/thue/can-ho.html" data-mix-header-click="group: rent, action: select_apartment_rent">Căn hộ
-cho thuê</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/thue/shop-house.html" data-mix-header-click="group: rent, action: select_shophouse_rent">Shophouse
-cho thuê</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/thue/nha-pho.html" data-mix-header-click="group: rent, action: select_house_rent">Nhà
-phố cho thuê</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/thue/biet-thu.html" data-mix-header-click="group: rent, action: select_villa_rent">Biệt thự
-cho thuê</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/thue/van-phong.html" data-mix-header-click="group: rent, action: select_office_rent">Văn phòng
-cho thuê</a>
-</li>
-<li>
-<a href="s/ho-chi-minh/thue/land-business.html" data-mix-header-click="group: rent, action: select_land_rent">Mặt
-bằng cho thuê</a>
-</li>
-<li class="divide"></li>
-<li>
-<a href="chuyen-vien.html" data-mix-header-click="group: rent, action: select_agent_rent">Gặp chuyên viên tư vấn</a>
-</li>
-<li>
-<a href="khu-dan-cu.html" data-mix-header-click="group: rent, action: select_zone_buy">Khu dân cư</a>
-</li>
-<li>
-<a href="thue-nha-voi-rever.html" data-mix-header-click="group: rent, action: select_lp_rent">Thuê với Rever</a>
-</li>
-<li>
-<a href="vi-sao-chon-rever.html" data-mix-header-click="group: rent, action: select_pr_rent">Vì sao chọn Rever?</a>
-</li>
-</ul>
-</li>
-<li class="sub-menu">
-<a>Dự án<i class="zmdi zmdi-chevron-down"></i></a>
-<ul>
-<li>
-<a href="du-an.html" data-mix-header-click="group: rent, action: select_all_project">Tất cả dự án</a>
-</li>
-<li>
-<a href="s/quan-2/du-an/mua.html" data-mix-header-click="group: rent, action: select_district_two_project">
-Dự án Quận 2</a>
-</li>
-<li>
-<a href="s/quan-4/du-an/mua.html" data-mix-header-click="group: rent, action: select_district_four_project">
-Dự án Quận 4</a>
-</li>
-<li>
-<a href="s/quan-7/du-an/mua.html" data-mix-header-click="group: rent, action: select_district_seven_project">
-Dự án Quận 7
-</a>
-</li>
-<li>
-<a href="s/quan-9/du-an/mua.html" data-mix-header-click="group: rent, action: select_district_nine_project">
-Dự án Quận 9
-</a>
-</li>
-<li>
-<a href="s/quan-binh-thanh/du-an/mua.html" data-mix-header-click="group: rent, action: select_district_binhthanh_project">
-Dự án Quận Bình Thạnh</a>
-</li>
-<li class="divide"></li>
-<li>
-<a href="chuyen-vien.html" data-mix-header-click="group: rent, action: select_agent_project">Gặp chuyên viên tư vấn</a>
-</li>
-<li>
-<a href="chu-dau-tu.html" data-mix-header-click="group: rent, action: select_investor_project">Danh mục Chủ đầu tư</a>
-</li>
-</ul>
-</li>
-<li class="sub-menu">
-<a>Bán & cho thuê<i class="zmdi zmdi-chevron-down"></i></a>
-<ul>
-<li>
-<a href="ban-nha-voi-rever.html" data-mix-header-click="group: sell_lease, action: select_post_sell_lease">Đăng bán</a>
-</li>
-
-
-
-<li class="divide"></li>
-<li>
-<a href="chuyen-vien.html" data-mix-header-click="group: sell_lease, action: select_agent_sell_lease">Gặp chuyên viên tư vấn</a>
-</li>
-<li>
-<a href="rever-photo.html" data-mix-header-click="group: sell_lease, action: select_photo_sell_lease">Rever Photo</a>
-</li>
-<li>
-<a href="vi-sao-chon-rever.html" data-mix-header-click="group: sell_lease, action: select_pr_sell_lease">Vì sao chọn Rever?</a>
-</li>
-</ul>
-</li>
-<li class="sub-menu">
-<a>Thông tin<i class="zmdi zmdi-chevron-down"></i></a>
-<ul>
-<li>
-<a href="../blog.rever.vn/index.html" data-mix-header-click="group: info, action: select_blog_info">Blog</a>
-</li>
-<li>
-<a href="../blog.rever.vn/topic/th%e1%bb%8b-tr%c6%b0%e1%bb%9dng.html" data-mix-header-click="group: info, action: select_market_info">Thông tin thị trường</a>
-</li>
-<li>
-<a href="../blog.rever.vn/topic/ph%c3%a2n-t%c3%adch.html" data-mix-header-click="group: info, action: select_analysis_info">Báo cáo & Phân tích</a>
-</li>
-<li>
-<a href="huong-dan-mua-nha.html" data-mix-header-click="group: info, action: select_guideline_buy_info">Hướng dẫn mua nhà</a>
-</li>
- <li>
-<a href="huong-dan-ban-nha.html" data-mix-header-click="group: info, action: select_guideline_sell_info">Hướng dẫn bán nhà</a>
-</li>
-<li>
-<a href="../offer.rever.vn/index.html" data-mix-header-click="group: info, action: select_material_info">Tải tài liệu</a>
-</li>
-<li>
-<a href="../help.rever.vn/index.html" data-mix-header-click="group: info, action: select_helpcenter_info">Trung tâm trợ giúp</a>
-</li>
-<li>
-<a target="_blank" href="../academy.rever.vn/index.html" data-mix-header-click="group: info, action: select_academy_info">Rever Academy</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="login">
-
-<style>
-              a[waiting-login-js]{
-                opacity: 0.2;
-              }
-            </style>
-<a href="#login" data-mix-header-click="group: authen, action: click_login" waiting-login-js title="Đăng nhập / Đăng ký" class="btn-login">Đăng nhập</a>
-
-
-
-<div class="agency-rever">
-<a href="ban-nha-voi-rever.html" title="Đăng tin nhà đất">Đăng tin nhà đất</a>
-</div>
-</div>
-</div>
-
-<script type="text/javascript">
-    window.$dialog = function(){var e={bodyClassSpecs:"mdialog-body",bodyLoadingClass:"mdialog-loading",cachedBodyStyle:null,default:{zindex:99999,width:300,minHeight:100,background:"rgba(0,0,0,.5)",opacity:.5},key:{cachedStyle:"cached-style"}};return e.show=function(t,n,i,o){(n=$.extend(!0,{outSideClick:!0},n||{})).maxWidth="100%";var a,d=document.body.getAttribute("style");document.body.setAttribute(e.key.cachedStyle,d),(a=t&&"string"==typeof t?$(document.getElementById(t)):t).css("opacity",0),a.css("overflow-y","auto"),a.css("overflow-x","hidden"),a.addClass("opened");var s=(n?n.body:"")||".body";return a.find(s).css(n),a.find(s).addClass(e.bodyClassSpecs),a[0]&&(a[0].$dialogCallback=i),a[0]&&(a[0].$dialogInitTime=+new Date),n&&n.close&&a.find(s+" "+n.close).off().click(function(n){n.preventDefault(),e.hide(t,i)}),n&&n.outSideClick&&a.off().click(function(){e.hide(t,i)}),a.find(s).click(function(e){e.stopPropagation()}),e.animation(a,0,0,1,function(){o&&o()}),e.loadingEnd(a),a},e.animation=function(t,n,i,o,a){t.css("opacity",n),o>0&&n>1||o<0&&n<0?a&&a():setTimeout(function(){n+=o*(.05*i+1e-4*i*i),e.animation(t,n,i+1,o,a)},10)},e.hide=function(t,n){var i;i=t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened"),e.animation(i,1,0,-1,function(){i.removeClass("opened"),n&&n(i)})},e.loadingStart=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs).addClass(e.bodyLoadingClass)},e.loadingEnd=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs+"."+e.bodyLoadingClass).removeClass(e.bodyLoadingClass)},$(window).keydown(function(t){var n=$(".mdialog.opened");if(n.length&&27==t.keyCode){var i=[];i.length=n.length;for(var o=0;o<n.length;o++)for(var a=o;a<n.length;a++)n[o].$dialogInitTime>n[a].$dialogInitTime?(i[a]=n[o],i[o]=n[a]):(i[o]=n[o],i[a]=n[a]);var d=i[i.length-1];d&&e.hide($(d),d?d.$dialogCallback:null)}}),e.initStyles=function(){var e=document.createElement("STYLE"),t=document.head||document.getElementsByTagName("head")[0];e.type="text/css",e.styleSheet?e.styleSheet.cssText="":e.appendChild(document.createTextNode(this.getCss())),t.appendChild(e)},e.getCss=function(){var t=e.default,n="",i={display:"none",position:"fixed",top:"0",height:"100%",left:"0",width:"100%"};i["z-index"]=t.zindex,i.background=t.background,n+=e.assignStyle(".mdialog",i),n+=".mdialog.opened{display: block;}";var o={};o.width=t.width+"px",o["min-height"]=t.minHeight+"px",o.background="#fff",o.margin="60px auto 140px auto",n+=e.assignStyle(".mdialog .body",o);var a={position:"relative"};n+=e.assignStyle("."+e.bodyLoadingClass,a);var d={content:"' '",top:0,left:0,width:"100%",height:"100%",position:"absolute",background:"#fff",opacity:.4,"z-index":1};n+=e.assignStyle("."+e.bodyLoadingClass+":before",d);var s={content:"' '",border:"2px solid #303339","border-top":"2px solid #fff;","border-radius":"50%",width:"30px",height:"30px",position:"absolute",top:"calc(50% - 15px)",left:"calc(50% - 15px)","-webkit-animation":"spin 2s linear infinite",animation:"spin 2s linear infinite","z-index":1};return n+=e.assignStyle("."+e.bodyLoadingClass+":after",s),n+="@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }"},e.assignStyle=function(e,t){var n=e+"{";for(var i in t){n+=i+":"+t[i]+";"}return n+="}"},e.initStyles(),e}();
-  </script>
-
-<div class="search-mobile-component" keyword="" init-search-page="false" placeholder="Nhập địa điểm, khu dân cư, tòa nhà"></div>
-</header>
-<script async defer src="../s3-cdn.rever.vn/p/v2.33.55/app_v2/header-v2.min90ca.js?v=1617780824171"></script>
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css/service.min90ca.css?v=1617780824171">
-<link rel="stylesheet" href="../s3-cdn.rever.vn/p/v2.33.55/css/menu.min90ca.css?v=1617780824171" />
-<div class="cta-bottom-wrapper">
-<div class="cta-bottom-inner">
-<div class="phone">
-<a class="cta-hotline" href="tel:1800234546"><span class="font-icon fone-b font-20"> </span> <strong>1800 234 546</strong></a>
-</div>
-<div>
-<a class="cta-form" href="#" data-action="request-service">ĐĂNG KÝ NGAY</a>
-</div>
-</div>
-</div>
-<div class="s-menu">
-<div class="width-1600">
-<div class="s-menu-wrapper">
-<ul>
-<li class="s-menu-items ">
-<a href="services.html">Tất cả dịch vụ</a>
-</li>
-<li class="s-menu-items ">
-<a href="vi-sao-chon-rever.html">Vì sao chọn Rever?</a>
-</li>
-<li class="s-menu-items active">
-<a href="ban-nha-voi-rever.html">Bán với Rever</a>
-</li>
-<li class="s-menu-items ">
-<a href="mua-nha-voi-rever.html">Mua với Rever</a>
-</li>
-<li class="s-menu-items ">
-<a href="thue-nha-voi-rever.html">Thuê với Rever</a>
-</li>
-<li class="s-menu-items ">
-<a href="chuyen-vien-rever.html">Chuyên viên Rever</a>
-</li>
-<li class="s-menu-items ">
-<a href="rever-photo.html">Chụp hình</a>
-</li>
-<li class="s-menu-items ">
-<a href="3d.html">Thực tế ảo</a>
-</li>
-<li class="s-menu-items ">
-<a href="thu-tuc-giay-to.html">Hành chính</a>
-</li>
-<li class="s-menu-items ">
-<a href="bang-dieu-khien.html">Bảng điều khiển</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sticky-header">
-<div class="stickyTrigger is-stuck sticky-sMenu">
-<div class="s-menu-wrapper">
-<ul>
-<li class="s-menu-items ">
-<a href="services.html">Tất cả dịch vụ</a>
-</li>
-<li class="s-menu-items ">
-<a href="vi-sao-chon-rever.html">Vì sao chọn Rever?</a>
-</li>
-<li class="s-menu-items active">
-<a href="ban-nha-voi-rever.html">Bán với Rever</a>
-</li>
-<li class="s-menu-items ">
-<a href="mua-nha-voi-rever.html">Mua với Rever</a>
-</li>
-<li class="s-menu-items ">
-<a href="thue-nha-voi-rever.html">Thuê với Rever</a>
-</li>
-<li class="s-menu-items ">
-<a href="chuyen-vien-rever.html">Chuyên viên Rever</a>
-</li>
-<li class="s-menu-items ">
-<a href="rever-photo.html">Chụp hình</a>
-</li>
-<li class="s-menu-items ">
-<a href="3d.html">Thực tế ảo</a>
-</li>
-<li class="s-menu-items ">
-<a href="thu-tuc-giay-to.html">Hành chính</a>
-</li>
-<li class="s-menu-items ">
-<a href="bang-dieu-khien.html">Bảng điều khiển</a>
-</li>
-<li class="s-btn-contact">
-<a href="javascript:void(0)" data-action="request-service">Đăng ký ngay</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="s-banner-bg" style="background: url(../s3-cdn.rever.vn/p/v2.33.55/images/service-sale-banner.jpg) 50% 50% / cover no-repeat;">
-<div class="s-banner-bg-inner">
-<div class="s-banner-header-wrapper">
-<h1>Bán nhà nhanh chóng và dễ dàng cùng Rever</h1>
-<div class="sumary">Bán nhà đất với các dịch vụ hỗ trợ nhanh chóng và tiện lợi, với chi phí thấp và đội ngũ hỗ trợ mọi lúc.</div>
-<div class="btn-contact">
-<a class="s-btn-red mgb-0" data-action="request-service">Đăng ký ngay</a>
-</div>
-</div>
-</div>
-</div>
-<section class="background-gray service-dashboard">
-<div class="container">
-<div class="row">
-<div class="col-3">
-<div class="item-service-sale">
-<div class="cover">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/icon_x2.svg" alt="Rever">
-</div>
-<h3>Dịch vụ nhanh X2 so với thị trường</h3>
-<p>80% bất động sản độc quyền tại Rever được bán trong 90 ngày</p>
-</div>
-</div>
-<div class="col-3">
-<div class="item-service-sale">
-<div class="cover">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/icon_dashboard.svg" alt="Rever">
-</div>
-<h3>Bảng điều khiển cho người bán</h3>
-<p>Người bán có thể theo dõi tiến độ bán nhà trực tuyến (Độc quyền chỉ có tại Rever)</p>
-</div>
-</div>
-<div class="col-3">
-<div class="item-service-sale">
-<div class="cover">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/icon_service.svg" alt="Rever">
-</div>
-<h3>Trải nghiệm hoàn hảo</h3>
-<p>Giúp quá trình bán nhà thuận tiện, dễ dàng và nhanh chóng</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="section-padding-50 s-sale-rever">
-<div class="container">
-<div class="row">
-<h2 class="s-heading">Vì sao nên chọn Rever?</h2>
-</div>
-<div class="row">
-<div class="service-sale-compare">
-<div class="col-left">
-<span class="line-header"></span>
-<h3 class="title">Thị trường</h3>
-<ul>
-<li>Đăng kê, tìm người mua, hoàn tất thủ tục<i class="zmdi zmdi-check color-blue-min"></i></li>
-<li>Không hỗ trợ định giá<i class="zmdi zmdi-close"></i></li>
-<li>Không hỗ trợ tiếp thị<i class="zmdi zmdi-close"></i></li>
-<li>Không theo dõi được tiến trình bán nhà<i class="zmdi zmdi-close"></i></li>
-<li>Không có các dịch vụ bổ sung<i class="zmdi zmdi-close"></i></li>
-</ul>
-</div>
-<div class="col-right">
- <span class="line-header"></span>
-<h3 class="title">Rever</h3>
-<ul>
-<li><i class="zmdi zmdi-check"></i>Đăng kê, tìm người mua, hoàn tất thủ tục</li>
-<li><i class="zmdi zmdi-check"></i>Tư vấn chiến lược giá, giúp bán được giá tốt</li>
-<li><i class="zmdi zmdi-check"></i>Quảng cáo, giúp tiếp cận khách hàng tiềm năng</li>
-<li><i class="zmdi zmdi-check"></i>Có bảng điều khiển riêng, chỉ có ở Rever</li>
-<li><i class="zmdi zmdi-check"></i>Đi kèm các dịch vụ bổ sung, tiết kiệm hơn</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="btn-contact mt-40">
-<a class="s-btn-red mgb-0" data-action="request-service">Đăng ký ngay</a>
-</div>
-</section>
-<section class="about-service-photo service-sale">
-<div class="container">
-<div class="w-60">
-<div class="row">
-<h3 class="col-12 s-heading">Cam kết dịch vụ</h3>
-</div>
-<div class="row">
-<div class="col-12">
-<span class="line-header"></span>
-<div class="title">Cam kết với khách hàng</div>
-<ul class="product-received">
-<li><i class="zmdi zmdi-check"></i>Đặt khách hàng làm trọng tâm trong mọi quyết định</li>
-<li><i class="zmdi zmdi-check"></i>Những điều đã nói là những điều được làm</li>
-<li><i class="zmdi zmdi-check"></i>Đảm bảo thực thi (Miễn phí các dịch vụ cao cấp nếu không bán được nhà)</li>
-</ul>
-</div>
-<div class="col-12">
-<span class="line-header"></span>
-<div class="title">Tiêu chuẩn môi giới</div>
-<ul class="product-received">
-<li><i class="zmdi zmdi-check"></i>Chứng nhận đảm bảo chuyên môn (RED 16)</li>
-<li><i class="zmdi zmdi-check"></i>Có chứng chỉ nghề môi giới</li>
-<li><i class="zmdi zmdi-check"></i>Hài lòng khách hàng trong 3 tháng (CSAT>4)</li>
-</ul>
-</div>
-<div class="service-image-mobile">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/service-pack-mobile.jpg" alt="Rever admin">
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="package" class="service-pack">
-<div class="container">
-<div class="row">
-<h3 class="title font-tiempos">Các gói dịch vụ</h3>
-<p class="desc">Chọn gói dịch vụ phù hợp với mong muốn và nhu cầu của bạn. Gói bạch kim sẽ giúp bạn bán được nhà nhanh nhất.</p>
-<div class="service-pack-grid">
-<div class="service-pack-item">
-<div class="service-pack-content">
-<div class="head">
-<div class="cover">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/icon-paper-airplanes.svg" alt="Rever">
-</div>
-<h4 class="title">Bạc</h4>
-<ul class="list">
-<li>Tư vấn chiến lược giá</li>
-<li>Đăng kê</li>
-<li>Quảng cáo</li>
-<li>Tìm người mua</li>
-<li>Hoàn tất thủ tục</li>
-<li>Bảng điều khiển</li>
-</ul>
-</div>
-<div class="bottom">
-<div class="charge">Phí 1%</div>
-<p class="text-vat">(Đã bao gồm VAT)</p>
-<a href="javascript:void(0)" data-desc-prefix="[ĐK gói Bạc] " data-action="request-service" class="s-btn-red">Đăng ký ngay</a>
-</div>
-</div>
-</div>
-<div class="service-pack-item">
-<div class="service-pack-content">
-<div class="head">
-<div class="cover">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/icon-airplanes.svg" alt="Rever">
-</div>
-<h4 class="title">Vàng</h4>
-<ul class="list">
-<li>Tư vấn chiến lược giá</li>
-<li>Đăng kê</li>
-<li>Quảng cáo</li>
-<li>Tìm người mua</li>
-<li>Hoàn tất thủ tục</li>
-<li>Bảng điều khiển</li>
-<li class="color-blue-min">Hiển thị ưu tiên</li>
-<li class="color-blue-min">Chụp hình chuyên nghiệp</li>
-
-<li class="color-blue-min">Đăng kê thêm 2 kênh</li>
-</ul>
-</div>
-<div class="bottom">
-<div class="charge">Phí 1.3%</div>
-<p class="text-vat">(Đã bao gồm VAT)</p>
-<a href="javascript:void(0)" data-desc-prefix="[ĐK gói Vàng] " data-action="request-service" class="s-btn-red">Đăng ký ngay</a>
-</div>
-</div>
-</div>
-<div class="service-pack-item">
-<div class="service-pack-content">
-<div class="head">
-<div class="cover">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/icon-rocket.svg" alt="Rever">
-</div>
-<h4 class="title color-red">Bạch kim</h4>
-<ul class="list">
-<li>Tư vấn chiến lược giá</li>
-<li>Đăng kê</li>
-<li>Quảng cáo</li>
-<li>Tìm người mua</li>
-<li>Hoàn tất thủ tục</li>
-<li>Bảng điều khiển</li>
-<li class="color-blue-min">Hiển thị ưu tiên</li>
-<li class="color-blue-min">Chụp hình chuyên nghiệp</li>
-<li class="color-blue-min">Đăng kê thêm 5 kênh</li>
-<li class="color-blue-min">Thực tế ảo (3D)</li>
-<li class="color-blue-min">Chạy Google, facebook</li>
-</ul>
-</div>
-<div class="bottom">
-<div class="charge color-red">Phí 1.5%</div>
-<p class="text-vat">(Đã bao gồm VAT)</p>
-<a href="javascript:void(0)" data-desc-prefix="[ĐK gói bạch kim] " data-action="request-service" class="s-btn-red">Đăng ký ngay</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="background-gray service-sale-photo">
-<div class="container">
-<div class="row">
-<h2 class="s-feature-heading">Miễn phí các dịch vụ bổ sung</h2>
-<div class="grid grid--2col grid--center">
-<div class="grid-item">
-<span class="line-header"></span>
-<h2 class="s-heading">Dịch vụ chụp ảnh chuyên nghiệp</h2>
-<ul class="list-check-red">
-<li><i class="zmdi zmdi-check"></i>Đi kèm khi chọn gói&nbsp;<strong>Vàng</strong>&nbsp;&&nbsp;<strong>Bạch kim</strong></li>
-<li><i class="zmdi zmdi-check"></i>Hình ảnh chất lượng cao, chuyên nghiệp</li>
-<li><i class="zmdi zmdi-check"></i>Tiết kiệm đến&nbsp;<strong>1.000.000 đồng</strong>&nbsp;so với thị trường</li>
-</ul>
-<a href="rever-photo.html" class="color-lipstick looking-for" target="_blank">Tìm hiểu thêm&nbsp;<i class="zmdi zmdi-chevron-right"></i></a>
-</div>
-<div class="grid-item grid-item--image">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/service-sale-free.png" alt="Deep Clean">
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="bg-charcoal service-sale-3dview">
-<div class="container">
-<div class="row">
-<div class="grid grid--2col grid--center grid--reverse">
-<div class="grid-item">
- <span class="line-header"></span>
-<h2 class="s-heading">Dịch vụ thực tế ảo (3D)</h2>
-<ul class="list-check-blue">
-<li><i class="zmdi zmdi-check"></i>Đi kèm khi chọn gói&nbsp;<strong>Bạch kim</strong></li>
-<li><i class="zmdi zmdi-check"></i>Trải nghiệm xem nhà như thật, chốt giao dịch nhanh</li>
-<li><i class="zmdi zmdi-check"></i>Tiết kiệm đến&nbsp;<strong>5.000.000 đồng</strong>&nbsp;so với thị trường</li>
-</ul>
-<a href="3d.html" class="looking-for" target="_blank">Tìm hiểu thêm&nbsp;<i class="zmdi zmdi-chevron-right"></i></a>
-</div>
-<div class="grid-item grid-item--image view-3d-img">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/service-3dview.png" id="demo-apart" alt="Deep Clean">
-</div>
-</div>
-</div>
-</div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section>
-<div class="width1140 s-padding-tb">
-<div class="s-heading">Đánh giá của chủ nhà</div>
-<div id="customer" class="s-customer-rating">
-<div class="flex-viewport flexslider slider-cus">
-<ul class="slides">
-<li>
-<p class="description">Tôi đã mua các gói đăng rao nhà đất trên các website bất động sản lớn nhưng không bán được nhà. Tuy nhiên, khi tôi mua gói dịch vụ Môi giới cho người bán của Rever, tôi đã bán được trong vòng một tháng. Tôi đã chọn gói Bạch kim và tiết kiệm được khá nhiều chi phí. Đặc biệt, tôi rất thích hình ảnh và mô hình 3D của Rever. Nó giúp tin rao của nhà tôi rất chuyên nghiệp và chỉn chu.</p>
-<div class="customer">
-<div class="avatar">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/service/reviewers/2-pham-huu-nghia.jpg" alt="" draggable="false">
-</div>
-<div class="info">
-<p class="name">Phạm Hữu Nghĩa</p>
-<p>Chủ căn hộ Estella Heights, Quận 2</p>
-</div>
-</div>
-</li>
-<li>
-<p class="description">Tôi có một căn hộ dịch vụ cần gửi bán, vì vậy tôi chọn gói Bạch Kim của dịch vụ Môi giới cho người bán tại Rever. Gói dịch vụ giúp tôi tiết kiệm thời gian và chi phí khá nhiều vì bao gồm cả đăng kê trên các website bất động sản khác ngoài Rever và chạy quảng cáo trên Google và Facebook. Nhà của tôi đã bán được với giá tốt trong khoảng thời gian ngắn.</p>
-<div class="customer">
-<div class="avatar">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/service/reviewers/do-hong-ngoc.jpg" alt="" draggable="false">
-</div>
-<div class="info">
-<p class="name">Đỗ Hồng Ngọc</p>
-<p>Chủ căn hộ Vista Verde, Quận 2</p>
-</div>
-</div>
-</li>
-<li>
-<p class="description">Căn hộ là tài sản có giá trị lớn đầu tiên của tôi. Vì vậy, tôi chưa có kinh nghiệm làm thế nào để rao bán nhà cũng như các thủ tục giấy tờ phải làm ra sao. Lúc đó tôi đã tìm thấy dịch vụ Môi giới cho người bán của Rever. Tôi đã chọn gói Bạc vì chưa chắc dịch vụ có tốt như quảng cáo không. Sau đó, tôi rất bất ngờ vì bán được nhà rất nhanh. Đội ngũ Rever còn tư vấn và hỗ trợ tôi rất nhiệt tình. Nếu có cơ hội lần sau, tôi sẽ chọn các gói cao hơn.</p>
-<div class="customer">
-<div class="avatar">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/service/reviewers/le-hung-phu.jpg" alt="" draggable="false">
-</div>
-<div class="info">
-<p class="name">Lê Hùng Phú</p>
-<p>Chủ căn hộ Masteri Millennium, Quận 4</p>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section style=" background: url(../s3-cdn.rever.vn/p/v2.33.55/images/service-sale-post-bg.jpg) 50% 50% / cover no-repeat;">
-<div class="width1140 s-padding-tb">
-<div class="s-subcription-inner">
-<div class="title">Đăng kê với Rever để bán nhanh gấp 2 lần thị trường và tiết kiệm nhiều hơn với những dịch vụ đi kèm chất lượng cao. Đăng ký thông tin ngay, chúng tôi sẽ liên hệ tư vấn và hẹn gặp sau ít phút!</div>
-<div class="btn-contact">
-<a class="s-btn-red mgb-0" data-action="request-service">Đăng ký ngay</a>
-</div>
-</div>
-</div>
-</section>
-<div class="mdialog" id="contact-now-form" style="background: none">
-<div class="popup-520" style="overflow: visible;">
-<div class="header-w-close">
-<button class="close-popup-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i></button>
-<h3 class="font-tiempos">Đăng ký dịch vụ môi giới cho người bán</h3>
-</div>
-<div class="form-info" id="contact-now-form-body">
-</div>
-</div>
-</div>
-
-<div class="full-3d-tour">
-<div class="full-3d-tour-render">
-<iframe width="100%" height="100%" src="#" frameborder="0" allowfullscreen allow="vr"></iframe>
-</div>
-<p class="close-3d-tour"></p>
-</div>
-<footer id="footer">
-<div class="inner">
-<div class="row">
-<ul class="contact-group">
-<li class="item">
-<div class="icon">
-<i class="zmdi zmdi-phone"></i>
-</div>
-<div class="detail">
-<p class="title">Hotline miễn phí (24/7)</p>
-<p class="link">
-<a href="tel:1800234546">1800 234 546</a>
-</p>
-</div>
-</li>
-<li class="item">
-<div class="icon">
-<i class="zmdi zmdi-phone"></i>
-</div>
-<div class="detail">
-<p class="title">Khiếu nại, phản hồi (miễn phí)</p>
-<p class="link">
-<a href="tel:1800 234 560">1800 234 560</a>
-</p>
-</div>
-</li>
-<li class="item">
-<div class="icon">
-<i class="zmdi zmdi-email-open"></i>
-</div>
-<div class="detail">
-<p class="title">Bộ phận kinh doanh</p>
-<p class="link">
-<a href="cdn-cgi/l/email-protection.html#2350424f46506351465546510d554d"><span class="__cf_email__" data-cfemail="d487b5b8b1a794a6b1a2b1a6faa2ba">[email&#160;protected]</span></a>
-</p>
-</div>
-</li>
-<li class="item">
-<div class="icon">
-<i class="zmdi zmdi-email-open"></i>
-</div>
-<div class="detail">
-<p class="title">Phòng dự án</p>
-<p class="link">
-<a href="cdn-cgi/l/email-protection.html#94e4fcfbfaf3f0e1f5fad4e6f1e2f1e6bae2fa"><span class="__cf_email__" data-cfemail="e9998186878e8d9c8887a99b8c9f8c9bc79f87">[email&#160;protected]</span></a>
-</p>
-</div>
-</li>
-<li class="item">
-<div class="icon">
-<i class="zmdi zmdi-email-open"></i>
-</div>
-<div class="detail">
-<p class="title">Chăm sóc khách hàng</p>
-<p class="link">
-<a href="cdn-cgi/l/email-protection.html#44373134342b36300436213221366a322a"><span class="__cf_email__" data-cfemail="eebd9b9e9e819c9aae9c8b988b9cc09880">[email&#160;protected]</span></a>
-</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="row">
-<ul class="info-container">
-<li class="address">
-<a class="logo" href="index.html" title="Rever">
-<img src="../s3-cdn.rever.vn/p/v2.33.55/images/rv-logo-ft.svg" alt="rever" title="rever">
-</a>
-<p>ST01, LakeView 1, Đường Ven Hồ Trung Tâm, P. An Khánh, Quận 2, TP. Hồ Chí Minh</p>
-<div class="social-group">
-<a class="zmdi zmdi-facebook" href="../www.facebook.com/rever.html" title="Facebook Rever" target="_blank"></a>
-<a class="zmdi zmdi-twitter" href="../twitter.com/VnRever.html" title="Twitter Rever" target="_blank"></a>
-<a class="zmdi zmdi-linkedin-box" href="../www.linkedin.com/company/rever-real-estate.html" title="Linkedin Rever" target="_blank"></a>
-<a class="zmdi zmdi-instagram" href="../www.instagram.com/rever.vn/index.html" title="Instagram Rever" target="_blank"></a>
-<a class="zmdi zmdi-youtube-play" href="../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html" title="Youtube Rever" target="_blank"></a>
-</div>
-</li>
-<li>
-<span class="link-cty">
-CÔNG TY
-<i class="zmdi zmdi-chevron-down"></i>
-</span>
-<ul id="mn-01">
-<li>
-<a href="gioi-thieu.html" title="Về Rever">Về Rever</a>
-</li>
-<li>
-<a href="tuyen-dung.html" title="Tuyển dụng">Tuyển dụng</a>
-</li>
-<li>
-<a href="doi-ngu.html" title="Đội ngũ">Đội ngũ</a>
-</li>
-<li>
-<a href="san-giao-dich.html" title="Sàn giao dịch">Sàn giao dịch</a>
-</li>
-<li>
-<a href="lien-he.html" title="Liên hệ">Liên hệ</a>
-</li>
-</ul>
-</li>
-<li>
-<span class="link-dv">
-DỊCH VỤ
-<i class="zmdi zmdi-chevron-down"></i>
-</span>
-<ul id="mn-02">
-
-
-
-<li>
-<a href="ban-nha-voi-rever.html" title="Bán & Cho thuê">Bán & Cho thuê</a>
-</li>
-<li>
-<a href="mua-nha-voi-rever.html" title="Mua với Rever">Mua với Rever</a>
-</li>
-<li>
-<a href="thue-nha-voi-rever.html" title="Thuê với Rever">Thuê với Rever</a>
-</li>
-<li>
-<a href="../academy.rever.vn/index.html" title="Rever Academy">Rever Academy</a>
-</li>
-<li>
-<a href="../agent.rever.vn/index.html" title="Rever Agents">Rever Agents</a>
-</li>
-</ul>
-</li>
-<li>
-<span class="link-tt">
-THÔNG TIN
-<i class="zmdi zmdi-chevron-down"></i>
-</span>
-<ul id="mn-03">
-<li>
-<a href="../blog.rever.vn/topic/th%e1%bb%8b-tr%c6%b0%e1%bb%9dng.html" target="_blank" title="Tin tức thị trường">Tin tức thị trường</a>
-</li>
-<li>
-<a href="../blog.rever.vn/topic/ph%c3%a2n-t%c3%adch.html" target="_blank" title="Báo cáo & phân tích">Báo cáo & phân tích</a>
-</li>
-<li>
-<a href="../blog.rever.vn/topic/c%e1%ba%adp-nh%e1%ba%adt-s%e1%ba%a3n-ph%e1%ba%a9m.html" target="_blank" title="Cập nhật sản phẩm">Cập nhật sản phẩm</a>
-</li>
-<li>
-<a href="../agent.rever.vn/blog.html" target="_blank" title="Kiến thức cho môi giới">Kiến thức cho môi giới</a>
-</li>
-<li>
-<a href="../help.rever.vn/index.html" target="_blank" title="Hướng dẫn sử dụng">Hướng dẫn sử dụng</a>
-</li>
-</ul>
-</li>
-<li>
-<span class="link-ud">
-ỨNG DỤNG
-<i class="zmdi zmdi-chevron-down"></i>
-</span>
-<ul id="mn-04">
-<li>
-<a href="../apps.apple.com/vn/app/rever/id1101768201.html" target="_blank" title="Rever trên iOS">Rever trên iOS</a>
-</li>
-<li>
-<a href="../play.google.com/store/apps/detailsece3.html?id=com.rever.app.android" target="_blank" title="Rever trên Android">Rever trên Android</a>
-</li>
-
-
-
-
-
-
-</ul>
-</li>
-</ul>
-</div>
-<div class="row">
-<div class="left">
-<span>Copyright © 2021 - Rever. All Rights Reserved.</span>
-</div>
-<div class="right">
-<a href="chinh-sach-bao-mat.html">Chính sách bảo mật</a>
-<a href="dieu-khoan-su-dung.html">Điều khoản sử dụng</a>
-<a href="javascript:showFeedbackModal()">Phản hồi</a>
-</div>
-</div>
-</div>
-</footer>
-<script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="../www.google.com/recaptcha/apib091.js?render=explicit"></script>
-<script src="../s3-cdn.rever.vn/p/v2.33.55/js/jquery-ui.min90ca.js?v=1617780824171"></script>
-
-
-<script>
-    adroll_adv_id = "VHUFKBW42JH37IACSQW3PD";
-    adroll_pix_id = "734MVFGRZFAB7JCBBH46O6";
-</script>
-
-
-
-<script defer id="hs-script-loader" src="../js.hs-scripts.com/2775524.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script async defer src="../s3-cdn.rever.vn/p/v2.33.55/app_v2/login-popup-app.min90ca.js?v=1617780824171"></script>
-<style>
-    #msform a.butt-primary[disabled]{
-        opacity: 0.4
-    }
-</style>
-<div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
-<div class="popup-feedback-fixed">
-<div class="popup-body-fb">
-<div v-show="state == 'composing'" class="popup-contain">
-<div class="visible-pc">
-<form id="msform" onsubmit="return false">
-<fieldset style="display: block">
-<h2 class="popup-title-w-back height-title popup-font-tiempos" id="title-head">Phản hồi của bạn về Rever.vn (<span v-text="step"></span>/3)</h2>
-<button @click="hideModal()" class="popup-close-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i></button>
-<div v-show="step == 1" class="contain" id="step-form-1">
-<div class="intro">Bạn có sẵn sàng giới thiệu Rever cho người khác?</div>
-<div class="choose-number">
-<ul>
-<li v-for="i in 10" @mouseover="onMouseOverRate(i)" @mouseleave="onMouseLeaveRate(i)" @click="selectStep1Rate(i)">
-<a :class="{active: step1.rate == i}" href="javascript:void(0)" v-text="i"></a>
-</li>
-</ul>
-</div>
-<div class="emotion">
-<img :src="'https://s3-cdn.rever.vn/p/v2.33.55/images/' + step1Icon" alt="">
-<p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
-</div>
-</div>
-<div v-show="step == 2" class="contain" id="step-form-2">
-<div class="intro">Bạn có thấy Rever.vn dễ sử dụng không?</div>
-<div class="row row-fb pd-t-39 pd-bt-68 center-item">
-<button :class="{active : step2.rate == 'hard'}" @click="selectStep2Rate('hard')" class="large-butt-grey btn-use mgr-r-20">Khó sử dụng</button>
-<button :class="{active : step2.rate == 'normal'}" @click="selectStep2Rate('normal')" class="large-butt-grey btn-use pd-use-btn mgr-r-20">Bình thường</button>
-<button :class="{active : step2.rate == 'easy'}" @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ sử dụng</button>
-</div>
-</div>
-<div v-show="step == 3" class="contain">
-<div class="intro">Bạn muốn Rever.vn cần cải thiện thêm về điều gì?</div>
-<div class="checkbox-option">
-<div class="checkbox-pc">
-<div class="row-fb">
-<div>
-<label class="container-cb">Giao diện đẹp hơn
-<input type="checkbox" v-model="step3.improve.ui">
-<span class="checkmark"></span>
-</label>
-<label class="container-cb">Nội dung chính xác hơn
-<input type="checkbox" v-model="step3.improve.content">
-<span class="checkmark"></span>
-</label>
-</div>
-<div>
-<label class="container-cb">Thêm tính năng
-<input type="checkbox" v-model="step3.improve.feature">
-<span class="checkmark"></span>
-</label>
-<label class="container-cb">Khác (vui lòng nhập)
-<input type="checkbox" v-model="step3.improve.other" @change="onSelectOtherMsg('')">
-<span class="checkmark"></span>
-</label>
-</div>
-</div>
-</div>
-<div class="share-rv">
-<p style="font-size: initial">Ý kiến khác</p>
-<textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg" :disabled="!step3.improve.other"></textarea>
-</div>
-</div>
-</div>
-<a @click="gotoStep(step - 1)" v-show="step > 1" class="butt-primary butt-transparent prev" href="javascript:void(0)" id="prev">Trước</a>
-<a @click="onClickNext()" v-show="step < 3" :disabled="!canNext" class="butt-primary btn-grey next" href="javascript:void(0)" id="next">Tiếp</a>
-<button @click="onClickSend" v-show="step == 3" class="butt-primary btn-grey">
-<span v-show="!isSending" class="send">Gửi</span>
-<span v-show="isSending">Đang gửi...</span>
-</button>
-</fieldset>
-</form>
-</div>
-<div class="visible-sm">
-<div class="header-sm">
-<button @click="hideModal()" class="popup-close-btn-sm"><i class="zmdi zmdi-hc-2x zmdi-close"></i></button>
-<h4>Phản hồi của bạn về Rever.vn</h4>
-</div>
-<div class="content">
-<div class="intro-sm">
-<p>Bạn có sẵn sàng giới thiệu Rever cho người khác?</p>
-<div class="choose-number">
-<ul>
-<li v-for="i in 10" @click="selectStep1Rate(i)">
-<a :class="{active: step1.rate == i}" href="javascript:void(0)" v-text="i"></a>
-</li>
-</ul>
-</div>
-</div>
-<div class="use-easy">
-<p>Bạn thấy Rever có dễ sử dụng không?</p>
-<div class="row pt-15 center-item">
-<button :class="{active : step2.rate == 'hard'}" @click="selectStep2Rate('hard')" class="large-butt-grey btn-use mgr-r-20">Khó sử dụng</button>
-<button :class="{active : step2.rate == 'normal'}" @click="selectStep2Rate('normal')" class="large-butt-grey btn-use pd-use-btn">Bình thường</button>
-<button :class="{active : step2.rate == 'easy'}" @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ sử dụng</button>
-</div>
-</div>
-<div class="improve">
-<p>Bạn muốn Rever.vn cần cải thiện thêm về điều gì?</p>
-<div class="checkbox-sm">
-<label class="container-cb">Giao diện đẹp hơn
-<input type="checkbox" v-model="step3.improve.ui">
-<span class="checkmark"></span>
-</label>
-<label class="container-cb">Nội dung chính xác hơn
-<input type="checkbox" v-model="step3.improve.content">
-<span class="checkmark"></span>
-</label>
-<label class="container-cb">Thêm tính năng
-<input type="checkbox" v-model="step3.improve.feature">
-<span class="checkmark"></span>
-</label>
-<label class="container-cb">Khác (vui lòng nhập)
-<input type="checkbox" v-model="step3.improve.other" @change="onSelectOtherMsg('2')">
-<span class="checkmark"></span>
-</label>
-</div>
-</div>
-<div class="note">
-<p>Ý kiến khác</p>
-<textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg2" :disabled="!step3.improve.other"></textarea>
-</div>
-</div>
-<div class="btn">
-<button @click="onClickSend" class="butt-primary btn-red">Gửi phản hồi</button>
-</div>
-</div>
-</div>
-<div v-show="state == 'finished'" class="popup-fb-success">
-<div class="popup-header">
-<h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về Rever.vn</h2>
-<button @click="hideModal()" class="popup-close-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i></button>
-</div>
-<div class="popup-contain">
-<img class="img-success" src="../s3-cdn.rever.vn/p/v2.33.55/images/icon-success.svg">
-<div class="send-success">
-<h3>Đã gửi thành công!</h3>
-<p>Cảm ơn bạn đã gửi phản hồi cho Rever, ý kiến của bạn sẽ giúp Rever.vn từng bước nâng cao chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7): <strong>1800 234 546</strong> </p>
-</div>
-</div>
-<div class="popup-footer">
-<a @click="hideModal()" class="butt-primary butt-red btn-red" href="javascript:void(0)">Đóng</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script defer src="../s3-cdn.rever.vn/p/v2.33.55/app_v2/feedback-modal.min90ca.js?v=1617780824171"></script>
-<script>
-    window.RFeedback = {
-        API: "https://rever.vn/mapi",
-        email: "",
-        name: "",
-        phone: "",
-        ip: "10.244.0.0"
-    }
-</script>
-<style>
-    //analytics.rever.vn/fap"],img[src^="/fap/debug/track"] {
-    display: none;
-  }
-</style>
-
-<script>
-      /*Footer*/
-      let footerContent = $("#footer .info-container li")
-
-      toggleFooterContent()
-
-      footerContent.click(function (e) {
-        if (window.matchMedia("(max-width: 640px)").matches) {
-          // don't slideUp when click <a>
-          if (e.target.tagName === 'A')
-            return
-
-          footerContent.find("ul").slideUp(300)
-          footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
-          if (!$(this).find("ul").is(":visible")) {
-            $(this).find("ul").slideDown(300)
-            $(this).find(".zmdi").removeClass("zmdi-chevron-down").addClass("zmdi-chevron-up")
-          }
+    <script type="text/javascript">
+        var callbackInitMap = function () {
+            if (window.vinitMap) {
+                window.vinitMap();
+            }
+            if (window.initMap) {
+                initMap.call(this);
+            } else {
+                setTimeout(callbackInitMap, 500);
+            }
         }
-      });
-
-      $(window).resize(function () {
-        toggleFooterContent()
-      })
-
-      /**
-       * show/hide footer content depend on max-width
-       */
-      function toggleFooterContent() {
-        if (window.matchMedia("(max-width: 640px)").matches) {
-          footerContent.find("ul").hide()
-          footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
-        } else {
-          footerContent.find("ul").show()
-        }
-      }
-
-      /*Footer - END*/
     </script>
-<script type="text/javascript" src="../www.googleadservices.com/pagead/f.txt"></script>
-<script src="../s3-cdn.rever.vn/p/v2.33.55/js/jquery.flexslider.jfix-0.0.1.min90ca.js?v=1617780824171"></script>
-<script async defer src="../s3-cdn.rever.vn/p/v2.33.55/app_v2/service-sale.min90ca.js?v=1617780824171"></script>
-</div>
-<script>
-  $('.slider-cus').flexslider({
-    animation: "slide",
-    controlNav: true,
-    animationLoop: false,
-    slideshow: true,
-    itemMargin: 0,
-    maxItems: 1,
-    touch: true,
-    slideshowSpeed: 4000,
-    prevText: "<i class='zmdi zmdi-chevron-left'></i>",
-    nextText: "<i class='zmdi zmdi-chevron-right'></i>",
-  });
+    <script>
+        adroll_adv_id = "VHUFKBW42JH37IACSQW3PD";
+        adroll_pix_id = "734MVFGRZFAB7JCBBH46O6";
+    </script>
+        <script>
+        window.RFeedback = {
+            API: "https://rever.vn/mapi",
+            email: "",
+            name: "",
+            phone: "",
+            ip: "10.244.0.0"
+        }
+    </script>
+      <script>
+        /*Footer*/
+        let footerContent = $("#footer .info-container li")
 
-  function show3DTour(src){
-    let $wrapper = $(".full-3d-tour")
-    $wrapper.find('iframe').attr('src', src)
-    $wrapper.show()
-  }
-  $(".close-3d-tour").click(function(e){
-    $(".full-3d-tour").hide();
-    e.stopPropagation()
-  });
+        toggleFooterContent()
 
-  //Show demo căn hộ
-  $("#demo-apart").click(function(){
-    show3DTour("https://my.matterport.com/show/?m=yYDQY6WGVXi")
-  })
+        footerContent.click(function (e) {
+            if (window.matchMedia("(max-width: 640px)").matches) {
+                // don't slideUp when click <a>
+                if (e.target.tagName === 'A')
+                    return
+
+                footerContent.find("ul").slideUp(300)
+                footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
+                if (!$(this).find("ul").is(":visible")) {
+                    $(this).find("ul").slideDown(300)
+                    $(this).find(".zmdi").removeClass("zmdi-chevron-down").addClass("zmdi-chevron-up")
+                }
+            }
+        });
+
+        $(window).resize(function () {
+            toggleFooterContent()
+        })
+
+        /**
+         * show/hide footer content depend on max-width
+         */
+        function toggleFooterContent() {
+            if (window.matchMedia("(max-width: 640px)").matches) {
+                footerContent.find("ul").hide()
+                footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
+            } else {
+                footerContent.find("ul").show()
+            }
+        }
+
+        /*Footer - END*/
+    </script>
+
+    <script>
+    $('.slider-cus').flexslider({
+        animation: "slide",
+        controlNav: true,
+        animationLoop: false,
+        slideshow: true,
+        itemMargin: 0,
+        maxItems: 1,
+        touch: true,
+        slideshowSpeed: 4000,
+        prevText: "<i class='zmdi zmdi-chevron-left'></i>",
+        nextText: "<i class='zmdi zmdi-chevron-right'></i>",
+    });
+
+    function show3DTour(src) {
+        let $wrapper = $(".full-3d-tour")
+        $wrapper.find('iframe').attr('src', src)
+        $wrapper.show()
+    }
+
+    $(".close-3d-tour").click(function (e) {
+        $(".full-3d-tour").hide();
+        e.stopPropagation()
+    });
+
+    //Show demo căn hộ
+    $("#demo-apart").click(function () {
+        show3DTour("https://my.matterport.com/show/?m=yYDQY6WGVXi")
+    })
 </script>
-</body>
+
+{% endblock %}
+
+

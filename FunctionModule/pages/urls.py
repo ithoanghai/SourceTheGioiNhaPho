@@ -12,6 +12,7 @@ urlpatterns = [
     path('search', views.search, name='search'),
     path('searchurban', views.searchurban, name='search_urban'),
     path('detail', views.detail, name='detail'),
+    path('sellwithus', views.sell_with_us, name='sell_with_us'),
 
     #Url for Backend
     #path('admin/', admin.site.urls), #for Backend from default lib

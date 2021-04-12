@@ -1,28 +1,28 @@
 @font-face {
     font-family: rv-font1;
-    src: url(../../fonts/RV-Harmonia-Regular.eot);
-    src: url(../../fonts/RV-Harmonia-Regulard41d.eot?#iefix) format('embedded-opentype'), url(../../fonts/RV-Harmonia-Regular.woff) format('woff'), url(../../fonts/RV-Harmonia-Regular.ttf) format('truetype'), url(../../fonts/RV-Harmonia-Regular.svg#roboto_condensedregular) format('svg');
+    src: url(../fonts/RV-Harmonia-Regular.eot);
+    src: url(../fonts/RV-Harmonia-Regulard41d.eot?#iefix) format('embedded-opentype'), url(../fonts/RV-Harmonia-Regular.woff) format('woff'), url(../fonts/RV-Harmonia-Regular.ttf) format('truetype'), url(../fonts/RV-Harmonia-Regular.svg#roboto_condensedregular) format('svg');
     font-weight: 400
 }
 
 @font-face {
     font-family: rv-font1;
-    src: url(../../fonts/RV-Harmonia-SemiBold.eot);
-    src: url(../../fonts/RV-Harmonia-SemiBoldd41d.eot?#iefix) format('embedded-opentype'), url(../../fonts/RV-Harmonia-SemiBold.woff) format('woff'), url(../../fonts/RV-Harmonia-SemiBold.ttf) format('truetype'), url(../../fonts/RV-Harmonia-SemiBold.svg#roboto_condensedregular) format('svg');
+    src: url(../fonts/RV-Harmonia-SemiBold.eot);
+    src: url(../fonts/RV-Harmonia-SemiBoldd41d.eot?#iefix) format('embedded-opentype'), url(../fonts/RV-Harmonia-SemiBold.woff) format('woff'), url(../fonts/RV-Harmonia-SemiBold.ttf) format('truetype'), url(../fonts/RV-Harmonia-SemiBold.svg#roboto_condensedregular) format('svg');
     font-weight: 500
 }
 
 @font-face {
     font-family: rv-font1;
-    src: url(../../fonts/RV-Harmonia-Bold.eot);
-    src: url(../../fonts/RV-Harmonia-Boldd41d.eot?#iefix) format('embedded-opentype'), url(../../fonts/RV-Harmonia-Bold.woff) format('woff'), url(../../fonts/RV-Harmonia-Bold.ttf) format('truetype'), url(../../fonts/RV-Harmonia-Bold.svg#roboto_condensedregular) format('svg');
+    src: url(../fonts/RV-Harmonia-Bold.eot);
+    src: url(../fonts/RV-Harmonia-Boldd41d.eot?#iefix) format('embedded-opentype'), url(../fonts/RV-Harmonia-Bold.woff) format('woff'), url(../fonts/RV-Harmonia-Bold.ttf) format('truetype'), url(../fonts/RV-Harmonia-Bold.svg#roboto_condensedregular) format('svg');
     font-weight: 600
 }
 
 @font-face {
     font-family: rv-font2;
-    src: url(../../fonts/TiemposHeadline-Medium.eot);
-    src: url(../../fonts/TiemposHeadline-Mediumd41d.eot?#iefix) format('embedded-opentype'), url(../../fonts/TiemposHeadline-Medium.woff) format('woff'), url(../../fonts/TiemposHeadline-Medium.ttf) format('truetype'), url(../../fonts/TiemposHeadline-Medium.svg#roboto_condensedregular) format('svg');
+    src: url(../fonts/TiemposHeadline-Medium.eot);
+    src: url(../fonts/TiemposHeadline-Mediumd41d.eot?#iefix) format('embedded-opentype'), url(../fonts/TiemposHeadline-Medium.woff) format('woff'), url(../fonts/TiemposHeadline-Medium.ttf) format('truetype'), url(../fonts/TiemposHeadline-Medium.svg#roboto_condensedregular) format('svg');
     font-weight: 500
 }
 
@@ -959,11 +959,11 @@ header#home::before {
 }
 
 .main-header#home .col-left .logo-large > a {
-    background-image: url(../../images/logo-r-white.svg)
+    background-image: url(../images/logo-r-white.svg)
 }
 
 .main-header#home .col-left .logo > a {
-    background-image: url(../../images/logo-r-white.svg)
+    background-image: url(../images/logo-r-white.svg)
 }
 
 .main-header#home .col-left .logo > a .zmdi {
