@@ -9776,7 +9776,7 @@
                 return e("div", {
                     staticClass: "popup-or-direct-call",
                     staticStyle: {"line-height": "1.6", "text-align": "center"}
-                }, [e("p", [this._v("Cảm ơn bạn đã chọn bán với Rever, chúng tôi sẽ liên lạc ngay trong thời gian sớm nhất. Mọi thắc mắc xin vui\n        lòng liên hệ\n        "), e("a", {attrs: {href: "tel:1800234546"}}, [e("strong", [this._v("0964399436")])])])])
+                }, [e("p", [this._v("Cảm ơn bạn đã chọn bán với Rever, chúng tôi sẽ liên lạc ngay trong thời gian sớm nhất. Mọi thắc mắc xin vui\n        lòng liên hệ\n        "), e("a", {attrs: {href: "tel:0964399436"}}, [e("strong", [this._v("0964399436")])])])])
             }]
         }, G = n("VU/8")(z, Y, !1, null, null, null).exports, q = function (t) {
             return yt(["text", "password", "search", "email", "tel", "url", "textarea", "number"], t.type)

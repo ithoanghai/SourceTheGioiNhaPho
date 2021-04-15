@@ -1,0 +1,305 @@
+.popup-fade {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    border: none;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 9999;
+    overflow-x: hidden;
+    overflow-y: auto;
+    opacity: 0;
+    -webkit-transition: opacity .15s linear;
+    transition: opacity .15s linear
+}
+
+.popup-fade.show {
+    display: block;
+    opacity: 1
+}
+
+.popup-dialog {
+    position: relative;
+    width: auto;
+    margin: .5rem;
+    pointer-events: none
+}
+
+@media (min-width: 576px) {
+    .popup-dialog {
+        max-width: 500px;
+        margin: 1.75rem auto
+    }
+}
+
+.popup-dialog-centered {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: calc(100% - (.5rem * 1))
+}
+
+@media (min-width: 576px) {
+    .popup-dialog-centered {
+        min-height: calc(100% - (1.75rem * 2))
+    }
+}
+
+@media (min-width: 900px) {
+    .popup-dialog-large {
+        max-width: 820px
+    }
+}
+
+@media (max-width: 900px) {
+    .popup-dialog-large {
+        max-width: 100%;
+        margin: 1.75rem
+    }
+}
+
+@media (max-width: 576px) {
+    .popup-dialog-large {
+        max-width: 100%;
+        margin: .5rem
+    }
+}
+
+.popup-dialog-meium {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    max-width: 820px;
+    width: 100%;
+    margin: 0 auto;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 0;
+    outline: 0;
+    border: 0;
+    z-index: 100
+}
+
+.popup-content {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 0;
+    outline: 0;
+    border: 0;
+    z-index: 100
+}
+
+.popup-header {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 0;
+    background-color: #f3f4f7
+}
+
+.popup-body {
+    position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem 1rem
+}
+
+.popup-footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-top: 1px solid #e9ecef
+}
+
+.popup-title {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: #30333a;
+    display: block;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+@media (max-width: 576px) {
+    .popup-title {
+        width: calc(100% - 2rem);
+        margin-left: 1.125rem
+    }
+}
+
+.popup-text {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #444c59
+}
+
+.popup-close {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, .1);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .1);
+    text-align: center;
+    padding: 7px 12px;
+    border: 0;
+    cursor: pointer;
+    z-index: 60
+}
+
+.popup-close .zmdi {
+    font-size: 1.375rem;
+    color: #30333a;
+    opacity: .5;
+    padding: 0
+}
+
+.popup-close:hover .zmdi {
+    opacity: 1
+}
+
+@media (max-width: 576px) {
+    .popup-close {
+        top: 5px;
+        right: 5px;
+        background: 0 0;
+        -webkit-box-shadow: unset;
+        box-shadow: unset;
+        opacity: 1
+    }
+}
+
+section.bg-career-gray div.contentpx div.career-img {
+    width: calc(100% + 10px)
+}
+
+section.bg-career-gray div.contentpx div.career-img ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap
+}
+
+section.bg-career-gray div.contentpx div.career-img ul li {
+    padding: 4px 4px
+}
+
+section.bg-career-gray div.contentpx div.career-img ul li a img {
+    height: 100%
+}
+
+section.bg-career-white div.content div div.detail {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap
+}
+
+section.bg-career-white div.content div div div.name {
+    padding-top: 0
+}
+
+section.bg-career-white div.content div div div.name .job-desc {
+    display: block;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    background-color: unset;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #00a6bd;
+    cursor: pointer
+}
+
+section.bg-career-white div.content div div.detail div.btn-app {
+    max-width: 100%;
+    min-width: 104px
+}
+
+.popup-career .popup-body iframe {
+    max-width: 100%;
+    width: 100%;
+    min-height: 60vh
+}
+
+.popup-career .popup-body iframe .c41 {
+    padding: 0 !important;
+    max-width: 100% !important
+}
+
+.popup-career .popup-title {
+    font-family: rv-font2
+}
+
+.popup-career .cta-apply-now {
+    display: inline-block;
+    max-width: -webkit-fit-content;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 4px;
+    background-color: #c72528;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: #fff
+}
+
+@media (min-width: 1200px) {
+    .popup-career .cta-apply-now:hover {
+        opacity: .86
+    }
+}

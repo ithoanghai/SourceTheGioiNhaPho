@@ -7,9 +7,8 @@ from FunctionModule.cadastral.constants import state_data
 from FunctionModule.listings.choices import price_choices, bedroom_choices
 from FunctionModule.listings.models import Listing
 from FunctionModule.realtors.models import Realtor
-
 from django.contrib.admin import site
-
+from django.contrib.auth.models import User
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -18,10 +17,6 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
-
-
-from django.contrib.admin import site
-from django.contrib.auth.models import User
 
 def index(request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)[:3]
@@ -33,8 +28,6 @@ def index(request):
     }
 
     return render(request, 'home/index.html', context)
-
-
 
 def about(request):
     # Get all realtors
@@ -48,7 +41,7 @@ def about(request):
         'mvp_realtors': mvp_realtors
     }
 
-    return render(request, 'about/about.html', context)
+    return render(request, 'home/about.html', context)
 
 def search(request):
        """'listing': get_object_or_404(Listing, house_type=house_type)"""
@@ -64,9 +57,8 @@ def search(request):
 
        return render(request, 'home/search.html', context)
 
-
 def searchurban(request):
-    listings = Listing.objects.order_by('-list_date').filter(urban_area = '')[:3]
+    listings = Listing.objects.order_by('-list_date').filter( urban_area='')[:3]
     context = {
         'listings': listings,
         'state_data': state_data,
@@ -75,7 +67,6 @@ def searchurban(request):
     }
 
     return render(request, 'home/search.html', context)
-
 
 def detail(request):
     listing_id = request.GET.get('id', '')
@@ -89,7 +80,64 @@ def sell_with_us(request):
     context = {
     }
 
-    return render(request, 'home/sellwithus.html', context)
+    return render(request, 'home/sellWithUs.html', context)
+
+def buy_with_us(request):
+    context = {
+    }
+
+    return render(request, 'home/buyWithUs.html', context)
+
+def rent_with_us(request):
+    context = {
+    }
+
+    return render(request, 'home/rentWithUs.html', context)
+
+def specialist_us(request):
+    context = {
+    }
+
+    return render(request, 'home/specialistUs.html', context)
+
+def specialist(request):
+    context = {
+    }
+
+    return render(request, 'home/specialist.html', context)
+
+def whyChoose(request):
+    context = {
+    }
+
+    return render(request, 'home/whyChoose.html', context)
+
+def services(request):
+    context = {
+    }
+
+    return render(request, 'home/services.html', context)
+
+def contact(request):
+    context = {
+    }
+
+    return render(request, 'home/contact.html', context)
+
+def recruitment(request):
+    context = {
+    }
+
+    return render(request, 'home/recruitment.html', context)
+
+def apply(request):
+    position = request.GET.get('trantype', '')
+    context = {
+        'position': position,
+    }
+
+    return render(request, 'home/apply.html', context)
+
 
 """Admin url here"""
 def dashboard(request):
