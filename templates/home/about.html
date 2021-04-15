@@ -1,0 +1,955 @@
+{% extends 'base_common.html' %}
+
+{% load static humanize i18n %}
+
+{% block head %}
+
+    <title> {% block title %}Giới thiệu về Thế giới Nhà Phố {% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Dựa trên nền tảng công nghệ, Rever nỗ lực mang đến nhiều nhà đất được xác minh nhất, giúp bạn dễ dàng tìm được ngôi nhà ưng ý với giá chính xác và hợp lý." />
+    <meta name="keywords"  content="Rever, tuyen dung, tuyen moi gioi, moi gioi nha dat, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
+    <meta name="author" content="thegioinhaphovietnam.com.vn"/>
+    <link rel="canonical" href="specialistUs"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <meta property="fb:app_id" content=""/>
+    <meta property="og:url" content="buywithus"/>
+    <meta property="og:title" content="Vì sao nên chọn chuyên viên môi giới Rever"/>
+    <meta property="og:description" content="Dựa trên nền tảng công nghệ, Rever nỗ lực mang đến nhiều nhà đất được xác minh nhất, giúp bạn dễ dàng tìm được ngôi nhà ưng ý với giá chính xác và hợp lý." />
+    <meta property="og:image" content="{% static 'img/logo-chi-chu.svg' %}"/>
+    <meta property="og:image:url" content="{% static 'img/logo-chi-chu.svg' %}"/>
+    <meta property="og:image:width" content="600"/>
+    <meta property="og:image:height" content="320"/>
+    <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
+    <meta property="og:rich_attachment" content="true"/>
+    <meta property="og:type" content="article"/>
+    <meta property="hotline" content="0964399436"/>
+
+    <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style01.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/mobile.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/temp90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/flexslider.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/header-live.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/service.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/menu.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/pop-up.min.css' %}"/>
+
+    s
+    <link rel="stylesheet" href="{% static 'css/popup-new.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/careers.min90ca.css' %}"/>
+
+    <style>
+        [v-cloak] {
+            display: none !important;
+        }
+
+        /* Ẩn các element khi vue chưa load */
+        picture img {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /*hide tracking img*/
+        img[src^="//analytics.rever.vn/fap"], img[src^="/fap/debug/track"] {
+            display: none;
+        }
+
+        ._hj_feedback_container button { /* Fix lỗi hotjar */
+            text-align: center;
+        }
+    </style>
+    <style>
+        #msform a.butt-primary[disabled] {
+            opacity: 0.4
+        }
+    </style>
+
+    <style>
+        .loading-gif {
+            display: block;
+            content: "";
+            width: 45px;
+            height: 13px;
+            background: url('data:image/gif;base64,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') center center no-repeat;
+            background-size: cover;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div id="wraps">
+        <!-- Search menu -->
+        {% include 'partials/_menuSearch.html' %}
+
+        <!-- Header -->
+        <div class="cta-bottom-wrapper">
+            <div class="cta-bottom-inner">
+                <div class="phone">
+                    <a class="cta-hotline" href="tel:0964399436"><span class="font-icon fone-b font-20"> </span>
+                        <strong>0964399436</strong></a>
+                </div>
+                <div>
+                    <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
+                </div>
+            </div>
+        </div>
+        <div class="s-menu about-menu">
+            <div class="width-1600">
+                <div class="s-menu-wrapper">
+                    <ul>
+                        <li class="s-menu-items"><a href="about">Giới thiệu Rever</a>
+                        </li>
+                        <li class="s-menu-items">
+                            <a href="doi-ngu.html">Đội ngũ</a>
+                        </li>
+
+
+                        <li class="s-menu-items">
+                            <a href="san-giao-dich.html">Sàn giao dịch</a>
+                        </li>
+
+
+                        <li class="s-menu-items active">
+                            <a href="#">Tuyển dụng</a>
+                        </li>
+                        <li class="s-menu-items">
+                            <a href="lien-he.html">Liên hệ</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content  -->
+
+<div class="bg-about" style=" background: url({% static 'images/bg-rever.jpg' %}) 50% 50% / cover no-repeat;">
+<div class="heading-wrapper">
+<div class="heading-inner">
+<h1>Sứ mệnh của chúng tôi là thiết lập và thực thi những tiêu chuẩn cao nhất nhằm phục vụ lợi ích lớn nhất của Khách hàng cho mọi nhu cầu về Bất động sản.</h1>
+</div>
+</div>
+</div>
+
+<section class="bg-white">
+<div class="width1140 s-padding-tb">
+<p class="s-heading" style="text-align:center">
+Giới thiệu về Rever
+</p>
+<p class="s-description pdb-60">
+Ra đời chính thức từ năm 2016, Rever là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Rever, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Rever còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở.</p>
+<p class="s-heading" style="text-align:center">
+Chuyên viên Rever
+</p>
+<p class="s-description pdb-60">
+Chuyên viên Rever - được đào tạo chuyên nghiệp, trải qua nhiều khóa học đào tạo chuyên sâu nhất, đặc biệt rất am hiểu thị trường theo từng khu vực, luôn đặt sự hài lòng của Khách Hàng là mục tiêu cao nhất. Với vai trò là người đồng hành hỗ trợ bạn trong suốt quá trình Mua / Bán/ Thuê / Cho Thuê, chuyên viên Rever sẽ tư vấn kỹ càng cho bạn về xu hướng & biến động thị trường, phân tích đầu tư, thông tin quy hoạch, tiện ích, và cộng đồng cư dân ở khu vực bạn quan tâm, đưa ra những gợi ý phù hợp nhất ứng với nhu cầu và tình hình tài chính của bạn.
+</p>
+<p class="s-heading" style="text-align:center">
+Danh mục bất động sản trên Rever
+</p>
+<p class="s-description pdb-60">
+<a href="#">Rever</a> là trang web dịch vụ có thể truy cập ở bất kì đâu, bên cạnh đó - Sàn giao dịch Rever là nơi
+giao dịch theo giấy phép sàn giao dịch bất động sản, là chi nhánh tập trung các giao dịch BĐS tại địa phương,
+vùng lân cận.
+</p>
+<div class="branch-map">
+<img src="../s3-cdn.rever.vn/p/v2.33.55/images/sanGD.jpg" alt="">
+</div>
+</div>
+</section>
+
+<section class="background-gray">
+<div class="width1140 s-padding-tb">
+<div class="s-grid s-column-4 s-gutters">
+<div class="s-cell s-btn">
+<a href="chuyen-vien.html">Gặp chuyên viên tư vấn</a>
+</div>
+<div class="s-cell s-btn">
+<a href="ban-nha-voi-rever.html">Đăng bán, cho thuê</a>
+</div>
+<div class="s-cell s-btn">
+<a href="tuyen-dung.html">Gia nhập Rever</a>
+</div>
+<div class="s-cell s-btn">
+<a href="lien-he.html">Liên hệ</a>
+</div>
+</div>
+</div>
+</section>
+
+        <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
+            <div class="popup-feedback-fixed">
+                <div class="popup-body-fb">
+                    <div v-show="state == 'composing'" class="popup-contain">
+                        <div class="visible-pc">
+                            <form id="msform" onsubmit="return false">
+                                <fieldset style="display: block">
+                                    <h2 class="popup-title-w-back height-title popup-font-tiempos" id="title-head">Phản
+                                        hồi của bạn về Thegioinhaphovietnam.com.vn (<span v-text="step"></span>/3)</h2>
+                                    <button @click="hideModal()" class="popup-close-btn"><i
+                                            class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                                    <div v-show="step == 1" class="contain" id="step-form-1">
+                                        <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?
+                                        </div>
+                                        <div class="choose-number">
+                                            <ul>
+                                                <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
+                                                    @mouseleave="onMouseLeaveRate(i)" @click="selectStep1Rate(i)">
+                                                    <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                                                       v-text="i"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="emotion">
+                                            <img :src="'../images/' + step1Icon" alt="">
+                                            <p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
+                                        </div>
+                                    </div>
+                                    <div v-show="step == 2" class="contain" id="step-form-2">
+                                        <div class="intro">Bạn có thấy TGNP dễ sử dụng không?</div>
+                                        <div class="row row-fb pd-t-39 pd-bt-68 center-item">
+                                            <button :class="{active : step2.rate == 'hard'}"
+                                                    @click="selectStep2Rate('hard')"
+                                                    class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                                            </button>
+                                            <button :class="{active : step2.rate == 'normal'}"
+                                                    @click="selectStep2Rate('normal')"
+                                                    class="large-butt-grey btn-use pd-use-btn mgr-r-20">Bình thường
+                                            </button>
+                                            <button :class="{active : step2.rate == 'easy'}"
+                                                    @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ
+                                                sử
+                                                dụng
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div v-show="step == 3" class="contain">
+                                        <div class="intro">Bạn muốn TGNP cần cải thiện thêm về điều gì?</div>
+                                        <div class="checkbox-option">
+                                            <div class="checkbox-pc">
+                                                <div class="row-fb">
+                                                    <div>
+                                                        <label class="container-cb">Giao diện đẹp hơn
+                                                            <input type="checkbox" v-model="step3.improve.ui">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="container-cb">Nội dung chính xác hơn
+                                                            <input type="checkbox" v-model="step3.improve.content">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label class="container-cb">Thêm tính năng
+                                                            <input type="checkbox" v-model="step3.improve.feature">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="container-cb">Khác (vui lòng nhập)
+                                                            <input type="checkbox" v-model="step3.improve.other"
+                                                                   @change="onSelectOtherMsg('')">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="share-rv">
+                                                <p style="font-size: initial">Ý kiến khác</p>
+                                                <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác"
+                                                          ref="msg"
+                                                          :disabled="!step3.improve.other"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a @click="gotoStep(step - 1)" v-show="step > 1"
+                                       class="butt-primary butt-transparent prev" href="javascript:void(0)"
+                                       id="prev">Trước</a>
+                                    <a @click="onClickNext()" v-show="step < 3" :disabled="!canNext"
+                                       class="butt-primary btn-grey next" href="javascript:void(0)" id="next">Tiếp</a>
+                                    <button @click="onClickSend" v-show="step == 3" class="butt-primary btn-grey">
+                                        <span v-show="!isSending" class="send">Gửi</span>
+                                        <span v-show="isSending">Đang gửi...</span>
+                                    </button>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="visible-sm">
+                            <div class="header-sm">
+                                <button @click="hideModal()" class="popup-close-btn-sm"><i
+                                        class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                                <h4>Phản hồi của bạn về thegioinhaphovietnam.com.vn</h4>
+                            </div>
+                            <div class="content">
+                                <div class="intro-sm">
+                                    <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?</p>
+                                    <div class="choose-number">
+                                        <ul>
+                                            <li v-for="i in 10" @click="selectStep1Rate(i)">
+                                                <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                                                   v-text="i"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="use-easy">
+                                    <p>Bạn thấy Thế giới Nhà Phố có dễ sử dụng không?</p>
+                                    <div class="row pt-15 center-item">
+                                        <button :class="{active : step2.rate == 'hard'}"
+                                                @click="selectStep2Rate('hard')"
+                                                class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                                        </button>
+                                        <button :class="{active : step2.rate == 'normal'}"
+                                                @click="selectStep2Rate('normal')"
+                                                class="large-butt-grey btn-use pd-use-btn">Bình thường
+                                        </button>
+                                        <button :class="{active : step2.rate == 'easy'}"
+                                                @click="selectStep2Rate('easy')"
+                                                class="large-butt-grey btn-use">Dễ sử dụng
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="improve">
+                                    <p>Bạn muốn Thế giới Nhà Phố .com.vn cần cải thiện thêm về điều gì?</p>
+                                    <div class="checkbox-sm">
+                                        <label class="container-cb">Giao diện đẹp hơn
+                                            <input type="checkbox" v-model="step3.improve.ui">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="container-cb">Nội dung chính xác hơn
+                                            <input type="checkbox" v-model="step3.improve.content">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="container-cb">Thêm tính năng
+                                            <input type="checkbox" v-model="step3.improve.feature">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="container-cb">Khác (vui lòng nhập)
+                                            <input type="checkbox" v-model="step3.improve.other"
+                                                   @change="onSelectOtherMsg('2')">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="note">
+                                    <p>Ý kiến khác</p>
+                                    <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg2"
+                                              :disabled="!step3.improve.other"></textarea>
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <button @click="onClickSend" class="butt-primary btn-red">Gửi phản hồi</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-show="state == 'finished'" class="popup-fb-success">
+                        <div class="popup-header">
+                            <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về
+                                TGNP.vn</h2>
+                            <button @click="hideModal()" class="popup-close-btn"><i
+                                    class="zmdi zmdi-hc-2x zmdi-close"></i>
+                            </button>
+                        </div>
+                        <div class="popup-contain">
+                            <img class="img-success" src="{% static 'images/icon-success.svg' %}">
+                            <div class="send-success">
+                                <h3>Đã gửi thành công!</h3>
+                                <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp Thế giới Nhà Phố từng
+                                    bước nâng
+                                    cao
+                                    chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
+                                    <strong>1800 234 546</strong></p>
+                            </div>
+                        </div>
+                        <div class="popup-footer">
+                            <a @click="hideModal()" class="butt-primary butt-red btn-red"
+                               href="javascript:void(0)">Đóng</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Footer content below-->
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script async defer src="{% static 'js/tracking.min90ca.js' %}"></script>
+    <script async defer src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
+    <script async defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
+    <script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script>
+    <script async defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
+    <script defer src="{% static 'js/feedback-modal.min90ca.js' %}"></script>
+
+    <script async defer src="{% static 'js/external90ca.js' %}"></script>
+
+    <script async defer src="{% static 'js/career.min90ca.js' %}"></script>
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js50aa?key=AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg&amp;libraries=drawing,places,geometry&amp;language=vi&amp;callback=callbackInitMap"></script>
+    <script defer src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
+    <script defer id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '268342061639747',
+                cookie: true,                     // Enable cookies to allow the server to access the session.
+                xfbml: true,                     // Parse social plugins on this webpage.
+                version: 'v8.0'           // Use this Graph API version for this call.
+            });
+        }
+    </script>
+
+    <!--[if lte IE 8]>
+    <script charset="utf-8" async defer type="text/javascript"
+            src="https://rever.vn/public/externaljs"></script>
+    <![endif]-->
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://rever.vn",
+      "logo": "https://rever.vn/static/images/rever-thumbnail.jpg",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "1800 234 546",
+          "contactType": "customer service"
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/rever.vn",
+        "../www.linkedin.com/company/rever-real-estate.html",
+        "../www.instagram.com/rever.vn/index.html",
+        "../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@id": "https://rever.vn/#website",
+        "@type": "WebSite",
+        "url": "https://rever.vn/",
+        "name": "TGNP",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://rever.vn/s/{search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+</script>
+
+    <script type="text/javascript">
+        var callbackInitMap = function () {
+            if (window.vinitMap) {
+                window.vinitMap();
+            }
+            if (window.initMap) {
+                initMap.call(this);
+            } else {
+                setTimeout(callbackInitMap, 500);
+            }
+        }
+    </script>
+    <script>
+        adroll_adv_id = "VHUFKBW42JH37IACSQW3PD";
+        adroll_pix_id = "734MVFGRZFAB7JCBBH46O6";
+    </script>
+    <script>
+        window.RFeedback = {
+            API: "https://thegioinhaphovietnam.com.vn/mapi",
+            email: "",
+            name: "",
+            phone: "",
+            ip: "10.244.0.0"
+        }
+    </script>
+    <script>
+        /*Footer*/
+        let footerContent = $("#footer .info-container li")
+
+        toggleFooterContent()
+
+        footerContent.click(function (e) {
+            if (window.matchMedia("(max-width: 640px)").matches) {
+                // don't slideUp when click <a>
+                if (e.target.tagName === 'A')
+                    return
+
+                footerContent.find("ul").slideUp(300)
+                footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
+                if (!$(this).find("ul").is(":visible")) {
+                    $(this).find("ul").slideDown(300)
+                    $(this).find(".zmdi").removeClass("zmdi-chevron-down").addClass("zmdi-chevron-up")
+                }
+            }
+        });
+
+        $(window).resize(function () {
+            toggleFooterContent()
+        })
+
+        /**
+         * show/hide footer content depend on max-width
+         */
+        function toggleFooterContent() {
+            if (window.matchMedia("(max-width: 640px)").matches) {
+                footerContent.find("ul").hide()
+                footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
+            } else {
+                footerContent.find("ul").show()
+            }
+        }
+
+        /*Footer - END*/
+    </script>
+
+
+    <script>
+        window.RHome = {
+            searchUrl: "search?specialist=",
+        }
+    </script>
+
+{% endblock %}
+
+<body>
+
+<div id="wrap">
+
+<footer id="footer">
+<div class="inner">
+<div class="row">
+<ul class="contact-group">
+<li class="item">
+<div class="icon">
+<i class="zmdi zmdi-phone"></i>
+</div>
+<div class="detail">
+<p class="title">Hotline miễn phí (24/7)</p>
+<p class="link">
+<a href="tel:1800234546">1800 234 546</a>
+</p>
+</div>
+</li>
+<li class="item">
+<div class="icon">
+<i class="zmdi zmdi-phone"></i>
+</div>
+<div class="detail">
+<p class="title">Khiếu nại, phản hồi (miễn phí)</p>
+<p class="link">
+<a href="tel:1800 234 560">1800 234 560</a>
+</p>
+</div>
+</li>
+<li class="item">
+<div class="icon">
+<i class="zmdi zmdi-email-open"></i>
+</div>
+<div class="detail">
+<p class="title">Bộ phận kinh doanh</p>
+<p class="link">
+<a href="cdn-cgi/l/email-protection.html#c0b3a1aca5b380b2a5b6a5b2eeb6ae"><span class="__cf_email__" data-cfemail="4c1f2d20293f0c3e293a293e623a22">[email&#160;protected]</span></a>
+</p>
+</div>
+</li>
+<li class="item">
+<div class="icon">
+<i class="zmdi zmdi-email-open"></i>
+</div>
+<div class="detail">
+<p class="title">Phòng dự án</p>
+<p class="link">
+<a href="cdn-cgi/l/email-protection.html#fb8b9394959c9f8e9a95bb899e8d9e89d58d95"><span class="__cf_email__" data-cfemail="deaeb6b1b0b9baabbfb09eacbba8bbacf0a8b0">[email&#160;protected]</span></a>
+</p>
+</div>
+</li>
+<li class="item">
+<div class="icon">
+<i class="zmdi zmdi-email-open"></i>
+</div>
+<div class="detail">
+<p class="title">Chăm sóc khách hàng</p>
+<p class="link">
+<a href="cdn-cgi/l/email-protection.html#cdbeb8bdbda2bfb98dbfa8bba8bfe3bba3"><span class="__cf_email__" data-cfemail="1b486e6b6b74696f5b697e6d7e69356d75">[email&#160;protected]</span></a>
+</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="row">
+<ul class="info-container">
+<li class="address">
+<a class="logo" href="index.html" title="Rever">
+<img src="../s3-cdn.rever.vn/p/v2.33.55/images/rv-logo-ft.svg" alt="rever" title="rever">
+</a>
+<p>ST01, LakeView 1, Đường Ven Hồ Trung Tâm, P. An Khánh, Quận 2, TP. Hồ Chí Minh</p>
+<div class="social-group">
+<a class="zmdi zmdi-facebook" href="../www.facebook.com/rever.html" title="Facebook Rever" target="_blank"></a>
+<a class="zmdi zmdi-twitter" href="../twitter.com/VnRever.html" title="Twitter Rever" target="_blank"></a>
+<a class="zmdi zmdi-linkedin-box" href="../www.linkedin.com/company/rever-real-estate.html" title="Linkedin Rever" target="_blank"></a>
+<a class="zmdi zmdi-instagram" href="../www.instagram.com/rever.vn/index.html" title="Instagram Rever" target="_blank"></a>
+<a class="zmdi zmdi-youtube-play" href="../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html" title="Youtube Rever" target="_blank"></a>
+</div>
+</li>
+<li>
+<span class="link-cty">
+CÔNG TY
+<i class="zmdi zmdi-chevron-down"></i>
+</span>
+<ul id="mn-01">
+<li>
+<a href="about" title="Về Rever">Về Rever</a>
+</li>
+<li>
+<a href="tuyen-dung.html" title="Tuyển dụng">Tuyển dụng</a>
+</li>
+<li>
+<a href="doi-ngu.html" title="Đội ngũ">Đội ngũ</a>
+</li>
+<li>
+<a href="san-giao-dich.html" title="Sàn giao dịch">Sàn giao dịch</a>
+</li>
+<li>
+<a href="lien-he.html" title="Liên hệ">Liên hệ</a>
+</li>
+</ul>
+</li>
+<li>
+<span class="link-dv">
+DỊCH VỤ
+<i class="zmdi zmdi-chevron-down"></i>
+</span>
+<ul id="mn-02">
+
+
+
+<li>
+<a href="ban-nha-voi-rever.html" title="Bán & Cho thuê">Bán & Cho thuê</a>
+</li>
+<li>
+<a href="mua-nha-voi-rever.html" title="Mua với Rever">Mua với Rever</a>
+</li>
+<li>
+<a href="thue-nha-voi-rever.html" title="Thuê với Rever">Thuê với Rever</a>
+</li>
+<li>
+<a href="../academy.rever.vn/index.html" title="Rever Academy">Rever Academy</a>
+</li>
+<li>
+<a href="../agent.rever.vn/index.html" title="Rever Agents">Rever Agents</a>
+</li>
+</ul>
+</li>
+<li>
+<span class="link-tt">
+THÔNG TIN
+<i class="zmdi zmdi-chevron-down"></i>
+</span>
+<ul id="mn-03">
+<li>
+<a href="../blog.rever.vn/topic/th%e1%bb%8b-tr%c6%b0%e1%bb%9dng.html" target="_blank" title="Tin tức thị trường">Tin tức thị trường</a>
+</li>
+<li>
+<a href="../blog.rever.vn/topic/ph%c3%a2n-t%c3%adch.html" target="_blank" title="Báo cáo & phân tích">Báo cáo & phân tích</a>
+</li>
+<li>
+<a href="../blog.rever.vn/topic/c%e1%ba%adp-nh%e1%ba%adt-s%e1%ba%a3n-ph%e1%ba%a9m.html" target="_blank" title="Cập nhật sản phẩm">Cập nhật sản phẩm</a>
+</li>
+<li>
+<a href="../agent.rever.vn/blog.html" target="_blank" title="Kiến thức cho môi giới">Kiến thức cho môi giới</a>
+</li>
+<li>
+<a href="../help.rever.vn/index.html" target="_blank" title="Hướng dẫn sử dụng">Hướng dẫn sử dụng</a>
+</li>
+</ul>
+</li>
+<li>
+<span class="link-ud">
+ỨNG DỤNG
+<i class="zmdi zmdi-chevron-down"></i>
+</span>
+<ul id="mn-04">
+<li>
+<a href="../apps.apple.com/vn/app/rever/id1101768201.html" target="_blank" title="Rever trên iOS">Rever trên iOS</a>
+</li>
+<li>
+<a href="../play.google.com/store/apps/detailsece3.html?id=com.rever.app.android" target="_blank" title="Rever trên Android">Rever trên Android</a>
+</li>
+
+
+
+
+
+
+</ul>
+</li>
+</ul>
+</div>
+<div class="row">
+<div class="left">
+<span>Copyright © 2021 - Rever. All Rights Reserved.</span>
+</div>
+<div class="right">
+<a href="chinh-sach-bao-mat.html">Chính sách bảo mật</a>
+<a href="dieu-khoan-su-dung.html">Điều khoản sử dụng</a>
+<a href="javascript:showFeedbackModal()">Phản hồi</a>
+</div>
+</div>
+</div>
+</footer>
+<script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="../www.google.com/recaptcha/apib091.js?render=explicit"></script>
+<script src="../s3-cdn.rever.vn/p/v2.33.55/js/jquery-ui.min90ca.js?v=1617780824171"></script>
+
+
+<script>
+    adroll_adv_id = "VHUFKBW42JH37IACSQW3PD";
+    adroll_pix_id = "734MVFGRZFAB7JCBBH46O6";
+</script>
+
+
+
+<script defer id="hs-script-loader" src="../js.hs-scripts.com/2775524.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script async defer src="../s3-cdn.rever.vn/p/v2.33.55/app_v2/login-popup-app.min90ca.js?v=1617780824171"></script>
+<style>
+    #msform a.butt-primary[disabled]{
+        opacity: 0.4
+    }
+</style>
+<div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
+<div class="popup-feedback-fixed">
+<div class="popup-body-fb">
+<div v-show="state == 'composing'" class="popup-contain">
+<div class="visible-pc">
+<form id="msform" onsubmit="return false">
+<fieldset style="display: block">
+<h2 class="popup-title-w-back height-title popup-font-tiempos" id="title-head">Phản hồi của bạn về Rever.vn (<span v-text="step"></span>/3)</h2>
+<button @click="hideModal()" class="popup-close-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+<div v-show="step == 1" class="contain" id="step-form-1">
+<div class="intro">Bạn có sẵn sàng giới thiệu Rever cho người khác?</div>
+<div class="choose-number">
+<ul>
+<li v-for="i in 10" @mouseover="onMouseOverRate(i)" @mouseleave="onMouseLeaveRate(i)" @click="selectStep1Rate(i)">
+<a :class="{active: step1.rate == i}" href="javascript:void(0)" v-text="i"></a>
+</li>
+</ul>
+</div>
+<div class="emotion">
+<img :src="'https://s3-cdn.rever.vn/p/v2.33.55/images/' + step1Icon" alt="">
+<p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
+</div>
+</div>
+<div v-show="step == 2" class="contain" id="step-form-2">
+<div class="intro">Bạn có thấy Rever.vn dễ sử dụng không?</div>
+<div class="row row-fb pd-t-39 pd-bt-68 center-item">
+<button :class="{active : step2.rate == 'hard'}" @click="selectStep2Rate('hard')" class="large-butt-grey btn-use mgr-r-20">Khó sử dụng</button>
+<button :class="{active : step2.rate == 'normal'}" @click="selectStep2Rate('normal')" class="large-butt-grey btn-use pd-use-btn mgr-r-20">Bình thường</button>
+<button :class="{active : step2.rate == 'easy'}" @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ sử dụng</button>
+</div>
+</div>
+<div v-show="step == 3" class="contain">
+<div class="intro">Bạn muốn Rever.vn cần cải thiện thêm về điều gì?</div>
+<div class="checkbox-option">
+<div class="checkbox-pc">
+<div class="row-fb">
+ <div>
+<label class="container-cb">Giao diện đẹp hơn
+<input type="checkbox" v-model="step3.improve.ui">
+<span class="checkmark"></span>
+</label>
+<label class="container-cb">Nội dung chính xác hơn
+<input type="checkbox" v-model="step3.improve.content">
+<span class="checkmark"></span>
+</label>
+</div>
+<div>
+<label class="container-cb">Thêm tính năng
+<input type="checkbox" v-model="step3.improve.feature">
+<span class="checkmark"></span>
+</label>
+<label class="container-cb">Khác (vui lòng nhập)
+<input type="checkbox" v-model="step3.improve.other" @change="onSelectOtherMsg('')">
+<span class="checkmark"></span>
+</label>
+</div>
+</div>
+</div>
+<div class="share-rv">
+<p style="font-size: initial">Ý kiến khác</p>
+<textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg" :disabled="!step3.improve.other"></textarea>
+</div>
+</div>
+</div>
+<a @click="gotoStep(step - 1)" v-show="step > 1" class="butt-primary butt-transparent prev" href="javascript:void(0)" id="prev">Trước</a>
+<a @click="onClickNext()" v-show="step < 3" :disabled="!canNext" class="butt-primary btn-grey next" href="javascript:void(0)" id="next">Tiếp</a>
+<button @click="onClickSend" v-show="step == 3" class="butt-primary btn-grey">
+<span v-show="!isSending" class="send">Gửi</span>
+<span v-show="isSending">Đang gửi...</span>
+</button>
+</fieldset>
+</form>
+</div>
+<div class="visible-sm">
+<div class="header-sm">
+<button @click="hideModal()" class="popup-close-btn-sm"><i class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+<h4>Phản hồi của bạn về Rever.vn</h4>
+</div>
+<div class="content">
+<div class="intro-sm">
+<p>Bạn có sẵn sàng giới thiệu Rever cho người khác?</p>
+<div class="choose-number">
+<ul>
+<li v-for="i in 10" @click="selectStep1Rate(i)">
+<a :class="{active: step1.rate == i}" href="javascript:void(0)" v-text="i"></a>
+</li>
+</ul>
+</div>
+</div>
+<div class="use-easy">
+<p>Bạn thấy Rever có dễ sử dụng không?</p>
+<div class="row pt-15 center-item">
+<button :class="{active : step2.rate == 'hard'}" @click="selectStep2Rate('hard')" class="large-butt-grey btn-use mgr-r-20">Khó sử dụng</button>
+<button :class="{active : step2.rate == 'normal'}" @click="selectStep2Rate('normal')" class="large-butt-grey btn-use pd-use-btn">Bình thường</button>
+<button :class="{active : step2.rate == 'easy'}" @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ sử dụng</button>
+</div>
+</div>
+<div class="improve">
+<p>Bạn muốn Rever.vn cần cải thiện thêm về điều gì?</p>
+<div class="checkbox-sm">
+<label class="container-cb">Giao diện đẹp hơn
+<input type="checkbox" v-model="step3.improve.ui">
+<span class="checkmark"></span>
+</label>
+<label class="container-cb">Nội dung chính xác hơn
+<input type="checkbox" v-model="step3.improve.content">
+<span class="checkmark"></span>
+</label>
+<label class="container-cb">Thêm tính năng
+<input type="checkbox" v-model="step3.improve.feature">
+<span class="checkmark"></span>
+</label>
+<label class="container-cb">Khác (vui lòng nhập)
+<input type="checkbox" v-model="step3.improve.other" @change="onSelectOtherMsg('2')">
+<span class="checkmark"></span>
+</label>
+</div>
+</div>
+<div class="note">
+<p>Ý kiến khác</p>
+<textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg2" :disabled="!step3.improve.other"></textarea>
+</div>
+</div>
+<div class="btn">
+<button @click="onClickSend" class="butt-primary btn-red">Gửi phản hồi</button>
+</div>
+</div>
+</div>
+<div v-show="state == 'finished'" class="popup-fb-success">
+<div class="popup-header">
+<h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về Rever.vn</h2>
+<button @click="hideModal()" class="popup-close-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+</div>
+<div class="popup-contain">
+<img class="img-success" src="../s3-cdn.rever.vn/p/v2.33.55/images/icon-success.svg">
+<div class="send-success">
+<h3>Đã gửi thành công!</h3>
+<p>Cảm ơn bạn đã gửi phản hồi cho Rever, ý kiến của bạn sẽ giúp Rever.vn từng bước nâng cao chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7): <strong>1800 234 546</strong> </p>
+</div>
+</div>
+<div class="popup-footer">
+<a @click="hideModal()" class="butt-primary butt-red btn-red" href="javascript:void(0)">Đóng</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script defer src="../s3-cdn.rever.vn/p/v2.33.55/app_v2/feedback-modal.min90ca.js?v=1617780824171"></script>
+<script>
+    window.RFeedback = {
+        API: "https://rever.vn/mapi",
+        email: "",
+        name: "",
+        phone: "",
+        ip: "10.244.0.0"
+    }
+</script>
+<style>
+    //analytics.rever.vn/fap"],img[src^="/fap/debug/track"] {
+    display: none;
+  }
+</style>
+
+<script>
+      /*Footer*/
+      let footerContent = $("#footer .info-container li")
+
+      toggleFooterContent()
+
+      footerContent.click(function (e) {
+        if (window.matchMedia("(max-width: 640px)").matches) {
+          // don't slideUp when click <a>
+          if (e.target.tagName === 'A')
+            return
+
+          footerContent.find("ul").slideUp(300)
+          footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
+          if (!$(this).find("ul").is(":visible")) {
+            $(this).find("ul").slideDown(300)
+            $(this).find(".zmdi").removeClass("zmdi-chevron-down").addClass("zmdi-chevron-up")
+          }
+        }
+      });
+
+      $(window).resize(function () {
+        toggleFooterContent()
+      })
+
+      /**
+       * show/hide footer content depend on max-width
+       */
+      function toggleFooterContent() {
+        if (window.matchMedia("(max-width: 640px)").matches) {
+          footerContent.find("ul").hide()
+          footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
+        } else {
+          footerContent.find("ul").show()
+        }
+      }
+
+      /*Footer - END*/
+    </script>
+</div>
+</body>
+

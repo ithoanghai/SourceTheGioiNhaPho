@@ -1,0 +1,959 @@
+{% extends 'base_common.html' %}
+
+{% load static humanize i18n %}
+
+{% block head %}
+
+    <title> {% block title %} Tại sao chọn Thế giới Nhà Phố {% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="UTF-8"/>
+    <meta name="description"
+          content="Rever với lợi thế về công nghệ và cung cấp đầy đủ các dịch vụ, cùng với đội ngũ chuyên viên hiểu biết sâu sắc từng khu vực đồng hành hỗ trợ bạn từng bước, sẽ giúp bạn tiết kiệm đáng kể chi phí và thời gian."/>
+    <meta name="keywords"
+          content="Rever, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
+    <meta name="author" content="thegioinhaphovietnam.com.vn"/>
+    <link rel="canonical" href="whyChoose"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <meta property="fb:app_id" content=""/>
+    <meta property="og:url" content="whyChoose"/>
+    <meta property="og:title" content="Danh sách chuyên viên môi giới bất động sản Rever"/>
+    <meta property="og:description"
+          content="Rever với lợi thế về công nghệ và cung cấp đầy đủ các dịch vụ, cùng với đội ngũ chuyên viên hiểu biết sâu sắc từng khu vực đồng hành hỗ trợ bạn từng bước, sẽ giúp bạn tiết kiệm đáng kể chi phí và thời gian."/>
+    <meta property="og:image" content="{% static 'img/logo-chi-chu.svg' %}"/>
+    <meta property="og:image:url" content="{% static 'img/logo-chi-chu.svg' %}"/>
+    <meta property="og:image:width" content="600"/>
+    <meta property="og:image:height" content="320"/>
+    <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
+    <meta property="og:rich_attachment" content="true"/>
+    <meta property="og:type" content="article"/>
+    <meta property="hotline" content="0964399436"/>
+
+    <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/menu.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/popup-new.min90ca.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style01.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/mobile.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/temp90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/flexslider.min.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'css/header-live.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/service.min90ca.css' %}"/>
+
+
+    <link rel="stylesheet" href="{% static 'css/browse-agent90ca.css' %}"/>
+
+    <style>
+        [v-cloak] {
+            display: none !important;
+        }
+
+        /* Ẩn các element khi vue chưa load */
+        picture img {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /*hide tracking img*/
+        img[src^="//analytics.rever.vn/fap"], img[src^="/fap/debug/track"] {
+            display: none;
+        }
+
+        ._hj_feedback_container button { /* Fix lỗi hotjar */
+            text-align: center;
+        }
+    </style>
+
+    <style>
+        #msform a.butt-primary[disabled] {
+            opacity: 0.4
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div id="wrap">
+    <!-- Search menu -->
+    {% include 'partials/_menuSearch.html' %}
+
+    <!-- Header -->
+    <div class="cta-bottom-wrapper">
+        <div class="cta-bottom-inner">
+            <div class="phone">
+                <a class="cta-hotline" href="tel:0964399436"><span class="font-icon fone-b font-20"> </span>
+                    <strong>0964399436</strong></a>
+            </div>
+            <div>
+                <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
+            </div>
+        </div>
+    </div>
+    <div class="s-menu">
+        <div class="width-1600">
+            <div class="s-menu-wrapper">
+                <ul>
+                    <li class="s-menu-items ">
+                        <a href="services">Tất cả dịch vụ</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="whyChoose">Vì sao chọn TGNP?</a>
+                    </li>
+                    <li class="s-menu-items active">
+                        <a href="sellwithus">Bán BĐS với Thế giới Nhà Phố</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="buywithus">Mua với TGNP</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="rentwithus">Thuê với TGNP</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="specialistUs">Chuyên viên TGNP</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="rever-photo.html">Chụp hình</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="3d.html">Thực tế ảo</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="thu-tuc-giay-to.html">Hành chính</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
+                    </li>
+                    <li class="s-btn-contact">
+                        <a href="#" data-action="contact-agent" style="font-size: 14px">Liên hệ ngay</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="sticky-header">
+        <div class="stickyTrigger is-stuck sticky-sMenu">
+            <div class="s-menu-wrapper">
+                <ul>
+                    <li class="s-menu-items ">
+                        <a href="services">Tất cả dịch vụ</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="whyChoose">Vì sao chọn TGNP?</a>
+                    </li>
+                    <li class="s-menu-items active">
+                        <a href="sellwithus">Bán với TG Nhà Phố</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="buywithus">Mua với TGNP</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="rentwithus">Thuê với TGNP</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="specialistUs">Chuyên viên TGNP</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="rever-photo.html">Chụp hình</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="3d.html">Thực tế ảo</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="thu-tuc-giay-to.html">Hành chính</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
+                    </li>
+                    <li class="s-btn-contact">
+                        <a href="javascript:void(0)" data-action="request-service">Đăng ký ngay</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content  -->
+    <div id="s-all" class="s-banner-bg"
+         style=" background: url({% static 'images/bg-service-sell.jpg' %}) 50% 50% / cover no-repeat;
+                 ">
+        <div class="s-banner-bg-inner">
+            <div class="s-banner-header-wrapper">
+                <h1>Mua bán nhà đất theo phương thức mới</h1>
+                <div class="sumary">Rever mong muốn mang đến cho bạn trải nghiệm tốt nhất trong việc tìm kiếm và giao
+                    dịch bất động sản. Lợi thế về
+                    công nghệ từ Rever sẽ giúp bạn tiết kiệm đáng kể chi phí, công sức và thời gian
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="background-gray">
+        <div class="width1140 s-padding-tb">
+            <ul>
+                <li class="s-col-3">
+                    <div class="item">
+                        <div class="icon-wrapper">
+                            <img src="{% static 'images/ho-tro-icon.svg' %}" alt="icon-save">
+                        </div>
+                        <h4>Được hỗ trợ mọi lúc</h4>
+                        <p>Chuyên viên Rever am hiểu từng khu vực sẽ hỗ trợ bạn tất cả mọi vấn đề và đưa ra lời khuyên
+                            phù hợp nhất
+                        </p>
+                    </div>
+                </li>
+                <li class="s-col-3">
+                    <div class="item">
+                        <div class="icon-wrapper">
+                            <img src="{% static 'images/chi-phi-icon.svg' %}" alt="icon-price">
+                        </div>
+                        <h4>Chi phí thấp nhất</h4>
+                        <p>Với lợi thế công nghệ và miễn phí các dịch vụ, Rever giúp bạn tiết kiệm đến 15% so với thị
+                            trường</p>
+                    </div>
+                </li>
+                <li class="s-col-3">
+                    <div class="item">
+                        <div class="icon-wrapper">
+                            <img src="{% static 'images/dich-vu-icon.svg' %}" alt="icon-buy">
+                        </div>
+                        <h4>Đầy đủ các dịch vụ</h4>
+                        <p>Dịch vụ Rever được tối ưu để hỗ trợ bạn từng bước, từ lúc tìm kiếm, thương lượng cho đến khi
+                            giao dịch hoàn
+                            tất
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="rv-guide" class="service-all">
+        <div class="s-padding-tb bg-gray">
+            <div class="guide-item">
+                <div class="s-col">
+                    <div class="img-wrapper">
+                        <img src="{% static 'images/dong-hanh.jpg' %}"
+                             alt="Chuyên viên Rever đồng hành cùng bạn">
+                    </div>
+                </div>
+                <div class="s-col">
+                    <div class="s-content mgr-l-0">
+                        <h2 class="s-feature-heading">Đồng hành hỗ trợ từng bước</h2>
+                        <p>
+                            Chuyên viên Rever - được đào tạo chuyên nghiệp, luôn đặt sự hài lòng của khách hàng là mục
+                            tiêu cao nhất. Với vai trò là
+                            người đồng hành hỗ trợ bạn trong suốt quá trình mua / bán, sẽ tư vấn kỹ càng cho bạn về xu
+                            hướng & biến động
+                            thị trường, thông tin quy hoạch, tiện ích và cộng đồng cư dân ở khu vực bạn quan tâm, đưa ra
+                            những gợi ý
+                            phù hợp nhất ứng với nhu cầu và tình hình tài chính của bạn.
+                        </p>
+                        <p class="s-btn-inner">
+                            <a class="s-btn-red" href="specialist">Tìm hiểu Chuyên viên Rever</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-padding-tb background-gray">
+            <div class="guide-item">
+                <div class="s-col">
+                    <div class="img-wrapper">
+                        <img src="{% static 'images/ban-voi-gia-tot-nhat.jpg' %}"
+                             alt="Miễn phí quảng bá">
+                    </div>
+                </div>
+                <div class="s-col">
+                    <div class="s-content">
+                        <h2 class="s-feature-heading">Bán với giá tốt nhất, chi phí bỏ ra thấp nhất</h2>
+                        <p>
+                            Rever hỗ trợ miễn phí cho chủ nhà mọi thứ từ hình ảnh chuyên nghiệp, scan 3D đến việc quảng
+                            bá nhà của bạn ở tất cả các kênh
+                            phổ biến và hỗ trợ các thủ tục khi giao dịch. Công nghệ mới đưa thông tin chính xác đến
+                            người có nhu cầu
+                            phù hợp giúp cho chủ nhà tìm được khách mua / thuê nhanh nhất.
+                        </p>
+                        <p class="s-btn-inner">
+                            <a class="s-btn-red" href="sell_with_us">Bán & Cho thuê với Rever</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-padding-tb">
+            <div class="guide-item">
+                <div class="s-col">
+                    <div class="img-wrapper">
+                        <img src="{% static 'images/nhanh-chong.jpg' %}"
+                             alt="Hỗ trợ đầy đủ các thủ tục pháp lý">
+                    </div>
+                </div>
+                <div class="s-col">
+                    <div class="s-content mgr-l-0">
+                        <h2 class="s-feature-heading">Nhanh chóng tìm được ngôi nhà ưng ý với giá hợp lý</h2>
+                        <p>Nhà đất giá tốt được cập nhật liên tục trên Rever với thông tin và hình ảnh chính xác đến từ
+                            chủ nhà. Bạn có
+                            thể đăng ký xem nhà, thương lượng giá và nhận tư vấn nhanh chóng ngay trên web và ứng dụng.
+                            Dịch vụ Rever
+                            sẽ hỗ trợ bạn mọi thứ phát sinh trong quá trình giao dịch (giấy tờ, pháp lý và vay ngân
+                            hàng...)</p>
+                        <div class="s-btn-inner">
+                            <a class="s-btn-red s-btn-red2" href="buy_with_us">Mua với Rever</a>
+                            <a class="s-btn-red s-btn-red2" href="rentwithus">Thuê với Rever</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-padding-tb background-gray">
+            <div class="guide-item">
+                <div class="s-col">
+                    <div class="img-wrapper">
+                        <img src="{% static 'images/van-phong-rever.jpg' %}" alt="Miễn phí quảng bá">
+                    </div>
+                </div>
+                <div class="s-col">
+                    <div class="s-content">
+                        <h2 class="s-feature-heading">Văn phòng của Rever hiện diện tại các điểm nóng</h2>
+                        <p>Rever hiện đã có văn phòng giao dịch tại các điểm nóng như Quận 2, Quận 7, Quận 4, Quận 1,
+                            Quận Bình Thạnh...
+                            và không ngừng mở rộng sự hiện diện rộng khắp ở các khu vực khác, nhằm mang đến sự hỗ trợ
+                            tốt nhất cho nhu
+                            cầu về bất động sản của bạn.</p>
+                        <p class="s-btn-inner">
+                            <a href="san-giao-dich.html" class="s-btn-red">Tìm văn phòng gần bạn</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="width1140 s-padding-tb">
+            <div class="s-heading pd-bt-30">Thông tin chính xác, liên tục cập nhật</div>
+            <p class="s-description" style="">
+                Thông tin nhà đất được xác thực và cập nhật liên tục theo biến động thị trường nhờ mối liên kết chặt chẽ
+                giữa Rever với chủ
+                nhà. Số liệu và trạng thái của nhà đất được hiển thị rõ ràng cho cả chủ nhà lẫn khách hàng tiềm năng.
+                Ngoài ra,
+                công nghệ phân tích dữ liệu sẽ cung cấp các thông tin tham khảo hữu ích khác dựa vào thống kê từ thị
+                trường chung.
+            </p>
+        </div>
+    </section>
+
+    <section class="serivce-slider">
+        <div id="service-all">
+            <ul class="slides">
+                <li class="flex-active-slide">
+                    <div class="section-container">
+                        <img class="img" src="{% static 'images/service-all-slider1.jpg' %}" alt="">
+                        <div class="section-content">
+                            <span class="line-header"></span>
+                            <h4 class="section-heading">Tìm kiếm nhà đất dễ dàng</h4>
+                            <p>Tìm và xem danh mục nhà đất đang bán và cho thuê cập nhật mới nhất theo quận, khu dân cư
+                                hoặc tên dự án.
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="section-container">
+                        <img class="img" src="{% static 'images/service-all-slider2.jpg' %}" alt="">
+                        <div class="section-content">
+                            <span class="line-header"></span>
+                            <h4 class="section-heading">Giá tốt mỗi ngày</h4>
+                            <p>Bạn luôn theo dõi được những căn giá tốt hoặc mới cập nhật giảm giá từ chủ nhà.</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="section-container">
+                        <img class="img" src="{% static 'images/service-all-slider4.jpg' %}" alt="">
+                        <div class="section-content">
+                            <span class="line-header"></span>
+                            <h4 class="section-heading">Thương lượng giá, đăng ký xem nhà</h4>
+                            <p>Rever kết nối bạn với chủ nhà để giúp quá trình thương lượng, giao dịch diễn ra nhanh
+                                chóng và tin cậy.
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="section-container">
+                        <img class="img" src="{% static 'images/service-all-slider3.jpg' %}" alt="">
+                        <div class="section-content">
+                            <span class="line-header"></span>
+                            <h4 class="section-heading">Theo dõi nhà đất của tôi</h4>
+                            <p>Công cụ dành cho chủ nhà giúp theo dõi tình trạng nhà đất đang đăng trên Rever mọi lúc
+                                mọi nơi.</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section style="background: #c52728">
+        <div class="width1140 s-padding-tb">
+            <div class="s-heading s-text-w">Khách hàng nói gì</div>
+            <div id="customer" class="s-customer-rating">
+                <div class="s-customer-rating-btn">
+                    <a href="#">
+                        <span class="btn-next flex-next s-text-w"></span>
+                    </a>
+                    <a href="#">
+                        <span class="btn-pre flex-prev s-text-w"></span>
+                    </a>
+                </div>
+                <ul class="slides">
+                    <li class="flex-active-slide">
+                        <p class="description s-text-w">"Trước đây tôi không có ấn tượng tốt với môi giới nhà đất, bởi
+                            vì đã trải qua vài lần tìm thuê nhà và phải
+                            làm việc với họ, tôi cảm thấy mất thời gian và rước vào những phiền nhiễu không đáng có.
+                            Nhưng vừa rồi, các
+                            bạn chuyên viên đến từ Rever đã khiến tôi thay đổi quan niệm đó, tôi đã được bạn ấy chia sẻ
+                            tận tình những
+                            ưu và nhược điểm của ngôi nhà tôi đang muốn thuê, ngoài ra bạn ấy còn gợi ý cho tôi nhiều
+                            căn khác lân cận
+                            với mức giá tốt cũng như hỗ trợ tôi thương lượng giá thuê và gói trang bị nội thất với chủ
+                            nhà rất suôn sẻ,
+                            tôi đã thuê được căn hộ rất đẹp với giá theo tôi là khá hợp lý, chắc chắn tôi sẽ giới thiệu
+                            Rever cho bạn
+                            bè của mình."</p>
+                        <div class="customer">
+                            <div class="avatar">
+                                <img src="{% static 'images/diemnhi.jpg' %}" alt="" draggable="false">
+                            </div>
+                            <div class="info">
+                                <p class="name s-text-w">Hồ Thị Duyên Trang</p>
+                                <p class="s-text-w">Trưởng phòng, Thiên Hoà Group.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <p class="description s-text-w">"Tôi không ngờ mua nhà dự án lại đơn giản và dễ dàng như vậy,
+                            Rever đã cung cấp cho tôi hầu như tất cả thông
+                            tin cần thiết về dự án Empire City Thủ Thiêm và hướng dẫn tôi mọi thủ tục cần thiết, tôi rất
+                            an tâm khi làm
+                            việc với bạn môi giới của Rever, bạn ấy rất tận tình, hiểu biết rất tốt thị trường, phong
+                            cách chuyên nghiệp
+                            và cũng rất dễ thương nữa."</p>
+                        <div class="customer">
+                            <div class="avatar">
+                                <img src="{% static 'images/trongkhoi.jpg' %}" alt="" draggable="false">
+                            </div>
+                            <div class="info">
+                                <p class="name s-text-w">Phan Thành Tâm</p>
+                                <p class="s-text-w">Kỹ sư phần mềm - FPT Software</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="s-bg-subcription">
+        <div class="width1140 s-padding-tb">
+            <div class="s-subcription-inner">
+                <div class="s-heading s-text-w pd-bt-20">Liên hệ tư vấn miễn phí</div>
+                <div class="title">Rever hoạt động 24/7 để sẵn sàng hỗ trợ bạn các nhu cầu, thắc mắc về nhà đất</div>
+                <div class="btn-contact">
+                    <a href="#" class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="mdialog" id="contact-now-form" style="background: none">
+        <div class="popup-520" style="overflow: visible;">
+            <div class="header-w-close">
+                <button class="close-popup-btn">
+                    <i class="zmdi zmdi-hc-2x zmdi-close"></i>
+                </button>
+                <h3 class="font-tiempos">Liên hệ chuyên viên tư vấn</h3>
+            </div>
+            <div class="form-info" id="contact-now-form-body">
+            </div>
+        </div>
+    </div>
+
+    <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
+            <div class="popup-feedback-fixed">
+                <div class="popup-body-fb">
+                    <div v-show="state == 'composing'" class="popup-contain">
+                        <div class="visible-pc">
+                            <form id="msform" onsubmit="return false">
+                                <fieldset style="display: block">
+                                    <h2 class="popup-title-w-back height-title popup-font-tiempos" id="title-head">Phản
+                                        hồi của bạn về Thegioinhaphovietnam.com.vn (<span v-text="step"></span>/3)</h2>
+                                    <button @click="hideModal()" class="popup-close-btn"><i
+                                            class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                                    <div v-show="step == 1" class="contain" id="step-form-1">
+                                        <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?
+                                        </div>
+                                        <div class="choose-number">
+                                            <ul>
+                                                <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
+                                                    @mouseleave="onMouseLeaveRate(i)" @click="selectStep1Rate(i)">
+                                                    <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                                                       v-text="i"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="emotion">
+                                            <img :src="'../images/' + step1Icon" alt="">
+                                            <p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
+                                        </div>
+                                    </div>
+                                    <div v-show="step == 2" class="contain" id="step-form-2">
+                                        <div class="intro">Bạn có thấy TGNP dễ sử dụng không?</div>
+                                        <div class="row row-fb pd-t-39 pd-bt-68 center-item">
+                                            <button :class="{active : step2.rate == 'hard'}"
+                                                    @click="selectStep2Rate('hard')"
+                                                    class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                                            </button>
+                                            <button :class="{active : step2.rate == 'normal'}"
+                                                    @click="selectStep2Rate('normal')"
+                                                    class="large-butt-grey btn-use pd-use-btn mgr-r-20">Bình thường
+                                            </button>
+                                            <button :class="{active : step2.rate == 'easy'}"
+                                                    @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ
+                                                sử
+                                                dụng
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div v-show="step == 3" class="contain">
+                                        <div class="intro">Bạn muốn TGNP cần cải thiện thêm về điều gì?</div>
+                                        <div class="checkbox-option">
+                                            <div class="checkbox-pc">
+                                                <div class="row-fb">
+                                                    <div>
+                                                        <label class="container-cb">Giao diện đẹp hơn
+                                                            <input type="checkbox" v-model="step3.improve.ui">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="container-cb">Nội dung chính xác hơn
+                                                            <input type="checkbox" v-model="step3.improve.content">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label class="container-cb">Thêm tính năng
+                                                            <input type="checkbox" v-model="step3.improve.feature">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="container-cb">Khác (vui lòng nhập)
+                                                            <input type="checkbox" v-model="step3.improve.other"
+                                                                   @change="onSelectOtherMsg('')">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="share-rv">
+                                                <p style="font-size: initial">Ý kiến khác</p>
+                                                <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác"
+                                                          ref="msg"
+                                                          :disabled="!step3.improve.other"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a @click="gotoStep(step - 1)" v-show="step > 1"
+                                       class="butt-primary butt-transparent prev" href="javascript:void(0)"
+                                       id="prev">Trước</a>
+                                    <a @click="onClickNext()" v-show="step < 3" :disabled="!canNext"
+                                       class="butt-primary btn-grey next" href="javascript:void(0)" id="next">Tiếp</a>
+                                    <button @click="onClickSend" v-show="step == 3" class="butt-primary btn-grey">
+                                        <span v-show="!isSending" class="send">Gửi</span>
+                                        <span v-show="isSending">Đang gửi...</span>
+                                    </button>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="visible-sm">
+                            <div class="header-sm">
+                                <button @click="hideModal()" class="popup-close-btn-sm"><i
+                                        class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                                <h4>Phản hồi của bạn về thegioinhaphovietnam.com.vn</h4>
+                            </div>
+                            <div class="content">
+                                <div class="intro-sm">
+                                    <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?</p>
+                                    <div class="choose-number">
+                                        <ul>
+                                            <li v-for="i in 10" @click="selectStep1Rate(i)">
+                                                <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                                                   v-text="i"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="use-easy">
+                                    <p>Bạn thấy Thế giới Nhà Phố có dễ sử dụng không?</p>
+                                    <div class="row pt-15 center-item">
+                                        <button :class="{active : step2.rate == 'hard'}"
+                                                @click="selectStep2Rate('hard')"
+                                                class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                                        </button>
+                                        <button :class="{active : step2.rate == 'normal'}"
+                                                @click="selectStep2Rate('normal')"
+                                                class="large-butt-grey btn-use pd-use-btn">Bình thường
+                                        </button>
+                                        <button :class="{active : step2.rate == 'easy'}"
+                                                @click="selectStep2Rate('easy')"
+                                                class="large-butt-grey btn-use">Dễ sử dụng
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="improve">
+                                    <p>Bạn muốn Thế giới Nhà Phố .com.vn cần cải thiện thêm về điều gì?</p>
+                                    <div class="checkbox-sm">
+                                        <label class="container-cb">Giao diện đẹp hơn
+                                            <input type="checkbox" v-model="step3.improve.ui">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="container-cb">Nội dung chính xác hơn
+                                            <input type="checkbox" v-model="step3.improve.content">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="container-cb">Thêm tính năng
+                                            <input type="checkbox" v-model="step3.improve.feature">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="container-cb">Khác (vui lòng nhập)
+                                            <input type="checkbox" v-model="step3.improve.other"
+                                                   @change="onSelectOtherMsg('2')">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="note">
+                                    <p>Ý kiến khác</p>
+                                    <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg2"
+                                              :disabled="!step3.improve.other"></textarea>
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <button @click="onClickSend" class="butt-primary btn-red">Gửi phản hồi</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-show="state == 'finished'" class="popup-fb-success">
+                        <div class="popup-header">
+                            <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về
+                                TGNP.vn</h2>
+                            <button @click="hideModal()" class="popup-close-btn"><i
+                                    class="zmdi zmdi-hc-2x zmdi-close"></i>
+                            </button>
+                        </div>
+                        <div class="popup-contain">
+                            <img class="img-success" src="{% static 'images/icon-success.svg' %}">
+                            <div class="send-success">
+                                <h3>Đã gửi thành công!</h3>
+                                <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp Thế giới Nhà Phố từng bước nâng
+                                    cao
+                                    chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
+                                    <strong>1800 234 546</strong></p>
+                            </div>
+                        </div>
+                        <div class="popup-footer">
+                            <a @click="hideModal()" class="butt-primary butt-red btn-red"
+                               href="javascript:void(0)">Đóng</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Footer content below-->
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script async defer src="{% static 'js/external90ca.js' %}"></script>
+
+    <script async defer src="{% static 'js/tracking.min90ca.js' %}"></script>
+    <script async defer src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
+
+    <script async defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
+
+    <script src="{% static 'js/agent-home-app.min90ca.js' %}"></script>
+
+    <script src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
+    <script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script>
+    <script async defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
+    <script defer src="{% static 'js/feedback-modal.min90ca.js' %}"></script>
+
+    <script async defer src="{% static 'js/overview.min90ca.js' %}"></script>
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js50aa?key=AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg&amp;libraries=drawing,places,geometry&amp;language=vi&amp;callback=callbackInitMap"></script>
+    <script defer src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
+    <script defer id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
+
+    <script>
+        window["_au_api"] = "thue/api.html";
+        window['fap_url'] = "../s3-cdn.rever.vn/p/v2.33.55/js/fap.min90ca.js?v=1617780824171";
+        window['fap.server'] = '//analytics.rever.vn/fap';
+        window['favorite_api'] = 'mapi/index.html';
+        window['googleClientId'] = '539423642927.apps.googleusercontent.com';
+        window['staticUrl'] = '../s3-cdn.rever.vn/p/v2.33.55';
+        window['hotline'] = '1800 234 546';
+
+        window['isLoggedIn'] = false;
+    </script>
+
+    <script>
+        !function () {
+            var analytics = window.analytics = window.analytics || [];
+            if (!analytics.initialize) if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice."); else {
+                analytics.invoked = !0;
+                analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on", "addSourceMiddleware", "addIntegrationMiddleware"];
+                analytics.factory = function (e) {
+                    return function () {
+                        var t = Array.prototype.slice.call(arguments);
+                        t.unshift(e);
+                        analytics.push(t);
+                        return analytics
+                    }
+                };
+                for (var e = 0; e < analytics.methods.length; e++) {
+                    var t = analytics.methods[e];
+                    analytics[t] = analytics.factory(t)
+                }
+                analytics.load = function (e, t) {
+                    var n = document.createElement("script");
+                    n.type = "text/javascript";
+                    n.async = !0;
+                    n.defer = !0;
+                    n.src = "https://cdn.segment.com/analytics.js/v1/" + e + "/analytics.min.js";
+                    var a = document.getElementsByTagName("script")[0];
+                    a.parentNode.insertBefore(n, a);
+                    analytics._loadOptions = t
+                };
+                analytics.SNIPPET_VERSION = "4.1.0";
+                analytics.load("4LCsqFQzVAmMhPA650qKAAbZoHweHzHt", {integrations: {'Mixpanel': false}});
+            }
+        }();
+    </script>
+    <script>
+        //Track thêm tags
+        var tagTrackings = []
+
+        var pageviewProperties = {}
+
+        analytics.page(Object.assign({
+            domain: location.hostname,
+            tags: tagTrackings.length > 0 ? tagTrackings : undefined
+        }, pageviewProperties));
+
+        analytics.ready(function () {
+            //window.mixpanel.init("31bae2b919cfc12821646533a62aee1b")
+            //window.track("Page View")
+        })
+    </script>
+
+    <script>(function (c, a) {
+        if (!a.__SV) {
+            var b = window;
+            try {
+                var d, m, j, k = b.location, f = k.hash;
+                d = function (a, b) {
+                    return (m = a.match(RegExp(b + "=([^&]*)"))) ? m[1] : null
+                };
+                f && d(f, "state") && (j = JSON.parse(decodeURIComponent(d(f, "state"))), "mpeditor" === j.action && (b.sessionStorage.setItem("_mpcehash", f), history.replaceState(j.desiredHash || "", c.title, k.pathname + k.search)))
+            } catch (n) {
+            }
+            var l, h;
+            window.mixpanel = a;
+            a._i = [];
+            a.init = function (b, d, g) {
+                function c(b, i) {
+                    var a = i.split(".");
+                    2 == a.length && (b = b[a[0]], i = a[1]);
+                    b[i] = function () {
+                        b.push([i].concat(Array.prototype.slice.call(arguments,
+                            0)))
+                    }
+                }
+
+                var e = a;
+                "undefined" !== typeof g ? e = a[g] = [] : g = "mixpanel";
+                e.people = e.people || [];
+                e.toString = function (b) {
+                    var a = "mixpanel";
+                    "mixpanel" !== g && (a += "." + g);
+                    b || (a += " (stub)");
+                    return a
+                };
+                e.people.toString = function () {
+                    return e.toString(1) + ".people (stub)"
+                };
+                l = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+                for (h = 0; h < l.length; h++) c(e, l[h]);
+                var f = "set set_once union unset remove delete".split(" ");
+                e.get_group = function () {
+                    function a(c) {
+                        b[c] = function () {
+                            call2_args = arguments;
+                            call2 = [c].concat(Array.prototype.slice.call(call2_args, 0));
+                            e.push([d, call2])
+                        }
+                    }
+
+                    for (var b = {}, d = ["get_group"].concat(Array.prototype.slice.call(arguments, 0)), c = 0; c < f.length; c++) a(f[c]);
+                    return b
+                };
+                a._i.push([b, d, g])
+            };
+            a.__SV = 1.2;
+            b = c.createElement("script");
+            b.type = "text/javascript";
+            b.async = !0;
+            b.defer = !0;
+            b.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ?
+                MIXPANEL_CUSTOM_LIB_URL : "file:" === c.location.protocol && "//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js";
+            d = c.getElementsByTagName("script")[0];
+            d.parentNode.insertBefore(b, d)
+        }
+    })(document, window.mixpanel || []);
+    mixpanel.init("31bae2b919cfc12821646533a62aee1b");
+    </script>
+    <script>
+        mixpanel.track("Page View")
+    </script>
+
+    <script>
+        window.hsConversationsSettings = {
+            loadImmediately: false // Delay the load of the chat widget
+        };
+    </script>
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '323161212360067',
+                cookie: true,                     // Enable cookies to allow the server to access the session.
+                xfbml: true,                     // Parse social plugins on this webpage.
+                version: 'v8.0'           // Use this Graph API version for this call.
+            });
+        }
+    </script>
+
+    <noscript>
+        <iframe src="../www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "url": "https://rever.vn",
+  "logo": "https://rever.vn/static/images/rever-thumbnail.jpg",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "1800 234 546",
+      "contactType": "customer service"
+    }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/rever.vn",
+    "../www.linkedin.com/company/rever-real-estate.html",
+    "../www.instagram.com/rever.vn/index.html",
+    "../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html"
+  ]
+}
+</script>
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@id": "https://rever.vn/#website",
+        "@type": "WebSite",
+        "url": "https://rever.vn/",
+        "name": "Rever",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://rever.vn/s/{search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+</script>
+
+    <script type="text/javascript">
+        var callbackInitMap = function () {
+            if (window.vinitMap) {
+                window.vinitMap();
+            }
+            if (window.initMap) {
+                initMap.call(this);
+            } else {
+                setTimeout(callbackInitMap, 500);
+            }
+        }
+    </script>
+
+    <script>
+        adroll_adv_id = "VHUFKBW42JH37IACSQW3PD";
+        adroll_pix_id = "734MVFGRZFAB7JCBBH46O6";
+    </script>
+
+    <script>
+        /*Footer*/
+        let footerContent = $("#footer .info-container li")
+
+        toggleFooterContent()
+
+        footerContent.click(function (e) {
+            if (window.matchMedia("(max-width: 640px)").matches) {
+                // don't slideUp when click <a>
+                if (e.target.tagName === 'A')
+                    return
+
+                footerContent.find("ul").slideUp(300)
+                footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
+                if (!$(this).find("ul").is(":visible")) {
+                    $(this).find("ul").slideDown(300)
+                    $(this).find(".zmdi").removeClass("zmdi-chevron-down").addClass("zmdi-chevron-up")
+                }
+            }
+        });
+
+        $(window).resize(function () {
+            toggleFooterContent()
+        })
+
+        /**
+         * show/hide footer content depend on max-width
+         */
+        function toggleFooterContent() {
+            if (window.matchMedia("(max-width: 640px)").matches) {
+                footerContent.find("ul").hide()
+                footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
+            } else {
+                footerContent.find("ul").show()
+            }
+        }
+
+        /*Footer - END*/
+    </script>
+
+    <script type="text/javascript">
+    window.$dialog = function(){var e={bodyClassSpecs:"mdialog-body",bodyLoadingClass:"mdialog-loading",cachedBodyStyle:null,default:{zindex:99999,width:300,minHeight:100,background:"rgba(0,0,0,.5)",opacity:.5},key:{cachedStyle:"cached-style"}};return e.show=function(t,n,i,o){(n=$.extend(!0,{outSideClick:!0},n||{})).maxWidth="100%";var a,d=document.body.getAttribute("style");document.body.setAttribute(e.key.cachedStyle,d),(a=t&&"string"==typeof t?$(document.getElementById(t)):t).css("opacity",0),a.css("overflow-y","auto"),a.css("overflow-x","hidden"),a.addClass("opened");var s=(n?n.body:"")||".body";return a.find(s).css(n),a.find(s).addClass(e.bodyClassSpecs),a[0]&&(a[0].$dialogCallback=i),a[0]&&(a[0].$dialogInitTime=+new Date),n&&n.close&&a.find(s+" "+n.close).off().click(function(n){n.preventDefault(),e.hide(t,i)}),n&&n.outSideClick&&a.off().click(function(){e.hide(t,i)}),a.find(s).click(function(e){e.stopPropagation()}),e.animation(a,0,0,1,function(){o&&o()}),e.loadingEnd(a),a},e.animation=function(t,n,i,o,a){t.css("opacity",n),o>0&&n>1||o<0&&n<0?a&&a():setTimeout(function(){n+=o*(.05*i+1e-4*i*i),e.animation(t,n,i+1,o,a)},10)},e.hide=function(t,n){var i;i=t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened"),e.animation(i,1,0,-1,function(){i.removeClass("opened"),n&&n(i)})},e.loadingStart=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs).addClass(e.bodyLoadingClass)},e.loadingEnd=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs+"."+e.bodyLoadingClass).removeClass(e.bodyLoadingClass)},$(window).keydown(function(t){var n=$(".mdialog.opened");if(n.length&&27==t.keyCode){var i=[];i.length=n.length;for(var o=0;o<n.length;o++)for(var a=o;a<n.length;a++)n[o].$dialogInitTime>n[a].$dialogInitTime?(i[a]=n[o],i[o]=n[a]):(i[o]=n[o],i[a]=n[a]);var d=i[i.length-1];d&&e.hide($(d),d?d.$dialogCallback:null)}}),e.initStyles=function(){var e=document.createElement("STYLE"),t=document.head||document.getElementsByTagName("head")[0];e.type="text/css",e.styleSheet?e.styleSheet.cssText="":e.appendChild(document.createTextNode(this.getCss())),t.appendChild(e)},e.getCss=function(){var t=e.default,n="",i={display:"none",position:"fixed",top:"0",height:"100%",left:"0",width:"100%"};i["z-index"]=t.zindex,i.background=t.background,n+=e.assignStyle(".mdialog",i),n+=".mdialog.opened{display: block;}";var o={};o.width=t.width+"px",o["min-height"]=t.minHeight+"px",o.background="#fff",o.margin="60px auto 140px auto",n+=e.assignStyle(".mdialog .body",o);var a={position:"relative"};n+=e.assignStyle("."+e.bodyLoadingClass,a);var d={content:"' '",top:0,left:0,width:"100%",height:"100%",position:"absolute",background:"#fff",opacity:.4,"z-index":1};n+=e.assignStyle("."+e.bodyLoadingClass+":before",d);var s={content:"' '",border:"2px solid #303339","border-top":"2px solid #fff;","border-radius":"50%",width:"30px",height:"30px",position:"absolute",top:"calc(50% - 15px)",left:"calc(50% - 15px)","-webkit-animation":"spin 2s linear infinite",animation:"spin 2s linear infinite","z-index":1};return n+=e.assignStyle("."+e.bodyLoadingClass+":after",s),n+="@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }"},e.assignStyle=function(e,t){var n=e+"{";for(var i in t){n+=i+":"+t[i]+";"}return n+="}"},e.initStyles(),e}();
+  </script>
+
+    {% endblock %}

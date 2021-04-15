@@ -21,14 +21,13 @@
     <meta property="og:title" content="Mua Bán Nhà Đất Căn Hộ Tốt Nhất | Thế giới Nhà Phố"/>
     <meta property="og:description"
           content="Mua bán bất động sản, chung cư, căn hộ Hà Nội sở hữu vị trí vàng, đầy đủ tiện nghi, sang trọng, an ninh, không gian sống hiện đại. bất động sản, chung cư, căn hộ Hà Nội cập nhật hình ảnh thật, thông tin xác thực."/>
-    <meta property="og:image" content="../images/rever-thumbnail.jpg"/>
-    <meta property="og:image:url" content="..//images/rever-thumbnail.jpg"/>
+    <meta property="og:image" content="{% static '/img/logo-chi-chu.svg' %}"/>
+    <meta property="og:image:url" content="{% static '/img/logo-chi-chu.svg' %}"/>
     <meta property="og:image:width" content="600"/>
     <meta property="og:image:height" content="320"/>
     <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
     <meta property="og:rich_attachment" content="true"/>
     <meta property="og:type" content="article"/>
-    <meta property="static-url" content=""/>
     <meta property="hotline" content="0964399436"/>
     <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
     <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
@@ -336,7 +335,7 @@
 
 {% block content %}
   <!-- Search menu -->
-    {% include 'partials/_menusearch.html' %}
+    {% include 'partials/_menuSearch.html' %}
 
     <input id="markerwithlabel" type="hidden"
            value="https://s3-cdn.rever.vn/p/v2.33.55/js/markerwithlabel-0.0.1.min.js?v=1617780824171">
@@ -1113,7 +1112,7 @@
                             <span>Mã nhà đất <strong>VUN56730</strong></span>
                         </p>
                         <a data-phone-hidden="category: ContactProperty, event: ClickHiddenHotline" style="opacity: 0.6"
-                           href="tel:1800234546" class="btn-primary btn-large btn-red btn-phone phone-hidden"><i
+                           href="tel:0964399436" class="btn-primary btn-large btn-red btn-phone phone-hidden"><i
                                 class="zmdi zmdi-phone"></i><span class="text">Gọi chuyên viên ngay</span></a>
                         <div class="divive">hoặc</div>
                         <ul class="group-cta">
@@ -1969,11 +1968,12 @@
                             <form id="msform" onsubmit="return false">
                                 <fieldset style="display: block">
                                     <h2 class="popup-title-w-back height-title popup-font-tiempos" id="title-head">Phản
-                                        hồi của bạn về TGNP.vn (<span v-text="step"></span>/3)</h2>
+                                        hồi của bạn về Thegioinhaphovietnam.com.vn (<span v-text="step"></span>/3)</h2>
                                     <button @click="hideModal()" class="popup-close-btn"><i
                                             class="zmdi zmdi-hc-2x zmdi-close"></i></button>
                                     <div v-show="step == 1" class="contain" id="step-form-1">
-                                        <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phốcho người khác?</div>
+                                        <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?
+                                        </div>
                                         <div class="choose-number">
                                             <ul>
                                                 <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
@@ -1984,12 +1984,12 @@
                                             </ul>
                                         </div>
                                         <div class="emotion">
-                                            <img :src="'https://s3-cdn.rever.vn/p/v2.33.55/images/' + step1Icon" alt="">
+                                            <img :src="'../images/' + step1Icon" alt="">
                                             <p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
                                         </div>
                                     </div>
                                     <div v-show="step == 2" class="contain" id="step-form-2">
-                                        <div class="intro">Bạn có thấy TGNP.vn dễ sử dụng không?</div>
+                                        <div class="intro">Bạn có thấy TGNP dễ sử dụng không?</div>
                                         <div class="row row-fb pd-t-39 pd-bt-68 center-item">
                                             <button :class="{active : step2.rate == 'hard'}"
                                                     @click="selectStep2Rate('hard')"
@@ -2001,12 +2001,13 @@
                                             </button>
                                             <button :class="{active : step2.rate == 'easy'}"
                                                     @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ
-                                                sử dụng
+                                                sử
+                                                dụng
                                             </button>
                                         </div>
                                     </div>
                                     <div v-show="step == 3" class="contain">
-                                        <div class="intro">Bạn muốn TGNP.vn cần cải thiện thêm về điều gì?</div>
+                                        <div class="intro">Bạn muốn TGNP cần cải thiện thêm về điều gì?</div>
                                         <div class="checkbox-option">
                                             <div class="checkbox-pc">
                                                 <div class="row-fb">
@@ -2036,12 +2037,14 @@
                                             <div class="share-rv">
                                                 <p style="font-size: initial">Ý kiến khác</p>
                                                 <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác"
-                                                          ref="msg" :disabled="!step3.improve.other"></textarea>
+                                                          ref="msg"
+                                                          :disabled="!step3.improve.other"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <a @click="gotoStep(step - 1)" v-show="step > 1"
-                                       class="butt-primary butt-transparent prev" href="javascript:void(0)" id="prev">Trước</a>
+                                       class="butt-primary butt-transparent prev" href="javascript:void(0)"
+                                       id="prev">Trước</a>
                                     <a @click="onClickNext()" v-show="step < 3" :disabled="!canNext"
                                        class="butt-primary btn-grey next" href="javascript:void(0)" id="next">Tiếp</a>
                                     <button @click="onClickSend" v-show="step == 3" class="butt-primary btn-grey">
@@ -2055,11 +2058,11 @@
                             <div class="header-sm">
                                 <button @click="hideModal()" class="popup-close-btn-sm"><i
                                         class="zmdi zmdi-hc-2x zmdi-close"></i></button>
-                                <h4>Phản hồi của bạn về TGNP.vn</h4>
+                                <h4>Phản hồi của bạn về thegioinhaphovietnam.com.vn</h4>
                             </div>
                             <div class="content">
                                 <div class="intro-sm">
-                                    <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phốcho người khác?</p>
+                                    <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?</p>
                                     <div class="choose-number">
                                         <ul>
                                             <li v-for="i in 10" @click="selectStep1Rate(i)">
@@ -2070,7 +2073,7 @@
                                     </div>
                                 </div>
                                 <div class="use-easy">
-                                    <p>Bạn thấy Thế giới Nhà Phốcó dễ sử dụng không?</p>
+                                    <p>Bạn thấy Thế giới Nhà Phố có dễ sử dụng không?</p>
                                     <div class="row pt-15 center-item">
                                         <button :class="{active : step2.rate == 'hard'}"
                                                 @click="selectStep2Rate('hard')"
@@ -2081,13 +2084,13 @@
                                                 class="large-butt-grey btn-use pd-use-btn">Bình thường
                                         </button>
                                         <button :class="{active : step2.rate == 'easy'}"
-                                                @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ sử
-                                            dụng
+                                                @click="selectStep2Rate('easy')"
+                                                class="large-butt-grey btn-use">Dễ sử dụng
                                         </button>
                                     </div>
                                 </div>
                                 <div class="improve">
-                                    <p>Bạn muốn TGNP.vn cần cải thiện thêm về điều gì?</p>
+                                    <p>Bạn muốn Thế giới Nhà Phố .com.vn cần cải thiện thêm về điều gì?</p>
                                     <div class="checkbox-sm">
                                         <label class="container-cb">Giao diện đẹp hơn
                                             <input type="checkbox" v-model="step3.improve.ui">
@@ -2124,14 +2127,16 @@
                             <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về
                                 TGNP.vn</h2>
                             <button @click="hideModal()" class="popup-close-btn"><i
-                                    class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                                    class="zmdi zmdi-hc-2x zmdi-close"></i>
+                            </button>
                         </div>
                         <div class="popup-contain">
-                            <img class="img-success" src="../../s3-cdn.rever.vn/p/v2.33.55/images/icon-success.svg">
+                            <img class="img-success" src="{% static 'images/icon-success.svg' %}">
                             <div class="send-success">
                                 <h3>Đã gửi thành công!</h3>
-                                <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp TGNP.vn từng bước nâng
-                                    cao chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
+                                <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp Thế giới Nhà Phố từng bước nâng
+                                    cao
+                                    chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
                                     <strong>1800 234 546</strong></p>
                             </div>
                         </div>
@@ -2151,7 +2156,7 @@
 {% block scripts %}
 
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-       <script type="deferjs" src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
+       <script defer src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
 
     <script>
         window.AppPrompt = (function () {
@@ -2287,8 +2292,8 @@
         }
     </script>
     <script type="deferjs"
-            src="../../maps.googleapis.com/maps/api/js50aa?key=AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg&amp;libraries=drawing,places,geometry&amp;language=vi&amp;callback=callbackInitMap"></script>
-    <script type="deferjs"  src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
+            src="https://maps.googleapis.com/maps/api/js50aa?key=AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg&amp;libraries=drawing,places,geometry&amp;language=vi&amp;callback=callbackInitMap"></script>
+    <script defer  src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
 
     <script type="deferjs">
     window.$dialog = function(){var e={bodyClassSpecs:"mdialog-body",bodyLoadingClass:"mdialog-loading",cachedBodyStyle:null,default:{zindex:99999,width:300,minHeight:100,background:"rgba(0,0,0,.5)",opacity:.5},key:{cachedStyle:"cached-style"}};return e.show=function(t,n,i,o){(n=$.extend(!0,{outSideClick:!0},n||{})).maxWidth="100%";var a,d=document.body.getAttribute("style");document.body.setAttribute(e.key.cachedStyle,d),(a=t&&"string"==typeof t?$(document.getElementById(t)):t).css("opacity",0),a.css("overflow-y","auto"),a.css("overflow-x","hidden"),a.addClass("opened");var s=(n?n.body:"")||".body";return a.find(s).css(n),a.find(s).addClass(e.bodyClassSpecs),a[0]&&(a[0].$dialogCallback=i),a[0]&&(a[0].$dialogInitTime=+new Date),n&&n.close&&a.find(s+" "+n.close).off().click(function(n){n.preventDefault(),e.hide(t,i)}),n&&n.outSideClick&&a.off().click(function(){e.hide(t,i)}),a.find(s).click(function(e){e.stopPropagation()}),e.animation(a,0,0,1,function(){o&&o()}),e.loadingEnd(a),a},e.animation=function(t,n,i,o,a){t.css("opacity",n),o>0&&n>1||o<0&&n<0?a&&a():setTimeout(function(){n+=o*(.05*i+1e-4*i*i),e.animation(t,n,i+1,o,a)},10)},e.hide=function(t,n){var i;i=t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened"),e.animation(i,1,0,-1,function(){i.removeClass("opened"),n&&n(i)})},e.loadingStart=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs).addClass(e.bodyLoadingClass)},e.loadingEnd=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs+"."+e.bodyLoadingClass).removeClass(e.bodyLoadingClass)},$(window).keydown(function(t){var n=$(".mdialog.opened");if(n.length&&27==t.keyCode){var i=[];i.length=n.length;for(var o=0;o<n.length;o++)for(var a=o;a<n.length;a++)n[o].$dialogInitTime>n[a].$dialogInitTime?(i[a]=n[o],i[o]=n[a]):(i[o]=n[o],i[a]=n[a]);var d=i[i.length-1];d&&e.hide($(d),d?d.$dialogCallback:null)}}),e.initStyles=function(){var e=document.createElement("STYLE"),t=document.head||document.getElementsByTagName("head")[0];e.type="text/css",e.styleSheet?e.styleSheet.cssText="":e.appendChild(document.createTextNode(this.getCss())),t.appendChild(e)},e.getCss=function(){var t=e.default,n="",i={display:"none",position:"fixed",top:"0",height:"100%",left:"0",width:"100%"};i["z-index"]=t.zindex,i.background=t.background,n+=e.assignStyle(".mdialog",i),n+=".mdialog.opened{display: block;}";var o={};o.width=t.width+"px",o["min-height"]=t.minHeight+"px",o.background="#fff",o.margin="60px auto 140px auto",n+=e.assignStyle(".mdialog .body",o);var a={position:"relative"};n+=e.assignStyle("."+e.bodyLoadingClass,a);var d={content:"' '",top:0,left:0,width:"100%",height:"100%",position:"absolute",background:"#fff",opacity:.4,"z-index":1};n+=e.assignStyle("."+e.bodyLoadingClass+":before",d);var s={content:"' '",border:"2px solid #303339","border-top":"2px solid #fff;","border-radius":"50%",width:"30px",height:"30px",position:"absolute",top:"calc(50% - 15px)",left:"calc(50% - 15px)","-webkit-animation":"spin 2s linear infinite",animation:"spin 2s linear infinite","z-index":1};return n+=e.assignStyle("."+e.bodyLoadingClass+":after",s),n+="@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }"},e.assignStyle=function(e,t){var n=e+"{";for(var i in t){n+=i+":"+t[i]+";"}return n+="}"},e.initStyles(),e}();
@@ -2682,14 +2687,14 @@
     <script>
         window.fbAsyncInit = function () {
             FB.init({
-                appId: '323161212360067',
+                appId: '268342061639747',
                 cookie: true,                     // Enable cookies to allow the server to access the session.
                 xfbml: true,                     // Parse social plugins on this webpage.
                 version: 'v8.0'           // Use this Graph API version for this call.
             });
         }
     </script>
-    <script async defer type="deferjs" crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 
     <noscript>
         <iframe src="https://www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
@@ -2731,10 +2736,10 @@
         }
     }
 </script>
-    <script type="deferjs" src="{% static 'js/listing.min90ca.js' %}"></script>
+    <script defersrc="{% static 'js/listing.min90ca.js' %}"></script>
 
-    <script type="deferjs" src="{% static 'js/hubspot-chatbox.min90ca.js' %}"></script>
-    <script type="deferjs" src="{% static 'js/property-contact-box-v2.min90ca.js' %}"></script>
+    <script defer src="{% static 'js/hubspot-chatbox.min90ca.js' %}"></script>
+    <script defer src="{% static 'js/property-contact-box-v2.min90ca.js' %}"></script>
 
     <script>
         var callbackInitMap = function () {
@@ -2753,11 +2758,11 @@
 
     </script>
     <script type="deferjs" src="https://www.googleadservices.com/pagead/f.txt"></script>
-    <script type="deferjs" src="{% static 'js/favorite.min90ca.js' %}"></script>
-    <script type="deferjs" src="{% static 'js/home-recent-view.min90ca.js' %}"></script>
-    <script type="deferjs" src="{% static 'js/addthis_widget.js' %}"></script>
-    <script type="deferjs" src="{% static 'js/tracking.min90ca.js' %}"></script>
-    <script type="deferjs" src="{% static 'js/external90ca.js' %}"></script>
+    <script defer src="{% static 'js/favorite.min90ca.js' %}"></script>
+    <script defer src="{% static 'js/home-recent-view.min90ca.js' %}"></script>
+    <script defer src="{% static 'js/addthis_widget.js' %}"></script>
+    <script defer src="{% static 'js/tracking.min90ca.js' %}"></script>
+    <script async defer src="{% static 'js/external90ca.js' %}"></script>
 
     <script type="application/ld+json">
     {
@@ -2854,7 +2859,7 @@
 
     <script type="deferjs" src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
 
-    <script type="deferjs" src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
+    <script defer src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
 
     <script>
         adroll_adv_id = "VHUFKBW42JH37IACSQW3PD";
@@ -2865,20 +2870,19 @@
     <script type="deferjs" id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
 
 
-    <script type="deferjs" src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
-    <script type="deferjs" src="{% static 'js/feedback-modal.min90ca.js' %}"></script>
+    <script defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
+    <script defer src="{% static 'js/feedback-modal.min90ca.js' %}"></script>
 
     <script>
         window.RFeedback = {
-            API: "https://rever.vn/mapi",
+            API: "https://thegioinhaphovietnam.com.vn/mapi",
             email: "",
             name: "",
             phone: "",
             ip: "10.244.0.0"
         }
     </script>
-    <script type="deferjs" src="{% static 'js/feedback-modal.min90ca.js' %}"></script>
-    <script type="deferjs" src="{% static 'js/footer-home.js' %}"></script>
+    <script defer src="{% static 'js/footer-home.js' %}"></script>
     <script type="deferjs">
   (function () {
     var formQueue = [];
@@ -3183,7 +3187,7 @@
 
     </script>
 
-    <script type="deferjs"  src="{% static 'js/header-v2.min90ca.js' %}"></script>
+    <script defer  src="{% static 'js/header-v2.min90ca.js' %}"></script>
 {% endblock %}
 
 

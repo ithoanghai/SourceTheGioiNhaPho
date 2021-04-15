@@ -1,0 +1,1202 @@
+{% extends 'base_common.html' %}
+
+{% load static humanize i18n %}
+
+{% block head %}
+
+    <title> {% block title %} Danh sách CV môi giới Thế giới Nhà Phố {% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="UTF-8"/>
+    <meta name="description"
+          content="Trải nghiệm tuyệt vời và sự hài lòng tuyệt đối của khách hàng là mục tiêu cao nhất của mỗi chuyên viên môi giới Rever, vốn được đào tạo bài bản, am hiểu sâu sắc thị trường và phong cách làm việc chuyên nghiệp."/>
+    <meta name="keywords"
+          content="Rever, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
+    <meta name="author" content="thegioinhaphovietnam.com.vn"/>
+    <link rel="canonical" href="specialist"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <meta property="fb:app_id" content=""/>
+    <meta property="og:url" content="buywithus"/>
+    <meta property="og:title" content="Danh sách chuyên viên môi giới bất động sản Rever"/>
+    <meta property="og:description"
+          content="Chuyên viên môi giới chuyên nghiệp từ TGNP sẽ giúp bạn dễ dàng sở hữu được ngôi nhà tốt nhất với giá thấp nhất đúng với nhu cầu và tình hình tài chính của bạn. Sự tin cậy, minh bạch, tận tình, uy tín là sự khác biệt của Rever với thị trường."/>
+    <meta property="og:image" content="{% static 'img/logo-chi-chu.svg' %}"/>
+    <meta property="og:image:url" content="{% static 'img/logo-chi-chu.svg' %}"/>
+    <meta property="og:image:width" content="600"/>
+    <meta property="og:image:height" content="320"/>
+    <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
+    <meta property="og:rich_attachment" content="true"/>
+    <meta property="og:type" content="article"/>
+    <meta property="hotline" content="0964399436"/>
+
+    <link rel="stylesheet" href="{% static 'css/menu.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style01.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/mobile.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/temp90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/flexslider.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/header-live.min90ca.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'css/popup-new.min90ca.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'css/header-layout90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/browse-agent90ca.css' %}"/>
+
+    <style>
+        {% comment %}//analytics.rever.vn/fap"],{% endcomment %}
+         img[src^="/fap/debug/track"] {
+         display: none;
+          }
+    </style>
+
+    <style>
+        [v-cloak] {
+            display: none !important;
+        }
+
+        /* Ẩn các element khi vue chưa load */
+        picture img {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /*hide tracking img*/
+        img[src^="//analytics.rever.vn/fap"], img[src^="/fap/debug/track"] {
+            display: none;
+        }
+
+        ._hj_feedback_container button { /* Fix lỗi hotjar */
+            text-align: center;
+        }
+    </style>
+    <style>
+        #msform a.butt-primary[disabled] {
+            opacity: 0.4
+        }
+    </style>
+
+    <style>
+        .loading-gif {
+            display: block;
+            content: "";
+            width: 45px;
+            height: 13px;
+            background: url('data:image/gif;base64,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') center center no-repeat;
+            background-size: cover;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div id="wrap">
+        <!-- Search menu -->
+        {% include 'partials/_menuSearch.html' %}
+
+        <!-- Header -->
+        <div class="cta-bottom-wrapper">
+            <div class="cta-bottom-inner">
+                <div class="phone">
+                    <a class="cta-hotline" href="tel:0964399436"><span class="font-icon fone-b font-20"> </span>
+                        <strong>0964399436</strong></a>
+                </div>
+                <div>
+                    <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
+                </div>
+            </div>
+        </div>
+        <div class="s-menu">
+            <div class="width-1600">
+                <div class="s-menu-wrapper">
+                    <ul>
+                        <li class="s-menu-items ">
+                            <a href="services">Tất cả dịch vụ</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="whyChoose">Vì sao chọn TGNP?</a>
+                        </li>
+                        <li class="s-menu-items active">
+                            <a href="sellwithus">Bán BĐS với Thế giới Nhà Phố</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="buywithus">Mua với TGNP</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="rentwithus">Thuê với TGNP</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="specialistUs">Chuyên viên TGNP</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="rever-photo.html">Chụp hình</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="3d.html">Thực tế ảo</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="thu-tuc-giay-to.html">Hành chính</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="bang-dieu-khien.html">Bảng điều khiển</a>
+                        </li>
+                        <li class="s-btn-contact">
+                            <a href="#" data-action="contact-agent" style="font-size: 14px">Liên hệ ngay</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="sticky-header">
+            <div class="stickyTrigger is-stuck sticky-sMenu">
+                <div class="s-menu-wrapper">
+                    <ul>
+                        <li class="s-menu-items ">
+                            <a href="services">Tất cả dịch vụ</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="whyChoose">Vì sao chọn TGNP?</a>
+                        </li>
+                        <li class="s-menu-items active">
+                            <a href="sellwithus">Bán với TG Nhà Phố</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="buywithus">Mua với TGNP</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="rentwithus">Thuê với TGNP</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="specialistUs">Chuyên viên TGNP</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="rever-photo.html">Chụp hình</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="3d.html">Thực tế ảo</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="thu-tuc-giay-to.html">Hành chính</a>
+                        </li>
+                        <li class="s-menu-items ">
+                            <a href="bang-dieu-khien.html">Bảng điều khiển</a>
+                        </li>
+                        <li class="s-btn-contact">
+                            <a href="javascript:void(0)" data-action="request-service">Đăng ký ngay</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content  -->
+        <div class="agent-home-app">
+            <div class="banner-agents-top">
+                <div class="banner-agents-inner">
+                    <div class="banner-agents-contain">
+                        <h1 class="font-tiempos">Chuyên viên môi giới bất động sản</h1>
+                        <p>Chuyên viên của Rever mang đến sự khác biệt so với thị trường chung, đó là sự tin cậy, tận
+                            tâm, được đào tạo kỹ càng, và am hiểu thị trường.</p>
+                        <div class="banner-agents-form-search">
+                            <agent-home-search-box :auto-focus="false"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section class="block-agents">
+                <div class="agents-container col-12">
+                    <div class="agents-inner">
+                        <div class="col-12 agents__grid">
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/hieupt.html">
+                                        <img src="https://portal.rever.vn/user/gg-103107983737927056479/avatar"
+                                             alt="Phạm Trọng Hiếu"/>
+                                        <button v-favorite-icon="{
+                                    id: 'gg-103107983737927056479',
+                                    alias: 'gg-103107983737927056479',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/hieupt.html"><h3 class="font-tiempos">Phạm Trọng Hiếu</h3></a>
+                                    <p class="team-name-sale">Sales Director</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#a1c9c8c4d4d1d5e1d3c4d7c4d38fd7cf"><span
+                                                class="__cf_email__" data-cfemail="f69e9f93838682b68493809384d88098">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/trucht.html">
+                                        <img src="https://portal.rever.vn/user/17367804806249695556/avatar"
+                                             alt="Huỳnh Thanh Trực"/>
+                                        <button v-favorite-icon="{
+                                    id: '17367804806249695556',
+                                    alias: '17367804806249695556',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/trucht.html"><h3 class="font-tiempos">Huỳnh Thanh Trực</h3>
+                                    </a>
+                                    <p class="team-name-sale">Sales Director</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#cfbbbdbaaca7bb8fbdaab9aabde1b9a1"><span
+                                                class="__cf_email__" data-cfemail="12666067717a665260776477603c647c">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/quypt.html">
+                                        <img src="https://portal.rever.vn/user/1578886198987000/avatar"
+                                             alt="Phạm Thanh Quý"/>
+                                        <button v-favorite-icon="{
+                                    id: '1578886198987000',
+                                    alias: '1578886198987000',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/quypt.html"><h3 class="font-tiempos">Phạm Thanh Quý</h3></a>
+                                    <p class="team-name-sale">Sales Director</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#e796929e9793a79582918295c99189"><span
+                                                class="__cf_email__" data-cfemail="4b3a3e323b3f0b392e3d2e39653d25">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/nhuthm.html">
+                                        <img src="https://portal.rever.vn/user/1571199346650000/avatar"
+                                             alt="Hà Minh Nhựt"/>
+                                        <button v-favorite-icon="{
+                                    id: '1571199346650000',
+                                    alias: '1571199346650000',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/nhuthm.html"><h3 class="font-tiempos">Hà Minh Nhựt</h3></a>
+                                    <p class="team-name-sale">Sales Director</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#452b2d30312d280537203320376b332b"><span
+                                                class="__cf_email__" data-cfemail="ea84829f9e8287aa988f9c8f98c49c84">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/tinnt4.html">
+                                        <img src="https://portal.rever.vn/user/1615736369461000/avatar"
+                                             alt="Tín Nguyễn Trung"/>
+                                        <button v-favorite-icon="{
+                                    id: '1615736369461000',
+                                    alias: '1615736369461000',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/tinnt4.html"><h3 class="font-tiempos">Tín Nguyễn Trung</h3></a>
+                                    <p class="team-name-sale">Sales Director</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#8bffe2e5e5ffbfcbf9eefdeef9a5fde5"><span
+                                                class="__cf_email__" data-cfemail="8efae7e0e0fabacefcebf8ebfca0f8e0">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/tranghlh.html">
+                                        <img src="https://portal.rever.vn/user/gg-116721494587086077540/avatar"
+                                             alt="Hà Lê Hồng Trang"/>
+                                        <button v-favorite-icon="{
+                                    id: 'gg-116721494587086077540',
+                                    alias: 'gg-116721494587086077540',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/tranghlh.html"><h3 class="font-tiempos">Hà Lê Hồng Trang</h3>
+                                    </a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#2d595f4c434a4541456d5f485b485f035b43"><span
+                                                class="__cf_email__"
+                                                data-cfemail="017573606f66696d694173647764732f776f">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/gianglbc.html">
+                                        <img src="https://portal.rever.vn/user/gg-108830401721239172527/avatar"
+                                             alt="Lữ Bội Cẩm Giang"/>
+                                        <button v-favorite-icon="{
+                                    id: 'gg-108830401721239172527',
+                                    alias: 'gg-108830401721239172527',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/gianglbc.html"><h3 class="font-tiempos">Lữ Bội Cẩm Giang</h3>
+                                    </a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#54333d353a333836371426312231267a223a"><span
+                                                class="__cf_email__"
+                                                data-cfemail="90f7f9f1fef7fcf2f3d0e2f5e6f5e2bee6fe">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/dungnq.html">
+                                        <img src="https://portal.rever.vn/user/gg-113687445825850881907/avatar"
+                                             alt="Nguyễn Quốc Dũng"/>
+                                        <button v-favorite-icon="{
+                                    id: 'gg-113687445825850881907',
+                                    alias: 'gg-113687445825850881907',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/dungnq.html"><h3 class="font-tiempos">Nguyễn Quốc Dũng</h3></a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#f6928398919887b68493809384d88098"><span
+                                                class="__cf_email__" data-cfemail="dabeafb4bdb4ab9aa8bfacbfa8f4acb4">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/trihv.html">
+                                        <img src="https://portal.rever.vn/user/gg-118230977798927026264/avatar"
+                                             alt="Huỳnh Văn Trí"/>
+                                        <button v-favorite-icon="{
+                                    id: 'gg-118230977798927026264',
+                                    alias: 'gg-118230977798927026264',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/trihv.html"><h3 class="font-tiempos">Huỳnh Văn Trí</h3></a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#790d0b10110f390b1c0f1c0b570f17"><span
+                                                class="__cf_email__" data-cfemail="0276706b6a744270677467702c746c">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/vanlnt.html">
+                                        <img src="https://portal.rever.vn/user/9062724989821109852/avatar"
+                                             alt="Lâm Nguyễn Trọng Văn"/>
+                                        <button v-favorite-icon="{
+                                    id: '9062724989821109852',
+                                    alias: '9062724989821109852',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/vanlnt.html"><h3 class="font-tiempos">Lâm Nguyễn Trọng
+                                        Văn</h3></a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#364057585a5842764453405344184058"><span
+                                                class="__cf_email__" data-cfemail="8ef8efe0e2e0facefcebf8ebfca0f8e0">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/namth.html">
+                                        <img src="https://portal.rever.vn/user/gg-113322040421434816409/avatar"
+                                             alt="Trần Hải Nam"/>
+                                        <button v-favorite-icon="{
+                                    id: 'gg-113322040421434816409',
+                                    alias: 'gg-113322040421434816409',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/namth.html"><h3 class="font-tiempos">Trần Hải Nam</h3></a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#395758544d51794b5c4f5c4b174f57"><span
+                                                class="__cf_email__" data-cfemail="452b2428312d0537203320376b332b">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/dungdnh.html">
+                                        <img src="https://portal.rever.vn/user/2250117370235982230/avatar"
+                                             alt="Đinh Nguyễn Hoàng Dung"/>
+                                        <button v-favorite-icon="{
+                                    id: '2250117370235982230',
+                                    alias: '2250117370235982230',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/dungdnh.html"><h3 class="font-tiempos">Đinh Nguyễn Hoàng
+                                        Dung</h3></a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#a4c0d1cac3c0cacce4d6c1d2c1d68ad2ca"><span
+                                                class="__cf_email__" data-cfemail="0266776c65666c6a4270677467702c746c">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/thinhns.html">
+                                        <img src="https://portal.rever.vn/user/2357645125714713385/avatar"
+                                             alt="Nguyễn Siêu Thịnh"/>
+                                        <button v-favorite-icon="{
+                                    id: '2357645125714713385',
+                                    alias: '2357645125714713385',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/thinhns.html"><h3 class="font-tiempos">Nguyễn Siêu Thịnh</h3>
+                                    </a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#4b3f2322252325380b392e3d2e39653d25"><span
+                                                class="__cf_email__" data-cfemail="1d6975747375736e5d6f786b786f336b73">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/nhutlhm.html">
+                                        <img src="https://portal.rever.vn/user/1246198205749882950/avatar"
+                                             alt="Lê Huỳnh Minh Nhựt"/>
+                                        <button v-favorite-icon="{
+                                    id: '1246198205749882950',
+                                    alias: '1246198205749882950',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/nhutlhm.html"><h3 class="font-tiempos">Lê Huỳnh Minh Nhựt</h3>
+                                    </a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#2846405d5c444045685a4d5e4d5a065e46"><span
+                                                class="__cf_email__" data-cfemail="315f5944455d595c7143544754431f475f">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/anhntc.html">
+                                        <img src="https://portal.rever.vn/user/gg-108063833610724949247/avatar"
+                                             alt="Nguyễn Thị Cúc Anh"/>
+                                        <button v-favorite-icon="{
+                                    id: 'gg-108063833610724949247',
+                                    alias: 'gg-108063833610724949247',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/anhntc.html"><h3 class="font-tiempos">Nguyễn Thị Cúc Anh</h3>
+                                    </a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#e8898680869c8ba89a8d9e8d9ac69e86"><span
+                                                class="__cf_email__" data-cfemail="6c0d020402180f2c1e091a091e421a02">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/danglp.html">
+                                        <img src="https://portal.rever.vn/user/gg-106180174787470260624/avatar"
+                                             alt="Lê Phú Đăng"/>
+                                        <button v-favorite-icon="{
+                                    id: 'gg-106180174787470260624',
+                                    alias: 'gg-106180174787470260624',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/danglp.html"><h3 class="font-tiempos">Lê Phú Đăng</h3></a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#a3c7c2cdc4cfd3e3d1c6d5c6d18dd5cd"><span
+                                                class="__cf_email__" data-cfemail="89ede8e7eee5f9c9fbecffecfba7ffe7">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/anhtt1.html">
+                                        <img src="https://portal.rever.vn/user/1563937679896000/avatar"
+                                             alt="Trần Thị Anh"/>
+                                        <button v-favorite-icon="{
+                                    id: '1563937679896000',
+                                    alias: '1563937679896000',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/anhtt1.html"><h3 class="font-tiempos">Trần Thị Anh</h3></a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#62030c0a1616532210071407104c140c"><span
+                                                class="__cf_email__" data-cfemail="72131c1a0606433200170417005c041c">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/huynq1.html">
+                                        <img src="https://portal.rever.vn/user/1567586928764000/avatar"
+                                             alt="Nguyễn Quang Huy"/>
+                                        <button v-favorite-icon="{
+                                    id: '1567586928764000',
+                                    alias: '1567586928764000',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/huynq1.html"><h3 class="font-tiempos">Nguyễn Quang Huy</h3></a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#9bf3eee2f5eaaadbe9feedfee9b5edf5"><span
+                                                class="__cf_email__" data-cfemail="49213c30273878093b2c3f2c3b673f27">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/hunglx.html">
+                                        <img src="https://portal.rever.vn/user/1577028508253000/avatar"
+                                             alt="Lê Xuân Hùng"/>
+                                        <button v-favorite-icon="{
+                                    id: '1577028508253000',
+                                    alias: '1577028508253000',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/hunglx.html"><h3 class="font-tiempos">Lê Xuân Hùng</h3></a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#bdd5c8d3dad1c5fdcfd8cbd8cf93cbd3"><span
+                                                class="__cf_email__" data-cfemail="e189948f868d99a19384978493cf978f">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/giangnvt.html">
+                                        <img src="https://portal.rever.vn/user/1581560928824000/avatar"
+                                             alt="Nguyễn Việt Thanh Giang"/>
+                                        <button v-favorite-icon="{
+                                    id: '1581560928824000',
+                                    alias: '1581560928824000',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/giangnvt.html"><h3 class="font-tiempos">Nguyễn Việt Thanh
+                                        Giang</h3></a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#33545a525d545d45477341564556411d455d"><span
+                                                class="__cf_email__"
+                                                data-cfemail="482f2129262f263e3c083a2d3e2d3a663e26">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/nhulny.html">
+                                        <img src="https://portal.rever.vn/user/1599812289755000/avatar"
+                                             alt="Lê Ngọc Ý Như"/>
+                                        <button v-favorite-icon="{
+                                    id: '1599812289755000',
+                                    alias: '1599812289755000',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/nhulny.html"><h3 class="font-tiempos">Lê Ngọc Ý Như</h3></a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#6f01071a0301162f1d0a190a1d411901"><span
+                                                class="__cf_email__" data-cfemail="600e08150c0e192012051605124e160e">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/toannp.html">
+                                        <img src="https://portal.rever.vn/user/1613895988052000/avatar"
+                                             alt="Nguyễn Phương Toàn"/>
+                                        <button v-favorite-icon="{
+                                    id: '1613895988052000',
+                                    alias: '1613895988052000',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/toannp.html"><h3 class="font-tiempos">Nguyễn Phương Toàn</h3>
+                                    </a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#4a3e252b24243a0a382f3c2f38643c24"><span
+                                                class="__cf_email__" data-cfemail="c3b7aca2adadb383b1a6b5a6b1edb5ad">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/linhch.html">
+                                        <img src="https://portal.rever.vn/user/1616986846121000/avatar"
+                                             alt="Cao Huy Linh"/>
+                                        <button v-favorite-icon="{
+                                    id: '1616986846121000',
+                                    alias: '1616986846121000',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/linhch.html"><h3 class="font-tiempos">Cao Huy Linh</h3></a>
+                                    <p class="team-name-sale">Sales Manager</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#f09c999e989398b08295869582de869e"><span
+                                                class="__cf_email__" data-cfemail="402c292e2823280032253625326e362e">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="agents-listing">
+                                <div class="agents-image">
+                                    <a href="chuyen-vien/vangdv.html">
+                                        <img src="https://portal.rever.vn/user/1610290805330000/avatar"
+                                             alt="Đặng Văn Vàng"/>
+                                        <button v-favorite-icon="{
+                                    id: '1610290805330000',
+                                    alias: '1610290805330000',
+                                    type: 'agent',
+                                    favorited: 'false'
+                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
+
+                                    </a>
+                                </div>
+                                <div class="agents-content">
+                                    <a href="chuyen-vien/vangdv.html"><h3 class="font-tiempos">Đặng Văn Vàng</h3></a>
+                                    <p class="team-name-sale">Sales Executive</p>
+                                    <div class="agents-email">
+                                        <a href="cdn-cgi/l/email-protection.html#9debfcf3faf9ebddeff8ebf8efb3ebf3"><span
+                                                class="__cf_email__" data-cfemail="691f08070e0d1f291b0c1f0c1b471f07">[email&#160;protected]</span></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <component v-for="html in moreAgentHTML" :is="html"></component>
+                        </div>
+                        <span class="view-more-agent">
+                        <div v-show="loadingMoreAgent" v-cloak class="loading-gif"></div>
+
+                        </span>
+                    </div>
+                </div>
+            </section>
+            <section class="agents-contact">
+                <div class="agents-container col-12">
+                    <div class="agents-contact-content">
+                        <h2>Gặp ngay chuyên viên tư vấn</h2>
+                        <p class="pb-20">Chuyên viên Rever luôn sẵn sàn lắng nghe và hỗ trợ bạn mọi lúc</p>
+                        <button class="agent-contact-modal btn-primary-agent btn-red">Liên hệ tư vấn</button>
+                    </div>
+                </div>
+            </section>
+
+            <dialogs-wrapper wrapper-name="default"/>
+        </div>
+
+    </div>
+
+    <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
+            <div class="popup-feedback-fixed">
+                <div class="popup-body-fb">
+                    <div v-show="state == 'composing'" class="popup-contain">
+                        <div class="visible-pc">
+                            <form id="msform" onsubmit="return false">
+                                <fieldset style="display: block">
+                                    <h2 class="popup-title-w-back height-title popup-font-tiempos" id="title-head">Phản
+                                        hồi của bạn về Thegioinhaphovietnam.com.vn (<span v-text="step"></span>/3)</h2>
+                                    <button @click="hideModal()" class="popup-close-btn"><i
+                                            class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                                    <div v-show="step == 1" class="contain" id="step-form-1">
+                                        <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?
+                                        </div>
+                                        <div class="choose-number">
+                                            <ul>
+                                                <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
+                                                    @mouseleave="onMouseLeaveRate(i)" @click="selectStep1Rate(i)">
+                                                    <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                                                       v-text="i"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="emotion">
+                                            <img :src="'../images/' + step1Icon" alt="">
+                                            <p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
+                                        </div>
+                                    </div>
+                                    <div v-show="step == 2" class="contain" id="step-form-2">
+                                        <div class="intro">Bạn có thấy TGNP dễ sử dụng không?</div>
+                                        <div class="row row-fb pd-t-39 pd-bt-68 center-item">
+                                            <button :class="{active : step2.rate == 'hard'}"
+                                                    @click="selectStep2Rate('hard')"
+                                                    class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                                            </button>
+                                            <button :class="{active : step2.rate == 'normal'}"
+                                                    @click="selectStep2Rate('normal')"
+                                                    class="large-butt-grey btn-use pd-use-btn mgr-r-20">Bình thường
+                                            </button>
+                                            <button :class="{active : step2.rate == 'easy'}"
+                                                    @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ
+                                                sử
+                                                dụng
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div v-show="step == 3" class="contain">
+                                        <div class="intro">Bạn muốn TGNP cần cải thiện thêm về điều gì?</div>
+                                        <div class="checkbox-option">
+                                            <div class="checkbox-pc">
+                                                <div class="row-fb">
+                                                    <div>
+                                                        <label class="container-cb">Giao diện đẹp hơn
+                                                            <input type="checkbox" v-model="step3.improve.ui">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="container-cb">Nội dung chính xác hơn
+                                                            <input type="checkbox" v-model="step3.improve.content">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label class="container-cb">Thêm tính năng
+                                                            <input type="checkbox" v-model="step3.improve.feature">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="container-cb">Khác (vui lòng nhập)
+                                                            <input type="checkbox" v-model="step3.improve.other"
+                                                                   @change="onSelectOtherMsg('')">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="share-rv">
+                                                <p style="font-size: initial">Ý kiến khác</p>
+                                                <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác"
+                                                          ref="msg"
+                                                          :disabled="!step3.improve.other"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a @click="gotoStep(step - 1)" v-show="step > 1"
+                                       class="butt-primary butt-transparent prev" href="javascript:void(0)"
+                                       id="prev">Trước</a>
+                                    <a @click="onClickNext()" v-show="step < 3" :disabled="!canNext"
+                                       class="butt-primary btn-grey next" href="javascript:void(0)" id="next">Tiếp</a>
+                                    <button @click="onClickSend" v-show="step == 3" class="butt-primary btn-grey">
+                                        <span v-show="!isSending" class="send">Gửi</span>
+                                        <span v-show="isSending">Đang gửi...</span>
+                                    </button>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="visible-sm">
+                            <div class="header-sm">
+                                <button @click="hideModal()" class="popup-close-btn-sm"><i
+                                        class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                                <h4>Phản hồi của bạn về thegioinhaphovietnam.com.vn</h4>
+                            </div>
+                            <div class="content">
+                                <div class="intro-sm">
+                                    <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?</p>
+                                    <div class="choose-number">
+                                        <ul>
+                                            <li v-for="i in 10" @click="selectStep1Rate(i)">
+                                                <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                                                   v-text="i"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="use-easy">
+                                    <p>Bạn thấy Thế giới Nhà Phố có dễ sử dụng không?</p>
+                                    <div class="row pt-15 center-item">
+                                        <button :class="{active : step2.rate == 'hard'}"
+                                                @click="selectStep2Rate('hard')"
+                                                class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                                        </button>
+                                        <button :class="{active : step2.rate == 'normal'}"
+                                                @click="selectStep2Rate('normal')"
+                                                class="large-butt-grey btn-use pd-use-btn">Bình thường
+                                        </button>
+                                        <button :class="{active : step2.rate == 'easy'}"
+                                                @click="selectStep2Rate('easy')"
+                                                class="large-butt-grey btn-use">Dễ sử dụng
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="improve">
+                                    <p>Bạn muốn Thế giới Nhà Phố .com.vn cần cải thiện thêm về điều gì?</p>
+                                    <div class="checkbox-sm">
+                                        <label class="container-cb">Giao diện đẹp hơn
+                                            <input type="checkbox" v-model="step3.improve.ui">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="container-cb">Nội dung chính xác hơn
+                                            <input type="checkbox" v-model="step3.improve.content">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="container-cb">Thêm tính năng
+                                            <input type="checkbox" v-model="step3.improve.feature">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="container-cb">Khác (vui lòng nhập)
+                                            <input type="checkbox" v-model="step3.improve.other"
+                                                   @change="onSelectOtherMsg('2')">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="note">
+                                    <p>Ý kiến khác</p>
+                                    <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg2"
+                                              :disabled="!step3.improve.other"></textarea>
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <button @click="onClickSend" class="butt-primary btn-red">Gửi phản hồi</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-show="state == 'finished'" class="popup-fb-success">
+                        <div class="popup-header">
+                            <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về
+                                TGNP.vn</h2>
+                            <button @click="hideModal()" class="popup-close-btn"><i
+                                    class="zmdi zmdi-hc-2x zmdi-close"></i>
+                            </button>
+                        </div>
+                        <div class="popup-contain">
+                            <img class="img-success" src="{% static 'images/icon-success.svg' %}">
+                            <div class="send-success">
+                                <h3>Đã gửi thành công!</h3>
+                                <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp Thế giới Nhà Phố từng bước nâng
+                                    cao
+                                    chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
+                                    <strong>1800 234 546</strong></p>
+                            </div>
+                        </div>
+                        <div class="popup-footer">
+                            <a @click="hideModal()" class="butt-primary butt-red btn-red"
+                               href="javascript:void(0)">Đóng</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Footer content below-->
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script async defer src="{% static 'js/external90ca.js' %}"></script>
+    <script async defer src="{% static 'js/tracking.min90ca.js' %}"></script>
+    <script async defer src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
+    <script async defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
+
+    <script src="{% static 'js/agent-home-app.min90ca.js' %}"></script>
+
+    <script src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
+    <script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script>
+    <script async defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
+    <script defer src="{% static 'js/feedback-modal.min90ca.js' %}"></script>
+
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js50aa?key=AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg&amp;libraries=drawing,places,geometry&amp;language=vi&amp;callback=callbackInitMap"></script>
+    <script defer src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
+    <script defer id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '268342061639747',
+                cookie: true,                     // Enable cookies to allow the server to access the session.
+                xfbml: true,                     // Parse social plugins on this webpage.
+                version: 'v8.0'           // Use this Graph API version for this call.
+            });
+        }
+    </script>
+
+    <!--[if lte IE 8]>
+    <script charset="utf-8" async defer type="text/javascript"
+            src="https://rever.vn/public/externaljs"></script>
+    <![endif]-->
+
+    <noscript><iframe src="https://www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://rever.vn",
+      "logo": "https://rever.vn/static/images/rever-thumbnail.jpg",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "1800 234 546",
+          "contactType": "customer service"
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/rever.vn",
+        "../www.linkedin.com/company/rever-real-estate.html",
+        "../www.instagram.com/rever.vn/index.html",
+        "../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@id": "https://rever.vn/#website",
+        "@type": "WebSite",
+        "url": "https://rever.vn/",
+        "name": "TGNP",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://rever.vn/s/{search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+</script>
+
+    <script type="text/javascript">
+        var callbackInitMap = function () {
+            if (window.vinitMap) {
+                window.vinitMap();
+            }
+            if (window.initMap) {
+                initMap.call(this);
+            } else {
+                setTimeout(callbackInitMap, 500);
+            }
+        }
+    </script>
+    <script>
+        adroll_adv_id = "VHUFKBW42JH37IACSQW3PD";
+        adroll_pix_id = "734MVFGRZFAB7JCBBH46O6";
+    </script>
+    <script>
+        window.RFeedback = {
+            API: "https://thegioinhaphovietnam.com.vn/mapi",
+            email: "",
+            name: "",
+            phone: "",
+            ip: "10.244.0.0"
+        }
+    </script>
+    <script>
+        /*Footer*/
+        let footerContent = $("#footer .info-container li")
+
+        toggleFooterContent()
+
+        footerContent.click(function (e) {
+            if (window.matchMedia("(max-width: 640px)").matches) {
+                // don't slideUp when click <a>
+                if (e.target.tagName === 'A')
+                    return
+
+                footerContent.find("ul").slideUp(300)
+                footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
+                if (!$(this).find("ul").is(":visible")) {
+                    $(this).find("ul").slideDown(300)
+                    $(this).find(".zmdi").removeClass("zmdi-chevron-down").addClass("zmdi-chevron-up")
+                }
+            }
+        });
+
+        $(window).resize(function () {
+            toggleFooterContent()
+        })
+
+        /**
+         * show/hide footer content depend on max-width
+         */
+        function toggleFooterContent() {
+            if (window.matchMedia("(max-width: 640px)").matches) {
+                footerContent.find("ul").hide()
+                footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
+            } else {
+                footerContent.find("ul").show()
+            }
+        }
+
+        /*Footer - END*/
+    </script>
+
+    <script>
+        window.AGENT_PREFIX = "[Cần gặp chuyên viên tư vấn]\n";
+        window.RHome = {
+            searchUrl: "search?specialist=",
+            loadMoreAgentUrl: "search?specialist=loadMoreHomeAgent",
+            totalAgent: 291,
+            numAgentShow: 24, //Số lượng hiển thị trước tại trang chủ
+            numAgentLoadMore: 24, //Số lượng load thêm agent
+        }
+
+        window.initAgentHome();
+    </script>
+
+{% endblock %}
+
+
+
