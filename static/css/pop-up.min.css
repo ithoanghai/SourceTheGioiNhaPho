@@ -348,7 +348,7 @@ body {
 
 .btn-red {
     color: #fff;
-    background: #c72528
+    background: orange
 }
 
 @media (min-width: 768px) {
@@ -359,15 +359,15 @@ body {
 }
 
 .btn-red-outline {
-    color: #c72528;
-    border: 1px solid #c72528;
+    color: orange;
+    border: 1px solid orange;
     background: 0 0
 }
 
 @media (min-width: 768px) {
     .btn-red-outline:hover {
         color: #fff;
-        background: #c72528
+        background: orange
     }
 }
 
@@ -616,7 +616,7 @@ body {
 }
 
 .popup-send-info .form-dropdown-content li.active a, .popup-send-info .form-dropdown-content li:hover a {
-    color: #c52728
+    color: orange
 }
 
 @media (max-width: 480px) {

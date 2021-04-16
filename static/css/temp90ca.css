@@ -7,7 +7,7 @@
 }
 .width-1600 .right-menu .rightmenu-dropdown li:hover{background: #f3f4f7;}
 .width-1600 .right-menu .rightmenu-dropdown li:last-child{border-top: 1px solid rgba(48, 51, 58, 0.1);}
-.width-1600 .right-menu .rightmenu-dropdown li:last-child a{color: #c52728}
+.width-1600 .right-menu .rightmenu-dropdown li:last-child a{color: orange}
 .width-1600 .right-menu ul li a.dropdown-link:hover{color:#30333a}
 .btn{
     line-height: 1em;

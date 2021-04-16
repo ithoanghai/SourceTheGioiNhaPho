@@ -57,7 +57,7 @@
         }
 
         /*hide tracking img*/
-        img[src^="//analytics.rever.vn/fap"], img[src^="/fap/debug/track"] {
+        img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
             display: none;
         }
 
@@ -79,7 +79,7 @@
     </style>
 
     <style>
-        .banner-app-rever {
+        .banner-app-tgnp {
             position: relative;
             display: none;
             -webkit-box-align: center;
@@ -99,7 +99,7 @@
         }
 
         @media (max-width: 768px) {
-            .banner-app-rever {
+            .banner-app-tgnp {
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex
@@ -142,7 +142,7 @@
         }
 
         .btn-install::after {
-            background-color: #c72528;
+            background-color: orange;
             content: "";
             position: absolute;
             top: 0;
@@ -342,7 +342,7 @@
 
     <div id="wrap">
 
-        <div class="banner-app-rever" id="rever-banner-prompt" style="display: none">
+        <div class="banner-app-tgnp" id="rever-banner-prompt" style="display: none">
             <div class="banner-app-content">
                 <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
                     <i class="zmdi zmdi-close"></i>
@@ -371,7 +371,7 @@
         <div class="background-detail mpreviews">
             <form name="info" class="hidden">
                 <input name="id" type="hidden" value="1593136601509_8642">
-                <input name="source" type="hidden" value="rever">
+                <input name="source" type="hidden" value="tgnp">
                 <input name="rvid" type="hidden" value="VUN56730">
                 <input name="title" type="hidden"
                        value="Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
@@ -388,8 +388,8 @@
                 <input name="agent-name" type="hidden" value="TGNP.vn">
                 <input name="agent-encoded" type="hidden" value="">
                 <input name="agent-job-title" type="hidden" value="Hỗ trợ 24/7">
-                <input name="agent-phone" type="hidden" value="1800 234 546">
-                <input name="contact" type="hidden" value="1800 234 546">
+                <input name="agent-phone" type="hidden" value="0916 286 256">
+                <input name="contact" type="hidden" value="0916 286 256">
                 <input name="area" type="hidden" value="421.5">
                 <input name="service-type" type="hidden" value="2">
                 <input name="property-type" type="hidden" value="4">
@@ -812,7 +812,7 @@
                         <div class="form-real-estate__row">
                             <div class="col-left">
                                 <div class="cover__isa">
-                                    <img src="{% static 'images/isa-team-v2.png' %}" alt="rever">
+                                    <img src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
                                 </div>
                                 <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
                             </div>
@@ -1104,7 +1104,7 @@
                     <div v-pre class="form-real-estate">
                         <h3 class="font-tiempos">Liên hệ tư vấn</h3>
                         <div class="cover__isa">
-                            <img src="{% static 'images/isa-team-v2.png' %}" alt="rever">
+                            <img src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
                         </div>
                         <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
                         <p class="advisory__sub-title">Tư vấn hoàn toàn miễn phí</p>
@@ -1137,8 +1137,8 @@
                             class="zmdi zmdi-comment-text-alt"></i>Chat</a>
                 </div>
                 <div class="phone">
-                    <a class="cta-hotline" href="tel:1800 234 546">
-                        <i class="zmdi zmdi-phone"></i> 1800 234 546</a>
+                    <a class="cta-hotline" href="tel:0916 286 256">
+                        <i class="zmdi zmdi-phone"></i> 0916 286 256</a>
                 </div>
 
 
@@ -1397,12 +1397,12 @@
                         <div class="promo-3d-vid cover">
 <span data-origin="EfMuBFZwS7Q" class="popup-yt-video">
 <picture>
-<source srcset="https://s3-cdn.rever.vn/p/v2.33.55/images/promo-3d-vid_small.jpg, https://s3-cdn.rever.vn/p/v2.33.55/images/promo-3d-vid_small@2x.jpg 2x"
+<source srcset="../images/promo-3d-vid_small.jpg, ../images/promo-3d-vid_small@2x.jpg 2x"
         media="(max-width: 374px)">
-<source srcset="https://s3-cdn.rever.vn/p/v2.33.55/images/promo-3d-vid_medium.jpg, https://s3-cdn.rever.vn/p/v2.33.55/images/promo-3d-vid.jpg 2x"
+<source srcset="../images/promo-3d-vid_medium.jpg, ../images/promo-3d-vid.jpg 2x"
         media="(min-width: 375px)">
-<img alt="TGNP 3D View" src="../../s3-cdn.rever.vn/p/v2.33.55/images/promo-3d-vid.jpg"
-     srcset="https://s3-cdn.rever.vn/p/v2.33.55/images/promo-3d-vid_medium.jpg, https://s3-cdn.rever.vn/p/v2.33.55/images/promo-3d-vid.jpg 2x"
+<img alt="TGNP 3D View" src="../../images/promo-3d-vid.jpg"
+     srcset="../images/promo-3d-vid_medium.jpg, ../images/promo-3d-vid.jpg 2x"
      title="TGNP 3D View">
 </picture>
 </span>
@@ -1425,12 +1425,12 @@
                                 <h4>TGNP.vn</h4>
                                 <p>Hỗ trợ 24/7</p>
                                 <p>
-                                    <a class="hotline" href="tel:1800 234 546" title="hotline">1800 234 546</a>
+                                    <a class="hotline" href="tel:0916 286 256" title="hotline">0916 286 256</a>
                                 </p>
                             </div>
                         </div>
                         <a class="like-button" href="#sell-now-form" title="Liên hệ">Liên hệ</a>
-                        <input type="hidden" name="contact-agent" value="support@rever.vn">
+                        <input type="hidden" name="contact-agent" value="support@thegioinhaphovietnam.com.vn">
                         <input type="hidden" name="contact-agent-msg"
                                value="Tôi có nhu cầu muốn bán nhà thông qua TGNP. Liên lạc với tôi ngay.">
                     </div>
@@ -1972,7 +1972,7 @@
                                     <button @click="hideModal()" class="popup-close-btn"><i
                                             class="zmdi zmdi-hc-2x zmdi-close"></i></button>
                                     <div v-show="step == 1" class="contain" id="step-form-1">
-                                        <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?
+                                        <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?
                                         </div>
                                         <div class="choose-number">
                                             <ul>
@@ -2062,7 +2062,7 @@
                             </div>
                             <div class="content">
                                 <div class="intro-sm">
-                                    <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?</p>
+                                    <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?</p>
                                     <div class="choose-number">
                                         <ul>
                                             <li v-for="i in 10" @click="selectStep1Rate(i)">
@@ -2137,7 +2137,7 @@
                                 <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp Thế giới Nhà Phố từng bước nâng
                                     cao
                                     chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
-                                    <strong>1800 234 546</strong></p>
+                                    <strong>0916 286 256</strong></p>
                             </div>
                         </div>
                         <div class="popup-footer">
@@ -2512,11 +2512,11 @@
     <script>
         window["_au_api"] = "../thue/api.html";
         window['fap_url'] = "{% static 'js/fap.min90ca.js' %}";
-        window['fap.server'] = '//analytics.rever.vn/fap';
+        window['fap.server'] = '//analytics.thegioinhaphovietnam.com.vn/fap';
         window['favorite_api'] = '../mapi/index.html';
         window['googleClientId'] = '539423642927.apps.googleusercontent.com';
         window['staticUrl'] = 'static';
-        window['hotline'] = '1800 234 546';
+        window['hotline'] = '0916 286 256';
 
         window['isLoggedIn'] = false;
     </script>
@@ -2705,33 +2705,33 @@
 {
   "@context": "http://schema.org",
   "@type": "Organization",
-  "url": "https://rever.vn",
-  "logo": "https://rever.vn/static/images/rever-thumbnail.jpg",
+  "url": "https://thegioinhaphovietnam.com.vn",
+  "logo": "../images/rever-thumbnail.jpg",
   "contactPoint": [
     {
       "@type": "ContactPoint",
-      "telephone": "1800 234 546",
+      "telephone": "0916 286 256",
       "contactType": "customer service"
     }
   ],
   "sameAs": [
-    "https://www.facebook.com/rever.vn",
-    "../../www.linkedin.com/company/rever-real-estate.html",
-    "../../www.instagram.com/rever.vn/index.html",
-    "../../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html"
+    "https://www.facebook.com/thegioinhaphovietnam.com.vn",
+    "../www.linkedin.com/company/thegioinhaphovietnam.com.vn",
+    "../www.instagram.com/thegioinhaphovietnam.com.vn",
+    "../https://www.youtube.com/channel/UC2YIBjJIw4jL5aQ9LEoCQDg"
   ]
 }
 </script>
     <script type="application/ld+json">
     {
         "@context": "http://schema.org",
-        "@id": "https://rever.vn/#website",
+        "@id": "https://www.thegioinhaphovietnam.com.vn/#website",
         "@type": "WebSite",
-        "url": "https://rever.vn/",
+        "url": "https://thegioinhaphovietnam.com.vn/",
         "name": "TGNP",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://rever.vn/s/{search_term_string}",
+            "target": "https://thegioinhaphovietnam.com.vn/search?term",
             "query-input": "required name=search_term_string"
         }
     }
@@ -2840,7 +2840,7 @@
     "itemListElement": [ {
   "position" : 1,
   "name" : "TGNP",
-  "item" : "https://rever.vn",
+  "item" : "https://thegioinhaphovietnam.com.vn",
   "@type" : "ListItem"
 }, {
   "position" : 2,
@@ -2923,7 +2923,7 @@
     </script>
     <!--[if lte IE 8]>
     <script charset="utf-8" async defer type="text/javascript"
-            src="https://rever.vn/public/externaljs"></script>
+            src="https://thegioinhaphovietnam.com.vn/public/externaljs"></script>
     <![endif]-->
     <script charset="utf-8" type="deferjs" src="https://js.hsforms.net/forms/v2.js"></script>
     <script type="deferjs">

@@ -118,8 +118,8 @@
 }
 
 .list-col-action a:hover {
-    border: 1px solid #c52728;
-    color: #c52728
+    border: 1px solid orange;
+    color: orange
 }
 
 .relative-news {
@@ -689,7 +689,7 @@ section.bg-gray-e6 div.more-info-black {
 }
 
 .more-info .contact-now {
-    color: #c52728
+    color: orange
 }
 
 .more-info-black .black-button {
@@ -717,7 +717,7 @@ section.bg-gray-e6 div.more-info-black {
 }
 
 .owner-img .more-info {
-    color: #c72528;
+    color: orange;
     font-weight: 500;
     font-size: 16px
 }
@@ -825,7 +825,7 @@ section.bg-gray-e6 div.more-info-black {
 }
 
 .career-form .hs_upload_cv .hs-field-desc:hover {
-    color: #c52728
+    color: orange
 }
 
 .career-form .hs-button {
@@ -844,7 +844,7 @@ section.bg-gray-e6 div.more-info-black {
 }
 
 .career-form .hs-button:hover {
-    background: #c72528;
+    background: orange;
     color: #fff
 }
 
@@ -949,7 +949,7 @@ section.bg-gray-e6 div.more-info-black {
     padding: 5px 0;
     border-radius: 2px;
     float: right;
-    background: #c52728;
+    background: orange;
     text-align: center;
     font-weight: 600;
     display: block
@@ -985,8 +985,8 @@ section.bg-gray-e6 div.more-info-black {
 }
 
 .btn-chitiet .btn-hotline:hover {
-    color: #c52728 !important;
-    border: 1px solid #c52728 !important
+    color: orange !important;
+    border: 1px solid orange !important
 }
 
 .btn-hotline {
@@ -1021,7 +1021,7 @@ section.bg-gray-e6 div.more-info-black {
     display: block;
     padding: 6px 10px 4px;
     font-size: 14px;
-    border: 1px solid #c52728;
+    border: 1px solid orange;
     border-radius: 2px;
     float: right;
     text-align: center;
@@ -1029,11 +1029,11 @@ section.bg-gray-e6 div.more-info-black {
 }
 
 .btn-red-boder a {
-    color: #c52728
+    color: orange
 }
 
 .btn-red-boder:hover {
-    background: #c52728
+    background: orange
 }
 
 .btn-red-boder:hover a {
@@ -1502,7 +1502,7 @@ ul.detailroom li div span:hover + div.detail-house-info {
 }
 
 .form-contact .form-columns-2 em span {
-    color: #c52728 !important
+    color: orange !important
 }
 
 .form-contact .hs-form-field label span {
@@ -1514,7 +1514,7 @@ ul.detailroom li div span:hover + div.detail-house-info {
 }
 
 .form-contact .hs-form-field label span + span {
-    color: #c52728
+    color: orange
 }
 
 .form-contact .hs-button {
@@ -1531,7 +1531,7 @@ ul.detailroom li div span:hover + div.detail-house-info {
 }
 
 .form-contact .hs-button:hover {
-    background: #c72528
+    background: orange
 }
 
 .contact-form .hs-form-field, .proprety-form-contact .hs-form-field {
@@ -1573,7 +1573,7 @@ ul.detailroom li div span:hover + div.detail-house-info {
 
 .contact-form .hs-error-msgs, .proprety-form-contact .hs-error-msgs {
     font-size: 12px;
-    color: #c72528;
+    color: orange;
     font-weight: 400;
     padding-top: 10px
 }
@@ -1666,7 +1666,7 @@ ul.form-career-detail li span.btn {
     margin-bottom: 10px
 }
 
-.compare-rever tr td {
+.compare-tgnp tr td {
     text-align: left;
     padding: 20px 10px
 }
@@ -2058,14 +2058,14 @@ div.width1140 div.owner-img div.right {
 .sdt {
     display: inline-block;
     padding: 0;
-    color: #c72528
+    color: orange
 }
 
 .chat {
     display: inline-block;
     float: right;
     padding: 0;
-    color: #c72528
+    color: orange
 }
 
 .member-detail ul {
@@ -2191,7 +2191,7 @@ section.graybg section.lch-content article.lch-content-detail ul.header li.detai
 }
 
 section.graybg section.lch-content article.lch-content-detail ul.header li.s {
-    color: #c72528;
+    color: orange;
     font-weight: 100;
     padding-top: 5px;
     font-size: 15px
@@ -2274,7 +2274,7 @@ section.news-bg div.width1140 div.news-right div.bg div.text {
 }
 
 .btn-down {
-    background: #c72528;
+    background: orange;
     color: #fff;
     padding: 11px 0 8px;
     border-radius: 2px;
@@ -2505,7 +2505,7 @@ section.graybg div.width1140 div.house-detail div.detail ul li {
 }
 
 .house-detail div.house-price span {
-    color: #c72528
+    color: orange
 }
 
 .header-career {
@@ -2555,7 +2555,7 @@ section.header-career div.bg-career div.btn a.btn-career {
     font-size: 16px;
     width: 245px;
     margin: 0 auto;
-    background: #c72528;
+    background: orange;
     color: #fff;
     padding: 15px 30px;
     clear: both;
@@ -2689,7 +2689,7 @@ section.bg-career-gray div.content div.our-dep-content div.col div h2.our-dep-na
     bottom: 0;
     left: 0;
     right: 0;
-    background: #c72528;
+    background: orange;
     font-size: 20px;
     color: #fff;
     line-height: 30px;
@@ -2739,7 +2739,7 @@ section.bg-career-white div.content div div.detail div.btn-app {
 
 section.bg-career-white div.content div div.detail div.btn-app div {
     padding: 5px 10px;
-    border: 1px solid #c72528;
+    border: 1px solid orange;
     border-radius: 2px;
     text-align: center;
     font-weight: 600;
@@ -2751,7 +2751,7 @@ section.bg-career-white div.content div div.detail div.btn-app div:hover {
 }
 
 section.bg-career-white div.content div div.detail div.btn-app div a {
-    color: #c72528
+    color: orange
 }
 
 section.bg-career-white div.content div div.detail div.btn-app div:hover a {
@@ -2763,7 +2763,7 @@ section.bg-career-white div.content div.btn-career {
     font-size: 16px;
     width: 20%;
     margin: 0 40%;
-    background: #c72528;
+    background: orange;
     color: #fff;
     padding: 15px 0 15px 0;
     font-weight: 600;
@@ -2781,7 +2781,7 @@ section.bg-career-white div.content div.btn a.btn-career {
     font-size: 16px;
     width: 245px;
     margin: 0 auto;
-    background: #c72528;
+    background: orange;
     color: #fff;
     padding: 15px 30px;
     font-weight: 600;
@@ -2858,7 +2858,7 @@ section.project-header div.project-name div.address h4 a {
 }
 
 section.project-header div.project-name div.address h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .project-header .project-name .address .title-project {
@@ -2961,7 +2961,7 @@ section.project-header div div.project-name div.address h1.title-project {
 }
 
 #price-area {
-    color: #c52728
+    color: orange
 }
 
 .project-house {
@@ -3050,7 +3050,7 @@ section.project-header div div.project-name div.address h1.title-project {
 }
 
 .project-house .btn a:hover {
-    border: 1px solid #c52728
+    border: 1px solid orange
 }
 
 .project-sumary .project-name .detail {
@@ -3100,8 +3100,8 @@ section.project-header div.project-name div.share ul li.btn-contact a {
 }
 
 section.project-header div.project-name div.share ul li.btn-contact a:hover {
-    background: #c52728;
-    border: 1px solid #c52728
+    background: orange;
+    border: 1px solid orange
 }
 
 section.project-header div.project-name div.share ul li.btn-contact a {
@@ -3120,8 +3120,8 @@ section.project-header div.project-name div.share ul li.btn-care a {
 }
 
 section.project-header div.project-name div.share ul li.btn-care:hover a {
-    color: #c72528;
-    border: 1px solid #c52728
+    color: orange;
+    border: 1px solid orange
 }
 
 section div.width1140 section.bg-white div.team-member div.member-detail header p {
@@ -3399,7 +3399,7 @@ section.bg-career-gray div.contentpx div.career-img {
 
 .hsg-cta-gallery .hsg-cta-gallery__item .hsg-cta-gallery__item-headline, .hsg-cta-gallery .hsg-cta-gallery__item .hsg-cta-gallery__item-overlay {
     position: absolute;
-    background: #c52728;
+    background: orange;
     width: calc(100% - 2px);
     bottom: 0;
     left: 1px;
@@ -3504,7 +3504,7 @@ li.whr-item:after {
 }
 
 .whr-title a:hover {
-    color: #c72528
+    color: orange
 }
 
 li.whr-item .whr-info {
@@ -3563,7 +3563,7 @@ li.whr-item .whr-info li.whr-date {
 
 .cta-hotline {
     display: block;
-    background: #c52728;
+    background: orange;
     border-radius: 2px;
     width: 100%;
     height: 40px;
@@ -4563,7 +4563,7 @@ li.whr-item .whr-info li.whr-date {
     }
 
     .btn-down {
-        background: #c72528;
+        background: orange;
         color: #fff;
         padding: 2px;
         border-radius: 2px;

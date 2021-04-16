@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.2" >
-<font id="ReverIcons">
-<font-face  font-family="Rever Icons" units-per-em="512" ascent="448" descent="-64" font-style="normal" font-weight="400" font-stretch="normal" cap-height="0" x-height="0" underline-position="-64" underline-thickness="25" />
+<font id="TGNPIcons">
+<font-face  font-family="TGNP Icons" units-per-em="512" ascent="448" descent="-64" font-style="normal" font-weight="400" font-stretch="normal" cap-height="0" x-height="0" underline-position="-64" underline-thickness="25" />
 <missing-glyph  horiz-adv-x="187" d="M17 0 L17 341 L153 341 L153 0 L17 0 Z M34 17 L136 17 L136 324 L34 324 L34 17 Z " />
 <glyph glyph-name="uniF100" unicode="&#xf100;" horiz-adv-x="322" d="M0 175 L0 207 L322 207 L322 175 L0 175 Z M0 83 L0 115 L322 115 L322 83 L0 83 Z M0 267 L0 299 L322 299 L322 267 L0 267 Z " />
 <glyph glyph-name="uniF101" unicode="&#xf101;" horiz-adv-x="387" d="M354 32 L354 129 L387 129 L387 0 L258 0 L258 32 L354 32 Z M354 355 L258 355 L258 387 L387 387 L387 258 L354 258 L354 355 Z M32 355 L32 258 L0 258 L0 387 L129 387 L129 355 L32 355 Z M32 32 L129 32 L129 0 L0 0 L0 129 L32 129 L32 32 Z " />

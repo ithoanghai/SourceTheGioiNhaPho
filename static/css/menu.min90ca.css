@@ -47,7 +47,7 @@
 .s-btn-contact > a {
     display: block;
     width: 100%;
-    background: #c52728;
+    background: orange;
     text-align: center;
     height: 32px;
     line-height: 32px;
@@ -95,7 +95,7 @@
 
 .cta-hotline {
     display: block;
-    background: #c52728;
+    background: orange;
     border-radius: 2px;
     width: 100%;
     height: 40px;
@@ -107,7 +107,7 @@
 .large-btn-red {
     padding: 13px 40px;
     color: #fff;
-    background: #c72528;
+    background: orange;
     border-radius: 2px;
     font-size: 16px;
     border: 0;

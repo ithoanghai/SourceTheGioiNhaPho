@@ -41,8 +41,8 @@
 
 @font-face {
     font-family: rever-icon;
-    src: url(../fonts/ReverIcons.eot);
-    src: url(../fonts/ReverIconsd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/ReverIcons.woff) format("woff"), url(../fonts/ReverIcons.ttf) format("truetype"), url(../fonts/ReverIcons.svg#roboto_condensedregular) format("svg")
+    src: url(../fonts/TGNPIcons.eot);
+    src: url(../fonts/TGNPIconsd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/TGNPIcons.woff) format("woff"), url(../fonts/TGNPIcons.ttf) format("truetype"), url(../fonts/TGNPIcons.svg#roboto_condensedregular) format("svg")
 }
 
 @font-face {
@@ -493,7 +493,7 @@ ul.breadcrumb li a.text-blue {
 }
 
 ul.breadcrumb li a:hover {
-    color: #c52728
+    color: orange
 }
 
 .heading-01 {
@@ -566,7 +566,7 @@ ul.breadcrumb li a:hover {
 
 @media (min-width: 1024px) {
     .block-browser .detail-block .col-link li a:hover {
-        color: #c72528
+        color: orange
     }
 }
 
@@ -781,7 +781,7 @@ ul.breadcrumb li a:hover {
 
 .btn-red {
     color: #fff;
-    background: #c72528
+    background: orange
 }
 
 @media (min-width: 768px) {
@@ -792,15 +792,15 @@ ul.breadcrumb li a:hover {
 }
 
 .btn-red-outline {
-    color: #c72528;
-    border: 1px solid #c72528;
+    color: orange;
+    border: 1px solid orange;
     background: 0 0
 }
 
 @media (min-width: 768px) {
     .btn-red-outline:hover {
         color: #fff;
-        background: #c72528
+        background: orange
     }
 }
 
@@ -1229,7 +1229,7 @@ ul.breadcrumb li a:hover {
     color: #fff
 }
 
-.status-rever {
+.status-tgnp {
     display: inline-block;
     padding: 4px 8px 1px !important;
     font-size: .875rem;
@@ -2411,7 +2411,7 @@ ul.breadcrumb li a:hover {
 .main-header .search-mobile .optionsList .option input:checked + label {
     border-radius: 2px;
     background-color: #fff;
-    color: #c72528
+    color: orange
 }
 
 .main-header .search-mobile .optionsList .option label {
@@ -2632,16 +2632,16 @@ ul.breadcrumb li a:hover {
     border: 1px solid transparent
 }
 
-#home .agency-rever a {
+#home .agency-tgnp a {
     border: 1px solid #fff;
     color: #fff
 }
 
-#home .agency-rever a:hover {
+#home .agency-tgnp a:hover {
     color: #fff !important
 }
 
-.agency-rever a {
+.agency-tgnp a {
     color: #30333a;
     font-size: 14px;
     height: 40px;
@@ -2663,7 +2663,7 @@ ul.breadcrumb li a:hover {
     min-width: 155px
 }
 
-.agency-rever a:hover {
+.agency-tgnp a:hover {
     opacity: .86;
     color: #30333a !important;
     -webkit-transition: all .3s;
@@ -2727,7 +2727,7 @@ ul.breadcrumb li a:hover {
     color: #30333a
 }
 
-.banner-app-rever {
+.banner-app-tgnp {
     position: relative;
     display: none;
     -webkit-box-align: center;
@@ -2747,7 +2747,7 @@ ul.breadcrumb li a:hover {
 }
 
 @media (max-width: 768px) {
-    .banner-app-rever {
+    .banner-app-tgnp {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex
@@ -2790,7 +2790,7 @@ ul.breadcrumb li a:hover {
 }
 
 .btn-install::after {
-    background-color: #c72528;
+    background-color: orange;
     content: "";
     position: absolute;
     top: 0;
@@ -3399,7 +3399,7 @@ ul.breadcrumb li a:hover {
 }
 
 .popular-location li a:hover {
-    color: #c72528
+    color: orange
 }
 
 .position-toast {
@@ -3460,7 +3460,7 @@ ul.breadcrumb li a:hover {
 }
 
 .toast-message > a:hover {
-    color: #c72528
+    color: orange
 }
 
 body div#hs-eu-cookie-confirmation div#hs-eu-cookie-confirmation-inner div#hs-eu-policy-wording {
@@ -3981,7 +3981,7 @@ select.form-control:focus::-ms-value {
 }
 
 .no--data__links {
-    background: #c72528;
+    background: orange;
     text-align: center;
     font-size: 1rem;
     border-radius: .25rem;
@@ -4034,7 +4034,7 @@ select.form-control:focus::-ms-value {
 }
 
 .no-items a {
-    background: #c72528;
+    background: orange;
     text-align: center;
     font-size: 1rem;
     border-radius: .25rem;
@@ -4125,7 +4125,7 @@ select.form-control:focus::-ms-value {
 }
 
 .toast-message > a:hover {
-    color: #c72528
+    color: orange
 }
 
 .form-element {
@@ -5579,7 +5579,7 @@ select.form-control:focus::-ms-value {
 }
 
 .project-header .project-name .address h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .social-share {
@@ -5889,7 +5889,7 @@ select.form-control:focus::-ms-value {
 
 .info-sticky-header li a.active {
     font-weight: 600;
-    border-bottom: 2px solid #c72528
+    border-bottom: 2px solid orange
 }
 
 .info-sticky-header p.gray {
@@ -5991,7 +5991,7 @@ select.form-control:focus::-ms-value {
 
 .price-redRV {
     font-size: 16px;
-    color: #c72528;
+    color: orange;
     font-weight: 600
 }
 
@@ -6354,7 +6354,7 @@ select.form-control:focus::-ms-value {
 }
 
 .address-project .zmdi {
-    color: #c72528 !important;
+    color: orange !important;
     font-size: 22px
 }
 
@@ -6434,14 +6434,14 @@ select.form-control:focus::-ms-value {
 }
 
 .project-news li .project-news__info h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .project-news li .project-news__info h4:after {
     position: absolute;
     bottom: 10px;
     width: 50px;
-    border-bottom: 1px solid #c72528;
+    border-bottom: 1px solid orange;
     left: 0;
     content: ''
 }
@@ -7129,7 +7129,7 @@ select.form-control:focus::-ms-value {
     height: 50px;
     line-height: 50px;
     padding: 0 20px;
-    background: #c72528;
+    background: orange;
     border-radius: 2px;
     border: 0;
     color: #fff;
@@ -7147,7 +7147,7 @@ select.form-control:focus::-ms-value {
     background: 0 0;
     border: 0;
     font-size: 24px;
-    color: #c72528;
+    color: orange;
     font-weight: 500
 }
 
@@ -7259,7 +7259,7 @@ select.form-control:focus::-ms-value {
 }
 
 .listingCard .info-container .listing-name:hover {
-    color: #c72528
+    color: orange
 }
 
 .listingCard .info-container .listing-address {
@@ -7284,7 +7284,7 @@ select.form-control:focus::-ms-value {
 }
 
 .listingCard .info-container .listing-address h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .listingCard .info-container .listing-info {
@@ -7351,7 +7351,7 @@ select.form-control:focus::-ms-value {
 
 @media (min-width: 1024px) {
     .listingCard .info-container .listing-price:hover {
-        color: #c72528
+        color: orange
     }
 }
 
@@ -8273,7 +8273,7 @@ select.form-control:focus::-ms-value {
     text-overflow: ellipsis
 }
 
-.banner-app-rever {
+.banner-app-tgnp {
     position: relative;
     display: none;
     -webkit-box-align: center;
@@ -8293,7 +8293,7 @@ select.form-control:focus::-ms-value {
 }
 
 @media (max-width: 768px) {
-    .banner-app-rever {
+    .banner-app-tgnp {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex
@@ -8336,7 +8336,7 @@ select.form-control:focus::-ms-value {
 }
 
 .btn-install::after {
-    background-color: #c72528;
+    background-color: orange;
     content: "";
     position: absolute;
     top: 0;
@@ -8610,7 +8610,7 @@ label {
 .text-error {
     display: block;
     width: 100%;
-    color: #c72528;
+    color: orange;
     font-size: 12px;
     line-height: 1.5;
     font-weight: 400;
@@ -8619,7 +8619,7 @@ label {
 }
 
 .color-red-base {
-    color: #c72528 !important
+    color: orange !important
 }
 
 .text-small-centered {
@@ -8861,14 +8861,14 @@ ul.exclusive li.featured header li .zmdi {
     position: relative;
     padding: 32px;
     background: rgba(48, 51, 58, .03);
-    border: 1px solid #c72528;
+    border: 1px solid orange;
     border-radius: 4px
 }
 
 .posts-expired h3 {
     font-size: 24px;
     line-height: normal;
-    color: #c72528;
+    color: orange;
     display: block;
     width: 100%;
     margin-bottom: 15px
@@ -8984,7 +8984,7 @@ ul.exclusive li.featured header li .zmdi {
     background: 0 0 !important;
     border: 0;
     font-size: 24px;
-    color: #c72528;
+    color: orange;
     font-weight: 500
 }
 
@@ -9495,7 +9495,7 @@ ul.exclusive li.featured header li .zmdi {
 }
 
 .popup-book-calendar .popup-body .text-contact a:hover {
-    color: #c72528
+    color: orange
 }
 
 .popup-book-calendar .popup-body .btn--form {
@@ -9822,13 +9822,13 @@ ul.exclusive li.featured header li .zmdi {
 }
 
 .popup-project .popup-left-title a:hover, .popup-property .popup-left-title a:hover {
-    color: #c72528;
+    color: orange;
     -webkit-transition: ease-in .2s;
     transition: ease-in .2s
 }
 
 .popup-project .popup-left-address h4 a:hover, .popup-property .popup-left-address h4 a:hover {
-    color: #c72528;
+    color: orange;
     -webkit-transition: ease-in .2s;
     transition: ease-in .2s
 }
@@ -10151,7 +10151,7 @@ ul.exclusive li.featured header li .zmdi {
 }
 
 #popup-send-form-success .popup-text a:hover {
-    color: #c72528
+    color: orange
 }
 
 #popup-send-form-success .form-group {
@@ -11380,7 +11380,7 @@ ul.slideimg li a.img:hover {
 }
 
 .red-bnt {
-    background: #c72528;
+    background: orange;
     color: #fff !important;
     padding: 11px 15px 9px !important;
     border-radius: 2px;
@@ -11551,7 +11551,7 @@ ul.slideimg li a.img:hover {
 }
 
 .detail-house .address h2 a:hover, .detail-house .address h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 @media screen and (max-width: 960px) {
@@ -12080,7 +12080,7 @@ ul.slideimg li a.img:hover {
 }
 
 .button-down button, .button-down span {
-    background: #c72528;
+    background: orange;
     color: #fff;
     border: 0;
     border-radius: 2px;
@@ -12502,12 +12502,12 @@ ul.slideimg li a.img:hover {
 }
 
 .icon-left-nearby a:hover {
-    background: #c72528;
+    background: orange;
     color: #fff
 }
 
 .icon-left-nearby a.active {
-    background-color: #c72528;
+    background-color: orange;
     color: #fff
 }
 
@@ -12584,7 +12584,7 @@ ul.slideimg li a.img:hover {
 .nearby .type .sub-content li:hover {
     background-color: #f7f7f7;
     padding-left: 10px;
-    border-left: 2px solid #c72528
+    border-left: 2px solid orange
 }
 
 .nearby .type label {
@@ -12667,7 +12667,7 @@ ul.slideimg li a.img:hover {
 }
 
 .nearby ul li.active {
-    border-left: 2px solid #c72528
+    border-left: 2px solid orange
 }
 
 .nearby ul.type .gray-content {
@@ -13065,7 +13065,7 @@ ul.slideimg li a.img:hover {
     text-align: center;
     font-size: 14px;
     line-height: 20px;
-    color: #c72528;
+    color: orange;
     font-weight: 500
 }
 
@@ -13144,7 +13144,7 @@ ul.slideimg li a.img:hover {
 }
 
 .compare-house .article div.action a:hover {
-    border-color: #c72528
+    border-color: orange
 }
 
 .compare-house .compare-house-desc {
@@ -13462,7 +13462,7 @@ ul.slideimg li a.img:hover {
 }
 
 .search-pagination-button-list li a:hover {
-    color: #c72528
+    color: orange
 }
 
 .list-part-t {
@@ -14015,7 +14015,7 @@ ul.exclusive li.featured header h4 a {
 }
 
 ul.exclusive li.featured header h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 ul.exclusive li.featured header p {
@@ -14103,7 +14103,7 @@ ul.exclusive li.featured header .heading {
 
 @media (min-width: 1024px) {
     #similar-property ul.exclusive li.featured header .heading:hover {
-        color: #c72528
+        color: orange
     }
 }
 
@@ -14176,7 +14176,7 @@ ul.exclusive li.featured header .heading {
 
 .cta-hotline {
     display: block;
-    background: #c52728;
+    background: orange;
     border-radius: 2px;
     width: 100%;
     height: 40px;
@@ -14192,9 +14192,9 @@ ul.exclusive li.featured header .heading {
 @media (min-width: 768px) {
     .cta-hotline.show-phone {
         background: 0 0 !important;
-        border: 1px solid #c72528;
+        border: 1px solid orange;
         font-size: 20px;
-        color: #c72528;
+        color: orange;
         font-weight: 500
     }
 
@@ -15069,7 +15069,7 @@ ul.exclusive li.featured header .heading {
 }
 
 .more__link:hover {
-    color: #c72528
+    color: orange
 }
 
 .more__link .zmdi {
@@ -15106,7 +15106,7 @@ ul.exclusive li.featured header .heading {
     font-weight: 400;
     line-height: 1.5;
     text-transform: uppercase;
-    color: #c72528
+    color: orange
 }
 
 .listing__home--price {
@@ -15115,7 +15115,7 @@ ul.exclusive li.featured header .heading {
     font-size: 22px;
     font-weight: 500;
     line-height: 1.5;
-    color: #c72528
+    color: orange
 }
 
 .listing__home--address {
@@ -15147,7 +15147,7 @@ ul.exclusive li.featured header .heading {
 }
 
 .listing__home--address h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .listing__home--info {
@@ -15605,7 +15605,7 @@ ul.exclusive li.featured header .heading {
 }
 
 .listing__listview--title:hover {
-    color: #c72528
+    color: orange
 }
 
 .listing__listview--desc {
@@ -16098,7 +16098,7 @@ ul.exclusive li.featured header .heading {
     background: 0 0 !important;
     border: 0;
     font-size: 24px;
-    color: #c72528;
+    color: orange;
     font-weight: 500
 }
 
@@ -17027,7 +17027,7 @@ ul.exclusive li.featured header .heading {
     background: 0 0 !important;
     border: 0;
     font-size: 24px;
-    color: #c72528;
+    color: orange;
     font-weight: 500
 }
 
@@ -17131,7 +17131,7 @@ ul.exclusive li.featured header .heading {
 }
 
 .listing__detail li.active p, .listing__detail--item.active p {
-    color: #c72528
+    color: orange
 }
 
 .listing__detail li.active strong, .listing__detail--item.active strong {
@@ -17142,7 +17142,7 @@ ul.exclusive li.featured header .heading {
     text-overflow: ellipsis;
     font-family: rv-font2;
     font-size: 18px;
-    color: #c72528
+    color: orange
 }
 
 .listing__detail li + li::before, .listing__detail--item + li::before {
@@ -17251,7 +17251,7 @@ ul.exclusive li.featured header .heading {
     }
 }
 
-.buy-with-rever .content {
+.buy-with-tgnp .content {
     position: relative;
     width: 100%;
     height: 100%;
@@ -17263,7 +17263,7 @@ ul.exclusive li.featured header .heading {
     box-shadow: 0 16px 20px rgba(0, 0, 0, .1)
 }
 
-.buy-with-rever .logo {
+.buy-with-tgnp .logo {
     position: absolute;
     top: -50px;
     left: 48px;
@@ -17275,14 +17275,14 @@ ul.exclusive li.featured header .heading {
     padding: 0
 }
 
-.buy-with-rever .logo img {
+.buy-with-tgnp .logo img {
     width: 100%;
     height: 100%;
     -o-object-fit: contain;
     object-fit: contain
 }
 
-.buy-with-rever .title {
+.buy-with-tgnp .title {
     display: block;
     max-width: 382px;
     width: 100%;
@@ -17292,14 +17292,14 @@ ul.exclusive li.featured header .heading {
     font-weight: 500
 }
 
-.buy-with-rever .content-row {
+.buy-with-tgnp .content-row {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     width: 100%
 }
 
-.buy-with-rever .consultant-avatar {
+.buy-with-tgnp .consultant-avatar {
     position: absolute;
     bottom: 0;
     right: 10px;
@@ -17307,14 +17307,14 @@ ul.exclusive li.featured header .heading {
     height: 375px
 }
 
-.buy-with-rever .consultant-avatar img {
+.buy-with-tgnp .consultant-avatar img {
     width: 100%;
     height: 100%;
     -o-object-fit: contain;
     object-fit: contain
 }
 
-.buy-with-rever ul {
+.buy-with-tgnp ul {
     display: block;
     max-width: 422px;
     width: 100%;
@@ -17323,7 +17323,7 @@ ul.exclusive li.featured header .heading {
     list-style: disc
 }
 
-.buy-with-rever ul li {
+.buy-with-tgnp ul li {
     list-style: disc;
     font-size: 16px;
     line-height: 1.5;
@@ -17331,7 +17331,7 @@ ul.exclusive li.featured header .heading {
     color: #444c59
 }
 
-.buy-with-rever ul li + li {
+.buy-with-tgnp ul li + li {
     margin-top: 4px
 }
 
@@ -17345,7 +17345,7 @@ ul.exclusive li.featured header .heading {
     outline: 0;
     border: 0;
     border-radius: 2px;
-    background-color: #c72528;
+    background-color: orange;
     font-size: 18px;
     line-height: 1.5;
     font-weight: 500;
@@ -17361,25 +17361,25 @@ ul.exclusive li.featured header .heading {
 }
 
 @media (max-width: 1140px) {
-    .buy-with-rever .consultant-avatar {
+    .buy-with-tgnp .consultant-avatar {
         width: 280px;
         height: 345px
     }
 }
 
 @media (max-width: 1024px) {
-    .buy-with-rever .consultant-avatar {
+    .buy-with-tgnp .consultant-avatar {
         width: 260px;
         height: 320px
     }
 }
 
 @media (max-width: 768px) {
-    .buy-with-rever .content {
+    .buy-with-tgnp .content {
         padding: 52px 32px 32px
     }
 
-    .buy-with-rever .logo {
+    .buy-with-tgnp .logo {
         top: -30px;
         left: 32px;
         min-width: 56px;
@@ -17387,17 +17387,17 @@ ul.exclusive li.featured header .heading {
         height: 56px
     }
 
-    .buy-with-rever .title {
+    .buy-with-tgnp .title {
         max-width: 100%;
         font-size: 24px
     }
 
-    .buy-with-rever ul {
+    .buy-with-tgnp ul {
         max-width: 100%;
         margin: 18px 0 0
     }
 
-    .buy-with-rever .consultant-avatar {
+    .buy-with-tgnp .consultant-avatar {
         display: none
     }
 

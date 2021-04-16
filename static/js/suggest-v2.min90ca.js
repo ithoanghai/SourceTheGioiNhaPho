@@ -7860,12 +7860,12 @@
                 }
             }, {
                 key: "quickViewInfo", value: function (t, e) {
-                    var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "rever";
+                    var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "tgnp";
                     return c.b.get("/s-quick-view/" + e + "/" + t + "?source=" + n)
                 }
             }, {
                 key: "quickViewInfoById", value: function (t, e) {
-                    var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "rever";
+                    var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "tgnp";
                     return c.b.get("/s-quick-view-v2/" + e + "/" + t + "?source=" + n)
                 }
             }, {
@@ -8553,7 +8553,7 @@
             S = f()((r = {}, c()(r, d.i.PROJECT, "Dự án"), c()(r, d.i.PROJECT_V2, "Dự án"), c()(r, d.i.AREA, "Khu vực"), c()(r, d.i.NEIGHBORHOOD, "Khu dân cư"), c()(r, d.i.STREET, "Đường"), c()(r, d.i.RECENT, "Tìm kiếm gần đây"), c()(r, d.i.NEARBY, "Lân cận"), c()(r, d.i.STREET, "Đường"), r)),
             A = [{id: d.n.ACTIVE, name: "Đăng thường"}, {
                 id: d.n.EXCLUSIVE,
-                name: "Rever độc quyền"
+                name: "TGNP độc quyền"
             }, {id: d.n.UNDER_CONTRACT, name: "Đang GD"}, {id: d.n.SOLD_RENT, name: "Đã bán/thuê"}],
             k = [{id: "has3d", name: "Có 3D"}]
     }, JBvZ: function (t, e, n) {
@@ -12690,7 +12690,7 @@
         }), n.d(e, "a", function () {
             return i
         });
-        var r = {RENT: 1, SALE: 2, SALE_AND_RENT: 3}, i = {MLS: "mls", REVER: "rever"}
+        var r = {RENT: 1, SALE: 2, SALE_AND_RENT: 3}, i = {MLS: "mls", TGNP: "tgnp"}
     }, NkRn: function (t, e, n) {
         var r = n("TQ3y").Symbol;
         t.exports = r

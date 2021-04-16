@@ -4,22 +4,21 @@
 
 {% block head %}
 
-    <title> {% block title %}Tuyển dụng liên tục | Thế giới Nhà Phố {% endblock %}</title>
+    <title> {% block title %}Điều khoản sử dụng Thế giới Nhà Phố {% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="UTF-8"/>
-    <meta name="description" content="TGNP đang tìm kiếm ứng viên phù hợp cho vị trí nhân viên kinh doanh bất động sản, media 3D, biên tập nội dung…" />
-    <meta name="keywords"
-          content="TGNP, tuyen dung, tuyen moi gioi, moi gioi nha dat, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
+    <meta name="description" content="TGNP xin chân thành cám ơn các bạn đã quan tâm và có mong muốn sử dụng dịch vụ của chúng tôi." />
+    <meta name="keywords"  content="TGNP, tuyen dung, tuyen moi gioi, moi gioi nha dat, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
     <meta name="author" content="thegioinhaphovietnam.com.vn"/>
-    <link rel="canonical" href="specialistUs"/>
+    <link rel="canonical" href="termsofuse"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
     <meta property="fb:app_id" content=""/>
-    <meta property="og:url" content="buywithus"/>
+    <meta property="og:url" content="termsofuse"/>
     <meta property="og:title" content="Vì sao nên chọn chuyên viên môi giới TGNP"/>
-    <meta property="og:description" content="TGNP đang tìm kiếm ứng viên phù hợp cho vị trí nhân viên kinh doanh bất động sản, media 3D, biên tập nội dung…" />
-   <meta property="og:image" content="{% static 'img/logo-chi-chu.svg' %}"/>
+    <meta property="og:description" content="TGNP xin chân thành cám ơn các bạn đã quan tâm và có mong muốn sử dụng dịch vụ của chúng tôi." />
+    <meta property="og:image" content="{% static 'img/logo-chi-chu.svg' %}"/>
     <meta property="og:image:url" content="{% static 'img/logo-chi-chu.svg' %}"/>
     <meta property="og:image:width" content="600"/>
     <meta property="og:image:height" content="320"/>
@@ -33,17 +32,12 @@
     <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/style01.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/style.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/mobile.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/temp90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/flexslider.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/header-live.min90ca.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/service.min90ca.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/menu.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/pop-up.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/popup-new.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/careers.min90ca.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'css/terms-of-use90ca.css' %}"/>
 
     <style>
         [v-cloak] {
@@ -101,504 +95,95 @@
                 </div>
             </div>
         </div>
-        <div class="s-menu about-menu">
-            <div class="width-1600">
-                <div class="s-menu-wrapper">
-                    <ul>
-                        <li class="s-menu-items"><a href="about">Giới thiệu TGNP</a>
-                        </li>
-                        <li class="s-menu-items">
-                             <a href="specialistUs">Đội ngũ chuyên viên</a>
-                        </li>
-
-
-                        <li class="s-menu-items">
-                            <a href="#">Phòng giao dịch</a>
-                        </li>
-
-
-                        <li class="s-menu-items active">
-                            <a href="#">Tuyển dụng</a>
-                        </li>
-                        <li class="s-menu-items">
-                            <a href="contact">Liên hệ</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <div id="menu" class="s-menu">
+<div class="width-1600">
+<div class="s-menu-wrapper">
+<ul>
+<li class="s-menu-items ">
+<a href="chinh-sach-bao-mat.html">Chính sách bảo mật</a>
+</li>
+<li class="s-menu-items active">
+<a href="dieu-khoan-su-dung.html">Điều khoản sử dụng</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
 
         <!-- Main Content  -->
-        <section class="header-career"
-                 style="background-image: url({% static 'images/background-tuyen-dung.jpg' %});">
-            <div class="bg-career width1140">
-                <div class="title">Với REVER, công việc là đam mê</div>
-                <div class="sumary">Bạn yêu thích môi trường làm việc trẻ trung và đậm tinh thần Startup? Gia nhập TGNP
-                    và khám
-                    phá ngay!
-                </div>
-                <div class="btn"><a class="btn-career" href="#list-career">Các vị trí đang tuyển</a></div>
-            </div>
-        </section>
-        <section class="bg-career-white width1140">
-            <div class="content">
-                <div class="title-career">Văn hoá REVER</div>
-                <div class="title-career-line">
-                    <div class="line"></div>
-                </div>
-                <div class="info">
-                    <div class="shape bg-shape1">
-                        <div class="shape"><span class="font-icon customer-icon"></span></div>
-                        <div class="requirement-detail">
-                            <ul>
-                                <li>Chính trực</li>
-                                <li>TGNP luôn xem sự Chính Trực là nền tảng quan trọng trong kinh doanh. Chúng tôi
-                                    khuyến khích mọi nhân viên sẵn sàng đưa ra và nhận cam kết, chịu trách nhiệm trước
-                                    hành động và lời nói của mình.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="shape bg-shape2">
-                        <div class="shape"><span class="font-icon honest-icon"></span></div>
-                        <div class="requirement-detail">
-                            <ul>
-                                <li>Khách Hàng Là Trọng Tâm</li>
-                                <li>Mỗi nhân viên tại TGNP luôn đặt Khách Hàng là ưu tiên số một trong mọi suy nghĩ và
-                                    hành động nhằm mang đến sự hài lòng cao nhất cho mọi Khách Hàng.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="shape bg-shape3">
-                        <div class="shape"><span class="font-icon responsibility-icon"></span></div>
-                        <div class="requirement-detail">
-                            <ul>
-                                <li>Tôn Trọng</li>
-                                <li>Văn hóa TGNP luôn đề cao sự tôn trọng, tôn trọng với Bản Thân, tôn trọng với Đồng
-                                    Nghiệp, tôn trọng với Khách Hàng và tôn trọng với Đối Tác.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="shape bg-shape4">
-                        <div class="shape-r2"><span class="font-icon kind-icon"></span></div>
-                        <div class="requirement-detail-r2">
-                            <ul>
-                                <li>Công nhận</li>
-                                <li class="style">TGNP luôn coi trọng người lao động như là tài sản quý giá nhất của
-                                    công ty. Chúng tôi công nhận và tưởng thưởng mọi nỗ lực của mỗi thành viên trong
-                                    công ty.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="shape bg-shape5">
-                        <div class="shape-r2"><span class="font-icon spirit-icon"></span></div>
-                        <div class="requirement-detail-r2">
-                            <ul>
-                                <li class="title">Đồng Đội</li>
-                                <li class="style">Mỗi cá nhân tại TGNP luôn đoàn kết, hỗ trợ và giúp đỡ lẫn nhau trong
-                                    công việc. TGNP đặt lợi ích của tập thể lên trên lợi ích của cá nhân.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+        <div class="content">
+<div id="terms-of-use" class="terms-of-use">
+<div class="banner-terms-of-use">
+<h1 class="font-tiempos">Điều khoản sử dụng</h1>
+</div>
+<div class="terms-of-use-content">
+<div class="container">
+<div class="info-content">
+<p>Đầu tiên, TGNP xin chân thành cám ơn các bạn đã quan tâm và có mong muốn sử dụng dịch vụ của chúng tôi. Trước khi bắt đầu tham quan  thegioinhaphovietnam.com.vn cũng như sử dụng các dịch vụ trên website, xin vui lòng đọc cẩn thận và ghi nhớ Điều khoản sử dụng này. Việc sử dụng hoặc truy cập vào website  thegioinhaphovietnam.com.vn sẽ được hiểu là sự chấp nhận và đồng ý ràng buộc vào Điều khoản sử dụng.</p>
+<p>Điều khoản sử dụng này được ký kết bởi và giữa  thegioinhaphovietnam.com.vn với bất kỳ một cá nhân tổ chức, những người truy cập hoặc sử dụng website  thegioinhaphovietnam.com.vn (được gọi chung dưới đây là "Người sử dụng” hoặc "bạn").</p>
+<p>
+</p><ul>thegioinhaphovietnam.com.vn là một website cho phép người dùng tìm kiếm thông tin về bất động sản và các lĩnh vực liên quan, bao gồm:
+<li>Cung cấp thông tin trong các bài đăng trên Website với mục đích hỗ trợ kết nối thực hiện các giao dịch về nhà đất/dự án giữa người cho thuê/bán và người muốn thuê/mua.</li>
+<li>Thông tin bán/cho thuê bất động sản cùng với hình ảnh, nội dung, tin tức, phần mềm được hỗ trợ và đăng từ TGNP.</li>
+<li>Chúng tôi cũng hoạt động như một kênh giao tiếp giữa Chủ Nhà và Khách hàng để có thể giải quyết bất kỳ tranh chấp nào giữa hai bên.</li>
+</ul>
+<p></p>
+<p class="terms-of font-tiempos">Các điều khoản sử dụng</p>
+<p>Truy cập tới website thegioinhaphovietnam.com.vn, bạn đồng ý:</p>
+<p class="terms-of-use-heading font-tiempos">Thông tin, nội dung trên website:</p>
+<p>
+</p><ul>
+<li>Không sử dụng bất kỳ thiết bị, phần mềm, quy trình, phương tiện để can thiệp hay cố gắng can thiệp vào hoạt động đúng đắn trên web.</li>
+<li>Bạn có thể tải các tài liệu tham khảo trên website của TGNP về làm thông tin tham khảo, nhưng tuyết đối không điều chỉnh các thông tin đó thành thông tin sai, hoặc vi phạm pháp luật và sau đó truyền tải đến những người dùng khác.</li>
+<li>thegioinhaphovietnam.com.vn sẽ không sắp đặt, uỷ quyền hay cho phép bất cứ một tổ chức nào đối với các tài liệu của  thegioinhaphovietnam.com.vn trừ khi có văn bản đồng ý chính thức.</li>
+<li>thegioinhaphovietnam.com.vn sẽ chịu trách nhiệm cho sự an toàn, hợp pháp, tính toàn vẹn của các dữ liệu, thông tin được đăng trên website</li>
+</ul>
+<p></p>
+<p class="terms-of-use-heading font-tiempos">Sử dụng Dịch vụ</p>
+<p>
+</p><ul>
+<li>Liên quan đến việc bạn sử dụng Dịch vụ, chúng tôi có thể gửi cho bạn các thông báo dịch vụ, thông báo quản trị và thông tin khác. Bạn có thể chọn không nhận một số thông báo này.</li>
+<li>Một số các Dịch vụ của chúng tôi có sẵn trên các thiết bị di động. Không sử dụng các Dịch vụ đó theo cách khiến bạn bị mất tập trung và ngăn cản bạn tuân thủ các luật về an toàn hoặc giao thông.</li>
+<li>thegioinhaphovietnam.com.vn không ngừng thay đổi và cải tiến Dịch vụ của mình. Chúng tôi có thể thêm hoặc xóa các chức năng hoặc tính năng và chúng tôi cũng có thể tạm ngừng hoặc ngừng hoàn toàn một Dịch vụ. Chúng tôi sẽ gửi thông báo đến cho bạn để bạn nắm bắt các thông tin này một cách nhanh nhất và chính xác nhất.</li>
+</ul>
+<p></p>
+<p class="terms-of-use-heading font-tiempos">Gửi thông tin hỗ trợ</p>
+<p>
+</p><ul>
+<li>Bạn chỉ gửi yêu cầu hỗ trợ về các thông tin hỗ trợ trên website của TGNP qua các kênh như điện thoại, email, chat. Nếu bạn nhận được bất kỳ thông tin hỗ trợ nào nhưng không phải từ các kênh này của chúng tôi, thì vui lòng bỏ qua thông tin đó. Chúng tôi không chịu trách nhiệm cho các thông tin giả mạo đó.</li>
+<li>Không gửi hàng loạt các thông tin rác, yêu cầu hỗ trợ giả mạo hoặc mang tính chất đùa giỡn đến TGNP.</li>
+<li>Chỉ nhập các thông tin được yêu cầu trong phần liên hệ. Không đính kèm hoặc sử dụng các từ ngữ mang tính chất xấu như các từ ngữ phản động hoặc sử dụng các từ ngữ khiếm nhã…</li>
+<li>Thành thật trong việc cung cấp các thông tin BĐS, các thông tin được cung cấp sau khi chuyên viên chúng tôi xác thực lại, sẽ bị bỏ đi nếu chua đúng với thực tế.</li>
+</ul>
+<p></p>
+<p class="terms-of-use-heading font-tiempos">Chia sẻ thông tin trên các trang mạng xã hội</p>
+<p>
+</p><ul>
+<li>Các thông tin, bài viết, chia sẻ hữu ích trên website của chúng tôi bạn có thể chia sẻ trên các trang mạng xã hội cá nhân của bạn như: Facebook, Twitter, Messenger, Email. Khi bạn muốn chia sẻ các thông tin của chúng tôi trên các trang cá nhân này của bạn, đồng nghĩa với việc bạn đã đồng ý thực hiện các thao tác chia sẻ thông tin các tài khoản này với TGNP, như vậy chúng tôi mới có thể hỗ trợ bạn việc chia sẻ này.</li>
+</ul>
+<p></p>
+<p class="terms-of-use-heading font-tiempos">Tài khoản cá nhân</p>
+<p>
+</p><ul>
+<li>Tài khoản cá nhân khi bạn đăng ký trên  thegioinhaphovietnam.com.vn sẽ chỉ thuộc sỡ hữu của bạn. Bạn có thể xóa tài khoản bất cứ lúc nào bạn không có nhu cầu sử dụng nữa.</li>
+</ul>
+<p></p>
+</div>
+</div>
+</div>
+<div class="terms-of-use-col">
+<div class="container">
+<ul>
+<li><a href="specialist" target="_blank" class="font-tiempos">Gặp chuyên viên tư vấn</a></li>
+<li><a href="sellWithUs" target="_blank" class="font-tiempos">Đăng bán, cho thuê</a></li>
+<li><a href="apply" target="_blank" class="font-tiempos">Gia nhập TGNP</a></li>
+<li><a href="contact" target="_blank" class="font-tiempos">Liên hệ</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 
-
-                </div>
-            </div>
-        </section>
-        <section class="bg-career-gray">
-            <div class="content width1140">
-                <div class="title-career">Phòng ban</div>
-                <div class="title-career-line">
-                    <div class="line"></div>
-                </div>
-                <section class="hsg-cta-gallery hsg-flex">
-                    <div class="hsg-cta-gallery__column col1">
-                        <a href="#" class="hsg-cta-gallery__item">
-                            <img src="../images/product_medium.jpg"
-                                 srcset="../images/product_medium.jpg 1x, ../images/product.jpg 2x"
-                                 alt="Product">
-                            <h4 class="hsg-cta-gallery__item-headline">Product</h4>
-                        </a>
-                        <a href="#" class="hsg-cta-gallery__item">
-                            <img src="../images/Technical_medium.jpg"
-                                 srcset="../images/Technical_medium.jpg 1x, ../images/Technical.jpg 2x"
-                                 alt="Engineering">
-                            <h4 class="hsg-cta-gallery__item-headline">Engineering</h4>
-                        </a>
-                    </div>
-                    <div class="hsg-cta-gallery__column">
-                        <a href="#" class="hsg-cta-gallery__item">
-                            <img src="../images/marketing_medium.jpg"
-                                 srcset="../images/marketing_medium.jpg 1x, ../images/marketing.jpg 2x"
-                                 alt="Marketing & PR">
-                            <h4 class="hsg-cta-gallery__item-headline">Marketing & PR</h4>
-                        </a>
-                        <a href="#" class="hsg-cta-gallery__item">
-                            <img src="../images/finance_medium.jpg"
-                                 srcset="../images/finance_medium.jpg 1x"
-                                 alt="Finance & Operations">
-                            <h4 class="hsg-cta-gallery__item-headline">Finance & Operations</h4>
-                        </a>
-                        <a href="#" class="hsg-cta-gallery__item">
-                            <img src="../images/HR_medium.jpg"
-                                 srcset="../images/HR_medium.jpg 1x, ../images/HR.jpg 2x"
-                                 alt="HR">
-                            <h4 class="hsg-cta-gallery__item-headline">HR</h4>
-                        </a>
-                    </div>
-                    <div class="hsg-cta-gallery__column col3">
-                        <a href="#" class="hsg-cta-gallery__item">
-                            <img src="../images/realestate_medium.jpg"
-                                 srcset="../images/realestate_medium.jpg 1x, ../images/realestate.jpg 2x"
-                                 alt="Real Estate">
-                            <h4 class="hsg-cta-gallery__item-headline">Real Estate</h4>
-                        </a>
-                        <a href="#" class="hsg-cta-gallery__item">
-                            <img src="../images/media_medium.jpg"
-                                 srcset="../images/media_medium.jpg 1x, ../images/media.jpg 2x"
-                                 alt="Media">
-                            <h4 class="hsg-cta-gallery__item-headline">Customer Excellence</h4>
-                        </a>
-                    </div>
-                </section>
-            </div>
-        </section>
-        <section class="bg-career-white width1140">
-            <div class="content pdb-0">
-                <div class="title-career">Vì sao chọn REVER?</div>
-                <div class="title-career-line">
-                    <div class="line"></div>
-                </div>
-                <div class="info">
-                    <div class="why-detail">
-                        <div class="icon"><img src="{% static 'images/TuyenDung_03.gif' %}"></div>
-                        <div class="info">
-                            <ul>
-                                <li class="title">Phúc Lợi Cơ Bản</li>
-                                <li> Các chế độ, bảo hiểm, nghỉ lễ, ký kết hợp đồng lao động theo quy định hiện hành.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="why-detail">
-                        <div class="icon"><img src="{% static 'images/TuyenDung_05.gif' %}"></div>
-                        <div class="info">
-                            <ul>
-                                <li class="title">Trợ Cấp</li>
-                                <li> Trợ cấp ăn trưa, di chuyển, gửi xe và các trợ cấp khác.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="why-detail">
-                        <div class="icon"><img src="{% static 'images/TuyenDung_07.gif' %}"></div>
-                        <div class="info">
-                            <ul>
-                                <li class="title">Môi Trường Làm Việc</li>
-                                <li> Lương thưởng cạnh tranh, cơ hội thăng tiến cao, môi trường chuyên nghiệp</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="why-detail">
-                        <div class="icon"><img src="{% static 'images/TuyenDung_13.gif' %}"></div>
-                        <div class="info">
-                            <ul>
-                                <li class="title">Cập Nhật Công Nghệ</li>
-                                <li>Vận hành các công cụ tiên tiến nhất trên thế giới trong lĩnh vực 3D, bán hàng, tiếp
-                                    thị, v.v
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="why-detail">
-                        <div class="icon"><img src="{% static 'images/TuyenDung_12.gif' %}"></div>
-                        <div class="info">
-                            <ul>
-                                <li class="title">Đào Tạo</li>
-                                <li>Cập nhật thông tin và hoàn thiện các kỹ năng với lịch học hàng tuần đa dạng của
-                                    TGNP.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="why-detail">
-                        <div class="icon"><img src="{% static 'images/TuyenDung_14.gif' %}"></div>
-                        <div class="info">
-                            <ul>
-                                <li class="title">Thể Thao</li>
-                                <li> Tham gia miễn phí các hoạt động thể thao như Cầu lông, bơi lội, v.v</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="bg-career-gray">
-            <div class="contentpx width1140">
-                <div class="title-career">Chúng tôi là TGNP</div>
-                <div class="title-career-line">
-                    <div class="line"></div>
-                </div>
-                <div class="career-img">
-                    <ul>
-                        <li><a href="javascript:void(0)"><img src="../images/career1.jpg"
-                                                              srcset="../images/career1-small.jpg 1x, ../images/career1-small@2x.jpg 2x"></a>
-                        </li>
-                        <li><a href="javascript:void(0)"><img src="../images/career2.jpg"
-                                                              srcset="../images/career2-small.jpg 1x, ../images/career2-small@2x.jpg 2x"></a>
-                        </li>
-                        <li><a href="javascript:void(0)"><img
-                                src="{% static 'images//career/1.jpg' %}"></a>
-                        </li>
-                        <li><a href="javascript:void(0)"><img
-                                src=".{% static 'images/career/2.jpg' %}"></a>
-                        </li>
-                        <li><a href="javascript:void(0)"><img
-                                src="{% static 'images/career/3.jpg' %}"></a>
-                        </li>
-                        <li><a href="javascript:void(0)"><img src="../images/career6.jpg"
-                                                              srcset="../images/career6-small.jpg 1x, ../images/career6-small@2x.jpg 2x"></a>
-                        </li>
-                        <li><a href="javascript:void(0)"><img src="../images/career7.jpg"
-                                                              srcset="../images/career7-small.jpg 1x, ../images/career7-small@2x.jpg 2x"></a>
-                        </li>
-                        <li><a href="javascript:void(0)"><img src="../images/career8.jpg"
-                                                              srcset="../images/career8-small.jpg 1x, ../images/career8-small@2x.jpg 2x"></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        <section id="list-career" class="bg-career-white width1140">
-            <div class="content">
-                <div class="title-career">TGNP đang tuyển dụng</div>
-                <div class="title-career-line">
-                    <div class="line"></div>
-                </div>
-
-
-                <!--$("a[href=#]").click(function(e){e.preventDefault()});-->
-
-
-                <!--$(document).on('click', 'li.whr-item a', function(e) {-->
-
-
-                <div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=sale" target="_blank">
-                                Nhân viên kinh doanh bất động sản
-                            </a>
-                        </div>
-                        <div class="pos">Primary/Secondary</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=sale"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=sales-director" target="_blank">
-                                Sales Director
-                            </a>
-                        </div>
-                        <div class="pos">Primary/Secondary</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=sales-director" target="_blank">ỨNG
-                                TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=sales-manager-primary"
-                               target="_blank">
-                                Sales Manager
-                            </a>
-                            <button onclick="showDescription('Sales Manager Primary', '1yuqVv-_PjomPsNj_rq6I_lvIopDs6ezQ', '../agent.rever.vn/ung-tuyen218b.html?position=sales-manager-primary')"
-                                    class="job-desc">Mô tả công việc
-                            </button>
-                        </div>
-                        <div class="pos">Primary</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=sales-manager-primary"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=sales-manager-secondary"
-                               target="_blank">
-                                Sales Manager
-                            </a>
-                            <button onclick="showDescription('Sales Manager Secondary', '1J7k-KBu7uXa265wkV6SJcX7k2MeVUZ7D', '../agent.rever.vn/ung-tuyen6ca6.html?position=sales-manager-secondary')"
-                                    class="job-desc">Mô tả công việc
-                            </button>
-                        </div>
-                        <div class="pos">Secondary</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=sales-manager-secondary"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=product-manager" target="_blank">
-                                Product Manager
-                            </a>
-                        </div>
-                        <div class="pos">Tech &amp; Product</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=product-manager" target="_blank">ỨNG
-                                TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=software-engineer" target="_blank">
-                                Software Engineer
-                            </a>
-                        </div>
-                        <div class="pos">Tech &amp; Product</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=software-engineer" target="_blank">ỨNG
-                                TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=data-engineer" target="_blank">
-                                Data Engineer
-                            </a>
-                        </div>
-                        <div class="pos">Tech &amp; Product</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block" href="apply?position=data-engineer"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=qa-specialist" target="_blank">
-                                QA Specialist
-                            </a>
-                            <button onclick="showDescription('QA Specialist', '1EwZzpzfa9_q3LzUUVJ9UDRiiGYOwCOVu', 'apply?position=qa-specialist')"
-                                    class="job-desc">Mô tả công việc
-                            </button>
-                        </div>
-                        <div class="pos">CE</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block" href="apply?position=qa-specialist"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=isa-outbound%2Finbound"
-                               target="_blank">
-                                ISA Outbound/Inbound
-                            </a>
-                            <button onclick="showDescription('ISA Outbound/Inbound', '1TkzWWPYr1ZUOj5RtlCTM6ulefdPClGMZ', 'apply?position=isa-outbound%2Finbound')"
-                                    class="job-desc">Mô tả công việc
-                            </button>
-                        </div>
-                        <div class="pos">CE</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=isa-outbound%2Finbound"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=customer-service-executive"
-                               target="_blank">
-                                Customer Service Executive
-                            </a>
-                            <button onclick="showDescription('Customer Service Executive', '1xUwW0mkDXn53FzkKZl-UUSIq1j6O4JHd', 'apply?position=customer-service-executive')"
-                                    class="job-desc">Mô tả công việc
-                            </button>
-                        </div>
-                        <div class="pos">CE</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=customer-service-executive"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=content-research-analyst"
-                               target="_blank">
-                                Content Research Analyst
-                            </a>
-                        </div>
-                        <div class="pos">Marketing</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=content-research-analyst"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=digital-marketing-specialist"
-                               target="_blank">
-                                Digital Marketing Specialist
-                            </a>
-                            <button onclick="showDescription('Digital Marketing Specialist', '1M8OoIp9LTa7XdWmSTwvnlTmSY1vrrzwm', 'apply?position=digital-marketing-specialist')"
-                                    class="job-desc">Mô tả công việc
-                            </button>
-                        </div>
-                        <div class="pos">Marketing</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=digital-marketing-specialist"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-         <div id="career-desc-popup" class="popup-fade popup-career">
-        <div class="popup-dialog popup-dialog-centered popup-dialog-large">
-            <div class="popup-content">
-                <button class="popup-close">
-                    <i class="zmdi zmdi-close"></i>
-                </button>
-                <div class="popup-header">
-                    <h3 class="popup-title">Nhân viên kinh doanh bất động sản</h3>
-                </div>
-                <div class="popup-body">
-                    <iframe class="desc-file" frameborder="0" scrolling="no" width="100%"></iframe>
-                </div>
-                <div class="popup-footer">
-                    <a href="apply" class="cta-apply-now" target="_blank">Ứng tuyển ngay</a>
-                </div>
-            </div>
-        </div>
-    </div>
         <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
             <div class="popup-feedback-fixed">
                 <div class="popup-body-fb">
@@ -791,6 +376,10 @@
 
     </div>
 
+<div id="service-guide-app">
+
+</div>
+
 
     <!-- Footer content below-->
 {% endblock %}
@@ -807,8 +396,6 @@
     <script defer src="{% static 'js/feedback-modal.min90ca.js' %}"></script>
 
     <script async defer src="{% static 'js/external90ca.js' %}"></script>
-
-    <script async defer src="{% static 'js/career.min90ca.js' %}"></script>
 
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script async defer
@@ -837,7 +424,7 @@
       "@context": "http://schema.org",
       "@type": "Organization",
       "url": "https://thegioinhaphovietnam.com.vn",
-      "logo": "../images/rever-thumbnail.jpg",
+      "logo": "https://thegioinhaphovietnam.com.vn/static/images/rever-thumbnail.jpg",
       "contactPoint": [
         {
           "@type": "ContactPoint",
@@ -847,8 +434,8 @@
       ],
       "sameAs": [
         "https://www.facebook.com/thegioinhaphovietnam.com.vn",
-        "www.linkedin.com/company/thegioinhaphovietnam.com.vn",
-        "www.instagram.com/thegioinhaphovietnam.com.vn",
+        "../www.linkedin.com/company/thegioinhaphovietnam.com.vn",
+        "../www.instagram.com/thegioinhaphovietnam.com.vn",
         "https://www.youtube.com/channel/UC2YIBjJIw4jL5aQ9LEoCQDg"
       ]
     }
@@ -933,11 +520,47 @@
         /*Footer - END*/
     </script>
 
-
     <script>
-        window.RHome = {
-            searchUrl: "search?specialist=",
+    $(function() {
+        var header = $('#menu')
+        var headerY = header.offset().top
+        var headerHeight = header.height()
+        function processShowingMenus() {
+          var y = $(document).scrollTop()
+          if (y > headerY) {
+            header.addClass('fixed')
+            $('body').css('padding-top', headerHeight + 'px')
+            header.css('zIndex', 101)
+          } else {
+            header.removeClass('fixed')
+            $('body').css('padding-top', '0px')
+            header.css('zIndex', 10)
+          }
         }
-    </script>
+        //$(document).scroll(processShowingMenus)
+        //processShowingMenus()
+
+        var list = $('.nav-mobileShow');
+        var overlay = $("#menu > .bg-overlay");
+        var link = $('.nav-mobileTab');
+        var timing = 300;
+        link.click(function(e) {
+            e.preventDefault();
+            if (overlay.css('display') !== 'none'){
+                list.slideToggle(timing, function(){
+                    $("#menu > .bg-overlay").fadeOut(timing);
+                });
+            } else {
+                list.slideToggle(timing);
+                $("#menu > .bg-overlay").fadeIn(timing);
+            }
+        });
+        overlay.click(function(){
+            list.slideUp(timing, function(){
+                $("#menu > .bg-overlay").fadeOut(timing);
+            });
+        })
+    });
+</script>
 
 {% endblock %}

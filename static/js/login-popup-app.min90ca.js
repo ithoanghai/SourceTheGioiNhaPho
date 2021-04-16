@@ -8933,7 +8933,7 @@
         }), n.d(e, "a", function () {
             return i
         });
-        var r = {RENT: 1, SALE: 2, SALE_AND_RENT: 3}, i = {MLS: "mls", REVER: "rever"}
+        var r = {RENT: 1, SALE: 2, SALE_AND_RENT: 3}, i = {MLS: "mls", TGNP: "tgnp"}
     }, NkRn: function (t, e, n) {
         var r = n("TQ3y").Symbol;
         t.exports = r
@@ -10928,7 +10928,7 @@
             return w
         });
         var r = n("wxAW"), i = n.n(r), o = n("Zx67"), a = n.n(o), s = n("Zrlr"), u = n.n(s), c = n("zwoO"), l = n.n(c),
-            f = n("Pf15"), d = n.n(f), h = n("8RZ1"), p = n.n(h), v = {MLS: "mls", REVER: "rever"}, m = function (t) {
+            f = n("Pf15"), d = n.n(f), h = n("8RZ1"), p = n.n(h), v = {MLS: "mls", TGNP: "tgnp"}, m = function (t) {
                 function e() {
                     var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
                     return u()(this, e), l()(this, (e.__proto__ || a()(e)).call(this, t, {
@@ -12151,7 +12151,7 @@
                             value: t.currentForm == t.FORM.registerWithPhone,
                             expression: "currentForm == FORM.registerWithPhone"
                         }], staticClass: "popup-info-form-up-login"
-                    }, [n("p", {staticClass: "login--title mb-16"}, [t._v("Tạo tài khoản mới")]), t._v(" "), n("p", {staticClass: "intro"}, [t._v("Thông tin được dùng để tạo tài khoản mới của bạn tại Rever. Mọi thông tin đều được bảo mật với Rever.")]), t._v(" "), n("div", {staticClass: "row"}, [n("div", {staticClass: "col-sm-6"}, [n("div", {staticClass: "form-group"}, [n("input", {
+                    }, [n("p", {staticClass: "login--title mb-16"}, [t._v("Tạo tài khoản mới")]), t._v(" "), n("p", {staticClass: "intro"}, [t._v("Thông tin được dùng để tạo tài khoản mới của bạn tại TGNP. Mọi thông tin đều được bảo mật với TGNP.")]), t._v(" "), n("div", {staticClass: "row"}, [n("div", {staticClass: "col-sm-6"}, [n("div", {staticClass: "form-group"}, [n("input", {
                         directives: [{
                             name: "model",
                             rawName: "v-model",
@@ -12284,7 +12284,7 @@
                             value: t.currentForm === t.FORM.registerWithOauth,
                             expression: "currentForm === FORM.registerWithOauth"
                         }], staticClass: "popup-info-form-up-login"
-                    }, [n("p", {staticClass: "login--title mb-16"}, [t._v("Tạo tài khoản mới")]), t._v(" "), n("p", {staticClass: "intro"}, [t._v("Thông tin được dùng để tạo tài khoản mới của bạn tại Rever. Mọi thông tin đều được bảo mật với Rever.")]), t._v(" "), n("div", {staticClass: "avatar-social"}, [n("div", {staticClass: "cover"}, [n("img", {attrs: {src: t.form.info.avatar}})]), t._v(" "), n("h3", [t._v(t._s(t.form.info.firstName + " " + t.form.info.lastName))]), t._v(" "), n("a", {
+                    }, [n("p", {staticClass: "login--title mb-16"}, [t._v("Tạo tài khoản mới")]), t._v(" "), n("p", {staticClass: "intro"}, [t._v("Thông tin được dùng để tạo tài khoản mới của bạn tại TGNP. Mọi thông tin đều được bảo mật với TGNP.")]), t._v(" "), n("div", {staticClass: "avatar-social"}, [n("div", {staticClass: "cover"}, [n("img", {attrs: {src: t.form.info.avatar}})]), t._v(" "), n("h3", [t._v(t._s(t.form.info.firstName + " " + t.form.info.lastName))]), t._v(" "), n("a", {
                         staticClass: "email",
                         attrs: {href: "javascript:void(0)"}
                     }, [t._v(t._s(t.form.info.email))])]), t._v(" "), n("div", {staticClass: "form-group"}, [n("input", {
@@ -12340,7 +12340,7 @@
                                 return e.preventDefault(), t.sendOTPWhileRegisterViaOauth(e)
                             }
                         }
-                    }, [n("span", [t._v("Hoàn tất")])])]), t._v(" "), n("div", {staticClass: "not-account"}, [n("p", [t._v("Đã có tài khoản Rever? "), n("a", {
+                    }, [n("span", [t._v("Hoàn tất")])])]), t._v(" "), n("div", {staticClass: "not-account"}, [n("p", [t._v("Đã có tài khoản TGNP? "), n("a", {
                         attrs: {
                             href: "#",
                             id: "btn-login-v2"
@@ -13531,7 +13531,7 @@
         Object.defineProperty(e, "__esModule", {value: !0}), e.default = void 0;
         var r = "web" === Object({
             NODE_ENV: "production",
-            contact_from_api: "https://rever.vn/mapi/form",
+            contact_from_api: "https://thegioinhaphovietnam.com.vn/mapi/form",
             rec_api: "https://rec.rever.vn/api",
             save_search_api: "https://rever.vn/api/save-search"
         }).BUILD ? n("tL8V").withParams : n("JVqD").withParams;

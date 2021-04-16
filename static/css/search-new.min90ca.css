@@ -446,8 +446,8 @@ body {
 
 .alert-danger {
     color: #fff;
-    background-color: #c72528;
-    border-color: #c72528
+    background-color: orange;
+    border-color: orange
 }
 
 .btn-alert-close {
@@ -824,7 +824,7 @@ body {
 
 .main-header .col-left .top-search form .search-type > span {
     font-size: 14px;
-    color: rgba(48, 51, 58, .86)
+    color: orange;
 }
 
 .main-header .col-left .top-search form .search-type ul {
@@ -1427,7 +1427,7 @@ body {
 .main-header .search-mobile .optionsList .option input:checked + label {
     border-radius: 2px;
     background-color: #fff;
-    color: #c72528
+    color: orange
 }
 
 .main-header .search-mobile .optionsList .option label {
@@ -1648,16 +1648,16 @@ body {
     border: 1px solid transparent
 }
 
-#home .agency-rever a {
+#home .agency-tgnp a {
     border: 1px solid #fff;
     color: #fff
 }
 
-#home .agency-rever a:hover {
+#home .agency-tgnp a:hover {
     color: #fff !important
 }
 
-.agency-rever a {
+.agency-tgnp a {
     color: #30333a;
     font-size: 14px;
     height: 40px;
@@ -1679,7 +1679,7 @@ body {
     min-width: 155px
 }
 
-.agency-rever a:hover {
+.agency-tgnp a:hover {
     opacity: .86;
     color: #30333a !important;
     -webkit-transition: all .3s;
@@ -1804,7 +1804,7 @@ ul.breadcrumb li a.text-blue {
 }
 
 ul.breadcrumb li a:hover {
-    color: #c52728
+    color: orange
 }
 
 .loading-wrapper {
@@ -2060,7 +2060,7 @@ ul.breadcrumb li a:hover {
 
 .btn-red {
     color: #fff;
-    background: #c72528
+    background: orange
 }
 
 @media (min-width: 768px) {
@@ -2071,15 +2071,15 @@ ul.breadcrumb li a:hover {
 }
 
 .btn-red-outline {
-    color: #c72528;
-    border: 1px solid #c72528;
+    color: orange;
+    border: 1px solid orange;
     background: 0 0
 }
 
 @media (min-width: 768px) {
     .btn-red-outline:hover {
         color: #fff;
-        background: #c72528
+        background: orange
     }
 }
 
@@ -2261,7 +2261,7 @@ ul.breadcrumb li a:hover {
 }
 
 .label-primary.unique {
-    background: #337588
+    background: orange
 }
 
 .label-primary.free {
@@ -2450,7 +2450,7 @@ ul.breadcrumb li a:hover {
     color: #fff
 }
 
-.status-rever {
+.status-tgnp {
     display: inline-block;
     padding: 4px 8px 1px !important;
     font-size: .875rem;
@@ -2860,7 +2860,7 @@ ul.breadcrumb li a:hover {
 }
 
 .listingCard .info-container .listing-name:hover {
-    color: #c72528
+    color: orange
 }
 
 .listingCard .info-container .listing-address {
@@ -2885,7 +2885,7 @@ ul.breadcrumb li a:hover {
 }
 
 .listingCard .info-container .listing-address h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .listingCard .info-container .listing-info {
@@ -2952,7 +2952,7 @@ ul.breadcrumb li a:hover {
 
 @media (min-width: 1024px) {
     .listingCard .info-container .listing-price:hover {
-        color: #c72528
+        color: orange
     }
 }
 
@@ -4613,7 +4613,7 @@ ul.breadcrumb li a:hover {
 }
 
 .toast-message > a:hover {
-    color: #c72528
+    color: orange
 }
 
 .form-element {
@@ -5992,7 +5992,7 @@ ul.breadcrumb li a:hover {
     }
 }
 
-.banner-app-rever {
+.banner-app-tgnp {
     position: relative;
     display: none;
     -webkit-box-align: center;
@@ -6012,7 +6012,7 @@ ul.breadcrumb li a:hover {
 }
 
 @media (max-width: 768px) {
-    .banner-app-rever {
+    .banner-app-tgnp {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex
@@ -6055,7 +6055,7 @@ ul.breadcrumb li a:hover {
 }
 
 .btn-install::after {
-    background-color: #c72528;
+    background-color: orange;
     content: "";
     position: absolute;
     top: 0;
@@ -6187,13 +6187,13 @@ label {
 .c72528-14 {
     font-size: 14px !important;
     line-height: 22px !important;
-    color: #c72528 !important
+    color: orange !important
 }
 
 .c72528-20 {
     font-size: 20px !important;
     line-height: 28px !important;
-    color: #c72528 !important
+    color: orange !important
 }
 
 .pd-left-right-30 {
@@ -6574,7 +6574,7 @@ label {
 
 @media (min-width: 1200px) {
     .promote-block .promote-detail .info .left h3 a:hover {
-        color: #c72528
+        color: orange
     }
 }
 
@@ -6600,7 +6600,7 @@ label {
 }
 
 .promote-block .promote-detail .info .left .address h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .promote-block .promote-detail .info .left .price {
@@ -7428,7 +7428,7 @@ label {
     text-overflow: ellipsis;
     padding-right: 18px;
     font-family: rv-font2;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.5;
     font-weight: 500
 }
@@ -7516,7 +7516,8 @@ label {
     .secondaryBar .btn-save-search {
         height: 32px !important;
         line-height: 32px !important;
-        padding: 0 14px
+        padding: 0 14px;
+        background: orange;
     }
 }
 
@@ -7606,7 +7607,7 @@ label {
 }
 
 .result-body .row:not(.grid) .listView.box .info-container .listing-name:hover {
-    color: #c72528
+    color: orange
 }
 
 .result-body .row:not(.grid) .listView.box .info-container .listing-address {
@@ -7634,7 +7635,7 @@ label {
 }
 
 .result-body .row:not(.grid) .listView.box .info-container .listing-address h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .result-body .row:not(.grid) .listView.box .info-container .listing-info {
@@ -8147,7 +8148,7 @@ label {
     }
 
     .result-body .row:not(.grid) .projectCard-list.box .info-container .project-name:hover {
-        color: #c72528
+        color: orange
     }
 
     .result-body .row:not(.grid) .projectCard-list.box .info-container .project-address {
@@ -8172,7 +8173,7 @@ label {
     }
 
     .result-body .row:not(.grid) .projectCard-list.box .info-container .project-address h4 a:hover {
-        color: #c72528
+        color: orange
     }
 
     .result-body .row:not(.grid) .projectCard-list.box .info-container .project-info {
@@ -8644,7 +8645,7 @@ label {
 }
 
 .result-body .row.grid .listView.box .info-container .listing-name:hover {
-    color: #c72528
+    color: orange
 }
 
 .result-body .row.grid .listView.box .info-container .listing-address {
@@ -8668,7 +8669,7 @@ label {
 }
 
 .result-body .row.grid .listView.box .info-container .listing-address h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .result-body .row.grid .listView.box .info-container .listing-info {
@@ -9571,7 +9572,7 @@ label {
 }
 
 .search-relative .inner .row .description figure a:hover, .search-relative .inner .row .description h2 a:hover, .search-relative .inner .row .description h3 a:hover, .search-relative .inner .row .description h4 a:hover, .search-relative .inner .row .description h5 a:hover, .search-relative .inner .row .description h6 a:hover, .search-relative .inner .row .description p a:hover, .search-relative .inner .row .description table > a:hover, .search-relative .inner .row .description ul li a:hover {
-    color: #c72528 !important
+    color: orange !important
 }
 
 .search-relative .inner .row .description p {
@@ -9635,7 +9636,7 @@ label {
 }
 
 .search-relative .inner .row .description a:hover * {
-    color: #c72528
+    color: orange
 }
 
 .search-relative .inner .row .description figcaption, .search-relative .inner .row .description figure {
@@ -9697,7 +9698,7 @@ label {
 }
 
 .search-relative .inner .row .relative-group .item a:hover {
-    color: #c72528;
+    color: orange;
     -webkit-transition: color ease-in .1s;
     transition: color ease-in .1s
 }
@@ -9744,7 +9745,7 @@ label {
 @media (min-width: 1024px) {
     .search-relative .inner .row .relative-group.tags .item a:hover {
         opacity: .86;
-        color: #c72528
+        color: orange
     }
 }
 
@@ -9783,24 +9784,24 @@ label {
 }
 
 .listings-map-box:hover > .listings-map {
-    background: #c72528;
+    background: orange;
     color: #fff;
     cursor: pointer
 }
 
 .listings-map-box:hover > .triangle-down {
-    border-top: 6px solid #c72528;
+    border-top: 6px solid orange;
     cursor: pointer
 }
 
 .listings-map-box.active > .listings-map {
-    background: #c72528;
+    background: orange;
     color: #fff;
     cursor: pointer
 }
 
 .listings-map-box.active .triangle-down {
-    border-top: 6px solid #c72528;
+    border-top: 6px solid orange;
     cursor: pointer
 }
 
@@ -9914,7 +9915,7 @@ label {
 }
 
 .searchlisting section.exclusive article.featured header a:hover {
-    color: #c72528
+    color: orange
 }
 
 .searchlisting section.exclusive article.featured header h2 {
@@ -9927,7 +9928,7 @@ label {
 }
 
 .searchlisting section.exclusive article.featured header h2:hover {
-    color: #c72528
+    color: orange
 }
 
 .searchlisting section.exclusive article.featured header .address {
@@ -10635,7 +10636,7 @@ div > img {
     height: 50px;
     line-height: 50px;
     color: #fff;
-    background: #c72528;
+    background: orange;
     font-size: 18px;
     font-weight: 600;
     padding: 0 40px
@@ -11359,7 +11360,7 @@ div > img {
         margin: 0 !important;
         height: 40px !important;
         line-height: 40px !important;
-        background: #c72528;
+        background: orange;
         color: #fff
     }
 
@@ -11577,7 +11578,7 @@ div > img {
 }
 
 .popup-project--page__search .popup-dialog-large .popup-left-title a:hover, .popup-property--page__search .popup-dialog-large .popup-left-title a:hover {
-    color: #c72528
+    color: orange
 }
 
 .popup-project--page__search .popup-dialog-large .popup-left-content, .popup-property--page__search .popup-dialog-large .popup-left-content {
@@ -11597,7 +11598,7 @@ div > img {
 }
 
 .popup-project--page__search .popup-dialog-large .popup-left-address h4 a:hover, .popup-property--page__search .popup-dialog-large .popup-left-address h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .popup-project--page__search .popup-dialog-large .popup-left-info li, .popup-property--page__search .popup-dialog-large .popup-left-info li {
@@ -11606,7 +11607,7 @@ div > img {
 }
 
 .popup-project--page__search .popup-dialog-large .popup-right-rva .rva-info-name:hover, .popup-property--page__search .popup-dialog-large .popup-right-rva .rva-info-name:hover {
-    color: #c72528
+    color: orange
 }
 
 .popup-project--page__search .popup-dialog-large .popup-right-phone .zmdi, .popup-property--page__search .popup-dialog-large .popup-right-phone .zmdi {
@@ -11647,7 +11648,7 @@ div > img {
 }
 
 .popup-success--page__search .popup-dialog-large .popup-left-title a:hover {
-    color: #c72528
+    color: orange
 }
 
 .popup-success--page__search .popup-dialog-large .popup-left-cover a:hover img {
@@ -11663,7 +11664,7 @@ div > img {
 }
 
 .popup-success--page__search .popup-dialog-large .popup-left-address h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .popup-success--page__search .popup-dialog-large .popup-left-info li {
@@ -11672,7 +11673,7 @@ div > img {
 }
 
 .popup-success--page__search .popup-dialog-large .popup-right-rva .rva-info-name:hover {
-    color: #c72528
+    color: orange
 }
 
 .popup-success--page__search .popup-dialog-large .popup-right-phone .zmdi {
@@ -11695,7 +11696,7 @@ div > img {
 }
 
 .popup-success--page__search .popup-success-content p a:hover {
-    color: #c72528
+    color: orange
 }
 
 .search-noresult {
@@ -11761,7 +11762,7 @@ div > img {
     height: 40px;
     line-height: 40px;
     margin: 0 auto;
-    background: #c72528;
+    background: orange;
     color: #fff;
     font-size: 16px;
     font-weight: 600;
@@ -11929,7 +11930,7 @@ div > img {
 
 .page--search .form-element .error-text {
     display: none;
-    color: #c72528;
+    color: orange;
     font-size: 12px;
     position: absolute;
     top: 44px;
@@ -11998,7 +11999,7 @@ div > img {
 .page--search .large-btn-red {
     padding: 13px 40px;
     color: #fff;
-    background: #c72528;
+    background: orange;
     border-radius: 2px;
     font-size: 18px;
     border: 0;
@@ -12066,7 +12067,7 @@ div > img {
     max-width: 616px
 }
 
-.map__fullscreen .banner-app-rever {
+.map__fullscreen .banner-app-tgnp {
     display: none
 }
 
@@ -12649,7 +12650,7 @@ div > img {
 }
 
 .project-area .table td a:hover {
-    color: #c72528
+    color: orange
 }
 
 .project-area .table small {
@@ -12660,7 +12661,7 @@ div > img {
 }
 
 .project-area .table small.danger {
-    color: #c72528
+    color: orange
 }
 
 .project-area .table small.success {
@@ -12773,7 +12774,7 @@ div > img {
 
 @media (min-width: 1024px) {
     .faq-section .question-text a:hover {
-        color: #c72528
+        color: orange
     }
 }
 
@@ -12800,7 +12801,7 @@ div > img {
 
 @media (min-width: 1024px) {
     .faq-section .answer-text a:hover {
-        color: #c72528
+        color: orange
     }
 }
 
@@ -12891,7 +12892,7 @@ div > img {
 
 @media (min-width: 1200px) {
     .project-marker__title:hover {
-        color: #c72528
+        color: orange
     }
 }
 
@@ -12931,7 +12932,7 @@ div > img {
 
 @media (min-width: 1200px) {
     .project-marker__address li a:hover {
-        color: #c72528
+        color: orange
     }
 }
 
@@ -12975,7 +12976,7 @@ div > img {
 }
 
 .project-marker__info li.price {
-    color: #c72528
+    color: orange
 }
 
 .fix--width__dropdown--inner {

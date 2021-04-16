@@ -104,8 +104,8 @@ a {
 
 @font-face {
     font-family: rever-icon;
-    src: url(../fonts/ReverIcons.eot);
-    src: url(../fonts/ReverIcons.eot?#iefix) format('embedded-opentype'), url(../fonts/ReverIcons.woff) format('woff'), url(../fonts/ReverIcons.ttf) format('truetype'), url(../fonts/ReverIcons.svg#roboto_condensedregular) format('svg')
+    src: url(../fonts/TGNPIcons.eot);
+    src: url(../fonts/TGNPIcons.eot?#iefix) format('embedded-opentype'), url(../fonts/TGNPIcons.woff) format('woff'), url(../fonts/TGNPIcons.ttf) format('truetype'), url(../fonts/TGNPIcons.svg#roboto_condensedregular) format('svg')
 }
 
 body {
@@ -299,7 +299,7 @@ body {
 }
 
 .btn-red {
-    background: #c52728;
+    background: orange;
     color: #fff
 }
 
@@ -526,7 +526,7 @@ body {
 }
 
 .icon-bar .zmdi-youtube-play {
-    color: #c72528
+    color: orange
 }
 
 .icon-bar .zmdi-google-plus {
@@ -546,7 +546,7 @@ body {
 }
 
 .icon-bar a:hover {
-    background-color: #c72528;
+    background-color: orange;
     color: #fff
 }
 
@@ -702,7 +702,7 @@ body {
     max-width: 55px;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
-    background: #c52728;
+    background: orange;
     cursor: pointer;
     margin: 0;
     padding: 0
@@ -1082,7 +1082,7 @@ body {
 }
 
 .cus-say-what {
-    background: #c72528;
+    background: orange;
     padding: 45px 0 55px;
     position: relative;
     text-align: center
