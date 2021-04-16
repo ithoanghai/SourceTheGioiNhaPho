@@ -22,6 +22,8 @@ urlpatterns = [
     path('contact', views.contact, name='contact'),
     path('recruitment', views.recruitment, name='recruitment'),
     path('apply', views.apply, name='apply'),
+    path('termsOfUse', views.termsOfUse, name='termsOfUse'),
+    path('privacyPolicy', views.privacyPolicy, name='privacyPolicy'),
 
 
     #Url for Backend

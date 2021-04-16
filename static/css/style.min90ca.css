@@ -64,8 +64,8 @@ html {
 
 @font-face {
     font-family: 'rever-icon';
-    src: url(../fonts/ReverIcons.eot);
-    src: url(../fonts/ReverIconsd41d.eot?#iefix) format('embedded-opentype'), url(../fonts/ReverIcons.woff) format('woff'), url(../fonts/ReverIcons.ttf) format('truetype'), url(../fonts/ReverIcons.svg#roboto_condensedregular) format('svg')
+    src: url(../fonts/TGNPIcons.eot);
+    src: url(../fonts/TGNPIconsd41d.eot?#iefix) format('embedded-opentype'), url(../fonts/TGNPIcons.woff) format('woff'), url(../fonts/TGNPIcons.ttf) format('truetype'), url(../fonts/TGNPIcons.svg#roboto_condensedregular) format('svg')
 }
 
 html * {
@@ -118,7 +118,7 @@ h2 {
 }
 
 .checkbox input + label:hover {
-    color: #c72528
+    color: orange
 }
 
 .checkbox input:checked + label:after {
@@ -293,7 +293,7 @@ a {
 }
 
 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .detail-content-news img, .thumb-duan, .cover {
@@ -577,16 +577,16 @@ a:hover {
 }
 
 .width-1600 .right-menu ul li a.sellbut:hover {
-    background: #c72528;
-    border: 1px solid #c72528
+    background: orange;
+    border: 1px solid orange
 }
 
 .width-1600 .right-menu ul li a.activeon {
-    color: #c72528 !important
+    color: orange !important
 }
 
 .width-1600 .right-menu ul li a.dropdown-link:hover {
-    color: #c72528
+    color: orange
 }
 
 .width-1600 .right-menu ul li a.dropdownmenu:hover {
@@ -715,7 +715,7 @@ a:hover {
     right: 15px;
     font-family: 'rever-icon', arial;
     font-size: .7em;
-    color: #c72528
+    color: orange
 }
 
 .iconremove:before {
@@ -928,7 +928,7 @@ a:hover {
 .topsearch-bgloop .box-search .fix-width770 form .muathue .radiobut input[type=radio]:checked + label {
     width: 100%;
     height: 100%;
-    background: #c72528;
+    background: orange;
     color: #fff
 }
 
@@ -1156,7 +1156,7 @@ button[type=button].btn-no-style:focus {
 
 .customer-review .box-reviewer .reviewer .reviewer-info a.name {
     font-size: 2em;
-    color: #c72528;
+    color: orange;
     line-height: 2em
 }
 
@@ -1223,7 +1223,7 @@ button[type=button].btn-no-style:focus {
     padding: 0 15px
 }
 
-.compare-rever {
+.compare-tgnp {
     width: 100%;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
@@ -1232,7 +1232,7 @@ button[type=button].btn-no-style:focus {
     border-spacing: 0
 }
 
-.compare-rever tr td {
+.compare-tgnp tr td {
     padding: 20px 0;
     text-align: center;
     border-left: 1px solid #ccc;
@@ -1308,8 +1308,8 @@ button[type=button].btn-no-style:focus {
 }
 
 .width-1600 .right-menu ul li a.sellbutblack:hover {
-    background: #c72528;
-    border: 2px solid #c72528;
+    background: orange;
+    border: 2px solid orange;
     color: #fff
 }
 
@@ -1500,7 +1500,7 @@ ul.slideimg span {
     display: block;
     width: 84%;
     margin: 0 8%;
-    background: #c72528;
+    background: orange;
     color: #fff;
     padding: 14px 0 10px 0;
     clear: both;
@@ -1526,7 +1526,7 @@ ul.slideimg span {
 }
 
 .black-button:hover {
-    background: #c72528;
+    background: orange;
     color: #fff
 }
 
@@ -1565,8 +1565,8 @@ ul.slideimg span {
 }
 
 .booking-button:hover {
-    background: #c72528;
-    border: 1px solid #c72528;
+    background: orange;
+    border: 1px solid orange;
     color: #fff
 }
 
@@ -1634,7 +1634,7 @@ ul.slideimg span {
 }
 
 .booking-tour .bg-gray .sms-button:hover {
-    background: #c72528
+    background: orange
 }
 
 .bg-gray:after {
@@ -2138,7 +2138,7 @@ ul.slidemap li a.img:hover {
 }
 
 .detail-house .address h2 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .content-detail-house header.detail-house ul.detailroom li {
@@ -2390,7 +2390,7 @@ ul.slidemap li a.img:hover {
 .write-review a {
     padding: 10px 100px 20px;
     display: block;
-    color: #c72528
+    color: orange
 }
 
 .uer-reviews li:first-child {
@@ -2635,7 +2635,7 @@ ul.slidemap li a.img:hover {
 }
 
 .btn-download {
-    background: #c72528;
+    background: orange;
     border-radius: 2px solid;
     height: 50px;
     line-height: 50px;
@@ -2649,7 +2649,7 @@ ul.slidemap li a.img:hover {
 
 .right-recruitment a.recruit {
     font-size: 24px;
-    color: #c72528;
+    color: orange;
     font-weight: 500;
     margin-top: 30px;
     display: block
@@ -2667,7 +2667,7 @@ ul.slidemap li a.img:hover {
 
 .right-recruitment .whr-item .whr-title a {
     font-size: 20px;
-    color: #c72528;
+    color: orange;
     font-weight: 500;
     margin-top: 30px;
     display: block;
@@ -2998,7 +2998,7 @@ ul.slidemap li a.img:hover {
 }
 
 .fone-info {
-    color: #c72528;
+    color: orange;
     padding: 5px 0;
     font-size: 1em;
     font-family: 'harmonia', Arial, Helvetica, sans-serif
@@ -3143,7 +3143,7 @@ ul.slidemap li a.img:hover {
 }
 
 .wswb-menu .menuleft li.active {
-    border-bottom: 4px solid #c72528;
+    border-bottom: 4px solid orange;
     font-size: 16px;
     padding: 0 20px;
     cursor: default
@@ -3277,7 +3277,7 @@ input[type=radio]:checked {
 }
 
 .left-filter2 input[type=radio]:checked + label {
-    color: #c72528
+    color: orange
 }
 
 .left-filter2 input[type=radio]:checked {
@@ -3493,7 +3493,7 @@ ul.popup li label:hover {
 }
 
 .btn-black:hover {
-    background: #c72528
+    background: orange
 }
 
 .no-bedroom label {
@@ -3622,7 +3622,7 @@ ul.input-roll li {
 .location-search-active:before {
     content: '\f103';
     font-size: 2.5em;
-    color: #c72528
+    color: orange
 }
 
 .map-and-sidebar {
@@ -3770,7 +3770,7 @@ section.result article.featured header h3 {
 }
 
 section.result article.featured header h3:hover {
-    color: #c72528
+    color: orange
 }
 
 section.result article.featured a:hover img {
@@ -3802,7 +3802,7 @@ section.result article.featured header h4 a {
 }
 
 section.result article.featured header h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 section.result article.featured header p {
@@ -3918,7 +3918,7 @@ section.result article.featured header ul li {
 }
 
 .search-pagination-button-list li a:hover {
-    color: #c72528
+    color: orange
 }
 
 section.result article.featured.active {
@@ -4069,7 +4069,7 @@ section.result article.featured.active header ul li {
 }
 
 .red-bnt {
-    background: #c72528;
+    background: orange;
     color: #fff !important;
     padding: 12px 15px 8px !important;
     border-radius: 2px;
@@ -4189,7 +4189,7 @@ section.result article.featured.active header ul li {
 }
 
 .skill-lish .right-if li .dotlet-cover .dotlet-red {
-    background: #c72528;
+    background: orange;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -4220,11 +4220,11 @@ section.result article.featured.active header ul li {
 }
 
 .actived:before {
-    color: #c72528 !important
+    color: orange !important
 }
 
 .actived:after {
-    color: #c72528 !important
+    color: orange !important
 }
 
 .bor-deco {
@@ -4462,7 +4462,7 @@ section.result article.featured.active header ul li {
 
 .chart-red {
     height: 15px;
-    background: #c72528;
+    background: orange;
     margin: 0 0 30px 0
 }
 
@@ -4868,7 +4868,7 @@ section.exclusive article.featured .cover img {
     bottom: 0;
     left: 0;
     height: 30px;
-    background: #c72528;
+    background: orange;
     line-height: 28px;
     color: #fff;
     padding: 0 15px;
@@ -4913,7 +4913,7 @@ section.exclusive article.featured header .heading {
 }
 
 section.exclusive article.featured header .heading:hover {
-    color: #c72528
+    color: orange
 }
 
 section.exclusive article.featured header p {
@@ -4947,7 +4947,7 @@ section.exclusive article.featured header h4 a {
 }
 
 section.exclusive article.featured header h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .searchlisting section.exclusive article.featured header .heading {
@@ -5029,7 +5029,7 @@ section.exclusive article.featured header h4 a:hover {
 
 .list-search02 section.exclusive article.featured header .price p {
     text-transform: uppercase;
-    color: #c72528;
+    color: orange;
     text-align: right;
     display: block;
     font-size: .6em;
@@ -5264,15 +5264,15 @@ article.featured .cover {
 }
 
 .checked {
-    color: #c72528 !important
+    color: orange !important
 }
 
 .checked:before {
-    color: #c72528 !important
+    color: orange !important
 }
 
 .checked:after {
-    color: #c72528 !important
+    color: orange !important
 }
 
 .but-pre:before {
@@ -5429,7 +5429,7 @@ article.featured .cover {
 }
 
 .icon-left-nearby a:hover {
-    background: #c72528;
+    background: orange;
     color: #fff
 }
 
@@ -5501,7 +5501,7 @@ article.featured .cover {
 .nearby .type .sub-content li:hover {
     background-color: #f7f7f7;
     padding-left: 10px;
-    border-left: 2px solid #c72528
+    border-left: 2px solid orange
 }
 
 .nearby .type label {
@@ -5584,7 +5584,7 @@ article.featured .cover {
 }
 
 .nearby ul li.active {
-    border-left: 2px solid #c72528
+    border-left: 2px solid orange
 }
 
 .nearby ul.type .gray-content {
@@ -6036,11 +6036,11 @@ article.featured .cover {
 }
 
 .project-owner li a.active {
-    color: #c72528
+    color: orange
 }
 
 .project-owner li a:active {
-    color: #c72528
+    color: orange
 }
 
 .project-owner-content {
@@ -6282,44 +6282,44 @@ article.featured .cover {
 }
 
 .error-form {
-    color: #c72528 !important
+    color: orange !important
 }
 
 .error-form input, .error-form textarea {
-    border: 1px solid #c72528 !important;
-    color: #c72528 !important
+    border: 1px solid orange !important;
+    color: orange !important
 }
 
 .error-form textarea::-webkit-input-placeholder {
-    color: #c72528
+    color: orange
 }
 
 .error-form textarea:-moz-placeholder {
-    color: #c72528
+    color: orange
 }
 
 .error-form textarea::-moz-placeholder {
-    color: #c72528
+    color: orange
 }
 
 .error-form textarea:-ms-input-placeholder {
-    color: #c72528
+    color: orange
 }
 
 .error-form input::-webkit-input-placeholder {
-    color: #c72528
+    color: orange
 }
 
 .error-form input:-moz-placeholder {
-    color: #c72528
+    color: orange
 }
 
 .error-form input::-moz-placeholder {
-    color: #c72528
+    color: orange
 }
 
 .error-form input:-ms-input-placeholder {
-    color: #c72528
+    color: orange
 }
 
 .w1600-hgroup-img {
@@ -6552,7 +6552,7 @@ article.featured .cover {
 .by a {
     font-family: 'harmonia', arial, Geneva, sans-serif !important;
     font-size: 16px !important;
-    color: #c72528
+    color: orange
 }
 
 .by a:hover {
@@ -6638,7 +6638,7 @@ article.featured .cover {
 }
 
 .box-form .booking-button:hover {
-    background: #c72528
+    background: orange
 }
 
 .box-form a {
@@ -6823,7 +6823,7 @@ article.featured .cover {
 }
 
 .buttondangky-fixed a {
-    background: #c72528;
+    background: orange;
     color: #fff;
     padding: 14px 20px 10px;
     border-radius: 2px;
@@ -7350,7 +7350,7 @@ article.featured .cover {
 }
 
 .bank-form .right-form .sms-button:hover {
-    background: #c72528
+    background: orange
 }
 
 .bank-form .right-form input::-webkit-input-placeholder {
@@ -7491,23 +7491,23 @@ footer .grey-footer {
     font-size: 1.4em
 }
 
-.address-rever {
+.address-tgnp {
     width: 60%;
     float: left;
     color: #dedede;
     font-size: 16px
 }
 
-.address-rever li:first-child {
+.address-tgnp li:first-child {
     padding-right: 40px
 }
 
-.address-rever li {
+.address-tgnp li {
     float: left;
     line-height: 30px
 }
 
-.about-rever {
+.about-tgnp {
     float: left;
     width: 40%;
     color: #fff;
@@ -7515,21 +7515,21 @@ footer .grey-footer {
     font-weight: 500
 }
 
-.about-rever li a {
+.about-tgnp li a {
     color: #fff
 }
 
-.about-rever li a:hover {
+.about-tgnp li a:hover {
     opacity: .9
 }
 
-.about-rever li {
+.about-tgnp li {
     width: 47%;
     float: left;
     margin-left: 6%
 }
 
-.about-rever li:first-child {
+.about-tgnp li:first-child {
     margin: 0
 }
 
@@ -7961,7 +7961,7 @@ a.rever-app-ios img:hover {
     width: 100%;
     padding: 10px 0;
     text-align: center;
-    background: #c72528;
+    background: orange;
     color: #fff;
     font-weight: 400;
     border: 0;
@@ -8497,7 +8497,7 @@ a.rever-app-ios img:hover {
 }
 
 .grid-btn:hover {
-    color: #c72528
+    color: orange
 }
 
 .list-btn {
@@ -8513,15 +8513,15 @@ a.rever-app-ios img:hover {
 }
 
 .list-btn:hover {
-    color: #c72528
+    color: orange
 }
 
 .grid-btn.active {
-    color: #c72528
+    color: orange
 }
 
 .list-btn.active {
-    color: #c72528
+    color: orange
 }
 
 .view-more-search:hover {
@@ -8640,7 +8640,7 @@ section.apartment article.featured header ul {
     position: absolute;
     bottom: 35px;
     right: 20px;
-    color: #c72528;
+    color: orange;
     text-transform: uppercase
 }
 
@@ -8658,7 +8658,7 @@ section.apartment article.featured header ul li {
 }
 
 .booking-tour .bg-gray .sms-button {
-    background: #c72528
+    background: orange
 }
 
 .booking-tour .bg-gray .sms-button:hover {
@@ -8809,7 +8809,7 @@ section.apartment article.featured header ul li {
     border: 1px solid rgba(199, 37, 40, .5);
     border-radius: 2px;
     background: none;
-    color: #c72528 !important;
+    color: orange !important;
     width: inherit !important;
     font-weight: 500 !important
 }
@@ -8819,7 +8819,7 @@ section.apartment article.featured header ul li {
     border: 1px solid rgba(199, 37, 40, .5);
     border-radius: 2px;
     background: none;
-    color: #c72528;
+    color: orange;
     width: inherit !important;
     font-weight: 500 !important;
     font-size: 14px;
@@ -8831,13 +8831,13 @@ section.apartment article.featured header ul li {
 }
 
 .save-search-btn:hover {
-    background: #c72528;
+    background: orange;
     color: #fff;
-    border: 1px solid #c72528
+    border: 1px solid orange
 }
 
 .apply-but:hover {
-    background: #c72528;
+    background: orange;
     color: #fff !important
 }
 
@@ -9073,7 +9073,7 @@ span.error:empty {
     font-family: 'harmonia', Arial, Helvetica, sans-serif !important;
     font-size: 14px;
     border-radius: 50%;
-    background-color: #c72528;
+    background-color: orange;
     opacity: .8;
     cursor: pointer;
     padding-top: 1px;
@@ -9246,7 +9246,7 @@ span.error:empty {
 }
 
 .menu-detail-under ul li a:hover {
-    color: #c72528
+    color: orange
 }
 
 .menu-detail-under ul li a.active {
@@ -9484,7 +9484,7 @@ span.error:empty {
 }
 
 .rever-red {
-    color: #c72528 !important
+    color: orange !important
 }
 
 a.rever-red:hover {
@@ -9561,11 +9561,11 @@ a.rever-red:hover {
 }
 
 .content-detail a {
-    color: #c72528
+    color: orange
 }
 
 .content-detail a:hover {
-    color: #c72528;
+    color: orange;
     text-decoration: underline
 }
 
@@ -9683,7 +9683,7 @@ img.width-50:nth-child(2n) {
     bottom: 5px;
     width: 2px;
     height: 45px;
-    background: #c72528
+    background: orange
 }
 
 .time-horizontal li.active:after {
@@ -9691,7 +9691,7 @@ img.width-50:nth-child(2n) {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #c72528;
+    background: orange;
     right: -5px;
     bottom: 5px;
     content: ''
@@ -9712,14 +9712,14 @@ img.width-50:nth-child(2n) {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #c72528;
+    background: orange;
     right: -5px;
     bottom: 5px;
     content: ''
 }
 
 .time-horizontal li.active {
-    color: #c72528 !important
+    color: orange !important
 }
 
 .border-t-de {
@@ -9758,7 +9758,7 @@ img.width-50:nth-child(2n) {
 }
 
 .black-btn:hover {
-    background: #c72528;
+    background: orange;
     color: #fff
 }
 
@@ -10124,7 +10124,7 @@ img.width-50:nth-child(2n) {
 
 .short-description {
     padding: 0 0 0 40px;
-    border-left: 5px solid #c72528;
+    border-left: 5px solid orange;
     margin: 30px 0
 }
 
@@ -10150,11 +10150,11 @@ img.width-50:nth-child(2n) {
 }
 
 .detail-content-news .article-content a {
-    color: #c72528
+    color: orange
 }
 
 .detail-content-news .article-content a:hover {
-    color: #c72528;
+    color: orange;
     text-decoration: underline
 }
 
@@ -10246,7 +10246,7 @@ img.width-50:nth-child(2n) {
 
 .detail-content-news h3 a {
     font-size: 16px;
-    color: #c72528;
+    color: orange;
     font-style: italic;
     display: block;
     clear: both
@@ -10255,7 +10255,7 @@ img.width-50:nth-child(2n) {
 .detail-content-news h3 a:before {
     font-family: 'rever-icon', Verdana, Geneva, sans-serif;
     content: '\f150';
-    color: #c72528;
+    color: orange;
     font-size: 20px;
     padding-right: 10px
 }
@@ -10274,7 +10274,7 @@ img.width-50:nth-child(2n) {
 }
 
 .more-news-list li a {
-    color: #c72528;
+    color: orange;
     font-style: italic
 }
 
@@ -10396,13 +10396,13 @@ img.width-50:nth-child(2n) {
 }
 
 .listings-map-box.active .listings-map {
-    background: #c72528;
+    background: orange;
     color: #fff;
     cursor: pointer
 }
 
 .listings-map-box.active .triangle-down {
-    border-top: 6px solid #c72528;
+    border-top: 6px solid orange;
     cursor: pointer
 }
 
@@ -10559,7 +10559,7 @@ ul.exclusive li.featured header h4, ul.exclusive li.featured header h4 a {
 }
 
 ul.exclusive li.featured header h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 ul.exclusive li.featured header h3 {
@@ -10687,7 +10687,7 @@ section.exclusive article.featured header h4.price-on-project {
     position: absolute;
     top: 0;
     right: 10px;
-    color: #c72528
+    color: orange
 }
 
 .icon-sort-cyan {
@@ -11311,7 +11311,7 @@ a.answer {
     text-align: center;
     font-size: 14px;
     line-height: 20px;
-    color: #c72528;
+    color: orange;
     font-weight: 500
 }
 
@@ -11354,7 +11354,7 @@ a.answer {
 }
 
 .compare-house .article div.action a:hover {
-    border-color: #c72528
+    border-color: orange
 }
 
 .compare-house .more2 {
@@ -11374,7 +11374,7 @@ a.answer {
 }
 
 .show-hide-bnt:hover {
-    background: #c72528;
+    background: orange;
     color: #fff !important
 }
 
@@ -11452,7 +11452,7 @@ a.answer {
 }
 
 .list-view section.result article.featured header h4 a:hover {
-    color: #c72528
+    color: orange
 }
 
 .list-view section.result article.featured .cover {
@@ -11625,7 +11625,7 @@ section.result article.featured header .name-title p {
 }
 
 .view-all-project:hover .next-icon:before {
-    color: #c52728
+    color: orange
 }
 
 .view-all-project .next-icon:before {
@@ -11711,7 +11711,7 @@ section.result article.featured header .name-title p {
 
 .info-sticky-header li a.active {
     font-weight: 600;
-    border-bottom: 2px solid #c72528
+    border-bottom: 2px solid orange
 }
 
 .btn-sticky-header {
@@ -12072,7 +12072,7 @@ section.result article.featured header .name-title p {
 }
 
 .selisting-action select:hover {
-    color: #c52728
+    color: orange
 }
 
 .selisting-tab:hover {
@@ -12187,7 +12187,7 @@ section.result article.featured header .name-title p {
 }
 
 .form-refine .booking-button:hover {
-    background: #c72528
+    background: orange
 }
 
 .more-yml {
@@ -12361,7 +12361,7 @@ section.result article.featured header .name-title p {
 
 .but-search-home button {
     color: #fff;
-    background: #c72528;
+    background: orange;
     border: 0;
     font-size: 18px;
     line-height: 55px;
@@ -12476,8 +12476,8 @@ section.result article.featured header .name-title p {
 
 .btn-bor_red {
     display: block;
-    border: 1px solid #c72528;
-    color: #c72528;
+    border: 1px solid orange;
+    color: orange;
     padding: 4px 10px;
     font-size: 14px
 }
@@ -13325,7 +13325,7 @@ section.project article.featured {
 }
 
 .button-down span, .button-down button {
-    background: #c72528;
+    background: orange;
     color: #fff;
     border: 0;
     border-radius: 2px;
@@ -13551,7 +13551,7 @@ section.project article.featured {
     position: absolute;
     bottom: 10px;
     width: 50px;
-    border-bottom: 1px solid #c72528;
+    border-bottom: 1px solid orange;
     left: 0;
     content: ''
 }
@@ -13835,7 +13835,7 @@ section.result article.featured header ul li .zmdi {
 .large-btn-red {
     padding: 13px 40px;
     color: #fff;
-    background: #c72528;
+    background: orange;
     border-radius: 2px;
     font-size: 18px;
     border: 0;
@@ -13854,7 +13854,7 @@ section.result article.featured header ul li .zmdi {
     background: #b71c1f
 }
 
-.logo-rever {
+.logo-tgnp {
     position: absolute;
     top: -50px;
     width: 100px;
@@ -14342,7 +14342,7 @@ section.browsing article.featured {
 
 .price-redRV {
     font-size: 16px;
-    color: #c72528;
+    color: orange;
     font-weight: 600
 }
 
@@ -14536,7 +14536,7 @@ section.browsing article.featured {
 
 .form-element .error-text {
     display: none;
-    color: #c72528;
+    color: orange;
     font-size: 12px;
     position: absolute;
     top: 44px;
@@ -14544,7 +14544,7 @@ section.browsing article.featured {
 }
 
 .form-element.error .input {
-    border: 1px solid #c72528
+    border: 1px solid orange
 }
 
 .form-element.error .error-text {
@@ -14699,7 +14699,7 @@ section.browsing article.featured {
 }
 
 .close-popup-btn:hover {
-    color: #c72528
+    color: orange
 }
 
 .info-form-up {
@@ -14801,7 +14801,7 @@ section.browsing article.featured {
     font-weight: 400
 }
 
-.why-rever {
+.why-tgnp {
     position: absolute;
     z-index: 999;
     bottom: 0;
@@ -14815,7 +14815,7 @@ section.browsing article.featured {
     padding-top: 16px
 }
 
-.why-rever img {
+.why-tgnp img {
     vertical-align: middle
 }
 
@@ -14832,7 +14832,7 @@ section.browsing article.featured {
 }
 
 .bor-red-btn:hover {
-    background: #c72528
+    background: orange
 }
 
 .bor-white-btn {
@@ -14917,7 +14917,7 @@ section.browsing article.featured {
 }
 
 .common-knowledge li:hover .card-knowledge {
-    background: #c72528
+    background: orange
 }
 
 .common-knowledge li:hover .card-knowledge h3 {
@@ -15946,10 +15946,10 @@ section.browsing article.featured {
 
     .title-comment-module-reporter > div {
         width: 100%;
-        justify-content: center
+        justify-content: center;
     }
 
-;.title-comment-module-reporter div {
+.title-comment-module-reporter div {
      flex-grow: 0;
      -webkit-flex-grow: 0
  }
@@ -16096,7 +16096,7 @@ a.actmore-filter {
 }
 
 .hotline:hover {
-    color: #c72528 !important
+    color: orange !important
 }
 
 footer .hotline {
@@ -16187,18 +16187,18 @@ div > img {
 }
 
 .box-form .hs-error-msgs label {
-    color: #c72528 !important;
+    color: orange !important;
     font-size: 12px;
     margin-bottom: 8px;
     display: block
 }
 
 .box-form .hbspt-form input.error {
-    border-color: #c72528 !important
+    border-color: orange !important
 }
 
 .box-form .hs-form-required {
-    color: #c72528 !important;
+    color: orange !important;
     margin-left: 5px
 }
 
@@ -16216,7 +16216,7 @@ div > img {
 }
 
 .box-form form .actions input[type=submit]:hover {
-    background-color: #c72528
+    background-color: orange
 }
 
 .box-form .hs-form fieldset.form-columns-1 .input {
@@ -16263,16 +16263,16 @@ div > img {
     border: 1px solid #ccc
 }
 
-.contact-rever .hs-form {
+.contact-tgnp .hs-form {
     max-width: 70%
 }
 
-.contact-rever .hs-button {
+.contact-tgnp .hs-button {
     text-transform: uppercase;
     min-width: 160px;
     display: block;
     width: 230px;
-    background: #c72528;
+    background: orange;
     color: #fff;
     padding: 10px 0 6px 0;
     clear: both;
@@ -16284,12 +16284,12 @@ div > img {
     -webkit-transition: height 2s
 }
 
-.contact-rever .hs-button:hover {
+.contact-tgnp .hs-button:hover {
     background: #444c59;
     color: #fff
 }
 
-.contact-rever .hs-form-field {
+.contact-tgnp .hs-form-field {
     float: left;
     width: 100%;
     font-size: 16px;
@@ -16299,7 +16299,7 @@ div > img {
     position: relative
 }
 
-.contact-rever .hs_description_note {
+.contact-tgnp .hs_description_note {
     padding-bottom: 30px
 }
 
@@ -16530,7 +16530,7 @@ a:hover .flex-disabled {
 }
 
 .toast-message > a:hover {
-    color: #C72528
+    color: orange
 }
 
 @media only screen and (max-width: 480px) {

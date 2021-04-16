@@ -7616,7 +7616,7 @@
         Object(wt.a)();
         var ne = Object({
             NODE_ENV: "production",
-            contact_from_api: "https://rever.vn/mapi/form",
+            contact_from_api: "https://thegioinhaphovietnam.com.vn/mapi/form",
             rec_api: "https://rec.rever.vn/api",
             save_search_api: "https://rever.vn/api/save-search"
         }).version || "production";
@@ -8606,7 +8606,7 @@
         }), n.d(e, "a", function () {
             return i
         });
-        var r = {RENT: 1, SALE: 2, SALE_AND_RENT: 3}, i = {MLS: "mls", REVER: "rever"}
+        var r = {RENT: 1, SALE: 2, SALE_AND_RENT: 3}, i = {MLS: "mls", TGNP: "tgnp"}
     }, NpIQ: function (t, e) {
         e.f = {}.propertyIsEnumerable
     }, O4g8: function (t, e) {

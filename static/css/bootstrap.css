@@ -1613,7 +1613,7 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #10284e;
+  background-color: orange;
   border-color: #10284e; }
   .btn-primary:hover {
     color: #fff;

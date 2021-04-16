@@ -7440,12 +7440,12 @@
                 }
             }, {
                 key: "quickViewInfo", value: function (t, e) {
-                    var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "rever";
+                    var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "tgnp";
                     return c.b.get("/s-quick-view/" + e + "/" + t + "?source=" + n)
                 }
             }, {
                 key: "quickViewInfoById", value: function (t, e) {
-                    var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "rever";
+                    var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "tgnp";
                     return c.b.get("/s-quick-view-v2/" + e + "/" + t + "?source=" + n)
                 }
             }, {
@@ -8192,7 +8192,7 @@
             S = f()((r = {}, c()(r, d.i.PROJECT, "Dự án"), c()(r, d.i.PROJECT_V2, "Dự án"), c()(r, d.i.AREA, "Khu vực"), c()(r, d.i.NEIGHBORHOOD, "Khu dân cư"), c()(r, d.i.STREET, "Đường"), c()(r, d.i.RECENT, "Tìm kiếm gần đây"), c()(r, d.i.NEARBY, "Lân cận"), c()(r, d.i.STREET, "Đường"), r)),
             k = [{id: d.n.ACTIVE, name: "Đăng thường"}, {
                 id: d.n.EXCLUSIVE,
-                name: "Rever độc quyền"
+                name: "TGNP độc quyền"
             }, {id: d.n.UNDER_CONTRACT, name: "Đang GD"}, {id: d.n.SOLD_RENT, name: "Đã bán/thuê"}],
             A = [{id: "has3d", name: "Có 3D"}]
     }, JBvZ: function (t, e, n) {
@@ -15483,7 +15483,7 @@
     }, gRE1: function (t, e, n) {
         t.exports = {default: n("TmV0"), __esModule: !0}
     }, gamp: function (t, e, n) {
-        (t.exports = n("FZ+f")(!1)).push([t.i, "\n/*!* POPUP *!*/\n/*.mdialog .body.systemModal,*/\n/*.systemModal{*/\n/*width: 100%;*/\n/*max-width: 520px !important;*/\n/*margin: 0 auto;*/\n/*}*/\n/*.systemModal-header{*/\n/*position: relative;*/\n/*height: 78px;*/\n/*background: #f3f4f7;*/\n/*text-align: center;*/\n/*}*/\n/*.systemModal-header > h2{*/\n/*font-family: 'Tiempos', Arial, Helvetica, sans-serif;*/\n/*line-height: 78px;*/\n/*font-size: 20px;*/\n/*font-weight: 400;*/\n/*max-width: 70%;*/\n/*white-space: nowrap;*/\n/*overflow: hidden;*/\n/*text-overflow: ellipsis;*/\n/*margin: 0 auto;*/\n/*}*/\n/*.systemModal-body{*/\n/*background: #fff;*/\n/*padding: 30px 50px;*/\n/*display: block;*/\n/*overflow: hidden;*/\n/*}*/\n/*.systemModal-body .description{*/\n/*font-size: 16px;*/\n/*color: #838383;*/\n/*}*/\n/*.systemModal-body .description > span{*/\n/*font-weight: 600;*/\n/*color: #30333a;*/\n/*}*/\n/*.systemModal-body .system-button{*/\n/*display: flex;*/\n/*justify-content: space-between;*/\n/*}*/\n/*.systemModal-body .system-button .btn-primary:first-child{margin-right: 30px}*/\n/*!* END POPUP *!*/\n/*!* BUTTON *!*/\n/*.btn-primary{*/\n/*display: inline-block;*/\n/*width: 100%;*/\n/*height: 50px;*/\n/*line-height: 50px;*/\n/*margin: 0;*/\n/*cursor: pointer;*/\n/*font-weight: 600;*/\n/*font-size: 18px;*/\n/*max-width: fit-content;*/\n/*min-width: 200px;*/\n/*text-align: center;*/\n/*border-radius: 2px;*/\n/*padding: 0 20px;*/\n/*}*/\n/*.btn-red{*/\n/*background: #c52728;*/\n/*color: #fff;*/\n/*}*/\n/*.btn-red:hover{*/\n/*background: #cf373a;*/\n/*color: #fff;*/\n/*}*/\n/*.btn-transparent{*/\n/*background:transparent;*/\n/*color: #30333a;*/\n/*border: 1px solid rgba(48, 51, 58, .2);*/\n/*}*/\n/*.btn-transparent:hover{*/\n/*background: #30333a;*/\n/*color: #fff;*/\n/*}*/\n/*.btn-gray{*/\n/*background: #838383;*/\n/*color: #fff;*/\n/*}*/\n/*.btn-gray:hover{*/\n/*background: rgba(131, 131, 131, .8);*/\n/*color: #fff;*/\n/*}*/\n/*!* END BUTTON *!*/\n/*!* RESPONSIVE *!*/\n/*@media only screen and (max-width: 530px){*/\n/*.systemModal-body{padding: 30px 20px}*/\n/*}*/\n/*!* END RESPONSIVE *!*/\n", ""])
+        (t.exports = n("FZ+f")(!1)).push([t.i, "\n/*!* POPUP *!*/\n/*.mdialog .body.systemModal,*/\n/*.systemModal{*/\n/*width: 100%;*/\n/*max-width: 520px !important;*/\n/*margin: 0 auto;*/\n/*}*/\n/*.systemModal-header{*/\n/*position: relative;*/\n/*height: 78px;*/\n/*background: #f3f4f7;*/\n/*text-align: center;*/\n/*}*/\n/*.systemModal-header > h2{*/\n/*font-family: 'Tiempos', Arial, Helvetica, sans-serif;*/\n/*line-height: 78px;*/\n/*font-size: 20px;*/\n/*font-weight: 400;*/\n/*max-width: 70%;*/\n/*white-space: nowrap;*/\n/*overflow: hidden;*/\n/*text-overflow: ellipsis;*/\n/*margin: 0 auto;*/\n/*}*/\n/*.systemModal-body{*/\n/*background: #fff;*/\n/*padding: 30px 50px;*/\n/*display: block;*/\n/*overflow: hidden;*/\n/*}*/\n/*.systemModal-body .description{*/\n/*font-size: 16px;*/\n/*color: #838383;*/\n/*}*/\n/*.systemModal-body .description > span{*/\n/*font-weight: 600;*/\n/*color: #30333a;*/\n/*}*/\n/*.systemModal-body .system-button{*/\n/*display: flex;*/\n/*justify-content: space-between;*/\n/*}*/\n/*.systemModal-body .system-button .btn-primary:first-child{margin-right: 30px}*/\n/*!* END POPUP *!*/\n/*!* BUTTON *!*/\n/*.btn-primary{*/\n/*display: inline-block;*/\n/*width: 100%;*/\n/*height: 50px;*/\n/*line-height: 50px;*/\n/*margin: 0;*/\n/*cursor: pointer;*/\n/*font-weight: 600;*/\n/*font-size: 18px;*/\n/*max-width: fit-content;*/\n/*min-width: 200px;*/\n/*text-align: center;*/\n/*border-radius: 2px;*/\n/*padding: 0 20px;*/\n/*}*/\n/*.btn-red{*/\n/*background: orange;*/\n/*color: #fff;*/\n/*}*/\n/*.btn-red:hover{*/\n/*background: #cf373a;*/\n/*color: #fff;*/\n/*}*/\n/*.btn-transparent{*/\n/*background:transparent;*/\n/*color: #30333a;*/\n/*border: 1px solid rgba(48, 51, 58, .2);*/\n/*}*/\n/*.btn-transparent:hover{*/\n/*background: #30333a;*/\n/*color: #fff;*/\n/*}*/\n/*.btn-gray{*/\n/*background: #838383;*/\n/*color: #fff;*/\n/*}*/\n/*.btn-gray:hover{*/\n/*background: rgba(131, 131, 131, .8);*/\n/*color: #fff;*/\n/*}*/\n/*!* END BUTTON *!*/\n/*!* RESPONSIVE *!*/\n/*@media only screen and (max-width: 530px){*/\n/*.systemModal-body{padding: 30px 20px}*/\n/*}*/\n/*!* END RESPONSIVE *!*/\n", ""])
     }, ggOT: function (t, e, n) {
         (function (t) {
             var r = n("TQ3y"), i = n("gwcX"), o = "object" == typeof e && e && !e.nodeType && e,

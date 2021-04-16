@@ -138,6 +138,18 @@ def apply(request):
 
     return render(request, 'home/apply.html', context)
 
+def termsOfUse(request):
+    context = {
+    }
+
+    return render(request, 'home/termsOfUse.html', context)
+
+def privacyPolicy(request):
+    context = {
+    }
+
+    return render(request, 'home/privacyPolicy.html', context)
+
 
 """Admin url here"""
 def dashboard(request):

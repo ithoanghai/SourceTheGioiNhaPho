@@ -496,7 +496,7 @@
 }
 
 .main-header .col-right .top-menu ul li:first-child:hover a:first-child .zmdi, .main-header .col-right .top-menu ul li:first-child:hover a:first-child span {
-    color: #c72528
+    color: orange
 }
 
 .main-header .col-right .top-menu ul li:first-child .zmdi {
@@ -811,7 +811,7 @@
 .main-header .search-mobile .optionsList .option input:checked + label {
     border-radius: 2px;
     background-color: #fff;
-    color: #c72528
+    color: orange
 }
 
 .main-header .search-mobile .optionsList .option label {
@@ -1153,7 +1153,7 @@ header#home::before {
 
 .main-header .btn-red {
     color: #fff;
-    background: #c72528
+    background: orange
 }
 
 @media (min-width: 768px) {
@@ -1164,15 +1164,15 @@ header#home::before {
 }
 
 .main-header .btn-red-outline {
-    color: #c72528;
-    border: 1px solid #c72528;
+    color: orange;
+    border: 1px solid orange;
     background: 0 0
 }
 
 @media (min-width: 768px) {
     .main-header .btn-red-outline:hover {
         color: #fff;
-        background: #c72528
+        background: orange
     }
 }
 
@@ -1322,7 +1322,7 @@ header#home::before {
     display: none !important
 }
 
-.agency-rever a {
+.agency-tgnp a {
     color: #30333a;
     font-size: 14px;
     height: 40px;
@@ -1343,7 +1343,7 @@ header#home::before {
     min-width: 155px
 }
 
-.agency-rever a:hover {
+.agency-tgnp a:hover {
     opacity: .86;
     color: #30333a !important;
     transition: all .3s

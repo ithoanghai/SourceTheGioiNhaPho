@@ -49,7 +49,7 @@
         }
 
         /*hide tracking img*/
-        img[src^="//analytics.rever.vn/fap"], img[src^="/fap/debug/track"] {
+        img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
             display: none;
         }
 
@@ -65,7 +65,7 @@
     <link rel="stylesheet" href="{% static 'css/search-new.min90ca.css' %}"/>
 
     <style>
-        .banner-app-rever {
+        .banner-app-tgnp {
             position: relative;
             display: none;
             -webkit-box-align: center;
@@ -85,7 +85,7 @@
         }
 
         @media (max-width: 768px) {
-            .banner-app-rever {
+            .banner-app-tgnp {
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex
@@ -110,11 +110,11 @@
         .btn-install {
             position: relative;
             display: inline-block;
-            min-width: -webkit-fit-content;
-            min-width: -moz-fit-content;
+            min-width: -webkit-min-content;
+            min-width: -moz-min-content;
             min-width: fit-content;
-            max-width: -webkit-fit-content;
-            max-width: -moz-fit-content;
+            max-width: -webkit-max-content;
+            max-width: -moz-max-content;
             max-width: fit-content;
             width: 100%;
             padding: 8px 10px 7px;
@@ -128,7 +128,7 @@
         }
 
         .btn-install::after {
-            background-color: #c72528;
+            background-color: orange;
             content: "";
             position: absolute;
             top: 0;
@@ -260,7 +260,7 @@
                 height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
 
-    <div class="banner-app-rever" id="rever-banner-prompt" style="display: none">
+    <div class="banner-app-tgnp" id="rever-banner-prompt" style="display: none">
         <div class="banner-app-content">
             <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
                 <i class="zmdi zmdi-close"></i>
@@ -3670,8 +3670,8 @@
 {
   "@context": "http://schema.org",
   "@type": "Organization",
-  "url": "https://rever.vn",
-  "logo": "https://rever.vn/static/images/rever-thumbnail.jpg",
+  "url": "https://thegioinhaphovietnam.com.vn",
+  "logo": "../images/rever-thumbnail.jpg",
   "contactPoint": [
     {
       "@type": "ContactPoint",
@@ -3680,23 +3680,23 @@
     }
   ],
   "sameAs": [
-    "https://www.facebook.com/rever.vn",
-    "../../../www.linkedin.com/company/rever-real-estate.html",
-    "../../../www.instagram.com/rever.vn/index.html",
-    "../../../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html"
+    "https://www.facebook.com/thegioinhaphovietnam.com.vn",
+    "../../www.linkedin.com/company/thegioinhaphovietnam.com.vn",
+    "../../www.instagram.com/thegioinhaphovietnam.com.vn",
+    "../../https://www.youtube.com/channel/UC2YIBjJIw4jL5aQ9LEoCQDg"
   ]
 }
 </script>
     <script type="application/ld+json">
     {
         "@context": "http://schema.org",
-        "@id": "https://rever.vn/#website",
+        "@id": "https://www.thegioinhaphovietnam.com.vn/#website",
         "@type": "WebSite",
-        "url": "https://rever.vn/",
+        "url": "https://thegioinhaphovietnam.com.vn/",
         "name": "TGNP",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://rever.vn/s/{search_term_string}",
+            "target": "https://thegioinhaphovietnam.com.vn/search?term",
             "query-input": "required name=search_term_string"
         }
     }
@@ -4284,7 +4284,7 @@
       "@type": "ListItem",
       "position": 1,
       "item": {
-        "@id": "https://rever.vn",
+        "@id": "https://thegioinhaphovietnam.com.vn",
         "name": "TGNP"
       }
     }
@@ -4305,18 +4305,18 @@
 {
     "@context": "http://schema.org",
     "@type": "Website",
-    "url": "https://rever.vn/s/ho-chi-minh/mua",
-    "name": "rever.vn",
+    "url": "https://thegioinhapho.com.vn/search",
+    "name": "thegioinhapho.com.vn",
     "alternateName": "Mua Bán Nhà Đất Căn Hộ Giá Tốt Nhất | Thế giới Nhà Phố",
     "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://rever.vn/s/{search_term_string}",
+        "target": "https://thegioinhaphovietnam.com.vn/search?term",
         "query-input": "required name=search_term_string"
     }
 }
 </script>
 
-    <script defer src="../../../www.google.com/recaptcha/apib091.js?render=explicit"></script>
+    <script defer src="www.google.com/recaptcha/apib091.js?render=explicit"></script>
     <script src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
 
 

@@ -76,8 +76,8 @@ html {
 
 @font-face {
     font-family: rever-icon;
-    src: url(../fonts/ReverIcons.eot);
-    src: url(../fonts/ReverIconsd41d.eot?#iefix) format('embedded-opentype'), url(../fonts/ReverIcons.woff) format('woff'), url(../fonts/ReverIcons.ttf) format('truetype'), url(../fonts/ReverIcons.svg#roboto_condensedregular) format('svg');
+    src: url(../fonts/TGNPIcons.eot);
+    src: url(../fonts/TGNPIconsd41d.eot?#iefix) format('embedded-opentype'), url(../fonts/TGNPIcons.woff) format('woff'), url(../fonts/TGNPIcons.ttf) format('truetype'), url(../fonts/TGNPIcons.svg#roboto_condensedregular) format('svg');
     font-display: swap
 }
 
@@ -179,7 +179,7 @@ input[type=email], input[type=text] {
 
 .popup-form-element .popup-error-text {
     display: none;
-    color: #c72528;
+    color: orange;
     font-size: 11px;
     position: absolute;
     top: 44px;
@@ -187,7 +187,7 @@ input[type=email], input[type=text] {
 }
 
 .popup-form-element.error .popup-input {
-    border: 1px solid #c72528
+    border: 1px solid orange
 }
 
 .popup-form-element.error .popup-error-text {
@@ -402,7 +402,7 @@ input[type=email], input[type=text] {
 .large-butt-red, .small-butt-red {
     padding: 0 40px;
     color: #fff;
-    background: #c72528;
+    background: orange;
     border-radius: 2px;
     font-size: 16px;
     border: 0;
@@ -651,7 +651,7 @@ input:focus, textarea:focus {
 }
 
 .butt-red {
-    background: #c52728;
+    background: orange;
     color: #fff
 }
 
@@ -795,7 +795,7 @@ input:focus, textarea:focus {
 }
 
 .popup-info-rv li span.rever-red {
-    color: #c72528;
+    color: orange;
     line-height: 1.13;
     font-weight: 700;
     opacity: unset
@@ -847,7 +847,7 @@ input:focus, textarea:focus {
     bottom: 10px;
     left: 0;
     right: 0;
-    background: #c72528;
+    background: orange;
     opacity: .86
 }
 
@@ -882,7 +882,7 @@ input:focus, textarea:focus {
     text-align: center;
     padding: 14px;
     font-weight: 400;
-    background: #c72528;
+    background: orange;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -938,7 +938,7 @@ input:focus, textarea:focus {
 }
 
 .popup-close-btn:hover {
-    color: #c72528
+    color: orange
 }
 
 .popup-info-form-up {
@@ -1295,7 +1295,7 @@ input:focus, textarea:focus {
 
 .popup-form-contact-real-estate .popup-form-info .popup-action button.large-butt-red {
     font-weight: 500;
-    background: #c72528;
+    background: orange;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -2099,7 +2099,7 @@ input:focus, textarea:focus {
     font-size: 16px;
     line-height: 1.5;
     font-weight: 400;
-    color: #c72528
+    color: orange
 }
 
 .popup-login-rv .popup-form-login-rv .login--title {
@@ -2162,7 +2162,7 @@ input:focus, textarea:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #c72528
+    color: orange
 }
 
 .popup-login-rv .popup-form-login-rv .introduce {
@@ -2317,7 +2317,7 @@ input:focus, textarea:focus {
     font-size: 14px;
     line-height: 1.5;
     font-weight: 400;
-    color: #c72528
+    color: orange
 }
 
 .popup-login-rv .popup-form-login-rv .form-group input {
@@ -2377,7 +2377,7 @@ input:focus, textarea:focus {
 }
 
 .popup-login-rv .popup-form-login-rv .form-group.error-in input {
-    border: 1px solid #c52728
+    border: 1px solid orange
 }
 
 .popup-login-rv .popup-form-login-rv .form-group input[type=number]::-webkit-inner-spin-button, .popup-login-rv .popup-form-login-rv .form-group input[type=number]::-webkit-outer-spin-button {
@@ -2521,7 +2521,7 @@ input:focus, textarea:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #c72528
+    background: orange
 }
 
 .popup-login-rv .butt-groups .btn-login p {
@@ -2567,7 +2567,7 @@ input:focus, textarea:focus {
     text-align: center
 }
 
-.popup-login-rv .popup-form-login-rv #login-rever .intro {
+.popup-login-rv .popup-form-login-rv #login-tgnp .intro {
     margin-top: 15px
 }
 
@@ -2576,7 +2576,7 @@ input:focus, textarea:focus {
     display: block;
     width: 100%;
     margin: 8px 0 0;
-    color: #c72528 !important;
+    color: orange !important;
     font-size: 12px;
     line-height: normal
 }
@@ -2754,7 +2754,7 @@ input:focus, textarea:focus {
 }
 
 .choose-number ul li a:hover {
-    background: #c72528;
+    background: orange;
     color: #fff
 }
 
@@ -3047,7 +3047,7 @@ input:focus, textarea:focus {
 }
 
 .btn-red {
-    background: #c72528 !important
+    background: orange !important
 }
 
 .img-success {
@@ -3581,7 +3581,7 @@ input:focus, textarea:focus {
 .popup-expired .popup-confirm-modal-footer .popup-confirm-button .butt-primary {
     margin: 0 auto;
     color: #fff;
-    background: #c72528;
+    background: orange;
     border-radius: 2px;
     font-size: 18px;
     border: 0;

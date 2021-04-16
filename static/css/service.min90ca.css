@@ -19,7 +19,7 @@
 }
 
 .color-red {
-    color: #c52728 !important
+    color: orange !important
 }
 
 .color-red:hover {
@@ -636,7 +636,7 @@
     height: 50px;
     line-height: 50px;
     margin: 0 auto;
-    background: #c52728;
+    background: orange;
     color: #fff;
     padding: 0 20px;
     cursor: pointer;
@@ -1103,11 +1103,11 @@
 }
 
 .s-col-3 .s-blog:hover {
-    border: 1px solid #c52728
+    border: 1px solid orange
 }
 
 .s-col-3 .s-blog:hover a {
-    color: #c52728
+    color: orange
 }
 
 .s-col-3:nth-child(n+4) .s-blog {
@@ -1420,7 +1420,7 @@
 
 .line-header {
     display: block;
-    background: #c52728;
+    background: orange;
     height: 2px;
     max-width: 60px;
     margin-bottom: 25px
@@ -1458,7 +1458,7 @@
 .photo-detail-wrapper .read-more {
     font-size: 1.6em;
     line-height: 1.5;
-    color: #c52728;
+    color: orange;
     font-weight: 400;
     display: block;
     margin-top: 15px
@@ -1645,7 +1645,7 @@
 }
 
 .s-dropdown-content li:hover a {
-    color: #c52728;
+    color: orange;
     height: 40px;
     line-height: 40px
 }
@@ -1684,7 +1684,7 @@
 .s-sreach-btn {
     text-align: center;
     max-width: 160px;
-    background: #c52728;
+    background: orange;
     border: 2px;
     width: 100%
 }
@@ -1696,7 +1696,7 @@
     cursor: pointer;
     width: 100%;
     height: 100%;
-    background: #c52728;
+    background: orange;
     outline: 0;
     border: 0;
     border-radius: 2px;
@@ -1772,7 +1772,7 @@
 }
 
 .flex-viewport .section-container .section-content .line-header {
-    background: #c52728;
+    background: orange;
     height: 2px;
     width: 100%;
     margin: 0 0 20px;
@@ -2655,7 +2655,7 @@
 }
 
 .color-lipstick {
-    color: #c52728 !important
+    color: orange !important
 }
 
 .color-lipstick:hover {
@@ -3054,7 +3054,7 @@ ul.product-received li .zmdi:before {
     }
 }
 
-.s-sale-rever .s-feature-heading {
+.s-sale-tgnp .s-feature-heading {
     padding-bottom: 40px;
     margin: 0;
     display: block;
@@ -3084,7 +3084,7 @@ ul.product-received li .zmdi:before {
     position: absolute;
     top: -8px;
     right: -12px;
-    color: #c52728;
+    color: orange;
     font-weight: 600;
     font-size: 20px
 }
@@ -3552,7 +3552,7 @@ ul.product-received li .zmdi:before {
 }
 
 .list-check-red li .zmdi {
-    color: #c52728;
+    color: orange;
     position: absolute;
     left: 1px;
     top: 2px;
@@ -3561,7 +3561,7 @@ ul.product-received li .zmdi:before {
 }
 
 .list-check-red li .zmdi::before {
-    color: #c52728 !important
+    color: orange !important
 }
 
 .list-check-blue {
@@ -3633,7 +3633,7 @@ ul.product-received li .zmdi:before {
     font-size: 16px;
     line-height: 24px;
     font-weight: 600;
-    color: #c52728;
+    color: orange;
     margin-top: 32px;
     display: block
 }

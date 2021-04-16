@@ -13,7 +13,7 @@
           content="Với Thế giới Nhà Phố, việc mua bán, cho thuê, đầu tư bất động sản, nhà đất trở nên hiệu quả và tin cậy hơn. Bạn sẽ dễ dàng tìm được ngôi nhà ưng ý nhất với giá hợp lý."/>
     <meta name="keywords"
           content="TGNP, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
-    <meta name="author" content="rever.vn"/>
+    <meta name="author" content="thegioinhaphovietnam.com.vn"/>
     <link rel="canonical" href="index.html"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -43,7 +43,7 @@
         }
 
         /*hide tracking img*/
-        img[src^="//analytics.rever.vn/fap"], img[src^="/fap/debug/track"] {
+        img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
             display: none;
         }
 
@@ -56,13 +56,15 @@
 
     <link rel="stylesheet" type="text/css" href="{% static "css/index-merge.min90ca.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/footer.min90ca.css" %}">
+
     <style>
         img.lazy, img.lazy-background {
             filter: blur(15px);
         }
     </style>
     <style>
-        .banner-app-rever {
+        .banner-app-tgnp {
             position: relative;
             display: none;
             -webkit-box-align: center;
@@ -82,7 +84,7 @@
         }
 
         @media (max-width: 768px) {
-            .banner-app-rever {
+            .banner-app-tgnp {
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex
@@ -125,7 +127,7 @@
         }
 
         .btn-install::after {
-            background-color: #c72528;
+            background-color: orange;
             content: "";
             position: absolute;
             top: 0;
@@ -243,7 +245,7 @@
 
 {% block content %}
 
-    <div class="banner-app-rever" id="rever-banner-prompt" style="display: none">
+    <div class="banner-app-tgnp" id="rever-banner-prompt" style="display: none">
         <div class="banner-app-content">
             <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
                 <i class="zmdi zmdi-close"></i>
@@ -1797,7 +1799,7 @@
 
     <section class="container col-12">
         <div class="inner block-browser">
-            <h2 class="heading">Xem nhà đất theo địa điểm</h2>
+            <h3 class="heading">Xem nhà đất theo địa điểm</h3>
             <div class="col-12 detail-block">
                 <ul class="col-link">
                     <li><a href="s/quan-1/mua.html">Mua bán tại Q. Hoàn Kiếm</a></li>
@@ -1880,7 +1882,7 @@
                                 <button @click="hideModal()" class="popup-close-btn"><i
                                         class="zmdi zmdi-hc-2x zmdi-close"></i></button>
                                 <div v-show="step == 1" class="contain" id="step-form-1">
-                                    <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?</div>
+                                    <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?</div>
                                     <div class="choose-number">
                                         <ul>
                                             <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
@@ -2067,8 +2069,8 @@
 {
   "@context": "http://schema.org",
   "@type": "Organization",
-  "url": "https://rever.vn",
-  "logo": "https://rever.vn/static/images/rever-thumbnail.jpg",
+  "url": "https://thegioinhaphovietnam.com.vn",
+  "logo": "../images/rever-thumbnail.jpg",
   "contactPoint": [
     {
       "@type": "ContactPoint",
@@ -2077,23 +2079,23 @@
     }
   ],
   "sameAs": [
-    "https://www.facebook.com/rever.vn",
-    "../www.linkedin.com/company/rever-real-estate.html",
-    "../www.instagram.com/rever.vn/index.html",
-    "../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html"
+    "https://www.facebook.com/thegioinhaphovietnam.com.vn",
+    "www.linkedin.com/company/thegioinhaphovietnam.com.vn",
+    "www.instagram.com/thegioinhaphovietnam.com.vn",
+    "https://www.youtube.com/channel/UC2YIBjJIw4jL5aQ9LEoCQDg"
   ]
 }
 </script>
     <script type="application/ld+json">
     {
         "@context": "http://schema.org",
-        "@id": "https://rever.vn/#website",
+        "@id": "https://www.thegioinhaphovietnam.com.vn/#website",
         "@type": "WebSite",
-        "url": "https://rever.vn/",
+        "url": "https://thegioinhaphovietnam.com.vn/",
         "name": "TGNP",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://rever.vn/s/{search_term_string}",
+            "target": "https://thegioinhaphovietnam.com.vn/search?term",
             "query-input": "required name=search_term_string"
         }
     }
@@ -2427,7 +2429,7 @@
     <script>
         window["_au_api"] = "thue/api.html";
         window['fap_url'] = "../s3-cdn.rever.vn/p/v2.33.55/js/fap.min90ca.js?v=1617780824171";
-        window['fap.server'] = '//analytics.rever.vn/fap';
+        window['fap.server'] = '//analytics.thegioinhaphovietnam.com.vn/fap';
         window['favorite_api'] = 'mapi/index.html';
         window['googleClientId'] = '539423642927.apps.googleusercontent.com';
         window['staticUrl'] = '../s3-cdn.rever.vn/p/v2.33.55';

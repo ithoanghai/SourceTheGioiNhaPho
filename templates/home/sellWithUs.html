@@ -58,7 +58,7 @@
         }
 
         /*hide tracking img*/
-        img[src^="//analytics.rever.vn/fap"], img[src^="/fap/debug/track"] {
+        img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
             display: none;
         }
 
@@ -111,7 +111,7 @@
                     <li class="s-menu-items ">
                         <a href="specialistUs">Chuyên viên TGNP</a>
                     </li>
-                    <li class="s-menu-items ">
+ {% comment %}                    <li class="s-menu-items ">
                         <a href="rever-photo.html">Chụp hình</a>
                     </li>
                     <li class="s-menu-items ">
@@ -122,9 +122,9 @@
                     </li>
                     <li class="s-menu-items ">
                         <a href="bang-dieu-khien.html">Bảng điều khiển</a>
-                    </li>
+                    </li>{% endcomment %}
                       <li class="s-btn-contact">
-                        <a href="#" data-action="request-service" style="font-size: 14px">Đăng ký bán ngay</a>
+                        <a href="javascript:void(0)" data-action="request-service" style="font-size: 14px">Đăng ký bán ngay</a>
                     </li>
                 </ul>
             </div>
@@ -152,7 +152,7 @@
                     <li class="s-menu-items ">
                         <a href="specialistUs">Chuyên viên TGNP</a>
                     </li>
-                    <li class="s-menu-items ">
+ {% comment %}                    <li class="s-menu-items ">
                         <a href="rever-photo.html">Chụp hình</a>
                     </li>
                     <li class="s-menu-items ">
@@ -163,7 +163,7 @@
                     </li>
                     <li class="s-menu-items ">
                         <a href="bang-dieu-khien.html">Bảng điều khiển</a>
-                    </li>
+                    </li>{% endcomment %}
                     <li class="s-btn-contact">
                         <a href="javascript:void(0)" data-action="request-service">Đăng ký ngay</a>
                     </li>
@@ -218,7 +218,7 @@
             </div>
         </div>
     </section>
-    <section class="section-padding-50 s-sale-rever">
+    <section class="section-padding-50 s-sale-tgnp">
         <div class="container">
             <div class="row">
                 <h2 class="s-heading">Vì sao nên chọn TGNP?</h2>
@@ -366,7 +366,7 @@
                                     <li class="color-blue-min">Hiển thị ưu tiên</li>
                                     <li class="color-blue-min">Chụp hình chuyên nghiệp</li>
                                     <li class="color-blue-min">Đăng kê thêm 5 kênh</li>
-                                    <li class="color-blue-min">Thực tế ảo (3D)</li>
+                                   {% comment %} <li class="color-blue-min">Thực tế ảo (3D)</li>{% endcomment %}
                                     <li class="color-blue-min">Chạy Google, facebook</li>
                                 </ul>
                             </div>
@@ -408,7 +408,7 @@
             </div>
         </div>
     </section>
-    <section class="bg-charcoal service-sale-3dview">
+{% comment %}    <section class="bg-charcoal service-sale-3dview">
         <div class="container">
             <div class="row">
                 <div class="grid grid--2col grid--center grid--reverse">
@@ -432,7 +432,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>{% endcomment %}
     <section>
         <div class="width1140 s-padding-tb">
             <div class="s-heading">Đánh giá của chủ nhà</div>
@@ -477,7 +477,7 @@
                                 có kinh nghiệm làm thế nào để rao bán nhà cũng như các thủ tục giấy tờ phải làm ra sao.
                                 Lúc đó tôi đã tìm thấy dịch vụ Môi giới cho người bán của TGNP. Tôi đã chọn gói Bạc vì
                                 chưa chắc dịch vụ có tốt như quảng cáo không. Sau đó, tôi rất bất ngờ vì bán được nhà
-                                rất nhanh. Đội ngũ Thế giới Nhà Phốcòn tư vấn và hỗ trợ tôi rất nhiệt tình. Nếu có cơ
+                                rất nhanh. Đội ngũ chuyên gia Thế giới Nhà Phố còn tư vấn và hỗ trợ tôi rất nhiệt tình. Nếu có cơ
                                 hội lần sau, tôi sẽ chọn các gói cao hơn.</p>
                             <div class="customer">
                                 <div class="avatar">
@@ -498,7 +498,7 @@
             style=" background: url({% static 'images/service-sale-post-bg.jpg' %}) 50% 50% / cover no-repeat;">
         <div class="width1140 s-padding-tb">
             <div class="s-subcription-inner">
-                <div class="title">Đăng kê với Thế giới Nhà Phốđể bán nhanh gấp 2 lần thị trường và tiết kiệm nhiều hơn
+                <div class="title">Đăng kê với Thế giới Nhà Phố để bán nhanh gấp 2 lần thị trường và tiết kiệm nhiều hơn
                     với những dịch vụ đi kèm chất lượng cao. Đăng ký thông tin ngay, chúng tôi sẽ liên hệ tư vấn và hẹn
                     gặp sau ít phút!
                 </div>
@@ -537,7 +537,7 @@
                                     <button @click="hideModal()" class="popup-close-btn"><i
                                             class="zmdi zmdi-hc-2x zmdi-close"></i></button>
                                     <div v-show="step == 1" class="contain" id="step-form-1">
-                                        <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?
+                                        <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?
                                         </div>
                                         <div class="choose-number">
                                             <ul>
@@ -627,7 +627,7 @@
                             </div>
                             <div class="content">
                                 <div class="intro-sm">
-                                    <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?</p>
+                                    <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?</p>
                                     <div class="choose-number">
                                         <ul>
                                             <li v-for="i in 10" @click="selectStep1Rate(i)">
@@ -702,7 +702,7 @@
                                 <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp Thế giới Nhà Phố từng bước nâng
                                     cao
                                     chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
-                                    <strong>1800 234 546</strong></p>
+                                    <strong>0916 286 256</strong></p>
                             </div>
                         </div>
                         <div class="popup-footer">
@@ -742,11 +742,11 @@
     <script>
         window["_au_api"] = "thue/api.html";
         window['fap_url'] = "{% static 'js/fap.min90ca.js' %}";
-        window['fap.server'] = '//analytics.rever.vn/fap';
+        window['fap.server'] = '//analytics.thegioinhaphovietnam.com.vn/fap';
         window['favorite_api'] = 'mapi/index.html';
         window['googleClientId'] = '539423642927.apps.googleusercontent.com';
         window['staticUrl'] = '../s3-cdn.rever.vn/p/v2.33.55';
-        window['hotline'] = '1800 234 546';
+        window['hotline'] = '0916 286 256';
 
         window['isLoggedIn'] = false;
     </script>
@@ -921,7 +921,7 @@
     </script>
     <!--[if lte IE 8]>
     <script charset="utf-8" async defer type="text/javascript"
-            src="https://rever.vn/public/externaljs"></script>
+            src="https://thegioinhaphovietnam.com.vn/public/externaljs"></script>
     <![endif]-->
     <script>
         function createHSForm(opt) {
@@ -1177,33 +1177,33 @@
     {
       "@context": "http://schema.org",
       "@type": "Organization",
-      "url": "https://rever.vn",
-      "logo": "https://rever.vn/static/images/rever-thumbnail.jpg",
+      "url": "https://thegioinhaphovietnam.com.vn",
+      "logo": "../images/rever-thumbnail.jpg",
       "contactPoint": [
         {
           "@type": "ContactPoint",
-          "telephone": "1800 234 546",
+          "telephone": "0916 286 256",
           "contactType": "customer service"
         }
       ],
       "sameAs": [
-        "https://www.facebook.com/rever.vn",
-        "../www.linkedin.com/company/rever-real-estate.html",
-        "../www.instagram.com/rever.vn/index.html",
-        "../www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ.html"
+        "https://www.facebook.com/thegioinhaphovietnam.com.vn",
+        "www.linkedin.com/company/thegioinhaphovietnam.com.vn",
+        "www.instagram.com/thegioinhaphovietnam.com.vn",
+        "https://www.youtube.com/channel/UC2YIBjJIw4jL5aQ9LEoCQDg"
       ]
     }
     </script>
     <script type="application/ld+json">
     {
         "@context": "http://schema.org",
-        "@id": "https://rever.vn/#website",
+        "@id": "https://www.thegioinhaphovietnam.com.vn/#website",
         "@type": "WebSite",
-        "url": "https://rever.vn/",
+        "url": "https://thegioinhaphovietnam.com.vn/",
         "name": "TGNP",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://rever.vn/s/{search_term_string}",
+            "target": "https://thegioinhaphovietnam.com.vn/search?term",
             "query-input": "required name=search_term_string"
         }
     }

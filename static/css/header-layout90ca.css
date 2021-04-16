@@ -404,7 +404,7 @@ body {
 }
 
 .main-header-agent .col-left .top-search form .zmdi {
-  background: #c72528;
+  background: orange;
   border: none;
   padding: 8px 10px;
   color: #fff;
@@ -820,7 +820,7 @@ body {
 .main-header-agent .search-mobile .optionsList .option input:checked + label {
   border-bottom: 2px solid #30333a;
   font-weight: 600;
-  color: #c72528;
+  color: orange;
 }
 
 .main-header-agent .search-mobile .optionsList .option label {
@@ -1000,7 +1000,7 @@ body {
     right: -18px;
     z-index: 50;
     color: #fff;
-    background: #c72528;
+    background: orange;
     border-radius: 9px;
     line-height: 18px;
     font-size: 12px;
@@ -1088,7 +1088,7 @@ body {
 }
 .main-header-agent .col-right .login .notification .notification-content li a span p.active:before{
     content: "•";
-    color: #c72528;
+    color: orange;
     left: 0;
     width: 7px;
     height: 7px;
@@ -1318,11 +1318,11 @@ body {
 }
 
 .btn-sigup-sm{
-    color: #c72528;
-    border: 1px solid #c72528;
+    color: orange;
+    border: 1px solid orange;
     background: transparent;
 }
 .btn-sigup-sm:hover{
   color: #fff;
-  background: #c72528;
+  background: orange;
 }
