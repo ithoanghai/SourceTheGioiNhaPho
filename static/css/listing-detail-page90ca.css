@@ -40,7 +40,7 @@
 }
 
 @font-face {
-    font-family: rever-icon;
+    font-family: tgnp-icon;
     src: url(../fonts/TGNPIcons.eot);
     src: url(../fonts/TGNPIconsd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/TGNPIcons.woff) format("woff"), url(../fonts/TGNPIcons.ttf) format("truetype"), url(../fonts/TGNPIcons.svg#roboto_condensedregular) format("svg")
 }
@@ -63,7 +63,7 @@ body {
 }
 
 .font-icon {
-    font-family: rever-icon, Verdana, Geneva, sans-serif;
+    font-family: tgnp-icon, Verdana, Geneva, sans-serif;
     text-rendering: auto;
     line-height: 20px;
     font-size: 18px;
@@ -4055,11 +4055,11 @@ select.form-control:focus::-ms-value {
     color: #73afba !important
 }
 
-.color-base-rever-blue-min {
+.color-base-tgnp-blue-min {
     color: #337588 !important
 }
 
-.color-base-rever-blue-min:hover {
+.color-base-tgnp-blue-min:hover {
     color: #265765 !important
 }
 
@@ -6963,8 +6963,8 @@ select.form-control:focus::-ms-value {
     .box-right .chart-box {
         -webkit-box-orient: vertical;
         -webkit-box-direction: reverse;
-        -ms-flex-flow: column-reverse nowrap;
-        flex-flow: column-reverse nowrap;
+        -ms-flex-flow: column-tgnpse nowrap;
+        flex-flow: column-tgnpse nowrap;
         border: 0;
         padding-top: 0
     }
@@ -7166,11 +7166,11 @@ select.form-control:focus::-ms-value {
     color: #73afba !important
 }
 
-.color-base-rever-blue-min {
+.color-base-tgnp-blue-min {
     color: #337588 !important
 }
 
-.color-base-rever-blue-min:hover {
+.color-base-tgnp-blue-min:hover {
     color: #265765 !important
 }
 
@@ -10950,7 +10950,7 @@ ul.exclusive li.featured header li .zmdi {
     right: 20px;
     width: 50px;
     height: 50px;
-    font-family: rever-icon, arial;
+    font-family: tgnp-icon, arial;
     font-size: 3em;
     background: rgba(255, 255, 255, .8);
     border-radius: 4px;
@@ -10996,7 +10996,7 @@ ul.exclusive li.featured header li .zmdi {
     left: 20px;
     width: 50px;
     height: 50px;
-    font-family: rever-icon, arial;
+    font-family: tgnp-icon, arial;
     font-size: 3em;
     background: rgba(255, 255, 255, .66);
     border-radius: 4px;
@@ -12492,7 +12492,7 @@ ul.slideimg li a.img:hover {
     background: #f7f7f7;
     margin-top: 20px;
     float: left;
-    font-family: rever-icon;
+    font-family: tgnp-icon;
     -webkit-box-shadow: 3px 2px 2px rgba(0, 0, 0, .17);
     box-shadow: 3px 2px 2px rgba(0, 0, 0, .17);
     font-size: 25px;
@@ -12697,7 +12697,7 @@ ul.slideimg li a.img:hover {
     position: absolute;
     top: 10px;
     right: 20px;
-    font-family: rever-icon, Arial, Helvetica, sans-serif;
+    font-family: tgnp-icon, Arial, Helvetica, sans-serif;
     font-weight: 400;
     font-size: 20px;
     color: #999
@@ -13901,7 +13901,7 @@ picture img {
     height: 40px;
     padding: 0 5px;
     color: #337588;
-    font-family: rever-icon, arial;
+    font-family: tgnp-icon, arial;
     font-size: 40px;
     background: rgba(255, 255, 255, .66);
     border-radius: 4px;
@@ -13921,7 +13921,7 @@ picture img {
     width: 40px;
     height: 40px;
     padding: 0 4px;
-    font-family: rever-icon, arial;
+    font-family: tgnp-icon, arial;
     font-size: 40px;
     color: #337588;
     background: rgba(255, 255, 255, .66);
@@ -17335,7 +17335,7 @@ ul.exclusive li.featured header .heading {
     margin-top: 4px
 }
 
-.buy-with-rever__cta {
+.buy-with-tgnp__cta {
     display: inline-block;
     max-width: 220px;
     width: 100%;
@@ -17355,7 +17355,7 @@ ul.exclusive li.featured header .heading {
     transition: opacity .2s
 }
 
-.buy-with-rever__cta:hover {
+.buy-with-tgnp__cta:hover {
     color: #fff;
     opacity: .86
 }
@@ -17401,7 +17401,7 @@ ul.exclusive li.featured header .heading {
         display: none
     }
 
-    .buy-with-rever__cta {
+    .buy-with-tgnp__cta {
         margin-top: 24px
     }
 }

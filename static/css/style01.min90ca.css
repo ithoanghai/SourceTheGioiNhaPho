@@ -1166,7 +1166,7 @@ section.bg-gray-e6 div.more-info-black {
     width: 44px;
     z-index: 700;
     position: absolute;
-    font-family: rever-icon, Arial, Helvetica, sans-serif;
+    font-family: tgnp-icon, Arial, Helvetica, sans-serif;
     font-size: 25px;
     font-weight: 700
 }
@@ -2422,7 +2422,7 @@ div.list-and-map div.search-list section div.detail ul li.bookmark {
     line-height: 0;
     top: 30px;
     right: 52px;
-    font-family: rever-icon, arial
+    font-family: tgnp-icon, arial
 }
 
 .rent-drop .iconrent {

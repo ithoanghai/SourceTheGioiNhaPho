@@ -38,8 +38,11 @@ def listing(request, listing_id):
 
 def detail(request):
     listing_id = request.GET.get('id', '')
+    listing = get_object_or_404(Listing, pk=listing_id)
+    listings_neighborhood = Listing.objects.order_by('-list_date').filter(state=listing.state)
     context = {
-        'listing': get_object_or_404(Listing, pk=listing_id)
+        'listing': listing,
+        'listings_neighborhood': listings_neighborhood
     }
 
     return render(request, 'listings/detail.html', context)

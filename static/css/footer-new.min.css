@@ -742,7 +742,7 @@ audio:not([controls]) {
 }
 
 .font-icon {
-    font-family: 'rever-icon', Verdana, Geneva, sans-serif;
+    font-family: 'tgnp-icon', Verdana, Geneva, sans-serif;
     text-rendering: auto;
     line-height: 20px;
     font-size: 18px;
@@ -916,7 +916,7 @@ audio:not([controls]) {
     display: block !important
 }
 
-.rever-icon-r:before {
+.tgnp-icon-r:before {
     content: "\f193"
 }
 

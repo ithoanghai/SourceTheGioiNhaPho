@@ -77,11 +77,11 @@
 }
 
 @media (min-width: 768px) {
-    .grid.grid--reverse {
+    .grid.grid--tgnpse {
         -webkit-box-orient: horizontal;
         -webkit-box-direction: reverse;
-        -ms-flex-direction: row-reverse;
-        flex-direction: row-reverse
+        -ms-flex-direction: row-tgnpse;
+        flex-direction: row-tgnpse
     }
 
     .grid .grid-item {
@@ -924,7 +924,7 @@
     position: absolute;
     top: 60%;
     right: 0;
-    font-family: rever-icon, arial;
+    font-family: tgnp-icon, arial;
     font-size: 50px;
     padding: 5px;
     z-index: 999;
@@ -939,7 +939,7 @@
     position: absolute;
     top: 60%;
     left: 0;
-    font-family: rever-icon, arial;
+    font-family: tgnp-icon, arial;
     font-size: 50px;
     padding: 5px;
     z-index: 999;
@@ -3219,7 +3219,7 @@ ul.product-received li .zmdi:before {
     }
 
     .service-sale-compare .col-left ul li {
-        flex-direction: row-reverse
+        flex-direction: row-tgnpse
     }
 
     .service-sale-compare .zmdi {

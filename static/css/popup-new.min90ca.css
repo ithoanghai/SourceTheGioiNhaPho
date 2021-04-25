@@ -75,7 +75,7 @@ html {
 }
 
 @font-face {
-    font-family: rever-icon;
+    font-family: tgnp-icon;
     src: url(../fonts/TGNPIcons.eot);
     src: url(../fonts/TGNPIconsd41d.eot?#iefix) format('embedded-opentype'), url(../fonts/TGNPIcons.woff) format('woff'), url(../fonts/TGNPIcons.ttf) format('truetype'), url(../fonts/TGNPIcons.svg#roboto_condensedregular) format('svg');
     font-display: swap
@@ -391,7 +391,7 @@ input[type=email], input[type=text] {
 }
 
 .popup-font-icon {
-    font-family: rever-icon, Verdana, Geneva, sans-serif;
+    font-family: tgnp-icon, Verdana, Geneva, sans-serif;
     text-rendering: auto;
     line-height: 20px;
     font-size: 22px;
@@ -498,7 +498,7 @@ input:focus, textarea:focus {
 
 .popup-checkbox input + label:after {
     content: "";
-    font-family: rever-icon;
+    font-family: tgnp-icon;
     font-size: 11px;
     line-height: 12px;
     margin-bottom: 0;
@@ -794,7 +794,7 @@ input:focus, textarea:focus {
     font-weight: 600
 }
 
-.popup-info-rv li span.rever-red {
+.popup-info-rv li span.tgnp-red {
     color: orange;
     line-height: 1.13;
     font-weight: 700;
@@ -1059,7 +1059,7 @@ input:focus, textarea:focus {
     margin: 0 auto
 }
 
-.popup-list-filter .popup-rever:not(.popup-visible) {
+.popup-list-filter .popup-tgnp:not(.popup-visible) {
     z-index: -1
 }
 
@@ -2151,7 +2151,7 @@ input:focus, textarea:focus {
 }
 
 .popup-login-rv .popup-form-login-rv .title .logo:before {
-    font-family: rever-icon, Arial, Helvetica, sans-serif;
+    font-family: tgnp-icon, Arial, Helvetica, sans-serif;
     content: '\f193';
     position: absolute;
     top: 20px;

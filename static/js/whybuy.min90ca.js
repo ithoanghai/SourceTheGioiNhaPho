@@ -8008,7 +8008,7 @@
     }, G5Z2: function (t, e, n) {
         (t.exports = n("FZ+f")(!0)).push([t.i, '\n.result-list-search-popup[data-v-32222dbc] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  z-index: 10;\n  display: none;\n}\n.result-list-search-popup[data-v-32222dbc]:before {\n  position: absolute;\n  content: "";\n  z-index: 0;\n  background: rgba(0, 0, 0, 0.25);\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n}\n.result-list-search-popup-container[data-v-32222dbc] {\n  position: absolute;\n  max-width: 100vw;\n  width: 500px;\n  max-height: 450px;\n  height: calc(100vh - 130px);\n  background: #fff;\n  left: 50%;\n  -webkit-transform: translate(-50%, 0);\n          transform: translate(-50%, 0);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  line-height: 1.3;\n}\n@media (min-width: 769px) {\n.result-list-search-popup-container[data-v-32222dbc] {\n    height: calc(100vh - 130px);\n    top: 120px;\n}\n}\n@media (max-width: 768px) {\n.result-list-search-popup-container[data-v-32222dbc] {\n    height: 100vh;\n    top: 0;\n}\n}\n.result-list-search-popup-container .result-list-search-popup-footer[data-v-32222dbc],\n.result-list-search-popup-container .result-list-search-popup-heading[data-v-32222dbc] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.result-list-search-popup-container .result-list-search-popup-heading[data-v-32222dbc] {\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: #f3f4f7;\n  min-height: 60px;\n  line-height: 60px;\n  text-align: center;\n  position: relative;\n  width: 100%;\n  font-size: 20px;\n  padding: 10px 15px;\n  -webkit-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .05);\n          box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .05);\n}\n.result-list-search-popup-container .result-list-search-popup-heading h5[data-v-32222dbc] {\n  line-height: normal;\n  text-align: left;\n  padding: 14px 0 5px;\n}\n.result-list-search-popup-container .result-list-search-popup-heading .zmdi[data-v-32222dbc] {\n  margin-left: 15px;\n}\n.result-list-search-popup-container .result-list-search-popup-footer[data-v-32222dbc] {\n  font-size: 0.95em;\n  padding: 25px 15px;\n}\n.result-list-search-popup-container .result-list-search-popup-footer a[data-v-32222dbc] {\n  color: #337588\n}\n.result-list-search-popup-container .search-container[data-v-32222dbc] {\n  -webkit-box-shadow: none;\n          box-shadow: none;\n  height: 100%;\n  overflow: auto;\n}\n.result-list-search-popup-container .search-container .recent-search[data-v-32222dbc],\n.result-list-search-popup-container .search-container .search-suggest-list[data-v-32222dbc] {\n  max-width: 100% !important;\n  position: relative !important;\n  top: 0 !important;\n  border: 0 !important;\n  padding: 0 15px !important;\n}\n.result-list-search-popup-container .result-empty-list[data-v-32222dbc] {\n  padding: 25px 15px !important;\n}\n.result-list-search-popup-container .result-empty-list p[data-v-32222dbc] {\n  margin-bottom: .5rem;\n}\n.result-list-search-popup-container .btn-close[data-v-32222dbc] {\n  position: absolute;\n  top: -20px;\n  right: -20px;\n  width: 36px;\n  height: 36px;\n  border-radius: 50%;\n  background: #fff;\n  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, .1);\n          box-shadow: 0 2px 2px rgba(0, 0, 0, .1);\n  text-align: center;\n  padding: 7px 12px;\n  border: 0;\n  z-index: 9999;\n  line-height: normal;\n}\n.result-list-search-popup-container .btn-close .zmdi[data-v-32222dbc] {\n  margin-left: 0 !important;\n  padding: 0 !important;\n  font-size: 22px !important;\n  color: inherit !important;\n}\n\n', "", {
             version: 3,
-            sources: ["/builds/nerds/rever-frontend/src/main/webapp-vue/src/controllers/search-v3/components/suggest/result-list-popup.vue"],
+            sources: ["/builds/nerds/tgnp-frontend/src/main/webapp-vue/src/controllers/search-v3/components/suggest/result-list-popup.vue"],
             names: [],
             mappings: ";AACA;EACE,gBAAgB;EAChB,OAAO;EACP,QAAQ;EACR,UAAU;EACV,SAAS;EACT,YAAY;EACZ,cAAc;CACf;AACD;EACE,mBAAmB;EACnB,YAAY;EACZ,WAAW;EACX,gCAAgC;EAChC,OAAO;EACP,QAAQ;EACR,UAAU;EACV,SAAS;CACV;AACD;EACE,mBAAmB;EACnB,iBAAiB;EACjB,aAAa;EACb,kBAAkB;EAClB,4BAA4B;EAC5B,iBAAiB;EACjB,UAAU;EACV,sCAAsC;UAC9B,8BAA8B;EACtC,qBAAqB;EACrB,qBAAqB;EACrB,cAAc;EACd,6BAA6B;EAC7B,8BAA8B;MAC1B,2BAA2B;UACvB,uBAAuB;EAC/B,iBAAiB;CAClB;AACD;AACA;IACI,4BAA4B;IAC5B,WAAW;CACd;CACA;AACD;AACA;IACI,cAAc;IACd,OAAO;CACV;CACA;AACD;;EAEE,qBAAqB;EACrB,qBAAqB;EACrB,cAAc;CACf;AACD;EACE,0BAA0B;MACtB,uBAAuB;UACnB,+BAA+B;EACvC,0BAA0B;MACtB,uBAAuB;UACnB,oBAAoB;EAC5B,oBAAoB;EACpB,iBAAiB;EACjB,kBAAkB;EAClB,mBAAmB;EACnB,mBAAmB;EACnB,YAAY;EACZ,gBAAgB;EAChB,mBAAmB;EACnB,oDAAoD;UAC5C,4CAA4C;CACrD;AACD;EACE,oBAAoB;EACpB,iBAAiB;EACjB,oBAAoB;CACrB;AACD;EACE,kBAAkB;CACnB;AACD;EACE,kBAAkB;EAClB,mBAAmB;CACpB;AACD;EACE,cAAc;CACf;AACD;EACE,yBAAyB;UACjB,iBAAiB;EACzB,aAAa;EACb,eAAe;CAChB;AACD;;EAEE,2BAA2B;EAC3B,8BAA8B;EAC9B,kBAAkB;EAClB,qBAAqB;EACrB,2BAA2B;CAC5B;AACD;EACE,8BAA8B;CAC/B;AACD;EACE,qBAAqB;CACtB;AACD;EACE,mBAAmB;EACnB,WAAW;EACX,aAAa;EACb,YAAY;EACZ,aAAa;EACb,mBAAmB;EACnB,iBAAiB;EACjB,gDAAgD;UACxC,wCAAwC;EAChD,mBAAmB;EACnB,kBAAkB;EAClB,UAAU;EACV,cAAc;EACd,oBAAoB;CACrB;AACD;EACE,0BAA0B;EAC1B,sBAAsB;EACtB,2BAA2B;EAC3B,0BAA0B;CAC3B",
             file: "result-list-popup.vue",
@@ -8647,7 +8647,7 @@
     }, LkOB: function (t, e, n) {
         (t.exports = n("FZ+f")(!0)).push([t.i, "\nli.search-result-type-heading[data-v-f74a834c] {\n  background: transparent !important;\n}\n.banner-cover-inner form .search-block .recent-search[data-v-f74a834c] li.search-result-type-heading,\n.banner-cover-inner form .search-container .recent-search[data-v-f74a834c] li.search-result-type-heading:hover {\n  background: inherit\n}\n.banner-cover-inner form .search-container .recent-search[data-v-f74a834c] li a {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: nowrap;\n      flex-wrap: nowrap;\n}\n.banner-cover-inner form .search-container .recent-search[data-v-f74a834c] li .rsi-icon {\n  display: inline-block;\n  /*width: 25px;*/\n  /*margin-right: 2px;*/\n}\n", "", {
             version: 3,
-            sources: ["/builds/nerds/rever-frontend/src/main/webapp-vue/src/controllers/search-v3/components/suggest/suggest-list.vue"],
+            sources: ["/builds/nerds/tgnp-frontend/src/main/webapp-vue/src/controllers/search-v3/components/suggest/suggest-list.vue"],
             names: [],
             mappings: ";AACA;EACE,mCAAmC;CACpC;AACD;;EAEE,mBAAmB;CACpB;AACD;EACE,qBAAqB;EACrB,qBAAqB;EACrB,cAAc;EACd,sBAAsB;MAClB,kBAAkB;CACvB;AACD;EACE,sBAAsB;EACtB,gBAAgB;EAChB,sBAAsB;CACvB",
             file: "suggest-list.vue",
@@ -15644,7 +15644,7 @@
             return a()(t, [{
                 key: "$emit", value: function (t) {
                     var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-                    var n = new CustomEvent("rever-" + t, {detail: e});
+                    var n = new CustomEvent("tgnp-" + t, {detail: e});
                     this.ele.dispatchEvent(n)
                 }
             }, {
@@ -15652,14 +15652,14 @@
                     var n = function (t) {
                         e.call(void 0, t.detail)
                     };
-                    n.bind(this), this.cbMapping.push({cb: e, evtCb: n}), this.ele.addEventListener("rever-" + t, n, !1)
+                    n.bind(this), this.cbMapping.push({cb: e, evtCb: n}), this.ele.addEventListener("tgnp-" + t, n, !1)
                 }
             }, {
                 key: "$off", value: function (t, e) {
                     for (var n = this, r = [], i = 0; i < this.cbMapping.length; i++) {
                         if (e === this.cbMapping[i].cb) {
                             var o = this.cbMapping[i].evtCb;
-                            this.ele.removeEventListener("rever-" + event, o), r.push(i)
+                            this.ele.removeEventListener("tgnp-" + event, o), r.push(i)
                         }
                     }
                     r.reverse().forEach(function (t) {
@@ -15671,7 +15671,7 @@
                     var n = this, r = function (r) {
                         e.call(void 0, r.detail), n.$off(t, e)
                     };
-                    r.bind(this), this.cbMapping.push({cb: e, evtCb: r}), this.ele.addEventListener("rever-" + t, r, !1)
+                    r.bind(this), this.cbMapping.push({cb: e, evtCb: r}), this.ele.addEventListener("tgnp-" + t, r, !1)
                 }
             }]), t
         }());

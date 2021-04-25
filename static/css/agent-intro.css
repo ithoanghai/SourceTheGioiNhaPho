@@ -103,7 +103,7 @@ a {
 }
 
 @font-face {
-    font-family: rever-icon;
+    font-family: tgnp-icon;
     src: url(../fonts/TGNPIcons.eot);
     src: url(../fonts/TGNPIcons.eot?#iefix) format('embedded-opentype'), url(../fonts/TGNPIcons.woff) format('woff'), url(../fonts/TGNPIcons.ttf) format('truetype'), url(../fonts/TGNPIcons.svg#roboto_condensedregular) format('svg')
 }
@@ -265,7 +265,7 @@ body {
 }
 
 .font-icon {
-    font-family: rever-icon, Verdana, Geneva, sans-serif;
+    font-family: tgnp-icon, Verdana, Geneva, sans-serif;
     text-rendering: auto;
     line-height: 20px;
     font-size: 18px;
