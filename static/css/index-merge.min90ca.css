@@ -3194,14 +3194,14 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 .listingCard .info-container .listing-info {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
+    display: inline-flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
-    width: 60%;
+   /* width: 60%;*/
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -12252,10 +12252,6 @@ input:focus, textarea:focus {
     content: '\f278'
 }
 
-.zmdi-square-o:before {
-    content: '\f279'
-}
-
 .zmdi-star-circle:before {
     content: '\f27a'
 }
@@ -13546,6 +13542,10 @@ input:focus, textarea:focus {
 
 .zmdi-volume-up:before {
     content: '\f3bc'
+}
+
+.zmdi-square:before {
+    content: "\f0fd"
 }
 
 .zmdi-n-1-square:before {

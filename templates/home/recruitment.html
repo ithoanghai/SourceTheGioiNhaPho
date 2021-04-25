@@ -111,14 +111,14 @@
                              <a href="specialistUs">Đội ngũ chuyên viên</a>
                         </li>
 
-
+{% comment %}
                         <li class="s-menu-items">
                             <a href="#">Phòng giao dịch</a>
-                        </li>
+                        </li>{% endcomment %}
 
 
                         <li class="s-menu-items active">
-                            <a href="#">Tuyển dụng</a>
+                            <a href="recruitment">Tuyển dụng</a>
                         </li>
                         <li class="s-menu-items">
                             <a href="contact">Liên hệ</a>
@@ -132,17 +132,16 @@
         <section class="header-career"
                  style="background-image: url({% static 'images/background-tuyen-dung.jpg' %});">
             <div class="bg-career width1140">
-                <div class="title">Với REVER, công việc là đam mê</div>
+                <div class="title">Với Thế giới Nhà Phố, công việc là đam mê</div>
                 <div class="sumary">Bạn yêu thích môi trường làm việc trẻ trung và đậm tinh thần Startup? Gia nhập TGNP
-                    và khám
-                    phá ngay!
+                    và khám phá ngay!
                 </div>
                 <div class="btn"><a class="btn-career" href="#list-career">Các vị trí đang tuyển</a></div>
             </div>
         </section>
         <section class="bg-career-white width1140">
             <div class="content">
-                <div class="title-career">Văn hoá REVER</div>
+                <div class="title-career">Văn hoá Thế giới Nhà Phố</div>
                 <div class="title-career-line">
                     <div class="line"></div>
                 </div>
@@ -209,7 +208,7 @@
                 </div>
             </div>
         </section>
-        <section class="bg-career-gray">
+        {% comment %}<section class="bg-career-gray">
             <div class="content width1140">
                 <div class="title-career">Phòng ban</div>
                 <div class="title-career-line">
@@ -266,10 +265,10 @@
                     </div>
                 </section>
             </div>
-        </section>
+        </section>{% endcomment %}
         <section class="bg-career-white width1140">
             <div class="content pdb-0">
-                <div class="title-career">Vì sao chọn REVER?</div>
+                <div class="title-career">Vì sao chọn TGNP?</div>
                 <div class="title-career-line">
                     <div class="line"></div>
                 </div>
@@ -397,7 +396,8 @@
                         <div class="loc"></div>
                         <div class="btn-app btn-red-boder">
                             <a style="display: block"
-                               href="apply?position=sale"
+                               {% comment %}href="apply?position=sale"{% endcomment %}
+                               href="contact"
                                target="_blank">ỨNG TUYỂN</a>
                         </div>
                     </div>
@@ -411,17 +411,19 @@
                         <div class="loc"></div>
                         <div class="btn-app btn-red-boder">
                             <a style="display: block"
-                               href="apply?position=sales-director" target="_blank">ỨNG
+                               {% comment %}href="apply?position=sale"{% endcomment %}
+                               href="contact"
+                                target="_blank">ỨNG
                                 TUYỂN</a>
                         </div>
                     </div>
-                    <div class="detail">
+{% comment %}                    <div class="detail">
                         <div class="name">
                             <a href="apply?position=sales-manager-primary"
                                target="_blank">
                                 Sales Manager
                             </a>
-                            <button onclick="showDescription('Sales Manager Primary', '1yuqVv-_PjomPsNj_rq6I_lvIopDs6ezQ', '../agent.rever.vn/ung-tuyen218b.html?position=sales-manager-primary')"
+                            <button onclick="showDescription('Sales Manager Primary', '1yuqVv-_PjomPsNj_rq6I_lvIopDs6ezQ', '../agent.thegioinhaphovietnam.com.vn/ung-tuyen218b.html?position=sales-manager-primary')"
                                     class="job-desc">Mô tả công việc
                             </button>
                         </div>
@@ -439,7 +441,7 @@
                                target="_blank">
                                 Sales Manager
                             </a>
-                            <button onclick="showDescription('Sales Manager Secondary', '1J7k-KBu7uXa265wkV6SJcX7k2MeVUZ7D', '../agent.rever.vn/ung-tuyen6ca6.html?position=sales-manager-secondary')"
+                            <button onclick="showDescription('Sales Manager Secondary', '1J7k-KBu7uXa265wkV6SJcX7k2MeVUZ7D', '../agent.thegioinhaphovietnam.com.vn/ung-tuyen6ca6.html?position=sales-manager-secondary')"
                                     class="job-desc">Mô tả công việc
                             </button>
                         </div>
@@ -464,7 +466,7 @@
                                href="apply?position=product-manager" target="_blank">ỨNG
                                 TUYỂN</a>
                         </div>
-                    </div>
+                    </div>{% endcomment %}
                     <div class="detail">
                         <div class="name">
                             <a href="apply?position=software-engineer" target="_blank">
@@ -475,11 +477,13 @@
                         <div class="loc"></div>
                         <div class="btn-app btn-red-boder">
                             <a style="display: block"
-                               href="apply?position=software-engineer" target="_blank">ỨNG
+                               {% comment %}href="apply?position=sale"{% endcomment %}
+                               href="contact"
+                               target="_blank">ỨNG
                                 TUYỂN</a>
                         </div>
                     </div>
-                    <div class="detail">
+{% comment %}                    <div class="detail">
                         <div class="name">
                             <a href="apply?position=data-engineer" target="_blank">
                                 Data Engineer
@@ -576,7 +580,7 @@
                                href="apply?position=digital-marketing-specialist"
                                target="_blank">ỨNG TUYỂN</a>
                         </div>
-                    </div>
+                    </div>{% endcomment %}
                 </div>
             </div>
         </section>
@@ -764,7 +768,7 @@
                     <div v-show="state == 'finished'" class="popup-fb-success">
                         <div class="popup-header">
                             <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về
-                                TGNP.vn</h2>
+                                thegioinhaphovietnam.com.vn</h2>
                             <button @click="hideModal()" class="popup-close-btn"><i
                                     class="zmdi zmdi-hc-2x zmdi-close"></i>
                             </button>
@@ -811,8 +815,6 @@
     <script async defer src="{% static 'js/career.min90ca.js' %}"></script>
 
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js50aa?key=AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg&amp;libraries=drawing,places,geometry&amp;language=vi&amp;callback=callbackInitMap"></script>
     <script defer src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
     <script defer id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
 
@@ -880,10 +882,7 @@
             }
         }
     </script>
-    <script>
-        adroll_adv_id = "VHUFKBW42JH37IACSQW3PD";
-        adroll_pix_id = "734MVFGRZFAB7JCBBH46O6";
-    </script>
+
     <script>
         window.RFeedback = {
             API: "https://thegioinhaphovietnam.com.vn/mapi",
@@ -936,7 +935,7 @@
 
     <script>
         window.RHome = {
-            searchUrl: "search?specialist=",
+            searchUrl: "listings/search?specialist=",
         }
     </script>
 

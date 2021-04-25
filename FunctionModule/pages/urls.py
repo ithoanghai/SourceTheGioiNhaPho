@@ -8,12 +8,7 @@ urlpatterns = [
     # Matches any html file
     #re_path('^.*\.*', views.pages, name='pages'),
     #url menu
-    path('search', views.search, name='search'),
-    path('searchurban', views.searchurban, name='search_urban'),
-    path('detail', views.detail, name='detail'),
-    path('sellwithus', views.sell_with_us, name='sell_with_us'),
-    path('buywithus', views.buy_with_us, name='buy_with_us'),
-    path('rentwithus', views.rent_with_us, name='rent_with_us'),
+
     path('specialistUs', views.specialist_us, name='specialist_us'),
     path('specialist', views.specialist, name='specialist'),
     path('whyChoose', views.whyChoose, name='whyChoose'),

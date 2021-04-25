@@ -3,9 +3,9 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.template import loader
 
-from FunctionModule.cadastral.constants import state_data
+from FunctionModule.cadastral.constants import state_data, district_data
 from FunctionModule.listings.choices import price_choices, bedroom_choices
-from FunctionModule.listings.models import Listing
+from FunctionModule.listings.models import Listing, TransactionType
 from FunctionModule.realtors.models import Realtor
 from django.contrib.admin import site
 from django.contrib.auth.models import User
@@ -19,10 +19,16 @@ def get_client_ip(request):
     return ip
 
 def index(request):
-    listings = Listing.objects.order_by('-list_date').filter(is_published=True)[:3]
+    listings_for_sale = Listing.objects.order_by('-list_date').filter(is_published=True, transaction_type=TransactionType.SELL)[:3]
+    listings_for_rent = Listing.objects.order_by('-list_date').filter(is_published=True, transaction_type=TransactionType.FOR_RENT)[:3]
+    listings_project = Listing.objects.order_by('-list_date').filter(is_published=True, transaction_type=TransactionType.PROJECT)[:3]
+    list_distric_HN = district_data.__getitem__("01");
     context = {
-        'listings': listings,
+        'listings_for_sale': listings_for_sale,
+        'listings_for_rent': listings_for_rent,
+        'listings_project': listings_project,
         'state_data': state_data,
+        'district_data': list_distric_HN,
         'bedroom_choices': bedroom_choices,
         'price_choices': price_choices,
     }
@@ -42,57 +48,6 @@ def about(request):
     }
 
     return render(request, 'home/about.html', context)
-
-def search(request):
-       """'listing': get_object_or_404(Listing, house_type=house_type)"""
-       tran = request.GET.get('trantype', '')
-       housetype = request.GET.get('housetype', '')
-       listings = Listing.objects.order_by('-list_date').filter(transaction_type=tran, house_type=housetype)[:3]
-       context = {
-           'listings': listings,
-           'state_data': state_data,
-           'bedroom_choices': bedroom_choices,
-           'price_choices': price_choices,
-       }
-
-       return render(request, 'home/search.html', context)
-
-def searchurban(request):
-    listings = Listing.objects.order_by('-list_date').filter( urban_area='')[:3]
-    context = {
-        'listings': listings,
-        'state_data': state_data,
-        'bedroom_choices': bedroom_choices,
-        'price_choices': price_choices,
-    }
-
-    return render(request, 'home/search.html', context)
-
-def detail(request):
-    listing_id = request.GET.get('id', '')
-    context = {
-        'listing': get_object_or_404(Listing, pk=listing_id)
-    }
-
-    return render(request, 'home/detail.html', context)
-
-def sell_with_us(request):
-    context = {
-    }
-
-    return render(request, 'home/sellWithUs.html', context)
-
-def buy_with_us(request):
-    context = {
-    }
-
-    return render(request, 'home/buyWithUs.html', context)
-
-def rent_with_us(request):
-    context = {
-    }
-
-    return render(request, 'home/rentWithUs.html', context)
 
 def specialist_us(request):
     context = {

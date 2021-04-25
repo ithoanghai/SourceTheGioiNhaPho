@@ -5,42 +5,46 @@
         <div class="top-menu">
             <ul>
                 <li class="sub-menu">
-                    <a href="./">Trang chủ</a>
+                    <a href="{% url 'index' %}">Trang chủ</a>
                 </li>
                 <li class="sub-menu">
                     <a>Mua<i class="zmdi zmdi-chevron-down"></i></a>
                     <ul>
                         <li>
-                            <a href="search?trantype=sell"
+                            <a href="listings/search?trantype=sell"
                                data-mix-header-click="group: buy, action: select_all_buy">Tất cả nhà đất bán</a>
                         </li>
                         <li>
-                            <a href="search?trantype=sell&housetype=apartment"
+                            <a href="listings/search?trantype=sell&housetype=apartment"
                                data-mix-header-click="group: buy, action: select_apartment_buy">Căn
                                 hộ</a>
                         </li>
                         <li>
-                            <a href="search?trantype=sell&housetype=shophouse"
-                               data-mix-header-click="group: buy, action: select_shophouse_buy">Shophouse</a>
-                        </li>
-                        <li>
-                            <a href="search?trantype=sell&housetype=house"
+                            <a href="listings/search?trantype=sell&housetype=house"
                                data-mix-header-click="group: buy, action: select_house_buy">Nhà
                                 phố</a>
                         </li>
                         <li>
-                            <a href="search?trantype=sell&housetype=villa"
+                            <a href="listings/search?trantype=sell&housetype=villa"
                                data-mix-header-click="group: buy, action: select_villa_buy">Biệt
                                 thự</a>
                         </li>
                         <li>
-                            <a href="search?trantype=sell&housetype=land"
+                            <a href="listings/search?trantype=sell&housetype=shophouse"
+                               data-mix-header-click="group: buy, action: select_shophouse_buy">Shophouse</a>
+                        </li>
+                        <li>
+                            <a href="listings/search?trantype=sell&housetype=Officetel"
+                               data-mix-header-click="group: buy, action: select_shophouse_buy">Văn phòng</a>
+                        </li>
+                        <li>
+                            <a href="listings/search?trantype=sell&housetype=land"
                                data-mix-header-click="group: buy, action: select_land_buy">Đất
                                 nền</a>
                         </li>
                         <li class="divide"></li>
                         <li>
-                            <a href="searchurban"
+                            <a href="hoanghai123"
                                data-mix-header-click="group: buy, action: select_zone_buy">Khu dân cư</a>
                         </li>
                         <li>
@@ -60,42 +64,42 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="search?trantype=rent"
+                        <a href="listings/search?trantype=rent"
                            data-mix-header-click="group: rent, action: select_all_rent">Tất cả nhà cho thuê</a>
                     </li>
                     <li>
-                        <a href="search?trantype=rent&housetype=apartment"
+                        <a href="listings/search?trantype=rent&housetype=apartment"
                            data-mix-header-click="group: rent, action: select_apartment_rent">Căn hộ
                             cho thuê</a>
                     </li>
                     <li>
-                        <a href="search?trantype=rent&housetype=shophouse"
+                        <a href="listings/search?trantype=rent&housetype=shophouse"
                            data-mix-header-click="group: rent, action: select_shophouse_rent">Cửa hàng
                             cho thuê</a>
                     </li>
                     <li>
-                        <a href="search?trantype=rent&housetype=house"
+                        <a href="listings/search?trantype=rent&housetype=house"
                            data-mix-header-click="group: rent, action: select_house_rent">Nhà
                             phố cho thuê</a>
                     </li>
                     <li>
-                        <a href="search?trantype=rent&housetype=villa"
+                        <a href="listings/search?trantype=rent&housetype=villa"
                            data-mix-header-click="group: rent, action: select_villa_rent">Biệt thự
                             cho thuê</a>
                     </li>
                     <li>
-                        <a href="search?trantype=rent&housetype=office"
+                        <a href="listings/search?trantype=rent&housetype=office"
                            data-mix-header-click="group: rent, action: select_office_rent">Văn phòng
                             cho thuê</a>
                     </li>
                     <li>
-                        <a href="search?trantype=rent&housetype=land"
+                        <a href="listings/search?trantype=rent&housetype=land"
                            data-mix-header-click="group: rent, action: select_land_rent">Mặt
                             bằng cho thuê</a>
                     </li>
                     <li class="divide"></li>
                     <li>
-                        <a href="searchurban" data-mix-header-click="group: rent, action: select_zone_buy">Khu
+                        <a href="hoanghai123" data-mix-header-click="group: rent, action: select_zone_buy">Khu
                             dân cư</a>
                     </li>
                     <li>
@@ -147,77 +151,77 @@
                         </a>
                         <ul>
                             <li>
-                                <a href="search?trantype=project" data-mix-header-click="group: rent, action: select_all_project">Tất
+                                <a href="listings/search?trantype=project" data-mix-header-click="group: rent, action: select_all_project">Tất
                                     cả dự án</a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Hoàn Kiếm"
+                                <a href="listings/search?trantype=project&district=Hoàn Kiếm"
                                    data-mix-header-click="group: rent, action: select_district_two_project">
                                     Hoàn Kiếm
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Ba Đình"
+                                <a href="listings/search?trantype=project&district=Ba Đình"
                                    data-mix-header-click="group: rent, action: select_district_four_project">
                                     Ba Đình
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Tây Hồ"
+                                <a href="listings/search?trantype=project&district=Tây Hồ"
                                    data-mix-header-click="group: rent, action: select_district_nine_project">
                                     Tây Hồ
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Đống Đa"
+                                <a href="listings/search?trantype=project&district=Đống Đa"
                                    data-mix-header-click="group: rent, action: select_district_seven_project">
                                     Đống Đa
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Hai Bà Trưng"
+                                <a href="listings/search?trantype=project&district=Hai Bà Trưng"
                                    data-mix-header-click="group: rent, action: select_district_nine_project">
                                     Hai Bà Trưng
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Thanh Xuân"
+                                <a href="listings/search?trantype=project&district=Thanh Xuân"
                                    data-mix-header-click="group: rent, action: select_district_binhthanh_project">
                                     Thanh Xuân
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Hà Đông"
+                                <a href="listings/search?trantype=project&district=Hà Đông"
                                    data-mix-header-click="group: rent, action: select_district_binhthanh_project">
                                     Hà Đông
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district= Bắc Từ Liêm"
+                                <a href="listings/search?trantype=project&district= Bắc Từ Liêm"
                                    data-mix-header-click="group: rent, action: select_district_nine_project">
                                     Bắc Từ Liêm
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Nam Từ Liêm"
+                                <a href="listings/search?trantype=project&district=Nam Từ Liêm"
                                    data-mix-header-click="group: rent, action: select_district_nine_project">
                                     Nam Từ Liêm
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Hoàng Mai"
+                                <a href="listings/search?trantype=project&district=Hoàng Mai"
                                    data-mix-header-click="group: rent, action: select_district_binhthanh_project">
                                     Hoàng Mai
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Thanh Trì"
+                                <a href="listings/search?trantype=project&district=Thanh Trì"
                                    data-mix-header-click="group: rent, action: select_district_binhthanh_project">
                                     Thanh Trì
                                 </a>
                             </li>
                              <li>
-                                <a href="search?trantype=project&district=Đông Anh"
+                                <a href="listings/search?trantype=project&district=Đông Anh"
                                    data-mix-header-click="group: rent, action: select_district_binhthanh_project">
                                     Đông Anh
                                 </a>
@@ -228,11 +232,11 @@
                                    data-mix-header-click="group: rent, action: select_agent_project">Gặp chuyên viên tư
                                     vấn</a>
                             </li>
-                            <li>
+                            {% comment %}<li>
                                 <a href="chu-dau-tu.html"
                                    data-mix-header-click="group: rent, action: select_investor_project">Danh mục Chủ đầu
                                     tư</a>
-                            </li>
+                            </li>{% endcomment %}
                         </ul>
                     </li>
                 <li class="sub-menu">
@@ -247,7 +251,7 @@
                             <a href="whyChoose"
                                data-mix-header-click="group: buy, action: select_pr_buy">Lý do chọn TG Nhà Phố?</a>
                         </li>
-                        <li>
+{% comment %}                        <li>
                             <a href="guideBuy"
                                data-mix-header-click="group: info, action: select_guideline_buy_info">Hướng dẫn
                                 mua nhà</a>
@@ -260,7 +264,7 @@
                         <li>
                             <a href="#"
                                data-mix-header-click="group: info, action: select_guideline_sell_info">Kiến thức môi giới</a>
-                        </li>
+                        </li>{% endcomment %}
                         <li class="divide"></li>
                         <li>
                             <a href="recruitment" title="Tuyển dụng">Tuyển dụng</a>
@@ -277,13 +281,13 @@
         </div>
 
         <div class="logo">
-            <a href="./" data-mix-header-click="group: logo, action: click_logo" title="Thế giới Nhà Phố logo">
+            <a href="{% url 'index' %}" data-mix-header-click="group: logo, action: click_logo" title="Thế giới Nhà Phố logo">
                 <img src="{% static 'img/logo-nen-trang.svg' %}" alt="Thế giới Nhà Phố">
 
             </a>
             <div class="main-nav-menu">
                 <div class="main-nav-menu__head">
-                    <a href="./" class="logo">
+                    <a href="{% url 'index' %}" class="logo">
                         <img src="{% static 'img/logo-ko-chu.svg' %}" alt="Thế giới Nhà Phố">
                     </a>
                     <button class="close__main-menu">
@@ -305,7 +309,7 @@
                 </div>
                 <ul>
                     <li>
-                        <a href="">
+                        <a href="{% url 'index' %}">
                             <span>Trang chủ</span>
                         </a>
                     </li>
@@ -313,36 +317,36 @@
                     <a>Mua<i class="zmdi zmdi-chevron-down"></i></a>
                     <ul>
                         <li>
-                            <a href="search?trantype=sell"
+                            <a href="listings/search?trantype=sell"
                                data-mix-header-click="group: buy, action: select_all_buy">Tất cả nhà đất bán</a>
                         </li>
                         <li>
-                            <a href="search?trantype=sell&housetype=apartment"
+                            <a href="listings/search?trantype=sell&housetype=apartment"
                                data-mix-header-click="group: buy, action: select_apartment_buy">Căn
                                 hộ</a>
                         </li>
                         <li>
-                            <a href="search?trantype=sell&housetype=shophouse"
+                            <a href="listings/search?trantype=sell&housetype=shophouse"
                                data-mix-header-click="group: buy, action: select_shophouse_buy">Shophouse</a>
                         </li>
                         <li>
-                            <a href="search?trantype=sell&housetype=house"
+                            <a href="listings/search?trantype=sell&housetype=house"
                                data-mix-header-click="group: buy, action: select_house_buy">Nhà
                                 phố</a>
                         </li>
                         <li>
-                            <a href="search?trantype=sell&housetype=villa"
+                            <a href="listings/search?trantype=sell&housetype=villa"
                                data-mix-header-click="group: buy, action: select_villa_buy">Biệt
                                 thự</a>
                         </li>
                         <li>
-                            <a href="search?trantype=sell&housetype=land"
+                            <a href="listings/search?trantype=sell&housetype=land"
                                data-mix-header-click="group: buy, action: select_land_buy">Đất
                                 nền</a>
                         </li>
                         <li class="divide"></li>
                         <li>
-                            <a href="searchurban"
+                            <a href="hoanghai123"
                                data-mix-header-click="group: buy, action: select_zone_buy">Khu dân cư</a>
                         </li>
                         <li>
@@ -362,42 +366,42 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="search?trantype=rent"
+                        <a href="listings/search?trantype=rent"
                            data-mix-header-click="group: rent, action: select_all_rent">Tất cả nhà cho thuê</a>
                     </li>
                     <li>
-                        <a href="search?trantype=rent&housetype=apartment"
+                        <a href="listings/search?trantype=rent&housetype=apartment"
                            data-mix-header-click="group: rent, action: select_apartment_rent">Căn hộ
                             cho thuê</a>
                     </li>
                     <li>
-                        <a href="search?trantype=rent&housetype=shophouse"
+                        <a href="listings/search?trantype=rent&housetype=shophouse"
                            data-mix-header-click="group: rent, action: select_shophouse_rent">Cửa hàng
                             cho thuê</a>
                     </li>
                     <li>
-                        <a href="search?trantype=rent&housetype=house"
+                        <a href="listings/search?trantype=rent&housetype=house"
                            data-mix-header-click="group: rent, action: select_house_rent">Nhà
                             phố cho thuê</a>
                     </li>
                     <li>
-                        <a href="search?trantype=rent&housetype=villa"
+                        <a href="listings/search?trantype=rent&housetype=villa"
                            data-mix-header-click="group: rent, action: select_villa_rent">Biệt thự
                             cho thuê</a>
                     </li>
                     <li>
-                        <a href="search?trantype=rent&housetype=office"
+                        <a href="listings/search?trantype=rent&housetype=office"
                            data-mix-header-click="group: rent, action: select_office_rent">Văn phòng
                             cho thuê</a>
                     </li>
                     <li>
-                        <a href="search?trantype=rent&housetype=land"
+                        <a href="listings/search?trantype=rent&housetype=land"
                            data-mix-header-click="group: rent, action: select_land_rent">Mặt
                             bằng cho thuê</a>
                     </li>
                     <li class="divide"></li>
                     <li>
-                        <a href="searchurban" data-mix-header-click="group: rent, action: select_zone_buy">Khu
+                        <a href="hoanghai123" data-mix-header-click="group: rent, action: select_zone_buy">Khu
                             dân cư</a>
                     </li>
                     <li>
@@ -449,77 +453,77 @@
                         </a>
                         <ul>
                             <li>
-                                <a href="search?trantype=project" data-mix-header-click="group: rent, action: select_all_project">Tất
+                                <a href="listings/search?trantype=project" data-mix-header-click="group: rent, action: select_all_project">Tất
                                     cả dự án</a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Hoàn Kiếm"
+                                <a href="listings/search?trantype=project&district=Hoàn Kiếm"
                                    data-mix-header-click="group: rent, action: select_district_two_project">
                                     Hoàn Kiếm
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Ba Đình"
+                                <a href="listings/search?trantype=project&district=Ba Đình"
                                    data-mix-header-click="group: rent, action: select_district_four_project">
                                     Ba Đình
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Tây Hồ"
+                                <a href="listings/search?trantype=project&district=Tây Hồ"
                                    data-mix-header-click="group: rent, action: select_district_nine_project">
                                     Tây Hồ
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Đống Đa"
+                                <a href="listings/search?trantype=project&district=Đống Đa"
                                    data-mix-header-click="group: rent, action: select_district_seven_project">
                                     Đống Đa
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Hai Bà Trưng"
+                                <a href="listings/search?trantype=project&district=Hai Bà Trưng"
                                    data-mix-header-click="group: rent, action: select_district_nine_project">
                                     Hai Bà Trưng
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Thanh Xuân"
+                                <a href="listings/search?trantype=project&district=Thanh Xuân"
                                    data-mix-header-click="group: rent, action: select_district_binhthanh_project">
                                     Thanh Xuân
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Hà Đông"
+                                <a href="listings/search?trantype=project&district=Hà Đông"
                                    data-mix-header-click="group: rent, action: select_district_binhthanh_project">
                                     Hà Đông
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district= Bắc Từ Liêm"
+                                <a href="listings/search?trantype=project&district= Bắc Từ Liêm"
                                    data-mix-header-click="group: rent, action: select_district_nine_project">
                                     Bắc Từ Liêm
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Nam Từ Liêm"
+                                <a href="listings/search?trantype=project&district=Nam Từ Liêm"
                                    data-mix-header-click="group: rent, action: select_district_nine_project">
                                     Nam Từ Liêm
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Hoàng Mai"
+                                <a href="listings/search?trantype=project&district=Hoàng Mai"
                                    data-mix-header-click="group: rent, action: select_district_binhthanh_project">
                                     Hoàng Mai
                                 </a>
                             </li>
                             <li>
-                                <a href="search?trantype=project&district=Thanh Trì"
+                                <a href="listings/search?trantype=project&district=Thanh Trì"
                                    data-mix-header-click="group: rent, action: select_district_binhthanh_project">
                                     Thanh Trì
                                 </a>
                             </li>
                              <li>
-                                <a href="search?trantype=project&district=Đông Anh"
+                                <a href="listings/search?trantype=project&district=Đông Anh"
                                    data-mix-header-click="group: rent, action: select_district_binhthanh_project">
                                     Đông Anh
                                 </a>
@@ -530,11 +534,11 @@
                                    data-mix-header-click="group: rent, action: select_agent_project">Gặp chuyên viên tư
                                     vấn</a>
                             </li>
-                            <li>
+                            {% comment %}<li>
                                 <a href="chu-dau-tu.html"
                                    data-mix-header-click="group: rent, action: select_investor_project">Danh mục Chủ đầu
                                     tư</a>
-                            </li>
+                            </li>{% endcomment %}
                         </ul>
                     </li>
                 <li class="sub-menu">
@@ -549,7 +553,7 @@
                             <a href="whyChoose"
                                data-mix-header-click="group: buy, action: select_pr_buy">Lý do chọn TG Nhà Phố?</a>
                         </li>
-                        <li>
+{% comment %}                        <li>
                             <a href="guideBuy"
                                data-mix-header-click="group: info, action: select_guideline_buy_info">Hướng dẫn
                                 mua nhà</a>
@@ -562,7 +566,7 @@
                         <li>
                             <a href="#"
                                data-mix-header-click="group: info, action: select_guideline_sell_info">Kiến thức môi giới</a>
-                        </li>
+                        </li>{% endcomment %}
                         <li class="divide"></li>
                         <li>
                             <a href="recruitment" title="Tuyển dụng">Tuyển dụng</a>
@@ -593,7 +597,7 @@
     </div>
     <div class="col-center">
         <div class="logo-large">
-            <a data-mix-header-click="group: logo, action: click_logo" href="./" title="Thế giới Nhà Phố logo">
+            <a data-mix-header-click="group: logo, action: click_logo" href="{% url 'index' %}" title="Thế giới Nhà Phố logo">
                 <img src="{% static 'img/logo-nen-trang-co-chu.svg' %}" alt="Thế giới Nhà Phố">
             </a>
         </div>

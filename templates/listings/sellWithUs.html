@@ -4,33 +4,36 @@
 
 {% block head %}
 
-    <title> Thế giới Nhà Phố {% block title %}| Thuê nhà với sàn Thế giới Nhà Phố {% endblock %}</title>
+    <title> Thế giới Nhà Phố {% block title %}| Đăng bán BĐS {% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="UTF-8"/>
-    <meta name="description" content="Dịch vụ cho thuê bất động sản từ TGNP sẽ giúp bạn dễ dàng thuê được nhà đất, căn hộ, văn phòng, mặt bằng phù hợp với giá tốt nhất đúng với nhu cầu và tài chính của bạn. Sự chuyên nghiệp, minh bạch, tận tình, nhanh chóng là khác biệt của TGNP với thị trường." />
-    <meta name="keywords" content="TGNP, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa" />
+    <meta name="description"
+          content="Bạn đang có nhu cầu bán nhà? Hãy để Thế giới Nhà Phố hỗ trợ bạn với gói Dịch vụ môi giới cho người bán đi kèm các dịch vụ bổ sung giúp làm nổi bật nhà đất đăng bán với chi phí tiết kiệm nhất so với thị trường. Bán nhà với Thế giới Nhà Phốđể được đội ngũ hỗ trợ mọi lúc, dịch vụ nhanh chóng, mang lại trải nghiệm bán nhà hoàn hảo. "/>
+    <meta name="keywords"
+          content="TGNP, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
     <meta name="author" content="thegioinhaphovietnam.com.vn"/>
-    <link rel="canonical" href="rentwithus"/>
+    <link rel="canonical" href="sellwithus"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
     <meta property="fb:app_id" content=""/>
-    <meta property="og:url" content="rentwithus"/>
-    <meta property="og:title" content="Thuê BĐS tốt nhất với TGNP"/>
-    <meta property="og:description" content="Dịch vụ cho thuê bất động sản từ TGNP sẽ giúp bạn dễ dàng thuê được nhà đất, căn hộ, văn phòng, mặt bằng phù hợp với giá tốt nhất đúng với nhu cầu và tài chính của bạn. Sự chuyên nghiệp, minh bạch, tận tình, nhanh chóng là khác biệt của TGNP với thị trường." />
-    <meta property="og:image" content="{% static 'img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:url" content="{% static 'img/logo-chi-chu.svg' %}"/>
+    <meta property="og:url" content="sellwithus"/>
+    <meta property="og:title" content="Đăng tin nhà đất với TGNP"/>
+    <meta property="og:description"
+          content="Bạn đang có nhu cầu bán nhà? Hãy để Thế giới Nhà Phố hỗ trợ bạn với gói Dịch vụ môi giới cho người bán đi kèm các dịch vụ bổ sung giúp làm nổi bật nhà đất đăng bán với chi phí tiết kiệm nhất so với thị trường. Bán nhà với Thế giới Nhà Phốđể được đội ngũ hỗ trợ mọi lúc, dịch vụ nhanh chóng, mang lại trải nghiệm bán nhà hoàn hảo. "/>
+    <meta property="og:image" content="../images/rever-thumbnail.jpg"/>
+    <meta property="og:image:url" content="..//images/rever-thumbnail.jpg"/>
     <meta property="og:image:width" content="600"/>
     <meta property="og:image:height" content="320"/>
     <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
     <meta property="og:rich_attachment" content="true"/>
     <meta property="og:type" content="article"/>
+    <meta property="static-url" content=""/>
     <meta property="hotline" content="0964399436"/>
 
     <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
     <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
-
     <link rel="stylesheet" href="{% static 'css/popup-new.min90ca.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
@@ -44,66 +47,71 @@
     <link rel="stylesheet" href="{% static 'css/menu.min90ca.css' %}"/>
 
     <style>
+        [v-cloak] {
+            display: none !important;
+        }
+
+        /* Ẩn các element khi vue chưa load */
+        picture img {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /*hide tracking img*/
+        img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
+            display: none;
+        }
+
+        ._hj_feedback_container button { /* Fix lỗi hotjar */
+            text-align: center;
+        }
+    </style>
+     <style>
         #msform a.butt-primary[disabled] {
             opacity: 0.4
         }
     </style>
-
-    <style>
-    img {
-      max-width: 100%;
-    }
-
-    @media screen and (max-width: 600px) {
-      picture img {
-        width: 100%;
-      }
-    }
-  </style>
 {% endblock %}
 
 {% block content %}
 
+<div id="wrap">
+  <!-- Search menu -->
+    {% include 'partials/_menuSearch.html' %}
 
-    <div id="whyrent-app">
-        <!-- Search menu -->
-        {% include 'partials/_menuSearch.html' %}
-
-        <!-- Header -->
-        <div class="cta-bottom-wrapper">
-            <div class="cta-bottom-inner">
-                <div class="phone">
-                    <a class="cta-hotline" href="tel:0964399436"><span class="font-icon fone-b font-20"> </span>
-                        <strong>0964399436</strong></a>
-                </div>
-                <div>
-                    <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
-                </div>
+     <div class="cta-bottom-wrapper">
+        <div class="cta-bottom-inner">
+            <div class="phone">
+                <a class="cta-hotline" href="tel:0964399436"><span class="font-icon fone-b font-20"> </span> <strong>0964399436</strong></a>
+            </div>
+            <div>
+                <a class="cta-form" href="#" data-action="request-service">ĐĂNG KÝ NGAY</a>
             </div>
         </div>
-        <div class="s-menu">
-                <div class="width-1600">
-                    <div class="s-menu-wrapper">
-                        <ul>
-                            <li class="s-menu-items ">
-                                <a href="services">Tất cả dịch vụ</a>
-                            </li>
-                            <li class="s-menu-items ">
-                                <a href="whyChoose">Vì sao chọn TGNP?</a>
-                            </li>
-                            <li class="s-menu-items active">
-                                <a href="sellwithus">Bán BĐS với Thế giới Nhà Phố</a>
-                            </li>
-                            <li class="s-menu-items ">
-                                <a href="buywithus">Mua với TGNP</a>
-                            </li>
-                            <li class="s-menu-items ">
-                                <a href="rentwithus">Thuê với TGNP</a>
-                            </li>
-                            <li class="s-menu-items ">
-                                <a href="specialistUs">Chuyên viên TGNP</a>
-                            </li>
-  {% comment %}                    <li class="s-menu-items ">
+    </div>
+    <div class="s-menu">
+        <div class="width-1600">
+            <div class="s-menu-wrapper">
+                <ul>
+                    <li class="s-menu-items ">
+                        <a href="services">Tất cả dịch vụ</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="whyChoose">Vì sao chọn TGNP?</a>
+                    </li>
+                    <li class="s-menu-items active">
+                        <a href="sellwithus">Bán BĐS với Thế giới Nhà Phố</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="buywithus">Mua với TGNP</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="rentwithus">Thuê với TGNP</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="specialistUs">Chuyên viên TGNP</a>
+                    </li>
+ {% comment %}                    <li class="s-menu-items ">
                         <a href="rever-photo.html">Chụp hình</a>
                     </li>
                     <li class="s-menu-items ">
@@ -115,380 +123,409 @@
                     <li class="s-menu-items ">
                         <a href="bang-dieu-khien.html">Bảng điều khiển</a>
                     </li>{% endcomment %}
-                            <li class="s-btn-contact">
-                                <a href="javascript:void(0)" data-action="contact-agent" style="font-size: 14px">Liên hệ ngay</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        <!-- Main Content  -->
-        <div id="s-rv-buy" class="s-banner-bg" style=" background: url({% static 'images/bg-service-rent.jpg' %}) 50% 50% / cover no-repeat;">
-            <div class="s-banner-bg-inner">
-                <div class="s-banner-header-wrapper">
-                    <h1>Thuê được nhà phù hợp với giá tốt</h1>
-                    <div class="sumary">Thấu hiểu nhu cầu về chỗ ở của bạn, hỗ trợ bạn thuê được nhà dễ dàng và nhanh
-                        chóng.
-                    </div>
-                    <div class="btn-contact">
-                        <a class="s-btn-red mgb-0" data-action="contact-agent">Liên hệ ngay</a>
-                    </div>
-                </div>
-                <div id="whyrent-search-form" class="s-sreach-cover">
-                    <form id="search-form-app" ref="searchFormApp" @submit.prevent="startSearch" action="#"
-                          class="s-sreach-cover-inner">
-                        <div class="s-sreach-type s-dropdown">
-                            <select title="Loại nhà đất" name="property_type" data-placeholder="Loại nhà đất"
-                                    style="display: none;">
-                                <option value="can-ho">Căn hộ</option>
-                                <option value="shop-house">Shophouse</option>
-                                <option value="office-tel">Officetel</option>
-                                <option value="can-ho-dich-vu">Căn hộ dịch vụ</option>
-                                <option value="nha-pho">Nhà phố</option>
-                                <option value="biet-thu">Biệt thự</option>
-                                <option value="van-phong">Văn phòng</option>
-                                <option value="building-business">Toà nhà KD</option>
-                                <option value="land-business">Mặt bằng KD</option>
-                            </select>
-                        </div>
-                        <div class="s-sreach-type s-dropdown">
-                            <select name="bedroom" title="Số phòng ngủ" data-placeholder="Số phòng ngủ"
-                                    style="display: none;">
-                                <option value="1">1 phòng</option>
-                                <option value="2">2 phòng</option>
-                                <option value="3">3 phòng</option>
-                                <option value="4">4 phòng</option>
-                                <option value="5">5+ phòng</option>
-                            </select>
-                        </div>
-                        <suggest-input placeholder="Địa điểm, dự án bạn muốn mua?" hide-button ref="suggestInput"
-                                       :value="keyword" :search-service-type="searchServiceType"
-                                       @select="onSelectSuggest" suggest-list-class="suggest-result"
-                                       class="search-desktop-component s-sreach-type s-sreach-input">
-                        </suggest-input>
-                        <div class="s-sreach-type s-sreach-btn">
-                            <button type="submit">Tìm ngay</button>
-                        </div>
-                    </form>
-                </div>
+                      <li class="s-btn-contact">
+                        <a href="javascript:void(0)" data-action="request-service" style="font-size: 14px">Đăng ký bán ngay</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <section class="background-gray">
-            <div class="width1140 s-padding-tb pd-t-100">
+    </div>
+    <div class="sticky-header">
+        <div class="stickyTrigger is-stuck sticky-sMenu">
+            <div class="s-menu-wrapper">
                 <ul>
-                    <li class="s-col-3">
-                        <div class="item">
-                            <div class="icon-wrapper">
-                                <img src="{%static 'images/icon-real-info.svg'%}" alt="icon-save"/>
-                            </div>
-                            <h4>Thông tin thật, hình ảnh thật</h4>
-                            <p>Nhà đất được xác thực và cập nhật liên tuc từ chủ nhà. Xem nhà nhanh chóng, thương lượng
-                                giá dễ dàng.</p>
-                        </div>
+                    <li class="s-menu-items ">
+                        <a href="services">Tất cả dịch vụ</a>
                     </li>
-                    <li class="s-col-3">
-                        <div class="item">
-                            <div class="icon-wrapper">
-                                <img src="{%static 'images/icon-price.svg'%}" alt="icon-price"/>
-                            </div>
-                            <h4>Chi phí luôn thấp nhất</h4>
-                            <p>Với lợi thế công nghệ và miễn phí một số dịch vụ, TGNP giúp bạn tiết kiệm đáng kể chi
-                                phí, công sức và thời gian.</p>
-                        </div>
+                    <li class="s-menu-items ">
+                        <a href="whyChoose">Vì sao chọn TGNP?</a>
                     </li>
-                    <li class="s-col-3">
-                        <div class="item">
-                            <div class="icon-wrapper">
-                                <img src="{%static 'images/buy-team.svg'%}" alt="icon-buy"/>
-                            </div>
-                            <h4>Được hỗ trợ mọi lúc</h4>
-                            <p>TGNP hỗ trợ mọi vấn đề để giúp bạn tìm được ngôi nhà ưng ý. Sự hài lòng của bạn chính là
-                                mục tiêu cao nhất.</p>
-                        </div>
+                    <li class="s-menu-items active">
+                        <a href="sellwithus">Bán với TG Nhà Phố</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="buywithus">Mua với TGNP</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="rentwithus">Thuê với TGNP</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="specialistUs">Chuyên viên TGNP</a>
+                    </li>
+ {% comment %}                    <li class="s-menu-items ">
+                        <a href="rever-photo.html">Chụp hình</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="3d.html">Thực tế ảo</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="thu-tuc-giay-to.html">Hành chính</a>
+                    </li>
+                    <li class="s-menu-items ">
+                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
+                    </li>{% endcomment %}
+                    <li class="s-btn-contact">
+                        <a href="javascript:void(0)" data-action="request-service">Đăng ký ngay</a>
                     </li>
                 </ul>
             </div>
-        </section>
-        <section id="rv-guide">
-            <div class="s-padding-tb">
-                <div class="guide-item">
-                    <div class="s-col">
-                        <div class="img-wrapper">
-                            <img src="{%static 'images/dong-hanh.jpg'%}"
-                                 alt="Chuyên viên TGNP đồng hành cùng bạn"/>
+        </div>
+    </div>
+    <div class="s-banner-bg"
+         style="background: url({% static 'images/service-sale-banner.jpg' %}) 50% 50% / cover no-repeat;">
+        <div class="s-banner-bg-inner">
+            <div class="s-banner-header-wrapper">
+                <h1>Bán nhà nhanh chóng và dễ dàng cùng TGNP</h1>
+                <div class="sumary">Bán nhà đất với các dịch vụ hỗ trợ nhanh chóng và tiện lợi, với chi phí thấp và đội
+                    ngũ hỗ trợ mọi lúc.
+                </div>
+                <div class="btn-contact">
+                    <a class="s-btn-red mgb-0" data-action="request-service">Đăng ký ngay</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="background-gray service-dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <div class="item-service-sale">
+                        <div class="cover">
+                            <img src="{% static 'images/icon_x2.svg' %}" alt="TGNP">
                         </div>
+                        <h3>Dịch vụ nhanh X2 so với thị trường</h3>
+                        <p>80% bất động sản độc quyền tại Thế giới Nhà Phốđược bán trong 90 ngày</p>
                     </div>
-                    <div class="s-col">
-                        <div class="s-content mgr-l-0">
-                            <h2 class="s-feature-heading">Được đồng hành hỗ trợ bởi chuyên viên</h2>
-                            <p>
-                                Chuyên viên của TGNP sẽ hướng dẫn và hỗ trợ bạn mọi thứ trong suốt quá trình tìm thuê
-                                nhà. Chia sẻ tất cả thông tin về biến động giá thuê, tình hình giao thông, các tiện ích
-                                xung quanh và cộng đồng dân cư ở những khu
-                                vực bạn quan tâm, đồng thời gợi ý những căn giá tốt phù hợp với bạn nhất. Hoàn toàn miễn
-                                phí !
-                            </p>
-                            <p class="s-btn-inner"><a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a></p>
+                </div>
+                <div class="col-3">
+                    <div class="item-service-sale">
+                        <div class="cover">
+                            <img src="{% static 'images/icon_dashboard.svg' %}" alt="TGNP">
                         </div>
+                        <h3>Bảng điều khiển cho người bán</h3>
+                        <p>Người bán có thể theo dõi tiến độ bán nhà trực tuyến (Độc quyền chỉ có tại TGNP)</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="item-service-sale">
+                        <div class="cover">
+                            <img src="{% static 'images/icon_service.svg' %}" alt="TGNP">
+                        </div>
+                        <h3>Trải nghiệm hoàn hảo</h3>
+                        <p>Giúp quá trình bán nhà thuận tiện, dễ dàng và nhanh chóng</p>
                     </div>
                 </div>
             </div>
-            <div class="s-padding-tb background-gray">
-                <div class="guide-item">
-                    <div class="s-col">
-                        <div class="img-wrapper">
-                            <img src="{%static 'images/real-info.jpg'%}"
-                                 alt="Chuyên viên TGNP đồng hành cùng bạn"/>
-                        </div>
-                    </div>
-                    <div class="s-col">
-                        <div class="s-content">
-                            <h2 class="s-feature-heading">Thông tin thật, được xác thực bởi chủ nhà</h2>
-                            <p>
-                                Hàng ngàn nhà đất cho thuê giá tốt được cập nhật mỗi ngày, cho bạn nhiều sự lựa chọn và
-                                so sánh để tìm được căn ưng ý nhất. Thông tin đầy đủ, rõ ràng và đều được xác thực chính
-                                xác từ chủ nhà. TGNP kiên quyết nói KHÔNG
-                                với tin đăng ảo.
-                            </p>
-                            <p class="s-btn-inner"><a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a></p>
-                        </div>
-                    </div>
-                </div>
+        </div>
+    </section>
+    <section class="section-padding-50 s-sale-tgnp">
+        <div class="container">
+            <div class="row">
+                <h2 class="s-heading">Vì sao nên chọn TGNP?</h2>
             </div>
-            <div id="sell-photo" class="s-padding-tb">
-                <div class="guide-item">
-                    <div class="s-col">
-                        <div class="img-wrapper">
-                            <img src="{%static 'images/group18%402x.png'%}"
-                                 alt="Miễn phí hình ảnh chuyên nghiệp"/>
-                        </div>
-                    </div>
-                    <div class="s-col">
-                        <div class="s-content mgr-l-0">
-                            <h2 class="s-feature-heading">Hình ảnh rõ ràng, 3D tour trực quan</h2>
-                            <p>
-                                Hình ảnh chất lượng cao không qua chỉnh sửa sẽ thể hiện rõ từng vị trí, đặc điểm của
-                                ngôi nhà, cho bạn cái nhìn chân thực nhất. Ngoài ra, với nội dung 3D trực quan (chỉ có
-                                trên TGNP) bạn sẽ không bỏ sót bất kỳ chi tiết
-                                nào của ngôi nhà, qua đó dễ dàng đưa ra quyết định mà không cần phải đi xem tận nơi.
-                            </p>
-                            <p class="s-btn-inner"><a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="s-padding-tb background-gray">
-                <div class="guide-item">
-                    <div class="s-col">
-                        <div class="img-wrapper">
-                            <img src="{%static 'images/rent.jpg'%}" alt="Miễn phí quảng bá"/>
-                        </div>
-                    </div>
-                    <div class="s-col">
-                        <div class="s-content">
-                            <h2 class="s-feature-heading">Giá thuê tốt nhất, chi phí thấp nhất</h2>
-                            <p>TGNP giúp bạn thương lượng mức giá hợp lý, bằng cách:</p>
-                            <ul>
-                                <li>Chỉ ra những ưu điểm và nhược điểm của căn nhà.</li>
-                                <li>Cùng xem giá thuê trung bình của các căn lân cận.</li>
-                                <li>Giúp bạn tìm hiểu rõ thông tin chủ nhà.</li>
-                                <li>Đề xuất giúp bạn mức giá thuê có thể chấp nhận được.</li>
-                                <li>Nền tảng công nghệ giúp đẩy nhanh quá trình thương lượng.</li>
-                                <li>Thuyết phục chủ nhà mức giá bạn mong muốn.</li>
-                            </ul>
-                            <p class="s-btn-inner"><a href="#" class="s-btn-red" data-action="contact-agent">Liên hệ
-                                ngay</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="s-padding-tb">
-                <div class="guide-item">
-                    <div class="s-col">
-                        <div class="img-wrapper">
-                            <img src="{%static 'images/screenShot20171025At92331Am.jpg'%}"
-                                 alt="Hỗ trợ đầy đủ các thủ tục pháp lý"/>
-                        </div>
-                    </div>
-                    <div class="s-col">
-                        <div class="s-content mgr-l-0">
-                            <h2 class="s-feature-heading">Hỗ trợ đầy đủ các thủ tục pháp lý</h2>
-                            <p>
-                                Không cần phải lo lắng về những rắc rối và phức tạp về pháp lý liên quan đến giao dịch
-                                bất động sản. Chuyên viên TGNP được đào tạo chuyên nghiệp sẽ hỗ trợ và hướng dẫn bạn
-                                mọi thủ tục và quy trình cần thiết để việc hoàn
-                                tất giao dịch diễn ra an toàn và nhanh chóng.
-                            </p>
-                            <p class="s-btn-inner"><a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section style="background: orange;">
-            <div class="width1140 s-padding-tb">
-                <div class="s-heading s-text-w">Khách hàng nói gì</div>
-                <div id="customer" class="s-customer-rating">
-                    <div class="s-customer-rating-btn">
-                        <a href="#">
-                            <span class="btn-next flex-next s-text-w"></span>
-                        </a>
-                        <a href="#">
-                            <span class="btn-pre flex-prev s-text-w"></span>
-                        </a>
-                    </div>
-                    <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                        <ul class="slides">
-                            <li class="flex-active-slide">
-                                <p class="description s-text-w">
-                                    Tôi có nhu cầu thuê biệt thự cho gia đình 7 người tại Quận 2, các bạn chuyên viên
-                                    bên TGNP rất tận tình tư vấn cho tôi nên ở khu nào, chọn đường nào để tiện cho công
-                                    việc và học hành của con cái tôi, và căn biệt thự
-                                    đó nên có những đặc điểm gì để phù hợp cho cuộc sống của gia đình có người già và
-                                    trẻ nhỏ. Tôi được xem 3D của các căn tôi quan tâm và thấy trải nghiệm rất trực quan,
-                                    rõ ràng, một công cụ vô cùng tiện lợi và khiến tôi
-                                    nhanh chóng đưa ra quyết định đi xem nhà và thương lượng thuê cho căn phù hợp nhất.
-                                </p>
-                                <div class="customer">
-                                    <div class="avatar">
-                                        <img src="{%static 'images/ntmlinh.jpg'%}" alt=""
-                                             draggable="false"/>
-                                    </div>
-                                    <div class="info">
-                                        <p class="name s-text-w">Nguyễn Thị Mỹ Linh</p>
-                                        <p class="s-text-w">Giáo viên - Trường mầm non Hoa Mai</p>
-                                    </div>
-                                </div>
+            <div class="row">
+                <div class="service-sale-compare">
+                    <div class="col-left">
+                        <span class="line-header"></span>
+                        <h3 class="title">Thị trường</h3>
+                        <ul>
+                            <li>Đăng kê, tìm người mua, hoàn tất thủ tục<i class="zmdi zmdi-check color-blue-min"></i>
                             </li>
-                            <li>
-                                <p class="description s-text-w">
-                                    Xem nhà đăng cho thuê trên TGNP thật sự là trải nghiệm thú vị, hình ảnh chất lượng
-                                    cao, rõ ràng với nhiều góc chụp và thể hiện tất cả các chi tiết của căn nhà. Đặc
-                                    biệt hơn với những căn được quay 3D thì xem trên web
-                                    giống như đang đi xem tận nơi vậy. Tôi đã quyết định thuê căn hộ ở Masteri Thảo Điền
-                                    rất nhanh, ngay sau khi cùng bạn chuyên viên đi xem nhà.
-                                </p>
-                                <div class="customer">
-                                    <div class="avatar">
-                                        <img src="{%static 'images/dttoan.jpg'%}" alt=""
-                                             draggable="false"/>
-                                    </div>
-                                    <div class="info">
-                                        <p class="name s-text-w">Đỗ Thanh Toàn</p>
-                                        <p class="s-text-w">Nhân viên ngân hàng, VCB</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <p class="description s-text-w">
-                                    Công ty tôi đã thuê được văn phòng làm việc tại Quận 4 với giá thuê theo tôi nghĩ là
-                                    khá tốt, điều đặc biệt hơn cả là tôi có ấn tượng rất tốt với chuyên viên bên TGNP,
-                                    các bạn vô cùng chuyên nghiệp, cung cấp đầy đủ
-                                    thông tin chính xác về những địa điểm bên tôi quan tâm và đáp ứng các yêu cầu phát
-                                    sinh trong giao dịch cho công ty tôi rất nhanh.
-                                </p>
-                                <div class="customer">
-                                    <div class="avatar">
-                                        <img src="{%static 'images/nvnam.jpg'%}" alt=""
-                                             draggable="false"/>
-                                    </div>
-                                    <div class="info">
-                                        <p class="name s-text-w">Nguyễn Văn Nam</p>
-                                        <p class="s-text-w">Trưởng phòng kinh doanh, Viettel Telecom</p>
-                                    </div>
-                                </div>
-                            </li>
+                            <li>Không hỗ trợ định giá<i class="zmdi zmdi-close"></i></li>
+                            <li>Không hỗ trợ tiếp thị<i class="zmdi zmdi-close"></i></li>
+                            <li>Không theo dõi được tiến trình bán nhà<i class="zmdi zmdi-close"></i></li>
+                            <li>Không có các dịch vụ bổ sung<i class="zmdi zmdi-close"></i></li>
+                        </ul>
+                    </div>
+                    <div class="col-right">
+                        <span class="line-header"></span>
+                        <h3 class="title">TGNP</h3>
+                        <ul>
+                            <li><i class="zmdi zmdi-check"></i>Đăng kê, tìm người mua, hoàn tất thủ tục</li>
+                            <li><i class="zmdi zmdi-check"></i>Tư vấn chiến lược giá, giúp bán được giá tốt</li>
+                            <li><i class="zmdi zmdi-check"></i>Quảng cáo, giúp tiếp cận khách hàng tiềm năng</li>
+                            <li><i class="zmdi zmdi-check"></i>Có bảng điều khiển riêng, chỉ có ở TGNP</li>
+                            <li><i class="zmdi zmdi-check"></i>Đi kèm các dịch vụ bổ sung, tiết kiệm hơn</li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="s-bg-subcription">
-            <div class="width1140 s-padding-tb">
-                <div class="s-subcription-inner">
-                    <div class="title">Hàng ngàn khách hàng đã chọn <strong>Thuê nhà cùng TGNP</strong> và hài lòng khi
-                        sở hữu được căn nhà ưng ý nhanh chóng với giá hợp lý dưới sự đồng hành hỗ trợ bởi chuyên viên
-                        TGNP.
+        </div>
+        <div class="btn-contact mt-40">
+            <a class="s-btn-red mgb-0" data-action="request-service">Đăng ký ngay</a>
+        </div>
+    </section>
+    <section class="about-service-photo service-sale">
+        <div class="container">
+            <div class="w-60">
+                <div class="row">
+                    <h3 class="col-12 s-heading">Cam kết dịch vụ</h3>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <span class="line-header"></span>
+                        <div class="title">Cam kết với khách hàng</div>
+                        <ul class="product-received">
+                            <li><i class="zmdi zmdi-check"></i>Đặt khách hàng làm trọng tâm trong mọi quyết định</li>
+                            <li><i class="zmdi zmdi-check"></i>Những điều đã nói là những điều được làm</li>
+                            <li><i class="zmdi zmdi-check"></i>Đảm bảo thực thi (Miễn phí các dịch vụ cao cấp nếu không
+                                bán được nhà)
+                            </li>
+                        </ul>
                     </div>
-                    <div class="btn-contact">
-                        <a class="s-btn-red mgb-0" data-action="contact-agent">Liên hệ ngay</a>
+                    <div class="col-12">
+                        <span class="line-header"></span>
+                        <div class="title">Tiêu chuẩn môi giới</div>
+                        <ul class="product-received">
+                            <li><i class="zmdi zmdi-check"></i>Chứng nhận đảm bảo chuyên môn (RED 16)</li>
+                            <li><i class="zmdi zmdi-check"></i>Có chứng chỉ nghề môi giới</li>
+                            <li><i class="zmdi zmdi-check"></i>Hài lòng khách hàng trong 3 tháng (CSAT>4)</li>
+                        </ul>
+                    </div>
+                    <div class="service-image-mobile">
+                        <img src="{% static 'images/service-pack-mobile.jpg' %}" alt="TGNP admin">
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="ft-line">
-            <div class="width1140 pdt-40 ft-browser">
-                <div class="browser-heading">Địa điểm nổi bật</div>
-                <ul class="popular-location">
-                    <li class="city"><a href="s/quan-1/thue.html">Cho thuê Quận 1</a></li>
-                    <li class="city"><a href="s/quan-2/thue.html">Cho thuê Quận 2</a></li>
-                    <li class="city"><a href="s/quan-3/thue.html">Cho thuê Quận 3</a></li>
-                    <li class="city"><a href="s/quan-4/thue.html">Cho thuê Quận 4</a></li>
-                    <li class="city"><a href="s/quan-7/thue.html">Cho thuê Quận 7</a></li>
-                    <li class="city"><a href="s/quan-8/thue.html">Cho thuê Quận 8</a></li>
-                    <li class="city"><a href="s/quan-9/thue.html">Cho thuê Quận 9</a></li>
-                    <li class="city"><a href="s/quan-10/thue.html">Cho thuê Quận 10</a></li>
-                    <li class="city"><a href="s/quan-binh-thanh/thue.html">Cho thuê Quận Bình Thạnh</a></li>
-                    <li class="city"><a href="s/quan-phu-nhuan/thue.html">Cho thuê Quận Phú Nhuận</a></li>
-                    <li class="city"><a href="s/phuong-thao-dien-quan-2/thue.html">Cho thuê Thảo Điền, Quận 2</a></li>
-                    <li class="city"><a href="s/phuong-an-phu-quan-2/thue.html">Cho thuê An Phú An Khánh, Quận 2</a>
-                    </li>
-                    <li class="city"><a href="s/phuong-thu-thiem-quan-2/thue.html">Cho thuê KĐT Thủ Thiêm, Quận 2</a>
-                    </li>
-                    <li class="city"><a href="s/phuong-binh-khanh-quan-2/thue.html">Cho thuê Bình Khánh, Quận 2</a></li>
-                    <li class="city"><a href="s/phuong-binh-an-quan-2/thue.html">Cho thuê KP4 Bình An, Quận 2</a></li>
-                    <li class="city"><a href="s/vinhomes-central-park/thue.html">Cho thuê Vinhomes Central Park</a></li>
-                    <li class="city"><a href="s/cau-vuot-hang-xanh-binh-thanh-ho-chi-minh/thue.html">Cho thuê Hàng Xanh,
-                        Bình Thạnh</a></li>
-                    <li class="city"><a href="s/ben-van-don/thue.html">Cho thuê Bến Vân Đồn, Quận 4</a></li>
-                    <li class="city"><a href="s/city-horse-an-phu/thue.html">Cho thuê City Horse - An Phú</a></li>
-                    <li class="city"><a href="s/phu-my-hung-/thue.html">Cho thuê Phú Mỹ Hưng, Quận 7</a></li>
-                    <li class="city"><a href="du-an/masteri-thao-dien.html">Cho thuê Masteri Thảo Điền</a></li>
-                    <li class="city"><a href="du-an/lexington-residence.html">Cho thuê Lexington Residence</a></li>
-                    <li class="city"><a href="du-an/vinhomes-central-park.html">Cho thuê Vinhomes Central Park</a></li>
-                    <li class="city"><a href="du-an/the-estella-an-phu.html">Cho thuê The Estella Residence</a></li>
-                    <li class="city"><a href="du-an/vista-verde.html">Cho thuê Vista Verde</a></li>
-                    <li class="city"><a href="du-an/imperia-an-phu.html">Cho thuê Imperia An Phú</a></li>
-                    <li class="city"><a href="du-an/the-vista-an-phu.html">Cho thuê The Vista An Phú</a></li>
-                    <li class="city"><a href="du-an/sarimi-sala-dai-quang-minh.html">Cho thuê Sarimi Sala Đại Quang
-                        Minh</a></li>
-                    <li class="city"><a href="du-an/tropic-garden.html">Cho thuê Tropic Garden</a></li>
-                    <li class="city"><a href="du-an/the-ascent.html">Cho thuê The Ascent</a></li>
-                    <li class="city"><a href="du-an/the-cbd-premium-home.html">Cho thuê The CBD Premium Home</a></li>
-                    <li class="city"><a href="du-an/homyland-1.html">Cho thuê HomyLand 1</a></li>
-                    <li class="city"><a href="du-an/homyland-2.html">Cho thuê HomyLand 2</a></li>
-                    <li class="city"><a href="du-an/chung-cu-binh-khanh.html">Cho thuê Chung cư Bình Khánh</a></li>
-                    <li class="city"><a href="du-an/cantavil-premier-an-phu.html">Cho thuê Cantavil Premier</a></li>
-                    <li class="city"><a href="du-an/cantavil-an-phu.html">Cho thuê Cantavil An Phú</a></li>
-                    <li class="city"><a href="du-an/de-capella.html">Cho thuê De Capella</a></li>
-                    <li class="city"><a href="du-an/chung-cu-bo-cong-an.html">Cho thuê Chung cư Bộ Công An</a></li>
-                    <li class="city"><a href="du-an/thao-dien-pearl.html">Cho thuê Thảo Điền Pearl</a></li>
-                    <li class="city"><a href="du-an/the-krista.html">Cho thuê The Krista</a></li>
-                    <li class="city"><a href="du-an/thu-thiem-sky.html">Cho thuê Thủ Thiêm Sky</a></li>
-                    <li class="city"><a href="du-an/saigon-pearl.html">Cho thuê Saigon Pearl</a></li>
-                    <li class="city"><a href="du-an/la-astoria.html">Cho thuê La Astoria</a></li>
-                    <li class="city"><a href="du-an/the-manor.html">Cho thuê The Manor</a></li>
-                    <li class="city"><a href="du-an/pearl-plaza.html">Cho thuê Pearl Plaza</a></li>
-                    <li class="city"><a href="du-an/the-parc-spring.html">Cho thuê The ParcSpring</a></li>
-                    <li class="city"><a href="du-an/xi-riverview-palace.html">Cho thuê Xi Riverview Palace</a></li>
-                    <li class="city"><a href="du-an/citihome.html">Cho thuê CitiHome</a></li>
-                    <li class="city"><a href="du-an/brilliant-dao-kim-cuong.html">Cho thuê Brilliant</a></li>
-                    <li class="city"><a href="du-an/hoang-anh-river-view.html">Cho thuê Hoàng Anh River View</a></li>
-                </ul>
-            </div>
-        </section>
-        <div class="mdialog" id="contact-now-form" style="background: none;">
-            <div class="popup-520" style="overflow: visible;">
-                <div class="header-w-close">
-                    <button class="close-popup-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i></button>
-                    <h3 class="font-tiempos">Thuê nhà với TGNP</h3>
-                </div>
-                <div class="form-info" id="contact-now-form-body"></div>
             </div>
         </div>
+    </section>
+    <section id="package" class="service-pack">
+        <div class="container">
+            <div class="row">
+                <h3 class="title font-tiempos">Các gói dịch vụ</h3>
+                <p class="desc">Chọn gói dịch vụ phù hợp với mong muốn và nhu cầu của bạn. Gói bạch kim sẽ giúp bạn bán
+                    được nhà nhanh nhất.</p>
+                <div class="service-pack-grid">
+                    <div class="service-pack-item">
+                        <div class="service-pack-content">
+                            <div class="head">
+                                <div class="cover">
+                                    <img src="{% static 'images/icon-paper-airplanes.svg' %}"
+                                         alt="TGNP">
+                                </div>
+                                <h4 class="title">Bạc</h4>
+                                <ul class="list">
+                                    <li>Tư vấn chiến lược giá</li>
+                                    <li>Đăng kê</li>
+                                    <li>Quảng cáo</li>
+                                    <li>Tìm người mua</li>
+                                    <li>Hoàn tất thủ tục</li>
+                                    <li>Bảng điều khiển</li>
+                                </ul>
+                            </div>
+                            <div class="bottom">
+                                <div class="charge">Phí 1%</div>
+                                <p class="text-vat">(Đã bao gồm VAT)</p>
+                                <a href="javascript:void(0)" data-desc-prefix="[ĐK gói Bạc] "
+                                   data-action="request-service" class="s-btn-red">Đăng ký ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-pack-item">
+                        <div class="service-pack-content">
+                            <div class="head">
+                                <div class="cover">
+                                    <img src="{% static 'images/icon-airplanes.svg' %}" alt="TGNP">
+                                </div>
+                                <h4 class="title">Vàng</h4>
+                                <ul class="list">
+                                    <li>Tư vấn chiến lược giá</li>
+                                    <li>Đăng kê</li>
+                                    <li>Quảng cáo</li>
+                                    <li>Tìm người mua</li>
+                                    <li>Hoàn tất thủ tục</li>
+                                    <li>Bảng điều khiển</li>
+                                    <li class="color-blue-min">Hiển thị ưu tiên</li>
+                                    <li class="color-blue-min">Chụp hình chuyên nghiệp</li>
 
-        <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
+                                    <li class="color-blue-min">Đăng kê thêm 2 kênh</li>
+                                </ul>
+                            </div>
+                            <div class="bottom">
+                                <div class="charge">Phí 1.3%</div>
+                                <p class="text-vat">(Đã bao gồm VAT)</p>
+                                <a href="javascript:void(0)" data-desc-prefix="[ĐK gói Vàng] "
+                                   data-action="request-service" class="s-btn-red">Đăng ký ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-pack-item">
+                        <div class="service-pack-content">
+                            <div class="head">
+                                <div class="cover">
+                                    <img src="{% static 'images/icon-rocket.svg' %}" alt="TGNP">
+                                </div>
+                                <h4 class="title color-red">Bạch kim</h4>
+                                <ul class="list">
+                                    <li>Tư vấn chiến lược giá</li>
+                                    <li>Đăng kê</li>
+                                    <li>Quảng cáo</li>
+                                    <li>Tìm người mua</li>
+                                    <li>Hoàn tất thủ tục</li>
+                                    <li>Bảng điều khiển</li>
+                                    <li class="color-blue-min">Hiển thị ưu tiên</li>
+                                    <li class="color-blue-min">Chụp hình chuyên nghiệp</li>
+                                    <li class="color-blue-min">Đăng kê thêm 5 kênh</li>
+                                   {% comment %} <li class="color-blue-min">Thực tế ảo (3D)</li>{% endcomment %}
+                                    <li class="color-blue-min">Chạy Google, facebook</li>
+                                </ul>
+                            </div>
+                            <div class="bottom">
+                                <div class="charge color-red">Phí 1.5%</div>
+                                <p class="text-vat">(Đã bao gồm VAT)</p>
+                                <a href="javascript:void(0)" data-desc-prefix="[ĐK gói bạch kim] "
+                                   data-action="request-service" class="s-btn-red">Đăng ký ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="background-gray service-sale-photo">
+        <div class="container">
+            <div class="row">
+                <h2 class="s-feature-heading">Miễn phí các dịch vụ bổ sung</h2>
+                <div class="grid grid--2col grid--center">
+                    <div class="grid-item">
+                        <span class="line-header"></span>
+                        <h2 class="s-heading">Dịch vụ chụp ảnh chuyên nghiệp</h2>
+                        <ul class="list-check-red">
+                            <li><i class="zmdi zmdi-check"></i>Đi kèm khi chọn gói&nbsp;<strong>Vàng</strong>&nbsp;&&nbsp;<strong>Bạch
+                                kim</strong></li>
+                            <li><i class="zmdi zmdi-check"></i>Hình ảnh chất lượng cao, chuyên nghiệp</li>
+                            <li><i class="zmdi zmdi-check"></i>Tiết kiệm đến&nbsp;<strong>1.000.000 đồng</strong>&nbsp;so
+                                với thị trường
+                            </li>
+                        </ul>
+                        <a href="rever-photo.html" class="color-lipstick looking-for" target="_blank">Tìm hiểu thêm&nbsp;<i
+                                class="zmdi zmdi-chevron-right"></i></a>
+                    </div>
+                    <div class="grid-item grid-item--image">
+                        <img src="{% static 'images/service-sale-free.png' %}" alt="Deep Clean">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% comment %}    <section class="bg-charcoal service-sale-3dview">
+        <div class="container">
+            <div class="row">
+                <div class="grid grid--2col grid--center grid--reverse">
+                    <div class="grid-item">
+                        <span class="line-header"></span>
+                        <h2 class="s-heading">Dịch vụ thực tế ảo (3D)</h2>
+                        <ul class="list-check-blue">
+                            <li><i class="zmdi zmdi-check"></i>Đi kèm khi chọn gói&nbsp;<strong>Bạch kim</strong></li>
+                            <li><i class="zmdi zmdi-check"></i>Trải nghiệm xem nhà như thật, chốt giao dịch nhanh</li>
+                            <li><i class="zmdi zmdi-check"></i>Tiết kiệm đến&nbsp;<strong>5.000.000 đồng</strong>&nbsp;so
+                                với thị trường
+                            </li>
+                        </ul>
+                        <a href="3d.html" class="looking-for" target="_blank">Tìm hiểu thêm&nbsp;<i
+                                class="zmdi zmdi-chevron-right"></i></a>
+                    </div>
+                    <div class="grid-item grid-item--image view-3d-img">
+                        <img src="{% static 'images/service-3dview.png' %}" id="demo-apart"
+                             alt="Deep Clean">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>{% endcomment %}
+    <section>
+        <div class="width1140 s-padding-tb">
+            <div class="s-heading">Đánh giá của chủ nhà</div>
+            <div id="customer" class="s-customer-rating">
+                <div class="flex-viewport flexslider slider-cus">
+                    <ul class="slides">
+                        <li>
+                            <p class="description">Tôi đã mua các gói đăng rao nhà đất trên các website bất động sản lớn
+                                nhưng không bán được nhà. Tuy nhiên, khi tôi mua gói dịch vụ Môi giới cho người bán của
+                                TGNP, tôi đã bán được trong vòng một tháng. Tôi đã chọn gói Bạch kim và tiết kiệm được
+                                khá nhiều chi phí. Đặc biệt, tôi rất thích hình ảnh và mô hình 3D của TGNP. Nó giúp tin
+                                rao của nhà tôi rất chuyên nghiệp và chỉn chu.</p>
+                            <div class="customer">
+                                <div class="avatar">
+                                        <img src="{% static 'images/service/reviewers/2-pham-huu-nghia.jpg' %}" alt="" draggable="false">
+
+                                </div>
+                                <div class="info">
+                                    <p class="name">Phạm Hữu Nghĩa</p>
+                                    <p>Chủ căn hộ Estella Heights, Quận 2</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="description">Tôi có một căn hộ dịch vụ cần gửi bán, vì vậy tôi chọn gói Bạch Kim
+                                của dịch vụ Môi giới cho người bán tại TGNP. Gói dịch vụ giúp tôi tiết kiệm thời gian
+                                và chi phí khá nhiều vì bao gồm cả đăng kê trên các website bất động sản khác ngoài Thế
+                                giới Nhà Phốvà chạy quảng cáo trên Google và Facebook. Nhà của tôi đã bán được với giá
+                                tốt trong khoảng thời gian ngắn.</p>
+                            <div class="customer">
+                                <div class="avatar">
+                                    <img src="{% static 'images/service/reviewers/do-hong-ngoc.jpg' %}" alt="" draggable="false">
+                                </div>
+                                <div class="info">
+                                    <p class="name">Đỗ Hồng Ngọc</p>
+                                    <p>Chủ căn hộ Vista Verde, Quận 2</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="description">Căn hộ là tài sản có giá trị lớn đầu tiên của tôi. Vì vậy, tôi chưa
+                                có kinh nghiệm làm thế nào để rao bán nhà cũng như các thủ tục giấy tờ phải làm ra sao.
+                                Lúc đó tôi đã tìm thấy dịch vụ Môi giới cho người bán của TGNP. Tôi đã chọn gói Bạc vì
+                                chưa chắc dịch vụ có tốt như quảng cáo không. Sau đó, tôi rất bất ngờ vì bán được nhà
+                                rất nhanh. Đội ngũ chuyên gia Thế giới Nhà Phố còn tư vấn và hỗ trợ tôi rất nhiệt tình. Nếu có cơ
+                                hội lần sau, tôi sẽ chọn các gói cao hơn.</p>
+                            <div class="customer">
+                                <div class="avatar">
+                                    <img src="{% static 'images/service/reviewers/le-hung-phu.jpg' %}" alt="" draggable="false">
+                                </div>
+                                <div class="info">
+                                    <p class="name">Lê Hùng Phú</p>
+                                    <p>Chủ căn hộ Masteri Millennium, Quận 4</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section
+            style=" background: url({% static 'images/service-sale-post-bg.jpg' %}) 50% 50% / cover no-repeat;">
+        <div class="width1140 s-padding-tb">
+            <div class="s-subcription-inner">
+                <div class="title">Đăng kê với Thế giới Nhà Phố để bán nhanh gấp 2 lần thị trường và tiết kiệm nhiều hơn
+                    với những dịch vụ đi kèm chất lượng cao. Đăng ký thông tin ngay, chúng tôi sẽ liên hệ tư vấn và hẹn
+                    gặp sau ít phút!
+                </div>
+                <div class="btn-contact">
+                    <a class="s-btn-red mgb-0" data-action="request-service">Đăng ký ngay</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="mdialog" id="contact-now-form" style="background: none">
+        <div class="popup-520" style="overflow: visible;">
+            <div class="header-w-close">
+                <button class="close-popup-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                <h3 class="font-tiempos">Đăng ký dịch vụ môi giới cho người bán</h3>
+            </div>
+            <div class="form-info" id="contact-now-form-body">
+            </div>
+        </div>
+    </div>
+    <div class="full-3d-tour">
+        <div class="full-3d-tour-render">
+            <iframe width="100%" height="100%" src="#" frameborder="0" allowfullscreen allow="vr"></iframe>
+        </div>
+        <p class="close-3d-tour"></p>
+    </div>
+
+    <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
             <div class="popup-feedback-fixed">
                 <div class="popup-body-fb">
                     <div v-show="state == 'composing'" class="popup-contain">
@@ -653,7 +690,7 @@
                     <div v-show="state == 'finished'" class="popup-fb-success">
                         <div class="popup-header">
                             <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về
-                                TGNP.vn</h2>
+                                thegioinhaphovietnam.com.vn</h2>
                             <button @click="hideModal()" class="popup-close-btn"><i
                                     class="zmdi zmdi-hc-2x zmdi-close"></i>
                             </button>
@@ -676,10 +713,8 @@
                 </div>
             </div>
         </div>
+</div>
 
-    </div>
-
-    <!-- Footer content below-->
 {% endblock %}
 
 {% block scripts %}
@@ -696,15 +731,10 @@
     <script src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
     <script async defer src="{% static 'js/service-sale.min90ca.js' %}"></script>
 
-    <script async defer src="{% static 'js/whyrent-old.min90ca.js' %}"></script>
-    <script async defer src="{% static 'js/whyrent.min90ca.js' %}"></script>
-
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script charset="utf-8" async defer type="text/javascript" src="https://js.hsforms.net/forms/v2.js"></script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js50aa?key=AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg&amp;libraries=drawing,places,geometry&amp;language=vi&amp;callback=callbackInitMap"></script>
-    <script defer src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
-    <script defer id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
+     <script defer src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
+     <script defer id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
     <script type="text/javascript" src="https://www.googleadservices.com/pagead/f.txt"></script>
 
     <script>
@@ -713,16 +743,44 @@
         window['fap.server'] = '//analytics.thegioinhaphovietnam.com.vn/fap';
         window['favorite_api'] = 'mapi/index.html';
         window['googleClientId'] = '539423642927.apps.googleusercontent.com';
-        window['staticUrl'] = '../s3-cdn.rever.vn/p/v2.33.55';
+        window['staticUrl'] = '../s3-cdn.thegioinhaphovietnam.com.vn/p/v2.33.55';
         window['hotline'] = '0916 286 256';
 
         window['isLoggedIn'] = false;
     </script>
-<script>
-    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var t=analytics.methods[e];analytics[t]=analytics.factory(t)}analytics.load=function(e,t){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.defer=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+e+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=t};analytics.SNIPPET_VERSION="4.1.0";
-      analytics.load("4LCsqFQzVAmMhPA650qKAAbZoHweHzHt", { integrations: { 'Mixpanel': false} });
-    }}();
-  </script>
+    <script>
+        !function () {
+            var analytics = window.analytics = window.analytics || [];
+            if (!analytics.initialize) if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice."); else {
+                analytics.invoked = !0;
+                analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on", "addSourceMiddleware", "addIntegrationMiddleware"];
+                analytics.factory = function (e) {
+                    return function () {
+                        var t = Array.prototype.slice.call(arguments);
+                        t.unshift(e);
+                        analytics.push(t);
+                        return analytics
+                    }
+                };
+                for (var e = 0; e < analytics.methods.length; e++) {
+                    var t = analytics.methods[e];
+                    analytics[t] = analytics.factory(t)
+                }
+                analytics.load = function (e, t) {
+                    var n = document.createElement("script");
+                    n.type = "text/javascript";
+                    n.async = !0;
+                    n.defer = !0;
+                    n.src = "https://cdn.segment.com/analytics.js/v1/" + e + "/analytics.min.js";
+                    var a = document.getElementsByTagName("script")[0];
+                    a.parentNode.insertBefore(n, a);
+                    analytics._loadOptions = t
+                };
+                analytics.SNIPPET_VERSION = "4.1.0";
+                analytics.load("4LCsqFQzVAmMhPA650qKAAbZoHweHzHt", {integrations: {'Mixpanel': false}});
+            }
+        }();
+    </script>
     <script>
         //Track thêm tags
         var tagTrackings = []
@@ -1161,11 +1219,8 @@
             }
         }
     </script>
-    <script>
-        adroll_adv_id = "VHUFKBW42JH37IACSQW3PD";
-        adroll_pix_id = "734MVFGRZFAB7JCBBH46O6";
-    </script>
-    <script>
+
+        <script>
         window.RFeedback = {
             API: "https://thegioinhaphovietnam.com.vn/mapi",
             email: "",
@@ -1174,7 +1229,7 @@
             ip: "10.244.0.0"
         }
     </script>
-    <script>
+      <script>
         /*Footer*/
         let footerContent = $("#footer .info-container li")
 
@@ -1215,43 +1270,36 @@
     </script>
 
     <script>
-        $('.slider-cus').flexslider({
-            animation: "slide",
-            controlNav: true,
-            animationLoop: false,
-            slideshow: true,
-            itemMargin: 0,
-            maxItems: 1,
-            touch: true,
-            slideshowSpeed: 4000,
-            prevText: "<i class='zmdi zmdi-chevron-left'></i>",
-            nextText: "<i class='zmdi zmdi-chevron-right'></i>",
-        });
+    $('.slider-cus').flexslider({
+        animation: "slide",
+        controlNav: true,
+        animationLoop: false,
+        slideshow: true,
+        itemMargin: 0,
+        maxItems: 1,
+        touch: true,
+        slideshowSpeed: 4000,
+        prevText: "<i class='zmdi zmdi-chevron-left'></i>",
+        nextText: "<i class='zmdi zmdi-chevron-right'></i>",
+    });
 
-        function show3DTour(src) {
-            let $wrapper = $(".full-3d-tour")
-            $wrapper.find('iframe').attr('src', src)
-            $wrapper.show()
-        }
+    function show3DTour(src) {
+        let $wrapper = $(".full-3d-tour")
+        $wrapper.find('iframe').attr('src', src)
+        $wrapper.show()
+    }
 
-        $(".close-3d-tour").click(function (e) {
-            $(".full-3d-tour").hide();
-            e.stopPropagation()
-        });
+    $(".close-3d-tour").click(function (e) {
+        $(".full-3d-tour").hide();
+        e.stopPropagation()
+    });
 
-        //Show demo căn hộ
-        $("#demo-apart").click(function () {
-            show3DTour("https://my.matterport.com/show/?m=yYDQY6WGVXi")
-        })
-    </script>
+    //Show demo căn hộ
+    $("#demo-apart").click(function () {
+        show3DTour("https://my.matterport.com/show/?m=yYDQY6WGVXi")
+    })
+</script>
 
 {% endblock %}
-
-
-
-
-
-
-
 
 

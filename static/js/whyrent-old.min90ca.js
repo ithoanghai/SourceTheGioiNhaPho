@@ -4024,12 +4024,12 @@
         }()), u = n("tAFL"), l = n("JDN0"), f = n.n(l), h = n("HlL3"), p = n.n(h), m = n("m0Xf"), g = function () {
             function t(e, n, r, i) {
                 o()(this, t), this.hotline = m.b, this.dismissFunc = i, this.onSubmitFn = [], this.suggestItems = ["Quận 2", "Quận 7", "Quận 4", "Quận Bình Thạnh", "Thảo Điền", "Thủ Thiêm", "An Phú An Khánh", "Vinhomes Central Park", "Phú Mỹ Hưng", "Quận 9"], this.propertyTypes = [{
-                    value: "can-ho",
+                    value: "apartment",
                     text: "Căn Hộ"
-                }, {value: "nha-pho", text: "Nhà Phố"}, {value: "biet-thu", text: "Biệt Thự"}, {
+                }, {value: "house", text: "Nhà Phố"}, {value: "villa", text: "Biệt Thự"}, {
                     value: "van-phong",
                     text: "Văn Phòng"
-                }, {value: "can-ho-dich-vu", text: "Căn Hộ Dịch Vụ"}, {
+                }, {value: "officetel", text: "Căn Hộ Dịch Vụ"}, {
                     value: "office-tel",
                     text: "Office-Tel"
                 }, {value: "shop-house", text: "ShopHouse"}, {

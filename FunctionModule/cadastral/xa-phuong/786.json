@@ -4,8 +4,8 @@
         "type": "thi-tran",
         "slug": "nha-be",
         "name_with_type": "Thị trấn Nhà Bè",
-        "path": "Nhà Bè, Nhà Bè, Hồ Chí Minh",
-        "path_with_type": "Thị trấn Nhà Bè, Huyện Nhà Bè, Thành phố Hồ Chí Minh",
+        "path": "Nhà Bè, Nhà Bè, Hà Nội",
+        "path_with_type": "Thị trấn Nhà Bè, Huyện Nhà Bè, Thành phố Hà Nội",
         "code": "27643",
         "parent_code": "786"
     },
@@ -14,8 +14,8 @@
         "type": "xa",
         "slug": "phuoc-kien",
         "name_with_type": "Xã Phước Kiển",
-        "path": "Phước Kiển, Nhà Bè, Hồ Chí Minh",
-        "path_with_type": "Xã Phước Kiển, Huyện Nhà Bè, Thành phố Hồ Chí Minh",
+        "path": "Phước Kiển, Nhà Bè, Hà Nội",
+        "path_with_type": "Xã Phước Kiển, Huyện Nhà Bè, Thành phố Hà Nội",
         "code": "27646",
         "parent_code": "786"
     },
@@ -24,8 +24,8 @@
         "type": "xa",
         "slug": "phuoc-loc",
         "name_with_type": "Xã Phước Lộc",
-        "path": "Phước Lộc, Nhà Bè, Hồ Chí Minh",
-        "path_with_type": "Xã Phước Lộc, Huyện Nhà Bè, Thành phố Hồ Chí Minh",
+        "path": "Phước Lộc, Nhà Bè, Hà Nội",
+        "path_with_type": "Xã Phước Lộc, Huyện Nhà Bè, Thành phố Hà Nội",
         "code": "27649",
         "parent_code": "786"
     },
@@ -34,8 +34,8 @@
         "type": "xa",
         "slug": "nhon-duc",
         "name_with_type": "Xã Nhơn Đức",
-        "path": "Nhơn Đức, Nhà Bè, Hồ Chí Minh",
-        "path_with_type": "Xã Nhơn Đức, Huyện Nhà Bè, Thành phố Hồ Chí Minh",
+        "path": "Nhơn Đức, Nhà Bè, Hà Nội",
+        "path_with_type": "Xã Nhơn Đức, Huyện Nhà Bè, Thành phố Hà Nội",
         "code": "27652",
         "parent_code": "786"
     },
@@ -44,8 +44,8 @@
         "type": "xa",
         "slug": "phu-xuan",
         "name_with_type": "Xã Phú Xuân",
-        "path": "Phú Xuân, Nhà Bè, Hồ Chí Minh",
-        "path_with_type": "Xã Phú Xuân, Huyện Nhà Bè, Thành phố Hồ Chí Minh",
+        "path": "Phú Xuân, Nhà Bè, Hà Nội",
+        "path_with_type": "Xã Phú Xuân, Huyện Nhà Bè, Thành phố Hà Nội",
         "code": "27655",
         "parent_code": "786"
     },
@@ -54,8 +54,8 @@
         "type": "xa",
         "slug": "long-thoi",
         "name_with_type": "Xã Long Thới",
-        "path": "Long Thới, Nhà Bè, Hồ Chí Minh",
-        "path_with_type": "Xã Long Thới, Huyện Nhà Bè, Thành phố Hồ Chí Minh",
+        "path": "Long Thới, Nhà Bè, Hà Nội",
+        "path_with_type": "Xã Long Thới, Huyện Nhà Bè, Thành phố Hà Nội",
         "code": "27658",
         "parent_code": "786"
     },
@@ -64,8 +64,8 @@
         "type": "xa",
         "slug": "hiep-phuoc",
         "name_with_type": "Xã Hiệp Phước",
-        "path": "Hiệp Phước, Nhà Bè, Hồ Chí Minh",
-        "path_with_type": "Xã Hiệp Phước, Huyện Nhà Bè, Thành phố Hồ Chí Minh",
+        "path": "Hiệp Phước, Nhà Bè, Hà Nội",
+        "path_with_type": "Xã Hiệp Phước, Huyện Nhà Bè, Thành phố Hà Nội",
         "code": "27661",
         "parent_code": "786"
     }

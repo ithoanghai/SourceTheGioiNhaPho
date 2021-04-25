@@ -11067,7 +11067,7 @@
                         content_type: ["home_listing", "product"],
                         experience: "buyer",
                         content_ids: [this.prop_id],
-                        city: this.city || "Hồ Chí Minh",
+                        city: this.city || "Hà Nội",
                         is_registered: this.is_registered,
                         currency: "VND",
                         value: this.price || void 0,
@@ -11430,7 +11430,7 @@
                 phone: String,
                 secondWait: {
                     type: Number,
-                    default: ["local.rever.vn", "staging.rever.vn"].indexOf(location.host) >= 0 ? 3 : 60
+                    default: ["local.thegioinhaphovietnam.com.vn", "staging.thegioinhaphovietnam.com.vn"].indexOf(location.host) >= 0 ? 3 : 60
                 },
                 onClickResend: Function,
                 onInput: {type: Function, required: !1}
@@ -12367,7 +12367,7 @@
                     var t = this.$createElement, e = this._self._c || t;
                     return e("label", {attrs: {for: "acceptTerm"}}, [this._v("Tôi đã đọc và đồng ý với"), e("span", [e("a", {
                         staticClass: "policy",
-                        attrs: {href: "https://staging.rever.vn/dieu-khoan-su-dung", target: "_blank"}
+                        attrs: {href: "https://staging.thegioinhaphovietnam.com.vn/dieu-khoan-su-dung", target: "_blank"}
                     }, [this._v("Điều khoản sử dụng")])])])
                 }, function () {
                     var t = this.$createElement, e = this._self._c || t;
@@ -13153,7 +13153,7 @@
                         error: a
                     })
                 }, getProfileContactStage: function () {
-                    return l.b.get("/api/profile/get-contact-stage").then(function (t) {
+                    return l.b.get("/*/api/profile/get-contact-stage*/").then(function (t) {
                         return t.code >= 0 ? t.data.contact_stage : ""
                     })
                 }
@@ -13532,7 +13532,7 @@
         var r = "web" === Object({
             NODE_ENV: "production",
             contact_from_api: "https://thegioinhaphovietnam.com.vn/mapi/form",
-            rec_api: "https://rec.rever.vn/api",
+            rec_api: "https://rec.thegioinhaphovietnam.com.vn/api",
             save_search_api: "https://rever.vn/api/save-search"
         }).BUILD ? n("tL8V").withParams : n("JVqD").withParams;
         e.default = r
