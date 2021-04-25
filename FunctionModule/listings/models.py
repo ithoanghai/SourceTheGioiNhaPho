@@ -38,6 +38,11 @@ class RoadType(models.TextChoices):
     ALLEY_BIKE = 'alley_bike', _("Ngõ xe máy")
     STREET_SURFACE = 'street_surface', _("Mặt tiền phố")
 
+class Status(models.TextChoices):
+    NEW = 'new', _("Mới")
+    SELLING = 'selling', _("Đang bán")
+    STOP_SELLING = 'stop_selling', _("Dừng bán")
+    SOLD = 'sold', _("Đã bán")
 
 city_choices = [(k, v['name']) for k, v in state_data.items()]
 city_choices.sort()
@@ -96,6 +101,8 @@ class Listing(models.Model):
     code = models.CharField(max_length=50, verbose_name=_("Mã BĐS"), help_text=_("Được điền tự động và duy nhất"),
                             unique=True)
 
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING,
+                                  verbose_name=_("Tình trạng BĐS"))
     is_verified = models.BooleanField(default=False, verbose_name=_("Đã xác minh thông tin nhà"))
     is_exclusive = models.BooleanField(default=False, verbose_name=_("Nhà Phố độc quyền"))
     is_published = models.BooleanField(default=True, verbose_name=_("Được phép đăng"))

@@ -3,9 +3,6 @@
 {% load static humanize i18n %}
 
 {% block head %}
-    <script defer src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
-    <script type="deferjs" src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
-
     <title> Thế giới Nhà Phố {% block title %}| Mua căn hộ tốt nhất {% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="UTF-8"/>
@@ -560,7 +557,7 @@
                                     <li title="Diện tích"><span
                                             class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} </li>
                                     <li title="Giá"><strong>$</strong> {{ listing.price }} tỷ</li>
-                                    {% if listing.sale_price %} <li title="Bán nhanh"><strong>SaleOff $</strong> {{ listing.sale_price }} tỷ</li> {% endif %}
+                                    {% if listing.sale_price %} <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price }} tỷ </strong></li> {% endif %}
                                 </ul>
                                 <div class="listing-id"><span>Mã nhà đất: </span><span
                                         style="padding-left: 0px">{{ listing.code }}</span>
@@ -973,7 +970,7 @@
                             <h3><a href="{% url 'listing' house_neigh.id %}"
                                    title="{{ house_neigh.title }}">{{ house_neigh.title }}</a></h3>
                         </div>
-                        <div class="status tgnp-color"></div>
+                        <div class="status tgnp-color">{{ house_neigh.status }}</div>
                         <div class="info">
                             <ul>
                                 <li title="Phòng ngủ"><span class="zmdi zmdi-airline-seat-individual-suite"></span> {{ house_neigh.bedrooms }} </li>
@@ -986,7 +983,7 @@
                             </ul>
                         </div>
                         <input name="url" type="hidden"
-                               value="/mua/nha-pho-quan-9-huong-dong-bac-ban-giao-noi-that-co-ban-phap-ly-ro-rang">
+                               value="{% url 'listing' house_neigh.id %}">
                         <input name="lat" type="hidden" value="">
                         <input name="lon" type="hidden" value="">
                     </div>
@@ -1001,23 +998,22 @@
                 <div class="ads3d-box pdt-15">
                     <div class="ads3d-box-left">
                         <div class="promo-3d-vid cover">
-<span data-origin="EfMuBFZwS7Q" class="popup-yt-video">
-<picture>
-<source srcset="../images/promo-3d-vid_small.jpg, ../images/promo-3d-vid_small@2x.jpg 2x"
-        media="(max-width: 374px)">
-<source srcset="../images/promo-3d-vid_medium.jpg, ../images/promo-3d-vid.jpg 2x"
-        media="(min-width: 375px)">
-<img alt="TGNP 3D View" src="../../images/promo-3d-vid.jpg"
-     srcset="../images/promo-3d-vid_medium.jpg, ../images/promo-3d-vid.jpg 2x"
-     title="TGNP 3D View">
-</picture>
-</span>
+                            <span data-origin="EfMuBFZwS7Q" class="popup-yt-video">
+                            <picture>
+                            <source srcset="../images/promo-3d-vid_small.jpg, ../images/promo-3d-vid_small@2x.jpg 2x"
+                                    media="(max-width: 374px)">
+                            <source srcset="../images/promo-3d-vid_medium.jpg, ../images/promo-3d-vid.jpg 2x"
+                                    media="(min-width: 375px)">
+                            <img alt="TGNP 3D View" src="../../images/promo-3d-vid.jpg"
+                                 srcset="../images/promo-3d-vid_medium.jpg, ../images/promo-3d-vid.jpg 2x"
+                                 title="TGNP 3D View">
+                            </picture>
+                            </span>
                         </div>
                         <div class="about-3d">
                             <h3>Tuyệt vời khi trình diễn với 3d nhập vai</h3>
-                            <p>Công nghệ 3d nhập vai của Thế giới Nhà Phốmang lại trải nghiệm có độ tin cậy tuyệt đối
-                                với khách
-                                hàng khi xem trực tuyến ở tất cả mọi nơi. Kết hợp đội ngũ nhân viên được đào tạo chuyên
+                            <p>Công nghệ 3d nhập vai của Thế giới Nhà Phố mang lại trải nghiệm có độ tin cậy tuyệt đối
+                                với khách hàng khi xem trực tuyến ở tất cả mọi nơi. Kết hợp đội ngũ nhân viên được đào tạo chuyên
                                 nghiệp đã giúp cho tốc độ bán nhanh hơn gấp đôi so với thị trường.</p>
                         </div>
                     </div>
@@ -1045,7 +1041,7 @@
             </section>
         </section>
 
-        <section class="background-gray">
+  {% comment %}      <section class="background-gray">
             <div class="width1140">
                 <div class="heading-02 pd-tb-30 mgt-10">Nhà đất tương tự</div>
                 <div id="similar-property" class="flexslider main-content">
@@ -1535,7 +1531,7 @@
                     </ul>
                 </div>
             </div>
-        </section>
+        </section>{% endcomment %}
 
         <div class="post-share-btn-group aj-post-share-btn-group">
             <div class="btn-group btn-share-group addthis_toolbox addthis_default_style">
@@ -1767,7 +1763,8 @@
 {% endblock %}
 
 {% block scripts %}
-
+    <script defer src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <script type="deferjs" src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
     <script>
         window.AppPrompt = (function () {
             var APP_PROMP_KEY = "app_banner_prompt"
