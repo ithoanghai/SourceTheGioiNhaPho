@@ -5250,7 +5250,7 @@
         var r = n("mvHQ"), i = n.n(r), o = n("Dd8w"), a = n.n(o), s = n("GDZS"), d = n.n(s), c = n("du7g"), u = n.n(c),
             l = n("lHK6"), f = n.n(l), h = n("NGEn"), p = n.n(h), m = n("gGqR"), g = n.n(m), v = n("PJh5"), y = n.n(v),
             x = n("rlck"), b = n("eBGp"), _ = n("K72o"), k = n.n(_), w = n("TmeQ"), S = n.n(w), D = b.f,
-            T = "Cảm ơn bạn đã gửi thông tin về REVER. Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất!";
+            T = "Cảm ơn bạn đã gửi thông tin về Thế giới Nhà Phố. Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất!";
         window.isMinisite && (!0 !== window.isTeam && window.AgentInfo ? (D = window.AgentInfo.phone, T = "Cảm ơn bạn đã gửi thông tin. " + window.AgentInfo.short_name + " sẽ liên hệ lại với bạn trong thời gian sớm nhất.") : window.isTeam && window.TeamInfo && window.showTeamInfo ? (D = window.TeamInfo.minisite_phone, T = "Cảm ơn bạn đã gửi thông tin. Team " + window.TeamInfo.name + " sẽ liên hệ lại với bạn trong thời gian sớm nhất.") : window.isTeam && !window.showTeamInfo && window.AgentInfo && (D = window.AgentInfo.phone, T = "Cảm ơn bạn đã gửi thông tin. " + window.AgentInfo.short_name + " sẽ liên hệ lại với bạn trong thời gian sớm nhất."));
         var M = {hotline: D, msg: T}, O = $(Object(b.d)(k.a, M)), A = $(Object(b.d)(S.a, M)), C = O, Y = n("249L"),
             N = n.n(Y), P = n("fB4n"), E = window.$ || window.jQuery, W = "data-fr",

@@ -8,5 +8,11 @@ admin.autodiscover()
 urlpatterns = [
     path('', views.index, name='listings'),
     path('<int:listing_id>', views.listing, name='listing'),
+
     path('search', views.search, name='search'),
+
+    path('detail', views.detail, name='detail'),
+    path('sellwithus', views.sell_with_us, name='sell_with_us'),
+    path('buywithus', views.buy_with_us, name='buy_with_us'),
+    path('rentwithus', views.rent_with_us, name='rent_with_us'),
 ]

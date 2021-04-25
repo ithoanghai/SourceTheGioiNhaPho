@@ -8169,7 +8169,7 @@
         var r, i = n("Dd8w"), o = n.n(i), a = n("d7EF"), s = n.n(a), u = n("bOdI"), c = n.n(u), l = n("u2KI"),
             f = n.n(l), d = n("z8d1"), p = "/s/", h = "m²", v = 768,
             g = f()({onShowSearchMobile: "show-search-mobile", onShowSearchDesktop: "show-search-desktop"}),
-            m = "ho-chi-minh", y = "Hồ Chí Minh",
+            m = "ha-noi", y = "Hà Nội",
             b = f()([{id: "1", name: "1 phòng ngủ"}, {id: "2", name: "2 phòng ngủ"}, {
                 id: "3",
                 name: "3 phòng ngủ"

@@ -7617,13 +7617,13 @@
         var ne = Object({
             NODE_ENV: "production",
             contact_from_api: "https://thegioinhaphovietnam.com.vn/mapi/form",
-            rec_api: "https://rec.rever.vn/api",
+            rec_api: "https://rec.thegioinhaphovietnam.com.vn/api",
             save_search_api: "https://rever.vn/api/save-search"
         }).version || "production";
         var re = {
             init: function () {
                 if ("local" !== ne && (ut({
-                    dsn: "https://57f92b8dc6194450a31b2d4587012270@sentry.rever.vn/8",
+                    dsn: "", //https://57f92b8dc6194450a31b2d4587012270@sentry.thegioinhaphovietnam.com.vn/8
                     integrations: [new Ot({Vue: c.a, tracing: !0}), new ee.BrowserTracing],
                     tracesSampleRate: 1
                 }), window.isLoggedIn)) {

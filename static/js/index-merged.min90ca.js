@@ -11905,7 +11905,7 @@
         var re = {
             init: function () {
                 if ("local" !== ne && (ct({
-                    dsn: "https://57f92b8dc6194450a31b2d4587012270@sentry.thegioinhaphovietnam.com.vn/8",
+                    dsn: "", //https://57f92b8dc6194450a31b2d4587012270@sentry.thegioinhaphovietnam.com.vn/8
                     integrations: [new wt({Vue: u.a, tracing: !0}), new ee.BrowserTracing],
                     tracesSampleRate: 1
                 }), window.isLoggedIn)) {
@@ -13580,9 +13580,9 @@
             })
         };
         var r, i = n("Dd8w"), o = n.n(i), a = n("d7EF"), s = n.n(a), u = n("bOdI"), c = n.n(u), l = n("u2KI"),
-            f = n.n(l), d = n("z8d1"), p = "/search?trantype=", h = "m²", v = 768,
+            f = n.n(l), d = n("z8d1"), p = "listings/search?trantype=", h = "m²", v = 768,
             m = f()({onShowSearchMobile: "show-search-mobile", onShowSearchDesktop: "show-search-desktop"}),
-            g = "ho-chi-minh", y = "Hà Nội",
+            g = "ha-noi", y = "Hà Nội",
             _ = f()([{id: "1", name: "1 phòng ngủ"}, {id: "2", name: "2 phòng ngủ"}, {
                 id: "3",
                 name: "3 phòng ngủ"

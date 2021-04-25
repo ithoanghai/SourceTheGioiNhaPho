@@ -89,14 +89,16 @@ class Listing(models.Model):
     location = LocationField(based_fields=['address'], zoom=7, null=True,
                              default=Point(105.8401439, 21.0334474))
 
-    is_published = models.BooleanField(default=True, verbose_name=_("Được phép đăng"))
-    is_verified = models.BooleanField(default=False, verbose_name=_("Đã xác minh thông tin nhà"))
     extra_data = models.JSONField(verbose_name=_("Thông tin khác"), null=True, blank=True, default=dict)
     list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày đăng"))
     title = models.CharField(max_length=200, verbose_name=_("Tên BĐS"),
                              help_text=_("[Tên phố - Quận/Huyện] [Diện tích - Tầng/Đất/CC - Mặt tiền] [Ngõ] [Giá]"))
     code = models.CharField(max_length=50, verbose_name=_("Mã BĐS"), help_text=_("Được điền tự động và duy nhất"),
                             unique=True)
+
+    is_verified = models.BooleanField(default=False, verbose_name=_("Đã xác minh thông tin nhà"))
+    is_exclusive = models.BooleanField(default=False, verbose_name=_("Nhà Phố độc quyền"))
+    is_published = models.BooleanField(default=True, verbose_name=_("Được phép đăng"))
 
     def __str__(self):
         return self.title

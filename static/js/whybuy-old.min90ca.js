@@ -31,9 +31,9 @@
             u = n("JDN0"), l = n.n(u), f = n("BJzf"), h = n.n(f), p = n("m0Xf"), m = function () {
                 function t(e, n, r, o) {
                     i()(this, t), this.hotline = p.b, this.dismissFunc = o, this.onSubmitFn = [], this.suggestItems = ["Quận 2", "Quận 7", "Quận 4", "Quận Bình Thạnh", "Thảo Điền", "Thủ Thiêm", "An Phú An Khánh", "Vinhomes Central Park", "Phú Mỹ Hưng", "Quận 9"], this.propertyTypes = [{
-                        value: "can-ho",
+                        value: "apartment",
                         text: "Căn Hộ"
-                    }, {value: "nha-pho", text: "Nhà Phố"}, {value: "biet-thu", text: "Biệt Thự"}, {
+                    }, {value: "house", text: "Nhà Phố"}, {value: "villa", text: "Biệt Thự"}, {
                         value: "dat-nen",
                         text: "Đất Nền"
                     }, {value: "shop-house", text: "ShopHouse"}, {value: "office-tel", text: "Office-Tel"}, {

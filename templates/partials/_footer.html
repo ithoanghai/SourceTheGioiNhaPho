@@ -7,7 +7,7 @@
             <ul class="info-container">
                 <li class="address">
                     <span >
-                    <a href="./" title="Thế giới Nhà Phố" style="margin-left: 30px">
+                    <a href="{% url 'index' %}" title="Thế giới Nhà Phố" style="margin-left: 30px">
                         <img style="height: 100px; width: auto" src="{% static 'img/logo-nen-trang-co-chu.svg' %}"
                              alt="Thế giới Nhà Phố" title="Thế giới Nhà Phố">
                     </a>
@@ -38,15 +38,15 @@
                         <li>
                             <a href="about" title="Về TGNP">Về TGNP</a>
                         </li>
-                        <li>
+                        {% comment %}<li>
                             <a href="#" title="Đội ngũ">Ban lãnh đạo</a>
-                        </li>
+                        </li>{% endcomment %}
                         <li>
                             <a href="specialistUs" title="Đội ngũ">Chuyên viên TGNP</a>
                         </li>
-                        <li>
+                        {% comment %}<li>
                             <a href="#" title="Sàn giao dịch">Phòng giao dịch</a>
-                        </li>
+                        </li>{% endcomment %}
                         <li>
                             <a href="contact" title="Liên hệ">Liên hệ làm việc</a>
                         </li>
@@ -93,13 +93,13 @@
                         <li>
                              <a href="javascript:showFeedbackModal()"> <i class="zmdi zmdi-email-open"></i>Phản hồi ý kiến</a>
                         </li>
-                        <li>
+{% comment %}                        <li>
                             <a href="#" target="_blank" title="Hướng dẫn sử dụng">Hướng dẫn sử dụng</a>
                         </li>
                         <li>
-                            <a href="../agent.rever.vn/blog.html" target="_blank" title="Kiến thức cho môi giới">Kiến
+                            <a href="../agent.thegioinhaphovietnam.com.vn/blog.html" target="_blank" title="Kiến thức cho môi giới">Kiến
                                 thức cho môi giới</a>
-                        </li>
+                        </li>{% endcomment %}
                     </ul>
                 </li>
                 <li>

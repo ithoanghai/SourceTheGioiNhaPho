@@ -8282,10 +8282,10 @@
     }, AYE1: function (t, e, n) {
         (t.exports = n("FZ+f")(!0)).push([t.i, "\n#search-content .search-container .search-result>div .actionBar .filter ul .filter-item a[data-v-107eaf8a] {\n  white-space: nowrap;\n}\n#search-content .search-container .search-result>div .actionBar .save-project.compact span[data-v-107eaf8a] {\n  display: none;\n}\n", "", {
             version: 3,
-            sources: ["/builds/nerds/nhapho-frontend/src/main/webapp-vue/src/controllers/search-v3/components/project-filter-form.vue"],
+            sources: ["/*/builds/nerds/nhapho-frontend/src/main/webapp-vue/src/controllers/search-v3/components/project-filter-form.vue*/"],
             names: [],
             mappings: ";AACA;EACE,oBAAoB;CACrB;AACD;EACE,cAAc;CACf",
-            file: "project-filter-form.vue",
+            file: "/*project-filter-form.vue*/",
             sourcesContent: ["\n#search-content .search-container .search-result>div .actionBar .filter ul .filter-item a[data-v-107eaf8a] {\n  white-space: nowrap;\n}\n#search-content .search-container .search-result>div .actionBar .save-project.compact span[data-v-107eaf8a] {\n  display: none;\n}\n"],
             sourceRoot: ""
         }])
@@ -8430,18 +8430,6 @@
             }, {
                 key: "AJAX_ENDPOINT", get: function () {
                     return "/s-ajax-v2"
-                }
-            }, {
-                key: "AGG_ENDPOINT", get: function () {
-                    return "/s-agg-v2"
-                }
-            }, {
-                key: "NEARBY_ENDPOINT", get: function () {
-                    return "/s-location-v2"
-                }
-            }, {
-                key: "SUGGEST_ENDPOINT", get: function () {
-                    return "/s-suggest"
                 }
             }], [{
                 key: "getInstance", value: function () {
@@ -52295,7 +52283,7 @@ tti0:function (t, e, n) {
         sources: [],
         names: [],
         mappings: "",
-        file: "nearby-location.vue",
+        file: "",
         sourceRoot: ""
     }])
 }
@@ -55822,8 +55810,8 @@ function (t, e, n) {
                     n("Jk36")
                 }, null, null).exports
             }, data: function () {
-                var t = this.mapOptions || {};
-                return {mapOptions: r()({zoom: 13}, t), mapLoading: !1, aggregations: [], activeMarker: null}
+                var t = this.mapOptions || {center: { lat: 20.965767, lng:  105.832835}};
+                return {mapOptions: r()({zoom: 1}, t), mapLoading: !1, aggregations: [], activeMarker: null}
             }, provide: function () {
                 return {searchMap: this.searchMap}
             }, methods: {
@@ -56884,7 +56872,7 @@ function (t, e, n) {
                     model: {
                         nhapho_id: "",
                         service_type: this.isForSale ? O.z[O.x.FOR_SALE] : O.z[O.x.RENTAL],
-                        property_type: "can-ho"
+                        property_type: "apartment"
                     }, showSuccess: !1, submitting: !1, validation: {lastname: !0, firstname: !0, email: !0, phone: !0}
                 }
             },
