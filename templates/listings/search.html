@@ -332,7 +332,7 @@
                     </project-filter-form>
                     <div class="results-sc">
                         <span class="results">Hiển thị
-                        <strong v-if="isFirstLoad">20 trong số 9676</strong>
+                        <strong v-if="isFirstLoad">10 trong số {{ listings.count }} sản phẩm</strong>
                         <strong v-else v-html="displayTotal + ' trong số ' + projects.total"></strong>
                         </span>
                         <div class="sort-listing" ref="projectSort">
@@ -429,14 +429,14 @@
                                     </p>
                                 </div>
                                 <ul class="relative-group">
-                                    <li class="item style1"><a href="listings/search?trantype=sell&housetype=apartment"> Căn hộ tại Hà Nội</a></li>
-                                    <li class="item style1"><a href="listings/search?trantype=sell&housetype=house"> Nhà phố tại Hà Nội</a></li>
-                                    <li class="item style1"><a href="listings/search?trantype=sell&housetype=villa"> Biệt thự tại Hà Nội</a>
+                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=apartment"> Căn hộ tại Hà Nội</a></li>
+                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=house"> Nhà phố tại Hà Nội</a></li>
+                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=villa"> Biệt thự tại Hà Nội</a>
                                     </li>
-                                    <li class="item style1"><a href=href="listings/search?trantype=sell&housetype=land"> Đất nền tại Hà Nội</a></li>
-                                    <li class="item style1"><a href="listings/search?trantype=sell&housetype=officetel"> Căn hộ dịch vụ tại Hà
+                                    <li class="item style1"><a href=href="../listings/search?trantype=sell&housetype=land"> Đất nền tại Hà Nội</a></li>
+                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=officetel"> Căn hộ dịch vụ tại Hà
                                         Nội</a></li>
-                                    <li class="item style1"><a href="listings/search?trantype=sell&housetype=office"> Văn phòng tại Hà Nội</a>
+                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=office"> Văn phòng tại Hà Nội</a>
                                     </li>
                                 </ul>
                             </div>
@@ -467,7 +467,7 @@
                                 <input id="list-check-item-type-1-desktop" type="checkbox" class="check" :value="1"
                                        v-model="data">
                                 <label for="list-check-item-type-1-desktop">
-                                    <a @click.prevent="toggleItem(1)" style="display: inline" href="listings/search?trantype=sell&housetype=apartment">Căn hộ</a>
+                                    <a @click.prevent="toggleItem(1)" style="display: inline" href="../listings/search?trantype=sell&housetype=apartment">Căn hộ</a>
                                 </label>
                             </li>
                             <li>
@@ -475,7 +475,7 @@
                                        v-model="data">
                                 <label for="list-check-item-type-9-desktop">
                                     <a @click.prevent="toggleItem(9)" style="display: inline"
-                                       href="listings/search?trantype=sell&housetype=shophouse">Shophouse</a>
+                                       href="../listings/search?trantype=sell&housetype=shophouse">Shophouse</a>
                                 </label>
                             </li>
                             <li>
@@ -483,14 +483,14 @@
                                        v-model="data">
                                 <label for="list-check-item-type-6-desktop">
                                     <a @click.prevent="toggleItem(6)" style="display: inline"
-                                       href="listings/search?trantype=sell&housetype=officetel">Văn phòng</a>
+                                       href="../listings/search?trantype=sell&housetype=officetel">Văn phòng</a>
                                 </label>
                             </li>
                             <li>
                                 <input id="list-check-item-type-8-desktop" type="checkbox" class="check" :value="8"
                                        v-model="data">
                                 <label for="list-check-item-type-8-desktop">
-                                    <a @click.prevent="toggleItem(8)" style="display: inline" href="listings/search?trantype=sell&housetype=house">Nhà
+                                    <a @click.prevent="toggleItem(8)" style="display: inline" href="../listings/search?trantype=sell&housetype=house">Nhà
                                         phố</a>
                                 </label>
                             </li>
@@ -498,7 +498,7 @@
                                 <input id="list-check-item-type-4-desktop" type="checkbox" class="check" :value="4"
                                        v-model="data">
                                 <label for="list-check-item-type-4-desktop">
-                                    <a @click.prevent="toggleItem(4)" style="display: inline" href="listings/search?trantype=sell&housetype=villa">Biệt thự</a>
+                                    <a @click.prevent="toggleItem(4)" style="display: inline" href="../listings/search?trantype=sell&housetype=villa">Biệt thự</a>
                                 </label>
                             </li>
 
@@ -506,7 +506,7 @@
                                 <input id="list-check-item-type-16-desktop" type="checkbox" class="check" :value="16"
                                        v-model="data">
                                 <label for="list-check-item-type-16-desktop">
-                                    <a @click.prevent="toggleItem(16)" style="display: inline" href=href="listings/search?trantype=sell&housetype=land">Đất nền/Mặt bằng</a>
+                                    <a @click.prevent="toggleItem(16)" style="display: inline" href="../listings/search?trantype=sell&housetype=land">Đất nền/Mặt bằng</a>
                                 </label>
                             </li>
                         </template>
@@ -519,7 +519,7 @@
                                            value="1" v-model="model">
                                     <label for="list-check-item-1-bed-room-desktop">
                                         <a @click.prevent="toggleItem('1')" style="display: inline"
-                                           href="mua/1-phong-ngu.html">1 Phòng ngủ</a>
+                                           href="../listings/search?bedrooms=1">1 Phòng ngủ</a>
                                     </label>
                                 </li>
                                 <li>
@@ -528,7 +528,7 @@
                                            v-model="model">
                                     <label for="list-check-item-2-bed-room-desktop">
                                         <a @click.prevent="toggleItem('2')" style="display: inline"
-                                           href="mua/2-phong-ngu.html">2 Phòng ngủ</a>
+                                           href="../listings/search?bedrooms=2">2 Phòng ngủ</a>
                                     </label>
                                 </li>
                                 <li>
@@ -537,7 +537,7 @@
                                            v-model="model">
                                     <label for="list-check-item-3-bed-room-desktop">
                                         <a @click.prevent="toggleItem('3')" style="display: inline"
-                                           href="mua/3-phong-ngu.html">3 Phòng ngủ</a>
+                                           href="../listings/search?bedrooms=3">3 Phòng ngủ</a>
                                     </label>
                                 </li>
                                 <li>
@@ -546,7 +546,7 @@
                                            v-model="model">
                                     <label for="list-check-item-4-bed-room-desktop">
                                         <a @click.prevent="toggleItem('4')" style="display: inline"
-                                           href="mua/4-phong-ngu.html">4 Phòng ngủ</a>
+                                           href="../listings/search?bedrooms=4">4 Phòng ngủ</a>
                                     </label>
                                 </li>
                                 <li>
@@ -555,7 +555,7 @@
                                            v-model="model">
                                     <label for="list-check-item-5-bed-room-desktop">
                                         <a @click.prevent="toggleItem('5')" style="display: inline"
-                                           href="mua/5-phong-ngu.html">5 Phòng ngủ</a>
+                                           href="../listings/search?bedrooms=5">5 Phòng ngủ</a>
                                     </label>
                                 </li>
                                 <li>
@@ -564,7 +564,7 @@
                                            v-model="model">
                                     <label for="list-check-item-6+-bed-room-desktop">
                                         <a @click.prevent="toggleItem('6+')" style="display: inline"
-                                           href="mua/6-phong-ngu.html">6+ Phòng ngủ</a>
+                                           href="../listings/search?bedrooms=6">6+ Phòng ngủ</a>
                                     </label>
                                 </li>
                             </template>
@@ -580,7 +580,7 @@
                                            @input="toggleItem(1)" :checked="isSelectedItem(1)">
                                     <label for="list-check-item-type-1-mobile">
                                         <a @click.prevent="toggleItem(1)" style="display: inline"
-                                           href="listings/search?trantype=sell&housetype=apartment">Căn
+                                           href="../listings/search?trantype=sell&housetype=apartment">Căn
                                             hộ</a>
                                     </label>
                                 </li>
@@ -589,7 +589,7 @@
                                            @input="toggleItem(9)" :checked="isSelectedItem(9)">
                                     <label for="list-check-item-type-9-mobile">
                                         <a @click.prevent="toggleItem(9)" style="display: inline"
-                                           href="listings/search?trantype=sell&housetype=shophouse">Shophouse</a>
+                                           href="../listings/search?trantype=sell&housetype=shophouse">Shophouse</a>
                                     </label>
                                 </li>
                                 <li>
@@ -597,7 +597,7 @@
                                            @input="toggleItem(6)" :checked="isSelectedItem(6)">
                                     <label for="list-check-item-type-6-mobile">
                                         <a @click.prevent="toggleItem(6)" style="display: inline"
-                                           href="listings/search?trantype=sell&housetype=officetel">Officetel</a>
+                                           href="../listings/search?trantype=sell&housetype=officetel">Officetel</a>
                                     </label>
                                 </li>
                                 <li>
@@ -605,7 +605,7 @@
                                            @input="toggleItem(8)" :checked="isSelectedItem(8)">
                                     <label for="list-check-item-type-8-mobile">
                                         <a @click.prevent="toggleItem(8)" style="display: inline"
-                                           href="listings/search?trantype=sell&housetype=house">Nhà
+                                           href="../listings/search?trantype=sell&housetype=house">Nhà
                                             phố</a>
                                     </label>
                                 </li>
@@ -614,7 +614,7 @@
                                            @input="toggleItem(4)" :checked="isSelectedItem(4)">
                                     <label for="list-check-item-type-4-mobile">
                                         <a @click.prevent="toggleItem(4)" style="display: inline"
-                                           href="listings/search?trantype=sell&housetype=villa">Biệt
+                                           href="../listings/search?trantype=sell&housetype=villa">Biệt
                                             thự</a>
                                     </label>
                                 </li>
@@ -639,7 +639,7 @@
                                            @input="toggleItem(16)" :checked="isSelectedItem(16)">
                                     <label for="list-check-item-type-16-mobile">
                                         <a @click.prevent="toggleItem(16)" style="display: inline"
-                                           href=href="listings/search?trantype=sell&housetype=land">Đất
+                                           href="../listings/search?trantype=sell&housetype=land">Đất
                                             nền</a>
                                     </label>
                                 </li>
@@ -656,7 +656,7 @@
                                            @input="toggleItem('1')" :checked="isSelectedItem('1')">
                                     <label for="list-check-item-1-bed-room-mobile">
                                         <a @click.prevent="toggleItem('1')" style="display: inline"
-                                           href="mua/1-phong-ngu.html">1 Phòng ngủ</a>
+                                           href="../listings/search?bedrooms=1">1 Phòng ngủ</a>
                                     </label>
                                 </li>
                                 <li>
@@ -665,7 +665,7 @@
                                            @input="toggleItem('2')" :checked="isSelectedItem('2')">
                                     <label for="list-check-item-2-bed-room-mobile">
                                         <a @click.prevent="toggleItem('2')" style="display: inline"
-                                           href="mua/2-phong-ngu.html">2 Phòng ngủ</a>
+                                           href="../listings/search?bedrooms=2">2 Phòng ngủ</a>
                                     </label>
                                 </li>
                                 <li>
@@ -674,7 +674,7 @@
                                            @input="toggleItem('3')" :checked="isSelectedItem('3')">
                                     <label for="list-check-item-3-bed-room-mobile">
                                         <a @click.prevent="toggleItem('3')" style="display: inline"
-                                           href="mua/3-phong-ngu.html">3 Phòng ngủ</a>
+                                           href="../listings/search?bedrooms=3">3 Phòng ngủ</a>
                                     </label>
                                 </li>
                                 <li>
@@ -683,7 +683,7 @@
                                            @input="toggleItem('4')" :checked="isSelectedItem('4')">
                                     <label for="list-check-item-4-bed-room-mobile">
                                         <a @click.prevent="toggleItem('4')" style="display: inline"
-                                           href="mua/4-phong-ngu.html">4 Phòng ngủ</a>
+                                           href="../listings/search?bedrooms=4">4 Phòng ngủ</a>
                                     </label>
                                 </li>
                                 <li>
@@ -692,7 +692,7 @@
                                            @input="toggleItem('5')" :checked="isSelectedItem('5')">
                                     <label for="list-check-item-5-bed-room-mobile">
                                         <a @click.prevent="toggleItem('5')" style="display: inline"
-                                           href="mua/5-phong-ngu.html">5 Phòng ngủ</a>
+                                           href="../listings/search?bedrooms=5">5 Phòng ngủ</a>
                                     </label>
                                 </li>
                                 <li>
@@ -701,7 +701,7 @@
                                            @input="toggleItem('6+')" :checked="isSelectedItem('6+')">
                                     <label for="list-check-item-6+-bed-room-mobile">
                                         <a @click.prevent="toggleItem('6+')" style="display: inline"
-                                           href="mua/6-phong-ngu.html">6+ Phòng ngủ</a>
+                                           href="../listings/search?bedrooms=6">6+ Phòng ngủ</a>
                                     </label>
                                 </li>
                             </template>
@@ -718,8 +718,8 @@
                     </property-filter-form>
 
                     <div class="results-sc">
-                        <span class="results">Hiển thị
-                        <strong v-if="isFirstLoad">  trong số 9676</strong>
+                        <span class="results">Hiển thị 10
+                        <strong v-if="isFirstLoad">  trong số {{ listings.count }} sản phẩm</strong>
                         <strong v-else v-text="displayTotal + ' trong số ' + properties.total"></strong>
                         </span>
 
@@ -883,8 +883,7 @@
                                             <li><a class="active" @click.prevent="resetPaging({{i}},'')" href="?page={{listings.previous_page_number}}">{{i}}</a>
                                             </li>
                                         {% else %}
-                                            <li><a class="" @click.prevent="resetPaging({{i}},'')" href="href="?page={{listings.previous_page_number}}">{{i}}</a>
-                                            </li>
+                                            <li><a class="" @click.prevent="resetPaging({{i}},'')" href="?page={{listings.previous_page_number}}">{{i}}</a></li>
                                         {% endif %}
                                     {% endfor %}
 
@@ -939,14 +938,14 @@
                                     </p>
                                 </div>
                                 <ul class="relative-group">
-                                    <li class="item style1"><a href="listings/search?trantype=sell&housetype=apartment"> Căn hộ tại Hà Nội</a></li>
-                                    <li class="item style1"><a href="listings/search?trantype=sell&housetype=house"> Nhà phố tại Hà Nội</a></li>
-                                    <li class="item style1"><a href="listings/search?trantype=sell&housetype=villa"> Biệt thự tại Hà Nội</a>
+                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=apartment"> Căn hộ tại Hà Nội</a></li>
+                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=house"> Nhà phố tại Hà Nội</a></li>
+                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=villa"> Biệt thự tại Hà Nội</a>
                                     </li>
-                                    <li class="item style1"><a href=href="listings/search?trantype=sell&housetype=land"> Đất nền tại Hà Nội</a></li>
-                                    <li class="item style1"><a href="listings/search?trantype=sell&housetype=officetel"> Căn hộ dịch vụ tại Hà
+                                    <li class="item style1"><a href=href="../listings/search?trantype=sell&housetype=land"> Đất nền tại Hà Nội</a></li>
+                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=officetel"> Căn hộ dịch vụ tại Hà
                                         Nội</a></li>
-                                    <li class="item style1"><a href="listings/search?trantype=sell&housetype=office"> Văn phòng tại Hà Nội</a>
+                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=office"> Văn phòng tại Hà Nội</a>
                                     </li>
                                 </ul>
                             </div>
