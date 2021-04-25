@@ -5609,7 +5609,7 @@
     }, Lwxd: function (t, e, n) {
         (t.exports = n("FZ+f")(!0)).push([t.i, "\n.popup-info-form-up-login[data-v-0aed16d8]{display:block\n}\n.captcha-wrapper[data-v-0aed16d8]{text-align:center;display:none\n}\n", "", {
             version: 3,
-            sources: ["/builds/nerds/rever-frontend/src/main/webapp-vue/src/controllers/login/LoginPopupV2.vue"],
+            sources: ["/builds/nerds/tgnp-frontend/src/main/webapp-vue/src/controllers/login/LoginPopupV2.vue"],
             names: [],
             mappings: ";AACA,2CAA2C,aAAa;CACvD;AACD,kCAAkC,kBAAkB,YAAY;CAC/D",
             file: "LoginPopupV2.vue",
@@ -13405,7 +13405,7 @@
             return a()(t, [{
                 key: "$emit", value: function (t) {
                     var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-                    var n = new CustomEvent("rever-" + t, {detail: e});
+                    var n = new CustomEvent("tgnp-" + t, {detail: e});
                     this.ele.dispatchEvent(n)
                 }
             }, {
@@ -13413,14 +13413,14 @@
                     var n = function (t) {
                         e.call(void 0, t.detail)
                     };
-                    n.bind(this), this.cbMapping.push({cb: e, evtCb: n}), this.ele.addEventListener("rever-" + t, n, !1)
+                    n.bind(this), this.cbMapping.push({cb: e, evtCb: n}), this.ele.addEventListener("tgnp-" + t, n, !1)
                 }
             }, {
                 key: "$off", value: function (t, e) {
                     for (var n = this, r = [], i = 0; i < this.cbMapping.length; i++) {
                         if (e === this.cbMapping[i].cb) {
                             var o = this.cbMapping[i].evtCb;
-                            this.ele.removeEventListener("rever-" + event, o), r.push(i)
+                            this.ele.removeEventListener("tgnp-" + event, o), r.push(i)
                         }
                     }
                     r.reverse().forEach(function (t) {
@@ -13432,7 +13432,7 @@
                     var n = this, r = function (r) {
                         e.call(void 0, r.detail), n.$off(t, e)
                     };
-                    r.bind(this), this.cbMapping.push({cb: e, evtCb: r}), this.ele.addEventListener("rever-" + t, r, !1)
+                    r.bind(this), this.cbMapping.push({cb: e, evtCb: r}), this.ele.addEventListener("tgnp-" + t, r, !1)
                 }
             }]), t
         }());

@@ -63,7 +63,7 @@ html {
 }
 
 @font-face {
-    font-family: 'rever-icon';
+    font-family: 'tgnp-icon';
     src: url(../fonts/TGNPIcons.eot);
     src: url(../fonts/TGNPIconsd41d.eot?#iefix) format('embedded-opentype'), url(../fonts/TGNPIcons.woff) format('woff'), url(../fonts/TGNPIcons.ttf) format('truetype'), url(../fonts/TGNPIcons.svg#roboto_condensedregular) format('svg')
 }
@@ -102,7 +102,7 @@ h2 {
 
 .checkbox input + label:after {
     content: '';
-    font-family: 'rever-icon';
+    font-family: 'tgnp-icon';
     font-size: 11px;
     line-height: 16px;
     margin-bottom: 0;
@@ -266,10 +266,9 @@ textarea:focus, input:focus {
 
 body {
     font-family: 'harmonia', Arial, Helvetica, sans-serif;
-    font-size: 1.6em;
     font-weight: 400;
     font-size: 62.5%;
-    line-height: 2em;
+/*    line-height: 2em;*/
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     color: #444c59
@@ -375,7 +374,7 @@ a:hover {
     width: 34px;
     z-index: 1200;
     position: absolute;
-    font-family: 'rever-icon', Arial, Helvetica, sans-serif;
+    font-family: 'tgnp-icon', Arial, Helvetica, sans-serif;
     font-size: 25px;
     font-weight: 700;
     background: #000;
@@ -502,7 +501,7 @@ a:hover {
 }
 
 .width-1600 hgroup .logo {
-    font-family: 'rever-icon', arial;
+    font-family: 'tgnp-icon', arial;
     display: block
 }
 
@@ -681,7 +680,7 @@ a:hover {
     line-height: 0;
     top: 30px;
     right: 52px;
-    font-family: 'rever-icon', arial
+    font-family: 'tgnp-icon', arial
 }
 
 .icondropdown:before {
@@ -697,7 +696,7 @@ a:hover {
     line-height: 0;
     top: 34px;
     right: 52px;
-    font-family: 'rever-icon', arial
+    font-family: 'tgnp-icon', arial
 }
 
 .iconup:before {
@@ -713,7 +712,7 @@ a:hover {
     line-height: 0;
     top: 26px;
     right: 15px;
-    font-family: 'rever-icon', arial;
+    font-family: 'tgnp-icon', arial;
     font-size: .7em;
     color: orange
 }
@@ -818,7 +817,7 @@ a:hover {
     position: absolute;
     top: 24px;
     left: 30px;
-    font-family: 'rever-icon', Arial, Helvetica, sans-serif;
+    font-family: 'tgnp-icon', Arial, Helvetica, sans-serif;
     display: none
 }
 
@@ -835,7 +834,7 @@ a:hover {
     height: 600px;
     position: relative;
     z-index: 1;
-    background: url(../images/home-rever01.jpg) 50% 50% / cover no-repeat
+    background: url(../images/home-tgnp01.jpg) 50% 50% / cover no-repeat
 }
 
 .topsearch-bgloop {
@@ -1169,7 +1168,7 @@ button[type=button].btn-no-style:focus {
     list-style: none;
     display: inline-block;
     color: #999;
-    font-family: 'rever-icon', Arial, Helvetica, sans-serif;
+    font-family: 'tgnp-icon', Arial, Helvetica, sans-serif;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1250,7 +1249,7 @@ button[type=button].btn-no-style:focus {
 }
 
 .width-1600 hgroup .logoblack {
-    font-family: 'rever-icon'
+    font-family: 'tgnp-icon'
 }
 
 .width-1600 hgroup .logoblack:before {
@@ -1355,7 +1354,7 @@ button[type=button].btn-no-style:focus {
     position: absolute;
     top: 24px;
     right: 35px;
-    font-family: 'rever-icon', Verdana, Geneva, sans-serif;
+    font-family: 'tgnp-icon', Verdana, Geneva, sans-serif;
     display: none
 }
 
@@ -2037,7 +2036,7 @@ ul.slidemap li a.img:hover {
     font-size: 100px
 }
 
-.rever-icon-r:before {
+.tgnp-icon-r:before {
     content: '\f193';
     font-size: 100px
 }
@@ -2752,7 +2751,7 @@ ul.slidemap li a.img:hover {
 }
 
 .font-icon {
-    font-family: 'rever-icon', Verdana, Geneva, sans-serif;
+    font-family: 'tgnp-icon', Verdana, Geneva, sans-serif;
     text-rendering: auto;
     line-height: 20px;
     font-size: 18px;
@@ -2770,7 +2769,7 @@ ul.slidemap li a.img:hover {
     top: 50%;
     margin-top: -20px;
     right: 20px;
-    font-family: 'rever-icon', arial;
+    font-family: 'tgnp-icon', arial;
     font-size: 4em;
     background: rgba(255, 255, 255, .8);
     border-radius: 4px;
@@ -2787,7 +2786,7 @@ ul.slidemap li a.img:hover {
     top: 50%;
     margin-top: -20px;
     right: 20px;
-    font-family: 'rever-icon', arial;
+    font-family: 'tgnp-icon', arial;
     font-size: 4em;
     background: rgba(255, 255, 255, .66);
     border-radius: 4px;
@@ -2803,7 +2802,7 @@ ul.slidemap li a.img:hover {
     top: 50%;
     margin-top: -20px;
     left: 20px;
-    font-family: 'rever-icon', arial;
+    font-family: 'tgnp-icon', arial;
     font-size: 4em;
     background: rgba(255, 255, 255, .66);
     border-radius: 4px;
@@ -2835,7 +2834,7 @@ ul.slidemap li a.img:hover {
     top: 50%;
     margin-top: -20px;
     left: 20px;
-    font-family: 'rever-icon', arial;
+    font-family: 'tgnp-icon', arial;
     font-size: 4em;
     background: rgba(255, 255, 255, .66);
     border-radius: 4px;
@@ -3979,7 +3978,7 @@ section.result article.featured.active header ul li {
 }
 
 .fix-search-top button {
-    font-family: 'rever-icon', Arial, Helvetica, sans-serif;
+    font-family: 'tgnp-icon', Arial, Helvetica, sans-serif;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -4422,41 +4421,41 @@ section.result article.featured.active header ul li {
     margin-right: 0
 }
 
-.rever-market {
+.tgnp-market {
     text-align: left
 }
 
-.rever-market .value {
+.tgnp-market .value {
     width: 48%;
     margin: 30px 4% 0 0;
     float: left
 }
 
-.rever-market .speed {
+.tgnp-market .speed {
     width: 48%;
     margin: 30px 0 0 0;
     float: left
 }
 
-.rever-market:after {
+.tgnp-market:after {
     clear: both;
     display: table;
     content: ''
 }
 
-.rever-market h4 {
+.tgnp-market h4 {
     font-size: 25px;
     border-bottom: 1px solid #444c59;
     line-height: 40px
 }
 
-.rever-market h4:after {
+.tgnp-market h4:after {
     content: '';
     clear: both;
     display: table
 }
 
-.rever-market p {
+.tgnp-market p {
     font-size: 16px
 }
 
@@ -4485,7 +4484,7 @@ section.result article.featured.active header ul li {
 
 .service3d {
     float: left;
-    font-family: 'rever-icon';
+    font-family: 'tgnp-icon';
     font-size: 6em;
     margin: 10px 30px 0 0;
     color: #b8b8b8
@@ -4497,7 +4496,7 @@ section.result article.featured.active header ul li {
 
 .photovideo {
     float: left;
-    font-family: 'rever-icon';
+    font-family: 'tgnp-icon';
     font-size: 6em;
     margin: 10px 30px 0 0;
     color: #b8b8b8
@@ -4509,7 +4508,7 @@ section.result article.featured.active header ul li {
 
 .proservice {
     float: left;
-    font-family: 'rever-icon';
+    font-family: 'tgnp-icon';
     font-size: 6em;
     margin: 10px 30px 0 0;
     color: #b8b8b8
@@ -5419,7 +5418,7 @@ article.featured .cover {
     background: #f7f7f7;
     margin-top: 20px;
     float: left;
-    font-family: 'rever-icon';
+    font-family: 'tgnp-icon';
     -webkit-box-shadow: 3px 2px 2px rgba(0, 0, 0, .17);
     -moz-box-shadow: 3px 2px 2px rgba(0, 0, 0, .17);
     box-shadow: 3px 2px 2px rgba(0, 0, 0, .17);
@@ -5614,7 +5613,7 @@ article.featured .cover {
     position: absolute;
     top: 10px;
     right: 20px;
-    font-family: 'rever-icon', Arial, Helvetica, sans-serif;
+    font-family: 'tgnp-icon', Arial, Helvetica, sans-serif;
     font-weight: 400;
     font-size: 20px;
     color: #999
@@ -6578,7 +6577,7 @@ article.featured .cover {
 }
 
 .bnt-facebook:before {
-    font-family: 'rever-icon', Arial, Helvetica, sans-serif;
+    font-family: 'tgnp-icon', Arial, Helvetica, sans-serif;
     content: '\f110';
     left: 15px;
     position: absolute;
@@ -7237,7 +7236,7 @@ article.featured .cover {
     margin: -25px 0 0 -25px;
     cursor: pointer;
     color: #fff;
-    font-family: 'rever-icon', arial;
+    font-family: 'tgnp-icon', arial;
     font-size: 77px;
     background: rgba(0, 0, 0, .54);
     border-radius: 50%
@@ -7606,12 +7605,12 @@ footer .copyright p {
     color: #838383 !important
 }
 
-.rever-app-ios img {
+.tgnp-app-ios img {
     height: 30px;
     vertical-align: text-bottom
 }
 
-a.rever-app-ios img:hover {
+a.tgnp-app-ios img:hover {
     opacity: .8
 }
 
@@ -7990,7 +7989,7 @@ a.rever-app-ios img:hover {
     float: right;
     margin-right: 2%;
     width: 49%;
-    font-family: 'rever-icon', arial;
+    font-family: 'tgnp-icon', arial;
     position: relative
 }
 
@@ -8024,7 +8023,7 @@ a.rever-app-ios img:hover {
 .currency-picker {
     width: 49%;
     float: left;
-    font-family: 'rever-icon', arial;
+    font-family: 'tgnp-icon', arial;
     position: relative
 }
 
@@ -9483,11 +9482,11 @@ span.error:empty {
     padding-bottom: 60px !important
 }
 
-.rever-red {
+.tgnp-red {
     color: orange !important
 }
 
-a.rever-red:hover {
+a.tgnp-red:hover {
     text-decoration: underline
 }
 
@@ -10253,7 +10252,7 @@ img.width-50:nth-child(2n) {
 }
 
 .detail-content-news h3 a:before {
-    font-family: 'rever-icon', Verdana, Geneva, sans-serif;
+    font-family: 'tgnp-icon', Verdana, Geneva, sans-serif;
     content: '\f150';
     color: orange;
     font-size: 20px;
@@ -10425,7 +10424,7 @@ img.width-50:nth-child(2n) {
     top: 40%;
     margin-top: -20px;
     right: -50px;
-    font-family: 'rever-icon', arial;
+    font-family: 'tgnp-icon', arial;
     font-size: 50px;
     padding: 10px 5px;
     z-index: 999
@@ -10436,7 +10435,7 @@ img.width-50:nth-child(2n) {
     top: 40%;
     margin-top: -20px;
     left: -50px;
-    font-family: 'rever-icon', arial;
+    font-family: 'tgnp-icon', arial;
     font-size: 50px;
     padding: 10px 5px;
     z-index: 100
@@ -11797,7 +11796,7 @@ section.result article.featured header .name-title p {
     position: relative;
     width: 20px;
     height: 20px;
-    font-family: rever-icon, Verdana, Geneva, sans-serif;
+    font-family: tgnp-icon, Verdana, Geneva, sans-serif;
     text-rendering: auto;
     line-height: 20px;
     font-size: 18px;
@@ -11809,7 +11808,7 @@ section.result article.featured header .name-title p {
     position: relative;
     width: 20px;
     height: 20px;
-    font-family: rever-icon, Verdana, Geneva, sans-serif;
+    font-family: tgnp-icon, Verdana, Geneva, sans-serif;
     text-rendering: auto;
     line-height: 20px;
     font-size: 18px;
@@ -11821,7 +11820,7 @@ section.result article.featured header .name-title p {
     position: relative;
     width: 20px;
     height: 20px;
-    font-family: rever-icon, Verdana, Geneva, sans-serif;
+    font-family: tgnp-icon, Verdana, Geneva, sans-serif;
     text-rendering: auto;
     line-height: 20px;
     font-size: 18px;
@@ -15200,7 +15199,7 @@ section.browsing article.featured {
 
 @media only screen and (max-width: 1440px) {
     .topsearch-bg {
-        background: url(../images/home-rever02.jpg) 50% 50% / cover no-repeat
+        background: url(../images/home-tgnp02.jpg) 50% 50% / cover no-repeat
     }
 
     section.result article.featured .cover {

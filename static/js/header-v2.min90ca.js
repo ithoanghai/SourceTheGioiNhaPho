@@ -11313,7 +11313,7 @@
             return a()(t, [{
                 key: "$emit", value: function (t) {
                     var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-                    var n = new CustomEvent("rever-" + t, {detail: e});
+                    var n = new CustomEvent("tgnp-" + t, {detail: e});
                     this.ele.dispatchEvent(n)
                 }
             }, {
@@ -11321,14 +11321,14 @@
                     var n = function (t) {
                         e.call(void 0, t.detail)
                     };
-                    n.bind(this), this.cbMapping.push({cb: e, evtCb: n}), this.ele.addEventListener("rever-" + t, n, !1)
+                    n.bind(this), this.cbMapping.push({cb: e, evtCb: n}), this.ele.addEventListener("tgnp-" + t, n, !1)
                 }
             }, {
                 key: "$off", value: function (t, e) {
                     for (var n = this, r = [], i = 0; i < this.cbMapping.length; i++) {
                         if (e === this.cbMapping[i].cb) {
                             var o = this.cbMapping[i].evtCb;
-                            this.ele.removeEventListener("rever-" + event, o), r.push(i)
+                            this.ele.removeEventListener("tgnp-" + event, o), r.push(i)
                         }
                     }
                     r.reverse().forEach(function (t) {
@@ -11340,7 +11340,7 @@
                     var n = this, r = function (r) {
                         e.call(void 0, r.detail), n.$off(t, e)
                     };
-                    r.bind(this), this.cbMapping.push({cb: e, evtCb: r}), this.ele.addEventListener("rever-" + t, r, !1)
+                    r.bind(this), this.cbMapping.push({cb: e, evtCb: r}), this.ele.addEventListener("tgnp-" + t, r, !1)
                 }
             }]), t
         }());

@@ -69,7 +69,7 @@ class Listing(models.Model):
     road_type = models.CharField(max_length=20, choices=RoadType.choices, default=RoadType.STREET_SURFACE,
                                  verbose_name=_("Loại mặt tiền"))
     registration_type = models.CharField(max_length=20, choices=RegistrationType.choices,
-                                         default=RegistrationType.RED_BOOK, verbose_name=_("Loại đăng ký"))
+                                         default=RegistrationType.RED_BOOK, verbose_name=_("Loại chứng nhận"))
     price = models.DecimalField(max_digits=4, decimal_places=2, verbose_name=_("Giá chào (tỷ)"))
     sale_price = models.DecimalField(max_digits=4, decimal_places=2, verbose_name=_("Giá Hạ chào (tỷ)"), blank=True, null=True)
 

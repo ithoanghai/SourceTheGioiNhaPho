@@ -3,6 +3,8 @@
 {% load static humanize i18n %}
 
 {% block head %}
+    <script defer src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <script type="deferjs" src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
 
     <title> Thế giới Nhà Phố {% block title %}| Mua căn hộ tốt nhất {% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -43,7 +45,7 @@
     <link rel="stylesheet" href="{% static 'css/mobile.min90ca.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/temp90ca.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/header-live.min90ca.css' %}"/>
-
+    <link rel="stylesheet" href="{% static 'css/listing-detail-page90ca.css' %}"/>
 
     <style>
         [v-cloak] {
@@ -331,18 +333,17 @@
         }
     </style>
 
- {% endblock %}
+{% endblock %}
 
 {% block content %}
-  <!-- Search menu -->
+    <!-- Search menu -->
     {% include 'partials/_menuSearch.html' %}
 
-    <input id="markerwithlabel" type="hidden"
-           value="https://s3-cdn.thegioinhaphovietnam.com.vn/p/v2.33.55/js/markerwithlabel-0.0.1.min.js?v=1617780824171">
+    <input id="markerwithlabel" type="hidden" value="{% static 'js/markerwithlabel-0.0.1.min.js' %}">
 
     <div id="wrap">
 
-        <div class="banner-app-tgnp" id="rever-banner-prompt" style="display: none">
+        <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">
             <div class="banner-app-content">
                 <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
                     <i class="zmdi zmdi-close"></i>
@@ -365,53 +366,49 @@
             <a href="javascript:void(0)" class="btn-install">Mở</a>
         </div>
 
-
-        <input name="recent-view-property-id" type="hidden" value="1593136601509_8642">
-        <input name="recent-view-service-type" type="hidden" value="2">
+        <input name="recent-view-property-id" type="hidden" value="{{ listing.id }}">
+        <input name="recent-view-service-type" type="hidden" value="{{ listing.transaction_type }}">
         <div class="background-detail mpreviews">
             <form name="info" class="hidden">
-                <input name="id" type="hidden" value="1593136601509_8642">
+                <input name="id" type="hidden" value="{{ listing.id }}">
                 <input name="source" type="hidden" value="tgnp">
-                <input name="rvid" type="hidden" value="VUN56730">
-                <input name="title" type="hidden"
-                       value="Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                <input name="price" type="hidden" value="38000000000">
-                <input name="thumbnail" type="hidden"
-                       value="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/TsmByzDXc_x1uR8XSDWbjASkzPZJvnxHMUb_dkJfHhE=/750x500/image.jpg">
-                <input name="price-format" type="hidden" value="38 tỷ">
-                <input name="num-bed-room" type="hidden" value="">
-                <input name="num-bath-room" type="hidden" value="">
-                <input name="sale-status" type="hidden" value="">
-                <input name="agent-avatar" type="hidden"
-                       value="https://rever.vn/photo/v2/get/e0OOJdqyE3M92qGnXjcBKJ4utsgFppUz1Y+vfTNcNfI=/750x500/OMyZdGHsT0T9EEdN.png">
-                <input name="agent-id" type="hidden" value="id-unknown">
+                <input name="rvid" type="hidden" value="{{ listing.code }}">
+                <input name="title" type="hidden" value="{{ listing.title }}">
+                <input name="price" type="hidden" value="{{ listing.price }}">
+                <input name="thumbnail" type="hidden" value="{% with listing.main_photo as photo %}{{ photo.url }}{% endwith %}">
+                 <input name="price-format" type="hidden" value="{{ listing.price }} tỷ">
+                <input name="num-bed-room" type="hidden" value="{{ listing.bedrooms }}">
+                <input name="num-bath-room" type="hidden" value="{{ listing.bathrooms }}">
+                <input name="sale-status" type="hidden" value="{{ listing.is_published }}">
+                <input name="agent-avatar" type="hidden" value="{% static 'img/logo.svg' %}">
+                <input name="agent-id" type="hidden" value="id-{{ listing.id }}">
                 <input name="agent-name" type="hidden" value="thegioinhaphovietnam.com.vn">
                 <input name="agent-encoded" type="hidden" value="">
                 <input name="agent-job-title" type="hidden" value="Hỗ trợ 24/7">
                 <input name="agent-phone" type="hidden" value="0916 286 256">
                 <input name="contact" type="hidden" value="0916 286 256">
-                <input name="area" type="hidden" value="421.5">
-                <input name="service-type" type="hidden" value="2">
-                <input name="property-type" type="hidden" value="4">
-                <input name="direction" type="hidden" value="0">
-                <input name="street" type="hidden" value="Số 8">
-                <input name="ward" type="hidden" value="Tăng Nhơn Phú B">
-                <input name="district" type="hidden" value="Quận 9">
-                <input name="city" type="hidden" value="Hà Nội">
+                <input name="area" type="hidden" value="{{ listing.area }}">
+                <input name="service-type" type="hidden" value="">
+                <input name="property-type" type="hidden" value="">
+                <input name="direction" type="hidden" value="{{ listing.direction }}">
+                <input name="street" type="hidden" value="{{ listing.street }}">
+                <input name="ward" type="hidden" value="{{ listing.ward }}">
+                <input name="district" type="hidden" value="{{ listing.district }}">
+                <input name="city" type="hidden" value="{{ listing.state }}">
                 <input name="neighborhood" type="hidden" value="">
-                <input name="lat" type="hidden" value="10.8340507">
-                <input name="lon" type="hidden" value="106.7770857">
+                <input name="lat" type="hidden" value="">
+                <input name="lon" type="hidden" value="">
                 <input name="youtube" type="hidden" value="">
                 <input name="matterport" type="hidden" value="">
                 <input name="favorited_type" type="hidden" value="sale_property">
-                <input name="streetviewLat" type="hidden" value="10.8428907">
-                <input name="streetviewLon" type="hidden" value="106.7870482">
+                <input name="streetviewLat" type="hidden" value="">
+                <input name="streetviewLon" type="hidden" value="">
             </form>
             <div class="mphotos height-100-percent">
                 <div id="slider" class="flexslider">
                     <div class="group-share">
-                        <a href="#" style="opacity: 0.3" data-id="1593136601509_8642" data-action="favorite"
-                           data-alias="ban-biet-thu-6-phong-ngu-duong-tang-nhon-phu-b-quan-9-da-co-so-hong-phap-ly-minh-bach"
+                        <a href="#" style="opacity: 0.3" data-id="{{ listing.id }}" data-action="favorite"
+                           data-alias="{{ listing.title }}"
                            data-type="sale_property" class="" data-favorited="false">
                             <i class="zmdi zmdi-favorite-outline"></i>
                             <span>Yêu thích</span>
@@ -423,73 +420,18 @@
                     </div>
                     <div class="flex-viewport">
                         <ul class="slides">
+                            {% for photo in listing.photos %}
                             <li>
                                 <a href="#" pos="0" class="cover">
                                     <img class="lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/+bwqVxOgAOGlXvHrHut45NucOJxyUd5hcfv5bZQPepg=/750x500/image.jpg"
-                                         alt="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
+                                         data-src="{{ photo.url }}"
+                                         alt="{{ listing.title }}"
+                                         title="{{ listing.title }}"
                                          draggable="false">
                                 </a>
                             </li>
-
-
-                            <li>
-                                <a href="#" pos="0" class="cover">
-                                    <img class="lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/VyzSLvdt_6CEgh1vGsMSO3LPZy8Dryu9ot7dnSv_v3c=/750x500/image.jpg"
-                                         alt="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         draggable="false">
-                                </a>
-                            </li>
-
-
-                            <li>
-                                <a href="#" pos="0" class="cover">
-                                    <img class="lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/9s8O6lKzTXhNevglL_WnyjjCw6nxEJBHL6ujPSf_0JY=/750x500/image.jpg"
-                                         alt="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         title="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         draggable="false">
-                                </a>
-                            </li>
-
-
-                            <li>
-                                <a href="#" pos="0" class="cover">
-                                    <img class="lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/06mRaw3TcKmtFMzfRYbcd5ioeBOGW6VMkr_SOwWJo98=/750x500/image.jpg"
-                                         alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         draggable="false">
-                                </a>
-                            </li>
-
-
-                            <li>
-                                <a href="#" pos="0" class="cover">
-                                    <img class="lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/Kpn_MtB9Y3bBJFBNhk5jQLeOAUX+Ocl_HH3eExPi2AA=/750x500/image.jpg"
-                                         alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         draggable="false">
-                                </a>
-                            </li>
-
-
-                            <li>
-                                <a href="#" pos="0" class="cover">
-                                    <img class="lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/ErpTH2cTV+ImsRH6VMQuh0GH_r9vcrJMqdbEZmFOZ_g=/750x500/image.jpg"
-                                         alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         draggable="false">
-                                </a>
-                            </li>
-
-
-                        </ul>
+                            {% endfor %}
+                       </ul>
                     </div>
                 </div>
             </div>
@@ -511,118 +453,32 @@
                         <a href="#" title="prev"><span class="but-predetail flex-prev"></span> </a>
                     </div>
                     <ul class="slides">
+                        {% for photo in listing.photos %}
                         <li>
                             <a href="#" class="cover"
-                               title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img src="../../photo.thegioinhaphovietnam.com.vn/v2/get/%2bbwqVxOgAOGlXvHrHut45NucOJxyUd5hcfv5bZQPepg%3d/750x500/image.jpg"
+                               title="{{ listing.title }}">
+                                <img src="{{ photo.url }}"
                                      pos="0"
-                                     alt="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
+                                     alt="{{ listing.title }}"
+                                     title="{{ listing.title }}">
                             </a>
                         </li>
-                        <li>
-                            <a href="#" class="cover"
-                               title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img src="../../photo.thegioinhaphovietnam.com.vn/v2/get/VyzSLvdt_6CEgh1vGsMSO3LPZy8Dryu9ot7dnSv_v3c%3d/750x500/image.jpg"
-                                     pos="0"
-                                     alt="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="cover"
-                               title="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img src="../../photo.thegioinhaphovietnam.com.vn/v2/get/9s8O6lKzTXhNevglL_WnyjjCw6nxEJBHL6ujPSf_0JY%3d/750x500/image.jpg"
-                                     pos="0"
-                                     alt="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="cover"
-                               title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img src="../../photo.thegioinhaphovietnam.com.vn/v2/get/06mRaw3TcKmtFMzfRYbcd5ioeBOGW6VMkr_SOwWJo98%3d/750x500/image.jpg"
-                                     pos="0"
-                                     alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="cover"
-                               title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img src="../../photo.thegioinhaphovietnam.com.vn/v2/get/Kpn_MtB9Y3bBJFBNhk5jQLeOAUX%2bOcl_HH3eExPi2AA%3d/750x500/image.jpg"
-                                     pos="0"
-                                     alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="cover"
-                               title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img src="../../photo.thegioinhaphovietnam.com.vn/v2/get/ErpTH2cTV%2bImsRH6VMQuh0GH_r9vcrJMqdbEZmFOZ_g%3d/750x500/image.jpg"
-                                     pos="0"
-                                     alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                            </a>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div id="carousel1" class="flexslider img-list-slide">
                     <ul class="slides slideimg">
+                        {% for photo in listing.photos %}
                         <li>
                             <a class="img cover" href="#" pos="0"
-                               title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
+                               title="{{ listing.title }}">
                                 <img class="lazy image-normalized"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/+bwqVxOgAOGlXvHrHut45NucOJxyUd5hcfv5bZQPepg=/750x500/image.jpg"
-                                     alt="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
+                                     data-src="{{ photo.url }}"
+                                     alt="{{ listing.title }}"
+                                     title="{{ listing.title }}">
                             </a>
                         </li>
-                        <li>
-                            <a class="img cover" href="#" pos="0"
-                               title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img class="lazy image-normalized"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/VyzSLvdt_6CEgh1vGsMSO3LPZy8Dryu9ot7dnSv_v3c=/750x500/image.jpg"
-                                     alt="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                            </a>
-                        </li>
-                        <li>
-                            <a class="img cover" href="#" pos="0"
-                               title="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img class="lazy image-normalized"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/9s8O6lKzTXhNevglL_WnyjjCw6nxEJBHL6ujPSf_0JY=/750x500/image.jpg"
-                                     alt="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                            </a>
-                        </li>
-                        <li>
-                            <a class="img cover" href="#" pos="0"
-                               title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img class="lazy image-normalized"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/06mRaw3TcKmtFMzfRYbcd5ioeBOGW6VMkr_SOwWJo98=/750x500/image.jpg"
-                                     alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                            </a>
-                        </li>
-                        <li>
-                            <a class="img cover" href="#" pos="0"
-                               title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img class="lazy image-normalized"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/Kpn_MtB9Y3bBJFBNhk5jQLeOAUX+Ocl_HH3eExPi2AA=/750x500/image.jpg"
-                                     alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                            </a>
-                        </li>
-                        <li>
-                            <a class="img cover" href="#" pos="0"
-                               title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img class="lazy image-normalized"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/ErpTH2cTV+ImsRH6VMQuh0GH_r9vcrJMqdbEZmFOZ_g=/750x500/image.jpg"
-                                     alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                            </a>
-                        </li>
+                        {% endfor %}
                     </ul>
                     <div class="slider-buttons2">
                         <a class="font-icon icon-presmall flex-prev" href="#" title="prev"></a>
@@ -641,66 +497,18 @@
                     </div>
                     <div class="flex-viewport">
                         <ul class="slides slideimg">
+                            {% for photo in listing.photos %}
                             <li class="flex-active-slide">
                                 <a class="img cover" href="javascript:void(0)"
-                                   title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
+                                   title="{{ listing.title }}">
                                     <img class="lazy image-normalized"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/+bwqVxOgAOGlXvHrHut45NucOJxyUd5hcfv5bZQPepg=/750x500/image.jpg"
-                                         title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         alt="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
+                                         data-src="{{ photo.url }}"
+                                         title="{{ listing.title }}"
+                                         alt="{{ listing.title }}"
                                          draggable="false">
                                 </a>
                             </li>
-                            <li class="flex-active-slide">
-                                <a class="img cover" href="javascript:void(0)"
-                                   title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                    <img class="lazy image-normalized"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/VyzSLvdt_6CEgh1vGsMSO3LPZy8Dryu9ot7dnSv_v3c=/750x500/image.jpg"
-                                         title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         alt="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         draggable="false">
-                                </a>
-                            </li>
-                            <li class="flex-active-slide">
-                                <a class="img cover" href="javascript:void(0)"
-                                   title="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                    <img class="lazy image-normalized"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/9s8O6lKzTXhNevglL_WnyjjCw6nxEJBHL6ujPSf_0JY=/750x500/image.jpg"
-                                         title="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         alt="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         draggable="false">
-                                </a>
-                            </li>
-                            <li class="flex-active-slide">
-                                <a class="img cover" href="javascript:void(0)"
-                                   title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                    <img class="lazy image-normalized"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/06mRaw3TcKmtFMzfRYbcd5ioeBOGW6VMkr_SOwWJo98=/750x500/image.jpg"
-                                         title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         draggable="false">
-                                </a>
-                            </li>
-                            <li class="flex-active-slide">
-                                <a class="img cover" href="javascript:void(0)"
-                                   title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                    <img class="lazy image-normalized"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/Kpn_MtB9Y3bBJFBNhk5jQLeOAUX+Ocl_HH3eExPi2AA=/750x500/image.jpg"
-                                         title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         draggable="false">
-                                </a>
-                            </li>
-                            <li class="flex-active-slide">
-                                <a class="img cover" href="javascript:void(0)"
-                                   title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                    <img class="lazy image-normalized"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/ErpTH2cTV+ImsRH6VMQuh0GH_r9vcrJMqdbEZmFOZ_g=/750x500/image.jpg"
-                                         title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                         draggable="false">
-                                </a>
-                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -734,40 +542,35 @@
                     <div class="content-detail-house">
                         <header class="detail-house">
                             <div class="address">
+                                <h2><a href="{% url 'search' %}?urban_area={{ listing.urban_area }}"
+                                       title="Khu đô thị/ khu dân cư">{{ listing.urban_area }}</a></h2>
+                                <h2><a href="{% url 'search' %}?street={{ listing.street }}"
+                                       title="Đường">{{ listing.street }}</a></h2>
+                                <h2><a href="{% url 'search' %}?ward={{ listing.ward }}"
+                                       title="Phường/Xã">{{ listing.ward }}</a></h2>
+                                <h2><a href="{% url 'search' %}?district={{ listing.district }}"
+                                       title="Quận/Huyện">{{ listing.district }}</a></h2>
+                                <h2><a href="{% url 'search' %}?state={{ listing.state }}"
+                                       title="Tỉnh/Thành phố">{{ listing.state }}</a></h2>
 
-                                <h2><a href="../s/so-8-quan-9-ha-noi/mua.html" title="Đường">Số 8</a></h2>
-                                <h2><a href="../s/tang-nhon-phu-b-quan-9/mua.html" title="Phường">Tăng Nhơn Phú B</a>
-                                </h2>
-                                <h2><a href="../s/quan-9/mua.html" title="Quận">Quận 9</a></h2>
                             </div>
-                            <h1>Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh
-                                bạch</h1>
+                            <h2>{{ listing.title }}</h2>
                             <div class="detail-row">
                                 <ul class="detailroom">
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 421.5
-                                        m²
-                                    </li>
-                                    <li title="Giá">
-                                        <strong>$</strong> 38 tỷ
-
-
-                                    </li>
+                                    <li title="Diện tích"><span
+                                            class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} </li>
+                                    <li title="Giá"><strong>$</strong> {{ listing.price }} tỷ</li>
+                                    {% if listing.sale_price %} <li title="Bán nhanh"><strong>SaleOff $</strong> {{ listing.sale_price }} tỷ</li> {% endif %}
                                 </ul>
-                                <div class="listing-id">
-                                    <span>Mã nhà đất: </span><span style="padding-left: 0px">VUN56730</span>
+                                <div class="listing-id"><span>Mã nhà đất: </span><span
+                                        style="padding-left: 0px">{{ listing.code }}</span>
                                 </div>
                             </div>
                         </header>
                     </div>
                     <div class="heading-02">Tổng quan</div>
                     <div class="content collapsed pdb-0" data-height="150">
-                        <p class="summary">Bán biệt thự đường số 8 khu phố 4, đường Tăng Nhơn Phú B quận 9. Diện tích
-                            đất 421.5, kết cấu 2 tầng gồm 6 phòng ngủ và 6 toilet, Biệt thự được thiết kế cửa gỗ và nội
-                            thất sang trọng, hiện đại với sân trước rộng rãi, nhiều cây xanh thoáng mát, là nơi an cư
-                            lâu dài cho gia đình nhiều thế hệ cùng chung sống. Hiện biệt thự đã có sổ hồng và hợp lệ về
-                            mặt pháp lý, sẵn sàng công chứng và sang tên ngay trong ngày.&#10;&#10;Vị trí đất Quận 9
-                            cách UBND Quận 9 khoảng 2km, cách chợ 100m, thuộc khu dân cư hiện hữu, dân trí cao, đường
-                            dân sinh. Biệt thự còn nằm gần đình Phong Phú, chợ Tân Nhơn Phú B.&#10;</p>
+                        <p class="summary">{{ listing.description }}</p>
                     </div>
                     <p class="more">
                         <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
@@ -778,33 +581,57 @@
                         <ul class="detail-more">
                             <li>
                                 <p class="left">Loại hình</p>
-                                <p class="right"><a href="../s/ha-noi/mua/biet-thu.html" target="_blank">Biệt
-                                    thự</a></p>
+                                <p class="right"><a href="{% url 'search' %}?house_type={{ listing.house_type }}"
+                                                    target="_blank">
+                                    {% if listing.house_type == 'city_house' %}{% translate 'Nhà Phố' %}
+                                    {% elif listing.registration_type == 'street_house' %} {% translate 'Nhà mặt phố' %}
+                                    {% elif listing.registration_type == 'shop_house' %} {% translate 'Cửa hàng' %}
+                                    {% elif listing.registration_type == 'building' %} {% translate 'Toà nhà' %}
+                                    {% elif listing.registration_type == 'apartment' %} {% translate 'Căn hộ CC' %}
+                                    {% elif listing.registration_type == 'villa' %} {% translate 'Biệt thự' %}
+                                    {% elif listing.registration_type == 'office' %} {% translate 'Văn phòng' %}
+                                    {% else %} {% translate 'Đất' %}  {% endif %}
+                                </a></p>
                             </li>
                             <li>
                                 <p class="left">Số tầng</p>
-                                <p class="right">2</p>
+                                <p class="right">{% if listing.floors %}{{ listing.floors }}{% else %} 0 {% endif %}</p>
+                            </li>
+                            <li>
+                                <p class="left">Số phòng ngủ</p>
+                                <p class="right">{{ listing.bedrooms }}</p>
+                            </li>
+                            <li>
+                                <p class="left">Số phòng tắm</p>
+                                <p class="right">
+                                    {% if listing.bathrooms %}{{ listing.bathrooms }}{% else %} 0 {% endif %}</p>
                             </li>
                             <li>
                                 <p class="left">Diện tích</p>
-                                <p class="right">421.5 m²</p>
+                                <p class="right">{{ listing.area }} {{ listing.area_unit }}</p>
                             </li>
                             <li>
-                                <p class="left">Diện tích sàn</p>
-                                <p class="right">519 m²</p>
+                                <p class="left">Diện tích khuân viên</p>
+                                <p class="right">{{ listing.lot_size }}</p>
                             </li>
                             <li>
-                                <p class="left">Tình hình nội thất</p>
-                                <p class="right">Nội thất cơ bản</p>
-                            </li>
-                            <li>
-                                <p class="left">Loại chủ quyền</p>
-                                <p class="right">Sổ hồng</p>
+                                <p class="left">Loại chứng nhận</p>
+                                <p class="right"><a
+                                        href="{% url 'search' %}?registration_type={{ listing.registration_type }}"
+                                        target="_blank">
+                                    {% if listing.registration_type == 'red_book' %}{% translate 'Sổ đỏ' %}
+                                    {% elif listing.registration_type == 'pink_book' %} {% translate 'Sổ hồng' %}
+                                    {% else %} {% translate 'Chưa làm sổ' %}  {% endif %}</a></p>
                             </li>
                             <li>
                                 <p class="left">Giá bán</p>
-                                <p class="right">38 tỷ</p>
+                                <p class="right">{{ listing.price }} tỷ</p>
                             </li>
+                             {% if listing.sale_price %}<li>
+                                    <p class="left">Bán nhanh</p>
+                                    <p class="right">{{ listing.sale_price }} tỷ</p>
+                                </li>
+                             {% endif %}
                         </ul>
                     </div>
                     <div class="form-real-estate visible-sm">
@@ -821,6 +648,7 @@
                         </div>
                     </div>
                     <div id="booking-form-sm-wrapper"></div>
+
                     <div class="heading-02">Tiện ích</div>
                     <div id="details-amenities" class="content collapsed">
                         <ul class="detail-more">
@@ -872,6 +700,7 @@
                         <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
                            less="Thu gọn">Xem thêm</a>
                     </p>
+
                     <div class="heading-02">Thiết bị, dịch vụ</div>
                     <div id="details-furniture" class="content collapsed">
                         <ul class="detail-more">
@@ -941,6 +770,7 @@
                         <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
                            less="Thu gọn">Xem thêm</a>
                     </p>
+
                     <div class="heading-02">Ưu điểm ngôi nhà</div>
                     <div class="content">
                         <div class="list-advantage clear">
@@ -949,9 +779,9 @@
                             </div>
                             <div class="advandate-content">
                                 <div class="tag-news pd-0">
-                                    <span>Biệt thự quận 9</span>
-                                    <span>biệt thự 6 phòng ngủ</span>
-                                    <span>biệt thự tăng nhơn phú b</span>
+                                    <span>{{ listing.house_type }} {{ listing.district }}</span>
+                                    <span>{{ listing.house_type }} {{ listing.floors }} tầng</span>
+                                    <span>{{ listing.house_type }} {{ listing.bedrooms }} phòng ngủ</span>
                                 </div>
                             </div>
                         </div>
@@ -965,9 +795,8 @@
                             <div class="advantage-name">
                                 <p>Mô tả vị trí</p>
                             </div>
-                            <div class="advandate-content">Vị trí đất Quận 9 cách UBND Quận 9 khoảng 2km, cách chợ 100m,
-                                thuộc khu dân cư hiện hữu, dân trí cao, đường dân sinh. Đất còn nằm gần đình Phong Phú,
-                                chợ Tân Nhơn Phú B.
+                            <div class="advandate-content">{{ listing.description }} Vị trí đất đắc địa, gần chợ,
+                                thuộc khu dân cư hiện hữu, dân trí cao, đường dân sinh. Đất còn nằm gần trung tâm.
                             </div>
                         </div>
                         <div class="list-advantage clear">
@@ -980,73 +809,23 @@
                             <div class="advantage-name">
                                 <p>Về giáo dục</p>
                             </div>
-                            <div class="advandate-content">Mầm non Phong Phú, TH Phong Phú, THCS Tăng Nhơn Phú B, CĐ
-                                Công thương TP. HÀ NỘI,...
+                            <div class="advandate-content">Gần trường mầm non, tiểu học, THCS,...
                             </div>
                         </div>
                     </div>
                     <div class="heading-02">Hình ảnh</div>
                     <div class="gallery-property collapsed" data-height="900">
-                        <div class="cover">
-                            <a href="#"
-                               title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img class="lazy"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/+bwqVxOgAOGlXvHrHut45NucOJxyUd5hcfv5bZQPepg=/750x500/image.jpg"
-                                     alt="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <span>Biệt thự Quận 9</span>
-                            </a>
-                        </div>
-                        <div class="cover">
-                            <a href="#"
-                               title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img class="lazy"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/VyzSLvdt_6CEgh1vGsMSO3LPZy8Dryu9ot7dnSv_v3c=/750x500/image.jpg"
-                                     alt="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <span>Biệt thự Quận 9</span>
-                            </a>
-                        </div>
-                        <div class="cover">
-                            <a href="#"
-                               title="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img class="lazy"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/9s8O6lKzTXhNevglL_WnyjjCw6nxEJBHL6ujPSf_0JY=/750x500/image.jpg"
-                                     alt="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Tiểu cảnh Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <span>Tiểu cảnh Biệt thự Quận 9</span>
-                            </a>
-                        </div>
-                        <div class="cover">
-                            <a href="#"
-                               title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img class="lazy"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/06mRaw3TcKmtFMzfRYbcd5ioeBOGW6VMkr_SOwWJo98=/750x500/image.jpg"
-                                     alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <span>Sân Biệt thự Quận 9</span>
-                            </a>
-                        </div>
-                        <div class="cover">
-                            <a href="#"
-                               title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img class="lazy"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/Kpn_MtB9Y3bBJFBNhk5jQLeOAUX+Ocl_HH3eExPi2AA=/750x500/image.jpg"
-                                     alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <span>Sân Biệt thự Quận 9</span>
-                            </a>
-                        </div>
-                        <div class="cover">
-                            <a href="#"
-                               title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <img class="lazy"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/ErpTH2cTV+ImsRH6VMQuh0GH_r9vcrJMqdbEZmFOZ_g=/750x500/image.jpg"
-                                     alt="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-                                     title="Sân Biệt thự Quận 9 Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch">
-                                <span>Sân Biệt thự Quận 9</span>
-                            </a>
-                        </div>
+                        {% for photo in listing.photos %}
+                            <div class="cover">
+                                <a href="#" title="{{ listing.title }}">
+                                    <img class="lazy"
+                                         data-src="{{ photo.url }}"
+                                         alt="{{ listing.title }}"
+                                         title="{{ listing.title }}">
+                                    <span>Hình sản phẩm</span>
+                                </a>
+                            </div>
+                        {% endfor %}
                         <div class="last-div"></div>
                     </div>
                     <p class="view-more-gray more">
@@ -1056,21 +835,20 @@
                     <div class="heading-02">Tiện ích khu vực</div>
                     <section class="mgt-15 map-detail gmap-render">
                         <div class="_map-bg openBtn img-map"
-                             style="background-image: url(https://maps.googleapis.com/maps/api/staticmap?center=10.8340507,106.7770857&amp;zoom=15&amp;size=1140x640&amp;maptype=roadmap&amp;markers=color:red%7C10.8340507,106.7770857&amp;key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc)">
+                             style="background-image: url(https://maps.googleapis.com/maps/api/staticmap?center=21.02678541550063,105.854106460572&zoom=15&size=1140x640&maptype=roadmap&markers=color:red%7C21.02678541550063,105.854106460572&key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc)">
                             <div class="tooltip-map">
                                 <a>Nhấn vào để xem chi tiết</a>
                             </div>
                             <div class="map--address">
                                 <div class="address-property">
-                                    <div class="left-70"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i> <strong>Số
-                                        Hà Nội</strong>
+                                    <div class="left-70"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i> <strong>{{ listing.title }}</strong>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="map-wrapper">
-                            <a href="#" class="full-screen-act" title="Fullscreen"></a>
+                            <a href="" class="full-screen-act" title="Fullscreen"></a>
                             <div id="render-map"></div>
                             <div class="cover-nearby">
                                 <div class="nearby">
@@ -1109,7 +887,7 @@
                         <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
                         <p class="advisory__sub-title">Tư vấn hoàn toàn miễn phí</p>
                         <p class="text-small-center">
-                            <span>Mã nhà đất <strong>VUN56730</strong></span>
+                            <span>Mã nhà đất <strong>{{ listing.code }}</strong></span>
                         </p>
                         <a data-phone-hidden="category: ContactProperty, event: ClickHiddenHotline" style="opacity: 0.6"
                            href="tel:0964399436" class="btn-primary btn-large btn-red btn-phone phone-hidden"><i
@@ -1130,27 +908,26 @@
             </div>
         </section>
         <div class="cta-bottom-wrapper listing__cta--bottom">
-            <p class="listing__cta--bottom-id">Mã nhà đất <strong>VUN56730</strong></p>
+            <p class="listing__cta--bottom-id">{% trans "Mã nhà đất: " %}<strong>{{ listing.code }}</strong>
+            </p>
             <div class="cta-bottom-inner">
                 <div class="listing__chat">
                     <a class="cta-form request-info btn-hubspot-chat" style="opacity: 0.3" href="javascript:void(0)"><i
                             class="zmdi zmdi-comment-text-alt"></i>Chat</a>
                 </div>
                 <div class="phone">
-                    <a class="cta-hotline" href="tel:0916 286 256">
+                    <a class="cta-hotline" href="tel:0916286256">
                         <i class="zmdi zmdi-phone"></i> 0916 286 256</a>
                 </div>
 
 
             </div>
         </div>
+
         <section id="sticky" class="bg-white mgb-0">
             <section class="width1140">
                 <div class="right-content">
-                    <div id="agent-fix" class="fixed-form">
-
-
-                    </div>
+                    <div id="agent-fix" class="fixed-form"></div>
                 </div>
             </section>
         </section>
@@ -1173,222 +950,51 @@
                 </div>
             </div>
         </div>
+
         <section class="background-gray">
             <section class="width1140 main-content">
                 <div class="heading-02 mgt-10">Nhà đất lân cận</div>
                 <section class="compare-house">
+                    {% for house_neigh in listings_neighborhood %}
                     <div class="article">
-                        <div class="abc">A</div>
                         <div class="img">
                             <a class="cover"
-                               href="nha-pho-quan-9-huong-dong-bac-ban-giao-noi-that-co-ban-phap-ly-ro-rang.html"
-                               title="Nhà phố Quận 9 hướng Đông Bắc, bàn giao nội thất cơ bản, pháp lý rõ ràng.">
+                               href="{% url 'listing' house_neigh.id %}"
+                               title="{{ house_neigh.title }}">
+                                 {% with house_neigh.main_photo as photo %}
                                 <img class="lazy"
-                                     data-src="../images/v2/get/8Ke_qOFlMet7p74akLpe8_MbNLWYGyRNlZ7w3rPEObA=/450x300/image.jpg"
-                                     alt="Nhà phố Quận 9 hướng Đông Bắc, bàn giao nội thất cơ bản, pháp lý rõ ràng."
-                                     title="Nhà phố Quận 9 hướng Đông Bắc, bàn giao nội thất cơ bản, pháp lý rõ ràng.">
+                                     data-src="{{ photo.url }}"
+                                     alt="{{ house_neigh.title }}"
+                                     title="{{ house_neigh.title }}">
+                                {% endwith %}
                             </a>
                         </div>
                         <div class="title">
-                            <h3><a href="nha-pho-quan-9-huong-dong-bac-ban-giao-noi-that-co-ban-phap-ly-ro-rang.html"
-                                   title="Nhà phố Quận 9 hướng Đông Bắc, bàn giao nội thất cơ bản, pháp lý rõ ràng.">Nhà
-                                phố Quận 9 hướng Đông Bắc, bàn giao nội thất cơ bản, pháp lý rõ ràng.</a></h3>
+                            <h3><a href="{% url 'listing' house_neigh.id %}"
+                                   title="{{ house_neigh.title }}">{{ house_neigh.title }}</a></h3>
                         </div>
-                        <div class="status rever-color"></div>
+                        <div class="status tgnp-color"></div>
                         <div class="info">
                             <ul>
-                                <li title="Phòng ngủ"><span class="zmdi zmdi-airline-seat-individual-suite"></span> 2
-                                </li>
-                                <li title="Phòng tắm" class="icon-bath-room"><span></span> 3</li>
+                                <li title="Phòng ngủ"><span class="zmdi zmdi-airline-seat-individual-suite"></span> {{ house_neigh.bedrooms }} </li>
+                                <li title="Phòng tắm" class="icon-bath-room"><span></span> {{ house_neigh.bathrooms }} </li>
                                 <li class="marea" title="Diện tích"><span
-                                        class="zmdi zmdi-photo-size-select-small"></span> 90 m²
+                                        class="zmdi zmdi-photo-size-select-small"></span> {{ house_neigh.area }} {{ house_neigh.area_unit }}
                                 </li>
-                                <li title="Giá">6.2 tỷ</li>
+                                <li title="Giá">{{ house_neigh.price }} tỷ</li>
+                                {% if house_neigh.sale_price %}<li title="Bán nhanh">{{ house_neigh.sale_price }} tỷ</li> {% endif %}
                             </ul>
                         </div>
                         <input name="url" type="hidden"
                                value="/mua/nha-pho-quan-9-huong-dong-bac-ban-giao-noi-that-co-ban-phap-ly-ro-rang">
-                        <input name="lat" type="hidden" value="10.8340507">
-                        <input name="lon" type="hidden" value="106.7770857">
+                        <input name="lat" type="hidden" value="">
+                        <input name="lon" type="hidden" value="">
                     </div>
-                    <div class="article">
-                        <div class="abc">B</div>
-                        <div class="img">
-                            <a class="cover"
-                               href="nha-pho-mat-tien-quan-9-ban-giao-ngay-so-hong-rieng-dien-tich-59-6m2.html"
-                               title="Nhà phố mặt tiền quận 9, bàn giao ngay sổ hồng riêng, diện tích 59.6m2">
-                                <img class="lazy"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/iWP2DnfV5tj9M5YV5QkNx3Tyi_O3iqbRz6U8oX2hhe0=/450x300/image.jpg"
-                                     alt="Nhà phố mặt tiền quận 9, bàn giao ngay sổ hồng riêng, diện tích 59.6m2"
-                                     title="Nhà phố mặt tiền quận 9, bàn giao ngay sổ hồng riêng, diện tích 59.6m2">
-                            </a>
-                        </div>
-                        <div class="title">
-                            <h3><a href="nha-pho-mat-tien-quan-9-ban-giao-ngay-so-hong-rieng-dien-tich-59-6m2.html"
-                                   title="Nhà phố mặt tiền quận 9, bàn giao ngay sổ hồng riêng, diện tích 59.6m2">Nhà
-                                phố mặt tiền quận 9, bàn giao ngay sổ hồng riêng, diện tích 59.6m2</a></h3>
-                            <p><span>100</span><span>m</span></p>
-                        </div>
-                        <div class="status rever-color">Đã bán</div>
-                        <div class="info">
-                            <ul>
-                                <li title="Phòng ngủ"><span class="zmdi zmdi-airline-seat-individual-suite"></span> 2
-                                </li>
-                                <li title="Phòng tắm" class="icon-bath-room"><span></span> 2</li>
-                                <li class="marea" title="Diện tích"><span
-                                        class="zmdi zmdi-photo-size-select-small"></span> 59.6 m²
-                                </li>
-                                <li title="Giá">4.5 tỷ</li>
-                            </ul>
-                        </div>
-                        <input name="url" type="hidden"
-                               value="/mua/nha-pho-mat-tien-quan-9-ban-giao-ngay-so-hong-rieng-dien-tich-59-6m2">
-                        <input name="lat" type="hidden" value="10.834823">
-                        <input name="lon" type="hidden" value="106.7777352">
-                    </div>
-                    <div class="article">
-                        <div class="abc">C</div>
-                        <div class="img">
-                            <a class="cover"
-                               href="ban-nha-pho-2-tang-mat-tien-duong-so-6-dien-tich-dat-24-2m2-so-do-day-du.html"
-                               title="Bán nhà phố 2 tầng - mặt tiền đường số 6, diện tích đất 24.2m2, sổ đỏ đầy đủ.">
-                                <img class="lazy"
-                                     data-src="../images/v2/get/xCNAB3d1uMYa9IgvjrjigI5M3zPve4K_J7eSZqUsIHI=/450x300/image.jpg"
-                                     alt="Bán nhà phố 2 tầng - mặt tiền đường số 6, diện tích đất 24.2m2, sổ đỏ đầy đủ."
-                                     title="Bán nhà phố 2 tầng - mặt tiền đường số 6, diện tích đất 24.2m2, sổ đỏ đầy đủ.">
-                            </a>
-                        </div>
-                        <div class="title">
-                            <h3><a href="ban-nha-pho-2-tang-mat-tien-duong-so-6-dien-tich-dat-24-2m2-so-do-day-du.html"
-                                   title="Bán nhà phố 2 tầng - mặt tiền đường số 6, diện tích đất 24.2m2, sổ đỏ đầy đủ.">Bán
-                                nhà phố 2 tầng - mặt tiền đường số 6, diện tích đất 24.2m2, sổ đỏ đầy đủ.</a></h3>
-                            <p><span>400</span><span>m</span></p>
-                        </div>
-                        <div class="status rever-color">Đã bán</div>
-                        <div class="info">
-                            <ul>
-                                <li title="Phòng ngủ"><span class="zmdi zmdi-airline-seat-individual-suite"></span> 2
-                                </li>
-                                <li title="Phòng tắm" class="icon-bath-room"><span></span> 2</li>
-                                <li class="marea" title="Diện tích"><span
-                                        class="zmdi zmdi-photo-size-select-small"></span> 24.2 m²
-                                </li>
-                                <li title="Giá">2.5 tỷ</li>
-                            </ul>
-                        </div>
-                        <input name="url" type="hidden"
-                               value="/mua/ban-nha-pho-2-tang-mat-tien-duong-so-6-dien-tich-dat-24-2m2-so-do-day-du">
-                        <input name="lat" type="hidden" value="10.8364936">
-                        <input name="lon" type="hidden" value="106.7797386">
-                    </div>
-                    <div class="article">
-                        <div class="abc">D</div>
-                        <div class="img">
-                            <a class="cover" href="apartment-citrine-apartment-tang-6-view-thoang-mat-noi-that-co-ban.html"
-                               title="Căn hộ Citrine Apartment tầng 6 view thoáng mát, nội thất cơ bản.">
-                                <img class="lazy"
-                                     data-src="../images/v2/get/oX2P4XTe2TJJmvm2j0h8wjWqBFy1IchD0yO1k5wXU1o=/450x300/image.jpg"
-                                     alt="Căn hộ Citrine Apartment tầng 6 view thoáng mát, nội thất cơ bản."
-                                     title="Căn hộ Citrine Apartment tầng 6 view thoáng mát, nội thất cơ bản.">
-                            </a>
-                        </div>
-                        <div class="title">
-                            <h3><a href="apartment-citrine-apartment-tang-6-view-thoang-mat-noi-that-co-ban.html"
-                                   title="Căn hộ Citrine Apartment tầng 6 view thoáng mát, nội thất cơ bản.">Căn hộ
-                                Citrine Apartment tầng 6 view thoáng mát, nội thất cơ bản.</a></h3>
-                            <p><span>500</span><span>m</span></p>
-                        </div>
-                        <div class="status rever-color"></div>
-                        <div class="info">
-                            <ul>
-                                <li title="Phòng ngủ"><span class="zmdi zmdi-airline-seat-individual-suite"></span> 2
-                                </li>
-                                <li title="Phòng tắm" class="icon-bath-room"><span></span> 2</li>
-                                <li class="marea" title="Diện tích"><span
-                                        class="zmdi zmdi-photo-size-select-small"></span> 68 m²
-                                </li>
-                                <li title="Giá">2.2 tỷ</li>
-                            </ul>
-                        </div>
-                        <input name="url" type="hidden"
-                               value="/mua/apartment-citrine-apartment-tang-6-view-thoang-mat-noi-that-co-ban">
-                        <input name="lat" type="hidden" value="10.83076301298253">
-                        <input name="lon" type="hidden" value="106.7745770010498">
-                    </div>
-                    <div class="article">
-                        <div class="abc">E</div>
-                        <div class="img">
-                            <a class="cover" href="apartment-citrine-apartment-tang-thap-huong-tay-bac-view-cay-xanh.html"
-                               title="Căn hộ Citrine Apartment tầng thấp, hướng Tây Bắc, view cây xanh.">
-                                <img class="lazy"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/qH2aJkpPcPYGjOzEORrkYysKjAvUt1Z3fnDj9E8eDI0=/450x300/image.jpg"
-                                     alt="Căn hộ Citrine Apartment tầng thấp, hướng Tây Bắc, view cây xanh."
-                                     title="Căn hộ Citrine Apartment tầng thấp, hướng Tây Bắc, view cây xanh.">
-                            </a>
-                        </div>
-                        <div class="title">
-                            <h3><a href="apartment-citrine-apartment-tang-thap-huong-tay-bac-view-cay-xanh.html"
-                                   title="Căn hộ Citrine Apartment tầng thấp, hướng Tây Bắc, view cây xanh.">Căn hộ
-                                Citrine Apartment tầng thấp, hướng Tây Bắc, view cây xanh.</a></h3>
-                            <p><span>500</span><span>m</span></p>
-                        </div>
-                        <div class="status rever-color">Đã bán</div>
-                        <div class="info">
-                            <ul>
-                                <li title="Phòng ngủ"><span class="zmdi zmdi-airline-seat-individual-suite"></span> 2
-                                </li>
-                                <li title="Phòng tắm" class="icon-bath-room"><span></span> 2</li>
-                                <li class="marea" title="Diện tích"><span
-                                        class="zmdi zmdi-photo-size-select-small"></span> 73 m²
-                                </li>
-                                <li title="Giá">2.3 tỷ</li>
-                            </ul>
-                        </div>
-                        <input name="url" type="hidden"
-                               value="/mua/apartment-citrine-apartment-tang-thap-huong-tay-bac-view-cay-xanh">
-                        <input name="lat" type="hidden" value="10.83076301298253">
-                        <input name="lon" type="hidden" value="106.7745770010498">
-                    </div>
-                    <div class="article">
-                        <div class="abc">F</div>
-                        <div class="img">
-                            <a class="cover"
-                               href="ban-apartment-citrine-apartment-tang-thap-dien-tich-68-9m2-2-phong-ngu-khong-co-noi-that.html"
-                               title="Bán căn hộ Citrine Apartment tầng thấp, diện tích 68.9m2 - 2 phòng ngủ, không có nội thất">
-                                <img class="lazy"
-                                     data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/DEsqJc2YQ2a5gjFUgaPgzpANlizC5k5TavywC3UB5eU=/450x300/image.jpg"
-                                     alt="Bán căn hộ Citrine Apartment tầng thấp, diện tích 68.9m2 - 2 phòng ngủ, không có nội thất"
-                                     title="Bán căn hộ Citrine Apartment tầng thấp, diện tích 68.9m2 - 2 phòng ngủ, không có nội thất">
-                            </a>
-                        </div>
-                        <div class="title">
-                            <h3>
-                                <a href="ban-apartment-citrine-apartment-tang-thap-dien-tich-68-9m2-2-phong-ngu-khong-co-noi-that.html"
-                                   title="Bán căn hộ Citrine Apartment tầng thấp, diện tích 68.9m2 - 2 phòng ngủ, không có nội thất">Bán
-                                    căn hộ Citrine Apartment tầng thấp, diện tích 68.9m2 - 2 phòng ngủ, không có nội
-                                    thất</a></h3>
-                            <p><span>500</span><span>m</span></p>
-                        </div>
-                        <div class="status rever-color">Đã bán</div>
-                        <div class="info">
-                            <ul>
-                                <li title="Phòng ngủ"><span class="zmdi zmdi-airline-seat-individual-suite"></span> 2
-                                </li>
-                                <li title="Phòng tắm" class="icon-bath-room"><span></span> 2</li>
-                                <li class="marea" title="Diện tích"><span
-                                        class="zmdi zmdi-photo-size-select-small"></span> 68.9 m²
-                                </li>
-                                <li title="Giá">2.03 tỷ</li>
-                            </ul>
-                        </div>
-                        <input name="url" type="hidden"
-                               value="/mua/ban-apartment-citrine-apartment-tang-thap-dien-tich-68-9m2-2-phong-ngu-khong-co-noi-that">
-                        <input name="lat" type="hidden" value="10.83076301298253">
-                        <input name="lon" type="hidden" value="106.7745770010498">
-                    </div>
+                    {% endfor %}
                 </section>
             </section>
         </section>
+
         <section class="bg-gray-e6 pdt-0">
             <section class="width1140">
                 <div class="heading-02">Bạn đang cần bán hay cho thuê nhà?</div>
@@ -1409,7 +1015,8 @@
                         </div>
                         <div class="about-3d">
                             <h3>Tuyệt vời khi trình diễn với 3d nhập vai</h3>
-                            <p>Công nghệ 3d nhập vai của Thế giới Nhà Phốmang lại trải nghiệm có độ tin cậy tuyệt đối với khách
+                            <p>Công nghệ 3d nhập vai của Thế giới Nhà Phốmang lại trải nghiệm có độ tin cậy tuyệt đối
+                                với khách
                                 hàng khi xem trực tuyến ở tất cả mọi nơi. Kết hợp đội ngũ nhân viên được đào tạo chuyên
                                 nghiệp đã giúp cho tốc độ bán nhanh hơn gấp đôi so với thị trường.</p>
                         </div>
@@ -1418,7 +1025,7 @@
                         <div class="clear">
                             <div class="cover">
                                 <img class="lazy" style="object-fit: cover; object-position: center center"
-                                     data-src="https://rever.vn/photo/v2/get/e0OOJdqyE3M92qGnXjcBKJ4utsgFppUz1Y+vfTNcNfI=/750x500/OMyZdGHsT0T9EEdN.png"
+                                     data-src="{% static 'img/logo-ko-chu.svg' %}"
                                      alt="thegioinhaphovietnam.com.vn" title="thegioinhaphovietnam.com.vn">
                             </div>
                             <div class="infoagent">
@@ -1430,13 +1037,14 @@
                             </div>
                         </div>
                         <a class="like-button" href="#sell-now-form" title="Liên hệ">Liên hệ</a>
-                        <input type="hidden" name="contact-agent" value="support@thegioinhaphovietnam.com.vn">
+                        <input type="hidden" name="contact-agent" value="thegioinhaphovietnam@gmail.com">
                         <input type="hidden" name="contact-agent-msg"
                                value="Tôi có nhu cầu muốn bán nhà thông qua TGNP. Liên lạc với tôi ngay.">
                     </div>
                 </div>
             </section>
         </section>
+
         <section class="background-gray">
             <div class="width1140">
                 <div class="heading-02 pd-tb-30 mgt-10">Nhà đất tương tự</div>
@@ -1675,7 +1283,8 @@
                             <header>
                                 <a href="dat-nen-quan-12-huong-bac-so-hong-phap-ly-ro-rang.html"
                                    title="Đất nền Q. Hoàn Kiếm2 hướng Bắc, sổ hồng pháp lý rõ ràng." data-imp-click><h3
-                                        class="heading">Đất nền Q. Hoàn Kiếm2 hướng Bắc, sổ hồng pháp lý rõ ràng.</h3></a>
+                                        class="heading">Đất nền Q. Hoàn Kiếm2 hướng Bắc, sổ hồng pháp lý rõ ràng.</h3>
+                                </a>
                                 <h4>P1274835 &#8226; </h4>
                                 <h4><a href="../s/an-phu-dong-quan-12/mua.html" title="Phường">An Phú Đông,</a></h4>
                                 <h4><a href="../s/quan-12/mua.html" title="Quận">Q. Hoàn Kiếm2</a></h4>
@@ -1691,7 +1300,7 @@
                             <a href="tieu-de.html" title="TIêu đề " data-imp-click>
                                 <div class="cover">
                                     <img class="image-pixelated lazy"
-                                         data-src="https://s3-cdn.thegioinhaphovietnam.com.vn/p/images/rever-realty-empty-image.png"
+                                         data-src="https://s3-cdn.thegioinhaphovietnam.com.vn/p/images/tgnp-realty-empty-image.png"
                                          alt="TIêu đề " title="TIêu đề "/>
                                 </div>
                             </a>
@@ -1927,6 +1536,7 @@
                 </div>
             </div>
         </section>
+
         <div class="post-share-btn-group aj-post-share-btn-group">
             <div class="btn-group btn-share-group addthis_toolbox addthis_default_style">
                 <ul class="post-share-buttons">
@@ -1960,6 +1570,7 @@
                 opacity: 0.4
             }
         </style>
+
         <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
             <div class="popup-feedback-fixed">
                 <div class="popup-body-fb">
@@ -1972,7 +1583,8 @@
                                     <button @click="hideModal()" class="popup-close-btn"><i
                                             class="zmdi zmdi-hc-2x zmdi-close"></i></button>
                                     <div v-show="step == 1" class="contain" id="step-form-1">
-                                        <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?
+                                        <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người
+                                            khác?
                                         </div>
                                         <div class="choose-number">
                                             <ul>
@@ -2134,7 +1746,8 @@
                             <img class="img-success" src="{% static 'images/icon-success.svg' %}">
                             <div class="send-success">
                                 <h3>Đã gửi thành công!</h3>
-                                <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp Thế giới Nhà Phố từng bước nâng
+                                <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp Thế giới Nhà Phố từng
+                                    bước nâng
                                     cao
                                     chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
                                     <strong>0916 286 256</strong></p>
@@ -2155,13 +1768,10 @@
 
 {% block scripts %}
 
-    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-       <script defer src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
-
     <script>
         window.AppPrompt = (function () {
             var APP_PROMP_KEY = "app_banner_prompt"
-            var wrapper = document.getElementById('rever-banner-prompt')
+            var wrapper = document.getElementById('tgnp-banner-prompt')
             var btnAdd = wrapper.querySelector('.btn-install')
             var deferredPrompt;
             var promptInfo = {
@@ -2291,10 +1901,11 @@
             }
         }
     </script>
-    <script defer  src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
+    <script defer src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
 
     <script type="deferjs">
     window.$dialog = function(){var e={bodyClassSpecs:"mdialog-body",bodyLoadingClass:"mdialog-loading",cachedBodyStyle:null,default:{zindex:99999,width:300,minHeight:100,background:"rgba(0,0,0,.5)",opacity:.5},key:{cachedStyle:"cached-style"}};return e.show=function(t,n,i,o){(n=$.extend(!0,{outSideClick:!0},n||{})).maxWidth="100%";var a,d=document.body.getAttribute("style");document.body.setAttribute(e.key.cachedStyle,d),(a=t&&"string"==typeof t?$(document.getElementById(t)):t).css("opacity",0),a.css("overflow-y","auto"),a.css("overflow-x","hidden"),a.addClass("opened");var s=(n?n.body:"")||".body";return a.find(s).css(n),a.find(s).addClass(e.bodyClassSpecs),a[0]&&(a[0].$dialogCallback=i),a[0]&&(a[0].$dialogInitTime=+new Date),n&&n.close&&a.find(s+" "+n.close).off().click(function(n){n.preventDefault(),e.hide(t,i)}),n&&n.outSideClick&&a.off().click(function(){e.hide(t,i)}),a.find(s).click(function(e){e.stopPropagation()}),e.animation(a,0,0,1,function(){o&&o()}),e.loadingEnd(a),a},e.animation=function(t,n,i,o,a){t.css("opacity",n),o>0&&n>1||o<0&&n<0?a&&a():setTimeout(function(){n+=o*(.05*i+1e-4*i*i),e.animation(t,n,i+1,o,a)},10)},e.hide=function(t,n){var i;i=t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened"),e.animation(i,1,0,-1,function(){i.removeClass("opened"),n&&n(i)})},e.loadingStart=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs).addClass(e.bodyLoadingClass)},e.loadingEnd=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs+"."+e.bodyLoadingClass).removeClass(e.bodyLoadingClass)},$(window).keydown(function(t){var n=$(".mdialog.opened");if(n.length&&27==t.keyCode){var i=[];i.length=n.length;for(var o=0;o<n.length;o++)for(var a=o;a<n.length;a++)n[o].$dialogInitTime>n[a].$dialogInitTime?(i[a]=n[o],i[o]=n[a]):(i[o]=n[o],i[a]=n[a]);var d=i[i.length-1];d&&e.hide($(d),d?d.$dialogCallback:null)}}),e.initStyles=function(){var e=document.createElement("STYLE"),t=document.head||document.getElementsByTagName("head")[0];e.type="text/css",e.styleSheet?e.styleSheet.cssText="":e.appendChild(document.createTextNode(this.getCss())),t.appendChild(e)},e.getCss=function(){var t=e.default,n="",i={display:"none",position:"fixed",top:"0",height:"100%",left:"0",width:"100%"};i["z-index"]=t.zindex,i.background=t.background,n+=e.assignStyle(".mdialog",i),n+=".mdialog.opened{display: block;}";var o={};o.width=t.width+"px",o["min-height"]=t.minHeight+"px",o.background="#fff",o.margin="60px auto 140px auto",n+=e.assignStyle(".mdialog .body",o);var a={position:"relative"};n+=e.assignStyle("."+e.bodyLoadingClass,a);var d={content:"' '",top:0,left:0,width:"100%",height:"100%",position:"absolute",background:"#fff",opacity:.4,"z-index":1};n+=e.assignStyle("."+e.bodyLoadingClass+":before",d);var s={content:"' '",border:"2px solid #303339","border-top":"2px solid #fff;","border-radius":"50%",width:"30px",height:"30px",position:"absolute",top:"calc(50% - 15px)",left:"calc(50% - 15px)","-webkit-animation":"spin 2s linear infinite",animation:"spin 2s linear infinite","z-index":1};return n+=e.assignStyle("."+e.bodyLoadingClass+":after",s),n+="@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }"},e.assignStyle=function(e,t){var n=e+"{";for(var i in t){n+=i+":"+t[i]+";"}return n+="}"},e.initStyles(),e}();
+
 
 
     </script>
@@ -2601,6 +2212,7 @@
       })
 
 
+
     </script>
 
     <script>(function (c, a) {
@@ -2673,6 +2285,7 @@
     mixpanel.track("Page View")
 
 
+
     </script>
 
 
@@ -2704,7 +2317,7 @@
   "@context": "http://schema.org",
   "@type": "Organization",
   "url": "https://thegioinhaphovietnam.com.vn",
-  "logo": "../images/rever-thumbnail.jpg",
+  "logo": "../images/tgnp-thumbnail.jpg",
   "contactPoint": [
     {
       "@type": "ContactPoint",
@@ -2734,10 +2347,10 @@
         }
     }
 </script>
-    <script defersrc="{% static 'js/listing.min90ca.js' %}"></script>
+    <script type="deferjs"  src="{% static 'js/listing.min90ca.js' %}"></script>
 
-    <script defer src="{% static 'js/hubspot-chatbox.min90ca.js' %}"></script>
-    <script defer src="{% static 'js/property-contact-box-v2.min90ca.js' %}"></script>
+    <script type="deferjs"  src="{% static 'js/hubspot-chatbox.min90ca.js' %}"></script>
+    <script type="deferjs"  src="{% static 'js/property-contact-box-v2.min90ca.js' %}"></script>
 
     <script>
         var callbackInitMap = function () {
@@ -2752,6 +2365,7 @@
     var addthis_share = {
        url: window.location.href
     }
+
 
 
     </script>
@@ -2781,6 +2395,7 @@
     t=l.createElement(r);t.async=1;t.defer=1;t.src="https://www.clarity.ms/tag/"+i;
     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
   })(window, document, "clarity", "script", "3y09hfteky");
+
 
 
     </script>
@@ -2830,6 +2445,7 @@
   })
 
 
+
     </script>
     <script type="application/ld+json">
   {
@@ -2853,17 +2469,13 @@
 } ]
   }
 </script>
+    <script defer src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
+
     <script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script>
 
     <script type="deferjs" src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
 
-    <script defer src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
-
-
-
-
     <script type="deferjs" id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
-
 
     <script defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
     <script defer src="{% static 'js/feedback-modal.min90ca.js' %}"></script>
@@ -2912,6 +2524,7 @@
       }
     };
   })();
+
 
 
 
@@ -3165,6 +2778,7 @@
   }
 
 
+
     </script>
     <script type="deferjs">
         createHSForm({
@@ -3180,9 +2794,10 @@
         });
 
 
+
     </script>
 
-    <script defer  src="{% static 'js/header-v2.min90ca.js' %}"></script>
+    <script defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
 {% endblock %}
 
 

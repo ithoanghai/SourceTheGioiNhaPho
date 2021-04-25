@@ -846,7 +846,7 @@ a {
 }
 
 @font-face {
-    font-family: 'rever-icon';
+    font-family: 'tgnp-icon';
     src: url('https://offer.thegioinhaphovietnam.com.vn/hubfs/test-Linh/fonts/ReverIcons.eot');
     src: url('https://offer.thegioinhaphovietnam.com.vn/hubfs/test-Linh/fonts/ReverIcons.eot?#iefix') format('embedded-opentype'), url('https://offer.thegioinhaphovietnam.com.vn/hubfs/test-Linh/fonts/ReverIcons.woff') format('woff'), url('https://offer.thegioinhaphovietnam.com.vn/hubfs/test-Linh/fonts/ReverIcons.ttf') format('truetype'), url('https://offer.thegioinhaphovietnam.com.vn/hubfs/test-Linh/fonts/ReverIcons.svg#roboto_condensedregular') format('svg')
 }
@@ -868,7 +868,7 @@ body {
 }
 
 .font-icon {
-    font-family: 'rever-icon', Verdana, Geneva, sans-serif;
+    font-family: 'tgnp-icon', Verdana, Geneva, sans-serif;
     text-rendering: auto;
     line-height: 20px;
     font-size: 18px;

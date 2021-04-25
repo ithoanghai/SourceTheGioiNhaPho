@@ -92,9 +92,9 @@
     animation: zmdi-spin 1.5s infinite linear
 }
 
-.zmdi-hc-spin-reverse {
-    -webkit-animation: zmdi-spin-reverse 1.5s infinite linear;
-    animation: zmdi-spin-reverse 1.5s infinite linear
+.zmdi-hc-spin-tgnpse {
+    -webkit-animation: zmdi-spin-tgnpse 1.5s infinite linear;
+    animation: zmdi-spin-tgnpse 1.5s infinite linear
 }
 
 @-webkit-keyframes zmdi-spin {
@@ -119,7 +119,7 @@
     }
 }
 
-@-webkit-keyframes zmdi-spin-reverse {
+@-webkit-keyframes zmdi-spin-tgnpse {
     0% {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg)
@@ -130,7 +130,7 @@
     }
 }
 
-@keyframes zmdi-spin-reverse {
+@keyframes zmdi-spin-tgnpse {
     0% {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg)

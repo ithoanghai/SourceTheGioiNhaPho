@@ -7367,12 +7367,12 @@ button.bg-darker:focus {
   flex-direction: column !important;
 }
 
-.flex-row-reverse {
-  flex-direction: row-reverse !important;
+.flex-row-tgnpse {
+  flex-direction: row-tgnpse !important;
 }
 
-.flex-column-reverse {
-  flex-direction: column-reverse !important;
+.flex-column-tgnpse {
+  flex-direction: column-tgnpse !important;
 }
 
 .flex-wrap {
@@ -7383,8 +7383,8 @@ button.bg-darker:focus {
   flex-wrap: nowrap !important;
 }
 
-.flex-wrap-reverse {
-  flex-wrap: wrap-reverse !important;
+.flex-wrap-tgnpse {
+  flex-wrap: wrap-tgnpse !important;
 }
 
 .flex-fill {
@@ -7504,12 +7504,12 @@ button.bg-darker:focus {
     flex-direction: column !important;
   }
 
-  .flex-sm-row-reverse {
-    flex-direction: row-reverse !important;
+  .flex-sm-row-tgnpse {
+    flex-direction: row-tgnpse !important;
   }
 
-  .flex-sm-column-reverse {
-    flex-direction: column-reverse !important;
+  .flex-sm-column-tgnpse {
+    flex-direction: column-tgnpse !important;
   }
 
   .flex-sm-wrap {
@@ -7520,8 +7520,8 @@ button.bg-darker:focus {
     flex-wrap: nowrap !important;
   }
 
-  .flex-sm-wrap-reverse {
-    flex-wrap: wrap-reverse !important;
+  .flex-sm-wrap-tgnpse {
+    flex-wrap: wrap-tgnpse !important;
   }
 
   .flex-sm-fill {
@@ -7642,12 +7642,12 @@ button.bg-darker:focus {
     flex-direction: column !important;
   }
 
-  .flex-md-row-reverse {
-    flex-direction: row-reverse !important;
+  .flex-md-row-tgnpse {
+    flex-direction: row-tgnpse !important;
   }
 
-  .flex-md-column-reverse {
-    flex-direction: column-reverse !important;
+  .flex-md-column-tgnpse {
+    flex-direction: column-tgnpse !important;
   }
 
   .flex-md-wrap {
@@ -7658,8 +7658,8 @@ button.bg-darker:focus {
     flex-wrap: nowrap !important;
   }
 
-  .flex-md-wrap-reverse {
-    flex-wrap: wrap-reverse !important;
+  .flex-md-wrap-tgnpse {
+    flex-wrap: wrap-tgnpse !important;
   }
 
   .flex-md-fill {
@@ -7780,12 +7780,12 @@ button.bg-darker:focus {
     flex-direction: column !important;
   }
 
-  .flex-lg-row-reverse {
-    flex-direction: row-reverse !important;
+  .flex-lg-row-tgnpse {
+    flex-direction: row-tgnpse !important;
   }
 
-  .flex-lg-column-reverse {
-    flex-direction: column-reverse !important;
+  .flex-lg-column-tgnpse {
+    flex-direction: column-tgnpse !important;
   }
 
   .flex-lg-wrap {
@@ -7796,8 +7796,8 @@ button.bg-darker:focus {
     flex-wrap: nowrap !important;
   }
 
-  .flex-lg-wrap-reverse {
-    flex-wrap: wrap-reverse !important;
+  .flex-lg-wrap-tgnpse {
+    flex-wrap: wrap-tgnpse !important;
   }
 
   .flex-lg-fill {
@@ -7918,12 +7918,12 @@ button.bg-darker:focus {
     flex-direction: column !important;
   }
 
-  .flex-xl-row-reverse {
-    flex-direction: row-reverse !important;
+  .flex-xl-row-tgnpse {
+    flex-direction: row-tgnpse !important;
   }
 
-  .flex-xl-column-reverse {
-    flex-direction: column-reverse !important;
+  .flex-xl-column-tgnpse {
+    flex-direction: column-tgnpse !important;
   }
 
   .flex-xl-wrap {
@@ -7934,8 +7934,8 @@ button.bg-darker:focus {
     flex-wrap: nowrap !important;
   }
 
-  .flex-xl-wrap-reverse {
-    flex-wrap: wrap-reverse !important;
+  .flex-xl-wrap-tgnpse {
+    flex-wrap: wrap-tgnpse !important;
   }
 
   .flex-xl-fill {
