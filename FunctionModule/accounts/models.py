@@ -25,7 +25,7 @@ phone_regex = RegexValidator(regex=r'^(09|03|07|08|05)+([0-9]{8})$',
 class User(AbstractUser):
     # These two fields are for backend (admin) login form to display correctly
 
-    email = models.EmailField(_('Email'), unique=True)
+    email = models.EmailField(_('Email'), blank=True)
     is_realtor = models.BooleanField(_("Là đầu chủ"), default=False)
     # Basic Info
     phone = models.CharField(_('Điện thoại'), max_length=20, db_index=True, unique=True,
@@ -45,7 +45,7 @@ class User(AbstractUser):
     first_time = models.BooleanField(_('FirstLogin'), default=True)
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def get_absolute_url(self):
         return reverse('users:detail', kwargs={'username': self.username})

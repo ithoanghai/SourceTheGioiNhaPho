@@ -17,6 +17,8 @@ services:
     restart: on-failure
   web:
     build: .
+    env_file:
+      - ./.env
     environment:
       - DB_HOST=db
     command:  bash -c "service ssh restart;python manage.py runserver 0.0.0.0:8888"

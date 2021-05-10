@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
 from django.utils.translation import gettext_lazy as _
 
+load_dotenv()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,11 +26,11 @@ SECRET_KEY = 'w6rm%l&xim0ivll-li$u6fg8)6k8-$7uar^f#33ht5sutw8e!#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ALLOWED_HOSTS = ['*']
 
 # Application definition
-
 MODULES = [
     'FunctionModule.accounts.apps.AccountsConfig',
     'FunctionModule.pages.apps.PagesConfig',
@@ -48,10 +50,12 @@ THIRD_PARTIES = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
+    'adminplus',
 ]
 
 BUILT_IN_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
+    'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -105,7 +109,7 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME', 'real_estate'),
         'USER': os.getenv('DB_USER', 'postgres'),
         'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'HOST': os.getenv('DB_HOST', 'db'),
 
     }
 }
@@ -145,7 +149,7 @@ COMPRESS_OFFLINE_CONTEXT = [
     {"LANGUAGE_BIDI": False},
 ]
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Ho_Chi_Minh'
 
 USE_I18N = True
 
@@ -153,7 +157,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+APPEND_SLASH = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/deployment/
@@ -174,11 +178,13 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
+GOOGLE_MAP_API_KEY = os.getenv('GOOGLE_MAP_API_KEY', '')
+GEOEARTH_API_KEY = os.getenv('GEOEARTH_API_KEY', '')
 LOCATION_FIELD = {
     'map.provider': 'google',
     'search.provider': 'nominatim',
     # 'provider.mapbox.access_token': 'pk.eyJ1Ijoia2llbm5ndXllbjExMDEiLCJhIjoiY2ttaHRqZTgzMGF0YzJ3bXVvYW9ncnh0ZiJ9.xar2mZcYZJ1qK4i2mRDa0Q',
-    'provider.google.api_key': os.getenv('GOOGLE_MAP_API_KEY', 'AIzaSyDmaAApf34vXAuXCPWvMAKJQ50t5ZzGVzA')
+    'provider.google.api_key': GOOGLE_MAP_API_KEY
 }
 
 INTERNAL_IPS = [
@@ -205,3 +211,26 @@ REST_FRAMEWORK = {
    'PAGE_SIZE': 1
 
 }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+    },
+}
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 15  # 15M
+FILE_UPLOAD_MAX_MEMORY_SIZE = DATA_UPLOAD_MAX_MEMORY_SIZE

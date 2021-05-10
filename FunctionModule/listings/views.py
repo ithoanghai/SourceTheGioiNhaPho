@@ -15,6 +15,7 @@ from ..cadastral.constants import state_data, district_data
 from decimal import Decimal
 from .serializers import *
 
+
 class ListingSearchQuery(BaseModel):
     keywords: str = None
     state: int = None
@@ -37,7 +38,6 @@ def index(request):
 
 
 def listing(request, listing_id):
-
     listing = get_object_or_404(Listing, pk=listing_id)
     listings_neighborhood = Listing.objects.order_by('-list_date').filter(state=listing.state)
     listings_same = Listing.objects.order_by('-list_date').filter(house_type=listing.house_type, area=listing.area )
@@ -48,6 +48,7 @@ def listing(request, listing_id):
     }
 
     return render(request, 'listings/detail.html', context)
+
 
 def detail(request):
     listing_id = request.GET.get('id', '')
@@ -89,19 +90,19 @@ def search(request):
             query = Q(description__icontains=keywords) | Q(name__icontains=keywords)
             queryset_list = queryset_list.filter(query)
 
-    # Address
+            # Address
             if 'address' in request.GET:
                 address = request.GET['address']
                 if address:
                     queryset_list = queryset_list.filter(address=address)
 
-    # street
+        # street
         if 'street' in request.GET:
             street = request.GET['street']
             if street:
                 queryset_list = queryset_list.filter(address=street)
 
-    # District
+        # District
         if 'district' in request.GET:
             district = request.GET['district']
             if district:
@@ -126,13 +127,13 @@ def search(request):
             query = Q(price__lte=price) | Q(sale_price__lte=price)
             queryset_list = queryset_list.filter(query)
 
-
     context = {
         'listings': queryset_list,
         'state_data': state_data,
     }
 
     return render(request, 'listings/search.html', context)
+
 
 def sell_with_us(request):
     context = {

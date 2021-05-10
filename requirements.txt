@@ -11,5 +11,8 @@ django-ajax-selects==2.1.0
 django-embed-video==1.4.0
 django-role-permissions==3.1.1
 django-debug-toolbar==3.2
+django-adminplus==0.5
+geopy==2.1.0
 pydantic==1.8.1
 django_filter==2.4.0
+python-dotenv==0.17.1
