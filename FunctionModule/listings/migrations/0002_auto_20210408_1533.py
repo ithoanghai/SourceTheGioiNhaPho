@@ -13,33 +13,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='listing',
-            name='code',
-            field=models.CharField(help_text='Được điền tự động và duy nhất', max_length=50, unique=True, verbose_name='Mã BĐS'),
-        ),
-        migrations.AlterField(
-            model_name='listing',
-            name='direction',
-            field=models.CharField(choices=[('east', 'Đông'), ('east-south', 'Đông - Nam'), ('south', 'Nam'), ('west-south', 'Tây - Nam'), ('west', 'Tây'), ('west-north', 'Tây - Bắc'), ('north', 'Bắc'), ('east-north', 'Đông - Bắc')], default='east', max_length=12, verbose_name='Hướng'),
-        ),
-        migrations.AlterField(
-            model_name='listing',
             name='lane_width',
             field=models.DecimalField(blank=True, decimal_places=1, max_digits=5, null=True, verbose_name='Rộng mặt đường/ngõ (m)'),
-        ),
-        migrations.AlterField(
-            model_name='listing',
-            name='price',
-            field=models.DecimalField(decimal_places=2, max_digits=4, verbose_name='Giá chào (tỷ)'),
-        ),
-        migrations.AlterField(
-            model_name='listing',
-            name='registration_type',
-            field=models.CharField(choices=[('red_book', 'Sổ Đỏ'), ('pink_book', 'Sổ Hồng'), ('dont_book', 'Chưa làm sổ')], default='red_book', max_length=20, verbose_name='Loại đăng ký'),
-        ),
-        migrations.AlterField(
-            model_name='listing',
-            name='sale_price',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=4, null=True, verbose_name='Giá Hạ chào (tỷ)'),
         ),
         migrations.AlterField(
             model_name='listing',
@@ -68,18 +43,8 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='listing',
-            name='registration_type',
-            field=models.CharField(choices=[('red_book', 'Sổ Đỏ'), ('pink_book', 'Sổ Hồng'), ('dont_book', 'Chưa làm sổ')], default='red_book', max_length=20, verbose_name='Loại chứng nhận'),
-        ),
-        migrations.AlterField(
-            model_name='listing',
             name='direction',
             field=models.CharField(choices=[('east', 'Đông'), ('south-east', 'Đông - Nam'), ('south', 'Nam'), ('south-west', 'Tây - Nam'), ('west', 'Tây'), ('north-west', 'Tây - Bắc'), ('north', 'Bắc'), ('north-east', 'Đông - Bắc')], default='east', max_length=12, verbose_name='Hướng'),
-        ),
-        migrations.AlterField(
-            model_name='listing',
-            name='lot_size',
-            field=models.DecimalField(decimal_places=1, default=0, max_digits=5, verbose_name='Diện tích khuôn viên'),
         ),
         migrations.AlterField(
             model_name='listing',
