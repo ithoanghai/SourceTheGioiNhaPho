@@ -6,8 +6,6 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    replaces = [('accounts', '0002_auto_20210408_1533'), ('accounts', '0003_auto_20210503_1417')]
-
     dependencies = [
         ('accounts', '0001_initial'),
     ]
