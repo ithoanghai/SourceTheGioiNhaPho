@@ -1,6 +1,10 @@
 from django.contrib import admin
+from django.core.files.storage import default_storage
+from django.core.files.uploadedfile import UploadedFile
+from django.http import HttpRequest, JsonResponse
 
-from .forms import ListingAdminForm
+from FunctionModule.listings.import_csv import handle_import
+from .forms import ListingAdminForm, ImportListingForm
 from .models import Listing, ListingImage, ListingVideo
 
 
@@ -24,9 +28,9 @@ class ListingAdmin(admin.ModelAdmin):
     form = ListingAdminForm
 
     class Media:
-        js = ('admin/js/text_money.js', 'admin/js/address_select.js')
+        js = ('admin/js/dropzone.js', 'admin/js/listing.js',)
         css = {
-            'all': ('admin/css/listing.css',)
+            'all': ('admin/css/dropzone.css', 'admin/css/listing.css',)
         }
 
     def get_queryset(self, request):
@@ -47,6 +51,23 @@ class ListingAdmin(admin.ModelAdmin):
             return list(excluded) + to_exclude
         except TypeError:
             return to_exclude
+
+
+@admin.site.register_view('listings/listing/import-listing')
+def my_view(request: HttpRequest) -> JsonResponse:
+    if request.method == 'POST':
+        form = ImportListingForm(request.POST, request.FILES)
+        if form.is_valid():
+            file: UploadedFile = form.cleaned_data.get('file')
+            with file.open() as fp:
+                default_storage.save(f'import-listing/{file.name}', fp)
+
+            handle_import(f'media/import-listing/{file.name}')
+
+            return JsonResponse({})
+        else:
+            return JsonResponse({'status': 'error', 'message': str(form.errors)}, status=400)
+    return JsonResponse({})
 
 
 admin.site.register(Listing, ListingAdmin)

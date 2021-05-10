@@ -1,5 +1,6 @@
 from typing import Set
 
+import django.contrib.admin.sites
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import Group
@@ -8,7 +9,10 @@ from .forms import MyUserChangeForm, GroupAdminForm
 from .models import User
 
 # Unregister the original Group admin.
-admin.site.unregister(Group)
+try:
+    admin.site.unregister(Group)
+except django.contrib.admin.sites.NotRegistered:
+    pass
 
 
 class AccountAdmin(AuthUserAdmin):
