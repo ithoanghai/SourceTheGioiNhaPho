@@ -395,8 +395,8 @@
                 <input name="neighborhood" type="hidden" value="">
                 <input name="lat" type="hidden" value="">
                 <input name="lon" type="hidden" value="">
-                <input name="youtube" type="hidden" value="">
-                <input name="matterport" type="hidden" value="">
+                <input name="youtube" type="hidden" value="https://youtu.be/_dfQMUgGmjc"> {% comment %}Cần thay {% endcomment %}
+                <input name="matterport" type="hidden" value="https://my.matterport.com/show/?m=yYDQY6WGVXi"> {% comment %}Cần thay{% endcomment %}
                 <input name="favorited_type" type="hidden" value="sale_property">
                 <input name="streetviewLat" type="hidden" value="">
                 <input name="streetviewLon" type="hidden" value="">
@@ -433,11 +433,11 @@
                 </div>
             </div>
             <div class="mvideo hidden height-100-percent">
-                <iframe id="preview-video" frameborder="0" allowfullscreen=""></iframe>
+                <iframe id="preview-video" frameborder="0" allowfullscreen></iframe>
             </div>
             <div class="mview3d preview3d hidden height-100-percent">
                 <a href="#" class="full-screen-act" title="Fullscreen"></a>
-                <iframe width="600" height="400" frameborder="0" allow-fullscreen=""></iframe>
+                <iframe frameborder="0" allow-fullscreen=""></iframe>
             </div>
             <div class="mstreetview hidden height-100-percent">
                 <div id="preview-streetview"></div>
@@ -483,6 +483,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="changeimg-box">
             <div class="fix-widthcell">
@@ -515,14 +516,14 @@
                             <span class="font-icon photo"></span> Photo
                         </a>
                     </li>
-                    <li class="disable">
-                        <a href="#view3d" title="3D view" no-prevent>
-                            <span class="font-icon view3d"></span> 3D view
-                        </a>
-                    </li>
-                    <li class="disable">
+                    <li class="">
                         <a href="#video" title="Video" no-prevent>
                             <span class="font-icon video"></span> Video
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#view3d" title="3D view" no-prevent>
+                            <span class="font-icon view3d"></span> 3D view
                         </a>
                     </li>
                     <li class="">
@@ -580,7 +581,7 @@
                                 <p class="left">Loại hình</p>
                                 <p class="right"><a href="{% url 'search' %}?house_type={{ listing.house_type }}"
                                                     target="_blank">
-                                    {% if listing.house_type == 'city_house' %}{% translate 'Nhà Phố' %}
+                                    {% if listing.house_type == 'town_house' %}{% translate 'Nhà Phố' %}
                                     {% elif listing.registration_type == 'street_house' %} {% translate 'Nhà mặt phố' %}
                                     {% elif listing.registration_type == 'shop_house' %} {% translate 'Cửa hàng' %}
                                     {% elif listing.registration_type == 'building' %} {% translate 'Toà nhà' %}
@@ -970,16 +971,21 @@
                             <h3><a href="{% url 'listing' house_neigh.id %}"
                                    title="{{ house_neigh.title }}">{{ house_neigh.title }}</a></h3>
                         </div>
-                        <div class="status tgnp-color">{{ house_neigh.status }}</div>
+                        <div class="status tgnp-color">
+                            {% if house_neigh.status == 'selling'%} {% trans 'Đang bán' %}
+                            {% elif house_neigh.status == 'sold'%} {% trans 'Đã bán' %}
+                            {% elif house_neigh.status == 'stop_selling'%} {% trans 'Dừng bán' %}
+                            {% else %} {% trans 'Mới' %}
+                            {% endif %}</div>
                         <div class="info">
                             <ul>
                                 <li title="Phòng ngủ"><span class="zmdi zmdi-airline-seat-individual-suite"></span> {{ house_neigh.bedrooms }} </li>
-                                <li title="Phòng tắm" class="icon-bath-room"><span></span> {{ house_neigh.bathrooms }} </li>
+                                {% if house_neigh.bathrooms %}<li title="Phòng tắm" class="icon-bath-room"><span></span> {{ house_neigh.bathrooms }} </li> {% endif %}
                                 <li class="marea" title="Diện tích"><span
                                         class="zmdi zmdi-photo-size-select-small"></span> {{ house_neigh.area }} {{ house_neigh.area_unit }}
                                 </li>
                                 <li title="Giá">{{ house_neigh.price }} tỷ</li>
-                                {% if house_neigh.sale_price %}<li title="Bán nhanh">{{ house_neigh.sale_price }} tỷ</li> {% endif %}
+                                {% if house_neigh.sale_price %}<li title="Bán nhanh">Còn {{ house_neigh.sale_price }} tỷ</li> {% endif %}
                             </ul>
                         </div>
                         <input name="url" type="hidden"
@@ -998,14 +1004,14 @@
                 <div class="ads3d-box pdt-15">
                     <div class="ads3d-box-left">
                         <div class="promo-3d-vid cover">
-                            <span data-origin="EfMuBFZwS7Q" class="popup-yt-video">
+                            <span data-origin="8IP1dKqq298" class="popup-yt-video">
                             <picture>
-                            <source srcset="../images/promo-3d-vid_small.jpg, ../images/promo-3d-vid_small@2x.jpg 2x"
+                            <source srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
                                     media="(max-width: 374px)">
-                            <source srcset="../images/promo-3d-vid_medium.jpg, ../images/promo-3d-vid.jpg 2x"
+                            <source srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
                                     media="(min-width: 375px)">
-                            <img alt="TGNP 3D View" src="../../images/promo-3d-vid.jpg"
-                                 srcset="../images/promo-3d-vid_medium.jpg, ../images/promo-3d-vid.jpg 2x"
+                            <img alt="TGNP 3D View" src="{% static 'images/service-3dview.png' %}"
+                                 srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
                                  title="TGNP 3D View">
                             </picture>
                             </span>
@@ -1041,497 +1047,52 @@
             </section>
         </section>
 
-  {% comment %}      <section class="background-gray">
+        <section class="background-gray">
             <div class="width1140">
                 <div class="heading-02 pd-tb-30 mgt-10">Nhà đất tương tự</div>
                 <div id="similar-property" class="flexslider main-content">
                     <div class="slider-buttons">
                         <a href="#" title="next"><span class="but-nextdetail-news flex-next"></span> </a>
-                        <a href="#" title="prev"><span class="but-predetail-news flex-prev flex-disabled"
-                                                       tabindex="-1"></span> </a>
+                        <a href="#" title="prev"><span class="but-predetail-news flex-prev flex-disabled" tabindex="-1"></span> </a>
                     </div>
                     <ul class="exclusive slides">
+                        {% for listing_same in listings_same %}
                         <li class="featured"
-                            data-imp-stats="{id: '1602035315547_8932', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="dat-nen-bui-dinh-tuy-q-binh-thanh-dien-tich-18-05x21-23m.html"
-                               title="Đất nền Bùi Đình Túy, Q. Bình Thạnh diện tích 18.05x21.23m." data-imp-click>
+                            data-imp-stats="{id: '{{ listing_same.id }}', type: 'property', position: 'PropertyDetail_Related'}">
+                            <a href="{% url 'listing' listing_same.id %}"
+                               title="{{ listing_same.title }}" data-imp-click>
                                 <div class="cover">
+                                    {% with listing_same.main_photo as photo %}
                                     <img class="image-pixelated lazy"
-                                         data-src="../images/v2/get/0p1S8M7DfzJ7Cbtcz6JEslr13IV8DrFv0fsAiWzGHW8=/450x300/image.jpg"
-                                         alt="Đất nền Bùi Đình Túy, Q. Bình Thạnh diện tích 18.05x21.23m."
-                                         title="Đất nền Bùi Đình Túy, Q. Bình Thạnh diện tích 18.05x21.23m."/>
+                                         data-src="{{ photo.url }}"
+                                         alt="{{ listing_same.title }}"
+                                         title="{{ listing_same.title }}"/>
+                                    {% endwith %}
                                 </div>
                             </a>
                             <header>
-                                <a href="dat-nen-bui-dinh-tuy-q-binh-thanh-dien-tich-18-05x21-23m.html"
-                                   title="Đất nền Bùi Đình Túy, Q. Bình Thạnh diện tích 18.05x21.23m." data-imp-click>
-                                    <h3 class="heading">Đất nền Bùi Đình Túy, Q. Bình Thạnh diện tích 18.05x21.23m.</h3>
+                                <a href="{% url 'listing' listing_same.id %}"
+                                   title="{{ listing_same.title }}" data-imp-click>
+                                    <h3 class="heading">{{ listing_same.title }}</h3>
                                 </a>
-                                <h4>PBT61254 &#8226; </h4>
-                                <h4><a href="../s/phuong-24-binh-thanh/mua.html" title="Phường">Phường 24,</a></h4>
-                                <h4><a href="../s/binh-thanh/mua.html" title="Quận">Bình Thạnh</a></h4>
+                                <h4>{{ listing_same.code }}</h4>
+                                <h2><a href="{% url 'search' %}?street={{ listing_same.street }}"
+                                       title="Đường">{{ listing_same.street }}</a></h2>
+                                <h2><a href="{% url 'search' %}?ward={{ listing_same.ward }}"
+                                       title="Phường/Xã">{{ listing_same.ward }}</a></h2>
+                                <h2><a href="{% url 'search' %}?district={{ listing_same.district }}"
+                                       title="Quận/Huyện">{{ listing_same.district }}</a></h2>
                                 <ul>
-
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 411.6
-                                        m²
-                                    </li>
+                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> {{ listing_same.area }} {{ listing_same.area_unit }}</li>
                                 </ul>
-                                <div class="price">41 tỷ</div>
+                                <div class="price">{{ listing_same.price }} tỷ</div>
                             </header>
                         </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1610866448761_3796', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="shophouse-vinhomes-golden-river-huong-dong-bac.html"
-                               title="Shophouse Vinhomes Golden River hướng Đông Bắc." data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="../images/v2/get/P97JNBnJGaweJSR8Yt7BXuQLcFvbzm5gF1z8Ud+2hCk=/450x300/image.jpg"
-                                         alt="Shophouse Vinhomes Golden River hướng Đông Bắc."
-                                         title="Shophouse Vinhomes Golden River hướng Đông Bắc."/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="shophouse-vinhomes-golden-river-huong-dong-bac.html"
-                                   title="Shophouse Vinhomes Golden River hướng Đông Bắc." data-imp-click><h3
-                                        class="heading">Shophouse Vinhomes Golden River hướng Đông Bắc.</h3></a>
-                                <h4>N0171749 &#8226; </h4>
-                                <h4><a href="../s/ben-nghe-quan-1/mua.html" title="Phường">Bến Nghé,</a></h4>
-                                <h4><a href="../s/quan-1/mua.html" title="Quận">Q. Hoàn Kiếm</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 150.8
-                                        m²
-                                    </li>
-                                </ul>
-                                <div class="price">45 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1608906560022_648', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="shophouse-vinhomes-golden-river-noi-that-co-ban-thoang-mat.html"
-                               title="Shophouse Vinhomes Golden River nội thất cơ bản, thoáng mát." data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="../images/v2/get/6kFd_kM4k55pelvbJJYwvv8G8A+oX8w7j0KNbF+mCzU=/450x300/image.jpg"
-                                         alt="Shophouse Vinhomes Golden River nội thất cơ bản, thoáng mát."
-                                         title="Shophouse Vinhomes Golden River nội thất cơ bản, thoáng mát."/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="shophouse-vinhomes-golden-river-noi-that-co-ban-thoang-mat.html"
-                                   title="Shophouse Vinhomes Golden River nội thất cơ bản, thoáng mát."
-                                   data-imp-click><h3 class="heading">Shophouse Vinhomes Golden River nội thất cơ
-                                    bản, thoáng mát.</h3></a>
-                                <h4>N0169518 &#8226; </h4>
-                                <h4><a href="../s/ben-nghe-quan-1/mua.html" title="Phường">Bến Nghé,</a></h4>
-                                <h4><a href="../s/quan-1/mua.html" title="Quận">Q. Hoàn Kiếm</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 127.4
-                                        m²
-                                    </li>
-                                </ul>
-                                <div class="price">38 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1610866821358_1870', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="shophouse-vinhomes-golden-river-cua-huong-tay-nam.html"
-                               title="Shophouse Vinhomes Golden River cửa hướng Tây Nam." data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="../images/v2/get/TxWOJES1cy1iDFjUCH8DDHfPVL1WgvgOrHv0aSoegmo=/450x300/image.jpg"
-                                         alt="Shophouse Vinhomes Golden River cửa hướng Tây Nam."
-                                         title="Shophouse Vinhomes Golden River cửa hướng Tây Nam."/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="shophouse-vinhomes-golden-river-cua-huong-tay-nam.html"
-                                   title="Shophouse Vinhomes Golden River cửa hướng Tây Nam." data-imp-click><h3
-                                        class="heading">Shophouse Vinhomes Golden River cửa hướng Tây Nam.</h3></a>
-                                <h4>N0171751 &#8226; </h4>
-                                <h4><a href="../s/ben-nghe-quan-1/mua.html" title="Phường">Bến Nghé,</a></h4>
-                                <h4><a href="../s/quan-1/mua.html" title="Quận">Q. Hoàn Kiếm</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 143.8
-                                        m²
-                                    </li>
-                                </ul>
-                                <div class="price">40 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1601937820217_8523', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="ban-dat-nen-hem-7m-duong-huynh-tan-phat-quan-7.html"
-                               title="&#8;Bán đất nền hẻm 7m đường Huỳnh Tấn Phát quận 7" data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/hLUDBhbyQ3skV0rZO2kx8VW8WJc496U2OHoF__wm_mQ=/450x300/image.jpg"
-                                         alt="&#8;Bán đất nền hẻm 7m đường Huỳnh Tấn Phát quận 7"
-                                         title="&#8;Bán đất nền hẻm 7m đường Huỳnh Tấn Phát quận 7"/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="ban-dat-nen-hem-7m-duong-huynh-tan-phat-quan-7.html"
-                                   title="&#8;Bán đất nền hẻm 7m đường Huỳnh Tấn Phát quận 7" data-imp-click><h3
-                                        class="heading">&#8;Bán đất nền hẻm 7m đường Huỳnh Tấn Phát quận 7</h3></a>
-                                <h4>P0761216 &#8226; </h4>
-                                <h4><a href="../s/phu-thuan-quan-7/mua.html" title="Phường">Phú Thuận,</a></h4>
-                                <h4><a href="../s/quan-7/mua.html" title="Quận">Quận 7</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 542 m²
-                                    </li>
-                                </ul>
-                                <div class="price">36 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1608905146534_9782', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="shop-house-masteri-an-phu-dien-tich-182m2-ban-giao-noi-that-co-ban.html"
-                               title="Shop-house Masteri An Phú diện tích 182m2, bàn giao nội thất cơ bản."
-                               data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/6Ri8JzmcuxLXLfqoI4kW8aNj_iejs8mejMBMWp0yvrA=/450x300/image.jpg"
-                                         alt="Shop-house Masteri An Phú diện tích 182m2, bàn giao nội thất cơ bản."
-                                         title="Shop-house Masteri An Phú diện tích 182m2, bàn giao nội thất cơ bản."/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="shop-house-masteri-an-phu-dien-tich-182m2-ban-giao-noi-that-co-ban.html"
-                                   title="Shop-house Masteri An Phú diện tích 182m2, bàn giao nội thất cơ bản."
-                                   data-imp-click><h3 class="heading">Shop-house Masteri An Phú diện tích 182m2, bàn
-                                    giao nội thất cơ bản.</h3></a>
-                                <h4>N0269512 &#8226; </h4>
-                                <h4><a href="../s/thao-dien-quan-2/mua.html" title="Phường">Thảo Điền,</a></h4>
-                                <h4><a href="../s/quan-2/mua.html" title="Quận">Quận 2</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 182 m²
-                                    </li>
-                                </ul>
-                                <div class="price">35 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1593056057843_2401', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="ban-dat-nen-du-an-saigon-mystery-villas-dien-tich-dat-180m2.html"
-                               title="Bán đất nền dự án Saigon Mystery Villas, diện tích đất 180m2" data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="../images/v2/get/qD8NuwOp75oZFX6vAElgvWihAgmFQPNAoQ9VzICzO8c=/450x300/image.jpg"
-                                         alt="Bán đất nền dự án Saigon Mystery Villas, diện tích đất 180m2"
-                                         title="Bán đất nền dự án Saigon Mystery Villas, diện tích đất 180m2"/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="ban-dat-nen-du-an-saigon-mystery-villas-dien-tich-dat-180m2.html"
-                                   title="Bán đất nền dự án Saigon Mystery Villas, diện tích đất 180m2" data-imp-click>
-                                    <h3 class="heading">Bán đất nền dự án Saigon Mystery Villas, diện tích đất
-                                        180m2</h3></a>
-                                <h4>P0256605 &#8226; </h4>
-                                <h4><a href="../s/binh-trung-tay-quan-2/mua.html" title="Phường">Bình Trưng Tây,</a>
-                                </h4>
-                                <h4><a href="../s/quan-2/mua.html" title="Quận">Quận 2</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 180 m²
-                                    </li>
-                                </ul>
-                                <div class="price">34 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1553495442221_5041', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="ban-can-shophouse-vinhomes-golden-river-139-5m2-huong-tay-nam-view-noi-khu.html"
-                               title="Bán căn shophouse Vinhomes Golden River 139.5m2 hướng Tây Nam, view nội khu"
-                               data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/5nhJiwjVXFXmTUckz67ctF4n5IJnGpU+R2u5lJomWl0=/450x300/image.jpg"
-                                         alt="Bán căn shophouse Vinhomes Golden River 139.5m2 hướng Tây Nam, view nội khu"
-                                         title="Bán căn shophouse Vinhomes Golden River 139.5m2 hướng Tây Nam, view nội khu"/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="ban-can-shophouse-vinhomes-golden-river-139-5m2-huong-tay-nam-view-noi-khu.html"
-                                   title="Bán căn shophouse Vinhomes Golden River 139.5m2 hướng Tây Nam, view nội khu"
-                                   data-imp-click><h3 class="heading">Bán căn shophouse Vinhomes Golden River 139.5m2
-                                    hướng Tây Nam, view nội khu</h3></a>
-                                <h4>N0145828 &#8226; </h4>
-                                <h4><a href="../s/ben-nghe-quan-1/mua.html" title="Phường">Bến Nghé,</a></h4>
-                                <h4><a href="../s/quan-1/mua.html" title="Quận">Q. Hoàn Kiếm</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 139.5
-                                        m²
-                                    </li>
-                                </ul>
-                                <div class="price">35 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1614597667412_3635', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="dat-nen-quan-12-huong-bac-so-hong-phap-ly-ro-rang.html"
-                               title="Đất nền Q. Hoàn Kiếm2 hướng Bắc, sổ hồng pháp lý rõ ràng." data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="../images/v2/get/jlzpZTCg252ThnhrSILuzoXLJ5fgoJ3A_YTs3hE+uOU=/450x300/image.jpg"
-                                         alt="Đất nền Q. Hoàn Kiếm2 hướng Bắc, sổ hồng pháp lý rõ ràng."
-                                         title="Đất nền Q. Hoàn Kiếm2 hướng Bắc, sổ hồng pháp lý rõ ràng."/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="dat-nen-quan-12-huong-bac-so-hong-phap-ly-ro-rang.html"
-                                   title="Đất nền Q. Hoàn Kiếm2 hướng Bắc, sổ hồng pháp lý rõ ràng." data-imp-click><h3
-                                        class="heading">Đất nền Q. Hoàn Kiếm2 hướng Bắc, sổ hồng pháp lý rõ ràng.</h3>
-                                </a>
-                                <h4>P1274835 &#8226; </h4>
-                                <h4><a href="../s/an-phu-dong-quan-12/mua.html" title="Phường">An Phú Đông,</a></h4>
-                                <h4><a href="../s/quan-12/mua.html" title="Quận">Q. Hoàn Kiếm2</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 971 m²
-                                    </li>
-                                </ul>
-                                <div class="price">36 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1569399089677_5263', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="tieu-de.html" title="TIêu đề " data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="https://s3-cdn.thegioinhaphovietnam.com.vn/p/images/tgnp-realty-empty-image.png"
-                                         alt="TIêu đề " title="TIêu đề "/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="tieu-de.html" title="TIêu đề " data-imp-click><h3 class="heading">TIêu đề </h3>
-                                </a>
-                                <h4>AUN52846 &#8226; </h4>
-                                <h4><a href="../s/dai-phuoc-nhon-trach/mua.html" title="Phường">Đại Phước,</a></h4>
-                                <h4><a href="../s/nhon-trach/mua.html" title="Quận">Nhơn Trạch</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 124 m²
-                                    </li>
-                                </ul>
-                                <div class="price">2.34 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1606537385896_577', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="apartment-shophouse-phu-my-hung-midtown-dien-tich-47m2-ban-giao-tho.html"
-                               title="Căn hộ Shophouse Phú Mỹ Hưng Midtown diện tích 47m2, bàn giao thô."
-                               data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/Ppc7CmhN2gA1kwo5waF1VAr0cphdyXLDpjEgbT3SFTE=/450x300/image.jpg"
-                                         alt="Căn hộ Shophouse Phú Mỹ Hưng Midtown diện tích 47m2, bàn giao thô."
-                                         title="Căn hộ Shophouse Phú Mỹ Hưng Midtown diện tích 47m2, bàn giao thô."/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="apartment-shophouse-phu-my-hung-midtown-dien-tich-47m2-ban-giao-tho.html"
-                                   title="Căn hộ Shophouse Phú Mỹ Hưng Midtown diện tích 47m2, bàn giao thô."
-                                   data-imp-click><h3 class="heading">Căn hộ Shophouse Phú Mỹ Hưng Midtown diện tích
-                                    47m2, bàn giao thô.</h3></a>
-                                <h4>A0765945 &#8226; </h4>
-                                <h4><a href="../s/phuong-tan-phu-quan-7/mua.html" title="Phường">Phường Tân Phú,</a>
-                                </h4>
-                                <h4><a href="../s/quan-7/mua.html" title="Quận">Quận 7</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 47 m²
-                                    </li>
-                                </ul>
-                                <div class="price">4.63 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1604830380333_6039', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="shop-house-phu-my-hung-midtown-tang-thap-ban-giao-tho.html"
-                               title="Shop-house Phú Mỹ Hưng Midtown tầng thấp, bàn giao thô." data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/qAgQvZbhfXddif7NbIIkCnrac584Un620kkyX8tzJGo=/450x300/image.jpg"
-                                         alt="Shop-house Phú Mỹ Hưng Midtown tầng thấp, bàn giao thô."
-                                         title="Shop-house Phú Mỹ Hưng Midtown tầng thấp, bàn giao thô."/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="shop-house-phu-my-hung-midtown-tang-thap-ban-giao-tho.html"
-                                   title="Shop-house Phú Mỹ Hưng Midtown tầng thấp, bàn giao thô." data-imp-click><h3
-                                        class="heading">Shop-house Phú Mỹ Hưng Midtown tầng thấp, bàn giao thô.</h3></a>
-                                <h4>A0763648 &#8226; </h4>
-                                <h4><a href="../s/phuong-tan-phu-quan-7/mua.html" title="Phường">Phường Tân Phú,</a>
-                                </h4>
-                                <h4><a href="../s/quan-7/mua.html" title="Quận">Quận 7</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 96.73
-                                        m²
-                                    </li>
-                                </ul>
-                                <div class="price">5.8 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1611646109908_8542', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="shophouse-vinhomes-grand-park-ban-giao-tho-huong-nam.html"
-                               title="Shophouse Vinhomes Grand Park bàn giao thô, hướng Nam." data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="../images/v2/get/Ypt_ysbTXsS33PXdR50a3+WYt1PzLnxmaRFWVLVFdmk=/450x300/image.jpg"
-                                         alt="Shophouse Vinhomes Grand Park bàn giao thô, hướng Nam."
-                                         title="Shophouse Vinhomes Grand Park bàn giao thô, hướng Nam."/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="shophouse-vinhomes-grand-park-ban-giao-tho-huong-nam.html"
-                                   title="Shophouse Vinhomes Grand Park bàn giao thô, hướng Nam." data-imp-click><h3
-                                        class="heading">Shophouse Vinhomes Grand Park bàn giao thô, hướng Nam.</h3>
-                                </a>
-                                <h4>A0973167 &#8226; </h4>
-                                <h4><a href="../s/long-binh-quan-9/mua.html" title="Phường">Long Bình,</a></h4>
-                                <h4><a href="../s/quan-9/mua.html" title="Quận">Quận 9</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 27 m²
-                                    </li>
-                                </ul>
-                                <div class="price">5.2 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1603362042773_1075', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="shophouse-the-sun-avenue-51m2-ban-giao-khong-kem-noi-that.html"
-                               title="Shophouse The Sun Avenue 51m2, bàn giao không kèm nội thất." data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="../images/v2/get/NcE9y8RsatY0y2WTwT2yqDhjm6Osit7_ckET2IpZCm0=/450x300/image.jpg"
-                                         alt="Shophouse The Sun Avenue 51m2, bàn giao không kèm nội thất."
-                                         title="Shophouse The Sun Avenue 51m2, bàn giao không kèm nội thất."/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="shophouse-the-sun-avenue-51m2-ban-giao-khong-kem-noi-that.html"
-                                   title="Shophouse The Sun Avenue 51m2, bàn giao không kèm nội thất."
-                                   data-imp-click><h3 class="heading">Shophouse The Sun Avenue 51m2, bàn giao không
-                                    kèm nội thất.</h3></a>
-                                <h4>N0262194 &#8226; </h4>
-                                <h4><a href="../s/an-phu-quan-2/mua.html" title="Phường">An Phú,</a></h4>
-                                <h4><a href="../s/quan-2/mua.html" title="Quận">Quận 2</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 51 m²
-                                    </li>
-                                </ul>
-                                <div class="price">8.5 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1600843661497_229', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="ban-shop-house-saigon-mia-ban-giao-tho-de-dang-trang-tri-theo-concept.html"
-                               title="Bán Shop-house Saigon Mia, bàn giao thô dễ dàng trang trí theo concept"
-                               data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="../images/v2/get/tZO+xvy6biBgMOzBMbo+9od29oC52sLF0Ak38W+jEfU=/450x300/image.jpg"
-                                         alt="Bán Shop-house Saigon Mia, bàn giao thô dễ dàng trang trí theo concept"
-                                         title="Bán Shop-house Saigon Mia, bàn giao thô dễ dàng trang trí theo concept"/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="ban-shop-house-saigon-mia-ban-giao-tho-de-dang-trang-tri-theo-concept.html"
-                                   title="Bán Shop-house Saigon Mia, bàn giao thô dễ dàng trang trí theo concept"
-                                   data-imp-click><h3 class="heading">Bán Shop-house Saigon Mia, bàn giao thô dễ dàng
-                                    trang trí theo concept</h3></a>
-                                <h4>ABC60481 &#8226; </h4>
-                                <h4><a href="../s/binh-hung-binh-chanh/mua.html" title="Phường">Bình Hưng,</a></h4>
-                                <h4><a href="../s/binh-chanh/mua.html" title="Quận">Bình Chánh</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 83.91
-                                        m²
-                                    </li>
-                                </ul>
-                                <div class="price">11 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1604830590744_2707', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="shop-house-phu-my-hung-midtown-tang-thap-dien-tich-127m2.html"
-                               title="Shop-house Phú Mỹ Hưng Midtown tầng thấp, diện tích 127m2." data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/YcM4aPQT8upTx_aS10jsx5oCziR8Aj67dDPGJQlCIQk=/450x300/image.jpg"
-                                         alt="Shop-house Phú Mỹ Hưng Midtown tầng thấp, diện tích 127m2."
-                                         title="Shop-house Phú Mỹ Hưng Midtown tầng thấp, diện tích 127m2."/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="shop-house-phu-my-hung-midtown-tang-thap-dien-tich-127m2.html"
-                                   title="Shop-house Phú Mỹ Hưng Midtown tầng thấp, diện tích 127m2." data-imp-click><h3
-                                        class="heading">Shop-house Phú Mỹ Hưng Midtown tầng thấp, diện tích 127m2.</h3>
-                                </a>
-                                <h4>N0763649 &#8226; </h4>
-                                <h4><a href="../s/phuong-tan-phu-quan-7/mua.html" title="Phường">Phường Tân Phú,</a>
-                                </h4>
-                                <h4><a href="../s/quan-7/mua.html" title="Quận">Quận 7</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 127 m²
-                                    </li>
-                                </ul>
-                                <div class="price">7.2 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1606187269420_4771', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="shophouse-vinhomes-grand-park-ban-giao-tho-thiet-ke-hien-dai.html"
-                               title="Shophouse Vinhomes Grand Park bàn giao thô, thiết kế hiện đại." data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/5Yu0xqVIqtJA2J7Q3PASiptkz+YfbM2caTgHWbhtQOI=/450x300/image.jpg"
-                                         alt="Shophouse Vinhomes Grand Park bàn giao thô, thiết kế hiện đại."
-                                         title="Shophouse Vinhomes Grand Park bàn giao thô, thiết kế hiện đại."/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="shophouse-vinhomes-grand-park-ban-giao-tho-thiet-ke-hien-dai.html"
-                                   title="Shophouse Vinhomes Grand Park bàn giao thô, thiết kế hiện đại."
-                                   data-imp-click><h3 class="heading">Shophouse Vinhomes Grand Park bàn giao thô, thiết
-                                    kế hiện đại.</h3></a>
-                                <h4>A0965425 &#8226; </h4>
-                                <h4><a href="../s/long-binh-quan-9/mua.html" title="Phường">Long Bình,</a></h4>
-                                <h4><a href="../s/quan-9/mua.html" title="Quận">Quận 9</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 58.5
-                                        m²
-                                    </li>
-                                </ul>
-                                <div class="price">15 tỷ</div>
-                            </header>
-                        </li>
-                        <li class="featured"
-                            data-imp-stats="{id: '1605242706837_2547', type: 'property', position: 'PropertyDetail_Related'}">
-                            <a href="apartment-studio-vinhomes-grand-park-tang-trung-huong-dong-nam.html"
-                               title="Căn hộ Studio Vinhomes Grand Park tầng trung, hướng Đông Nam." data-imp-click>
-                                <div class="cover">
-                                    <img class="image-pixelated lazy"
-                                         data-src="https://photo.thegioinhaphovietnam.com.vn/photo/v2/get/P3mAwWJysGSpDc1fwd7Hkozp+19idutP7Mzy95om33U=/450x300/image.jpg"
-                                         alt="Căn hộ Studio Vinhomes Grand Park tầng trung, hướng Đông Nam."
-                                         title="Căn hộ Studio Vinhomes Grand Park tầng trung, hướng Đông Nam."/>
-                                </div>
-                            </a>
-                            <header>
-                                <a href="apartment-studio-vinhomes-grand-park-tang-trung-huong-dong-nam.html"
-                                   title="Căn hộ Studio Vinhomes Grand Park tầng trung, hướng Đông Nam." data-imp-click>
-                                    <h3 class="heading">Căn hộ Studio Vinhomes Grand Park tầng trung, hướng Đông
-                                        Nam.</h3></a>
-                                <h4>A0964236 &#8226; </h4>
-                                <h4><a href="../s/long-binh-quan-9/mua.html" title="Phường">Long Bình,</a></h4>
-                                <h4><a href="../s/quan-9/mua.html" title="Quận">Quận 9</a></h4>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> 30 m²
-                                    </li>
-                                </ul>
-                                <div class="price">1.58 tỷ</div>
-                            </header>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
-        </section>{% endcomment %}
+        </section>
 
         <div class="post-share-btn-group aj-post-share-btn-group">
             <div class="btn-group btn-share-group addthis_toolbox addthis_default_style">

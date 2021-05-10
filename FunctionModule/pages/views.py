@@ -1,6 +1,6 @@
 from django import template
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.template import loader
 
 from FunctionModule.cadastral.constants import state_data, district_data
@@ -108,7 +108,7 @@ def privacyPolicy(request):
 
 """Admin url here"""
 def dashboard(request):
-    return  redirect(request, 'admin/admin_login')
+    return  redirect('admin/login')
 
 def admin_login(request):
 

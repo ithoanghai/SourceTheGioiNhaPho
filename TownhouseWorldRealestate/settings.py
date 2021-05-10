@@ -33,6 +33,7 @@ MODULES = [
     'FunctionModule.accounts.apps.AccountsConfig',
     'FunctionModule.pages.apps.PagesConfig',
     'FunctionModule.listings.apps.ListingsConfig',
+    'FunctionModule.transactions.apps.TransactionsConfig',
     'FunctionModule.realtors.apps.RealtorsConfig',
     'FunctionModule.contacts.apps.ContactsConfig',
     'FunctionModule.cadastral.apps.CadastralConfig',
@@ -43,6 +44,10 @@ THIRD_PARTIES = [
     'location_field.apps.DefaultConfig',
     'ajax_select',
     'rolepermissions',
+    'debug_toolbar',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'django_filters',
 ]
 
 BUILT_IN_APPS = [
@@ -65,8 +70,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
     'django.middleware.locale.LocaleMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'TownhouseWorldRealestate.urls'
@@ -82,7 +87,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
                 'django.template.context_processors.i18n',  # this one
             ],
         },
@@ -175,4 +179,29 @@ LOCATION_FIELD = {
     'search.provider': 'nominatim',
     # 'provider.mapbox.access_token': 'pk.eyJ1Ijoia2llbm5ndXllbjExMDEiLCJhIjoiY2ttaHRqZTgzMGF0YzJ3bXVvYW9ncnh0ZiJ9.xar2mZcYZJ1qK4i2mRDa0Q',
     'provider.google.api_key': os.getenv('GOOGLE_MAP_API_KEY', 'AIzaSyDmaAApf34vXAuXCPWvMAKJQ50t5ZzGVzA')
+}
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+    '172.17.0.1',
+    '172.24.0.1',
+    '*'
+]
+
+
+REST_FRAMEWORK = {
+   'DEFAULT_MODEL_SERIALIZER_CLASS':(
+    'rest_framework.serializers.HyperlinkedModelSerializer',
+   ),
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.TokenAuthentication',
+       'rest_framework.authentication.SessionAuthentication',
+   ),
+   'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAdminUser',
+        #        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+   ),
+   'DEFAULT_PAGINATION_CLASS':  'rest_framework.pagination.LimitOffsetPagination',
+   'PAGE_SIZE': 1
+
 }

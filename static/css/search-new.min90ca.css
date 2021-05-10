@@ -6970,7 +6970,7 @@ label {
 
 .actionBar .filter-item .DropdownMenu {
     display: none;
-    min-width: 320px;
+    min-width: 520px;
     padding: 20px;
     position: absolute;
     background: #fff;
@@ -7017,8 +7017,8 @@ label {
 }
 
 .actionBar .filter-item .DropdownMenu .row .col {
-    width: 50%;
-    min-width: 275px;
+   /* width: 50%;*/
+    min-width: 375px;
     text-align: left;
     border-right: 1px solid rgba(48, 51, 58, .1)
 }

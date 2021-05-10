@@ -4023,19 +4023,15 @@
             }]), t
         }()), u = n("tAFL"), l = n("JDN0"), f = n.n(l), h = n("HlL3"), p = n.n(h), m = n("m0Xf"), g = function () {
             function t(e, n, r, i) {
-                o()(this, t), this.hotline = m.b, this.dismissFunc = i, this.onSubmitFn = [], this.suggestItems = ["Quận 2", "Quận 7", "Quận 4", "Quận Bình Thạnh", "Thảo Điền", "Thủ Thiêm", "An Phú An Khánh", "Vinhomes Central Park", "Phú Mỹ Hưng", "Quận 9"], this.propertyTypes = [{
+                o()(this, t), this.hotline = m.b, this.dismissFunc = i, this.onSubmitFn = [], this.suggestItems = ["Quận Hoàn Kiếm", "Quận Ba Đình", "Quận Đống Đa", "Quận Bình Thạnh", "Thảo Điền", "Thủ Thiêm", "An Phú An Khánh", "Vinhomes Central Park", "Phú Mỹ Hưng", "Quận 9"], this.propertyTypes = [{
                     value: "apartment",
                     text: "Căn Hộ"
                 }, {value: "house", text: "Nhà Phố"}, {value: "villa", text: "Biệt Thự"}, {
-                    value: "van-phong",
-                    text: "Văn Phòng"
-                }, {value: "officetel", text: "Căn Hộ Dịch Vụ"}, {
-                    value: "office-tel",
-                    text: "Office-Tel"
-                }, {value: "shop-house", text: "ShopHouse"}, {
-                    value: "other",
-                    text: "Khác"
-                }], this.initForm(), this.init(e), this.reset(n, r), this.serviceType = n, this.reverId = r
+                    value: "office", text: "Văn phòng"},
+                    {value: "office_tel", text: "Văn phòng khách sạn"},
+                    {value: "shop_house", text: "Cửa hàng"},
+                    { value: "other", text: "Khác" }],
+                    this.initForm(), this.init(e), this.reset(n, r), this.serviceType = n, this.reverId = r
             }
 
             return s()(t, [{

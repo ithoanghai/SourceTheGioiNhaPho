@@ -6,9 +6,10 @@ pycryptodome==3.10.1
 whitenoise==5.2.0
 psycopg2-binary==2.8.6
 django-location-field==2.1.0
-# djangorestframework==3.12.2
+djangorestframework==3.12.4
 django-ajax-selects==2.1.0
 django-embed-video==1.4.0
 django-role-permissions==3.1.1
 django-debug-toolbar==3.2
 pydantic==1.8.1
+django_filter==2.4.0

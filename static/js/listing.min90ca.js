@@ -619,13 +619,13 @@
                     $("#preview-video").attr("src", t)
                 }
             }), $(".changeimg-box .naviicon li:not(.disable) [href=#view3d]").click(function () {
-                $(e).addClass("hidden"), $(n).addClass("hidden"), $(r).removeClass("hidden"), $(i).addClass("hidden"), $(".changeimg-box .naviicon li:not(.disable)").removeClass("active"), $(this).parent().addClass("active");
-                var t = $(r).find("iframe");
-                if (!t.attr("src")) {
-                    var o = $("form[name=info] input[name=matterport]").val();
-                    o && t.attr("src", o)
-                }
-                u && document.getElementById("preview-video").contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*")
+                        $(e).addClass("hidden"), $(n).addClass("hidden"), $(r).removeClass("hidden"), $(i).addClass("hidden"), $(".changeimg-box .naviicon li:not(.disable)").removeClass("active"), $(this).parent().addClass("active");
+                        var t = $(r).find("iframe");
+                        if (!t.attr("src")) {
+                            var o = $("form[name=info] input[name=matterport]").val();
+                            o && t.attr("src", o)
+                        }
+                        u && document.getElementById("preview-video").contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*")
             }), $(".changeimg-box .naviicon li:not(.disable) [href=#streetview]").click(function () {
                 if ($(e).addClass("hidden"), $(n).addClass("hidden"), $(r).addClass("hidden"), $(i).removeClass("hidden"), $(".changeimg-box .naviicon li:not(.disable)").removeClass("active"), $(this).parent().addClass("active"), !a) {
                     a = !0;

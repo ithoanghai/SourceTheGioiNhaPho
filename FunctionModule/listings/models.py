@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from datetime import datetime
 
 from django.contrib.gis.geos import Point
@@ -14,24 +15,34 @@ class TransactionType(models.TextChoices):
     FOR_RENT = 'for_rent', _("Cho thuê")
     PROJECT = 'project', _("Dự án")
 
-
 class HouseType(models.TextChoices):
     STREET_HOUSE = 'street_house', _("Nhà mặt phố")
-    CITY_HOUSE = 'city_house', _("Nhà phố")
+    TOWN_HOUSE = 'town_house', _("Nhà phố")
+    LOFT_HOUSE = 'loft_house', _("Nhà gác xép/Cấp 4")
     SHOP_HOUSE = 'shop_house', _("Cửa hàng")
-    BUILDING = 'building', _("Toà nhà")
-    OFFICE = 'office', _("Văn phòng")
-    APARTMENT = 'apartment', _("Căn hộ")
-    VILLA = 'villa', _("Biệt thự")
-    LAND = 'land', _("Đất nền")
 
+    BUILDING = 'building', _("Toà nhà")
+    BUILDING_BUSINESS = 'building_business',_("Toà nhà kinh doanh")
+    OFFICE = 'office', _("Văn phòng")
+    OFFICE_TEL = 'office_tel', _("Văn phòng khách sạn")
+    CONDO_TEL = 'condo_tel',_('Căn hộ khách sạn')
+    APARTMENT = 'apartment', _("Căn hộ")
+    SERVICE_APARTMENT = 'service_apartment', _("Căn hộ dịch vụ")
+    PENT_HOUSE = 'pent_house', _("Căn hộ áp mái")
+    VILLA = 'villa', _("Biệt thự")
+    VILLA_REST = 'villa_rest',_("Biệt thự nghỉ dưỡng")
+    LAND = 'land', _("Đất nền")
+    LAND_BUSINESS = 'land_business', _("Mặt bằng kinh doanh")
+    PLOT = 'plot',_("Đất phân lô")
+    INDUSTRIAL_LAND = 'industrial_land',_("Đất công nghiệp")
+    WAREHOUSE_WORKSHOP = 'warehouse_workshop',_("Kho xưởng")
+    OTHER = 'other', _("Khác")
 
 
 class RegistrationType(models.TextChoices):
     RED_BOOK = 'red_book', _("Sổ Đỏ")
     PINK_BOOK = 'pink_book', _("Sổ Hồng")
     DONT_BOOK = 'dont_book', _("Chưa làm sổ")
-
 
 class RoadType(models.TextChoices):
     ALLEY_CAR = 'alley_car', _("Ngõ ô tô")
@@ -47,6 +58,8 @@ class Status(models.TextChoices):
 city_choices = [(k, v['name']) for k, v in state_data.items()]
 city_choices.sort()
 
+def get_image_path(instance, filename: str):
+    return 'photos/listings/' + str(instance.listing.id) + '/' + filename
 
 class Listing(models.Model):
     transaction_type = models.CharField(max_length=20, choices=TransactionType.choices, default=TransactionType.SELL,
@@ -69,7 +82,7 @@ class Listing(models.Model):
     floors = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)],
                                  choices=([(i, i) for i in range(1, 10)]),
                                  verbose_name=_("Số tầng"))
-    house_type = models.CharField(max_length=20, choices=HouseType.choices, default=HouseType.CITY_HOUSE,
+    house_type = models.CharField(max_length=20, choices=HouseType.choices, default=HouseType.TOWN_HOUSE,
                                   verbose_name=_("Loại nhà"))
     road_type = models.CharField(max_length=20, choices=RoadType.choices, default=RoadType.STREET_SURFACE,
                                  verbose_name=_("Loại mặt tiền"))
@@ -86,23 +99,19 @@ class Listing(models.Model):
                                    verbose_name=_("Số phòng ngủ"))
     bathrooms = models.DecimalField(max_digits=3, decimal_places=1, verbose_name=_("Diện tích phòng tắm"),
                                     blank=True, null=True)
-    lane_width = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True,
-                                     verbose_name=_("Rộng mặt đường/ngõ (m)"))
-    lot_size = models.DecimalField(max_digits=5, decimal_places=1, default=0,
-                                   verbose_name=_("Diện tích khuân viên"), )
+    lane_width = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True, verbose_name=_("Rộng mặt đường/ngõ (m)"))
+    lot_size = models.DecimalField(max_digits=5, decimal_places=1, default=0, verbose_name=_("Diện tích khuân viên"), )
     description = models.TextField(blank=True, verbose_name=_("Mô tả"), default="")
-    location = LocationField(based_fields=['address'], zoom=7, null=True,
-                             default=Point(105.8401439, 21.0334474))
+    location = LocationField(based_fields=['address'], zoom=7, null=True, default=Point(105.8401439, 21.0334474))
 
     extra_data = models.JSONField(verbose_name=_("Thông tin khác"), null=True, blank=True, default=dict)
     list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày đăng"))
     title = models.CharField(max_length=200, verbose_name=_("Tên BĐS"),
-                             help_text=_("[Tên phố - Quận/Huyện] [Diện tích - Tầng/Đất/CC - Mặt tiền] [Ngõ] [Giá]"))
-    code = models.CharField(max_length=50, verbose_name=_("Mã BĐS"), help_text=_("Được điền tự động và duy nhất"),
+                             help_text=_("[Tên phố - Quận/Huyện] [Diện tích - Tầng/Đất/CC - Mặt tiền] [Rộng Ngõ] [Giá]"))
+    code = models.CharField(max_length=50, verbose_name=_("Mã BĐS"), help_text=_("Được điền tự động và duy nhất theo cú pháp; [house_type-Viết tắt] [số thứ tự bản ghi BĐS]"),
                             unique=True)
 
-    status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING,
-                                  verbose_name=_("Tình trạng BĐS"))
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING, verbose_name=_("Tình trạng BĐS"))
     is_verified = models.BooleanField(default=False, verbose_name=_("Đã xác minh thông tin nhà"))
     is_exclusive = models.BooleanField(default=False, verbose_name=_("Nhà Phố độc quyền"))
     is_published = models.BooleanField(default=True, verbose_name=_("Được phép đăng"))
@@ -125,9 +134,10 @@ class Listing(models.Model):
     def photos(self):
         return self.listingimage_set.all().order_by('sort')
 
+    @property
+    def main_video(self):
+        return self.listingvideo_set.first()
 
-def get_image_path(instance, filename: str):
-    return 'photos/listings/' + str(instance.listing.id) + '/' + filename
 
 
 class ListingImage(models.Model):
@@ -147,3 +157,5 @@ class ListingImage(models.Model):
 class ListingVideo(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     video = EmbedVideoField()
+
+
