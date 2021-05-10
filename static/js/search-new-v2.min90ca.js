@@ -19604,7 +19604,7 @@
                 }, [n("i", {staticClass: "zmdi zmdi-hc-2x zmdi-close"})])]), t._v(" "), n("div", {staticClass: "search-container"}, [t.items.length > 0 ? n("suggest-list", {
                     staticClass: "recent-search search-suggest-list",
                     attrs: {list: t.items, selectItem: t.selectItem}
-                }) : n("div", {staticClass: "result-empty-list"}, [n("p", [t._v("\n            Vui lòng kiểm tra lại từ khóa "), n("br"), t._v("\n            Hoặc bạn có thể định dạng lại từ khóa theo ví dụ dưới:\n          ")]), t._v(" "), n("p", {staticStyle: {"padding-top": ".25rem"}}, [n("strong", [t._v("Dự án:")]), t._v(" Jamila Khang Điền\n          ")]), t._v(" "), n("p", [n("strong", [t._v("Khu dân cư:")]), t._v(' "Quận 2" hoặc "Khu đô thị sala" hoặc "An phú"\n          ')])])], 1)])])
+                }) : n("div", {staticClass: "result-empty-list"}, [n("p", [t._v("\n            Vui lòng kiểm tra lại từ khóa "), n("br"), t._v("\n            Hoặc bạn có thể định dạng lại từ khóa theo ví dụ dưới:\n          ")]), t._v(" "), n("p", {staticStyle: {"padding-top": ".25rem"}}, [n("strong", [t._v("Dự án:")]), t._v(" Vinhome Gia Lâm\n          ")]), t._v(" "), n("p", [n("strong", [t._v("Khu dân cư:")]), t._v(' "Quận Hoàn Kiếm" hoặc "Khu đô thị Linh Đàm" hoặc "Ciputra - Nam Thăng Long"\n          ')])])], 1)])])
             }, staticRenderFns: []
         };
         var A = n("VU/8")(x, w, !1, function (t) {
@@ -53545,7 +53545,7 @@ function (t, e, n) {
             }, projectTypes: function () {
                 return [{id: O.m.APARTMENT, name: "Căn hộ"}, {
                     id: O.m.SHOP_HOUSE,
-                    name: "Shophouse"
+                    name: "Cửa hàng"
                 }, {id: O.m.TOWN_HOUSE, name: "Nhà phố"}, {id: O.m.VILLA, name: "Biệt thự"}]
             }, projectStatuses: function () {
                 return [{id: O.l.READY_FOR_SALE, name: "Sắp mở bán"}, {
@@ -56925,7 +56925,7 @@ function (t, e, n) {
             },
             computed: {
                 neighborhoods: function () {
-                    return ["Quận 2", "Quận 7", "Quận 4", "Quận Bình Thạnh", "Thảo Điền", "Thủ Thiêm", "An Phú An Khánh", "Vinhomes Central Park", "Phú Mỹ Hưng", "Quận 9"]
+                    return ["Quận Hoàn Kiếm", "Quận Đống Đa", "Quận Ba Đình", "Quận Hai Bà Trưng", "Linh Đàm", "Ecopark", "An Khánh", "Vinhomes"]
                 }, propertyTypes: function () {
                     return (this.isForSale ? O.w : O.r).map(function (t) {
                         return {key: Pn.a.fold(t.name).toLowerCase().replace(/\s{1,}/gm, "-"), label: t.name}
@@ -58762,18 +58762,10 @@ z8d1:function (t, e, n) {
         }), N = 10, D = 11, M = 20, O = 21, P = 22, L = 23, R = 30, B = 31, F = 32,
         j = u()((o = {}, d()(o, N, "Thành phố"), d()(o, D, "Tỉnh"), d()(o, M, "Quận"), d()(o, O, "Huyện"), d()(o, P, "Thị xã"), d()(o, L, "Thành phố"), d()(o, R, "Phường"), d()(o, B, "Xã"), d()(o, F, "Thị trấn"), o)),
         z = [I.STREET, I.AREA, I.PROJECT, I.PROJECT_V2, I.NEIGHBORHOOD, I.NEARBY],
-        $ = (a = {}, d()(a, T.APARTMENT, "Căn hộ"), d()(a, T.SERVICE_APARTMENT, "Căn hộ dịch vụ"), d()(a, T.PENT_HOUSE, "Pent-house"), d()(a, T.VILLA, "Biệt thự"), d()(a, T.LOFT_HOUSE, "Lofthouse"), d()(a, T.OFFICE_TEL, "Office-tel"), d()(a, T.CONDO_TEL, "Condo-tel"), d()(a, T.TOWN_HOUSE, "Nhà phố"), d()(a, T.SHOP_HOUSE, "Shop-house"), d()(a, T.VILLA_REST, "Biệt thự nghỉ dưỡng"), d()(a, T.PLOT, "Đất nền"), d()(a, T.OFFICE, "Văn phòng"), d()(a, T.BUILDING_BUSINESS, "Tòa nhà KD"), d()(a, T.LAND_BUSINESS, "Mặt bằng KD"), d()(a, T.WAREHOUSE_WORKSHOP, "Nhà xưởng kho bãi"), d()(a, T.INDUSTRIAL_LAND, "Đất công nghiệp"), d()(a, T.OTHER, "Khác"), a),
+        $ = (a = {}, d()(a, T.APARTMENT, "Căn hộ"), d()(a, T.SERVICE_APARTMENT, "Căn hộ dịch vụ"), d()(a, T.PENT_HOUSE, "Căn hộ áp mái (Pent-house)"), d()(a, T.VILLA, "Biệt thự"), d()(a, T.LOFT_HOUSE, "Nhà gác xép/Cấp 4"), d()(a, T.OFFICE_TEL, "Văn phòng khách sạn (Office-tel)"), d()(a, T.CONDO_TEL, "Căn hộ khách sạn (Condo-tel)"), d()(a, T.TOWN_HOUSE, "Nhà phố"), d()(a, T.SHOP_HOUSE, "Cửa hàng"), d()(a, T.VILLA_REST, "Biệt thự nghỉ dưỡng Villa_rest"), d()(a, T.PLOT, "Đất phân lô"), d()(a, T.OFFICE, "Văn phòng"),d()(a, T.BUILDING, "Tòa nhà"),  d()(a, T.BUILDING_BUSINESS, "Tòa nhà kinh doanh"), d()(a, T.LAND_BUSINESS, "Mặt bằng kinh doanh"), d()(a, T.WAREHOUSE_WORKSHOP, "Kho xưởng"), d()(a, T.INDUSTRIAL_LAND, "Đất công nghiệp"), d()(a, T.OTHER, "Khác"), a),
         Y = (l = {}, d()(l, T.APARTMENT, "CH"), d()(l, T.SERVICE_APARTMENT, "CHDV"), d()(l, T.PENT_HOUSE, "PH"), d()(l, T.VILLA, "BT"), d()(l, T.LOFT_HOUSE, "LH"), d()(l, T.OFFICE_TEL, "OT"), d()(l, T.CONDO_TEL, "CT"), d()(l, T.TOWN_HOUSE, "NP"), d()(l, T.SHOP_HOUSE, "SH"), d()(l, T.VILLA_REST, "BTND"), d()(l, T.PLOT, "DN"), d()(l, T.OFFICE, "VP"), d()(l, T.BUILDING_BUSINESS, "TNKD"), d()(l, T.LAND_BUSINESS, "MBKD"), d()(l, T.WAREHOUSE_WORKSHOP, "NXKB"), d()(l, T.INDUSTRIAL_LAND, "DCN"), d()(l, T.OTHER, "KHC"), l),
-        G = [{id: T.APARTMENT, name: $[T.APARTMENT]}, {id: T.PENT_HOUSE, name: $[T.PENT_HOUSE]}, {
-            id: T.SHOP_HOUSE,
-            name: $[T.SHOP_HOUSE]
-        }, {id: T.OFFICE_TEL, name: $[T.OFFICE_TEL]}, {id: T.TOWN_HOUSE, name: $[T.TOWN_HOUSE]}, {
-            id: T.VILLA,
-            name: $[T.VILLA]
-        }, {id: T.OFFICE, name: $[T.OFFICE]}, {id: T.LAND_BUSINESS, name: $[T.LAND_BUSINESS]}, {
-            id: T.PLOT,
-            name: $[T.PLOT]
-        }], q = [{id: T.APARTMENT, name: $[T.APARTMENT]}, {id: T.SHOP_HOUSE, name: $[T.SHOP_HOUSE]}, {
+        G = [{id: T.APARTMENT, name: $[T.APARTMENT]}, {id: T.SERVICE_APARTMENT, name: $[T.SERVICE_APARTMENT]}, {id: T.PENT_HOUSE, name: $[T.PENT_HOUSE]}, {id: T.SHOP_HOUSE, name: $[T.SHOP_HOUSE]}, {id: T.TOWN_HOUSE, name: $[T.TOWN_HOUSE]}, {id: T.LOFT_HOUSE, name: $[T.LOFT_HOUSE]}, {id: T.VILLA, name: $[T.VILLA]}, {id: T.VILLA_REST, name: $[T.VILLA_REST]}, {id: T.OFFICE, name: $[T.OFFICE]}, {id: T.OFFICE_TEL, name: $[T.OFFICE_TEL]}, {id: T.CONDO_TEL, name: $[T.CONDO_TEL]}, {id: T.LAND_BUSINESS, name: $[T.LAND_BUSINESS]}, {id: T.PLOT, name: $[T.PLOT] }],
+        q = [{id: T.APARTMENT, name: $[T.APARTMENT]}, {id: T.SHOP_HOUSE, name: $[T.SHOP_HOUSE]}, {
             id: T.OFFICE_TEL,
             name: $[T.OFFICE_TEL]
         }, {id: T.SERVICE_APARTMENT, name: $[T.SERVICE_APARTMENT]}, {id: T.TOWN_HOUSE, name: $[T.TOWN_HOUSE]}, {
@@ -58782,7 +58774,8 @@ z8d1:function (t, e, n) {
         }, {id: T.OFFICE, name: $[T.OFFICE]}, {id: T.BUILDING_BUSINESS, name: $[T.BUILDING_BUSINESS]}, {
             id: T.LAND_BUSINESS,
             name: $[T.LAND_BUSINESS]
-        }], U = {NEIGHBORHOOD: 1, PROJECT: 2, POLYGON: 3, SAVE_SEARCH: 4, BOUNDING_BOX: 5, CIRCLE: 6, STREET: 7},
+        }],
+        U = {NEIGHBORHOOD: 1, PROJECT: 2, POLYGON: 3, SAVE_SEARCH: 4, BOUNDING_BOX: 5, CIRCLE: 6, STREET: 7},
         H = {READY_FOR_SALE: 1, OPEN_FOR_SALE: 2, RELEASED: 3},
         V = {APARTMENT: 1, SHOP_HOUSE: 2, TOWN_HOUSE: 3, VILLA: 4},
         W = {ACTIVE: 1, EXCLUSIVE: 2, UNDER_CONTRACT: 3, SOLD_RENT: 4}

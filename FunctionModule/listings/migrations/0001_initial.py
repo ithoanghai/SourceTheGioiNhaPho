@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
                 ('lot_size', models.DecimalField(decimal_places=1, default=0, max_digits=5, verbose_name='Diện tích khuân viên')),
                 ('description', models.TextField(blank=True, default='', verbose_name='Mô tả')),
                 ('lane_width', models.DecimalField(blank=True, decimal_places=1, max_digits=5, null=True, verbose_name='Diện tích mặt đường/ngõ')),
-                ('house_type', models.CharField(choices=[('city_house', 'Nhà phố'), ('villa', 'Biệt thự'), ('land', 'Đất nền'), ('apartment', 'Chung cư'), ('project', 'Dự án')], default='city_house', max_length=20, verbose_name='Loại nhà')),
+                ('house_type', models.CharField(choices=[('town_house', 'Nhà phố'), ('villa', 'Biệt thự'), ('land', 'Đất nền'), ('apartment', 'Chung cư'), ('project', 'Dự án')], default='town_house', max_length=20, verbose_name='Loại nhà')),
                 ('registration_type', models.CharField(choices=[('red_book', 'Sổ Đỏ'), ('pink_book', 'Sổ Hồng')], default='red_book', max_length=20, verbose_name='Loại đăng ký')),
                 ('road_type', models.CharField(choices=[('alley_car', 'Ngõ ô tô'), ('alley_bike', 'Ngõ xe máy'), ('street_surface', 'Mặt tiền phố')], default='street_surface', max_length=20, verbose_name='Loại mặt tiền')),
                 ('location', location_field.models.spatial.LocationField(

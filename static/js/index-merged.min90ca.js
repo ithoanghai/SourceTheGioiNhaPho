@@ -2313,7 +2313,7 @@
                         "line-height": "1.3",
                         padding: "0 17px"
                     }
-                }, [n("h5", {staticStyle: {"margin-bottom": "1rem"}}, [t._v('\n        Không tìm thấy kết quả nào tương ứng với "' + t._s(t.instanceKeyword) + '"\n      ')]), t._v(" "), n("p", [t._v("Vui lòng kiểm tra lại từ khóa.")])]) : t._e()], 1)
+                }, [n("h5", {staticStyle: {"margin-bottom": "1rem"}}, [t._v('\n        Không tìm thấy kết quả có từ khoá "' + t._s(t.instanceKeyword) + '"\n      ')]), t._v(" "), n("p", [t._v("Vui lòng kiểm tra lại từ khóa.")])]) : t._e()], 1)
             }, staticRenderFns: []
         };
         var s = n("VU/8")(o, a, !1, function (t) {
@@ -18439,7 +18439,7 @@
             },
             computed: {
                 title: function () {
-                    return this.items.length ? "Có phải bạn đang tìm kiếm" : 'Không tìm thấy kết quả nào tương ứng với "' + this.keyword + '"'
+                    return this.items.length ? "Có phải bạn đang tìm kiếm" : 'Không tìm thấy BĐS có từ khoá "' + this.keyword + '"'
                 }
             }
         }, x = {
@@ -18465,7 +18465,7 @@
                 }, [n("i", {staticClass: "zmdi zmdi-hc-2x zmdi-close"})])]), t._v(" "), n("div", {staticClass: "search-container"}, [t.items.length > 0 ? n("suggest-list", {
                     staticClass: "recent-search search-suggest-list",
                     attrs: {list: t.items, selectItem: t.selectItem}
-                }) : n("div", {staticClass: "result-empty-list"}, [n("p", [t._v("\n            Vui lòng kiểm tra lại từ khóa "), n("br"), t._v("\n            Hoặc bạn có thể định dạng lại từ khóa theo ví dụ dưới:\n          ")]), t._v(" "), n("p", {staticStyle: {"padding-top": ".25rem"}}, [n("strong", [t._v("Dự án:")]), t._v(" Jamila Khang Điền\n          ")]), t._v(" "), n("p", [n("strong", [t._v("Khu dân cư:")]), t._v(' "Quận 2" hoặc "Khu đô thị sala" hoặc "An phú"\n          ')])])], 1)])])
+                }) : n("div", {staticClass: "result-empty-list"}, [n("p", [t._v("\n            Vui lòng kiểm tra lại từ khóa "), n("br"), t._v("\n            Hoặc bạn có thể định dạng lại từ khóa theo ví dụ dưới:\n          ")]), t._v(" "), n("p", {staticStyle: {"padding-top": ".25rem"}}, [n("strong", [t._v("Dự án:")]), t._v(" Vinhome Gia Lâm\n          ")]), t._v(" "), n("p", [n("strong", [t._v("Khu dân cư:")]), t._v(' "Quận Hoàn Kiếm" hoặc "Khu đô thị Linh Đàm" hoặc "Ciputra - Nam Thăng Long"\n          ')])])], 1)])])
             }, staticRenderFns: []
         };
         var S = n("VU/8")(w, x, !1, function (t) {
@@ -22567,7 +22567,7 @@
             n("KKi3")
         }, "data-v-3dbc1c43", null);
         e.a = a.exports
-    }, aNix: function (t, e, n) {
+    }, aNix: function (t, e, n){
         "use strict";
         var r = n("//Fk"), i = n.n(r), o = n("ESwS"), a = n.n(o), s = n("7+uW"), u = n("+cKO"), c = n("ccBP"),
             l = n("fQD6"), f = n("mvHQ"), d = n.n(f), p = window._au_api, h = {
@@ -27730,7 +27730,7 @@
             }), j = 10, P = 11, N = 20, D = 21, R = 22, I = 23, M = 30, L = 31, B = 32,
             $ = l()((a = {}, d()(a, j, "Thành phố"), d()(a, P, "Tỉnh"), d()(a, N, "Quận"), d()(a, D, "Huyện"), d()(a, R, "Thị xã"), d()(a, I, "Thành phố"), d()(a, M, "Phường"), d()(a, L, "Xã"), d()(a, B, "Thị trấn"), a)),
             F = [T.STREET, T.AREA, T.PROJECT, T.PROJECT_V2, T.NEIGHBORHOOD, T.NEARBY],
-            H = (s = {}, d()(s, C.APARTMENT, "Căn hộ"), d()(s, C.SERVICE_APARTMENT, "Căn hộ dịch vụ"), d()(s, C.PENT_HOUSE, "Pent-house"), d()(s, C.VILLA, "Biệt thự"), d()(s, C.LOFT_HOUSE, "Lofthouse"), d()(s, C.OFFICE_TEL, "Office-tel"), d()(s, C.CONDO_TEL, "Condo-tel"), d()(s, C.TOWN_HOUSE, "Nhà phố"), d()(s, C.SHOP_HOUSE, "Shop-house"), d()(s, C.VILLA_REST, "Biệt thự nghỉ dưỡng"), d()(s, C.PLOT, "Đất nền"), d()(s, C.OFFICE, "Văn phòng"), d()(s, C.BUILDING_BUSINESS, "Tòa nhà KD"), d()(s, C.LAND_BUSINESS, "Mặt bằng KD"), d()(s, C.WAREHOUSE_WORKSHOP, "Nhà xưởng kho bãi"), d()(s, C.INDUSTRIAL_LAND, "Đất công nghiệp"), d()(s, C.OTHER, "Khác"), s),
+            H = (s = {}, d()(s, C.APARTMENT, "Căn hộ"), d()(s, C.SERVICE_APARTMENT, "Căn hộ dịch vụ"), d()(s, C.PENT_HOUSE, "Nhà áp mái (Pent-house)"), d()(s, C.VILLA, "Biệt thự"), d()(s, C.LOFT_HOUSE, "Nhà gác xép/Cấp 4"), d()(s, C.OFFICE_TEL, "Văn phòng khách sạn (Office-tel)"), d()(s, C.CONDO_TEL, "Căn hộ khách sạn (Condo-tel)"), d()(s, C.TOWN_HOUSE, "Nhà phố"), d()(s, C.SHOP_HOUSE, "shop_house"), d()(s, C.VILLA_REST, "Biệt thự nghỉ dưỡng"), d()(s, C.PLOT, "Đất nền"), d()(s, C.OFFICE, "Văn phòng"), d()(s, C.BUILDING_BUSINESS, "Tòa nhà KD"), d()(s, C.LAND_BUSINESS, "Mặt bằng KD"), d()(s, C.WAREHOUSE_WORKSHOP, "Nhà xưởng kho bãi"), d()(s, C.INDUSTRIAL_LAND, "Đất công nghiệp"), d()(s, C.OTHER, "Khác"), s),
             U = (u = {}, d()(u, C.APARTMENT, "CH"), d()(u, C.SERVICE_APARTMENT, "CHDV"), d()(u, C.PENT_HOUSE, "PH"), d()(u, C.VILLA, "BT"), d()(u, C.LOFT_HOUSE, "LH"), d()(u, C.OFFICE_TEL, "OT"), d()(u, C.CONDO_TEL, "CT"), d()(u, C.TOWN_HOUSE, "NP"), d()(u, C.SHOP_HOUSE, "SH"), d()(u, C.VILLA_REST, "BTND"), d()(u, C.PLOT, "DN"), d()(u, C.OFFICE, "VP"), d()(u, C.BUILDING_BUSINESS, "TNKD"), d()(u, C.LAND_BUSINESS, "MBKD"), d()(u, C.WAREHOUSE_WORKSHOP, "NXKB"), d()(u, C.INDUSTRIAL_LAND, "DCN"), d()(u, C.OTHER, "KHC"), u),
             z = [{id: C.APARTMENT, name: H[C.APARTMENT]}, {id: C.PENT_HOUSE, name: H[C.PENT_HOUSE]}, {
                 id: C.SHOP_HOUSE,

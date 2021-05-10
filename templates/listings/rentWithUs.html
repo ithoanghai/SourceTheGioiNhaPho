@@ -139,17 +139,27 @@
                     <form id="search-form-app" ref="searchFormApp" @submit.prevent="startSearch" action="#"
                           class="s-sreach-cover-inner">
                         <div class="s-sreach-type s-dropdown">
-                            <select title="Loại nhà đất" name="property_type" data-placeholder="Loại nhà đất"
-                                    style="display: none;">
-                                <option value="apartment">Căn hộ</option>
-                                <option value="shop-house">Shophouse</option>
-                                <option value="office-tel">Officetel</option>
-                                <option value="officetel">Căn hộ dịch vụ</option>
-                                <option value="house">Nhà phố</option>
+                            <select title="Loại nhà đất" name="property_type" data-placeholder="Loại nhà đất"  style="display: none;">
+                                <option value="town_house">Nhà phố</option>
+                                <option value="loft_house">Nhà gác xép/Cấp 4</option>
+                                <option value="street_house">Nhà mặt phố</option>
+                                <option value="shop_house">Cửa hàng</option>
                                 <option value="villa">Biệt thự</option>
-                                <option value="van-phong">Văn phòng</option>
-                                <option value="building-business">Toà nhà KD</option>
-                                <option value="land-business">Mặt bằng KD</option>
+                                <option value="villa_rest">Biệt thự nghỉ dưỡng</option>
+                                <option value="building">Toà nhà</option>
+                                <option value="building_business">Toà nhà kinh doanh</option>
+                                <option value="apartment">Căn hộ</option>
+                                <option value="pent_house">Căn hộ áp mái</option>
+                                <option value="service_apartment">Căn hộ dịch vụ</option>
+                                <option value="condo_tel">Căn hộ khách sạn</option>
+                                <option value="office">Văn phòng</option>
+                                <option value="office_tel">Văn phòng khách sạn</option>
+                                <option value="land">Đất nền</option>
+                                <option value="plot">Đất phân lô</option>
+                                <option value="industrial_land">Đất công nghiệp</option>
+                                <option value="warehouse_workshop">Kho xưởng</option>
+                                <option value="land_business">Mặt bằng kinh doanh</option>
+                                <option value="other">Khác</option>
                             </select>
                         </div>
                         <div class="s-sreach-type s-dropdown">
@@ -342,7 +352,7 @@
                         <ul class="slides">
                             <li class="flex-active-slide">
                                 <p class="description s-text-w">
-                                    Tôi có nhu cầu thuê biệt thự cho gia đình 7 người tại Quận 2, các bạn chuyên viên
+                                    Tôi có nhu cầu thuê biệt thự cho gia đình 7 người tại Quận Hoàn Kiếm, các bạn chuyên viên
                                     bên TGNP rất tận tình tư vấn cho tôi nên ở khu nào, chọn đường nào để tiện cho công
                                     việc và học hành của con cái tôi, và căn biệt thự
                                     đó nên có những đặc điểm gì để phù hợp cho cuộc sống của gia đình có người già và
@@ -382,7 +392,7 @@
                             </li>
                             <li>
                                 <p class="description s-text-w">
-                                    Công ty tôi đã thuê được văn phòng làm việc tại Quận 4 với giá thuê theo tôi nghĩ là
+                                    Công ty tôi đã thuê được văn phòng làm việc tại Quận Đống Đa với giá thuê theo tôi nghĩ là
                                     khá tốt, điều đặc biệt hơn cả là tôi có ấn tượng rất tốt với chuyên viên bên TGNP,
                                     các bạn vô cùng chuyên nghiệp, cung cấp đầy đủ
                                     thông tin chính xác về những địa điểm bên tôi quan tâm và đáp ứng các yêu cầu phát
@@ -422,28 +432,28 @@
                 <div class="browser-heading">Địa điểm nổi bật</div>
                 <ul class="popular-location">
                     <li class="city"><a href="s/quan-1/thue.html">Cho thuê Quận 1</a></li>
-                    <li class="city"><a href="s/quan-2/thue.html">Cho thuê Quận 2</a></li>
+                    <li class="city"><a href="s/quan-2/thue.html">Cho thuê Quận Hoàn Kiếm</a></li>
                     <li class="city"><a href="s/quan-3/thue.html">Cho thuê Quận 3</a></li>
-                    <li class="city"><a href="s/quan-4/thue.html">Cho thuê Quận 4</a></li>
-                    <li class="city"><a href="s/quan-7/thue.html">Cho thuê Quận 7</a></li>
+                    <li class="city"><a href="s/quan-4/thue.html">Cho thuê Quận Đống Đa</a></li>
+                    <li class="city"><a href="s/quan-7/thue.html">Cho thuê Quận Ba Đình</a></li>
                     <li class="city"><a href="s/quan-8/thue.html">Cho thuê Quận 8</a></li>
                     <li class="city"><a href="s/quan-9/thue.html">Cho thuê Quận 9</a></li>
                     <li class="city"><a href="s/quan-10/thue.html">Cho thuê Quận 10</a></li>
                     <li class="city"><a href="s/quan-binh-thanh/thue.html">Cho thuê Quận Bình Thạnh</a></li>
                     <li class="city"><a href="s/quan-phu-nhuan/thue.html">Cho thuê Quận Phú Nhuận</a></li>
-                    <li class="city"><a href="s/phuong-thao-dien-quan-2/thue.html">Cho thuê Thảo Điền, Quận 2</a></li>
-                    <li class="city"><a href="s/phuong-an-phu-quan-2/thue.html">Cho thuê An Phú An Khánh, Quận 2</a>
+                    <li class="city"><a href="s/phuong-thao-dien-quan-2/thue.html">Cho thuê Thảo Điền, Quận Hoàn Kiếm</a></li>
+                    <li class="city"><a href="s/phuong-an-phu-quan-2/thue.html">Cho thuê An Phú An Khánh, Quận Hoàn Kiếm</a>
                     </li>
-                    <li class="city"><a href="s/phuong-thu-thiem-quan-2/thue.html">Cho thuê KĐT Thủ Thiêm, Quận 2</a>
+                    <li class="city"><a href="s/phuong-thu-thiem-quan-2/thue.html">Cho thuê KĐT Thủ Thiêm, Quận Hoàn Kiếm</a>
                     </li>
-                    <li class="city"><a href="s/phuong-binh-khanh-quan-2/thue.html">Cho thuê Bình Khánh, Quận 2</a></li>
-                    <li class="city"><a href="s/phuong-binh-an-quan-2/thue.html">Cho thuê KP4 Bình An, Quận 2</a></li>
+                    <li class="city"><a href="s/phuong-binh-khanh-quan-2/thue.html">Cho thuê Bình Khánh, Quận Hoàn Kiếm</a></li>
+                    <li class="city"><a href="s/phuong-binh-an-quan-2/thue.html">Cho thuê KP4 Bình An, Quận Hoàn Kiếm</a></li>
                     <li class="city"><a href="s/vinhomes-central-park/thue.html">Cho thuê Vinhomes Central Park</a></li>
                     <li class="city"><a href="s/cau-vuot-hang-xanh-binh-thanh-ha-noi/thue.html">Cho thuê Hàng Xanh,
                         Bình Thạnh</a></li>
-                    <li class="city"><a href="s/ben-van-don/thue.html">Cho thuê Bến Vân Đồn, Quận 4</a></li>
+                    <li class="city"><a href="s/ben-van-don/thue.html">Cho thuê Bến Vân Đồn, Quận Đống Đa</a></li>
                     <li class="city"><a href="s/city-horse-an-phu/thue.html">Cho thuê City Horse - An Phú</a></li>
-                    <li class="city"><a href="s/phu-my-hung-/thue.html">Cho thuê Phú Mỹ Hưng, Quận 7</a></li>
+                    <li class="city"><a href="s/phu-my-hung-/thue.html">Cho thuê Phú Mỹ Hưng, Quận Ba Đình</a></li>
                     <li class="city"><a href="du-an/masteri-thao-dien.html">Cho thuê Masteri Thảo Điền</a></li>
                     <li class="city"><a href="du-an/lexington-residence.html">Cho thuê Lexington Residence</a></li>
                     <li class="city"><a href="du-an/vinhomes-central-park.html">Cho thuê Vinhomes Central Park</a></li>

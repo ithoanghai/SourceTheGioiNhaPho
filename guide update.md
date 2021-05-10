@@ -9,6 +9,11 @@
 	Run collectstatic (python manage.py collectstatic)
 
 2. git guide
+	- git commit
+
+	- git pull
+
+
 	cap nhat: 
 	- git pull = git fetch + git merge
 

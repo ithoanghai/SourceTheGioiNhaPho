@@ -23,7 +23,7 @@ urlpatterns = [
 
     #Url for Backend
     #path('admin/', admin.site.urls), #for Backend from default lib
-    path('admin', views.dashboard , name ='dashboard'),
+    #path('admin/', views.dashboard , name ='dashboard'),
     path('admin/login', views.admin_login , name ='admin_login'),
     path('admin/logout/',auth_views.LogoutView.as_view(next_page='/admin'),name='logout'),
 

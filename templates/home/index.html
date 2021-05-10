@@ -55,7 +55,7 @@
     <meta name="ahrefs-site-verification" content="b3a10354398a2c17b3410f4506518ba93e519af05a49ba8d75ccb03d7059bbe6">
 
     <link rel="stylesheet" type="text/css" href="{% static "css/index-merge.min90ca.css" %}">
-       <link rel="stylesheet" type="text/css" href="{% static "css/font-icon.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/font-icon.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
 
     <link rel="stylesheet" type="text/css" href="{% static "css/footer.min90ca.css" %}">
@@ -246,14 +246,13 @@
 {% endblock %}
 
 {% block content %}
-
     <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">
         <div class="banner-app-content">
             <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
                 <i class="zmdi zmdi-close"></i>
             </button>
             <a href="javascript:void(0)" class="cover">
-                <img src="{% static 'img/logo.svg'%}" alt="Thế giới Nhà Phố">
+                <img src="{% static 'img/logo.svg' %}" alt="Thế giới Nhà Phố">
             </a>
             <div class="banner-app-info">
                 <a href="javascript:void(0)">Thế giới Nhà Phố</a>
@@ -274,7 +273,8 @@
         <div class="inner text-center-index block-introduce">
             <h2 class="heading-02">Hỗ trợ từng bước, chi phí thấp nhất</h2>
             <p class="col-8">TGNP với thế mạnh về công nghệ và cung cấp đầy đủ các dịch vụ, cùng với đội ngũ chuyên
-                viên hiểu biết sâu sắc thị trường từng khu vực, sẽ đồng hành hỗ trợ bạn từng bước, giúp bạn tiết kiệm đáng kể chi
+                viên hiểu biết sâu sắc thị trường từng khu vực, sẽ đồng hành hỗ trợ bạn từng bước, giúp bạn tiết kiệm
+                đáng kể chi
                 phí, công sức và thời gian.</p>
             <a class="btn-primary btn-large btn-black-outline" target="_blank" href="whyChoose">Tìm hiểu thêm</a>
         </div>
@@ -283,69 +283,85 @@
     <section class="container col-12">
 
         {% comment %}{% for key, value in district_data.items %}{% endcomment %}
-            <div class="inner pd-top-bottom-block block-project" style="padding-top: 0">
+        <div class="inner pd-top-bottom-block block-project" style="padding-top: 0">
             <h2 class="heading-03">
                 <a href="{% url 'search' %} {{ key }}">Bán tại Q. {{ value }}</a>
             </h2>
             <div class="col-12">
-                  {% if listings_for_sale %}
+                {% if listings_for_sale %}
                     {% for listing in listings_for_sale %}
-                        <article class="listingCard" data-imp-stats="{id: '1607072022408_852', type: 'property', position: 'HomeLocation'}">
+                        <article class="listingCard"
+                                 data-imp-stats="{id: '1607072022408_852', type: 'property', position: 'HomeLocation'}">
                             <div class="cover-image">
                                 <a href="{% url 'listing' listing.id %}" title="{{ listing.title }}" data-imp-click>
-                                 {% with listing.main_photo as photo %}
-                                    <img src="{{ photo.url }}" data-src="{{ photo.url }}"
-                                         data-srcset="{{ photo.url }}, {{ photo.url }} 2x"
-                                         alt="{{ listing.title }}"
-                                         title="{{ listing.title }}"
-                                         class="lazy" draggable="false">
-                                {% endwith %}
+                                    {% with listing.main_photo as photo %}
+                                        <img src="{{ photo.url }}" data-src="{{ photo.url }}"
+                                             data-srcset="{{ photo.url }}, {{ photo.url }} 2x"
+                                             alt="{{ listing.title }}"
+                                             title="{{ listing.title }}"
+                                             class="lazy" draggable="false">
+                                    {% endwith %}
 
                                 </a>
                                 <div class="label-group">
                                     {% if listing.is_exclusive %}
-                                    <label class="label-primary unique">{% trans "TGNP độc quyền" %}</label>
+                                        <label class="label-primary unique">{% trans "TGNP độc quyền" %}</label>
                                     {% endif %}
-                                    <label class="label-primary unique p-1" style="font-size: 16px">{{ listing.price }} {% trans "tỷ" %}</label>
-                                   </div>
+                                    <label class="label-primary unique p-1"
+                                           style="font-size: 16px">{{ listing.price }} {% trans "tỷ" %}</label>
+                                </div>
                                 <button data-action="favorite" data-id="{{ listing.id }}"
                                         data-alias="{{ listing.title }}"
                                         data-type="sale_property" data-favorited="false"
                                         class="btn-favorite zmdi zmdi-favorite-outline"></button>
-                                </div>
+                            </div>
                             <div class="info-container">
                                 <div class="flex align-items-center justify-content-space-between">
                                     <ul class="listing-info">
-                                        <li><i class="zmdi zmdi-airline-seat-individual-suite"></i>{{ listing.bedrooms }} {% trans "ngủ"%}</li>
-                                        <li><i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2"%}</li>
-                                       {% if listing.floors %} <li> <i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}</li> {% endif %}
-                                       {% if listing.bathrooms %} <li><i class="fa fa-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %} </li> {% endif %}
+                                        <li>
+                                            <i class="zmdi zmdi-airline-seat-individual-suite"></i>{{ listing.bedrooms }} {% trans "ngủ" %}
+                                        </li>
+                                        <li>
+                                            <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2" %}
+                                        </li>
+                                        {% if listing.floors %}
+                                            <li><i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}
+                                            </li> {% endif %}
+                                        {% if listing.bathrooms %}
+                                            <li><i class="fa fa-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %}
+                                            </li> {% endif %}
 
                                     </ul>
                                 </div>
                                 <h3>
-                                    <a class="listing-name" href="{% url 'listing' listing.id %}" title="{{ listing.title }}"  data-imp-click>{{ listing.title }}</a>
+                                    <a class="listing-name" href="{% url 'listing' listing.id %}"
+                                       title="{{ listing.title }}" data-imp-click>{{ listing.title }}</a>
                                 </h3>
+                                
                                 <div class="listing-address">
-                                    <h4><a href="{% url 'listing' listing.id %}" data-imp-click>{{listing.code }}</a></h4>
-                                    <h4>
-                                        <a href="{% url 'search'%}?street={{listing.street }}" title="">{{listing.street }}</a>
+                                    <h4><a href="{% url 'listing' listing.id %}" data-imp-click>{{ listing.code }}</a>
                                     </h4>
                                     <h4>
-                                        <a href="{% url 'search'%}?urban_area={{listing.urban_area }}" title="">{{listing.urban_area }}</a>
+                                        <a href="{% url 'search' %}?street={{ listing.street }}"
+                                           title="">{{ listing.street }}</a>
                                     </h4>
                                     <h4>
-                                        <a href="{% url 'search'%}?district={{listing.district }}" title="">{{listing.district}} {% comment %}{% state_data.get('district','' %}{% endcomment %}</a>
+                                        <a href="{% url 'search' %}?urban_area={{ listing.urban_area }}"
+                                           title="">{{ listing.urban_area }}</a>
+                                    </h4>
+                                    <h4>
+                                        <a href="{% url 'search' %}?district={{ listing.district }}"
+                                           title=""> {{ listing.district.name }}  {% comment %}{% state_data.get('district','' %}{% endcomment %}</a>
                                     </h4>
                                 </div>
                             </div>
                         </article>
                     {% endfor %}
-                  {% else %}
-                      <div class="col-md-12">
+                {% else %}
+                    <div class="col-md-12">
                         <p>{% trans "Không có kết quả phù hợp!" %}</p>
-                      </div>
-                    {% endif %}
+                    </div>
+                {% endif %}
                 <input type="hidden" value=""/>
                 <a class="more" href="../listings/search?trantype=sell&district=Hoàn Kiếm">Xem thêm nhà đất
                     <i class="zmdi zmdi-chevron-right"></i>
@@ -390,64 +406,77 @@
                 <a href="../listings/search?trantype=rent&district=Hoàn Kiếm">Cho thuê tại Hoàn Kiếm</a>
             </h2>
             <div class="col-12">
-                  {% if listings_for_rent %}
+                {% if listings_for_rent %}
                     {% for listing in listings_for_rent %}
-                        <article class="listingCard" data-imp-stats="{id: '1607072022408_852', type: 'property', position: 'HomeLocation'}">
+                        <article class="listingCard"
+                                 data-imp-stats="{id: '1607072022408_852', type: 'property', position: 'HomeLocation'}">
                             <div class="cover-image">
                                 <a href="{% url 'listing' listing.id %}" title="{{ listing.title }}" data-imp-click>
-                                 {% with listing.main_photo as photo %}
-                                    <img src="{{ photo.url }}" data-src="{{ photo.url }}"
-                                         data-srcset="{{ photo.url }}, {{ photo.url }} 2x"
-                                         alt="{{ listing.title }}"
-                                         title="{{ listing.title }}"
-                                         class="lazy" draggable="false">
-                                {% endwith %}
+                                    {% with listing.main_photo as photo %}
+                                        <img src="{{ photo.url }}" data-src="{{ photo.url }}"
+                                             data-srcset="{{ photo.url }}, {{ photo.url }} 2x"
+                                             alt="{{ listing.title }}"
+                                             title="{{ listing.title }}"
+                                             class="lazy" draggable="false">
+                                    {% endwith %}
 
                                 </a>
                                 <div class="label-group">
                                     {% if listing.is_exclusive %}
-                                    <label class="label-primary unique">{% trans "TGNP độc quyền" %}</label>
+                                        <label class="label-primary unique">{% trans "TGNP độc quyền" %}</label>
                                     {% endif %}
-                                    <label class="label-primary unique p-1" style="font-size: 16px">{{ listing.price }} {% trans "tỷ" %}</label>
-                                   </div>
+                                    <label class="label-primary unique p-1"
+                                           style="font-size: 16px">{{ listing.price }} {% trans "tỷ" %}</label>
+                                </div>
                                 <button data-action="favorite" data-id="{{ listing.id }}"
                                         data-alias="{{ listing.title }}"
                                         data-type="sale_property" data-favorited="false"
                                         class="btn-favorite zmdi zmdi-favorite-outline"></button>
-                                </div>
+                            </div>
                             <div class="info-container">
                                 <div class="flex align-items-center justify-content-space-between">
                                     <ul class="listing-info">
-                                        <li><i class="fa fas fa-bed"></i>{{ listing.bedrooms }} {% trans "ngủ"%}</li>
-                                        <li><i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2"%}</li>
-                                       {% if listing.floors %} <li> <i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}</li> {% endif %}
-                                       {% if listing.bathrooms %} <li><i class="fa fa-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %} </li> {% endif %}
+                                        <li><i class="fa fas fa-bed"></i>{{ listing.bedrooms }} {% trans "ngủ" %}</li>
+                                        <li>
+                                            <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2" %}
+                                        </li>
+                                        {% if listing.floors %}
+                                            <li><i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}
+                                            </li> {% endif %}
+                                        {% if listing.bathrooms %}
+                                            <li><i class="fa fa-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %}
+                                            </li> {% endif %}
 
                                     </ul>
                                 </div>
                                 <h3>
-                                    <a class="listing-name" href="{% url 'listing' listing.id %}" title="{{ listing.title }}"  data-imp-click>{{ listing.title }}</a>
+                                    <a class="listing-name" href="{% url 'listing' listing.id %}"
+                                       title="{{ listing.title }}" data-imp-click>{{ listing.title }}</a>
                                 </h3>
                                 <div class="listing-address">
-                                    <h4><a href="{% url 'listing' listing.id %}" data-imp-click>{{listing.code }}</a></h4>
-                                    <h4>
-                                        <a href="{% url 'search'%}?street={{listing.street }}" title="">{{listing.street }}</a>
+                                    <h4><a href="{% url 'listing' listing.id %}" data-imp-click>{{ listing.code }}</a>
                                     </h4>
                                     <h4>
-                                        <a href="{% url 'search'%}?urban_area={{listing.urban_area }}" title="">{{listing.urban_area }}</a>
+                                        <a href="{% url 'search' %}?street={{ listing.street }}"
+                                           title="">{{ listing.street }}</a>
                                     </h4>
                                     <h4>
-                                        <a href="{% url 'search'%}?district={{listing.district }}" title="">{{listing.district}} {% comment %}{% state_data.get('district','' %}{% endcomment %}</a>
+                                        <a href="{% url 'search' %}?urban_area={{ listing.urban_area }}"
+                                           title="">{{ listing.urban_area }}</a>
+                                    </h4>
+                                    <h4>
+                                        <a href="{% url 'search' %}?district={{ listing.district }}"
+                                           title="">{{ listing.district }} {% comment %}{% state_data.get('district','' %}{% endcomment %}</a>
                                     </h4>
                                 </div>
                             </div>
                         </article>
                     {% endfor %}
-                  {% else %}
-                      <div class="col-md-12">
+                {% else %}
+                    <div class="col-md-12">
                         <p>{% trans "Không có kết quả phù hợp!" %}</p>
-                      </div>
-                    {% endif %}
+                    </div>
+                {% endif %}
                 <input type="hidden" value=""/>
                 <a class="more" href="../listings/search?trantype=sell&district=Hoàn Kiếm">Xem thêm nhà đất
                     <i class="zmdi zmdi-chevron-right"></i>
@@ -457,7 +486,7 @@
     </section>
 
 
-{% comment %}    <section class="container col-12">
+    {% comment %}    <section class="container col-12">
         <div class="inner pd-bot-60 block-project project-hot-trend">
             <h2 class="heading-03">
                 <a href="../listings/search?trantype=project">Dự án mới nổi bật</a>
@@ -518,7 +547,7 @@
         }
 
         .app-banner-qc.visible {
-            background-image: url({% static 'images/app-rv%403x-small.png' %} );
+            background-image: url({% static "images/app-rv%403x-small.png" %} );
         }
     </style>
 
@@ -539,7 +568,8 @@
                                 <button @click="hideModal()" class="popup-close-btn"><i
                                         class="zmdi zmdi-hc-2x zmdi-close"></i></button>
                                 <div v-show="step == 1" class="contain" id="step-form-1">
-                                    <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?</div>
+                                    <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?
+                                    </div>
                                     <div class="choose-number">
                                         <ul>
                                             <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
@@ -572,7 +602,9 @@
                                     </div>
                                 </div>
                                 <div v-show="step == 3" class="contain">
-                                    <div class="intro">Bạn muốn thegioinhaphovietnam.com.vn cần cải thiện thêm về điều gì?</div>
+                                    <div class="intro">Bạn muốn thegioinhaphovietnam.com.vn cần cải thiện thêm về điều
+                                        gì?
+                                    </div>
                                     <div class="checkbox-option">
                                         <div class="checkbox-pc">
                                             <div class="row-fb">
@@ -686,7 +718,8 @@
                 </div>
                 <div v-show="state == 'finished'" class="popup-fb-success">
                     <div class="popup-header">
-                        <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về thegioinhaphovietnam.com.vn</h2>
+                        <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về
+                            thegioinhaphovietnam.com.vn</h2>
                         <button @click="hideModal()" class="popup-close-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i>
                         </button>
                     </div>
@@ -694,8 +727,10 @@
                         <img class="img-success" src="../images/icon-success.svg">
                         <div class="send-success">
                             <h3>Đã gửi thành công!</h3>
-                            <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp thegioinhaphovietnam.com.vn từng bước nâng cao
-                                chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7): <strong>0916286256</strong></p>
+                            <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp thegioinhaphovietnam.com.vn
+                                từng bước nâng cao
+                                chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7): <strong>0916286256</strong>
+                            </p>
                         </div>
                     </div>
                     <div class="popup-footer">
@@ -710,13 +745,14 @@
 
 
 {% block scripts %}
-        <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
-        {% comment %} <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>{% endcomment %}
-        <script src="{% static 'js/main.js' %} "></script>
-        <script src="{% static 'js/index-merged.min90ca.js' %} "></script>
-         <script src="{% static 'js/favorite.min90ca.js' %} "></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
+    {% comment %} <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>{% endcomment %}
+    <script src="{% static 'js/main.js' %} "></script>
+    
+    <script src="{% static 'js/index-merged.min90ca.js' %} "></script>
+    <script src="{% static 'js/favorite.min90ca.js' %} "></script>
 
-         <noscript>
+    <noscript>
         <iframe src="https://www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
                 height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
@@ -994,6 +1030,7 @@
     <script type="deferjs">
     mixpanel.track("Page View")
 
+
     </script>
 
 
@@ -1015,7 +1052,7 @@
     </script>
     <script async defer type="deferjs" crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 
-        <script>
+    <script>
         window.RFeedback = {
             API: "https://thegioinhaphovietnam.com.vn/mapi",
             email: "",

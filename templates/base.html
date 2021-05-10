@@ -6,10 +6,24 @@
 
 <head>
     {% block head %} {% endblock %}
+
+    <script src="https://unpkg.com/vue"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.2"></script>
+    <script src="{% static 'js/home-v.js' %} "></script>
 </head>
 
 <body>
-  <!-- Top Bar -->
+  
+  <div id="app">
+    <ul>
+        <li v-for="listing in listings">
+            <h1>${ listing.title }$</h1>
+            <p> ${ listing.description }$ </p>
+        </li>
+    </ul>
+</div>
+
+ <!-- Top Bar -->
 {% comment %}  {% include 'partials/_topbar.html' %}{% endcomment %}
   <!-- NavBar -->
   {% include 'partials/_navbar.html' %}
@@ -31,6 +45,7 @@
         e.preventDefault();
     })});
     </script>
+
 
 </body>
 

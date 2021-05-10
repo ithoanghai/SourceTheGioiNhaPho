@@ -7,9 +7,7 @@
         <script src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
         <script async defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
         <script async defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
-            <script defer src="www.google.com/recaptcha/apib091.js?render=explicit"></script>
-    <script async defer src="{% static 'js/ion.rangeSlider.js' %}"></script>
-    <script async defer src="{% static 'js/search-new-v2.min90ca.js' %}"></script>
+        <script defer src="www.google.com/recaptcha/apib091.js?render=explicit"></script>
 
         <script type="text/javascript">
             var callbackInitMap = function () {
@@ -580,8 +578,7 @@
                                            @input="toggleItem(1)" :checked="isSelectedItem(1)">
                                     <label for="list-check-item-type-1-mobile">
                                         <a @click.prevent="toggleItem(1)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=apartment">Căn
-                                            hộ</a>
+                                           href="../listings/search?trantype=sell&housetype=apartment">Căn hộ</a>
                                     </label>
                                 </li>
                                 <li>
@@ -589,7 +586,7 @@
                                            @input="toggleItem(9)" :checked="isSelectedItem(9)">
                                     <label for="list-check-item-type-9-mobile">
                                         <a @click.prevent="toggleItem(9)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=shophouse">Shophouse</a>
+                                           href="../listings/search?trantype=sell&housetype=shophouse">Cửa hàng</a>
                                     </label>
                                 </li>
                                 <li>
@@ -597,7 +594,7 @@
                                            @input="toggleItem(6)" :checked="isSelectedItem(6)">
                                     <label for="list-check-item-type-6-mobile">
                                         <a @click.prevent="toggleItem(6)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=officetel">Officetel</a>
+                                           href="../listings/search?trantype=sell&housetype=officetel">Căn hộ dịch vụ</a>
                                     </label>
                                 </li>
                                 <li>
@@ -605,8 +602,7 @@
                                            @input="toggleItem(8)" :checked="isSelectedItem(8)">
                                     <label for="list-check-item-type-8-mobile">
                                         <a @click.prevent="toggleItem(8)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=house">Nhà
-                                            phố</a>
+                                           href="../listings/search?trantype=sell&housetype=house">Nhà phố</a>
                                     </label>
                                 </li>
                                 <li>
@@ -614,8 +610,7 @@
                                            @input="toggleItem(4)" :checked="isSelectedItem(4)">
                                     <label for="list-check-item-type-4-mobile">
                                         <a @click.prevent="toggleItem(4)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=villa">Biệt
-                                            thự</a>
+                                           href="../listings/search?trantype=sell&housetype=villa">Biệt thự</a>
                                     </label>
                                 </li>
                                 <li>
@@ -623,7 +618,7 @@
                                            @input="toggleItem(32)" :checked="isSelectedItem(32)">
                                     <label for="list-check-item-type-32-mobile">
                                         <a @click.prevent="toggleItem(32)" style="display: inline"
-                                           href="mua/van-phong.html">Văn phòng</a>
+                                           href="../listings/search?trantype=sell&housetype=office">Văn phòng</a>
                                     </label>
                                 </li>
                                 <li>
@@ -631,7 +626,7 @@
                                            @input="toggleItem(34)" :checked="isSelectedItem(34)">
                                     <label for="list-check-item-type-34-mobile">
                                         <a @click.prevent="toggleItem(34)" style="display: inline"
-                                           href="mua/land-business.html">Mặt bằng</a>
+                                           href="../listings/search?trantype=sell&housetype=land">Mặt bằng kinh doanh</a>
                                     </label>
                                 </li>
                                 <li>
@@ -639,12 +634,12 @@
                                            @input="toggleItem(16)" :checked="isSelectedItem(16)">
                                     <label for="list-check-item-type-16-mobile">
                                         <a @click.prevent="toggleItem(16)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=land">Đất
-                                            nền</a>
+                                           href="../listings/search?trantype=sell&housetype=land">Đất nền</a>
                                     </label>
                                 </li>
                             </template>
                         </list-check-form>
+
                         <list-check-form multiple slot="bedroom-mobile"
                                          slot-scope="{params, model, onDropdownShow, onDropdownHide, applyItem}"
                                          ref="bedroomCheckList" label="Chọn số phòng ngủ" hide-action-bar
@@ -841,15 +836,15 @@
                                     </h4>
                                 </div>
                                         <ul class="listing-info">
-                                                <li><i class="fa fas fa-bed"></i>{{ listing.bedrooms }} {% trans "ngủ"%}</li>
-                                                <li><i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2"%}</li>
+                                                <li><i class="fa fas fa-bed"></i> {{ listing.bedrooms }} {% trans "ngủ"%}</li>
+                                                <li><i class="zmdi zmdi-photo-size-select-small"></i> {{ listing.area }}{% trans "m2"%}</li>
                                                {% if listing.floors %} <li> <i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}</li> {% endif %}
-                                               {% if listing.bathrooms %} <li><i class="fa fa-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %} </li> {% endif %}
+                                               {% if listing.bathrooms %} <li><i class="fa fa-bath"></i> {{ listing.bathrooms }} {% trans "tắm" %} </li> {% endif %}
                                                {% comment %} <li><i class="zmdi zmdi-compass"></i> Đông Bắc</li>{% endcomment %}
                                             </ul>
                                         <div class="action-group">
                                             <div class="action-group--left">
-                                                <div class="listing-price">{{ listing.price }}</div>
+                                                <div class="listing-price">{{ listing.price }} {% trans "tỷ" %}</div>
                                                 {% if listing.is_exclusive %}
                                                 <span class="label-primary unique">{% trans "TGNP độc quyền" %}</span>
                                                 {% endif %}
@@ -1001,6 +996,16 @@
 
 
 {% block scripts %}
+    <script async defer src="{% static 'js/ion.rangeSlider.js' %}"></script>
+    <script async defer src="{% static 'js/search-new-v2.min.js' %}"></script>
+
+    <script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.defer=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "3y09hfteky");
+</script>
 
     <script type="text/javascript">
         var callbackInitMap = function () {
