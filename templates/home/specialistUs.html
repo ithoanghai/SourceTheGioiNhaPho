@@ -12,7 +12,7 @@
     <meta name="keywords"
           content="TGNP, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
     <meta name="author" content="thegioinhaphovietnam.com.vn"/>
-    <link rel="canonical" href="../specialistUs"/>
+    <link rel="canonical" href="{% url 'specialist_us' %}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
@@ -110,22 +110,22 @@
                 <div class="s-menu-wrapper">
                     <ul>
                         <li class="s-menu-items ">
-                            <a href="../services">Tất cả dịch vụ</a>
+                            <a href="{% url 'services' %}">Tất cả dịch vụ</a>
                         </li>
                         <li class="s-menu-items ">
-                            <a href="../whyChoose">Vì sao chọn TGNP?</a>
+                            <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
                         </li>
                         <li class="s-menu-items active">
-                            <a href="../listings/sellwithus">Bán BĐS với Thế giới Nhà Phố</a>
+                            <a href="{% url 'sell_with_us' %}">Bán BĐS với Thế giới Nhà Phố</a>
                         </li>
                         <li class="s-menu-items ">
-                            <a href="../listings/buywithus">Mua với TGNP</a>
+                            <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
                         </li>
                         <li class="s-menu-items ">
-                            <a href="../listings/rentwithus">Thuê với TGNP</a>
+                            <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
                         </li>
                         <li class="s-menu-items ">
-                            <a href="../specialistUs">Chuyên viên TGNP</a>
+                            <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
                         </li>
 {% comment %}                    <li class="s-menu-items ">
                         <a href="tgnp-photo.html">Chụp hình</a>
@@ -151,22 +151,22 @@
                 <div class="s-menu-wrapper">
                     <ul>
                         <li class="s-menu-items ">
-                            <a href="../services">Tất cả dịch vụ</a>
+                            <a href="{% url 'services' %}">Tất cả dịch vụ</a>
                         </li>
                         <li class="s-menu-items ">
-                            <a href="../whyChoose">Vì sao chọn TGNP?</a>
+                            <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
                         </li>
                         <li class="s-menu-items active">
-                            <a href="../listings/sellwithus">Bán với TG Nhà Phố</a>
+                            <a href="{% url 'sell_with_us' %}">Bán với TG Nhà Phố</a>
                         </li>
                         <li class="s-menu-items ">
-                            <a href="../listings/buywithus">Mua với TGNP</a>
+                            <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
                         </li>
                         <li class="s-menu-items ">
-                            <a href="../listings/rentwithus">Thuê với TGNP</a>
+                            <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
                         </li>
                         <li class="s-menu-items ">
-                            <a href="../specialistUs">Chuyên viên TGNP</a>
+                            <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
                         </li>
 {% comment %}                    <li class="s-menu-items ">
                         <a href="tgnp-photo.html">Chụp hình</a>
@@ -196,7 +196,7 @@
                         <h1 class="font-tiempos">Trải nghiệm hoàn hảo cùng với chuyên viên TGNP</h1>
                         <p>Chúng tôi hiểu rõ những lo lắng của bạn khi giao dịch bất động sản. Hãy để chuyên viên TGNP
                             đồng hành cùng bạn để mang đến nụ cười và sự an tâm đến cho bạn.</p>
-                        <a href="specialist">
+                        <a href="{% url 'specialist' %}">
                             <button class="btn-primary-agent btn-red">Gặp chuyên viên</button>
                         </a>
                     </div>
@@ -399,7 +399,7 @@
                 <div class="agents-container">
                     <p>Sau khi làm việc với chuyên viên TGNP, khách hàng luôn cảm thấy an tâm và tin tưởng bởi sự
                         chuyên nghiệp, tận tâm và sự thấu hiểu về sản phẩm và thị trường bất động sản.</p>
-                    <a href="specialist">
+                    <a href="{% url 'specialist' %}">
                         <button class="btn-primary-agent btn-red">Gặp chuyên viên</button>
                     </a>
                 </div>

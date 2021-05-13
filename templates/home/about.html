@@ -10,7 +10,7 @@
     <meta name="description" content="Dựa trên nền tảng công nghệ, TGNP nỗ lực mang đến nhiều nhà đất được xác minh nhất, giúp bạn dễ dàng tìm được ngôi nhà ưng ý với giá chính xác và hợp lý." />
     <meta name="keywords"  content="TGNP, tuyen dung, tuyen moi gioi, moi gioi nha dat, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
     <meta name="author" content="thegioinhaphovietnam.com.vn"/>
-    <link rel="canonical" href="about"/>
+    <link rel="canonical" href="{% url 'about' %}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
@@ -97,10 +97,10 @@
             <div class="width-1600">
                 <div class="s-menu-wrapper">
                     <ul>
-                        <li class="s-menu-items"><a href="about">Giới thiệu TGNP</a>
+                        <li class="s-menu-items"><a href="{% url 'about' %}">Giới thiệu TGNP</a>
                         </li>
                         <li class="s-menu-items">
-                            <a href="../specialistUs">Đội ngũ chuyên viên</a>
+                            <a href="{% url 'specialist_us' %}">Đội ngũ chuyên viên</a>
                         </li>
 
 
@@ -110,10 +110,10 @@
 
 
                         <li class="s-menu-items active">
-                            <a href="recruitment">Tuyển dụng</a>
+                            <a href="{% url 'apply' %}">Tuyển dụng</a>
                         </li>
                         <li class="s-menu-items">
-                            <a href="contact">Liên hệ</a>
+                            <a href="{% url 'contacts' %}">Liên hệ</a>
                         </li>
                     </ul>
                 </div>
@@ -161,16 +161,16 @@ vùng lân cận.
 <div class="width1140 s-padding-tb">
 <div class="s-grid s-column-4 s-gutters">
 <div class="s-cell s-btn">
-<a href="specialist">Gặp chuyên viên tư vấn</a>
+<a href="{% url 'specialist' %}">Gặp chuyên viên tư vấn</a>
 </div>
 <div class="s-cell s-btn">
-<a href="../listings/sellwithus">Đăng bán, cho thuê</a>
+<a href="{% url 'sell_with_us' %}">Đăng bán, cho thuê</a>
 </div>
 <div class="s-cell s-btn">
-<a href="apply">Gia nhập TGNP</a>
+<a href="{% url 'apply' %}">Gia nhập TGNP</a>
 </div>
 <div class="s-cell s-btn">
-<a href="contact">Liên hệ</a>
+<a href="{% url 'contacts' %}">Liên hệ</a>
 </div>
 </div>
 </div>

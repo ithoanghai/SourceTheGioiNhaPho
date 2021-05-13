@@ -10,7 +10,7 @@
     <meta name="description" content="TGNP xin chân thành cám ơn các bạn đã quan tâm và có mong muốn sử dụng dịch vụ của chúng tôi." />
     <meta name="keywords"  content="TGNP, tuyen dung, tuyen moi gioi, moi gioi nha dat, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
     <meta name="author" content="thegioinhaphovietnam.com.vn"/>
-    <link rel="canonical" href="termsofuse"/>
+    <link rel="canonical" href="{% url 'termsOfUse' %}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
@@ -174,10 +174,10 @@
 <div class="terms-of-use-col">
 <div class="container">
 <ul>
-<li><a href="specialist" target="_blank" class="font-tiempos">Gặp chuyên viên tư vấn</a></li>
-<li><a href="../listings/sellwithus" target="_blank" class="font-tiempos">Đăng bán, cho thuê</a></li>
-<li><a href="apply" target="_blank" class="font-tiempos">Gia nhập TGNP</a></li>
-<li><a href="contact" target="_blank" class="font-tiempos">Liên hệ</a></li>
+<li><a href="{% url 'specialist' %}" target="_blank" class="font-tiempos">Gặp chuyên viên tư vấn</a></li>
+<li><a href="{% url 'sell_with_us' %}" target="_blank" class="font-tiempos">Đăng bán, cho thuê</a></li>
+<li><a href="{% url 'apply' %}" target="_blank" class="font-tiempos">Gia nhập TGNP</a></li>
+<li><a href="{% url 'contacts' %}" target="_blank" class="font-tiempos">Liên hệ</a></li>
 </ul>
 </div>
 </div>

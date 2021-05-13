@@ -12,7 +12,7 @@
     <meta name="keywords"
           content="TGNP, tuyen dung, tuyen moi gioi, moi gioi nha dat, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
     <meta name="author" content="thegioinhaphovietnam.com.vn"/>
-    <link rel="canonical" href="termsofuse"/>
+    <link rel="canonical" href="{% url 'termsOfUse' %}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
@@ -234,16 +234,16 @@
         <div class="width1140 s-padding-tb">
             <div class="s-grid s-column-4 s-gutters">
                 <div class="s-cell s-btn">
-                    <a href="specialist">Gặp chuyên viên tư vấn</a>
+                    <a href="{% url 'specialist' %}">Gặp chuyên viên tư vấn</a>
                 </div>
                 <div class="s-cell s-btn">
-                    <a href="../listings/sellwithus">Đăng bán, cho thuê</a>
+                    <a href="{% url 'sell_with_us' %}">Đăng bán, cho thuê</a>
                 </div>
                 <div class="s-cell s-btn">
-                    <a href="apply">Gia nhập TGNP</a>
+                    <a href="{% url 'apply' %}">Gia nhập TGNP</a>
                 </div>
                 <div class="s-cell s-btn">
-                    <a href="contact">Liên hệ</a>
+                    <a href="{% url 'contacts' %}">Liên hệ</a>
                 </div>
             </div>
         </div>

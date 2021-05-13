@@ -12,7 +12,7 @@
     <meta name="keywords"
           content="TGNP, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
     <meta name="author" content="thegioinhaphovietnam.com.vn"/>
-    <link rel="canonical" href="../services"/>
+    <link rel="canonical" href="{% url 'services' %}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
@@ -86,10 +86,10 @@
             <div class="width-1600">
                 <div class="s-menu-wrapper">
                     <ul>
-                        <li class="s-menu-items"><a href="about">Giới thiệu TGNP</a>
+                        <li class="s-menu-items"><a href="{% url 'about' %}">Giới thiệu TGNP</a>
                         </li>
                         <li class="s-menu-items">
-                            <a href="../specialistUs">Đội ngũ chuyên viên</a>
+                            <a href="{% url 'specialist_us' %}">Đội ngũ chuyên viên</a>
                         </li>
 
 
@@ -99,10 +99,10 @@
 
 
                         <li class="s-menu-items">
-                            <a href="recruitment">Tuyển dụng</a>
+                            <a href="{% url 'apply' %}">Tuyển dụng</a>
                         </li>
                         <li class="s-menu-items active">
-                            <a href="contact">Liên hệ</a>
+                            <a href="{% url 'contacts' %}">Liên hệ</a>
                         </li>
                     </ul>
                 </div>
@@ -185,7 +185,7 @@
                         tạp khi đã có chuyên viên tư vấn đáng tin cậy của TGNP bên cạnh!
                     </div>
                     <div class="btn-contact" style="max-width: 250px">
-                        <a href="specialist" class="s-btn-red" data-action="contact-agent">Gặp chuyên viên
+                        <a href="{% url 'specialist' %}" class="s-btn-red" data-action="contact-agent">Gặp chuyên viên
                             TGNP</a>
                     </div>
                 </div>
