@@ -18,7 +18,7 @@ class ListingVideoAdmin(admin.TabularInline):
 
 
 class ListingAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'code', 'is_published', 'price', 'list_date', 'realtor')
+    list_display = ('id', 'code', 'title', 'price', 'list_date', 'realtor', 'is_published')
     list_display_links = ('id', 'title')
     list_filter = ('realtor',)
     list_editable = ('is_published', 'code')
