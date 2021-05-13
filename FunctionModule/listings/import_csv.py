@@ -174,7 +174,7 @@ def handle_import(file_path):
                         continue
                     desc = row[header_dict['dac-diem']]
                     trans_type = TransactionType.SELL
-                    house_type = HouseType.CITY_HOUSE
+                    house_type = HouseType.TOWN_HOUSE
                     road_type = RoadType.STREET_SURFACE
 
                     if desc == 'Đất Dự Án':

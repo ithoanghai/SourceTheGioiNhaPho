@@ -176,12 +176,14 @@
 }
 
 #footer {
-    width: 100%;
     background-image: url("../img/backgroundfooter.png" );
     background-repeat: no-repeat;
-    background-size: 100%;
     color: #fff;
-    padding: 0
+    padding: 0;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
 }
 
 #footer .inner {
