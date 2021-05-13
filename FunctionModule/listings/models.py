@@ -122,10 +122,8 @@ class Listing(models.Model):
     extra_data = models.JSONField(verbose_name=_("Thông tin khác"), null=True, blank=True, default=dict)
     list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày đăng"))
     title = models.CharField(max_length=200, verbose_name=_("Tên BĐS"),
-                             help_text=_(
-                                 "[Tên phố - Quận/Huyện] [Diện tích - Tầng/Đất/CC - Mặt tiền] [Ngõ] [Giá]"))
-    code = models.CharField(max_length=80, verbose_name=_("Mã BĐS"),
-                            help_text=_("Được điền tự động và duy nhất"),
+                             help_text=_("[Tên phố - Quận/Huyện] [Diện tích - Tầng/Đất/CC - Mặt tiền] [Ngõ] [Giá]"))
+    code = models.CharField(max_length=40, verbose_name=_("Mã BĐS"), help_text=_("Được điền tự động và duy nhất"),
                             unique=True)
 
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING,
