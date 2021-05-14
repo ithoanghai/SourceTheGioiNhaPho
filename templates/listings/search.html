@@ -773,7 +773,6 @@
                         <div ref="propertyList" class="row grid" v-else-if="isFirstLoad">
                             {% for listing in listings %}
                             <div id="property-tgnp-{{ listing.id }}"
-                                 data-imp-stats="{id: '{{ listing.id }}', type: 'property', position: 'SearchResult'}"
                                  class="col property-itemz">
                                 <article class="box listView"
                                          @mouseenter="setActiveMarker({&quot;lat&quot;:10.78527041834275,&quot;label&quot;:&quot;1.95 tỷ&quot;,&quot;lon&quot;:106.7464855165772})"

@@ -1,4 +1,5 @@
 from django import template
+from django.contrib.admin import site
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template import loader
@@ -110,10 +111,9 @@ def privacyPolicy(request):
 def dashboard(request):
     return  redirect('admin/login')
 
+
 def admin_login(request):
-
-    return  render(request, 'admin/login.html')
-
+    return render(request, 'admin/login.html')
 
 
 def layout1(request):
@@ -123,6 +123,7 @@ def layout1(request):
     }
     return render(request, 'admin/includes/index-static.html', context)
 
+
 def layout2(request):
     app_list = site.get_app_list(request)
     context = {
@@ -130,17 +131,20 @@ def layout2(request):
     }
     return render(request, 'admin/includes/index-light.html', context)
 
+
 def error403(request):
     context = {
 
     }
     return render(request, 'admin/page-403.html', context)
 
+
 def error404(request):
     context = {
 
     }
     return render(request, 'admin/page-404.html', context)
+
 
 def error500(request):
     context = {
@@ -175,6 +179,7 @@ def pages(request):
         html_template = loader.get_template('admin/page-500.html')
         return HttpResponse(html_template.render(context, request))
 
+
 def chart(request):
     app_list = site.get_app_list(request)
     context = {
@@ -182,12 +187,14 @@ def chart(request):
     }
     return render(request, 'admin/charts.html', context)
 
+
 def map(request):
     app_list = site.get_app_list(request)
     context = {
         'available_apps': app_list
     }
     return render(request, 'admin/maps.html', context)
+
 
 def profile(request):
     app_list = site.get_app_list(request)
@@ -203,6 +210,7 @@ def table(request):
         'available_apps': app_list
     }
     return render(request, 'admin/tables.html', context)
+
 
 def pageblank(request):
     app_list = site.get_app_list(request)

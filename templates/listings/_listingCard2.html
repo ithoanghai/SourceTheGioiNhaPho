@@ -1,0 +1,69 @@
+{% load humanize i18n %}
+
+<article class="listingCard">
+  <div class="cover-image">
+    <a href="{% url 'listing' listing.id %}" title="{{ listing.title }}">
+      {% with listing.main_photo as photo %}
+        <img src="{{ photo.url }}" data-src="{{ photo.url }}"
+             data-srcset="{{ photo.url }}, {{ photo.url }} 2x"
+             alt="{{ listing.title }}"
+             title="{{ listing.title }}"
+             class="lazy" draggable="false">
+      {% endwith %}
+
+    </a>
+    <div class="label-group">
+      {% if listing.is_exclusive %}
+        <label class="label-primary unique">{% trans "TGNP độc quyền" %}</label>
+      {% endif %}
+      <label class="label-primary unique p-1"
+             style="font-size: 16px">{{ listing.price }} {% trans "tỷ" %}</label>
+    </div>
+    <button data-action="favorite" data-id="{{ listing.id }}"
+            data-alias="{{ listing.title }}"
+            data-type="sale_property" data-favorited="false"
+            class="btn-favorite zmdi zmdi-favorite-outline"></button>
+  </div>
+  <div class="info-container">
+    <div class="flex align-items-center justify-content-space-between">
+      <ul class="listing-info">
+        {% if listing.bedrooms %}
+          <li>
+            <i class="zmdi zmdi-airline-seat-individual-suite"></i>{{ listing.bedrooms }} {% trans "ngủ" %}
+          </li>
+        {% endif %}
+        <li>
+          <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2" %}
+        </li>
+        {% if listing.floors %}
+          <li><i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}
+          </li> {% endif %}
+        {% if listing.bathrooms %}
+          <li><i class="fa fa-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %}
+          </li> {% endif %}
+
+      </ul>
+    </div>
+    <h3>
+      <a class="listing-name" href="{% url 'listing' listing.id %}"
+         title="{{ listing.title }}">{{ listing.title }}</a>
+    </h3>
+
+    <div class="listing-address">
+      <h4><a href="{% url 'listing' listing.id %}">{{ listing.code }}</a>
+      </h4>
+      <h4>
+        <a href="{% url 'search' %}?street={{ listing.street }}"
+           title="">{{ listing.street }}</a>
+      </h4>
+      <h4>
+        <a href="{% url 'search' %}?urban_area={{ listing.urban_area }}"
+           title="">{{ listing.urban_area }}</a>
+      </h4>
+      <h4>
+        <a href="{% url 'search' %}?district={{ listing.district }}"
+           title=""> {{ listing.district.name }} {% comment %}{% state_data.get('district','' %}{% endcomment %}</a>
+      </h4>
+    </div>
+  </div>
+</article>
