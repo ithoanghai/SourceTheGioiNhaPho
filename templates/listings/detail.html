@@ -1057,8 +1057,7 @@
                     </div>
                     <ul class="exclusive slides">
                         {% for listing_same in listings_same %}
-                        <li class="featured"
-                            data-imp-stats="{id: '{{ listing_same.id }}', type: 'property', position: 'PropertyDetail_Related'}">
+                        <li class="featured">
                             <a href="{% url 'listing' listing_same.id %}"
                                title="{{ listing_same.title }}" data-imp-click>
                                 <div class="cover">

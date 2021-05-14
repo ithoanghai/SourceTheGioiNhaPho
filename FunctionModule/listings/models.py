@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+
 from datetime import datetime
 
 from django.contrib.gis.geos import Point
@@ -17,6 +18,7 @@ class TransactionType(models.TextChoices):
     FOR_RENT = 'for_rent', _("Cho thuê")
     PROJECT = 'project', _("Dự án")
 
+
 class HouseType(models.TextChoices):
     STREET_HOUSE = 'street_house', _("Nhà mặt phố")
     TOWN_HOUSE = 'town_house', _("Nhà phố")
@@ -24,26 +26,28 @@ class HouseType(models.TextChoices):
     SHOP_HOUSE = 'shop_house', _("Cửa hàng")
 
     BUILDING = 'building', _("Toà nhà")
-    BUILDING_BUSINESS = 'building_business',_("Toà nhà kinh doanh")
+    BUILDING_BUSINESS = 'building_business', _("Toà nhà kinh doanh")
     OFFICE = 'office', _("Văn phòng")
     OFFICE_TEL = 'office_tel', _("Văn phòng khách sạn")
-    CONDO_TEL = 'condo_tel',_('Căn hộ khách sạn')
+    CONDO_TEL = 'condo_tel', _('Căn hộ khách sạn')
     APARTMENT = 'apartment', _("Căn hộ")
     SERVICE_APARTMENT = 'service_apartment', _("Căn hộ dịch vụ")
     PENT_HOUSE = 'pent_house', _("Căn hộ áp mái")
     VILLA = 'villa', _("Biệt thự")
-    VILLA_REST = 'villa_rest',_("Biệt thự nghỉ dưỡng")
+    VILLA_REST = 'villa_rest', _("Biệt thự nghỉ dưỡng")
     LAND = 'land', _("Đất nền")
     LAND_BUSINESS = 'land_business', _("Mặt bằng kinh doanh")
-    PLOT = 'plot',_("Đất phân lô")
-    INDUSTRIAL_LAND = 'industrial_land',_("Đất công nghiệp")
-    WAREHOUSE_WORKSHOP = 'warehouse_workshop',_("Kho xưởng")
+    PLOT = 'plot', _("Đất phân lô")
+    INDUSTRIAL_LAND = 'industrial_land', _("Đất công nghiệp")
+    WAREHOUSE_WORKSHOP = 'warehouse_workshop', _("Kho xưởng")
     OTHER = 'other', _("Khác")
+
 
 class RegistrationType(models.TextChoices):
     RED_BOOK = 'red_book', _("Sổ Đỏ")
     PINK_BOOK = 'pink_book', _("Sổ Hồng")
     DONT_BOOK = 'dont_book', _("Chưa làm sổ")
+
 
 class RoadType(models.TextChoices):
     ALLEY_CAR = 'alley_car', _("Ngõ ô tô")
@@ -63,8 +67,10 @@ class Status(models.TextChoices):
 city_choices = [(k, v['name']) for k, v in state_data.items()]
 city_choices.sort()
 
+
 def get_image_path(instance, filename: str):
     return 'photos/listings/' + str(instance.listing.id) + '/' + filename
+
 
 class Listing(models.Model):
     transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,
@@ -117,13 +123,16 @@ class Listing(models.Model):
     lot_size = models.DecimalField(max_digits=5, decimal_places=1, default=0,
                                    verbose_name=_("Diện tích khuôn viên"), null=True, blank=True)
     description = models.TextField(blank=True, verbose_name=_("Mô tả"), default="")
-    location = LocationField(based_fields=['address'], zoom=7, null=True, default=Point(105.8401439, 21.0334474))
+    location = LocationField(based_fields=['address'], zoom=7, null=True,
+                             default=Point(105.8401439, 21.0334474))
 
     extra_data = models.JSONField(verbose_name=_("Thông tin khác"), null=True, blank=True, default=dict)
     list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày đăng"))
     title = models.CharField(max_length=200, verbose_name=_("Tên BĐS"),
-                             help_text=_("[Tên phố - Quận/Huyện] [Diện tích - Tầng/Đất/CC - Mặt tiền] [Ngõ] [Giá]"))
-    code = models.CharField(max_length=40, verbose_name=_("Mã BĐS"), help_text=_("Được điền tự động và duy nhất"),
+                             help_text=_(
+                                 "[Tên phố - Quận/Huyện] [Diện tích - Tầng/Đất/CC - Mặt tiền] [Ngõ] [Giá]"))
+    code = models.CharField(max_length=40, verbose_name=_("Mã BĐS"),
+                            help_text=_("Được điền tự động và duy nhất"),
                             unique=True)
 
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING,
@@ -155,7 +164,6 @@ class Listing(models.Model):
         return self.listingvideo_set.first()
 
 
-
 class ListingImage(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     sort = models.IntegerField(default=0, verbose_name=_("Thứ tự hiện"))
@@ -173,5 +181,3 @@ class ListingImage(models.Model):
 class ListingVideo(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     video = EmbedVideoField()
-
-
