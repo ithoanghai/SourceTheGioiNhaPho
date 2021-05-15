@@ -1,15 +1,23 @@
+{% load static %}
 {% load humanize i18n %}
 
 <article class="listingCard">
   <div class="cover-image">
     <a href="{% url 'listing' listing.id %}" title="{{ listing.title }}">
+    {% if listing.main_photo %}
       {% with listing.main_photo as photo %}
+        {{ photo }}
         <img src="{{ photo.url }}" data-src="{{ photo.url }}"
-             data-srcset="{{ photo.url }}, {{ photo.url }} 2x"
              alt="{{ listing.title }}"
              title="{{ listing.title }}"
              class="lazy" draggable="false">
       {% endwith %}
+    {% else %}
+      <img src="{% static 'img/default.png' %}" data-src="{% static 'img/default.png' %}"
+             alt="{{ listing.title }}"
+             title="{{ listing.title }}"
+             class="lazy" draggable="false">
+    {% endif %}
 
     </a>
     <div class="label-group">
@@ -50,16 +58,18 @@
     </h3>
 
     <div class="listing-address">
-      <h4><a href="{% url 'listing' listing.id %}">{{ listing.code }}</a>
+{#      <h4><a href="{% url 'listing' listing.id %}">Xem Chi Tiết</a>#}
       </h4>
       <h4>
         <a href="{% url 'search' %}?street={{ listing.street }}"
            title="">{{ listing.street }}</a>
       </h4>
+      {% if listing.urban_area %}
       <h4>
         <a href="{% url 'search' %}?urban_area={{ listing.urban_area }}"
            title="">{{ listing.urban_area }}</a>
       </h4>
+      {% endif %}
       <h4>
         <a href="{% url 'search' %}?district={{ listing.district }}"
            title=""> {{ listing.district.name }} {% comment %}{% state_data.get('district','' %}{% endcomment %}</a>

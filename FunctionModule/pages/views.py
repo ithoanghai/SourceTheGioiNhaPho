@@ -1,5 +1,7 @@
 from django import template
 from django.contrib.admin import site
+from django.contrib.admin import site
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template import loader
@@ -8,8 +10,7 @@ from FunctionModule.cadastral.constants import state_data, district_data
 from FunctionModule.listings.choices import price_choices, bedroom_choices
 from FunctionModule.listings.models import Listing, TransactionType
 from FunctionModule.realtors.models import Realtor
-from django.contrib.admin import site
-from django.contrib.auth.models import User
+
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -19,11 +20,15 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
+
 def index(request):
-    listings_for_sale = Listing.objects.order_by('-list_date').filter(is_published=True, transaction_type=TransactionType.SELL)[:3]
-    listings_for_rent = Listing.objects.order_by('-list_date').filter(is_published=True, transaction_type=TransactionType.FOR_RENT)[:3]
-    listings_project = Listing.objects.order_by('-list_date').filter(is_published=True, transaction_type=TransactionType.PROJECT)[:3]
-    list_distric_HN = district_data.__getitem__("01");
+    listings_for_sale = Listing.objects.order_by('-list_date').filter(is_published=True,
+                                                                      transaction_type=TransactionType.SELL)[:3]
+    listings_for_rent = Listing.objects.order_by('-list_date').filter(is_published=True,
+                                                                      transaction_type=TransactionType.FOR_RENT)[:3]
+    listings_project = Listing.objects.order_by('-list_date').filter(is_published=True,
+                                                                     transaction_type=TransactionType.PROJECT)[:3]
+    list_distric_HN = district_data.__getitem__("01")
     context = {
         'listings_for_sale': listings_for_sale,
         'listings_for_rent': listings_for_rent,
@@ -35,6 +40,7 @@ def index(request):
     }
 
     return render(request, 'home/index.html', context)
+
 
 def about(request):
     # Get all realtors
@@ -50,11 +56,13 @@ def about(request):
 
     return render(request, 'home/about.html', context)
 
+
 def specialist_us(request):
     context = {
     }
 
     return render(request, 'home/specialistUs.html', context)
+
 
 def specialist(request):
     context = {
@@ -62,11 +70,13 @@ def specialist(request):
 
     return render(request, 'home/specialist.html', context)
 
+
 def whyChoose(request):
     context = {
     }
 
     return render(request, 'home/whyChoose.html', context)
+
 
 def services(request):
     context = {
@@ -74,17 +84,20 @@ def services(request):
 
     return render(request, 'home/services.html', context)
 
+
 def contact(request):
     context = {
     }
 
     return render(request, 'home/contact.html', context)
 
+
 def recruitment(request):
     context = {
     }
 
     return render(request, 'home/recruitment.html', context)
+
 
 def apply(request):
     position = request.GET.get('trantype', '')
@@ -94,11 +107,13 @@ def apply(request):
 
     return render(request, 'home/apply.html', context)
 
+
 def termsOfUse(request):
     context = {
     }
 
     return render(request, 'home/termsOfUse.html', context)
+
 
 def privacyPolicy(request):
     context = {
@@ -108,8 +123,10 @@ def privacyPolicy(request):
 
 
 """Admin url here"""
+
+
 def dashboard(request):
-    return  redirect('admin/login')
+    return redirect('admin/login')
 
 
 def admin_login(request):
