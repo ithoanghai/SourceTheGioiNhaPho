@@ -5,55 +5,32 @@
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
 
 <head>
-    {% block head %} {% endblock %}
+  {% block head %} {% endblock %}
 </head>
 
 <body>
-  <!-- Top Bar -->
+<!-- Top Bar -->
 {% comment %}  {% include 'partials/_topbar.html' %}{% endcomment %}
-    <!-- Banner -->
+<!-- Banner -->
 {% comment %}  {% include 'partials/_banner.html' %}{% endcomment %}
-    <!-- Main Content -->
-  {% block content %} {% endblock %}
-  <!-- Footer -->
-  {% include 'partials/_footer.html' %}
+<!-- Main Content -->
+{% block content %} {% endblock %}
+<!-- Footer -->
+{% include 'partials/_footer.html' %}
 
-    <!-- Scripts -->
-  {% block scripts %} {% endblock %}
+<!-- Scripts -->
+{% block scripts %} {% endblock %}
 
 
-    <!-- Chống sao chép website-->
-    <script type="text/javascript">
-    $(document).ready(function(){
-    $('*').bind('cut copy paste contextmenu', function (e) {
-        e.preventDefault();
-    })});
-    </script>
+<!-- Chống sao chép website-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('*').bind('cut copy paste contextmenu', function (e) {
+            e.preventDefault();
+        })
+    });
+</script>
 
-<!-- Messenger Plugin chat Code -->
-    <div id="fb-root"></div>
-      <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            xfbml            : true,
-            version          : 'v10.0'
-          });
-        };
-
-        (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-      </script>
-
-      <!-- Your Plugin chat code -->
-      <div class="fb-customerchat"
-        attribution="biz_inbox"
-        page_id="108470991299693">
-      </div>
 </body>
 
 </html>

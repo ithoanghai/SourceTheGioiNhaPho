@@ -163,6 +163,10 @@ class Listing(models.Model):
     def main_video(self):
         return self.listingvideo_set.first()
 
+    @property
+    def videos(self):
+        return self.listingvideo_set.all()
+
 
 class ListingImage(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)

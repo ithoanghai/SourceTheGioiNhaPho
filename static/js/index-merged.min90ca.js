@@ -23031,22 +23031,6 @@
                         var n = document.getElementsByTagName("script")[0];
                         n.parentNode.insertBefore(e, n)
                     }
-                    if (null == document.getElementById("apple-js")) {
-                        c.b.waitForVariable("AppleID", function () {
-                            t.$refs.btnApple.style.opacity = "1", AppleID.auth.init({
-                                clientId: A.apple,
-                                scope: "name email",
-                                redirectURI: location.protocol + "//" + location.host,
-                                state: "",
-                                nonce: "",
-                                usePopup: !0
-                            })
-                        }, 3e4);
-                        var r = document.createElement("script");
-                        r.async = !0, r.defer = !0, r.id = "apple-js", r.src = "https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js";
-                        var i = document.getElementsByTagName("script")[0];
-                        i.parentNode.insertBefore(r, i)
-                    }
                     $("a[href='#logout']").each(function (e, n) {
                         $(n).css("opacity", "1"), $(n).click(t.onClickLogout)
                     }), $("a[href='#login']").each(function (e, n) {

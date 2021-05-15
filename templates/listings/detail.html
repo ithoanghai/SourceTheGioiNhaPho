@@ -495,6 +495,7 @@
                     </div>
                     <div class="flex-viewport">
                         <ul class="slides slideimg">
+                        {{ listing.photos }}
                             {% for photo in listing.photos %}
                             <li class="flex-active-slide">
                                 <a class="img cover" href="javascript:void(0)"
@@ -516,21 +517,21 @@
                             <span class="font-icon photo"></span> Photo
                         </a>
                     </li>
-                    <li class="">
+                    <li class="{% if not listing.videos %}disable{% endif %}">
                         <a href="#video" title="Video" no-prevent>
                             <span class="font-icon video"></span> Video
                         </a>
                     </li>
-                    <li class="">
-                        <a href="#view3d" title="3D view" no-prevent>
-                            <span class="font-icon view3d"></span> 3D view
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#streetview" title="Street view" no-prevent>
-                            <span class="font-icon streetview"></span> Street view
-                        </a>
-                    </li>
+{#                    <li class="">#}
+{#                        <a href="#view3d" title="3D view" no-prevent>#}
+{#                            <span class="font-icon view3d"></span> 3D view#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="">#}
+{#                        <a href="#streetview" title="Street view" no-prevent>#}
+{#                            <span class="font-icon streetview"></span> Street view#}
+{#                        </a>#}
+{#                    </li>#}
                 </ul>
             </div>
         </div>
@@ -540,12 +541,16 @@
                     <div class="content-detail-house">
                         <header class="detail-house">
                             <div class="address">
+                              {% if listing.urban_area %}
                                 <h2><a href="{% url 'search' %}?urban_area={{ listing.urban_area }}"
                                        title="Khu đô thị/ khu dân cư">{{ listing.urban_area }}</a></h2>
+                              {% endif %}
                                 <h2><a href="{% url 'search' %}?street={{ listing.street }}"
                                        title="Đường">{{ listing.street }}</a></h2>
+                            {% if listing.ward %}
                                 <h2><a href="{% url 'search' %}?ward={{ listing.ward }}"
                                        title="Phường/Xã">{{ listing.ward }}</a></h2>
+                            {% endif %}
                                 <h2><a href="{% url 'search' %}?district={{ listing.district }}"
                                        title="Quận/Huyện">{{ listing.district }}</a></h2>
                                 <h2><a href="{% url 'search' %}?state={{ listing.state }}"
@@ -560,8 +565,9 @@
                                     <li title="Giá"><strong>$</strong> {{ listing.price }} tỷ</li>
                                     {% if listing.sale_price %} <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price }} tỷ </strong></li> {% endif %}
                                 </ul>
-                                <div class="listing-id"><span>Mã nhà đất: </span><span
-                                        style="padding-left: 0px">{{ listing.code }}</span>
+                                <div class="listing-id">
+                                  <span>Mã nhà đất: </span>
+                                  <span style="padding-left: 0px">{{ listing.code }}</span>
                                 </div>
                             </div>
                         </header>
@@ -1325,126 +1331,6 @@
 {% block scripts %}
     <script defer src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
     <script type="deferjs" src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
-    <script>
-        window.AppPrompt = (function () {
-            var APP_PROMP_KEY = "app_banner_prompt"
-            var wrapper = document.getElementById('tgnp-banner-prompt')
-            var btnAdd = wrapper.querySelector('.btn-install')
-            var deferredPrompt;
-            var promptInfo = {
-                lastHide: 0, //Thời gian cuối ẩn form
-                numHide: 0 //Số lần ẩn form
-            }
-            var androidUrl = "../../play.google.com/store/apps/detailsece3.html?id=com.rever.app.android"
-            var iosUrl = "../../apps.apple.com/vn/app/rever/id1101768201.html"
-            var isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
-            var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
-            var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
-            var os = isIOS ? "ios" : "android"
-            if (!isMobile) {
-                return
-            }
-
-            // if(localStorage){ //lấy thông tin cũ
-            //   let info = localStorage.getItem(APP_PROMP_KEY)
-            //   if(info){
-            //     try{
-            //       promptInfo = {
-            //         ...promptInfo,
-            //         ...JSON.parse(info)
-            //       }
-            //     }catch(e){}
-            //   }
-            // }
-            // //Kiểm tra lần ẩn cuối cùng
-            // let hideDuration = promptInfo.numHide*2*24*60*60000 //Mỗi lần hide sẽ cộng thêm 2 ngày
-            // let currTime = +new Date()
-            // if(promptInfo.lastHide > 0 && currTime < promptInfo.lastHide + hideDuration){
-            //   return
-            // }
-
-            function showBanner() {
-                // var scrollPos = window.pageYOffset || document.documentElement.scrollTop
-                wrapper.style.display = 'flex';
-                window.ga && ga('send', 'event', 'Smart App Banner', 'Show', os);
-                // if(scrollPos == 0){
-                //   document.documentElement.scrollTop = 65
-                // }
-            }
-
-            function closeBanner() {
-                wrapper.style.display = 'none';
-                window.ga && ga('send', 'event', 'Smart App Banner', 'Close', os);
-            }
-
-            function savePrompInfo() {
-                // if(localStorage){
-                //   localStorage.setItem(APP_PROMP_KEY, JSON.stringify(promptInfo))
-                // }
-            }
-
-            //wrapper.style.display = 'flex';
-            document.addEventListener('DOMContentLoaded', function () {
-                setTimeout(function () {
-                    if (!deferredPrompt && isMobile) {
-                        showBanner()
-                    }
-                }, 1000)
-            });
-
-            window.addEventListener('beforeinstallprompt', function (e) {
-                // Prevent Chrome 67 and earlier from automatically showing the prompt
-                e.preventDefault();
-                // Stash the event so it can be triggered later.
-                deferredPrompt = e;
-                // Update UI notify the user they can add to home screen
-                showBanner()
-            });
-
-            btnAdd.addEventListener('click', function (e) {
-                window.ga && ga('send', 'event', 'Smart App Banner', 'Click Install', os);
-
-                //Lưu lại promp info
-                promptInfo.lastHide = 0
-                promptInfo.numHide = 0
-                savePrompInfo()
-
-                // hide our user interface that shows our A2HS button
-                //closeBanner()
-                if (deferredPrompt) {
-                    // Show the prompt
-                    deferredPrompt.prompt();
-                    // Wait for the user to respond to the prompt
-                    deferredPrompt.userChoice
-                        .then(function (choiceResult) {
-                            if (choiceResult.outcome === 'accepted') {
-                                console.log('User accepted the A2HS prompt');
-                            } else {
-                                console.log('User dismissed the A2HS prompt');
-                            }
-                            deferredPrompt = null;
-                        });
-                } else {
-                    if (isIOS && iosUrl) {
-                        window.open(iosUrl, "_blank")
-                    } else if (!isIOS && androidUrl) {
-                        window.open(androidUrl, "_blank")
-                    }
-                }
-            });
-
-            return {
-                closePrompt: function (evt) {
-                    closeBanner()
-
-                    //Lưu lại prompt info
-                    promptInfo.lastHide = +new Date()
-                    promptInfo.numHide++
-                    savePrompInfo()
-                }
-            }
-        })()
-    </script>
 
     <script type="text/javascript">
         var callbackInitMap = function () {
@@ -1676,198 +1562,10 @@
     </script>
 
     <script>
-        window["_au_api"] = "../thue/api.html";
-        window['fap_url'] = "{% static 'js/fap.min90ca.js' %}";
-        window['fap.server'] = '//analytics.thegioinhaphovietnam.com.vn/fap';
-        window['favorite_api'] = '../mapi/index.html';
-        window['googleClientId'] = '539423642927.apps.googleusercontent.com';
-        window['staticUrl'] = 'static';
-        window['hotline'] = '0916 286 256';
-
-        window['isLoggedIn'] = false;
-    </script>
-
-
-    <script>
-        !function () {
-            var analytics = window.analytics = window.analytics || [];
-            if (!analytics.initialize) if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice."); else {
-                analytics.invoked = !0;
-                analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on", "addSourceMiddleware", "addIntegrationMiddleware"];
-                analytics.factory = function (e) {
-                    return function () {
-                        var t = Array.prototype.slice.call(arguments);
-                        t.unshift(e);
-                        analytics.push(t);
-                        return analytics
-                    }
-                };
-                for (var e = 0; e < analytics.methods.length; e++) {
-                    var t = analytics.methods[e];
-                    analytics[t] = analytics.factory(t)
-                }
-                analytics.load = function (e, t) {
-                    var n = document.createElement("script");
-                    n.type = "text/javascript";
-                    n.async = !0;
-                    n.defer = !0;
-                    n.src = "https://cdn.segment.com/analytics.js/v1/" + e + "/analytics.min.js";
-                    var a = document.getElementsByTagName("script")[0];
-                    a.parentNode.insertBefore(n, a);
-                    analytics._loadOptions = t
-                };
-                analytics.SNIPPET_VERSION = "4.1.0";
-                analytics.load("4LCsqFQzVAmMhPA650qKAAbZoHweHzHt", {integrations: {'Mixpanel': false}});
-            }
-        }();
-    </script>
-    <script type="deferjs">
-    //Track thêm tags
-      var tagTrackings = []
-
-      var pageviewProperties = {
-  "property_info" : {
-    "is_mls" : false,
-    "rent_price" : 0,
-    "id" : "1593136601509_8642",
-    "sale_price" : 38000000000,
-    "rever_id" : "VUN56730",
-    "service_type" : "sale"
-  },
-  "address_info" : {
-    "street" : "Số 8",
-    "ward" : "Tăng Nhơn Phú B",
-    "ward_id" : "1577429515596_1786",
-    "district" : "Quận 9",
-    "district_id" : "1577269008573_2161",
-    "city" : "Hà Nội",
-    "city_id" : "1576833711767_2408",
-    "geolocation" : {
-      "lat" : 10.8340507,
-      "lon" : 106.7770857,
-      "valid" : true
-    },
-    "street_id" : "so-8",
-    "city_alias" : "ha-noi",
-    "district_alias" : "quan-9",
-    "ward_alias" : "tang-nhon-phu-b-quan-9",
-    "street_alias" : "so-27-go-vap-ha-noi",
-    "full_with_no" : "Số 8, Tăng Nhơn Phú B, Quận 9, Hà Nội",
-    "full" : "Số 8, Tăng Nhơn Phú B, Quận 9, Hà Nội",
-    "short" : "Số 8, Quận 9"
-  }
-}
-
-      analytics.page(Object.assign({
-        domain: location.hostname,
-        tags: tagTrackings.length > 0 ? tagTrackings : undefined
-      }, pageviewProperties));
-
-      analytics.ready(function(){
-        //window.mixpanel.init("31bae2b919cfc12821646533a62aee1b")
-        //window.track("Page View")
-      })
-
-
-
-    </script>
-
-    <script>(function (c, a) {
-        if (!a.__SV) {
-            var b = window;
-            try {
-                var d, m, j, k = b.location, f = k.hash;
-                d = function (a, b) {
-                    return (m = a.match(RegExp(b + "=([^&]*)"))) ? m[1] : null
-                };
-                f && d(f, "state") && (j = JSON.parse(decodeURIComponent(d(f, "state"))), "mpeditor" === j.action && (b.sessionStorage.setItem("_mpcehash", f), history.replaceState(j.desiredHash || "", c.title, k.pathname + k.search)))
-            } catch (n) {
-            }
-            var l, h;
-            window.mixpanel = a;
-            a._i = [];
-            a.init = function (b, d, g) {
-                function c(b, i) {
-                    var a = i.split(".");
-                    2 == a.length && (b = b[a[0]], i = a[1]);
-                    b[i] = function () {
-                        b.push([i].concat(Array.prototype.slice.call(arguments,
-                            0)))
-                    }
-                }
-
-                var e = a;
-                "undefined" !== typeof g ? e = a[g] = [] : g = "mixpanel";
-                e.people = e.people || [];
-                e.toString = function (b) {
-                    var a = "mixpanel";
-                    "mixpanel" !== g && (a += "." + g);
-                    b || (a += " (stub)");
-                    return a
-                };
-                e.people.toString = function () {
-                    return e.toString(1) + ".people (stub)"
-                };
-                l = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
-                for (h = 0; h < l.length; h++) c(e, l[h]);
-                var f = "set set_once union unset remove delete".split(" ");
-                e.get_group = function () {
-                    function a(c) {
-                        b[c] = function () {
-                            call2_args = arguments;
-                            call2 = [c].concat(Array.prototype.slice.call(call2_args, 0));
-                            e.push([d, call2])
-                        }
-                    }
-
-                    for (var b = {}, d = ["get_group"].concat(Array.prototype.slice.call(arguments, 0)), c = 0; c < f.length; c++) a(f[c]);
-                    return b
-                };
-                a._i.push([b, d, g])
-            };
-            a.__SV = 1.2;
-            b = c.createElement("script");
-            b.type = "text/javascript";
-            b.async = !0;
-            b.defer = !0;
-            b.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ?
-                MIXPANEL_CUSTOM_LIB_URL : "file:" === c.location.protocol && "//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js";
-            d = c.getElementsByTagName("script")[0];
-            d.parentNode.insertBefore(b, d)
-        }
-    })(document, window.mixpanel || []);
-    mixpanel.init("31bae2b919cfc12821646533a62aee1b");
-    </script>
-    <script type="deferjs">
-    mixpanel.track("Page View")
-
-
-
-    </script>
-
-
-    <script>
         window.hsConversationsSettings = {
             loadImmediately: false // Delay the load of the chat widget
         };
     </script>
-
-    <script>
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '268342061639747',
-                cookie: true,                     // Enable cookies to allow the server to access the session.
-                xfbml: true,                     // Parse social plugins on this webpage.
-                version: 'v8.0'           // Use this Graph API version for this call.
-            });
-        }
-    </script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
-                height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
 
     <script type="application/ld+json">
 {
@@ -1926,12 +1624,10 @@
 
 
     </script>
-    <script type="deferjs" src="https://www.googleadservices.com/pagead/f.txt"></script>
     <script defer src="{% static 'js/favorite.min90ca.js' %}"></script>
     <script defer src="{% static 'js/home-recent-view.min90ca.js' %}"></script>
     <script defer src="{% static 'js/addthis_widget.js' %}"></script>
     <script defer src="{% static 'js/tracking.min90ca.js' %}"></script>
-    <script async defer src="{% static 'js/external90ca.js' %}"></script>
 
     <script type="application/ld+json">
     {
@@ -2334,8 +2030,6 @@
     }
   }
 
-
-
     </script>
     <script type="deferjs">
         createHSForm({
@@ -2349,9 +2043,6 @@
                 });
             }
         });
-
-
-
     </script>
 
     <script defer src="{% static 'js/header-v2.min90ca.js' %}"></script>

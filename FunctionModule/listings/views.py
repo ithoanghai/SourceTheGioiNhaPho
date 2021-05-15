@@ -1,19 +1,19 @@
-from rest_framework import status, generics, mixins, permissions
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from django_filters.rest_framework import DjangoFilterBackend
+from decimal import Decimal
 
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
+from django_filters.rest_framework import DjangoFilterBackend
 from pydantic import BaseModel
+from rest_framework import status, generics, mixins, permissions
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from .choices import price_choices, bedroom_choices, state_choices
-from .models import Listing 
 from .filters import ListingFilter
-from ..cadastral.constants import state_data, district_data
-from decimal import Decimal
+from .models import Listing
 from .serializers import *
+from ..cadastral.constants import state_data, district_data
 
 
 class ListingSearchQuery(BaseModel):
@@ -38,11 +38,12 @@ def index(request):
 
 
 def listing(request, listing_id):
-    listing = get_object_or_404(Listing, pk=listing_id)
-    listings_neighborhood = Listing.objects.order_by('-list_date').filter(state=listing.state)
-    listings_same = Listing.objects.order_by('-list_date').filter(house_type=listing.house_type, area=listing.area )
+    listing_detail = get_object_or_404(Listing, pk=listing_id)
+    listings_neighborhood = Listing.objects.order_by('-list_date').filter(state=listing_detail.state)[:10]
+    listings_same = Listing.objects.order_by('-list_date').filter(house_type=listing_detail.house_type,
+                                                                  area=listing_detail.area)[:10]
     context = {
-        'listing': listing,
+        'listing': listing_detail,
         'listings_neighborhood': listings_neighborhood,
         'listings_same': listings_same
     }
@@ -52,10 +53,10 @@ def listing(request, listing_id):
 
 def detail(request):
     listing_id = request.GET.get('id', '')
-    listing = get_object_or_404(Listing, pk=listing_id)
-    listings_neighborhood = Listing.objects.order_by('-list_date').filter(state=listing.state)
+    listing_detail = get_object_or_404(Listing, pk=listing_id)
+    listings_neighborhood = Listing.objects.order_by('-list_date').filter(state=listing_detail.state)[:10]
     context = {
-        'listing': listing,
+        'listing': listing_detail,
         'listings_neighborhood': listings_neighborhood
     }
 
@@ -81,7 +82,7 @@ def search(request):
     if 'urban_area' in request.GET:
         urban_area = request.GET['urban_area']
         if urban_area:
-            queryset_list = queryset_list.filter(urban_area=housetype)
+            queryset_list = queryset_list.filter(urban_area=urban_area)
 
     # Keywords
     if 'keywords' in request.GET:
@@ -155,6 +156,7 @@ def rent_with_us(request):
 
     return render(request, 'listings/rentWithUs.html', context)
 
+
 @api_view(['GET', 'POST'])
 def listingsAPI(request):
     """
@@ -165,7 +167,7 @@ def listingsAPI(request):
         serializer_context = {
             'request': request,
         }
-        serializer = ListingSerializer(listings,context={'request': request} ,many=True)
+        serializer = ListingSerializer(listings, context={'request': request}, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = ListingSerializer(data=request.data)
@@ -174,7 +176,8 @@ def listingsAPI(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class listingsAPIView(generics.ListCreateAPIView):
+
+class ListingsAPIView(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = ListingSerializer
     filter_backends = (DjangoFilterBackend,)
@@ -182,7 +185,7 @@ class listingsAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         id_pk = self.kwargs.get('id', None)
-        #queryset = Listing.objects.filter(id=id_pk)
+        # queryset = Listing.objects.filter(id=id_pk)
         queryset = Listing.objects.all()
         return queryset.order_by('list_date')
 
@@ -192,20 +195,17 @@ class listingsAPIView(generics.ListCreateAPIView):
                       request=request)
         request.data.update({force_text('listing'): force_text(url)})
 
-        return super(listingsAPIView, self).post(request, *args, **kwargs)
+        return super(ListingsAPIView, self).post(request, *args, **kwargs)
 
-    
-    
-class listingAPIall(mixins.ListModelMixin,mixins.UpdateModelMixin,generics.GenericAPIView):
+
+class ListingAPIAllView(mixins.ListModelMixin, mixins.UpdateModelMixin, generics.GenericAPIView):
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
-    
+
     def get(self, request, *args, **kwargs):
         serializer_context = {
             'request': request,
         }
-        serializer = ListingSerializer(queryset, many=True, context=serializer_context)    
+        serializer = ListingSerializer(queryset, many=True, context=serializer_context)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
