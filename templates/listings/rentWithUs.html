@@ -3,30 +3,9 @@
 {% load static humanize i18n %}
 
 {% block head %}
+    {{ block.super }}
 
-    <title> Thế giới Nhà Phố {% block title %}| Thuê nhà với sàn Thế giới Nhà Phố {% endblock %}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="UTF-8"/>
-    <meta name="description" content="Dịch vụ cho thuê bất động sản từ TGNP sẽ giúp bạn dễ dàng thuê được nhà đất, căn hộ, văn phòng, mặt bằng phù hợp với giá tốt nhất đúng với nhu cầu và tài chính của bạn. Sự chuyên nghiệp, minh bạch, tận tình, nhanh chóng là khác biệt của TGNP với thị trường." />
-    <meta name="keywords" content="TGNP, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa" />
-    <meta name="author" content="thegioinhaphovietnam.com.vn"/>
     <link rel="canonical" href="{% url 'rent_with_us' %}"/>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-
-    <meta property="fb:app_id" content=""/>
-    <meta property="og:url" content="../listings/rentwithus"/>
-    <meta property="og:title" content="Thuê BĐS tốt nhất với TGNP"/>
-    <meta property="og:description" content="Dịch vụ cho thuê bất động sản từ TGNP sẽ giúp bạn dễ dàng thuê được nhà đất, căn hộ, văn phòng, mặt bằng phù hợp với giá tốt nhất đúng với nhu cầu và tài chính của bạn. Sự chuyên nghiệp, minh bạch, tận tình, nhanh chóng là khác biệt của TGNP với thị trường." />
-    <meta property="og:image" content="{% static 'img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:url" content="{% static 'img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:width" content="600"/>
-    <meta property="og:image:height" content="320"/>
-    <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
-    <meta property="og:rich_attachment" content="true"/>
-    <meta property="og:type" content="article"/>
-    <meta property="hotline" content="0964399436"/>
-
     <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
     <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
@@ -695,7 +674,6 @@
 {% block scripts %}
 
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-    <script async defer src="{% static 'js/tracking.min90ca.js' %}"></script>
     <script async defer src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
     <script async defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
     <script src="{% static 'js/jquery-ui.min90ca.js' %}"></script>

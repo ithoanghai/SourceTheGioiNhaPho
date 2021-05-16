@@ -3,6 +3,7 @@
 {% load static humanize i18n %}
 
 {% block head %}
+  {{ block.super }}
         <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
         <script src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
         <script async defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
@@ -24,31 +25,8 @@
         </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap"></script>
 
-    <title> Thế giới Nhà Phố {% block title %}| Mua căn hộ tốt nhất {% endblock %}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="UTF-8"/>
-    <meta name="description"
-          content="Mua bán bất động sản, chung cư, căn hộ Hà Nội sở hữu vị trí vàng, đầy đủ tiện nghi, sang trọng, an ninh, không gian sống hiện đại. bất động sản, chung cư, căn hộ Hà Nội cập nhật hình ảnh thật, thông tin xác thực."/>
-    <meta name="keywords"
-          content="nha pho, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
-    <meta name="author" content="thegioinhaphovietnam.com.vn"/>
-    <link rel="canonical" href="search"/>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-    <meta property="fb:app_id" content=""/>
-    <meta property="og:url" content="buy"/>
-    <meta property="og:title" content="Mua Bán Nhà Đất Căn Hộ Tốt Nhất | Thế giới Nhà Phố"/>
-    <meta property="og:description"
-          content="Mua bán bất động sản, chung cư, căn hộ Hà Nội sở hữu vị trí vàng, đầy đủ tiện nghi, sang trọng, an ninh, không gian sống hiện đại. bất động sản, chung cư, căn hộ Hà Nội cập nhật hình ảnh thật, thông tin xác thực."/>
-    <meta property="og:image" content="{% static 'img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:url" content="{% static 'img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:width" content="600"/>
-    <meta property="og:image:height" content="320"/>
-    <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
-    <meta property="og:rich_attachment" content="true"/>
-    <meta property="og:type" content="article"/>
-    <meta property="hotline" content="0964399436"/>
+    <link rel="canonical" href="search"/>
     <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
     <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
@@ -997,15 +975,6 @@
 {% block scripts %}
     <script async defer src="{% static 'js/ion.rangeSlider.js' %}"></script>
     <script async defer src="{% static 'js/search-new-v2.min.js' %}"></script>
-
-    <script type="text/javascript">
-  (function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.defer=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-  })(window, document, "clarity", "script", "3y09hfteky");
-</script>
-
     <script type="text/javascript">
         var callbackInitMap = function () {
             if (window.vinitMap) {

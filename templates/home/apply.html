@@ -3,33 +3,9 @@
 {% load static humanize i18n %}
 
 {% block head %}
+{{ block.super }}
 
-    <title> {% block title %}Ứng tuyển nhân viên | Thế giới Nhà Phố {% endblock %}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="UTF-8"/>
-    <meta name="description"
-          content="Đăng ký trở thành môi giới với TGNP, nơi gửi thông tin ứng tuyển và CV tới bộ phận tuyển dụng TGNP Careers.">
-    <meta name="keywords"
-          content="TGNP, tuyen dung, tuyen moi gioi, moi gioi nha dat, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
-    <meta name="author" content="thegioinhaphovietnam.com.vn"/>
-    <link rel="canonical" href="{% url 'specialist_us' %}"/>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-
-    <meta property="fb:app_id" content=""/>
-    <meta property="og:url" content="../listings/buywithus"/>
-    <meta property="og:title" content="Vì sao nên chọn chuyên viên môi giới TGNP"/>
-    <meta property="og:description"
-          content="Đăng ký trở thành môi giới với TGNP, nơi gửi thông tin ứng tuyển và CV tới bộ phận tuyển dụng TGNP Careers.">
-    <meta property="og:image" content="{% static 'img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:url" content="{% static 'img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:width" content="600"/>
-    <meta property="og:image:height" content="320"/>
-    <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
-    <meta property="og:rich_attachment" content="true"/>
-    <meta property="og:type" content="article"/>
-    <meta property="hotline" content="0964399436"/>
-
+  <link rel="canonical" href="{% url 'specialist_us' %}"/>
     <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}">
     <link rel="stylesheet" href="{% static 'css/apply.min.css' %}"/>
