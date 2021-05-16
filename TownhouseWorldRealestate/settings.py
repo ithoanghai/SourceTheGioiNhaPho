@@ -196,8 +196,8 @@ INTERNAL_IPS = [
 
 
 REST_FRAMEWORK = {
-   'DEFAULT_MODEL_SERIALIZER_CLASS':(
-    'rest_framework.serializers.HyperlinkedModelSerializer',
+   'DEFAULT_MODEL_SERIALIZER_CLASS': (
+        'rest_framework.serializers.HyperlinkedModelSerializer',
    ),
    'DEFAULT_AUTHENTICATION_CLASSES': (
        'rest_framework.authentication.TokenAuthentication',

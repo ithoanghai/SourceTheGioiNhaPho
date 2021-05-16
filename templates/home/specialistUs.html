@@ -3,33 +3,9 @@
 {% load static humanize i18n %}
 
 {% block head %}
+{{ block.super }}
 
-    <title> {% block title %}| Vì sao nên chọn chuyên viên môi giới Thế giới Nhà Phố {% endblock %}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="UTF-8"/>
-    <meta name="description"
-          content="Trải nghiệm tuyệt vời và sự hài lòng tuyệt đối của khách hàng là mục tiêu cao nhất của mỗi chuyên viên môi giới TGNP, vốn được đào tạo bài bản, am hiểu sâu sắc thị trường và phong cách làm việc chuyên nghiệp."/>
-    <meta name="keywords"
-          content="TGNP, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
-    <meta name="author" content="thegioinhaphovietnam.com.vn"/>
     <link rel="canonical" href="{% url 'specialist_us' %}"/>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-
-    <meta property="fb:app_id" content=""/>
-    <meta property="og:url" content="../listings/buywithus"/>
-    <meta property="og:title" content="Vì sao nên chọn chuyên viên môi giới TGNP"/>
-    <meta property="og:description"
-          content="Chuyên viên môi giới chuyên nghiệp từ TGNP sẽ giúp bạn dễ dàng sở hữu được ngôi nhà tốt nhất với giá thấp nhất đúng với nhu cầu và tình hình tài chính của bạn. Sự tin cậy, minh bạch, tận tình, uy tín là sự khác biệt của TGNP với thị trường."/>
-    <meta property="og:image" content="{% static 'img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:url" content="{% static 'img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:width" content="600"/>
-    <meta property="og:image:height" content="320"/>
-    <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
-    <meta property="og:rich_attachment" content="true"/>
-    <meta property="og:type" content="article"/>
-    <meta property="hotline" content="0964399436"/>
-
     <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
     <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
@@ -606,7 +582,6 @@
 {% block scripts %}
 
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-    <script async defer src="{% static 'js/tracking.min90ca.js' %}"></script>
     <script async defer src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
     <script async defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
     <script src="{% static 'js/jquery-ui.min90ca.js' %}"></script>

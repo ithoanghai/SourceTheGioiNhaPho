@@ -131,7 +131,7 @@ class Listing(models.Model):
     title = models.CharField(max_length=200, verbose_name=_("Tên BĐS"),
                              help_text=_(
                                  "[Tên phố - Quận/Huyện] [Diện tích - Tầng/Đất/CC - Mặt tiền] [Ngõ] [Giá]"))
-    code = models.CharField(max_length=40, verbose_name=_("Mã BĐS"),
+    code = models.CharField(max_length=80, verbose_name=_("Mã BĐS"),
                             help_text=_("Được điền tự động và duy nhất"),
                             unique=True)
 

@@ -2,786 +2,759 @@
 
 {% load static humanize i18n %}
 
-{% block head %}
+{% block head_script %}
+  {{ block.super }}
+  <style>
+      [v-cloak] {
+          display: none !important;
+      }
 
-    <title> Thế giới Nhà Phố {% block title %}| Mua bán, cho thuê nhà đất, căn hộ, đất nền và văn
-        phòng {% endblock %}</title>
+      /* Ẩn các element khi vue chưa load */
+      picture img {
+          display: inline-block;
+          vertical-align: middle;
+      }
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="UTF-8"/>
-    <meta name="description"
-          content="Với Thế giới Nhà Phố, việc mua bán, cho thuê, đầu tư bất động sản, nhà đất trở nên hiệu quả và tin cậy hơn. Bạn sẽ dễ dàng tìm được ngôi nhà ưng ý nhất với giá hợp lý."/>
-    <meta name="keywords"
-          content="TGNP, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
-    <meta name="author" content="thegioinhaphovietnam.com.vn"/>
-    <link rel="canonical" href="index.html"/>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+      /*hide tracking img*/
+      img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
+          display: none;
+      }
 
-    <meta property="fb:app_id" content=""/>
-    <meta property="og:url" content="https://thegioinhaphovietnam.com.vn/"/>
-    <meta property="og:title" content="Thế giới Nhà ph | Mua bán, cho thuê nhà đất, căn hộ, đất nền và văn phòng"/>
-    <meta property="og:description"
-          content="Với Thế giới Nhà Phố, việc mua bán, cho thuê, đầu tư bất động sản, nhà đất trở nên hiệu quả và tin cậy hơn. Bạn sẽ dễ dàng tìm được ngôi nhà ưng ý nhất với giá hợp lý."/>
-    <meta property="og:image" content="{% static '/img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:url" content="{% static '/img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:width" content="600"/>
-    <meta property="og:image:height" content="320"/>
-    <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
-    <meta property="og:rich_attachment" content="true"/>
-    <meta property="og:type" content="article"/>
-    <meta property="hotline" content="0964399436"/>
-    <style>
-        [v-cloak] {
-            display: none !important;
-        }
+      ._hj_feedback_container button { /* Fix lỗi hotjar */
+          text-align: center;
+      }
+  </style>
 
-        /* Ẩn các element khi vue chưa load */
-        picture img {
-            display: inline-block;
-            vertical-align: middle;
-        }
+  <link rel="canonical" href="index.html"/>
+  <link rel="stylesheet" type="text/css" href="{% static "css/index-merge.min90ca.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "css/font-icon.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
 
-        /*hide tracking img*/
-        img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
-            display: none;
-        }
+  <link rel="stylesheet" type="text/css" href="{% static "css/footer.min90ca.css" %}">
 
-        ._hj_feedback_container button { /* Fix lỗi hotjar */
-            text-align: center;
-        }
-    </style>
+  <style>
+      img.lazy, img.lazy-background {
+          filter: blur(15px);
+      }
+  </style>
+  <style>
+      .banner-app-tgnp {
+          position: relative;
+          display: none;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          -webkit-box-orient: horizontal;
+          -webkit-box-direction: normal;
+          -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+          -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+          justify-content: space-between;
+          width: 100%;
+          padding: 10px 18px;
+          background-color: #30333a;
+          z-index: 100
+      }
 
-    <meta name="ahrefs-site-verification" content="b3a10354398a2c17b3410f4506518ba93e519af05a49ba8d75ccb03d7059bbe6">
+      @media (max-width: 768px) {
+          .banner-app-tgnp {
+              display: -webkit-box;
+              display: -ms-flexbox;
+              display: flex
+          }
+      }
 
-    <link rel="stylesheet" type="text/css" href="{% static "css/index-merge.min90ca.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "css/font-icon.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
+      .close-banner-app {
+          padding: 0 10px 0 0;
+          outline: 0;
+          background: 0 0;
+          border: 0;
+          font-size: 16px;
+          color: #fff;
+          font-weight: 400
+      }
 
-    <link rel="stylesheet" type="text/css" href="{% static "css/footer.min90ca.css" %}">
+      .close-banner-app .zmdi {
+          font-size: 16px;
+          padding: 0
+      }
 
-    <style>
-        img.lazy, img.lazy-background {
-            filter: blur(15px);
-        }
-    </style>
-    <style>
-        .banner-app-tgnp {
-            position: relative;
-            display: none;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-            -ms-flex-flow: row nowrap;
-            flex-flow: row nowrap;
-            -webkit-box-pack: justify;
-            -ms-flex-pack: justify;
-            justify-content: space-between;
-            width: 100%;
-            padding: 10px 18px;
-            background-color: #30333a;
-            z-index: 100
-        }
+      .btn-install {
+          position: relative;
+          display: inline-block;
+          min-width: -webkit-min-content;
+          min-width: -moz-min-content;
+          min-width: fit-content;
+          max-width: max-content;
+          max-width: max-content;
+          max-width: fit-content;
+          width: 100%;
+          padding: 8px 10px 7px;
+          border-radius: 2px;
+          font-size: 14px;
+          line-height: 1.5;
+          font-weight: 500;
+          text-align: center;
+          color: #fff;
+          cursor: pointer
+      }
 
-        @media (max-width: 768px) {
-            .banner-app-tgnp {
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex
-            }
-        }
+      .btn-install::after {
+          background-color: orange;
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 2px;
+          z-index: -1;
+          -webkit-animation: zoomin 1.2s ease-in infinite;
+          animation: zoomin 1.2s ease-in infinite;
+          -webkit-transition: all .3s ease-in-out;
+          transition: all .3s ease-in-out
+      }
 
-        .close-banner-app {
-            padding: 0 10px 0 0;
-            outline: 0;
-            background: 0 0;
-            border: 0;
-            font-size: 16px;
-            color: #fff;
-            font-weight: 400
-        }
+      .btn-install:focus, .btn-install:hover {
+          color: #fff
+      }
 
-        .close-banner-app .zmdi {
-            font-size: 16px;
-            padding: 0
-        }
+      .banner-app-content {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center
+      }
 
-        .btn-install {
-            position: relative;
-            display: inline-block;
-            min-width: -webkit-min-content;
-            min-width: -moz-min-content;
-            min-width: fit-content;
-            max-width: max-content;
-            max-width: max-content;
-            max-width: fit-content;
-            width: 100%;
-            padding: 8px 10px 7px;
-            border-radius: 2px;
-            font-size: 14px;
-            line-height: 1.5;
-            font-weight: 500;
-            text-align: center;
-            color: #fff;
-            cursor: pointer
-        }
+      .banner-app-content .cover {
+          width: 44px;
+          min-width: 44px;
+          height: 44px;
+          margin-right: 10px;
+          border-radius: 10px;
+          overflow: hidden
+      }
 
-        .btn-install::after {
-            background-color: orange;
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 2px;
-            z-index: -1;
-            -webkit-animation: zoomin 1.2s ease-in infinite;
-            animation: zoomin 1.2s ease-in infinite;
-            -webkit-transition: all .3s ease-in-out;
-            transition: all .3s ease-in-out
-        }
+      .banner-app-content .cover img {
+          width: 100%;
+          max-width: 100%;
+          height: 100%;
+          -o-object-fit: contain;
+          object-fit: contain
+      }
 
-        .btn-install:focus, .btn-install:hover {
-            color: #fff
-        }
+      .banner-app-content .banner-app-info a {
+          font-size: 14px;
+          line-height: 1;
+          font-weight: 500;
+          color: #fff
+      }
 
-        .banner-app-content {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center
-        }
+      .banner-app-content .banner-app-info p {
+          font-size: 12px;
+          line-height: 1.5;
+          font-weight: 400;
+          color: #fff
+      }
 
-        .banner-app-content .cover {
-            width: 44px;
-            min-width: 44px;
-            height: 44px;
-            margin-right: 10px;
-            border-radius: 10px;
-            overflow: hidden
-        }
+      .banner-app-content .banner-app-info .rating-star {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center
+      }
 
-        .banner-app-content .cover img {
-            width: 100%;
-            max-width: 100%;
-            height: 100%;
-            -o-object-fit: contain;
-            object-fit: contain
-        }
+      .banner-app-content .banner-app-info .rating-star .zmdi {
+          font-size: 12px;
+          color: #838383;
+          cursor: pointer
+      }
 
-        .banner-app-content .banner-app-info a {
-            font-size: 14px;
-            line-height: 1;
-            font-weight: 500;
-            color: #fff
-        }
+      @media (min-width: 1200px) {
+          .banner-app-content .banner-app-info .rating-star .zmdi:hover {
+              color: #f7ce27
+          }
+      }
 
-        .banner-app-content .banner-app-info p {
-            font-size: 12px;
-            line-height: 1.5;
-            font-weight: 400;
-            color: #fff
-        }
+      .banner-app-content .banner-app-info .rating-star .zmdi.evaluated {
+          color: #f7ce27
+      }
 
-        .banner-app-content .banner-app-info .rating-star {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center
-        }
+      @keyframes zoomin {
+          0% {
+              -webkit-transform: scale(1);
+              transform: scale(1)
+          }
+          50% {
+              -webkit-transform: scale(1.1);
+              transform: scale(1.1)
+          }
+          100% {
+              -webkit-transform: scale(1);
+              transform: scale(1)
+          }
+      }
 
-        .banner-app-content .banner-app-info .rating-star .zmdi {
-            font-size: 12px;
-            color: #838383;
-            cursor: pointer
-        }
-
-        @media (min-width: 1200px) {
-            .banner-app-content .banner-app-info .rating-star .zmdi:hover {
-                color: #f7ce27
-            }
-        }
-
-        .banner-app-content .banner-app-info .rating-star .zmdi.evaluated {
-            color: #f7ce27
-        }
-
-        @keyframes zoomin {
-            0% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-            50% {
-                -webkit-transform: scale(1.1);
-                transform: scale(1.1)
-            }
-            100% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-        }
-
-        @-webkit-keyframes zoomin {
-            0% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-            50% {
-                -webkit-transform: scale(1.1);
-                transform: scale(1.1)
-            }
-            100% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-        }
-    </style>
+      @-webkit-keyframes zoomin {
+          0% {
+              -webkit-transform: scale(1);
+              transform: scale(1)
+          }
+          50% {
+              -webkit-transform: scale(1.1);
+              transform: scale(1.1)
+          }
+          100% {
+              -webkit-transform: scale(1);
+              transform: scale(1)
+          }
+      }
+  </style>
 {% endblock %}
 
 {% block content %}
-    <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">
-        <div class="banner-app-content">
-            <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
-                <i class="zmdi zmdi-close"></i>
-            </button>
-            <a href="javascript:void(0)" class="cover">
-                <img src="{% static 'img/logo.svg' %}" alt="Thế giới Nhà Phố">
+  <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">
+    <div class="banner-app-content">
+      <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
+        <i class="zmdi zmdi-close"></i>
+      </button>
+      <a href="javascript:void(0)" class="cover">
+        <img src="{% static 'img/logo.svg' %}" alt="Thế giới Nhà Phố">
+      </a>
+      <div class="banner-app-info">
+        <a href="javascript:void(0)">Thế giới Nhà Phố</a>
+        <p>Mua bán nhà dễ dàng</p>
+        <div class="rating-star">
+          <i class="zmdi zmdi-star evaluated"></i>
+          <i class="zmdi zmdi-star evaluated"></i>
+          <i class="zmdi zmdi-star evaluated"></i>
+          <i class="zmdi zmdi-star evaluated"></i>
+          <i class="zmdi zmdi-star-half evaluated"></i>
+        </div>
+      </div>
+    </div>
+    <a href="javascript:void(0)" class="btn-install">Mở</a>
+  </div>
+
+  <section class="container col-12">
+    <div class="inner text-center-index block-introduce">
+      <h2 class="heading-02">Hỗ trợ từng bước, chi phí thấp nhất</h2>
+      <p class="col-8">TGNP với thế mạnh về công nghệ và cung cấp đầy đủ các dịch vụ, cùng với đội ngũ chuyên
+        viên hiểu biết sâu sắc thị trường từng khu vực, sẽ đồng hành hỗ trợ bạn từng bước, giúp bạn tiết kiệm
+        đáng kể chi
+        phí, công sức và thời gian.</p>
+      <a class="btn-primary btn-large btn-black-outline" target="_blank" href="{% url 'whyChoose' %}">Tìm hiểu thêm</a>
+    </div>
+  </section>
+
+  <section class="container col-12">
+
+    {% comment %}{% for key, value in district_data.items %}{% endcomment %}
+    <div class="inner pd-top-bottom-block block-project" style="padding-top: 0">
+      <h2 class="heading-03">
+        <a href="{% url 'search' %} {{ key }}">Bán tại Q. {{ value }}</a>
+      </h2>
+      <div class="col-12">
+        {% if listings_for_sale %}
+          {% for listing in listings_for_sale %}
+            {% include "listings/_listingCard2.html" %}
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>{% trans "Không có kết quả phù hợp!" %}</p>
+          </div>
+        {% endif %}
+        <input type="hidden" value=""/>
+        <a class="more" href="../listings/search?trantype=sell&district=Hoàn Kiếm">Xem thêm nhà đất
+          <i class="zmdi zmdi-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+    {% comment %}{% endfor %}{% endcomment %}
+  </section>
+
+  <section class="container col-12">
+    <div class="inner pd-top-bottom-block quickly-sell">
+      <div class="quickly-sell-cover">
+        <img data-src="{% static 'images/background-quick-sell-small@1x.jpg' %}"
+             data-srcset="{% static 'images/background-quick-sell-small@1x.jpg' %} 600w, {% static 'images/background-quick-sell-small@1x.jpg' %} 1920w"
+             class="lazy" alt="TGNP">
+      </div>
+      <div class="detail-block">
+        <div class="content-detail-block">
+          <h2 class="font-tiempos-h2">
+            Bán nhanh nhất,<br>cho thuê giá tốt nhất!
+            <br>
+          </h2>
+          <p class="font-rvharmonia">
+            Gần 90% chủ nhà chốt giao dịch trong vòng 90 ngày sau khi chọn TGNP.
+          </p>
+          <div class="option-group">
+            <a class="btn-primary btn-large btn-black-outline" href="listings\sellwithus">
+              Bán với Thế giới Nhà Phố
             </a>
-            <div class="banner-app-info">
-                <a href="javascript:void(0)">Thế giới Nhà Phố</a>
-                <p>Mua bán nhà dễ dàng</p>
-                <div class="rating-star">
-                    <i class="zmdi zmdi-star evaluated"></i>
-                    <i class="zmdi zmdi-star evaluated"></i>
-                    <i class="zmdi zmdi-star evaluated"></i>
-                    <i class="zmdi zmdi-star evaluated"></i>
-                    <i class="zmdi zmdi-star-half evaluated"></i>
-                </div>
-            </div>
+            <a class="btn-primary btn-large btn-black-outline" href="listings\rentwithus">
+              Cho thuê với Thế giới Nhà Phố
+            </a>
+          </div>
         </div>
-        <a href="javascript:void(0)" class="btn-install">Mở</a>
+      </div>
     </div>
+  </section>
 
-    <section class="container col-12">
-        <div class="inner text-center-index block-introduce">
-            <h2 class="heading-02">Hỗ trợ từng bước, chi phí thấp nhất</h2>
-            <p class="col-8">TGNP với thế mạnh về công nghệ và cung cấp đầy đủ các dịch vụ, cùng với đội ngũ chuyên
-                viên hiểu biết sâu sắc thị trường từng khu vực, sẽ đồng hành hỗ trợ bạn từng bước, giúp bạn tiết kiệm
-                đáng kể chi
-                phí, công sức và thời gian.</p>
-            <a class="btn-primary btn-large btn-black-outline" target="_blank" href="{% url 'whyChoose' %}">Tìm hiểu thêm</a>
-        </div>
-    </section>
-
-    <section class="container col-12">
-
-        {% comment %}{% for key, value in district_data.items %}{% endcomment %}
-        <div class="inner pd-top-bottom-block block-project" style="padding-top: 0">
-            <h2 class="heading-03">
-                <a href="{% url 'search' %} {{ key }}">Bán tại Q. {{ value }}</a>
-            </h2>
-            <div class="col-12">
-                {% if listings_for_sale %}
-                    {% for listing in listings_for_sale %}
-                        {% include "listings/_listingCard2.html" %}
-                    {% endfor %}
-                {% else %}
-                    <div class="col-md-12">
-                        <p>{% trans "Không có kết quả phù hợp!" %}</p>
-                    </div>
-                {% endif %}
-                <input type="hidden" value=""/>
-                <a class="more" href="../listings/search?trantype=sell&district=Hoàn Kiếm">Xem thêm nhà đất
-                    <i class="zmdi zmdi-chevron-right"></i>
-                </a>
-            </div>
-        </div>
-        {% comment %}{% endfor %}{% endcomment %}
-    </section>
-
-    <section class="container col-12">
-        <div class="inner pd-top-bottom-block quickly-sell">
-            <div class="quickly-sell-cover">
-                <img data-src="{% static 'images/background-quick-sell-small@1x.jpg' %}"
-                     data-srcset="{% static 'images/background-quick-sell-small@1x.jpg' %} 600w, {% static 'images/background-quick-sell-small@1x.jpg' %} 1920w"
-                     class="lazy" alt="TGNP">
-            </div>
-            <div class="detail-block">
-                <div class="content-detail-block">
-                    <h2 class="font-tiempos-h2">
-                        Bán nhanh nhất,<br>cho thuê giá tốt nhất!
-                        <br>
-                    </h2>
-                    <p class="font-rvharmonia">
-                        Gần 90% chủ nhà chốt giao dịch trong vòng 90 ngày sau khi chọn TGNP.
-                    </p>
-                    <div class="option-group">
-                        <a class="btn-primary btn-large btn-black-outline" href="listings\sellwithus">
-                            Bán với Thế giới Nhà Phố
-                        </a>
-                        <a class="btn-primary btn-large btn-black-outline" href="listings\rentwithus">
-                            Cho thuê với Thế giới Nhà Phố
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="container col-12">
-        <div class="inner pd-top-bottom-block block-project" style="padding-top: 0">
-            <h2 class="heading-03">
-                <a href="../listings/search?trantype=rent&district=Hoàn Kiếm">Cho thuê tại Hoàn Kiếm</a>
-            </h2>
-            <div class="col-12">
-                {% if listings_for_rent %}
-                    {% for listing in listings_for_rent %}
-                        {% include "listings/_listingCard2.html" %}
-                    {% endfor %}
-                {% else %}
-                    <div class="col-md-12">
-                        <p>{% trans "Không có kết quả phù hợp!" %}</p>
-                    </div>
-                {% endif %}
-                <input type="hidden" value=""/>
-                <a class="more" href="../listings/search?trantype=sell&district=Hoàn Kiếm">Xem thêm nhà đất
-                    <i class="zmdi zmdi-chevron-right"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-
-    <style>
-        #msform a.butt-primary[disabled] {
-            opacity: 0.4
-        }
-    </style>
-    <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
-        <div class="popup-feedback-fixed">
-            <div class="popup-body-fb">
-                <div v-show="state == 'composing'" class="popup-contain">
-                    <div class="visible-pc">
-                        <form id="msform" onsubmit="return false">
-                            <fieldset style="display: block">
-                                <h2 class="popup-title-w-back height-title popup-font-tiempos" id="title-head">Phản hồi
-                                    của bạn về Thegioinhaphovietnam.com.vn (<span v-text="step"></span>/3)</h2>
-                                <button @click="hideModal()" class="popup-close-btn"><i
-                                        class="zmdi zmdi-hc-2x zmdi-close"></i></button>
-                                <div v-show="step == 1" class="contain" id="step-form-1">
-                                    <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?
-                                    </div>
-                                    <div class="choose-number">
-                                        <ul>
-                                            <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
-                                                @mouseleave="onMouseLeaveRate(i)" @click="selectStep1Rate(i)">
-                                                <a :class="{active: step1.rate == i}" href="javascript:void(0)"
-                                                   v-text="i"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="emotion">
-                                        <img :src="'https://images/' + step1Icon" alt="">
-                                        <p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
-                                    </div>
-                                </div>
-                                <div v-show="step == 2" class="contain" id="step-form-2">
-                                    <div class="intro">Bạn có thấy Thegioinhaphovietnam.com.vn dễ sử dụng không?</div>
-                                    <div class="row row-fb pd-t-39 pd-bt-68 center-item">
-                                        <button :class="{active : step2.rate == 'hard'}"
-                                                @click="selectStep2Rate('hard')"
-                                                class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
-                                        </button>
-                                        <button :class="{active : step2.rate == 'normal'}"
-                                                @click="selectStep2Rate('normal')"
-                                                class="large-butt-grey btn-use pd-use-btn mgr-r-20">Bình thường
-                                        </button>
-                                        <button :class="{active : step2.rate == 'easy'}"
-                                                @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ sử
-                                            dụng
-                                        </button>
-                                    </div>
-                                </div>
-                                <div v-show="step == 3" class="contain">
-                                    <div class="intro">Bạn muốn thegioinhaphovietnam.com.vn cần cải thiện thêm về điều
-                                        gì?
-                                    </div>
-                                    <div class="checkbox-option">
-                                        <div class="checkbox-pc">
-                                            <div class="row-fb">
-                                                <div>
-                                                    <label class="container-cb">Giao diện đẹp hơn
-                                                        <input type="checkbox" v-model="step3.improve.ui">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="container-cb">Nội dung chính xác hơn
-                                                        <input type="checkbox" v-model="step3.improve.content">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="container-cb">Thêm tính năng
-                                                        <input type="checkbox" v-model="step3.improve.feature">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="container-cb">Khác (vui lòng nhập)
-                                                        <input type="checkbox" v-model="step3.improve.other"
-                                                               @change="onSelectOtherMsg('')">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="share-rv">
-                                            <p style="font-size: initial">Ý kiến khác</p>
-                                            <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg"
-                                                      :disabled="!step3.improve.other"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a @click="gotoStep(step - 1)" v-show="step > 1"
-                                   class="butt-primary butt-transparent prev" href="javascript:void(0)"
-                                   id="prev">Trước</a>
-                                <a @click="onClickNext()" v-show="step < 3" :disabled="!canNext"
-                                   class="butt-primary btn-grey next" href="javascript:void(0)" id="next">Tiếp</a>
-                                <button @click="onClickSend" v-show="step == 3" class="butt-primary btn-grey">
-                                    <span v-show="!isSending" class="send">Gửi</span>
-                                    <span v-show="isSending">Đang gửi...</span>
-                                </button>
-                            </fieldset>
-                        </form>
-                    </div>
-                    <div class="visible-sm">
-                        <div class="header-sm">
-                            <button @click="hideModal()" class="popup-close-btn-sm"><i
-                                    class="zmdi zmdi-hc-2x zmdi-close"></i></button>
-                            <h4>Phản hồi của bạn về thegioinhaphovietnam.com.vn</h4>
-                        </div>
-                        <div class="content">
-                            <div class="intro-sm">
-                                <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?</p>
-                                <div class="choose-number">
-                                    <ul>
-                                        <li v-for="i in 10" @click="selectStep1Rate(i)">
-                                            <a :class="{active: step1.rate == i}" href="javascript:void(0)"
-                                               v-text="i"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="use-easy">
-                                <p>Bạn thấy Thế giới Nhà Phố có dễ sử dụng không?</p>
-                                <div class="row pt-15 center-item">
-                                    <button :class="{active : step2.rate == 'hard'}" @click="selectStep2Rate('hard')"
-                                            class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
-                                    </button>
-                                    <button :class="{active : step2.rate == 'normal'}"
-                                            @click="selectStep2Rate('normal')"
-                                            class="large-butt-grey btn-use pd-use-btn">Bình thường
-                                    </button>
-                                    <button :class="{active : step2.rate == 'easy'}" @click="selectStep2Rate('easy')"
-                                            class="large-butt-grey btn-use">Dễ sử dụng
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="improve">
-                                <p>Bạn muốn thegioinhaphovietnam.com.vn cần cải thiện thêm về điều gì?</p>
-                                <div class="checkbox-sm">
-                                    <label class="container-cb">Giao diện đẹp hơn
-                                        <input type="checkbox" v-model="step3.improve.ui">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container-cb">Nội dung chính xác hơn
-                                        <input type="checkbox" v-model="step3.improve.content">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container-cb">Thêm tính năng
-                                        <input type="checkbox" v-model="step3.improve.feature">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container-cb">Khác (vui lòng nhập)
-                                        <input type="checkbox" v-model="step3.improve.other"
-                                               @change="onSelectOtherMsg('2')">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="note">
-                                <p>Ý kiến khác</p>
-                                <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg2"
-                                          :disabled="!step3.improve.other"></textarea>
-                            </div>
-                        </div>
-                        <div class="btn">
-                            <button @click="onClickSend" class="butt-primary btn-red">Gửi phản hồi</button>
-                        </div>
-                    </div>
-                </div>
-                <div v-show="state == 'finished'" class="popup-fb-success">
-                    <div class="popup-header">
-                        <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về
-                            thegioinhaphovietnam.com.vn</h2>
-                        <button @click="hideModal()" class="popup-close-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i>
-                        </button>
-                    </div>
-                    <div class="popup-contain">
-                        <img class="img-success" src="{% static 'images/icon-success.svg' %}">
-                        <div class="send-success">
-                            <h3>Đã gửi thành công!</h3>
-                            <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp thegioinhaphovietnam.com.vn
-                                từng bước nâng cao
-                                chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7): <strong>0916286256</strong>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="popup-footer">
-                        <a @click="hideModal()" class="butt-primary butt-red btn-red" href="javascript:void(0)">Đóng</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <section class="container col-12">
+    <div class="inner pd-top-bottom-block block-project" style="padding-top: 0">
+      <h2 class="heading-03">
+        <a href="../listings/search?trantype=rent&district=Hoàn Kiếm">Cho thuê tại Hoàn Kiếm</a>
+      </h2>
+      <div class="col-12">
+        {% if listings_for_rent %}
+          {% for listing in listings_for_rent %}
+            {% include "listings/_listingCard2.html" %}
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>{% trans "Không có kết quả phù hợp!" %}</p>
+          </div>
+        {% endif %}
+        <input type="hidden" value=""/>
+        <a class="more" href="../listings/search?trantype=sell&district=Hoàn Kiếm">Xem thêm nhà đất
+          <i class="zmdi zmdi-chevron-right"></i>
+        </a>
+      </div>
     </div>
+  </section>
+
+
+  <style>
+      #msform a.butt-primary[disabled] {
+          opacity: 0.4
+      }
+  </style>
+  <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
+    <div class="popup-feedback-fixed">
+      <div class="popup-body-fb">
+        <div v-show="state == 'composing'" class="popup-contain">
+          <div class="visible-pc">
+            <form id="msform" onsubmit="return false">
+              <fieldset style="display: block">
+                <h2 class="popup-title-w-back height-title popup-font-tiempos" id="title-head">Phản hồi
+                  của bạn về Thegioinhaphovietnam.com.vn (<span v-text="step"></span>/3)</h2>
+                <button @click="hideModal()" class="popup-close-btn"><i
+                  class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                <div v-show="step == 1" class="contain" id="step-form-1">
+                  <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?
+                  </div>
+                  <div class="choose-number">
+                    <ul>
+                      <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
+                          @mouseleave="onMouseLeaveRate(i)" @click="selectStep1Rate(i)">
+                        <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                           v-text="i"></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="emotion">
+                    <img :src="'https://images/' + step1Icon" alt="">
+                    <p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
+                  </div>
+                </div>
+                <div v-show="step == 2" class="contain" id="step-form-2">
+                  <div class="intro">Bạn có thấy Thegioinhaphovietnam.com.vn dễ sử dụng không?</div>
+                  <div class="row row-fb pd-t-39 pd-bt-68 center-item">
+                    <button :class="{active : step2.rate == 'hard'}"
+                            @click="selectStep2Rate('hard')"
+                            class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                    </button>
+                    <button :class="{active : step2.rate == 'normal'}"
+                            @click="selectStep2Rate('normal')"
+                            class="large-butt-grey btn-use pd-use-btn mgr-r-20">Bình thường
+                    </button>
+                    <button :class="{active : step2.rate == 'easy'}"
+                            @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ sử
+                      dụng
+                    </button>
+                  </div>
+                </div>
+                <div v-show="step == 3" class="contain">
+                  <div class="intro">Bạn muốn thegioinhaphovietnam.com.vn cần cải thiện thêm về điều
+                    gì?
+                  </div>
+                  <div class="checkbox-option">
+                    <div class="checkbox-pc">
+                      <div class="row-fb">
+                        <div>
+                          <label class="container-cb">Giao diện đẹp hơn
+                            <input type="checkbox" v-model="step3.improve.ui">
+                            <span class="checkmark"></span>
+                          </label>
+                          <label class="container-cb">Nội dung chính xác hơn
+                            <input type="checkbox" v-model="step3.improve.content">
+                            <span class="checkmark"></span>
+                          </label>
+                        </div>
+                        <div>
+                          <label class="container-cb">Thêm tính năng
+                            <input type="checkbox" v-model="step3.improve.feature">
+                            <span class="checkmark"></span>
+                          </label>
+                          <label class="container-cb">Khác (vui lòng nhập)
+                            <input type="checkbox" v-model="step3.improve.other"
+                                   @change="onSelectOtherMsg('')">
+                            <span class="checkmark"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="share-rv">
+                      <p style="font-size: initial">Ý kiến khác</p>
+                      <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg"
+                                :disabled="!step3.improve.other"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <a @click="gotoStep(step - 1)" v-show="step > 1"
+                   class="butt-primary butt-transparent prev" href="javascript:void(0)"
+                   id="prev">Trước</a>
+                <a @click="onClickNext()" v-show="step < 3" :disabled="!canNext"
+                   class="butt-primary btn-grey next" href="javascript:void(0)" id="next">Tiếp</a>
+                <button @click="onClickSend" v-show="step == 3" class="butt-primary btn-grey">
+                  <span v-show="!isSending" class="send">Gửi</span>
+                  <span v-show="isSending">Đang gửi...</span>
+                </button>
+              </fieldset>
+            </form>
+          </div>
+          <div class="visible-sm">
+            <div class="header-sm">
+              <button @click="hideModal()" class="popup-close-btn-sm"><i
+                class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+              <h4>Phản hồi của bạn về thegioinhaphovietnam.com.vn</h4>
+            </div>
+            <div class="content">
+              <div class="intro-sm">
+                <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho người khác?</p>
+                <div class="choose-number">
+                  <ul>
+                    <li v-for="i in 10" @click="selectStep1Rate(i)">
+                      <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                         v-text="i"></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="use-easy">
+                <p>Bạn thấy Thế giới Nhà Phố có dễ sử dụng không?</p>
+                <div class="row pt-15 center-item">
+                  <button :class="{active : step2.rate == 'hard'}" @click="selectStep2Rate('hard')"
+                          class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                  </button>
+                  <button :class="{active : step2.rate == 'normal'}"
+                          @click="selectStep2Rate('normal')"
+                          class="large-butt-grey btn-use pd-use-btn">Bình thường
+                  </button>
+                  <button :class="{active : step2.rate == 'easy'}" @click="selectStep2Rate('easy')"
+                          class="large-butt-grey btn-use">Dễ sử dụng
+                  </button>
+                </div>
+              </div>
+              <div class="improve">
+                <p>Bạn muốn thegioinhaphovietnam.com.vn cần cải thiện thêm về điều gì?</p>
+                <div class="checkbox-sm">
+                  <label class="container-cb">Giao diện đẹp hơn
+                    <input type="checkbox" v-model="step3.improve.ui">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container-cb">Nội dung chính xác hơn
+                    <input type="checkbox" v-model="step3.improve.content">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container-cb">Thêm tính năng
+                    <input type="checkbox" v-model="step3.improve.feature">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container-cb">Khác (vui lòng nhập)
+                    <input type="checkbox" v-model="step3.improve.other"
+                           @change="onSelectOtherMsg('2')">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="note">
+                <p>Ý kiến khác</p>
+                <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg2"
+                          :disabled="!step3.improve.other"></textarea>
+              </div>
+            </div>
+            <div class="btn">
+              <button @click="onClickSend" class="butt-primary btn-red">Gửi phản hồi</button>
+            </div>
+          </div>
+        </div>
+        <div v-show="state == 'finished'" class="popup-fb-success">
+          <div class="popup-header">
+            <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về
+              thegioinhaphovietnam.com.vn</h2>
+            <button @click="hideModal()" class="popup-close-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i>
+            </button>
+          </div>
+          <div class="popup-contain">
+            <img class="img-success" src="{% static 'images/icon-success.svg' %}">
+            <div class="send-success">
+              <h3>Đã gửi thành công!</h3>
+              <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp thegioinhaphovietnam.com.vn
+                từng bước nâng cao
+                chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
+                <strong>0916286256</strong>
+              </p>
+            </div>
+          </div>
+          <div class="popup-footer">
+            <a @click="hideModal()" class="butt-primary butt-red btn-red" href="javascript:void(0)">Đóng</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
 
 
 {% block scripts %}
-    <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
-    {% comment %} <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>{% endcomment %}
-    <script src="{% static 'js/main.js' %} "></script>
-    
-    <script src="{% static 'js/index-merged.min90ca.js' %} "></script>
-    <script src="{% static 'js/favorite.min90ca.js' %} "></script>
+  <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
+  {% comment %} <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>{% endcomment %}
+  <script src="{% static 'js/main.js' %} "></script>
 
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
-                height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
+{#  <script src="{% static 'js/index-merged.min90ca.js' %} "></script>#}
+  <script src="{% static 'js/favorite.min90ca.js' %} "></script>
 
-    <script>
-        /*@shinsenter/defer.js*/
-        !function (e, i, t, n, r, o) {
-            o = /p/.test(i.readyState);
-            var c = 0 <= navigator.userAgent.indexOf('Firefox');
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
 
-            function f(e, t) {
-                o ? n(e, t || 32) : r.push(e, t)
-            }
+  <script>
+      /*@shinsenter/defer.js*/
+      !function (e, i, t, n, r, o) {
+          o = /p/.test(i.readyState);
+          var c = 0 <= navigator.userAgent.indexOf('Firefox');
 
-            function a(e, t, n, r) {
-                return t && i.getElementById(t) || (r = i.createElement(e || 'SCRIPT'), t && (r.id = t), n && (r.onload = n), i.head.appendChild(r)), r || {}
-            }
+          function f(e, t) {
+              o ? n(e, t || 32) : r.push(e, t)
+          }
 
-            e.addEventListener('on' + t in e ? t : 'load', function () {
-                for (o = 1; r[0];) f(r.shift(), r.shift())
-            }), f._ = a, e.defer = f, e.deferscript = function (e, t, n, r) {
-                f(function () {
-                    a('', t, r).src = e
-                }, n)
-            }, e.deferPreload = function (e, t) {
-                if (t = t || 'script', c) {
-                    var n = i.createElement('object');
-                    n.data = e, n.width = 0, n.height = 0, i.body.append(n)
-                } else {
-                    var r = i.createElement('link');
-                    r.setAttribute('rel', 'preload'), r.href = e, r.as = t, i.head.append(r)
-                }
-            }
-        }(this, document, 'pageshow', setTimeout, []), function (s, n) {
-            var u = 'IntersectionObserver', d = 'lazied', l = 'data-', h = l + d, p = 'load', m = 'forEach',
-                y = 'getAttribute', v = 'setAttribute', b = Function(), g = s.defer || b, f = g._ || b;
+          function a(e, t, n, r) {
+              return t && i.getElementById(t) || (r = i.createElement(e || 'SCRIPT'), t && (r.id = t), n && (r.onload = n), i.head.appendChild(r)), r || {}
+          }
 
-            function E(e, t) {
-                return [].slice.call((t || n).querySelectorAll(e))
-            }
+          e.addEventListener('on' + t in e ? t : 'load', function () {
+              for (o = 1; r[0];) f(r.shift(), r.shift())
+          }), f._ = a, e.defer = f, e.deferscript = function (e, t, n, r) {
+              f(function () {
+                  a('', t, r).src = e
+              }, n)
+          }, e.deferPreload = function (e, t) {
+              if (t = t || 'script', c) {
+                  var n = i.createElement('object');
+                  n.data = e, n.width = 0, n.height = 0, i.body.append(n)
+              } else {
+                  var r = i.createElement('link');
+                  r.setAttribute('rel', 'preload'), r.href = e, r.as = t, i.head.append(r)
+              }
+          }
+      }(this, document, 'pageshow', setTimeout, []), function (s, n) {
+          var u = 'IntersectionObserver', d = 'lazied', l = 'data-', h = l + d, p = 'load', m = 'forEach',
+              y = 'getAttribute', v = 'setAttribute', b = Function(), g = s.defer || b, f = g._ || b;
 
-            function e(a) {
-                return function (e, t, i, o, c, f) {
-                    g(function (n, t) {
-                        function r(n) {
-                            !1 !== (o || b).call(n, n) && ((f || ['srcset', 'src', 'style'])[m](function (e, t) {
-                                (t = n[y](l + e)) && n[v](e, t)
-                            }), E('SOURCE', n)[m](r), p in n && n[p]()), n.className += ' ' + (i || d)
-                        }
+          function E(e, t) {
+              return [].slice.call((t || n).querySelectorAll(e))
+          }
 
-                        t = u in s ? (n = new s[u](function (e) {
-                            e[m](function (e, t) {
-                                e.isIntersecting && (t = e.target) && (n.unobserve(t), r(t))
-                            })
-                        }, c)).observe.bind(n) : r, E(e || a + '[' + l + 'src]:not([' + h + '])')[m](function (e) {
-                            e[y](h) || (e[v](h, a), t(e))
-                        })
-                    }, t)
-                }
-            }
+          function e(a) {
+              return function (e, t, i, o, c, f) {
+                  g(function (n, t) {
+                      function r(n) {
+                          !1 !== (o || b).call(n, n) && ((f || ['srcset', 'src', 'style'])[m](function (e, t) {
+                              (t = n[y](l + e)) && n[v](e, t)
+                          }), E('SOURCE', n)[m](r), p in n && n[p]()), n.className += ' ' + (i || d)
+                      }
 
-            function t() {
-                g(function (t, n, r, i, o) {
-                    function c(e, t) {
-                        for (i in t = t || !1, e.parentNode.removeChild(e), e.removeAttribute('type'), n = f(e.nodeName), t && (n.async = 1), e) 'string' == typeof (o = e[i]) && n[i] != o && (n[i] = o);
-                        return n
-                    }
+                      t = u in s ? (n = new s[u](function (e) {
+                          e[m](function (e, t) {
+                              e.isIntersecting && (t = e.target) && (n.unobserve(t), r(t))
+                          })
+                      }, c)).observe.bind(n) : r, E(e || a + '[' + l + 'src]:not([' + h + '])')[m](function (e) {
+                          e[y](h) || (e[v](h, a), t(e))
+                      })
+                  }, t)
+              }
+          }
 
-                    t = E((r = '[type=deferjs]') + ':not(' + (i = '[async]') + ')'), E(r + i).forEach(function (e) {
-                        c(e, !0)
-                    }), t.forEach(function (e) {
-                        e.src && s.deferPreload(e.src)
-                    }), function e() {
-                        0 != t && (r = t.shift(), n = c(r), r.src ? n.onload = n.onerror = e : g(e, .1))
-                    }()
-                }, 4)
-            }
+          function t() {
+              g(function (t, n, r, i, o) {
+                  function c(e, t) {
+                      for (i in t = t || !1, e.parentNode.removeChild(e), e.removeAttribute('type'), n = f(e.nodeName), t && (n.async = 1), e) 'string' == typeof (o = e[i]) && n[i] != o && (n[i] = o);
+                      return n
+                  }
 
-            t(), s.deferstyle = function (t, n, e, r) {
-                g(function (e) {
-                    (e = f('LINK', n, r)).rel = 'stylesheet', e.href = t
-                }, e)
-            }, s.deferimg = e('IMG'), s.deferiframe = e('IFRAME'), g.all = t
-        }(this, document);
-    </script>
+                  t = E((r = '[type=deferjs]') + ':not(' + (i = '[async]') + ')'), E(r + i).forEach(function (e) {
+                      c(e, !0)
+                  }), t.forEach(function (e) {
+                      e.src && s.deferPreload(e.src)
+                  }), function e() {
+                      0 != t && (r = t.shift(), n = c(r), r.src ? n.onload = n.onerror = e : g(e, .1))
+                  }()
+              }, 4)
+          }
 
-    <script>deferscript('https://cdn.jsdelivr.net/npm/%40shinsenter/defer.js%401.1.7/dist/polyfill.min.js', 'polyfill-js', 1)</script>
-    <script>
-        function objValue(obj, is, value) { //Access 1 object bằng key
-            if (typeof is == 'string')
-                return objValue(obj, is.split('.'), value);
-            else if (is.length == 1 && value !== undefined)
-                return obj[is[0]] = value;
-            else if (is.length == 0)
-                return obj;
-            else if (typeof obj === "undefined")
-                return undefined
-            else
-                return objValue(obj[is[0]], is.slice(1), value);
-        }
+          t(), s.deferstyle = function (t, n, e, r) {
+              g(function (e) {
+                  (e = f('LINK', n, r)).rel = 'stylesheet', e.href = t
+              }, e)
+          }, s.deferimg = e('IMG'), s.deferiframe = e('IFRAME'), g.all = t
+      }(this, document);
+  </script>
 
-        function waitFor(objAcc, callback, timeout) {
-            if (typeof callback !== "function") {
-                return
-            }
-            timeout = timeout || 0
-            var startTime = new Date().getTime()
+  <script>deferscript('https://cdn.jsdelivr.net/npm/%40shinsenter/defer.js%401.1.7/dist/polyfill.min.js', 'polyfill-js', 1)</script>
+  <script>
+      function objValue(obj, is, value) { //Access 1 object bằng key
+          if (typeof is == 'string')
+              return objValue(obj, is.split('.'), value);
+          else if (is.length == 1 && value !== undefined)
+              return obj[is[0]] = value;
+          else if (is.length == 0)
+              return obj;
+          else if (typeof obj === "undefined")
+              return undefined
+          else
+              return objValue(obj[is[0]], is.slice(1), value);
+      }
 
-            function check() {
-                if (typeof objValue(window, objAcc) !== "undefined") {
-                    callback()
-                } else {
-                    if (timeout > 0 && new Date().getTime() - startTime > timeout) { //Vượt quá timeout
-                        console.error("wait for " + objAcc + " has timeout!")
-                    } else {
-                        setTimeout(check, 500)
-                    }
-                }
-            }
+      function waitFor(objAcc, callback, timeout) {
+          if (typeof callback !== "function") {
+              return
+          }
+          timeout = timeout || 0
+          var startTime = new Date().getTime()
 
-            check()
-        }
+          function check() {
+              if (typeof objValue(window, objAcc) !== "undefined") {
+                  callback()
+              } else {
+                  if (timeout > 0 && new Date().getTime() - startTime > timeout) { //Vượt quá timeout
+                      console.error("wait for " + objAcc + " has timeout!")
+                  } else {
+                      setTimeout(check, 500)
+                  }
+              }
+          }
 
-        function applyImageLazyLoad(scope) {
-            scope = scope || document
-            var lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
+          check()
+      }
 
-            if ("IntersectionObserver" in window) {
-                let ops = {
-                    rootMargin: "450px",
-                    threshold: 0.1
-                }
+      function applyImageLazyLoad(scope) {
+          scope = scope || document
+          var lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
 
-                let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
-                    entries.forEach(function (entry) {
-                        if (entry.isIntersecting) {
-                            let lazyImage = entry.target;
-                            lazyImage.src = lazyImage.dataset.src;
-                            if (!!lazyImage.dataset.srcset) {
-                                lazyImage.srcset = lazyImage.dataset.srcset;
-                            }
-                            lazyImage.classList.remove("lazy");
-                            lazyImageObserver.unobserve(lazyImage);
-                        }
-                    });
-                }, ops);
+          if ("IntersectionObserver" in window) {
+              let ops = {
+                  rootMargin: "450px",
+                  threshold: 0.1
+              }
 
-                lazyImages.forEach(function (lazyImage) {
-                    lazyImageObserver.observe(lazyImage);
-                });
+              let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+                  entries.forEach(function (entry) {
+                      if (entry.isIntersecting) {
+                          let lazyImage = entry.target;
+                          lazyImage.src = lazyImage.dataset.src;
+                          if (!!lazyImage.dataset.srcset) {
+                              lazyImage.srcset = lazyImage.dataset.srcset;
+                          }
+                          lazyImage.classList.remove("lazy");
+                          lazyImageObserver.unobserve(lazyImage);
+                      }
+                  });
+              }, ops);
 
-                //Lazy for background
-                var lazyBackgrounds = [].slice.call(scope.querySelectorAll(".lazy-background"));
-                let lazyBackgroundObserver = new IntersectionObserver(function (entries, observer) {
-                    entries.forEach(function (entry) {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add("visible");
-                            entry.target.classList.remove("lazy-background");
-                            lazyBackgroundObserver.unobserve(entry.target);
-                        }
-                    });
-                }, ops);
-                lazyBackgrounds.forEach(function (lazyBackground) {
-                    lazyBackgroundObserver.observe(lazyBackground);
-                });
-            } else { //Không support observer
-                let lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
-                let active = false;
+              lazyImages.forEach(function (lazyImage) {
+                  lazyImageObserver.observe(lazyImage);
+              });
 
-                const lazyLoad = function () {
-                    if (active === false) {
-                        active = true;
+              //Lazy for background
+              var lazyBackgrounds = [].slice.call(scope.querySelectorAll(".lazy-background"));
+              let lazyBackgroundObserver = new IntersectionObserver(function (entries, observer) {
+                  entries.forEach(function (entry) {
+                      if (entry.isIntersecting) {
+                          entry.target.classList.add("visible");
+                          entry.target.classList.remove("lazy-background");
+                          lazyBackgroundObserver.unobserve(entry.target);
+                      }
+                  });
+              }, ops);
+              lazyBackgrounds.forEach(function (lazyBackground) {
+                  lazyBackgroundObserver.observe(lazyBackground);
+              });
+          } else { //Không support observer
+              let lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
+              let active = false;
 
-                        setTimeout(function () {
-                            lazyImages.forEach(function (lazyImage) {
-                                if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
-                                    lazyImage.src = lazyImage.dataset.src;
-                                    lazyImage.srcset = lazyImage.dataset.srcset;
-                                    lazyImage.classList.remove("lazy");
+              const lazyLoad = function () {
+                  if (active === false) {
+                      active = true;
 
-                                    lazyImages = lazyImages.filter(function (image) {
-                                        return image !== lazyImage;
-                                    });
+                      setTimeout(function () {
+                          lazyImages.forEach(function (lazyImage) {
+                              if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                                  lazyImage.src = lazyImage.dataset.src;
+                                  lazyImage.srcset = lazyImage.dataset.srcset;
+                                  lazyImage.classList.remove("lazy");
 
-                                    if (lazyImages.length === 0) {
-                                        document.removeEventListener("scroll", lazyLoad);
-                                        window.removeEventListener("resize", lazyLoad);
-                                        window.removeEventListener("orientationchange", lazyLoad);
-                                    }
-                                }
-                            });
+                                  lazyImages = lazyImages.filter(function (image) {
+                                      return image !== lazyImage;
+                                  });
 
-                            active = false;
-                        }, 200);
-                    }
-                };
+                                  if (lazyImages.length === 0) {
+                                      document.removeEventListener("scroll", lazyLoad);
+                                      window.removeEventListener("resize", lazyLoad);
+                                      window.removeEventListener("orientationchange", lazyLoad);
+                                  }
+                              }
+                          });
 
-                document.addEventListener("scroll", lazyLoad);
-                window.addEventListener("resize", lazyLoad);
-                window.addEventListener("orientationchange", lazyLoad);
-            }
-        }
+                          active = false;
+                      }, 200);
+                  }
+              };
 
-        document.addEventListener("DOMContentLoaded", function () {
-            applyImageLazyLoad(document)
-        });
-    </script>
+              document.addEventListener("scroll", lazyLoad);
+              window.addEventListener("resize", lazyLoad);
+              window.addEventListener("orientationchange", lazyLoad);
+          }
+      }
 
-    <script>
-        window.hsConversationsSettings = {
-            loadImmediately: false // Delay the load of the chat widget
-        };
-    </script>
-    <script>
-        window.RFeedback = {
-            API: "https://thegioinhaphovietnam.com.vn/mapi",
-            email: "",
-            name: "",
-            phone: "",
-            ip: "10.244.0.0"
-        }
-    </script>
+      document.addEventListener("DOMContentLoaded", function () {
+          applyImageLazyLoad(document)
+      });
+  </script>
+
+  <script>
+      window.hsConversationsSettings = {
+          loadImmediately: false // Delay the load of the chat widget
+      };
+  </script>
+  <script>
+      window.RFeedback = {
+          API: "https://thegioinhaphovietnam.com.vn/mapi",
+          email: "",
+          name: "",
+          phone: "",
+          ip: "10.244.0.0"
+      }
+  </script>
 
 {% endblock %}

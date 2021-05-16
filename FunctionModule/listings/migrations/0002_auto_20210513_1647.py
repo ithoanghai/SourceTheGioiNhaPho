@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='listing',
             name='code',
-            field=models.CharField(help_text='Được điền tự động và duy nhất', max_length=40, unique=True, verbose_name='Mã BĐS'),
+            field=models.CharField(help_text='Được điền tự động và duy nhất', max_length=80, unique=True, verbose_name='Mã BĐS'),
         ),
         migrations.AlterField(
             model_name='listing',

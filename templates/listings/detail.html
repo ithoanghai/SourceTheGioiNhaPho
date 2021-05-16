@@ -3,1571 +3,1604 @@
 {% load static humanize i18n %}
 
 {% block head %}
-    <title> Thế giới Nhà Phố {% block title %}| Mua căn hộ tốt nhất {% endblock %}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="UTF-8"/>
-    <meta name="description"
-          content="Mua bán bất động sản, chung cư, căn hộ Hà Nội sở hữu vị trí vàng, đầy đủ tiện nghi, sang trọng, an ninh, không gian sống hiện đại. bất động sản, chung cư, căn hộ Hà Nội cập nhật hình ảnh thật, thông tin xác thực."/>
-    <meta name="keywords"
-          content="nha pho, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
-    <meta name="author" content="thegioinhaphovietnam.com.vn"/>
-    <link rel="canonical" href="search"/>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  {{ block.super }}
 
-    <meta property="fb:app_id" content=""/>
-    <meta property="og:url" content="mua.html"/>
-    <meta property="og:title" content="Mua Bán Nhà Đất Căn Hộ Tốt Nhất | Thế giới Nhà Phố"/>
-    <meta property="og:description"
-          content="Mua bán bất động sản, chung cư, căn hộ Hà Nội sở hữu vị trí vàng, đầy đủ tiện nghi, sang trọng, an ninh, không gian sống hiện đại. bất động sản, chung cư, căn hộ Hà Nội cập nhật hình ảnh thật, thông tin xác thực."/>
-    <meta property="og:image" content="{% static '/img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:url" content="{% static '/img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:width" content="600"/>
-    <meta property="og:image:height" content="320"/>
-    <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
-    <meta property="og:rich_attachment" content="true"/>
-    <meta property="og:type" content="article"/>
-    <meta property="hotline" content="0964399436"/>
-    <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
-    <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/popup-new.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/flexslider.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/listing-detail-page90ca.css' %}"/>
+  <link rel="canonical" href="search"/>
 
-    <link rel="stylesheet" href="{% static 'css/style01.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/style.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/mobile.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/temp90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/header-live.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/listing-detail-page90ca.css' %}"/>
-
-    <style>
-        [v-cloak] {
-            display: none !important;
-        }
-
-        /* Ẩn các element khi vue chưa load */
-        picture img {
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        /*hide tracking img*/
-        img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
-            display: none;
-        }
-
-        ._hj_feedback_container button { /* Fix lỗi hotjar */
-            text-align: center;
-        }
-    </style>
-
-    <style>
-        img.lazy, img.lazy-background {
-            filter: blur(15px);
-        }
-    </style>
-
-    <style>
-        .detail-content-news img:before, .thumb-duan img:before, .cover img:not([src]):before {
-            background-image: none !important;
-        }
-    </style>
-
-    <style>
-        .banner-app-tgnp {
-            position: relative;
-            display: none;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-            -ms-flex-flow: row nowrap;
-            flex-flow: row nowrap;
-            -webkit-box-pack: justify;
-            -ms-flex-pack: justify;
-            justify-content: space-between;
-            width: 100%;
-            padding: 10px 18px;
-            background-color: #30333a;
-            z-index: 100
-        }
-
-        @media (max-width: 768px) {
-            .banner-app-tgnp {
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex
-            }
-        }
-
-        .close-banner-app {
-            padding: 0 10px 0 0;
-            outline: 0;
-            background: 0 0;
-            border: 0;
-            font-size: 16px;
-            color: #fff;
-            font-weight: 400
-        }
-
-        .close-banner-app .zmdi {
-            font-size: 16px;
-            padding: 0
-        }
-
-        .btn-install {
-            position: relative;
-            display: inline-block;
-            min-width: -webkit-min-content;
-            min-width: -moz-min-content;
-            min-width: fit-content;
-            max-width: max-content;
-            max-width: max-content;
-            max-width: fit-content;
-            width: 100%;
-            padding: 8px 10px 7px;
-            border-radius: 2px;
-            font-size: 14px;
-            line-height: 1.5;
-            font-weight: 500;
-            text-align: center;
-            color: #fff;
-            cursor: pointer
-        }
-
-        .btn-install::after {
-            background-color: orange;
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 2px;
-            z-index: -1;
-            -webkit-animation: zoomin 1.2s ease-in infinite;
-            animation: zoomin 1.2s ease-in infinite;
-            -webkit-transition: all .3s ease-in-out;
-            transition: all .3s ease-in-out
-        }
-
-        .btn-install:focus, .btn-install:hover {
-            color: #fff
-        }
-
-        .banner-app-content {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center
-        }
-
-        .banner-app-content .cover {
-            width: 44px;
-            min-width: 44px;
-            height: 44px;
-            margin-right: 10px;
-            border-radius: 10px;
-            overflow: hidden
-        }
-
-        .banner-app-content .cover img {
-            width: 100%;
-            max-width: 100%;
-            height: 100%;
-            -o-object-fit: contain;
-            object-fit: contain
-        }
-
-        .banner-app-content .banner-app-info a {
-            font-size: 14px;
-            line-height: 1;
-            font-weight: 500;
-            color: #fff
-        }
-
-        .banner-app-content .banner-app-info p {
-            font-size: 12px;
-            line-height: 1.5;
-            font-weight: 400;
-            color: #fff
-        }
-
-        .banner-app-content .banner-app-info .rating-star {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center
-        }
-
-        .banner-app-content .banner-app-info .rating-star .zmdi {
-            font-size: 12px;
-            color: #838383;
-            cursor: pointer
-        }
-
-        @media (min-width: 1200px) {
-            .banner-app-content .banner-app-info .rating-star .zmdi:hover {
-                color: #f7ce27
-            }
-        }
-
-        .banner-app-content .banner-app-info .rating-star .zmdi.evaluated {
-            color: #f7ce27
-        }
-
-        @keyframes zoomin {
-            0% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-            50% {
-                -webkit-transform: scale(1.1);
-                transform: scale(1.1)
-            }
-            100% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-        }
-
-        @-webkit-keyframes zoomin {
-            0% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-            50% {
-                -webkit-transform: scale(1.1);
-                transform: scale(1.1)
-            }
-            100% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-        }
-    </style>
-
-    <style>
-        .info-sketch {
-            height: auto;
-            min-height: 190px;
-        }
-
-        @media screen and (max-width: 480px) {
-            .info-sketch {
-                padding-top: 20px;
-            }
-
-            .floorplan-property .content {
-                padding-bottom: 0;
-            }
-        }
-
-        .gallery-property div img {
-            object-fit: cover;
-            object-position: center;
-        }
-    </style>
-    <style>
-        .gmap-render.full-screen {
-            max-width: 100% !important;
-        }
-
-        ._map-bg {
-            background: url({% static 'images/single-property/map-detail.png' %}) center / cover no-repeat;
-            cursor: pointer;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-        }
-
-        /*Mặc định sẽ ẩn map render*/
-        .map-detail .map-wrapper {
-            display: none
-        }
-
-        /* Khi fullscreen thì sẽ hiện map render lên */
-        .map-detail.full-screen .map-wrapper {
-            display: block;
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Khi fullscreen thì ẩn cái ảnh map đi */
-        .map-detail.full-screen .img-map {
-            display: none
-        }
-
-        /* Mặc định sẽ ẩn nút fullscreen đi */
-        .map-wrapper .full-screen-act {
-            display: none
-        }
-
-        /* Và sẽ hiện fullscreen khi đang ở chế độ fullscreen */
-        .map-detail.full-screen .full-screen-act {
-            display: block
-        }
-    </style>
-
-    <style>
-        @media screen and (min-width: 481px) {
-            .post-share-btn-group {
-                position: fixed;
-                top: auto;
-                bottom: 50%;
-                margin-bottom: -90px;
-            }
-        }
-    </style>
 
 {% endblock %}
 
+{% block head_script %}
+  <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
+  <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
+  <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/popup-new.min90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/flexslider.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/listing-detail-page90ca.css' %}"/>
+
+  <link rel="stylesheet" href="{% static 'css/style01.min90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/style.min90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/mobile.min90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/temp90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/header-live.min90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/listing-detail-page90ca.css' %}"/>
+
+  <style>
+      [v-cloak] {
+          display: none !important;
+      }
+
+      /* Ẩn các element khi vue chưa load */
+      picture img {
+          display: inline-block;
+          vertical-align: middle;
+      }
+
+      /*hide tracking img*/
+      img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
+          display: none;
+      }
+
+      ._hj_feedback_container button { /* Fix lỗi hotjar */
+          text-align: center;
+      }
+  </style>
+
+  <style>
+      img.lazy, img.lazy-background {
+          filter: blur(15px);
+      }
+  </style>
+
+  <style>
+      .detail-content-news img:before, .thumb-duan img:before, .cover img:not([src]):before {
+          background-image: none !important;
+      }
+  </style>
+
+  <style>
+      .banner-app-tgnp {
+          position: relative;
+          display: none;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          -webkit-box-orient: horizontal;
+          -webkit-box-direction: normal;
+          -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+          -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+          justify-content: space-between;
+          width: 100%;
+          padding: 10px 18px;
+          background-color: #30333a;
+          z-index: 100
+      }
+
+      @media (max-width: 768px) {
+          .banner-app-tgnp {
+              display: -webkit-box;
+              display: -ms-flexbox;
+              display: flex
+          }
+      }
+
+      .close-banner-app {
+          padding: 0 10px 0 0;
+          outline: 0;
+          background: 0 0;
+          border: 0;
+          font-size: 16px;
+          color: #fff;
+          font-weight: 400
+      }
+
+      .close-banner-app .zmdi {
+          font-size: 16px;
+          padding: 0
+      }
+
+      .btn-install {
+          position: relative;
+          display: inline-block;
+          min-width: -webkit-min-content;
+          min-width: -moz-min-content;
+          min-width: fit-content;
+          max-width: max-content;
+          max-width: max-content;
+          max-width: fit-content;
+          width: 100%;
+          padding: 8px 10px 7px;
+          border-radius: 2px;
+          font-size: 14px;
+          line-height: 1.5;
+          font-weight: 500;
+          text-align: center;
+          color: #fff;
+          cursor: pointer
+      }
+
+      .btn-install::after {
+          background-color: orange;
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 2px;
+          z-index: -1;
+          -webkit-animation: zoomin 1.2s ease-in infinite;
+          animation: zoomin 1.2s ease-in infinite;
+          -webkit-transition: all .3s ease-in-out;
+          transition: all .3s ease-in-out
+      }
+
+      .btn-install:focus, .btn-install:hover {
+          color: #fff
+      }
+
+      .banner-app-content {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center
+      }
+
+      .banner-app-content .cover {
+          width: 44px;
+          min-width: 44px;
+          height: 44px;
+          margin-right: 10px;
+          border-radius: 10px;
+          overflow: hidden
+      }
+
+      .banner-app-content .cover img {
+          width: 100%;
+          max-width: 100%;
+          height: 100%;
+          -o-object-fit: contain;
+          object-fit: contain
+      }
+
+      .banner-app-content .banner-app-info a {
+          font-size: 14px;
+          line-height: 1;
+          font-weight: 500;
+          color: #fff
+      }
+
+      .banner-app-content .banner-app-info p {
+          font-size: 12px;
+          line-height: 1.5;
+          font-weight: 400;
+          color: #fff
+      }
+
+      .banner-app-content .banner-app-info .rating-star {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center
+      }
+
+      .banner-app-content .banner-app-info .rating-star .zmdi {
+          font-size: 12px;
+          color: #838383;
+          cursor: pointer
+      }
+
+      @media (min-width: 1200px) {
+          .banner-app-content .banner-app-info .rating-star .zmdi:hover {
+              color: #f7ce27
+          }
+      }
+
+      .banner-app-content .banner-app-info .rating-star .zmdi.evaluated {
+          color: #f7ce27
+      }
+
+      @keyframes zoomin {
+          0% {
+              -webkit-transform: scale(1);
+              transform: scale(1)
+          }
+          50% {
+              -webkit-transform: scale(1.1);
+              transform: scale(1.1)
+          }
+          100% {
+              -webkit-transform: scale(1);
+              transform: scale(1)
+          }
+      }
+
+      @-webkit-keyframes zoomin {
+          0% {
+              -webkit-transform: scale(1);
+              transform: scale(1)
+          }
+          50% {
+              -webkit-transform: scale(1.1);
+              transform: scale(1.1)
+          }
+          100% {
+              -webkit-transform: scale(1);
+              transform: scale(1)
+          }
+      }
+  </style>
+
+  <style>
+      .info-sketch {
+          height: auto;
+          min-height: 190px;
+      }
+
+      @media screen and (max-width: 480px) {
+          .info-sketch {
+              padding-top: 20px;
+          }
+
+          .floorplan-property .content {
+              padding-bottom: 0;
+          }
+      }
+
+      .gallery-property div img {
+          object-fit: cover;
+          object-position: center;
+      }
+  </style>
+  <style>
+      .gmap-render.full-screen {
+          max-width: 100% !important;
+      }
+
+      ._map-bg {
+          background: url({% static 'images/single-property/map-detail.png' %}) center / cover no-repeat;
+          cursor: pointer;
+          width: 100%;
+          height: 100%;
+          z-index: 2;
+      }
+
+      /*Mặc định sẽ ẩn map render*/
+      .map-detail .map-wrapper {
+          display: none
+      }
+
+      /* Khi fullscreen thì sẽ hiện map render lên */
+      .map-detail.full-screen .map-wrapper {
+          display: block;
+          position: relative;
+          width: 100%;
+          height: 100%;
+      }
+
+      /* Khi fullscreen thì ẩn cái ảnh map đi */
+      .map-detail.full-screen .img-map {
+          display: none
+      }
+
+      /* Mặc định sẽ ẩn nút fullscreen đi */
+      .map-wrapper .full-screen-act {
+          display: none
+      }
+
+      /* Và sẽ hiện fullscreen khi đang ở chế độ fullscreen */
+      .map-detail.full-screen .full-screen-act {
+          display: block
+      }
+  </style>
+
+  <style>
+      @media screen and (min-width: 481px) {
+          .post-share-btn-group {
+              position: fixed;
+              top: auto;
+              bottom: 50%;
+              margin-bottom: -90px;
+          }
+      }
+  </style>
+{% endblock %}
+
 {% block content %}
-    <!-- Search menu -->
-    {% include 'partials/_menuSearch.html' %}
+  <!-- Search menu -->
+  {% include 'partials/_menuSearch.html' %}
 
-    <input id="markerwithlabel" type="hidden" value="{% static 'js/markerwithlabel-0.0.1.min.js' %}">
+  <input id="markerwithlabel" type="hidden" value="{% static 'js/markerwithlabel-0.0.1.min.js' %}">
 
-    <div id="wrap">
+  <div id="wrap">
 
-        <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">
-            <div class="banner-app-content">
-                <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
-                    <i class="zmdi zmdi-close"></i>
-                </button>
-                <a href="javascript:void(0)" class="cover">
-                    <img src="{% static 'img/logo.svg' %}" alt="Thế giới Nhà Phố">
+    <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">
+      <div class="banner-app-content">
+        <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
+          <i class="zmdi zmdi-close"></i>
+        </button>
+        <a href="javascript:void(0)" class="cover">
+          <img src="{% static 'img/logo.svg' %}" alt="Thế giới Nhà Phố">
+        </a>
+        <div class="banner-app-info">
+          <a href="javascript:void(0)">TGNP</a>
+          <p>Mua bán nhà dễ dàng</p>
+          <div class="rating-star">
+            <i class="zmdi zmdi-star evaluated"></i>
+            <i class="zmdi zmdi-star evaluated"></i>
+            <i class="zmdi zmdi-star evaluated"></i>
+            <i class="zmdi zmdi-star evaluated"></i>
+            <i class="zmdi zmdi-star-half evaluated"></i>
+          </div>
+        </div>
+      </div>
+      <a href="javascript:void(0)" class="btn-install">Mở</a>
+    </div>
+
+    <input name="recent-view-property-id" type="hidden" value="{{ listing.id }}">
+    <input name="recent-view-service-type" type="hidden" value="{{ listing.transaction_type }}">
+    <div class="background-detail mpreviews">
+      <form name="info" class="hidden">
+        <input name="id" type="hidden" value="{{ listing.id }}">
+        <input name="source" type="hidden" value="tgnp">
+        <input name="rvid" type="hidden" value="{{ listing.code }}">
+        <input name="title" type="hidden" value="{{ listing.title }}">
+        <input name="price" type="hidden" value="{{ listing.price }}">
+        <input name="thumbnail" type="hidden"
+               value="{% with listing.main_photo as photo %}{{ photo.url }}{% endwith %}">
+        <input name="price-format" type="hidden" value="{{ listing.price }} tỷ">
+        <input name="num-bed-room" type="hidden" value="{{ listing.bedrooms }}">
+        <input name="num-bath-room" type="hidden" value="{{ listing.bathrooms }}">
+        <input name="sale-status" type="hidden" value="{{ listing.is_published }}">
+        <input name="agent-avatar" type="hidden" value="{% static 'img/logo.svg' %}">
+        <input name="agent-id" type="hidden" value="id-{{ listing.id }}">
+        <input name="agent-name" type="hidden" value="thegioinhaphovietnam.com.vn">
+        <input name="agent-encoded" type="hidden" value="">
+        <input name="agent-job-title" type="hidden" value="Hỗ trợ 24/7">
+        <input name="agent-phone" type="hidden" value="0916 286 256">
+        <input name="contact" type="hidden" value="0916 286 256">
+        <input name="area" type="hidden" value="{{ listing.area }}">
+        <input name="service-type" type="hidden" value="">
+        <input name="property-type" type="hidden" value="">
+        <input name="direction" type="hidden" value="{{ listing.direction }}">
+        <input name="street" type="hidden" value="{{ listing.street }}">
+        <input name="ward" type="hidden" value="{{ listing.ward }}">
+        <input name="district" type="hidden" value="{{ listing.district }}">
+        <input name="city" type="hidden" value="{{ listing.state }}">
+        <input name="neighborhood" type="hidden" value="">
+        <input name="lat" type="hidden" value="">
+        <input name="lon" type="hidden" value="">
+        <input name="youtube" type="hidden" value="https://youtu.be/_dfQMUgGmjc"> {% comment %}Cần thay {% endcomment %}
+        <input name="matterport" type="hidden"
+               value="https://my.matterport.com/show/?m=yYDQY6WGVXi"> {% comment %}Cần thay{% endcomment %}
+        <input name="favorited_type" type="hidden" value="sale_property">
+        <input name="streetviewLat" type="hidden" value="">
+        <input name="streetviewLon" type="hidden" value="">
+      </form>
+      <div class="mphotos height-100-percent">
+        <div id="slider" class="flexslider">
+          <div class="group-share">
+            <a href="#" style="opacity: 0.3" data-id="{{ listing.id }}" data-action="favorite"
+               data-alias="{{ listing.title }}"
+               data-type="sale_property" class="" data-favorited="false">
+              <i class="zmdi zmdi-favorite-outline"></i>
+              <span>Yêu thích</span>
+            </a>
+          </div>
+          <div class="slider-buttons">
+            <a href="#"><span class="but-nextdetail flex-next"></span></a>
+            <a href="#"><span class="but-predetail flex-prev flex-disabled" tabindex="-1"></span></a>
+          </div>
+          <div class="flex-viewport">
+            <ul class="slides">
+              {% for photo in listing.photos %}
+                <li>
+                  <a href="#" pos="0" class="cover">
+                    <img class="lazy"
+                         data-src="{{ photo.url }}"
+                         alt="{{ listing.title }}"
+                         title="{{ listing.title }}"
+                         draggable="false">
+                  </a>
+                </li>
+              {% empty %}
+                <li>
+                  <img class="lazy"
+                       data-src="{% static 'img/default.png' %}"
+                       alt="{{ listing.title }}"
+                       title="{{ listing.title }}"
+                       draggable="false">
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="mvideo hidden height-100-percent">
+        <iframe id="preview-video" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="mview3d preview3d hidden height-100-percent">
+        <a href="#" class="full-screen-act" title="Fullscreen"></a>
+        <iframe frameborder="0" allow-fullscreen=""></iframe>
+      </div>
+      <div class="mstreetview hidden height-100-percent">
+        <div id="preview-streetview"></div>
+      </div>
+      <div class="fullscreen-slide preview">
+        <a href="#" class="full-screen-act close" title="Fullscreen"></a>
+        <div id="slider8" class="flexslider fullscreen">
+          <div class="slider-buttons">
+            <a href="#" title="next"><span class="but-nextdetail flex-next"></span> </a>
+            <a href="#" title="prev"><span class="but-predetail flex-prev"></span> </a>
+          </div>
+          <ul class="slides">
+            {% for photo in listing.photos %}
+              <li>
+                <a href="#" class="cover"
+                   title="{{ listing.title }}">
+                  <img src="{{ photo.url }}"
+                       pos="0"
+                       alt="{{ listing.title }}"
+                       title="{{ listing.title }}">
                 </a>
-                <div class="banner-app-info">
-                    <a href="javascript:void(0)">TGNP</a>
-                    <p>Mua bán nhà dễ dàng</p>
-                    <div class="rating-star">
-                        <i class="zmdi zmdi-star evaluated"></i>
-                        <i class="zmdi zmdi-star evaluated"></i>
-                        <i class="zmdi zmdi-star evaluated"></i>
-                        <i class="zmdi zmdi-star evaluated"></i>
-                        <i class="zmdi zmdi-star-half evaluated"></i>
-                    </div>
-                </div>
-            </div>
-            <a href="javascript:void(0)" class="btn-install">Mở</a>
-        </div>
+              </li>
+            {% empty %}
+              <li>
+                <img src="{% static 'img/default.png' %}"
+                     pos="0"
+                     alt="{{ listing.title }}"
+                     title="{{ listing.title }}">
+              </li>
+            {% endfor %}
 
-        <input name="recent-view-property-id" type="hidden" value="{{ listing.id }}">
-        <input name="recent-view-service-type" type="hidden" value="{{ listing.transaction_type }}">
-        <div class="background-detail mpreviews">
-            <form name="info" class="hidden">
-                <input name="id" type="hidden" value="{{ listing.id }}">
-                <input name="source" type="hidden" value="tgnp">
-                <input name="rvid" type="hidden" value="{{ listing.code }}">
-                <input name="title" type="hidden" value="{{ listing.title }}">
-                <input name="price" type="hidden" value="{{ listing.price }}">
-                <input name="thumbnail" type="hidden" value="{% with listing.main_photo as photo %}{{ photo.url }}{% endwith %}">
-                 <input name="price-format" type="hidden" value="{{ listing.price }} tỷ">
-                <input name="num-bed-room" type="hidden" value="{{ listing.bedrooms }}">
-                <input name="num-bath-room" type="hidden" value="{{ listing.bathrooms }}">
-                <input name="sale-status" type="hidden" value="{{ listing.is_published }}">
-                <input name="agent-avatar" type="hidden" value="{% static 'img/logo.svg' %}">
-                <input name="agent-id" type="hidden" value="id-{{ listing.id }}">
-                <input name="agent-name" type="hidden" value="thegioinhaphovietnam.com.vn">
-                <input name="agent-encoded" type="hidden" value="">
-                <input name="agent-job-title" type="hidden" value="Hỗ trợ 24/7">
-                <input name="agent-phone" type="hidden" value="0916 286 256">
-                <input name="contact" type="hidden" value="0916 286 256">
-                <input name="area" type="hidden" value="{{ listing.area }}">
-                <input name="service-type" type="hidden" value="">
-                <input name="property-type" type="hidden" value="">
-                <input name="direction" type="hidden" value="{{ listing.direction }}">
-                <input name="street" type="hidden" value="{{ listing.street }}">
-                <input name="ward" type="hidden" value="{{ listing.ward }}">
-                <input name="district" type="hidden" value="{{ listing.district }}">
-                <input name="city" type="hidden" value="{{ listing.state }}">
-                <input name="neighborhood" type="hidden" value="">
-                <input name="lat" type="hidden" value="">
-                <input name="lon" type="hidden" value="">
-                <input name="youtube" type="hidden" value="https://youtu.be/_dfQMUgGmjc"> {% comment %}Cần thay {% endcomment %}
-                <input name="matterport" type="hidden" value="https://my.matterport.com/show/?m=yYDQY6WGVXi"> {% comment %}Cần thay{% endcomment %}
-                <input name="favorited_type" type="hidden" value="sale_property">
-                <input name="streetviewLat" type="hidden" value="">
-                <input name="streetviewLon" type="hidden" value="">
-            </form>
-            <div class="mphotos height-100-percent">
-                <div id="slider" class="flexslider">
-                    <div class="group-share">
-                        <a href="#" style="opacity: 0.3" data-id="{{ listing.id }}" data-action="favorite"
-                           data-alias="{{ listing.title }}"
-                           data-type="sale_property" class="" data-favorited="false">
-                            <i class="zmdi zmdi-favorite-outline"></i>
-                            <span>Yêu thích</span>
-                        </a>
-                    </div>
-                    <div class="slider-buttons">
-                        <a href="#"><span class="but-nextdetail flex-next"></span></a>
-                        <a href="#"><span class="but-predetail flex-prev flex-disabled" tabindex="-1"></span></a>
-                    </div>
-                    <div class="flex-viewport">
-                        <ul class="slides">
-                            {% for photo in listing.photos %}
-                            <li>
-                                <a href="#" pos="0" class="cover">
-                                    <img class="lazy"
-                                         data-src="{{ photo.url }}"
-                                         alt="{{ listing.title }}"
-                                         title="{{ listing.title }}"
-                                         draggable="false">
-                                </a>
-                            </li>
-                            {% endfor %}
-                       </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="mvideo hidden height-100-percent">
-                <iframe id="preview-video" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="mview3d preview3d hidden height-100-percent">
-                <a href="#" class="full-screen-act" title="Fullscreen"></a>
-                <iframe frameborder="0" allow-fullscreen=""></iframe>
-            </div>
-            <div class="mstreetview hidden height-100-percent">
-                <div id="preview-streetview"></div>
-            </div>
-            <div class="fullscreen-slide preview">
-                <a href="#" class="full-screen-act close" title="Fullscreen"></a>
-                <div id="slider8" class="flexslider fullscreen">
-                    <div class="slider-buttons">
-                        <a href="#" title="next"><span class="but-nextdetail flex-next"></span> </a>
-                        <a href="#" title="prev"><span class="but-predetail flex-prev"></span> </a>
-                    </div>
-                    <ul class="slides">
-                        {% for photo in listing.photos %}
-                        <li>
-                            <a href="#" class="cover"
-                               title="{{ listing.title }}">
-                                <img src="{{ photo.url }}"
-                                     pos="0"
-                                     alt="{{ listing.title }}"
-                                     title="{{ listing.title }}">
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div id="carousel1" class="flexslider img-list-slide">
-                    <ul class="slides slideimg">
-                        {% for photo in listing.photos %}
-                        <li>
-                            <a class="img cover" href="#" pos="0"
-                               title="{{ listing.title }}">
-                                <img class="lazy image-normalized"
-                                     data-src="{{ photo.url }}"
-                                     alt="{{ listing.title }}"
-                                     title="{{ listing.title }}">
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    <div class="slider-buttons2">
-                        <a class="font-icon icon-presmall flex-prev" href="#" title="prev"></a>
-                        <a class="font-icon icon-nextsmall flex-next" href="#" title="next"></a>
-                    </div>
-                </div>
-            </div>
-
+          </ul>
         </div>
-        <div class="changeimg-box">
-            <div class="fix-widthcell">
-                <div id="carousel" class="flexslider">
-                    <div class="slider-buttons2">
-                        <a class="font-icon icon-presmall flex-prev flex-disabled" href="#" tabindex="-1"
-                           title="prev"></a>
-                        <a class="font-icon icon-nextsmall flex-next" href="#" title="next"></a>
-                    </div>
-                    <div class="flex-viewport">
-                        <ul class="slides slideimg">
-                        {{ listing.photos }}
-                            {% for photo in listing.photos %}
-                            <li class="flex-active-slide">
-                                <a class="img cover" href="javascript:void(0)"
-                                   title="{{ listing.title }}">
-                                    <img class="lazy image-normalized"
-                                         data-src="{{ photo.url }}"
-                                         title="{{ listing.title }}"
-                                         alt="{{ listing.title }}"
-                                         draggable="false">
-                                </a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-                <ul class="naviicon">
-                    <li class="active ">
-                        <a href="#photos" title="Photo" no-prevent>
-                            <span class="font-icon photo"></span> Photo
-                        </a>
-                    </li>
-                    <li class="{% if not listing.videos %}disable{% endif %}">
-                        <a href="#video" title="Video" no-prevent>
-                            <span class="font-icon video"></span> Video
-                        </a>
-                    </li>
-{#                    <li class="">#}
-{#                        <a href="#view3d" title="3D view" no-prevent>#}
-{#                            <span class="font-icon view3d"></span> 3D view#}
-{#                        </a>#}
-{#                    </li>#}
-{#                    <li class="">#}
-{#                        <a href="#streetview" title="Street view" no-prevent>#}
-{#                            <span class="font-icon streetview"></span> Street view#}
-{#                        </a>#}
-{#                    </li>#}
+        <div id="carousel1" class="flexslider img-list-slide">
+          <ul class="slides slideimg">
+            {% for photo in listing.photos %}
+              <li>
+                <a class="img cover" href="#" pos="0"
+                   title="{{ listing.title }}">
+                  <img class="lazy image-normalized"
+                       data-src="{{ photo.url }}"
+                       alt="{{ listing.title }}"
+                       title="{{ listing.title }}">
+                </a>
+              </li>
+            {% empty %}
+              <li>
+                <img class="lazy image-normalized" src="{% static 'img/default.png' %}"
+                     data-src="{% static 'img/default.png' %}"
+                     alt="{{ listing.title }}"
+                     title="{{ listing.title }}">
+              </li>
+            {% endfor %}
+          </ul>
+          <div class="slider-buttons2">
+            <a class="font-icon icon-presmall flex-prev" href="#" title="prev"></a>
+            <a class="font-icon icon-nextsmall flex-next" href="#" title="next"></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="changeimg-box">
+      <div class="fix-widthcell">
+        <div id="carousel" class="flexslider">
+          <div class="slider-buttons2">
+            <a class="font-icon icon-presmall flex-prev flex-disabled" href="#" tabindex="-1"
+               title="prev"></a>
+            <a class="font-icon icon-nextsmall flex-next" href="#" title="next"></a>
+          </div>
+          <div class="flex-viewport">
+            <ul class="slides slideimg">
+              {% for photo in listing.photos %}
+                <li class="flex-active-slide">
+                  <a class="img cover" href="javascript:void(0)"
+                     title="{{ listing.title }}">
+                    <img class="lazy image-normalized"
+                         data-src="{{ photo.url }}"
+                         title="{{ listing.title }}"
+                         alt="{{ listing.title }}"
+                         draggable="false">
+                  </a>
+                </li>
+              {% empty %}
+                <li class="flex-active-slide">
+                  <img class="lazy image-normalized"
+                       data-src="{% static 'img/default.png' %}"
+                       title="{{ listing.title }}"
+                       alt="{{ listing.title }}"
+                       draggable="false">
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <ul class="naviicon">
+          <li class="active ">
+            <a href="#photos" title="Photo" no-prevent>
+              <span class="font-icon photo"></span> Photo
+            </a>
+          </li>
+          <li class="{% if not listing.videos %}disable{% endif %}">
+            <a href="#video" title="Video" no-prevent>
+              <span class="font-icon video"></span> Video
+            </a>
+          </li>
+          {#                    <li class="">#}
+          {#                        <a href="#view3d" title="3D view" no-prevent>#}
+          {#                            <span class="font-icon view3d"></span> 3D view#}
+          {#                        </a>#}
+          {#                    </li>#}
+          {#                    <li class="">#}
+          {#                        <a href="#streetview" title="Street view" no-prevent>#}
+          {#                            <span class="font-icon streetview"></span> Street view#}
+          {#                        </a>#}
+          {#                    </li>#}
+        </ul>
+      </div>
+    </div>
+    <section class="page-listing-detail">
+      <div class="width1140">
+        <div class="left-content">
+          <div class="content-detail-house">
+            <header class="detail-house">
+              <div class="address">
+                {% if listing.urban_area %}
+                  <h2><a href="{% url 'search' %}?urban_area={{ listing.urban_area }}"
+                         title="Khu đô thị/ khu dân cư">{{ listing.urban_area }}</a></h2>
+                {% endif %}
+                <h2><a href="{% url 'search' %}?street={{ listing.street }}"
+                       title="Đường">{{ listing.street }}</a></h2>
+                {% if listing.ward %}
+                  <h2><a href="{% url 'search' %}?ward={{ listing.ward }}"
+                         title="Phường/Xã">{{ listing.ward }}</a></h2>
+                {% endif %}
+                <h2><a href="{% url 'search' %}?district={{ listing.district }}"
+                       title="Quận/Huyện">{{ listing.district }}</a></h2>
+                <h2><a href="{% url 'search' %}?state={{ listing.state }}"
+                       title="Tỉnh/Thành phố">{{ listing.state }}</a></h2>
+
+              </div>
+              <h2>{{ listing.title }}</h2>
+              <div class="detail-row">
+                <ul class="detailroom">
+                  <li title="Diện tích"><span
+                    class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} </li>
+                  <li title="Giá"><strong>$</strong> {{ listing.price }} tỷ</li>
+                  {% if listing.sale_price %}
+                    <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price }} tỷ </strong></li> {% endif %}
                 </ul>
+                <div class="listing-id">
+                  <span>Mã nhà đất: </span>
+                  <span style="padding-left: 0px">{{ listing.code }}</span>
+                </div>
+              </div>
+            </header>
+          </div>
+          <div class="heading-02">Tổng quan</div>
+          <div class="content collapsed pdb-0" data-height="150">
+            <p class="summary">{{ listing.description }}</p>
+          </div>
+          <p class="more">
+            <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
+               less="Thu gọn">Xem thêm</a>
+          </p>
+          <div class="heading-02">Thông tin cơ bản</div>
+          <div class="content">
+            <ul class="detail-more">
+              <li>
+                <p class="left">Loại hình</p>
+                <p class="right"><a href="{% url 'search' %}?house_type={{ listing.house_type }}"
+                                    target="_blank">
+                  {% if listing.house_type == 'town_house' %}{% translate 'Nhà Phố' %}
+                  {% elif listing.registration_type == 'street_house' %} {% translate 'Nhà mặt phố' %}
+                  {% elif listing.registration_type == 'shop_house' %} {% translate 'Cửa hàng' %}
+                  {% elif listing.registration_type == 'building' %} {% translate 'Toà nhà' %}
+                  {% elif listing.registration_type == 'apartment' %} {% translate 'Căn hộ CC' %}
+                  {% elif listing.registration_type == 'villa' %} {% translate 'Biệt thự' %}
+                  {% elif listing.registration_type == 'office' %} {% translate 'Văn phòng' %}
+                  {% else %} {% translate 'Đất' %}  {% endif %}
+                </a></p>
+              </li>
+              <li>
+                <p class="left">Số tầng</p>
+                <p class="right">{% if listing.floors %}{{ listing.floors }}{% else %} 0 {% endif %}</p>
+              </li>
+              <li>
+                <p class="left">Số phòng ngủ</p>
+                <p class="right">{{ listing.bedrooms }}</p>
+              </li>
+              <li>
+                <p class="left">Số phòng tắm</p>
+                <p class="right">
+                  {% if listing.bathrooms %}{{ listing.bathrooms }}{% else %} 0 {% endif %}</p>
+              </li>
+              <li>
+                <p class="left">Diện tích</p>
+                <p class="right">{{ listing.area }} {{ listing.area_unit }}</p>
+              </li>
+              <li>
+                <p class="left">Diện tích khuân viên</p>
+                <p class="right">{{ listing.lot_size }}</p>
+              </li>
+              <li>
+                <p class="left">Loại chứng nhận</p>
+                <p class="right"><a
+                  href="{% url 'search' %}?registration_type={{ listing.registration_type }}"
+                  target="_blank">
+                  {% if listing.registration_type == 'red_book' %}{% translate 'Sổ đỏ' %}
+                  {% elif listing.registration_type == 'pink_book' %} {% translate 'Sổ hồng' %}
+                  {% else %} {% translate 'Chưa làm sổ' %}  {% endif %}</a></p>
+              </li>
+              <li>
+                <p class="left">Giá bán</p>
+                <p class="right">{{ listing.price }} tỷ</p>
+              </li>
+              {% if listing.sale_price %}
+                <li>
+                  <p class="left">Bán nhanh</p>
+                  <p class="right">{{ listing.sale_price }} tỷ</p>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+          <div class="form-real-estate visible-sm">
+            <div class="heading-02">Liên hệ tư vấn</div>
+            <div class="form-real-estate__row">
+              <div class="col-left">
+                <div class="cover__isa">
+                  <img src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
+                </div>
+                <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
+              </div>
+              <a style="opacity: 0.3" href="javascript:void(0)"
+                 class="btn-contact-me btn-primary btn-black btn-form-real-estate">Yêu cầu liên hệ lại</a>
             </div>
+          </div>
+          <div id="booking-form-sm-wrapper"></div>
+
+          <div class="heading-02">Tiện ích</div>
+          <div id="details-amenities" class="content collapsed">
+            <ul class="detail-more">
+              <li><p class="left">Ban công</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Phòng cho giúp việc</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Sân vườn</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Phòng giải trí</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Chỗ đậu xe hơi</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Hồ bơi riêng</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Quầy minibar</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Tầng hầm</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Góc làm việc</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Nhà kho</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Nuôi thú cưng</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Gym</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+
+
+            </ul>
+          </div>
+          <p class="more">
+            <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
+               less="Thu gọn">Xem thêm</a>
+          </p>
+          <p class="more">
+            <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
+               less="Thu gọn">Xem thêm</a>
+          </p>
+
+          <div class="heading-02">Thiết bị, dịch vụ</div>
+          <div id="details-furniture" class="content collapsed">
+            <ul class="detail-more">
+              <li><p class="left">TV</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Máy hút mùi</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Cảm biến cháy</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Tủ lạnh</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Bếp ga, bếp từ</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Máy giặt</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Máy sấy</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Dàn phơi đồ thông minh</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Máy lạnh</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Máy nước nóng</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Khóa cửa thẻ từ</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Khóa cửa mật khẩu</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Khóa cửa vân tay</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Thiết bị âm thanh</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Smart Home</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Lò nướng</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Lò vi sóng</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Camera an ninh</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Internet</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+              <li><p class="left">Truyền hình cáp</p>
+                <p class="right zmdi zmdi-close"></p>
+              </li>
+            </ul>
+          </div>
+          <p class="more">
+            <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
+               less="Thu gọn">Xem thêm</a>
+          </p>
+
+          <div class="heading-02">Ưu điểm ngôi nhà</div>
+          <div class="content">
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Tag</p>
+              </div>
+              <div class="advandate-content">
+                <div class="tag-news pd-0">
+                  <span>{{ listing.house_type }} {{ listing.district }}</span>
+                  <span>{{ listing.house_type }} {{ listing.floors }} tầng</span>
+                  <span>{{ listing.house_type }} {{ listing.bedrooms }} phòng ngủ</span>
+                </div>
+              </div>
+            </div>
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Tình hình nội thất</p>
+              </div>
+              <div class="advandate-content">Nội thất cơ bản</div>
+            </div>
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Mô tả vị trí</p>
+              </div>
+              <div class="advandate-content">{{ listing.description }} Vị trí đất đắc địa, gần chợ,
+                thuộc khu dân cư hiện hữu, dân trí cao, đường dân sinh. Đất còn nằm gần trung tâm.
+              </div>
+            </div>
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Cộng đồng dân cư</p>
+              </div>
+              <div class="advandate-content">Cộng đồng dân cư văn minh, an ninh, thân thiện</div>
+            </div>
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Về giáo dục</p>
+              </div>
+              <div class="advandate-content">Gần trường mầm non, tiểu học, THCS,...
+              </div>
+            </div>
+          </div>
+          <div class="heading-02">Hình ảnh</div>
+          <div class="gallery-property collapsed" data-height="900">
+            {% for photo in listing.photos %}
+              <div class="cover">
+                <a href="#" title="{{ listing.title }}">
+                  <img class="lazy"
+                       data-src="{{ photo.url }}"
+                       alt="{{ listing.title }}"
+                       title="{{ listing.title }}">
+                  <span>Hình sản phẩm</span>
+                </a>
+              </div>
+            {% endfor %}
+            <div class="last-div"></div>
+          </div>
+          <p class="view-more-gray more">
+            <a href="#" title="Xem thêm / thu gọn" style="text-underline: none" class="collapse pdt-0"
+               is-more="false" more="Xem thêm" less="Thu gọn">Xem tất cả</a>
+          </p>
+          <div class="heading-02">Tiện ích khu vực</div>
+          <section class="mgt-15 map-detail gmap-render">
+            <div class="_map-bg openBtn img-map"
+                 style="background-image: url(https://maps.googleapis.com/maps/api/staticmap?center=21.02678541550063,105.854106460572&zoom=15&size=1140x640&maptype=roadmap&markers=color:red%7C21.02678541550063,105.854106460572&key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc)">
+              <div class="tooltip-map">
+                <a>Nhấn vào để xem chi tiết</a>
+              </div>
+              <div class="map--address">
+                <div class="address-property">
+                  <div class="left-70"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>
+                    <strong>{{ listing.title }}</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="map-wrapper">
+              <a href="" class="full-screen-act" title="Fullscreen"></a>
+              <div id="render-map"></div>
+              <div class="cover-nearby">
+                <div class="nearby">
+                  <div class="parent-content">
+                    <form name="search-nearby">
+                      <input type="text" id="nearby-search" class="" autocomplete="on"
+                             spellcheck="false" dir="auto"
+                             placeholder="Tìm kiếm địa điểm gần đây">
+                    </form>
+                    <div class="title">
+                      <span>Bản đồ</span>
+                      <div class="list-icon traffic-type">
+                      </div>
+                    </div>
+                    <ul class="content directions pdb-0">
+                    </ul>
+                    <div class="title">Địa điểm gần nhất</div>
+                    <ul class="type checkbox nearby-places">
+                    </ul>
+                  </div>
+                </div>
+                <div class="icon-left-nearby ">
+                  <a class="location" href="#" title="Vị trí của BĐS"></a>
+                  <a class="icon-slide" href="#" title="Mở rộng / thu gọn"></a>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-        <section class="page-listing-detail">
-            <div class="width1140">
-                <div class="left-content">
-                    <div class="content-detail-house">
-                        <header class="detail-house">
-                            <div class="address">
-                              {% if listing.urban_area %}
-                                <h2><a href="{% url 'search' %}?urban_area={{ listing.urban_area }}"
-                                       title="Khu đô thị/ khu dân cư">{{ listing.urban_area }}</a></h2>
-                              {% endif %}
-                                <h2><a href="{% url 'search' %}?street={{ listing.street }}"
-                                       title="Đường">{{ listing.street }}</a></h2>
-                            {% if listing.ward %}
-                                <h2><a href="{% url 'search' %}?ward={{ listing.ward }}"
-                                       title="Phường/Xã">{{ listing.ward }}</a></h2>
-                            {% endif %}
-                                <h2><a href="{% url 'search' %}?district={{ listing.district }}"
-                                       title="Quận/Huyện">{{ listing.district }}</a></h2>
-                                <h2><a href="{% url 'search' %}?state={{ listing.state }}"
-                                       title="Tỉnh/Thành phố">{{ listing.state }}</a></h2>
-
-                            </div>
-                            <h2>{{ listing.title }}</h2>
-                            <div class="detail-row">
-                                <ul class="detailroom">
-                                    <li title="Diện tích"><span
-                                            class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} </li>
-                                    <li title="Giá"><strong>$</strong> {{ listing.price }} tỷ</li>
-                                    {% if listing.sale_price %} <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price }} tỷ </strong></li> {% endif %}
-                                </ul>
-                                <div class="listing-id">
-                                  <span>Mã nhà đất: </span>
-                                  <span style="padding-left: 0px">{{ listing.code }}</span>
-                                </div>
-                            </div>
-                        </header>
-                    </div>
-                    <div class="heading-02">Tổng quan</div>
-                    <div class="content collapsed pdb-0" data-height="150">
-                        <p class="summary">{{ listing.description }}</p>
-                    </div>
-                    <p class="more">
-                        <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
-                           less="Thu gọn">Xem thêm</a>
-                    </p>
-                    <div class="heading-02">Thông tin cơ bản</div>
-                    <div class="content">
-                        <ul class="detail-more">
-                            <li>
-                                <p class="left">Loại hình</p>
-                                <p class="right"><a href="{% url 'search' %}?house_type={{ listing.house_type }}"
-                                                    target="_blank">
-                                    {% if listing.house_type == 'town_house' %}{% translate 'Nhà Phố' %}
-                                    {% elif listing.registration_type == 'street_house' %} {% translate 'Nhà mặt phố' %}
-                                    {% elif listing.registration_type == 'shop_house' %} {% translate 'Cửa hàng' %}
-                                    {% elif listing.registration_type == 'building' %} {% translate 'Toà nhà' %}
-                                    {% elif listing.registration_type == 'apartment' %} {% translate 'Căn hộ CC' %}
-                                    {% elif listing.registration_type == 'villa' %} {% translate 'Biệt thự' %}
-                                    {% elif listing.registration_type == 'office' %} {% translate 'Văn phòng' %}
-                                    {% else %} {% translate 'Đất' %}  {% endif %}
-                                </a></p>
-                            </li>
-                            <li>
-                                <p class="left">Số tầng</p>
-                                <p class="right">{% if listing.floors %}{{ listing.floors }}{% else %} 0 {% endif %}</p>
-                            </li>
-                            <li>
-                                <p class="left">Số phòng ngủ</p>
-                                <p class="right">{{ listing.bedrooms }}</p>
-                            </li>
-                            <li>
-                                <p class="left">Số phòng tắm</p>
-                                <p class="right">
-                                    {% if listing.bathrooms %}{{ listing.bathrooms }}{% else %} 0 {% endif %}</p>
-                            </li>
-                            <li>
-                                <p class="left">Diện tích</p>
-                                <p class="right">{{ listing.area }} {{ listing.area_unit }}</p>
-                            </li>
-                            <li>
-                                <p class="left">Diện tích khuân viên</p>
-                                <p class="right">{{ listing.lot_size }}</p>
-                            </li>
-                            <li>
-                                <p class="left">Loại chứng nhận</p>
-                                <p class="right"><a
-                                        href="{% url 'search' %}?registration_type={{ listing.registration_type }}"
-                                        target="_blank">
-                                    {% if listing.registration_type == 'red_book' %}{% translate 'Sổ đỏ' %}
-                                    {% elif listing.registration_type == 'pink_book' %} {% translate 'Sổ hồng' %}
-                                    {% else %} {% translate 'Chưa làm sổ' %}  {% endif %}</a></p>
-                            </li>
-                            <li>
-                                <p class="left">Giá bán</p>
-                                <p class="right">{{ listing.price }} tỷ</p>
-                            </li>
-                             {% if listing.sale_price %}<li>
-                                    <p class="left">Bán nhanh</p>
-                                    <p class="right">{{ listing.sale_price }} tỷ</p>
-                                </li>
-                             {% endif %}
-                        </ul>
-                    </div>
-                    <div class="form-real-estate visible-sm">
-                        <div class="heading-02">Liên hệ tư vấn</div>
-                        <div class="form-real-estate__row">
-                            <div class="col-left">
-                                <div class="cover__isa">
-                                    <img src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
-                                </div>
-                                <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
-                            </div>
-                            <a style="opacity: 0.3" href="javascript:void(0)"
-                               class="btn-contact-me btn-primary btn-black btn-form-real-estate">Yêu cầu liên hệ lại</a>
-                        </div>
-                    </div>
-                    <div id="booking-form-sm-wrapper"></div>
-
-                    <div class="heading-02">Tiện ích</div>
-                    <div id="details-amenities" class="content collapsed">
-                        <ul class="detail-more">
-                            <li><p class="left">Ban công</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Phòng cho giúp việc</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Sân vườn</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Phòng giải trí</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Chỗ đậu xe hơi</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Hồ bơi riêng</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Quầy minibar</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Tầng hầm</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Góc làm việc</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Nhà kho</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Nuôi thú cưng</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Gym</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-
-
-                        </ul>
-                    </div>
-                    <p class="more">
-                        <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
-                           less="Thu gọn">Xem thêm</a>
-                    </p>
-                    <p class="more">
-                        <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
-                           less="Thu gọn">Xem thêm</a>
-                    </p>
-
-                    <div class="heading-02">Thiết bị, dịch vụ</div>
-                    <div id="details-furniture" class="content collapsed">
-                        <ul class="detail-more">
-                            <li><p class="left">TV</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Máy hút mùi</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Cảm biến cháy</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Tủ lạnh</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Bếp ga, bếp từ</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Máy giặt</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Máy sấy</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Dàn phơi đồ thông minh</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Máy lạnh</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Máy nước nóng</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Khóa cửa thẻ từ</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Khóa cửa mật khẩu</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Khóa cửa vân tay</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Thiết bị âm thanh</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Smart Home</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Lò nướng</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Lò vi sóng</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Camera an ninh</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Internet</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                            <li><p class="left">Truyền hình cáp</p>
-                                <p class="right zmdi zmdi-close"></p>
-                            </li>
-                        </ul>
-                    </div>
-                    <p class="more">
-                        <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
-                           less="Thu gọn">Xem thêm</a>
-                    </p>
-
-                    <div class="heading-02">Ưu điểm ngôi nhà</div>
-                    <div class="content">
-                        <div class="list-advantage clear">
-                            <div class="advantage-name">
-                                <p>Tag</p>
-                            </div>
-                            <div class="advandate-content">
-                                <div class="tag-news pd-0">
-                                    <span>{{ listing.house_type }} {{ listing.district }}</span>
-                                    <span>{{ listing.house_type }} {{ listing.floors }} tầng</span>
-                                    <span>{{ listing.house_type }} {{ listing.bedrooms }} phòng ngủ</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-advantage clear">
-                            <div class="advantage-name">
-                                <p>Tình hình nội thất</p>
-                            </div>
-                            <div class="advandate-content">Nội thất cơ bản</div>
-                        </div>
-                        <div class="list-advantage clear">
-                            <div class="advantage-name">
-                                <p>Mô tả vị trí</p>
-                            </div>
-                            <div class="advandate-content">{{ listing.description }} Vị trí đất đắc địa, gần chợ,
-                                thuộc khu dân cư hiện hữu, dân trí cao, đường dân sinh. Đất còn nằm gần trung tâm.
-                            </div>
-                        </div>
-                        <div class="list-advantage clear">
-                            <div class="advantage-name">
-                                <p>Cộng đồng dân cư</p>
-                            </div>
-                            <div class="advandate-content">Cộng đồng dân cư văn minh, an ninh, thân thiện</div>
-                        </div>
-                        <div class="list-advantage clear">
-                            <div class="advantage-name">
-                                <p>Về giáo dục</p>
-                            </div>
-                            <div class="advandate-content">Gần trường mầm non, tiểu học, THCS,...
-                            </div>
-                        </div>
-                    </div>
-                    <div class="heading-02">Hình ảnh</div>
-                    <div class="gallery-property collapsed" data-height="900">
-                        {% for photo in listing.photos %}
-                            <div class="cover">
-                                <a href="#" title="{{ listing.title }}">
-                                    <img class="lazy"
-                                         data-src="{{ photo.url }}"
-                                         alt="{{ listing.title }}"
-                                         title="{{ listing.title }}">
-                                    <span>Hình sản phẩm</span>
-                                </a>
-                            </div>
-                        {% endfor %}
-                        <div class="last-div"></div>
-                    </div>
-                    <p class="view-more-gray more">
-                        <a href="#" title="Xem thêm / thu gọn" style="text-underline: none" class="collapse pdt-0"
-                           is-more="false" more="Xem thêm" less="Thu gọn">Xem tất cả</a>
-                    </p>
-                    <div class="heading-02">Tiện ích khu vực</div>
-                    <section class="mgt-15 map-detail gmap-render">
-                        <div class="_map-bg openBtn img-map"
-                             style="background-image: url(https://maps.googleapis.com/maps/api/staticmap?center=21.02678541550063,105.854106460572&zoom=15&size=1140x640&maptype=roadmap&markers=color:red%7C21.02678541550063,105.854106460572&key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc)">
-                            <div class="tooltip-map">
-                                <a>Nhấn vào để xem chi tiết</a>
-                            </div>
-                            <div class="map--address">
-                                <div class="address-property">
-                                    <div class="left-70"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i> <strong>{{ listing.title }}</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="map-wrapper">
-                            <a href="" class="full-screen-act" title="Fullscreen"></a>
-                            <div id="render-map"></div>
-                            <div class="cover-nearby">
-                                <div class="nearby">
-                                    <div class="parent-content">
-                                        <form name="search-nearby">
-                                            <input type="text" id="nearby-search" class="" autocomplete="on"
-                                                   spellcheck="false" dir="auto"
-                                                   placeholder="Tìm kiếm địa điểm gần đây">
-                                        </form>
-                                        <div class="title">
-                                            <span>Bản đồ</span>
-                                            <div class="list-icon traffic-type">
-                                            </div>
-                                        </div>
-                                        <ul class="content directions pdb-0">
-                                        </ul>
-                                        <div class="title">Địa điểm gần nhất</div>
-                                        <ul class="type checkbox nearby-places">
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="icon-left-nearby ">
-                                    <a class="location" href="#" title="Vị trí của BĐS"></a>
-                                    <a class="icon-slide" href="#" title="Mở rộng / thu gọn"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <div class="right-content visible-pc">
-                    <div v-pre class="form-real-estate">
-                        <h3 class="font-tiempos">Liên hệ tư vấn</h3>
-                        <div class="cover__isa">
-                            <img src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
-                        </div>
-                        <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
-                        <p class="advisory__sub-title">Tư vấn hoàn toàn miễn phí</p>
-                        <p class="text-small-center">
-                            <span>Mã nhà đất <strong>{{ listing.code }}</strong></span>
-                        </p>
-                        <a data-phone-hidden="category: ContactProperty, event: ClickHiddenHotline" style="opacity: 0.6"
-                           href="tel:0964399436" class="btn-primary btn-large btn-red btn-phone phone-hidden"><i
-                                class="zmdi zmdi-phone"></i><span class="text">Gọi chuyên viên ngay</span></a>
-                        <div class="divive">hoặc</div>
-                        <ul class="group-cta">
-                            <li>
-                                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-hubspot-chat">Chat
-                                    với TGNP</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-contact-me">Liên
-                                    hệ lại tôi</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+        <div class="right-content visible-pc">
+          <div v-pre class="form-real-estate">
+            <h3 class="font-tiempos">Liên hệ tư vấn</h3>
+            <div class="cover__isa">
+              <img src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
             </div>
-        </section>
-        <div class="cta-bottom-wrapper listing__cta--bottom">
-            <p class="listing__cta--bottom-id">{% trans "Mã nhà đất: " %}<strong>{{ listing.code }}</strong>
+            <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
+            <p class="advisory__sub-title">Tư vấn hoàn toàn miễn phí</p>
+            <p class="text-small-center">
+              <span>Mã nhà đất <strong>{{ listing.code }}</strong></span>
             </p>
-            <div class="cta-bottom-inner">
-                <div class="listing__chat">
-                    <a class="cta-form request-info btn-hubspot-chat" style="opacity: 0.3" href="javascript:void(0)"><i
-                            class="zmdi zmdi-comment-text-alt"></i>Chat</a>
-                </div>
-                <div class="phone">
-                    <a class="cta-hotline" href="tel:0916286256">
-                        <i class="zmdi zmdi-phone"></i> 0916 286 256</a>
-                </div>
-
-
-            </div>
+            <a data-phone-hidden="category: ContactProperty, event: ClickHiddenHotline" style="opacity: 0.6"
+               href="tel:0964399436" class="btn-primary btn-large btn-red btn-phone phone-hidden"><i
+              class="zmdi zmdi-phone"></i><span class="text">Gọi chuyên viên ngay</span></a>
+            <div class="divive">hoặc</div>
+            <ul class="group-cta">
+              <li>
+                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-hubspot-chat">Chat
+                  với TGNP</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-contact-me">Liên
+                  hệ lại tôi</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="cta-bottom-wrapper listing__cta--bottom">
+      <p class="listing__cta--bottom-id">{% trans "Mã nhà đất: " %}<strong>{{ listing.code }}</strong>
+      </p>
+      <div class="cta-bottom-inner">
+        <div class="listing__chat">
+          <a class="cta-form request-info btn-hubspot-chat" style="opacity: 0.3" href="javascript:void(0)"><i
+            class="zmdi zmdi-comment-text-alt"></i>Chat</a>
+        </div>
+        <div class="phone">
+          <a class="cta-hotline" href="tel:0916286256">
+            <i class="zmdi zmdi-phone"></i> 0916 286 256</a>
         </div>
 
-        <section id="sticky" class="bg-white mgb-0">
-            <section class="width1140">
-                <div class="right-content">
-                    <div id="agent-fix" class="fixed-form"></div>
-                </div>
-            </section>
-        </section>
-        <div class="mdialog" id="sell-now-form" style="background: none">
-            <div class="popup-overlay">
-                <div class="title title-res">
+
+      </div>
+    </div>
+
+    <section id="sticky" class="bg-white mgb-0">
+      <section class="width1140">
+        <div class="right-content">
+          <div id="agent-fix" class="fixed-form"></div>
+        </div>
+      </section>
+    </section>
+    <div class="mdialog" id="sell-now-form" style="background: none">
+      <div class="popup-overlay">
+        <div class="title title-res">
                 <span>
                 <a class="back-icon cnb-close" href="javascript:void(0)"></a>
                 </span>
-                    <span class="house-type">Bán, cho thuê nhà với TGNP</span>
-                </div>
-                <div class="popup-contact">
-                    <div class="bg-e1e2e6 header">
-                        Bán, cho thuê nhà với TGNP
-                    </div>
-                    <div class="actionIcon cnb-close"></div>
-                    <div class="form-contact contact-form">
-                        <div class="contact" id="sell-now-form-body"></div>
-                    </div>
-                </div>
-            </div>
+          <span class="house-type">Bán, cho thuê nhà với TGNP</span>
         </div>
+        <div class="popup-contact">
+          <div class="bg-e1e2e6 header">
+            Bán, cho thuê nhà với TGNP
+          </div>
+          <div class="actionIcon cnb-close"></div>
+          <div class="form-contact contact-form">
+            <div class="contact" id="sell-now-form-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <section class="background-gray">
-            <section class="width1140 main-content">
-                <div class="heading-02 mgt-10">Nhà đất lân cận</div>
-                <section class="compare-house">
-                    {% for house_neigh in listings_neighborhood %}
-                    <div class="article">
-                        <div class="img">
-                            <a class="cover"
-                               href="{% url 'listing' house_neigh.id %}"
-                               title="{{ house_neigh.title }}">
-                                 {% with house_neigh.main_photo as photo %}
-                                <img class="lazy"
-                                     data-src="{{ photo.url }}"
-                                     alt="{{ house_neigh.title }}"
-                                     title="{{ house_neigh.title }}">
-                                {% endwith %}
-                            </a>
-                        </div>
-                        <div class="title">
-                            <h3><a href="{% url 'listing' house_neigh.id %}"
-                                   title="{{ house_neigh.title }}">{{ house_neigh.title }}</a></h3>
-                        </div>
-                        <div class="status tgnp-color">
-                            {% if house_neigh.status == 'selling'%} {% trans 'Đang bán' %}
-                            {% elif house_neigh.status == 'sold'%} {% trans 'Đã bán' %}
-                            {% elif house_neigh.status == 'stop_selling'%} {% trans 'Dừng bán' %}
-                            {% else %} {% trans 'Mới' %}
-                            {% endif %}</div>
-                        <div class="info">
-                            <ul>
-                                <li title="Phòng ngủ"><span class="zmdi zmdi-airline-seat-individual-suite"></span> {{ house_neigh.bedrooms }} </li>
-                                {% if house_neigh.bathrooms %}<li title="Phòng tắm" class="icon-bath-room"><span></span> {{ house_neigh.bathrooms }} </li> {% endif %}
-                                <li class="marea" title="Diện tích"><span
-                                        class="zmdi zmdi-photo-size-select-small"></span> {{ house_neigh.area }} {{ house_neigh.area_unit }}
-                                </li>
-                                <li title="Giá">{{ house_neigh.price }} tỷ</li>
-                                {% if house_neigh.sale_price %}<li title="Bán nhanh">Còn {{ house_neigh.sale_price }} tỷ</li> {% endif %}
-                            </ul>
-                        </div>
-                        <input name="url" type="hidden"
-                               value="{% url 'listing' house_neigh.id %}">
-                        <input name="lat" type="hidden" value="">
-                        <input name="lon" type="hidden" value="">
-                    </div>
-                    {% endfor %}
-                </section>
-            </section>
+    <section class="background-gray">
+      <section class="width1140 main-content">
+        <div class="heading-02 mgt-10">Nhà đất lân cận</div>
+        <section class="compare-house">
+          {% for house_neigh in listings_neighborhood %}
+            <div class="article">
+              <div class="img">
+                <a class="cover"
+                   href="{% url 'listing' house_neigh.id %}"
+                   title="{{ house_neigh.title }}">
+                  {% with house_neigh.main_photo as photo %}
+                    <img class="lazy"
+                         data-src="{{ photo.url }}"
+                         alt="{{ house_neigh.title }}"
+                         title="{{ house_neigh.title }}">
+                  {% endwith %}
+                </a>
+              </div>
+              <div class="title">
+                <h3><a href="{% url 'listing' house_neigh.id %}"
+                       title="{{ house_neigh.title }}">{{ house_neigh.title }}</a></h3>
+              </div>
+              <div class="status tgnp-color">
+                {% if house_neigh.status == 'selling' %} {% trans 'Đang bán' %}
+                {% elif house_neigh.status == 'sold' %} {% trans 'Đã bán' %}
+                {% elif house_neigh.status == 'stop_selling' %} {% trans 'Dừng bán' %}
+                {% else %} {% trans 'Mới' %}
+                {% endif %}</div>
+              <div class="info">
+                <ul>
+                  <li title="Phòng ngủ"><span
+                    class="zmdi zmdi-airline-seat-individual-suite"></span> {{ house_neigh.bedrooms }} </li>
+                  {% if house_neigh.bathrooms %}
+                    <li title="Phòng tắm" class="icon-bath-room"><span></span> {{ house_neigh.bathrooms }}
+                    </li> {% endif %}
+                  <li class="marea" title="Diện tích"><span
+                    class="zmdi zmdi-photo-size-select-small"></span> {{ house_neigh.area }} {{ house_neigh.area_unit }}
+                  </li>
+                  <li title="Giá">{{ house_neigh.price }} tỷ</li>
+                  {% if house_neigh.sale_price %}
+                    <li title="Bán nhanh">Còn {{ house_neigh.sale_price }} tỷ</li> {% endif %}
+                </ul>
+              </div>
+              <input name="url" type="hidden"
+                     value="{% url 'listing' house_neigh.id %}">
+              <input name="lat" type="hidden" value="">
+              <input name="lon" type="hidden" value="">
+            </div>
+          {% endfor %}
         </section>
+      </section>
+    </section>
 
-        <section class="bg-gray-e6 pdt-0">
-            <section class="width1140">
-                <div class="heading-02">Bạn đang cần bán hay cho thuê nhà?</div>
-                <div class="ads3d-box pdt-15">
-                    <div class="ads3d-box-left">
-                        <div class="promo-3d-vid cover">
+    <section class="bg-gray-e6 pdt-0">
+      <section class="width1140">
+        <div class="heading-02">Bạn đang cần bán hay cho thuê nhà?</div>
+        <div class="ads3d-box pdt-15">
+          <div class="ads3d-box-left">
+            <div class="promo-3d-vid cover">
                             <span data-origin="8IP1dKqq298" class="popup-yt-video">
                             <picture>
-                            <source srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
-                                    media="(max-width: 374px)">
-                            <source srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
-                                    media="(min-width: 375px)">
+                            <source
+                              srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
+                              media="(max-width: 374px)">
+                            <source
+                              srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
+                              media="(min-width: 375px)">
                             <img alt="TGNP 3D View" src="{% static 'images/service-3dview.png' %}"
                                  srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
                                  title="TGNP 3D View">
                             </picture>
                             </span>
-                        </div>
-                        <div class="about-3d">
-                            <h3>Tuyệt vời khi trình diễn với 3d nhập vai</h3>
-                            <p>Công nghệ 3d nhập vai của Thế giới Nhà Phố mang lại trải nghiệm có độ tin cậy tuyệt đối
-                                với khách hàng khi xem trực tuyến ở tất cả mọi nơi. Kết hợp đội ngũ nhân viên được đào tạo chuyên
-                                nghiệp đã giúp cho tốc độ bán nhanh hơn gấp đôi so với thị trường.</p>
-                        </div>
-                    </div>
-                    <div class="ads3d-box-right">
-                        <div class="clear">
-                            <div class="cover">
-                                <img class="lazy" style="object-fit: cover; object-position: center center"
-                                     data-src="{% static 'img/logo-ko-chu.svg' %}"
-                                     alt="thegioinhaphovietnam.com.vn" title="thegioinhaphovietnam.com.vn">
-                            </div>
-                            <div class="infoagent">
-                                <h4>thegioinhaphovietnam.com.vn</h4>
-                                <p>Hỗ trợ 24/7</p>
-                                <p>
-                                    <a class="hotline" href="tel:0916 286 256" title="hotline">0916 286 256</a>
-                                </p>
-                            </div>
-                        </div>
-                        <a class="like-button" href="#sell-now-form" title="Liên hệ">Liên hệ</a>
-                        <input type="hidden" name="contact-agent" value="thegioinhaphovietnam@gmail.com">
-                        <input type="hidden" name="contact-agent-msg"
-                               value="Tôi có nhu cầu muốn bán nhà thông qua TGNP. Liên lạc với tôi ngay.">
-                    </div>
-                </div>
-            </section>
-        </section>
-
-        <section class="background-gray">
-            <div class="width1140">
-                <div class="heading-02 pd-tb-30 mgt-10">Nhà đất tương tự</div>
-                <div id="similar-property" class="flexslider main-content">
-                    <div class="slider-buttons">
-                        <a href="#" title="next"><span class="but-nextdetail-news flex-next"></span> </a>
-                        <a href="#" title="prev"><span class="but-predetail-news flex-prev flex-disabled" tabindex="-1"></span> </a>
-                    </div>
-                    <ul class="exclusive slides">
-                        {% for listing_same in listings_same %}
-                        <li class="featured">
-                            <a href="{% url 'listing' listing_same.id %}"
-                               title="{{ listing_same.title }}" data-imp-click>
-                                <div class="cover">
-                                    {% with listing_same.main_photo as photo %}
-                                    <img class="image-pixelated lazy"
-                                         data-src="{{ photo.url }}"
-                                         alt="{{ listing_same.title }}"
-                                         title="{{ listing_same.title }}"/>
-                                    {% endwith %}
-                                </div>
-                            </a>
-                            <header>
-                                <a href="{% url 'listing' listing_same.id %}"
-                                   title="{{ listing_same.title }}" data-imp-click>
-                                    <h3 class="heading">{{ listing_same.title }}</h3>
-                                </a>
-                                <h4>{{ listing_same.code }}</h4>
-                                <h2><a href="{% url 'search' %}?street={{ listing_same.street }}"
-                                       title="Đường">{{ listing_same.street }}</a></h2>
-                                <h2><a href="{% url 'search' %}?ward={{ listing_same.ward }}"
-                                       title="Phường/Xã">{{ listing_same.ward }}</a></h2>
-                                <h2><a href="{% url 'search' %}?district={{ listing_same.district }}"
-                                       title="Quận/Huyện">{{ listing_same.district }}</a></h2>
-                                <ul>
-                                    <li title="Diện tích"><span class="zmdi zmdi-photo-size-select-small"></span> {{ listing_same.area }} {{ listing_same.area_unit }}</li>
-                                </ul>
-                                <div class="price">{{ listing_same.price }} tỷ</div>
-                            </header>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
             </div>
-        </section>
-
-        <div class="post-share-btn-group aj-post-share-btn-group">
-            <div class="btn-group btn-share-group addthis_toolbox addthis_default_style">
-                <ul class="post-share-buttons">
-                    <li>
-                        <a class="addthis_button_facebook kmq-blog-post-share-post facebook-color"> <i
-                                class="zmdi zmdi-facebook"></i></a>
-                    </li>
-                    <li>
-                        <a class="addthis_button_messenger kmq-blog-post-share-post twitter-color">
-                            <img width="90%" src="{% static 'images/fb_message.svg' %}"
-                                 alt="messenger" title="messenger"/>
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a class="addthis_button_sms kmq-blog-post-share-post in-color"> <i
-                                class="zmdi zmdi-hc-2x zmdi-comment-text"></i></a>
-                    </li>
-                    <li>
-                        <a class="addthis_button_mailto kmq-blog-post-share-post gray "> <i
-                                class="zmdi zmdi-hc-2x zmdi-email"></i></a>
-                    </li>
-                </ul>
+            <div class="about-3d">
+              <h3>Tuyệt vời khi trình diễn với 3d nhập vai</h3>
+              <p>Công nghệ 3d nhập vai của Thế giới Nhà Phố mang lại trải nghiệm có độ tin cậy tuyệt đối
+                với khách hàng khi xem trực tuyến ở tất cả mọi nơi. Kết hợp đội ngũ nhân viên được đào tạo chuyên
+                nghiệp đã giúp cho tốc độ bán nhanh hơn gấp đôi so với thị trường.</p>
             </div>
+          </div>
+          <div class="ads3d-box-right">
+            <div class="clear">
+              <div class="cover">
+                <img class="lazy" style="object-fit: cover; object-position: center center"
+                     data-src="{% static 'img/logo-ko-chu.svg' %}"
+                     alt="thegioinhaphovietnam.com.vn" title="thegioinhaphovietnam.com.vn">
+              </div>
+              <div class="infoagent">
+                <h4>thegioinhaphovietnam.com.vn</h4>
+                <p>Hỗ trợ 24/7</p>
+                <p>
+                  <a class="hotline" href="tel:0916 286 256" title="hotline">0916 286 256</a>
+                </p>
+              </div>
+            </div>
+            <a class="like-button" href="#sell-now-form" title="Liên hệ">Liên hệ</a>
+            <input type="hidden" name="contact-agent" value="thegioinhaphovietnam@gmail.com">
+            <input type="hidden" name="contact-agent-msg"
+                   value="Tôi có nhu cầu muốn bán nhà thông qua TGNP. Liên lạc với tôi ngay.">
+          </div>
         </div>
-        <div id="property-contactbox-v2-app"></div>
+      </section>
+    </section>
 
-        <style>
-            #msform a.butt-primary[disabled] {
-                opacity: 0.4
-            }
-        </style>
-
-        <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
-            <div class="popup-feedback-fixed">
-                <div class="popup-body-fb">
-                    <div v-show="state == 'composing'" class="popup-contain">
-                        <div class="visible-pc">
-                            <form id="msform" onsubmit="return false">
-                                <fieldset style="display: block">
-                                    <h2 class="popup-title-w-back height-title popup-font-tiempos" id="title-head">Phản
-                                        hồi của bạn về Thegioinhaphovietnam.com.vn (<span v-text="step"></span>/3)</h2>
-                                    <button @click="hideModal()" class="popup-close-btn"><i
-                                            class="zmdi zmdi-hc-2x zmdi-close"></i></button>
-                                    <div v-show="step == 1" class="contain" id="step-form-1">
-                                        <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người
-                                            khác?
-                                        </div>
-                                        <div class="choose-number">
-                                            <ul>
-                                                <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
-                                                    @mouseleave="onMouseLeaveRate(i)" @click="selectStep1Rate(i)">
-                                                    <a :class="{active: step1.rate == i}" href="javascript:void(0)"
-                                                       v-text="i"></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="emotion">
-                                            <img :src="'../images/' + step1Icon" alt="">
-                                            <p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
-                                        </div>
-                                    </div>
-                                    <div v-show="step == 2" class="contain" id="step-form-2">
-                                        <div class="intro">Bạn có thấy TGNP dễ sử dụng không?</div>
-                                        <div class="row row-fb pd-t-39 pd-bt-68 center-item">
-                                            <button :class="{active : step2.rate == 'hard'}"
-                                                    @click="selectStep2Rate('hard')"
-                                                    class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
-                                            </button>
-                                            <button :class="{active : step2.rate == 'normal'}"
-                                                    @click="selectStep2Rate('normal')"
-                                                    class="large-butt-grey btn-use pd-use-btn mgr-r-20">Bình thường
-                                            </button>
-                                            <button :class="{active : step2.rate == 'easy'}"
-                                                    @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ
-                                                sử
-                                                dụng
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div v-show="step == 3" class="contain">
-                                        <div class="intro">Bạn muốn TGNP cần cải thiện thêm về điều gì?</div>
-                                        <div class="checkbox-option">
-                                            <div class="checkbox-pc">
-                                                <div class="row-fb">
-                                                    <div>
-                                                        <label class="container-cb">Giao diện đẹp hơn
-                                                            <input type="checkbox" v-model="step3.improve.ui">
-                                                            <span class="checkmark"></span>
-                                                        </label>
-                                                        <label class="container-cb">Nội dung chính xác hơn
-                                                            <input type="checkbox" v-model="step3.improve.content">
-                                                            <span class="checkmark"></span>
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label class="container-cb">Thêm tính năng
-                                                            <input type="checkbox" v-model="step3.improve.feature">
-                                                            <span class="checkmark"></span>
-                                                        </label>
-                                                        <label class="container-cb">Khác (vui lòng nhập)
-                                                            <input type="checkbox" v-model="step3.improve.other"
-                                                                   @change="onSelectOtherMsg('')">
-                                                            <span class="checkmark"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="share-rv">
-                                                <p style="font-size: initial">Ý kiến khác</p>
-                                                <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác"
-                                                          ref="msg"
-                                                          :disabled="!step3.improve.other"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a @click="gotoStep(step - 1)" v-show="step > 1"
-                                       class="butt-primary butt-transparent prev" href="javascript:void(0)"
-                                       id="prev">Trước</a>
-                                    <a @click="onClickNext()" v-show="step < 3" :disabled="!canNext"
-                                       class="butt-primary btn-grey next" href="javascript:void(0)" id="next">Tiếp</a>
-                                    <button @click="onClickSend" v-show="step == 3" class="butt-primary btn-grey">
-                                        <span v-show="!isSending" class="send">Gửi</span>
-                                        <span v-show="isSending">Đang gửi...</span>
-                                    </button>
-                                </fieldset>
-                            </form>
-                        </div>
-                        <div class="visible-sm">
-                            <div class="header-sm">
-                                <button @click="hideModal()" class="popup-close-btn-sm"><i
-                                        class="zmdi zmdi-hc-2x zmdi-close"></i></button>
-                                <h4>Phản hồi của bạn về thegioinhaphovietnam.com.vn</h4>
-                            </div>
-                            <div class="content">
-                                <div class="intro-sm">
-                                    <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?</p>
-                                    <div class="choose-number">
-                                        <ul>
-                                            <li v-for="i in 10" @click="selectStep1Rate(i)">
-                                                <a :class="{active: step1.rate == i}" href="javascript:void(0)"
-                                                   v-text="i"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="use-easy">
-                                    <p>Bạn thấy Thế giới Nhà Phố có dễ sử dụng không?</p>
-                                    <div class="row pt-15 center-item">
-                                        <button :class="{active : step2.rate == 'hard'}"
-                                                @click="selectStep2Rate('hard')"
-                                                class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
-                                        </button>
-                                        <button :class="{active : step2.rate == 'normal'}"
-                                                @click="selectStep2Rate('normal')"
-                                                class="large-butt-grey btn-use pd-use-btn">Bình thường
-                                        </button>
-                                        <button :class="{active : step2.rate == 'easy'}"
-                                                @click="selectStep2Rate('easy')"
-                                                class="large-butt-grey btn-use">Dễ sử dụng
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="improve">
-                                    <p>Bạn muốn Thế giới Nhà Phố .com.vn cần cải thiện thêm về điều gì?</p>
-                                    <div class="checkbox-sm">
-                                        <label class="container-cb">Giao diện đẹp hơn
-                                            <input type="checkbox" v-model="step3.improve.ui">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="container-cb">Nội dung chính xác hơn
-                                            <input type="checkbox" v-model="step3.improve.content">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="container-cb">Thêm tính năng
-                                            <input type="checkbox" v-model="step3.improve.feature">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="container-cb">Khác (vui lòng nhập)
-                                            <input type="checkbox" v-model="step3.improve.other"
-                                                   @change="onSelectOtherMsg('2')">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="note">
-                                    <p>Ý kiến khác</p>
-                                    <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg2"
-                                              :disabled="!step3.improve.other"></textarea>
-                                </div>
-                            </div>
-                            <div class="btn">
-                                <button @click="onClickSend" class="butt-primary btn-red">Gửi phản hồi</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div v-show="state == 'finished'" class="popup-fb-success">
-                        <div class="popup-header">
-                            <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về
-                                thegioinhaphovietnam.com.vn</h2>
-                            <button @click="hideModal()" class="popup-close-btn"><i
-                                    class="zmdi zmdi-hc-2x zmdi-close"></i>
-                            </button>
-                        </div>
-                        <div class="popup-contain">
-                            <img class="img-success" src="{% static 'images/icon-success.svg' %}">
-                            <div class="send-success">
-                                <h3>Đã gửi thành công!</h3>
-                                <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp Thế giới Nhà Phố từng
-                                    bước nâng
-                                    cao
-                                    chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
-                                    <strong>0916 286 256</strong></p>
-                            </div>
-                        </div>
-                        <div class="popup-footer">
-                            <a @click="hideModal()" class="butt-primary butt-red btn-red"
-                               href="javascript:void(0)">Đóng</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section class="background-gray">
+      <div class="width1140">
+        <div class="heading-02 pd-tb-30 mgt-10">Nhà đất tương tự</div>
+        <div id="similar-property" class="flexslider main-content">
+          <div class="slider-buttons">
+            <a href="#" title="next"><span class="but-nextdetail-news flex-next"></span> </a>
+            <a href="#" title="prev"><span class="but-predetail-news flex-prev flex-disabled" tabindex="-1"></span> </a>
+          </div>
+          <ul class="exclusive slides">
+            {% for listing_same in listings_same %}
+              <li class="featured">
+                <a href="{% url 'listing' listing_same.id %}"
+                   title="{{ listing_same.title }}" data-imp-click>
+                  <div class="cover">
+                    {% with listing_same.main_photo as photo %}
+                      <img class="image-pixelated lazy"
+                           data-src="{{ photo.url }}"
+                           alt="{{ listing_same.title }}"
+                           title="{{ listing_same.title }}"/>
+                    {% endwith %}
+                  </div>
+                </a>
+                <header>
+                  <a href="{% url 'listing' listing_same.id %}"
+                     title="{{ listing_same.title }}" data-imp-click>
+                    <h3 class="heading">{{ listing_same.title }}</h3>
+                  </a>
+                  <h4>{{ listing_same.code }}</h4>
+                  <h2><a href="{% url 'search' %}?street={{ listing_same.street }}"
+                         title="Đường">{{ listing_same.street }}</a></h2>
+                  <h2><a href="{% url 'search' %}?ward={{ listing_same.ward }}"
+                         title="Phường/Xã">{{ listing_same.ward }}</a></h2>
+                  <h2><a href="{% url 'search' %}?district={{ listing_same.district }}"
+                         title="Quận/Huyện">{{ listing_same.district }}</a></h2>
+                  <ul>
+                    <li title="Diện tích"><span
+                      class="zmdi zmdi-photo-size-select-small"></span> {{ listing_same.area }} {{ listing_same.area_unit }}
+                    </li>
+                  </ul>
+                  <div class="price">{{ listing_same.price }} tỷ</div>
+                </header>
+              </li>
+            {% endfor %}
+          </ul>
         </div>
+      </div>
+    </section>
 
+    <div class="post-share-btn-group aj-post-share-btn-group">
+      <div class="btn-group btn-share-group addthis_toolbox addthis_default_style">
+        <ul class="post-share-buttons">
+          <li>
+            <a class="addthis_button_facebook kmq-blog-post-share-post facebook-color"> <i
+              class="zmdi zmdi-facebook"></i></a>
+          </li>
+          <li>
+            <a class="addthis_button_messenger kmq-blog-post-share-post twitter-color">
+              <img width="90%" src="{% static 'images/fb_message.svg' %}"
+                   alt="messenger" title="messenger"/>
+            </a>
+          </li>
+
+
+          <li>
+            <a class="addthis_button_sms kmq-blog-post-share-post in-color"> <i
+              class="zmdi zmdi-hc-2x zmdi-comment-text"></i></a>
+          </li>
+          <li>
+            <a class="addthis_button_mailto kmq-blog-post-share-post gray "> <i
+              class="zmdi zmdi-hc-2x zmdi-email"></i></a>
+          </li>
+        </ul>
+      </div>
     </div>
+    <div id="property-contactbox-v2-app"></div>
+
+    <style>
+        #msform a.butt-primary[disabled] {
+            opacity: 0.4
+        }
+    </style>
+
+    <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
+      <div class="popup-feedback-fixed">
+        <div class="popup-body-fb">
+          <div v-show="state == 'composing'" class="popup-contain">
+            <div class="visible-pc">
+              <form id="msform" onsubmit="return false">
+                <fieldset style="display: block">
+                  <h2 class="popup-title-w-back height-title popup-font-tiempos" id="title-head">Phản
+                    hồi của bạn về Thegioinhaphovietnam.com.vn (<span v-text="step"></span>/3)</h2>
+                  <button @click="hideModal()" class="popup-close-btn"><i
+                    class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                  <div v-show="step == 1" class="contain" id="step-form-1">
+                    <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người
+                      khác?
+                    </div>
+                    <div class="choose-number">
+                      <ul>
+                        <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
+                            @mouseleave="onMouseLeaveRate(i)" @click="selectStep1Rate(i)">
+                          <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                             v-text="i"></a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="emotion">
+                      <img :src="'../images/' + step1Icon" alt="">
+                      <p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
+                    </div>
+                  </div>
+                  <div v-show="step == 2" class="contain" id="step-form-2">
+                    <div class="intro">Bạn có thấy TGNP dễ sử dụng không?</div>
+                    <div class="row row-fb pd-t-39 pd-bt-68 center-item">
+                      <button :class="{active : step2.rate == 'hard'}"
+                              @click="selectStep2Rate('hard')"
+                              class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                      </button>
+                      <button :class="{active : step2.rate == 'normal'}"
+                              @click="selectStep2Rate('normal')"
+                              class="large-butt-grey btn-use pd-use-btn mgr-r-20">Bình thường
+                      </button>
+                      <button :class="{active : step2.rate == 'easy'}"
+                              @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ
+                        sử
+                        dụng
+                      </button>
+                    </div>
+                  </div>
+                  <div v-show="step == 3" class="contain">
+                    <div class="intro">Bạn muốn TGNP cần cải thiện thêm về điều gì?</div>
+                    <div class="checkbox-option">
+                      <div class="checkbox-pc">
+                        <div class="row-fb">
+                          <div>
+                            <label class="container-cb">Giao diện đẹp hơn
+                              <input type="checkbox" v-model="step3.improve.ui">
+                              <span class="checkmark"></span>
+                            </label>
+                            <label class="container-cb">Nội dung chính xác hơn
+                              <input type="checkbox" v-model="step3.improve.content">
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                          <div>
+                            <label class="container-cb">Thêm tính năng
+                              <input type="checkbox" v-model="step3.improve.feature">
+                              <span class="checkmark"></span>
+                            </label>
+                            <label class="container-cb">Khác (vui lòng nhập)
+                              <input type="checkbox" v-model="step3.improve.other"
+                                     @change="onSelectOtherMsg('')">
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="share-rv">
+                        <p style="font-size: initial">Ý kiến khác</p>
+                        <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác"
+                                  ref="msg"
+                                  :disabled="!step3.improve.other"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <a @click="gotoStep(step - 1)" v-show="step > 1"
+                     class="butt-primary butt-transparent prev" href="javascript:void(0)"
+                     id="prev">Trước</a>
+                  <a @click="onClickNext()" v-show="step < 3" :disabled="!canNext"
+                     class="butt-primary btn-grey next" href="javascript:void(0)" id="next">Tiếp</a>
+                  <button @click="onClickSend" v-show="step == 3" class="butt-primary btn-grey">
+                    <span v-show="!isSending" class="send">Gửi</span>
+                    <span v-show="isSending">Đang gửi...</span>
+                  </button>
+                </fieldset>
+              </form>
+            </div>
+            <div class="visible-sm">
+              <div class="header-sm">
+                <button @click="hideModal()" class="popup-close-btn-sm"><i
+                  class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                <h4>Phản hồi của bạn về thegioinhaphovietnam.com.vn</h4>
+              </div>
+              <div class="content">
+                <div class="intro-sm">
+                  <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?</p>
+                  <div class="choose-number">
+                    <ul>
+                      <li v-for="i in 10" @click="selectStep1Rate(i)">
+                        <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                           v-text="i"></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="use-easy">
+                  <p>Bạn thấy Thế giới Nhà Phố có dễ sử dụng không?</p>
+                  <div class="row pt-15 center-item">
+                    <button :class="{active : step2.rate == 'hard'}"
+                            @click="selectStep2Rate('hard')"
+                            class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                    </button>
+                    <button :class="{active : step2.rate == 'normal'}"
+                            @click="selectStep2Rate('normal')"
+                            class="large-butt-grey btn-use pd-use-btn">Bình thường
+                    </button>
+                    <button :class="{active : step2.rate == 'easy'}"
+                            @click="selectStep2Rate('easy')"
+                            class="large-butt-grey btn-use">Dễ sử dụng
+                    </button>
+                  </div>
+                </div>
+                <div class="improve">
+                  <p>Bạn muốn Thế giới Nhà Phố .com.vn cần cải thiện thêm về điều gì?</p>
+                  <div class="checkbox-sm">
+                    <label class="container-cb">Giao diện đẹp hơn
+                      <input type="checkbox" v-model="step3.improve.ui">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="container-cb">Nội dung chính xác hơn
+                      <input type="checkbox" v-model="step3.improve.content">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="container-cb">Thêm tính năng
+                      <input type="checkbox" v-model="step3.improve.feature">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="container-cb">Khác (vui lòng nhập)
+                      <input type="checkbox" v-model="step3.improve.other"
+                             @change="onSelectOtherMsg('2')">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="note">
+                  <p>Ý kiến khác</p>
+                  <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg2"
+                            :disabled="!step3.improve.other"></textarea>
+                </div>
+              </div>
+              <div class="btn">
+                <button @click="onClickSend" class="butt-primary btn-red">Gửi phản hồi</button>
+              </div>
+            </div>
+          </div>
+          <div v-show="state == 'finished'" class="popup-fb-success">
+            <div class="popup-header">
+              <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về
+                thegioinhaphovietnam.com.vn</h2>
+              <button @click="hideModal()" class="popup-close-btn"><i
+                class="zmdi zmdi-hc-2x zmdi-close"></i>
+              </button>
+            </div>
+            <div class="popup-contain">
+              <img class="img-success" src="{% static 'images/icon-success.svg' %}">
+              <div class="send-success">
+                <h3>Đã gửi thành công!</h3>
+                <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp Thế giới Nhà Phố từng
+                  bước nâng
+                  cao
+                  chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
+                  <strong>0916 286 256</strong></p>
+              </div>
+            </div>
+            <div class="popup-footer">
+              <a @click="hideModal()" class="butt-primary butt-red btn-red"
+                 href="javascript:void(0)">Đóng</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 {% endblock %}
 
 {% block scripts %}
-    <script defer src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
-    <script type="deferjs" src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
+  <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+  <script type="deferjs" src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
 
-    <script type="text/javascript">
-        var callbackInitMap = function () {
-            if (window.vinitMap) {
-                window.vinitMap();
-            }
-            if (window.initMap) {
-                initMap.call(this);
-            } else {
-                setTimeout(callbackInitMap, 500);
-            }
-        }
-    </script>
-    <script defer src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
+  <script type="text/javascript">
+      var callbackInitMap = function () {
+          if (window.vinitMap) {
+              window.vinitMap();
+          }
+          if (window.initMap) {
+              initMap.call(this);
+          } else {
+              setTimeout(callbackInitMap, 500);
+          }
+      }
+  </script>
+  <script defer src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
 
-    <script type="deferjs">
+  <script type="deferjs">
     window.$dialog = function(){var e={bodyClassSpecs:"mdialog-body",bodyLoadingClass:"mdialog-loading",cachedBodyStyle:null,default:{zindex:99999,width:300,minHeight:100,background:"rgba(0,0,0,.5)",opacity:.5},key:{cachedStyle:"cached-style"}};return e.show=function(t,n,i,o){(n=$.extend(!0,{outSideClick:!0},n||{})).maxWidth="100%";var a,d=document.body.getAttribute("style");document.body.setAttribute(e.key.cachedStyle,d),(a=t&&"string"==typeof t?$(document.getElementById(t)):t).css("opacity",0),a.css("overflow-y","auto"),a.css("overflow-x","hidden"),a.addClass("opened");var s=(n?n.body:"")||".body";return a.find(s).css(n),a.find(s).addClass(e.bodyClassSpecs),a[0]&&(a[0].$dialogCallback=i),a[0]&&(a[0].$dialogInitTime=+new Date),n&&n.close&&a.find(s+" "+n.close).off().click(function(n){n.preventDefault(),e.hide(t,i)}),n&&n.outSideClick&&a.off().click(function(){e.hide(t,i)}),a.find(s).click(function(e){e.stopPropagation()}),e.animation(a,0,0,1,function(){o&&o()}),e.loadingEnd(a),a},e.animation=function(t,n,i,o,a){t.css("opacity",n),o>0&&n>1||o<0&&n<0?a&&a():setTimeout(function(){n+=o*(.05*i+1e-4*i*i),e.animation(t,n,i+1,o,a)},10)},e.hide=function(t,n){var i;i=t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened"),e.animation(i,1,0,-1,function(){i.removeClass("opened"),n&&n(i)})},e.loadingStart=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs).addClass(e.bodyLoadingClass)},e.loadingEnd=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs+"."+e.bodyLoadingClass).removeClass(e.bodyLoadingClass)},$(window).keydown(function(t){var n=$(".mdialog.opened");if(n.length&&27==t.keyCode){var i=[];i.length=n.length;for(var o=0;o<n.length;o++)for(var a=o;a<n.length;a++)n[o].$dialogInitTime>n[a].$dialogInitTime?(i[a]=n[o],i[o]=n[a]):(i[o]=n[o],i[a]=n[a]);var d=i[i.length-1];d&&e.hide($(d),d?d.$dialogCallback:null)}}),e.initStyles=function(){var e=document.createElement("STYLE"),t=document.head||document.getElementsByTagName("head")[0];e.type="text/css",e.styleSheet?e.styleSheet.cssText="":e.appendChild(document.createTextNode(this.getCss())),t.appendChild(e)},e.getCss=function(){var t=e.default,n="",i={display:"none",position:"fixed",top:"0",height:"100%",left:"0",width:"100%"};i["z-index"]=t.zindex,i.background=t.background,n+=e.assignStyle(".mdialog",i),n+=".mdialog.opened{display: block;}";var o={};o.width=t.width+"px",o["min-height"]=t.minHeight+"px",o.background="#fff",o.margin="60px auto 140px auto",n+=e.assignStyle(".mdialog .body",o);var a={position:"relative"};n+=e.assignStyle("."+e.bodyLoadingClass,a);var d={content:"' '",top:0,left:0,width:"100%",height:"100%",position:"absolute",background:"#fff",opacity:.4,"z-index":1};n+=e.assignStyle("."+e.bodyLoadingClass+":before",d);var s={content:"' '",border:"2px solid #303339","border-top":"2px solid #fff;","border-radius":"50%",width:"30px",height:"30px",position:"absolute",top:"calc(50% - 15px)",left:"calc(50% - 15px)","-webkit-animation":"spin 2s linear infinite",animation:"spin 2s linear infinite","z-index":1};return n+=e.assignStyle("."+e.bodyLoadingClass+":after",s),n+="@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }"},e.assignStyle=function(e,t){var n=e+"{";for(var i in t){n+=i+":"+t[i]+";"}return n+="}"},e.initStyles(),e}();
 
 
 
-    </script>
 
-    <script>
-        /*@shinsenter/defer.js*/
-        !function (e, i, t, n, r, o) {
-            o = /p/.test(i.readyState);
-            var c = 0 <= navigator.userAgent.indexOf('Firefox');
 
-            function f(e, t) {
-                o ? n(e, t || 32) : r.push(e, t)
-            }
 
-            function a(e, t, n, r) {
-                return t && i.getElementById(t) || (r = i.createElement(e || 'SCRIPT'), t && (r.id = t), n && (r.onload = n), i.head.appendChild(r)), r || {}
-            }
 
-            e.addEventListener('on' + t in e ? t : 'load', function () {
-                for (o = 1; r[0];) f(r.shift(), r.shift())
-            }), f._ = a, e.defer = f, e.deferscript = function (e, t, n, r) {
-                f(function () {
-                    a('', t, r).src = e
-                }, n)
-            }, e.deferPreload = function (e, t) {
-                if (t = t || 'script', c) {
-                    var n = i.createElement('object');
-                    n.data = e, n.width = 0, n.height = 0, i.body.append(n)
-                } else {
-                    var r = i.createElement('link');
-                    r.setAttribute('rel', 'preload'), r.href = e, r.as = t, i.head.append(r)
-                }
-            }
-        }(this, document, 'pageshow', setTimeout, []), function (s, n) {
-            var u = 'IntersectionObserver', d = 'lazied', l = 'data-', h = l + d, p = 'load', m = 'forEach',
-                y = 'getAttribute', v = 'setAttribute', b = Function(), g = s.defer || b, f = g._ || b;
 
-            function E(e, t) {
-                return [].slice.call((t || n).querySelectorAll(e))
-            }
 
-            function e(a) {
-                return function (e, t, i, o, c, f) {
-                    g(function (n, t) {
-                        function r(n) {
-                            !1 !== (o || b).call(n, n) && ((f || ['srcset', 'src', 'style'])[m](function (e, t) {
-                                (t = n[y](l + e)) && n[v](e, t)
-                            }), E('SOURCE', n)[m](r), p in n && n[p]()), n.className += ' ' + (i || d)
-                        }
 
-                        t = u in s ? (n = new s[u](function (e) {
-                            e[m](function (e, t) {
-                                e.isIntersecting && (t = e.target) && (n.unobserve(t), r(t))
-                            })
-                        }, c)).observe.bind(n) : r, E(e || a + '[' + l + 'src]:not([' + h + '])')[m](function (e) {
-                            e[y](h) || (e[v](h, a), t(e))
-                        })
-                    }, t)
-                }
-            }
 
-            function t() {
-                g(function (t, n, r, i, o) {
-                    function c(e, t) {
-                        for (i in t = t || !1, e.parentNode.removeChild(e), e.removeAttribute('type'), n = f(e.nodeName), t && (n.async = 1), e) 'string' == typeof (o = e[i]) && n[i] != o && (n[i] = o);
-                        return n
-                    }
+  </script>
 
-                    t = E((r = '[type=deferjs]') + ':not(' + (i = '[async]') + ')'), E(r + i).forEach(function (e) {
-                        c(e, !0)
-                    }), t.forEach(function (e) {
-                        e.src && s.deferPreload(e.src)
-                    }), function e() {
-                        0 != t && (r = t.shift(), n = c(r), r.src ? n.onload = n.onerror = e : g(e, .1))
-                    }()
-                }, 4)
-            }
+  <script>
+      /*@shinsenter/defer.js*/
+      !function (e, i, t, n, r, o) {
+          o = /p/.test(i.readyState);
+          var c = 0 <= navigator.userAgent.indexOf('Firefox');
 
-            t(), s.deferstyle = function (t, n, e, r) {
-                g(function (e) {
-                    (e = f('LINK', n, r)).rel = 'stylesheet', e.href = t
-                }, e)
-            }, s.deferimg = e('IMG'), s.deferiframe = e('IFRAME'), g.all = t
-        }(this, document);
-    </script>
+          function f(e, t) {
+              o ? n(e, t || 32) : r.push(e, t)
+          }
 
-    <script>deferscript('https://cdn.jsdelivr.net/npm/%40shinsenter/defer.js%401.1.7/dist/polyfill.min.js', 'polyfill-js', 1)</script>
+          function a(e, t, n, r) {
+              return t && i.getElementById(t) || (r = i.createElement(e || 'SCRIPT'), t && (r.id = t), n && (r.onload = n), i.head.appendChild(r)), r || {}
+          }
 
-    <script>
-        function objValue(obj, is, value) { //Access 1 object bằng key
-            if (typeof is == 'string')
-                return objValue(obj, is.split('.'), value);
-            else if (is.length == 1 && value !== undefined)
-                return obj[is[0]] = value;
-            else if (is.length == 0)
-                return obj;
-            else if (typeof obj === "undefined")
-                return undefined
-            else
-                return objValue(obj[is[0]], is.slice(1), value);
-        }
+          e.addEventListener('on' + t in e ? t : 'load', function () {
+              for (o = 1; r[0];) f(r.shift(), r.shift())
+          }), f._ = a, e.defer = f, e.deferscript = function (e, t, n, r) {
+              f(function () {
+                  a('', t, r).src = e
+              }, n)
+          }, e.deferPreload = function (e, t) {
+              if (t = t || 'script', c) {
+                  var n = i.createElement('object');
+                  n.data = e, n.width = 0, n.height = 0, i.body.append(n)
+              } else {
+                  var r = i.createElement('link');
+                  r.setAttribute('rel', 'preload'), r.href = e, r.as = t, i.head.append(r)
+              }
+          }
+      }(this, document, 'pageshow', setTimeout, []), function (s, n) {
+          var u = 'IntersectionObserver', d = 'lazied', l = 'data-', h = l + d, p = 'load', m = 'forEach',
+              y = 'getAttribute', v = 'setAttribute', b = Function(), g = s.defer || b, f = g._ || b;
 
-        function waitFor(objAcc, callback, timeout) {
-            if (typeof callback !== "function") {
-                return
-            }
-            timeout = timeout || 0
-            var startTime = new Date().getTime()
+          function E(e, t) {
+              return [].slice.call((t || n).querySelectorAll(e))
+          }
 
-            function check() {
-                if (typeof objValue(window, objAcc) !== "undefined") {
-                    callback()
-                } else {
-                    if (timeout > 0 && new Date().getTime() - startTime > timeout) { //Vượt quá timeout
-                        console.error("wait for " + objAcc + " has timeout!")
-                    } else {
-                        setTimeout(check, 500)
-                    }
-                }
-            }
+          function e(a) {
+              return function (e, t, i, o, c, f) {
+                  g(function (n, t) {
+                      function r(n) {
+                          !1 !== (o || b).call(n, n) && ((f || ['srcset', 'src', 'style'])[m](function (e, t) {
+                              (t = n[y](l + e)) && n[v](e, t)
+                          }), E('SOURCE', n)[m](r), p in n && n[p]()), n.className += ' ' + (i || d)
+                      }
 
-            check()
-        }
+                      t = u in s ? (n = new s[u](function (e) {
+                          e[m](function (e, t) {
+                              e.isIntersecting && (t = e.target) && (n.unobserve(t), r(t))
+                          })
+                      }, c)).observe.bind(n) : r, E(e || a + '[' + l + 'src]:not([' + h + '])')[m](function (e) {
+                          e[y](h) || (e[v](h, a), t(e))
+                      })
+                  }, t)
+              }
+          }
 
-        function applyImageLazyLoad(scope) {
-            scope = scope || document
-            var lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
+          function t() {
+              g(function (t, n, r, i, o) {
+                  function c(e, t) {
+                      for (i in t = t || !1, e.parentNode.removeChild(e), e.removeAttribute('type'), n = f(e.nodeName), t && (n.async = 1), e) 'string' == typeof (o = e[i]) && n[i] != o && (n[i] = o);
+                      return n
+                  }
 
-            if ("IntersectionObserver" in window) {
-                let ops = {
-                    rootMargin: "450px",
-                    threshold: 0.1
-                }
+                  t = E((r = '[type=deferjs]') + ':not(' + (i = '[async]') + ')'), E(r + i).forEach(function (e) {
+                      c(e, !0)
+                  }), t.forEach(function (e) {
+                      e.src && s.deferPreload(e.src)
+                  }), function e() {
+                      0 != t && (r = t.shift(), n = c(r), r.src ? n.onload = n.onerror = e : g(e, .1))
+                  }()
+              }, 4)
+          }
 
-                let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
-                    entries.forEach(function (entry) {
-                        if (entry.isIntersecting) {
-                            let lazyImage = entry.target;
-                            lazyImage.src = lazyImage.dataset.src;
-                            if (!!lazyImage.dataset.srcset) {
-                                lazyImage.srcset = lazyImage.dataset.srcset;
-                            }
-                            lazyImage.classList.remove("lazy");
-                            lazyImageObserver.unobserve(lazyImage);
-                        }
-                    });
-                }, ops);
+          t(), s.deferstyle = function (t, n, e, r) {
+              g(function (e) {
+                  (e = f('LINK', n, r)).rel = 'stylesheet', e.href = t
+              }, e)
+          }, s.deferimg = e('IMG'), s.deferiframe = e('IFRAME'), g.all = t
+      }(this, document);
+  </script>
 
-                lazyImages.forEach(function (lazyImage) {
-                    lazyImageObserver.observe(lazyImage);
-                });
+  <script>deferscript('https://cdn.jsdelivr.net/npm/%40shinsenter/defer.js%401.1.7/dist/polyfill.min.js', 'polyfill-js', 1)</script>
 
-                //Lazy for background
-                var lazyBackgrounds = [].slice.call(scope.querySelectorAll(".lazy-background"));
-                let lazyBackgroundObserver = new IntersectionObserver(function (entries, observer) {
-                    entries.forEach(function (entry) {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add("visible");
-                            entry.target.classList.remove("lazy-background");
-                            lazyBackgroundObserver.unobserve(entry.target);
-                        }
-                    });
-                }, ops);
-                lazyBackgrounds.forEach(function (lazyBackground) {
-                    lazyBackgroundObserver.observe(lazyBackground);
-                });
-            } else { //Không support observer
-                let lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
-                let active = false;
+  <script>
+      function objValue(obj, is, value) { //Access 1 object bằng key
+          if (typeof is == 'string')
+              return objValue(obj, is.split('.'), value);
+          else if (is.length == 1 && value !== undefined)
+              return obj[is[0]] = value;
+          else if (is.length == 0)
+              return obj;
+          else if (typeof obj === "undefined")
+              return undefined
+          else
+              return objValue(obj[is[0]], is.slice(1), value);
+      }
 
-                const lazyLoad = function () {
-                    if (active === false) {
-                        active = true;
+      function waitFor(objAcc, callback, timeout) {
+          if (typeof callback !== "function") {
+              return
+          }
+          timeout = timeout || 0
+          var startTime = new Date().getTime()
 
-                        setTimeout(function () {
-                            lazyImages.forEach(function (lazyImage) {
-                                if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
-                                    lazyImage.src = lazyImage.dataset.src;
-                                    lazyImage.srcset = lazyImage.dataset.srcset;
-                                    lazyImage.classList.remove("lazy");
+          function check() {
+              if (typeof objValue(window, objAcc) !== "undefined") {
+                  callback()
+              } else {
+                  if (timeout > 0 && new Date().getTime() - startTime > timeout) { //Vượt quá timeout
+                      console.error("wait for " + objAcc + " has timeout!")
+                  } else {
+                      setTimeout(check, 500)
+                  }
+              }
+          }
 
-                                    lazyImages = lazyImages.filter(function (image) {
-                                        return image !== lazyImage;
-                                    });
+          check()
+      }
 
-                                    if (lazyImages.length === 0) {
-                                        document.removeEventListener("scroll", lazyLoad);
-                                        window.removeEventListener("resize", lazyLoad);
-                                        window.removeEventListener("orientationchange", lazyLoad);
-                                    }
-                                }
-                            });
+      function applyImageLazyLoad(scope) {
+          scope = scope || document
+          var lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
 
-                            active = false;
-                        }, 200);
-                    }
-                };
+          if ("IntersectionObserver" in window) {
+              let ops = {
+                  rootMargin: "450px",
+                  threshold: 0.1
+              }
 
-                document.addEventListener("scroll", lazyLoad);
-                window.addEventListener("resize", lazyLoad);
-                window.addEventListener("orientationchange", lazyLoad);
-            }
-        }
+              let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+                  entries.forEach(function (entry) {
+                      if (entry.isIntersecting) {
+                          let lazyImage = entry.target;
+                          lazyImage.src = lazyImage.dataset.src;
+                          if (!!lazyImage.dataset.srcset) {
+                              lazyImage.srcset = lazyImage.dataset.srcset;
+                          }
+                          lazyImage.classList.remove("lazy");
+                          lazyImageObserver.unobserve(lazyImage);
+                      }
+                  });
+              }, ops);
 
-        document.addEventListener("DOMContentLoaded", function () {
-            applyImageLazyLoad(document)
-        });
-    </script>
-    <script>
-        window['isListing'] = true;
-    </script>
+              lazyImages.forEach(function (lazyImage) {
+                  lazyImageObserver.observe(lazyImage);
+              });
 
-    <script>
-        window.hsConversationsSettings = {
-            loadImmediately: false // Delay the load of the chat widget
-        };
-    </script>
+              //Lazy for background
+              var lazyBackgrounds = [].slice.call(scope.querySelectorAll(".lazy-background"));
+              let lazyBackgroundObserver = new IntersectionObserver(function (entries, observer) {
+                  entries.forEach(function (entry) {
+                      if (entry.isIntersecting) {
+                          entry.target.classList.add("visible");
+                          entry.target.classList.remove("lazy-background");
+                          lazyBackgroundObserver.unobserve(entry.target);
+                      }
+                  });
+              }, ops);
+              lazyBackgrounds.forEach(function (lazyBackground) {
+                  lazyBackgroundObserver.observe(lazyBackground);
+              });
+          } else { //Không support observer
+              let lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
+              let active = false;
 
-    <script type="application/ld+json">
+              const lazyLoad = function () {
+                  if (active === false) {
+                      active = true;
+
+                      setTimeout(function () {
+                          lazyImages.forEach(function (lazyImage) {
+                              if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                                  lazyImage.src = lazyImage.dataset.src;
+                                  lazyImage.srcset = lazyImage.dataset.srcset;
+                                  lazyImage.classList.remove("lazy");
+
+                                  lazyImages = lazyImages.filter(function (image) {
+                                      return image !== lazyImage;
+                                  });
+
+                                  if (lazyImages.length === 0) {
+                                      document.removeEventListener("scroll", lazyLoad);
+                                      window.removeEventListener("resize", lazyLoad);
+                                      window.removeEventListener("orientationchange", lazyLoad);
+                                  }
+                              }
+                          });
+
+                          active = false;
+                      }, 200);
+                  }
+              };
+
+              document.addEventListener("scroll", lazyLoad);
+              window.addEventListener("resize", lazyLoad);
+              window.addEventListener("orientationchange", lazyLoad);
+          }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+          applyImageLazyLoad(document)
+      });
+  </script>
+  <script>
+      window['isListing'] = true;
+  </script>
+
+  <script>
+      window.hsConversationsSettings = {
+          loadImmediately: false // Delay the load of the chat widget
+      };
+  </script>
+
+  <script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "Organization",
@@ -1588,7 +1621,7 @@
   ]
 }
 </script>
-    <script type="application/ld+json">
+  <script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@id": "https://www.thegioinhaphovietnam.com.vn/#website",
@@ -1602,34 +1635,29 @@
         }
     }
 </script>
-    <script type="deferjs"  src="{% static 'js/listing.min90ca.js' %}"></script>
+  <script type="deferjs" src="{% static 'js/hubspot-chatbox.min90ca.js' %}"></script>
+  <script type="deferjs" src="{% static 'js/property-contact-box-v2.min90ca.js' %}"></script>
 
-    <script type="deferjs"  src="{% static 'js/hubspot-chatbox.min90ca.js' %}"></script>
-    <script type="deferjs"  src="{% static 'js/property-contact-box-v2.min90ca.js' %}"></script>
-
-    <script>
-        var callbackInitMap = function () {
-            if (window.doInitMap) {
-                window.doInitMap.call(this);
-            } else {
-                setTimeout(callbackInitMap, 500);
-            }
-        }
-    </script>
-    <script type="deferjs">
+  <script>
+      var callbackInitMap = function () {
+          if (window.doInitMap) {
+              window.doInitMap.call(this);
+          } else {
+              setTimeout(callbackInitMap, 500);
+          }
+      }
+  </script>
+  <script type="deferjs">
     var addthis_share = {
        url: window.location.href
     }
 
+  </script>
+  <script defer src="{% static 'js/favorite.min90ca.js' %}"></script>
+  <script defer src="{% static 'js/home-recent-view.min90ca.js' %}"></script>
+  <script defer src="{% static 'js/addthis_widget.js' %}"></script>
 
-
-    </script>
-    <script defer src="{% static 'js/favorite.min90ca.js' %}"></script>
-    <script defer src="{% static 'js/home-recent-view.min90ca.js' %}"></script>
-    <script defer src="{% static 'js/addthis_widget.js' %}"></script>
-    <script defer src="{% static 'js/tracking.min90ca.js' %}"></script>
-
-    <script type="application/ld+json">
+  <script type="application/ld+json">
     {
         "@type": "Product",
         "@context": "http://schema.org",
@@ -1642,18 +1670,7 @@
         "name": "Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
     }
 </script>
-    <script type="deferjs">
-  (function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.defer=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-  })(window, document, "clarity", "script", "3y09hfteky");
-
-
-
-    </script>
-
-    <script type="deferjs">
+  <script type="deferjs">
   function setupViewMore(heightLimit, $itemsWrapper, $items, $viewMoreWrapper, $viewMoreLink){
     var isCollapse = false
     var itemHeight = $items.height()
@@ -1699,8 +1716,16 @@
 
 
 
-    </script>
-    <script type="application/ld+json">
+
+
+
+
+
+
+
+
+  </script>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -1722,28 +1747,28 @@
 } ]
   }
 </script>
-    <script defer src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
+  <script defer src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
 
-    <script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script>
+  <script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script>
 
-    <script type="deferjs" src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
+  <script type="deferjs" src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
 
-    <script type="deferjs" id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
+  <script type="deferjs" id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
 
-    <script defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
-    <script defer src="{% static 'js/feedback-modal.min90ca.js' %}"></script>
+  <script defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
+  <script defer src="{% static 'js/feedback-modal.min90ca.js' %}"></script>
 
-    <script>
-        window.RFeedback = {
-            API: "https://thegioinhaphovietnam.com.vn/mapi",
-            email: "",
-            name: "",
-            phone: "",
-            ip: "10.244.0.0"
-        }
-    </script>
-    <script defer src="{% static 'js/footer-home.js' %}"></script>
-    <script type="deferjs">
+  <script>
+      window.RFeedback = {
+          API: "https://thegioinhaphovietnam.com.vn/mapi",
+          email: "",
+          name: "",
+          phone: "",
+          ip: "10.244.0.0"
+      }
+  </script>
+  <script defer src="{% static 'js/footer-home.js' %}"></script>
+  <script type="deferjs">
   (function () {
     var formQueue = [];
 
@@ -1781,13 +1806,21 @@
 
 
 
-    </script>
-    <!--[if lte IE 8]>
-    <script charset="utf-8" async defer type="text/javascript"
-            src="https://thegioinhaphovietnam.com.vn/public/externaljs"></script>
-    <![endif]-->
-    <script charset="utf-8" type="deferjs" src="https://js.hsforms.net/forms/v2.js"></script>
-    <script type="deferjs">
+
+
+
+
+
+
+
+
+  </script>
+  <!--[if lte IE 8]>
+  <script charset="utf-8" async defer type="text/javascript"
+          src="https://thegioinhaphovietnam.com.vn/public/externaljs"></script>
+  <![endif]-->
+  <script charset="utf-8" type="deferjs" src="https://js.hsforms.net/forms/v2.js"></script>
+  <script type="deferjs">
   function createHSForm(opt) {
     function getClientId() {
       try {
@@ -2030,8 +2063,16 @@
     }
   }
 
-    </script>
-    <script type="deferjs">
+
+
+
+
+
+
+
+
+  </script>
+  <script type="deferjs">
         createHSForm({
             css: '',
             target: '#sell-now-form-body',
@@ -2043,9 +2084,17 @@
                 });
             }
         });
-    </script>
 
-    <script defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
+
+
+
+
+
+
+
+  </script>
+
+  <script defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
 {% endblock %}
 
 

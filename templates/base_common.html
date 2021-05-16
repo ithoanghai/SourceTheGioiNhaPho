@@ -5,7 +5,35 @@
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
 
 <head>
-  {% block head %} {% endblock %}
+  {% block head %}
+    <title> Thế giới Nhà Phố {% block title %}| Mua căn hộ tốt nhất {% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="UTF-8"/>
+    <meta name="description"
+          content="Mua bán bất động sản, chung cư, căn hộ Hà Nội sở hữu vị trí vàng, đầy đủ tiện nghi, sang trọng, an ninh, không gian sống hiện đại. bất động sản, chung cư, căn hộ Hà Nội cập nhật hình ảnh thật, thông tin xác thực."/>
+    <meta name="keywords"
+          content="nha pho, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
+    <meta name="author" content="thegioinhaphovietnam.com.vn"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta property="fb:app_id" content=""/>
+    <meta property="og:url" content="mua.html"/>
+    <meta property="og:title" content="Mua Bán Nhà Đất Căn Hộ Tốt Nhất | Thế giới Nhà Phố"/>
+    <meta property="og:description"
+          content="Mua bán bất động sản, chung cư, căn hộ Hà Nội sở hữu vị trí vàng, đầy đủ tiện nghi, sang trọng, an ninh, không gian sống hiện đại. bất động sản, chung cư, căn hộ Hà Nội cập nhật hình ảnh thật, thông tin xác thực."/>
+    <meta property="og:image" content="{% static '/img/logo-chi-chu.svg' %}"/>
+    <meta property="og:image:url" content="{% static '/img/logo-chi-chu.svg' %}"/>
+    <meta property="og:image:width" content="600"/>
+    <meta property="og:image:height" content="320"/>
+    <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
+    <meta property="og:rich_attachment" content="true"/>
+    <meta property="og:type" content="article"/>
+    <meta property="hotline" content="0964399436"/>
+  {% endblock %}
+
+  {% block head_script %}
+
+  {% endblock %}
 </head>
 
 <body>
@@ -22,14 +50,14 @@
 {% block scripts %} {% endblock %}
 
 
-<!-- Chống sao chép website-->
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('*').bind('cut copy paste contextmenu', function (e) {
-            e.preventDefault();
-        })
-    });
-</script>
+{#<!-- Chống sao chép website-->#}
+{#<script type="text/javascript">#}
+{#    $(document).ready(function () {#}
+{#        $('*').bind('cut copy paste contextmenu', function (e) {#}
+{#            e.preventDefault();#}
+{#        })#}
+{#    });#}
+{#</script>#}
 
 </body>
 
