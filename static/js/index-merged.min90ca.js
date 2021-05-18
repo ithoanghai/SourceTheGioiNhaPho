@@ -12147,7 +12147,7 @@
                 }
             }, {
                 key: "SUGGEST_ENDPOINT", get: function () {
-                    return "/s-suggest"
+                    return "/api/s-suggest"
                 }
             }], [{
                 key: "getInstance", value: function () {
@@ -26166,7 +26166,7 @@
                 return e("button", {
                     staticClass: "btn-primary btn-ultra btn-search",
                     attrs: {type: "submit", tabindex: "-1"}
-                }, [e("i", {staticClass: "zmdi zmdi-search"}), this._v(" "), e("span", [this._v("Tìm Kiếm")])])
+                }, [e("i", {staticClass: "zmdi zmdi-search "}), this._v(" "), e("span", [this._v("Tìm Kiếm")])])
             }]
         };
         var u = n("VU/8")(a, s, !1, function (t) {

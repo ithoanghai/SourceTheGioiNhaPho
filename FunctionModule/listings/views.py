@@ -1,17 +1,15 @@
-from decimal import Decimal
-
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
+from django.utils.encoding import force_text
 from django_filters.rest_framework import DjangoFilterBackend
 from pydantic import BaseModel
 from rest_framework import status, generics, mixins, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .choices import price_choices, bedroom_choices, state_choices
 from .filters import ListingFilter
-from .models import Listing
 from .serializers import *
 from ..cadastral.constants import state_data, district_data
 
@@ -65,6 +63,7 @@ def detail(request):
 
 def search(request):
     queryset_list = Listing.objects.order_by('-list_date')
+    hn_district = district_data['01']
 
     # Trantype
     if 'trantype' in request.GET:
@@ -103,11 +102,12 @@ def search(request):
             if street:
                 queryset_list = queryset_list.filter(address=street)
 
-        # District
-        if 'district' in request.GET:
-            district = request.GET['district']
-            if district:
-                queryset_list = queryset_list.filter(district=district)
+    # District
+    if 'district' in request.GET:
+        district = request.GET['district']
+        if district:
+            district_code = next(x['code'] for x in hn_district if x['slug'] == district)
+            queryset_list = queryset_list.filter(district=district_code)
 
     # State
     if 'state' in request.GET:
@@ -128,9 +128,20 @@ def search(request):
             query = Q(price__lte=price) | Q(sale_price__lte=price)
             queryset_list = queryset_list.filter(query)
 
+    page = request.GET.get('page', 1)
+    limit = request.GET.get('limit', 20)
+    offset = (page - 1) * limit
+
     context = {
-        'listings': queryset_list,
+        'listings': queryset_list[offset: limit + offset],
         'state_data': state_data,
+        'districts': hn_district,
+        'pagination': {
+            'current_page': page,
+            'limit': limit,
+            'offset': offset,
+            'total': queryset_list.count()
+        }
     }
 
     return render(request, 'listings/search.html', context)
@@ -158,7 +169,7 @@ def rent_with_us(request):
 
 
 @api_view(['GET', 'POST'])
-def listingsAPI(request):
+def listing_api_view(request):
     """
     List all listings, or create a new listing.
     """
@@ -191,8 +202,7 @@ class ListingsAPIView(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         id_pk = self.kwargs.get('id', None)
-        url = reverse('listing-detail', kwargs={'id': id_pk},
-                      request=request)
+        url = reverse('listing-detail', kwargs={'id': id_pk})
         request.data.update({force_text('listing'): force_text(url)})
 
         return super(ListingsAPIView, self).post(request, *args, **kwargs)
@@ -206,6 +216,6 @@ class ListingAPIAllView(mixins.ListModelMixin, mixins.UpdateModelMixin, generics
         serializer_context = {
             'request': request,
         }
-        serializer = ListingSerializer(queryset, many=True, context=serializer_context)
+        serializer = ListingSerializer(self.queryset, many=True, context=serializer_context)
 
         return Response(serializer.data, status=status.HTTP_200_OK)

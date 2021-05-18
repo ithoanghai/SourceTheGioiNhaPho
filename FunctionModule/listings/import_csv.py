@@ -152,7 +152,7 @@ def handle_import(file_path):
                     street = row[header_dict['pho']]
                     # Hanoi
                     state = '01'
-                    code = f"{district}-{street}-{addr}".lower().replace('đ', 'd').replace('õ', 'o')
+                    code = f"{district}-{street}-{addr}".lower().replace('đ', 'd').replace('õ', 'o')[:80]
                     code = slugify(code)
                     if code in listing_obj:
                         continue

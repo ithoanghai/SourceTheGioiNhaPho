@@ -18,7 +18,7 @@ urlpatterns = [
     path('rentwithus', views.rent_with_us, name='rent_with_us'),
 
     path('ListingsAPIView/', views.ListingsAPIView.as_view(), name='ListingsAPIView'),
-    path('listingsAPI', views.listingsAPI),
+    path('listingsAPI', views.listing_api_view),
     path('ListingAPIAllView', views.ListingAPIAllView.as_view()),
     path('listings-api-token-auth/', obtain_auth_token, name='listings_api_token_auth'),
 ]

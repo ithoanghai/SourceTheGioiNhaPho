@@ -13,11 +13,11 @@ new Vue({
     },
     methods: {
         getListings: function () {
-            this.$http.get('listings/listingsAPI1/').then(function (data,status,request) {
-            if (status == 200) {
-                this.listings = data.body.results;
-             }   
-            })
+            // this.$http.get('listings/listingsAPI1/').then(function (data,status,request) {
+            // if (status == 200) {
+            //     this.listings = data.body.results;
+            //  }
+            // })
         }
     },
     mounted: function () {
