@@ -32,9 +32,6 @@
   {% endblock %}
 
   {% block head_script %}
-    <script src="https://unpkg.com/vue"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.2"></script>
-    <script src="{% static 'js/home-v.js' %} "></script>
   {% endblock %}
 
 </head>
@@ -43,8 +40,6 @@
 
 <div id="app"></div>
 
-<!-- Top Bar -->
-{% comment %}  {% include 'partials/_topbar.html' %}{% endcomment %}
 <!-- NavBar -->
 {% include 'partials/_navbar.html' %}
 <!-- Banner -->
@@ -56,7 +51,10 @@
 {% include 'partials/_footer.html' %}
 
 <!-- Scripts -->
-{% block scripts %} {% endblock %}
+{% block scripts %}
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.2"></script>
+{% endblock %}
 
 {#    <!-- Chống sao chép website-->#}
 {#    <script type="text/javascript">#}

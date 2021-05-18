@@ -11,8 +11,7 @@
     <div class="banner-content-inner">
       <h1 class="heading-01">Tìm kiếm ngôi nhà mơ ước</h1>
       <h5 class="heading-04">Hàng ngàn căn nhà trong kho giúp bạn tìm kiếm ngôi nhà mơ ước</h5>
-      <form class="search-desktop-component" action="search" keyword="TP. Hà Nội"
-            init-title="TP. Hà Nội" placeholder="Nhập địa điểm, khu dân cư, tòa nhà">
+      <form id="searchForm" class="search-desktop-component" action="search">
         <div class="tab-container">
           <div class="tab">
             <input type="radio" name="service-type" value="sell" checked id="buy-house">
@@ -23,15 +22,15 @@
             <label for="rent-house">Thuê nhà</label>
           </div>
         </div>
-        <input type="hidden" placeholder="Nhập địa điểm, khu dân cư, tòa nhà" id="hidServiceTypeChecked"/>
+        <input type="hidden" placeholder="Nhập địa điểm, khu dân cư, tòa nhà" id="hidServiceTypeChecked"
+               name="searchData"/>
         <div class="search-container">
-          {#                        <i class="zmdi zmdi-search" style="opacity: 0.3"></i>#}
-          <i class="zmdi zmdi-refresh zmdi-hc-spin"></i>
-          <input class="search-input" style="cursor: progress" disabled type="search" autocomplete="off"
+          <i class="zmdi zmdi-search" style="opacity: 0.3"></i>
+          <input disabled style="cursor: progress"
+                 class="search-input" type="search" autocomplete="off"
                  spellcheck="false" dir="auto" placeholder="TP. Hà Nội">
           <button type="submit" class="btn-primary btn-ultra btn-search" style="background-color: orange">
-            {#                            <i class="zmdi zmdi-search"></i>#}
-            <i class="zmdi zmdi-refresh zmdi-hc-spin"></i>
+            <i class="zmdi zmdi-search"></i>
             <span>Tìm Kiếm</span>
           </button>
           <ul class="recent-search hidden">
@@ -44,3 +43,43 @@
 
   </div>
 </div>
+
+<script type="text/x-template" id="searchFormTemplate">
+  <form class="search-desktop-component" action="search">
+    <div class="tab-container">
+      <div class="tab">
+        <input type="radio" name="service-type" value="sell" checked id="buy-house">
+        <label for="buy-house">Mua nhà</label>
+      </div>
+      <div class="tab">
+        <input type="radio" name="service-type" value="rent" id="rent-house">
+        <label for="rent-house">Thuê nhà</label>
+      </div>
+    </div>
+    <input type="hidden" placeholder="Nhập địa điểm, khu dân cư, tòa nhà" id="hidServiceTypeChecked"
+           name="searchData"/>
+    <div class="search-container">
+      <i v-show="!isLoading" class="zmdi zmdi-search" style="opacity: 0.3"></i>
+      <i v-show="isLoading" class="zmdi zmdi-refresh zmdi-hc-spin"></i>
+      <input
+        v-model="query" v-on:input="handleQueryChange"
+        v-bind:class="{ inputInProgress: isLoading, }"
+        class="search-input" type="search" autocomplete="off"
+        spellcheck="false" dir="auto" placeholder="TP. Hà Nội"
+      >
+      <button type="submit" class="btn-primary btn-ultra btn-search" style="background-color: orange">
+        <i class="zmdi zmdi-search"></i>
+        <span>Tìm Kiếm</span>
+      </button>
+      <ul class="recent-search" v-bind:class="{hidden: !suggestions.length}">
+        <li v-for="suggestion in suggestions" :key="suggestion.type" class=""
+            v-bind:class="{'search-result-type-heading': suggestion.isHeader}">
+            <span v-if="suggestion.isHeader">
+              <strong>${ suggestion.text }$</strong>
+            </span>
+          <span v-else><a v-bind:href="suggestion.link">${ suggestion.text }$ </a></span>
+        </li>
+      </ul>
+    </div>
+  </form>
+</script>

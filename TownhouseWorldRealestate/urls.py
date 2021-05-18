@@ -10,6 +10,7 @@ admin.autodiscover()
 
 urlpatterns = [
     path('', include('FunctionModule.pages.urls')),
+    path('api/', include('FunctionModule.api.urls')),
     path('listings/', include('FunctionModule.listings.urls')),
     path('transactions/', include('FunctionModule.transactions.urls')),
     path('accounts/', include('FunctionModule.accounts.urls')),
