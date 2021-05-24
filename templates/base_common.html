@@ -32,7 +32,14 @@
   {% endblock %}
 
   {% block head_script %}
-
+  <style>
+      [v-cloak] { display: none !important; }
+      /* Ẩn các element khi vue chưa load */
+      picture img { display: inline-block; vertical-align: middle; }
+      /*hide tracking img*/
+      img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] { display: none; }
+      ._hj_feedback_container button { /* Fix lỗi hotjar */ text-align: center; }
+  </style>
   {% endblock %}
 </head>
 

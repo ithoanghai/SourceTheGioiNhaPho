@@ -27,7 +27,7 @@ new Vue({
         },
         handleFocus: function (e) {
             this.isFocus = !this.isFocus;
-        }
+        },
     },
     created() {
         this.getAutoComplete = _.debounce(async (q) => {
@@ -65,6 +65,21 @@ new Vue({
     }
 })
 
+const ContactPopUpComponent = Vue.extend({
+    template: '#contactPopupTemplate',
+    delimiters: ["[[", "]]"],
+    props: {
+        showContactPopup: {
+            type: Boolean,
+            default: false
+        },
+        closePopup: Function
+    }
+})
+
+Vue.component('contact-popup', ContactPopUpComponent)
+
+// new ContactPopUpComponent().$mount('#contactPopUp');
 const defaultSliderPriceOptions = {
     type: "double",
     min: 0,
@@ -99,6 +114,7 @@ const PropertyListComponent = Vue.extend({
         pagination: Object,
         isViewGrid: Boolean,
         isLoading: Boolean,
+        showContactProject: Function,
     },
     methods: {
         getListingDetailURL: function (id) {
@@ -143,6 +159,7 @@ new Vue({
             pagination: {},
             scriptsReady: false,
             checkingInterval: null,
+            showContactPopup: false,
         }
     },
     computed: {
@@ -327,6 +344,12 @@ new Vue({
         applySearchParams: async function () {
 
         },
+        showContactProject: function () {
+            this.showContactPopup = true;
+        },
+        closeContactProject: function () {
+            this.showContactPopup = false;
+        },
         setMarkers: function () {
             if (!map) return;
             this.listings.map(item => {
@@ -397,3 +420,4 @@ new Vue({
         this.$priceSlider.destroy()
     }
 })
+

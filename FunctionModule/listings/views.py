@@ -62,101 +62,19 @@ def detail(request):
 
 
 def search(request):
-    queryset_list = Listing.objects.order_by('-list_date')
     hn_district = district_data['01']
 
-    # Trantype
-    if 'trantype' in request.GET:
-        trantype = request.GET['trantype']
-        if trantype:
-            queryset_list = queryset_list.filter(transaction_type=trantype)
-
-    # Housetype
-    if 'housetype' in request.GET:
-        housetype = request.GET['housetype']
-        if housetype:
-            queryset_list = queryset_list.filter(transaction_type=housetype)
-
-    # urban_area
-    if 'urban_area' in request.GET:
-        urban_area = request.GET['urban_area']
-        if urban_area:
-            queryset_list = queryset_list.filter(urban_area=urban_area)
-
-    # Keywords
-    if 'keywords' in request.GET:
-        keywords = request.GET['keywords']
-        if keywords:
-            query = Q(description__icontains=keywords) | Q(title__icontains=keywords)
-            queryset_list = queryset_list.filter(query)
-
-            # Address
-            if 'address' in request.GET:
-                address = request.GET['address']
-                if address:
-                    queryset_list = queryset_list.filter(address__icontains=address)
-
-        # street
-        if 'street' in request.GET:
-            street = request.GET['street']
-            if street:
-                queryset_list = queryset_list.filter(
-                    Q(address__icontains=street) | Q(street__icontains=street))
-
-    # District
-    if 'district' in request.GET:
-        district = request.GET['district']
-        if district:
-            district_code = next(x['code'] for x in hn_district if x['slug'] == district)
-            if district_code:
-                queryset_list = queryset_list.filter(district=district_code)
-
-    # State
-    if 'state' in request.GET:
-        state = request.GET['state']
-        if state:
-            queryset_list = queryset_list.filter(state=state)
-
-    # Bedrooms
-    if 'bedrooms' in request.GET:
-        bedrooms = request.GET['bedrooms']
-        if bedrooms:
-            queryset_list = queryset_list.filter(bedrooms__lte=bedrooms)
-
-    # Price
-    if 'price' in request.GET:
-        price = request.GET['price']
-        if price:
-            query = Q(price__lte=price) | Q(sale_price__lte=price)
-            queryset_list = queryset_list.filter(query)
-
-    try:
-        page = int(request.GET.get('page', 1))
-    except ValueError:
-        page = 1
-    limit = request.GET.get('limit', 10)
-    offset = (page - 1) * limit
-    paginator = Paginator(queryset_list, limit)
-    try:
-        listings = paginator.get_page(page)
-    except Exception:
-        listings = paginator.get_page(1)
-    request_params = dict(request.GET.items())
-    total_pages = paginator.num_pages
-    next_5_pages = page + 5 if page + 5 < total_pages else total_pages
-    min_page = page - 1 if page - 1 > 0 else page
     context = {
         # 'listings': queryset_list[offset: limit + offset],
-        'listings': listings,
-        'request_params': request_params,
+        'listings': [],
         'state_data': state_data,
         'districts': hn_district,
         'pagination': {
-            'current_page': page,
-            'next_5_pages': range(min_page, next_5_pages),
-            'limit': limit,
-            'offset': offset,
-            'total': queryset_list.count()
+            'current_page': 1,
+            'next_5_pages': range(1, 5),
+            'limit': 10,
+            'offset': 0,
+            'total': 0
         }
     }
 
