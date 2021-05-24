@@ -88,8 +88,7 @@
           <li>Kiểm tra lại địa điểm được nhập hoặc mở rộng phạm vi tìm kiếm bằng cách di chuyển bản đồ.</li>
           <li>Thay đổi hoặc huỷ bỏ bộ lọc đang áp dụng.</li>
         </ul>
-        <a class="btn-primary btn-view-agent" @click.prevent="showContactProject" href="../../specialistUs">Liên hệ tư
-          vấn</a>
+        <a class="btn-primary btn-view-agent" @click.prevent="showContactProject">Liên hệ tư vấn</a>
       </div>
     </div>
     <div v-if="listings.length" class="paginator-search">
@@ -126,4 +125,107 @@
       </ul>
     </div>
   </div>
+</script>
+
+<script type="text/x-template" id="contactPopupTemplate">
+  <span v-show="showContactPopup" wrapper-name="default">
+    <div class="popup-overlay">
+      <div class="popup-container">
+        <div class="popup-send-info">
+          <div class="header-w-close">
+            <button class="close-popup-btn">
+              <i class="zmdi zmdi-hc-2x zmdi-close"></i>
+            </button>
+            <h3 class="font-tiempos">Liên hệ tư vấn</h3>
+          </div>
+          <div id="contact-now-form-body" class="form-info" style="background: rgb(255, 255, 255);">
+            <form data-formtype="property-form" _lpchecked="1">
+              <fieldset><div class="form-element per50-left error">
+                <div class="placeholder">Họ </div>
+                <input type="text" name="lastname" class="input"/>
+                <span class="error-text">Thông tin bắt buộc</span>
+              </div>
+                <div class="form-element per50-right error"><div class="placeholder">Tên</div>
+                <input type="text" name="firstname" class="input"/>
+                  <span class="error-text">Thông tin bắt buộc</span>
+                </div>
+                <div class="form-element per50-left error">
+                  <div class="placeholder">Email</div>
+                  <input type="text" name="email" class="input">
+                  <span class="error-text">Thông tin bắt buộc</span>
+                </div>
+                <div class="form-element per50-right error">
+                  <div class="placeholder">Số điện thoại</div>
+                  <input type="text" name="phone" class="input"/>
+                  <span class="error-text">Thông tin bắt buộc</span>
+                </div>
+                <div class="form-element form-dropdown">
+                  <div class="placeholder">Khu vực bạn quan tâm</div>
+                  <div class="">
+                    <input type="text" autocomplete="false" class="input"/>
+                    <ul
+                      tabindex="-1" class="form-dropdown-content">
+                      <li class="active"><a href="#">Quận 2</a></li>
+                      <li class=""><a href="#">Quận 7</a></li>
+                      <li class=""><a href="#">Quận 4</a></li>
+                      <li class=""><a href="#">Quận Bình Thạnh</a></li>
+                      <li class=""><a href="#">Thảo Điền</a></li>
+                      <li class=""><a href="#">Thủ Thiêm</a></li>
+                      <li class=""><a href="#">An Phú An Khánh</a></li>
+                      <li class=""><a href="#">Vinhomes Central Park</a></li>
+                      <li class=""><a href="#">Phú Mỹ Hưng</a></li>
+                      <li class=""><a href="#">Quận 9</a></li>
+                    </ul>
+                  </div>
+                  <span class="error-text"></span>
+                </div>
+                <div class="form-element form-dropdown focused">
+                  <div class="placeholder">Loại nhà đất bạn muốn mua</div>
+                  <div class="">
+                    <span class="input" style="color: initial; padding: 8px 10px 5px;"> Căn hộ </span>
+                    <select style="display: none;">
+                      <option value="can-ho">Căn hộ</option>
+                      <option value="pent-house">Pent-house</option>
+                      <option value="shop-house">Shop-house</option>
+                      <option value="office-tel">Office-tel</option>
+                      <option value="nha-pho">Nhà phố</option>
+                      <option value="biet-thu">Biệt thự</option>
+                      <option value="van-phong">Văn phòng</option>
+                      <option value="mat-bang-kd">Mặt bằng KD</option>
+                      <option value="dat-nen">Đất nền</option></select>
+                    <ul tabindex="-1" class="form-dropdown-content">
+                      <li class="active"><a href="#">Căn hộ</a></li>
+                      <li class=""><a href="#">Pent-house</a></li>
+                      <li class=""><a href="#">Shop-house</a></li>
+                      <li class=""><a href="#">Office-tel</a></li>
+                      <li class=""><a href="#">Nhà phố</a></li>
+                      <li class=""><a href="#">Biệt thự</a></li>
+                      <li class=""><a href="#">Văn phòng</a></li>
+                      <li class=""><a href="#">Mặt bằng KD</a></li>
+                      <li class=""><a href="#">Đất nền</a></li></ul>
+                  </div>
+                  <span class="error-text"></span>
+                </div>
+                <div class="form-element">
+                  <div class="placeholder">Mức giá cần mua</div>
+                  <input type="text" name="price" class="input"/>
+                  <span class="error-text"></span>
+                </div>
+                <div class="form-element textarea-height">
+                  <div class="placeholder">Lời nhắn </div>
+                  <textarea name="description_note"> </textarea>
+                </div>
+              </fieldset>
+              <div class="action">
+                <button type="submit" class="large-btn-red">Gửi thông tin</button>
+              </div>
+              <div class="or-direct-call">
+                <p> Hoặc gọi ngay <a href="tel:1800 234 546"><strong>1800 234 546</strong></a> để gặp chuyên viên tư vấn </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </span>
 </script>

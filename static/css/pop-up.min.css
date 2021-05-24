@@ -1,15 +1,3 @@
-*, ::after, ::before {
-    margin: 0;
-    padding: 0;
-    -webkit-box-sizing: inherit;
-    box-sizing: inherit
-}
-
-html * {
-    -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: grayscale
-}
-
 input[type=search]::-webkit-search-cancel-button {
     -webkit-appearance: searchfield-cancel-button
 }
