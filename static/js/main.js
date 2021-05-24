@@ -5,6 +5,7 @@ new Vue({
     data() {
         return {
             isLoading: false,
+            isFocus: false,
             suggestions: [],
         }
     },
@@ -24,6 +25,9 @@ new Vue({
                 this.isLoading = true;
                 this.getAutoComplete(q);
             }
+        },
+        handleFocus: function (e) {
+            this.isFocus = !this.isFocus;
         }
     },
     created() {

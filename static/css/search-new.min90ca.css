@@ -817,14 +817,14 @@ body {
     margin-left: 4px;
     content: '\f2f9';
     font-family: Material-Design-Iconic-Font;
-    color: #c72628;
+    color: orange;
     font-size: 14px;
     vertical-align: middle
 }
 
 .main-header .col-left .top-search form .search-type > span {
     font-size: 14px;
-    color: orange;
+    color: rgba(48,51,58,.86);
 }
 
 .main-header .col-left .top-search form .search-type ul {
@@ -2205,7 +2205,8 @@ ul.breadcrumb li a:hover {
     cursor: pointer;
     color: #fff;
     background: rgba(48, 51, 58, .3);
-    z-index: 9
+    z-index: 9;
+    opacity: 1;
 }
 
 .btn-favorite.zmdi {
@@ -2623,7 +2624,7 @@ ul.breadcrumb li a:hover {
     color: #337588
 }
 
-.paginator li a:hover {
+.paginator :not(.disabled) li a:hover {
     color: #fff;
     display: block;
     border-radius: 2px;
@@ -2635,6 +2636,10 @@ ul.breadcrumb li a:hover {
     display: block;
     border-radius: 2px;
     background: rgba(48, 51, 58, .8)
+}
+
+.paginator li .active :hover {
+    cursor: initial;
 }
 
 .paginator li .btnNext:hover, .paginator li .btnPre:hover {
@@ -6289,10 +6294,18 @@ label {
     color: #fff
 }
 
+.btn-favorite__v2:hover:before {
+    color: orange;
+}
+
 .btn-favorite__v2.active:before {
     content: '\f15f';
     font-size: 24px;
     color: #fff
+}
+
+.btn-favorite__v2.active:hover:before {
+    color: orange;
 }
 
 .btn-compare {
@@ -8564,18 +8577,18 @@ label {
 }
 
 .result-body .row.grid .listView.box .cover-image a {
-    position: relative;
+    /*position: relative;*/
     width: 100%;
-    height: 0;
-    display: block;
-    overflow: hidden;
-    padding-top: 66.67%
+    /*height: 0;*/
+    /*display: block;*/
+    /*overflow: hidden;*/
+    /*padding-top: 66.67%*/
 }
 
 .result-body .row.grid .listView.box .cover-image img {
     width: 100%;
     display: block;
-    position: absolute;
+    /*position: absolute;*/
     top: 0;
     height: 100%;
     -o-object-fit: cover;
@@ -12127,7 +12140,6 @@ div > img {
 }
 
 .sort-listing .sort-listing--option {
-    display: none;
     position: absolute;
     top: 100%;
     right: 0;
@@ -12988,4 +13000,13 @@ div > img {
     .fix--width__dropdown--inner {
         overflow-y: scroll
     }
+}
+
+.search-result-type-heading {
+    padding: 0 15px;
+}
+
+.page-item.disabled {
+    cursor: initial;
+    pointer-events: none;
 }

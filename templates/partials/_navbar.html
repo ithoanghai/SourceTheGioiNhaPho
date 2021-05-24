@@ -58,12 +58,14 @@
     </div>
     <input type="hidden" placeholder="Nhập địa điểm, khu dân cư, tòa nhà" id="hidServiceTypeChecked"
            name="searchData"/>
-    <div class="search-container">
+    <div class="search-container" v-click-outside="handleFocus">
       <i v-show="!isLoading" class="zmdi zmdi-search" style="opacity: 0.3"></i>
       <i v-show="isLoading" class="zmdi zmdi-refresh zmdi-hc-spin"></i>
       <input
         v-model="query" v-on:input="handleQueryChange"
         v-bind:class="{ inputInProgress: isLoading, }"
+        v-on:focus="handleFocus"
+
         class="search-input" type="search" autocomplete="off"
         spellcheck="false" dir="auto" placeholder="TP. Hà Nội"
       >
@@ -71,7 +73,7 @@
         <i class="zmdi zmdi-search"></i>
         <span>Tìm Kiếm</span>
       </button>
-      <ul class="recent-search" v-bind:class="{hidden: !suggestions.length}">
+      <ul class="recent-search" v-show="suggestions.length && isFocus">
         <li v-for="suggestion in suggestions" :key="suggestion.type" class=""
             v-bind:class="{'search-result-type-heading': suggestion.isHeader}">
             <span v-if="suggestion.isHeader">

@@ -30,3 +30,4 @@ services:
       - "2222:22"
     depends_on:
       - db
+      - redis

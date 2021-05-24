@@ -1,0 +1,129 @@
+{% load static i18n %}
+
+<script type="text/x-template" id="propertyListTemplate">
+  <div id="propertyList" class="row" v-bind:class="{grid: isViewGrid}">
+    <div v-for="listing in listings" :key="listing.id" class="col property-itemz" :id="`property-tgnp-${listing.id}`">
+      <article class="box listView">
+        <div class="cover-image realty-search pic-realty-search">
+          <img :src="listing.main_photo || '{% static 'img/default.png' %}'" v-bind:alt="listing.title"/>
+          <a class="view-realty-search transition" :href="getListingDetailURL(listing.id)" target="_blank"
+             :title="listing.title"
+          >
+            <span><i>Xem chi tiết</i></span>
+          </a>
+          <button class="btn-favorite btn-favorite__v2 ">
+          </button>
+          <div class="label-group">
+            <label v-if="listing.is_exclusive" class="label-primary unique">{% trans "TGNP độc quyền" %}</label>
+            <label class="label-primary unique p-1"
+                   style="font-size: 16px">[[listing.price]] {% trans "tỷ" %}</label>
+          </div>
+          <div style="display: none" class="overview-quick-look">
+            <div class="btn-quick-look">
+              <a class="btn-primary" id="quick-look" href="#">
+                Xem nhanh
+              </a>
+              <a class="btn-primary" target="_blank"
+                 :href="getListingDetailURL(listing.id)"
+                 title="{{ listing.title }}">
+                Xem chi tiết
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="info-container">
+          <div class="group-grid__view">
+            <ul class="listing-info">
+              <li v-if="listing.bedrooms && listing.bedrooms > 0"><i
+                class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}</li>
+              <li><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]]{% trans "m2" %}</li>
+              <li v-if="listings.floors && listing.floors > 0"><i class="fa fa-h-square"></i>
+                [[listing.floors]] {% trans "tầng" %}</li>
+              <li v-if="listings.bathrooms && listing.bathrooms > 0"><i
+                class="fa fa-bath"></i>[[listing.bathrooms]] {% trans "tắm" %} </li>
+            </ul>
+          </div>
+          <h3>
+            <a class="listing-name" :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.title]]</a>
+          </h3>
+          <div class="listing-address">
+            <h4><a :href="getListingDetailURL(listing.id)">[[listing.code]]</a></h4>
+            <h4>
+              <a :href="`/listings/search?keywords=${listing.street}`" title="">[[listing.street]]</a>
+            </h4>
+            <h4 v-if="listing.urban_area">
+              <a :href="`/listings/search?keywords=${listing.urban_area}`" title="">[[listing.urban_area]]</a>
+            </h4>
+            <h4>
+              <a :href="`/listings/search?keywords=${listing.district}`" title="">[[getDistrict(listing.district)]]</a>
+            </h4>
+          </div>
+          <ul class="listing-info">
+            <li v-if="listing.bedrooms && listing.bedrooms > 0"><i
+              class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}</li>
+            <li><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]]{% trans "m2" %}</li>
+            <li v-if="listings.floors && listing.floors > 0"><i class="fa fa-h-square"></i>
+              [[listing.floors]] {% trans "tầng" %}</li>
+            <li v-if="listings.bathrooms && listing.bathrooms > 0"><i
+              class="fa fa-bath"></i>[[listing.bathrooms]] {% trans "tắm" %} </li>
+          </ul>
+          <div class="action-group">
+            <div class="action-group--left">
+              <div class="listing-price">[[listing.price]] {% trans "tỷ" %}</div>
+              <span v-if="listing.is_exclusive" class="label-primary unique">{% trans "TGNP độc quyền" %}</span>
+            </div>
+            <div class="action-group--right action-group--cta">
+              <button class="btn-favorite btn-favorite__v2 " @click.prevent="handleFavorite(listing.id)"></button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="search-noresult">
+      <div v-if="!listings.length && !isLoading" class="search-noresult-main">
+        <img src="{% static 'images/icon-home-empty.svg' %}" alt="No data"/><br/>
+        <h2>Không tìm thấy dự án nào!</h2>
+        <ul> Vui lòng thử lại bằng cách:
+          <li>Kiểm tra lại địa điểm được nhập hoặc mở rộng phạm vi tìm kiếm bằng cách di chuyển bản đồ.</li>
+          <li>Thay đổi hoặc huỷ bỏ bộ lọc đang áp dụng.</li>
+        </ul>
+        <a class="btn-primary btn-view-agent" @click.prevent="showContactProject" href="../../specialistUs">Liên hệ tư
+          vấn</a>
+      </div>
+    </div>
+    <div v-if="listings.length" class="paginator-search">
+      <ul class="paginator">
+        {% if listings.has_previous %}
+          <li>
+            <a class="btnPre" @click.prevent="goTo({{ listings.paginator.previous_page }})">
+              <i class="zmdi zmdi-chevron-left"></i>
+            </a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link">&laquo;</a>
+          </li>
+        {% endif %}
+
+        {% for i in pagination.next_5_pages %}
+          <li><a class="{% if listings.number == i %}active{% endif %}"
+                 @click.prevent="goTo({{ i }})">{{ i }}</a></li>
+        {% endfor %}
+
+        {% if listings.has_next %}
+          <li>
+            <a class="btnNext">
+              <i class="zmdi zmdi-chevron-right"></i>
+            </a>
+          </li>
+        {% else %}
+          <li class="page-item disabled" @click.prevent="goTo({{ listings.paginator.next_page }})">
+            <a class="page-link">&raquo;</a>
+          </li>
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>
+</script>
