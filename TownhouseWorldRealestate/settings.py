@@ -51,6 +51,7 @@ THIRD_PARTIES = [
     'rest_framework.authtoken',
     'django_filters',
     'adminplus',
+    'cachalot',
 ]
 
 BUILT_IN_APPS = [
@@ -96,7 +97,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 WSGI_APPLICATION = 'TownhouseWorldRealestate.wsgi.application'
 
@@ -194,23 +194,23 @@ INTERNAL_IPS = [
     '*'
 ]
 
-
 REST_FRAMEWORK = {
-   'DEFAULT_MODEL_SERIALIZER_CLASS': (
+    'DEFAULT_MODEL_SERIALIZER_CLASS': (
         'rest_framework.serializers.HyperlinkedModelSerializer',
-   ),
-   'DEFAULT_AUTHENTICATION_CLASSES': (
-       'rest_framework.authentication.TokenAuthentication',
-       'rest_framework.authentication.SessionAuthentication',
-   ),
-   'DEFAULT_PERMISSION_CLASSES': (
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAdminUser',
         #        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-   ),
-   'DEFAULT_PAGINATION_CLASS':  'rest_framework.pagination.LimitOffsetPagination',
-   'PAGE_SIZE': 1
-
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 1,
+    'UNICODE_JSON': True,
 }
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -234,3 +234,10 @@ LOGGING = {
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 15  # 15M
 FILE_UPLOAD_MAX_MEMORY_SIZE = DATA_UPLOAD_MAX_MEMORY_SIZE
+
+CACHES = {
+    'default': {
+        "BACKEND": "django_redis.cache.RedisCache",
+        'LOCATION': os.getenv('REDIS_URL', default='redis://redis:6379/1')
+    }
+}

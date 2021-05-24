@@ -321,8 +321,53 @@
       </div>
       <div class="main-nav-menu__overlay"></div>
     </div>
-    <div class="search-desktop-component" keyword="" init-title=""
-         placeholder="Nhập địa điểm, khu dân cư, tòa nhà"></div>
+    <div class="top-search" id="topSearchForm">
+      <a href="#"></a>
+      <form>
+        <div tabindex="0" class="search-type"><span>Mua nhà</span>
+          <ul class="hide">
+            <li>
+              Thuê nhà
+            </li><!---->
+            <li>
+              Dự án
+            </li>
+          </ul>
+        </div>
+        <i class="zmdi zmdi-search"></i>
+        <div class="search-type-mobile">
+          Mua •
+        </div>
+        <input placeholder="Nhập địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
+               spellcheck="false" dir="auto">
+        {#        <div class="result-list-search-popup">#}
+        {#          <div class="result-list-search-popup-container">#}
+        {#            <div class="result-list-search-popup-heading">#}
+        {#              <h5>#}
+        {#                Không tìm thấy kết quả nào tương ứng với "Hà Nội"#}
+        {#              </h5>#}
+        {#              <a href="#" class="btn-close">#}
+        {#                <i class="zmdi zmdi-hc-2x zmdi-close"></i>#}
+        {#              </a>#}
+        {#            </div>#}
+        {#            <div class="search-container">#}
+        {#              <div class="result-empty-list">#}
+        {#                <p>#}
+        {#                  Vui lòng kiểm tra lại từ khóa <br>#}
+        {#                  Hoặc bạn có thể định dạng lại từ khóa theo ví dụ dưới:#}
+        {#                </p>#}
+        {#                <p style="padding-top: 0.25rem;"><strong>Dự án:</strong> Vinhome#}
+        {#                  Gia Lâm#}
+        {#                </p>#}
+        {#                <p><strong>Khu dân cư:</strong> "Quận Hoàn Kiếm" hoặc "Khu đô thị#}
+        {#                  Linh Đàm" hoặc "Ciputra - Nam Thăng Long"#}
+        {#                </p>#}
+        {#              </div>#}
+        {#            </div>#}
+        {#          </div>#}
+        {#        </div>#}
+      </form>
+    </div>
   </div>
   <div class="col-right">
     <div class="top-menu">
@@ -725,3 +770,45 @@
   <div class="search-mobile-component" keyword="" init-title=""
        placeholder="Nhập địa điểm, khu dân cư, tòa nhà"></div>
 </header>
+
+
+<script type="text/x-template" id="topSearchTemplate">
+  <div class="top-search">
+    <a href="#"></a>
+    <form>
+      <div tabindex="0" class="search-type"><span>Mua nhà</span>
+        <ul class="hide">
+          <li>
+            Thuê nhà
+          </li><!---->
+          <li>
+            Dự án
+          </li>
+        </ul>
+      </div>
+      <i v-show="!isLoading" class="zmdi zmdi-search" style="opacity: 0.3"></i>
+      <i v-show="isLoading" class="zmdi zmdi-refresh zmdi-hc-spin"></i>
+      <div class="search-type-mobile">
+        Mua •
+      </div>
+      <div style="width: 100%" v-click-outside="handleFocus">
+        <input placeholder="Nhập địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
+               spellcheck="false" dir="auto" v-model="query"
+               v-on:input="handleQueryChange"
+               v-bind:class="{ inputInProgress: isLoading, }"
+               v-on:focus="handleFocus"
+        />
+        <ul class="search-suggest-list" v-show="suggestions.length && isFocus">
+          <li v-for="suggestion in suggestions" :key="suggestion.type" class=""
+              v-bind:class="{'search-result-type-heading': suggestion.isHeader}">
+            <span v-if="suggestion.isHeader">
+              <strong>${ suggestion.text }$</strong>
+            </span>
+            <span v-else><a v-bind:href="suggestion.link"><span>${ suggestion.text }$</span> </a></span>
+          </li>
+        </ul>
+      </div>
+
+    </form>
+  </div>
+</script>

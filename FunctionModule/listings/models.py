@@ -8,6 +8,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 from embed_video.fields import EmbedVideoField
 from location_field.models.spatial import LocationField
+from rest_framework import serializers
 
 from FunctionModule.cadastral.constants import state_data, district_data
 from FunctionModule.realtors.models import Realtor
@@ -167,6 +168,22 @@ class Listing(models.Model):
     def videos(self):
         return self.listingvideo_set.all()
 
+    @property
+    def lat(self):
+        return self.location.y
+
+    @property
+    def long(self):
+        return self.location.x
+
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "district": self.district,
+
+        }
+
 
 class ListingImage(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
@@ -185,3 +202,21 @@ class ListingImage(models.Model):
 class ListingVideo(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     video = EmbedVideoField()
+
+
+class ListingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Listing
+        # fields = '__all__'
+        exclude = ('address',)
+
+    lat = serializers.CharField()
+    long = serializers.CharField()
+    main_photo = serializers.SerializerMethodField()
+
+    def get_main_photo(self, obj):
+        photo = obj.main_photo
+        if photo:
+            return photo.url
+        else:
+            return ''

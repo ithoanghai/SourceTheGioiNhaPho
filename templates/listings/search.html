@@ -4,1264 +4,697 @@
 
 {% block head %}
   {{ block.super }}
-        <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-        <script src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
-        <script async defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
-        <script async defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
-        <script defer src="www.google.com/recaptcha/apib091.js?render=explicit"></script>
+  <link rel="canonical" href="search"/>
+  <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
+  <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
+  <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/popup-new.min90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/flexslider.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/search-transition.css' %}"/>
 
-        <script type="text/javascript">
-            var callbackInitMap = function () {
-                if (window.vinitMap) {
-                    window.vinitMap();
-                }
-                if (window.initMap) {
-                    initMap.call(this);
-                } else {
-                    setTimeout(callbackInitMap, 500);
-                }
-            }
+  <style>
+      [v-cloak] {
+          display: none !important;
+      }
 
-        </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap"></script>
+      /* Ẩn các element khi vue chưa load */
+      picture img {
+          display: inline-block;
+          vertical-align: middle;
+      }
 
+      /*hide tracking img*/
+      img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
+          display: none;
+      }
 
-    <link rel="canonical" href="search"/>
-    <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
-    <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/popup-new.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/flexslider.min.css' %}"/>
+      ._hj_feedback_container button { /* Fix lỗi hotjar */
+          text-align: center;
+      }
+  </style>
+  <style>
+      @-webkit-keyframes vueContentPlaceholdersAnimation {
+          0% {
+              -webkit-transform: translate3d(-30%, 0, 0);
+              transform: translate3d(-30%, 0, 0);
+          }
+          100% {
+              -webkit-transform: translate3d(100%, 0, 0);
+              transform: translate3d(100%, 0, 0);
+          }
+      }
 
-    <style>
-        [v-cloak] {
-            display: none !important;
-        }
+      @keyframes vueContentPlaceholdersAnimation {
+          0% {
+              -webkit-transform: translate3d(-30%, 0, 0);
+              transform: translate3d(-30%, 0, 0);
+          }
+          100% {
+              -webkit-transform: translate3d(100%, 0, 0);
+              transform: translate3d(100%, 0, 0);
+          }
+      }
 
-        /* Ẩn các element khi vue chưa load */
-        picture img {
-            display: inline-block;
-            vertical-align: middle;
-        }
+      .vue-content-placeholders-heading {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+      }
 
-        /*hide tracking img*/
-        img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
-            display: none;
-        }
+      [class^="vue-content-placeholders-"] + .vue-content-placeholders-heading {
+          margin-top: 20px;
+      }
 
-        ._hj_feedback_container button { /* Fix lỗi hotjar */
-            text-align: center;
-        }
-    </style>
+      .vue-content-placeholders-heading__img {
+          position: relative;
+          overflow: hidden;
+          height: 15px;
+          background: #eee;
+          width: 60px;
+          height: 60px;
+          margin-right: 15px;
+      }
 
-        <link rel="stylesheet" href="{% static 'css/search-new.min90ca.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/ion.rangeSlider.skinFlat.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/pop-up.min.css' %}"/>
+      .vue-content-placeholders-is-rounded .vue-content-placeholders-heading__img {
+          border-radius: 6px;
+      }
 
-    <style>
-        .banner-app-tgnp {
-            position: relative;
-            display: none;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-            -ms-flex-flow: row nowrap;
-            flex-flow: row nowrap;
-            -webkit-box-pack: justify;
-            -ms-flex-pack: justify;
-            justify-content: space-between;
-            width: 100%;
-            padding: 10px 18px;
-            background-color: #30333a;
-            z-index: 100
-        }
+      .vue-content-placeholders-is-centered .vue-content-placeholders-heading__img {
+          margin-left: auto;
+          margin-right: auto;
+      }
 
-        @media (max-width: 768px) {
-            .banner-app-tgnp {
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex
-            }
-        }
+      .vue-content-placeholders-is-animated .vue-content-placeholders-heading__img::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          max-width: 1000px;
+          height: 100%;
+          background: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(15%, #e1e1e1), color-stop(30%, transparent));
+          background: linear-gradient(to right, transparent 0%, #e1e1e1 15%, transparent 30%);
+          -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+          -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+          -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+          -webkit-animation-name: vueContentPlaceholdersAnimation;
+          animation-name: vueContentPlaceholdersAnimation;
+          -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+      }
 
-        .close-banner-app {
-            padding: 0 10px 0 0;
-            outline: 0;
-            background: 0 0;
-            border: 0;
-            font-size: 16px;
-            color: #fff;
-            font-weight: 400
-        }
+      .vue-content-placeholders-heading__content {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-flex: 1;
+          -ms-flex: 1;
+          flex: 1;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+          flex-direction: column;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+      }
 
-        .close-banner-app .zmdi {
-            font-size: 16px;
-            padding: 0
-        }
+      .vue-content-placeholders-heading__title {
+          position: relative;
+          overflow: hidden;
+          height: 15px;
+          background: #eee;
+          width: 85%;
+          margin-bottom: 10px;
+          background: #ccc;
+      }
 
-        .btn-install {
-            position: relative;
-            display: inline-block;
-            min-width: -webkit-min-content;
-            min-width: -moz-min-content;
-            min-width: fit-content;
-            max-width: max-content;
-            max-width: max-content;
-            max-width: fit-content;
-            width: 100%;
-            padding: 8px 10px 7px;
-            border-radius: 2px;
-            font-size: 14px;
-            line-height: 1.5;
-            font-weight: 500;
-            text-align: center;
-            color: #fff;
-            cursor: pointer
-        }
+      .vue-content-placeholders-is-rounded .vue-content-placeholders-heading__title {
+          border-radius: 6px;
+      }
 
-        .btn-install::after {
-            background-color: orange;
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 2px;
-            z-index: -1;
-            -webkit-animation: zoomin 1.2s ease-in infinite;
-            animation: zoomin 1.2s ease-in infinite;
-            -webkit-transition: all .3s ease-in-out;
-            transition: all .3s ease-in-out
-        }
+      .vue-content-placeholders-is-centered .vue-content-placeholders-heading__title {
+          margin-left: auto;
+          margin-right: auto;
+      }
 
-        .btn-install:focus, .btn-install:hover {
-            color: #fff
-        }
+      .vue-content-placeholders-is-animated .vue-content-placeholders-heading__title::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          max-width: 1000px;
+          height: 100%;
+          background: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(15%, #e1e1e1), color-stop(30%, transparent));
+          background: linear-gradient(to right, transparent 0%, #e1e1e1 15%, transparent 30%);
+          -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+          -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+          -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+          -webkit-animation-name: vueContentPlaceholdersAnimation;
+          animation-name: vueContentPlaceholdersAnimation;
+          -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+      }
 
-        .banner-app-content {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center
-        }
+      .vue-content-placeholders-heading__subtitle {
+          position: relative;
+          overflow: hidden;
+          height: 15px;
+          background: #eee;
+          width: 90%;
+      }
 
-        .banner-app-content .cover {
-            width: 44px;
-            min-width: 44px;
-            height: 44px;
-            margin-right: 10px;
-            border-radius: 10px;
-            overflow: hidden
-        }
+      .vue-content-placeholders-is-rounded .vue-content-placeholders-heading__subtitle {
+          border-radius: 6px;
+      }
 
-        .banner-app-content .cover img {
-            width: 100%;
-            max-width: 100%;
-            height: 100%;
-            -o-object-fit: contain;
-            object-fit: contain
-        }
+      .vue-content-placeholders-is-centered .vue-content-placeholders-heading__subtitle {
+          margin-left: auto;
+          margin-right: auto;
+      }
 
-        .banner-app-content .banner-app-info a {
-            font-size: 14px;
-            line-height: 1;
-            font-weight: 500;
-            color: #fff
-        }
+      .vue-content-placeholders-is-animated .vue-content-placeholders-heading__subtitle::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          max-width: 1000px;
+          height: 100%;
+          background: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(15%, #e1e1e1), color-stop(30%, transparent));
+          background: linear-gradient(to right, transparent 0%, #e1e1e1 15%, transparent 30%);
+          -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+          -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+          -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+          -webkit-animation-name: vueContentPlaceholdersAnimation;
+          animation-name: vueContentPlaceholdersAnimation;
+          -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+      }
 
-        .banner-app-content .banner-app-info p {
-            font-size: 12px;
-            line-height: 1.5;
-            font-weight: 400;
-            color: #fff
-        }
+      [class^="vue-content-placeholders-"] + .vue-content-placeholders-text {
+          margin-top: 20px;
+      }
 
-        .banner-app-content .banner-app-info .rating-star {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center
-        }
+      .vue-content-placeholders-text__line {
+          position: relative;
+          overflow: hidden;
+          height: 15px;
+          background: #eee;
+          width: 100%;
+          margin-bottom: 10px;
+      }
 
-        .banner-app-content .banner-app-info .rating-star .zmdi {
-            font-size: 12px;
-            color: #838383;
-            cursor: pointer
-        }
+      .vue-content-placeholders-is-rounded .vue-content-placeholders-text__line {
+          border-radius: 6px;
+      }
 
-        @media (min-width: 1200px) {
-            .banner-app-content .banner-app-info .rating-star .zmdi:hover {
-                color: #f7ce27
-            }
-        }
+      .vue-content-placeholders-is-centered .vue-content-placeholders-text__line {
+          margin-left: auto;
+          margin-right: auto;
+      }
 
-        .banner-app-content .banner-app-info .rating-star .zmdi.evaluated {
-            color: #f7ce27
-        }
+      .vue-content-placeholders-is-animated .vue-content-placeholders-text__line::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          max-width: 1000px;
+          height: 100%;
+          background: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(15%, #e1e1e1), color-stop(30%, transparent));
+          background: linear-gradient(to right, transparent 0%, #e1e1e1 15%, transparent 30%);
+          -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+          -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+          -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+          -webkit-animation-name: vueContentPlaceholdersAnimation;
+          animation-name: vueContentPlaceholdersAnimation;
+          -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+      }
 
-        @keyframes zoomin {
-            0% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-            50% {
-                -webkit-transform: scale(1.1);
-                transform: scale(1.1)
-            }
-            100% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-        }
+      .vue-content-placeholders-text__line:nth-child(4n + 1) {
+          width: 80%;
+      }
 
-        @-webkit-keyframes zoomin {
-            0% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-            50% {
-                -webkit-transform: scale(1.1);
-                transform: scale(1.1)
-            }
-            100% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-        }
-    </style>
-    <style>
-        #search-content .search-container .search-result > div .result-body .row.grid .projectCard-list.box .cover-image .btn-favorite {
-            display: block;
-        }
-    </style>
+      .vue-content-placeholders-text__line:nth-child(4n + 2) {
+          width: 100%;
+      }
+
+      .vue-content-placeholders-text__line:nth-child(4n + 3) {
+          width: 70%;
+      }
+
+      .vue-content-placeholders-text__line:nth-child(4n + 4) {
+          width: 85%;
+      }
+
+      .vue-content-placeholders-img {
+          position: relative;
+          overflow: hidden;
+          height: 15px;
+          background: #eee;
+          width: 100%;
+          height: 120px;
+      }
+
+      .vue-content-placeholders-is-rounded .vue-content-placeholders-img {
+          border-radius: 6px;
+      }
+
+      .vue-content-placeholders-is-centered .vue-content-placeholders-img {
+          margin-left: auto;
+          margin-right: auto;
+      }
+
+      .vue-content-placeholders-is-animated .vue-content-placeholders-img::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          max-width: 1000px;
+          height: 100%;
+          background: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(15%, #e1e1e1), color-stop(30%, transparent));
+          background: linear-gradient(to right, transparent 0%, #e1e1e1 15%, transparent 30%);
+          -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+          -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+          -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+          -webkit-animation-name: vueContentPlaceholdersAnimation;
+          animation-name: vueContentPlaceholdersAnimation;
+          -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+      }
+
+      [class^="vue-content-placeholders-"] + .vue-content-placeholders-img {
+          margin-top: 20px;
+      }
+  </style>
+
+  <link rel="stylesheet" href="{% static 'css/search-new.min90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/ion.rangeSlider.skinFlat.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/pop-up.min.css' %}"/>
+  {% include 'listings/_searchXTemplate.html' %}
 {% endblock %}
 
 {% block content %}
-    <!-- Search menu -->
-    {% include 'partials/_menuSearch.html' %}
+  <!-- Search menu -->
+  {% include 'partials/_menuSearch.html' %}
 
-    <input id="elInitSearchPage" type="hidden" value="true"/>
+  <input id="elInitSearchPage" type="hidden" value="true"/>
 
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/nsee2a.html?id=GTM-5VPGSP5"
-                height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-
-    <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">
-        <div class="banner-app-content">
-            <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
-                <i class="zmdi zmdi-close"></i>
-            </button>
-            <a href="javascript:void(0)" class="cover">
-                <img src="{% static 'img/logo.svg' %}" alt="Thế giới Nhà Phố">
-            </a>
-            <div class="banner-app-info">
-                <a href="javascript:void(0)">TGNP</a>
-                <p>Mua bán nhà dễ dàng</p>
-                <div class="rating-star">
-                    <i class="zmdi zmdi-star evaluated"></i>
-                    <i class="zmdi zmdi-star evaluated"></i>
-                    <i class="zmdi zmdi-star evaluated"></i>
-                    <i class="zmdi zmdi-star evaluated"></i>
-                    <i class="zmdi zmdi-star-half evaluated"></i>
-                </div>
-            </div>
+  <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">
+    <div class="banner-app-content">
+      <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
+        <i class="zmdi zmdi-close"></i>
+      </button>
+      <a href="javascript:void(0)" class="cover">
+        <img src="{% static 'img/logo.svg' %}" alt="Thế giới Nhà Phố">
+      </a>
+      <div class="banner-app-info">
+        <a href="javascript:void(0)">TGNP</a>
+        <p>Mua bán nhà dễ dàng</p>
+        <div class="rating-star">
+          <i class="zmdi zmdi-star evaluated"></i>
+          <i class="zmdi zmdi-star evaluated"></i>
+          <i class="zmdi zmdi-star evaluated"></i>
+          <i class="zmdi zmdi-star evaluated"></i>
+          <i class="zmdi zmdi-star-half evaluated"></i>
         </div>
-        <a href="javascript:void(0)" class="btn-install">Mở</a>
+      </div>
     </div>
+    <a href="javascript:void(0)" class="btn-install">Mở</a>
+  </div>
 
-     <div id="search-content" class="block-search-noresult page--search" single-project=""
-             init-params="{&#10;  &quot;service_type&quot; : 2,&#10;  &quot;neighborhood_id&quot; : &quot;1576833711767_2408&quot;,&#10;  &quot;city_id&quot; : &quot;1576833711767_2408&quot;,&#10;  &quot;page&quot; : 1,&#10;  &quot;size&quot; : 20,&#10;  &quot;keyword&quot; : &quot;ha-noi&quot;,&#10;  &quot;title&quot; : &quot;Hà Nội&quot;,&#10;  &quot;search_mode&quot; : 10,&#10;  &quot;filter_price_path&quot; : &quot;sell_price_vnd&quot;,&#10;  &quot;service_types&quot; : [ 2, 3 ],&#10;  &quot;invalid&quot; : false,&#10;  &quot;bounding_box_valid&quot; : false&#10;}"
-             boundary="[[21.295381463351596, 105.38073761109472],[21.2123020505755, 105.33956107581396],[21.16171282561229, 105.29353489176499],[21.1021521594662, 105.320994425131],[21.05027681277835, 105.29490980349338],[21.008326734261086, 105.32944177058108],[21.020313965630454, 105.38632129084931],[20.947484530468444, 105.46424442284552],[20.921675451614405, 105.58252172714195],[20.879759397798193, 105.54211095932246],[20.82832226686058, 105.58054303388099],[20.829941767971732, 105.63830351952595],[20.697070152946058, 105.67748025098294],[20.615684037636022, 105.66776680728132],[20.56311664393288, 105.78141594398187],[20.659158189634052, 105.82666127230605],[20.645281892522505, 105.8835735541997],[20.678608793290262, 105.94344217173007],[20.65023589977849, 105.9543655592307],[20.703355387555888, 105.99873907713264],[20.706870310462758, 105.97207066442263],[20.7756221659939, 105.96132661584272],[20.92729528266984, 105.90713655179569],[20.974393047064282, 105.9137039525554],[20.96998939866876, 105.96145711527774],[21.03667413222488, 106.0168568439639],[21.076992082534073, 106.00230380866917],[21.126031976940215, 105.9188007990859],[21.25155684246848, 105.93460406525612],[21.391069876039094, 105.81833499962408],[21.26724754015096, 105.72271762432533],[21.218549476844235, 105.71441633219307],[21.237391772539002, 105.64292693379171],[21.18186569527792, 105.60533031172685],[21.1792751266507, 105.47246135743721],[21.297984275129185, 105.39349793685294]]"
-             nearby-location="{name: Hà Nội}"
-             search-ref="">
-            <save-search-manager ref="createSaveSearch" email="hoanghai.bdsvn@gmail.com"></save-search-manager>
-            <div class="search-container" :class="{'full': !isShowMap}">
-                <div class="search-result" :class="{'is-quick-look': quick_view_data.show}" style="z-index: auto">
-                <div id="projects" class="panel" v-show="isSearchProject" style="z-index: auto; display: none;">
-                    <div class="secondaryBar">
-                        <p class="keyword" v-if="isFirstLoad">Mua Bán Nhà Đất Căn Hộ Hà Nội Giá Tốt Nhất | TGNP</p>
-                        <p class="keyword" v-else v-text="titleStringProject"></p>
-                        <div class="mobile-save"></div>
-                    </div>
-                    <project-filter-form v-if="isSearchProject" :on-click-filter-mobi="onClickFilterMobi"
-                                         ref="projectFilterForm" :show-mobile="isMobileWidth" v-model="params">
-                        <template slot="right">
-                            <div class="view">
-                                <button @click.prevent="viewAsGrid()" :class="{active: isViewGrid}"
-                                        class="zmdi zmdi-view-module"></button>
-                                <button @click.prevent="viewAsList()" :class="{active: !isViewGrid}"
-                                        class="zmdi zmdi-view-stream"></button>
-                            </div>
-                        </template>
-                    </project-filter-form>
-                    <div class="results-sc">
-                        <span class="results">Hiển thị
-                        <strong v-if="isFirstLoad">10 trong số {{ listings.count }} sản phẩm</strong>
-                        <strong v-else v-html="displayTotal + ' trong số ' + projects.total"></strong>
-                        </span>
-                        <div class="sort-listing" ref="projectSort">
-                            <a href="#" @click.prevent.stop="toggleSort()">
-                                <span ref="labelSortProperty" v-text="sortString || 'Mới nhất'"></span>
-                                <i class="zmdi zmdi-chevron-down" style="cursor: pointer"></i>
-                            </a>
-                            <ul class="sort-listing--option">
-                                <li style="cursor: pointer" title="Mới nhất" value="1" @click.prevent="sortBy(1)">Mới nhất</li>
-                                <li style="cursor: pointer" title="Giá tăng dần" value="2" @click.prevent="sortBy(2)">Giá tăng dần</li>
-                                <li style="cursor: pointer" title="Giá giảm dần" value="3" @click.prevent="sortBy(3)">Giá giảm dần</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="result-body">
-                        <project-list v-if="!isFirstLoad || loading" :loading="loading" v-bind="projects"
-                                      :page.sync="page"
-                                      :size="size" :handle-favorite="handleFavorite" :quick-view="quickView"
-                                      :service-type="params.service_type" :grid="isViewGrid" class="row"
-                                      :first-load="isFirstLoad">
-                            <template slot="no-results">
-                                <div class="search-noresult-main">
-                                    <img src="{% static 'images/icon-home-empty.svg'%}"
-                                         alt="No data"><br>
-                                    <h2>Không tìm thấy dự án nào!</h2>
-                                    <ul> Vui lòng thử lại bằng cách:
-                                        <li>Kiểm tra lại địa điểm được nhập hoặc mở rộng phạm vi tìm kiếm bằng cách di chuyển bản đồ.
-                                        </li>
-                                        <li>Thay đổi hoặc huỷ bỏ bộ lọc đang áp dụng.</li>
-
-                                    </ul>
-                                    <a class="btn-primary btn-view-agent" @click.prevent="showContactProject"
-                                       href="../../specialistUs">Liên hệ tư vấn</a>
-                                </div>
-                            </template>
-                        </project-list>
-                        <div ref="projectList" class="row grid" v-else-if="isFirstLoad">
-                            <div class="search-noresult">
-                                <div class="search-noresult-main">
-                                    <img src="{% static 'images/icon-home-empty.svg'%}"
-                                         alt="No data"><br>
-                                    <h2>Không tìm thấy dự án nào!</h2>
-                                    <ul>
-                                        Vui lòng thử lại bằng cách:
-                                        <li>Kiểm tra lại địa điểm được nhập hoặc mở rộng phạm vi tìm kiếm bằng cách di
-                                            chuyển bản đồ.
-                                        </li>
-                                        <li>Thay đổi hoặc huỷ bỏ bộ lọc đang áp dụng.</li>
-
-                                    </ul>
-                                    <a class="btn-primary btn-view-agent" @click.prevent="showContactProject"
-                                       href="../../specialistUs">Liên hệ tư vấn</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <section class="search-relative" v-if="isFirstLoad || !nearByLocation">
-                        <div class="inner">
-                            <h2 class="main-key">
-                                <a title="Hà Nội">Hà Nội</a>
-                            </h2>
-                            <div class="row">
-                                <div class="description"><h2
-                                        style="line-height:1.32; margin-top:24px; margin-bottom:8px">
-                                    MUA BÁN NHÀ ĐẤT, CĂN HỘ THÀNH PHỐ HÀ NỘI</h2>
-                                    <p style="line-height:1.38"><span style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Thành phố Hà Nội là khu vực có nền kinh tế phát triển nhanh và mạnh nhất cả nước. Bất động sản HÀ NỘI là một trong những thị trường sôi động, tiềm năng. Nguồn cung chính nhà đất Hà Nội tập trung cả hai phân khúc là căn hộ và nhà phố. Trong đó, các dự án căn hộ, nhà phố tập trung tại các quận trung tâm như Q. Hoàn Kiếm, Hai Bà Trưng, Đống Đa,... hay các khu vực đang phát triển ở ngoại thành như Ba Vì, Hoà Lạc, Đông Anh,... Thị trường bất động sản Hà Nội thường có nhu cầu, sức mua cao, tính thanh khoản rất nhanh chóng. Cùng thegioinhaphovietnam.com.vn tìm hiểu về tình hình thị trường BĐS Hà Nội để biết lý do nên đầu tư căn hộ, nhà phố Hà Nội ngay thời điểm này.</span>
-                                    </p>
-                                    <h3 style="line-height: 1.38;">Cơ sở hạ tầng - giao thông Hà Nội luôn được
-                                        liên tục đầu tư.</h3>
-                                    <h3 style="line-height:1.38; margin-top:21px; margin-bottom:5px">Tiềm năng tăng giá
-                                        trong tương lai của nhà đất Hà Nội rất lớn.</h3>
-                                    <p style="line-height:1.38"><span
-                                            style="font-size:11.5pt; font-variant:normal; white-space:pre-wrap">Nền kinh tế TP. Hà Nội có tốc độ tăng trưởng kinh tế cao nhất cả nước, nên đã tạo ra sức bật cho thị trường BĐS, nhất là phân khúc nhà đất, thổ cư. Hơn nữa TP. HÀ NỘI là nơi tập trung nhiều người đến sinh sống và làm việc, sở hữu nhiều tiện ích cộng đồng đầy đủ, chất lượng như trường học, bệnh viện quốc tế, chuỗi nhà hàng, trung tâm thương mại… nên giá bán nhà đất Hà Nội sẽ không ngừng tăng giá trong tương lai.</span>
-                                    </p>
-                                    <h3 style="line-height:1.38; margin-top:21px; margin-bottom:5px">Thị trường nhà đất, căn hộ Hà Nội được các chủ đầu tư uy tín, nổi tiếng có tiềm lực đầu tư xây dựng.</h3>
-                                     <h2 style="line-height: 1.38;">Mua bán căn hộ chung cư Hà Nội</h2>
-                                    <p style="line-height: 1.38;"><span style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Hiện tại có rất nhiều hộ gia đình trẻ lựa chọn mua chung cư TP.HÀ NỘI giá rẻ thay vì phải mua đất làm nhà, vì lợi thế có sẵn cơ sở hạ tầng và giá lại thấp hơn so với việc mua đất và xây nhà. Và trong tương lai, đây là xu hướng tất yếu, nên các dự án căn hộ chung cư luôn được các nhà đầu tư quan tâm. Tuy nhiên, việc chọn mua chung cư tại Hà Nội giá rẻ nhưng vẫn đáp ứng được đầy đủ nhu cầu cuộc sống là không dễ dàng.&nbsp;</span>
-                                    </p>
-                                     <p style="line-height:1.38"><span style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Tùy thuộc vào vị trí, diện tích, tiện ích, chủ đầu tư,...mà giá bán căn hộ chung cư TP. HÀ NỘI sẽ có sự chênh lệch:</span>
-                                    </p>
-                                    <h2 style="line-height:1.38; margin-top:24px; margin-bottom:8px">Mua nhà phố Hà Nội
-                                        giá rẻ, chính chủ, có sổ đỏ</h2>
-                                    <p style="line-height:1.38"><span
-                                            style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Ngay cả khi xu hướng lựa chọn căn hộ chung cư để ở ngày càng tăng thì nhu cầu mua nhà đất tại thành phố Hà Nội vẫn chưa bao giờ hạ nhiệt. Các giao dịch mua bán nhà phố, nhà mặt tiền vẫn diễn ra rất nhộn nhịp, từ những nhà phố 2 tỷ đến những nhà mặt tiền nằm ở vị trí đắc địa với giá hàng chục tỷ đồng.&nbsp;</span>
-                                    </p>
-                                    <p style="line-height:1.38"><span
-                                            style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Nếu bạn đang có nhu cầu mua nhà phố TP.HÀ NỘI dưới 2 tỷ thì các vị trí trung tâm nội thành không thích hợp, bạn vẫn có thể cân nhắc để mua nhà cấp 4 hay mua nhà trong hẻm sâu. Nếu bạn muốn nhà rộng hơn và vị trí đẹp hơn thì có thể mua nhà ở quận rìa ngoại thành, gia đình bạn vẫn được tận hưởng đầy đủ các tiện ích sống cơ bản với mức giá tầm dưới 2 tỷ. Nếu bạn có tài chính để có thể mua nhà phố từ 3 tỷ - 4 tỷ thì lúc này nhà mặt tiền là lựa chọn tốt nhất. Khi sở hữu nhà mặt tiền HÀ NỘI bạn có thể đi lại dễ dàng, tiếp cận rất gần những tiện ích phục vụ sinh hoạt thường ngày như chợ, siêu thị, hàng quán…Với những ai có ý định mua để ở kết hợp với kinh doanh hoặc mua để đầu tư thì mua nhà mặt tiền TP. HÀ NỘI là lựa chọn rất đáng cân nhắc. Bởi nhà mặt tiền có lượng khách vãng lai lớn, dễ tìm kiếm vì ở ngay mặt đường, thuận tiện cho việc mở shop, hàng quán, làm đại lý giao dịch… Nhà mặt tiền cũng rất dễ cho thuê, đặc biệt giá thuê nhà mặt tiền tại Hà Nội hiện nay là rất cao, giúp sinh lời cho chủ nhân. Nếu căn nhà rộng rãi, nhiều tầng thì gia chủ có thể cho thuê tầng 1 và ở, sinh hoạt ở các tầng trên để tăng nguồn thu.</span>
-                                    </p>
-                                    <p style="line-height:1.38"><span
-                                            style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Nhà đất nói chung và nhà mặt tiền nói riêng rất giữ giá, cơ hội sinh lời cao hơn hẳn so với các loại bất động sản khác như biệt thự, đất nền… vì quỹ đất TP.HÀ NỘI ngày càng khan hiếm, nhà mặt phố ngày càng bị thu hẹp. Đây cũng là ưu điểm và là lý do khiến cho các giao dịch mua bán nhà mặt tiền TP. HÀ NỘI giá rẻ cho đến đắt đỏ vẫn luôn tấp nập.</span>
-                                    </p>
-                                    <p style="line-height:1.38"><span
-                                            style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Việc quyết định mua bán căn hộ chung cư hay nhà phố Hà Nội thường rất khó khăn, mất thời gian và tồn tại khá nhiều điều cần lưu ý. Vì thế, để việc mua bán căn hộ, nhà phố HÀ NỘI giá rẻ, dễ dàng và nhanh chóng hơn, bạn hãy truy cập </span><a href="../home" style="text-decoration:none">THẾ GIỚI NHÀ PHỐ</a><span style="text-decoration:none"> để có thêm hàng nghìn sự lựa chọn. Thế giới Nhà Phố là nơi có thể đáp ứng mọi nhu cầu về diện tích, số phòng, vị trí, giá cả,...của căn hộ chung cư, nhà phố mà bạn đang muốn tìm kiếm. Từ đó, giúp bạn có thể đưa ra quyết định&nbsp; phù hợp, chính xác nhất.</span>
-                                    </p>
-                                </div>
-                                <ul class="relative-group">
-                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=apartment"> Căn hộ tại Hà Nội</a></li>
-                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=house"> Nhà phố tại Hà Nội</a></li>
-                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=villa"> Biệt thự tại Hà Nội</a>
-                                    </li>
-                                    <li class="item style1"><a href=href="../listings/search?trantype=sell&housetype=land"> Đất nền tại Hà Nội</a></li>
-                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=officetel"> Căn hộ dịch vụ tại Hà
-                                        Nội</a></li>
-                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=office"> Văn phòng tại Hà Nội</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </section>
-
-                    <near-by-location v-else :info="nearByLocation"></near-by-location>
-
-                </div>
-
-                <div id="leads" class="panel" v-show="!isSearchProject" style=" z-index: auto">
-                    {% comment %}<div class="secondaryBar">
-                        <h1 class="keyword" title="Mua bán nhà đất căn hộ Hà Nội" v-if="isFirstLoad">Mua bán nhà đất căn hộ Hà Nội</h1>
-                        <p v-else class="keyword" v-text="titleStringProperty"></p>
-                        <save-search-button v-if="!isSearchProject" v-model="saveSearch.model"
-                                            :is-save-search="isSavedSearch"
-                                            view-all-url="/u/luu-tim-kiem"></save-search-button>
-                    </div>{% endcomment %}
-                    <property-filter-form class="actionBar" v-if="!isSearchProject" ref="propertyFilterForm"
-                                          :show-mobile="isMobileWidth" save-search-view-all-url="/u/luu-tim-kiem"
-                                          v-model="params" :is-saved-search="isSavedSearch"
-                                          :save-search-model.sync="saveSearch.model"
-                                          :on-click-filter-mobi="onClickFilterMobi">
-                        <template slot="property-type-list-item"
-                                  slot-scope="{data, toggleItem,itemClick,isSelectedItem}">
-                            <li>
-                                <input id="list-check-item-type-1-desktop" type="checkbox" class="check" :value="1"
-                                       v-model="data">
-                                <label for="list-check-item-type-1-desktop">
-                                    <a @click.prevent="toggleItem(1)" style="display: inline" href="../listings/search?trantype=sell&housetype=apartment">Căn hộ</a>
-                                </label>
-                            </li>
-                            <li>
-                                <input id="list-check-item-type-9-desktop" type="checkbox" class="check" :value="9"
-                                       v-model="data">
-                                <label for="list-check-item-type-9-desktop">
-                                    <a @click.prevent="toggleItem(9)" style="display: inline"
-                                       href="../listings/search?trantype=sell&housetype=shophouse">Shophouse</a>
-                                </label>
-                            </li>
-                            <li>
-                                <input id="list-check-item-type-6-desktop" type="checkbox" class="check" :value="6"
-                                       v-model="data">
-                                <label for="list-check-item-type-6-desktop">
-                                    <a @click.prevent="toggleItem(6)" style="display: inline"
-                                       href="../listings/search?trantype=sell&housetype=officetel">Văn phòng</a>
-                                </label>
-                            </li>
-                            <li>
-                                <input id="list-check-item-type-8-desktop" type="checkbox" class="check" :value="8"
-                                       v-model="data">
-                                <label for="list-check-item-type-8-desktop">
-                                    <a @click.prevent="toggleItem(8)" style="display: inline" href="../listings/search?trantype=sell&housetype=house">Nhà
-                                        phố</a>
-                                </label>
-                            </li>
-                            <li>
-                                <input id="list-check-item-type-4-desktop" type="checkbox" class="check" :value="4"
-                                       v-model="data">
-                                <label for="list-check-item-type-4-desktop">
-                                    <a @click.prevent="toggleItem(4)" style="display: inline" href="../listings/search?trantype=sell&housetype=villa">Biệt thự</a>
-                                </label>
-                            </li>
-
-                            <li>
-                                <input id="list-check-item-type-16-desktop" type="checkbox" class="check" :value="16"
-                                       v-model="data">
-                                <label for="list-check-item-type-16-desktop">
-                                    <a @click.prevent="toggleItem(16)" style="display: inline" href="../listings/search?trantype=sell&housetype=land">Đất nền/Mặt bằng</a>
-                                </label>
-                            </li>
-                        </template>
-                        <list-check-form multiple ref="bedroomCheckList" hide-action-bar class="col"
-                                         @item-checked="onBedroomClick()" label="Chọn số phòng ngủ"
-                                         v-model="params.bedroom">
-                            <template slot="list-item" slot-scope="{model, toggleItem,itemClick,isSelectedItem}">
-                                <li>
-                                    <input id="list-check-item-1-bed-room-desktop" type="checkbox" class="check"
-                                           value="1" v-model="model">
-                                    <label for="list-check-item-1-bed-room-desktop">
-                                        <a @click.prevent="toggleItem('1')" style="display: inline"
-                                           href="../listings/search?bedrooms=1">1 Phòng ngủ</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-2-bed-room-desktop" type="checkbox" class="check"
-                                           value="2"
-                                           v-model="model">
-                                    <label for="list-check-item-2-bed-room-desktop">
-                                        <a @click.prevent="toggleItem('2')" style="display: inline"
-                                           href="../listings/search?bedrooms=2">2 Phòng ngủ</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-3-bed-room-desktop" type="checkbox" class="check"
-                                           value="3"
-                                           v-model="model">
-                                    <label for="list-check-item-3-bed-room-desktop">
-                                        <a @click.prevent="toggleItem('3')" style="display: inline"
-                                           href="../listings/search?bedrooms=3">3 Phòng ngủ</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-4-bed-room-desktop" type="checkbox" class="check"
-                                           value="4"
-                                           v-model="model">
-                                    <label for="list-check-item-4-bed-room-desktop">
-                                        <a @click.prevent="toggleItem('4')" style="display: inline"
-                                           href="../listings/search?bedrooms=4">4 Phòng ngủ</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-5-bed-room-desktop" type="checkbox" class="check"
-                                           value="5"
-                                           v-model="model">
-                                    <label for="list-check-item-5-bed-room-desktop">
-                                        <a @click.prevent="toggleItem('5')" style="display: inline"
-                                           href="../listings/search?bedrooms=5">5 Phòng ngủ</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-6+-bed-room-desktop" type="checkbox" class="check"
-                                           value="6+"
-                                           v-model="model">
-                                    <label for="list-check-item-6+-bed-room-desktop">
-                                        <a @click.prevent="toggleItem('6+')" style="display: inline"
-                                           href="../listings/search?bedrooms=6">6+ Phòng ngủ</a>
-                                    </label>
-                                </li>
-                            </template>
-                        </list-check-form>
-
-                        <list-check-form multiple slot="property-type-mobile"
-                                         slot-scope="{params, model, onDropdownShow, onDropdownHide, applyItem}"
-                                         label="Chọn loại bất động sản" ref="propertyTypeCheckList" hide-action-bar
-                                         v-model="model.property_type">
-                            <template slot="list-item" slot-scope="{toggleItem,itemClick,isSelectedItem}">
-                                <li>
-                                    <input id="list-check-item-type-1-mobile" type="checkbox" class="check" value="1"
-                                           @input="toggleItem(1)" :checked="isSelectedItem(1)">
-                                    <label for="list-check-item-type-1-mobile">
-                                        <a @click.prevent="toggleItem(1)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=apartment">Căn hộ</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-type-9-mobile" type="checkbox" class="check" value="9"
-                                           @input="toggleItem(9)" :checked="isSelectedItem(9)">
-                                    <label for="list-check-item-type-9-mobile">
-                                        <a @click.prevent="toggleItem(9)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=shophouse">Cửa hàng</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-type-6-mobile" type="checkbox" class="check" value="6"
-                                           @input="toggleItem(6)" :checked="isSelectedItem(6)">
-                                    <label for="list-check-item-type-6-mobile">
-                                        <a @click.prevent="toggleItem(6)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=officetel">Căn hộ dịch vụ</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-type-8-mobile" type="checkbox" class="check" value="8"
-                                           @input="toggleItem(8)" :checked="isSelectedItem(8)">
-                                    <label for="list-check-item-type-8-mobile">
-                                        <a @click.prevent="toggleItem(8)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=house">Nhà phố</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-type-4-mobile" type="checkbox" class="check" value="4"
-                                           @input="toggleItem(4)" :checked="isSelectedItem(4)">
-                                    <label for="list-check-item-type-4-mobile">
-                                        <a @click.prevent="toggleItem(4)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=villa">Biệt thự</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-type-32-mobile" type="checkbox" class="check" value="32"
-                                           @input="toggleItem(32)" :checked="isSelectedItem(32)">
-                                    <label for="list-check-item-type-32-mobile">
-                                        <a @click.prevent="toggleItem(32)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=office">Văn phòng</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-type-34-mobile" type="checkbox" class="check" value="34"
-                                           @input="toggleItem(34)" :checked="isSelectedItem(34)">
-                                    <label for="list-check-item-type-34-mobile">
-                                        <a @click.prevent="toggleItem(34)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=land">Mặt bằng kinh doanh</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-type-16-mobile" type="checkbox" class="check" value="16"
-                                           @input="toggleItem(16)" :checked="isSelectedItem(16)">
-                                    <label for="list-check-item-type-16-mobile">
-                                        <a @click.prevent="toggleItem(16)" style="display: inline"
-                                           href="../listings/search?trantype=sell&housetype=land">Đất nền</a>
-                                    </label>
-                                </li>
-                            </template>
-                        </list-check-form>
-
-                        <list-check-form multiple slot="bedroom-mobile"
-                                         slot-scope="{params, model, onDropdownShow, onDropdownHide, applyItem}"
-                                         ref="bedroomCheckList" label="Chọn số phòng ngủ" hide-action-bar
-                                         v-model="model.bedroom">
-                            <template slot="list-item" slot-scope="{toggleItem,itemClick,isSelectedItem}">
-                                <li>
-                                    <input id="list-check-item-1-bed-room-mobile" type="checkbox" class="check"
-                                           value="1"
-                                           @input="toggleItem('1')" :checked="isSelectedItem('1')">
-                                    <label for="list-check-item-1-bed-room-mobile">
-                                        <a @click.prevent="toggleItem('1')" style="display: inline"
-                                           href="../listings/search?bedrooms=1">1 Phòng ngủ</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-2-bed-room-mobile" type="checkbox" class="check"
-                                           value="2"
-                                           @input="toggleItem('2')" :checked="isSelectedItem('2')">
-                                    <label for="list-check-item-2-bed-room-mobile">
-                                        <a @click.prevent="toggleItem('2')" style="display: inline"
-                                           href="../listings/search?bedrooms=2">2 Phòng ngủ</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-3-bed-room-mobile" type="checkbox" class="check"
-                                           value="3"
-                                           @input="toggleItem('3')" :checked="isSelectedItem('3')">
-                                    <label for="list-check-item-3-bed-room-mobile">
-                                        <a @click.prevent="toggleItem('3')" style="display: inline"
-                                           href="../listings/search?bedrooms=3">3 Phòng ngủ</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-4-bed-room-mobile" type="checkbox" class="check"
-                                           value="4"
-                                           @input="toggleItem('4')" :checked="isSelectedItem('4')">
-                                    <label for="list-check-item-4-bed-room-mobile">
-                                        <a @click.prevent="toggleItem('4')" style="display: inline"
-                                           href="../listings/search?bedrooms=4">4 Phòng ngủ</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-5-bed-room-mobile" type="checkbox" class="check"
-                                           value="5"
-                                           @input="toggleItem('5')" :checked="isSelectedItem('5')">
-                                    <label for="list-check-item-5-bed-room-mobile">
-                                        <a @click.prevent="toggleItem('5')" style="display: inline"
-                                           href="../listings/search?bedrooms=5">5 Phòng ngủ</a>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input id="list-check-item-6+-bed-room-mobile" type="checkbox" class="check"
-                                           value="6+"
-                                           @input="toggleItem('6+')" :checked="isSelectedItem('6+')">
-                                    <label for="list-check-item-6+-bed-room-mobile">
-                                        <a @click.prevent="toggleItem('6+')" style="display: inline"
-                                           href="../listings/search?bedrooms=6">6+ Phòng ngủ</a>
-                                    </label>
-                                </li>
-                            </template>
-                        </list-check-form>
-
-                        <template slot="right">
-                            <div class="view">
-                                <button @click.prevent="viewAsGrid()" :class="{active: isViewGrid}"
-                                        class="zmdi zmdi-view-module"></button>
-                                <button @click.prevent="viewAsList()" :class="{active: !isViewGrid}"
-                                        class="zmdi zmdi-view-stream"></button>
-                            </div>
-                        </template>
-                    </property-filter-form>
-
-                    <div class="results-sc">
-                        <span class="results">Hiển thị 10
-                        <strong v-if="isFirstLoad">  trong số {{ listings.count }} sản phẩm</strong>
-                        <strong v-else v-text="displayTotal + ' trong số ' + properties.total"></strong>
-                        </span>
-
-                        <div class="sort-listing" ref="propertySort">
-                            <a href="#" @click.prevent.stop="toggleSort()">
-                                <span ref="labelSortProperty" v-text="sortString || 'Mới nhất'"></span>
-                                <i class="zmdi zmdi-chevron-down" style="cursor: pointer"></i>
-                            </a>
-                            <ul class="sort-listing--option">
-                                <li style="cursor: pointer" title="Mặc định" value="0"
-                                    :class="{ active: params.sort_by == 0 }" @click.prevent="sortBy(0)">Mặc định
-                                </li>
-                                <li style="cursor: pointer" title="Mới nhất" value="1"
-                                    :class="{ active: params.sort_by == 1 }" @click.prevent="sortBy(1)">Mới nhất
-                                </li>
-                                <li style="cursor: pointer" title="Giá tăng dần" value="2"
-                                    :class="{ active: params.sort_by == 2 }" @click.prevent="sortBy(2)">Giá tăng dần
-                                </li>
-                                <li style="cursor: pointer" title="Giá giảm dần" value="3"
-                                    :class="{ active: params.sort_by == 3 }" @click.prevent="sortBy(3)">Giá giảm dần
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <widget-project :first-load="isFirstLoad" :data="widgetProject"></widget-project>
-
-                    <div class="result-body">
-                        <property-list v-if="!isFirstLoad || loading" :loading="loading && isFirstLoad"
-                                       v-bind="properties"
-                                       :page.sync="page" :size="size" :handle-favorite="handleFavorite"
-                                       :quick-view="quickViewById" :service-type="params.service_type"
-                                       :grid="isViewGrid"
-                                       class="row" :first-load="isFirstLoad">
-                            <template slot="no-results">
-                                <div class="search-noresult-main">
-                                    <img src="{% static 'images/icon-home-empty.svg'%}"
-                                         alt="No data"><br>
-                                    <h2>Không tìm thấy nhà đất nào!</h2>
-                                    <ul>
-                                        Vui lòng thử lại bằng cách:
-                                        <li>Kiểm tra lại địa điểm được nhập hoặc mở rộng phạm vi tìm kiếm bằng cách di
-                                            chuyển bản đồ.
-                                        </li>
-                                        <li>Thay đổi hoặc huỷ bỏ bộ lọc đang áp dụng.</li>
-                                        <li>“Lưu tìm kiếm” này lại để được thông báo (qua email) khi có tin đăng mới.
-                                        </li>
-                                    </ul>
-                                    <a class="btn-primary btn-view-agent" @click.prevent="showContactProperty"
-                                       :href="isForSaleSearch ? '/mua-nha-voi-tgnp' : '/thue-nha-voi-tgnp'">Liên hệ tư
-                                        vấn</a>
-                                </div>
-                            </template>
-                        </property-list>
-
-                        <div ref="propertyList" class="row grid" v-else-if="isFirstLoad">
-                            {% for listing in listings %}
-                            <div id="property-tgnp-{{ listing.id }}"
-                                 class="col property-itemz">
-                                <article class="box listView"
-                                         @mouseenter="setActiveMarker({&quot;lat&quot;:10.78527041834275,&quot;label&quot;:&quot;1.95 tỷ&quot;,&quot;lon&quot;:106.7464855165772})"
-                                         @mouseleave="removeActiveMarker()">
-                                    <div class="cover-image">
-                                        <a href="{% url 'listing' listing.id %}"
-                                           target="_blank" title="{{ listing.title }}"
-                                           data-imp-click>
-                                            {% with listing.main_photo as photo %}
-                                            <img src="{{ photo.url }}" alt="{{ listing.title }}"/>
-                                            {% endwith %}
-                                        </a>
-                                        <button rv-id="{{ listing.id }}"
-                                                alias="{{ listing.title }}"
-                                                class="btn-favorite btn-favorite__v2 "
-                                                @click.prevent="e => handleFavorite('{{ listing.title }}', undefined, 'sale_property', '{{ listing.id }}')(e)">
-                                        </button>
-                                       <div class="label-group">
-                                        {% if listing.is_exclusive %}
-                                        <label class="label-primary unique">{% trans "TGNP độc quyền" %}</label>
-                                        {% endif %}
-                                        <label class="label-primary unique p-1" style="font-size: 16px">{{ listing.price }} {% trans "tỷ" %}</label>
-                                       </div>
-                                        <div style="display: none" class="overview-quick-look">
-                                            <div class="btn-quick-look">
-                                                <a @click.prevent="quickViewById('{{ listing.id }}', 'tgnp')"
-                                                   class="btn-primary" id="quick-look" href="#" data-imp-click>
-                                                    Xem nhanh
-                                                </a>
-                                                <a class="btn-primary" target="_blank"
-                                                   href="{% url 'listing' listing.id %}"
-                                                   title="{{ listing.title }}"
-                                                   data-imp-click>Xem chi tiết</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="group-grid__view">
-                                            <ul class="listing-info">
-                                                <li><i class="fa fas fa-bed"></i>{{ listing.bedrooms }} {% trans "ngủ"%}</li>
-                                                <li><i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2"%}</li>
-                                               {% if listing.floors %} <li> <i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}</li> {% endif %}
-                                               {% if listing.bathrooms %} <li><i class="fa fa-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %} </li> {% endif %}
-                                               {% comment %} <li><i class="zmdi zmdi-compass"></i> Đông Bắc</li>{% endcomment %}
-                                            </ul>
-                                        </div>
-                                        <h3>
-                                            <a class="listing-name" href="{% url 'listing' listing.id %}" title="{{ listing.title }}"  data-imp-click>{{ listing.title }}</a>
-                                        </h3>
-                                        <div class="listing-address">
-                                    <h4><a href="{% url 'listing' listing.id %}" data-imp-click>{{listing.code }}</a></h4>
-                                    <h4>
-                                        <a href="{% url 'search'%}?street={{listing.street }}" title="">{{listing.street }}</a>
-                                    </h4>
-                                    <h4>
-                                        <a href="{% url 'search'%}?urban_area={{listing.urban_area }}" title="">{{listing.urban_area }}</a>
-                                    </h4>
-                                    <h4>
-                                        <a href="{% url 'search'%}?district={{listing.district }}" title="">{{listing.district}} {% comment %}{% state_data.get('district','' %}{% endcomment %}</a>
-                                    </h4>
-                                </div>
-                                        <ul class="listing-info">
-                                                <li><i class="fa fas fa-bed"></i> {{ listing.bedrooms }} {% trans "ngủ"%}</li>
-                                                <li><i class="zmdi zmdi-photo-size-select-small"></i> {{ listing.area }}{% trans "m2"%}</li>
-                                               {% if listing.floors %} <li> <i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}</li> {% endif %}
-                                               {% if listing.bathrooms %} <li><i class="fa fa-bath"></i> {{ listing.bathrooms }} {% trans "tắm" %} </li> {% endif %}
-                                               {% comment %} <li><i class="zmdi zmdi-compass"></i> Đông Bắc</li>{% endcomment %}
-                                            </ul>
-                                        <div class="action-group">
-                                            <div class="action-group--left">
-                                                <div class="listing-price">{{ listing.price }} {% trans "tỷ" %}</div>
-                                                {% if listing.is_exclusive %}
-                                                <span class="label-primary unique">{% trans "TGNP độc quyền" %}</span>
-                                                {% endif %}
-                                            </div>
-                                            <div class="action-group--right action-group--cta">
-                                                 <button rv-id="{{ listing.id }}"
-                                                        alias="{{ listing.title }}"
-                                                        class="btn-favorite btn-favorite__v2 "
-                                                        @click.prevent="e => handleFavorite('{{ listing.title }}', undefined, 'sale_property', '{{ listing.id }}')(e)">
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            {% endfor %}
-
-                            <div class="paginator-search">
-                                <ul class="paginator">
-                                    {% if listings.has_previous %}
-                                        <li><a class="btnPre" @click.prevent="resetPaging(1, '')" href="?page={{listings.previous_page_number}}"><i
-                                            class="zmdi zmdi-chevron-left"></i></a></li>
-                                    {% else %}
-                                        <li class="page-item disabled">
-                                          <a class="page-link">&laquo;</a>
-                                        </li>
-                                      {% endif %}
-
-                                    {% for i in listings.paginator.page_range %}
-                                        {% if listings.number == i %}
-                                            <li><a class="active" @click.prevent="resetPaging({{i}},'')" href="?page={{listings.previous_page_number}}">{{i}}</a>
-                                            </li>
-                                        {% else %}
-                                            <li><a class="" @click.prevent="resetPaging({{i}},'')" href="?page={{listings.previous_page_number}}">{{i}}</a></li>
-                                        {% endif %}
-                                    {% endfor %}
-
-                                    {% if listings.has_next %}
-                                        <li>
-                                            <a class="btnNext" @click.prevent="resetPaging(484, '')" href="?page={{listings.previous_page_number}}"><i class="zmdi zmdi-chevron-right"></i></a></li>
-                                    {% else %}
-                                        <li class="page-item disabled">
-                                          <a class="page-link">&raquo;</a>
-                                        </li>
-                                      {% endif %}
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <section class="search-relative" v-if="isFirstLoad || !nearByLocation">
-                        <div class="inner">
-                            <h2 class="main-key">
-                                <a title="Hà Nội">Hà Nội</a>
-                            </h2>
-                            <div class="row">
-                                <div class="description">
-                                    <h2 style="line-height:1.32; margin-top:24px; margin-bottom:8px">
-                                    MUA BÁN NHÀ ĐẤT, CĂN HỘ THÀNH PHỐ HÀ NỘI</h2>
-                                    <p style="line-height:1.38"><span style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Thành phố Hà Nội là khu vực có nền kinh tế phát triển nhanh và mạnh nhất cả nước. Bất động sản HÀ NỘI là một trong những thị trường sôi động, tiềm năng. Nguồn cung chính nhà đất Hà Nội tập trung cả hai phân khúc là căn hộ và nhà phố. Trong đó, các dự án căn hộ, nhà phố tập trung tại các quận trung tâm như Q. Hoàn Kiếm, Hai Bà Trưng, Đống Đa,... hay các khu vực đang phát triển ở ngoại thành như Ba Vì, Hoà Lạc, Đông Anh,... Thị trường bất động sản Hà Nội thường có nhu cầu, sức mua cao, tính thanh khoản rất nhanh chóng. Cùng thegioinhaphovietnam.com.vn tìm hiểu về tình hình thị trường BĐS Hà Nội để biết lý do nên đầu tư căn hộ, nhà phố Hà Nội ngay thời điểm này.</span>
-                                    </p>
-                                    <h3 style="line-height: 1.38;">Cơ sở hạ tầng - giao thông Hà Nội luôn được liên tục đầu tư.</h3>
-                                    <h3 style="line-height:1.38; margin-top:21px; margin-bottom:5px">Tiềm năng tăng giá trong tương lai của nhà đất Hà Nội rất lớn.</h3>
-                                    <p style="line-height:1.38"><span
-                                            style="font-size:11.5pt; font-variant:normal; white-space:pre-wrap">Nền kinh tế TP. Hà Nội có tốc độ tăng trưởng kinh tế cao nhất cả nước, nên đã tạo ra sức bật cho thị trường BĐS, nhất là phân khúc nhà đất, thổ cư. Hơn nữa TP. HÀ NỘI là nơi tập trung nhiều người đến sinh sống và làm việc, sở hữu nhiều tiện ích cộng đồng đầy đủ, chất lượng như trường học, bệnh viện quốc tế, chuỗi nhà hàng, trung tâm thương mại… nên giá bán nhà đất Hà Nội sẽ không ngừng tăng giá trong tương lai.</span>
-                                    </p>
-                                    <h3 style="line-height:1.38; margin-top:21px; margin-bottom:5px">Thị trường nhà đất, căn hộ Hà Nội được các chủ đầu tư uy tín, nổi tiếng có tiềm lực đầu tư xây dựng.</h3>
-                                     <h2 style="line-height: 1.38;">Mua bán căn hộ chung cư Hà Nội</h2>
-                                    <p style="line-height: 1.38;"><span style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Hiện tại có rất nhiều hộ gia đình trẻ lựa chọn mua chung cư TP.HÀ NỘI giá rẻ thay vì phải mua đất làm nhà, vì lợi thế có sẵn cơ sở hạ tầng và giá lại thấp hơn so với việc mua đất và xây nhà. Và trong tương lai, đây là xu hướng tất yếu, nên các dự án căn hộ chung cư luôn được các nhà đầu tư quan tâm. Tuy nhiên, việc chọn mua chung cư tại Hà Nội giá rẻ nhưng vẫn đáp ứng được đầy đủ nhu cầu cuộc sống là không dễ dàng.&nbsp;</span>
-                                    </p>
-                                     <p style="line-height:1.38"><span style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Tùy thuộc vào vị trí, diện tích, tiện ích, chủ đầu tư,...mà giá bán căn hộ chung cư TP. HÀ NỘI sẽ có sự chênh lệch:</span>
-                                    </p>
-                                    <h2 style="line-height:1.38; margin-top:24px; margin-bottom:8px">Mua nhà phố Hà Nội giá rẻ, chính chủ, có sổ đỏ</h2>
-                                    <p style="line-height:1.38"><span
-                                            style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Ngay cả khi xu hướng lựa chọn căn hộ chung cư để ở ngày càng tăng thì nhu cầu mua nhà đất tại thành phố Hà Nội vẫn chưa bao giờ hạ nhiệt. Các giao dịch mua bán nhà phố, nhà mặt tiền vẫn diễn ra rất nhộn nhịp, từ những nhà phố 2 tỷ đến những nhà mặt tiền nằm ở vị trí đắc địa với giá hàng chục tỷ đồng.&nbsp;</span>
-                                    </p>
-                                    <p style="line-height:1.38"><span
-                                            style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Nếu bạn đang có nhu cầu mua nhà phố TP.HÀ NỘI dưới 2 tỷ thì các vị trí trung tâm nội thành không thích hợp, bạn vẫn có thể cân nhắc để mua nhà cấp 4 hay mua nhà trong hẻm sâu. Nếu bạn muốn nhà rộng hơn và vị trí đẹp hơn thì có thể mua nhà ở quận rìa ngoại thành, gia đình bạn vẫn được tận hưởng đầy đủ các tiện ích sống cơ bản với mức giá tầm dưới 2 tỷ. Nếu bạn có tài chính để có thể mua nhà phố từ 3 tỷ - 4 tỷ thì lúc này nhà mặt tiền là lựa chọn tốt nhất. Khi sở hữu nhà mặt tiền HÀ NỘI bạn có thể đi lại dễ dàng, tiếp cận rất gần những tiện ích phục vụ sinh hoạt thường ngày như chợ, siêu thị, hàng quán…Với những ai có ý định mua để ở kết hợp với kinh doanh hoặc mua để đầu tư thì mua nhà mặt tiền TP. HÀ NỘI là lựa chọn rất đáng cân nhắc. Bởi nhà mặt tiền có lượng khách vãng lai lớn, dễ tìm kiếm vì ở ngay mặt đường, thuận tiện cho việc mở shop, hàng quán, làm đại lý giao dịch… Nhà mặt tiền cũng rất dễ cho thuê, đặc biệt giá thuê nhà mặt tiền tại Hà Nội hiện nay là rất cao, giúp sinh lời cho chủ nhân. Nếu căn nhà rộng rãi, nhiều tầng thì gia chủ có thể cho thuê tầng 1 và ở, sinh hoạt ở các tầng trên để tăng nguồn thu.</span>
-                                    </p>
-                                    <p style="line-height:1.38"><span
-                                            style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Nhà đất nói chung và nhà mặt tiền nói riêng rất giữ giá, cơ hội sinh lời cao hơn hẳn so với các loại bất động sản khác như biệt thự, đất nền… vì quỹ đất TP.HÀ NỘI ngày càng khan hiếm, nhà mặt phố ngày càng bị thu hẹp. Đây cũng là ưu điểm và là lý do khiến cho các giao dịch mua bán nhà mặt tiền TP. HÀ NỘI giá rẻ cho đến đắt đỏ vẫn luôn tấp nập.</span>
-                                    </p>
-                                    <p style="line-height:1.38"><span
-                                            style="font-size:11pt; font-variant:normal; white-space:pre-wrap">Việc quyết định mua bán căn hộ chung cư hay nhà phố Hà Nội thường rất khó khăn, mất thời gian và tồn tại khá nhiều điều cần lưu ý. Vì thế, để việc mua bán căn hộ, nhà phố HÀ NỘI giá rẻ, dễ dàng và nhanh chóng hơn, bạn hãy truy cập </span><a href="../home" style="text-decoration:none">THẾ GIỚI NHÀ PHỐ</a><span style="text-decoration:none"> để có thêm hàng nghìn sự lựa chọn. Thế giới Nhà Phố là nơi có thể đáp ứng mọi nhu cầu về diện tích, số phòng, vị trí, giá cả,...của căn hộ chung cư, nhà phố mà bạn đang muốn tìm kiếm. Từ đó, giúp bạn có thể đưa ra quyết định&nbsp; phù hợp, chính xác nhất.</span>
-                                    </p>
-                                </div>
-                                <ul class="relative-group">
-                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=apartment"> Căn hộ tại Hà Nội</a></li>
-                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=house"> Nhà phố tại Hà Nội</a></li>
-                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=villa"> Biệt thự tại Hà Nội</a>
-                                    </li>
-                                    <li class="item style1"><a href=href="../listings/search?trantype=sell&housetype=land"> Đất nền tại Hà Nội</a></li>
-                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=officetel"> Căn hộ dịch vụ tại Hà
-                                        Nội</a></li>
-                                    <li class="item style1"><a href="../listings/search?trantype=sell&housetype=office"> Văn phòng tại Hà Nội</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-                    </section>
-
-                    <near-by-location v-else :info="nearByLocation"></near-by-location>
-
-                </div>
-
-                    <section v-cloak class="mobile-filter">
-                        <div class="inner">
-
-
-                            <a href="#" class="btnMobileMap" @click.prevent="onClickMapMobi">
-                                <i class="zmdi" :class="{'zmdi-view-stream' : activeMap, 'zmdi-map': !activeMap}"></i>
-                                <span v-if="!activeMap">Bản đồ</span>
-                                <span v-else>Danh sách</span>
-                            </a>
-                        </div>
-                    </section>
-                </div>
-                <dialogs-wrapper wrapper-name="default"></dialogs-wrapper>
-                <search-map class="search-map" ref="gmap" v-show="!quick_view_data.show" :active.sync="activeMap"
-                            :center.sync="params.center" :zoom="mapOptions.zoom" :data="aggregations"
-                            :active-marker="activeMarker" :params="params" :loading="mapLoading" :visible="isShowMap"
-                            :is-search-project="isSearchProject" v-on="mapListeners" :is-saved-search="isSavedSearch"
-                            :save-search-model.sync="saveSearch.model" save-search-view-all-url="/u/luu-tim-kiem">
-                    <div slot="map-container">
-                        <error-alert ref="$alert"></error-alert>
-                    </div>
-                    <div style="width:100%;max-height:100vh;height:100%;text-align:center;display:flex;align-items:center;justify-content:center">Đang tải dữ liệu bản đồ...</div>
-                </search-map>
-                <quick-view-modal ref="quickView" :show.sync="quick_view_data.show"
-                                  @on-click-next-quick-preview="(info) => onClickNextOrPrevQuickPreview(info, true)"
-                                  @on-click-prev-quick-preview="(info) => onClickNextOrPrevQuickPreview(info, false)">
-                    <template slot="favorite-action" slot-scope="{data}">
-                        <a v-if="data" href="#"
-                           @click.prevent="e => handleFavorite(data.alias, result => data.favorited = result, data.favorited_type)(e)"
-                           :class="{'active': data.favorited}">
-                            <i v-if="data.favorited" class="zmdi zmdi-favorite"></i>
-                            <i v-else class="zmdi zmdi-favorite-outline"></i>
-                        </a>
-                    </template>
-                </quick-view-modal>
-            </div>
+  <div id="search-content" class="block-search-noresult page--search">
+    <div class="search-container">
+      <div class="search-result" style="z-index: auto">
+        <div id="leads" class="panel" style=" z-index: auto">
+          {% include "listings/_searchFilterBar.html" %}
+          {% include "listings/_searchResult.html" %}
         </div>
 
+      </div>
+      <div class="search-map">
+        <div class="map-container" id="search-map"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div>
+    {% include "partials/_relativeDescription.html" %}
+  </div>
 
 {% endblock %}
 
 
 {% block scripts %}
-    <script async defer src="{% static 'js/ion.rangeSlider.js' %}"></script>
-    <script async defer src="{% static 'js/search-new-v2.min.js' %}"></script>
-    <script type="text/javascript">
-        var callbackInitMap = function () {
-            if (window.vinitMap) {
-                window.vinitMap();
-            }
-            if (window.initMap) {
-                initMap.call(this);
-            } else {
-                setTimeout(callbackInitMap, 500);
-            }
-        }
+  {{ block.super }}
 
-    </script>
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'js/ion.rangeSlider.js' %}"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+          integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+          integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
 
-    <script>
-        window["_au_api"] = "../thue/api";
-        window['fap_url'] = "{% static 'js/fap.min90ca.js' %}";
-        window['fap.server'] = '/thegioinhaphovietnam.com.vn/fap';
-        window['favorite_api'] = '../mapi/index.html';
-        window['googleClientId'] = '539423642927.apps.googleusercontent.com';
-        window['staticUrl'] = '../static';
-        window['hotline'] = '0964399436';
+  {#        <script async defer src="{% static 'js/search-new-v2.min.js' %}"></script>#}
+  {#  <script defer src="www.google.com/recaptcha/apib091.js?render=explicit"></script>#}
 
-        window['isLoggedIn'] = false;
-    </script>
-    <script>
-        window.hsConversationsSettings = {
-            loadImmediately: false // Delay the load of the chat widget
-        };
-    </script>
+  <script type="text/javascript">
+      var map;
+      var markerData = [];
+      var markers = [];
 
-    <script>
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '268342061639747',
-                cookie: true,                     // Enable cookies to allow the server to access the session.
-                xfbml: true,                     // Parse social plugins on this webpage.
-                version: 'v8.0'           // Use this Graph API version for this call.
-            });
-        }
-    </script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+      // on:hover -> markers[index].setIcon(highlightedIcon());
+      // on:hover -> markers[index].setIcon(normalIcon());
 
-    <script>
-        function createHSForm(opt) {
-            function getClientId() {
-                try {
-                    return ga.getAll()[0].get('clientId');
-                } catch (e) {
-                    return ""
-                }
-            }
+      function initialize() {
+          if (window.initMap) {
+              window.initMap();
+          } else {
+              setTimeout(initialize, 200);
+          }
+      }
 
-            var optFS = opt['onFormSubmit'];
-            var defaultOpt = Object.create(opt);
-            defaultOpt.onFormSubmit = function () {
-                var $gaClientId = $('[name=ga_client_id]');
-                if ($gaClientId[0]) {
-                    $gaClientId.val(getClientId());
-                }
-                if (typeof optFS === 'function') {
-                    optFS.apply(this, arguments)
-                }
-            };
-            return hbspt.forms.create(defaultOpt);
-        }
+      function normalIcon() {
+          return {
+              url: 'http://1.bp.blogspot.com/_GZzKwf6g1o8/S6xwK6CSghI/AAAAAAAAA98/_iA3r4Ehclk/s1600/marker-green.png'
+          };
+      }
 
-        var dialogManager = (function DialogService() {
-            var fact = this;
-            fact.bodyClassSpecs = "mdialog-body";
-            fact.bodyLoadingClass = "mdialog-loading";
-            fact.cachedBodyStyle = null;
-            fact.default = {
-                zindex: 99999,
-                width: 300,
-                minHeight: 100,
-                background: "rgba(0,0,0,.5)",
-                opacity: 0.5
-            };
-            fact.key = {
-                cachedStyle: "cached-style"
-            };
-            var v0 = 0.05;
-            var a = 0.0002;
-            fact.show = function (selectorId, options, hideFn, showFn) {
-                options = $.extend(true, {
-                    outSideClick: true
-                }, options || {});
-                options.maxWidth = "100%";
-                var dialog, oldStyle = document.body.getAttribute("style");
-                document.body.setAttribute(fact.key.cachedStyle, oldStyle);
-                if (selectorId && typeof selectorId === 'string') {
-                    dialog = $(document.getElementById(selectorId));
-                } else {
-                    dialog = selectorId;
-                }
-                dialog.css("opacity", 0);
-                dialog.css("overflow-y", "auto");
-                dialog.css("overflow-x", "hidden");
-                dialog.addClass("opened");
-                var bodyClass = (options ? options.body : "") || ".body";
-                dialog.find(bodyClass).css(options);
-                dialog.find(bodyClass).addClass(fact.bodyClassSpecs)
-                dialog[0] ? dialog[0]["$dialogCallback"] = hideFn : null;
-                dialog[0] ? dialog[0]["$dialogInitTime"] = +new Date() : null;
-                if (options && options.close) {
-                    dialog.find(bodyClass + " " + options.close).off().click(function (e) {
-                        e.preventDefault();
-                        fact.hide(selectorId, hideFn);
-                    });
-                }
-                if (options && options.outSideClick) {
-                    dialog.off().click(function () {
-                        fact.hide(selectorId, hideFn);
-                    });
-                }
-                dialog.find(bodyClass).click(function (e) {
-                    e.stopPropagation();
-                });
-                //.preventParentScroll();
-                fact.animation(dialog, 0, 0, 1, function () {
-                    showFn ? showFn() : null;
-                });
-                fact.loadingEnd(dialog);
-                return dialog;
-            };
-            fact.animation = function (dialog, opa, t, delta, callback) {
-                dialog.css("opacity", opa);
-                if ((delta > 0 && opa > 1) || (delta < 0 && opa < 0)) {
-                    if (callback) {
-                        callback();
-                    }
-                    return;
-                }
-                setTimeout(function () {
-                    opa += delta * (v0 * t + 1 / 2 * a * t * t);
-                    fact.animation(dialog, opa, t + 1, delta, callback);
-                }, 10);
-            };
-            fact.hide = function (selectorId, fn) {
-                var dialog;
-                if (!selectorId) {
-                    dialog = $(".mdialog.opened");
-                } else if (typeof selectorId === 'string') {
-                    dialog = $(document.getElementById(selectorId));
-                } else {
-                    dialog = selectorId;
-                }
-                fact.animation(dialog, 1, 0, -1, function () {
-                    dialog.removeClass("opened");
-                    fn ? fn(dialog) : null;
-                });
-            };
-            fact.loadingStart = function (selectorId) {
-                var dialog;
-                if (!selectorId) {
-                    dialog = $(".mdialog.opened");
-                } else if (typeof selectorId === 'string') {
-                    dialog = $(document.getElementById(selectorId));
-                } else {
-                    dialog = selectorId;
-                }
-                dialog.find("." + fact.bodyClassSpecs).addClass(fact.bodyLoadingClass);
-            };
-            fact.loadingEnd = function (selectorId) {
-                var dialog;
-                if (!selectorId) {
-                    dialog = $(".mdialog.opened");
-                } else if (typeof selectorId === 'string') {
-                    dialog = $(document.getElementById(selectorId));
-                } else {
-                    dialog = selectorId;
-                }
-                dialog.find("." + fact.bodyClassSpecs + "." + fact.bodyLoadingClass).removeClass(fact.bodyLoadingClass);
-            };
-            $(window).keydown(function (e) {
-                var openedDialog = $(".mdialog.opened");
-                if (openedDialog.length && e.keyCode == 27) {
-                    var arr = [];
-                    arr.length = openedDialog.length;
-                    for (var i = 0; i < openedDialog.length; i++) {
-                        for (var j = i; j < openedDialog.length; j++) {
-                            if (openedDialog[i]["$dialogInitTime"] > openedDialog[j]["$dialogInitTime"]) {
-                                arr[j] = openedDialog[i];
-                                arr[i] = openedDialog[j];
-                            } else {
-                                arr[i] = openedDialog[i];
-                                arr[j] = openedDialog[j];
-                            }
-                        }
-                    }
-                    var lastedOpen = arr[arr.length - 1];
-                    if (lastedOpen) {
-                        fact.hide($(lastedOpen), lastedOpen ? lastedOpen["$dialogCallback"] : null);
-                    }
-                }
-            });
-            fact.initStyles = function () {
-                var css = "";
-                var style = document.createElement("STYLE");
-                var head = document.head || document.getElementsByTagName("head")[0];
-                style.type = "text/css";
-                if (style.styleSheet) {
-                    style.styleSheet.cssText = css;
-                } else {
-                    style.appendChild(document.createTextNode(this.getCss()));
-                }
-                head.appendChild(style);
-            };
-            fact.getCss = function () {
-                var options = fact.default;
-                var css = "";
-                var dialog = {};
-                dialog["display"] = "none";
-                dialog["position"] = "fixed";
-                dialog["top"] = "0";
-                dialog["height"] = "100%";
-                dialog["left"] = "0";
-                dialog["width"] = "100%";
-                dialog["z-index"] = options.zindex;
-                dialog["background"] = options.background;
-                css += fact.assignStyle(".mdialog", dialog);
-                css += ".mdialog.opened{display: block;}";
-                var body = {};
-                body["width"] = options.width + "px";
-                body["min-height"] = options.minHeight + "px";
-                body["background"] = "#fff";
-                body["margin"] = "60px auto 140px auto";
-                css += fact.assignStyle(".mdialog .body", body);
-                var bodySpecs = {};
-                bodySpecs["position"] = "relative"
-                css += fact.assignStyle("." + fact.bodyLoadingClass, bodySpecs);
-                var loadingFrame = {};
-                loadingFrame["content"] = "' '";
-                loadingFrame["top"] = 0;
-                loadingFrame["left"] = 0;
-                loadingFrame["width"] = "100%";
-                loadingFrame["height"] = "100%";
-                loadingFrame["position"] = "absolute";
-                loadingFrame["background"] = "#fff";
-                loadingFrame["opacity"] = 0.4;
-                loadingFrame["z-index"] = 1;
-                css += fact.assignStyle("." + fact.bodyLoadingClass + ":before", loadingFrame);
-                var loading = {};
-                loading["content"] = "' '";
-                loading["border"] = "2px solid #303339";
-                loading["border-top"] = "2px solid #fff;";
-                loading["border-radius"] = "50%";
-                loading["width"] = "30px";
-                loading["height"] = "30px";
-                loading["position"] = "absolute";
-                loading["top"] = "calc(50% - 15px)";
-                loading["left"] = "calc(50% - 15px)";
-                loading["-webkit-animation"] = "spin 2s linear infinite";
-                loading["animation"] = "spin 2s linear infinite";
-                loading["z-index"] = 1;
-                css += fact.assignStyle("." + fact.bodyLoadingClass + ":after", loading);
-                css += "@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }";
-                return css;
-            };
-            fact.assignStyle = function (name, cssobj) {
-                var res = name + "{";
-                for (var key in cssobj) {
-                    var val = cssobj[key];
-                    res += key + ":" + val + ";";
-                }
-                res += "}";
-                return res;
-            };
-            fact.initStyles();
-            return fact;
-        })();
+      function highlightedIcon() {
+          return {
+              url: 'http://steeplemedia.com/images/markers/markerGreen.png'
+          };
+      }
 
-        if (!window['showDialog']) {
-            window['showDialog'] = function (id, closeClass, bodyClass) {
-                dialogManager.show("contact-now", {
-                    close: closeClass,
-                    body: bodyClass
-                }, function hideFn() {
-                }, function showFn(dialog) {
-                    $('#' + id).find("input").first().focus();
-                    $(bodyClass).css("max-width", "").css("width", "100%")
-                        .find(".popup-contact").scrollTop(0);
-                });
-            }
-        }
-    </script>
+      function callbackInitMap() {
+          console.log('initilize map');
+          initialize();
+      }
+
+  </script>
+  <script async
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap">
+  </script>
+  <script src="{% static 'js/search.js' %}"></script>
+
+  <script>
+      window["_au_api"] = "../thue/api";
+      window['fap_url'] = "{% static 'js/fap.min90ca.js' %}";
+      window['fap.server'] = '/thegioinhaphovietnam.com.vn/fap';
+      window['favorite_api'] = '../mapi/index.html';
+      window['staticUrl'] = '../static';
+      window['hotline'] = '0964399436';
+      window['isLoggedIn'] = false;
+      window.hsConversationsSettings = {
+          loadImmediately: false // Delay the load of the chat widget
+      };
+  </script>
+  <script>
+      {% comment %}window.fbAsyncInit = function () {
+          FB.init({
+              appId: '268342061639747',
+              cookie: true,                     // Enable cookies to allow the server to access the session.
+              xfbml: true,                     // Parse social plugins on this webpage.
+              version: 'v8.0'           // Use this Graph API version for this call.
+          });
+      }{% endcomment %}
+  </script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+  <script>
+      function createHSForm(opt) {
+          function getClientId() {
+              try {
+                  return ga.getAll()[0].get('clientId');
+              } catch (e) {
+                  return ""
+              }
+          }
+
+          var optFS = opt['onFormSubmit'];
+          var defaultOpt = Object.create(opt);
+          defaultOpt.onFormSubmit = function () {
+              var $gaClientId = $('[name=ga_client_id]');
+              if ($gaClientId[0]) {
+                  $gaClientId.val(getClientId());
+              }
+              if (typeof optFS === 'function') {
+                  optFS.apply(this, arguments)
+              }
+          };
+          return hbspt.forms.create(defaultOpt);
+      }
+
+      var dialogManager = (function DialogService() {
+          var fact = this;
+          fact.bodyClassSpecs = "mdialog-body";
+          fact.bodyLoadingClass = "mdialog-loading";
+          fact.cachedBodyStyle = null;
+          fact.default = {
+              zindex: 99999,
+              width: 300,
+              minHeight: 100,
+              background: "rgba(0,0,0,.5)",
+              opacity: 0.5
+          };
+          fact.key = {
+              cachedStyle: "cached-style"
+          };
+          var v0 = 0.05;
+          var a = 0.0002;
+          fact.show = function (selectorId, options, hideFn, showFn) {
+              options = $.extend(true, {
+                  outSideClick: true
+              }, options || {});
+              options.maxWidth = "100%";
+              var dialog, oldStyle = document.body.getAttribute("style");
+              document.body.setAttribute(fact.key.cachedStyle, oldStyle);
+              if (selectorId && typeof selectorId === 'string') {
+                  dialog = $(document.getElementById(selectorId));
+              } else {
+                  dialog = selectorId;
+              }
+              dialog.css("opacity", 0);
+              dialog.css("overflow-y", "auto");
+              dialog.css("overflow-x", "hidden");
+              dialog.addClass("opened");
+              var bodyClass = (options ? options.body : "") || ".body";
+              dialog.find(bodyClass).css(options);
+              dialog.find(bodyClass).addClass(fact.bodyClassSpecs)
+              dialog[0] ? dialog[0]["$dialogCallback"] = hideFn : null;
+              dialog[0] ? dialog[0]["$dialogInitTime"] = +new Date() : null;
+              if (options && options.close) {
+                  dialog.find(bodyClass + " " + options.close).off().click(function (e) {
+                      e.preventDefault();
+                      fact.hide(selectorId, hideFn);
+                  });
+              }
+              if (options && options.outSideClick) {
+                  dialog.off().click(function () {
+                      fact.hide(selectorId, hideFn);
+                  });
+              }
+              dialog.find(bodyClass).click(function (e) {
+                  e.stopPropagation();
+              });
+              //.preventParentScroll();
+              fact.animation(dialog, 0, 0, 1, function () {
+                  showFn ? showFn() : null;
+              });
+              fact.loadingEnd(dialog);
+              return dialog;
+          };
+          fact.animation = function (dialog, opa, t, delta, callback) {
+              dialog.css("opacity", opa);
+              if ((delta > 0 && opa > 1) || (delta < 0 && opa < 0)) {
+                  if (callback) {
+                      callback();
+                  }
+                  return;
+              }
+              setTimeout(function () {
+                  opa += delta * (v0 * t + 1 / 2 * a * t * t);
+                  fact.animation(dialog, opa, t + 1, delta, callback);
+              }, 10);
+          };
+          fact.hide = function (selectorId, fn) {
+              var dialog;
+              if (!selectorId) {
+                  dialog = $(".mdialog.opened");
+              } else if (typeof selectorId === 'string') {
+                  dialog = $(document.getElementById(selectorId));
+              } else {
+                  dialog = selectorId;
+              }
+              fact.animation(dialog, 1, 0, -1, function () {
+                  dialog.removeClass("opened");
+                  fn ? fn(dialog) : null;
+              });
+          };
+          fact.loadingStart = function (selectorId) {
+              var dialog;
+              if (!selectorId) {
+                  dialog = $(".mdialog.opened");
+              } else if (typeof selectorId === 'string') {
+                  dialog = $(document.getElementById(selectorId));
+              } else {
+                  dialog = selectorId;
+              }
+              dialog.find("." + fact.bodyClassSpecs).addClass(fact.bodyLoadingClass);
+          };
+          fact.loadingEnd = function (selectorId) {
+              var dialog;
+              if (!selectorId) {
+                  dialog = $(".mdialog.opened");
+              } else if (typeof selectorId === 'string') {
+                  dialog = $(document.getElementById(selectorId));
+              } else {
+                  dialog = selectorId;
+              }
+              dialog.find("." + fact.bodyClassSpecs + "." + fact.bodyLoadingClass).removeClass(fact.bodyLoadingClass);
+          };
+          $(window).keydown(function (e) {
+              var openedDialog = $(".mdialog.opened");
+              if (openedDialog.length && e.keyCode == 27) {
+                  var arr = [];
+                  arr.length = openedDialog.length;
+                  for (var i = 0; i < openedDialog.length; i++) {
+                      for (var j = i; j < openedDialog.length; j++) {
+                          if (openedDialog[i]["$dialogInitTime"] > openedDialog[j]["$dialogInitTime"]) {
+                              arr[j] = openedDialog[i];
+                              arr[i] = openedDialog[j];
+                          } else {
+                              arr[i] = openedDialog[i];
+                              arr[j] = openedDialog[j];
+                          }
+                      }
+                  }
+                  var lastedOpen = arr[arr.length - 1];
+                  if (lastedOpen) {
+                      fact.hide($(lastedOpen), lastedOpen ? lastedOpen["$dialogCallback"] : null);
+                  }
+              }
+          });
+          fact.initStyles = function () {
+              var css = "";
+              var style = document.createElement("STYLE");
+              var head = document.head || document.getElementsByTagName("head")[0];
+              style.type = "text/css";
+              if (style.styleSheet) {
+                  style.styleSheet.cssText = css;
+              } else {
+                  style.appendChild(document.createTextNode(this.getCss()));
+              }
+              head.appendChild(style);
+          };
+          fact.getCss = function () {
+              var options = fact.default;
+              var css = "";
+              var dialog = {};
+              dialog["display"] = "none";
+              dialog["position"] = "fixed";
+              dialog["top"] = "0";
+              dialog["height"] = "100%";
+              dialog["left"] = "0";
+              dialog["width"] = "100%";
+              dialog["z-index"] = options.zindex;
+              dialog["background"] = options.background;
+              css += fact.assignStyle(".mdialog", dialog);
+              css += ".mdialog.opened{display: block;}";
+              var body = {};
+              body["width"] = options.width + "px";
+              body["min-height"] = options.minHeight + "px";
+              body["background"] = "#fff";
+              body["margin"] = "60px auto 140px auto";
+              css += fact.assignStyle(".mdialog .body", body);
+              var bodySpecs = {};
+              bodySpecs["position"] = "relative"
+              css += fact.assignStyle("." + fact.bodyLoadingClass, bodySpecs);
+              var loadingFrame = {};
+              loadingFrame["content"] = "' '";
+              loadingFrame["top"] = 0;
+              loadingFrame["left"] = 0;
+              loadingFrame["width"] = "100%";
+              loadingFrame["height"] = "100%";
+              loadingFrame["position"] = "absolute";
+              loadingFrame["background"] = "#fff";
+              loadingFrame["opacity"] = 0.4;
+              loadingFrame["z-index"] = 1;
+              css += fact.assignStyle("." + fact.bodyLoadingClass + ":before", loadingFrame);
+              var loading = {};
+              loading["content"] = "' '";
+              loading["border"] = "2px solid #303339";
+              loading["border-top"] = "2px solid #fff;";
+              loading["border-radius"] = "50%";
+              loading["width"] = "30px";
+              loading["height"] = "30px";
+              loading["position"] = "absolute";
+              loading["top"] = "calc(50% - 15px)";
+              loading["left"] = "calc(50% - 15px)";
+              loading["-webkit-animation"] = "spin 2s linear infinite";
+              loading["animation"] = "spin 2s linear infinite";
+              loading["z-index"] = 1;
+              css += fact.assignStyle("." + fact.bodyLoadingClass + ":after", loading);
+              css += "@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }";
+              return css;
+          };
+          fact.assignStyle = function (name, cssobj) {
+              var res = name + "{";
+              for (var key in cssobj) {
+                  var val = cssobj[key];
+                  res += key + ":" + val + ";";
+              }
+              res += "}";
+              return res;
+          };
+          fact.initStyles();
+          return fact;
+      })();
+
+      if (!window['showDialog']) {
+          window['showDialog'] = function (id, closeClass, bodyClass) {
+              dialogManager.show("contact-now", {
+                  close: closeClass,
+                  body: bodyClass
+              }, function hideFn() {
+              }, function showFn(dialog) {
+                  $('#' + id).find("input").first().focus();
+                  $(bodyClass).css("max-width", "").css("width", "100%")
+                      .find(".popup-contact").scrollTop(0);
+              });
+          }
+      }
+  </script>
+  <script async defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
+  <script async defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
 
 {% endblock %}
 
