@@ -13580,7 +13580,7 @@
             })
         };
         var r, i = n("Dd8w"), o = n.n(i), a = n("d7EF"), s = n.n(a), u = n("bOdI"), c = n.n(u), l = n("u2KI"),
-            f = n.n(l), d = n("z8d1"), p = "../listings/search?trantype=", h = "m²", v = 768,
+            f = n.n(l), d = n("z8d1"), p = "../listings/search?trans_type=", h = "m²", v = 768,
             m = f()({onShowSearchMobile: "show-search-mobile", onShowSearchDesktop: "show-search-desktop"}),
             g = "ha-noi", y = "Hà Nội",
             _ = f()([{id: "1", name: "1 phòng ngủ"}, {id: "2", name: "2 phòng ngủ"}, {

@@ -60,17 +60,17 @@
 {#      <h4><a href="{% url 'listing' listing.id %}">Xem Chi Tiết</a>#}
       </h4>
       <h4>
-        <a href="{% url 'search' %}?street={{ listing.street }}"
+        <a href="{% url 'listing_search' %}?street={{ listing.street }}"
            title="">{{ listing.street }}</a>
       </h4>
       {% if listing.urban_area %}
       <h4>
-        <a href="{% url 'search' %}?urban_area={{ listing.urban_area }}"
+        <a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}"
            title="">{{ listing.urban_area }}</a>
       </h4>
       {% endif %}
       <h4>
-        <a href="{% url 'search' %}?district={{ listing.district }}"
+        <a href="{% url 'listing_search' %}?district={{ listing.district }}"
            title=""> {{ listing.district.name }} {% comment %}{% state_data.get('district','' %}{% endcomment %}</a>
       </h4>
     </div>

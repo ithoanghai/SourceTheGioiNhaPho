@@ -13010,3 +13010,9 @@ div > img {
     cursor: initial;
     pointer-events: none;
 }
+
+#contact-now-form-body .active .form-dropdown-content {
+    border: 1px solid rgba(131,131,131,0.3);
+    max-height: 132px;
+    overflow-y: scroll;
+}

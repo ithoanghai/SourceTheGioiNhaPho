@@ -1,7 +1,7 @@
 {% load static i18n %}
 
 <div class="banner-top-bg">
-  {% include 'partials/_menu.html' %}
+  {% include 'partials/_homeMenu.html' %}
 
   <div class="banner-cover">
     <img srcset="{% static 'img/banner_trang_chupsd.png' %}"
@@ -11,7 +11,8 @@
     <div class="banner-content-inner">
       <h1 class="heading-01">Tìm kiếm ngôi nhà mơ ước</h1>
       <h5 class="heading-04">Hàng ngàn căn nhà trong kho giúp bạn tìm kiếm ngôi nhà mơ ước</h5>
-      <form id="searchForm" class="search-desktop-component" action="search">
+      <form id="searchForm" class="search-desktop-component" action="{% url "listing_search" %}">
+        {% csrf_token %}
         <div class="tab-container">
           <div class="tab">
             <input type="radio" name="service-type" value="sell" checked id="buy-house">
@@ -34,21 +35,18 @@
             <span>Tìm Kiếm</span>
           </button>
           <ul class="recent-search hidden">
-
           </ul>
         </div>
       </form>
     </div>
-
-
   </div>
 </div>
 
 <script type="text/x-template" id="searchFormTemplate">
-  <form class="search-desktop-component" action="search">
+  <form class="search-desktop-component" action="{% url "listing_search" %}">
     <div class="tab-container">
       <div class="tab">
-        <input type="radio" name="service-type" value="sell" checked id="buy-house">
+        <input type="radio" name="trans_type" value="sell" checked id="buy-house">
         <label for="buy-house">Mua nhà</label>
       </div>
       <div class="tab">
@@ -56,12 +54,11 @@
         <label for="rent-house">Thuê nhà</label>
       </div>
     </div>
-    <input type="hidden" placeholder="Nhập địa điểm, khu dân cư, tòa nhà" id="hidServiceTypeChecked"
-           name="searchData"/>
     <div class="search-container" v-click-outside="handleFocus">
       <i v-show="!isLoading" class="zmdi zmdi-search" style="opacity: 0.3"></i>
       <i v-show="isLoading" class="zmdi zmdi-refresh zmdi-hc-spin"></i>
       <input
+        name="keywords"
         v-model="query" v-on:input="handleQueryChange"
         v-bind:class="{ inputInProgress: isLoading, }"
         v-on:focus="handleFocus"

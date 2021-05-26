@@ -65,15 +65,67 @@ new Vue({
     }
 })
 
+const houseTypes = [
+    {type: 'town_house', text: 'Nhà phố'},
+    {type: 'shop_house', text: 'Cửa hàng'},
+    {type: 'apartment', text: 'Căn hộ'},
+    {type: 'land', text: 'Đất nền'},
+    {type: 'land_business', text: 'Mặt bằng kinh doanh'},
+    {type: 'villa', text: 'Biệt thự'}
+];
+
 const ContactPopUpComponent = Vue.extend({
     template: '#contactPopupTemplate',
     delimiters: ["[[", "]]"],
     props: {
         showContactPopup: {
             type: Boolean,
-            default: false
+            default: true
         },
         closePopup: Function
+    },
+    data() {
+        return {
+            focusedField: '',
+            houseTypes: houseTypes,
+            selectedHouseType: 'apartment',
+            districtData: districts,
+            district: {
+                code: '',
+                text: ''
+            },
+            firstName: '',
+            lastName: '',
+            phone: '',
+            email: '',
+        }
+    },
+    computed: {
+    },
+    methods: {
+        onFocusField(field) {
+            this.focusedField = field;
+        },
+        toggleFocusField(field) {
+          if (this.focusedField == field)  {
+              this.focusedField = ''
+          } else {
+              this.focusedField = field;
+          }
+        },
+        onBlur() {
+            this.focusedField = '';
+        },
+        onSelectHouseType(type) {
+           this.selectedHouseType = type;
+           this.onBlur();
+        },
+        getSelectedHouseTypeText() {
+            return (this.houseTypes.find(item => item.type === this.selectedHouseType)).text;
+        },
+        onSelectDistrict(district) {
+            this.district = district
+        }
     }
 })
 
@@ -135,14 +187,7 @@ new Vue({
     data() {
         return {
             showFilterType: '',
-            houseTypes: [
-                {type: 'town_house', text: 'Nhà phố'},
-                {type: 'shop_house', text: 'Cửa hàng'},
-                {type: 'apartment', text: 'Căn hộ'},
-                {type: 'land', text: 'Đất nền'},
-                {type: 'land_business', text: 'Mặt bằng kinh doanh'},
-                {type: 'villa', text: 'Biệt thự'}
-            ],
+            houseTypes: houseTypes,
             houseTypeFilter: [],
             tmpHouseTypeFilter: [],
             minPrice: 0,

@@ -556,18 +556,18 @@
             <header class="detail-house">
               <div class="address">
                 {% if listing.urban_area %}
-                  <h2><a href="{% url 'search' %}?urban_area={{ listing.urban_area }}"
+                  <h2><a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}"
                          title="Khu đô thị/ khu dân cư">{{ listing.urban_area }}</a></h2>
                 {% endif %}
-                <h2><a href="{% url 'search' %}?street={{ listing.street }}"
+                <h2><a href="{% url 'listing_search' %}?street={{ listing.street }}"
                        title="Đường">{{ listing.street }}</a></h2>
                 {% if listing.ward %}
-                  <h2><a href="{% url 'search' %}?ward={{ listing.ward }}"
+                  <h2><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
                          title="Phường/Xã">{{ listing.ward }}</a></h2>
                 {% endif %}
-                <h2><a href="{% url 'search' %}?district={{ listing.district }}"
+                <h2><a href="{% url 'listing_search' %}?district={{ listing.district }}"
                        title="Quận/Huyện">{{ listing.district }}</a></h2>
-                <h2><a href="{% url 'search' %}?state={{ listing.state }}"
+                <h2><a href="{% url 'listing_search' %}?state={{ listing.state }}"
                        title="Tỉnh/Thành phố">{{ listing.state }}</a></h2>
 
               </div>
@@ -600,7 +600,7 @@
             <ul class="detail-more">
               <li>
                 <p class="left">Loại hình</p>
-                <p class="right"><a href="{% url 'search' %}?house_type={{ listing.house_type }}"
+                <p class="right"><a href="{% url 'listing_search' %}?house_type={{ listing.house_type }}"
                                     target="_blank">
                   {% if listing.house_type == 'town_house' %}{% translate 'Nhà Phố' %}
                   {% elif listing.registration_type == 'street_house' %} {% translate 'Nhà mặt phố' %}
@@ -636,7 +636,7 @@
               <li>
                 <p class="left">Loại chứng nhận</p>
                 <p class="right"><a
-                  href="{% url 'search' %}?registration_type={{ listing.registration_type }}"
+                  href="{% url 'listing_search' %}?registration_type={{ listing.registration_type }}"
                   target="_blank">
                   {% if listing.registration_type == 'red_book' %}{% translate 'Sổ đỏ' %}
                   {% elif listing.registration_type == 'pink_book' %} {% translate 'Sổ hồng' %}
@@ -1104,11 +1104,11 @@
                     <h3 class="heading">{{ listing_same.title }}</h3>
                   </a>
                   <h4>{{ listing_same.code }}</h4>
-                  <h2><a href="{% url 'search' %}?street={{ listing_same.street }}"
+                  <h2><a href="{% url 'listing_search' %}?street={{ listing_same.street }}"
                          title="Đường">{{ listing_same.street }}</a></h2>
-                  <h2><a href="{% url 'search' %}?ward={{ listing_same.ward }}"
+                  <h2><a href="{% url 'listing_search' %}?ward={{ listing_same.ward }}"
                          title="Phường/Xã">{{ listing_same.ward }}</a></h2>
-                  <h2><a href="{% url 'search' %}?district={{ listing_same.district }}"
+                  <h2><a href="{% url 'listing_search' %}?district={{ listing_same.district }}"
                          title="Quận/Huyện">{{ listing_same.district }}</a></h2>
                   <ul>
                     <li title="Diện tích"><span

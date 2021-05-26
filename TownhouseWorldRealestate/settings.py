@@ -28,6 +28,8 @@ SECRET_KEY = 'w6rm%l&xim0ivll-li$u6fg8)6k8-$7uar^f#33ht5sutw8e!#'
 DEBUG = True
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
+ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
+
 ALLOWED_HOSTS = ['*']
 
 # Application definition
