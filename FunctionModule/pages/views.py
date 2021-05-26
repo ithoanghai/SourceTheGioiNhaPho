@@ -100,7 +100,7 @@ def recruitment(request):
 
 
 def apply(request):
-    position = request.GET.get('trantype', '')
+    position = request.GET.get('trans_type', '')
     context = {
         'position': position,
     }

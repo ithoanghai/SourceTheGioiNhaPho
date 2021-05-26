@@ -10,7 +10,7 @@ urlpatterns = [
     path('', views.index, name='listings'),
     path('<int:listing_id>', views.listing, name='listing'),
 
-    path('search', views.search, name='search'),
+    path('search', views.search, name='listing_search'),
 
     path('detail', views.detail, name='detail'),
     path('sellwithus', views.sell_with_us, name='sell_with_us'),

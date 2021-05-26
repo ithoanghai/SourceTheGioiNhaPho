@@ -70,11 +70,9 @@
   </section>
 
   <section class="container col-12">
-
-    {% comment %}{% for key, value in district_data.items %}{% endcomment %}
     <div class="inner pd-top-bottom-block block-project" style="padding-top: 0">
       <h2 class="heading-03">
-        <a href="{% url 'search' %} {{ key }}">Bán tại Q. {{ value }}</a>
+        <a href="{% url 'listing_search' %} {{ key }}">Bán tại Q. {{ value }}</a>
       </h2>
       <div class="col-12">
         {% if listings_for_sale %}
@@ -87,12 +85,11 @@
           </div>
         {% endif %}
         <input type="hidden" value=""/>
-        <a class="more" href="../listings/search?trantype=sell&district=Hoàn Kiếm">Xem thêm nhà đất
+        <a class="more" href="../listings/search?trans_type=sell&district=Hoàn Kiếm">Xem thêm nhà đất
           <i class="zmdi zmdi-chevron-right"></i>
         </a>
       </div>
     </div>
-    {% comment %}{% endfor %}{% endcomment %}
   </section>
 
   <section class="container col-12">
@@ -127,7 +124,7 @@
   <section class="container col-12">
     <div class="inner pd-top-bottom-block block-project" style="padding-top: 0">
       <h2 class="heading-03">
-        <a href="../listings/search?trantype=rent&district=Hoàn Kiếm">Cho thuê tại Hoàn Kiếm</a>
+        <a href="../listings/search?trans_type=rent&district=Hoàn Kiếm">Cho thuê tại Hoàn Kiếm</a>
       </h2>
       <div class="col-12">
         {% if listings_for_rent %}
@@ -140,7 +137,7 @@
           </div>
         {% endif %}
         <input type="hidden" value=""/>
-        <a class="more" href="../listings/search?trantype=sell&district=Hoàn Kiếm">Xem thêm nhà đất
+        <a class="more" href="../listings/search?trans_type=sell&district=Hoàn Kiếm">Xem thêm nhà đất
           <i class="zmdi zmdi-chevron-right"></i>
         </a>
       </div>
@@ -357,6 +354,7 @@
   {#  <script src="{% static 'js/index-merged.min90ca.js' %} "></script>#}
   <script async defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
   <script defer src="{% static 'js/favorite.min90ca.js' %} "></script>
+  <script defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
   <script>
       /*@shinsenter/defer.js*/
       !function (e, i, t, n, r, o) {

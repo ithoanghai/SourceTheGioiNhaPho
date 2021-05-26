@@ -36,11 +36,11 @@ def search_listing(req: request.Request, **kwargs):
     queryset_list = Listing.objects.order_by('-list_date')
     hn_district = district_data['01']
 
-    # Trantype
-    if 'trantype' in req.query_params:
-        trantype = req.query_params['trantype']
-        if trantype:
-            queryset_list = queryset_list.filter(transaction_type=trantype)
+    # trans_type
+    if 'trans_type' in req.query_params:
+        trans_type = req.query_params['trans_type']
+        if trans_type:
+            queryset_list = queryset_list.filter(transaction_type=trans_type)
 
     # Housetype
     if 'housetype' in req.query_params:
@@ -58,7 +58,13 @@ def search_listing(req: request.Request, **kwargs):
     if 'keywords' in req.query_params:
         keywords = req.query_params['keywords']
         if keywords:
-            query = Q(description__icontains=keywords) | Q(name__icontains=keywords)
+            query = Q(description__icontains=keywords) | Q(title__icontains=keywords) | Q(
+                address__icontains=keywords)
+            slug_keyword = slugify(keywords.lower().replace('đ', 'd').replace('õ', 'o'))
+            district_code = next(
+                x['code'] for x in hn_district if (x['name'] == keywords or x['slug'] == slug_keyword))
+            if district_code:
+                query = query | Q(district=district_code)
             queryset_list = queryset_list.filter(query)
 
             # Address

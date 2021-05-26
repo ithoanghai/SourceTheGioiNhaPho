@@ -133,87 +133,83 @@
       <div class="popup-container">
         <div class="popup-send-info">
           <div class="header-w-close">
-            <button class="close-popup-btn">
+            <button class="close-popup-btn" v-on:click="closePopup">
               <i class="zmdi zmdi-hc-2x zmdi-close"></i>
             </button>
             <h3 class="font-tiempos">Liên hệ tư vấn</h3>
           </div>
           <div id="contact-now-form-body" class="form-info" style="background: rgb(255, 255, 255);">
-            <form data-formtype="property-form" _lpchecked="1">
-              <fieldset><div class="form-element per50-left error">
-                <div class="placeholder">Họ </div>
-                <input type="text" name="lastname" class="input"/>
-                <span class="error-text">Thông tin bắt buộc</span>
-              </div>
-                <div class="form-element per50-right error"><div class="placeholder">Tên</div>
-                <input type="text" name="firstname" class="input"/>
+            <form data-formtype="property-form">
+              <fieldset>
+                <div class="form-element per50-left" v-bind:class="{focused: focusedField==='lastName'}">
+                  <div class="placeholder">Họ</div>
+                  <input type="text" name="lastname" class="input" v-bind:value="lastName"
+                         v-on:focus="onFocusField('lastName')" v-on:blur="onBlur"/>
                   <span class="error-text">Thông tin bắt buộc</span>
                 </div>
-                <div class="form-element per50-left error">
+                <div class="form-element per50-right" v-bind:class="{focused: focusedField==='firstName'}">
+                  <div class="placeholder">Tên</div>
+                  <input type="text" name="firstname" class="input" v-bind:value="firstName"
+                         v-on:focus="onFocusField('firstName')" v-on:blur="onBlur"/>
+                  <span class="error-text">Thông tin bắt buộc</span>
+                </div>
+                <div class="form-element per50-left" v-bind:class="{focused: focusedField==='email'}">
                   <div class="placeholder">Email</div>
-                  <input type="text" name="email" class="input">
+                  <input type="text" name="email" class="input" v-bind:value="email" v-on:focus="onFocusField('email')"
+                         v-on:blur="onBlur"/>
                   <span class="error-text">Thông tin bắt buộc</span>
                 </div>
-                <div class="form-element per50-right error">
+                <div class="form-element per50-right" v-bind:class="{focused: focusedField==='phone'}">
                   <div class="placeholder">Số điện thoại</div>
-                  <input type="text" name="phone" class="input"/>
+                  <input type="text" name="phone" class="input" v-bind:value="phone"
+                         v-on:focus="onFocusField('phone')" v-on:blur="onBlur"/>
                   <span class="error-text">Thông tin bắt buộc</span>
                 </div>
-                <div class="form-element form-dropdown">
+                <div class="form-element form-dropdown"
+                     v-bind:class="{focused: focusedField==='district' || district.code !== ''}">
                   <div class="placeholder">Khu vực bạn quan tâm</div>
-                  <div class="">
-                    <input type="text" autocomplete="false" class="input"/>
-                    <ul
-                      tabindex="-1" class="form-dropdown-content">
-                      <li class="active"><a href="#">Quận 2</a></li>
-                      <li class=""><a href="#">Quận 7</a></li>
-                      <li class=""><a href="#">Quận 4</a></li>
-                      <li class=""><a href="#">Quận Bình Thạnh</a></li>
-                      <li class=""><a href="#">Thảo Điền</a></li>
-                      <li class=""><a href="#">Thủ Thiêm</a></li>
-                      <li class=""><a href="#">An Phú An Khánh</a></li>
-                      <li class=""><a href="#">Vinhomes Central Park</a></li>
-                      <li class=""><a href="#">Phú Mỹ Hưng</a></li>
-                      <li class=""><a href="#">Quận 9</a></li>
+                  <div class="" v-bind:class="{active: focusedField==='district'}">
+                    <input type="hidden" name="district" v-bind:value="district.code"/>
+                    <input type="text" autocomplete="false" class="input" v-bind:value="district.text"
+                           v-on:focus="onFocusField('district')" v-on:blur="onBlur"/>
+                    <ul tabindex="-1" class="form-dropdown-content">
+{#                      <li class="active"><a href="#">Quận 2</a></li>#}
+                        <li v-for="item in districtData" v-bind:class="{active: district.code===item.code}"
+                            @click.prevent="onSelectDistrict(item)">
+                          <a href="#">[[item.text]]</a>
+                        </li>
                     </ul>
                   </div>
                   <span class="error-text"></span>
                 </div>
-                <div class="form-element form-dropdown focused">
+                <div class="form-element form-dropdown focused"
+                     v-bind:class="{active: focusedField==='houseType'}">
                   <div class="placeholder">Loại nhà đất bạn muốn mua</div>
                   <div class="">
-                    <span class="input" style="color: initial; padding: 8px 10px 5px;"> Căn hộ </span>
-                    <select style="display: none;">
-                      <option value="can-ho">Căn hộ</option>
-                      <option value="pent-house">Pent-house</option>
-                      <option value="shop-house">Shop-house</option>
-                      <option value="office-tel">Office-tel</option>
-                      <option value="nha-pho">Nhà phố</option>
-                      <option value="biet-thu">Biệt thự</option>
-                      <option value="van-phong">Văn phòng</option>
-                      <option value="mat-bang-kd">Mặt bằng KD</option>
-                      <option value="dat-nen">Đất nền</option></select>
+                    <span class="input" style="color: initial; padding: 8px 10px 5px;"
+                          v-on:click="toggleFocusField('houseType')">[[getSelectedHouseTypeText()]]</span>
+                    <select name="houseType" style="display: none">
+                      <option v-for="item in houseTypes" :value="item.type">[[item.text]]</option>
+                    </select>
                     <ul tabindex="-1" class="form-dropdown-content">
-                      <li class="active"><a href="#">Căn hộ</a></li>
-                      <li class=""><a href="#">Pent-house</a></li>
-                      <li class=""><a href="#">Shop-house</a></li>
-                      <li class=""><a href="#">Office-tel</a></li>
-                      <li class=""><a href="#">Nhà phố</a></li>
-                      <li class=""><a href="#">Biệt thự</a></li>
-                      <li class=""><a href="#">Văn phòng</a></li>
-                      <li class=""><a href="#">Mặt bằng KD</a></li>
-                      <li class=""><a href="#">Đất nền</a></li></ul>
+                      <li v-for="item in houseTypes" v-bind:class="{active: selectedHouseType===item.type}"
+                          @click.prevent="onSelectHouseType(item.type)">
+                        <a href="#">[[item.text]]</a>
+                      </li>
+                    </ul>
                   </div>
                   <span class="error-text"></span>
                 </div>
-                <div class="form-element">
+                <div class="form-element" :class="{focused: focusedField === 'price'}">
                   <div class="placeholder">Mức giá cần mua</div>
-                  <input type="text" name="price" class="input"/>
+                  <input type="text" name="price" class="input" v-on:focus="onFocusField('price')"
+                         v-on:blur="onBlur"/>
                   <span class="error-text"></span>
                 </div>
-                <div class="form-element textarea-height">
+                <div class="form-element textarea-height" :class="{focused: focusedField === 'description_note'}">
                   <div class="placeholder">Lời nhắn </div>
-                  <textarea name="description_note"> </textarea>
+                  <textarea name="description_note" v-on:focus="onFocusField('description_note')" v-on:blur="onBlur">
+                  </textarea>
                 </div>
               </fieldset>
               <div class="action">

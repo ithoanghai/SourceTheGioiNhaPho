@@ -1,0 +1,38 @@
+<li class="sub-menu">
+  <a>Hỗ trợ<i class="zmdi zmdi-chevron-down"></i></a>
+  <ul>
+    <li>
+      <a href="{% url 'specialist' %}"
+         data-mix-header-click="group: buy, action: select_agent_buy">Gặp chuyên viên tư
+        vấn</a>
+    </li>
+    <li>
+      <a href="{% url 'whyChoose' %}"
+         data-mix-header-click="group: buy, action: select_pr_buy">Lý do chọn TG Nhà Phố?</a>
+    </li>
+    {% comment %}                        <li>
+                            <a href="guideBuy"
+                               data-mix-header-click="group: info, action: select_guideline_buy_info">Hướng dẫn
+                                mua nhà</a>
+                        </li>
+                        <li>
+                            <a href="guideSell"
+                               data-mix-header-click="group: info, action: select_guideline_sell_info">Hướng dẫn
+                                bán nhà</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                               data-mix-header-click="group: info, action: select_guideline_sell_info">Kiến thức môi giới</a>
+                        </li>{% endcomment %}
+    <li class="divide"></li>
+    <li>
+      <a href="{% url 'whyChoose' %}" title="Tuyển dụng">Tuyển dụng</a>
+    </li>
+    <li>
+      <a href="{% url 'contacts' %}" title="Liên hệ">Liên hệ</a>
+    </li>
+    <li>
+      <a href="{% url 'about' %}" title="Về TGNP">Giới thiệu Về TGNP</a>
+    </li>
+  </ul>
+</li>

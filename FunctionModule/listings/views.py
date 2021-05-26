@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
@@ -69,6 +70,7 @@ def search(request):
         'listings': [],
         'state_data': state_data,
         'districts': hn_district,
+        'environment': settings.ENVIRONMENT,
         'pagination': {
             'current_page': 1,
             'next_5_pages': range(1, 5),
