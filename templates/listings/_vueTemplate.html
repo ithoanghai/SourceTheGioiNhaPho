@@ -34,13 +34,18 @@
         <div class="info-container">
           <div class="group-grid__view">
             <ul class="listing-info">
-              <li v-if="listing.bedrooms && listing.bedrooms > 0"><i
-                class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}</li>
-              <li><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]]{% trans "m2" %}</li>
-              <li v-if="listings.floors && listing.floors > 0"><i class="fa fa-h-square"></i>
-                [[listing.floors]] {% trans "tầng" %}</li>
-              <li v-if="listings.bathrooms && listing.bathrooms > 0"><i
-                class="fa fa-bath"></i>[[listing.bathrooms]] {% trans "tắm" %} </li>
+              <li v-if="listing.bedrooms && listing.bedrooms > 0">
+                <i class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}
+              </li>
+              <li>
+                <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]]{% trans "m2" %}
+              </li>
+              <li v-if="listing.floors > 0">
+                <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
+              </li>
+              <li v-if="listing.bathrooms > 0">
+                <i class="fa fa-bath"></i>[[listing.bathrooms]] {% trans "tắm" %}
+              </li>
             </ul>
           </div>
           <h3>
@@ -59,12 +64,12 @@
             </h4>
           </div>
           <ul class="listing-info">
-            <li v-if="listing.bedrooms && listing.bedrooms > 0"><i
+            <li v-if="listing.bedrooms > 0"><i
               class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}</li>
             <li><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]]{% trans "m2" %}</li>
             <li v-if="listings.floors && listing.floors > 0"><i class="fa fa-h-square"></i>
               [[listing.floors]] {% trans "tầng" %}</li>
-            <li v-if="listings.bathrooms && listing.bathrooms > 0"><i
+            <li v-if="listing.bathrooms > 0"><i
               class="fa fa-bath"></i>[[listing.bathrooms]] {% trans "tắm" %} </li>
           </ul>
           <div class="action-group">
@@ -105,10 +110,14 @@
           </li>
         {% endif %}
 
-        {% for i in pagination.next_5_pages %}
-          <li><a class="{% if listings.number == i %}active{% endif %}"
-                 @click.prevent="goTo({{ i }})">{{ i }}</a></li>
-        {% endfor %}
+        <li v-for="i in pagination.next_5_pages">
+          <a :class="{active: pagination.current_page == i}" @click.prevent="goTo(i)">[[i]]</a>
+        </li>
+
+        {#        {% for i in pagination.next_5_pages %}#}
+        {#          <li><a class="{% if listings.number == i %}active{% endif %}"#}
+        {#                 @click.prevent="goTo({{ i }})">{{ i }}</a></li>#}
+        {#        {% endfor %}#}
 
         {% if listings.has_next %}
           <li>
@@ -124,6 +133,42 @@
 
       </ul>
     </div>
+  </div>
+</script>
+
+<script type="text/x-template" id="infoWindowTemplate">
+  <div class="searchlisting" >
+    <section class="exclusive">
+      <article class="featured">
+        <a target="_blank"
+           :title="listing.title"
+           :href="getListingDetailURL(listing.id)"
+           class="property_detail">
+          <div class="cover">
+            <img :src="listing.main_photo || '{% static 'img/default.png' %}'" v-bind:alt="listing.title"/>
+          </div>
+        </a>
+        <header>
+          <a target="_blank"
+             :href="getListingDetailURL(listing.id)"
+             :title="listing.title">
+            <h2 class="title"> [[listing.title]]</h2>
+          </a>
+          <div class="address">[[listing.street]]</div>
+          <div>
+            <ul>
+              <li v-if="listing.bedrooms > 0" title="Phòng ngủ">
+                <span class="zmdi zmdi-airline-seat-individual-suite"></span> [[listing.bedrooms]]
+              </li>
+              <li title="Diện tích">
+                <span class="zmdi zmdi-photo-size-select-small"></span> [[listing.area]]{% trans "m2" %}
+              </li>
+            </ul>
+            <div class="price-marker">[[listing.price]] {% trans "tỷ" %}</div>
+          </div>
+        </header>
+      </article>
+    </section>
   </div>
 </script>
 
