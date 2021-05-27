@@ -1,8 +1,8 @@
 {% load static humanize i18n %}
 
 <div class="results-sc">
-  <span class="results">
-    Hiển thị <strong v-if="isFirstLoad">[[listings.length]] trong số [[pagination.total]] sản phẩm</strong>
+  <span class="results" v-show="listings.length > 0">
+    Hiển thị <strong>[[displayListingNumText]]</strong>
   </span>
   <div class="sort-listing" ref="projectSort">
     <a href="#" @click.prevent="toggleShowSortOptions">
@@ -75,6 +75,8 @@
     </div>
   </div>
   <property-list v-bind:listings="listings" v-bind:is-view-grid="isViewGrid" v-bind:pagination="pagination"
-                 v-bind:is-loading="isLoading" v-bind:show-contact-project="showContactProject"/>
+                 v-bind:is-loading="isLoading" v-bind:show-contact-project="showContactProject"
+                 v-bind:go-to="goTo"
+  />
 
 </div>

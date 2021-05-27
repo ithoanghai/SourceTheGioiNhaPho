@@ -100,25 +100,24 @@ const ContactPopUpComponent = Vue.extend({
             email: '',
         }
     },
-    computed: {
-    },
+    computed: {},
     methods: {
         onFocusField(field) {
             this.focusedField = field;
         },
         toggleFocusField(field) {
-          if (this.focusedField == field)  {
-              this.focusedField = ''
-          } else {
-              this.focusedField = field;
-          }
+            if (this.focusedField == field) {
+                this.focusedField = ''
+            } else {
+                this.focusedField = field;
+            }
         },
         onBlur() {
             this.focusedField = '';
         },
         onSelectHouseType(type) {
-           this.selectedHouseType = type;
-           this.onBlur();
+            this.selectedHouseType = type;
+            this.onBlur();
         },
         getSelectedHouseTypeText() {
             return (this.houseTypes.find(item => item.type === this.selectedHouseType)).text;
@@ -129,7 +128,20 @@ const ContactPopUpComponent = Vue.extend({
     }
 })
 
-Vue.component('contact-popup', ContactPopUpComponent)
+Vue.component('contact-popup', ContactPopUpComponent);
+
+const InfoWindowComponent = Vue.extend({
+    template: '#infoWindowTemplate',
+    delimiters: ["[[", "]]"],
+    props: {
+        listing: Object
+    },
+    methods: {
+        getListingDetailURL: function (id) {
+            return `/listings/${id}`
+        },
+    },
+});
 
 // new ContactPopUpComponent().$mount('#contactPopUp');
 const defaultSliderPriceOptions = {
@@ -166,6 +178,7 @@ const PropertyListComponent = Vue.extend({
         pagination: Object,
         isViewGrid: Boolean,
         isLoading: Boolean,
+        goTo: Function,
         showContactProject: Function,
     },
     methods: {
@@ -208,6 +221,16 @@ new Vue({
         }
     },
     computed: {
+        displayListingNumText: function () {
+            // if (this.pagination && this.pagination.current_page > 1) {
+            //     const from = (this.pagination.current_page) * this.pagination.limit;
+            //     const to = (this.pagination.current_page + 1) * this.pagination.limit;
+            //     return `${from} - ${to} trong số ${this.pagination.total} sản phẩm`;
+            // } else {
+            //     return `${this.listings.length} trong số ${this.pagination.total} sản phẩm`;
+            // }
+            return `${this.listings.length} trong số ${this.pagination.total} sản phẩm`;
+        },
         filterPriceText: function () {
             if (this.minPrice == 0 && this.maxPrice == 1000) {
                 return "Khoảng giá";
@@ -382,6 +405,7 @@ new Vue({
             this.isLoading = false;
         },
         goTo: async function (page) {
+            console.log(page);
             this.updateQueryParams({page})
             await this.getListings();
             this.setMarkers();
@@ -397,16 +421,34 @@ new Vue({
         },
         setMarkers: function () {
             if (!map) return;
-            this.listings.map(item => {
-                markers.push(
-                    new google.maps.Marker({
-                        position: new google.maps.LatLng(item.lat, item.long),
-                        title: item.title,
-                        map: map,
-                        icon: normalIcon(),
-                    })
-                );
+            this.listings.map((item, index) => {
+                const marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(item.lat, item.long),
+                    title: item.title,
+                    map: map,
+                    icon: normalIcon(),
+                })
+                google.maps.event.addListener(marker, 'click', (e) => this.openInfoWindow(index))
+                markers.push(marker);
             })
+        },
+        openInfoWindow: function (index) {
+            if (!index || !this.listings.length || this.listings.length < index) return;
+            const listing = this.listings[index];
+            const instance = new InfoWindowComponent({
+                propsData: {
+                    listing
+                }
+            })
+            instance.$mount();
+            const infoWindow = new google.maps.InfoWindow({
+                content: instance.$el
+            })
+            infoWindow.open(map, markers[index])
+
+            setTimeout(() => {
+                instance.$destroy();
+            }, 500)
         },
         initMap: function () {
             if (!google) return;

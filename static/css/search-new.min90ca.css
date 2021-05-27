@@ -9875,10 +9875,10 @@ label {
     background: #ebebeb;
     top: 50px;
     left: 50px;
-    position: absolute;
+    display: block;
+    /*position: absolute;*/
     padding: 0;
     z-index: 100;
-    display: none;
     max-height: 368px
 }
 
@@ -9895,7 +9895,7 @@ label {
     width: 100%;
     margin: 0;
     padding: 15px 0;
-    border-top: 1px solid #ebebeb
+    /*border-top: 1px solid #ebebeb*/
 }
 
 .searchlisting section.exclusive article.featured .cover {

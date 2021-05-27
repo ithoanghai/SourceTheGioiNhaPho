@@ -206,7 +206,7 @@
 <script type="text/x-template" id="topSearchTemplate">
   <div class="top-search">
     <a href="#"></a>
-    <form>
+    <form action="{% url "listing_search" %}">
       <div tabindex="0" class="search-type"><span>Mua nhà</span>
         <ul class="hide">
           <li>
@@ -224,6 +224,7 @@
       </div>
       <div style="width: 100%" v-click-outside="handleFocus">
         <input placeholder="Nhập địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
+               name="keywords"
                spellcheck="false" dir="auto" v-model="query"
                v-on:input="handleQueryChange"
                v-bind:class="{ inputInProgress: isLoading, }"
