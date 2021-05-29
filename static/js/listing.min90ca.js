@@ -88,11 +88,13 @@
             }(S.a.Entity), E = function (t, e, n, r) {
                 return w()(a()({method: t, url: e, data: n, withCredentials: !0}, r)).then(function (t) {
                     return y()(t) && y()(t.data) ? t.data : new D({error: !0, reason: t})
-                }).catch(function (t) {
-                    if (!w.a.isCancel(t)) {
-                        var e = t;
-                        t.response && ((e = (e = y()(t.response) ? t.response.data : t.response) || {}).msg = e.msg || e.error_msg);
-                        var n = ((y()(t.response) ? t.response : {}).data || {}).data;
+                }).catch(function (error) {
+                    if (!w.a.isCancel(error)) {
+                        console.log(error);
+                        return;
+                        var e = error;
+                        error.response && ((e = (e = y()(error.response) ? error.response.data : error.response) || {}).msg = e.msg || e.error_msg);
+                        var n = ((y()(error.response) ? error.response : {}).data || {}).data;
                         return new D({error: !0, reason: a()({}, e), data: n})
                     }
                 })
@@ -9588,7 +9590,8 @@
                         source: u
                     }
                 }).then(function (t) {
-                    return new i.a(t.data)
+                    if (t && t.data)
+                        return new i.a(t.data)
                 })
             }, getByProject: function (t, e, n, o) {
                 return r.b.get("/project/" + t + "/properties", {
@@ -10144,11 +10147,11 @@
                     product_catalog_id: "154656028656917"
                 })
             }, trackViewContent: function (t) {
-                this.track("ViewContent", i()({product_catalog_id: "154656028656917"}, t.trackingParams))
+                // this.track("ViewContent", i()({product_catalog_id: "154656028656917"}, t.trackingParams))
             }, trackInitiateCheckout: function (t) {
-                this.track("InitiateCheckout", t.trackingParams)
+                // this.track("InitiateCheckout", t.trackingParams)
             }, trackPurchase: function (t) {
-                this.track("Purchase", i()({product_catalog_id: "154656028656917"}, t.trackingParams))
+                // this.track("Purchase", i()({product_catalog_id: "154656028656917"}, t.trackingParams))
             }, init: function () {
                 var t = this;
                 o.a.$on(o.b.VIEW_PROPERTY, function (e) {
@@ -10182,16 +10185,18 @@
                 }), o.a.$on(o.b.FAVORITE_ACTION, function (e) {
                     var n = e.target_type, r = e.target_value, i = s.a.getPropertySource(n);
                     if (i) {
-                        var o = s.a.getPropertyServiceType(n);
-                        a.a.getFacebookPixelTracking({alias: r, serviceType: o, source: i}).then(function (e) {
-                            t.trackInitiateCheckout(e)
-                        })
+                        // var o = s.a.getPropertyServiceType(n);
+                        console.log(o.b.FAVORITE_ACTION, o)
+                        // a.a.getFacebookPixelTracking({alias: r, serviceType: o, source: i}).then(function (e) {
+                        //     t.trackInitiateCheckout(e)
+                        // })
                     }
                 }), o.a.$on(o.b.CLICK_CONTACT_PROPERTY, function (e) {
                     var n = e.id, r = e.serviceType, i = e.source;
-                    a.a.getFacebookPixelTracking({id: n, serviceType: r, source: i}).then(function (e) {
-                        t.trackPurchase(e)
-                    })
+                    console.log(o.b.CLICK_CONTACT_PROPERTY, n, r, i)
+                    // a.a.getFacebookPixelTracking({id: n, serviceType: r, source: i}).then(function (e) {
+                    //     t.trackPurchase(e)
+                    // })
                 })
             }
         };

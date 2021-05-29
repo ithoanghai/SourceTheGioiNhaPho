@@ -38,9 +38,12 @@ def index(request):
 
 def listing(request, listing_id):
     listing_detail = get_object_or_404(Listing, pk=listing_id)
-    listings_neighborhood = Listing.objects.order_by('-list_date').filter(state=listing_detail.state)[:10]
-    listings_same = Listing.objects.order_by('-list_date').filter(house_type=listing_detail.house_type,
-                                                                  area=listing_detail.area)[:10]
+    listings_neighborhood = Listing.objects.order_by('-list_date').filter(state=listing_detail.state).exclude(
+        id=listing_id)[:10]
+    listings_same = (Listing.objects
+                         .filter(house_type=listing_detail.house_type, area=listing_detail.area)
+                         .exclude(id=listing_id)
+                         .order_by('-list_date')[:10])
     context = {
         'listing': listing_detail,
         'listings_neighborhood': listings_neighborhood,

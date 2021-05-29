@@ -10951,12 +10951,12 @@ ul.exclusive li.featured header li .zmdi {
     width: 50px;
     height: 50px;
     font-family: tgnp-icon, arial;
-    font-size: 3em;
+    font-size: 4em;
     background: rgba(255, 255, 255, .8);
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
-    padding: 0 8px;
+    padding: 5px 8px;
     z-index: 99;
     -webkit-transition: opacity .2s linear;
     transition: opacity .2s linear
@@ -10997,12 +10997,12 @@ ul.exclusive li.featured header li .zmdi {
     width: 50px;
     height: 50px;
     font-family: tgnp-icon, arial;
-    font-size: 3em;
+    font-size: 4em;
     background: rgba(255, 255, 255, .66);
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
-    padding: 0 7px;
+    padding: 5px 7px;
     z-index: 90;
     -webkit-transition: opacity .2s linear;
     transition: opacity .2s linear;

@@ -336,6 +336,9 @@
         <div class="map-container" id="search-map"></div>
       </div>
     </div>
+    <div id="testInfoWindow"></div>
+    <button v-on:click="openInfoWindow(197)">Open Window 197</button>
+    <button v-on:click="openInfoWindow(202)">Open Window 202</button>
   </div>
 
 
@@ -409,6 +412,10 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap">
     </script>
   {% endif %}
+  {#    <script async#}
+  {#            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap">#}
+  {#    </script> #}
+
   <script src="{% static 'js/search.js' %}"></script>
 
   <script>

@@ -62,7 +62,8 @@ def search_listing(req: request.Request, **kwargs):
                 address__icontains=keywords)
             slug_keyword = slugify(keywords.lower().replace('đ', 'd').replace('õ', 'o'))
             district_code = next(
-                x['code'] for x in hn_district if (x['name'] == keywords or x['slug'] == slug_keyword))
+                x['code'] for x in hn_district if
+                (x['name'] == keywords or x['slug'] == slug_keyword or x['code'] == slug_keyword))
             if district_code:
                 query = query | Q(district=district_code)
             queryset_list = queryset_list.filter(query)
@@ -84,7 +85,8 @@ def search_listing(req: request.Request, **kwargs):
     if 'district' in req.query_params:
         district = req.query_params['district']
         if district:
-            district_code = next(x['code'] for x in hn_district if x['slug'] == district)
+            district_code = next(
+                x['code'] for x in hn_district if x['slug'] == district or x['code'] == district)
             if district_code:
                 queryset_list = queryset_list.filter(district=district_code)
 
@@ -152,6 +154,7 @@ def search_listing(req: request.Request, **kwargs):
 
     return response.Response({
         "listings": ListingSerializer(listings, many=True).data,
+        # "listings": [],
         "pagination": {
             'current_page': page,
             'next_5_pages': list(range(min_page, next_5_pages)),
