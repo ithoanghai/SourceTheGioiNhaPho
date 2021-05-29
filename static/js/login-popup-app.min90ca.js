@@ -11968,7 +11968,8 @@
                     var t = this;
                     if (null == document.getElementById("gapi")) {
                         window.gapiInited = function () {
-                            t.initGAPI()
+                            if (t.initGAPI)
+                                t.initGAPI()
                         };
                         var e = document.createElement("script");
                         e.async = !0, e.defer = !0, e.id = "gapi", e.src = "https://apis.google.com/js/platform.js?onload=gapiInited";

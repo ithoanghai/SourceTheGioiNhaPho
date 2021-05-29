@@ -1,0 +1,47 @@
+{% load i18n static %}
+
+<div class="article">
+  <div class="img">
+    <a class="cover"
+       href="{% url 'listing' listing.id %}"
+       title="{{ listing.title }}">
+      {% with listing.main_photo as photo %}
+        <img class="lazy"
+             data-src="{{ photo.url }}"
+             alt="{{ listing.title }}"
+             title="{{ listing.title }}">
+      {% endwith %}
+    </a>
+  </div>
+  <div class="title">
+    <h3><a href="{% url 'listing' listing.id %}"
+           title="{{ listing.title }}">{{ listing.title }}</a></h3>
+  </div>
+  <div class="status tgnp-color">
+    {% if listing.status == 'selling' %} {% trans 'Đang bán' %}
+    {% elif listing.status == 'sold' %} {% trans 'Đã bán' %}
+    {% elif listing.status == 'stop_selling' %} {% trans 'Dừng bán' %}
+    {% else %} {% trans 'Mới' %}
+    {% endif %}</div>
+  <div class="info">
+    <ul>
+      {% if listing.bedrooms %}
+        <li title="Phòng ngủ">
+          <span class="zmdi zmdi-airline-seat-individual-suite"></span> {{ listing.bedrooms }}
+        </li>
+      {% endif %}
+      {% if listing.bathrooms %}
+        <li title="Phòng tắm" class="icon-bath-room"><span></span> {{ listing.bathrooms }} </li>
+      {% endif %}
+      <li class="marea" title="Diện tích"><span
+        class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} {{ listing.area_unit }}
+      </li>
+      <li title="Giá">{{ listing.price }} tỷ</li>
+      {% if listing.sale_price and listing.sale_price < listing.price %}
+        <li title="Bán nhanh">Còn {{ listing.sale_price }} tỷ</li> {% endif %}
+    </ul>
+  </div>
+  <input name="url" type="hidden" value="{% url 'listing' listing.id %}">
+  <input name="lat" type="hidden" value="{{ listing.lat }}">
+  <input name="lon" type="hidden" value="{{ listing.long }}">
+</div>

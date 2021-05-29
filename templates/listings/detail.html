@@ -1,12 +1,11 @@
 {% extends 'base_common.html' %}
 
-{% load static humanize i18n %}
+{% load static humanize i18n get_cadastral %}
 
 {% block head %}
   {{ block.super }}
 
   <link rel="canonical" href="search"/>
-
 
 {% endblock %}
 
@@ -15,7 +14,7 @@
   <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
   <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/popup-new.min90ca.css' %}"/>
-  <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>
+  {#  <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>#}
   <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/flexslider.min.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/listing-detail-page90ca.css' %}"/>
@@ -25,7 +24,6 @@
   <link rel="stylesheet" href="{% static 'css/mobile.min90ca.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/temp90ca.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/header-live.min90ca.css' %}"/>
-  <link rel="stylesheet" href="{% static 'css/listing-detail-page90ca.css' %}"/>
 
   <style>
       [v-cloak] {
@@ -58,188 +56,7 @@
       .detail-content-news img:before, .thumb-duan img:before, .cover img:not([src]):before {
           background-image: none !important;
       }
-  </style>
 
-  <style>
-      .banner-app-tgnp {
-          position: relative;
-          display: none;
-          -webkit-box-align: center;
-          -ms-flex-align: center;
-          align-items: center;
-          -webkit-box-orient: horizontal;
-          -webkit-box-direction: normal;
-          -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-          -webkit-box-pack: justify;
-          -ms-flex-pack: justify;
-          justify-content: space-between;
-          width: 100%;
-          padding: 10px 18px;
-          background-color: #30333a;
-          z-index: 100
-      }
-
-      @media (max-width: 768px) {
-          .banner-app-tgnp {
-              display: -webkit-box;
-              display: -ms-flexbox;
-              display: flex
-          }
-      }
-
-      .close-banner-app {
-          padding: 0 10px 0 0;
-          outline: 0;
-          background: 0 0;
-          border: 0;
-          font-size: 16px;
-          color: #fff;
-          font-weight: 400
-      }
-
-      .close-banner-app .zmdi {
-          font-size: 16px;
-          padding: 0
-      }
-
-      .btn-install {
-          position: relative;
-          display: inline-block;
-          min-width: -webkit-min-content;
-          min-width: -moz-min-content;
-          min-width: fit-content;
-          max-width: max-content;
-          max-width: max-content;
-          max-width: fit-content;
-          width: 100%;
-          padding: 8px 10px 7px;
-          border-radius: 2px;
-          font-size: 14px;
-          line-height: 1.5;
-          font-weight: 500;
-          text-align: center;
-          color: #fff;
-          cursor: pointer
-      }
-
-      .btn-install::after {
-          background-color: orange;
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          border-radius: 2px;
-          z-index: -1;
-          -webkit-animation: zoomin 1.2s ease-in infinite;
-          animation: zoomin 1.2s ease-in infinite;
-          -webkit-transition: all .3s ease-in-out;
-          transition: all .3s ease-in-out
-      }
-
-      .btn-install:focus, .btn-install:hover {
-          color: #fff
-      }
-
-      .banner-app-content {
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-align: center;
-          -ms-flex-align: center;
-          align-items: center
-      }
-
-      .banner-app-content .cover {
-          width: 44px;
-          min-width: 44px;
-          height: 44px;
-          margin-right: 10px;
-          border-radius: 10px;
-          overflow: hidden
-      }
-
-      .banner-app-content .cover img {
-          width: 100%;
-          max-width: 100%;
-          height: 100%;
-          -o-object-fit: contain;
-          object-fit: contain
-      }
-
-      .banner-app-content .banner-app-info a {
-          font-size: 14px;
-          line-height: 1;
-          font-weight: 500;
-          color: #fff
-      }
-
-      .banner-app-content .banner-app-info p {
-          font-size: 12px;
-          line-height: 1.5;
-          font-weight: 400;
-          color: #fff
-      }
-
-      .banner-app-content .banner-app-info .rating-star {
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-align: center;
-          -ms-flex-align: center;
-          align-items: center
-      }
-
-      .banner-app-content .banner-app-info .rating-star .zmdi {
-          font-size: 12px;
-          color: #838383;
-          cursor: pointer
-      }
-
-      @media (min-width: 1200px) {
-          .banner-app-content .banner-app-info .rating-star .zmdi:hover {
-              color: #f7ce27
-          }
-      }
-
-      .banner-app-content .banner-app-info .rating-star .zmdi.evaluated {
-          color: #f7ce27
-      }
-
-      @keyframes zoomin {
-          0% {
-              -webkit-transform: scale(1);
-              transform: scale(1)
-          }
-          50% {
-              -webkit-transform: scale(1.1);
-              transform: scale(1.1)
-          }
-          100% {
-              -webkit-transform: scale(1);
-              transform: scale(1)
-          }
-      }
-
-      @-webkit-keyframes zoomin {
-          0% {
-              -webkit-transform: scale(1);
-              transform: scale(1)
-          }
-          50% {
-              -webkit-transform: scale(1.1);
-              transform: scale(1.1)
-          }
-          100% {
-              -webkit-transform: scale(1);
-              transform: scale(1)
-          }
-      }
-  </style>
-
-  <style>
       .info-sketch {
           height: auto;
           min-height: 190px;
@@ -260,6 +77,7 @@
           object-position: center;
       }
   </style>
+
   <style>
       .gmap-render.full-screen {
           max-width: 100% !important;
@@ -311,6 +129,10 @@
               margin-bottom: -90px;
           }
       }
+
+      #msform a.butt-primary[disabled] {
+          opacity: 0.4
+      }
   </style>
 {% endblock %}
 
@@ -321,7 +143,6 @@
   <input id="markerwithlabel" type="hidden" value="{% static 'js/markerwithlabel-0.0.1.min.js' %}">
 
   <div id="wrap">
-
     <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">
       <div class="banner-app-content">
         <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
@@ -378,9 +199,7 @@
         <input name="neighborhood" type="hidden" value="">
         <input name="lat" type="hidden" value="">
         <input name="lon" type="hidden" value="">
-        <input name="youtube" type="hidden" value="https://youtu.be/_dfQMUgGmjc"> {% comment %}Cần thay {% endcomment %}
-        <input name="matterport" type="hidden"
-               value="https://my.matterport.com/show/?m=yYDQY6WGVXi"> {% comment %}Cần thay{% endcomment %}
+        {#        <input name="youtube" type="hidden" value="https://youtu.be/_dfQMUgGmjc"> {% comment %}Cần thay {% endcomment %}#}
         <input name="favorited_type" type="hidden" value="sale_property">
         <input name="streetviewLat" type="hidden" value="">
         <input name="streetviewLon" type="hidden" value="">
@@ -566,9 +385,9 @@
                          title="Phường/Xã">{{ listing.ward }}</a></h2>
                 {% endif %}
                 <h2><a href="{% url 'listing_search' %}?district={{ listing.district }}"
-                       title="Quận/Huyện">{{ listing.district }}</a></h2>
+                       title="Quận/Huyện">{% get_district listing.district %}</a></h2>
                 <h2><a href="{% url 'listing_search' %}?state={{ listing.state }}"
-                       title="Tỉnh/Thành phố">{{ listing.state }}</a></h2>
+                       title="Tỉnh/Thành phố">{% get_state listing.state %}</a></h2>
 
               </div>
               <h2>{{ listing.title }}</h2>
@@ -577,7 +396,7 @@
                   <li title="Diện tích"><span
                     class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} </li>
                   <li title="Giá"><strong>$</strong> {{ listing.price }} tỷ</li>
-                  {% if listing.sale_price %}
+                  {% if listing.sale_price  and listing.sale_price < listing.price %}
                     <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price }} tỷ </strong></li> {% endif %}
                 </ul>
                 <div class="listing-id">
@@ -852,52 +671,54 @@
             <a href="#" title="Xem thêm / thu gọn" style="text-underline: none" class="collapse pdt-0"
                is-more="false" more="Xem thêm" less="Thu gọn">Xem tất cả</a>
           </p>
-          <div class="heading-02">Tiện ích khu vực</div>
-          <section class="mgt-15 map-detail gmap-render">
-            <div class="_map-bg openBtn img-map"
-                 style="background-image: url(https://maps.googleapis.com/maps/api/staticmap?center=21.02678541550063,105.854106460572&zoom=15&size=1140x640&maptype=roadmap&markers=color:red%7C21.02678541550063,105.854106460572&key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc)">
-              <div class="tooltip-map">
-                <a>Nhấn vào để xem chi tiết</a>
-              </div>
-              <div class="map--address">
-                <div class="address-property">
-                  <div class="left-70"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>
-                    <strong>{{ listing.title }}</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="map-wrapper">
-              <a href="" class="full-screen-act" title="Fullscreen"></a>
-              <div id="render-map"></div>
-              <div class="cover-nearby">
-                <div class="nearby">
-                  <div class="parent-content">
-                    <form name="search-nearby">
-                      <input type="text" id="nearby-search" class="" autocomplete="on"
-                             spellcheck="false" dir="auto"
-                             placeholder="Tìm kiếm địa điểm gần đây">
-                    </form>
-                    <div class="title">
-                      <span>Bản đồ</span>
-                      <div class="list-icon traffic-type">
-                      </div>
-                    </div>
-                    <ul class="content directions pdb-0">
-                    </ul>
-                    <div class="title">Địa điểm gần nhất</div>
-                    <ul class="type checkbox nearby-places">
-                    </ul>
-                  </div>
-                </div>
-                <div class="icon-left-nearby ">
-                  <a class="location" href="#" title="Vị trí của BĐS"></a>
-                  <a class="icon-slide" href="#" title="Mở rộng / thu gọn"></a>
-                </div>
-              </div>
-            </div>
-          </section>
+          <div class="map-detail hidden"></div>
+          {#          <div class="heading-02">Tiện ích khu vực</div>#}
+          {#          <section class="mgt-15 map-detail gmap-render">#}
+          {#            AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg#}
+          {#            <div class="_map-bg openBtn img-map"#}
+          {#                 style="background-image: url(https://maps.googleapis.com/maps/api/staticmap?center=21.02678541550063,105.854106460572&zoom=15&size=1140x640&maptype=roadmap&markers=color:red%7C21.02678541550063,105.854106460572&key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc)">#}
+          {#              <div class="tooltip-map">#}
+          {#                <a>Nhấn vào để xem chi tiết</a>#}
+          {#              </div>#}
+          {#              <div class="map--address">#}
+          {#                <div class="address-property">#}
+          {#                  <div class="left-70"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>#}
+          {#                    <strong>{{ listing.title }}</strong>#}
+          {#                  </div>#}
+          {#                </div>#}
+          {#              </div>#}
+          {#            </div>#}
+          {##}
+          {#            <div class="map-wrapper">#}
+          {#              <a href="" class="full-screen-act" title="Fullscreen"></a>#}
+          {#              <div id="render-map"></div>#}
+          {#              <div class="cover-nearby">#}
+          {#                <div class="nearby">#}
+          {#                  <div class="parent-content">#}
+          {#                    <form name="search-nearby">#}
+          {#                      <input type="text" id="nearby-search" class="" autocomplete="on"#}
+          {#                             spellcheck="false" dir="auto"#}
+          {#                             placeholder="Tìm kiếm địa điểm gần đây">#}
+          {#                    </form>#}
+          {#                    <div class="title">#}
+          {#                      <span>Bản đồ</span>#}
+          {#                      <div class="list-icon traffic-type">#}
+          {#                      </div>#}
+          {#                    </div>#}
+          {#                    <ul class="content directions pdb-0">#}
+          {#                    </ul>#}
+          {#                    <div class="title">Địa điểm gần nhất</div>#}
+          {#                    <ul class="type checkbox nearby-places">#}
+          {#                    </ul>#}
+          {#                  </div>#}
+          {#                </div>#}
+          {#                <div class="icon-left-nearby ">#}
+          {#                  <a class="location" href="#" title="Vị trí của BĐS"></a>#}
+          {#                  <a class="icon-slide" href="#" title="Mở rộng / thu gọn"></a>#}
+          {#                </div>#}
+          {#              </div>#}
+          {#            </div>#}
+          {#          </section>#}
         </div>
         <div class="right-content visible-pc">
           <div v-pre class="form-real-estate">
@@ -908,7 +729,7 @@
             <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
             <p class="advisory__sub-title">Tư vấn hoàn toàn miễn phí</p>
             <p class="text-small-center">
-              <span>Mã nhà đất <strong>{{ listing.code }}</strong></span>
+              <span>Mã nhà đất:  <strong> {{ listing.code }} </strong></span>
             </p>
             <a data-phone-hidden="category: ContactProperty, event: ClickHiddenHotline" style="opacity: 0.6"
                href="tel:0964399436" class="btn-primary btn-large btn-red btn-phone phone-hidden"><i
@@ -976,74 +797,31 @@
       <section class="width1140 main-content">
         <div class="heading-02 mgt-10">Nhà đất lân cận</div>
         <section class="compare-house">
-          {% for house_neigh in listings_neighborhood %}
-            <div class="article">
-              <div class="img">
-                <a class="cover"
-                   href="{% url 'listing' house_neigh.id %}"
-                   title="{{ house_neigh.title }}">
-                  {% with house_neigh.main_photo as photo %}
-                    <img class="lazy"
-                         data-src="{{ photo.url }}"
-                         alt="{{ house_neigh.title }}"
-                         title="{{ house_neigh.title }}">
-                  {% endwith %}
-                </a>
-              </div>
-              <div class="title">
-                <h3><a href="{% url 'listing' house_neigh.id %}"
-                       title="{{ house_neigh.title }}">{{ house_neigh.title }}</a></h3>
-              </div>
-              <div class="status tgnp-color">
-                {% if house_neigh.status == 'selling' %} {% trans 'Đang bán' %}
-                {% elif house_neigh.status == 'sold' %} {% trans 'Đã bán' %}
-                {% elif house_neigh.status == 'stop_selling' %} {% trans 'Dừng bán' %}
-                {% else %} {% trans 'Mới' %}
-                {% endif %}</div>
-              <div class="info">
-                <ul>
-                  <li title="Phòng ngủ"><span
-                    class="zmdi zmdi-airline-seat-individual-suite"></span> {{ house_neigh.bedrooms }} </li>
-                  {% if house_neigh.bathrooms %}
-                    <li title="Phòng tắm" class="icon-bath-room"><span></span> {{ house_neigh.bathrooms }}
-                    </li> {% endif %}
-                  <li class="marea" title="Diện tích"><span
-                    class="zmdi zmdi-photo-size-select-small"></span> {{ house_neigh.area }} {{ house_neigh.area_unit }}
-                  </li>
-                  <li title="Giá">{{ house_neigh.price }} tỷ</li>
-                  {% if house_neigh.sale_price %}
-                    <li title="Bán nhanh">Còn {{ house_neigh.sale_price }} tỷ</li> {% endif %}
-                </ul>
-              </div>
-              <input name="url" type="hidden"
-                     value="{% url 'listing' house_neigh.id %}">
-              <input name="lat" type="hidden" value="">
-              <input name="lon" type="hidden" value="">
-            </div>
+          {% for listing in listings_neighborhood %}
+            {% include "listings/_nearByListing.html" %}
           {% endfor %}
         </section>
       </section>
     </section>
-
     <section class="bg-gray-e6 pdt-0">
       <section class="width1140">
         <div class="heading-02">Bạn đang cần bán hay cho thuê nhà?</div>
         <div class="ads3d-box pdt-15">
           <div class="ads3d-box-left">
             <div class="promo-3d-vid cover">
-                            <span data-origin="8IP1dKqq298" class="popup-yt-video">
-                            <picture>
-                            <source
-                              srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
-                              media="(max-width: 374px)">
-                            <source
-                              srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
-                              media="(min-width: 375px)">
-                            <img alt="TGNP 3D View" src="{% static 'images/service-3dview.png' %}"
-                                 srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
-                                 title="TGNP 3D View">
-                            </picture>
-                            </span>
+              <span data-origin="8IP1dKqq298" class="popup-yt-video">
+              <picture>
+              <source
+                srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
+                media="(max-width: 374px)">
+              <source
+                srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
+                media="(min-width: 375px)">
+              <img alt="TGNP 3D View" src="{% static 'images/service-3dview.png' %}"
+                   srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
+                   title="TGNP 3D View">
+              </picture>
+              </span>
             </div>
             <div class="about-3d">
               <h3>Tuyệt vời khi trình diễn với 3d nhập vai</h3>
@@ -1085,39 +863,8 @@
             <a href="#" title="prev"><span class="but-predetail-news flex-prev flex-disabled" tabindex="-1"></span> </a>
           </div>
           <ul class="exclusive slides">
-            {% for listing_same in listings_same %}
-              <li class="featured">
-                <a href="{% url 'listing' listing_same.id %}"
-                   title="{{ listing_same.title }}" data-imp-click>
-                  <div class="cover">
-                    {% with listing_same.main_photo as photo %}
-                      <img class="image-pixelated lazy"
-                           data-src="{{ photo.url }}"
-                           alt="{{ listing_same.title }}"
-                           title="{{ listing_same.title }}"/>
-                    {% endwith %}
-                  </div>
-                </a>
-                <header>
-                  <a href="{% url 'listing' listing_same.id %}"
-                     title="{{ listing_same.title }}" data-imp-click>
-                    <h3 class="heading">{{ listing_same.title }}</h3>
-                  </a>
-                  <h4>{{ listing_same.code }}</h4>
-                  <h2><a href="{% url 'listing_search' %}?street={{ listing_same.street }}"
-                         title="Đường">{{ listing_same.street }}</a></h2>
-                  <h2><a href="{% url 'listing_search' %}?ward={{ listing_same.ward }}"
-                         title="Phường/Xã">{{ listing_same.ward }}</a></h2>
-                  <h2><a href="{% url 'listing_search' %}?district={{ listing_same.district }}"
-                         title="Quận/Huyện">{{ listing_same.district }}</a></h2>
-                  <ul>
-                    <li title="Diện tích"><span
-                      class="zmdi zmdi-photo-size-select-small"></span> {{ listing_same.area }} {{ listing_same.area_unit }}
-                    </li>
-                  </ul>
-                  <div class="price">{{ listing_same.price }} tỷ</div>
-                </header>
-              </li>
+            {% for listing in listings_same %}
+              {% include "listings/_neighbourListing.html" %}
             {% endfor %}
           </ul>
         </div>
@@ -1153,9 +900,7 @@
     <div id="property-contactbox-v2-app"></div>
 
     <style>
-        #msform a.butt-primary[disabled] {
-            opacity: 0.4
-        }
+
     </style>
 
     <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
@@ -1183,7 +928,7 @@
                       </ul>
                     </div>
                     <div class="emotion">
-                      <img :src="'../images/' + step1Icon" alt="">
+                      <img :src="'{% static 'images/' %}' + step1Icon" alt="">
                       <p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
                     </div>
                   </div>
@@ -1199,9 +944,8 @@
                               class="large-butt-grey btn-use pd-use-btn mgr-r-20">Bình thường
                       </button>
                       <button :class="{active : step2.rate == 'easy'}"
-                              @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">Dễ
-                        sử
-                        dụng
+                              @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">
+                        Dễ sử dụng
                       </button>
                     </div>
                   </div>
@@ -1356,6 +1100,7 @@
 {% block scripts %}
   <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
   <script type="deferjs" src="{% static 'js/jquery.flexslider.jfix-0.0.1.min90ca.js' %}"></script>
+  <script async src="{% static 'js/listing.min90ca.js' %}"></script>
 
   <script type="text/javascript">
       var callbackInitMap = function () {
@@ -1373,9 +1118,6 @@
 
   <script type="deferjs">
     window.$dialog = function(){var e={bodyClassSpecs:"mdialog-body",bodyLoadingClass:"mdialog-loading",cachedBodyStyle:null,default:{zindex:99999,width:300,minHeight:100,background:"rgba(0,0,0,.5)",opacity:.5},key:{cachedStyle:"cached-style"}};return e.show=function(t,n,i,o){(n=$.extend(!0,{outSideClick:!0},n||{})).maxWidth="100%";var a,d=document.body.getAttribute("style");document.body.setAttribute(e.key.cachedStyle,d),(a=t&&"string"==typeof t?$(document.getElementById(t)):t).css("opacity",0),a.css("overflow-y","auto"),a.css("overflow-x","hidden"),a.addClass("opened");var s=(n?n.body:"")||".body";return a.find(s).css(n),a.find(s).addClass(e.bodyClassSpecs),a[0]&&(a[0].$dialogCallback=i),a[0]&&(a[0].$dialogInitTime=+new Date),n&&n.close&&a.find(s+" "+n.close).off().click(function(n){n.preventDefault(),e.hide(t,i)}),n&&n.outSideClick&&a.off().click(function(){e.hide(t,i)}),a.find(s).click(function(e){e.stopPropagation()}),e.animation(a,0,0,1,function(){o&&o()}),e.loadingEnd(a),a},e.animation=function(t,n,i,o,a){t.css("opacity",n),o>0&&n>1||o<0&&n<0?a&&a():setTimeout(function(){n+=o*(.05*i+1e-4*i*i),e.animation(t,n,i+1,o,a)},10)},e.hide=function(t,n){var i;i=t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened"),e.animation(i,1,0,-1,function(){i.removeClass("opened"),n&&n(i)})},e.loadingStart=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs).addClass(e.bodyLoadingClass)},e.loadingEnd=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs+"."+e.bodyLoadingClass).removeClass(e.bodyLoadingClass)},$(window).keydown(function(t){var n=$(".mdialog.opened");if(n.length&&27==t.keyCode){var i=[];i.length=n.length;for(var o=0;o<n.length;o++)for(var a=o;a<n.length;a++)n[o].$dialogInitTime>n[a].$dialogInitTime?(i[a]=n[o],i[o]=n[a]):(i[o]=n[o],i[a]=n[a]);var d=i[i.length-1];d&&e.hide($(d),d?d.$dialogCallback:null)}}),e.initStyles=function(){var e=document.createElement("STYLE"),t=document.head||document.getElementsByTagName("head")[0];e.type="text/css",e.styleSheet?e.styleSheet.cssText="":e.appendChild(document.createTextNode(this.getCss())),t.appendChild(e)},e.getCss=function(){var t=e.default,n="",i={display:"none",position:"fixed",top:"0",height:"100%",left:"0",width:"100%"};i["z-index"]=t.zindex,i.background=t.background,n+=e.assignStyle(".mdialog",i),n+=".mdialog.opened{display: block;}";var o={};o.width=t.width+"px",o["min-height"]=t.minHeight+"px",o.background="#fff",o.margin="60px auto 140px auto",n+=e.assignStyle(".mdialog .body",o);var a={position:"relative"};n+=e.assignStyle("."+e.bodyLoadingClass,a);var d={content:"' '",top:0,left:0,width:"100%",height:"100%",position:"absolute",background:"#fff",opacity:.4,"z-index":1};n+=e.assignStyle("."+e.bodyLoadingClass+":before",d);var s={content:"' '",border:"2px solid #303339","border-top":"2px solid #fff;","border-radius":"50%",width:"30px",height:"30px",position:"absolute",top:"calc(50% - 15px)",left:"calc(50% - 15px)","-webkit-animation":"spin 2s linear infinite",animation:"spin 2s linear infinite","z-index":1};return n+=e.assignStyle("."+e.bodyLoadingClass+":after",s),n+="@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }"},e.assignStyle=function(e,t){var n=e+"{";for(var i in t){n+=i+":"+t[i]+";"}return n+="}"},e.initStyles(),e}();
-
-
-
 
 
 
@@ -1468,7 +1210,7 @@
       }(this, document);
   </script>
 
-  <script>deferscript('https://cdn.jsdelivr.net/npm/%40shinsenter/defer.js%401.1.7/dist/polyfill.min.js', 'polyfill-js', 1)</script>
+  <script>deferscript('https://cdn.jsdelivr.net/npm/@shinsenter/defer.js@1.1.7/dist/polyfill.min.js', 'polyfill-js', 1)</script>
 
   <script>
       function objValue(obj, is, value) { //Access 1 object bằng key
@@ -1592,6 +1334,7 @@
   </script>
   <script>
       window['isListing'] = true;
+      window['favorite_api'] = 'api/favorite';
   </script>
 
   <script>
@@ -1621,55 +1364,23 @@
   ]
 }
 </script>
-  <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@id": "https://www.thegioinhaphovietnam.com.vn/#website",
-        "@type": "WebSite",
-        "url": "https://thegioinhaphovietnam.com.vn/",
-        "name": "TGNP",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://thegioinhaphovietnam.com.vn/search?term",
-            "query-input": "required name=search_term_string"
-        }
-    }
-</script>
+
   <script type="deferjs" src="{% static 'js/hubspot-chatbox.min90ca.js' %}"></script>
   <script type="deferjs" src="{% static 'js/property-contact-box-v2.min90ca.js' %}"></script>
 
-  <script>
-      var callbackInitMap = function () {
-          if (window.doInitMap) {
-              window.doInitMap.call(this);
-          } else {
-              setTimeout(callbackInitMap, 500);
-          }
-      }
-  </script>
   <script type="deferjs">
     var addthis_share = {
        url: window.location.href
     }
+
+
+
 
   </script>
   <script defer src="{% static 'js/favorite.min90ca.js' %}"></script>
   <script defer src="{% static 'js/home-recent-view.min90ca.js' %}"></script>
   <script defer src="{% static 'js/addthis_widget.js' %}"></script>
 
-  <script type="application/ld+json">
-    {
-        "@type": "Product",
-        "@context": "http://schema.org",
-        "offers": {
-            "@type": "Offer",
-            "@context": "http://schema.org",
-            "price": 38000000000,
-            "priceCurrency": "VND"
-        },
-        "name": "Bán biệt thự 6 phòng ngủ đường Tăng Nhơn Phú B, quận 9, đã có sổ hồng, pháp lý minh bạch"
-    }
-</script>
   <script type="deferjs">
   function setupViewMore(heightLimit, $itemsWrapper, $items, $viewMoreWrapper, $viewMoreLink){
     var isCollapse = false
@@ -1717,56 +1428,17 @@
 
 
 
-
-
-
-
-
-
-
   </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [ {
-  "position" : 1,
-  "name" : "TGNP",
-  "item" : "https://thegioinhaphovietnam.com.vn",
-  "@type" : "ListItem"
-}, {
-  "position" : 2,
-  "name" : "Hà Nội",
-  "item" : "https://rever.vn/s/ha-noi/mua",
-  "@type" : "ListItem"
-}, {
-  "position" : 3,
-  "name" : "Quận 9",
-  "item" : "https://rever.vn/s/quan-9/mua",
-  "@type" : "ListItem"
-} ]
-  }
-</script>
+
   <script defer src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
 
   <script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script>
 
-  <script type="deferjs" src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
-
-  <script type="deferjs" id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
+  {#  <script type="deferjs" src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>#}
 
   <script defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
   <script defer src="{% static 'js/feedback-modal.min90ca.js' %}"></script>
 
-  <script>
-      window.RFeedback = {
-          API: "https://thegioinhaphovietnam.com.vn/mapi",
-          email: "",
-          name: "",
-          phone: "",
-          ip: "10.244.0.0"
-      }
-  </script>
   <script defer src="{% static 'js/footer-home.js' %}"></script>
   <script type="deferjs">
   (function () {
@@ -1806,19 +1478,7 @@
 
 
 
-
-
-
-
-
-
-
-
   </script>
-  <!--[if lte IE 8]>
-  <script charset="utf-8" async defer type="text/javascript"
-          src="https://thegioinhaphovietnam.com.vn/public/externaljs"></script>
-  <![endif]-->
   <script charset="utf-8" type="deferjs" src="https://js.hsforms.net/forms/v2.js"></script>
   <script type="deferjs">
   function createHSForm(opt) {
@@ -2066,11 +1726,6 @@
 
 
 
-
-
-
-
-
   </script>
   <script type="deferjs">
         createHSForm({
@@ -2088,14 +1743,7 @@
 
 
 
-
-
-
-
   </script>
 
   <script defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
 {% endblock %}
-
-
-

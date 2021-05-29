@@ -1,0 +1,35 @@
+{% load get_cadastral %}
+<li class="featured">
+  <a href="{% url 'listing' listing.id %}"
+     title="{{ listing.title }}" data-imp-click>
+    <div class="cover">
+      {% with listing.main_photo as photo %}
+        <img class="image-pixelated lazy"
+             data-src="{{ photo.url }}"
+             alt="{{ listing.title }}"
+             title="{{ listing.title }}"/>
+      {% endwith %}
+    </div>
+  </a>
+  <header>
+    <a href="{% url 'listing' listing.id %}"
+       title="{{ listing.title }}" data-imp-click>
+      <h3 class="heading">{{ listing.title }}</h3>
+    </a>
+    <h4>{{ listing.code }}</h4>
+    <h2><a href="{% url 'listing_search' %}?street={{ listing.street }}"
+           title="Đường">{{ listing.street }}</a></h2>
+    {% if listing.ward %}
+      <h2><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
+             title="Phường/Xã">{{ listing.ward }}</a></h2>
+    {% endif %}
+    <h2><a href="{% url 'listing_search' %}?keywords={{ listing.district }}"
+           title="Quận/Huyện">{% get_district listing.district %}</a></h2>
+    <ul>
+      <li title="Diện tích"><span
+        class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} {{ listing.area_unit }}
+      </li>
+    </ul>
+    <div class="price">{{ listing.price }} tỷ</div>
+  </header>
+</li>
