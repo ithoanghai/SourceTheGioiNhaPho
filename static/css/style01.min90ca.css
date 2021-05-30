@@ -1432,11 +1432,6 @@ ul.detailroom li div span:hover + div.detail-house-info {
     float: left
 }
 
-.popup-content {
-    width: 35%;
-    float: left
-}
-
 .contact-form div.hbspt-form div.submitted-message {
     font-size: 16px;
     line-height: 20px;

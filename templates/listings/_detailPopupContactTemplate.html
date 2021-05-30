@@ -1,0 +1,87 @@
+<script type="text/x-template" id="detailPopupContactTemplate">
+  <div v-show="showContactPopup" class="popup-fade popup-property popup__listing--contact show">
+    <div class="popup-dialog popup-dialog-centered popup-dialog-large">
+      <div class="popup-content">
+        <button class="popup-close" @click.prevent="closePopup"><i class="zmdi zmdi-close"></i></button>
+        <div class="popup-left">
+          <div class="popup-left-cover"><a href="javascript:void(0)"><img
+            src="/media/photos/listings/97/9d8845a11980cbd21da492668292c2b6-2720567584725984355_AX1UEdS.jpg"
+            alt="TGNP"></a> <label class="status status-top status-monopoly" style="display: none;">Độc
+            quyền</label></div>
+          <div class="popup-left-content"><h3 class="popup-left-title"><a
+            href="javascript:void(0)">{{ lisitng.title }}</a></h3>
+            <div class="popup-left-address"><h4><a href="javascript:void(0)">thanh-xuan-giap-nhat-21329436a • 009</a>
+            </h4></div>
+            <ul class="popup-left-info">
+              {% if listing.bedrooms %}
+                <li><p>Phòng ngủ:</p> <strong>{{ listing.bedrooms }}</strong></li>
+              {% endif %}
+              <li><p>Diện tích:</p> <strong>{{ listing.area }}</strong></li>
+              {% if listing.bathrooms %}
+                <li><p>Phòng tắm:</p> <strong>None</strong></li>
+              {% endif %}
+              <li><p>Giá:</p> <strong class="color-red-base">{{ listing.price }} tỷ</strong></li>
+            </ul>
+          </div>
+        </div>
+        <div class="popup-right">
+          <div class="popup-right-content" style="display: none;">
+            <div class="popup-header"><h5 class="popup-title">Liên hệ tư vấn</h5>
+            </div>
+            <div class="popup-body">
+              <div class="popup-right-rva">
+                <div class="rva-cover"><img src="/static/images/isa-team-v2.png"
+                                            alt="TGNP"></div>
+                <div class="rva-info">
+                  <h3 class="rva-info-name">Chuyên viên đã sẵn sàng hỗ trợ!</h3>
+                  <p class="rva-info-job-title">Tư vấn hoàn toàn miễn phí</p>
+                </div>
+              </div>
+              <a href="tel:0916 286 256"
+                 class="phone-hidden_popup btn-primary btn-large btn-red popup-right-phone"><i
+                class="zmdi zmdi-phone"></i>
+                <span class="text">Liên hệ chuyên viên ngay</span></a> <span
+              class="text-small-centered">Hoặc</span>
+              <div class="popup-right-cta">
+                <button class="btn-primary btn-large btn-black-outline">Thương lượng giá</button>
+                <button class="btn-primary btn-large btn-black-outline">Liên hệ lại tôi</button>
+              </div>
+            </div>
+          </div>
+          <div class="popup-right-form-up show ask-view" style="">
+            <div class="popup-header"><h5 class="popup-title">Liên hệ lại tôi</h5>
+              <button class="popup-back back-negotiate"><i
+                class="zmdi zmdi zmdi-hc-2x zmdi-long-arrow-left"></i>
+              </button>
+            </div>
+            <div class="popup-body">
+              <form data-formtype="property-form" data-formitem="property-request-info" action="">
+                <div class="form-element"><input type="text" name="firstname" /> <span
+                  class="text-error" style="display: none;">Thông tin bắt buộc</span> <label
+                >Họ</label></div>
+                <div class="form-element"><input type="text" name="lastname" /> <span
+                  class="text-error" style="display: none;">Thông tin bắt buộc</span> <label
+                >Tên</label></div>
+                <div class="form-element"><input type="text" name="phone" />
+                  <div style="display: none;"><span class="text-error">Thông tin bắt buộc</span>
+                  </div>
+                  <label>Số điện thoại</label></div>
+                <div class="form-element"><input type="text" name="email" /> <span
+                  class="text-error"></span> <label>Email</label>
+                </div>
+                <div class="form-element focused" style="display: none;"><input inputmode="decimal" />
+                  <div style="display: none;"><span class="text-error">Giá thương lượng không hợp lệ</span>
+                  </div>
+                  <label>Giá mong muốn</label></div>
+                <div class="form-element" style=""><input type="text" /> <!---->
+                  <label>Lời nhắn</label></div>
+                <div class="form-element">
+                  <button type="submit" class="btn-primary btn-red btn-medium">Gửi ngay</button>
+                </div>
+              </form> <!----></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
