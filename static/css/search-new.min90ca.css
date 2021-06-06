@@ -824,7 +824,7 @@ body {
 
 .main-header .col-left .top-search form .search-type > span {
     font-size: 14px;
-    color: rgba(48,51,58,.86);
+    color: rgba(48, 51, 58, .86);
 }
 
 .main-header .col-left .top-search form .search-type ul {
@@ -6886,7 +6886,7 @@ label {
 .actionBar {
     position: -webkit-sticky;
     position: sticky;
-   /* top: 120px;*/
+    /* top: 120px;*/
     left: 0;
     width: 100%;
     height: 60px;
@@ -7030,7 +7030,7 @@ label {
 }
 
 .actionBar .filter-item .DropdownMenu .row .col {
-   /* width: 50%;*/
+    /* width: 50%;*/
     min-width: 375px;
     text-align: left;
     border-right: 1px solid rgba(48, 51, 58, .1)
@@ -11893,6 +11893,11 @@ div > img {
     text-align: center
 }
 
+.page--search .form-info .action button.large-btn-red:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
 .page--search .form-element {
     position: relative;
     width: 100%;
@@ -11942,11 +11947,10 @@ div > img {
 }
 
 .page--search .form-element .error-text {
-    display: none;
     color: orange;
     font-size: 12px;
     position: absolute;
-    top: 44px;
+    top: 50px;
     left: 0
 }
 
@@ -13012,7 +13016,36 @@ div > img {
 }
 
 #contact-now-form-body .active .form-dropdown-content {
-    border: 1px solid rgba(131,131,131,0.3);
+    border: 1px solid rgba(131, 131, 131, 0.3);
     max-height: 132px;
     overflow-y: scroll;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fade {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.blink {
+    animation: fade 1s linear infinite;
+    -webkit-animation: fade 1s linear infinite;
 }

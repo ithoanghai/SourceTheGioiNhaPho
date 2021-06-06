@@ -1,9 +1,7 @@
 from django import template
 from django.contrib.admin import site
-from django.contrib.admin import site
-from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import render, redirect
 from django.template import loader
 
 from FunctionModule.cadastral.constants import state_data, district_data
@@ -23,11 +21,14 @@ def get_client_ip(request):
 
 def index(request):
     listings_for_sale = Listing.objects.order_by('-list_date').filter(is_published=True,
-                                                                      transaction_type=TransactionType.SELL)[:3]
+                                                                      transaction_type=TransactionType.SELL)[
+                        :3]
     listings_for_rent = Listing.objects.order_by('-list_date').filter(is_published=True,
-                                                                      transaction_type=TransactionType.FOR_RENT)[:3]
+                                                                      transaction_type=TransactionType.FOR_RENT)[
+                        :3]
     listings_project = Listing.objects.order_by('-list_date').filter(is_published=True,
-                                                                     transaction_type=TransactionType.PROJECT)[:3]
+                                                                     transaction_type=TransactionType.PROJECT)[
+                       :3]
     list_distric_HN = district_data.__getitem__("01")
     context = {
         'listings_for_sale': listings_for_sale,

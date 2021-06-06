@@ -73,6 +73,8 @@ const houseTypes = [
     {type: 'land_business', text: 'Mặt bằng kinh doanh'},
     {type: 'villa', text: 'Biệt thự'}
 ];
+const vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/;
+const email_regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const ContactPopUpComponent = Vue.extend({
     template: '#contactPopupTemplate',
@@ -86,22 +88,39 @@ const ContactPopUpComponent = Vue.extend({
     },
     data() {
         return {
+            data: {
+                firstname: '',
+                lastname: '',
+                phone: '',
+                email: '',
+                district: {
+                    code: '',
+                    text: ''
+                },
+                houseType: 'apartment',
+                requestPrice: '',
+                message: ''
+            },
+            errors: {
+                firstname: '',
+                lastname: '',
+                phone: '',
+                email: '',
+                district: '',
+                houseType: '',
+                requestPrice: '',
+                message: ''
+            },
             focusedField: '',
             houseTypes: houseTypes,
-            selectedHouseType: 'apartment',
             districtData: districts,
-            district: {
-                code: '',
-                text: ''
-            },
-            firstName: '',
-            lastName: '',
-            phone: '',
-            email: '',
         }
     },
     computed: {},
     methods: {
+        shouldFocusedClass(field) {
+            return this.focusedField === field || this.data[field] !== '';
+        },
         onFocusField(field) {
             this.focusedField = field;
         },
@@ -112,18 +131,112 @@ const ContactPopUpComponent = Vue.extend({
                 this.focusedField = field;
             }
         },
-        onBlur() {
+        onBlur(field) {
             this.focusedField = '';
+            switch (field) {
+                case 'phone':
+                    this.validatePhone();
+                    break;
+                case 'email':
+                    this.validateEmail();
+                    break;
+                case 'requestPrice':
+                    this.validatePrice();
+                    break;
+                default:
+                    this.validateRequired(field);
+                    break;
+            }
         },
         onSelectHouseType(type) {
-            this.selectedHouseType = type;
-            this.onBlur();
+            this.data.houseType = type;
+            this.onBlur('houseType');
         },
         getSelectedHouseTypeText() {
-            return (this.houseTypes.find(item => item.type === this.selectedHouseType)).text;
+            return (this.houseTypes.find(item => item.type === this.data.houseType)).text;
         },
         onSelectDistrict(district) {
-            this.district = district
+            this.data.district = district
+        },
+        handleInputChange(field, e) {
+            this.errors[field] = '';
+        },
+        validateRequired(field) {
+            if (!this.data[field]) {
+                this.errors[field] = "Thông tin bắt buộc";
+            }
+        },
+        validatePhone() {
+            //Auto Input
+            const phone = $('#contact-now-form-body input[name="phone"]').val();
+            if (phone) {
+                const isValid = vnf_regex.test(phone.trim());
+                if (!isValid) {
+                    this.errors.phone = 'Số điện thoại không hợp lệ.'
+                    return;
+                }
+                this.errors.phone = '';
+                this.data.phone = phone;
+            } else {
+                this.errors.phone = 'Vui lòng điền số điện thoại.'
+            }
+        },
+        validateEmail() {
+            this.data.email = $('#contact-now-form-body input[name="email"]').val();
+            if (this.data.email) {
+                if (email_regex.test(this.data.email) === false) {
+                    this.errors.email = 'Email không hợp lệ.'
+                }
+            }
+        },
+        validatePrice() {
+            if (!this.data.requestPrice) {
+                this.errors.requestPrice = '';
+                return;
+            }
+            const price = parseFloat(this.data.requestPrice);
+            if (isNaN(price)) {
+                this.errors.requestPrice = 'Xin điền số hợp lệ';
+            } else {
+                this.errors.requestPrice = '';
+            }
+        },
+        handleFormSubmit(e) {
+            e.preventDefault();
+            let hasError = false;
+            for (let field of Object.keys(this.errors)) {
+                this.onBlur(field);
+                if (this.errors[field]) {
+                    hasError = true;
+                }
+            }
+            if (hasError) {
+                return;
+            }
+            // const data = this.data;
+            const $form = $('#contact-now-form-body form');
+            const formData = $form.serialize();
+            $.ajax({
+                method: $form.attr('method'),
+                url: $form.attr('action'),
+                data: formData,
+                beforeSend: () => {
+                    $form.find('button').attr('disabled', 'disabled').addClass('running');
+                }
+            }).fail(() => {
+            }).done((resp) => {
+                setTimeout(() => {
+                    $('#search-content').prepend(`<div style="text-align: center;padding-bottom: 0;" class="alert alert-success">
+                    <p class="blink">${resp.message}</p>
+                </div>`)
+                    this.closePopup();
+                    hideAlert(8000);
+                }, 2000)
+            }).always(() => {
+                setTimeout(() => {
+                    $form.find('button').removeClass('running').removeAttr('disabled');
+                }, 1500)
+            })
         }
     }
 })

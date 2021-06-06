@@ -9582,17 +9582,7 @@
                 })
             }, getFacebookPixelTracking: function (t) {
                 var e = t.id, n = t.alias, o = t.serviceType, a = t.source, u = void 0 === a ? "rever" : a;
-                return r.b.get("/api/property/fb-pixel", {
-                    params: {
-                        id: e,
-                        alias: n,
-                        service_type: o,
-                        source: u
-                    }
-                }).then(function (t) {
-                    if (t && t.data)
-                        return new i.a(t.data)
-                })
+
             }, getByProject: function (t, e, n, o) {
                 return r.b.get("/project/" + t + "/properties", {
                     params: {
@@ -10156,9 +10146,9 @@
                 var t = this;
                 o.a.$on(o.b.VIEW_PROPERTY, function (e) {
                     var n = e.id, r = e.serviceType, i = e.source;
-                    a.a.getFacebookPixelTracking({id: n, serviceType: r, source: i}).then(function (e) {
-                        t.trackViewContent(e)
-                    })
+                    // a.a.getFacebookPixelTracking({id: n, serviceType: r, source: i}).then(function (e) {
+                    //     t.trackViewContent(e)
+                    // })
                 }), o.a.$on(o.b.ON_SEARCH_RESULT, function (e) {
                     var n = e.minPrice, r = e.maxPrice, i = e.city, o = e.minBedroom, a = e.maxBedroom,
                         u = e.neighborhood, s = e.propIds, l = e.district;
