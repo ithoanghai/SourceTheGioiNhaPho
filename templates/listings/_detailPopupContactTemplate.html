@@ -55,30 +55,60 @@
               </button>
             </div>
             <div class="popup-body">
-              <form data-formtype="property-form" data-formitem="property-request-info" action="">
-                <div class="form-element"><input type="text" name="firstname" /> <span
-                  class="text-error" style="display: none;">Thông tin bắt buộc</span> <label
-                >Họ</label></div>
-                <div class="form-element"><input type="text" name="lastname" /> <span
-                  class="text-error" style="display: none;">Thông tin bắt buộc</span> <label
-                >Tên</label></div>
-                <div class="form-element"><input type="text" name="phone" />
-                  <div style="display: none;"><span class="text-error">Thông tin bắt buộc</span>
-                  </div>
-                  <label>Số điện thoại</label></div>
-                <div class="form-element"><input type="text" name="email" /> <span
-                  class="text-error"></span> <label>Email</label>
+              <form id="detailContactForm" data-formtype="property-form" data-formitem="property-request-info"
+                    method="post" action="{% url 'post_contact' %}">
+                {% csrf_token %}
+                <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
+                <div class="form-element">
+                  <input required type="text" name="firstname"
+                         v-model="data.firstname"
+                         v-on:blur="validateRequired('firstname')"
+                         v-on:input="e => handleInputChange('firstname', e)"
+                  />
+                  <span class="text-error" v-if="errors.firstname">[[errors.firstname]]</span>
+                  <label>Họ</label>
                 </div>
-                <div class="form-element focused" style="display: none;"><input inputmode="decimal" />
+                <div class="form-element">
+                  <input required type="text" name="lastname"
+                         v-model="data.lastname"
+                         v-on:blur="validateRequired('lastname')"
+                         v-on:input="e => handleInputChange('lastname', e)"
+                  />
+                  <span class="text-error" v-if="errors.lastname">[[errors.lastname]]</span>
+                  <label>Tên</label>
+                </div>
+                <div class="form-element">
+                  <input type="text" name="phone" required
+                         v-model="data.phone"
+                         v-on:blur="validatePhone"
+                         v-on:input="e => handleInputChange('phone', e)"
+                  />
+                  <span v-if="errors.phone" class="text-error">[[errors.phone]]</span>
+                  <label>Số điện thoại</label>
+                </div>
+                <div class="form-element">
+                  <input type="text" name="email"
+                         v-model="data.email"
+                         v-on:input="e => handleInputChange('email', e)"
+                         v-on:blur="validateEmail"/>
+                  <span class="text-error">[[errors.email]]</span>
+                  <label>Email (không bắt buộc)</label>
+                </div>
+                <div class="form-element focused" style="display: none;">
+                  <input inputmode="decimal"/>
                   <div style="display: none;"><span class="text-error">Giá thương lượng không hợp lệ</span>
                   </div>
                   <label>Giá mong muốn</label></div>
-                <div class="form-element" style=""><input type="text" /> <!---->
-                  <label>Lời nhắn</label></div>
+                <div class="form-element" style="">
+                  <input required name="message" type="text"
+                         value="Tôi muốn biết thêm thông tin về căn hộ {{ listing.code }}"/>
+                  <label>Lời nhắn</label>
+                </div>
                 <div class="form-element">
                   <button type="submit" class="btn-primary btn-red btn-medium">Gửi ngay</button>
                 </div>
-              </form> <!----></div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
