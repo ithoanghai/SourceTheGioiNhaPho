@@ -97,7 +97,7 @@
 
 
             <li class="s-menu-items active">
-              <a href="{% url 'apply' %}">Tuyển dụng</a>
+              <a href="{% url 'recruitment' %}">Tuyển dụng</a>
             </li>
             <li class="s-menu-items">
               <a href="{% url 'contacts' %}">Liên hệ</a>
@@ -322,37 +322,20 @@
         </div>
         <div class="career-img">
           <ul>
-            <li><a href="javascript:void(0)"><img src="../images/career1.jpg"
-                                                  srcset="../images/career1-small.jpg 1x, ../images/career1-small@2x.jpg 2x"></a>
-            </li>
-            <li><a href="javascript:void(0)"><img src="../images/career2.jpg"
-                                                  srcset="../images/career2-small.jpg 1x, ../images/career2-small@2x.jpg 2x"></a>
-            </li>
-            <li><a href="javascript:void(0)"><img
-              src="{% static 'images//career/1.jpg' %}"></a>
+            <li><a href="javascript:void(0)"><img src="{% static 'images/career1.jpg' %}"></a>
             </li>
             <li><a href="javascript:void(0)"><img
               src=".{% static 'images/career/2.jpg' %}"></a>
             </li>
-            <li><a href="javascript:void(0)"><img
-              src="{% static 'images/career/3.jpg' %}"></a>
-            </li>
-            <li><a href="javascript:void(0)"><img src="../images/career6.jpg"
-                                                  srcset="../images/career6-small.jpg 1x, ../images/career6-small@2x.jpg 2x"></a>
-            </li>
-            <li><a href="javascript:void(0)"><img src="../images/career7.jpg"
-                                                  srcset="../images/career7-small.jpg 1x, ../images/career7-small@2x.jpg 2x"></a>
-            </li>
-            <li><a href="javascript:void(0)"><img src="../images/career8.jpg"
-                                                  srcset="../images/career8-small.jpg 1x, ../images/career8-small@2x.jpg 2x"></a>
-            </li>
+            <li><a href="javascript:void(0)"><img src="{% static 'images/career6.jpg' %}"></a></li>
+            <li><a href="javascript:void(0)"><img src="{% static 'images/career7.jpg' %}"></a></li>
           </ul>
         </div>
       </div>
     </section>
     <section id="list-career" class="bg-career-white width1140">
       <div class="content">
-        <div class="title-career">TGNP đang tuyển dụng</div>
+        <div class="title-career">Các vị trí Thế Giới Nhà Phố đang chờ bạn hợp tác</div>
         <div class="title-career-line">
           <div class="line"></div>
         </div>
@@ -368,96 +351,48 @@
           <div class="detail">
             <div class="name">
               <a href="apply?position=sale" target="_blank">
-                Nhân viên kinh doanh bất động sản
+                Chuyên viên kinh doanh bất động sản Đầu Chủ/Đầu Khách
               </a>
             </div>
-            <div class="pos">Primary/Secondary</div>
+            <div class="pos">Chính thức/Cộng tác</div>
             <div class="loc"></div>
             <div class="btn-app btn-red-boder">
               <a style="display: block"
                 {% comment %}href="apply?position=sale"{% endcomment %}
-                 href="{% url 'contacts' %}"
+                {% comment %} href="{% url 'contacts' %}"{% endcomment %}
+                      href="https://forms.gle/tjhswtmDUQbb1My88"
                  target="_blank">ỨNG TUYỂN</a>
             </div>
           </div>
           <div class="detail">
             <div class="name">
               <a href="apply?position=sales-director" target="_blank">
-                Sales Director
+                Giám đốc Khu vực
               </a>
             </div>
-            <div class="pos">Primary/Secondary</div>
+            <div class="pos">Chính thức</div>
             <div class="loc"></div>
             <div class="btn-app btn-red-boder">
               <a style="display: block"
                 {% comment %}href="apply?position=sale"{% endcomment %}
-                 href="{% url 'contacts' %}"
+                 {% comment %} href="{% url 'contacts' %}"{% endcomment %}
+                      href="https://forms.gle/tjhswtmDUQbb1My88"
                  target="_blank">ỨNG
                 TUYỂN</a>
             </div>
           </div>
-          {% comment %}                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=sales-manager-primary"
-                               target="_blank">
-                                Sales Manager
-                            </a>
-                            <button onclick="showDescription('Sales Manager Primary', '1yuqVv-_PjomPsNj_rq6I_lvIopDs6ezQ', '../agent.thegioinhaphovietnam.com.vn/ung-tuyen218b.html?position=sales-manager-primary')"
-                                    class="job-desc">Mô tả công việc
-                            </button>
-                        </div>
-                        <div class="pos">Primary</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=sales-manager-primary"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=sales-manager-secondary"
-                               target="_blank">
-                                Sales Manager
-                            </a>
-                            <button onclick="showDescription('Sales Manager Secondary', '1J7k-KBu7uXa265wkV6SJcX7k2MeVUZ7D', '../agent.thegioinhaphovietnam.com.vn/ung-tuyen6ca6.html?position=sales-manager-secondary')"
-                                    class="job-desc">Mô tả công việc
-                            </button>
-                        </div>
-                        <div class="pos">Secondary</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=sales-manager-secondary"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=product-manager" target="_blank">
-                                Product Manager
-                            </a>
-                        </div>
-                        <div class="pos">Tech &amp; Product</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=product-manager" target="_blank">ỨNG
-                                TUYỂN</a>
-                        </div>
-                    </div>{% endcomment %}
           <div class="detail">
             <div class="name">
               <a href="apply?position=software-engineer" target="_blank">
-                Software Engineer
+                Lập trình viên phần mềm & Hỗ trợ kỹ thuật
               </a>
             </div>
             <div class="pos">Tech &amp; Product</div>
             <div class="loc"></div>
             <div class="btn-app btn-red-boder">
               <a style="display: block"
-                {% comment %}href="apply?position=sale"{% endcomment %}
-                 href="{% url 'contacts' %}"
+                {% comment %} href="{% url 'contacts' %}"{% endcomment %}
+                      href="https://forms.gle/tjhswtmDUQbb1My88"
                  target="_blank">ỨNG
                 TUYỂN</a>
             </div>
@@ -792,8 +727,8 @@
 
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
   <script defer src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
-  <script defer id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
-
+ {% comment %} <script defer id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>
+{% endcomment %}
   <script>
       window.fbAsyncInit = function () {
           FB.init({
