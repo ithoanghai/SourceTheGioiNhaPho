@@ -38,7 +38,6 @@ def index(request):
 
 
 def listing(request, listing_id):
-    messages.success(request, 'Yêu cầu được gửi thành công. Chúng tôi sẽ liên lạc lại với bạn sớm nhất.')
     listing_detail = get_object_or_404(Listing, pk=listing_id)
     listings_neighborhood = Listing.objects.order_by('-list_date').filter(state=listing_detail.state).exclude(
         id=listing_id)[:10]

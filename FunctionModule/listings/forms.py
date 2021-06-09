@@ -17,8 +17,6 @@ class ListingAdminForm(forms.ModelForm):
         self.fields['district'] = forms.ChoiceField(choices=district_default_choices, label="Quận/Huyện",
                                                     required=False)
         self.fields['ward'] = EmptyChoiceField(empty_label="Chọn Quận/Huyện trước", required=False)
-        # if not self.instance.id:
-        self.fields['address'].widget = forms.HiddenInput()
 
 
 class ImportListingForm(forms.Form):

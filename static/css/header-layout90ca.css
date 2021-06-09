@@ -50,31 +50,31 @@ a {
   text-decoration: none; }
 
 @font-face {
-    font-family: 'rv-font1';
+    font-family: 'tgnp-font';
     src: url('../../fonts/RV-Harmonia-Regular.eot');
     src: url('../../fonts/RV-Harmonia-Regulard41d.eot?#iefix') format('embedded-opentype'), url('../../fonts/RV-Harmonia-Regular.woff') format('woff'), url('../../fonts/RV-Harmonia-Regular.ttf') format('truetype'), url('../../fonts/RV-Harmonia-Regular.svg#roboto_condensedregular') format('svg');
     font-weight: 400;
 }
 @font-face {
-    font-family: 'rv-font1';
+    font-family: 'tgnp-font';
     src: url('../../fonts/RV-Harmonia-SemiBold.eot');
     src: url('../../fonts/RV-Harmonia-SemiBoldd41d.eot?#iefix') format('embedded-opentype'), url('../../fonts/RV-Harmonia-SemiBold.woff') format('woff'), url('../../fonts/RV-Harmonia-SemiBold.ttf') format('truetype'), url('../../fonts/RV-Harmonia-SemiBold.svg#roboto_condensedregular') format('svg');
     font-weight: 500;
 }
 @font-face {
-    font-family: 'rv-font1';
+    font-family: 'tgnp-font';
     src: url('../../fonts/RV-Harmonia-Bold.eot');
     src: url('../../fonts/RV-Harmonia-Boldd41d.eot?#iefix') format('embedded-opentype'), url('../../fonts/RV-Harmonia-Bold.woff') format('woff'), url('../../fonts/RV-Harmonia-Bold.ttf') format('truetype'), url('../../fonts/RV-Harmonia-Bold.svg#roboto_condensedregular') format('svg');
     font-weight: 600;
 }
 @font-face {
-    font-family: 'rv-font2';
+    font-family: 'tgnp-font2';
     src: url('../../fonts/TiemposHeadline-Medium.eot');
     src: url('../../fonts/TiemposHeadline-Mediumd41d.eot?#iefix') format('embedded-opentype'), url('../../fonts/TiemposHeadline-Medium.woff') format('woff'), url('../../fonts/TiemposHeadline-Medium.ttf') format('truetype'), url('../../fonts/TiemposHeadline-Medium.svg#roboto_condensedregular') format('svg');
     font-weight: 500;
 }
 body {
-    font-family: 'rv-font1', Arial, Helvetica, sans-serif;
+    font-family: 'tgnp-font', Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 1;
     color: #444c59;
@@ -246,7 +246,7 @@ body {
 .main-header-agent .col-left .main-nav-menu .login .user-avatar span {
   width: calc(100% - 60px);
   text-align: left;
-  font-family: 'rv-font2';
+  font-family: 'tgnp-font2';
   font-size: 16px;
   color: #30333a;
 }
@@ -953,7 +953,7 @@ body {
     margin-left: 30px;
     position: relative;
     z-index: 104;
-    font-family: 'rv-font1', Arial, Helvetica, sans-serif;
+    font-family: 'tgnp-font', Arial, Helvetica, sans-serif;
 }
 .main-header-agent .col-right .login .notification-content:before{
     position: absolute;
@@ -1036,7 +1036,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 22px;
-    font-family: 'rv-font1', Arial, Helvetica, sans-serif;
+    font-family: 'tgnp-font', Arial, Helvetica, sans-serif;
 }
 .main-header-agent .col-right .login .notification .notification-content .notification-heading a {
     line-height: 1.38;
@@ -1198,7 +1198,7 @@ body {
 .main-header-agent .col-left .main-nav-menu .login .user-avatar span {
     width: calc(100% - 60px);
     text-align: left;
-    font-family: 'rv-font2';
+    font-family: 'tgnp-font2';
     font-size: 16px;
     color: #30333a;
 }
