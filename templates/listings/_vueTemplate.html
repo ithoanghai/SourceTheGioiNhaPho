@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n get_cadastral%}
 
 <script type="text/x-template" id="propertyListTemplate">
   <div id="propertyList" class="row" v-bind:class="{grid: isViewGrid}">
@@ -14,7 +14,7 @@
           <button class="btn-favorite btn-favorite__v2 ">
           </button>
           <div class="label-group">
-            <label v-if="listing.is_exclusive" class="label-primary unique">{% trans "TGNP độc quyền" %}</label>
+            <label v-if="listing.is_exclusive" class="label-primary unique p-1">{% trans "TGNP độc quyền" %}</label>
             <label class="label-primary unique p-1"
                    style="font-size: 16px">[[listing.price]] {% trans "tỷ" %}</label>
           </div>
@@ -34,16 +34,17 @@
         <div class="info-container">
           <div class="group-grid__view">
             <ul class="listing-info">
+              <li><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></li>
+              <li>
+                <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}
+              </li>
               <li v-if="listing.bedrooms && listing.bedrooms > 0">
                 <i class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}
               </li>
-              <li>
-                <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]]{% trans "m2" %}
-              </li>
-              <li v-if="listing.floors > 0">
+              <li v-if="listing.floors && listing.floors > 0">
                 <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
               </li>
-              <li v-if="listing.bathrooms > 0">
+              <li v-if="listing.bathrooms && listing.bathrooms > 0">
                 <i class="fa fa-bath"></i>[[listing.bathrooms]] {% trans "tắm" %}
               </li>
             </ul>
@@ -52,21 +53,22 @@
             <a class="listing-name" :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.title]]</a>
           </h3>
           <div class="listing-address">
-            <h4><a :href="getListingDetailURL(listing.id)">[[listing.code]]</a></h4>
+            <h4 v-if="listing.urban_area">
+              <a :href="`/listings/search?keywords=${listing.urban_area}`" title="">[[listing.urban_area]]</a>
+            </h4>
             <h4>
               <a :href="`/listings/search?keywords=${listing.street}`" title="">[[listing.street]]</a>
             </h4>
-            <h4 v-if="listing.urban_area">
-              <a :href="`/listings/search?keywords=${listing.urban_area}`" title="">[[listing.urban_area]]</a>
+            <h4 v-if="listing.ward"><a :href="`/listings/search?keywords=${listing.ward}`" title="Phường/Xã">[[listing.ward]]</a>
             </h4>
             <h4>
               <a :href="`/listings/search?keywords=${listing.district}`" title="">[[getDistrict(listing.district)]]</a>
             </h4>
           </div>
           <ul class="listing-info">
+            <li><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]]{% trans "m2" %}</li>
             <li v-if="listing.bedrooms > 0"><i
               class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}</li>
-            <li><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]]{% trans "m2" %}</li>
             <li v-if="listings.floors && listing.floors > 0"><i class="fa fa-h-square"></i>
               [[listing.floors]] {% trans "tầng" %}</li>
             <li v-if="listing.bathrooms > 0"><i
@@ -294,7 +296,7 @@
                 </button>
               </div>
               <div class="or-direct-call">
-                <p> Hoặc gọi ngay <a href="tel:1800 234 546"><strong>1800 234 546</strong></a> để gặp chuyên viên tư vấn </p>
+                <p> Hoặc gọi ngay <a href="tel:0916286256"><strong>0916286256</strong></a> để gặp chuyên viên tư vấn </p>
               </div>
             </form>
           </div>
