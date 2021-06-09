@@ -1,5 +1,5 @@
 {% load static %}
-{% load humanize i18n %}
+{% load humanize i18n get_cadastral%}
 
 <article class="listingCard">
   <div class="cover-image">
@@ -22,7 +22,7 @@
     </a>
     <div class="label-group">
       {% if listing.is_exclusive %}
-        <label class="label-primary unique">{% trans "TGNP độc quyền" %}</label>
+        <label class="label-primary unique p-1">{% trans "TGNP độc quyền" %}</label>
       {% endif %}
       <label class="label-primary unique p-1"
              style="font-size: 16px">{{ listing.price }} {% trans "tỷ" %}</label>
@@ -35,14 +35,17 @@
   <div class="info-container">
     <div class="flex align-items-center justify-content-space-between">
       <ul class="listing-info">
+         <li>
+          <i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b>
+        </li>
+         <li>
+          <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2" %}
+        </li>
         {% if listing.bedrooms %}
           <li>
             <i class="zmdi zmdi-airline-seat-individual-suite"></i>{{ listing.bedrooms }} {% trans "ngủ" %}
           </li>
         {% endif %}
-        <li>
-          <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2" %}
-        </li>
         {% if listing.floors %}
           <li><i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}
           </li> {% endif %}
@@ -51,18 +54,14 @@
           </li> {% endif %}
       </ul>
     </div>
-    <h3>
+{% comment %}    <h3>
       <a class="listing-name" href="{% url 'listing' listing.id %}"
          title="{{ listing.title }}">{{ listing.title }}</a>
-    </h3>
+    </h3>{% endcomment %}
 
     <div class="listing-address">
-{#      <h4><a href="{% url 'listing' listing.id %}">Xem Chi Tiết</a>#}
-      </h4>
-      <h4>
-        <a href="{% url 'listing_search' %}?street={{ listing.street }}"
-           title="">{{ listing.street }}</a>
-      </h4>
+{% comment %}     <h4><a href="{% url 'listing' listing.id %}">Xem Chi Tiết</a>
+      </h4>{% endcomment %}
       {% if listing.urban_area %}
       <h4>
         <a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}"
@@ -70,8 +69,16 @@
       </h4>
       {% endif %}
       <h4>
+        <a href="{% url 'listing_search' %}?street={{ listing.street }}"
+           title="">{{ listing.street }}</a>
+      </h4>
+    {% if listing.ward %}
+                  <h2><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
+                         title="Phường/Xã">{{ listing.ward }}</a></h2>
+     {% endif %}
+      <h4>
         <a href="{% url 'listing_search' %}?district={{ listing.district }}"
-           title=""> {{ listing.district.name }} {% comment %}{% state_data.get('district','' %}{% endcomment %}</a>
+           title=""> {% get_district listing.district %}</a>
       </h4>
     </div>
   </div>
