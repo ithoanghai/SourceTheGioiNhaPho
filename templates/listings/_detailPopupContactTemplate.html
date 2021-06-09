@@ -4,14 +4,15 @@
       <div class="popup-content">
         <button class="popup-close" @click.prevent="closePopup"><i class="zmdi zmdi-close"></i></button>
         <div class="popup-left">
-          <div class="popup-left-cover"><a href="javascript:void(0)"><img
-            src="/media/photos/listings/97/9d8845a11980cbd21da492668292c2b6-2720567584725984355_AX1UEdS.jpg"
-            alt="TGNP"></a> <label class="status status-top status-monopoly" style="display: none;">Độc
+          <div class="popup-left-cover"><a href="javascript:void(0)">
+              {% with listing.main_photo as photo %}
+                    <img class="card-img-top" src="{{ photo.url }}"  alt="TGNP">
+                {% endwith %}
+              </a> <label class="status status-top status-monopoly" style="display: none;">Độc
             quyền</label></div>
           <div class="popup-left-content"><h3 class="popup-left-title"><a
             href="javascript:void(0)">{{ lisitng.title }}</a></h3>
-            <div class="popup-left-address"><h4><a href="javascript:void(0)">thanh-xuan-giap-nhat-21329436a • 009</a>
-            </h4></div>
+            <div class="popup-left-address"></div>
             <ul class="popup-left-info">
               {% if listing.bedrooms %}
                 <li><p>Phòng ngủ:</p> <strong>{{ listing.bedrooms }}</strong></li>
