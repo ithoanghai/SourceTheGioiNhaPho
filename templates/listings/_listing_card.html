@@ -1,5 +1,5 @@
 {#{% load text_money %}#}
-{% load humanize i18n %}
+{% load humanize i18n get_cadastral%}
 
 <div class="card listing-preview">
     {% with listing.main_photo as photo %}
@@ -14,7 +14,30 @@
         <div class="listing-heading text-center">
             <h6 class="text-primary"><a href="{% url 'listing' listing.id %}">{{ listing.title }}</a></h6>
             <p>
-                <i class="fas fa-map-marker text-secondary"></i> {{ listing.street}}  {{ listing.district }}  {{ listing.state }} {{ listing.city }}
+                <i class="fas fa-map-marker text-secondary"></i>
+                {% if listing.urban_area %}
+                  <h4>
+                    <a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}"
+                       title="">{{ listing.urban_area }}</a>
+                  </h4>
+                  {% endif %}
+                <h4>
+                    <a href="{% url 'listing_search' %}?street={{ listing.street }}"
+                       title="">{{ listing.street }}</a>
+                  </h4>
+                {% if listing.ward %}
+                  <h2><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
+                         title="Phường/Xã">{{ listing.ward }}</a></h2>
+                 {% endif %}
+                  <h4>
+                    <a href="{% url 'listing_search' %}?district={{ listing.district }}"
+                       title="Quận/Huyện"> {% get_district listing.district %}</a>
+                  </h4>
+                    {% if listing.state %}
+                              <h2><a href="{% url 'listing_search' %}?ward={{ listing.state }}"
+                                     title="Tỉnh/TP">{{ listing.state }}</a></h2>
+                 {% endif %}
+                {{ listing.city }}
             </p>
         </div>
         <hr>
