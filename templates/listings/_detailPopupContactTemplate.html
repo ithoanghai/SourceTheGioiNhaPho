@@ -11,10 +11,14 @@
               </a> <label class="status status-top status-monopoly" style="display: none;">Độc
             quyền</label></div>
           <div class="popup-left-content"><h3 class="popup-left-title"><a
-            href="javascript:void(0)">{{ lisitng.title }}</a></h3>
+            href="javascript:void(0)">{{ listing.title }}</a></h3>
             <div class="popup-left-address"></div>
             <ul class="popup-left-info">
-              {% if listing.bedrooms %}
+              <li><p>Mã nhà đất:</p> <strong>{{ listing.code }}</strong></li>
+                {% if listing.floors %}
+                <li><p>Số tầng:</p> <strong>{{ listing.floors }}</strong></li>
+              {% endif %}
+                {% if listing.bedrooms %}
                 <li><p>Phòng ngủ:</p> <strong>{{ listing.bedrooms }}</strong></li>
               {% endif %}
               <li><p>Diện tích:</p> <strong>{{ listing.area }}</strong></li>
@@ -102,7 +106,7 @@
                   <label>Giá mong muốn</label></div>
                 <div class="form-element" style="">
                   <input required name="message" type="text"
-                         value="Tôi muốn biết thêm thông tin về căn hộ {{ listing.code }}"/>
+                         value="Tôi muốn biết thêm thông tin về BĐS có mã {{ listing.code }}"/>
                   <label>Lời nhắn</label>
                 </div>
                 <div class="form-element">
