@@ -66,3 +66,7 @@ services:
       - db
       - redis
     tty: true
+    
+volumes:
+  db-data:
+    driver: local

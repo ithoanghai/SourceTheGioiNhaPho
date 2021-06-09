@@ -30,6 +30,8 @@ SECRET_KEY = 'w6rm%l&xim0ivll-li$u6fg8)6k8-$7uar^f#33ht5sutw8e!#'
 DEBUG = True
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
+SITE_ID = 1
+
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
 ALLOWED_HOSTS = ['*']
@@ -64,6 +66,7 @@ BUILT_IN_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
@@ -96,7 +99,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.i18n',  # this one
+                'django.template.context_processors.i18n',
             ],
         },
     },

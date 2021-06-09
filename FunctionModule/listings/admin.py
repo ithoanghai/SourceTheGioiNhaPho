@@ -42,11 +42,14 @@ class ListingAdmin(admin.ModelAdmin):
 
     def get_exclude(self, request, obj=None):
         excluded = super().get_exclude(request, obj)
+        user = request.user
         to_exclude = ['list_date']
         if obj is None:
             to_exclude += []
         else:
-            pass
+            if not user.is_superuser:
+                if obj.realtor.user != user.id:
+                    to_exclude.append('address')
         try:
             return list(excluded) + to_exclude
         except TypeError:
@@ -54,7 +57,7 @@ class ListingAdmin(admin.ModelAdmin):
 
 
 @admin.site.register_view('listings/listing/import-listing')
-def my_view(request: HttpRequest) -> JsonResponse:
+def import_csv_view(request: HttpRequest) -> JsonResponse:
     if request.method == 'POST':
         form = ImportListingForm(request.POST, request.FILES)
         if form.is_valid():

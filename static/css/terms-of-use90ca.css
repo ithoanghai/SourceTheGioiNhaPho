@@ -57,7 +57,7 @@ a {
 }
 
 .font-tiempos {
-    font-family: rv-font2, Arial, Helvetica, sans-serif
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif
 }
 
 .container {
@@ -135,35 +135,35 @@ a {
 }
 
 @font-face {
-    font-family: rv-font1;
+    font-family: tgnp-font;
     src: url(../fonts/RV-Harmonia-Regular.eot);
     src: url(../fonts/RV-Harmonia-Regular.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-Regular.woff) format("woff"), url(../fonts/RV-Harmonia-Regular.ttf) format("truetype"), url(../fonts/RV-Harmonia-Regular.svg#roboto_condensedregular) format("svg");
     font-weight: 400
 }
 
 @font-face {
-    font-family: rv-font1;
+    font-family: tgnp-font;
     src: url(../fonts/RV-Harmonia-SemiBold.eot);
     src: url(../fonts/RV-Harmonia-SemiBold.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-SemiBold.woff) format("woff"), url(../fonts/RV-Harmonia-SemiBold.ttf) format("truetype"), url(../fonts/RV-Harmonia-SemiBold.svg#roboto_condensedregular) format("svg");
     font-weight: 500
 }
 
 @font-face {
-    font-family: rv-font1;
+    font-family: tgnp-font;
     src: url(../fonts/RV-Harmonia-Bold.eot);
     src: url(../fonts/RV-Harmonia-Bold.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-Bold.woff) format("woff"), url(../fonts/RV-Harmonia-Bold.ttf) format("truetype"), url(../fonts/RV-Harmonia-Bold.svg#roboto_condensedregular) format("svg");
     font-weight: 600
 }
 
 @font-face {
-    font-family: rv-font2;
+    font-family: tgnp-font2;
     src: url(../fonts/TiemposHeadline-Medium.eot);
     src: url(../fonts/TiemposHeadline-Medium.eot?#iefix) format("embedded-opentype"), url(../fonts/TiemposHeadline-Medium.woff) format("woff"), url(../fonts/TiemposHeadline-Medium.ttf) format("truetype"), url(../fonts/TiemposHeadline-Medium.svg#roboto_condensedregular) format("svg");
     font-weight: 500
 }
 
 body {
-    font-family: rv-font1, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font, Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 1;
     color: #444c59;
