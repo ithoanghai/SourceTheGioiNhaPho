@@ -61,6 +61,8 @@
   {% block head_script %}
   {% endblock %}
 
+    <meta name="facebook-domain-verification" content="sci46fyogj6esxp1ex8rkf81j63v6o" />
+
 </head>
 
 <body>
@@ -113,13 +115,14 @@
   </script>
 {% endblock %}
 
-{#    <!-- Chống sao chép website-->#}
-{#    <script type="text/javascript">#}
-{#    $(document).ready(function(){#}
-{#    $('*').bind('cut copy paste contextmenu', function (e) {#}
-{#        e.preventDefault();#}
-{#    })});#}
-{#    </script>#}
+    <!-- Chống sao chép website-->
+    <script type="text/javascript">
+    $(document).ready(function(){
+    $('*').bind('cut copy paste contextmenu', function (e) {
+        e.preventDefault();
+    })});
+   </script>
+
 
 <!-- Messenger Plugin chat Code -->
 <div id="fb-root"></div>
