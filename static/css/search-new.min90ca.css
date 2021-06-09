@@ -260,7 +260,7 @@ a {
 }
 
 .font-tiempos {
-    font-family: rv-font2, Arial, Helvetica, sans-serif !important;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif !important;
     font-weight: 500 !important
 }
 
@@ -362,7 +362,7 @@ a {
 }
 
 @font-face {
-    font-family: rv-font1;
+    font-family: tgnp-font;
     src: url(../fonts/RV-Harmonia-Light.eot);
     src: url(../fonts/RV-Harmonia-Lightd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-Light.woff) format("woff"), url(../fonts/RV-Harmonia-Light.ttf) format("truetype"), url(../fonts/RV-Harmonia-Light.svg#roboto_condensedregular) format("svg");
     font-weight: 300;
@@ -370,7 +370,7 @@ a {
 }
 
 @font-face {
-    font-family: rv-font1;
+    font-family: tgnp-font;
     src: url(../fonts/RV-Harmonia-Regular.eot);
     src: url(../fonts/RV-Harmonia-Regulard41d.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-Regular.woff) format("woff"), url(../fonts/RV-Harmonia-Regular.ttf) format("truetype"), url(../fonts/RV-Harmonia-Regular.svg#roboto_condensedregular) format("svg");
     font-weight: 400;
@@ -378,7 +378,7 @@ a {
 }
 
 @font-face {
-    font-family: rv-font1;
+    font-family: tgnp-font;
     src: url(../fonts/RV-Harmonia-SemiBold.eot);
     src: url(../fonts/RV-Harmonia-SemiBoldd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-SemiBold.woff) format("woff"), url(../fonts/RV-Harmonia-SemiBold.ttf) format("truetype"), url(../fonts/RV-Harmonia-SemiBold.svg#roboto_condensedregular) format("svg");
     font-weight: 500;
@@ -386,7 +386,7 @@ a {
 }
 
 @font-face {
-    font-family: rv-font1;
+    font-family: tgnp-font;
     src: url(../fonts/RV-Harmonia-Bold.eot);
     src: url(../fonts/RV-Harmonia-Boldd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-Bold.woff) format("woff"), url(../fonts/RV-Harmonia-Bold.ttf) format("truetype"), url(../fonts/RV-Harmonia-Bold.svg#roboto_condensedregular) format("svg");
     font-weight: 600;
@@ -394,7 +394,7 @@ a {
 }
 
 @font-face {
-    font-family: rv-font2;
+    font-family: tgnp-font2;
     src: url(../fonts/TiemposHeadline-Medium.eot);
     src: url(../fonts/TiemposHeadline-Mediumd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/TiemposHeadline-Medium.woff) format("woff"), url(../fonts/TiemposHeadline-Medium.ttf) format("truetype"), url(../fonts/TiemposHeadline-Medium.svg#roboto_condensedregular) format("svg");
     font-weight: 500;
@@ -402,7 +402,7 @@ a {
 }
 
 body {
-    font-family: rv-font1, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font, Arial, Helvetica, sans-serif;
     font-size: 1rem;
     line-height: 1;
     color: #444c59;
@@ -490,7 +490,7 @@ body {
     z-index: 100;
     background: #fff;
     border-bottom: 1px solid rgba(48, 51, 58, .1);
-    font-family: rv-font1, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font, Arial, Helvetica, sans-serif;
     font-size: 16px;
     color: #444c59;
     font-weight: 400
@@ -671,7 +671,7 @@ body {
 .main-header .col-left .main-nav-menu .login .user-avatar span {
     width: calc(100% - 60px);
     text-align: left;
-    font-family: rv-font2;
+    font-family: tgnp-font2;
     font-size: 16px;
     color: #30333a
 }
@@ -2857,7 +2857,7 @@ ul.breadcrumb li a:hover {
     white-space: nowrap;
     text-overflow: ellipsis;
     margin-top: 6px;
-    font-family: rv-font1;
+    font-family: tgnp-font;
     font-size: 14px;
     color: #30333a;
     font-weight: 400;
@@ -2948,7 +2948,7 @@ ul.breadcrumb li a:hover {
     text-overflow: ellipsis;
     max-width: 140px;
     width: 140px;
-    font-family: rv-font2;
+    font-family: tgnp-font2;
     font-size: 22px;
     line-height: 1.5;
     font-weight: 500;
@@ -3010,7 +3010,7 @@ ul.breadcrumb li a:hover {
     width: calc(100% - 160px);
     white-space: unset;
     display: block;
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-size: 16px;
     color: #30333a;
     font-weight: 400;
@@ -3653,7 +3653,7 @@ ul.breadcrumb li a:hover {
     line-height: 1.5;
     font-weight: 500;
     color: #30333a;
-    font-family: rv-font2;
+    font-family: tgnp-font2;
     width: calc(100% - 90px);
     display: block;
     display: -webkit-box;
@@ -3938,7 +3938,7 @@ ul.breadcrumb li a:hover {
 
 .projectCard .info-container .project-name {
     display: block;
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-size: 16px;
     font-weight: 500;
     color: #fff;
@@ -4607,14 +4607,14 @@ ul.breadcrumb li a:hover {
 
 .toast-message {
     padding: 0 10px;
-    font-family: rv-font1;
+    font-family: tgnp-font;
     font-weight: 400;
     font-size: 16px
 }
 
 .toast-message > a {
     color: #00a6bd !important;
-    font-family: rv-font1
+    font-family: tgnp-font
 }
 
 .toast-message > a:hover {
@@ -6185,7 +6185,7 @@ label {
 }
 
 .font-tiempos {
-    font-family: rv-font2, Arial, Helvetica, sans-serif !important;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif !important;
     font-weight: 500 !important
 }
 
@@ -6576,7 +6576,7 @@ label {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-size: 16px;
     color: #30333a;
     font-weight: 400;
@@ -7440,7 +7440,7 @@ label {
     overflow: hidden;
     text-overflow: ellipsis;
     padding-right: 18px;
-    font-family: rv-font2;
+    font-family: tgnp-font2;
     font-size: 14px;
     line-height: 1.5;
     font-weight: 500
@@ -7612,7 +7612,7 @@ label {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-size: 18px;
     color: #30333a;
     font-weight: 500;
@@ -7835,7 +7835,7 @@ label {
 
     .result-body .row:not(.grid) .listView.box .info-container .listing-name {
         display: block;
-        font-family: rv-font2;
+        font-family: tgnp-font2;
         font-size: 16px;
         color: #30333a;
         font-weight: 400;
@@ -7999,7 +7999,7 @@ label {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-        font-family: rv-font1;
+        font-family: tgnp-font;
         font-size: 1rem;
         color: #30333a;
         font-weight: 400;
@@ -8069,7 +8069,7 @@ label {
         text-overflow: ellipsis;
         font-size: 1.375rem;
         font-weight: 500;
-        font-family: rv-font2;
+        font-family: tgnp-font2;
         color: #30333a;
         text-align: left
     }
@@ -8151,7 +8151,7 @@ label {
     .result-body .row:not(.grid) .projectCard-list.box .info-container .project-name {
         color: #30333a;
         display: block;
-        font-family: rv-font2, Arial, Helvetica, sans-serif;
+        font-family: tgnp-font2, Arial, Helvetica, sans-serif;
         font-size: 16px;
         font-weight: 500;
         white-space: nowrap;
@@ -8443,7 +8443,7 @@ label {
 
     .result-body .row:not(.grid) .projectCard-list.box .info-container .project-name {
         display: block;
-        font-family: rv-font2, Arial, Helvetica, sans-serif;
+        font-family: tgnp-font2, Arial, Helvetica, sans-serif;
         font-size: 16px;
         font-weight: 500;
         color: #fff;
@@ -8646,7 +8646,7 @@ label {
     height: unset;
     margin-top: 6px;
     padding: 0;
-    font-family: rv-font1, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font, Arial, Helvetica, sans-serif;
     font-size: 14px;
     color: #30333a;
     font-weight: 400;
@@ -8755,7 +8755,7 @@ label {
     font-weight: 500;
     text-align: left;
     color: #30333a;
-    font-family: rv-font2
+    font-family: tgnp-font2
 }
 
 .result-body .row.grid .listView.box .info-container .group-grid__view .listing-price span {
@@ -8849,7 +8849,7 @@ label {
 
 .result-body .row.grid .projectCard-list .info-container .project-name {
     display: block;
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     font-weight: 500;
@@ -9484,7 +9484,7 @@ label {
 }
 
 .search-relative .inner .main-key a {
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-size: 24px;
     font-weight: 400
 }
@@ -9501,7 +9501,7 @@ label {
 }
 
 .search-relative .inner .row .description * {
-    font-family: rv-font1 !important;
+    font-family: tgnp-font !important;
     font-size: 14px !important
 }
 
@@ -10055,7 +10055,7 @@ section.exclusive article.featured .cover img {
 }
 
 section.exclusive article.featured header h2 {
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-size: 1.7em;
     color: #444c59;
     font-weight: 500;
@@ -10730,7 +10730,7 @@ div > img {
 }
 
 .heading-02 {
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     padding: 40px 0 20px;
     font-size: 24px;
     font-weight: 400;
@@ -11017,14 +11017,14 @@ div > img {
     -ms-flex-align: center;
     align-items: center;
     height: 60px;
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-size: 20px;
     line-height: 1.5;
     font-weight: 500
 }
 
 .popup-save-search .popup-header h2 span {
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-size: 20px;
     line-height: 1.5;
     font-weight: 500;
@@ -11573,7 +11573,7 @@ div > img {
 }
 
 .popup-project--page__search .popup-title, .popup-property--page__search .popup-title {
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-weight: 500
 }
 
@@ -11586,7 +11586,7 @@ div > img {
 }
 
 .popup-project--page__search .popup-dialog-large .popup-left-title a, .popup-property--page__search .popup-dialog-large .popup-left-title a {
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-weight: 500
 }
 
@@ -11651,12 +11651,12 @@ div > img {
 }
 
 .popup-success--page__search .popup-title {
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-weight: 500
 }
 
 .popup-success--page__search .popup-dialog-large .popup-left-title a {
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-weight: 500
 }
 
@@ -11702,7 +11702,7 @@ div > img {
 }
 
 .popup-success--page__search .popup-success-content h5 {
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
+    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-size: 18px;
     font-weight: 500;
     line-height: 28px
@@ -12897,7 +12897,7 @@ div > img {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-family: rv-font2;
+    font-family: tgnp-font2;
     font-size: 16px;
     line-height: 1.5;
     font-weight: 500;

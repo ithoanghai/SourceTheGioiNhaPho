@@ -81,8 +81,8 @@
 
 <!-- Scripts -->
 {% block scripts %}
-  <script src="{% static "js/vue-2.16.12.js" %}"></script>
-  <script src="{% static 'js/vue-resource-1.5.2' %}"></script>
+  <script src="{% static "js/vue-2.16.12.min.js" %}"></script>
+  <script src="{% static 'js/vue-resource-1.5.2.min.js' %}"></script>
   <script>
       Vue.directive('click-outside', {
           bind: function (el, binding, vnode) {
@@ -124,22 +124,40 @@
    </script>
 
 
-<!-- Messenger Plugin chat Code -->
 <div id="fb-root"></div>
 <script>
+    function statusChangeCallback(response) {
+        console.log(response);
+        console.log('callback fb login')
+    }
+
+    function checkLoginState() {
+        FB.getLoginStatus(function (response) {
+            statusChangeCallback(response);
+        });
+    }
+
     window.fbAsyncInit = function () {
         FB.init({
+            appId: '486655809059854',
+            cookie: true,
             xfbml: true,
             version: 'v10.0'
+        });
+        FB.AppEvents.logPageView();
+        FB.getLoginStatus(function (response) {
+            statusChangeCallback(response);
         });
     };
 
     (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
+        if (d.getElementById(id)) {
+            return;
+        }
         js = d.createElement(s);
         js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 </script>
