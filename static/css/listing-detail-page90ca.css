@@ -17469,3 +17469,26 @@ ul.exclusive li.featured header .heading {
         padding: 5px 10px 3px !important
     }
 }
+
+#listing-video {
+    width: 100%;
+    height: 100%;
+}
+
+#listing-video .vjs-big-play-button {
+    top: 48%;
+    left: 48%;
+}
+
+@media screen and (min-width: 481px) {
+    .post-share-btn-group {
+        position: fixed;
+        top: auto;
+        bottom: 20%;
+        margin-bottom: -90px;
+    }
+}
+
+#msform a.butt-primary[disabled] {
+    opacity: 0.4
+}
