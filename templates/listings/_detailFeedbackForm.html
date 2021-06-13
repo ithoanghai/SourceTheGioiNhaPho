@@ -1,0 +1,191 @@
+{% load static %}
+
+<div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
+  <div class="popup-feedback-fixed">
+    <div class="popup-body-fb">
+      <div v-show="state == 'composing'" class="popup-contain">
+        <div class="visible-pc">
+          <form id="msform" onsubmit="return false">
+            <fieldset style="display: block">
+              <h2 class="popup-title-w-back height-title popup-font-tiempos" id="title-head">Phản
+                hồi của bạn về Thegioinhaphovietnam.com.vn (<span v-text="step"></span>/3)</h2>
+              <button @click="hideModal()" class="popup-close-btn"><i
+                class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+              <div v-show="step == 1" class="contain" id="step-form-1">
+                <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người
+                  khác?
+                </div>
+                <div class="choose-number">
+                  <ul>
+                    <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
+                        @mouseleave="onMouseLeaveRate(i)" @click="selectStep1Rate(i)">
+                      <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                         v-text="i"></a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="emotion">
+                  <img :src="'{% static 'images/' %}' + step1Icon" alt="">
+                  <p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
+                </div>
+              </div>
+              <div v-show="step == 2" class="contain" id="step-form-2">
+                <div class="intro">Bạn có thấy TGNP dễ sử dụng không?</div>
+                <div class="row row-fb pd-t-39 pd-bt-68 center-item">
+                  <button :class="{active : step2.rate == 'hard'}"
+                          @click="selectStep2Rate('hard')"
+                          class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                  </button>
+                  <button :class="{active : step2.rate == 'normal'}"
+                          @click="selectStep2Rate('normal')"
+                          class="large-butt-grey btn-use pd-use-btn mgr-r-20">Bình thường
+                  </button>
+                  <button :class="{active : step2.rate == 'easy'}"
+                          @click="selectStep2Rate('easy')" class="large-butt-grey btn-use">
+                    Dễ sử dụng
+                  </button>
+                </div>
+              </div>
+              <div v-show="step == 3" class="contain">
+                <div class="intro">Bạn muốn TGNP cần cải thiện thêm về điều gì?</div>
+                <div class="checkbox-option">
+                  <div class="checkbox-pc">
+                    <div class="row-fb">
+                      <div>
+                        <label class="container-cb">Giao diện đẹp hơn
+                          <input type="checkbox" v-model="step3.improve.ui">
+                          <span class="checkmark"></span>
+                        </label>
+                        <label class="container-cb">Nội dung chính xác hơn
+                          <input type="checkbox" v-model="step3.improve.content">
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div>
+                        <label class="container-cb">Thêm tính năng
+                          <input type="checkbox" v-model="step3.improve.feature">
+                          <span class="checkmark"></span>
+                        </label>
+                        <label class="container-cb">Khác (vui lòng nhập)
+                          <input type="checkbox" v-model="step3.improve.other"
+                                 @change="onSelectOtherMsg('')">
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="share-rv">
+                    <p style="font-size: initial">Ý kiến khác</p>
+                    <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác"
+                              ref="msg"
+                              :disabled="!step3.improve.other"></textarea>
+                  </div>
+                </div>
+              </div>
+              <a @click="gotoStep(step - 1)" v-show="step > 1"
+                 class="butt-primary butt-transparent prev" href="javascript:void(0)"
+                 id="prev">Trước</a>
+              <a @click="onClickNext()" v-show="step < 3" :disabled="!canNext"
+                 class="butt-primary btn-grey next" href="javascript:void(0)" id="next">Tiếp</a>
+              <button @click="onClickSend" v-show="step == 3" class="butt-primary btn-grey">
+                <span v-show="!isSending" class="send">Gửi</span>
+                <span v-show="isSending">Đang gửi...</span>
+              </button>
+            </fieldset>
+          </form>
+        </div>
+        <div class="visible-sm">
+          <div class="header-sm">
+            <button @click="hideModal()" class="popup-close-btn-sm"><i
+              class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+            <h4>Phản hồi của bạn về thegioinhaphovietnam.com.vn</h4>
+          </div>
+          <div class="content">
+            <div class="intro-sm">
+              <p>Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?</p>
+              <div class="choose-number">
+                <ul>
+                  <li v-for="i in 10" @click="selectStep1Rate(i)">
+                    <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                       v-text="i"></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="use-easy">
+              <p>Bạn thấy Thế giới Nhà Phố có dễ sử dụng không?</p>
+              <div class="row pt-15 center-item">
+                <button :class="{active : step2.rate == 'hard'}"
+                        @click="selectStep2Rate('hard')"
+                        class="large-butt-grey btn-use mgr-r-20">Khó sử dụng
+                </button>
+                <button :class="{active : step2.rate == 'normal'}"
+                        @click="selectStep2Rate('normal')"
+                        class="large-butt-grey btn-use pd-use-btn">Bình thường
+                </button>
+                <button :class="{active : step2.rate == 'easy'}"
+                        @click="selectStep2Rate('easy')"
+                        class="large-butt-grey btn-use">Dễ sử dụng
+                </button>
+              </div>
+            </div>
+            <div class="improve">
+              <p>Bạn muốn Thế giới Nhà Phố .com.vn cần cải thiện thêm về điều gì?</p>
+              <div class="checkbox-sm">
+                <label class="container-cb">Giao diện đẹp hơn
+                  <input type="checkbox" v-model="step3.improve.ui">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container-cb">Nội dung chính xác hơn
+                  <input type="checkbox" v-model="step3.improve.content">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container-cb">Thêm tính năng
+                  <input type="checkbox" v-model="step3.improve.feature">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container-cb">Khác (vui lòng nhập)
+                  <input type="checkbox" v-model="step3.improve.other"
+                         @change="onSelectOtherMsg('2')">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+            <div class="note">
+              <p>Ý kiến khác</p>
+              <textarea v-model="step3.otherMsg" placeholder="Nhập ý kiến khác" ref="msg2"
+                        :disabled="!step3.improve.other"></textarea>
+            </div>
+          </div>
+          <div class="btn">
+            <button @click="onClickSend" class="butt-primary btn-red">Gửi phản hồi</button>
+          </div>
+        </div>
+      </div>
+      <div v-show="state == 'finished'" class="popup-fb-success">
+        <div class="popup-header">
+          <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về
+            thegioinhaphovietnam.com.vn</h2>
+          <button @click="hideModal()" class="popup-close-btn"><i
+            class="zmdi zmdi-hc-2x zmdi-close"></i>
+          </button>
+        </div>
+        <div class="popup-contain">
+          <img class="img-success" src="{% static 'images/icon-success.svg' %}">
+          <div class="send-success">
+            <h3>Đã gửi thành công!</h3>
+            <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp Thế giới Nhà Phố từng
+              bước nâng
+              cao
+              chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
+              <strong>0916 286 256</strong></p>
+          </div>
+        </div>
+        <div class="popup-footer">
+          <a @click="hideModal()" class="butt-primary butt-red btn-red"
+             href="javascript:void(0)">Đóng</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
