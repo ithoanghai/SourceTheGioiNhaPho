@@ -5,8 +5,10 @@ from django.http import HttpRequest, JsonResponse
 
 from FunctionModule.listings.import_csv import handle_import
 from .forms import ListingAdminForm, ImportListingForm
-from .models import Listing, ListingImage, ListingVideo
+from .models import Listing, ListingImage, ListingVideo, ContractImage
 
+class ContractPhotoAdmin(admin.TabularInline):
+    model = ContractImage
 
 class ListingPhotoAdmin(admin.TabularInline):
     model = ListingImage
@@ -24,7 +26,7 @@ class ListingAdmin(admin.ModelAdmin):
     list_editable = ('is_published', 'code')
     search_fields = ('title', 'code', 'address', 'price')
     list_per_page = 25
-    inlines = [ListingPhotoAdmin, ListingVideoAdmin]
+    inlines = [ListingPhotoAdmin, ListingVideoAdmin,ContractPhotoAdmin]
     form = ListingAdminForm
 
     class Media:

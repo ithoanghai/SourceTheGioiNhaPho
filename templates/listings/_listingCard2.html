@@ -36,19 +36,16 @@
     <div class="flex align-items-center justify-content-space-between">
       <ul class="listing-info">
          <li>
-          <i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b>
-        </li>
-         <li>
           <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2" %}
         </li>
-        {% if listing.bedrooms %}
+        {% if listing.floors %}
+          <li><i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}
+          </li> {% endif %}
+         {% if listing.bedrooms %}
           <li>
             <i class="zmdi zmdi-airline-seat-individual-suite"></i>{{ listing.bedrooms }} {% trans "ngủ" %}
           </li>
         {% endif %}
-        {% if listing.floors %}
-          <li><i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}
-          </li> {% endif %}
         {% if listing.bathrooms %}
           <li><i class="fa fa-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %}
           </li> {% endif %}
@@ -62,7 +59,10 @@
     <div class="listing-address">
 {% comment %}     <h4><a href="{% url 'listing' listing.id %}">Xem Chi Tiết</a>
       </h4>{% endcomment %}
-      {% if listing.urban_area %}
+        <h4>
+          <i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b>
+       </h4>
+        {% if listing.urban_area %}
       <h4>
         <a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}"
            title="">{{ listing.urban_area }}</a>
