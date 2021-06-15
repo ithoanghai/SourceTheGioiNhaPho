@@ -44,7 +44,7 @@
     </div>
     <div class="top-search" id="topSearchForm">
       <a href="#"></a>
-      <form>
+      <form action="{% url 'listing_search' %}">
         <div tabindex="0" class="search-type"><span>Mua nhà</span>
           <ul class="hide">
             <li>
@@ -60,7 +60,7 @@
           Mua •
         </div>
         <input placeholder="Nhập địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
-               spellcheck="false" dir="auto">
+               spellcheck="false" dir="auto" name="keywords">
       </form>
     </div>
   </div>

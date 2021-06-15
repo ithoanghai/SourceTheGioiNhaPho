@@ -19,23 +19,23 @@ def get_client_ip(request):
     return ip
 
 
-def index(request):
-    listings_for_sale = Listing.objects.order_by('-list_date').filter(is_published=True,
-                                                                      transaction_type=TransactionType.SELL)[
-                        :3]
-    listings_for_rent = Listing.objects.order_by('-list_date').filter(is_published=True,
-                                                                      transaction_type=TransactionType.FOR_RENT)[
-                        :3]
-    listings_project = Listing.objects.order_by('-list_date').filter(is_published=True,
-                                                                     transaction_type=TransactionType.PROJECT)[
-                       :3]
-    list_distric_HN = district_data.__getitem__("01")
+def home_view(request):
+    listings_for_sale = (Listing.objects
+                             .order_by('-list_date')
+                             .filter(is_published=True, transaction_type=TransactionType.SELL)[:3])
+    listings_for_rent = (Listing.objects
+                             .order_by('-list_date')
+                             .filter(is_published=True, transaction_type=TransactionType.FOR_RENT)[:3])
+    listings_project = (Listing.objects
+                            .order_by('-list_date')
+                            .filter(is_published=True, transaction_type=TransactionType.PROJECT)[:3])
+    list_district_hn = district_data.get("01")
     context = {
         'listings_for_sale': listings_for_sale,
         'listings_for_rent': listings_for_rent,
         'listings_project': listings_project,
         'state_data': state_data,
-        'district_data': list_distric_HN,
+        'district_data': list_district_hn,
         'bedroom_choices': bedroom_choices,
         'price_choices': price_choices,
     }

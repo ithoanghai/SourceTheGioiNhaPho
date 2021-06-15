@@ -5,7 +5,7 @@ from . import views
 
 urlpatterns = [
     # Url for FrontEnd
-    path('', views.index, name='index'),
+    path('', views.home_view, name='index'),
     path('about', views.about, name='about'),
     # Matches any html file
     # re_path('^.*\.*', views.pages, name='pages'),
