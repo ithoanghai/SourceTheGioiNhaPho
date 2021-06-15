@@ -1,7 +1,5 @@
 from django.conf import settings
-from django.contrib import messages
 from django.core.paginator import Paginator
-from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils.encoding import force_text
@@ -12,6 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .filters import ListingFilter
+from .search import prepare_listing_queryset
 from .serializers import *
 from ..cadastral.constants import state_data, district_data
 
@@ -68,19 +67,35 @@ def detail(request):
 
 def search(request):
     hn_district = district_data['01']
+    queryset_list = prepare_listing_queryset(request.GET)
+    try:
+        page = int(request.GET.get('page', 1))
+    except ValueError:
+        page = 1
+
+    limit = request.GET.get('limit', 10)
+    offset = (page - 1) * limit
+    paginator = Paginator(queryset_list, limit)
+    total_pages = paginator.num_pages
+    next_5_pages = page + 5 if page + 5 < total_pages else total_pages
+    min_page = page - 1 if page - 1 > 0 else page
+
+    try:
+        listings = paginator.get_page(page)
+    except Exception:
+        listings = paginator.get_page(1)
 
     context = {
-        # 'listings': queryset_list[offset: limit + offset],
-        'listings': [],
+        'listings': listings,
         'state_data': state_data,
         'districts': hn_district,
         'environment': settings.ENVIRONMENT,
-        'pagination': {
-            'current_page': 1,
-            'next_5_pages': range(1, 5),
-            'limit': 10,
-            'offset': 0,
-            'total': 0
+        "pagination": {
+            'current_page': page,
+            'next_5_pages': list(range(min_page, next_5_pages)),
+            'limit': limit,
+            'offset': offset,
+            'total': queryset_list.count()
         }
     }
 

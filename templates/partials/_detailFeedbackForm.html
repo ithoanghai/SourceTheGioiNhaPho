@@ -1,5 +1,4 @@
 {% load static %}
-
 <div v-show="isShowModal" class="popup-feedback" id="feedback-modal" v-cloak>
   <div class="popup-feedback-fixed">
     <div class="popup-body-fb">
@@ -12,9 +11,7 @@
               <button @click="hideModal()" class="popup-close-btn"><i
                 class="zmdi zmdi-hc-2x zmdi-close"></i></button>
               <div v-show="step == 1" class="contain" id="step-form-1">
-                <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người
-                  khác?
-                </div>
+                <div class="intro">Bạn có sẵn sàng giới thiệu Thế giới Nhà Phố cho mấy người khác?</div>
                 <div class="choose-number">
                   <ul>
                     <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
@@ -166,8 +163,7 @@
         <div class="popup-header">
           <h2 class="popup-title-w-back height-title popup-font-tiempos">Phản hồi của bạn về
             thegioinhaphovietnam.com.vn</h2>
-          <button @click="hideModal()" class="popup-close-btn"><i
-            class="zmdi zmdi-hc-2x zmdi-close"></i>
+          <button @click="hideModal()" class="popup-close-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i>
           </button>
         </div>
         <div class="popup-contain">
@@ -175,15 +171,12 @@
           <div class="send-success">
             <h3>Đã gửi thành công!</h3>
             <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp Thế giới Nhà Phố từng
-              bước nâng
-              cao
-              chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
+              bước nâng cao chất lượng sản phẩm. Mọi thắc mắc nếu có xin vui lòng liên hệ hotline (24/7):
               <strong>0916 286 256</strong></p>
           </div>
         </div>
         <div class="popup-footer">
-          <a @click="hideModal()" class="butt-primary butt-red btn-red"
-             href="javascript:void(0)">Đóng</a>
+          <a @click="hideModal()" class="butt-primary butt-red btn-red" href="javascript:void(0)">Đóng</a>
         </div>
       </div>
     </div>
