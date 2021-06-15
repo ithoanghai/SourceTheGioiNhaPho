@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 from FunctionModule.cadastral.constants import state_data
 
 bedroom_choices = {
+    '0': 0,
     '1': 1,
     '2': 2,
     '3': 3,
@@ -17,6 +18,7 @@ bedroom_choices = {
 }
 
 price_choices = {
+    '1000000000': '1 tỷ',
     '2000000000': '2 tỷ',
     '3000000000': '3 tỷ',
     '4000000000': '4 tỷ',
@@ -69,15 +71,32 @@ class RegistrationType(models.TextChoices):
 
 
 class RoadType(models.TextChoices):
-    ALLEY_CAR = 'alley_car', _("Ngõ ô tô")
-    ALLEY_BIKE = 'alley_bike', _("Ngõ xe máy")
-    ALLEY_TRIBIKE = 'alley_tribike', _("Ngõ Ba gác")
-    STREET_SURFACE = 'street_surface', _("Mặt tiền phố")
+    ALLEY_CAR_2 = 'alley_car_2', _("Ô tô tránh")
+    ALLEY_CAR_TRIBIKE = 'alley_car_tribike', _("Ô tô tránh Ba gác")
+    ALLEY_CAR = 'alley_car', _("Chỉ 1 Ô tô")
+    ALLEY_TRIBIKE = 'alley_tribike', _("Chỉ 1 Ba gác")
+    ALLEY_TRIBIKE_BIKE = 'alley_tribike_bike', _("Ba gác tránh Xe máy")
+    ALLEY_BIKE = 'alley_bike', _("Xe máy tránh nhau")
 
+class Condition(models.TextChoices):
+    NEW = 'new', _("Mới")
+    OLD = 'old', _("Cũ")
+    NONE = 'none', _("Chưa xác định")
 
 class Status(models.TextChoices):
-    NEW = 'new', _("Mới")
     SELLING = 'selling', _("Còn bán")
-    STOP_SELLING = 'stop_selling', _("Dừng bán")
-    SOLD = 'sold', _("Đã bán")
     SALE = 'sale', _("Hạ chào")
+    SOLD = 'sold', _("Đã bán")
+    STOP_SELLING = 'stop_selling', _("Dừng bán")
+
+class Direction(models.TextChoices):
+    none = 'none', _("Chưa xác định")
+    east = 'east', _("Đông")
+    south_east = 'south-east', _("Đông - Nam")
+    south = 'south', _("Nam")
+    south_west = 'south-west', _("Tây - Nam")
+    west = 'west', _("Tây")
+    north_west = 'north-west', _("Tây - Bắc")
+    north = 'north', _("Bắc")
+    north_east = 'north-east', _("Đông - Bắc")
+
