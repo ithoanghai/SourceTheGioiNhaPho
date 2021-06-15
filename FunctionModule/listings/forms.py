@@ -14,9 +14,8 @@ class ListingAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-     #   self.fields['district'] = forms.ChoiceField(choices=district_default_choices, label="Quận/Huyện",
-      #                                              required=False)
-      #  self.fields['ward'] = EmptyChoiceField(empty_label="Chọn Quận/Huyện trước", required=False)
+        self.fields['district'] = forms.ChoiceField(choices=district_default_choices, label="Quận/Huyện", required=True)
+        self.fields['ward'] = EmptyChoiceField(empty_label="Chọn Quận/Huyện trước", required=False)
 
 
 class ImportListingForm(forms.Form):

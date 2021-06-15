@@ -9,6 +9,7 @@ from .models import Listing, ListingImage, ListingVideo, ContractImage
 
 class ContractPhotoAdmin(admin.TabularInline):
     model = ContractImage
+    verbose_name = "ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"
 
 class ListingPhotoAdmin(admin.TabularInline):
     model = ListingImage

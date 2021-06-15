@@ -113,7 +113,7 @@ WSGI_APPLICATION = 'TownhouseWorldRealestate.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.getenv('DB_NAME', 'real_estate'),
+        'NAME': os.getenv('DB_NAME', 'tgnp'),
         'USER': os.getenv('DB_USER', 'postgres'),
         'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
         'HOST': os.getenv('DB_HOST', 'db'),

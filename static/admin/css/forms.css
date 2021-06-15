@@ -282,7 +282,6 @@ body.popup .submit-row {
     background: var(--delete-button-bg);
     border-radius: 4px;
     padding: 10px 15px;
-    height: 15px;
     line-height: 15px;
     color: var(--button-fg);
 }
@@ -451,7 +450,6 @@ body.popup .submit-row {
 .inline-group .tabular td.original p {
     position: absolute;
     left: 0;
-    height: 1.1em;
     padding: 2px 9px;
     overflow: hidden;
     font-size: 9px;

@@ -22,8 +22,9 @@ def get_image_path(instance, filename: str):
 
 class Listing(models.Model):
     realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, verbose_name=_("Đầu chủ"))
-    transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,
-                                        default=TransactionType.SELL,verbose_name=_("Hình thức giao dịch"))
+    transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,  default=TransactionType.SELL,verbose_name=_("Hình thức giao dịch"))
+    house_type = models.CharField(max_length=20, choices=HouseType.choices, default=HouseType.TOWN_HOUSE, verbose_name=_("Loại nhà"))
+
     code = models.CharField(max_length=80, verbose_name=_("Mã BĐS"), help_text=_(
         "Quy tắc: Viết tắt chữ cái đầu Loại BĐS + 2 chữ số Năm + Tháng + Chữ cái đầu tên Đầu chủ + Số BĐS của ĐC"),unique=True)
     title = models.CharField(max_length=200, verbose_name=_("Tiêu đề đăng"),
@@ -36,7 +37,6 @@ class Listing(models.Model):
     district = models.CharField(max_length=50, verbose_name=_("Quận/Huyện"))
     ward = models.CharField(max_length=50, verbose_name=_("Phường/Xã"), blank=True, null=True)
 
-    house_type = models.CharField(max_length=20, choices=HouseType.choices, default=HouseType.TOWN_HOUSE,verbose_name=_("Loại nhà"))
     condition = models.CharField(max_length=20, choices=Condition.choices, default=Condition.OLD,verbose_name=_("Tình trạng BĐS"), null=True)
     year = models.CharField(max_length=50, verbose_name=_("Năm xây dựng/Còn lại"), help_text=_("Điền năm xây dựng/Tỷ lệ % sử dụng còn lại"))
     road_type = models.CharField(max_length=20, choices=RoadType.choices, default=RoadType.ALLEY_CAR,
@@ -111,19 +111,19 @@ class Listing(models.Model):
     bonus_rate = models.DecimalField(max_digits=2, decimal_places=1, verbose_name=_("Tỷ lệ trích thưởng (%)"))
     reward = models.DecimalField(max_digits=5, decimal_places=0, verbose_name=_("Số tiền trích thưởng (triệu)"))
 
-    reward_person = models.TextField(blank=True, verbose_name=_("Tên chủ sở hữu BĐS"), help_text="Tên người chủ sở hữu BĐS")
-    reward_person_mobile = models.TextField(blank=True, verbose_name=_("Số ĐT chủ sở hữu BĐS"),help_text="Số ĐT chủ sở hữu BĐS")
+    reward_person = models.CharField(max_length=50, blank=True, verbose_name=_("Tên chủ sở hữu BĐS"), help_text="Tên người chủ sở hữu BĐS")
+    reward_person_mobile = models.CharField(max_length=50, blank=True, verbose_name=_("Số ĐT chủ sở hữu BĐS"),help_text="Số ĐT chủ sở hữu BĐS")
 
-    extra_data = models.TextField(verbose_name=_("Ghi chú"), null=True, blank=True, default="Chủ nhà hiểu chuyện, tôn trọng môi giới, thiện chí hợp tác,..",help_text="Ghi các thông tin khác quan trọng về chủ nhà, các yếu tố khác liên quan...")
+    extra_data = models.TextField(max_length=250, verbose_name=_("Ghi chú"), null=True, blank=True, default="Chủ nhà hiểu chuyện, tôn trọng môi giới, thiện chí hợp tác,..",help_text="Ghi các thông tin khác quan trọng về chủ nhà, các yếu tố khác liên quan...")
 
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING, verbose_name=_("Trạng thái giao dịch"))
-    is_verified = models.BooleanField(default=False, verbose_name=_("Đã xác minh thông tin nhà"))
-    is_exclusive = models.BooleanField(default=False, verbose_name=_("Nhà Phố độc quyền"))
-    is_published = models.BooleanField(default=True, verbose_name=_("Được phép đăng"))
+    is_verified = models.BooleanField(default=False, verbose_name=_("ĐÃ XÁC MINH THÔNG TIN"))
+    is_exclusive = models.BooleanField(default=False, verbose_name=_("THẾ GIỚI NHÀ PHỐ ĐỘC QUYỀN"))
+    is_published = models.BooleanField(default=True, verbose_name=_("CHO PHÉP ĐĂNG"))
     list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày đăng"))
 
 class ListingImage(models.Model):
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("ẢNH CHỤP BĐS"))
     sort = models.IntegerField(default=0, verbose_name=_("Thứ tự hiện"))
     description = models.CharField(max_length=255, blank=True, default="", verbose_name=_("Thông tin"))
     photo = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Ảnh"))
@@ -137,7 +137,7 @@ class ListingImage(models.Model):
 
 
 class ListingVideo(models.Model):
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("VIDEO BĐS"))
     video = EmbedVideoField()
 
 
@@ -159,7 +159,7 @@ class ListingSerializer(serializers.ModelSerializer):
             return ''
 
 class ContractImage(models.Model):
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"))
     sort = models.IntegerField(default=0, verbose_name=_("Thứ tự hiện"))
     description = models.CharField(max_length=255, blank=True, default="", verbose_name=_("Thông tin"))
     photo = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Ảnh"))
