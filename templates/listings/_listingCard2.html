@@ -42,14 +42,14 @@
         <li>
           <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2" %}
         </li>
-        {% if listing.bedrooms %}
+        {% if listing.floors %}
+          <li><i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}
+          </li> {% endif %}
+         {% if listing.bedrooms %}
           <li>
             <i class="zmdi zmdi-airline-seat-individual-suite"></i>{{ listing.bedrooms }} {% trans "ngủ" %}
           </li>
         {% endif %}
-        {% if listing.floors %}
-          <li><i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}
-          </li> {% endif %}
         {% if listing.bathrooms %}
           <li><i class="fa fa-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %}
           </li> {% endif %}

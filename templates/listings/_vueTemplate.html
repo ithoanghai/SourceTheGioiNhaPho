@@ -4,7 +4,7 @@
   <div id="propertyList" class="row" v-bind:class="{grid: isViewGrid}">
     <div v-for="listing in listings" :key="listing.id" class="col property-itemz" :id="`property-tgnp-${listing.id}`">
       <article class="box listView">
-        <div class="cover-image realty-search pic-realty-search">
+        <div class="cover-image realty-search pic-realty-search" style="height: 240px">
           <img :src="listing.main_photo || '{% static 'img/default.png' %}'" v-bind:alt="listing.title"
                onerror="this.src='{% static "img/default.png" %}'"/>
           <a class="view-realty-search transition" :href="getListingDetailURL(listing.id)" target="_blank"
@@ -35,15 +35,14 @@
         <div class="info-container">
           <div class="group-grid__view">
             <ul class="listing-info">
-              <li><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></li>
               <li>
                 <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}
               </li>
-              <li v-if="listing.bedrooms && listing.bedrooms > 0">
-                <i class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}
-              </li>
               <li v-if="listing.floors && listing.floors > 0">
                 <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
+              </li>
+              <li v-if="listing.bedrooms && listing.bedrooms > 0">
+                <i class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}
               </li>
               <li v-if="listing.bathrooms && listing.bathrooms > 0">
                 <i class="fa fa-bath"></i>[[listing.bathrooms]] {% trans "tắm" %}
@@ -54,6 +53,7 @@
             <a class="listing-name" :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.title]]</a>
           </h3>
           <div class="listing-address">
+            <h4><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></h4>
             <h4 v-if="listing.urban_area">
               <a :href="`/listings/search?keywords=${listing.urban_area}`" title="">[[listing.urban_area]]</a>
             </h4>
@@ -68,10 +68,10 @@
           </div>
           <ul class="listing-info">
             <li><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]]{% trans "m2" %}</li>
-            <li v-if="listing.bedrooms > 0"><i
-              class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}</li>
             <li v-if="listings.floors && listing.floors > 0"><i class="fa fa-h-square"></i>
               [[listing.floors]] {% trans "tầng" %}</li>
+           <li v-if="listing.bedrooms > 0"><i
+              class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}</li>
             <li v-if="listing.bathrooms > 0"><i
               class="fa fa-bath"></i>[[listing.bathrooms]] {% trans "tắm" %} </li>
           </ul>
@@ -157,14 +157,19 @@
              :title="listing.title">
             <h2 class="title"> [[listing.title]]</h2>
           </a>
-          <div class="address">[[listing.street]]</div>
           <div>
             <ul>
-              <li v-if="listing.bedrooms > 0" title="Phòng ngủ">
-                <span class="zmdi zmdi-airline-seat-individual-suite"></span> [[listing.bedrooms]]
-              </li>
               <li title="Diện tích">
                 <span class="zmdi zmdi-photo-size-select-small"></span> [[listing.area]]{% trans "m2" %}
+              </li>
+                <li v-if="listing.floors > 1" title="Số tầng">
+                <span class="fas fa-h-square"></span> [[listing.floors]]
+              </li>
+                <li v-if="listing.bathrooms > 1" title="Số tầng">
+                <span class="fas fa-bath"></span> [[listing.bathrooms]]
+              </li>
+                <li v-if="listing.bedrooms > 0" title="Phòng ngủ">
+                <span class="zmdi zmdi-airline-seat-individual-suite"></span> [[listing.bedrooms]]
               </li>
             </ul>
             <div class="price-marker">[[listing.price]] {% trans "tỷ" %}</div>

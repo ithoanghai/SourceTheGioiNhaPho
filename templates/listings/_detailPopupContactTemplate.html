@@ -4,7 +4,7 @@
       <div class="popup-content">
         <button class="popup-close" @click.prevent="closePopup"><i class="zmdi zmdi-close"></i></button>
         <div class="popup-left">
-          <div class="popup-left-cover"><a href="javascript:void(0)">
+          <div class="popup-left-cover" style="padding-left: 5px; padding-top: 5px "><a href="javascript:void(0)">
               {% with listing.main_photo as photo %}
                     <img class="card-img-top" src="{{ photo.url }}"  alt="TGNP">
                 {% endwith %}
@@ -14,7 +14,7 @@
             href="javascript:void(0)">{{ listing.title }}</a></h3>
             <div class="popup-left-address"></div>
             <ul class="popup-left-info">
-              <li><p>Mã nhà đất:</p> <strong>{{ listing.code }}</strong></li>
+              <li> <i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b>></li>
                 {% if listing.floors %}
                 <li><p>Số tầng:</p> <strong>{{ listing.floors }}</strong></li>
               {% endif %}
