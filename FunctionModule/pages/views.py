@@ -134,21 +134,13 @@ def admin_login(request):
     return render(request, 'admin/login.html')
 
 
-def layout1(request):
+def layout(request, layout_id):
     app_list = site.get_app_list(request)
     context = {
+        'layout_id': layout_id,
         'available_apps': app_list
     }
-    return render(request, 'admin/includes/index-static.html', context)
-
-
-def layout2(request):
-    app_list = site.get_app_list(request)
-    context = {
-        'available_apps': app_list
-    }
-    return render(request, 'admin/includes/index-light.html', context)
-
+    return render(request, 'admin/index.html', context)
 
 def error403(request):
     context = {

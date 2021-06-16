@@ -1,22 +1,4 @@
 {% load static i18n %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-
-    <title> Quản trị hệ thống Thế giới Nhà phố {% block title %}{% endblock %}</title>
-
-    <link href="/static/admin/css/styles.css" rel="stylesheet"/>
-    <link href="{% static 'admin/css/admin-dashboard.css' %}" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-            crossorigin="anonymous"></script>
-
-</head>
-<body>
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -84,14 +66,3 @@
 
     </div>
 </div>
-
-<!-- Specific JS goes HERE -->
-{% block javascripts %}
-    <!-- Scripts for Admin -->
-    {% include "admin/includes/scripts.html" %}
- {% endblock javascripts %}
-
-
-</body>
-</html>
-    
