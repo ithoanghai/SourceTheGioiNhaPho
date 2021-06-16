@@ -37,7 +37,8 @@
             </table>
         </div>
     {% endfor %}
-    <div style="text-transform: uppercase; font-size: 12px; padding: 5px 5px 5px 5px">
+{% comment %}    CÁC TÍNH NĂNG NÀY SỬA ĐỔI, PHÁT TRIỂN SAU{% endcomment %}
+{% comment %}    <div style="text-transform: uppercase; font-size: 12px; padding: 5px 5px 5px 5px">
         {% translate 'Cấu hình giao diện' %}</div>
     <div style="font-size: 14px; width: 100%">
         <a style="display: flex; position: relative;" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts"
@@ -50,8 +51,8 @@
         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
             <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" href="{% url 'admin:index' %}">{% translate 'Mặc định' %}</a>
-                <a class="nav-link" href="{% url 'layout1' %}">{% translate 'Giao diện 1' %}</a>
-                <a class="nav-link" href="{% url 'layout2' %}">{% translate 'Giao diện 2' %}</a>
+                <a class="nav-link" href="{% url 'layout' 1%}">{% translate 'Giao diện 1' %}</a>
+                <a class="nav-link" href="{% url 'layout' 2 %}">{% translate 'Giao diện 2' %}</a>
             </nav>
         </div>
         <a style="display: flex; position: relative;" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false"
@@ -111,7 +112,7 @@
             <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
             {% translate 'Trang trắng' %}
         </a>
-    </div>
+    </div>{% endcomment %}
     <hr/>
     <div style=" padding: 5px 5px 5px 5px">
         <a  style="display: flex; position: relative;" style="text-transform: uppercase; font-size: 12px;"
