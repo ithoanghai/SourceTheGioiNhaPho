@@ -13,11 +13,13 @@ class ContractPhotoAdmin(admin.TabularInline):
 
 class ListingPhotoAdmin(admin.TabularInline):
     model = ListingImage
+    verbose_name = "HÌNH ẢNH CHỤP BĐS"
 
 
 class ListingVideoAdmin(admin.TabularInline):
     model = ListingVideo
     extra = 1
+    verbose_name = "VIDEO QUAY BĐS"
 
 
 class ListingAdmin(admin.ModelAdmin):
