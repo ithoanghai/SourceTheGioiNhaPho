@@ -1,11 +1,11 @@
 from django import forms
 
 from FunctionModule.cadastral.constants import district_data
+from FunctionModule.cadastral.lookups import DistrictLookup
 from .fields import EmptyChoiceField
 from .models import Listing
 
 district_default_choices = [('', 'Chọn quận/huyện')] + [(d['code'], d['name']) for d in district_data['01']]
-
 
 class ListingAdminForm(forms.ModelForm):
     class Meta:

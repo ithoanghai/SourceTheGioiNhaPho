@@ -25,15 +25,14 @@ class Listing(models.Model):
     transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,  default=TransactionType.SELL,verbose_name=_("Hình thức giao dịch"))
     house_type = models.CharField(max_length=20, choices=HouseType.choices, default=HouseType.TOWN_HOUSE, verbose_name=_("Loại nhà"))
 
-    code = models.CharField(max_length=80, verbose_name=_("Mã BĐS"), help_text=_(
+    code = models.CharField(max_length=80, verbose_name=_("Mã BĐS (VIẾT HOA)"), help_text=_(
         "Quy tắc: Viết tắt chữ cái đầu Loại BĐS + 2 chữ số Năm + Tháng + Chữ cái đầu tên Đầu chủ + Số BĐS của ĐC"),unique=True)
-    title = models.CharField(max_length=200, verbose_name=_("Tiêu đề đăng"),
+    title = models.CharField(max_length=200, verbose_name=_("Tiêu đề đăng (VIẾT HOA)"),
                              help_text=_( "Gợi ý: Từ khoá + Vị trí (Đường/Phố/Khu) + Diện tích + Tiện ích + Giá + Sổ"))
-    address = models.CharField(max_length=255, verbose_name=_("Địa chỉ ngắn gọn"), help_text=_("Ngõ.Ngách.Hẻm.Số nhà"))
+    address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ"), help_text=_("Ngõ.Ngách.Hẻm.Số nhà - Khu dân cư - Phố - Quận/Huyện"))
     urban_area = models.CharField(max_length=100, verbose_name=_("Khu đô thị/Khu dân cư"), blank=True, null=True)
     street = models.CharField(max_length=125, verbose_name=_("Tên đường, phố"), default=_("Nhập tên Đường/Phố/Thôn/Xóm"), null=True)
-    state = models.CharField(max_length=50, choices=city_choices, default="01",
-                             verbose_name=_("Thành phố/Tỉnh"), )
+    state = models.CharField(max_length=50, choices=city_choices, default="01", verbose_name=_("Thành phố/Tỉnh"), )
     district = models.CharField(max_length=50, verbose_name=_("Quận/Huyện"), default="01")
     ward = models.CharField(max_length=50, verbose_name=_("Phường/Xã"), blank=True, null=True)
 
@@ -101,8 +100,6 @@ class Listing(models.Model):
 
         }
 
-    location = LocationField(based_fields=['address'], zoom=7, null=True,default=Point(105.8401439, 21.0334474))
-
     registration_type = models.CharField(max_length=20, choices=RegistrationType.choices, blank=True,
                                          null=True, default=RegistrationType.RED_BOOK, verbose_name=_("Loại chứng nhận"))
     price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá chào (tỷ)"))
@@ -121,6 +118,10 @@ class Listing(models.Model):
     is_exclusive = models.BooleanField(default=False, verbose_name=_("THẾ GIỚI NHÀ PHỐ ĐỘC QUYỀN"))
     is_published = models.BooleanField(default=True, verbose_name=_("CHO PHÉP ĐĂNG"))
     list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày đăng"))
+
+    location = LocationField(based_fields=['address'], zoom=7, null=True, default=Point(105.8401439, 21.0334474),
+                             help_text="Nhập toạ độ hoặc chọn vị trí trên bản đồ")
+
 
 class ListingImage(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("ẢNH CHỤP BĐS"))
