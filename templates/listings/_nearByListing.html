@@ -6,10 +6,11 @@
        href="{% url 'listing' listing.id %}"
        title="{{ listing.title }}">
       {% with listing.main_photo as photo %}
-        <img class="lazy"
-             data-src="{{ photo.url }}"
-             alt="{{ listing.title }}"
-             title="{{ listing.title }}">
+          <img class="lazy" src="{{ photo.url }}" data-src="{{ photo.url }}"
+               alt="{{ listing.title }}" title="{{ listing.title }}"
+               class="lazy" draggable="false"
+               onerror="this.src='{% static "img/default.png" %}'"
+          />
       {% endwith %}
     </a>
   </div>
