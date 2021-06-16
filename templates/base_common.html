@@ -7,7 +7,7 @@
 <head>
   {% block head %}
     <title> Thế giới Nhà Phố {% block title %}| Mua căn hộ tốt nhất {% endblock %}</title>
-    <meta name="facebook-domain-verification" content="sci46fyogj6esxp1ex8rkf81j63v6o" />
+    <meta name="facebook-domain-verification" content="sci46fyogj6esxp1ex8rkf81j63v6o"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="UTF-8"/>
     <meta name="description"
@@ -79,10 +79,39 @@
         ._hj_feedback_container button { /* Fix lỗi hotjar */
             text-align: center;
         }
+
+        #msform a.butt-primary[disabled] {
+            opacity: 0.4
+        }
+
+    </style>
+    <style>
+        img {
+            max-width: 100%;
+        }
+
+        @media screen and (max-width: 600px) {
+            picture img {
+                width: 100%;
+            }
+        }
+
+        img.lazy, img.lazy-background {
+            filter: blur(15px);
+        }
     </style>
     <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/menu.min90ca.css' %}"/>
+  {% endblock %}
+  {% block optional_styles %}
+    <link rel="stylesheet" href="{% static 'css/header-live.min90ca.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/service.min90ca.css' %}"/>
   {% endblock %}
 </head>
+
 
 <body>
 <!-- Top Bar -->
@@ -133,6 +162,7 @@
               $('.alert').remove();
           }, timeout)
       }
+
       hideAlert();
 
   </script>
@@ -168,16 +198,9 @@
     }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<!-- Your Plugin chat code -->
-<div class="fb-customerchat"
-     attribution="biz_inbox"
-     page_id="108470991299693">
-</div>
-
 <!-- Start of HubSpot Embed Code -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/19875873.js"></script>
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/19875873.js"></script>
 <!-- End of HubSpot Embed Code -->
-
 
 </body>
 

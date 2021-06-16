@@ -5,17 +5,12 @@
 {% block head %}
   {{ block.super }}
 
-  <link rel="canonical" href="search"/>
+  <link rel="canonical" href="{% url 'detail' %}/{{ listing.id }}"/>
 
 {% endblock %}
 
 {% block head_script %}
-  <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
-  <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
-  <link rel="stylesheet" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
-  <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}"/>
-  {#  <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>#}
-  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+
   <link rel="stylesheet" href="{% static 'css/flexslider.min.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/listing-detail-page90ca.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/popup-new.min90ca.css' %}"/>
@@ -23,34 +18,7 @@
   <link rel="stylesheet" href="{% static 'css/style_0706.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/mobile.min90ca.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/temp90ca.css' %}"/>
-  <link rel="stylesheet" href="{% static 'css/header-live.min90ca.css' %}"/>
 
-  <style>
-      [v-cloak] {
-          display: none !important;
-      }
-
-      /* Ẩn các element khi vue chưa load */
-      picture img {
-          display: inline-block;
-          vertical-align: middle;
-      }
-
-      /*hide tracking img*/
-      img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
-          display: none;
-      }
-
-      ._hj_feedback_container button { /* Fix lỗi hotjar */
-          text-align: center;
-      }
-  </style>
-
-  <style>
-      img.lazy, img.lazy-background {
-          filter: blur(15px);
-      }
-  </style>
 
   <style>
       .detail-content-news img:before, .thumb-duan img:before, .cover img:not([src]):before {
@@ -904,7 +872,7 @@
     </div>
     <div id="property-contactbox-v2-app"></div>
     <div id="detailPopupContact">{% include "listings/_detailPopupContactTemplate.html" %}</div>
-    {% include "listings/_detailFeedbackForm.html" %}
+    {% include "partials/_detailFeedbackForm.html" %}
   </div>
 
 {% endblock %}
