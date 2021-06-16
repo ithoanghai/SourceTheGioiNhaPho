@@ -26,6 +26,9 @@
     {% endif %}</div>
   <div class="info">
     <ul>
+        {% if listing.floors %}
+          <li><span class="fa fa-h-square"></span> {{ listing.floors }}
+          </li> {% endif %}
       {% if listing.bedrooms %}
         <li title="Phòng ngủ">
           <span class="zmdi zmdi-airline-seat-individual-suite"></span> {{ listing.bedrooms }}
