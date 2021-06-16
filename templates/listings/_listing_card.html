@@ -3,7 +3,7 @@
 
 <div class="card listing-preview">
     {% with listing.main_photo as photo %}
-        <img class="card-img-top" src="{{ photo.url }}" style="height: 200px; width: auto" alt="">
+        <img class="card-img-top" src="{{ photo.url }}" style="height: 200px; width: auto" alt="" onerror="this.src='{% static "img/default.png" %}'">
     {% endwith %}
     <div class="card-img-overlay">
         <h2>
