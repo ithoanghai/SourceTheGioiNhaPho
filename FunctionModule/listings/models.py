@@ -106,7 +106,7 @@ class Listing(models.Model):
     receive_price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá thu về (tỷ)"),blank=True, null=True)
     sale_price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá Hạ chào (tỷ)"),blank=True, null=True)
     bonus_rate = models.DecimalField(max_digits=2, decimal_places=1, verbose_name=_("Tỷ lệ trích thưởng (%)"), default="3")
-    reward = models.DecimalField(max_digits=5, decimal_places=0, verbose_name=_("Số tiền trích thưởng (triệu)"), default="100")
+    reward = models.DecimalField(max_digits=5, decimal_places=0, verbose_name=_("Số tiền trích thưởng (triệu)"), default="100",blank=True, null=True)
 
     reward_person = models.CharField(max_length=50, blank=True, verbose_name=_("Tên chủ sở hữu BĐS"), help_text="Tên người chủ sở hữu BĐS", default="Nguyễn Văn A")
     reward_person_mobile = models.CharField(max_length=50, blank=True, verbose_name=_("Số ĐT chủ sở hữu BĐS"),help_text="Số ĐT chủ sở hữu BĐS", default="0912345678")
