@@ -1,4 +1,4 @@
-{% extends 'base_common.html' %}
+{% extends 'base.html' %}
 
 {% load static humanize i18n %}
 
@@ -6,8 +6,7 @@
 {{ block.super }}
 
   <link rel="canonical" href="{% url 'specialist_us' %}"/>
-    <link rel="stylesheet" href="{% static 'css/footer.min90ca.css' %}">
-    <link rel="stylesheet" href="{% static 'css/apply.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/apply.min.css' %}"/>
 
     <style>
         a.cta_button {
@@ -193,10 +192,10 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
 
     <script src="{% static 'js/form-apply.js' %}"></script>
 
+{% comment %}
     <script>
         (function () {
             window.addEventListener('load', function () {
@@ -234,17 +233,6 @@
             });
         })();
     </script>
-
-    {% comment %}<script src="https://agent.thegioinhaphovietnam.com.vn/hs-fs/hub/2775524/hub_generated/template_assets/37481636818/1605249984895/Agent/js/get-param.min.js"></script>
-<script>
-if (typeof hsVars !== 'undefined') { hsVars['language'] = 'vi'; }
-</script>{% endcomment %}
-
-    {% comment %}<script src="https://agent.thegioinhaphovietnam.com.vn/hs/hsstatic/cos-i18n/static-1.27/bundles/project.js"></script>{% endcomment %}
-
-    <!--[if lte IE 8]>
-  {% comment %}<script charset="utf-8" src="https://js.hsforms.net/forms/v2-legacy.js"></script>{% endcomment %}
-    <![endif]-->
 
     <script>
         var options = {
@@ -305,6 +293,7 @@ if (typeof hsVars !== 'undefined') { hsVars['language'] = 'vi'; }
 
         hbspt.forms.create(options);
     </script>
+{% endcomment %}
 
 
     {% comment %}

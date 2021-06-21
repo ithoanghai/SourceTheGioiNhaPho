@@ -4023,7 +4023,7 @@
             }]), t
         }()), u = n("tAFL"), l = n("JDN0"), f = n.n(l), h = n("HlL3"), p = n.n(h), m = n("m0Xf"), g = function () {
             function t(e, n, r, i) {
-                o()(this, t), this.hotline = m.b, this.dismissFunc = i, this.onSubmitFn = [], this.suggestItems = ["Quận Hoàn Kiếm", "Quận Ba Đình", "Quận Đống Đa", "Quận Bình Thạnh", "Thảo Điền", "Thủ Thiêm", "An Phú An Khánh", "Vinhomes Central Park", "Phú Mỹ Hưng", "Quận 9"], this.propertyTypes = [{
+                o()(this, t), this.hotline = m.b, this.dismissFunc = i, this.onSubmitFn = [], this.suggestItems = ["Quận Hoàn Kiếm", "Quận Ba Đình", "Quận Đống Đa", "Quận Hai Bà Trưng", "Quận Hoàng Mai", "Quận Thanh Xuân", "Quận Tây Hồ", "Quận Cầu Giấy", "Quận Nam Từ Liêm", "Quận Bắc Từ Liêm", "Quận Hà Đông", "Quận Gia Lâm", "Quận Long Biên"], this.propertyTypes = [{
                     value: "apartment",
                     text: "Căn Hộ"
                 }, {value: "house", text: "Nhà Phố"}, {value: "villa", text: "Biệt Thự"}, {

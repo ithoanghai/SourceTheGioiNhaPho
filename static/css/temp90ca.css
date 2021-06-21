@@ -23,7 +23,7 @@
 #container-id,
 .search-container,
 .active-map{
-    z-index: 99999;
+    /*z-index: 99999;*/
 }
 
 .close-map .zmdi-hc-3x {

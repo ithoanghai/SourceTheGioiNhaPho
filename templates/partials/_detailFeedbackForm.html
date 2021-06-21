@@ -79,6 +79,7 @@
                   </div>
                 </div>
               </div>
+                <div>
               <a @click="gotoStep(step - 1)" v-show="step > 1"
                  class="butt-primary butt-transparent prev" href="javascript:void(0)"
                  id="prev">Trước</a>
@@ -88,6 +89,7 @@
                 <span v-show="!isSending" class="send">Gửi</span>
                 <span v-show="isSending">Đang gửi...</span>
               </button>
+                    </div>
             </fieldset>
           </form>
         </div>

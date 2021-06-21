@@ -13,9 +13,9 @@ urlpatterns = [
     path('search', views.search, name='listing_search'),
 
     path('detail', views.detail, name='detail'),
-    path('sellwithus', views.sell_with_us, name='sell_with_us'),
-    path('buywithus', views.buy_with_us, name='buy_with_us'),
-    path('rentwithus', views.rent_with_us, name='rent_with_us'),
+    path('sell_with_us', views.sell_with_us, name='sell_with_us'),
+    path('buy_with_us', views.buy_with_us, name='buy_with_us'),
+    path('rent_with_us', views.rent_with_us, name='rent_with_us'),
 
     path('ListingsAPIView/', views.ListingsAPIView.as_view(), name='ListingsAPIView'),
     path('listingsAPI', views.listing_api_view),
