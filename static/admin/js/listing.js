@@ -241,9 +241,9 @@ function importListing($) {
 }
 
 window.addEventListener("load", function () {
-    // (function (jQuery) {
-    //     priceToText(jQuery);
-    //     addressSelect(jQuery);
-    //     importListing(jQuery);
-    // })(django.jQuery);
+    (function (jQuery) {
+        // priceToText(jQuery);
+        addressSelect(jQuery);
+        // importListing(jQuery);
+    })(django.jQuery);
 });
