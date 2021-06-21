@@ -24,9 +24,9 @@ class ListingVideoAdmin(admin.TabularInline):
 
 class ListingAdmin(admin.ModelAdmin):
     list_display = ('id', 'code', 'title', 'price', 'list_date', 'realtor', 'is_published')
-    list_display_links = ('id', 'title')
-    list_filter = ('realtor',)
-    list_editable = ('is_published', 'code')
+    list_display_links = ('id', 'code')
+    # list_filter = ('realtor',)
+    list_editable = ('is_published', 'title', 'code')
     search_fields = ('title', 'code', 'address', 'price')
     list_per_page = 25
     inlines = [ListingPhotoAdmin, ListingVideoAdmin,ContractPhotoAdmin]

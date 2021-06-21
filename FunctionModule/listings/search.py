@@ -32,7 +32,7 @@ def prepare_listing_queryset(input_params):
         keywords = input_params.get('keywords')
         if keywords:
             query = Q(description__icontains=keywords) | Q(title__icontains=keywords) | Q(
-                address__icontains=keywords)
+                address__icontains=keywords) | Q(code=keywords)
             slug_keyword = slugify(keywords.lower().replace('đ', 'd').replace('õ', 'o'))
             district_code = next(
                 x['code'] for x in hn_district if
