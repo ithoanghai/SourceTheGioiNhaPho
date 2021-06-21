@@ -1,4 +1,4 @@
-{% extends 'base_common.html' %}
+{% extends 'base.html' %}
 
 {% load static humanize i18n %}
 
@@ -8,11 +8,11 @@
 
   <link rel="stylesheet" href="{% static 'css/search-transition.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/loading.min.css' %}"/>
-  <link rel="stylesheet" href="{% static 'css/search-new.min90ca.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/ion.rangeSlider.skinFlat.css' %}"/>
-  <link rel="stylesheet" href="{% static 'css/pop-up.min.css' %}"/>
+      <link rel="stylesheet" href="{% static 'css/search-new.min90ca.css' %}"/>
+
   {% include 'listings/_vueTemplate.html' %}
 {% endblock %}
 {% block optional_styles %}
@@ -115,8 +115,8 @@
       }
 
   </script>
-  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
   <script src="{% static 'js/ion.rangeSlider.js' %}"></script>
+   <script defer src="{% static 'js/favorite.min90ca.js' %}"></script>
   <script async src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
           integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -124,11 +124,6 @@
           integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script async src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-  {#  <script src="{% static 'js/jquery-ui.min90ca.js' %}"></script>#}
-
-  {#        <script async defer src="{% static 'js/search-new-v2.min.js' %}"></script>#}
-  {#  <script defer src="www.google.com/recaptcha/apib091.js?render=explicit"></script>#}
-
 
   {% if environment != 'development' %}
     <script async
@@ -142,8 +137,7 @@
   <script src="{% static 'js/search.js' %}"></script>
 
   {#  <script defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>#}
-  <script defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
-  <script defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
+
 
 {% endblock %}
 

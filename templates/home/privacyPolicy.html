@@ -1,4 +1,4 @@
-{% extends 'base_common.html' %}
+{% extends 'base.html' %}
 
 {% load static humanize i18n %}
 
@@ -161,80 +161,6 @@
 {% endblock %}
 
 {% block scripts %}
-
-  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-  <script async defer src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
-  <script async defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
-  <script src="{% static 'js/jquery-ui.min90ca.js' %}"></script>
-  <script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script>
-  <script async defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
-  <script defer src="{% static 'js/feedback-modal.min90ca.js' %}"></script>
-
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-  <script defer src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
-  {% comment %}<script defer id="hs-script-loader" src="https://js.hs-scripts.com/2775524.js"></script>{% endcomment %}
-
-  <script type="text/javascript">
-      var callbackInitMap = function () {
-          if (window.vinitMap) {
-              window.vinitMap();
-          }
-          if (window.initMap) {
-              initMap.call(this);
-          } else {
-              setTimeout(callbackInitMap, 500);
-          }
-      }
-  </script>
-
-  <script>
-      window.RFeedback = {
-          API: "https://thegioinhaphovietnam.com.vn/mapi",
-          email: "",
-          name: "",
-          phone: "",
-          ip: "10.244.0.0"
-      }
-  </script>
-  <script>
-      /*Footer*/
-      let footerContent = $("#footer .info-container li")
-
-      toggleFooterContent()
-
-      footerContent.click(function (e) {
-          if (window.matchMedia("(max-width: 640px)").matches) {
-              // don't slideUp when click <a>
-              if (e.target.tagName === 'A')
-                  return
-
-              footerContent.find("ul").slideUp(300)
-              footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
-              if (!$(this).find("ul").is(":visible")) {
-                  $(this).find("ul").slideDown(300)
-                  $(this).find(".zmdi").removeClass("zmdi-chevron-down").addClass("zmdi-chevron-up")
-              }
-          }
-      });
-
-      $(window).resize(function () {
-          toggleFooterContent()
-      })
-
-      /**
-       * show/hide footer content depend on max-width
-       */
-      function toggleFooterContent() {
-          if (window.matchMedia("(max-width: 640px)").matches) {
-              footerContent.find("ul").hide()
-              footerContent.find(".zmdi").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down")
-          } else {
-              footerContent.find("ul").show()
-          }
-      }
-
-      /*Footer - END*/
-  </script>
 
   <script>
       $(function () {

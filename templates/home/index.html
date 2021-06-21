@@ -4,37 +4,19 @@
 
 {% block head_script %}
   {{ block.super }}
-  <style>
-      [v-cloak] {
-          display: none !important;
-      }
-
-      /* Ẩn các element khi vue chưa load */
-      picture img {
-          display: inline-block;
-          vertical-align: middle;
-      }
-
-      /*hide tracking img*/
-      img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
-          display: none;
-      }
-
-      ._hj_feedback_container button { /* Fix lỗi hotjar */
-          text-align: center;
-      }
-  </style>
 
   <link rel="canonical" href="index.html"/>
   <link rel="stylesheet" type="text/css" href="{% static "css/index-merge.min90ca.css" %}">
-  <link rel="stylesheet" type="text/css" href="{% static "css/font-icon.css" %}">
-  <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
-  <link rel="stylesheet" type="text/css" href="{% static "css/footer.min90ca.css" %}">
 
 {% endblock %}
 
 {% block content %}
-  <div id="app"></div>
+
+  <!-- NavBar -->
+  {% include 'partials/_navbar.html' %}
+  <!-- Banner -->
+  {% comment %}{% include 'partials/_banner.html' %}{% endcomment %}
+
   <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">
     <div class="banner-app-content">
       <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
@@ -106,10 +88,10 @@
             Gần 90% chủ nhà chốt giao dịch trong vòng 90 ngày sau khi chọn TGNP.
           </p>
           <div class="option-group">
-            <a class="btn-primary btn-large btn-black-outline" href="listings\sellwithus">
+            <a class="btn-primary btn-large btn-black-outline" href="{% url 'sell_with_us' %}">
               Bán với Thế giới Nhà Phố
             </a>
-            <a class="btn-primary btn-large btn-black-outline" href="listings\rentwithus">
+            <a class="btn-primary btn-large btn-black-outline" href="{% url 'rent_with_us' %}">
               Cho thuê với Thế giới Nhà Phố
             </a>
           </div>
@@ -153,20 +135,16 @@
 
 {% block scripts %}
   {{ block.super }}
-  <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
           integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
           integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  {% comment %} <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>{% endcomment %}
   <script src="{% static 'js/main.js' %}"></script>
 
-  {#  <script src="{% static 'js/index-merged.min90ca.js' %} "></script>#}
-  <script async defer src="{% static 'js/login-popup-app.min90ca.js' %}"></script>
   <script defer src="{% static 'js/favorite.min90ca.js' %} "></script>
-  <script defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
+
   <script>
       /*@shinsenter/defer.js*/
       !function (e, i, t, n, r, o) {
@@ -371,19 +349,7 @@
       });
   </script>
 
-  <script>
-      window.hsConversationsSettings = {
-          loadImmediately: false // Delay the load of the chat widget
-      };
-  </script>
-  <script>
-      window.RFeedback = {
-          API: "https://thegioinhaphovietnam.com.vn/mapi",
-          email: "",
-          name: "",
-          phone: "",
-          ip: "10.244.0.0"
-      }
-  </script>
+
+
 
 {% endblock %}

@@ -5,123 +5,33 @@
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
 
 <head>
-  {% block head %}
-    <title> Thế giới Nhà Phố {% block title %}| Mua căn hộ tốt nhất {% endblock %}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="UTF-8"/>
-    <meta name="description"
-          content="Mua bán bất động sản, chung cư, căn hộ Hà Nội sở hữu vị trí vàng, đầy đủ tiện nghi, sang trọng, an ninh, không gian sống hiện đại. bất động sản, chung cư, căn hộ Hà Nội cập nhật hình ảnh thật, thông tin xác thực."/>
-    <meta name="keywords"
-          content="nha pho, mua ban, cho thue, bat dong san, nha dat, van phong, dat nen, biet thu, villa"/>
-    <meta name="author" content="thegioinhaphovietnam.com.vn"/>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta property="fb:app_id" content=""/>
-    <meta property="og:url" content="mua.html"/>
-    <meta property="og:title" content="Mua Bán Nhà Đất Căn Hộ Tốt Nhất | Thế giới Nhà Phố"/>
-    <meta property="og:description"
-          content="Mua bán bất động sản, chung cư, căn hộ Hà Nội sở hữu vị trí vàng, đầy đủ tiện nghi, sang trọng, an ninh, không gian sống hiện đại. bất động sản, chung cư, căn hộ Hà Nội cập nhật hình ảnh thật, thông tin xác thực."/>
-    <meta property="og:image" content="{% static '/img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:url" content="{% static '/img/logo-chi-chu.svg' %}"/>
-    <meta property="og:image:width" content="600"/>
-    <meta property="og:image:height" content="320"/>
-    <meta property="og:site_name" content="thegioinhaphovietnam.com.vn"/>
-    <meta property="og:rich_attachment" content="true"/>
-    <meta property="og:type" content="article"/>
-    <meta property="hotline" content="0964399436"/>
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Organization",
-  "url": "https://thegioinhaphovietnam.com.vn",
-  "name": "TGNP",
-  "logo": "{% static 'img/logo-ko-chu.svg' %}",
-  "contactPoint": [
-    {
-      "@type": "ContactPoint",
-      "telephone": "0916 286 256",
-      "contactType": "customer service"
-    }
-  ],
-  "sameAs": [
-    "https://www.facebook.com/thegioinhaphovietnam.com.vn",
-    "../www.linkedin.com/company/thegioinhaphovietnam.com.vn",
-    "../www.instagram.com/thegioinhaphovietnam.com.vn",
-    "../https://www.youtube.com/channel/UC2YIBjJIw4jL5aQ9LEoCQDg"
-  ],
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://thegioinhaphovietnam.com.vn/search",
-    "query-input": "required name=keywords"
-  }
-}
-</script>
-  {% endblock %}
-
-  {% block head_script %}
-  {% endblock %}
-
+   {% include 'partials/_head.html' %}
+   {% block head %} {% endblock %}
+   {% block head_script %} {% endblock %}
+   {% block optional_styles %}{% endblock %}
 </head>
 
 <body>
 
-<div id="app"></div>
-
-<!-- NavBar -->
-{% include 'partials/_navbar.html' %}
-<!-- Banner -->
-{% comment %}{% include 'partials/_banner.html' %}{% endcomment %}
 <!-- Main Content -->
 {% block content %} {% endblock %}
 
 <!-- Footer -->
 {% include 'partials/_footer.html' %}
 
-<!-- Scripts -->
-{% block scripts %}
-  <script src="{% static "js/vue-2.16.12.min.js" %}"></script>
-  <script src="{% static 'js/vue-resource-1.5.2.min.js' %}"></script>
-  <script>
-      Vue.directive('click-outside', {
-          bind: function (el, binding, vnode) {
-              el.eventSetDrag = function () {
-                  el.setAttribute('data-dragging', 'yes');
-              }
-              el.eventClearDrag = function () {
-                  el.removeAttribute('data-dragging');
-              }
-              el.eventOnClick = function (event) {
-                  var dragging = el.getAttribute('data-dragging');
-                  // Check that the click was outside the el and its children, and wasn't a drag
-                  if (!(el == event.target || el.contains(event.target)) && !dragging) {
-                      // call method provided in attribute value
-                      vnode.context[binding.expression](event);
-                  }
-              };
-              document.addEventListener('touchstart', el.eventClearDrag);
-              document.addEventListener('touchmove', el.eventSetDrag);
-              document.addEventListener('click', el.eventOnClick);
-              document.addEventListener('touchend', el.eventOnClick);
-          }, unbind: function (el) {
-              document.removeEventListener('touchstart', el.eventClearDrag);
-              document.removeEventListener('touchmove', el.eventSetDrag);
-              document.removeEventListener('click', el.eventOnClick);
-              document.removeEventListener('touchend', el.eventOnClick);
-              el.removeAttribute('data-dragging');
-          },
-      });
-  </script>
-{% endblock %}
-
-{#    <!-- Chống sao chép website-->#}
-{#    <script type="text/javascript">#}
-{#    $(document).ready(function(){#}
-{#    $('*').bind('cut copy paste contextmenu', function (e) {#}
-{#        e.preventDefault();#}
-{#    })});#}
-{#    </script>#}
-
 <div id="fb-root"></div>
+
+<!-- Your Plugin chat code -->
+<div class="fb-customerchat"
+     attribution="biz_inbox"
+     page_id="108470991299693">
+</div>
+
+<!-- Scripts -->
+{% include 'partials/_scriptsCommon.html' %}
+
+{% block scripts %}
+{% endblock %}
 
 </body>
 

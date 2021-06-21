@@ -30,7 +30,7 @@
         var r = n("Zrlr"), i = n.n(r), o = n("wxAW"), a = n.n(o), s = n("88TU"), c = n("eBGp"), d = n("tAFL"),
             u = n("JDN0"), l = n.n(u), f = n("BJzf"), h = n.n(f), p = n("m0Xf"), m = function () {
                 function t(e, n, r, o) {
-                    i()(this, t), this.hotline = p.b, this.dismissFunc = o, this.onSubmitFn = [], this.suggestItems = ["Quận Hoàn Kiếm", "Quận Ba Đình", "Quận Đống Đa", "Quận Bình Thạnh", "Thảo Điền", "Thủ Thiêm", "An Phú An Khánh", "Vinhomes Central Park", "Phú Mỹ Hưng", "Quận 9"], this.propertyTypes = [{
+                    i()(this, t), this.hotline = p.b, this.dismissFunc = o, this.onSubmitFn = [], this.suggestItems = ["Quận Hoàn Kiếm", "Quận Ba Đình", "Quận Đống Đa", "Quận Hai Bà Trưng", "Quận Hoàng Mai", "Quận Thanh Xuân", "Quận Tây Hồ", "Quận Cầu Giấy", "Quận Nam Từ Liêm", "Quận Bắc Từ Liêm", "Quận Hà Đông", "Quận Gia Lâm", "Quận Long Biên"], this.propertyTypes = [{
                         value: "apartment",
                         text: "Căn Hộ"
                     }, {value: "house", text: "Nhà Phố"}, {value: "villa", text: "Biệt Thự"}, {
