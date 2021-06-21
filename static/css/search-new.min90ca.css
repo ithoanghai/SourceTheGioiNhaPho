@@ -935,7 +935,7 @@ body {
 
 @media (max-width: 480px) {
     .main-header .col-left .top-search > a {
-        display: block;
+        display: none;
         height: 100%
     }
 
