@@ -31,8 +31,8 @@ class User(AbstractUser):
     phone = models.CharField(_('Điện thoại'), max_length=20, db_index=True, unique=True,
                              validators=[phone_regex])
     address = models.CharField(_('Địa chỉ'), blank=True, max_length=255)
-    dob = models.DateField(_('DoB'), blank=True, null=True)
-    gender = models.CharField(_('Gender'), max_length=20, choices=GENDER_CHOICES, blank=True, default='male')
+    dob = models.DateField(_('Ngày sinh'), blank=True, null=True)
+    gender = models.CharField(_('Giới tính'), max_length=20, choices=GENDER_CHOICES, blank=True, default='male')
     bio = models.TextField(_('Lý lịch'), blank=True)
     avatar = models.ImageField(_("Ảnh đại diện"), upload_to="photos/%Y/%m/%d/")
 
@@ -42,7 +42,7 @@ class User(AbstractUser):
     youtube = models.CharField(_('Youtube'), blank=True, max_length=255)
 
     # Metadata
-    first_time = models.BooleanField(_('FirstLogin'), default=True)
+    first_time = models.BooleanField(_('Đăng nhập lần đầu'), default=True)
 
     def __str__(self):
         return self.username
