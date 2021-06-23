@@ -959,11 +959,11 @@ header#home::before {
 }
 
 .main-header#home .col-left .logo-large > a {
-    background-image: url(../images/logo-r-white.svg)
+    background-image: url(../img/logo.svg)
 }
 
 .main-header#home .col-left .logo > a {
-    /*background-image: url(../images/logo-r-white.svg)*/
+    /*background-image: url(../img/logo.svg)*/
 }
 
 .main-header#home .col-left .logo > a .zmdi {
