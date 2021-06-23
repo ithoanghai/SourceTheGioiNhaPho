@@ -16,6 +16,7 @@ urlpatterns = [
     path('accounts/', include('FunctionModule.accounts.urls')),
     path('contacts/', include('FunctionModule.contacts.urls')),
     path('cadastral/', include('FunctionModule.cadastral.urls')),
+    path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

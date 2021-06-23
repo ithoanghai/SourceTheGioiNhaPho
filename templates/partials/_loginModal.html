@@ -1,0 +1,40 @@
+{% load static socialaccount %}
+
+<div id="login-modal">
+</div>
+
+<script type="text/x-template" id="LoginPopupTemplate">
+  <div class="popup-login-rv" v-if="isShowPopup">
+
+    <div class="popup-fixed">
+      <form class="popup-form-login-rv">
+        <span class="popup-close-btn" v-on:click="closeModal"><i class="zmdi zmdi-hc-2x zmdi-close"></i></span>
+        <div class="popup-info-form-up-login"><p class="login--title mb-40">Đăng nhập</p>
+          <div class="btn-group__account">
+            <a  class="btn-facebook" href="{% provider_login_url "facebook" method="oauth2" %}">
+              Đăng nhập với Facebook
+            </a>
+{#            <a href="#" class="btn-google">Đăng nhập với Google</a>#}
+{#            <a href="#" class="btn-apple" style="opacity: 1;">Đăng nhập với Apple</a>#}
+          </div>
+          <p class="or-type"><span>Hoặc</span></p>
+          <div class="form-group username">
+            <input type="tel" placeholder="" required="required"/>
+            <label class="error__star">Số điện thoại</label>
+            <p class="error" style="display: none;">Số điện thoại không hợp lệ</p>
+          </div>
+          <div class="captcha-wrapper" style="display: none;">
+            <div style="display: inline-block;"></div>
+          </div>
+          <div id="loading-signup" class="butt-groups">
+            <a href="#" class="butt-primary large-butt-red btn-login">
+              <p><span class="loading-icon"></span>Đăng nhập với số điện thoại</p>
+            </a>
+          </div>
+          <p class="error-server" style="display: none;"></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</script>

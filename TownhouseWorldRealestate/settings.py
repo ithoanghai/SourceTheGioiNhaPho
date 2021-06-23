@@ -49,6 +49,11 @@ MODULES = [
 ]
 
 THIRD_PARTIES = [
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
     'location_field.apps.DefaultConfig',
     'ajax_select',
     'rolepermissions',
@@ -135,7 +140,8 @@ AUTH_USER_MODEL = 'accounts.User'
 
 AUTHENTICATION_BACKENDS = [
     'FunctionModule.accounts.auth.RealEstateAuthBackend',
-    'django.contrib.auth.backends.ModelBackend'
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 # Internationalization
@@ -251,3 +257,30 @@ CACHES = {
         'LOCATION': os.getenv('REDIS_URL', default='redis://redis:6379/1')
     }
 }
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SDK_URL': '//connect.facebook.net/vi_vn/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'email',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
+        ],
+        'EXCHANGE_TOKEN': True,
+        'VERSION': 'v10.0',
+    }
+}
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
