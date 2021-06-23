@@ -45,7 +45,7 @@
       }
 
       ._map-bg {
-          background: url({% static 'images/single-property/map-detail.png' %}) center / cover no-repeat;
+          background: url({% static 'images/map-detail.png' %}) center / cover no-repeat;
           cursor: pointer;
           width: 100%;
           height: 100%;
@@ -157,7 +157,9 @@
         <input name="neighborhood" type="hidden" value="">
         <input name="lat" type="hidden" value="">
         <input name="lon" type="hidden" value="">
-        {#        <input name="youtube" type="hidden" value="https://youtu.be/_dfQMUgGmjc"> {% comment %}Cần thay {% endcomment %}#}
+        {% for video in listing.videos %}
+            <input name="youtube" type="hidden" value="{{ video.video }}">
+        {% endfor %}
         <input name="favorited_type" type="hidden" value="sale_property">
         <input name="streetviewLat" type="hidden" value="">
         <input name="streetviewLon" type="hidden" value="">
@@ -202,7 +204,7 @@
         </div>
       </div>
       <div class="mvideo height-100-percent">
-        <video
+        {% comment %}<video
           id="listing-video"
           class="video-js vjs-default-skin"
           controls
@@ -213,7 +215,7 @@
           {% for video in listing.videos %}
             <source src="{{ video.video }}" type="video/youtube">
           {% endfor %}
-        </video>
+        </video>{% endcomment %}
         <iframe id="preview-video" frameborder="0" allowfullscreen>
 
         </iframe>
