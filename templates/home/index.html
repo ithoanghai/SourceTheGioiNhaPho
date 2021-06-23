@@ -13,6 +13,7 @@
 
   <!-- NavBar -->
   {% include 'partials/_navbar.html' %}
+  {% include "partials/_loginModal.html" %}
   <!-- Banner -->
   {% comment %}{% include 'partials/_banner.html' %}{% endcomment %}
 
@@ -350,5 +351,20 @@
 
 
 
+  <script>
+      window.hsConversationsSettings = {
+          loadImmediately: false // Delay the load of the chat widget
+      };
+  </script>
+  <script>
+      window.RFeedback = {
+          API: "https://thegioinhaphovietnam.com.vn/mapi",
+          email: "",
+          name: "",
+          phone: "",
+          ip: "10.244.0.0"
+      }
+  </script>
+   <script defer src="{% static 'js/login-popup.js' %}"></script>
 
 {% endblock %}
