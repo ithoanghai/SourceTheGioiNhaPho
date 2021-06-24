@@ -19,3 +19,4 @@ python-dotenv==0.17.1
 django-redis==4.12.1
 django-cachalot==2.4.1
 django-ipware==3.0.2
+django-allauth==0.44.0
