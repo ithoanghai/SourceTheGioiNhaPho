@@ -2751,7 +2751,8 @@
 }
 
 .row {
-    display: flex;
+    /*display: flex;*/
+    display: inline;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin-right: -18px;
