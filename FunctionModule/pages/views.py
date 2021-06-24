@@ -22,13 +22,13 @@ def get_client_ip(request):
 def home_view(request):
     listings_for_sale = (Listing.objects
                              .order_by('-list_date')
-                             .filter(is_published=True, transaction_type=TransactionType.SELL)[:3])
+                             .filter(is_published=True, transaction_type=TransactionType.SELL)[:15])
     listings_for_rent = (Listing.objects
                              .order_by('-list_date')
-                             .filter(is_published=True, transaction_type=TransactionType.FOR_RENT)[:3])
+                             .filter(is_published=True, transaction_type=TransactionType.FOR_RENT)[:12])
     listings_project = (Listing.objects
                             .order_by('-list_date')
-                            .filter(is_published=True, transaction_type=TransactionType.PROJECT)[:3])
+                            .filter(is_published=True, transaction_type=TransactionType.PROJECT)[:9])
     list_district_hn = district_data.get("01")
     context = {
         'listings_for_sale': listings_for_sale,

@@ -381,12 +381,12 @@
               </div>
             </header>
           </div>
-          <div class="heading-02">Mô tả</div>
-          <div class="content collapsed pdb-0" {% comment %}data-height="150"{% endcomment %}>
+          <div class="heading-02">Mô tả ngắn gọn</div>
+          <div class="content collapsed pdb-0" data-height="150">
             <p class="summary">{{ listing.description }}</p>
           </div>
           <p class="more">
-            <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
+            <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="true" more="Xem thêm"
                less="Thu gọn">Xem thêm</a>
           </p>
           <div class="heading-02">Thông tin cơ bản</div>
@@ -463,7 +463,71 @@
           </div>
           <div id="booking-form-sm-wrapper"></div>
 
-          <div class="heading-02">Tiện ích</div>
+          <div class="heading-02">Ưu điểm ngôi nhà</div>
+          <div class="content">
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Tag</p>
+              </div>
+              <div class="advandate-content">
+                <div class="tag-news pd-0">
+                  <span>{{ listing.house_type }} {{ listing.district }}</span>
+                  <span>{{ listing.house_type }} {{ listing.floors }} tầng</span>
+                  <span>{{ listing.house_type }} {{ listing.bedrooms }} phòng ngủ</span>
+                </div>
+              </div>
+            </div>
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Đặc điểm nổi bật</p>
+              </div>
+              <div class="advandate-content">{{ listing.salient_features }}</div>
+            </div>
+              <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Ưu điểm vị trí</p>
+              </div>
+              <div class="advandate-content">{{ listing.location_advantage }}</div>
+            </div>
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Nội thất kèm theo</p>
+              </div>
+              <div class="advandate-content">{{ listing.furniture_included }}</div>
+            </div>
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Tiện ích sinh hoạt</p>
+              </div>
+              <div class="advandate-content">{{ listing.living_facilities }}</div>
+            </div>
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Cộng đồng dân cư</p>
+              </div>
+              <div class="advandate-content">{{ listing.residential_community }}</div>
+            </div>
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>An sinh khu vực</p>
+              </div>
+              <div class="advandate-content">{{ listing.regional_welfare }}
+              </div>
+            </div>
+            <div class="list-advantage clear">
+               <div class="advantage-name">
+                <p>Tình trạng BĐS</p>
+              </div>
+              <div class="advandate-content">{% if listing.status == 'selling' %} {% trans 'Đang bán' %}
+                {% elif listing.status == 'sold' %} {% trans 'Đã bán' %}
+                {% elif listing.status == 'stop_selling' %} {% trans 'Dừng bán' %}
+                {% else %} {% trans 'Mới' %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          {% comment %}<div class="heading-02">Tiện ích</div>
           <div id="details-amenities" class="content collapsed">
             <ul class="detail-more">
               <li><p class="left">Ban công</p>
@@ -507,11 +571,7 @@
             </ul>
           </div>
           <p class="more">
-            <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
-               less="Thu gọn">Xem thêm</a>
-          </p>
-          <p class="more">
-            <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
+            <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="true" more="Xem thêm"
                less="Thu gọn">Xem thêm</a>
           </p>
 
@@ -581,51 +641,10 @@
             </ul>
           </div>
           <p class="more">
-            <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
+            <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="true" more="Xem thêm"
                less="Thu gọn">Xem thêm</a>
-          </p>
+          </p>{% endcomment %}
 
-          <div class="heading-02">Ưu điểm ngôi nhà</div>
-          <div class="content">
-            <div class="list-advantage clear">
-              <div class="advantage-name">
-                <p>Tag</p>
-              </div>
-              <div class="advandate-content">
-                <div class="tag-news pd-0">
-                  <span>{{ listing.house_type }} {{ listing.district }}</span>
-                  <span>{{ listing.house_type }} {{ listing.floors }} tầng</span>
-                  <span>{{ listing.house_type }} {{ listing.bedrooms }} phòng ngủ</span>
-                </div>
-              </div>
-            </div>
-            <div class="list-advantage clear">
-              <div class="advantage-name">
-                <p>Tình hình nội thất</p>
-              </div>
-              <div class="advandate-content">Nội thất cơ bản</div>
-            </div>
-            <div class="list-advantage clear">
-              <div class="advantage-name">
-                <p>Cộng đồng dân cư</p>
-              </div>
-              <div class="advandate-content">Cộng đồng dân cư văn minh, an ninh, thân thiện</div>
-            </div>
-            <div class="list-advantage clear">
-              <div class="advantage-name">
-                <p>Về giáo dục</p>
-              </div>
-              <div class="advandate-content">Gần trường mầm non, tiểu học, THCS,...
-              </div>
-            </div>
-            <div class="list-advantage clear">
-               <div class="advantage-name">
-                <p>Tình trạng BĐS</p>
-              </div>
-              <div class="advandate-content">{{ listing.status }}
-              </div>
-            </div>
-          </div>
           <div class="heading-02">Hình ảnh</div>
           <div class="gallery-property collapsed" data-height="900">
             {% for photo in listing.photos %}
@@ -643,56 +662,56 @@
           </div>
           <p class="view-more-gray more">
             <a href="#" title="Xem thêm / thu gọn" style="text-underline: none" class="collapse pdt-0"
-               is-more="false" more="Xem thêm" less="Thu gọn">Xem tất cả</a>
+               is-more="true" more="Xem thêm" less="Thu gọn">Xem tất cả</a>
           </p>
           <div class="map-detail hidden"></div>
-          {#          <div class="heading-02">Tiện ích khu vực</div>#}
-          {#          <section class="mgt-15 map-detail gmap-render">#}
-          {#            AIzaSyB_J7TCgptlDrvjaFaHrayYb1C2F8ZaeBg#}
-          {#            <div class="_map-bg openBtn img-map"#}
-          {#                 style="background-image: url(https://maps.googleapis.com/maps/api/staticmap?center=21.02678541550063,105.854106460572&zoom=15&size=1140x640&maptype=roadmap&markers=color:red%7C21.02678541550063,105.854106460572&key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc)">#}
-          {#              <div class="tooltip-map">#}
-          {#                <a>Nhấn vào để xem chi tiết</a>#}
-          {#              </div>#}
-          {#              <div class="map--address">#}
-          {#                <div class="address-property">#}
-          {#                  <div class="left-70"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>#}
-          {#                    <strong>{{ listing.title }}</strong>#}
-          {#                  </div>#}
-          {#                </div>#}
-          {#              </div>#}
-          {#            </div>#}
-          {##}
-          {#            <div class="map-wrapper">#}
-          {#              <a href="" class="full-screen-act" title="Fullscreen"></a>#}
-          {#              <div id="render-map"></div>#}
-          {#              <div class="cover-nearby">#}
-          {#                <div class="nearby">#}
-          {#                  <div class="parent-content">#}
-          {#                    <form name="search-nearby">#}
-          {#                      <input type="text" id="nearby-search" class="" autocomplete="on"#}
-          {#                             spellcheck="false" dir="auto"#}
-          {#                             placeholder="Tìm kiếm địa điểm gần đây">#}
-          {#                    </form>#}
-          {#                    <div class="title">#}
-          {#                      <span>Bản đồ</span>#}
-          {#                      <div class="list-icon traffic-type">#}
-          {#                      </div>#}
-          {#                    </div>#}
-          {#                    <ul class="content directions pdb-0">#}
-          {#                    </ul>#}
-          {#                    <div class="title">Địa điểm gần nhất</div>#}
-          {#                    <ul class="type checkbox nearby-places">#}
-          {#                    </ul>#}
-          {#                  </div>#}
-          {#                </div>#}
-          {#                <div class="icon-left-nearby ">#}
-          {#                  <a class="location" href="#" title="Vị trí của BĐS"></a>#}
-          {#                  <a class="icon-slide" href="#" title="Mở rộng / thu gọn"></a>#}
-          {#                </div>#}
-          {#              </div>#}
-          {#            </div>#}
-          {#          </section>#}
+                  <div class="heading-02">Tiện ích khu vực</div>
+                  <section class="mgt-15 map-detail gmap-render">
+                    AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc
+                    <div class="_map-bg openBtn img-map"
+                         style="background-image: url(https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap)">
+                      <div class="tooltip-map">
+                        <a>Nhấn vào để xem chi tiết</a>
+                      </div>
+                      <div class="map--address">
+                        <div class="address-property">
+                          <div class="left-70"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>
+                            <strong>{{ listing.title }}</strong>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="map-wrapper">
+                      <a href="" class="full-screen-act" title="Fullscreen"></a>
+                      <div id="render-map"></div>
+                      <div class="cover-nearby">
+                        <div class="nearby">
+                          <div class="parent-content">
+                            <form name="search-nearby">
+                              <input type="text" id="nearby-search" class="" autocomplete="on"
+                                     spellcheck="false" dir="auto"
+                                     placeholder="Tìm kiếm địa điểm gần đây">
+                            </form>
+                            <div class="title">
+                              <span>Bản đồ</span>
+                              <div class="list-icon traffic-type">
+                              </div>
+                            </div>
+                            <ul class="content directions pdb-0">
+                            </ul>
+                            <div class="title">Địa điểm gần nhất</div>
+                            <ul class="type checkbox nearby-places">
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="icon-left-nearby ">
+                          <a class="location" href="#" title="Vị trí của BĐS"></a>
+                          <a class="icon-slide" href="#" title="Mở rộng / thu gọn"></a>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
         </div>
         <div class="right-content visible-pc">
           <div v-pre class="form-real-estate">

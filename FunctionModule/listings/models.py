@@ -34,7 +34,7 @@ class Listing(models.Model):
                              help_text=_(
                                  "Gợi ý: Từ khoá + Vị trí (Đường/Phố/Khu) + Diện tích + Tiện ích + Giá + Sổ"))
     address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ"),
-                               help_text=_("Ngõ.Ngách.Hẻm.Số nhà - Khu dân cư - Phố - Quận/Huyện"))
+                               help_text=_("Ngõ.Ngách.Hẻm.Số nhà, Khu dân cư, Phố, Quận/Huyện, Tỉnh/TP"))
     urban_area = models.CharField(max_length=100, verbose_name=_("Khu đô thị/Khu dân cư"), blank=True,
                                   null=True)
     street = models.CharField(max_length=125, verbose_name=_("Tên đường, phố"),
@@ -68,8 +68,20 @@ class Listing(models.Model):
                                     null=True)
     direction = models.CharField(max_length=20, choices=Direction.choices, default=Direction.none,
                                  verbose_name=_("Hướng"))
-    description = models.TextField(blank=True, verbose_name=_("Mô tả"), default=_(
-        "Vị trí cực đẹp, thuận tiện đi lại, chỉ phút mốt ra trung tâm, đường chính, hồ, bến tàu, xe,..Thiết kế hiện đại, đầy đủ công năng, khung cột bê tông chắc chắn.., các phòng, khuôn viên rộng rãi, hướng đẹp, mát,.. Tiện ích tràn ngập như BĐS có bể bơi, phòng xông hơi, phòng xem phim, giải trí, thể thao, chỗ đỗ xe hơi... Gần rạp chiếu phim, TTTM, bể bơi, khu vui chơi, thể thao,...An sinh khu vực đỉnh gần bệnh viện, trường học, khu dân trí cao, an ninh tốt,...Pháp lý đầy đủ, sổ đẹp vuông cất két…"))
+    description = models.TextField(blank=True, verbose_name=_("Mô tả ngắn gọn"), help_text=_(
+        "Mô tả giới thiệu BĐS ngắn gọn "))
+    salient_features = models.TextField(blank=True,null=True, verbose_name=_("Đặc điểm nổi bật"), help_text=_(
+        "Nêu tất cả các ưu điểm nổi bật của BĐS"))
+    location_advantage = models.TextField(blank=True, null=True, verbose_name=_("Ưu điểm vị trí"), help_text=_(
+        "Mô tả ưu điểm của vị trí, gần địa điểm nổi tiếng, dễ nhớ nào, khoảng bao nhiêu phút ra trung tâm, đường chính, hồ, bến tàu, xe, sân vận động, rạp chiếu phim.."))
+    furniture_disign = models.TextField(blank=True,null=True, verbose_name=_("Nội thất, thiết kế"), help_text=_(
+        "Thiết kế hiện đại, đầy đủ công năng, khung cột bê tông chắc chắn hay không, Có hay không có nội thất kèm theo, kèm theo những nội thất"))
+    living_facilities = models.TextField(blank=True, null=True, verbose_name=_("Tiện ích sinh hoạt"), help_text=_(
+        "Có bể bơi, phòng xông hơi, xem phim, thể thao, có chỗ đỗ xe hơi,..."))
+    residential_community = models.TextField(blank=True, null=True, verbose_name=_("Cộng đồng dân cư"), help_text=_(
+        "Cộng đồng dân cư dân trí cao, văn minh, an ninh, thân thiện hay không"))
+    regional_welfare = models.TextField(blank=True, null=True, verbose_name=_("An sinh khu vực"), help_text=_(
+        "Gần trường mầm non, tiểu học, THCS,...Bệnh viện, Trung tâm spa, chăm sóc sức khoẻ, sắc đẹp..."))
 
     def __str__(self):
         return self.title
@@ -148,7 +160,7 @@ class Listing(models.Model):
     list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày đăng"))
 
     location = LocationField(based_fields=['address'], zoom=7, null=True,
-                             default=Point(105.8401439, 21.0334474),
+                             default=Point(105.8401439, 21.0334474), verbose_name=_("Toạ độ vị trí BĐS"),
                              help_text="Nhập toạ độ hoặc chọn vị trí trên bản đồ")
 
 
