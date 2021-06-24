@@ -13,6 +13,7 @@
 
   <link rel="stylesheet" href="{% static 'css/listing-detail-page90ca.css' %}"/>
 
+
   <style>
       .detail-content-news img:before, .thumb-duan img:before, .cover img:not([src]):before {
           background-image: none !important;
@@ -204,7 +205,7 @@
         </div>
       </div>
       <div class="mvideo height-100-percent">
-        {% comment %}<video
+{% comment %}        <video
           id="listing-video"
           class="video-js vjs-default-skin"
           controls
@@ -318,7 +319,7 @@
             </ul>
           </div>
         </div>
-        <ul class="naviicon">
+        <div class="naviicon">
           <li class="active ">
             <a href="#photos" title="Photo" no-prevent>
               <span class="font-icon photo"></span> Photo
@@ -339,7 +340,7 @@
           {#                            <span class="font-icon streetview"></span> Street view#}
           {#                        </a>#}
           {#                    </li>#}
-        </ul>
+        </div>
       </div>
     </div>
     <section class="page-listing-detail">
@@ -368,7 +369,7 @@
               <div class="detail-row">
                 <ul class="detailroom">
                   <li title="Diện tích"><span
-                    class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} </li>
+                    class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} m2</li>
                   <li title="Giá"><strong>$</strong> {{ listing.price }} tỷ</li>
                   {% if listing.sale_price  and listing.sale_price < listing.price %}
                     <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price }} tỷ </strong></li> {% endif %}
@@ -380,8 +381,8 @@
               </div>
             </header>
           </div>
-          <div class="heading-02">Tổng quan</div>
-          <div class="content collapsed pdb-0" data-height="150">
+          <div class="heading-02">Mô tả</div>
+          <div class="content collapsed pdb-0" {% comment %}data-height="150"{% endcomment %}>
             <p class="summary">{{ listing.description }}</p>
           </div>
           <p class="more">
@@ -606,14 +607,6 @@
             </div>
             <div class="list-advantage clear">
               <div class="advantage-name">
-                <p>Mô tả vị trí</p>
-              </div>
-              <div class="advandate-content">{{ listing.description }} Vị trí đất đắc địa, gần chợ,
-                thuộc khu dân cư hiện hữu, dân trí cao, đường dân sinh. Đất còn nằm gần trung tâm.
-              </div>
-            </div>
-            <div class="list-advantage clear">
-              <div class="advantage-name">
                 <p>Cộng đồng dân cư</p>
               </div>
               <div class="advandate-content">Cộng đồng dân cư văn minh, an ninh, thân thiện</div>
@@ -623,6 +616,13 @@
                 <p>Về giáo dục</p>
               </div>
               <div class="advandate-content">Gần trường mầm non, tiểu học, THCS,...
+              </div>
+            </div>
+            <div class="list-advantage clear">
+               <div class="advantage-name">
+                <p>Tình trạng BĐS</p>
+              </div>
+              <div class="advandate-content">{{ listing.status }}
               </div>
             </div>
           </div>
@@ -706,7 +706,7 @@
               <span>Mã nhà đất:  <strong> {{ listing.code }} </strong></span>
             </p>
             <a data-phone-hidden="category: ContactProperty, event: ClickHiddenHotline" style="opacity: 0.6"
-               href="tel:0964399436" class="btn-primary btn-large btn-red btn-phone phone-hidden"><i
+               href="tel:0971841941" class="btn-primary btn-large btn-red btn-phone phone-hidden"><i
               class="zmdi zmdi-phone"></i><span class="text">Gọi chuyên viên ngay</span></a>
             <div class="divive">hoặc</div>
             <ul class="group-cta">
@@ -732,8 +732,8 @@
             class="zmdi zmdi-comment-text-alt"></i>Chat</a>
         </div>
         <div class="phone">
-          <a class="cta-hotline" href="tel:0916286256">
-            <i class="zmdi zmdi-phone"></i> 0916 286 256</a>
+          <a class="cta-hotline" href="tel:0971841941">
+            <i class="zmdi zmdi-phone"></i> 0971 841 941</a>
         </div>
       </div>
     </div>
@@ -811,7 +811,7 @@
                 <h4>thegioinhaphovietnam.com.vn</h4>
                 <p>Hỗ trợ 24/7</p>
                 <p>
-                  <a class="hotline" href="tel:0916 286 256" title="hotline">0916 286 256</a>
+                  <a class="hotline" href="tel:0971841941" title="hotline">0971 841 941</a>
                 </p>
               </div>
             </div>
