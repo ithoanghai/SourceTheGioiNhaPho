@@ -205,7 +205,7 @@
         </div>
       </div>
       <div class="mvideo height-100-percent">
-        {% comment %}<video
+{% comment %}        <video
           id="listing-video"
           class="video-js vjs-default-skin"
           controls
@@ -369,7 +369,7 @@
               <div class="detail-row">
                 <ul class="detailroom">
                   <li title="Diện tích"><span
-                    class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} </li>
+                    class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} m2</li>
                   <li title="Giá"><strong>$</strong> {{ listing.price }} tỷ</li>
                   {% if listing.sale_price  and listing.sale_price < listing.price %}
                     <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price }} tỷ </strong></li> {% endif %}
@@ -381,8 +381,8 @@
               </div>
             </header>
           </div>
-          <div class="heading-02">Tổng quan</div>
-          <div class="content collapsed pdb-0" data-height="150">
+          <div class="heading-02">Mô tả</div>
+          <div class="content collapsed pdb-0" {% comment %}data-height="150"{% endcomment %}>
             <p class="summary">{{ listing.description }}</p>
           </div>
           <p class="more">
@@ -607,14 +607,6 @@
             </div>
             <div class="list-advantage clear">
               <div class="advantage-name">
-                <p>Mô tả vị trí</p>
-              </div>
-              <div class="advandate-content">{{ listing.description }} Vị trí đất đắc địa, gần chợ,
-                thuộc khu dân cư hiện hữu, dân trí cao, đường dân sinh. Đất còn nằm gần trung tâm.
-              </div>
-            </div>
-            <div class="list-advantage clear">
-              <div class="advantage-name">
                 <p>Cộng đồng dân cư</p>
               </div>
               <div class="advandate-content">Cộng đồng dân cư văn minh, an ninh, thân thiện</div>
@@ -624,6 +616,13 @@
                 <p>Về giáo dục</p>
               </div>
               <div class="advandate-content">Gần trường mầm non, tiểu học, THCS,...
+              </div>
+            </div>
+            <div class="list-advantage clear">
+               <div class="advantage-name">
+                <p>Tình trạng BĐS</p>
+              </div>
+              <div class="advandate-content">{{ listing.status }}
               </div>
             </div>
           </div>

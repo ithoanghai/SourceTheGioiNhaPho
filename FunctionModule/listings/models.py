@@ -134,7 +134,7 @@ class Listing(models.Model):
     reward_person = models.CharField(max_length=50, blank=True, verbose_name=_("Tên chủ sở hữu BĐS"),
                                      help_text="Tên người chủ sở hữu BĐS", default="Nguyễn Văn A")
     reward_person_mobile = models.CharField(max_length=50, blank=True, verbose_name=_("Số ĐT chủ sở hữu BĐS"),
-                                            help_text="Số ĐT chủ sở hữu BĐS", default="0912345678")
+                                            help_text="Số ĐT chủ sở hữu BĐS", default="0916286256")
 
     extra_data = models.TextField(max_length=250, verbose_name=_("Ghi chú"), null=True, blank=True,
                                   default="Chủ nhà hiểu chuyện, tôn trọng môi giới, thiện chí hợp tác,..",
