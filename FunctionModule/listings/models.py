@@ -168,7 +168,7 @@ class ListingImage(models.Model):
 
 class ListingVideo(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("VIDEO BĐS"))
-    video = EmbedVideoField()
+    video = EmbedVideoField(blank=True, null=True)
 
 
 class ListingSerializer(serializers.ModelSerializer):
