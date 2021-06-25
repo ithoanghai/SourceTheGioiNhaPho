@@ -71,11 +71,17 @@
         </li>
       </ul>
     </div>
+
     <div class="login">
-      <ul>
-        <li>
-          <a href="#login" title="Đăng nhập / Đăng ký" class="btn-login">Đăng nhập</a>
+      <ul class="welcome-user">
+        <li class="">
+          {% if user.is_authenticated %}
+            <span>Xin chào {{ user.name }}</span>
+          {% else %}
+            <a href="#login" title="Đăng nhập / Đăng ký" class="btn-login">Đăng nhập</a>
+          {% endif %}
         </li>
+
       </ul>
       <div class="agency-tgnp">
         <a href="{% url 'sell_with_us' %}" title="Đăng tin nhà đất">Đăng bán nhà đất</a>

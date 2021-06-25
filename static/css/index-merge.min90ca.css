@@ -2227,6 +2227,12 @@ body {
     }
 }
 
+.main-header .col-right .welcome-user  {
+    margin-right: 1em;
+    margin-left: 1em;
+    color: antiquewhite;
+}
+
 @media (max-width: 1096px) {
     /*noinspection ALL,CssInvalidPropertyValue*/
     .main-header .col-right {
@@ -14892,3 +14898,4 @@ img.lazy, img.lazy-background {
     display: block;
     padding: 10px 15px;
 }
+

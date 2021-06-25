@@ -90,8 +90,10 @@
               opacity: 0.2;
           }
       </style>
+      {% if not user.is_authenticated %}
       <a href="#login" data-mix-header-click="group: authen, action: click_login" waiting-login-js
          title="Đăng nhập / Đăng ký" class="btn-login">Đăng nhập</a>
+      {% endif %}
       <div class="agency-tgnp">
         <a href="{% url 'sell_with_us' %}" title="Đăng tin nhà đất">Đăng bán nhà đất</a>
       </div>
