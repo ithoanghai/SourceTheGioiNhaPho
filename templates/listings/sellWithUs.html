@@ -20,7 +20,8 @@
     <div class="cta-bottom-wrapper">
       <div class="cta-bottom-inner">
         <div class="phone">
-          <a class="cta-hotline" href="tel:0971841941"><span class="font-icon fone-b font-20"> </span> <strong>0971 841 941</strong></a>
+          <a class="cta-hotline" href="tel:0971841941"><span class="font-icon fone-b font-20"> </span> <strong>0971 841
+            941</strong></a>
         </div>
         <div>
           <a class="cta-form" href="#" data-action="request-service">ĐĂNG KÝ NGAY</a>
@@ -470,6 +471,20 @@
 {% block scripts %}
 
   <script type="text/javascript" src="https://www.googleadservices.com/pagead/f.txt"></script>
+  <script>
+      $('.slider-cus').flexslider({
+          animation: "slide",
+          controlNav: true,
+          animationLoop: false,
+          slideshow: true,
+          itemMargin: 0,
+          maxItems: 1,
+          touch: true,
+          slideshowSpeed: 4000,
+          prevText: "<i class='zmdi zmdi-chevron-left'></i>",
+          nextText: "<i class='zmdi zmdi-chevron-right'></i>",
+      });
+  </script>
 
 {% endblock %}
 

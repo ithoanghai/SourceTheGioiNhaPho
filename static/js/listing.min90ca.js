@@ -564,7 +564,7 @@
         n("yw+R");
         !function () {
             var t = null, e = ".mpreviews .mphotos", n = ".mpreviews .mvideo", r = ".mpreviews .mview3d",
-                i = ".mpreviews .mstreetview", o = ".changeimg-box .naviicon li:not(.disable) [href=#photos]", a = !1,
+                i = ".mpreviews .mstreetview", o = ".changeimg-box .naviicon li:not(.disable) [href='#photos']", a = !1,
                 u = !1, s = !1;
             $("#slider .slides li a[bgr]"), $("#carousel .slides li a[bgr]"), $("#carousel1 .slides li a[bgr]");
 
@@ -602,7 +602,7 @@
                     end: function (t) {
                     }
                 }))
-            }), $(".changeimg-box .naviicon li:not(.disable) [href=#video]").click(function () {
+            }), $(".changeimg-box .naviicon li:not(.disable) [href='#video']").click(function () {
                 if ($(e).addClass("hidden"), $(n).removeClass("hidden"), $(r).addClass("hidden"), $(i).addClass("hidden"), $(".changeimg-box .naviicon li:not(.disable)").removeClass("active"), $(this).parent().addClass("active"), !u) {
                     u = !0;
                     var t = function (t) {
@@ -620,7 +620,7 @@
                     }($("form[name=info] input[name=youtube]").val());
                     $("#preview-video").attr("src", t)
                 }
-            }), $(".changeimg-box .naviicon li:not(.disable) [href=#view3d]").click(function () {
+            }), $(".changeimg-box .naviicon li:not(.disable) [href='#view3d']").click(function () {
                         $(e).addClass("hidden"), $(n).addClass("hidden"), $(r).removeClass("hidden"), $(i).addClass("hidden"), $(".changeimg-box .naviicon li:not(.disable)").removeClass("active"), $(this).parent().addClass("active");
                         var t = $(r).find("iframe");
                         if (!t.attr("src")) {
@@ -628,7 +628,7 @@
                             o && t.attr("src", o)
                         }
                         u && document.getElementById("preview-video").contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*")
-            }), $(".changeimg-box .naviicon li:not(.disable) [href=#streetview]").click(function () {
+            }), $(".changeimg-box .naviicon li:not(.disable) [href='#streetview']").click(function () {
                 if ($(e).addClass("hidden"), $(n).addClass("hidden"), $(r).addClass("hidden"), $(i).removeClass("hidden"), $(".changeimg-box .naviicon li:not(.disable)").removeClass("active"), $(this).parent().addClass("active"), !a) {
                     a = !0;
                     var t = parseFloat($("form[name=info] input[name=streetviewLat]").val()),
@@ -1281,7 +1281,7 @@
                 width: 360,
                 close: ".close"
             }), $("#contact-now-form input").first().focus()
-        }), $("a[href=#sell-now-form]").click(function (t) {
+        }), $("a[href='#sell-now-form']").click(function (t) {
             t.preventDefault(), $dialog.show("sell-now-form", {
                 close: ".cnb-close",
                 body: ".popup-overlay"

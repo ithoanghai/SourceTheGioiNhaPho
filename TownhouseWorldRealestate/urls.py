@@ -1,4 +1,5 @@
 import debug_toolbar
+from django.shortcuts import redirect
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
@@ -7,6 +8,10 @@ from adminplus.sites import AdminSitePlus
 
 admin.site = AdminSitePlus()
 admin.autodiscover()
+
+def redirect_view(request):
+    response = redirect('/admin/')
+    return response
 
 urlpatterns = [
     path('', include('FunctionModule.pages.urls')),
@@ -17,6 +22,7 @@ urlpatterns = [
     path('contacts/', include('FunctionModule.contacts.urls')),
     path('cadastral/', include('FunctionModule.cadastral.urls')),
     path('accounts/', include('allauth.urls')),
+    path('admin', redirect_view),
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
