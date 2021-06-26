@@ -150,7 +150,7 @@
         fact.bodyClassSpecs = "mdialog-body";
         fact.bodyLoadingClass = "mdialog-loading";
         fact.cachedBodyStyle = null;
-        fact.default = {
+        fact.styleOptions = {
             zindex: 99999,
             width: 300,
             minHeight: 100,
@@ -288,7 +288,7 @@
             head.appendChild(style);
         };
         fact.getCss = function () {
-            var options = fact.default;
+            var options = fact.styleOptions;
             var css = "";
             var dialog = {};
             dialog["display"] = "none";

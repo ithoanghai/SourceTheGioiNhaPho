@@ -1,66 +1,4 @@
 @charset "UTF-8";
-@font-face {
-    font-family: tgnp-font;
-    src: url(../fonts/RV-Harmonia-Light.eot);
-    src: url(../fonts/RV-Harmonia-Lightd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-Light.woff) format("woff"), url(../fonts/RV-Harmonia-Light.ttf) format("truetype"), url(../fonts/RV-Harmonia-Light.svg#roboto_condensedregular) format("svg");
-    font-weight: 300;
-    font-display: swap
-}
-
-@font-face {
-    font-family: tgnp-font;
-    src: url(../fonts/RV-Harmonia-Regular.eot);
-    src: url(../fonts/RV-Harmonia-Regulard41d.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-Regular.woff) format("woff"), url(../fonts/RV-Harmonia-Regular.ttf) format("truetype"), url(../fonts/RV-Harmonia-Regular.svg#roboto_condensedregular) format("svg");
-    font-weight: 400;
-    font-display: swap
-}
-
-@font-face {
-    font-family: tgnp-font;
-    src: url(../fonts/RV-Harmonia-SemiBold.eot);
-    src: url(../fonts/RV-Harmonia-SemiBoldd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-SemiBold.woff) format("woff"), url(../fonts/RV-Harmonia-SemiBold.ttf) format("truetype"), url(../fonts/RV-Harmonia-SemiBold.svg#roboto_condensedregular) format("svg");
-    font-weight: 500;
-    font-display: swap
-}
-
-@font-face {
-    font-family: tgnp-font;
-    src: url(../fonts/RV-Harmonia-Bold.eot);
-    src: url(../fonts/RV-Harmonia-Boldd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-Bold.woff) format("woff"), url(../fonts/RV-Harmonia-Bold.ttf) format("truetype"), url(../fonts/RV-Harmonia-Bold.svg#roboto_condensedregular) format("svg");
-    font-weight: 600;
-    font-display: swap
-}
-
-@font-face {
-    font-family: tgnp-font2;
-    src: url(../fonts/TiemposHeadline-Medium.eot);
-    src: url(../fonts/TiemposHeadline-Mediumd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/TiemposHeadline-Medium.woff) format("woff"), url(../fonts/TiemposHeadline-Medium.ttf) format("truetype"), url(../fonts/TiemposHeadline-Medium.svg#roboto_condensedregular) format("svg");
-    font-weight: 500;
-    font-display: swap
-}
-
-@font-face {
-    font-family: tgnp-icon;
-    src: url(../fonts/TGNPIcons.eot);
-    src: url(../fonts/TGNPIconsd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/TGNPIcons.woff) format("woff"), url(../fonts/TGNPIcons.ttf) format("truetype"), url(../fonts/TGNPIcons.svg#roboto_condensedregular) format("svg")
-}
-
-@font-face {
-    font-family: flexslider-icon;
-    src: url(../fonts/flexslider-icon.eot);
-    src: url(../fonts/flexslider-icond41d.eot?#iefix) format("embedded-opentype"), url(../fonts/flexslider-icon.woff) format("woff"), url(../fonts/flexslider-icon.ttf) format("truetype"), url(../fonts/flexslider-icon.svg#flexslider-icon) format("svg");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap
-}
-
-body {
-    font-family: tgnp-font, Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    line-height: 1;
-    color: #444c59;
-    font-weight: 400
-}
 
 .font-icon {
     font-family: tgnp-icon, Verdana, Geneva, sans-serif;
@@ -69,70 +7,6 @@ body {
     font-size: 18px;
     font-style: normal;
     vertical-align: middle
-}
-
-*, ::after, ::before {
-    margin: 0;
-    padding: 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box
-}
-
-html * {
-    -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: grayscale
-}
-
-input[type=search]::-webkit-search-cancel-button {
-    -webkit-appearance: searchfield-cancel-button
-}
-
-::-webkit-input-placeholder {
-    color: rgba(0, 4, 68, .3)
-}
-
-button, input, keygen, select, textarea {
-    text-rendering: auto;
-    color: initial;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0;
-    text-shadow: none;
-    display: inline-block;
-    margin: 0
-}
-
-button:focus, input:focus, keygen:focus, select:focus, textarea:focus {
-    outline: 0
-}
-
-li {
-    list-style: none
-}
-
-abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, cite, code, dd, del, details, dfn, div, dl, dt, em, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, p, pre, q, samp, section, small, span, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, ul, var, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    background: 0 0;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box
-}
-
-label {
-    display: inline-block;
-    margin-bottom: .5rem
-}
-
-a {
-    color: #303330;
-    text-decoration: none
 }
 
 .clearfix {
@@ -10868,17 +10742,6 @@ ul.exclusive li.featured header li .zmdi {
     margin: 0 auto
 }
 
-.background-detail.mpreviews {
-    background-color: #444c59;
-    text-align: center
-}
-
-@media (max-width: 480px) {
-    .background-detail {
-        height: 276px
-    }
-}
-
 #slider {
     position: relative;
     height: 350px;
@@ -10911,37 +10774,6 @@ ul.exclusive li.featured header li .zmdi {
     }
 }
 
-.changeimg-box {
-    width: 100%;
-    text-align: center;
-    font-size: 1.6em;
-    height: 76px;
-    background: #262626
-}
-
-.changeimg-box .fix-widthcell {
-    max-width: 1140px;
-    margin: 0 auto
-}
-
-@media (max-width: 800px) {
-    .changeimg-box {
-        height: 68px
-    }
-}
-
-@media (max-width: 480px) {
-    .changeimg-box {
-        width: 100%;
-        margin-left: 0
-    }
-}
-
-@media (max-width: 375px) {
-    .changeimg-box {
-        height: 60px
-    }
-}
 
 .but-nextdetail {
     position: absolute;
@@ -11101,9 +10933,9 @@ ul.slideimg li a.img:hover {
 #carousel {
     position: relative;
     width: 50%;
-    margin: 8px 0 0 !important;
-    border-radius: 0 !important;
-    border: 0 !important;
+    margin: 8px 0 0;
+    border-radius: 0;
+    border: 0;
     background: 0 0;
     float: left;
     overflow: hidden
