@@ -157,9 +157,7 @@
         <input name="neighborhood" type="hidden" value="">
         <input name="lat" type="hidden" value="">
         <input name="lon" type="hidden" value="">
-        {% for video in listing.videos %}
-            <input name="youtube" type="hidden" value="{{ video.video }}">
-        {% endfor %}
+{#        <input name="youtube" type="hidden" value="{{ listing.videos.0.video }}">#}
         <input name="favorited_type" type="hidden" value="sale_property">
         <input name="streetviewLat" type="hidden" value="">
         <input name="streetviewLon" type="hidden" value="">
@@ -206,19 +204,18 @@
       <div class="mvideo height-100-percent">
         <video
           id="listing-video"
-          class="video-js vjs-default-skin"
+          class="video-js vjs-default-skin hidden"
           controls
           preload="auto"
           data-setup="{'techOrder': ['youtube'],}"
-{#          data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "{{ listing.videos.0.video }}"}] }'#}
         >
           {% for video in listing.videos %}
             <source src="{{ video.video }}" type="video/youtube">
           {% endfor %}
         </video>
-        <iframe id="preview-video" frameborder="0" allowfullscreen>
-
-        </iframe>
+{#        <iframe id="preview-video" frameborder="0" allowfullscreen>#}
+{##}
+{#        </iframe>#}
       </div>
       <div class="mview3d preview3d hidden height-100-percent">
         <a href="#" class="full-screen-act" title="Fullscreen"></a>
@@ -339,7 +336,7 @@
           {#                            <span class="font-icon streetview"></span> Street view#}
           {#                        </a>#}
           {#                    </li>#}
-        </div>
+        </ul>
       </div>
     </div>
     <section class="page-listing-detail">
@@ -1474,7 +1471,7 @@
   {% if listing.videos %}
     <link href="//vjs.zencdn.net/7.10.2/video-js.min.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="//vjs.zencdn.net/7.10.2/video.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/video.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/youtube_video.min.js' %}"></script>
   {% endif %}"
 
 {% endblock %}
