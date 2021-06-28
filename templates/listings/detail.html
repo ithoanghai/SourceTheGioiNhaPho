@@ -5,7 +5,7 @@
 {% block head %}
   {{ block.super }}
 
-  <link rel="canonical" href="{% url 'detail' %}/{{ listing.id }}"/>
+  <link rel="canonical" href="{{ listing.id }}"/>
 
 {% endblock %}
 
@@ -856,30 +856,6 @@
       </div>
     </section>
 
-    <div class="post-share-btn-group aj-post-share-btn-group">
-      <div class="btn-group btn-share-group addthis_toolbox addthis_default_style">
-        <ul class="post-share-buttons">
-          <li>
-            <a class="addthis_button_facebook kmq-blog-post-share-post facebook-color"> <i
-              class="zmdi zmdi-facebook"></i></a>
-          </li>
-          <li>
-            <a class="addthis_button_messenger kmq-blog-post-share-post twitter-color">
-              <img width="90%" src="{% static 'images/fb_message.svg' %}"
-                   alt="messenger" title="messenger"/>
-            </a>
-          </li>
-          <li>
-            <a class="addthis_button_sms kmq-blog-post-share-post in-color"> <i
-              class="zmdi zmdi-hc-2x zmdi-comment-text"></i></a>
-          </li>
-          <li>
-            <a class="addthis_button_mailto kmq-blog-post-share-post gray "> <i
-              class="zmdi zmdi-hc-2x zmdi-email"></i></a>
-          </li>
-        </ul>
-      </div>
-    </div>
     <div id="property-contactbox-v2-app"></div>
     <div id="detailPopupContact">{% include "listings/_detailPopupContactTemplate.html" %}</div>
     {% include "partials/_detailFeedbackForm.html" %}
@@ -1119,7 +1095,6 @@
   </script>
   <script defer src="{% static 'js/favorite.min90ca.js' %}"></script>
   <script defer src="{% static 'js/home-recent-view.min90ca.js' %}"></script>
-  <script defer src="{% static 'js/addthis_widget.js' %}"></script>
 
   <script type="deferjs">
   function setupViewMore(heightLimit, $itemsWrapper, $items, $viewMoreWrapper, $viewMoreLink){

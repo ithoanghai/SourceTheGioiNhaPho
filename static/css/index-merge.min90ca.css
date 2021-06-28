@@ -84,7 +84,8 @@ a {
 
 .container .inner {
     display: block;
-    overflow: hidden
+    overflow: hidden;
+    width: 100%
 }
 
 .section-home {
