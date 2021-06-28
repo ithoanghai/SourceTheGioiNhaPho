@@ -47,7 +47,16 @@
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script defer src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>
 
-<!-- Chống sao chép website-->
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60d864aab9d3c079"></script>
+
+   <!-- Chống sao chép website-->
+{% comment %}    <script type="text/javascript">
+    $(document).ready(function(){
+    $('*').bind('cut copy paste contextmenu', function (e) {
+        e.preventDefault();
+    })});
+    </script>{% endcomment %}
 
 <!-- Start of HubSpot Embed Code -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/19875873.js"></script>
