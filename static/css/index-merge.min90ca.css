@@ -6614,7 +6614,8 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
     position: relative;
     height: 348px;
     margin-bottom: 60px;
-    padding: 0
+    padding: 0;
+    width: 100%
 }
 
 .quickly-sell-cover {
