@@ -8,6 +8,7 @@ from adminplus.sites import AdminSitePlus
 
 admin.site = AdminSitePlus()
 admin.autodiscover()
+admin.site.site_header = 'Quản trị hệ thống thế giới nhà phố'
 
 def redirect_view(request):
     response = redirect('/admin/')
