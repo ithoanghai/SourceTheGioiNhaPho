@@ -4,7 +4,7 @@
 
 {% block head %}
   {{ block.super }}
-  <link rel="canonical" href="search"/>
+  <link rel="canonical" href="{% url 'listing_search' %}"/>
 
   <link rel="stylesheet" href="{% static 'css/search-transition.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/loading.min.css' %}"/>
