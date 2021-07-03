@@ -150,24 +150,46 @@ function addressSelect($) {
         return self;
     }
 
-    function updateSelect(parentId, childId, channel, text) {
-        $(`#${parentId}`).change((e) => {
-            const parentCode = e.target.value;
-            if (!parentCode) return;
-            $.ajax(buildURL(channel, parentCode)).done((result) => {
-                if (Array.isArray(result)) {
-                    let optionText = [`<option value=\"\" selected=\"\">${text}</option>`]
-                    result.map(item => {
-                        optionText.push(item.repr)
-                    });
-                    $(`#${childId}`).html(optionText);
-                }
-            })
+    function updateWard() {
+        const selector = $(`#${wardId}`);
+        const curVal = selector.val() || "";
+        if (curVal) {
+            selector.replaceWith(`<select name="ward" id="id_ward"><option selected value="${curVal}">${curVal}</option></select>`);
+        } else {
+            selector.replaceWith('<select name="ward" id="id_ward"></select>');
+        }
+        updateSelectOptions(wardChannel, $(`#${districtId}`).val() || '008', `#${wardId}`, "Chọn Phường/xã")
+    }
+
+    function updateSelectOptions(channel, code, selector, defaultText) {
+        $.ajax(buildURL(channel, code)).done((result) => {
+            if (Array.isArray(result)) {
+                // let optionText = [`<option value="" disabled selected>${defaultText}</option>`]
+                let optionText = []
+                const curVal = $(selector).val();
+                result.map(item => {
+                    if (item.value == curVal) {
+                        optionText.push(`<option selected value="${item.value}">${item.repr}</option>`)
+                    } else {
+                        optionText.push(`<option value="${item.value}">${item.repr}</option>`)
+                    }
+                });
+                $(selector).html(optionText);
+            }
         })
     }
 
-    updateSelect(stateId, districtId, districtChannel, "Chọn quận/huyện")
+    function updateSelect(parentId, childId, channel, defaultText) {
+        $(`#${parentId}`).change((e) => {
+            const parentCode = e.target.value;
+            if (!parentCode) return;
+            updateSelectOptions(channel, parentCode, `#${childId}`, defaultText);
+        })
+    }
+
+    updateSelect(stateId, districtId, districtChannel, "Chọn quận/huyện truoc")
     updateSelect(districtId, wardId, wardChannel, "Chọn Phường/xã")
+    updateWard();
     const address$ = $('#id_address');
 
     $('#id_street').typingFinished(500, (e) => {

@@ -43,7 +43,7 @@ class ListingAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return queryset
         else:
-            return queryset.filter(user=request.user.id)
+            return queryset.filter(realtor=request.user.id)
 
     def get_exclude(self, request, obj=None):
         excluded = super().get_exclude(request, obj)

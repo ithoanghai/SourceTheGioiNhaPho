@@ -34,7 +34,7 @@ class WardLookup(LookupChannel):
             return []
 
     def format_item_display(self, obj):
-        return f"<option value='{obj['code']}'>{obj['name']}</option>"
+        return obj['name']
 
     def get_result(self, obj):
         return obj['code']
