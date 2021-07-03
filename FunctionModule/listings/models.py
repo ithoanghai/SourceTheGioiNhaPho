@@ -41,7 +41,7 @@ class Listing(models.Model):
                               default=_("Nhập tên Đường/Phố/Thôn/Xóm"), null=True)
     state = models.CharField(max_length=50, choices=city_choices, default="01",
                              verbose_name=_("Thành phố/Tỉnh"), )
-    district = models.CharField(max_length=50, verbose_name=_("Quận/Huyện"), default="01")
+    district = models.CharField(max_length=50, verbose_name=_("Quận/Huyện"), default="008")
     ward = models.CharField(max_length=50, verbose_name=_("Phường/Xã"), blank=True, null=True)
 
     condition = models.CharField(max_length=20, choices=Condition.choices, default=Condition.OLD,
