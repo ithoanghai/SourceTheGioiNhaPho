@@ -479,10 +479,6 @@ a:hover {
     vertical-align: middle
 }
 
-.width-1600 .right-menu ul li:last-child a.rightmenu-linkblack {
-    padding-right: 0
-}
-
 .width-1600 .right-menu ul li .avatar-user {
     color: #fff
 }
@@ -917,33 +913,6 @@ button[type=button].btn-no-style:focus {
     position: relative
 }
 
-.width-1600 hgroup .logoblack {
-    font-family: 'tgnp-icon'
-}
-
-.width-1600 hgroup .logoblack:before {
-    content: '\f191';
-    font-weight: 400;
-    font-size: 113px;
-    color: #444c59
-}
-
-.width-1600 hgroup .logoblack a {
-    width: 180px;
-    height: 38px;
-    display: block
-}
-
-.width-1600 .right-menu ul li a.rightmenu-linkblack {
-    width: 100%;
-    margin: 2px 14px 0 15px;
-    border-bottom: 2px solid transparent;
-    color: #444c59;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 58px
-}
-
 .width-1600 .right-menu ul {
     float: left;
     position: relative
@@ -952,16 +921,6 @@ button[type=button].btn-no-style:focus {
 .width-1600 .right-menu ul li a.active {
     border-bottom: 3px solid #444c59
 }
-
-.width-1600 .right-menu ul li.active a.rightmenu-linkblack:not(.dropdownmenublack), .width-1600 .right-menu ul li a.rightmenu-linkblack:not(.dropdownmenublack):hover {
-    border-bottom: 2px solid #444c59;
-    color: rgba(119, 118, 118, .96)
-}
-
-.width-1600 .right-menu ul li.active a.rightmenu-linkblack:not(.dropdownmenublack) {
-    color: #444c59
-}
-
 
 .background-detail {
     position: relative;
@@ -7744,22 +7703,6 @@ section.apartment article.featured header ul li {
     color: #fff
 }
 
-.contactnow-but {
-    display: inline-block !important;
-    padding: 7px 20px 3px !important;
-    border: 1px solid rgba(51, 117, 136, .5);
-    border-radius: 2px;
-    background: none;
-    color: #00779a !important;
-    width: auto !important;
-    font-weight: 500 !important
-}
-
-.contactnow-but:hover {
-    background: #00779a;
-    color: #fff !important
-}
-
 .apply-but {
     display: inline-block !important;
     padding: 7px 20px 3px !important;
@@ -10434,13 +10377,6 @@ a.answer {
     float: left
 }
 
-#slider-building, #slider-project {
-    border: 0 !important;
-    position: relative;
-    background: none !important;
-    padding-bottom: 60px
-}
-
 section.result article.featured header ul:after {
     width: 100%;
     clear: both;
@@ -10512,36 +10448,6 @@ section.result article.featured header .name-title p {
 
 .list-view section.result article.featured header ul {
     width: auto
-}
-
-#slider-building ul.exclusive li.featured .cover, #slider-project ul.exclusive li.featured .cover {
-    border: 0;
-    background-color: #f4f5f9
-}
-
-#slider-building ul.exclusive li.featured header, #slider-project ul.exclusive li.featured header {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .9));
-    color: #fff;
-    padding-top: 30px
-}
-
-#slider-building ul.exclusive li.featured header .heading, #slider-project ul.exclusive li.featured header .heading {
-    color: #fff;
-    min-height: auto;
-    max-height: 22px;
-    overflow: hidden;
-    font-size: 18px;
-    line-height: 20px
-}
-
-#slider-building ul.exclusive li.featured header h4, #slider-building ul.exclusive li.featured header h4 a, #slider-project ul.exclusive li.featured header h4, #slider-project ul.exclusive li.featured header h4 a {
-    color: #fff;
-    line-height: 24px;
-    font-weight: 400
 }
 
 .view-all-project {
@@ -11452,10 +11358,6 @@ section.project article.featured {
     opacity: .2
 }
 
-.width-1600 .right-menu ul.border-navgroup-gray li a.rightmenu-linkblack {
-    font-weight: 500
-}
-
 .btn-no {
     border: 0;
     background: none;
@@ -11694,10 +11596,6 @@ section.project article.featured {
     height: 48px;
     overflow: hidden;
     display: block
-}
-
-.width-1600 .right-menu ul.border-navgroup-gray li a.rightmenu-linkblack {
-    margin: 2px 8px 0 8px
 }
 
 .pd-search-icon {
@@ -13054,12 +12952,6 @@ section.browsing article.featured {
     bottom: 0
 }
 
-.list-part-t li .contactnow-but {
-    padding: 7px 10px 3px 10px !important;
-    font-weight: 400 !important;
-    font-size: 14px
-}
-
 .right-title-ab .view-more-cyan {
     display: none
 }
@@ -13670,26 +13562,8 @@ section.browsing article.featured {
     z-index: -1
 }
 
-.title-popup-da {
-    background: #f3f4f7;
-    height: 80px;
-    line-height: 80px;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    font-size: 20px;
-    margin: -45px -45px
-}
-
 .project-name .listing-detail {
     width: 68%
-}
-
-.text-fill-left {
-    color: rgba(68, 76, 89, .76);
-    font-weight: 400;
-    display: inline-block;
-    width: 30%
 }
 
 .stickyTrigger .btn-sticky-header {
@@ -13700,12 +13574,6 @@ section.browsing article.featured {
 
 .fixed-form-r .content-pu-rv {
     padding: 20px
-}
-
-.project-sumary .project-name {
-    display: -webkit-flex !important;
-    display: -ms-flexbox !important;
-    display: flex !important
 }
 
 .form-info .box-form .checkbox input + label:after {
@@ -14129,16 +13997,9 @@ section.browsing article.featured {
 }
 
 @media only screen and (max-width: 1080px) {
-    .contactnow-but > span {
-        display: none
-    }
 
     .project-name .listing-detail {
         width: 100%
-    }
-
-    .project-sumary .project-name {
-        display: block !important
     }
 
     .listing-detail-price {

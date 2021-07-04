@@ -998,10 +998,6 @@ header#home::before {
     background: rgba(255, 255, 255, .2)
 }
 
-.main-header#home .col-right .login .btn-login {
-    color: #fff
-}
-
 .main-header#home .col-right .login .btn-red-outline {
     color: #fff;
     border: 1px solid #fff
@@ -1081,11 +1077,6 @@ header#home::before {
     }
 }
 
-.main-header .btn-ultra {
-    height: 55px;
-    line-height: 55px
-}
-
 .main-header .btn-large {
     height: 50px;
     line-height: 50px
@@ -1094,28 +1085,6 @@ header#home::before {
 .main-header .btn-medium {
     height: 40px;
     line-height: 40px
-}
-
-.main-header .btn-small {
-    height: 32px;
-    line-height: 32px
-}
-
-.main-header .btn-login {
-    display: inline-block;
-    width: auto;
-    margin: 0 auto;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 14px;
-    border: 0;
-    padding: 0 20px;
-    background: 0 0;
-    white-space: nowrap
-}
-
-.main-header .btn-login:focus {
-    outline: 0
 }
 
 .main-header .btn-facebook {
