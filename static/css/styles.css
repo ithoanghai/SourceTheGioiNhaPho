@@ -311,15 +311,6 @@
     display: inline-block
 }
 
-.project-sumary .project-name {
-    width: 100%;
-    padding: 20px 0 20px;
-    overflow: hidden;
-    display: block;
-    font-size: 16px;
-    border-bottom: 1px solid rgba(48, 51, 58, .2)
-}
-
 .main-content .view-more-gray.more {
     display: none
 }
@@ -2880,16 +2871,6 @@ section.project-header div div.project-name div.address h1.title-project {
     border: 1px solid orange
 }
 
-.project-sumary .project-name .detail {
-    float: left;
-    width: 100%;
-    display: block;
-    overflow: hidden;
-    font-size: 16px;
-    padding: 30px 0 0 0;
-    border-top: 1px solid #dedede
-}
-
 section.project-header div.project-name div.share ul li.share {
     width: 100%;
     text-align: right;
@@ -3693,11 +3674,6 @@ li.whr-item .whr-info li.whr-date {
 
     .project-title .width1140 {
         padding: 0 !important
-    }
-
-    .project-sumary .project-name .detail {
-        padding: 0;
-        border: none
     }
 
     .project-title .btn-info, .project-title .header {

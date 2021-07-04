@@ -84,10 +84,6 @@
         padding: 20px
     }
 
-    .list-part-t li .contactnow-but {
-        padding-right: 5px !important
-    }
-
     .left-popup-rv {
         display: none
     }
@@ -130,10 +126,6 @@
 
     .list-part-t li {
         width: 14%
-    }
-
-    .contactnow-but {
-        padding: 0 10px
     }
 
     .fixed-form-r {
@@ -925,10 +917,6 @@
         padding-bottom: 20px
     }
 
-    #slider-building, #slider-project {
-        padding-bottom: 30px
-    }
-
     .common-info p {
         font-weight: 400;
         line-height: 26px
@@ -1153,10 +1141,6 @@
     .content-document li button {
         padding: 0 20px;
         line-height: 30px
-    }
-
-    .list-part-t li .contactnow-but span {
-        display: none
     }
 
     .p-doc-relative-wrapper .img {
@@ -1625,10 +1609,6 @@
 
     .list-view section.project .action-list {
         display: block
-    }
-
-    .list-view section.project .action-list .contactnow-but {
-        display: none !important
     }
 
     .list-view section.project .action-list .follow-button {
