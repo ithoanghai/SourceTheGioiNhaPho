@@ -175,19 +175,6 @@
     }
 }
 
-.btn-blue-outline {
-    color: #337588;
-    border: 1px solid #337588;
-    background: 0 0
-}
-
-@media (min-width: 768px) {
-    .btn-blue-outline:hover {
-        color: #fff;
-        background: #337588
-    }
-}
-
 .btn-white {
     color: #73afba;
     background: #fff
@@ -223,18 +210,6 @@
 
 .btn-favorite.active {
     background: #00a6bd
-}
-
-.per50-left {
-    float: left;
-    width: 48%
-}
-
-.per50-left::after {
-    clear: both;
-    width: 100%;
-    content: '';
-    display: table
 }
 
 .popup-overlay {
@@ -378,6 +353,9 @@
         -ms-flex-pack: start;
         justify-content: flex-start
     }
+    .popup-fb-success {
+        overflow: scroll
+    }
 }
 
 @media screen and (max-width: 576px) {
@@ -407,18 +385,6 @@
     -webkit-box-pack: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, .7)
-}
-
-.popup-fixed-login {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    padding: 30px;
-    position: unset
-}
-
-.popup-fixed-login .popup-form-login-rv {
-    display: inline-block
 }
 
 .popup-login-rv {

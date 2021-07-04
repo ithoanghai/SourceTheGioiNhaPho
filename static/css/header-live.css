@@ -1182,19 +1182,6 @@ header#home::before {
     }
 }
 
-.main-header .btn-blue-outline {
-    color: #337588;
-    border: 1px solid #337588;
-    background: 0 0
-}
-
-@media (min-width: 768px) {
-    .main-header .btn-blue-outline:hover {
-        color: #fff;
-        background: #337588
-    }
-}
-
 .main-header .btn-favorite {
     position: absolute;
     top: 10px;
@@ -1414,25 +1401,6 @@ header#home::before {
     height: 100%;
     -o-object-fit: contain;
     object-fit: contain
-}
-
-.main-header .col-left .main-nav-menu .main-nav-menu__head .close__main-menu {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 44px;
-    height: 44px;
-    background-color: transparent;
-    outline: 0;
-    border: 0;
-    text-align: right;
-    cursor: pointer
-}
-
-.main-header .col-left .main-nav-menu .main-nav-menu__head .close__main-menu .zmdi {
-    padding: 0;
-    font-size: 24px;
-    color: #30333a
 }
 
 .main-header .col-right .top-menu ul li .menu-humber {
