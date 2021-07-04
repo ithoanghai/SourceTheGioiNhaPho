@@ -126,72 +126,6 @@
     max-height: inherit
 }
 
-.bg-opa {
-    background: rgba(0, 0, 0, .32);
-    text-align: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    color: #fff;
-    margin: auto;
-    height: 100%;
-    font-size: 14px
-}
-
-.display-table {
-    display: table;
-    width: 100%;
-    height: 100%
-}
-
-.display-table a {
-    color: #fff
-}
-
-.bg-opa a {
-    display: table-cell;
-    vertical-align: middle
-}
-
-.sticky-footer {
-    position: fixed;
-    background: #fff;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px 20px;
-    display: none;
-    justify-content: space-between;
-    border-top: 1px solid #f4f5f9;
-    z-index: 1000
-}
-
-.sticky-footer div {
-    width: 50%;
-    padding: 0 10px
-}
-
-.bg-overlay-wrapper {
-    background: rgba(0, 0, 0, .9);
-    height: 100vh;
-    overflow: auto;
-    position: relative
-}
-
-.s-form-wrapper {
-    width: 100%;
-    max-width: 645px;
-    margin: 0 auto;
-    background: #fff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%)
-}
-
 .s-form-close-btn {
     display: block;
     height: 36px;
@@ -503,13 +437,6 @@
 
 .s-col .img-wrapper a img {
     width: 100%
-}
-
-.s-col .bg-opa .zmdi::before {
-    content: '\f3a8';
-    font-family: Material-Design-Iconic-Font;
-    font-size: 2em;
-    font-style: normal
 }
 
 .s-content {
@@ -2225,10 +2152,6 @@
         max-width: 600px
     }
 
-    .sticky-footer {
-        display: flex
-    }
-
     .heading-wrapper {
         top: 35%
     }
@@ -2433,14 +2356,6 @@
         width: 100%
     }
 
-    .bg-overlay-wrapper {
-        background: unset
-    }
-
-    .s-form-wrapper {
-        min-height: 100%
-    }
-
     .s-form-close-btn {
         display: none
     }
@@ -2514,20 +2429,6 @@
 
     .s-subcription-inner .title {
         font-size: 14px
-    }
-
-    .sticky-footer {
-        flex-flow: row wrap
-    }
-
-    .sticky-footer div {
-        width: 100%;
-        margin-bottom: 10px;
-        padding: unset
-    }
-
-    .sticky-footer div:nth-child(2) {
-        margin-bottom: 0
     }
 
     .s-column-4 > .s-cell.s-btn {

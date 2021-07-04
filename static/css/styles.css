@@ -891,17 +891,6 @@ section.bg-gray-e6 div.more-info-black {
     width: 100%
 }
 
-.project-title .btn-info .btn-chitiet, .stickyTrigger .width1140 .btn-chitiet {
-    width: 180px;
-    float: right;
-    padding-top: 8px
-}
-
-.btn-chitiet .btn-hotline:hover {
-    color: orange !important;
-    border: 1px solid orange !important
-}
-
 .btn-hotline {
     height: 40px;
     text-align: center;
@@ -913,12 +902,6 @@ section.bg-gray-e6 div.more-info-black {
     font-size: 16px !important;
     color: #000 !important;
     display: block
-}
-
-.btn-chitiet .btn-hotline {
-    height: 40px;
-    line-height: 40px;
-    float: none
 }
 
 .fone-b:before {
@@ -1836,50 +1819,6 @@ ul li.list-filter a.ward {
     line-height: 36px !important
 }
 
-.khudancu {
-    padding: 0 0 30px 0
-}
-
-.khudancu-right {
-    display: table-cell;
-    vertical-align: middle;
-    width: 48%;
-    font-size: 16px;
-    line-height: 22px;
-    text-align: justify
-}
-
-.khudancu-right ul {
-    padding: 20px 0
-}
-
-.khudancu-right ul li {
-    display: inline-block
-}
-
-.khudancu-left {
-    display: table-cell;
-    vertical-align: middle;
-    width: 52%;
-    padding: 0 4% 0 0
-}
-
-.khudancu-right .title {
-    font-size: 20px;
-    font-weight: 400;
-    font-family: Tiempos, Verdana, Geneva, sans-serif;
-    padding-bottom: 20px
-}
-
-.khudancu-right .content {
-    padding-bottom: 20px
-}
-
-.khudancu-right .black-button {
-    float: left;
-    max-width: 160px
-}
-
 .owner-img + .owner-img {
     padding-top: 40px;
     border-top: 1px dotted #dedede
@@ -1923,24 +1862,6 @@ div.width1140 div.owner-img div.right {
 
 .owner-img:last-child {
     padding-bottom: 60px
-}
-
-.btn-chitiet a {
-    border: 1px solid #303339;
-    font-weight: 500;
-    text-align: center;
-    border-radius: 2px;
-    height: 35px;
-    line-height: 35px;
-    display: block;
-    padding: 0 15px;
-    background: #fff;
-    float: left;
-    cursor: pointer
-}
-
-.btn-chitiet:hover a {
-    color: #fff
 }
 
 .ttct {
@@ -2640,68 +2561,6 @@ div.width1140 div.owner-img div.right .title {
     display: block
 }
 
-.project-header .project-header .project-name {
-    width: 100%;
-    padding: 20px 0;
-    overflow: hidden;
-    display: block;
-    font-size: 20px
-}
-
-.project-header .project-name .address h2 {
-    font-weight: 400;
-    padding-right: 5px;
-    font-size: 14px
-}
-
-section.project-header div.project-name {
-    padding: 40px
-}
-
-section.project-header div.project-name div.address {
-    width: 65%;
-    float: left;
-    font-size: 14px;
-    color: gray
-}
-
-section.project-header div.project-name div.address h4 {
-    font-size: 14px;
-    font-weight: 400;
-    display: inline-block
-}
-
-section.project-header div.project-name div.address h4 a {
-    color: #8e9399
-}
-
-section.project-header div.project-name div.address h4 a:hover {
-    color: orange
-}
-
-.project-header .project-name .address .title-project {
-    font-family: Tiempos, Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 40px;
-    width: 100%;
-    color: #303339
-}
-
-section.project-header div div.project-name div.address h1.title-project {
-    padding-bottom: 40px
-}
-
-.project-name .detail {
-    float: left;
-    width: 100%;
-    display: block;
-    overflow: hidden;
-    font-size: 16px;
-    padding: 30px 0 0 0;
-    border-top: 1px solid #dedede
-}
-
 .social-share {
     float: left;
     width: 35%;
@@ -2871,22 +2730,6 @@ section.project-header div div.project-name div.address h1.title-project {
     border: 1px solid orange
 }
 
-section.project-header div.project-name div.share ul li.share {
-    width: 100%;
-    text-align: right;
-    font-size: 16px;
-    margin-bottom: 15px
-}
-
-section.project-header div.project-name div.share ul li.btn {
-    font-family: harmonia, Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    display: inline-block;
-    padding: 30px 0 0 0;
-    float: right;
-    margin-left: 10px
-}
-
 .lhtv {
     width: 40% !important
 }
@@ -2895,42 +2738,6 @@ section.project-header div.project-name div.share ul li.btn {
     width: 60%
 }
 
-section.project-header div.project-name div.share ul li.btn-contact a {
-    border: 1px solid #303339;
-    font-weight: 500;
-    text-align: center;
-    border-radius: 2px;
-    background: #000;
-    height: 40px;
-    line-height: 40px;
-    display: block;
-    width: 160px
-}
-
-section.project-header div.project-name div.share ul li.btn-contact a:hover {
-    background: orange;
-    border: 1px solid orange
-}
-
-section.project-header div.project-name div.share ul li.btn-contact a {
-    color: #fff
-}
-
-section.project-header div.project-name div.share ul li.btn-care a {
-    border: 1px solid #303339;
-    font-weight: 500;
-    text-align: center;
-    border-radius: 2px;
-    height: 40px;
-    line-height: 40px;
-    display: block;
-    width: 160px
-}
-
-section.project-header div.project-name div.share ul li.btn-care:hover a {
-    color: orange;
-    border: 1px solid orange
-}
 
 section div.width1140 section.bg-white div.team-member div.member-detail header p {
     padding-top: 10px
@@ -3577,15 +3384,6 @@ li.whr-item .whr-info li.whr-date {
         padding: 0 0 0 240px
     }
 
-    .khudancu-left {
-        width: 100%;
-        padding: 0
-    }
-
-    .khudancu-right {
-        width: 100%
-    }
-
     .btn-quyhoach {
         width: 38%
     }
@@ -3605,10 +3403,6 @@ li.whr-item .whr-info li.whr-date {
 
     .house-detail div.detail {
         width: 30%
-    }
-
-    .khudancu-right {
-        padding-top: 20px
     }
 
     .team-member .member-detail header {
@@ -3871,11 +3665,6 @@ li.whr-item .whr-info li.whr-date {
         padding: 0
     }
 
-    .khudancu-left {
-        width: 100%;
-        display: block
-    }
-
     .btn-quyhoach {
         width: 65%
     }
@@ -3930,11 +3719,6 @@ li.whr-item .whr-info li.whr-date {
         width: 50%
     }
 
-    .btn-sticky-header, .stickyTrigger .width1140 .btn-chitiet {
-        width: 50% !important;
-        margin: 0 auto
-    }
-
     .red-bnt {
         max-width: 100%
     }
@@ -3949,10 +3733,6 @@ li.whr-item .whr-info li.whr-date {
 
     div.share {
         display: none
-    }
-
-    .project-header .project-name .address {
-        width: 100%
     }
 
     .stickyTrigger {
@@ -4030,21 +3810,6 @@ li.whr-item .whr-info li.whr-date {
         padding-top: 33px
     }
 
-    section.project-header div.project-name div.share {
-        width: 100%;
-        padding-bottom: 20px
-    }
-
-    section.project-header div.project-name div.share ul li.share {
-        text-align: left;
-        width: 14%;
-        float: left
-    }
-
-    section.project-header div.project-name div.share ul li.btn {
-        float: left;
-        margin-top: -10px
-    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -4284,16 +4049,6 @@ li.whr-item .whr-info li.whr-date {
         width: 50%
     }
 
-    section.project-header div.project-name div.share ul li.btn {
-        margin: 0 10px 0 0
-    }
-
-    section.project-header div.project-name div.address h1.title-project {
-        font-size: 20px;
-        line-height: 36px;
-        overflow: hidden
-    }
-
     .title_duan {
         padding: 30px 0 20px !important;
         font-size: 26px !important
@@ -4349,10 +4104,6 @@ li.whr-item .whr-info li.whr-date {
     section.news-bg div.width1140 div.news-right div.bg {
         height: 100%;
         padding: 10px 10px 30px 10px
-    }
-
-    section.project-header div.project-name div.share ul li.share {
-        width: 90%
     }
 
     section.header-career div.bg-career div.title {
@@ -4488,17 +4239,9 @@ li.whr-item .whr-info li.whr-date {
         display: none
     }
 
-    section.project-header div.project-name div.address {
-        width: 80%
-    }
-
     .social-share {
         width: 20%;
         display: block
-    }
-
-    .project-header .project-header .project-name {
-        padding: 10px !important
     }
 
     .relative-news .featured header .title {
@@ -4621,14 +4364,6 @@ li.whr-item .whr-info li.whr-date {
         font-size: 22px !important
     }
 
-    .project-header .project-name .address .title-project {
-        padding-bottom: 0 !important
-    }
-
-    .project-header .project-name .detail {
-        display: none !important
-    }
-
     .owner-img .more-info {
         display: block;
         padding-top: 20px
@@ -4706,10 +4441,6 @@ li.whr-item .whr-info li.whr-date {
 
     section.bg-career-gray div.content div.career-right div {
         width: 100%
-    }
-
-    section.project-header div.project-name div.share ul li.btn {
-        padding-top: 10px
     }
 
     .lch-content {
@@ -4832,15 +4563,6 @@ li.whr-item .whr-info li.whr-date {
         line-height: 45px
     }
 
-    .btn-chitiet .btn-hotline {
-        font-size: 14px !important;
-        text-align: center
-    }
-
-    .btn-chitiet .btn-hotline .fone-b {
-        display: none
-    }
-
     .btn-sticky-header .red-bnt {
         font-size: 13px !important
     }
@@ -4929,19 +4651,6 @@ li.whr-item .whr-info li.whr-date {
         width: 100%
     }
 
-    section.project-header div.project-name div.share ul li.btn-contact {
-        padding: 5px 10px 5px 10px
-    }
-
-    section.project-header div.project-name div.share ul li.btn-care {
-        padding: 5px 10px 5px 10px
-    }
-
-    .khudancu-left {
-        width: 100%;
-        padding: 0
-    }
-
     .team-member .member-detail header {
         padding: 10px 5px !important
     }
@@ -5027,17 +4736,6 @@ li.whr-item .whr-info li.whr-date {
         width: 43%
     }
 
-    section.project-header div.project-name div.share ul li.btn {
-        margin-left: 0
-    }
-
-    section.project-header div.project-name div.share ul li.btn-contact {
-        padding: 5px 0
-    }
-
-    section.project-header div.project-name div.share ul li.btn-care {
-        padding: 5px 0
-    }
 }
 
 @media only screen and (max-width: 1080px) {

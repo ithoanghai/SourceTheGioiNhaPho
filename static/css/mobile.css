@@ -844,10 +844,6 @@
 }
 
 @media only screen and (max-width: 600px) {
-    .box-collapse .content {
-        padding-bottom: 0;
-        font-size: 14px
-    }
 
     .info-duan .btn-more {
         bottom: 0;
@@ -1073,25 +1069,12 @@
         font-size: 18px
     }
 
-    .media-box {
-        display: none
-    }
-
     .form-info .per50-left {
         width: 100%
     }
 
     .form-info .per50-right {
         width: 100%
-    }
-
-    .content-document li .button-down {
-        max-width: 120px
-    }
-
-    .button-down a, .button-down button, .button-down span {
-        line-height: 20px;
-        padding: 0
     }
 
     .header-w-close {
@@ -1263,10 +1246,6 @@
         overflow: hidden
     }
 
-    .sort-type-apm {
-        margin: 0 15px
-    }
-
     .suggest-result {
         position: fixed;
         top: 59px
@@ -1350,11 +1329,6 @@
         text-overflow: ellipsis
     }
 
-    .project-news li {
-        margin-bottom: 10px;
-        padding-top: 0
-    }
-
     .content-document li {
         padding-top: 0
     }
@@ -1367,48 +1341,8 @@
         width: 100%
     }
 
-    .tab-sale li a {
-        padding: 15px 20px
-    }
-
-    .tab-sale li .type-property {
-        display: none
-    }
-
-    .last-coll {
-        margin-bottom: 20px !important
-    }
-
-    .project-news li img {
-        width: 84px
-    }
-
-    .project-news li div p {
-        display: none
-    }
-
-    .project-news li div p.date {
-        display: block
-    }
-
-    .project-news li div h4 {
-        font-size: 14px;
-        line-height: 18px;
-        max-height: 35px;
-        overflow: hidden
-    }
-
-    .project-news li div {
-        width: calc(100% - 84px);
-        padding-left: 15px
-    }
-
     .content-document li h4 {
         font-size: 14px
-    }
-
-    .project-news li div h4:after {
-        display: none
     }
 
     .content-document li p {
@@ -1421,31 +1355,8 @@
         font-weight: 400
     }
 
-    .owner-project .title {
-        padding: 10px 0
-    }
-
-    .owner-project img {
-        width: 50%
-    }
-
-    .info-owner-project {
-        width: 100%
-    }
-
-    .location-around li {
-        width: 100%;
-        padding: 0 0 0 25px
-    }
-
     .left-70 {
         width: 100%
-    }
-
-    .location-around li .left-70 {
-        width: 70%;
-        max-height: 25px;
-        overflow: hidden
     }
 
     .map-loca-project {
@@ -1462,20 +1373,6 @@
 
     .detail-building li:nth-child(2) {
         margin: 20px 20px 0 0
-    }
-
-    .media-box li {
-        width: 100%;
-        margin: 10px 0 0;
-        display: none
-    }
-
-    .media-box li:last-child {
-        display: block
-    }
-
-    .media-box .w-50percent {
-        width: 100%
     }
 
     .info-sticky-header {
@@ -1831,29 +1728,6 @@
         margin: 10px 0
     }
 
-    .post-share-btn-group {
-        position: relative;
-        top: auto;
-        text-align: center;
-        padding: 20px 0
-    }
-
-    .post-share-btn-group ul.post-share-buttons li {
-        display: inline-block
-    }
-
-    .post-share-btn-group ul.post-share-buttons li a {
-        border: 1px solid rgba(131, 131, 131, .2);
-        width: 40px;
-        padding: 8px 10px;
-        border-radius: 3px;
-        margin: 5px 8px
-    }
-
-    .post-share-btn-group ul.post-share-buttons li:last-child a {
-        border: 1px solid rgba(131, 131, 131, .2)
-    }
-
     .sms-share {
         display: block
     }
@@ -1912,11 +1786,6 @@
     }
 
     section.pdb-30 {
-        padding-bottom: 0 !important
-    }
-
-    .project-header .project-name .address h2 {
-        font-size: 14px !important;
         padding-bottom: 0 !important
     }
 
@@ -3606,10 +3475,6 @@
 }
 
 @media only screen and (max-width: 320px) {
-    .tab-sale li a {
-        padding: 15px;
-        font-size: 14px
-    }
 
     .tab-choose ul li {
         padding: 0 10px
