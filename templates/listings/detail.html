@@ -11,7 +11,7 @@
 
 {% block head_script %}
 
-  <link rel="stylesheet" href="{% static 'css/listing-detail-page90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/listing-detail-page.css' %}"/>
 
   <style>
       .detail-content-news img:before, .thumb-duan img:before, .cover img:not([src]):before {
@@ -465,7 +465,7 @@
               <div class="advantage-name">
                 <p>Tag</p>
               </div>
-              <div class="advandate-content">
+              <div class="advance-date-content">
                 <div class="tag-news pd-0">
                   <span>{{ listing.house_type }} {{ listing.district }}</span>
                   <span>{{ listing.house_type }} {{ listing.floors }} tầng</span>
@@ -477,44 +477,44 @@
               <div class="advantage-name">
                 <p>Đặc điểm nổi bật</p>
               </div>
-              <div class="advandate-content">{{ listing.salient_features }}</div>
+              <div class="advance-date-content">{{ listing.salient_features }}</div>
             </div>
               <div class="list-advantage clear">
               <div class="advantage-name">
                 <p>Ưu điểm vị trí</p>
               </div>
-              <div class="advandate-content">{{ listing.location_advantage }}</div>
+              <div class="advance-date-content">{{ listing.location_advantage }}</div>
             </div>
             <div class="list-advantage clear">
               <div class="advantage-name">
                 <p>Nội thất kèm theo</p>
               </div>
-              <div class="advandate-content">{{ listing.furniture_included }}</div>
+              <div class="advance-date-content">{{ listing.furniture_included }}</div>
             </div>
             <div class="list-advantage clear">
               <div class="advantage-name">
                 <p>Tiện ích sinh hoạt</p>
               </div>
-              <div class="advandate-content">{{ listing.living_facilities }}</div>
+              <div class="advance-date-content">{{ listing.living_facilities }}</div>
             </div>
             <div class="list-advantage clear">
               <div class="advantage-name">
                 <p>Cộng đồng dân cư</p>
               </div>
-              <div class="advandate-content">{{ listing.residential_community }}</div>
+              <div class="advance-date-content">{{ listing.residential_community }}</div>
             </div>
             <div class="list-advantage clear">
               <div class="advantage-name">
                 <p>An sinh khu vực</p>
               </div>
-              <div class="advandate-content">{{ listing.regional_welfare }}
+              <div class="advance-date-content">{{ listing.regional_welfare }}
               </div>
             </div>
             <div class="list-advantage clear">
                <div class="advantage-name">
                 <p>Tình trạng BĐS</p>
               </div>
-              <div class="advandate-content">{% if listing.status == 'selling' %} {% trans 'Đang bán' %}
+              <div class="advance-date-content">{% if listing.status == 'selling' %} {% trans 'Đang bán' %}
                 {% elif listing.status == 'sold' %} {% trans 'Đã bán' %}
                 {% elif listing.status == 'stop_selling' %} {% trans 'Dừng bán' %}
                 {% else %} {% trans 'Mới' %}
