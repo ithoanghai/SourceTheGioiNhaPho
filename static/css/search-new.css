@@ -1743,36 +1743,6 @@ body {
     color: #30333a
 }
 
-.breadcrums {
-    list-style: none;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap
-}
-
-.breadcrums .breadcrumbs-item, .breadcrums .breadcrumbs-item-active {
-    position: relative;
-    padding-right: 14px;
-    margin-right: 12px
-}
-
-.breadcrums .breadcrumbs-item a:after, .breadcrums .breadcrumbs-item-active a:after {
-    font-family: Material-Design-Iconic-Font;
-    content: '\f2fb';
-    font-size: 18px;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%)
-}
-
-.breadcrums .breadcrumbs-item span, .breadcrums .breadcrumbs-item-active span {
-    color: rgba(48, 51, 58, .3)
-}
-
 ul.breadcrumb {
     padding: 0;
     list-style: none
@@ -9766,19 +9736,6 @@ label {
     border-top: 1px solid rgba(48, 51, 58, .1)
 }
 
-.search-relative .search-breadcrumbs .breadcrums {
-    margin-top: 20px;
-    padding: 0 30px
-}
-
-.search-relative .search-breadcrumbs .breadcrums .breadcrumbs-item a {
-    color: #444c59
-}
-
-.search-relative .search-breadcrumbs .breadcrums .breadcrumbs-item a::before {
-    color: #30333a
-}
-
 .font-14 {
     font-size: 14px !important
 }
@@ -10845,7 +10802,7 @@ div > img {
     margin: 0
 }
 
-.advandate-content {
+.advance-date-content {
     float: left;
     width: 72%;
     margin-left: 5%;

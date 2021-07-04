@@ -1,22 +1,3 @@
-.full-screen-white {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 200;
-    width: 50px;
-    height: 50px;
-    padding: 5px;
-    opacity: .8;
-    transition: opacity linear .25s;
-    -webkit-transition: opacity linear .25s;
-    -moz-transition: opacity linear .25s;
-    background: #fff;
-    background-image: url(../images/full-screen-white.svg)
-}
-
-.full-screen-white.close {
-    background-image: url(../images/close-white.svg)
-}
 
 .title.title-res {
     display: none
@@ -326,29 +307,6 @@
     margin: 0 auto
 }
 
-.view-all-img {
-    border: 1px solid #fff;
-    color: #fff;
-    background-color: rgba(0, 0, 0, .6);
-    display: inline-block;
-    line-height: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color, background, box-shadow, color, fill .1s ease;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    padding: 5px 10px;
-    font-size: 14px;
-    min-width: 125px
-}
-
-.view-all-img:hover {
-    color: #fff;
-    background-color: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .9));
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .1)
-}
-
 .list-all-img-project li {
     display: inline-block
 }
@@ -604,44 +562,9 @@ section.bg-gray-e6 div.more-info-black {
     margin-top: -8px
 }
 
-.bg-neiberhood {
-    position: relative;
-    width: 100%;
-    background-image: url(../../latest/images/xbg-tuyendung.jpg.pagespeed.ic.a3Lt3ZgXIm.jpg);
-    background-repeat: no-repeat;
-    background-position: 50%;
-    -ms-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-    -webkit-background-size: cover;
-    background-size: cover;
-    overflow: auto
-}
-
-.bg-neiberhood .sub-content {
-    color: #fff;
-    line-height: 22px;
-    font-size: 16px;
-    padding-bottom: 20px;
-    max-width: 900px;
-    max-height: 145px;
-    overflow: hidden
-}
-
 .btn-more {
     font-size: 16px;
     font-weight: 600
-}
-
-.bg-neiberhood .btn-more {
-    padding-top: 20px;
-    font-size: 16px;
-    line-height: 20px;
-    text-decoration: underline
-}
-
-.bg-neiberhood .btn-more a {
-    color: #fff !important
 }
 
 .btn-down-neiberhood {
@@ -788,7 +711,6 @@ section.bg-gray-e6 div.more-info-black {
     line-height: 24px;
     padding: 8px;
     display: block;
-    border: none;
     border: 1px solid #999;
     width: 100%;
     margin: 10px 0 20px
@@ -1461,7 +1383,6 @@ ul.detailroom li div span:hover + div.detail-house-info {
     font-weight: 500;
     text-align: center;
     font-size: 16px;
-    border-style: none;
     cursor: pointer;
     -webkit-transition: height 2s;
     -webkit-appearance: none;
@@ -1479,7 +1400,6 @@ ul.detailroom li div span:hover + div.detail-house-info {
     font-size: 16px;
     line-height: 24px;
     font-weight: 600;
-    max-width: 100%;
     margin: 0 auto;
     max-width: 50%
 }
@@ -1494,7 +1414,7 @@ ul.detailroom li div span:hover + div.detail-house-info {
 
 .form-contact .hs-form-field .hs-input:not([type=checkbox]) {
     background-color: #f4f5f9;
-    letter-spacing: .5px;
+    letter-spacing: 1px;
     -webkit-transition: all .3s;
     transition: all .3s;
     padding: 7px 15px;
@@ -1687,12 +1607,6 @@ ul.form-career-detail li span.btn {
     padding: 40px 30px 30px;
     font-size: 18px;
     line-height: 26px
-}
-
-.container-textblock {
-    display: block;
-    background-color: #e6e7eb;
-    margin: 0 30px 0 175px
 }
 
 .container-col-img-left {
@@ -1959,11 +1873,6 @@ ul li.list-filter a.ward {
     padding: 0 4% 0 0
 }
 
-.khudancu-img img {
-    width: 100%;
-    height: 250px
-}
-
 .khudancu-right .title {
     font-size: 20px;
     font-weight: 400;
@@ -2041,13 +1950,6 @@ div.width1140 div.owner-img div.right {
 
 .btn-chitiet:hover a {
     color: #fff
-}
-
-.bg-neiberhood .btn-chitiet a {
-    font-size: 16px;
-    background: 0 0;
-    color: #fff;
-    border: 1px solid #fff
 }
 
 .ttct {
@@ -2163,38 +2065,12 @@ ul.detail-info-col li p span.color {
     margin-right: 30px
 }
 
-section.graybg section.lch-content article.lch-content-detail img {
-    height: 262px;
-    width: 262px
-}
-
-section.graybg section.lch-content article.lch-content-detail ul.header {
-    font-size: 20px;
-    color: #000;
-    line-height: 23px;
-    text-align: center;
-    padding: 30px
-}
-
 section div.width1140 div div.flex-viewport ul.slides li div.title {
     font-size: 16px;
     color: #000;
     line-height: 24px;
     text-align: center;
     padding: 20px 0 60px 0
-}
-
-section.graybg section.lch-content article.lch-content-detail ul.header li.detail {
-    font-weight: 100;
-    padding-top: 5px;
-    font-size: 15px
-}
-
-section.graybg section.lch-content article.lch-content-detail ul.header li.s {
-    color: orange;
-    font-weight: 100;
-    padding-top: 5px;
-    font-size: 15px
 }
 
 .news-bg {
@@ -2299,23 +2175,6 @@ section.news-bg div.width1140 div.news-right div.bg div.text {
     flex-wrap: wrap
 }
 
-.hinhanh-content-detail {
-    margin-right: 29px
-}
-
-section div.width1140 article.hinhanh-content-detail img {
-    width: 263px;
-    height: 175px
-}
-
-section div.width1140 article.hinhanh-content-detail ul.header {
-    text-align: center;
-    font-size: 16px;
-    line-height: 24px;
-    margin-top: 15px;
-    margin-bottom: 60px
-}
-
 section.background-gray div.width1140 div ul.icon {
     float: left;
     width: 10%;
@@ -2416,26 +2275,6 @@ div.list-and-map div.search-list section div.detail ul li.bookmark {
     color: #303339
 }
 
-.iconrent {
-    display: inline;
-    position: absolute;
-    line-height: 0;
-    top: 30px;
-    right: 52px;
-    font-family: tgnp-icon, arial
-}
-
-.rent-drop .iconrent {
-    right: 90px
-}
-
-.iconrent:before {
-    content: "\f116";
-    position: absolute;
-    font-size: 23px;
-    font-weight: 400
-}
-
 .search-left-filter {
     margin: 0;
     font-size: 15px;
@@ -2456,12 +2295,6 @@ div.list-and-map div.search-list section div.detail ul li.bookmark {
     border: 1px solid #d9d9d9;
     background: #fff;
     margin: 0 0 50px 0
-}
-
-section.graybg div.width1140 div.house-detail div.content {
-    width: 100%;
-    padding: 10px 20px 10px 20px;
-    border-bottom: 1px solid #ececec
 }
 
 .house-detail div.img {
@@ -2492,11 +2325,6 @@ section.graybg div.width1140 div.house-detail div.content {
     padding: 40px 20px 0 0
 }
 
-section.graybg div.width1140 div.house-detail div.detail ul li {
-    display: inline;
-    padding-right: 12px
-}
-
 .house-detail div.house-price {
     float: left;
     width: 20%;
@@ -2512,10 +2340,9 @@ section.graybg div.width1140 div.house-detail div.detail ul li {
     position: relative;
     height: 400px;
     width: 100%;
-    background-image: url(../images/xbg-tuyendung.jpg);
+    background-image: url(../images/background-tuyen-dung.jpg);
     background-repeat: no-repeat;
     background-position: 50% 0;
-    -ms-background-size: cover;
     -o-background-size: cover;
     -moz-background-size: cover;
     -webkit-background-size: cover;
@@ -3387,7 +3214,6 @@ section.bg-career-gray div.contentpx div.career-img {
     position: relative;
     -webkit-transition: -webkit-transform 1s ease;
     transition: -webkit-transform 1s ease;
-    transition: transform 1s ease;
     transition: transform 1s ease, -webkit-transform 1s ease;
     margin-bottom: 11px
 }
@@ -3510,7 +3336,6 @@ li.whr-item:after {
 li.whr-item .whr-info {
     float: left;
     width: 60%;
-    padding-left: 30px;
     line-height: 22px;
     padding: 8px 30px 5px 0
 }
@@ -3675,11 +3500,6 @@ li.whr-item .whr-info li.whr-date {
         padding: 0 30px 0 30px
     }
 
-    section div.width1140 article.hinhanh-content-detail img {
-        width: 460px !important;
-        height: 350px !important
-    }
-
     section.news-bg div.width1140 div.news-right div.bg {
         height: 490px
     }
@@ -3752,31 +3572,12 @@ li.whr-item .whr-info li.whr-date {
         display: inline-block
     }
 
-    .pro-descrip .left-descrip {
-        width: 100%;
-        margin-bottom: 30px
-    }
-
-    .pro-descrip .right-descrip {
-        width: 100%
-    }
-
-    section.graybg section.lch-content article.lch-content-detail img {
-        width: 406px !important;
-        height: 70% !important
-    }
-
     section.news-bg div.width1140 div.news-left header {
         line-height: 40px
     }
 
     section.news-bg div.width1140 div.news-right div.bg div.text {
         padding: 0
-    }
-
-    section div.width1140 article.hinhanh-content-detail img {
-        width: 405px !important;
-        height: 70% !important
     }
 
     .lch-content-detail {
@@ -3804,16 +3605,8 @@ li.whr-item .whr-info li.whr-date {
         width: 100%
     }
 
-    .khudancu-img {
-        width: 100%
-    }
-
     .btn-quyhoach {
         width: 38%
-    }
-
-    section.graybg div.width1140 div.house-detail div.content {
-        padding: 10px 10px 10px 10px
     }
 
     .houde-detail div.img {
@@ -3927,10 +3720,6 @@ li.whr-item .whr-info li.whr-date {
         padding: 15px 15px 30px
     }
 
-    .allproject-list {
-        margin: 0 auto 15px
-    }
-
     .list-prop .article div.title {
         padding-left: 10px
     }
@@ -3999,12 +3788,6 @@ li.whr-item .whr-info li.whr-date {
 
     .team-member .member-detail {
         padding-bottom: 0
-    }
-
-    .container-textblock {
-        width: 50%;
-        margin: 0 10px 0;
-        float: left
     }
 
     .container-col {
@@ -4093,10 +3876,6 @@ li.whr-item .whr-info li.whr-date {
         padding: 30px 0 0 0
     }
 
-    section.graybg section.lch-content article.lch-content-detail img {
-        width: 742px !important
-    }
-
     .news-left {
         width: 50%;
         padding-bottom: 0
@@ -4105,10 +3884,6 @@ li.whr-item .whr-info li.whr-date {
     .news-right {
         width: 50%;
         padding: 60px 30px 60px 30px
-    }
-
-    section div.width1140 article.hinhanh-content-detail img {
-        width: 742px !important
     }
 
     section.background-gray div.width1140 div ul.icon {
@@ -4151,10 +3926,6 @@ li.whr-item .whr-info li.whr-date {
     .house-detail div.house-price {
         width: 25%;
         padding: 33px 5px 5px 0
-    }
-
-    section.graybg div.width1140 div.house-detail div.detail ul li {
-        padding-right: 2px
     }
 
     section.background-gray div.width1140 div.owner-img div.left img {
@@ -4276,10 +4047,6 @@ li.whr-item .whr-info li.whr-date {
     .house-detail div.detail {
         width: 30% !important;
         padding: 30px 10px
-    }
-
-    section.graybg div.width1140 div.house-detail div.detail ul li {
-        padding-right: 5px
     }
 
     .house-detail div.house-price {
@@ -4505,12 +4272,6 @@ li.whr-item .whr-info li.whr-date {
     .container-col-img-left {
         width: 100%;
         text-align: center
-    }
-
-    .container-textblock {
-        visibility: hidden;
-        width: 0%;
-        height: 0%
     }
 
     section.bg-career-gray div.contentpx div.career-img ul li {
@@ -4979,11 +4740,6 @@ li.whr-item .whr-info li.whr-date {
         width: 100%
     }
 
-    section.graybg section.lch-content article.lch-content-detail img {
-        width: 384px !important;
-        height: 320px !important
-    }
-
     .news-left {
         width: 100%;
         padding-bottom: 0
@@ -4992,11 +4748,6 @@ li.whr-item .whr-info li.whr-date {
     .news-right {
         width: 100%;
         padding: 60px 30px 60px 30px
-    }
-
-    section div.width1140 article.hinhanh-content-detail img {
-        width: 384px !important;
-        height: 320px !important
     }
 
     .btn-lienhe {
@@ -5135,10 +4886,6 @@ li.whr-item .whr-info li.whr-date {
     section.background-gray div.width1140 div ul.icon {
         width: 44%;
         padding: 0 0 20px 0
-    }
-
-    .khudancu-img {
-        width: 100%
     }
 
     .btn-quyhoach {
@@ -5288,16 +5035,6 @@ li.whr-item .whr-info li.whr-date {
         line-height: 30px
     }
 
-    section.graybg section.lch-content article.lch-content-detail img {
-        width: 290px !important;
-        padding-top: 30px
-    }
-
-    section.graybg section.lch-content article.lch-content-detail ul.header {
-        margin-top: 10px;
-        margin-bottom: 10px
-    }
-
     .news-left {
         padding: 30px 10px 30px 10px
     }
@@ -5310,26 +5047,8 @@ li.whr-item .whr-info li.whr-date {
         width: 100%
     }
 
-    section div.width1140 article.hinhanh-content-detail img {
-        width: 290px !important;
-        height: 320px !important
-    }
-
-    section div.width1140 article.hinhanh-content-detail ul.header {
-        text-align: center !important;
-        margin-top: 10px
-    }
-
-    .hinhanh-content-detail {
-        width: 290px !important
-    }
-
     section.background-gray div.width1140 div ul.icon {
         width: 43%
-    }
-
-    .khudancu-img {
-        width: 100%
     }
 
     section.project-header div.project-name div.share ul li.btn {
@@ -5363,4 +5082,49 @@ li.whr-item .whr-info li.whr-date {
     .listing-detail-price span:nth-of-type(2n+1) {
         width: 30%
     }
+}
+
+.width-1600 .right-menu ul li a.dropdown-link:hover {
+    color: #30333a
+}
+
+.btn {
+    line-height: 1em;
+}
+
+.responsive-filter {
+    z-index: 99999;
+}
+
+@media only screen and (max-width: 979px) {
+    .search-map {
+        width: inherit !important;
+    }
+}
+
+#container-id,
+.search-container,
+.active-map {
+    /*z-index: 99999;*/
+}
+
+.close-map .zmdi-hc-3x {
+    font-size: 30px !important;
+}
+
+
+.info-project {
+    line-height: 20px;
+}
+
+section.result article.featured header .name-title p {
+    padding-top: 3px;
+}
+
+.searchlisting section.exclusive article.featured header .address {
+    width: 100%;
+    float: left;
+    margin-top: -4px;
+    font-size: 11px;
+    padding-top: 5px;
 }

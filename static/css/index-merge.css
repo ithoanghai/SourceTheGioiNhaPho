@@ -1,6 +1,5 @@
 *, ::after, ::before {
     -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
     box-sizing: inherit
@@ -2616,8 +2615,6 @@ body {
     margin: 0 auto;
     cursor: pointer;
     font-weight: 500;
-    max-width: -webkit-max-content;
-    max-width: -moz-max-content;
     max-width: fit-content;
     text-align: center;
     border-radius: 2px;
@@ -2740,8 +2737,6 @@ body {
     min-width: -webkit-min-content;
     min-width: -moz-min-content;
     min-width: fit-content;
-    max-width: -webkit-max-content;
-    max-width: -moz-max-content;
     max-width: fit-content;
     width: 100%;
     padding: 8px 10px 7px;
@@ -3293,7 +3288,6 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
     padding: 20px 0;
     border-bottom: 1px solid rgba(48, 51, 58, .1) !important;
     max-width: 100%;
-    border: 0;
     -webkit-box-shadow: unset;
     box-shadow: unset
 }
@@ -3319,7 +3313,6 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 }
 
 .listView .info-container .listing-name {
-    white-space: unset;
     display: block;
     font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     font-size: 16px;
@@ -3335,7 +3328,6 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 
 .listView .info-container .listing-address {
     width: calc(100% - 160px);
-    white-space: unset;
     line-height: 1.29;
     font-size: 14px;
     white-space: nowrap;
@@ -3348,10 +3340,8 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 .listView .info-container .listing-info {
     display: block;
     overflow: hidden;
-    margin-top: 0;
     margin-top: 5px;
     width: calc(100% - 160px);
-    white-space: unset;
     white-space: nowrap;
     text-overflow: ellipsis
 }
@@ -3387,7 +3377,6 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-flow: row wrap;
     flex-flow: row wrap;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
@@ -5146,7 +5135,6 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
         display: flex;
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
-        -ms-flex-flow: row nowrap;
         flex-flow: row nowrap;
         -webkit-box-pack: center;
         -ms-flex-pack: center;
@@ -5171,8 +5159,6 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
     }
 
     .banner-content-inner form .search-container .btn-search {
-        max-width: -webkit-max-content;
-        max-width: -moz-max-content;
         max-width: fit-content
     }
 
@@ -5215,7 +5201,6 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 }
 
 .block-introduce .col-8 {
-    margin: auto;
     line-height: 1.63;
     font-size: 16px;
     margin-bottom: 30px
@@ -8012,10 +7997,6 @@ input:focus, textarea:focus {
 .popup-responsive-filter .popup li {
     float: left;
     width: 50%
-}
-
-.allproject-list .info-duan .btn-more {
-    padding: 0
 }
 
 .post-share-btn-group ul.post-share-buttons li a img {
@@ -14408,7 +14389,6 @@ input:focus, textarea:focus {
 }
 
 .owl-carousel.owl-grab {
-    cursor: move;
     cursor: grab
 }
 
@@ -14624,10 +14604,8 @@ input:focus, textarea:focus {
     content: ' ';
     height: 0;
     width: 0;
-    border: solid transparent;
-    border-color: transparent;
+    border: 8px solid transparent;
     border-bottom-color: #fff;
-    border-width: 8px;
     pointer-events: none;
     opacity: 1;
     visibility: hidden;
