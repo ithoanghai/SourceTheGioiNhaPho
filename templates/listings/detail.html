@@ -865,7 +865,7 @@
 
 {% block scripts %}
   {{ block.super }}
-  <script async src="{% static 'js/listing.min90ca.js' %}"></script>
+  <script async src="{% static 'js/listing.js' %}"></script>
 
 
   <script type="deferjs">
@@ -1084,7 +1084,7 @@
 
 
 
-  {#  <script type="deferjs" src="{% static 'js/hubspot-chatbox.min90ca.js' %}"></script>#}
+  {#  <script type="deferjs" src="{% static 'js/hubspot-chatbox.min.js' %}"></script>#}
   <script async type="text/javascript" src="{% static 'js/property-contact-box.js' %}"></script>
 
   <script type="deferjs">
@@ -1093,8 +1093,8 @@
     }
 
   </script>
-  <script defer src="{% static 'js/favorite.min90ca.js' %}"></script>
-  <script defer src="{% static 'js/home-recent-view.min90ca.js' %}"></script>
+  <script defer src="{% static 'js/favorite.min.js' %}"></script>
+  <script defer src="{% static 'js/home-recent-view.min.js' %}"></script>
 
   <script type="deferjs">
   function setupViewMore(heightLimit, $itemsWrapper, $items, $viewMoreWrapper, $viewMoreLink){
@@ -1442,7 +1442,7 @@
 
   </script>
 
-  <script defer src="{% static 'js/header-v2.min90ca.js' %}"></script>
+  <script defer src="{% static 'js/header-v2.min.js' %}"></script>
   {% if listing.videos %}
     <link href="//vjs.zencdn.net/7.10.2/video-js.min.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="//vjs.zencdn.net/7.10.2/video.min.js"></script>

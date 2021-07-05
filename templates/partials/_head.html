@@ -1,4 +1,4 @@
-{% load static humanize i18n %}
+{% load static humanize i18n load_static %}
 
 <title> Thế giới Nhà Phố {% block title %}| Mua thổ cư, căn hộ tốt nhất {% endblock %}</title>
 
@@ -92,6 +92,7 @@
         filter: blur(15px);
     }
 </style>
+
 <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
 <link rel="stylesheet" type="text/css" href="{% static "css/font-icon.css" %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/pop-up.css' %}"/>

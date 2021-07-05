@@ -15,8 +15,6 @@ pax_global_header
 .project
 .pydevproject
 .settings/*
-*.wpr
-*.wpu
 
 # exception to the rule
 .gitkeep
