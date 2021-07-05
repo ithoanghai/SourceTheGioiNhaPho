@@ -6,7 +6,7 @@
 {{ block.super }}
 
   <link rel="canonical" href="{% url 'specialist_us' %}"/>
-  <link rel="stylesheet" href="{% static 'css/apply.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/apply.css' %}"/>
 
     <style>
         a.cta_button {
@@ -193,7 +193,7 @@
 
 {% block scripts %}
 
-    <script src="{% static 'js/form-apply.js' %}"></script>
+    <script src="{% static 'js/form-apply.min.js' %}"></script>
 
 {% comment %}
     <script>

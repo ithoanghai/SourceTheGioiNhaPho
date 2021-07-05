@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n %}
+{% load static humanize i18n load_static %}
 
 {% block head %}
   {{ block.super }}
 
   <link rel="canonical" href="{% url 'rent_with_us' %}"/>
 
-  <link rel="stylesheet" href="{% static 'css/service.min90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/service.css' %}"/>
 
 {% endblock %}
 
@@ -406,8 +406,8 @@
 
 {% block scripts %}
 
-  <script async defer src="{% static 'js/whyrent-old.min90ca.js' %}"></script>
-  <script async defer src="{% static 'js/whyrent.min90ca.js' %}"></script>
+  <script async defer src="{% static 'js/whyrent-old.min.js' %}"></script>
+  <script async defer src="{% static 'js/whyrent.min.js' %}"></script>
 
   <script type="text/javascript" src="https://www.googleadservices.com/pagead/f.txt"></script>
 

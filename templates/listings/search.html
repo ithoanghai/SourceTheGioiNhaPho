@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n %}
+{% load static humanize i18n load_static %}
 
 {% block head %}
   {{ block.super }}
@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/ion.rangeSlider.skinFlat.css' %}"/>
-      <link rel="stylesheet" href="{% static 'css/search-new.min90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/search-new.css' %}"/>
 
   {% include 'listings/_vueTemplate.html' %}
 {% endblock %}
@@ -115,8 +115,8 @@
       }
 
   </script>
-  <script src="{% static 'js/ion.rangeSlider.js' %}"></script>
-   <script defer src="{% static 'js/favorite.min90ca.js' %}"></script>
+  <script src="{% static 'js/ion.rangeSlider.min.js' %}"></script>
+   <script defer src="{% static 'js/favorite.min.js' %}"></script>
   <script async src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
           integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>

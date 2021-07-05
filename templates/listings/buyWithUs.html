@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n %}
+{% load static humanize i18n load_static %}
 
 {% block head %}
 
@@ -8,7 +8,7 @@
 
   <link rel="canonical" href="{% url 'buy_with_us' %}"/>
 
-  <link rel="stylesheet" type="text/css" href="{% static 'css/service.min90ca.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
 
 {% endblock %}
 
@@ -412,8 +412,8 @@
 
 {% block scripts %}
 
-  <script defer src="{% static 'js/whybuy-old.min90ca.js' %}"></script>
-  <script defer src="{% static 'js/whybuy.min90ca.js' %}"></script>
+  <script defer src="{% static 'js/whybuy-old.min.js' %}"></script>
+  <script defer src="{% static 'js/whybuy.min.js' %}"></script>
 
 {% endblock %}
 

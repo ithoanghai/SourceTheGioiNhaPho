@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n %}
+{% load static humanize i18n load_static %}
 
 {% block head %}
   {{ block.super }}
 
   <link rel="canonical" href="{% url 'termsOfUse' %}"/>
 
-  <link rel="stylesheet" href="{% static 'css/terms-of-use90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/terms-of-use.css' %}"/>
 
 {% endblock %}
 

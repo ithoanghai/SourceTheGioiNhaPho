@@ -1,0 +1,20 @@
+{
+  "name": "tgnp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production gulp build"
+  },
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-changed": "^4.0.3",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-rev": "^9.0.0",
+    "gulp-rev-format": "^1.0.5",
+    "gulp-uglify": "^3.0.2"
+  },
+  "devDependencies": {
+    "cross-env": "^5.1.1"
+  }
+}

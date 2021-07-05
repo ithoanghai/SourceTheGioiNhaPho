@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n %}
+{% load static humanize i18n load_static %}
 
 {% block head %}
 
@@ -8,7 +8,7 @@
 
   <link rel="canonical" href="{% url 'specialist_us' %}"/>
 
-  <link rel="stylesheet" href="{% static 'css/careers.min90ca.css' %}"/>
+  <link rel="stylesheet" href="{% load_static 'css/careers.css' %}"/>
 {% endblock %}
 
 {% block content %}
@@ -476,6 +476,6 @@
 
 {% block scripts %}
 
-  <script async defer src="{% static 'js/career.min90ca.js' %}"></script>
+  <script async defer src="{% static 'js/career.js' %}"></script>
 
 {% endblock %}

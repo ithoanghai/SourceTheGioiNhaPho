@@ -1,4 +1,4 @@
-{% load static humanize i18n %}
+{% load static humanize i18n load_static %}
 
 <title> Thế giới Nhà Phố {% block title %}| Mua thổ cư, căn hộ tốt nhất {% endblock %}</title>
 
@@ -92,19 +92,19 @@
         filter: blur(15px);
     }
 </style>
+
 <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
 <link rel="stylesheet" type="text/css" href="{% static "css/font-icon.css" %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/pop-up.min.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/material-design-iconic-font.2.min90ca.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/fontawsome-5.5.0.all.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/footer.min90ca.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/menu.min90ca.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/pop-up.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/material-design-iconic-font.2.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/fontawsome-5.5.0.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/menu.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'css/style_0706.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/index-merge.min90ca.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/index-merge.css' %}" />
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.min90ca.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/mobile.min90ca.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/mobile.css' %}"/>
 
-<link rel="stylesheet" href="{% static 'css/temp90ca.css' %}"/>
 <link rel="stylesheet" href="{% static 'css/flexslider.min.css' %}"/>
-<link rel="stylesheet" href="{% static 'css/header-live.min90ca.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/header-live.css' %}"/>

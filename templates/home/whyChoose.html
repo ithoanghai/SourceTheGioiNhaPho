@@ -5,8 +5,8 @@
 {% block head %}
   {{ block.super }}
   <link rel="canonical" href="{% url 'whyChoose' %}"/>
-  <link rel="stylesheet" href="{% static 'css/browse-agent90ca.css' %}"/>
-   <link rel="stylesheet" href="{% static 'css/service.min90ca.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/browse-agent.css' %}"/>
+   <link rel="stylesheet" href="{% static 'css/service.css' %}"/>
 
 {% endblock %}
 
@@ -425,10 +425,10 @@
 
 {% block scripts %}
 
-  <script async defer src="{% static 'js/suggest-v2.min90ca.js' %}"></script>
+  <script async defer src="{% static 'js/suggest-v2.min.js' %}"></script>
 
-  <script src="{% static 'js/agent-home-app.min90ca.js' %}"></script>
-  <script async defer src="{% static 'js/overview.min90ca.js' %}"></script>
+  <script src="{% static 'js/agent-home-app.min.js' %}"></script>
+  <script async defer src="{% static 'js/overview.js' %}"></script>
   <script type="text/javascript">
       window.$dialog = function () {
           var e = {
