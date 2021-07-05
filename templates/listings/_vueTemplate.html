@@ -60,10 +60,10 @@
             <h4>
               <a :href="`/listings/search?keywords=${listing.street}`" title="">[[listing.street]]</a>
             </h4>
-            <h4 v-if="listing.ward"><a :href="`/listings/search?keywords=${listing.ward}`" title="Phường/Xã">[[listing.ward]]</a>
+            <h4 v-if="listing.ward"><a :href="`/listings/search?ward=${listing.ward}`" title="Phường/Xã">[[listing.ward_name]]</a>
             </h4>
             <h4>
-              <a :href="`/listings/search?keywords=${listing.district}`" title="">[[getDistrict(listing.district)]]</a>
+              <a :href="`/listings/search?district=${listing.district}`" title="">[[getDistrict(listing.district)]]</a>
             </h4>
           </div>
           <ul class="listing-info">
@@ -116,11 +116,6 @@
         <li v-for="i in pagination.next_5_pages">
           <a :class="{active: pagination.current_page == i}" @click.prevent="goTo(i)">[[i]]</a>
         </li>
-
-        {#        {% for i in pagination.next_5_pages %}#}
-        {#          <li><a class="{% if listings.number == i %}active{% endif %}"#}
-        {#                 @click.prevent="goTo({{ i }})">{{ i }}</a></li>#}
-        {#        {% endfor %}#}
 
         {% if listings.has_next %}
           <li>

@@ -299,7 +299,11 @@ const PropertyListComponent = Vue.extend({
             return `/listings/${id}`
         },
         getDistrict: function (district_code) {
-            return district_code
+            try {
+                return districts.find(item => item.code == district_code).text;
+            } catch (e) {
+                return '';
+            }
         }
     },
 })

@@ -47,12 +47,12 @@ def prepare_listing_queryset(input_params):
                 if address:
                     queryset_list = queryset_list.filter(address=address)
 
-        # street
-        if 'street' in input_params:
-            street = input_params.get('street')
-            if street:
-                queryset_list = queryset_list.filter(
-                    Q(address__icontains=street) | Q(street__icontains=street))
+    # street
+    if 'street' in input_params:
+        street = input_params.get('street')
+        if street:
+            queryset_list = queryset_list.filter(
+                Q(address__icontains=street) | Q(street__icontains=street))
 
     # District
     if 'district' in input_params:
@@ -68,6 +68,10 @@ def prepare_listing_queryset(input_params):
         state = input_params.get('state')
         if state:
             queryset_list = queryset_list.filter(state=state)
+
+    ward = input_params.get('ward', None)
+    if ward:
+        queryset_list = queryset_list.filter(ward=ward)
 
     # Bedrooms
     if 'bedrooms' in input_params:
