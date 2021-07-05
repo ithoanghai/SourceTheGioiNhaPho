@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n %}
+{% load static humanize i18n load_static %}
 
 {% block head %}
   {{ block.super }}
@@ -276,7 +276,7 @@
 
 {% block scripts %}
 
-  <script async defer src="{% static 'js/services.min90ca.js' %}"></script>
+  <script async defer src="{% static 'js/services.min.js' %}"></script>
 
 
 {% endblock %}
