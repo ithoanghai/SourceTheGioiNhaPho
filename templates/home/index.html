@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n get_cadastral %}
+{% load static humanize i18n get_cadastral load_static %}
 
 {% block head_script %}
   {{ block.super }}
@@ -134,9 +134,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
           integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% load_static 'js/main.js' %}"></script>
 
-  <script defer src="{% static 'js/favorite.min.js' %} "></script>
+  <script defer src="{% load_static 'js/favorite.min.js' %} "></script>
 
   <script>
       /*@shinsenter/defer.js*/
@@ -358,6 +358,6 @@
           ip: "10.244.0.0"
       }
   </script>
-   <script defer src="{% static 'js/login-popup.js' %}"></script>
+   <script defer src="{% load_static 'js/login-popup.js' %}"></script>
 
 {% endblock %}
