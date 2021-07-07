@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import functools
 from datetime import datetime
 
 from django.contrib.gis.geos import Point
@@ -10,7 +11,7 @@ from embed_video.fields import EmbedVideoField
 from location_field.models.spatial import LocationField
 from rest_framework import serializers
 
-from FunctionModule.cadastral.constants import state_data, district_data
+from FunctionModule.cadastral.constants import state_data, district_data, ward_data
 from FunctionModule.realtors.models import Realtor
 from .choices import (TransactionType, city_choices, HouseType, RegistrationType,
                       RoadType, Status, Direction, Condition)
@@ -121,6 +122,14 @@ class Listing(models.Model):
     def long(self):
         return self.location.x
 
+    @functools.cached_property
+    def ward_name(self):
+        try:
+            ward = [x for x in ward_data[self.district] if x['code'] == self.ward ]
+            return ward[0]['name']
+        except (KeyError, IndexError):
+            return None
+
     def as_dict(self):
         return {
             "id": self.id,
@@ -191,6 +200,7 @@ class ListingSerializer(serializers.ModelSerializer):
 
     lat = serializers.CharField()
     long = serializers.CharField()
+    ward_name = serializers.CharField()
     main_photo = serializers.SerializerMethodField()
 
     def get_main_photo(self, obj):
