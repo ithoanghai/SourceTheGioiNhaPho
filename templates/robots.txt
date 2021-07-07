@@ -1,2 +1,12 @@
 User-Agent: *
-Disallow: /admin/
+Disallow: /admin
+
+User-agent: AhrefsBot
+User-agent: Baiduspider
+User-agent: EasouSpider
+User-agent: Ezooms
+User-agent: YandexBot
+User-agent: MJ12bot
+User-agent: SiteSucker
+User-agent: HTTrack
+Disallow: /

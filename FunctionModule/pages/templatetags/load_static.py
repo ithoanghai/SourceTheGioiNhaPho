@@ -49,8 +49,6 @@ class CustomStaticNode(TextNode):
 if settings.ENVIRONMENT == 'production':
     def p_render(self, context):
         return get_minified_url(self.s)
-
-
     CustomStaticNode.render = p_render
 
 

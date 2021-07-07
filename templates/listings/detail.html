@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n get_cadastral %}
+{% load static humanize i18n get_cadastral load_static %}
 
 {% block head %}
   {{ block.super }}
@@ -11,7 +11,7 @@
 
 {% block head_script %}
 
-  <link rel="stylesheet" href="{% static 'css/listing-detail-page.css' %}"/>
+  <link rel="stylesheet" href="{% load_static 'css/listing-detail-page.css' %}"/>
 
   <style>
       .detail-content-news img:before, .thumb-duan img:before, .cover img:not([src]):before {
@@ -865,7 +865,7 @@
 
 {% block scripts %}
   {{ block.super }}
-  <script async src="{% static 'js/listing.js' %}"></script>
+  <script async src="{% load_static 'js/listing.js' %}"></script>
 
 
   <script type="deferjs">
@@ -1084,8 +1084,8 @@
 
 
 
-  {#  <script type="deferjs" src="{% static 'js/hubspot-chatbox.min.js' %}"></script>#}
-  <script async type="text/javascript" src="{% static 'js/property-contact-box.js' %}"></script>
+  {#  <script type="deferjs" src="{% load_static 'js/hubspot-chatbox.min.js' %}"></script>#}
+  <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
 
   <script type="deferjs">
     var addthis_share = {
@@ -1093,8 +1093,8 @@
     }
 
   </script>
-  <script defer src="{% static 'js/favorite.min.js' %}"></script>
-  <script defer src="{% static 'js/home-recent-view.min.js' %}"></script>
+  <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
+  <script defer src="{% load_static 'js/home-recent-view.min.js' %}"></script>
 
   <script type="deferjs">
   function setupViewMore(heightLimit, $itemsWrapper, $items, $viewMoreWrapper, $viewMoreLink){
@@ -1442,11 +1442,11 @@
 
   </script>
 
-  <script defer src="{% static 'js/header-v2.min.js' %}"></script>
+  <script defer src="{% load_static 'js/header-v2.min.js' %}"></script>
   {% if listing.videos %}
     <link href="//vjs.zencdn.net/7.10.2/video-js.min.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="//vjs.zencdn.net/7.10.2/video.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/youtube_video.min.js' %}"></script>
+    <script type="text/javascript" src="{% load_static 'js/youtube_video.min.js' %}"></script>
   {% endif %}"
 
 {% endblock %}
