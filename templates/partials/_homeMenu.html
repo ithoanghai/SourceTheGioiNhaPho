@@ -30,10 +30,15 @@
         </div>
         <div class="login">
           <div class="user-login">
-            <a href="#login"
-               title="Đăng nhập / Đăng ký"
-               class="btn-primary btn-black-outline btn-medium btn-login">Đăng nhập</a>
-            <a href="#register" class="btn-primary btn-red-outline btn-medium btn-signup">Đăng ký</a>
+            {% if user.is_authenticated %}
+              <span>Xin chào {{ user.name }}</span>
+            {% else %}
+              <a href="#login"
+                 title="Đăng nhập"
+                 class="btn-primary btn-black-outline btn-medium btn-login">Đăng nhập</a>
+              <a href="#register" title="Đăng ký"
+                 class="btn-primary btn-red-outline btn-medium btn-signup">Đăng ký</a>
+            {% endif %}
           </div>
         </div>
         <ul>
