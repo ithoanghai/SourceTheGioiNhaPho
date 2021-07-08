@@ -16,6 +16,13 @@ RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/s
 
 COPY requirements.txt /app
 RUN pip install -r requirements.txt
+
+# install nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt install -y nodejs yarn
+COPY package.json /app
+RUN yarn install
+
 COPY . /app
 # RUN useradd --create-home appuser
 # USER appuser

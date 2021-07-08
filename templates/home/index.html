@@ -13,7 +13,6 @@
 
   <!-- NavBar -->
   {% include 'partials/_navbar.html' %}
-  {% include "partials/_loginModal.html" %}
   <!-- Banner -->
   {% comment %}{% include 'partials/_banner.html' %}{% endcomment %}
 
@@ -134,7 +133,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
           integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="{% load_static 'js/main.js' %}"></script>
+  <script src="{% load_static 'js/homepage-search.js' %}"></script>
 
   <script defer src="{% load_static 'js/favorite.min.js' %} "></script>
 
@@ -358,6 +357,5 @@
           ip: "10.244.0.0"
       }
   </script>
-   <script defer src="{% load_static 'js/login-popup.js' %}"></script>
 
 {% endblock %}

@@ -3325,7 +3325,7 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 
 .banner-content-inner form .search-container .search-input {
     font-size: 18px;
-    height: 56px;
+    height: 50px;
     width: calc(100% - 155px);
     background: #fff;
     border: 0 !important;
