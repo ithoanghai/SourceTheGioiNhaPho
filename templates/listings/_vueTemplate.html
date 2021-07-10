@@ -15,9 +15,9 @@
           <button class="btn-favorite btn-favorite__v2 ">
           </button>
           <div class="label-group">
-            <label v-if="listing.is_exclusive" class="label-primary unique p-1" style="font-size: 16px">{% trans "TGNP độc quyền" %}</label>
-            <label class="label-primary unique p-1"
-                   style="font-size: 16px">[[listing.price]] {% trans "tỷ" %}</label>
+            <label class="label-primary unique p-1"><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></label>
+            <label class="label-primary unique p-1">[[listing.price]] {% trans "tỷ" %}</label>
+            <label v-if="listing.is_exclusive" class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
           </div>
           <div style="display: none" class="overview-quick-look">
             <div class="btn-quick-look">
@@ -34,7 +34,7 @@
         </div>
         <div class="info-container">
           <div class="group-grid__view">
-            <ul class="listing-info">
+           <ul class="listing-info">
               <li>
                 <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}
               </li>
@@ -53,12 +53,11 @@
             <a class="listing-name" :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.title]]</a>
           </h3>
           <div class="listing-address">
-            <h4><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></h4>
             <h4 v-if="listing.urban_area">
-              <a :href="`/listings/search?keywords=${listing.urban_area}`" title="">[[listing.urban_area]]</a>
+              <a :href="`/listings/search?urban_area=${listing.urban_area}`" title="">[[listing.urban_area]]</a>
             </h4>
             <h4>
-              <a :href="`/listings/search?keywords=${listing.street}`" title="">[[listing.street]]</a>
+              <a :href="`/listings/search?street=${listing.street}`" title="">[[listing.street]]</a>
             </h4>
             <h4 v-if="listing.ward"><a :href="`/listings/search?ward=${listing.ward}`" title="Phường/Xã">[[listing.ward_name]]</a>
             </h4>

@@ -38,12 +38,17 @@ class ListingAdmin(admin.ModelAdmin):
             'all': ('admin/css/dropzone.css', 'admin/css/listing.css',)
         }
 
+    def save_model(self, request, obj, form, change):
+        if getattr(obj, 'user_id', None) is None:
+            obj.user_id = request.user.id
+        obj.save()
+
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         if request.user.is_superuser:
             return queryset
         else:
-            return queryset.filter(realtor=request.user.id)
+            return queryset.filter(user=request.user.id)
 
     def get_exclude(self, request, obj=None):
         excluded = super().get_exclude(request, obj)

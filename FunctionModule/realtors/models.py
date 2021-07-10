@@ -10,7 +10,6 @@ def default_hire_date():
 
 class Realtor(models.Model):
     user = models.OneToOneField(User, on_delete=models.RESTRICT)
-    is_mvp = models.BooleanField(default=False)
     hire_date = models.DateTimeField(default=default_hire_date, blank=True)
 
     def __str__(self):

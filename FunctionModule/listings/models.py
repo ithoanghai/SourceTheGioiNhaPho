@@ -13,6 +13,7 @@ from rest_framework import serializers
 
 from FunctionModule.cadastral.constants import state_data, district_data, ward_data
 from FunctionModule.realtors.models import Realtor
+from FunctionModule.accounts.models import User
 from .choices import (TransactionType, city_choices, HouseType, RegistrationType,
                       RoadType, Status, Direction, Condition)
 
@@ -22,11 +23,12 @@ def get_image_path(instance, filename: str):
 
 
 class Listing(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name=_("Người tạo"), editable=False, blank=True, null=True)
     realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, verbose_name=_("Đầu chủ"))
     transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,
                                         default=TransactionType.SELL, verbose_name=_("Hình thức giao dịch"))
     house_type = models.CharField(max_length=20, choices=HouseType.choices, default=HouseType.TOWN_HOUSE,
-                                  verbose_name=_("Loại nhà"))
+                                  verbose_name=_("Loại BĐS"))
 
     code = models.CharField(max_length=80, verbose_name=_("Mã BĐS (VIẾT HOA)"), help_text=_(
         "Quy tắc: Viết tắt chữ cái đầu Loại BĐS + 2 chữ số Năm + Tháng + Chữ cái đầu tên Đầu chủ + Số BĐS của ĐC"),
@@ -75,7 +77,7 @@ class Listing(models.Model):
         "Nêu tất cả các ưu điểm nổi bật của BĐS"))
     location_advantage = models.TextField(blank=True, null=True, verbose_name=_("Ưu điểm vị trí"), help_text=_(
         "Mô tả ưu điểm của vị trí, gần địa điểm nổi tiếng, dễ nhớ nào, khoảng bao nhiêu phút ra trung tâm, đường chính, hồ, bến tàu, xe, sân vận động, rạp chiếu phim.."))
-    furniture_disign = models.TextField(blank=True,null=True, verbose_name=_("Nội thất, thiết kế"), help_text=_(
+    furniture_design = models.TextField(blank=True,null=True, verbose_name=_("Nội thất, thiết kế"), help_text=_(
         "Thiết kế hiện đại, đầy đủ công năng, khung cột bê tông chắc chắn hay không, Có hay không có nội thất kèm theo, kèm theo những nội thất"))
     living_facilities = models.TextField(blank=True, null=True, verbose_name=_("Tiện ích sinh hoạt"), help_text=_(
         "Có bể bơi, phòng xông hơi, xem phim, thể thao, có chỗ đỗ xe hơi,..."))
