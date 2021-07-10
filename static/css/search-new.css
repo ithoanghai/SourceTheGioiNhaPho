@@ -1662,7 +1662,7 @@ body {
 }
 
 .label-primary.unique {
-    background: orange
+    background: rgba(255, 169, 19 , 0.5);
 }
 
 .label-primary.free {
@@ -5335,7 +5335,7 @@ label {
 
 .result-body .row.grid .listView.box .cover-image .label-group .label-primary {
     padding: 5px 8px 2px;
-    font-size: 10px;
+    /*font-size: 10px;*/
     line-height: 1.5;
     font-weight: 600;
     text-transform: uppercase
@@ -5347,7 +5347,10 @@ label {
 }
 
 .result-body .row.grid .listView.box .cover-image .label-group .label-primary + .label-primary {
-    margin-left: 10px
+    margin-left: 5px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .result-body .row.grid .listView.box .info-container {

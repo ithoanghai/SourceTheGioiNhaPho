@@ -474,7 +474,7 @@ table thead th.sorted .sortoptions a.descending:hover {
 
 input, textarea, select, .form-row p, form .button {
     margin: 2px 0;
-    padding: 2px 3px;
+    padding: 5px 10px;
     vertical-align: middle;
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
     font-weight: normal;
@@ -518,7 +518,7 @@ select[multiple] {
 
 .button, input[type=submit], input[type=button], .submit-row input, a.button {
     background: var(--button-bg);
-    padding: 10px 15px;
+    padding: 5px 10px;
     border: none;
     border-radius: 4px;
     color: var(--button-fg);
@@ -742,7 +742,7 @@ div.breadcrumbs a:focus, div.breadcrumbs a:hover {
 }
 
 a.deletelink:link, a.deletelink:visited {
-    color: #CC3434; /* XXX Probably unused? */
+
 }
 
 a.deletelink:focus, a.deletelink:hover {
@@ -1007,6 +1007,10 @@ table#change-history tbody th {
 }
 
 .delete-confirmation form input[type="submit"] {
+    display: inline-block;
+    vertical-align: middle;
+    /* height: 15px; */
+    line-height: 15px;
     background: var(--delete-button-bg);
     border-radius: 4px;
     padding: 10px 15px;
@@ -1022,7 +1026,6 @@ table#change-history tbody th {
 .delete-confirmation form .cancel-link {
     display: inline-block;
     vertical-align: middle;
-    height: 15px;
     line-height: 15px;
     border-radius: 4px;
     padding: 10px 15px;

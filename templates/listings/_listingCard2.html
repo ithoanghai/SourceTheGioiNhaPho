@@ -23,11 +23,11 @@
 
     </a>
     <div class="label-group">
-      {% if listing.is_exclusive %}
-        <label class="label-primary unique p-1" style="font-size: 16px">{% trans "TGNP độc quyền" %}</label>
+       <label class="label-primary unique p-1"><i class="zmdi zmdi-key"></i><b>{{listing.code}}</b></label>
+      <label class="label-primary unique p-1">{{ listing.price }} {% trans "tỷ" %}</label>
+              {% if listing.is_exclusive %}
+        <label class="label-primary unique p-1" >{% trans "Độc quyền" %}</label>
       {% endif %}
-      <label class="label-primary unique p-1"
-             style="font-size: 16px">{{ listing.price }} {% trans "tỷ" %}</label>
     </div>
     <button data-action="favorite" data-id="{{ listing.id }}"
             data-alias="{{ listing.title }}"
@@ -59,11 +59,6 @@
     </h3>{% endcomment %}
 
     <div class="listing-address">
-{% comment %}     <h4><a href="{% url 'listing' listing.id %}">Xem Chi Tiết</a>
-      </h4>{% endcomment %}
-        <h4>
-          <i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b>
-       </h4>
         {% if listing.urban_area %}
       <h4>
         <a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}"
@@ -75,12 +70,12 @@
            title="">{{ listing.street }}</a>
       </h4>
     {% if listing.ward %}
-                  <h2><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
-                         title="Phường/Xã">{{ listing.ward }}</a></h2>
+                  <a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
+                         title="Phường/Xã">{{ listing.ward_name }}</a>
      {% endif %}
       <h4>
-        <a href="{% url 'listing_search' %}?district={{ listing.district }}"
-           title=""> {% get_district listing.district %}</a>
+        <h2><a href="{% url 'listing_search' %}?district={{ listing.district }}"
+           title=""> {% get_district listing.district %}</a></h2>
       </h4>
     </div>
   </div>

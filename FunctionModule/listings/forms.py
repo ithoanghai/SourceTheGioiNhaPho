@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import Textarea
 
 from FunctionModule.cadastral.constants import district_data, ward_data
 from .fields import EmptyChoiceField
@@ -11,6 +12,16 @@ class ListingAdminForm(forms.ModelForm):
     class Meta:
         model = Listing
         fields = '__all__'
+
+        widgets = {
+            'description': Textarea(attrs={'class': '???', 'rows': 5}),
+            'salient_features': Textarea(attrs={'class': '???', 'rows': 5}),
+            'location_advantage': Textarea(attrs={'class': '???', 'rows': 3}),
+            'furniture_design': Textarea(attrs={'class': '???', 'rows': 3}),
+            'living_facilities': Textarea(attrs={'class': '???', 'rows': 3}),
+            'residential_community': Textarea(attrs={'class': '???', 'rows': 3}),
+            'regional_welfare': Textarea(attrs={'class': '???', 'rows': 3}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
