@@ -36,7 +36,7 @@
   </div>
   <div class="info-container">
     <div class="flex align-items-center justify-content-space-between">
-        <div style="color: orange; font-size: large;"><b>{{ listing.price }} {% trans "tỷ" %}</b></div>
+        <div class="listing-price" style="color: orange; font-size: large;">{{ listing.price }} {% trans "tỷ" %}</div>
       <ul class="listing-info">
          <li>
           <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2" %}
@@ -49,9 +49,9 @@
             <i class="zmdi zmdi-airline-seat-individual-suite"></i>{{ listing.bedrooms }} {% trans "ngủ" %}
           </li>
         {% endif %}
-        {% if listing.bathrooms %}
+        {% comment %}{% if listing.bathrooms %}
           <li><i class="fa fa-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %}
-          </li> {% endif %}
+          </li> {% endif %}{% endcomment %}
       </ul>
     </div>
 {% comment %}    <h3>
