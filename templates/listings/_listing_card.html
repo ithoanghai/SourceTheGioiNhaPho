@@ -27,7 +27,7 @@
                   </h4>
                 {% if listing.ward %}
                   <h2><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
-                         title="Phường/Xã">{{ listing.ward }}</a></h2>
+                         title="Phường/Xã"> {% get_ward listing.ward %}</a></h2>
                  {% endif %}
                   <h4>
                     <a href="{% url 'listing_search' %}?district={{ listing.district }}"

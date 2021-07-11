@@ -4993,7 +4993,8 @@ select.form-control:focus::-ms-value {
 }
 
 h2 {
-    display: inline-block
+    display: inline-block;
+    font-size: 1.5rem;
 }
 
 .heading-02 {

@@ -1,1 +1,0 @@
-INSERT INTO "geometry_columns"("f_table_catalog", "f_table_schema", "f_table_name", "f_geometry_column", "coord_dimension", "srid", "type") VALUES ('real_estate', 'public', 'listings_listing', 'location', 2, 4326, 'POINT');

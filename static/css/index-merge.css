@@ -1,5 +1,6 @@
 *, ::after, ::before {
     -webkit-box-sizing: border-box;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     box-sizing: inherit
@@ -83,8 +84,23 @@ a {
 
 .container .inner {
     display: block;
-    overflow: hidden;
-    width: 100%
+    overflow: hidden
+}
+
+.section-home {
+    margin: 100px 0 0
+}
+
+@media (max-width: 1024px) {
+    .section-home {
+        margin: 5rem 0 0
+    }
+}
+
+@media (max-width: 768px) {
+    .section-home {
+        margin: 3rem 0 0
+    }
 }
 
 .wrapper {
@@ -701,7 +717,7 @@ body {
 }
 
 .label-primary.unique {
-    background: orange
+    background-color: rgba(255, 169, 19 , 0.5);
 }
 
 .label-primary.free {
@@ -1290,6 +1306,9 @@ body {
     padding: 0 10px;
     height: 20px;
     width: 100%;
+    max-width: max-content;
+    max-width: min-content;
+    max-width: fit-content;
     border-right: 1px solid rgba(48, 51, 58, .3);
     line-height: 20px;
     cursor: pointer;
@@ -1915,6 +1934,8 @@ body {
 
 @media (max-width: 1095px) {
     .main-header .col-right {
+        max-width: max-content;
+        max-width: max-content;
         max-width: fit-content;
         min-width: -webkit-min-content;
         min-width: -moz-min-content;
@@ -2933,7 +2954,7 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
     display: inline-block;
     width: auto;
     font-size: 14px;
-    margin-right: 15px;
+    margin-right: 5px;
     color: #838383
 }
 
@@ -2966,7 +2987,7 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 140px;
-    width: 140px;
+    width: auto;
     font-family: tgnp-font2;
     font-size: 22px;
     line-height: 1.5;
@@ -3530,6 +3551,7 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 }
 
 .block-introduce .col-8 {
+    margin: auto;
     line-height: 1.63;
     font-size: 16px;
     margin-bottom: 30px
@@ -3574,6 +3596,57 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
     width: 100%
 }
 
+.block-project > div .projectCard {
+    width: calc(33.33% - 20px);
+    margin-right: 30px;
+    margin-bottom: 30px
+}
+
+.block-project > div .projectCard:nth-child(3n) {
+    margin-right: 0
+}
+
+.block-project > div .projectCard:hover {
+    -webkit-transform: unset;
+    transform: unset
+}
+
+.block-project > div .listingCard {
+    width: calc(33.33% - 20px);
+    margin-right: 30px;
+    margin-bottom: 30px
+}
+
+.block-project > div .listingCard:nth-child(3n) {
+    margin-right: 0
+}
+
+.block-project > div .listingCard:hover {
+    -webkit-transform: unset;
+    transform: unset
+}
+
+.block-project > div .listingCard .label-group {
+    left: 10px;
+    display: inline-block;
+    padding: 0
+}
+
+.block-project > div .listingCard .label-group label {
+    margin: 0
+}
+
+.block-project > div .listingCard .label-group label + .label-primary {
+    margin-left: 10px
+}
+
+.block-project > div .listingCard .label-group .label-primary {
+    padding: 5px 8px 2px;
+    font-size: 12px;
+    line-height: 1.5;
+    font-weight: 600;
+    text-transform: uppercase
+}
 
 .block-project > div .listingCard .label-group .label-primary.label-white--outline {
     padding: 3px 8px 1px;
@@ -3581,7 +3654,10 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 }
 
 .block-project > div .listingCard .label-group .label-primary + .label-primary {
-    margin-left: 10px
+    margin-left: 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .block-project > div .item .listingCard:nth-child(3n) {
@@ -3603,6 +3679,18 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 }
 
 @media (max-width: 960px) {
+    .block-project > div .projectCard {
+        width: calc(50% - 15px);
+        max-width: inherit
+    }
+
+    .block-project > div .projectCard:nth-child(2n) {
+        margin-right: 0 !important
+    }
+
+    .block-project > div .projectCard:nth-child(3n) {
+        margin-right: 30px
+    }
 
     .block-project > div .listingCard {
         width: calc(50% - 15px);
@@ -3619,6 +3707,14 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 }
 
 @media (max-width: 640px) {
+    .block-project > div .projectCard {
+        width: 100%;
+        margin-bottom: 20px
+    }
+
+    .block-project > div .projectCard:nth-child(n+4) {
+        display: none
+    }
 
     .block-project > div .listingCard {
         width: 100%;
