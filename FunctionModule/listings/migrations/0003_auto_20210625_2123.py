@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='listing',
-            name='furniture_disign',
+            name='furniture_design',
             field=models.TextField(blank=True, help_text='Thiết kế hiện đại, đầy đủ công năng, khung cột bê tông chắc chắn hay không, Có hay không có nội thất kèm theo, kèm theo những nội thất', null=True, verbose_name='Nội thất, thiết kế'),
         ),
         migrations.AddField(
