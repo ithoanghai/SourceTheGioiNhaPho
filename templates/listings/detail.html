@@ -353,7 +353,7 @@
                        title="Đường">{{ listing.street }}</a></h2>
                 {% if listing.ward %}
                   <h2><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
-                         title="Phường/Xã">{{ listing.ward }}</a></h2>
+                         title="Phường/Xã">{{ listing.ward_name }}</a></h2>
                 {% endif %}
                 <h2><a href="{% url 'listing_search' %}?district={{ listing.district }}"
                        title="Quận/Huyện">{% get_district listing.district %}</a></h2>
@@ -366,7 +366,7 @@
                 <ul class="detailroom">
                   <li title="Diện tích"><span
                     class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} m2</li>
-                  <li title="Giá"><strong>$</strong> {{ listing.price }} tỷ</li>
+                    <li title="Giá"><strong>$</strong><b>{{ listing.price }} tỷ</b></li>
                   {% if listing.sale_price  and listing.sale_price < listing.price %}
                     <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price }} tỷ </strong></li> {% endif %}
                 </ul>
@@ -377,7 +377,7 @@
               </div>
             </header>
           </div>
-          <div class="heading-02">Mô tả ngắn gọn</div>
+          <div class="heading-02">Mô tả ngắn</div>
           <div class="content collapsed pdb-0" data-height="150">
             <p class="summary">{{ listing.description }}</p>
           </div>
@@ -473,36 +473,47 @@
                 </div>
               </div>
             </div>
+          {% if listing.salient_features %}
             <div class="list-advantage clear">
               <div class="advantage-name">
                 <p>Đặc điểm nổi bật</p>
               </div>
               <div class="advance-date-content">{{ listing.salient_features }}</div>
             </div>
+          {% endif %}
+          {% if listing.location_advantage %}
               <div class="list-advantage clear">
               <div class="advantage-name">
                 <p>Ưu điểm vị trí</p>
               </div>
               <div class="advance-date-content">{{ listing.location_advantage }}</div>
             </div>
+          {% endif %}
+          {% if listing.furniture_included %}
             <div class="list-advantage clear">
               <div class="advantage-name">
                 <p>Nội thất kèm theo</p>
               </div>
               <div class="advance-date-content">{{ listing.furniture_included }}</div>
             </div>
+          {% endif %}
+          {% if listing.living_facilities %}
             <div class="list-advantage clear">
               <div class="advantage-name">
                 <p>Tiện ích sinh hoạt</p>
               </div>
               <div class="advance-date-content">{{ listing.living_facilities }}</div>
             </div>
+          {% endif %}
+          {% if listing.residential_community %}
             <div class="list-advantage clear">
               <div class="advantage-name">
                 <p>Cộng đồng dân cư</p>
               </div>
               <div class="advance-date-content">{{ listing.residential_community }}</div>
             </div>
+          {% endif %}
+          {% if listing.regional_welfare %}
             <div class="list-advantage clear">
               <div class="advantage-name">
                 <p>An sinh khu vực</p>
@@ -510,6 +521,7 @@
               <div class="advance-date-content">{{ listing.regional_welfare }}
               </div>
             </div>
+          {% endif %}
             <div class="list-advantage clear">
                <div class="advantage-name">
                 <p>Tình trạng BĐS</p>
@@ -661,7 +673,7 @@
                is-more="true" more="Xem thêm" less="Thu gọn">Xem tất cả</a>
           </p>
           <div class="map-detail hidden"></div>
-                  <div class="heading-02">Tiện ích khu vực</div>
+                  <div class="heading-02">Bản đồ khu vực</div>
                   <section class="mgt-15 map-detail gmap-render">
                      <div class="_map-bg openBtn img-map"
                          style="background-image: url(https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap)">
@@ -1447,5 +1459,7 @@
     <script type="text/javascript" src="//vjs.zencdn.net/7.10.2/video.min.js"></script>
     <script type="text/javascript" src="{% load_static 'js/youtube_video.min.js' %}"></script>
   {% endif %}"
+    <script type="deferjs" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap">
+    </script>
 
 {% endblock %}
