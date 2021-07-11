@@ -11,9 +11,9 @@ from embed_video.fields import EmbedVideoField
 from location_field.models.spatial import LocationField
 from rest_framework import serializers
 
+from FunctionModule.accounts.models import User
 from FunctionModule.cadastral.constants import state_data, district_data, ward_data
 from FunctionModule.realtors.models import Realtor
-from FunctionModule.accounts.models import User
 from .choices import (TransactionType, city_choices, HouseType, RegistrationType,
                       RoadType, Status, Direction, Condition)
 
@@ -23,7 +23,6 @@ def get_image_path(instance, filename: str):
 
 
 class Listing(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name=_("Người tạo"), editable=False, blank=True, null=True)
     realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, verbose_name=_("Đầu chủ"))
     transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,
                                         default=TransactionType.SELL, verbose_name=_("Hình thức giao dịch"))
@@ -73,16 +72,21 @@ class Listing(models.Model):
                                  verbose_name=_("Hướng"))
     description = models.TextField(blank=True, verbose_name=_("Mô tả ngắn gọn"), help_text=_(
         "Mô tả giới thiệu BĐS ngắn gọn "))
-    salient_features = models.TextField(blank=True,null=True, verbose_name=_("Đặc điểm nổi bật"), help_text=_(
-        "Nêu tất cả các ưu điểm nổi bật của BĐS"))
-    location_advantage = models.TextField(blank=True, null=True, verbose_name=_("Ưu điểm vị trí"), help_text=_(
-        "Mô tả ưu điểm của vị trí, gần địa điểm nổi tiếng, dễ nhớ nào, khoảng bao nhiêu phút ra trung tâm, đường chính, hồ, bến tàu, xe, sân vận động, rạp chiếu phim.."))
-    furniture_design = models.TextField(blank=True,null=True, verbose_name=_("Nội thất, thiết kế"), help_text=_(
-        "Thiết kế hiện đại, đầy đủ công năng, khung cột bê tông chắc chắn hay không, Có hay không có nội thất kèm theo, kèm theo những nội thất"))
-    living_facilities = models.TextField(blank=True, null=True, verbose_name=_("Tiện ích sinh hoạt"), help_text=_(
-        "Có bể bơi, phòng xông hơi, xem phim, thể thao, có chỗ đỗ xe hơi,..."))
-    residential_community = models.TextField(blank=True, null=True, verbose_name=_("Cộng đồng dân cư"), help_text=_(
-        "Cộng đồng dân cư dân trí cao, văn minh, an ninh, thân thiện hay không"))
+    salient_features = models.TextField(blank=True, null=True, verbose_name=_("Đặc điểm nổi bật"),
+                                        help_text=_(
+                                            "Nêu tất cả các ưu điểm nổi bật của BĐS"))
+    location_advantage = models.TextField(blank=True, null=True, verbose_name=_("Ưu điểm vị trí"),
+                                          help_text=_(
+                                              "Mô tả ưu điểm của vị trí, gần địa điểm nổi tiếng, dễ nhớ nào, khoảng bao nhiêu phút ra trung tâm, đường chính, hồ, bến tàu, xe, sân vận động, rạp chiếu phim.."))
+    furniture_design = models.TextField(blank=True, null=True, verbose_name=_("Nội thất, thiết kế"),
+                                        help_text=_(
+                                            "Thiết kế hiện đại, đầy đủ công năng, khung cột bê tông chắc chắn hay không, Có hay không có nội thất kèm theo, kèm theo những nội thất"))
+    living_facilities = models.TextField(blank=True, null=True, verbose_name=_("Tiện ích sinh hoạt"),
+                                         help_text=_(
+                                             "Có bể bơi, phòng xông hơi, xem phim, thể thao, có chỗ đỗ xe hơi,..."))
+    residential_community = models.TextField(blank=True, null=True, verbose_name=_("Cộng đồng dân cư"),
+                                             help_text=_(
+                                                 "Cộng đồng dân cư dân trí cao, văn minh, an ninh, thân thiện hay không"))
     regional_welfare = models.TextField(blank=True, null=True, verbose_name=_("An sinh khu vực"), help_text=_(
         "Gần trường mầm non, tiểu học, THCS,...Bệnh viện, Trung tâm spa, chăm sóc sức khoẻ, sắc đẹp..."))
 
@@ -127,7 +131,7 @@ class Listing(models.Model):
     @functools.cached_property
     def ward_name(self):
         try:
-            ward = [x for x in ward_data[self.district] if x['code'] == self.ward ]
+            ward = [x for x in ward_data[self.district] if x['code'] == self.ward]
             return ward[0]['name']
         except (KeyError, IndexError):
             return None
