@@ -6,7 +6,7 @@ from ..cadastral.constants import district_data
 
 
 def prepare_listing_queryset(input_params):
-    queryset_list = Listing.objects.order_by('-list_date')
+    queryset_list = Listing.objects.order_by('-list_date').filter(is_published=True)
     hn_district = district_data['01']
 
     # trans_type

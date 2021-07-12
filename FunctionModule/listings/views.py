@@ -56,7 +56,7 @@ def listing(request, listing_id):
 def detail(request):
     listing_id = request.GET.get('id', '')
     listing_detail = get_object_or_404(Listing, pk=listing_id)
-    listings_neighborhood = Listing.objects.order_by('-list_date').filter(state=listing_detail.state)[:10]
+    listings_neighborhood = Listing.objects.order_by('-list_date').filter(is_published=True, state=listing_detail.state)[:10]
     context = {
         'listing': listing_detail,
         'listings_neighborhood': listings_neighborhood
