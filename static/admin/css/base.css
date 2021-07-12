@@ -566,6 +566,7 @@ input[type=button][disabled].default {
     border: none;
     margin-bottom: 30px;
     background: var(--body-bg);
+    width: 100%;
 }
 
 .module p, .module ul, .module h3, .module h4, .module dl, .module pre {
