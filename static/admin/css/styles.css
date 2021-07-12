@@ -2142,7 +2142,7 @@ textarea.form-control {
 }
 
 .form-row {
-  display: flex;
+  /*display: flex;*/
   flex-wrap: wrap;
   margin-right: -5px;
   margin-left: -5px;
