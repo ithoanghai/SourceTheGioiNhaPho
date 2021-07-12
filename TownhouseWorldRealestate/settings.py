@@ -258,6 +258,7 @@ CACHES = {
     }
 }
 
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
         'METHOD': 'oauth2',

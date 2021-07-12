@@ -1,9 +1,10 @@
 from django.contrib import messages, auth
-from django.contrib.auth.models import User
+from django.db.models import Q
 from django.shortcuts import render, redirect
+from allauth.account.views import get_adapter
 
+from FunctionModule.accounts.models import User
 from FunctionModule.contacts.models import Contact
-from FunctionModule.pages.views import home_view
 
 
 def register(request):
@@ -44,22 +45,30 @@ def register(request):
         return render(request, 'accounts/register.html')
 
 
-def login(request):
+def login_handler(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
 
-        user = auth.authenticate(username=username, password=password)
+        query = Q(username=username) | Q(email=username)
+        user = User.objects.get(query)
+        adapter = get_adapter(request)
 
         if user is not None:
-            auth.login(request, user)
+            is_correct = user.check_password(password)
+            if not is_correct:
+                messages.error(request, 'Thông tin không hợp lệ')
+                return redirect('index')
+
+            adapter.login(request, user)
             messages.success(request, 'Bạn đã đăng nhập thành công')
-            return redirect('dashboard')
+            return redirect('index')
         else:
             messages.error(request, 'Thông tin không hợp lệ')
-            return redirect('login')
+            return redirect('index')
     else:
-        return render(request, 'accounts/login.html')
+        messages.error(request, 'Bạn cần gửi đủ thông tin đăng nhập')
+        return render(request, 'home/index.html')
 
 
 def logout(request):

@@ -7,7 +7,7 @@ from . import views
 admin.autodiscover()
 
 urlpatterns = [
-    path('login', views.login, name='login'),
+    path('login', views.login_handler, name='login_username'),
     path('register', views.register, name='register'),
     path('logout', views.logout, name='logout'),
     path('dashboard', views.dashboard, name='dashboard'),
