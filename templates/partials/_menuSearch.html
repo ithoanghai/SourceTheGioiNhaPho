@@ -92,7 +92,7 @@
           }
       </style>
       {% if user.is_authenticated %}
-        <span>Xin chào {{ user.name }}</span>
+        <span style="font-size: smaller; line-height: 1.1em">Chào {{ user.name }}</span>
       {% else %}
         <a href="#login" data-mix-header-click="group: authen, action: click_login" waiting-login-js
            title="Đăng nhập / Đăng ký" class="btn-login">Đăng nhập</a>
