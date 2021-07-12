@@ -7,7 +7,7 @@
         </a>
       </li>
       <li class="filter-item" v-click-outside="hideHouseFilters">
-        <a href="#" v-on:click="toggleFilterType('houseType')" :class="{active: houseTypeFilter.length>0}">
+        <a href="#" v-on:click="toggleFilterType('houseType')" v-bin:class="{active: houseTypeFilter.length>0}">
           <span>Loại hình</span>
           <span v-if="houseTypeFilter.length>0" class="mark">[[houseTypeFilter.length]]</span>
         </a>
