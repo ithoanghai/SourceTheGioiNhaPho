@@ -6111,7 +6111,7 @@ ul.exclusive li.featured header li .zmdi {
 
 @media (max-width: 480px) {
     #slider {
-        height: 276px;
+        height: 100%;
         width: 100%
     }
 }

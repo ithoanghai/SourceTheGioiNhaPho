@@ -107,7 +107,7 @@
 
 @media (max-width: 767px) {
     #nav-sidebar, #toggle-nav-sidebar {
-        display: flex;
+        display: inline;
     }
 
     .main > #nav-sidebar + .content,
