@@ -14,13 +14,14 @@ class ListingAdminForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-            'description': Textarea(attrs={'class': '???', 'rows': 5}),
+            'description': Textarea(attrs={'class': '???', 'rows': 12}),
             'salient_features': Textarea(attrs={'class': '???', 'rows': 5}),
             'location_advantage': Textarea(attrs={'class': '???', 'rows': 3}),
             'furniture_design': Textarea(attrs={'class': '???', 'rows': 3}),
             'living_facilities': Textarea(attrs={'class': '???', 'rows': 3}),
             'residential_community': Textarea(attrs={'class': '???', 'rows': 3}),
             'regional_welfare': Textarea(attrs={'class': '???', 'rows': 3}),
+            'extra_data': Textarea(attrs={'class': '???', 'rows': 5}),
         }
 
     def __init__(self, *args, **kwargs):

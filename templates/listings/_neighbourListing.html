@@ -23,7 +23,7 @@
       <h2><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
              title="Phường/Xã">{{ listing.ward }}</a></h2>
     {% endif %}
-    <h2><a href="{% url 'listing_search' %}?keywords={{ listing.district }}"
+    <h2><a href="{% url 'listing_search' %}?district={{ listing.district }}"
            title="Quận/Huyện">{% get_district listing.district %}</a></h2>
     <ul>
       <li title="Diện tích"><span
