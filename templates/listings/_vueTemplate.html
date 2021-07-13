@@ -63,7 +63,7 @@
             <h4 v-if="listing.ward"><a :href="`/listings/search?ward=${listing.ward}`" title="Phường/Xã">[[listing.ward_name]]</a>
             </h4>
             <h4>
-              <a :href="`/listings/search?district=${listing.district}`" title="">[[getDistrict(listing.district)]]</a>
+              <b><a :href="`/listings/search?district=${listing.district}`" title="">[[getDistrict(listing.district)]]</a></b>
             </h4>
           </div>
           <ul class="listing-info">

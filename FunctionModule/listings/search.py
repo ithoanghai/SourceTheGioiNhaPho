@@ -33,19 +33,8 @@ def prepare_listing_queryset(input_params):
         if keywords:
             query = Q(description__icontains=keywords) | Q(title__icontains=keywords) | Q(
                 address__icontains=keywords) | Q(code=keywords)
-            slug_keyword = slugify(keywords.lower().replace('đ', 'd').replace('õ', 'o'))
-            district_code = next(
-                x['code'] for x in hn_district if
-                (x['name'] == keywords or x['slug'] == slug_keyword or x['code'] == slug_keyword))
-            if district_code:
-                query = query | Q(district=district_code)
-            queryset_list = queryset_list.filter(query)
 
-            # Address
-            if 'address' in input_params:
-                address = input_params.get('address')
-                if address:
-                    queryset_list = queryset_list.filter(address=address)
+            queryset_list = queryset_list.filter(query)
 
     # street
     if 'street' in input_params:

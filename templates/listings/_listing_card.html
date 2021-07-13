@@ -26,18 +26,17 @@
                        title="">{{ listing.street }}</a>
                   </h4>
                 {% if listing.ward %}
-                  <h2><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
-                         title="Phường/Xã"> {% get_ward listing.ward %}</a></h2>
+                  <h4><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
+                         title="Phường/Xã"> {% get_ward listing.ward %}</a></h4>
                  {% endif %}
-                  <h4>
+                  <h4><b>
                     <a href="{% url 'listing_search' %}?district={{ listing.district }}"
-                       title="Quận/Huyện"> {% get_district listing.district %}</a>
+                       title="Quận/Huyện"> {% get_district listing.district %}</a></b>
                   </h4>
                     {% if listing.state %}
-                              <h2><a href="{% url 'listing_search' %}?ward={{ listing.state }}"
-                                     title="Tỉnh/TP">{{ listing.state }}</a></h2>
+                              <h4><b><a href="{% url 'listing_search' %}?ward={{ listing.state }}"
+                                     title="Tỉnh/TP">{{ listing.state }}</a></b></h4>
                  {% endif %}
-                {{ listing.city }}
             </p>
         </div>
         <hr>

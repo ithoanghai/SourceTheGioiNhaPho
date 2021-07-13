@@ -74,10 +74,8 @@
                   <a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
                          title="Phường/Xã">{{ listing.ward_name }}</a>
      {% endif %}
-      <h4>
-        <h2><a href="{% url 'listing_search' %}?district={{ listing.district }}"
-           title=""> {% get_district listing.district %}</a></h2>
-      </h4>
+        <h4><b><a href="{% url 'listing_search' %}?district={{ listing.district }}"
+           title=""> {% get_district listing.district %}</a></b></h4>
     </div>
   </div>
 </article>
