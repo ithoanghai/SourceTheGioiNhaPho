@@ -8149,7 +8149,7 @@ ul.slideimg li a.img:hover {
         width: 70%;
         display: block;
         float: right;
-        padding-left: 0
+        padding-left: 5px
     }
 }
 
@@ -8176,7 +8176,7 @@ ul.slideimg li a.img:hover {
 
 @media (max-width: 480px) {
     .compare-house .article div.status {
-        padding-left: 0
+        padding-left: 5px
     }
 }
 

@@ -419,10 +419,12 @@
                 <p class="left">Diện tích</p>
                 <p class="right">{{ listing.area }} {{ listing.area_unit }}</p>
               </li>
+            {% if listing.lot_size %}
               <li>
                 <p class="left">Diện tích khuân viên</p>
                 <p class="right">{{ listing.lot_size }}</p>
               </li>
+            {% endif %}
               <li>
                 <p class="left">Loại chứng nhận</p>
                 <p class="right"><a
