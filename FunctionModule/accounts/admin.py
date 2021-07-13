@@ -17,17 +17,32 @@ except django.contrib.admin.sites.NotRegistered:
 
 class AccountAdmin(AuthUserAdmin):
     form = MyUserChangeForm
-    fieldsets = (('User Profile', {'fields': (
-        'is_realtor', 'first_time', 'phone',
-        'address', 'dob', 'gender',
-        'bio', 'website', 'facebook', 'youtube',)}),
-                 ) + AuthUserAdmin.fieldsets
     add_fieldsets = (
-        (None, {
+        ('THÔNG TIN CƠ BẢN', {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'phone', 'password1', 'password2'),
-        }),
+            'fields': ('username', 'email', 'phone', 'password1', 'password2',),
+        }), ('THÔNG TIN BỔ SUNG', {'fields': (
+        'is_realtor', 'first_time',
+        'first_name', 'last_name',
+        'address', 'dob', 'gender',
+        'bio', 'website', 'facebook', 'youtube',)})
     )
+
+    fieldsets = (
+        ('THÔNG TIN CƠ BẢN', {
+            'classes': ('wide',),
+            'fields': ('username', 'email', 'phone', 'password',)}),
+        ('THÔNG TIN BỔ SUNG', {'fields': (
+            'is_realtor', 'first_time',
+            'last_name', 'first_name',
+            'address', 'dob', 'gender',
+            'bio', 'website', 'facebook', 'youtube',)}),
+        ('PHÂN QUYỀN SỬ DỤNG', {
+            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
+        }),
+        ('THỜI GIAN HOẠT ĐỘNG', {'fields': ('last_login', 'date_joined')}),
+    )
+
     list_display = ('id', 'name', 'email', 'date_joined', 'phone', 'is_realtor')
     list_display_links = ('id', 'email')
     search_fields = ['email', 'phone']
@@ -39,6 +54,12 @@ class AccountAdmin(AuthUserAdmin):
     ]
 
     # change_list_template = 'admin/auth/user/change_list.html'
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        if request.user.is_superuser:
+            return queryset
+        else:
+            return queryset.filter(id=request.user.id)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
@@ -47,7 +68,6 @@ class AccountAdmin(AuthUserAdmin):
 
         if not is_superuser:
             disabled_fields |= {
-                'username',
                 'is_superuser',
                 'user_permissions'
             }

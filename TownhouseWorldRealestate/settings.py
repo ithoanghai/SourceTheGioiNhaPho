@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 from django.contrib.messages import constants as messages
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _, gettext_noop
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -150,21 +150,30 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),
 )
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'vi'
 LANGUAGES = [
-    ('vi', _('Vietnamese')),
-    ('en-us', _('English')),
+    ('vi', gettext_noop('Vietnamese')),
+    ('en-us', gettext_noop('English')),
 ]
+LANGUAGES_BIDI = ["ar-dz", "fa", "ur"]
+
+# Settings for language cookie
+LANGUAGE_COOKIE_NAME = 'django_language'
+LANGUAGE_COOKIE_AGE = None
+LANGUAGE_COOKIE_DOMAIN = None
+LANGUAGE_COOKIE_PATH = '/'
+LANGUAGE_COOKIE_SECURE = False
+LANGUAGE_COOKIE_HTTPONLY = False
+LANGUAGE_COOKIE_SAMESITE = None
 
 COMPRESS_OFFLINE = True
 COMPRESS_OFFLINE_CONTEXT = [
     {"LANGUAGE_BIDI": True},
-    {"LANGUAGE_BIDI": False},
 ]
 
 TIME_ZONE = 'Asia/Ho_Chi_Minh'
 
-USE_I18N = True
+USE_I18N = False
 
 USE_L10N = True
 

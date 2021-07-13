@@ -1,9 +1,9 @@
-{% load static i18n %}
+{% load static i18n%}
 
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 
-<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
+<html lang="{{ LANGUAGE_CODE|default:"vi" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 
 {% include 'admin/includes/_head.html' %}
 
