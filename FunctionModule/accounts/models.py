@@ -24,10 +24,20 @@ phone_regex = RegexValidator(regex=r'^(09|03|07|08|05)+([0-9]{8})$',
 
 class User(AbstractUser):
     # These two fields are for backend (admin) login form to display correctly
-
+    username = models.CharField(
+        _('Tên đăng nhập'),
+        max_length=150,
+        unique=True,
+        help_text=_('Bắt buộc nhập. Không quá 150 ký tự. Có thể bao gồm ký tự, chữ số và chỉ ký tự đặc biệt @/./+/-/_.'),
+        error_messages={
+            'unique': _("Người dùng này đã tồn tại trên hệ thống."),
+        },
+    )
     email = models.EmailField(_('Email'), blank=True)
-    is_realtor = models.BooleanField(_("Là đầu chủ"), default=False)
+    is_realtor = models.BooleanField(_("Là đầu chủ"), default=True)
     # Basic Info
+    first_name = models.CharField(_('Tên'), max_length=150, blank=True)
+    last_name = models.CharField(_('Họ'), max_length=150, blank=True)
     phone = models.CharField(_('Điện thoại'), max_length=20, db_index=True, unique=True,
                              validators=[phone_regex])
     address = models.CharField(_('Địa chỉ'), blank=True, max_length=255)

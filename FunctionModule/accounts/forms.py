@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import Group
+from django.forms import Textarea
 
 from .models import User
 
@@ -9,6 +10,10 @@ from .models import User
 class MyUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = User
+
+        widgets = {
+            'bio': Textarea(attrs={'class': '???', 'rows': 3}),
+        }
 
 
 class GroupAdminForm(forms.ModelForm):
