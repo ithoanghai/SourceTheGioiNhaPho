@@ -3009,6 +3009,9 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 }
 
 @media (min-width: 768px) {
+    .listingCard {
+        height: 375px;
+    }
     .listingCard:hover {
         -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .3);
         box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .3)
@@ -3615,7 +3618,8 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 .block-project > div .listingCard {
     width: calc(33.33% - 20px);
     margin-right: 30px;
-    margin-bottom: 30px
+    margin-bottom: 30px;
+    height: 320px;
 }
 
 .block-project > div .listingCard:nth-child(3n) {
@@ -3722,7 +3726,7 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
         margin-bottom: 20px
     }
 
-    .block-project > div .listingCard:nth-child(n+4) {
+    .block-project > div .listingCard:nth-child(n+7) {
         display: none
     }
 

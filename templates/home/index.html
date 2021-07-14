@@ -4,8 +4,8 @@
 
 {% block head_script %}
   {{ block.super }}
-    <meta name="facebook-domain-verification" content="3g449o0k74keromcp6ksrzkk4t8fxm" />
-    <link rel="stylesheet" type="text/css" href="{% load_static 'css/index-merge.css' %}" />
+  <meta name="facebook-domain-verification" content="3g449o0k74keromcp6ksrzkk4t8fxm"/>
+  <link rel="stylesheet" type="text/css" href="{% load_static 'css/index-merge.css' %}"/>
   <link rel="canonical" href="{% url 'index' %}"/>
 
 {% endblock %}
@@ -43,7 +43,8 @@
   <section class="container col-12">
     <div class="inner text-center-index block-introduce">
       <h2 class="heading-02">Hỗ trợ từng bước, chi phí thấp nhất</h2>
-      <p class="col-8">Thế Giới Nhà Phố (TGNP) với thế mạnh về công nghệ và cung cấp đầy đủ các dịch vụ, cùng với đội ngũ chuyên
+      <p class="col-8">Thế Giới Nhà Phố (TGNP) với thế mạnh về công nghệ và cung cấp đầy đủ các dịch vụ, cùng với đội
+        ngũ chuyên
         viên hiểu biết sâu sắc thị trường từng khu vực, sẽ đồng hành hỗ trợ bạn từng bước, giúp bạn tiết kiệm
         đáng kể chi phí, công sức và thời gian.</p>
       <a class="btn-primary btn-large btn-black-outline" target="_blank" href="{% url 'whyChoose' %}">Tìm hiểu thêm</a>
@@ -62,9 +63,8 @@
             {% include "listings/_listingCard2.html" %}
           {% endfor %}
 
-          <input type="hidden" value=""/>
-          <a class="more" href="{% url "listing_search" %}?trans_type=sell">Xem thêm nhà đất
-            <i class="zmdi zmdi-chevron-right"></i>
+          <a class="more" href="{% url "listing_search" %}?trans_type=sell">
+            <span>Xem thêm nhà đất <i class="zmdi zmdi-chevron-right"></i></span>
           </a>
         </div>
       </div>
