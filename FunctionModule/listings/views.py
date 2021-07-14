@@ -67,36 +67,13 @@ def detail(request):
 
 def search(request):
     hn_district = district_data['01']
-    queryset_list = prepare_listing_queryset(request.GET)
-    try:
-        page = int(request.GET.get('page', 1))
-    except ValueError:
-        page = 1
-
-    limit = request.GET.get('limit', 10)
-    offset = (page - 1) * limit
-    paginator = Paginator(queryset_list, limit)
-    total_pages = paginator.num_pages
-    next_5_pages = page + 5 if page + 5 < total_pages else total_pages
-    min_page = page - 1 if page - 1 > 0 else page
-
-    try:
-        listings = paginator.get_page(page)
-    except Exception:
-        listings = paginator.get_page(1)
 
     context = {
-        'listings': listings,
+        'listings': [],
         'state_data': state_data,
         'districts': hn_district,
         'environment': settings.ENVIRONMENT,
-        "pagination": {
-            'current_page': page,
-            'next_5_pages': list(range(min_page, next_5_pages)),
-            'limit': limit,
-            'offset': offset,
-            'total': queryset_list.count()
-        }
+        "pagination": { }
     }
 
     return render(request, 'listings/search.html', context)

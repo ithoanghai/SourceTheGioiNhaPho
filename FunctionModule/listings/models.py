@@ -11,7 +11,6 @@ from embed_video.fields import EmbedVideoField
 from location_field.models.spatial import LocationField
 from rest_framework import serializers
 
-from FunctionModule.accounts.models import User
 from FunctionModule.cadastral.constants import state_data, district_data, ward_data
 from FunctionModule.realtors.models import Realtor
 from .choices import (TransactionType, city_choices, HouseType, RegistrationType,
@@ -129,12 +128,30 @@ class Listing(models.Model):
         return self.location.x
 
     @functools.cached_property
+    def state_name(self):
+        try:
+            state = state_data.get(self.state, '')
+            return state['name']
+        except (KeyError,):
+            return ""
+
+    @functools.cached_property
     def ward_name(self):
+        if not self.ward:
+            return ""
         try:
             ward = [x for x in ward_data[self.district] if x['code'] == self.ward]
             return ward[0]['name']
         except (KeyError, IndexError):
             return None
+
+    @functools.cached_property
+    def district_name(self):
+        try:
+            district = [x for x in district_data.get(self.state, '') if x['code'] == self.district]
+            return district[0]['name']
+        except (KeyError, IndexError):
+            return ""
 
     def as_dict(self):
         return {
@@ -201,12 +218,13 @@ class ListingVideo(models.Model):
 class ListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Listing
-        # fields = '__all__'
         exclude = ('address',)
 
     lat = serializers.CharField()
     long = serializers.CharField()
     ward_name = serializers.CharField()
+    state_name = serializers.CharField()
+    district_name = serializers.CharField()
     main_photo = serializers.SerializerMethodField()
 
     def get_main_photo(self, obj):
@@ -215,6 +233,13 @@ class ListingSerializer(serializers.ModelSerializer):
             return photo.url
         else:
             return ''
+
+
+class ListingIndexSerializer(ListingSerializer):
+    class Meta:
+        model = Listing
+        fields = '__all__'
+        exclude = ()
 
 
 class ContractImage(models.Model):

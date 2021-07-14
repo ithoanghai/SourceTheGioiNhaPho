@@ -294,3 +294,7 @@ LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+MEILI_MASTER_KEY = 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+MEILI_HOST = os.getenv('MEILI_HOST', 'search_engine')
+MEILI_PORT = os.getenv('MEILI_PORT', 7700)
