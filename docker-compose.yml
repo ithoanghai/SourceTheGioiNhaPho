@@ -11,10 +11,21 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-    - ./data/db:/var/lib/postgresql/data
+      - ./data/db:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     restart: on-failure
+  search_engine:
+    image: 'getmeili/meilisearch:v0.21.0rc2'
+    ports:
+      - '7700:7700'
+    volumes:
+      - ./data/search/ms:/data.ms
+    environment:
+      - MEILI_ENV=development
+      - MEILI_MASTER_KEY=a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3
+      - MEILI_NO_ANALYTICS=true
+      - MEILI_NO_SENTRY=true
   web:
     build: .
     env_file:
@@ -31,3 +42,4 @@ services:
     depends_on:
       - db
       - redis
+      - search_engine

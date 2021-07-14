@@ -33,7 +33,8 @@
         </div>
         <div class="info-container">
           <div class="group-grid__view">
-            <div class="listing-price" style="color: orange; font-size: large;">[[ listing.price ]] {% trans "tỷ" %}</div>
+            <div class="listing-price" style="color: orange; font-size: large;">[[ listing.price
+              ]] {% trans "tỷ" %}</div>
             <ul class="listing-info">
               <li>
                 <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}
@@ -63,14 +64,15 @@
             <h4 v-if="listing.ward"><a :href="`/listings/search?ward=${listing.ward}`" title="Phường/Xã">[[listing.ward_name]]</a>
             </h4>
             <h4>
-              <b><a :href="`/listings/search?district=${listing.district}`" title="">[[getDistrict(listing.district)]]</a></b>
+              <b><a :href="`/listings/search?district=${listing.district}`"
+                    title="">[[getDistrict(listing.district)]]</a></b>
             </h4>
           </div>
           <ul class="listing-info">
             <li><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]]{% trans "m2" %}</li>
             <li v-if="listings.floors && listing.floors > 0"><i class="fa fa-h-square"></i>
               [[listing.floors]] {% trans "tầng" %}</li>
-           <li v-if="listing.bedrooms > 0"><i
+            <li v-if="listing.bedrooms > 0"><i
               class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}</li>
             <li v-if="listing.bathrooms > 0"><i
               class="fa fa-bath"></i>[[listing.bathrooms]] {% trans "tắm" %} </li>
@@ -101,33 +103,29 @@
     </div>
     <div v-if="listings.length" class="paginator-search">
       <ul class="paginator">
-        {% if listings.has_previous %}
-          <li>
-            <a class="btnPre" @click.prevent="goTo({{ listings.paginator.previous_page }})">
-              <i class="zmdi zmdi-chevron-left"></i>
-            </a>
-          </li>
-        {% else %}
-          <li class="page-item disabled">
-            <a class="page-link">&laquo;</a>
-          </li>
-        {% endif %}
+        <li v-if="pagination.previous_page">
+          <a class="btnPre" @click.prevent="goTo(pagination.previous_page)">
+            <i class="zmdi zmdi-chevron-left"></i>
+          </a>
+        </li>
+
+        <li v-else class="page-item disabled">
+          <a class="page-link">&laquo;</a>
+        </li>
 
         <li v-for="i in pagination.next_5_pages">
           <a :class="{active: pagination.current_page == i}" @click.prevent="goTo(i)">[[i]]</a>
         </li>
 
-        {% if listings.has_next %}
-          <li>
-            <a class="btnNext">
-              <i class="zmdi zmdi-chevron-right"></i>
-            </a>
-          </li>
-        {% else %}
-          <li class="page-item disabled" @click.prevent="goTo({{ listings.paginator.next_page }})">
-            <a class="page-link">&raquo;</a>
-          </li>
-        {% endif %}
+        <li v-if="pagination.next_page">
+          <a class="btnNext" @click.prevent="goTo(pagination.next_page)">
+            <i class="zmdi zmdi-chevron-right"></i>
+          </a>
+        </li>
+
+        <li v-else class="page-item disabled">
+          <a class="page-link">&raquo;</a>
+        </li>
 
       </ul>
     </div>
@@ -157,13 +155,13 @@
               <li title="Diện tích">
                 <span class="zmdi zmdi-photo-size-select-small"></span> [[listing.area]]{% trans "m2" %}
               </li>
-                <li v-if="listing.floors > 1" title="Số tầng">
+              <li v-if="listing.floors > 1" title="Số tầng">
                 <span class="fas fa-h-square"></span> [[listing.floors]]
               </li>
-                <li v-if="listing.bathrooms > 1" title="Số tầng">
+              <li v-if="listing.bathrooms > 1" title="Số tầng">
                 <span class="fas fa-bath"></span> [[listing.bathrooms]]
               </li>
-                <li v-if="listing.bedrooms > 0" title="Phòng ngủ">
+              <li v-if="listing.bedrooms > 0" title="Phòng ngủ">
                 <span class="zmdi zmdi-airline-seat-individual-suite"></span> [[listing.bedrooms]]
               </li>
             </ul>
@@ -297,7 +295,8 @@
                 </button>
               </div>
               <div class="or-direct-call">
-                <p> Hoặc gọi ngay <a href="tel:0971841941"><strong>0971841941</strong></a> để gặp chuyên viên tư vấn </p>
+                <p> Hoặc gọi ngay <a
+                  href="tel:0971841941"><strong>0971841941</strong></a> để gặp chuyên viên tư vấn </p>
               </div>
             </form>
           </div>

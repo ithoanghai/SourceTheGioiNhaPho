@@ -1,3 +1,5 @@
+import math
+
 from django.core.paginator import Paginator
 from django.utils.text import slugify
 from rest_framework import request, response
@@ -5,7 +7,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 
 from FunctionModule.cadastral.constants import district_data
 from FunctionModule.listings.models import ListingSerializer
-from FunctionModule.listings.search import prepare_listing_queryset
+from FunctionModule.listings.search import prepare_listing_queryset, search_by_keywords
 
 
 @api_view(['GET'])
@@ -33,19 +35,44 @@ def get_states(r: request.Request, **kwargs):
 @authentication_classes([])
 @permission_classes([])
 def search_listing(req: request.Request, **kwargs):
-    queryset_list = prepare_listing_queryset(req.query_params)
-
     try:
         page = int(req.query_params.get('page', 1))
     except ValueError:
         page = 1
 
+    previous_page = None if page == 1 else page - 1
     limit = req.query_params.get('limit', 10)
     offset = (page - 1) * limit
+    min_page = page - 1 if page - 1 > 0 else page
+
+    keywords = req.query_params.get('keywords', '')
+    if keywords:
+        results = search_by_keywords(keywords, limit, offset)
+        total: int = results['nbHits']
+        total_pages = int(math.ceil(total / limit))
+        next_page = page + 1 if total_pages > page else None
+        next_5_pages = list(range(min_page, page + 5 if page + 5 < total_pages else total_pages))
+        next_5_pages = next_5_pages if len(next_5_pages) > 1 else [page]
+
+        return response.Response({
+            'listings': results['hits'],
+            'pagination': {
+                'current_page': page,
+                'previous_page': previous_page,
+                'next_page': next_page,
+                'next_5_pages': next_5_pages,
+                'limit': limit,
+                'offset': offset,
+                'total': results['nbHits']
+            }
+        })
+
+    queryset_list = prepare_listing_queryset(req.query_params)
     paginator = Paginator(queryset_list, limit)
     total_pages = paginator.num_pages
-    next_5_pages = page + 5 if page + 5 < total_pages else total_pages
-    min_page = page - 1 if page - 1 > 0 else page
+    next_page = page + 1 if total_pages > page else None
+    next_5_pages = list(range(min_page, page + 5 if page + 5 < total_pages else total_pages))
+    next_5_pages = next_5_pages if len(next_5_pages) > 1 else [page]
 
     try:
         listings = paginator.get_page(page)
@@ -57,7 +84,9 @@ def search_listing(req: request.Request, **kwargs):
         # "listings": [],
         "pagination": {
             'current_page': page,
-            'next_5_pages': list(range(min_page, next_5_pages)),
+            'previous_page': previous_page,
+            'next_page': next_page,
+            'next_5_pages': next_5_pages,
             'limit': limit,
             'offset': offset,
             'total': queryset_list.count()
