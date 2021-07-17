@@ -23,7 +23,6 @@ RUN pip install -r requirements.txt
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt install -y nodejs yarn
 COPY package.json /app
-RUN yarn install
 
 COPY . /app
 # RUN useradd --create-home appuser

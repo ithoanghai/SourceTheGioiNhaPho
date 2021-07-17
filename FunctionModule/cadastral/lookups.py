@@ -1,6 +1,9 @@
+import functools
+
 from ajax_select import register, LookupChannel
 
-from .constants import district_data, DISTRICT_LOOKUP_CHANNEL, WARD_LOOKUP_CHANNEL, ward_data
+from .constants import (DISTRICT_LOOKUP_CHANNEL, WARD_LOOKUP_CHANNEL, ward_data, state_data, district_data,
+                        all_districts)
 
 
 @register(DISTRICT_LOOKUP_CHANNEL)
@@ -38,3 +41,35 @@ class WardLookup(LookupChannel):
 
     def get_result(self, obj):
         return obj['code']
+
+
+@functools.cache
+def get_state_name(code):
+    try:
+        return state_data[code]['name']
+    except KeyError:
+        return ""
+
+
+@functools.cache
+def get_district_name(code):
+    try:
+        return all_districts[code]['name']
+    except KeyError:
+        return ""
+
+
+@functools.cache
+def get_ward_name(district, ward):
+    try:
+        ward = [x for x in ward_data[district] if x['code'] == ward]
+        return ward[0]['name']
+    except (KeyError, IndexError):
+        return ""
+
+
+def get_all_states():
+    return state_data
+
+def get_default_districts():
+    return district_data['01']

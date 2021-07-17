@@ -15,7 +15,7 @@ for f in onlyfiles:
         except:
             pass
 
-with open('test.json', 'w', encoding='utf-8') as fp:
+with open('json_data/test.json', 'w', encoding='utf-8') as fp:
     json.dump(xa_phuong, fp, ensure_ascii=False)
 
 # with open('tinh_tp.json') as fp:

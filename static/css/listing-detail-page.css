@@ -7410,7 +7410,7 @@ ul.slideimg li a.img:hover {
     width: 100%;
     clear: both;
     position: relative;
-    background: #f3f3f3
+    /*background: #f3f3f3*/
 }
 
 .map-detail .full-screen-act {
@@ -7457,7 +7457,6 @@ ul.slideimg li a.img:hover {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    cursor: pointer;
     margin: 0 auto;
     padding-bottom: 43px;
     width: 100%;
