@@ -2,7 +2,18 @@ from django.db.models import Q
 from django.utils.text import slugify
 
 from .models import Listing
+from .search_engine import listing_search
 from ..cadastral.constants import district_data
+
+
+def search_by_keywords(q: str, limit: int = 10, offset: int = 0,):
+    if not q:
+        return []
+    results = listing_search.search(q, {
+        'limit': limit,
+        'offset': offset
+    })
+    return results
 
 
 def prepare_listing_queryset(input_params):
@@ -33,6 +44,16 @@ def prepare_listing_queryset(input_params):
         if keywords:
             query = Q(description__icontains=keywords) | Q(title__icontains=keywords) | Q(
                 address__icontains=keywords) | Q(code=keywords)
+            slug_keyword = slugify(keywords.lower().replace('đ', 'd').replace('õ', 'o'))
+            try:
+                district_code = next(
+                    x['code'] for x in hn_district if
+                    (x['name'] == keywords or x['slug'] == slug_keyword or x['code'] == slug_keyword))
+            except StopIteration:
+                district_code = ''
+            if district_code:
+                query = query | Q(district=district_code)
+            queryset_list = queryset_list.filter(query)
 
             queryset_list = queryset_list.filter(query)
 

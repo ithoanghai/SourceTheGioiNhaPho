@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 
-import functools
 from datetime import datetime
 
 from django.contrib.gis.geos import Point
@@ -11,8 +10,7 @@ from embed_video.fields import EmbedVideoField
 from location_field.models.spatial import LocationField
 from rest_framework import serializers
 
-from FunctionModule.accounts.models import User
-from FunctionModule.cadastral.constants import state_data, district_data, ward_data
+from FunctionModule.cadastral.lookups import get_state_name, get_district_name, get_ward_name
 from FunctionModule.realtors.models import Realtor
 from .choices import (TransactionType, city_choices, HouseType, RegistrationType,
                       RoadType, Status, Direction, Condition)
@@ -95,8 +93,8 @@ class Listing(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id and not self.address:
-            state_name = state_data[self.state]['name']
-            district_name = next(x['name'] for x in district_data[self.state] if x['code'] == self.district)
+            state_name = get_state_name(self.state)
+            district_name = get_ward_name(self.district)
             self.address = f"{self.street}, {district_name} {state_name}"
         super().save(*args, **kwargs)
 
@@ -128,13 +126,16 @@ class Listing(models.Model):
     def long(self):
         return self.location.x
 
-    @functools.cached_property
+    def state_name(self):
+        return get_state_name(self.state)
+
     def ward_name(self):
-        try:
-            ward = [x for x in ward_data[self.district] if x['code'] == self.ward]
-            return ward[0]['name']
-        except (KeyError, IndexError):
-            return None
+        if not self.ward:
+            return ""
+        return get_ward_name(self.district, self.ward)
+
+    def district_name(self):
+        return get_district_name(self.district)
 
     def as_dict(self):
         return {
@@ -201,12 +202,13 @@ class ListingVideo(models.Model):
 class ListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Listing
-        # fields = '__all__'
         exclude = ('address',)
 
     lat = serializers.CharField()
     long = serializers.CharField()
     ward_name = serializers.CharField()
+    state_name = serializers.CharField()
+    district_name = serializers.CharField()
     main_photo = serializers.SerializerMethodField()
 
     def get_main_photo(self, obj):
@@ -215,6 +217,13 @@ class ListingSerializer(serializers.ModelSerializer):
             return photo.url
         else:
             return ''
+
+
+class ListingIndexSerializer(ListingSerializer):
+    class Meta:
+        model = Listing
+        fields = '__all__'
+        exclude = ()
 
 
 class ContractImage(models.Model):

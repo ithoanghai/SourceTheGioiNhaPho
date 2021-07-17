@@ -9,10 +9,9 @@ from rest_framework import status, generics, mixins, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from FunctionModule.cadastral.lookups import get_default_districts, get_all_states
 from .filters import ListingFilter
-from .search import prepare_listing_queryset
 from .serializers import *
-from ..cadastral.constants import state_data, district_data
 
 
 class ListingSearchQuery(BaseModel):
@@ -38,10 +37,12 @@ def index(request):
 
 def listing(request, listing_id):
     listing_detail = get_object_or_404(Listing, pk=listing_id)
-    listings_neighborhood = Listing.objects.order_by('-list_date').filter(is_published=True, state=listing_detail.state).exclude(
+    listings_neighborhood = Listing.objects.order_by('-list_date').filter(is_published=True,
+                                                                          state=listing_detail.state).exclude(
         id=listing_id)[:10]
     listings_same = (Listing.objects
-                         .filter(is_published=True, house_type=listing_detail.house_type, area=listing_detail.area)
+                         .filter(is_published=True, house_type=listing_detail.house_type,
+                                 area=listing_detail.area)
                          .exclude(id=listing_id)
                          .order_by('-list_date')[:10])
     context = {
@@ -56,9 +57,11 @@ def listing(request, listing_id):
 def detail(request):
     listing_id = request.GET.get('id', '')
     listing_detail = get_object_or_404(Listing, pk=listing_id)
-    listings_neighborhood = Listing.objects.order_by('-list_date').filter(is_published=True, state=listing_detail.state)[:10]
+    listings_neighborhood = Listing.objects.order_by('-list_date').filter(is_published=True,
+                                                                          state=listing_detail.state)[:10]
     context = {
         'listing': listing_detail,
+        'environment': settings.ENVIRONMENT,
         'listings_neighborhood': listings_neighborhood
     }
 
@@ -66,37 +69,13 @@ def detail(request):
 
 
 def search(request):
-    hn_district = district_data['01']
-    queryset_list = prepare_listing_queryset(request.GET)
-    try:
-        page = int(request.GET.get('page', 1))
-    except ValueError:
-        page = 1
-
-    limit = request.GET.get('limit', 10)
-    offset = (page - 1) * limit
-    paginator = Paginator(queryset_list, limit)
-    total_pages = paginator.num_pages
-    next_5_pages = page + 5 if page + 5 < total_pages else total_pages
-    min_page = page - 1 if page - 1 > 0 else page
-
-    try:
-        listings = paginator.get_page(page)
-    except Exception:
-        listings = paginator.get_page(1)
-
     context = {
-        'listings': listings,
-        'state_data': state_data,
-        'districts': hn_district,
+        'listings': [],
+        'state_data': get_all_states(),
+        'districts': get_default_districts(),
+        'GOOGLE_MAP_API_KEY': settings.GOOGLE_MAP_API_KEY,
         'environment': settings.ENVIRONMENT,
-        "pagination": {
-            'current_page': page,
-            'next_5_pages': list(range(min_page, next_5_pages)),
-            'limit': limit,
-            'offset': offset,
-            'total': queryset_list.count()
-        }
+        "pagination": {}
     }
 
     return render(request, 'listings/search.html', context)
