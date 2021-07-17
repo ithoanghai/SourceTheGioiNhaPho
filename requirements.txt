@@ -22,3 +22,4 @@ django-ipware==3.0.2
 django-allauth==0.44.0
 meilisearch>=0.15.1
 python-gettext==4.0
+requests==2.25.1

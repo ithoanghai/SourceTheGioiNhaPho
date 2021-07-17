@@ -205,6 +205,8 @@ MESSAGE_TAGS = {
 
 GOOGLE_MAP_API_KEY = os.getenv('GOOGLE_MAP_API_KEY', '')
 GEOEARTH_API_KEY = os.getenv('GEOEARTH_API_KEY', '')
+MAPBOX_API_KEY = os.getenv('MAPBOX_API_KEY', 'pk.eyJ1Ijoia2llbm5ndXllbjExMDEiLCJhIjoiY2ttaHRqZTgzMGF0YzJ3bXVvYW9ncnh0ZiJ9.xar2mZcYZJ1qK4i2mRDa0Q')
+
 LOCATION_FIELD = {
     'map.provider': 'google',
     'search.provider': 'nominatim',
