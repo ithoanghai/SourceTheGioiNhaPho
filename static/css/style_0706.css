@@ -2384,15 +2384,6 @@ ul.slidemap li a.img:hover {
     color: #111
 }
 
-.map-detail {
-    padding: 0;
-    height: 550px;
-    width: 100%;
-    clear: both;
-    position: relative;
-    background: #f3f3f3
-}
-
 .Mortgage {
     width: 100%;
     overflow: auto;

@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template import loader
 
-from FunctionModule.cadastral.constants import state_data, district_data
+from FunctionModule.cadastral.lookups import get_all_states, get_default_districts
 from FunctionModule.listings.choices import price_choices, bedroom_choices
 from FunctionModule.listings.models import Listing, TransactionType
 from FunctionModule.realtors.models import Realtor
@@ -29,12 +29,12 @@ def home_view(request):
     listings_project = (Listing.objects
                             .order_by('-list_date')
                             .filter(is_published=True, transaction_type=TransactionType.PROJECT)[:9])
-    list_district_hn = district_data.get("01")
+    list_district_hn = get_default_districts()
     context = {
         'listings_for_sale': listings_for_sale,
         'listings_for_rent': listings_for_rent,
         'listings_project': listings_project,
-        'state_data': state_data,
+        'state_data': get_all_states(),
         'district_data': list_district_hn,
         'bedroom_choices': bedroom_choices,
         'price_choices': price_choices,
@@ -137,6 +137,7 @@ def layout(request, layout_id):
         'available_apps': app_list
     }
     return render(request, 'admin/index.html', context)
+
 
 def error403(request):
     context = {
