@@ -16,20 +16,20 @@
        title="{{ listing.title }}" data-imp-click>
       <h3 class="heading">{{ listing.title }}</h3>
     </a>
-    <h4>{{ listing.code }}</h4>
-    <h2><a href="{% url 'listing_search' %}?street={{ listing.street }}"
-           title="Đường">{{ listing.street }}</a></h2>
+    <a href="{% url 'listing_search' %}?street={{ listing.street }}"
+           title="Đường">{{ listing.street }}</a>
     {% if listing.ward %}
-      <h2><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
-             title="Phường/Xã">{{ listing.ward }}</a></h2>
+      <a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
+             title="Phường/Xã">{{ listing.ward_name }}</a>
     {% endif %}
-    <h2><a href="{% url 'listing_search' %}?district={{ listing.district }}"
-           title="Quận/Huyện">{% get_district listing.district %}</a></h2>
+    <b><a href="{% url 'listing_search' %}?district={{ listing.district }}"
+           title="Quận/Huyện">{% get_district listing.district %}</a></b>
     <ul>
       <li title="Diện tích"><span
         class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} {{ listing.area_unit }}
       </li>
     </ul>
     <div class="price">{{ listing.price }} tỷ</div>
+     <div class="unique p-1"><i class="zmdi zmdi-key"></i><b>{{listing.code}}</b></div>
   </header>
 </li>

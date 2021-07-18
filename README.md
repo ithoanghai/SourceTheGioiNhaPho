@@ -12,5 +12,6 @@ A simple, reponsive  website. Built with:
 
 
 Search Engine - Meilisearch:
-- Run docker-compose. Setup port and environment variables (MEILI_HOST, MEILI_PORT)
+- Run docker-compose up --build web. Setup port and environment variables (MEILI_HOST, MEILI_PORT)
+- Run docker-compose exec web bash -c "python manage.py index_listing"
 - Run "python manage.py index_listing" to create indexer
