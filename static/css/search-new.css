@@ -4633,7 +4633,8 @@ label {
 
 .result-body .row:not(.grid) .listView.box .info-container .listing-info {
     width: 100%;
-    margin-top: 6px
+    margin-top: 6px;
+    padding-left: 0px;
 }
 
 @media (min-width: 767px) {
@@ -4718,7 +4719,7 @@ label {
 
 .result-body .row:not(.grid) .listView.box .info-container .action-group--left .label-primary {
     padding: 5px 8px 2px;
-    font-size: 10px;
+    font-size: 16px;
     line-height: 1.5;
     font-weight: 600;
     margin-left: 16px;
