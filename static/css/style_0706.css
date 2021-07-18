@@ -7747,15 +7747,6 @@ section.apartment article.featured header ul li {
     width: 50%
 }
 
-#carousel .slides li a {
-    overflow: hidden
-}
-
-#carousel .slides li a img {
-    min-height: 100%;
-    width: 100%
-}
-
 .list-view section.result article.featured:hover {
     box-shadow: none;
     transform: translate(0, 0);

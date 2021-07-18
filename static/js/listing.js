@@ -1320,71 +1320,10 @@
             }, i = {id: r.id, rv_id: r.rvid, title: r.title};
 
             function a(e, n) {
-                n.property = r, window.fap && fap.track(t, n), o.a.set("_property_source", e), o.a.set("_property_current_url", document.location.href)
             }
 
-            $(window).load(function (e) {
-                var n = o.a.get("_property_source"), a = o.a.get("_property_current_url"), u = void 0;
-                a && a === document.referrer && (u = n), window.fap && fap.track("page", {
-                    subtype: "enter",
-                    page_name: "Property",
-                    page_info: i
-                }), window.fap && fap.track(t, {subtype: "enter", property: r, source: u})
-            }), $(window).unload(function (n) {
-                var i = +new Date - e;
-                window.fap && fap.track("page", {
-                    subtype: "exit",
-                    page_name: "Property",
-                    duration: i
-                }), window.fap && fap.track(t, {subtype: "exit", duration: i, property: r})
-            });
-            var u = $("section.nearby-properties .featured > a"),
-                s = $("section.nearby-properties .featured header > a");
-            u.click(function (t) {
-                a("nearby_navigate", {subtype: "nearby_property", nav_pos: u.index($(this))})
-            }), s.click(function (t) {
-                a("nearby_navigate", {subtype: "nearby_property", nav_pos: s.index($(this))})
-            });
-            var c = $("#similar-property .featured > a"), l = $("#similar-property .featured header > a");
-            c.click(function (t) {
-                a("similar_navigate", {subtype: "similar_property", nav_pos: c.index($(this))})
-            }), l.click(function (t) {
-                a("similar_navigate", {subtype: "similar_property", nav_pos: l.index($(this))})
-            }), $("#similar-property .flex-next").click(function (e) {
-                window.fap && fap.track(t, {subtype: "similar_next"})
-            }), $("#similar-property .flex-prev").click(function (e) {
-                window.fap && fap.track(t, {subtype: "similar_prev"})
-            }), $(".booking-tour .list-but a:has(.facebook)").click(function () {
-                window.fap && fap.track(t, {subtype: "share_facebook"})
-            }), $(".booking-tour .list-but a:has(.message)").click(function () {
-                window.fap && fap.track(t, {subtype: "share_messenger"})
-            }), $(".booking-tour .list-but a:has(.twitter)").click(function () {
-                window.fap && fap.track(t, {subtype: "share_twitter"})
-            }), $(".map-detail a.full-screen-act").click(function (e) {
-                $(".map-detail").hasClass("full-screen") ? window.fap && fap.track(t, {subtype: "map_fullscreen"}) : window.fap && fap.track(t, {subtype: "map_exit_fullscreen"})
-            })
         }(), function () {
-            var t, e = ((t = $("form[name=info]")) && t.length > 0 ? {
-                id: t.find("input[name=id]").val(),
-                reverId: t.find("input[name=rvid]").val(),
-                title: t.find("input[name=title]").val(),
-                street: t.find("input[name=street]").val(),
-                ward: t.find("input[name=ward]").val(),
-                district: t.find("input[name=district]").val(),
-                city: t.find("input[name=city]").val()
-            } : null) || {};
-            var n = ((e.reverId ? e.reverId + " - " : "") + e.title).trim();
-            c({
-                container: "#contact-now-fixed-form",
-                formQuery: "form[data-form-id]",
-                eventCategory: "Property Detail Request Info Form",
-                eventLabels: {input: n || document.title, submit: n || document.title}
-            }), c({
-                container: "#contact-now-form-body",
-                formQuery: "form[data-form-id]",
-                eventCategory: "Property Detail Request Info Form",
-                eventLabels: {input: n || document.title, submit: n || document.title}
-            })
+
         }(), function () {
             var t = !1;
             $(".img-map").click(function () {
