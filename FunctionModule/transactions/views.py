@@ -1,13 +1,13 @@
-from rest_framework import status, generics, mixins, permissions
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 from pydantic import BaseModel
+from rest_framework import status, generics
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
-from .models import Transaction 
 from .serializers import *
+
 
 class TransactionSearchQuery(BaseModel):
     keywords: str = None
@@ -30,7 +30,6 @@ def index(request):
 
 
 def transaction(request, transaction_id):
-
     transaction = get_object_or_404(Transaction, pk=transaction_id)
     transactions_same = Transaction.objects.order_by('-date').filter(status=transaction.status)
     context = {
@@ -40,12 +39,13 @@ def transaction(request, transaction_id):
 
     return render(request, 'transactions/detail.html', context)
 
+
 def detail(request):
     transaction_id = request.GET.get('id', '')
     transaction = get_object_or_404(Transaction, pk=transaction_id)
     context = {
         'transaction': transaction,
-     }
+    }
 
     return render(request, 'transactions/detail.html', context)
 
@@ -75,22 +75,22 @@ def search(request):
     if 'keywords' in request.GET:
         keywords = request.GET['keywords']
         if keywords:
-            query = Q(comment__icontains=keywords) 
+            query = Q(comment__icontains=keywords)
             queryset_list = queryset_list.filter(query)
 
-     # Price
+    # Price
     if 'price' in request.GET:
         price = request.GET['price']
         if price:
             query = Q(price__lte=price)
             queryset_list = queryset_list.filter(query)
 
-
     context = {
         'transactions': queryset_list,
     }
 
     return render(request, 'transactions/search.html', context)
+
 
 @api_view(['GET', 'POST'])
 def transactionsAPIViewWay1(request):
@@ -99,7 +99,7 @@ def transactionsAPIViewWay1(request):
     """
     if request.method == 'GET':
         transactions = Transaction.objects.all()
-        serializer = TransactionSerializer(transactions,context={'request': request} ,many=True)
+        serializer = TransactionSerializer(transactions, context={'request': request}, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = TransactionSerializer(data=request.data)
@@ -110,18 +110,15 @@ def transactionsAPIViewWay1(request):
 
 
 class transactionsAPIView(generics.RetrieveAPIView):
-    queryset= Transaction.objects.all()
+    queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
 
     def get(self, request, *args, **kwargs):
         queryset = self.get_queryset()
- 
+
         serializer_context = {
             'request': request,
         }
-        serializer = TransactionSerializer(queryset, many=True, context=serializer_context)    
+        serializer = TransactionSerializer(queryset, many=True, context=serializer_context)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-   
