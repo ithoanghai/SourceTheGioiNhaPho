@@ -692,12 +692,12 @@
                  style="">
               <img src="{{ listing.id|location_image }}"
                    title="{{ listing.code }}"  alt="{{ listing.title }}"/>
-              <div class="tooltip-map">
+              {% comment %}<div class="tooltip-map">
                 <a>Nhấn vào để xem chi tiết</a>
-              </div>
+              </div>{% endcomment %}
               <div class="map--address">
                 <div class="address-property">
-                  <div class="left-70"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>
+                  <div class="left-100"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>
                     <strong>{{ listing.title }}</strong>
                   </div>
                 </div>
