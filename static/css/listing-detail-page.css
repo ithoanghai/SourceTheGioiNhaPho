@@ -6109,14 +6109,6 @@ ul.exclusive li.featured header li .zmdi {
     transition: opacity .15s
 }
 
-@media (max-width: 480px) {
-    #slider {
-        height: 276px;
-        width: 100%
-    }
-}
-
-
 .but-nextdetail {
     position: absolute;
     top: 50%;
@@ -6825,7 +6817,8 @@ ul.slideimg li a.img:hover {
     color: #444c59;
     font-size: 1.7em;
     font-family: tgnp-font, Arial, Helvetica, sans-serif;
-    font-weight: 400
+    font-weight: 400;
+    padding-inline-start: 0;
 }
 
 .content-detail-house header.detail-house ul.detailroom li {
