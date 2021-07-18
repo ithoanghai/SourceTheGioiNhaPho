@@ -12,17 +12,6 @@
 {% block head_script %}
 
   <link rel="stylesheet" href="{% load_static 'css/listing-detail-page.css' %}"/>
-  <style>
-      img.fade {
-          transition: opacity 500ms ease-in-out;
-          opacity: 0;
-      }
-
-      img.fade.loaded {
-          background: none;
-          opacity: 1;
-      }
-  </style>
 
   <style>
       .detail-content-news img:before, .thumb-duan img:before, .cover img:not([src]):before {
@@ -109,6 +98,7 @@
       {#      {{ message }}#}
     </div>
   {% endfor %}
+  <input id="markerwithlabel" type="hidden" value="{% static 'js/markerwithlabel-0.0.1.min.js' %}">
 
   <div id="wrap">
     <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">
@@ -167,7 +157,7 @@
         <input name="neighborhood" type="hidden" value="">
         <input name="lat" type="hidden" value="">
         <input name="lon" type="hidden" value="">
-        {#        <input name="youtube" type="hidden" value="{{ listing.videos.0.video }}">#}
+{#        <input name="youtube" type="hidden" value="{{ listing.videos.0.video }}">#}
         <input name="favorited_type" type="hidden" value="sale_property">
         <input name="streetviewLat" type="hidden" value="">
         <input name="streetviewLon" type="hidden" value="">
@@ -190,30 +180,21 @@
             <ul class="slides">
               {% for photo in listing.photos %}
                 <li>
-                  <a href="#" class="cover">
-                    {% if forloop.first %}
-                      <img class="image-normalized"
-                           src="{{ photo.url }}"
-                           alt="{{ listing.title }}"
-                           title="{{ listing.title }}"
-                           draggable="false"/>
-                    {% else %}
-                      <img class="lazy fade image-normalized"
-                           data-src="{{ photo.url }}"
-                           alt="{{ listing.title }}"
-                           title="{{ listing.title }}"
-                           draggable="false"/>
-                    {% endif %}
-
+                  <a href="#" pos="0" class="cover">
+                    <img class="lazy"
+                         data-src="{{ photo.url }}"
+                         alt="{{ listing.title }}"
+                         title="{{ listing.title }}"
+                         draggable="false">
                   </a>
                 </li>
               {% empty %}
                 <li>
-                  <img class="lazy fade image-normalized"
+                  <img class="lazy"
                        data-src="{% static 'img/default.png' %}"
                        alt="{{ listing.title }}"
                        title="{{ listing.title }}"
-                       draggable="false"/>
+                       draggable="false">
                 </li>
               {% endfor %}
             </ul>
@@ -232,9 +213,9 @@
             <source src="{{ video.video }}" type="video/youtube">
           {% endfor %}
         </video>
-        {#        <iframe id="preview-video" frameborder="0" allowfullscreen>#}
-        {##}
-        {#        </iframe>#}
+{#        <iframe id="preview-video" frameborder="0" allowfullscreen>#}
+{##}
+{#        </iframe>#}
       </div>
       <div class="mview3d preview3d hidden height-100-percent">
         <a href="#" class="full-screen-act" title="Fullscreen"></a>
@@ -269,32 +250,27 @@
                      title="{{ listing.title }}">
               </li>
             {% endfor %}
+
           </ul>
         </div>
         <div id="carousel1" class="flexslider img-list-slide">
           <ul class="slides slideimg">
             {% for photo in listing.photos %}
               <li>
-                <a class="img cover" href="#" title="{{ listing.title }}">
-                  {% if forloop.first %}
-                    <img class="lazy image-normalized fade"
-                         src="{{ photo.url }}"
-                         alt="{{ listing.title }}"
-                         title="{{ listing.title }}"/>
-                  {% else %}
-                    <img class="lazy image-normalized fade"
-                         data-src="{{ photo.url }}"
-                         alt="{{ listing.title }}"
-                         title="{{ listing.title }}"/>
-                  {% endif %}
+                <a class="img cover" href="#" pos="0"
+                   title="{{ listing.title }}">
+                  <img class="lazy image-normalized"
+                       data-src="{{ photo.url }}"
+                       alt="{{ listing.title }}"
+                       title="{{ listing.title }}">
                 </a>
               </li>
             {% empty %}
               <li>
-                <img class="lazy image-normalized fade" src="{% static 'img/default.png' %}"
+                <img class="lazy image-normalized" src="{% static 'img/default.png' %}"
                      data-src="{% static 'img/default.png' %}"
                      alt="{{ listing.title }}"
-                     title="{{ listing.title }}"/>
+                     title="{{ listing.title }}">
               </li>
             {% endfor %}
           </ul>
@@ -320,7 +296,7 @@
                 <li class="flex-active-slide">
                   <a class="img cover" href="javascript:void(0)"
                      title="{{ listing.title }}">
-                    <img class="lazy image-normalized fade"
+                    <img class="lazy image-normalized"
                          data-src="{{ photo.url }}"
                          title="{{ listing.title }}"
                          alt="{{ listing.title }}"
@@ -329,7 +305,7 @@
                 </li>
               {% empty %}
                 <li class="flex-active-slide">
-                  <img class="lazy image-normalized fade"
+                  <img class="lazy image-normalized"
                        data-src="{% static 'img/default.png' %}"
                        title="{{ listing.title }}"
                        alt="{{ listing.title }}"
@@ -389,9 +365,8 @@
               <div class="detail-row">
                 <ul class="detailroom">
                   <li title="Diện tích"><span
-                    class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} m2
-                  </li>
-                  <li title="Giá"><strong>$</strong><b>{{ listing.price }} tỷ</b></li>
+                    class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} m2</li>
+                    <li title="Giá"><strong>$</strong><b>{{ listing.price }} tỷ</b></li>
                   {% if listing.sale_price  and listing.sale_price < listing.price %}
                     <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price }} tỷ </strong></li> {% endif %}
                 </ul>
@@ -444,12 +419,12 @@
                 <p class="left">Diện tích</p>
                 <p class="right">{{ listing.area }} {{ listing.area_unit }}</p>
               </li>
-              {% if listing.lot_size %}
-                <li>
-                  <p class="left">Diện tích khuân viên</p>
-                  <p class="right">{{ listing.lot_size }}</p>
-                </li>
-              {% endif %}
+            {% if listing.lot_size %}
+              <li>
+                <p class="left">Diện tích khuân viên</p>
+                <p class="right">{{ listing.lot_size }}</p>
+              </li>
+            {% endif %}
               <li>
                 <p class="left">Loại chứng nhận</p>
                 <p class="right"><a
@@ -476,7 +451,7 @@
             <div class="form-real-estate__row">
               <div class="col-left">
                 <div class="cover__isa">
-                  <img class="lazy" data-src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
+                  <img src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
                 </div>
                 <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
               </div>
@@ -685,7 +660,7 @@
             {% for photo in listing.photos %}
               <div class="cover">
                 <a href="#" title="{{ listing.title }}">
-                  <img class="lazy fadeout"
+                  <img class="lazy"
                        data-src="{{ photo.url }}"
                        alt="{{ listing.title }}"
                        title="{{ listing.title }}">
@@ -701,17 +676,17 @@
           </p>
           <div class="heading-02">Bản đồ khu vực</div>
           <section class="mgt-15 map-detail gmap-render">
-            {#            background-image: url(https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap)#}
+{#            background-image: url(https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap)#}
             <div class="_map-bg openBtn img-map"
                  style="">
               <img src="{{ listing.id|location_image }}"
-                   title="{{ listing.code }}" alt="{{ listing.title }}"/>
+                   title="{{ listing.code }}"  alt="{{ listing.title }}"/>
               {% comment %}<div class="tooltip-map">
                 <a>Nhấn vào để xem chi tiết</a>
               </div>{% endcomment %}
               <div class="map--address">
                 <div class="address-property">
-                  <div class="left-100"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>
+                  <div><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>
                     <strong>{{ listing.title }}</strong>
                   </div>
                 </div>
@@ -753,7 +728,7 @@
           <div v-pre class="form-real-estate">
             <h3 class="font-tiempos">Liên hệ tư vấn</h3>
             <div class="cover__isa">
-              <img class="lazy fade" data-src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
+              <img src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
             </div>
             <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
             <p class="advisory__sub-title">Tư vấn hoàn toàn miễn phí</p>
@@ -761,15 +736,17 @@
               <span>Mã nhà đất:  <strong> {{ listing.code }} </strong></span>
             </p>
             <a data-phone-hidden="category: ContactProperty, event: ClickHiddenHotline" style="opacity: 0.6"
-               href="tel:{{ listing.realtor.user.phone }}" class="btn-primary btn-large btn-red btn-phone phone-hidden"><i
+               href="tel:0971841941" class="btn-primary btn-large btn-red btn-phone phone-hidden"><i
               class="zmdi zmdi-phone"></i><span class="text">Gọi chuyên viên ngay</span></a>
             <div class="divive">hoặc</div>
             <ul class="group-cta">
               <li>
-                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-hubspot-chat">Chat với TGNP</a>
+                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-hubspot-chat">Chat
+                  với TGNP</a>
               </li>
               <li>
-                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-contact-me">Liên hệ lại tôi</a>
+                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-contact-me">Liên
+                  hệ lại tôi</a>
               </li>
             </ul>
           </div>
@@ -785,9 +762,8 @@
             class="zmdi zmdi-comment-text-alt"></i>Chat</a>
         </div>
         <div class="phone">
-          <a class="cta-hotline" href="tel:{{ listing.realtor.user.phone }}">
-            <span><i class="zmdi zmdi-phone"></i>{{ listing.realtor.user.phone }}</span>
-          </a>
+          <a class="cta-hotline" href="tel:0971841941">
+            <i class="zmdi zmdi-phone"></i> 0971 841 941</a>
         </div>
       </div>
     </div>
@@ -802,7 +778,7 @@
     <div class="mdialog" id="sell-now-form" style="background: none">
       <div class="popup-overlay">
         <div class="title title-res">
-          <span> <a class="back-icon cnb-close" href="javascript:void(0)"></a> </span>
+            <span> <a class="back-icon cnb-close" href="javascript:void(0)"></a> </span>
           <span class="house-type">Bán, cho thuê nhà với TGNP</span>
         </div>
         <div class="popup-contact">
@@ -841,7 +817,7 @@
               <source
                 srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
                 media="(min-width: 375px)">
-              <img alt="TGNP 3D View" data-src="{% static 'images/service-3dview.png' %}"
+              <img alt="TGNP 3D View" src="{% static 'images/service-3dview.png' %}"
                    srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
                    title="TGNP 3D View">
               </picture>
@@ -865,9 +841,7 @@
                 <h4>thegioinhaphovietnam.com.vn</h4>
                 <p>Hỗ trợ 24/7</p>
                 <p>
-                  <a class="hotline" href="tel:{{ listing.realtor.user.phone }}" title="hotline">
-                    {{ listing.realtor.user.phone }}
-                  </a>
+                  <a class="hotline" href="tel:0971841941" title="hotline">0971 841 941</a>
                 </p>
               </div>
             </div>
@@ -907,16 +881,230 @@
 {% block scripts %}
   {{ block.super }}
   <script async src="{% load_static 'js/listing.js' %}"></script>
+
+
+  <script type="deferjs">
+    window.$dialog = function(){var e={bodyClassSpecs:"mdialog-body",bodyLoadingClass:"mdialog-loading",cachedBodyStyle:null,default:{zindex:99999,width:300,minHeight:100,background:"rgba(0,0,0,.5)",opacity:.5},key:{cachedStyle:"cached-style"}};return e.show=function(t,n,i,o){(n=$.extend(!0,{outSideClick:!0},n||{})).maxWidth="100%";var a,d=document.body.getAttribute("style");document.body.setAttribute(e.key.cachedStyle,d),(a=t&&"string"==typeof t?$(document.getElementById(t)):t).css("opacity",0),a.css("overflow-y","auto"),a.css("overflow-x","hidden"),a.addClass("opened");var s=(n?n.body:"")||".body";return a.find(s).css(n),a.find(s).addClass(e.bodyClassSpecs),a[0]&&(a[0].$dialogCallback=i),a[0]&&(a[0].$dialogInitTime=+new Date),n&&n.close&&a.find(s+" "+n.close).off().click(function(n){n.preventDefault(),e.hide(t,i)}),n&&n.outSideClick&&a.off().click(function(){e.hide(t,i)}),a.find(s).click(function(e){e.stopPropagation()}),e.animation(a,0,0,1,function(){o&&o()}),e.loadingEnd(a),a},e.animation=function(t,n,i,o,a){t.css("opacity",n),o>0&&n>1||o<0&&n<0?a&&a():setTimeout(function(){n+=o*(.05*i+1e-4*i*i),e.animation(t,n,i+1,o,a)},10)},e.hide=function(t,n){var i;i=t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened"),e.animation(i,1,0,-1,function(){i.removeClass("opened"),n&&n(i)})},e.loadingStart=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs).addClass(e.bodyLoadingClass)},e.loadingEnd=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+e.bodyClassSpecs+"."+e.bodyLoadingClass).removeClass(e.bodyLoadingClass)},$(window).keydown(function(t){var n=$(".mdialog.opened");if(n.length&&27==t.keyCode){var i=[];i.length=n.length;for(var o=0;o<n.length;o++)for(var a=o;a<n.length;a++)n[o].$dialogInitTime>n[a].$dialogInitTime?(i[a]=n[o],i[o]=n[a]):(i[o]=n[o],i[a]=n[a]);var d=i[i.length-1];d&&e.hide($(d),d?d.$dialogCallback:null)}}),e.initStyles=function(){var e=document.createElement("STYLE"),t=document.head||document.getElementsByTagName("head")[0];e.type="text/css",e.styleSheet?e.styleSheet.cssText="":e.appendChild(document.createTextNode(this.getCss())),t.appendChild(e)},e.getCss=function(){var t=e.default,n="",i={display:"none",position:"fixed",top:"0",height:"100%",left:"0",width:"100%"};i["z-index"]=t.zindex,i.background=t.background,n+=e.assignStyle(".mdialog",i),n+=".mdialog.opened{display: block;}";var o={};o.width=t.width+"px",o["min-height"]=t.minHeight+"px",o.background="#fff",o.margin="60px auto 140px auto",n+=e.assignStyle(".mdialog .body",o);var a={position:"relative"};n+=e.assignStyle("."+e.bodyLoadingClass,a);var d={content:"' '",top:0,left:0,width:"100%",height:"100%",position:"absolute",background:"#fff",opacity:.4,"z-index":1};n+=e.assignStyle("."+e.bodyLoadingClass+":before",d);var s={content:"' '",border:"2px solid #303339","border-top":"2px solid #fff;","border-radius":"50%",width:"30px",height:"30px",position:"absolute",top:"calc(50% - 15px)",left:"calc(50% - 15px)","-webkit-animation":"spin 2s linear infinite",animation:"spin 2s linear infinite","z-index":1};return n+=e.assignStyle("."+e.bodyLoadingClass+":after",s),n+="@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }"},e.assignStyle=function(e,t){var n=e+"{";for(var i in t){n+=i+":"+t[i]+";"}return n+="}"},e.initStyles(),e}();
+
+  </script>
+
+  <script>
+      /*@shinsenter/defer.js*/
+      !function (e, i, t, n, r, o) {
+          o = /p/.test(i.readyState);
+          var c = 0 <= navigator.userAgent.indexOf('Firefox');
+
+          function f(e, t) {
+              o ? n(e, t || 32) : r.push(e, t)
+          }
+
+          function a(e, t, n, r) {
+              return t && i.getElementById(t) || (r = i.createElement(e || 'SCRIPT'), t && (r.id = t), n && (r.onload = n), i.head.appendChild(r)), r || {}
+          }
+
+          e.addEventListener('on' + t in e ? t : 'load', function () {
+              for (o = 1; r[0];) f(r.shift(), r.shift())
+          }), f._ = a, e.defer = f, e.deferscript = function (e, t, n, r) {
+              f(function () {
+                  a('', t, r).src = e
+              }, n)
+          }, e.deferPreload = function (e, t) {
+              if (t = t || 'script', c) {
+                  var n = i.createElement('object');
+                  n.data = e, n.width = 0, n.height = 0, i.body.append(n)
+              } else {
+                  var r = i.createElement('link');
+                  r.setAttribute('rel', 'preload'), r.href = e, r.as = t, i.head.append(r)
+              }
+          }
+      }(this, document, 'pageshow', setTimeout, []), function (s, n) {
+          var u = 'IntersectionObserver', d = 'lazied', l = 'data-', h = l + d, p = 'load', m = 'forEach',
+              y = 'getAttribute', v = 'setAttribute', b = Function(), g = s.defer || b, f = g._ || b;
+
+          function E(e, t) {
+              return [].slice.call((t || n).querySelectorAll(e))
+          }
+
+          function e(a) {
+              return function (e, t, i, o, c, f) {
+                  g(function (n, t) {
+                      function r(n) {
+                          !1 !== (o || b).call(n, n) && ((f || ['srcset', 'src', 'style'])[m](function (e, t) {
+                              (t = n[y](l + e)) && n[v](e, t)
+                          }), E('SOURCE', n)[m](r), p in n && n[p]()), n.className += ' ' + (i || d)
+                      }
+
+                      t = u in s ? (n = new s[u](function (e) {
+                          e[m](function (e, t) {
+                              e.isIntersecting && (t = e.target) && (n.unobserve(t), r(t))
+                          })
+                      }, c)).observe.bind(n) : r, E(e || a + '[' + l + 'src]:not([' + h + '])')[m](function (e) {
+                          e[y](h) || (e[v](h, a), t(e))
+                      })
+                  }, t)
+              }
+          }
+
+          function t() {
+              g(function (t, n, r, i, o) {
+                  function c(e, t) {
+                      for (i in t = t || !1, e.parentNode.removeChild(e), e.removeAttribute('type'), n = f(e.nodeName), t && (n.async = 1), e) 'string' == typeof (o = e[i]) && n[i] != o && (n[i] = o);
+                      return n
+                  }
+
+                  t = E((r = '[type=deferjs]') + ':not(' + (i = '[async]') + ')'), E(r + i).forEach(function (e) {
+                      c(e, !0)
+                  }), t.forEach(function (e) {
+                      e.src && s.deferPreload(e.src)
+                  }), function e() {
+                      0 != t && (r = t.shift(), n = c(r), r.src ? n.onload = n.onerror = e : g(e, .1))
+                  }()
+              }, 4)
+          }
+
+          t(), s.deferstyle = function (t, n, e, r) {
+              g(function (e) {
+                  (e = f('LINK', n, r)).rel = 'stylesheet', e.href = t
+              }, e)
+          }, s.deferimg = e('IMG'), s.deferiframe = e('IFRAME'), g.all = t
+      }(this, document);
+  </script>
+  <script>deferscript('https://cdn.jsdelivr.net/npm/@shinsenter/defer.js@1.1.7/dist/polyfill.min.js', 'polyfill-js', 1)</script>
+
+  <script>
+      function objValue(obj, is, value) { //Access 1 object bằng key
+          if (typeof is == 'string')
+              return objValue(obj, is.split('.'), value);
+          else if (is.length == 1 && value !== undefined)
+              return obj[is[0]] = value;
+          else if (is.length == 0)
+              return obj;
+          else if (typeof obj === "undefined")
+              return undefined
+          else
+              return objValue(obj[is[0]], is.slice(1), value);
+      }
+
+      function waitFor(objAcc, callback, timeout) {
+          if (typeof callback !== "function") {
+              return
+          }
+          timeout = timeout || 0
+          var startTime = new Date().getTime()
+
+          function check() {
+              if (typeof objValue(window, objAcc) !== "undefined") {
+                  callback()
+              } else {
+                  if (timeout > 0 && new Date().getTime() - startTime > timeout) { //Vượt quá timeout
+                      console.error("wait for " + objAcc + " has timeout!")
+                  } else {
+                      setTimeout(check, 500)
+                  }
+              }
+          }
+
+          check()
+      }
+
+      function applyImageLazyLoad(scope) {
+          scope = scope || document
+          var lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
+
+          if ("IntersectionObserver" in window) {
+              let ops = {
+                  rootMargin: "450px",
+                  threshold: 0.1
+              }
+
+              let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+                  entries.forEach(function (entry) {
+                      if (entry.isIntersecting) {
+                          let lazyImage = entry.target;
+                          lazyImage.src = lazyImage.dataset.src;
+                          if (!!lazyImage.dataset.srcset) {
+                              lazyImage.srcset = lazyImage.dataset.srcset;
+                          }
+                          lazyImage.classList.remove("lazy");
+                          lazyImageObserver.unobserve(lazyImage);
+                      }
+                  });
+              }, ops);
+
+              lazyImages.forEach(function (lazyImage) {
+                  lazyImageObserver.observe(lazyImage);
+              });
+
+              //Lazy for background
+              var lazyBackgrounds = [].slice.call(scope.querySelectorAll(".lazy-background"));
+              let lazyBackgroundObserver = new IntersectionObserver(function (entries, observer) {
+                  entries.forEach(function (entry) {
+                      if (entry.isIntersecting) {
+                          entry.target.classList.add("visible");
+                          entry.target.classList.remove("lazy-background");
+                          lazyBackgroundObserver.unobserve(entry.target);
+                      }
+                  });
+              }, ops);
+              lazyBackgrounds.forEach(function (lazyBackground) {
+                  lazyBackgroundObserver.observe(lazyBackground);
+              });
+          } else { //Không support observer
+              let lazyImages = [].slice.call(scope.querySelectorAll("img.lazy"));
+              let active = false;
+
+              const lazyLoad = function () {
+                  if (active === false) {
+                      active = true;
+
+                      setTimeout(function () {
+                          lazyImages.forEach(function (lazyImage) {
+                              if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                                  lazyImage.src = lazyImage.dataset.src;
+                                  lazyImage.srcset = lazyImage.dataset.srcset;
+                                  lazyImage.classList.remove("lazy");
+
+                                  lazyImages = lazyImages.filter(function (image) {
+                                      return image !== lazyImage;
+                                  });
+
+                                  if (lazyImages.length === 0) {
+                                      document.removeEventListener("scroll", lazyLoad);
+                                      window.removeEventListener("resize", lazyLoad);
+                                      window.removeEventListener("orientationchange", lazyLoad);
+                                  }
+                              }
+                          });
+
+                          active = false;
+                      }, 200);
+                  }
+              };
+
+              document.addEventListener("scroll", lazyLoad);
+              window.addEventListener("resize", lazyLoad);
+              window.addEventListener("orientationchange", lazyLoad);
+          }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+          applyImageLazyLoad(document)
+      });
+  </script>
   <script>
       window['isListing'] = true;
       window['favorite_api'] = 'api/favorite';
-      window['hotline'] = '{{ listing.realtor.user.phone }}'
   </script>
+
+
+
+  {#  <script type="deferjs" src="{% load_static 'js/hubspot-chatbox.min.js' %}"></script>#}
   <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
-  <script>
-      var addthis_share = {
-          url: window.location.href
-      }
+
+  <script type="deferjs">
+    var addthis_share = {
+       url: window.location.href
+    }
   </script>
   <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
   <script defer src="{% load_static 'js/home-recent-view.min.js' %}"></script>
@@ -965,8 +1153,6 @@
     setupViewMore(114, publicFacEle.wrapper, publicFacEle.items, publicFacEle.viewMore, publicFacEle.viewMoreLink)
   })
 
-
-
   </script>
 
   <script type="deferjs">
@@ -1003,8 +1189,6 @@
       }
     };
   })();
-
-
 
   </script>
   {% comment %}  <script charset="utf-8" type="deferjs" src="https://js.hsforms.net/forms/v2.js"></script>{% endcomment %}
@@ -1251,8 +1435,6 @@
     }
   }
 
-
-
   </script>
   <script type="deferjs">
         createHSForm({
@@ -1267,7 +1449,6 @@
             }
         });
 
-
   </script>
 
   <script defer src="{% load_static 'js/header-v2.min.js' %}"></script>
@@ -1276,5 +1457,7 @@
     <script type="text/javascript" src="//vjs.zencdn.net/7.10.2/video.min.js"></script>
     <script type="text/javascript" src="{% load_static 'js/youtube_video.min.js' %}"></script>
   {% endif %}"
+    <script type="deferjs" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap">
+    </script>
 
 {% endblock %}
