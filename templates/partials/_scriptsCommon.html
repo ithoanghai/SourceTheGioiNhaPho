@@ -40,8 +40,7 @@
 <script defer src="{% load_static 'js/header-v2.min.js' %}"></script>
 <script defer src="{% load_static 'js/service-sale.min.js' %}"></script>
 
-<script data-cfasync="false" src="{% load_static 'js/email-decode.min.js' %}"></script>
-<script type="deferjs" src="{% load_static 'js/jquery.flexslider.jfix-0.0.1.min.js' %}"></script>
+<script src="{% load_static 'js/vendors.min.js' %}"></script>
 <script defer src="{% load_static 'js/login-popup.js' %}"></script>
 
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
@@ -470,3 +469,4 @@
         show3DTour("https://my.matterport.com/show/?m=yYDQY6WGVXi")
     })
 </script>
+<script>Defer.dom('img.lazy', 200, 'loaded');</script>
