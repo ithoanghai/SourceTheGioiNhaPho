@@ -20,6 +20,7 @@ def realtor_delete_handler(sender, instance: Realtor, **kwargs):
 
 @receiver(user_signed_up)
 def user_signed_up_handler(request: WSGIRequest, user, **kwargs):
+    print('user_signed_up_handler', user)
     if 'facebook/login/callback' in request.path:
         user.username = user.email
         user.save()
