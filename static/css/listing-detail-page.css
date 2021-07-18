@@ -1193,7 +1193,7 @@ ul.breadcrumb li a:hover {
 
 @media (max-width: 480px) {
     .main-header .col-left .top-search > a {
-        display: block;
+        display: contents;
         height: 100%
     }
 
@@ -4215,6 +4215,9 @@ select.form-control:focus::-ms-value {
     color: #00779a !important
 }
 
+.collapse:not(.show) {
+    display: block;
+}
 
 .collapsed {
     overflow: hidden
@@ -5190,7 +5193,6 @@ label {
     display: inline-block;
     width: auto;
     color: #444c59;
-    vertical-align: text-bottom;
     font-size: 14px
 }
 
@@ -6109,6 +6111,14 @@ ul.exclusive li.featured header li .zmdi {
     transition: opacity .15s
 }
 
+@media (max-width: 480px) {
+    #slider {
+        height: 100%;
+        width: 100%
+    }
+}
+
+
 .but-nextdetail {
     position: absolute;
     top: 50%;
@@ -6817,8 +6827,7 @@ ul.slideimg li a.img:hover {
     color: #444c59;
     font-size: 1.7em;
     font-family: tgnp-font, Arial, Helvetica, sans-serif;
-    font-weight: 400;
-    padding-inline-start: 0;
+    font-weight: 400
 }
 
 .content-detail-house header.detail-house ul.detailroom li {
@@ -7441,7 +7450,7 @@ ul.slideimg li a.img:hover {
 
 @media (max-width: 480px) {
     .map-detail {
-        height: 450px
+        height: 280px
     }
 }
 
@@ -7509,11 +7518,9 @@ ul.slideimg li a.img:hover {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 43px;
     background-color: #fff;
     -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .07);
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .07);
-    line-height: 48px;
     padding-left: 10px;
     overflow: hidden
 }
@@ -10139,4 +10146,10 @@ ul.exclusive li.featured header .heading {
 #listing-video .vjs-big-play-button {
     top: 48%;
     left: 48%;
+}
+
+dl, ol, ul {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding-left: 5px;
 }

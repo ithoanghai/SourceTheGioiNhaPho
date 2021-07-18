@@ -190,12 +190,21 @@
             <ul class="slides">
               {% for photo in listing.photos %}
                 <li>
-                  <a href="#" pos="0" class="cover">
-                    <img class="lazy fade image-normalized"
-                         data-src="{{ photo.url }}"
-                         alt="{{ listing.title }}"
-                         title="{{ listing.title }}"
-                         draggable="false">
+                  <a href="#" class="cover">
+                    {% if forloop.first %}
+                      <img class="image-normalized"
+                           src="{{ photo.url }}"
+                           alt="{{ listing.title }}"
+                           title="{{ listing.title }}"
+                           draggable="false"/>
+                    {% else %}
+                      <img class="lazy fade image-normalized"
+                           data-src="{{ photo.url }}"
+                           alt="{{ listing.title }}"
+                           title="{{ listing.title }}"
+                           draggable="false"/>
+                    {% endif %}
+
                   </a>
                 </li>
               {% empty %}
@@ -204,7 +213,7 @@
                        data-src="{% static 'img/default.png' %}"
                        alt="{{ listing.title }}"
                        title="{{ listing.title }}"
-                       draggable="false">
+                       draggable="false"/>
                 </li>
               {% endfor %}
             </ul>
@@ -260,19 +269,24 @@
                      title="{{ listing.title }}">
               </li>
             {% endfor %}
-
           </ul>
         </div>
         <div id="carousel1" class="flexslider img-list-slide">
           <ul class="slides slideimg">
             {% for photo in listing.photos %}
               <li>
-                <a class="img cover" href="#" pos="0"
-                   title="{{ listing.title }}">
-                  <img class="lazy image-normalized fade"
-                       data-src="{{ photo.url }}"
-                       alt="{{ listing.title }}"
-                       title="{{ listing.title }}">
+                <a class="img cover" href="#" title="{{ listing.title }}">
+                  {% if forloop.first %}
+                    <img class="lazy image-normalized fade"
+                         src="{{ photo.url }}"
+                         alt="{{ listing.title }}"
+                         title="{{ listing.title }}"/>
+                  {% else %}
+                    <img class="lazy image-normalized fade"
+                         data-src="{{ photo.url }}"
+                         alt="{{ listing.title }}"
+                         title="{{ listing.title }}"/>
+                  {% endif %}
                 </a>
               </li>
             {% empty %}
@@ -280,7 +294,7 @@
                 <img class="lazy image-normalized fade" src="{% static 'img/default.png' %}"
                      data-src="{% static 'img/default.png' %}"
                      alt="{{ listing.title }}"
-                     title="{{ listing.title }}">
+                     title="{{ listing.title }}"/>
               </li>
             {% endfor %}
           </ul>
@@ -689,15 +703,15 @@
           <section class="mgt-15 map-detail gmap-render">
             {#            background-image: url(https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap)#}
             <div class="_map-bg openBtn img-map"
-                 style="background-image: url({{ listing.id|location_image }})">
-{#              <img class="lazy" data-src="{{ listing.id|location_image }}"#}
-{#                   title="{{ listing.code }}" alt="{{ listing.title }}"/>#}
-              <div class="tooltip-map">
+                 style="">
+              <img src="{{ listing.id|location_image }}"
+                   title="{{ listing.code }}" alt="{{ listing.title }}"/>
+              {% comment %}<div class="tooltip-map">
                 <a>Nhấn vào để xem chi tiết</a>
-              </div>
+              </div>{% endcomment %}
               <div class="map--address">
                 <div class="address-property">
-                  <div class="left-70"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>
+                  <div class="left-100"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>
                     <strong>{{ listing.title }}</strong>
                   </div>
                 </div>
@@ -752,12 +766,10 @@
             <div class="divive">hoặc</div>
             <ul class="group-cta">
               <li>
-                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-hubspot-chat">Chat
-                  với TGNP</a>
+                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-hubspot-chat">Chat với TGNP</a>
               </li>
               <li>
-                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-contact-me">Liên
-                  hệ lại tôi</a>
+                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-contact-me">Liên hệ lại tôi</a>
               </li>
             </ul>
           </div>
@@ -773,7 +785,7 @@
             class="zmdi zmdi-comment-text-alt"></i>Chat</a>
         </div>
         <div class="phone">
-          <a class="cta-hotline" href="tel:0971841941">
+          <a class="cta-hotline" href="tel:{{ listing.realtor.user.phone }}">
             <span><i class="zmdi zmdi-phone"></i>{{ listing.realtor.user.phone }}</span>
           </a>
         </div>
@@ -853,7 +865,9 @@
                 <h4>thegioinhaphovietnam.com.vn</h4>
                 <p>Hỗ trợ 24/7</p>
                 <p>
-                  <a class="hotline" href="tel:0971841941" title="hotline">0971 841 941</a>
+                  <a class="hotline" href="tel:{{ listing.realtor.user.phone }}" title="hotline">
+                    {{ listing.realtor.user.phone }}
+                  </a>
                 </p>
               </div>
             </div>
@@ -896,15 +910,64 @@
   <script>
       window['isListing'] = true;
       window['favorite_api'] = 'api/favorite';
+      window['hotline'] = '{{ listing.realtor.user.phone }}'
   </script>
   <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
   <script>
-    var addthis_share = {
-       url: window.location.href
-    }
+      var addthis_share = {
+          url: window.location.href
+      }
   </script>
   <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
   <script defer src="{% load_static 'js/home-recent-view.min.js' %}"></script>
+
+  <script type="deferjs">
+  function setupViewMore(heightLimit, $itemsWrapper, $items, $viewMoreWrapper, $viewMoreLink){
+    var isCollapse = false
+    var itemHeight = $items.height()
+    $itemsWrapper.css("box-sizing", "content-box")
+    $viewMoreLink.click(function () {
+      if(!isCollapse){
+        showMore()
+      }else{
+        hide()
+      }
+    })
+
+    function showMore(){
+      isCollapse = true
+      $viewMoreLink.html('Thu gọn<i class="zmdi zmdi-chevron-up zmdi-hc-fw"></i>')
+      //$itemsWrapper.css('height', 'auto')
+      $itemsWrapper.animate({height: itemHeight + "px"}, 500)
+    }
+
+    function hide(){
+      isCollapse = false
+      $viewMoreLink.html('Xem thêm<i class="zmdi zmdi-chevron-down zmdi-hc-fw"></i>')
+      //$itemsWrapper.css('height', heightLimit + 'px')
+      $itemsWrapper.animate({height: heightLimit + "px"}, 500)
+    }
+
+    if(itemHeight > heightLimit){
+      $viewMoreWrapper.show()
+    }else{
+      $itemsWrapper.css('height', itemHeight + "px")
+    }
+  }
+
+  var publicFacEle = {
+    wrapper: $("#public-facilities .items"),
+    items: $("#public-facilities .items ul"),
+    viewMore: $("#public-facilities .view-more-wrapper"),
+    viewMoreLink: $("#public-facilities .view-more-wrapper a")
+  }
+  $(document).ready(function(){
+    setupViewMore(114, publicFacEle.wrapper, publicFacEle.items, publicFacEle.viewMore, publicFacEle.viewMoreLink)
+  })
+
+
+
+  </script>
 
   <script type="deferjs">
   (function () {
@@ -942,7 +1005,9 @@
   })();
 
 
+
   </script>
+  {% comment %}  <script charset="utf-8" type="deferjs" src="https://js.hsforms.net/forms/v2.js"></script>{% endcomment %}
   <script type="deferjs">
   function createHSForm(opt) {
     function getClientId() {
@@ -1187,6 +1252,7 @@
   }
 
 
+
   </script>
   <script type="deferjs">
         createHSForm({
@@ -1200,6 +1266,8 @@
                 });
             }
         });
+
+
   </script>
 
   <script defer src="{% load_static 'js/header-v2.min.js' %}"></script>

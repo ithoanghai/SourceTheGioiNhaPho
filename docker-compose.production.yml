@@ -62,9 +62,6 @@ services:
       context: .
       dockerfile: deploy/dockerfile.production
     command: bash -c "gunicorn --bind 0.0.0.0:8888 TownhouseWorldRealestate.wsgi:application -k gevent"
-    environment:
-    - DEBUG=true
-    - USE_DOCKER=yes
     env_file:
     - .env
     volumes:

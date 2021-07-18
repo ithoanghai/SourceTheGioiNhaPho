@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from distutils.util import strtobool
 
 from django.contrib.messages import constants as messages
 from django.utils.translation import gettext_lazy as _, gettext_noop
@@ -24,10 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w6rm%l&xim0ivll-li$u6fg8)6k8-$7uar^f#33ht5sutw8e!#'
+SECRET_KEY = os.getenv('SECRET_KEY','w6rm%l&xim0ivll-li$u6fg8)6k8-$7uar^f#33ht5sutw8e!#')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = strtobool(os.getenv('DEBUG', 'true'))
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 SITE_ID = 1
@@ -45,7 +45,6 @@ MODULES = [
     'FunctionModule.realtors.apps.RealtorsConfig',
     'FunctionModule.contacts.apps.ContactsConfig',
     'FunctionModule.cadastral.apps.CadastralConfig',
-
 ]
 
 THIRD_PARTIES = [
@@ -137,6 +136,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
+
+if ENVIRONMENT == 'production':
+    ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
 AUTHENTICATION_BACKENDS = [
     'FunctionModule.accounts.auth.RealEstateAuthBackend',

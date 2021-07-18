@@ -10,9 +10,9 @@ RUN pip install gunicorn gevent uwsgi
 
 RUN mkdir -p /app
 WORKDIR /app
-COPY requirements.txt package.json ./
+COPY requirements.txt package.json yarn.lock ./
 RUN pip install -r requirements.txt
-RUN yarn install
+RUN npm install
 
 COPY . /app
 
