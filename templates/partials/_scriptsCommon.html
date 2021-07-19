@@ -32,6 +32,16 @@
             el.removeAttribute('data-dragging');
         },
     });
+    const removeElements = (elms) => [...elms].forEach(el => el.remove());
+    function hideAlert(timeout=5000) {
+        setTimeout(() => {
+           removeElements(document.getElementsByClassName('alert'));
+        }, timeout)
+    }
+    window.addEventListener("load", function () {
+        hideAlert();
+    })
+
 </script>
 
 {#  <script src="{% load_static 'js/jquery-ui.min.js' %}"></script>#}
@@ -50,33 +60,34 @@
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60d864aab9d3c079"></script>
 
 <!-- Messenger Plugin chat Code -->
-    <div id="fb-root"></div>
+<div id="fb-root"></div>
 
-    <!-- Your Plugin chat code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
+<!-- Your Plugin chat code -->
+<div id="fb-customer-chat" class="fb-customerchat">
+</div>
 
-    <script>
-      var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "108470991299693");
-      chatbox.setAttribute("attribution", "biz_inbox");
-      window.fbAsyncInit = function() {
+<script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "108470991299693");
+    chatbox.setAttribute("attribution", "biz_inbox");
+    window.fbAsyncInit = function () {
         FB.init({
-          xfbml            : true,
-          version          : 'v11.0'
+            xfbml: true,
+            version: 'v11.0'
         });
-      };
+    };
 
-      (function(d, s, id) {
+    (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
+        js = d.createElement(s);
+        js.id = id;
         js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
         fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 
-   <!-- Chống sao chép website-->
+<!-- Chống sao chép website-->
 {% comment %}    <script type="text/javascript">
     $(document).ready(function(){
     $('*').bind('cut copy paste contextmenu', function (e) {
@@ -85,25 +96,29 @@
     </script>{% endcomment %}
 
 <!-- Start of HubSpot Embed Code -->
-<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/19875873.js"></script>
+<script type="text/javascript" id="hs-script-loader" async src="//js-na1.hs-scripts.com/19875873.js"></script>
 <!-- End of HubSpot Embed Code -->
 
 <script>
     window["_au_api"] = "thue/api.html";
     window['fap_url'] = "../thegioinhaphovietnam.com.vn/p/v2.33.55/js/fap.min90ca.js?v=1617780824171";
     window['fap.server'] = '//analytics.thegioinhaphovietnam.com.vn/fap';
-    window['favorite_api'] = 'mapi/index.html';
+    window['favorite_api'] = 'api/favorite';
     window['googleClientId'] = '539423642927.apps.googleusercontent.com';
     window['staticUrl'] = '../thegioinhaphovietnam.com.vn/p/v2.33.55';
     window['hotline'] = '0971 841 941';
 
     window['isLoggedIn'] = false;
-</script>
-
-<script>
     window.hsConversationsSettings = {
         loadImmediately: false // Delay the load of the chat widget
     };
+    window.RFeedback = {
+        API: "https://thegioinhaphovietnam.com.vn/mapi",
+        email: "",
+        name: "",
+        phone: "",
+        ip: "10.244.0.0"
+    }
 </script>
 
 <script type="text/javascript">
@@ -398,16 +413,6 @@
                     .find(".popup-contact").scrollTop(0);
             });
         }
-    }
-</script>
-
-<script>
-    window.RFeedback = {
-        API: "https://thegioinhaphovietnam.com.vn/mapi",
-        email: "",
-        name: "",
-        phone: "",
-        ip: "10.244.0.0"
     }
 </script>
 
