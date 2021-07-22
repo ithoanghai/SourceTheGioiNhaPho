@@ -907,19 +907,19 @@
 {% block scripts %}
   {{ block.super }}
   <script async src="{% load_static 'js/listing.js' %}"></script>
+  <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
+  <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
+  <script defer src="{% load_static 'js/home-recent-view.min.js' %}"></script>
+
   <script>
       window['isListing'] = true;
       window['favorite_api'] = 'api/favorite';
       window['hotline'] = '{{ listing.realtor.user.phone }}'
-  </script>
-  <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
-  <script>
+
       var addthis_share = {
           url: window.location.href
       }
   </script>
-  <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
-  <script defer src="{% load_static 'js/home-recent-view.min.js' %}"></script>
 
   <script type="deferjs">
   function setupViewMore(heightLimit, $itemsWrapper, $items, $viewMoreWrapper, $viewMoreLink){
@@ -964,9 +964,6 @@
   $(document).ready(function(){
     setupViewMore(114, publicFacEle.wrapper, publicFacEle.items, publicFacEle.viewMore, publicFacEle.viewMoreLink)
   })
-
-
-
   </script>
 
   <script type="deferjs">
@@ -1003,9 +1000,6 @@
       }
     };
   })();
-
-
-
   </script>
   {% comment %}  <script charset="utf-8" type="deferjs" src="https://js.hsforms.net/forms/v2.js"></script>{% endcomment %}
   <script type="deferjs">
@@ -1250,10 +1244,8 @@
       });
     }
   }
-
-
-
   </script>
+
   <script type="deferjs">
         createHSForm({
             css: '',
@@ -1270,7 +1262,6 @@
 
   </script>
 
-  <script defer src="{% load_static 'js/header-v2.min.js' %}"></script>
   {% if listing.videos %}
     <link href="//vjs.zencdn.net/7.10.2/video-js.min.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="//vjs.zencdn.net/7.10.2/video.min.js"></script>

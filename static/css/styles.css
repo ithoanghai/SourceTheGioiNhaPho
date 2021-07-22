@@ -1,3 +1,265 @@
+@font-face {
+    font-family: Harmonia;
+    src: url(../fonts/RV-Harmonia-Light.eot);
+    src: url(../fonts/RV-Harmonia-Lightd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-Light.woff) format("woff"), url(../fonts/RV-Harmonia-Light.ttf) format("truetype"), url(../fonts/RV-Harmonia-Light.svg#roboto_condensedregular) format("svg");
+    font-weight: 300;
+    font-display: swap
+}
+
+@font-face {
+    font-family: Harmonia;
+    src: url(../fonts/RV-Harmonia-Regular.eot);
+    src: url(../fonts/RV-Harmonia-Regulard41d.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-Regular.woff) format("woff"), url(../fonts/RV-Harmonia-Regular.ttf) format("truetype"), url(../fonts/RV-Harmonia-Regular.svg#roboto_condensedregular) format("svg");
+    font-weight: 400;
+    font-display: swap
+}
+
+@font-face {
+    font-family: Harmonia;
+    src: url(../fonts/RV-Harmonia-SemiBold.eot);
+    src: url(../fonts/RV-Harmonia-SemiBoldd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-SemiBold.woff) format("woff"), url(../fonts/RV-Harmonia-SemiBold.ttf) format("truetype"), url(../fonts/RV-Harmonia-SemiBold.svg#roboto_condensedregular) format("svg");
+    font-weight: 500;
+    font-display: swap
+}
+
+@font-face {
+    font-family: Harmonia;
+    src: url(../fonts/RV-Harmonia-Bold.eot);
+    src: url(../fonts/RV-Harmonia-Boldd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-Bold.woff) format("woff"), url(../fonts/RV-Harmonia-Bold.ttf) format("truetype"), url(../fonts/RV-Harmonia-Bold.svg#roboto_condensedregular) format("svg");
+    font-weight: 600;
+    font-display: swap
+
+}
+
+@font-face {
+    font-family: Tiempos;
+    src: url(../fonts/TiemposHeadline-Medium.eot);
+    src: url(../fonts/TiemposHeadline-Mediumd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/TiemposHeadline-Medium.woff) format("woff"), url(../fonts/TiemposHeadline-Medium.ttf) format("truetype"), url(../fonts/TiemposHeadline-Medium.svg#roboto_condensedregular) format("svg");
+    font-weight: 500;
+    font-display: swap
+}
+
+@font-face {
+    font-family: tgnp-icon;
+    src: url(../fonts/TGNPIcons.eot);
+    src: url(../fonts/TGNPIconsd41d.eot?#iefix) format('embedded-opentype'), url(../fonts/TGNPIcons.woff) format('woff'), url(../fonts/TGNPIcons.ttf) format('truetype'), url(../fonts/TGNPIcons.svg#roboto_condensedregular) format('svg');
+    font-display: swap
+}
+
+
+
+.title-ft {
+    padding: 5px 15px 8px !important;
+    font-weight: 600;
+    background: #fff;
+    white-space: nowrap;
+    width: 100% !important
+}
+
+input::-webkit-input-placeholder {
+    color: rgba(131, 131, 131, .7);
+    font-size: 14px
+}
+
+input:-moz-placeholder {
+    color: rgba(131, 131, 131, .7);
+    font-size: 14px
+}
+
+input::-moz-placeholder {
+    color: rgba(131, 131, 131, .7);
+    font-size: 14px
+}
+
+input:-ms-input-placeholder {
+    color: rgba(131, 131, 131, .7);
+    font-size: 14px
+}
+
+::-webkit-input-placeholder {
+    color: rgba(131, 131, 131, .7);
+    font-size: 14px
+}
+
+::-moz-placeholder {
+    color: rgba(131, 131, 131, .7);
+    font-size: 14px
+}
+
+:-ms-input-placeholder {
+    color: rgba(131, 131, 131, .7);
+    font-size: 14px
+}
+
+:-moz-placeholder {
+    color: rgba(131, 131, 131, .7);
+    font-size: 14px
+}
+
+input[type=text], input[type=email] {
+    -webkit-appearance: textfield;
+    background-color: white;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-repeat: initial;
+    -webkit-rtl-ordering: logical;
+    -webkit-user-select: text;
+    cursor: auto;
+    border: 1px solid #a9a9a9
+}
+
+a {
+    text-decoration: none;
+    color: #444c59
+}
+
+a:hover {
+    color: orange
+}
+
+li {
+    list-style: none
+}
+
+.visible-ts {
+    display: none
+}
+
+.visible-pc {
+    display: block
+}
+
+.visible-sm {
+    display: none
+}
+
+.pt-30 {
+    padding-top: 30px !important
+}
+
+.pt-40 {
+    padding-top: 40px !important
+}
+
+.pt-50 {
+    padding-top: 50px !important
+}
+
+.pt-20 {
+    padding-top: 20px !important
+}
+
+.pt-10 {
+    padding-top: 10px !important
+}
+
+.pt-15 {
+    padding-top: 15px !important
+}
+
+.pt-5 {
+    padding-top: 5px !important
+}
+
+.pb-50 {
+    padding-bottom: 50px !important
+}
+
+.pb-40 {
+    padding-bottom: 40px !important
+}
+
+.pb-30 {
+    padding-bottom: 30px !important
+}
+
+.pb-20 {
+    padding-bottom: 20px !important
+}
+
+.pb-10 {
+    padding-bottom: 10px !important
+}
+
+.pb-0 {
+    padding-bottom: 0 !important
+}
+
+.pr-10 {
+    padding-right: 10px !important
+}
+
+.pr-30 {
+    padding-right: 30px !important
+}
+
+.pr-50 {
+    padding-right: 50px !important
+}
+
+.pl-10 {
+    padding-left: 10px !important
+}
+
+.pl-25 {
+    padding-left: 25px !important
+}
+
+.mt-30 {
+    margin-top: 30px !important
+}
+
+.mt-20 {
+    margin-top: 20px !important
+}
+
+.mt-50 {
+    margin-top: 50px !important
+}
+
+.mt-60 {
+    margin-top: 60px !important
+}
+
+.mt-0 {
+    margin-top: 0 !important
+}
+
+.mt-10 {
+    margin-top: 10px !important
+}
+
+.mt-8 {
+    margin-top: 8px !important
+}
+
+.mt-15 {
+    margin-top: 15px !important
+}
+
+.mb-15 {
+    margin-bottom: 15px !important
+}
+
+.mb-0 {
+    margin-bottom: 0 !important
+}
+
+.mb-16 {
+    margin-bottom: 16px !important
+}
+
+.mb-40 {
+    margin-bottom: 40px !important
+}
+
+.mr-10 {
+    margin-right: 10px !important
+}
+
+.mr-30 {
+    margin-right: 30px !important
+}
 
 .title.title-res {
     display: none
@@ -4801,4 +5063,65 @@ section.result article.featured header .name-title p {
     margin-top: -4px;
     font-size: 11px;
     padding-top: 5px;
+}
+
+.background-gray {
+    background: #f4f5f9;
+    width: 100%
+}
+
+.background-gray:after {
+    clear: both;
+    display: table;
+    content: ''
+}
+
+.background-gray .width1140 h5 {
+    font-size: 28px;
+    text-align: center;
+    padding: 50px 0;
+    text-transform: uppercase
+}
+
+.background-gray-sell {
+    background: #f4f5f9;
+    width: 100%;
+    padding: 30px 0
+}
+
+input, textarea, keygen, select, button {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0;
+    font-family: 'harmonia', Arial, Helvetica, sans-serif
+}
+
+textarea:focus, button:focus, input:focus {
+    outline: none
+}
+
+textarea:focus, input:focus {
+    border: 1px solid rgba(131, 131, 131, 1) !important
+}
+
+.search-result {
+    height: 100%
+}
+
+.search-result .result {
+    margin-bottom: 30px
+}
+
+#wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #fff
 }

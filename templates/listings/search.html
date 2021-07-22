@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="{% load_static 'css/ion.rangeSlider.css' %}"/>
   <link rel="stylesheet" href="{% load_static 'css/ion.rangeSlider.skinFlat.css' %}"/>
   <link rel="stylesheet" href="{% load_static 'css/search-new.css' %}"/>
-
   {% include 'listings/_vueTemplate.html' %}
 {% endblock %}
 {% block optional_styles %}
@@ -69,6 +68,7 @@
     {% include "partials/_relativeDescription.html" %}
   </div>
 
+  {% include "partials/_detailFeedbackForm.html" %}
 {% endblock %}
 
 
