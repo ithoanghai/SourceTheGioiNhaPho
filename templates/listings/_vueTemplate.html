@@ -12,8 +12,10 @@
           >
             <span><i>Xem chi tiết</i></span>
           </a>
-          <button class="btn-favorite btn-favorite__v2 ">
-          </button>
+          <button class="btn-favorite btn-favorite__v2 " data-action="favorite" data-id="{{ listing.id }}"
+            data-alias="{{ listing.title }}"
+            data-type="sale_property" data-favorited="false"
+            class="btn-favorite zmdi zmdi-favorite-outline"></button>
           <div class="label-group">
             <label class="label-primary unique p-1"><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></label>
             <label v-if="listing.is_exclusive" class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
@@ -43,10 +45,10 @@
                 <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
               </li>
               <li v-if="listing.bedrooms && listing.bedrooms > 0">
-                <i class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}
+                <i class="fa fas fa-bed"></i> [[listing.bedrooms]] {% trans "ngủ" %}
               </li>
               <li v-if="listing.bathrooms && listing.bathrooms > 0">
-                <i class="fa fa-bath"></i>[[listing.bathrooms]] {% trans "tắm" %}
+                <i class="fa fa-bath"></i> [[listing.bathrooms]] {% trans "tắm" %}
               </li>
             </ul>
 
@@ -73,9 +75,9 @@
             <li v-if="listings.floors && listing.floors > 0"><i class="fa fa-h-square"></i>
               [[listing.floors]] {% trans "tầng" %}</li>
             <li v-if="listing.bedrooms > 0"><i
-              class="fa fas fa-bed"></i>[[listing.bedrooms]] {% trans "ngủ" %}</li>
+              class="fa fas fa-bed"></i> [[listing.bedrooms]] {% trans "ngủ" %}</li>
             <li v-if="listing.bathrooms > 0"><i
-              class="fa fa-bath"></i>[[listing.bathrooms]] {% trans "tắm" %} </li>
+              class="fa fa-bath"></i> [[listing.bathrooms]] {% trans "tắm" %} </li>
           </ul>
           <div class="action-group">
             <div class="action-group--left">
@@ -84,7 +86,10 @@
                 <label v-if="listing.is_exclusive" class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
            </div>
             <div class="action-group--right action-group--cta">
-              <button class="btn-favorite btn-favorite__v2 " @click.prevent="handleFavorite(listing.id)"></button>
+               <button class="btn-favorite btn-favorite__v2 " data-action="favorite" data-id="{{ listing.id }}"
+                data-alias="{{ listing.title }}"
+                data-type="sale_property" data-favorited="false"
+                class="btn-favorite zmdi zmdi-favorite-outline"></button>
             </div>
           </div>
         </div>

@@ -190,12 +190,21 @@
             <ul class="slides">
               {% for photo in listing.photos %}
                 <li>
-                  <a href="#" pos="0" class="cover">
-                    <img class="lazy fade image-normalized"
-                         data-src="{{ photo.url }}"
-                         alt="{{ listing.title }}"
-                         title="{{ listing.title }}"
-                         draggable="false">
+                  <a href="#" class="cover">
+                    {% if forloop.first %}
+                      <img class="image-normalized"
+                           src="{{ photo.url }}"
+                           alt="{{ listing.title }}"
+                           title="{{ listing.title }}"
+                           draggable="false"/>
+                    {% else %}
+                      <img class="lazy fade image-normalized"
+                           data-src="{{ photo.url }}"
+                           alt="{{ listing.title }}"
+                           title="{{ listing.title }}"
+                           draggable="false"/>
+                    {% endif %}
+
                   </a>
                 </li>
               {% empty %}
@@ -204,7 +213,7 @@
                        data-src="{% static 'img/default.png' %}"
                        alt="{{ listing.title }}"
                        title="{{ listing.title }}"
-                       draggable="false">
+                       draggable="false"/>
                 </li>
               {% endfor %}
             </ul>
@@ -260,19 +269,24 @@
                      title="{{ listing.title }}">
               </li>
             {% endfor %}
-
           </ul>
         </div>
         <div id="carousel1" class="flexslider img-list-slide">
           <ul class="slides slideimg">
             {% for photo in listing.photos %}
               <li>
-                <a class="img cover" href="#" pos="0"
-                   title="{{ listing.title }}">
-                  <img class="lazy image-normalized fade"
-                       data-src="{{ photo.url }}"
-                       alt="{{ listing.title }}"
-                       title="{{ listing.title }}">
+                <a class="img cover" href="#" title="{{ listing.title }}">
+                  {% if forloop.first %}
+                    <img class="lazy image-normalized fade"
+                         src="{{ photo.url }}"
+                         alt="{{ listing.title }}"
+                         title="{{ listing.title }}"/>
+                  {% else %}
+                    <img class="lazy image-normalized fade"
+                         data-src="{{ photo.url }}"
+                         alt="{{ listing.title }}"
+                         title="{{ listing.title }}"/>
+                  {% endif %}
                 </a>
               </li>
             {% empty %}
@@ -280,7 +294,7 @@
                 <img class="lazy image-normalized fade" src="{% static 'img/default.png' %}"
                      data-src="{% static 'img/default.png' %}"
                      alt="{{ listing.title }}"
-                     title="{{ listing.title }}">
+                     title="{{ listing.title }}"/>
               </li>
             {% endfor %}
           </ul>
@@ -691,7 +705,7 @@
             <div class="_map-bg openBtn img-map"
                  style="">
               <img src="{{ listing.id|location_image }}"
-                   title="{{ listing.code }}"  alt="{{ listing.title }}"/>
+                   title="{{ listing.code }}" alt="{{ listing.title }}"/>
               {% comment %}<div class="tooltip-map">
                 <a>Nhấn vào để xem chi tiết</a>
               </div>{% endcomment %}
@@ -752,12 +766,10 @@
             <div class="divive">hoặc</div>
             <ul class="group-cta">
               <li>
-                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-hubspot-chat">Chat
-                  với TGNP</a>
+                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-hubspot-chat">Chat với TGNP</a>
               </li>
               <li>
-                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-contact-me">Liên
-                  hệ lại tôi</a>
+                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-contact-me">Liên hệ lại tôi</a>
               </li>
             </ul>
           </div>
@@ -853,7 +865,9 @@
                 <h4>thegioinhaphovietnam.com.vn</h4>
                 <p>Hỗ trợ 24/7</p>
                 <p>
-                  <a class="hotline" href="tel:0971841941" title="hotline">0971 841 941</a>
+                  <a class="hotline" href="tel:{{ listing.realtor.user.phone }}" title="hotline">
+                    {{ listing.realtor.user.phone }}
+                  </a>
                 </p>
               </div>
             </div>
@@ -893,19 +907,19 @@
 {% block scripts %}
   {{ block.super }}
   <script async src="{% load_static 'js/listing.js' %}"></script>
+  <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
+  <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
+  <script defer src="{% load_static 'js/home-recent-view.min.js' %}"></script>
+
   <script>
       window['isListing'] = true;
       window['favorite_api'] = 'api/favorite';
-      window['hotline'] = '0971 841 941';
+      window['hotline'] = '{{ listing.realtor.user.phone }}'
+
+      var addthis_share = {
+          url: window.location.href
+      }
   </script>
-  <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
-  <script>
-    var addthis_share = {
-       url: window.location.href
-    }
-  </script>
-  <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
-  <script defer src="{% load_static 'js/home-recent-view.min.js' %}"></script>
 
   <script type="deferjs">
   function setupViewMore(heightLimit, $itemsWrapper, $items, $viewMoreWrapper, $viewMoreLink){
@@ -950,7 +964,6 @@
   $(document).ready(function(){
     setupViewMore(114, publicFacEle.wrapper, publicFacEle.items, publicFacEle.viewMore, publicFacEle.viewMoreLink)
   })
-
   </script>
 
   <script type="deferjs">
@@ -987,7 +1000,6 @@
       }
     };
   })();
-
   </script>
   {% comment %}  <script charset="utf-8" type="deferjs" src="https://js.hsforms.net/forms/v2.js"></script>{% endcomment %}
   <script type="deferjs">
@@ -1232,8 +1244,8 @@
       });
     }
   }
-
   </script>
+
   <script type="deferjs">
         createHSForm({
             css: '',
@@ -1246,9 +1258,10 @@
                 });
             }
         });
+
+
   </script>
 
-  <script defer src="{% load_static 'js/header-v2.min.js' %}"></script>
   {% if listing.videos %}
     <link href="//vjs.zencdn.net/7.10.2/video-js.min.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="//vjs.zencdn.net/7.10.2/video.min.js"></script>

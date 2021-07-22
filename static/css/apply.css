@@ -773,10 +773,6 @@ input:focus, textarea:focus, keygen:focus, select:focus, button:focus {
     outline: 0
 }
 
-li {
-    list-style: none
-}
-
 body {
     background: #f3f4f7 !important
 }
