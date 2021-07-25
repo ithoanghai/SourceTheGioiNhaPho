@@ -7,7 +7,7 @@
 
   <link rel="canonical" href="{% url 'termsOfUse' %}"/>
 
-  <link rel="stylesheet" href="{% static 'css/terms-of-use.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/service.css' %}"/>
 
 {% endblock %}
 
@@ -34,10 +34,10 @@
         <div class="s-menu-wrapper">
           <ul>
             <li class="s-menu-items ">
-              <a href="chinh-sach-bao-mat.html">Chính sách bảo mật</a>
+              <a href="{% url 'privacyPolicy' %}">Chính sách bảo mật</a>
             </li>
             <li class="s-menu-items active">
-              <a href="dieu-khoan-su-dung.html">Điều khoản sử dụng</a>
+              <a href="{% url 'termsOfUse' %}">Điều khoản sử dụng</a>
             </li>
           </ul>
         </div>
@@ -45,7 +45,7 @@
     </div>
 
     <!-- Main Content  -->
-    <div class="policy-heading banner-terms-of-use">
+    <div class="service-heading">
       <div class="heading-wrapper">
         <div class="heading-inner">
           <h1>Chính Sách Bảo Mật</h1>

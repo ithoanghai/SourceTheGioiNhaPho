@@ -36,7 +36,7 @@
   </div>
   <div class="info-container">
     <div class="flex align-items-center justify-content-space-between">
-        <div class="listing-price" style="color: orange; font-size: large;">{{ listing.price }} {% trans "tỷ" %}</div>
+        <div class="listing-price">{{ listing.price }} {% trans "tỷ" %}</div>
       <ul class="listing-info">
          <li>
           <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2" %}
@@ -71,8 +71,10 @@
            title="">{{ listing.street }}</a>
       </h4>
     {% if listing.ward %}
-                  <a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
-                         title="Phường/Xã">{{ listing.ward_name }}</a>
+        <h4>
+          <a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
+                 title="Phường/Xã">{{ listing.ward_name }}</a>
+        </h4>
      {% endif %}
         <h4><b><a href="{% url 'listing_search' %}?district={{ listing.district }}"
            title=""> {% get_district listing.district %}</a></b></h4>

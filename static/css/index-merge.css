@@ -54,11 +54,6 @@ label {
     margin-bottom: .5rem
 }
 
-a {
-    text-decoration: none;
-    color: #30333a
-}
-
 .clearfix {
     clear: both
 }
@@ -477,25 +472,6 @@ btn-blue {
     background: #00a6bd
 }
 
-.btn {
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    -webkit-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, -webkit-box-shadow .15s ease-in-out
-}
-
 .btn-outline-secondary {
     color: #838383;
     background-color: transparent;
@@ -743,13 +719,7 @@ btn-blue {
     color: #fff
 }
 
-.headerNoScroll {
-    position: fixed;
-    left: 0;
-    right: 0
-}
-
-.hide {
+hide {
     display: none !important
 }
 
@@ -877,42 +847,6 @@ btn-blue {
 
 #home .col-right .login .btn-red-outline:hover {
     border: 1px solid transparent
-}
-
-#home .agency-tgnp a {
-    border: 1px solid #fff;
-    color: #fff
-}
-
-#home .agency-tgnp a:hover {
-    color: #fff !important
-}
-
-.agency-tgnp a {
-    color: #30333a;
-    font-size: 14px;
-    height: 40px;
-    line-height: 40px;
-    display: inline-block;
-    width: 100%;
-    margin: 0 auto;
-    cursor: pointer;
-    font-weight: 500;
-    max-width: fit-content;
-    text-align: center;
-    border-radius: 2px;
-    padding: 0 20px;
-    white-space: nowrap;
-    outline: unset;
-    border: 1px solid #30333a;
-    min-width: 155px
-}
-
-.agency-tgnp a:hover {
-    opacity: .86;
-    color: #30333a !important;
-    -webkit-transition: all .3s;
-    transition: all .3s
 }
 
 .main-nav-menu__head {
@@ -1528,7 +1462,8 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
     font-size: 22px;
     line-height: 1.5;
     font-weight: 500;
-    color: #30333a
+    color: orange;
+    font-weight: bold;
 }
 
 @media (min-width: 1024px) {
@@ -2552,17 +2487,6 @@ input[type=email], input[type=text] {
     margin-top: 5px
 }
 
-.visible-ts {
-    display: none
-}
-
-.visible-pc {
-    display: block
-}
-
-.visible-sm {
-    display: none
-}
 
 .pt-30 {
     padding-top: 30px !important
@@ -2787,11 +2711,6 @@ input:focus, textarea:focus {
     padding: 20px
 }
 
-
-.popup-responsive-filter .popup li {
-    float: left;
-    width: 50%
-}
 
 .sms-share {
     display: none

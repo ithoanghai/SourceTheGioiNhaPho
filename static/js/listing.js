@@ -1045,7 +1045,7 @@
                 })
             }, t.genCoordsForNearbyArea = function (t, e, n) {
                 var r = new google.maps.LatLngBounds, i = Math.PI / 180, o = e / 3963 * (180 / Math.PI),
-                    a = o / Math.cos(t.lat() * i), u = new Array, s = 0, c = 133;
+                    a = o / Math.cos(t.lat() * i), u = [], s = 0, c = 133;
                 if (1 !== n) {
                     s = 133;
                     c = 0

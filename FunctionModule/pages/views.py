@@ -95,16 +95,6 @@ def recruitment(request):
 
     return render(request, 'home/recruitment.html', context)
 
-
-def apply(request):
-    position = request.GET.get('trans_type', '')
-    context = {
-        'position': position,
-    }
-
-    return render(request, 'home/apply.html', context)
-
-
 def termsOfUse(request):
     context = {
     }
