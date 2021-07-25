@@ -47,7 +47,6 @@
 }
 
 
-
 .title-ft {
     padding: 5px 15px 8px !important;
     font-weight: 600;
@@ -106,15 +105,6 @@ input[type=text], input[type=email] {
     -webkit-user-select: text;
     cursor: auto;
     border: 1px solid #a9a9a9
-}
-
-a {
-    text-decoration: none;
-    color: #444c59
-}
-
-a:hover {
-    color: orange
 }
 
 li {
@@ -261,493 +251,31 @@ li {
     margin-right: 30px !important
 }
 
+.hide {
+    display: none !important
+}
+
 .title.title-res {
     display: none
-}
-
-.full-screen-icon {
-    width: 15px;
-    display: inline-block;
-    vertical-align: text-bottom;
-    margin-right: 5px
-}
-
-.list-container {
-    position: relative;
-    display: inline-block;
-    font-size: 14px;
-    width: 100%
-}
-
-.list-container-fullscreen {
-    display: block
-}
-
-.list-container .list-row {
-    border-bottom: 1px solid #e6e6e6;
-    transition: background-color .1s;
-    white-space: nowrap;
-    width: 100%;
-    box-sizing: border-box;
-    height: 40px
-}
-
-.list-container .list-row:hover {
-    background: #fff
-}
-
-.list-cell {
-    white-space: nowrap;
-    height: 100%;
-    box-sizing: border-box;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    float: left;
-    padding-top: 10px
-}
-
-.list-col-name {
-    width: 43%;
-    padding-left: 30px
-}
-
-.list-col-status {
-    width: 6%;
-    text-align: center;
-    padding-left: 10px
-}
-
-.list-col-status span {
-    font-size: 12px;
-    background-color: #edeef2;
-    border: 1px solid rgba(48, 51, 57, .19);
-    display: block;
-    max-width: 40px
-}
-
-.list-col-id {
-    width: 9%;
-    padding-left: 10px
-}
-
-.list-col-room {
-    width: 9%;
-    padding-top: 2px;
-    padding-left: 10px
-}
-
-.list-col-area {
-    width: 9%;
-    padding-top: 2px;
-    padding-left: 10px
-}
-
-.list-col-price {
-    width: 9%;
-    padding-left: 10px
-}
-
-.list-col-action {
-    width: 15%;
-    text-align: center;
-    padding-left: 10px;
-    padding-right: 30px
-}
-
-.list-col-action a {
-    font-size: 12px;
-    border: 1px solid rgba(48, 51, 57, .19);
-    padding: 5px 10px
-}
-
-.list-col-action a:hover {
-    border: 1px solid orange;
-    color: orange
-}
-
-.relative-news {
-    width: 100%;
-    overflow: auto;
-    display: flex;
-    flex-wrap: wrap
-}
-
-.relative-news .relative-news-left {
-    float: left;
-    width: 48%;
-    margin-right: 4%
-}
-
-.relative-news .relative-news-left .featured header {
-    padding: 20px 0 0;
-    height: auto;
-    overflow: hidden
-}
-
-.relative-news .relative-news-left .featured a .cover {
-    position: relative;
-    height: 310px
-}
-
-.relative-news .relative-news-left .featured a .cover img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover
-}
-
-.relative-news .relative-news-left .featured a .date {
-    position: absolute;
-    font-size: 14px;
-    bottom: 30px;
-    left: 0;
-    background-color: rgba(0, 0, 0, .5);
-    color: #fff;
-    padding: 5px 20px;
-    line-height: 14px
-}
-
-.relative-news .relative-news-left .featured header .sumary {
-    padding-top: 10px;
-    max-height: 56px;
-    display: block;
-    font-size: 14px;
-    line-height: 22px;
-    color: #8e9399
-}
-
-.relative-news .relative-news-left .featured .time {
-    display: none
-}
-
-.relative-news .relative-news-right {
-    float: left;
-    width: 48%
-}
-
-.relative-news .relative-news-right .featured {
-    padding: 20px 0;
-    border-bottom: 1px dotted #ccc;
-    overflow: hidden
-}
-
-.relative-news .relative-news-right .featured:first-child {
-    padding-top: 0
-}
-
-.relative-news .featured .time {
-    float: left;
-    width: 10%;
-    margin-right: 2%;
-    position: relative;
-    font-size: 22px;
-    line-height: 22px;
-    color: #464646;
-    text-align: center
-}
-
-.relative-news .featured .time .date {
-    padding: 10px 0 6px;
-    max-width: 45px;
-    margin-bottom: 1px
-}
-
-.relative-news .featured .time .bg-e1 {
-    background: #e1e1e1;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px
-}
-
-.relative-news .featured .time .bg-eb {
-    background: #ebebeb;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px
-}
-
-.relative-news .featured header .title {
-    font-size: 18px;
-    line-height: 26px;
-    font-weight: 500;
-    max-height: 50px;
-    overflow: hidden;
-    font-family: Tiempos, Verdana, Geneva, sans-serif
-}
-
-.relative-news .relative-news-right .featured header .sumary {
-    padding-top: 10px;
-    font-size: 14px;
-    max-height: 50px;
-    overflow: hidden;
-    color: #8e9399
-}
-
-.max-width-946.contact {
-    padding-top: 60px;
-    padding-bottom: 60px;
-    font-size: 16px;
-    line-height: 26px
-}
-
-.max-width-946.contact .contact-detail .contact-info {
-    width: 60%;
-    float: left;
-    padding: 60px 0 60px 60px
-}
-
-.max-width-946.contact .contact-detail .contact-info header {
-    font-family: Tiempos, Verdana, Geneva, sans-serif;
-    font-size: 30px;
-    font-weight: 500;
-    line-height: 42px
-}
-
-.max-width-946.contact .contact-detail .contact-info p {
-    padding: 20px 20px 40px 0
-}
-
-.max-width-946.contact .contact-detail .contact-info .red-bnt {
-    max-width: 180px
-}
-
-.max-width-946.contact .contact-detail .contact-img {
-    width: 40%;
-    float: left;
-    display: block;
-    position: relative;
-    height: 390px;
-    overflow: hidden
-}
-
-.max-width-946.contact .contact-detail .contact-img img {
-    position: absolute;
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0
-}
-
-.project-slider {
-    position: relative;
-    border-bottom: 1px solid #f3f3f3;
-    overflow: hidden;
-    height: 350px
-}
-
-.list-img-srcoll {
-    font-size: 0;
-    white-space: nowrap;
-    background-position: top left
-}
-
-.listing-img {
-    cursor: pointer;
-    border-right: 1px solid #f3f3f3;
-    opacity: 1;
-    -webkit-transition: opacity .4s;
-    -moz-transition: opacity .4s;
-    -o-transition: opacity .4s;
-    transition: opacity .4s;
-    height: 350px
-}
-
-.listing-img:hover {
-    opacity: .9
-}
-
-.all-img {
-    bottom: 30px;
-    pointer-events: auto;
-    z-index: 200;
-    width: 100%;
-    position: absolute
-}
-
-.all-img-inner {
-    max-width: 1140px;
-    margin: 0 auto
-}
-
-.list-all-img-project li {
-    display: inline-block
 }
 
 .main-content .view-more-gray.more {
     display: none
 }
 
-.CTA-block {
-    width: 100%;
-    padding-top: 40px;
-    overflow: hidden;
-    display: table
+.bg-gray-e6 {
+    background: #edeef2;
+    width: 100%
 }
 
-.CTA-img {
-    width: 52%;
-    display: table-cell;
-    padding-right: 30px;
-    vertical-align: middle
+.bg-gray-e6:after {
+    clear: both;
+    display: table;
+    content: ''
 }
 
-#CTA-img-right {
-    padding-right: 0;
-    padding-left: 4%
-}
-
-.CTA-info {
-    width: 48%;
-    display: table-cell;
-    font-size: 16px;
-    line-height: 26px;
-    text-align: left;
-    vertical-align: middle
-}
-
-.CTA-info .cta-title {
-    font-family: Tiempos, Verdana, Geneva, sans-serif;
-    font-size: 24px;
-    font-weight: 500;
-    margin-top: 0;
-    line-height: 30px;
-    padding-bottom: 20px
-}
-
-.CTA-info .cta-content li {
-    list-style-type: initial;
-    margin-left: 20px
-}
-
-.CTA-info .red-bnt {
-    font-size: 16px !important;
-    max-width: 190px;
-    padding: 8px 0 6px !important
-}
-
-.CTA-info .cta-action {
-    display: block;
-    overflow: hidden;
-    padding: 25px 0 20px
-}
-
-.map-gutter {
-    padding-top: 40px;
-    overflow: hidden;
-    display: table
-}
-
-.location-icon {
-    display: none
-}
-
-.btn-map {
-    width: 18%;
-    float: left;
-    min-width: 125px;
-    margin-right: 20px
-}
-
-.map-icon {
-    border: 1px solid #303339;
-    color: #303339;
-    background: #fff;
-    text-align: center;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    padding: 4px 18%;
-    font-size: 16px;
-    font-weight: 500;
-    min-width: 125px
-}
-
-.map-icon .font-icon {
-    font-size: 26px;
-    margin-right: 5px;
-    vertical-align: text-bottom
-}
-
-.location-icon .title-res {
-    font-size: 14px;
-    height: 40px;
-    overflow: hidden;
-    display: table-cell;
-    vertical-align: middle;
-    color: #8e9399
-}
-
-.location-map, .max-width-946.contact .contact-detail {
-    box-shadow: 0 0 7px #a3a3a3;
-    background-clip: padding-box;
-    background-color: #fff;
-    box-sizing: border-box;
-    overflow: hidden
-}
-
-.location-map-content {
-    position: relative;
-    text-align: center;
-    padding: 25px;
-    font-size: 16px;
-    line-height: 28px
-}
-
-.location-map-content .map {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 430px
-}
-
-.location-map-content .address-wrap {
-    display: inline-block;
-    margin-top: 20px
-}
-
-.location-map-content .address-wrap .address-title {
-    font-weight: 600;
-    font-style: normal
-}
-
-.location-map-content .address-wrap .address-range {
-    margin: 0 15px 0 5px
-}
-
-.width1140 .contact-form {
-    padding-bottom: 60px
-}
-
-.width1140 > h1 {
-    padding: 60px 0 0;
-    font-size: 36px;
-    font-family: Tiempos, Arial, Helvetica, sans-serif;
-    line-height: 46px;
-    font-weight: 400;
-    text-align: center
-}
-
-.news-pro-detail {
-    width: 100%;
-    overflow: auto;
-    padding-bottom: 60px
-}
-
-.news-pro-detail li {
-    display: block;
-    padding: 7px 0;
-    float: left;
-    margin-right: 4%;
-    width: 48%;
-    font-size: 16px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden
-}
-
-.news-pro-detail li:nth-child(2n+2) {
-    margin-right: 0
+.bg-gray-e6-d {
+    background: #edeef2
 }
 
 section.bg-gray-e6 div.more-info-black {
@@ -755,70 +283,10 @@ section.bg-gray-e6 div.more-info-black {
     padding: 0 20px
 }
 
-.bg-neiberhood-overlay {
-    background-color: rgba(0, 0, 0, .5);
-    overflow: hidden;
-    padding-bottom: 60px
-}
-
 .compare-house .action .favorite:before {
     padding: 0 !important
 }
 
-.favorite-white-icon:before {
-    content: "\f190"
-}
-
-.share-icon:before {
-    content: "\f203"
-}
-
-.project-title {
-    padding-bottom: 0
-}
-
-.tittle-neiberhood {
-    font-size: 38px;
-    line-height: 40px;
-    color: #fff;
-    padding: 60px 0 40px;
-    font-family: Tiempos, Verdana, Geneva, sans-serif;
-    overflow: hidden
-}
-
-.project-title .width1140 {
-    padding: 0 0 20px !important
-}
-
-.project-title .header {
-    float: left;
-    width: 60%;
-    height: 40px;
-    font-weight: 500;
-    line-height: 40px;
-    font-size: 16px;
-    margin-top: -8px
-}
-
-.project-title .header li:first-child {
-    padding-left: 0
-}
-
-.project-title .header li {
-    display: inline-block;
-    padding: 8px 15px 0
-}
-
-.project-title .btn-info {
-    width: 40%;
-    float: left;
-    margin-top: -8px
-}
-
-.btn-more {
-    font-size: 16px;
-    font-weight: 600
-}
 
 .btn-down-neiberhood {
     width: 100%;
@@ -884,12 +352,6 @@ section.bg-gray-e6 div.more-info-black {
 .btn-black-border .btn-hotline:hover, .more-info-black .btn-hotline:hover {
     background: #000;
     color: #fff !important
-}
-
-.owner-img .btn-more {
-    text-decoration: underline;
-    padding-right: 30px;
-    cursor: pointer
 }
 
 .owner-img .more-info {
@@ -3468,219 +2930,1035 @@ li.whr-item .whr-info li.whr-date {
     background: #fff
 }
 
-#carousel1 .flex-active-slide {
-    border: 2px solid #fff;
-    box-sizing: border-box;
-    overflow: hidden;
-    height: 61px
+article.featured header .name-title p {
+    color: rgba(48, 51, 57, .7);
+    font-size: 12px;
+    padding: 0;
+    padding-top: 3px;
 }
 
-@media screen and (min-width: 1920px) {
-    .listing-img, .project-slider {
-        height: 420px
+{
+    width: 100%;
+    margin: 0 auto;
+    overflow: auto;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: center;
+    padding-bottom: 30px
+}
+
+article.featured {
+    width: calc(50% - 30px);
+    margin: 30px 30px 0 0;
+    float: left;
+    display: inline-block;
+    background: #fff;
+    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, .05);
+    transition: box-shadow .3s ease-out, transform .3s ease-out, opacity .2s ease-out;
+    transition-delay: .1s;
+    transform: translateZ(0)
+}
+
+article.featured:hover {
+    opacity: 1 !important;
+    box-shadow: rgba(45, 45, 45, .05) 0 0 0, rgba(49, 49, 49, .05) 0 1px 1px, rgba(42, 42, 42, .05) 0 2px 2px, rgba(32, 32, 32, .05) 0 4px 4px, rgba(49, 49, 49, .05) 0 8px 8px, rgba(35, 35, 35, .05) 0 16px 16px;
+    transform: translate(0, -2px)
+}
+
+article.featured .cover {
+    height: 268px;
+    position: relative;
+    text-align: center
+}
+
+article.featured .cover img {
+    height: 100%;
+    width: 100%
+}
+
+article.featured header {
+    display: block;
+    position: relative;
+    padding: 15px;
+    font-size: 14px
+}
+
+article.featured header a {
+    display: block
+}
+
+article.featured header h3 {
+    font-family: 'Tiempos', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #30333a;
+    padding: 6px 0;
+    font-weight: 500;
+    line-height: 24px;
+    width: 100%;
+    height: 60px;
+    vertical-align: top;
+    display: table-cell;
+    letter-spacing: .2px
+}
+
+article.featured header h3:hover {
+    color: orange
+}
+
+article.featured a:hover img {
+    opacity: .8
+}
+
+article.featured header h4 {
+    color: gray;
+    padding: 2px 0;
+    font-size: 14px;
+    font-weight: 400;
+    display: inline-block
+}
+
+
+.full-width > div > article.featured {
+    width: calc(25% - 30px);
+    margin: 30px 30px 0 0;
+    float: left;
+    display: inline-block;
+    background: #fff
+}
+
+.full-width > div > article.featured .cover {
+    height: 170px
+}
+
+article.featured header h4 a {
+    color: gray
+}
+
+article.featured header h4 a:hover {
+    color: orange
+}
+
+article.featured header p {
+    color: #444c59;
+    padding: 2px 0;
+    font-size: 1.4em
+}
+
+article.featured header ul {
+    width: 200px
+}
+
+article.featured header ul li {
+    list-style: none;
+    display: inline-block;
+    color: #444c59;
+    margin-right: 15px;
+    padding: 5px 0;
+    font-size: 14px
+}
+
+article.featured.active {
+    opacity: .8;
+    background: #444c59
+}
+
+article.featured.active header {
+    background: #444c59
+}
+
+article.featured.active header h2 {
+    color: #fff
+}
+
+article.featured.active header p {
+    color: #fff
+}
+
+article.featured.active .price {
+    color: #fff
+}
+
+article.featured.active header ul li {
+    color: #fff
+}
+
+article.featured .price {
+    bottom: 20px
+}
+
+article.featured header ul:after {
+    width: 100%;
+    clear: both;
+    display: table;
+    content: ''
+}
+
+article.featured header ul li .zmdi {
+    vertical-align: text-bottom
+}
+
+
+.background-gray {
+    background: #f4f5f9;
+    width: 100%
+}
+
+.background-gray:after {
+    clear: both;
+    display: table;
+    content: ''
+}
+
+.background-gray .width1140 h5 {
+    font-size: 28px;
+    text-align: center;
+    padding: 50px 0;
+    text-transform: uppercase
+}
+
+input, textarea, keygen, select, button {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0;
+    font-family: 'harmonia', Arial, Helvetica, sans-serif
+}
+
+textarea:focus, button:focus, input:focus {
+    outline: none
+}
+
+textarea:focus, input:focus {
+    border: 1px solid rgba(131, 131, 131, 1) !important
+}
+
+#wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #fff
+}
+
+#home .agency-tgnp a {
+    border: 1px solid #fff;
+    color: #fff
+}
+
+#home .agency-tgnp a:hover {
+    color: #fff !important
+}
+
+.agency-tgnp a {
+    color: #30333a;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    width: 100%;
+    margin: 0 auto;
+    cursor: pointer;
+    font-weight: 500;
+    max-width: fit-content;
+    text-align: center;
+    border-radius: 2px;
+    padding: 0 20px;
+    white-space: nowrap;
+    outline: unset;
+    border: 1px solid #30333a;
+    min-width: 155px
+}
+
+.agency-tgnp a:hover {
+    opacity: .86;
+    color: #30333a !important;
+    -webkit-transition: all .3s;
+    transition: all .3s
+}
+
+@media only screen and (max-width: 320px) {
+    .listing-img {
+        height: 250px
     }
-}
 
-@media only screen and (max-width: 1080px) {
-    .listing-detail {
+    .btn-sticky-header .red-bnt {
+        min-width: 145px;
+        font-size: 12px !important
+    }
+
+    .container-col {
+        height: 185px
+    }
+
+    .bg-career-white .btn-app {
+        width: 100% !important;
+        float: left !important;
+        margin-top: 8px
+    }
+
+    section.bg-career-white div.content div div.detail div.name {
+        padding-bottom: 0
+    }
+
+    section.bg-career-white div.content div div.detail div.loc {
         width: 100%
     }
 
-    .popup-lch-img {
-        width: 60%
+    section.bg-career-white div.content div div div.pos {
+        width: 100%
     }
 
-    .popup-lch .bg-e1e2e6, .popup-lch .popup-header, .popup-lch-detail {
-        width: 40%
+    .btn-lienhe {
+        width: 120px;
+        padding-right: 30px !important
     }
 
-    .all-img-inner {
-        padding: 0 15px
+    .btn-quantam {
+        width: 120px;
+        padding-right: 22px !important
     }
 
-    .popup-sketup .image-sketch {
-        width: 65%
-    }
-
-    .info-sticky-header {
-        overflow: hidden;
-        border-left: 0;
-        padding-left: 0;
-        white-space: nowrap
-    }
-
-    .container {
-        padding: 0 10px
-    }
-
-    .test-content div.cover {
-        margin: 0 auto;
-        float: none
-    }
-
-    .test-content {
-        text-align: center
-    }
-
-    .test-content div.detail {
+    .detail-info-col {
         width: 100%;
-        padding-top: 10px
+        font-size: 16px;
+        line-height: 30px
+    }
+
+    .news-left {
+        padding: 30px 10px 30px 10px
+    }
+
+    .news-right {
+        padding: 30px 10px 30px 10px
+    }
+
+    .btn-down {
+        width: 100%
+    }
+
+    section.background-gray div.width1140 div ul.icon {
+        width: 43%
+    }
+
+}
+
+@media only screen and (max-width: 360px) {
+    .right-content-sell {
+        padding: 20px 0 0
+    }
+
+    .btn-black-border {
+        padding: 30px 10px 60px
+    }
+
+    form.hs-form .form-columns-2 .hs-form-field .hs-input, form.hs-form .form-columns-3 .hs-form-field .hs-input {
+        width: 100%
+    }
+
+    .contact-form .hs-form-field div.input {
+        margin: 0
+    }
+
+    .contact-form .hs-form-field:nth-child(3) input, .contact-form .hs-form-field:nth-child(3) label span, .hs-error-msgs {
+        margin: 0
+    }
+
+    .form-contact {
+        width: 100%;
+        padding: 0
+    }
+
+    ul.max-w70 li:last-child {
+        padding: 0
+    }
+
+    .form-contact-project, div.form-captcha div.captcha {
+        width: 100%;
+        padding: 0
+    }
+
+    li.whr-item .whr-info li {
+        width: 100%
+    }
+
+    section.header-career div.bg-career div.title {
+        padding-top: 50px;
+        line-height: 45px
+    }
+
+    .btn-sticky-header .red-bnt {
+        font-size: 13px !important
+    }
+
+    .detail-info-col li {
+        width: 100%
+    }
+
+    .btn-lienhe {
+        width: 90px;
+        padding: 8px 18px 0 0 !important
+    }
+
+    .btn-down {
+        width: 240px;
+        margin-top: 10px
+    }
+
+    section.background-gray div.width1140 div ul.icon {
+        width: 44%;
+        padding: 0 0 20px 0
     }
 
     .btn-quyhoach {
-        width: 33%
+        width: 64%
     }
 
-    section.background-gray div.width1140 div.owner-img div.left img {
+    .house-detail div.img {
         width: 100%
     }
 
-    .ower-more {
-        display: block;
-        clear: both;
-        padding: 0 0 0 345px
+    .house-detail div.name {
+        width: 100%
     }
 
-    .hinhanh-content {
+    .house-detail div.detail {
+        width: 100% !important
+    }
+
+    .house-detail div.house-price {
+        width: 100%;
+        padding-left: 5px
+    }
+
+    section.bg-white div.team-member div.member-detail {
+        width: 100%
+    }
+
+    div.team-member div.member-detail header.content {
+        height: 120px;
+        padding: 5px !important
+    }
+
+    section div.width1140 section.bg-white div.team-member div.member-detail header p {
+        padding-top: 2px
+    }
+
+    .member-detail ul {
+        padding: 1px 0
+    }
+
+    .btn-quantam {
+        width: 95px;
+        padding: 8px 9px 0 0 !important
+    }
+
+    .btn-down {
+        width: 215px
+    }
+
+    .house-detail div.img {
+        width: 100%
+    }
+
+    .house-detail div.name {
+        width: 100%
+    }
+
+    .house-detail div.detail {
+        width: 100% !important
+    }
+
+    .house-detail div.house-price {
+        width: 100%
+    }
+
+    .team-member .member-detail header {
+        padding: 10px 5px !important
+    }
+
+    section div.width1140 section.bg-white div.team-member div.member-detail header p {
+        padding-top: 5px !important
+    }
+
+    .member-detail ul {
+        padding-top: 5px !important
+    }
+
+    section.header-career div.bg-career div.title {
+        padding-top: 30px
+    }
+
+    section.header-career div.bg-career div.sumary {
+        padding-top: 10px
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .social-content .follow-button span {
+        display: none
+    }
+
+    .social-share {
+        width: 20%;
+        display: block
+    }
+
+    .relative-news .featured header .title {
+        font-weight: 300
+    }
+
+    .all-img {
+        bottom: 20px
+    }
+
+    .relative-news .relative-news-left .featured .time {
+        display: block
+    }
+
+    .relative-news .featured header .sumary, .relative-news .relative-news-left .featured a .cover {
+        display: none !important
+    }
+
+    .relative-news .featured header .title {
+        font-size: 18px !important
+    }
+
+    .relative-news .relative-news-left {
+        padding: 0 0 20px
+    }
+
+    .relative-news .relative-news-left .featured header {
+        padding: 0
+    }
+
+    .popup-lch .bg-e1e2e6.popup-header {
+        display: none
+    }
+
+    .form-contact .hs-form-field:nth-child(3) label {
+        margin: 0
+    }
+
+    .popup-contact {
+        max-width: 100%;
+        position: initial;
+        transform: translate(0, 0);
+        margin: 0;
+        height: 100%
+    }
+
+    .popup-contact .form-contact {
+        border: none;
+        min-height: 100%
+    }
+
+    .popup-contact .form-contact .contact {
+        padding-top: 50px;
+        height: 100%
+    }
+
+    .popup-contact .header {
+        display: none
+    }
+
+    #slider8 .slides .title {
+        width: 100%;
+        bottom: 25%;
+        top: inherit
+    }
+
+    #slider8 .slides .title .name-img {
+        width: 100%;
+        text-align: center
+    }
+
+    #slider8 .slides .title .number {
+        display: none
+    }
+
+    .title.title-res {
+        display: block;
+        position: fixed;
+        padding: 15px;
+        background: #f2f2f2;
+        font-size: 18px;
+        width: 100%;
+        z-index: 100;
+        font-weight: 500;
+        overflow: hidden;
+        top: 0
+    }
+
+    .popup-lch {
+        max-width: 100%;
+        transform: translate(0, 7%);
+        position: initial;
+        margin: 0 !important;
+        min-height: 100%
+    }
+
+    .popup-overlay .full-screen-act.close {
+        display: none
+    }
+
+    .listing-img {
+        height: 300px
+    }
+
+    .contentpx .title-career {
+        padding: 30px 0
+    }
+
+    .contentpx .title-career, .title_duan {
+        font-size: 22px !important;
+        line-height: 26px
+    }
+
+    .owner-img .more-info {
+        display: block;
+        padding-top: 20px
+    }
+
+    .list-prop .article div.title h3 {
+        padding: 0
+    }
+
+    .list-prop .article div.action a {
+        margin: 0 10px 0 0
+    }
+
+    .hs-form fieldset.form-columns-2 .hs-form-field {
+        width: 100% !important
+    }
+
+    .hs-form fieldset.form-columns-2 .input {
+        margin: 0
+    }
+
+    .contact-form .hs-form-field:nth-child(3) input, .contact-form .hs-form-field:nth-child(3) label span, .hs-error-msgs {
+        margin: 0
+    }
+
+    .contact-form .hs-form-field div.input {
+        padding: 5px 0 5px
+    }
+
+    .container-col {
+        height: 220px
+    }
+
+    .ward-filter {
+        height: 40px
+    }
+
+    .post-news-right div.list {
+        width: 100%
+    }
+
+    .popup-ward-visible {
+        display: none !important
+    }
+
+    .whr-title {
+        width: 100%;
+        float: left
+    }
+
+    li.whr-item .whr-info {
+        float: left;
+        width: 100%;
+        padding: 0
+    }
+
+    li.whr-item .whr-info li {
+        float: left;
+        width: 50%;
+        text-align: left;
+        padding-top: 10px
+    }
+
+    section.bg-career-white div.content div div.detail div.btn-app {
+        width: 33.33%
+    }
+
+    section.bg-career-white div.content div div.detail div.loc {
+        width: 33.33%
+    }
+
+    section.bg-career-white div.content div div div.pos {
+        width: 33.33%
+    }
+
+    section.bg-career-gray div.content div.career-right div {
         width: 100%
     }
 
     .lch-content {
+        width: 100%
+    }
+
+    .news-left {
         width: 100%;
-        padding: 0 30px 0 30px
+        padding-bottom: 0
     }
 
-    section.news-bg div.width1140 div.news-right div.bg {
-        height: 490px
-    }
-
-    section.news-bg div.width1140 div.news-right div.bg div.img {
+    .news-right {
         width: 100%;
-        text-align: center
+        padding: 60px 30px 60px 30px
     }
 
-    section.news-bg div.width1140 div.news-right div.bg div.text {
+    .btn-lienhe {
+        width: 205px;
+        padding-right: 75px !important;
+        margin-bottom: 10px !important
+    }
+
+    .btn-quantam {
+        width: 205px;
+        padding-right: 75px !important
+    }
+
+    .width1140 .owner-img .left {
         width: 100%;
-        padding: 0 0 0 60px
+        padding-bottom: 20px
     }
 
-    section div section article.lch-content-detail a img {
-        width: 460px !important;
-        height: 350px !important
+    .width1140 .owner-img .right {
+        width: 100%;
+        padding-top: 0
+    }
+
+    .house-detail div.img {
+        width: 100%
     }
 
     .house-detail div.name {
-        width: 30%
+        width: 100%
     }
 
     .house-detail div.detail {
-        width: 25%
+        width: 50%
     }
 
     .house-detail div.house-price {
-        width: 25%;
-        padding-top: 43px
-    }
-}
-
-@media only screen and (max-width: 979px) {
-    .relative-news .relative-news-right .featured header .sumary {
-        display: none
-    }
-
-    .listing-item {
-        width: calc(100% * 1 / 2 - 30px)
-    }
-
-    .post-news-right div div.list-step ul li + li {
-        padding: 10px 10px
-    }
-
-    .post-news-right div div.list-step ul li:first-child {
-        padding: 10px 0
-    }
-
-    .post-news-right div div.list-step {
-        width: 100%;
-        text-align: center
-    }
-
-    .post-news-right div div.list-number div {
-        margin: 0 auto
-    }
-
-    .post-news-right div div.list-number {
-        width: 100%;
-        padding: 0
-    }
-
-    .post-news-right div.list {
-        height: 160px
-    }
-
-    section div header div div ul.detail-info-col li {
-        display: inline-block
-    }
-
-    section.news-bg div.width1140 div.news-left header {
-        line-height: 40px
-    }
-
-    section.news-bg div.width1140 div.news-right div.bg div.text {
-        padding: 0
-    }
-
-    .lch-content-detail {
-        width: 46%
-    }
-
-    .tienich-icon {
-        padding: 0 10px 0 10px
-    }
-
-    section.background-gray div.width1140 div ul.icon {
-        margin-right: 17px
-    }
-
-    .ower-more {
-        padding: 0 0 0 240px
+        width: 50%
     }
 
     .btn-quyhoach {
-        width: 38%
-    }
-
-    .houde-detail div.img {
-        width: 20%
-    }
-
-    .house-detail div.name {
-        width: 25%
-    }
-
-    .house-detail div.house-price {
-        width: 25%;
-        padding-top: 43px
-    }
-
-    .house-detail div.detail {
-        width: 30%
-    }
-
-    .team-member .member-detail header {
-        padding: 20px 0 0 20px
-    }
-
-    section div.width1140 section.bg-white div.team-member div.member-detail header p {
-        padding-top: 7px
-    }
-
-    .member-detail ul {
-        padding-top: 7px
+        width: 60%
     }
 
     div.team-member div.member-detail header.content {
-        padding: 27px 5px 20px 10px
+        padding: 20px 5px 20px 10px !important
+    }
+
+    section.header-career div.bg-career div.title {
+        padding-top: 80px
+    }
+
+    section.header-career div.bg-career div.sumary {
+        padding: 20px 10px
+    }
+
+    section.bg-career-white div.content div.info div {
+        width: 100%
+    }
+
+    .CTA-info .cta-title {
+        font-size: 22px
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    .btn-down-neiberhood {
+        padding-top: 10px
+    }
+
+    .btn-down-neiberhood .red-bnt {
+        height: 60px
+    }
+
+    .btn-black-border .btn-hotline {
+        border: none !important;
+        line-height: 24px;
+        text-decoration: underline;
+        cursor: pointer;
+        text-align: left;
+        padding-left: 90px !important
+    }
+
+    .btn-black-border .btn-hotline img {
+        display: block
+    }
+
+    .contact-form .hs-richtext > p {
+        max-width: 100%
+    }
+
+    section.news-bg div.width1140 div.news-right div.bg div.img img {
+        width: 80%;
+        height: 80%
+    }
+
+    .btn-down {
+        width: 100% !important
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .project-house .img {
+        vertical-align: top
+    }
+
+    .main-content .view-more-gray.more {
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        background: 0 0;
+        display: block
+    }
+
+    .main-content .view-more-gray.more a {
+        text-decoration: none
+    }
+
+    #cta-title {
+        padding-top: 20px
+    }
+
+    .project-house {
+        padding-top: 20px;
+        padding-bottom: 20px
+    }
+
+    .project-house .img {
+        width: 30%;
+        height: auto
+    }
+
+    .project-house .img .cover {
+        width: 100%;
+        min-height: 100px;
+        height: auto
+    }
+
+    .project-house .img .cover img {
+        width: 90%
+    }
+
+    .project-house .area-m2, .project-house .price-m2, .project-house .room, .project-house .title {
+        width: 100%;
+        float: right;
+        padding: 0 0 0 10px
+    }
+
+    .project-house .title h3 {
+        margin-right: 0
+    }
+
+    .project-house .btn {
+        display: none
+    }
+
+    .CTA-block {
+        padding-top: 30px
+    }
+
+    .CTA-img {
+        width: 100%;
+        padding: 0 0 20px
+    }
+
+    .CTA-img .img {
+        padding: 0
+    }
+
+    #CTA-img-right {
+        padding: 20px 0 0
+    }
+
+    .CTA-info {
+        width: 100%
+    }
+
+    .owner-img:last-child {
+        padding-bottom: 30px
+    }
+
+    .width1140 .contact-form {
+        padding-bottom: 30px
+    }
+
+    .news-pro-detail {
+        padding-bottom: 30px
+    }
+
+    .top-sell {
+        padding: 30px 0
+    }
+
+    .detail-more li {
+        width: 100%;
+        margin-right: 0
+    }
+
+    .owner-img + .owner-img {
+        padding-top: 30px
+    }
+
+    .content-detail {
+        padding-bottom: 30px
+    }
+
+    .news-pro-detail li {
+        width: 100%
+    }
+
+    .owner-img .title {
+        padding-top: 20px !important
+    }
+
+    .owner-img .left {
+        width: 100% !important;
+        padding: 0 !important
+    }
+
+    .owner-img .right {
+        width: 100% !important
+    }
+
+    .career-form, .contact-form .hs-form, .sub-career {
+        max-width: 100%
+    }
+
+    div.title-career-line > p {
+        max-width: 100%
+    }
+
+    .form-career-detail {
+        max-width: 100%
+    }
+
+    .right-content-sell-gray {
+        width: 100%;
+        padding: 20px 0
+    }
+
+    .right-content-sell {
+        width: 100%;
+        padding: 20px 0 0
+    }
+
+    .cover-left-sell {
+        width: 100%
+    }
+
+    .container-col {
+        height: 330px
+    }
+
+    .container-col-img-left {
+        width: 100%;
+        text-align: center
+    }
+
+    section.bg-career-gray div.contentpx div.career-img ul li {
+        width: 50%
+    }
+
+    .hsg-cta-gallery .hsg-cta-gallery__column {
+        width: 100% !important
+    }
+
+    section.bg-career-white div.content div.info div {
+        max-height: 251px
+    }
+
+    section.bg-career-white div.content div div div.pos {
+        float: left;
+        width: 33.33%;
+        text-align: left
+    }
+
+    .test-content div.detail ul li:first-child {
+        padding-top: 10px
+    }
+
+    .test-content + .test-content {
+        padding-top: 40px
+    }
+
+    .test-content {
+        width: 100%
+    }
+
+    section.bg-career-gray div.content div.career-right div {
+        width: 50%
+    }
+
+    .title_duan {
+        padding: 30px 0 20px !important;
+        font-size: 26px !important
+    }
+
+    .btn-down {
+        background: orange;
+        color: #fff;
+        padding: 2px;
+        border-radius: 2px;
+        text-align: center;
+        font-weight: 500;
+        text-transform: uppercase;
+        display: block;
+        font-size: 16px;
+        width: 170px;
+        margin-top: 10px
+    }
+
+    .team-member .member-detail {
+        width: 100%
+    }
+
+    .news-left {
+        width: 100%;
+        padding-bottom: 0
+    }
+
+    .news-right {
+        width: 100%;
+        padding: 0 10px 30px 10px
+    }
+
+    .house-detail div.img {
+        width: 100%
+    }
+
+    .house-detail div.name {
+        width: 100%;
+        padding: 10px 5px 10px 5px
+    }
+
+    .house-detail div.detail {
+        width: 50% !important;
+        padding: 10px 5px 5px 5px
+    }
+
+    .house-detail div.house-price {
+        width: 50%;
+        padding: 13px 5px 5px 0
+    }
+
+    section.news-bg div.width1140 div.news-right div.bg {
+        height: 100%;
+        padding: 10px 10px 30px 10px
     }
 
     section.header-career div.bg-career div.title {
@@ -3688,8 +3966,138 @@ li.whr-item .whr-info li.whr-date {
     }
 
     section.header-career div.bg-career div.sumary {
-        padding: 30px 50px 30px 50px
+        padding: 30px 20px;
+        line-height: 26px
     }
+
+    section.bg-career-white div.content div.info div.shape {
+        width: 100%
+    }
+
+    section.bg-career-white div.content div.info div.shape2 {
+        width: 100%
+    }
+
+    section.bg-career-white div.content div.info div.shape3 {
+        width: 100%
+    }
+
+    section.bg-career-white div.content div.info div.shape4 {
+        width: 100%
+    }
+
+    section.bg-career-white div.content div.info div.shape5 div.shape {
+        width: 24%
+    }
+
+    section.bg-career-white div.content div.info div.shape5 div.requirement-detail {
+        width: 76%
+    }
+
+    section.bg-career-white div.content div div.detail div.name {
+        width: 100%;
+        float: left;
+        padding-bottom: 10px
+    }
+
+    section.bg-career-white div.content div div.detail div.loc {
+        float: left;
+        width: 33.33%
+    }
+
+    section.bg-career-gray div.content div.our-dep-content div.col {
+        width: 100%;
+        padding: 0
+    }
+}
+
+@media only screen and (max-width: 630px) {
+    .whr-title {
+        width: 100%
+    }
+
+    li.whr-item .whr-info {
+        width: 100%;
+        padding: 0
+    }
+
+    li.whr-item .whr-info li {
+        float: left;
+        width: 50%;
+        text-align: left
+    }
+
+    .btn-down {
+        width: 100% !important;
+        margin-top: 10px !important
+    }
+
+    .house-detail div.img {
+        width: 100%;
+        height: 100%
+    }
+
+    .house-detail div.name {
+        width: 100%;
+        padding: 10px 5px 10px 5px
+    }
+
+    .house-detail div.detail {
+        width: 50%;
+        padding: 10px 5px 5px 5px
+    }
+
+    .house-detail div.house-price {
+        width: 50%;
+        padding: 13px 5px 5px 0
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .all-img-inner {
+        padding: 0 10px
+    }
+
+    .listing-item {
+        width: 100%
+    }
+
+    .post-news-form .hs-form-field label {
+        width: 30%
+    }
+
+    .post-news-form .hs-form-field .input {
+        width: 70%
+    }
+
+    .max-w70 {
+        max-width: 100% !important
+    }
+
+    .ward-down-icon {
+        left: 130px
+    }
+
+    .btn-down {
+        width: 100%;
+        margin-top: 15px
+    }
+
+    .house-detail div.name {
+        width: 25%;
+        padding-top: 30px
+    }
+
+    .house-detail div.detail {
+        width: 30% !important;
+        padding: 30px 10px
+    }
+
+    .house-detail div.house-price {
+        width: 25%;
+        padding-top: 33px
+    }
+
 }
 
 @media only screen and (max-width: 800px) {
@@ -4018,354 +4426,104 @@ li.whr-item .whr-info li.whr-date {
     }
 }
 
-@media only screen and (max-width: 720px) {
-    .all-img-inner {
-        padding: 0 10px
-    }
-
-    .max-width-946.contact .contact-detail .contact-info {
-        width: 100%;
-        padding: 60px
+@media only screen and (max-width: 979px) {
+    .relative-news .relative-news-right .featured header .sumary {
+        display: none
     }
 
     .listing-item {
-        width: 100%
+        width: calc(100% * 1 / 2 - 30px)
     }
 
-    .max-width-946.contact .contact-detail .contact-img {
-        display: none
+    .post-news-right div div.list-step ul li + li {
+        padding: 10px 10px
     }
 
-    .post-news-form .hs-form-field label {
-        width: 30%
+    .post-news-right div div.list-step ul li:first-child {
+        padding: 10px 0
     }
 
-    .post-news-form .hs-form-field .input {
-        width: 70%
-    }
-
-    .max-w70 {
-        max-width: 100% !important
-    }
-
-    .ward-down-icon {
-        left: 130px
-    }
-
-    .btn-down {
-        width: 100%;
-        margin-top: 15px
-    }
-
-    .house-detail div.name {
-        width: 25%;
-        padding-top: 30px
-    }
-
-    .house-detail div.detail {
-        width: 30% !important;
-        padding: 30px 10px
-    }
-
-    .house-detail div.house-price {
-        width: 25%;
-        padding-top: 33px
-    }
-
-}
-
-@media only screen and (max-width: 600px) {
-    .project-house .img {
-        vertical-align: top
-    }
-
-    .max-width-946.contact .contact-detail .contact-info header {
-        font-size: 26px
-    }
-
-    .main-content .view-more-gray.more {
-        margin-top: 10px;
-        border: 1px solid #ccc;
-        background: 0 0;
-        display: block
-    }
-
-    .main-content .view-more-gray.more a {
-        text-decoration: none
-    }
-
-    #cta-title {
-        padding-top: 20px
-    }
-
-    .project-house {
-        padding-top: 20px;
-        padding-bottom: 20px
-    }
-
-    .project-house .img {
-        width: 30%;
-        height: auto
-    }
-
-    .project-house .img .cover {
-        width: 100%;
-        min-height: 100px;
-        height: auto
-    }
-
-    .project-house .img .cover img {
-        width: 90%
-    }
-
-    .project-house .area-m2, .project-house .price-m2, .project-house .room, .project-house .title {
-        width: 100%;
-        float: right;
-        padding: 0 0 0 10px
-    }
-
-    .project-house .title h3 {
-        margin-right: 0
-    }
-
-    .project-house .btn {
-        display: none
-    }
-
-    .max-width-946.contact .contact-detail .contact-info {
-        padding: 30px
-    }
-
-    .max-width-946.contact {
-        padding-top: 30px;
-        padding-bottom: 30px
-    }
-
-    .max-width-946.contact .contact-detail .contact-info p {
-        padding: 20px 0
-    }
-
-    .relative-news .relative-news-left {
-        display: block;
-        width: 100%;
-        margin: 0
-    }
-
-    .relative-news .relative-news-right {
-        width: 100%;
-        margin-right: 0
-    }
-
-    .relative-news .relative-news-right .featured:first-child {
-        padding-top: 20px;
-        border-top: 1px dotted #ccc
-    }
-
-    .relative-news .featured .time {
-        font-size: 16px;
-        margin-right: 5%
-    }
-
-    .CTA-block {
-        padding-top: 30px
-    }
-
-    .CTA-img {
-        width: 100%;
-        padding: 0 0 20px
-    }
-
-    .CTA-img .img {
-        padding: 0
-    }
-
-    #CTA-img-right {
-        padding: 20px 0 0
-    }
-
-    .CTA-info {
-        width: 100%
-    }
-
-    .owner-img:last-child {
-        padding-bottom: 30px
-    }
-
-    .width1140 .contact-form {
-        padding-bottom: 30px
-    }
-
-    .news-pro-detail {
-        padding-bottom: 30px
-    }
-
-    .bg-neiberhood-overlay {
-        padding-bottom: 30px
-    }
-
-    .tittle-neiberhood {
-        font-size: 26px;
-        padding: 30px 0 20px
-    }
-
-    .top-sell {
-        padding: 30px 0
-    }
-
-    .detail-more li {
-        width: 100%;
-        margin-right: 0
-    }
-
-    .owner-img + .owner-img {
-        padding-top: 30px
-    }
-
-    .content-detail {
-        padding-bottom: 30px
-    }
-
-    .news-pro-detail li {
-        width: 100%
-    }
-
-    .owner-img .title {
-        padding-top: 20px !important
-    }
-
-    .owner-img .left {
-        width: 100% !important;
-        padding: 0 !important
-    }
-
-    .owner-img .right {
-        width: 100% !important
-    }
-
-    .career-form, .contact-form .hs-form, .sub-career {
-        max-width: 100%
-    }
-
-    div.title-career-line > p {
-        max-width: 100%
-    }
-
-    .form-career-detail {
-        max-width: 100%
-    }
-
-    .right-content-sell-gray {
-        width: 100%;
-        padding: 20px 0
-    }
-
-    .right-content-sell {
-        width: 100%;
-        padding: 20px 0 0
-    }
-
-    .cover-left-sell {
-        width: 100%
-    }
-
-    .container-col {
-        height: 330px
-    }
-
-    .container-col-img-left {
+    .post-news-right div div.list-step {
         width: 100%;
         text-align: center
     }
 
-    section.bg-career-gray div.contentpx div.career-img ul li {
-        width: 50%
+    .post-news-right div div.list-number div {
+        margin: 0 auto
     }
 
-    .hsg-cta-gallery .hsg-cta-gallery__column {
-        width: 100% !important
-    }
-
-    section.bg-career-white div.content div.info div {
-        max-height: 251px
-    }
-
-    section.bg-career-white div.content div div div.pos {
-        float: left;
-        width: 33.33%;
-        text-align: left
-    }
-
-    .test-content div.detail ul li:first-child {
-        padding-top: 10px
-    }
-
-    .test-content + .test-content {
-        padding-top: 40px
-    }
-
-    .test-content {
-        width: 100%
-    }
-
-    section.bg-career-gray div.content div.career-right div {
-        width: 50%
-    }
-
-    .title_duan {
-        padding: 30px 0 20px !important;
-        font-size: 26px !important
-    }
-
-    .btn-down {
-        background: orange;
-        color: #fff;
-        padding: 2px;
-        border-radius: 2px;
-        text-align: center;
-        font-weight: 500;
-        text-transform: uppercase;
-        display: block;
-        font-size: 16px;
-        width: 170px;
-        margin-top: 10px
-    }
-
-    .team-member .member-detail {
-        width: 100%
-    }
-
-    .news-left {
+    .post-news-right div div.list-number {
         width: 100%;
-        padding-bottom: 0
+        padding: 0
     }
 
-    .news-right {
-        width: 100%;
-        padding: 0 10px 30px 10px
+    .post-news-right div.list {
+        height: 160px
     }
 
-    .house-detail div.img {
-        width: 100%
+    section div header div div ul.detail-info-col li {
+        display: inline-block
+    }
+
+    section.news-bg div.width1140 div.news-left header {
+        line-height: 40px
+    }
+
+    section.news-bg div.width1140 div.news-right div.bg div.text {
+        padding: 0
+    }
+
+    .lch-content-detail {
+        width: 46%
+    }
+
+    .tienich-icon {
+        padding: 0 10px 0 10px
+    }
+
+    section.background-gray div.width1140 div ul.icon {
+        margin-right: 17px
+    }
+
+    .ower-more {
+        padding: 0 0 0 240px
+    }
+
+    .btn-quyhoach {
+        width: 38%
+    }
+
+    .houde-detail div.img {
+        width: 20%
     }
 
     .house-detail div.name {
-        width: 100%;
-        padding: 10px 5px 10px 5px
-    }
-
-    .house-detail div.detail {
-        width: 50% !important;
-        padding: 10px 5px 5px 5px
+        width: 25%
     }
 
     .house-detail div.house-price {
-        width: 50%;
-        padding: 13px 5px 5px 0
+        width: 25%;
+        padding-top: 43px
     }
 
-    section.news-bg div.width1140 div.news-right div.bg {
-        height: 100%;
-        padding: 10px 10px 30px 10px
+    .house-detail div.detail {
+        width: 30%
+    }
+
+    .team-member .member-detail header {
+        padding: 20px 0 0 20px
+    }
+
+    section div.width1140 section.bg-white div.team-member div.member-detail header p {
+        padding-top: 7px
+    }
+
+    .member-detail ul {
+        padding-top: 7px
+    }
+
+    div.team-member div.member-detail header.content {
+        padding: 27px 5px 20px 10px
     }
 
     section.header-career div.bg-career div.title {
@@ -4373,755 +4531,114 @@ li.whr-item .whr-info li.whr-date {
     }
 
     section.header-career div.bg-career div.sumary {
-        padding: 30px 20px;
-        line-height: 26px
-    }
-
-    section.bg-career-white div.content div.info div.shape {
-        width: 100%
-    }
-
-    section.bg-career-white div.content div.info div.shape2 {
-        width: 100%
-    }
-
-    section.bg-career-white div.content div.info div.shape3 {
-        width: 100%
-    }
-
-    section.bg-career-white div.content div.info div.shape4 {
-        width: 100%
-    }
-
-    section.bg-career-white div.content div.info div.shape5 div.shape {
-        width: 24%
-    }
-
-    section.bg-career-white div.content div.info div.shape5 div.requirement-detail {
-        width: 76%
-    }
-
-    section.bg-career-white div.content div div.detail div.name {
-        width: 100%;
-        float: left;
-        padding-bottom: 10px
-    }
-
-    section.bg-career-white div.content div div.detail div.loc {
-        float: left;
-        width: 33.33%
-    }
-
-    section.bg-career-gray div.content div.our-dep-content div.col {
-        width: 100%;
-        padding: 0
+        padding: 30px 50px 30px 50px
     }
 }
 
-@media only screen and (max-width: 630px) {
-    .whr-title {
+@media only screen and (max-width: 1080px) {
+    .listing-detail {
         width: 100%
     }
 
-    li.whr-item .whr-info {
-        width: 100%;
-        padding: 0
+    .popup-lch-img {
+        width: 60%
     }
 
-    li.whr-item .whr-info li {
-        float: left;
-        width: 50%;
-        text-align: left
+    .popup-lch .bg-e1e2e6, .popup-lch .popup-header, .popup-lch-detail {
+        width: 40%
     }
 
-    .btn-down {
-        width: 100% !important;
-        margin-top: 10px !important
+    .all-img-inner {
+        padding: 0 15px
     }
 
-    .house-detail div.img {
-        width: 100%;
-        height: 100%
+    .popup-sketup .image-sketch {
+        width: 65%
     }
 
-    .house-detail div.name {
-        width: 100%;
-        padding: 10px 5px 10px 5px
+    .info-sticky-header {
+        overflow: hidden;
+        border-left: 0;
+        padding-left: 0;
+        white-space: nowrap
     }
 
-    .house-detail div.detail {
-        width: 50%;
-        padding: 10px 5px 5px 5px
+    .container {
+        padding: 0 10px
     }
 
-    .house-detail div.house-price {
-        width: 50%;
-        padding: 13px 5px 5px 0
-    }
-}
-
-@media only screen and (max-width: 530px) {
-    .btn-down-neiberhood {
-        padding-top: 10px
+    .test-content div.cover {
+        margin: 0 auto;
+        float: none
     }
 
-    .btn-down-neiberhood .red-bnt {
-        height: 60px
-    }
-
-    .btn-black-border .btn-hotline {
-        border: none !important;
-        line-height: 24px;
-        text-decoration: underline;
-        cursor: pointer;
-        text-align: left;
-        padding-left: 90px !important
-    }
-
-    .btn-black-border .btn-hotline img {
-        display: block
-    }
-
-    .contact-form .hs-richtext > p {
-        max-width: 100%
-    }
-
-    section.news-bg div.width1140 div.news-right div.bg div.img img {
-        width: 80%;
-        height: 80%
-    }
-
-    .btn-down {
-        width: 100% !important
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .social-content .follow-button span {
-        display: none
-    }
-
-    .social-share {
-        width: 20%;
-        display: block
-    }
-
-    .relative-news .featured header .title {
-        font-weight: 300
-    }
-
-    .all-img {
-        bottom: 20px
-    }
-
-    .relative-news .relative-news-left .featured .time {
-        display: block
-    }
-
-    .relative-news .featured header .sumary, .relative-news .relative-news-left .featured a .cover {
-        display: none !important
-    }
-
-    .relative-news .featured header .title {
-        font-size: 18px !important
-    }
-
-    .relative-news .relative-news-left {
-        padding: 0 0 20px
-    }
-
-    .relative-news .relative-news-left .featured header {
-        padding: 0
-    }
-
-    .popup-lch .bg-e1e2e6.popup-header {
-        display: none
-    }
-
-    .form-contact .hs-form-field:nth-child(3) label {
-        margin: 0
-    }
-
-    .popup-contact {
-        max-width: 100%;
-        position: initial;
-        transform: translate(0, 0);
-        margin: 0;
-        height: 100%
-    }
-
-    .popup-contact .form-contact {
-        border: none;
-        min-height: 100%
-    }
-
-    .popup-contact .form-contact .contact {
-        padding-top: 50px;
-        height: 100%
-    }
-
-    .popup-contact .header {
-        display: none
-    }
-
-    #slider8 .slides .title {
-        width: 100%;
-        bottom: 25%;
-        top: inherit
-    }
-
-    #slider8 .slides .title .name-img {
-        width: 100%;
+    .test-content {
         text-align: center
     }
 
-    #slider8 .slides .title .number {
-        display: none
-    }
-
-    .title.title-res {
-        display: block;
-        position: fixed;
-        padding: 15px;
-        background: #f2f2f2;
-        font-size: 18px;
+    .test-content div.detail {
         width: 100%;
-        z-index: 100;
-        font-weight: 500;
-        overflow: hidden;
-        top: 0
-    }
-
-    .popup-lch {
-        max-width: 100%;
-        transform: translate(0, 7%);
-        position: initial;
-        margin: 0 !important;
-        min-height: 100%
-    }
-
-    .popup-overlay .full-screen-act.close {
-        display: none
-    }
-
-    .listing-img, .project-slider {
-        height: 300px
-    }
-
-    .max-width-946.contact .contact-detail .contact-info header {
-        font-size: 22px;
-        line-height: 32px
-    }
-
-    .contentpx .title-career {
-        padding: 30px 0
-    }
-
-    .contentpx .title-career, .title_duan, .tittle-neiberhood {
-        font-size: 22px !important;
-        line-height: 26px
-    }
-
-    .max-width-946 .title-28, .width1140 > h2, .width1140 > h3 {
-        font-size: 22px !important
-    }
-
-    .owner-img .more-info {
-        display: block;
-        padding-top: 20px
-    }
-
-    .list-prop .article div.title h3 {
-        padding: 0
-    }
-
-    .list-prop .article div.action a {
-        margin: 0 10px 0 0
-    }
-
-    .hs-form fieldset.form-columns-2 .hs-form-field {
-        width: 100% !important
-    }
-
-    .hs-form fieldset.form-columns-2 .input {
-        margin: 0
-    }
-
-    .contact-form .hs-form-field:nth-child(3) input, .contact-form .hs-form-field:nth-child(3) label span, .hs-error-msgs {
-        margin: 0
-    }
-
-    .contact-form .hs-form-field div.input {
-        padding: 5px 0 5px
-    }
-
-    .container-col {
-        height: 220px
-    }
-
-    .ward-filter {
-        height: 40px
-    }
-
-    .post-news-right div.list {
-        width: 100%
-    }
-
-    .popup-ward-visible {
-        display: none !important
-    }
-
-    .whr-title {
-        width: 100%;
-        float: left
-    }
-
-    li.whr-item .whr-info {
-        float: left;
-        width: 100%;
-        padding: 0
-    }
-
-    li.whr-item .whr-info li {
-        float: left;
-        width: 50%;
-        text-align: left;
         padding-top: 10px
     }
 
-    section.bg-career-white div.content div div.detail div.btn-app {
-        width: 33.33%
+    .btn-quyhoach {
+        width: 33%
     }
 
-    section.bg-career-white div.content div div.detail div.loc {
-        width: 33.33%
+    section.background-gray div.width1140 div.owner-img div.left img {
+        width: 100%
     }
 
-    section.bg-career-white div.content div div div.pos {
-        width: 33.33%
+    .ower-more {
+        display: block;
+        clear: both;
+        padding: 0 0 0 345px
     }
 
-    section.bg-career-gray div.content div.career-right div {
+    .hinhanh-content {
         width: 100%
     }
 
     .lch-content {
-        width: 100%
-    }
-
-    .news-left {
         width: 100%;
-        padding-bottom: 0
+        padding: 0 30px 0 30px
     }
 
-    .news-right {
+    section.news-bg div.width1140 div.news-right div.bg {
+        height: 490px
+    }
+
+    section.news-bg div.width1140 div.news-right div.bg div.img {
         width: 100%;
-        padding: 60px 30px 60px 30px
+        text-align: center
     }
 
-    .btn-lienhe {
-        width: 205px;
-        padding-right: 75px !important;
-        margin-bottom: 10px !important
-    }
-
-    .btn-quantam {
-        width: 205px;
-        padding-right: 75px !important
-    }
-
-    .width1140 .owner-img .left {
+    section.news-bg div.width1140 div.news-right div.bg div.text {
         width: 100%;
-        padding-bottom: 20px
+        padding: 0 0 0 60px
     }
 
-    .width1140 .owner-img .right {
-        width: 100%;
-        padding-top: 0
-    }
-
-    .house-detail div.img {
-        width: 100%
+    section div section article.lch-content-detail a img {
+        width: 460px !important;
+        height: 350px !important
     }
 
     .house-detail div.name {
-        width: 100%
-    }
-
-    .house-detail div.detail {
-        width: 50%
-    }
-
-    .house-detail div.house-price {
-        width: 50%
-    }
-
-    .btn-quyhoach {
-        width: 60%
-    }
-
-    div.team-member div.member-detail header.content {
-        padding: 20px 5px 20px 10px !important
-    }
-
-    section.header-career div.bg-career div.title {
-        padding-top: 80px
-    }
-
-    section.header-career div.bg-career div.sumary {
-        padding: 20px 10px
-    }
-
-    section.bg-career-white div.content div.info div {
-        width: 100%
-    }
-
-    .CTA-info .cta-title {
-        font-size: 22px
-    }
-}
-
-@media only screen and (max-width: 375px) {
-    .right-content-sell {
-        padding: 20px 0 0
-    }
-
-    .btn-black-border {
-        padding: 30px 10px 60px
-    }
-
-    form.hs-form .form-columns-2 .hs-form-field .hs-input, form.hs-form .form-columns-3 .hs-form-field .hs-input {
-        width: 100%
-    }
-
-    .contact-form .hs-form-field div.input {
-        margin: 0
-    }
-
-    .contact-form .hs-form-field:nth-child(3) input, .contact-form .hs-form-field:nth-child(3) label span, .hs-error-msgs {
-        margin: 0
-    }
-
-    .form-contact {
-        width: 100%;
-        padding: 0
-    }
-
-    ul.max-w70 li:last-child {
-        padding: 0
-    }
-
-    .form-contact-project, div.form-captcha div.captcha {
-        width: 100%;
-        padding: 0
-    }
-
-    li.whr-item .whr-info li {
-        width: 100%
-    }
-
-    section.header-career div.bg-career div.title {
-        padding-top: 50px;
-        line-height: 45px
-    }
-
-    .btn-sticky-header .red-bnt {
-        font-size: 13px !important
-    }
-
-    .detail-info-col li {
-        width: 100%
-    }
-
-    .btn-lienhe {
-        width: 90px;
-        padding: 8px 18px 0 0 !important
-    }
-
-    .btn-down {
-        width: 240px;
-        margin-top: 10px
-    }
-
-    section.background-gray div.width1140 div ul.icon {
-        width: 44%;
-        padding: 0 0 20px 0
-    }
-
-    .btn-quyhoach {
-        width: 64%
-    }
-
-    .house-detail div.img {
-        width: 100%
-    }
-
-    .house-detail div.name {
-        width: 100%
-    }
-
-    .house-detail div.detail {
-        width: 100% !important
-    }
-
-    .house-detail div.house-price {
-        width: 100%;
-        padding-left: 5px
-    }
-
-    section.bg-white div.team-member div.member-detail {
-        width: 100%
-    }
-
-    div.team-member div.member-detail header.content {
-        height: 120px;
-        padding: 5px !important
-    }
-
-    section div.width1140 section.bg-white div.team-member div.member-detail header p {
-        padding-top: 2px
-    }
-
-    .member-detail ul {
-        padding: 1px 0
-    }
-}
-
-@media only screen and (max-width: 360px) {
-    .btn-quantam {
-        width: 95px;
-        padding: 8px 9px 0 0 !important
-    }
-
-    .btn-down {
-        width: 215px
-    }
-
-    .house-detail div.img {
-        width: 100%
-    }
-
-    .house-detail div.name {
-        width: 100%
-    }
-
-    .house-detail div.detail {
-        width: 100% !important
-    }
-
-    .house-detail div.house-price {
-        width: 100%
-    }
-
-    .team-member .member-detail header {
-        padding: 10px 5px !important
-    }
-
-    section div.width1140 section.bg-white div.team-member div.member-detail header p {
-        padding-top: 5px !important
-    }
-
-    .member-detail ul {
-        padding-top: 5px !important
-    }
-
-    section.header-career div.bg-career div.title {
-        padding-top: 30px
-    }
-
-    section.header-career div.bg-career div.sumary {
-        padding-top: 10px
-    }
-}
-
-@media only screen and (max-width: 320px) {
-    .listing-img, .project-slider {
-        height: 250px
-    }
-
-    .btn-sticky-header .red-bnt {
-        min-width: 145px;
-        font-size: 12px !important
-    }
-
-    .container-col {
-        height: 185px
-    }
-
-    .bg-career-white .btn-app {
-        width: 100% !important;
-        float: left !important;
-        margin-top: 8px
-    }
-
-    section.bg-career-white div.content div div.detail div.name {
-        padding-bottom: 0
-    }
-
-    section.bg-career-white div.content div div.detail div.loc {
-        width: 100%
-    }
-
-    section.bg-career-white div.content div div div.pos {
-        width: 100%
-    }
-
-    .btn-lienhe {
-        width: 120px;
-        padding-right: 30px !important
-    }
-
-    .btn-quantam {
-        width: 120px;
-        padding-right: 22px !important
-    }
-
-    .detail-info-col {
-        width: 100%;
-        font-size: 16px;
-        line-height: 30px
-    }
-
-    .news-left {
-        padding: 30px 10px 30px 10px
-    }
-
-    .news-right {
-        padding: 30px 10px 30px 10px
-    }
-
-    .btn-down {
-        width: 100%
-    }
-
-    section.background-gray div.width1140 div ul.icon {
-        width: 43%
-    }
-
-}
-
-@media only screen and (max-width: 1080px) {
-    .listing-detail-price {
-        width: 50%
-    }
-}
-
-@media only screen and (max-width: 720px) {
-    .listing-detail-price {
-        width: 100%
-    }
-
-    .listing-detail-price span {
-        width: calc(70% - 10px)
-    }
-
-    .listing-detail-price span:nth-of-type(2n+1) {
         width: 30%
     }
-}
 
-.width-1600 .right-menu ul li a.dropdown-link:hover {
-    color: #30333a
-}
+    .house-detail div.detail {
+        width: 25%
+    }
 
-.btn {
-    line-height: 1em;
-}
-
-.responsive-filter {
-    z-index: 99999;
-}
-
-@media only screen and (max-width: 979px) {
-    .search-map {
-        width: inherit !important;
+    .house-detail div.house-price {
+        width: 25%;
+        padding-top: 43px
     }
 }
 
-#container-id,
-.search-container,
-.active-map {
-    /*z-index: 99999;*/
-}
-
-.close-map .zmdi-hc-3x {
-    font-size: 30px !important;
-}
-
-
-.info-project {
-    line-height: 20px;
-}
-
-section.result article.featured header .name-title p {
-    padding-top: 3px;
-}
-
-.searchlisting section.exclusive article.featured header .address {
-    width: 100%;
-    float: left;
-    margin-top: -4px;
-    font-size: 11px;
-    padding-top: 5px;
-}
-
-.background-gray {
-    background: #f4f5f9;
-    width: 100%
-}
-
-.background-gray:after {
-    clear: both;
-    display: table;
-    content: ''
-}
-
-.background-gray .width1140 h5 {
-    font-size: 28px;
-    text-align: center;
-    padding: 50px 0;
-    text-transform: uppercase
-}
-
-.background-gray-sell {
-    background: #f4f5f9;
-    width: 100%;
-    padding: 30px 0
-}
-
-input, textarea, keygen, select, button {
-    text-rendering: auto;
-    color: initial;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    margin: 0;
-    font-family: 'harmonia', Arial, Helvetica, sans-serif
-}
-
-textarea:focus, button:focus, input:focus {
-    outline: none
-}
-
-textarea:focus, input:focus {
-    border: 1px solid rgba(131, 131, 131, 1) !important
-}
-
-.search-result {
-    height: 100%
-}
-
-.search-result .result {
-    margin-bottom: 30px
-}
-
-#wrap {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    background: #fff
+@media screen and (min-width: 1920px) {
+    .listing-img {
+        height: 420px
+    }
 }

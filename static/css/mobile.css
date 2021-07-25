@@ -147,7 +147,7 @@
         top: 0
     }
 
-    .list-view section.result article header a h3 {
+    .list-view article header a h3 {
         display: block;
         overflow: hidden;
         max-height: 55px
@@ -163,7 +163,7 @@
         height: 226px
     }
 
-    .full-width > div > section.result article.featured .cover {
+    .full-width > div > article.featured .cover {
         height: 226px
     }
 
@@ -208,7 +208,7 @@
         display: none
     }
 
-    .article-news article.featured .cover {
+    article.featured .cover {
         height: 220px
     }
 
@@ -242,7 +242,7 @@
         width: 50%
     }
 
-    section.exclusive article.featured .cover img {
+    article.featured .cover img {
         width: 100%
     }
 
@@ -285,7 +285,7 @@
         background: #fff
     }
 
-    section.exclusive article.featured .cover {
+    article.featured .cover {
         height: 226px
     }
 
@@ -432,7 +432,7 @@
         height: 68px
     }
 
-    .searchlisting section.exclusive article.featured:nth-child(3n+3) {
+    .searchlisting article.featured:nth-child(3n+3) {
         margin-right: 0
     }
 
@@ -596,12 +596,12 @@
         padding-right: 20px
     }
 
-    .left-content-news section.exclusive article.featured .cover {
+    .left-content-news article.featured .cover {
         width: 100%;
         height: auto
     }
 
-    .left-content-news section.exclusive article.featured header {
+    .left-content-news article.featured header {
         width: 100%;
         padding: 20px 0 0 0
     }
@@ -652,7 +652,7 @@
         padding-top: 60px
     }
 
-    .full-width > div > section.result article.featured {
+    .full-width > div > article.featured {
         width: calc(50% - 30px) !important;
         margin: 30px 30px 0 0 !important;
         float: left;
@@ -710,14 +710,6 @@
         width: 100%;
         height: 50px;
         padding: 7px 15px
-    }
-
-    .responsive-filter .popup {
-        padding: 15px
-    }
-
-    .responsive-filter .different {
-        padding: 0 !important
     }
 
     .left-content {
@@ -792,7 +784,7 @@
         padding: 20px 0 !important
     }
 
-    section.exclusive article.featured .cover {
+    article.featured .cover {
         height: 200px
     }
 
@@ -858,7 +850,7 @@
         padding-bottom: 0
     }
 
-    section.exclusive article.featured:nth-child(3n+3) {
+    article.featured:nth-child(3n+3) {
         margin-right: 0
     }
 
@@ -918,19 +910,19 @@
         line-height: 26px
     }
 
-    .article-news .time span {
+    .time span {
         display: none
     }
 
-    .article-news .time span:nth-child(1) {
+    .time span:nth-child(1) {
         display: block
     }
 
-    .article-news article.featured .cover {
+    article.featured .cover {
         height: 160px
     }
 
-    .article-news article.featured header h3 a {
+    article.featured header h3 a {
         line-height: 26px
     }
 
@@ -943,7 +935,7 @@
         display: none
     }
 
-    section.exclusive article.featured .cover {
+    article.featured .cover {
         height: 380px
     }
 
@@ -967,12 +959,12 @@
         padding-bottom: 50px
     }
 
-    section.exclusive article.featured {
+    article.featured {
         width: 100%;
         margin: 15px 0 0
     }
 
-    section.exclusive article.featured:nth-child(2), section.exclusive article.featured:nth-child(3) {
+    article.featured:nth-child(2), article.featured:nth-child(3) {
         margin-top: 15px
     }
 
@@ -1016,16 +1008,16 @@
         padding-right: 0
     }
 
-    .left-content-news section.exclusive article.featured {
+    .left-content-news article.featured {
         max-width: 460px
     }
 
-    .left-content-news section.exclusive article.featured .cover {
+    .left-content-news article.featured .cover {
         width: 100%;
         height: auto
     }
 
-    .left-content-news section.exclusive article.featured header {
+    .left-content-news article.featured header {
         width: 100%;
         padding: 20px 0 0 0
     }
@@ -1049,7 +1041,7 @@
         width: 320px
     }
 
-    .searchlisting section.exclusive article.featured {
+    .searchlisting article.featured {
         margin: 0
     }
 }
@@ -1153,24 +1145,6 @@
         margin: 0 auto !important
     }
 
-    .listing-detail-price {
-        text-align: left;
-        float: left;
-        width: 100%
-    }
-
-    .listing-detail-price span {
-        display: block;
-        width: calc(70% - 10px);
-        float: left
-    }
-
-    .listing-detail-price span:nth-of-type(2n+1) {
-        width: 30%;
-        display: inline-block;
-        margin-right: 10px
-    }
-
     .price-redRV span:first-child {
         width: auto;
         display: inline-block;
@@ -1217,11 +1191,11 @@
         display: block
     }
 
-    section.result article.featured header ul li .zmdi {
+    article.featured header ul li .zmdi {
         color: #30333a
     }
 
-    section.result article.featured header h3 {
+    article.featured header h3 {
         padding: 6px 0 0
     }
 
@@ -1239,7 +1213,7 @@
         line-height: 20px
     }
 
-    .searchlisting section.exclusive article.featured header h2 {
+    .searchlisting article.featured header h2 {
         font-size: 12px;
         padding: 0;
         max-height: 30px;
@@ -1475,22 +1449,22 @@
         font-size: 15px
     }
 
-    .list-view section.result article.featured .cover {
+    .list-view article.featured .cover {
         width: 113px;
         height: 75px;
         margin: 15px 0
     }
 
-    .list-view section.result article.featured header {
+    .list-view article.featured header {
         padding: 12px 0 10px 15px;
         width: calc(100% - 113px)
     }
 
-    .list-view section.result article header a {
+    .list-view article header a {
         width: 100%
     }
 
-    .list-view section.result article header a h3 {
+    .list-view article header a h3 {
         width: 100%;
         max-height: 44px;
         margin-bottom: 0
@@ -1500,7 +1474,7 @@
         display: none
     }
 
-    .list-view section.result .action-list {
+    .list-view .action-list {
         display: none
     }
 
@@ -1519,20 +1493,20 @@
         color: #fff
     }
 
-    .list-view section.result article.featured {
+    .list-view article.featured {
         padding: 0 15px;
         border: 0
     }
 
-    .list-view section.result article.featured header ul li {
+    .list-view article.featured header ul li {
         display: none
     }
 
-    .list-view section.result article.featured header ul li:first-child {
+    .list-view article.featured header ul li:first-child {
         display: inline-block
     }
 
-    .list-view section.result article.featured header ul li:nth-child(3) {
+    .list-view article.featured header ul li:nth-child(3) {
         display: inline-block
     }
 
@@ -1627,7 +1601,7 @@
         background: #fff
     }
 
-    .list-view section.result {
+    .list-view {
         margin-top: 0
     }
 
@@ -1806,59 +1780,59 @@
         z-index: 220
     }
 
-    .article-news li {
+    li {
         width: 100%;
         border-right: 0;
         border-left: 2px solid #e6e6e6
     }
 
-    .article-news li:nth-child(2n) {
+    li:nth-child(2n) {
         width: 100%;
         border-left: 2px solid #e6e6e6;
         margin-top: 0;
         padding-top: 80px
     }
 
-    .article-news li:nth-child(2n) article.featured {
+    li:nth-child(2n) article.featured {
         width: 95%;
         margin-left: 5%
     }
 
-    .article-news li article.featured {
+    li article.featured {
         margin-left: 5%;
         width: 95%
     }
 
-    .article-news .time {
+    .time {
         left: -6%;
         text-align: left;
         padding-left: 25px
     }
 
-    .article-news .time:after {
+    .time:after {
         left: -9px;
         right: auto
     }
 
-    .article-news li:nth-child(2n) article.featured .time {
+    li:nth-child(2n) article.featured .time {
         left: -6%;
         padding-left: 25px
     }
 
-    .article-news article.featured .cover {
+    article.featured .cover {
         height: 250px
     }
 
-    .article-news article.featured header {
+    article.featured header {
         padding: 20px
     }
 
-    .article-news {
+    {
         margin-top: 0;
         padding-top: 0
     }
 
-    section.result article.featured header {
+    article.featured header {
         float: left;
         width: calc(100% - 117px);
         padding: 0 0 0 15px;
@@ -1878,13 +1852,13 @@
         width: 100%
     }
 
-    section.result article.featured {
+    article.featured {
         margin: 0;
         width: 100%;
         padding: 15px
     }
 
-    section.result article.featured:nth-child(2n) {
+    article.featured:nth-child(2n) {
         background: #f3f4f7
     }
 
@@ -1904,27 +1878,27 @@
         display: none
     }
 
-    section.result article.featured header h3 {
+    article.featured header h3 {
         padding-top: 0;
         font-size: 14px;
         line-height: 20px;
         height: auto
     }
 
-    section.result article.featured header h4 {
+    article.featured header h4 {
         font-size: 12px;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden
     }
 
-    section.result article.featured header ul li {
+    article.featured header ul li {
         padding: 0;
         font-size: 12px;
         color: grey
     }
 
-    section.result article.featured .price {
+    article.featured .price {
         bottom: 0;
         right: 0;
         font-size: 14px
@@ -2038,7 +2012,7 @@
         margin-right: 0
     }
 
-    section.exclusive article.kdc-new {
+    article.kdc-new {
         position: relative
     }
 
@@ -2149,10 +2123,6 @@
     .info-duan {
         width: 100%;
         padding: 20px
-    }
-
-    .responsive-filter .popup {
-        display: block !important
     }
 
     .language {
@@ -2345,7 +2315,7 @@
         color: #fff !important
     }
 
-    section.exclusive article.featured .cover {
+    article.featured .cover {
         height: 256px
     }
 
@@ -2446,24 +2416,24 @@
         margin-left: 0
     }
 
-    .list-search02 section.exclusive article.featured .cover {
+    .list-search02 article.featured .cover {
         width: 100%;
         height: 220px
     }
 
-    .list-search02 section.exclusive article.featured header {
+    .list-search02 article.featured header {
         width: 100%
     }
 
-    .list-search02 section.exclusive article.featured header .price p {
+    .list-search02 article.featured header .price p {
         text-align: left
     }
 
-    .list-search02 section.exclusive article.featured header ul {
+    .list-search02 article.featured header ul {
         padding: 0
     }
 
-    .list-search02 section.exclusive article.featured header ul li {
+    .list-search02 article.featured header ul li {
         padding: 0
     }
 
@@ -2507,7 +2477,7 @@
         position: static
     }
 
-    section.exclusive article.featured:nth-child(3n+3) {
+    article.featured:nth-child(3n+3) {
         margin-right: 0
     }
 
@@ -2645,7 +2615,7 @@
         margin: 0 auto
     }
 
-    section.result article.featured .cover {
+    article.featured .cover {
         height: 75px;
         float: left;
         width: 113px
@@ -2754,10 +2724,6 @@
 
     .fix-widthcell .naviicon li a {
         padding: 5px 0
-    }
-
-    .fullscreen-slide .flexslider .slides img {
-        width: 100%
     }
 
     .reverland {
@@ -3116,16 +3082,16 @@
         margin: 0 auto
     }
 
-    .left-content-news section.exclusive article.featured {
+    .left-content-news article.featured {
         padding: 0 0 20px 0
     }
 
-    .left-content-news section.exclusive article.featured .cover {
+    .left-content-news article.featured .cover {
         width: 100%;
         height: auto
     }
 
-    .left-content-news section.exclusive article.featured header {
+    .left-content-news article.featured header {
         width: 100%;
         padding: 20px 0 0 0
     }
@@ -3192,11 +3158,11 @@
         padding: 0 15px
     }
 
-    section.exclusive article.kdc-new:nth-child(1) {
+    article.kdc-new:nth-child(1) {
         margin-top: 5px
     }
 
-    section.exclusive article.kdc-new {
+    article.kdc-new {
         margin-right: 15px !important;
         margin-left: 15px !important
     }
@@ -3216,7 +3182,7 @@
         padding-top: 0
     }
 
-    .searchlisting section.exclusive article.featured header .price {
+    .searchlisting article.featured header .price {
         position: static
     }
 
@@ -3224,19 +3190,19 @@
         width: 300px
     }
 
-    .searchlisting section.exclusive article.featured header ul {
+    .searchlisting article.featured header ul {
         display: none
     }
 
-    section.exclusive article.featured .cover {
+    article.featured .cover {
         height: 230px
     }
 
-    .article-news article.featured .cover {
+    article.featured .cover {
         height: 200px
     }
 
-    .article-news article.featured header {
+    article.featured header {
         padding: 15px
     }
 
@@ -3331,11 +3297,11 @@
         width: 100%
     }
 
-    .left-content-news section.exclusive article.featured .cover {
+    .left-content-news article.featured .cover {
         height: 220px
     }
 
-    section.exclusive article.featured {
+    article.featured {
         width: 100%;
         margin-right: 0 !important
     }
@@ -3395,7 +3361,7 @@
         display: none
     }
 
-    section.exclusive article.kdc-new {
+    article.kdc-new {
         margin-right: 15px !important;
         margin-left: 15px !important
     }
@@ -3445,7 +3411,7 @@
         font-size: 12px
     }
 
-    section.exclusive article.featured {
+    article.featured {
         width: 100%;
         margin-right: 0 !important
     }
@@ -3504,11 +3470,11 @@
         font-size: 14px
     }
 
-    section.exclusive article.featured .cover {
+    article.featured .cover {
         height: 193px
     }
 
-    section.exclusive article.kdc-new {
+    article.kdc-new {
         position: relative;
         height: 193px
     }
@@ -3612,7 +3578,7 @@
         margin: 0 15px
     }
 
-    section.exclusive article.featured {
+    article.featured {
         width: 100%;
         margin-right: 0 !important
     }
@@ -3657,7 +3623,7 @@
         position: initial
     }
 
-    .list-view section.result article.featured header ul {
+    .list-view article.featured header ul {
         display: none
     }
 }

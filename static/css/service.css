@@ -645,11 +645,6 @@
 }
 
 @media (max-width: 1024px) {
-    .width1140 {
-        padding-left: 18px !important;
-        padding-right: 18px !important
-    }
-
     .s-col-3 .item .icon-wrapper > span {
         font-size: 48px
     }
@@ -1099,16 +1094,16 @@
     padding: 0
 }
 
-.policy-heading {
+.service-heading {
     background: #f4f5f9;
     padding: 50px 0 50px !important
 }
 
-.policy-heading > .heading-wrapper {
+.service-heading > .heading-wrapper {
     top: 50%
 }
 
-.policy-heading .heading-wrapper .heading-inner h1 {
+.service-heading .heading-wrapper .heading-inner h1 {
     color: #303339
 }
 
@@ -2003,22 +1998,6 @@
     margin-bottom: 10px
 }
 
-.investor-item .right .investor-btn-more {
-    margin-bottom: 40px
-}
-
-.investor-item .right .investor-btn-more > a {
-    font-size: 14px;
-    color: #337588;
-    font-weight: 600
-}
-
-.investor-item .right .investor-btn-more > a .zmdi {
-    margin-left: 10px;
-    font-size: 18px;
-    padding: 0
-}
-
 @media only screen and (max-width: 1080px) {
     .s-banner-bg-inner {
         padding: 0 30px
@@ -2652,8 +2631,7 @@
 }
 
 .row {
-    /*display: flex;*/
-    display: inline;
+    display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin-right: -18px;
