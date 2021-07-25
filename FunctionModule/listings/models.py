@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import os.path
 from datetime import datetime
 
 from django.contrib.gis.geos import Point
@@ -193,6 +194,11 @@ class ListingImage(models.Model):
     def url(self):
         return self.photo.url
 
+    def delete(self, using=None, keep_parents=False):
+        if os.path.isfile(self.photo.path):
+            os.remove(self.photo.path)
+        return super().delete(using, keep_parents)
+
 
 class ListingVideo(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("VIDEO BĐS"))
@@ -239,3 +245,8 @@ class ContractImage(models.Model):
     @property
     def url(self):
         return self.photo.url
+
+    def delete(self, using=None, keep_parents=False):
+        if os.path.isfile(self.photo.path):
+            os.remove(self.photo.path)
+        return super().delete(using, keep_parents)

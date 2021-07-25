@@ -4,16 +4,23 @@ from django.core.files.uploadedfile import UploadedFile
 from django.http import HttpRequest, JsonResponse
 
 from FunctionModule.listings.import_csv import handle_import
-from .forms import ListingAdminForm, ImportListingForm
+from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage
+
 
 class ContractPhotoAdmin(admin.TabularInline):
     model = ContractImage
     verbose_name = "ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"
 
+
 class ListingPhotoAdmin(admin.TabularInline):
     model = ListingImage
     verbose_name = "HÌNH ẢNH CHỤP BĐS"
+    form = ImageForm
+    formset = ImageFormSet
+
+    max_num = 20
+    extra = 0
 
 
 class ListingVideoAdmin(admin.TabularInline):
@@ -29,14 +36,16 @@ class ListingAdmin(admin.ModelAdmin):
     list_editable = ('title',)
     search_fields = ('title', 'code', 'address', 'price', 'street', 'district',)
     list_per_page = 25
-    inlines = [ListingPhotoAdmin, ListingVideoAdmin,ContractPhotoAdmin]
+    inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
     form = ListingAdminForm
 
     class Media:
-        js = ('admin/js/dropzone.js', 'admin/js/listing.js',)
+        js = ('admin/js/dropzone.js', 'admin/js/listing.js', 'admin/js/filepond-4.28.2.min.js',
+              'admin/js/micromodal-0.4.6.min.js')
         css = {
-            'all': ('admin/css/dropzone.css', 'admin/css/listing.css',)
+            'all': ('admin/css/dropzone.css', 'admin/css/listing.css', 'admin/css/filepond.min.css')
         }
+
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         if request.user.is_superuser:
