@@ -112,10 +112,6 @@
         padding: 20px 0 40px
     }
 
-    .compare-house .left-list-filter {
-        padding-right: 0
-    }
-
     section.browsing article.featured {
         width: 100%
     }
@@ -147,23 +143,9 @@
         top: 0
     }
 
-    .list-view article header a h3 {
-        display: block;
-        overflow: hidden;
-        max-height: 55px
-    }
-
     .full-width > div > section.project article.featured {
         width: calc(50% - 30px) !important;
         margin: 30px 30px 0 0 !important;
-        height: 226px
-    }
-
-    .full-width > div > section.project article.featured .cover {
-        height: 226px
-    }
-
-    .full-width > div > article.featured .cover {
         height: 226px
     }
 
@@ -177,10 +159,6 @@
         text-align: center
     }
 
-    .popup-lch-detail {
-        min-height: 0 !important
-    }
-
     .image-sketch .actionIcon:not(.actionIcon-responsive) {
         display: none
     }
@@ -189,53 +167,12 @@
         display: block
     }
 
-    .top-team {
-        padding: 30px 0
-    }
-
-    .top-team h1 {
-        font-size: 30px;
-        line-height: 38px
-    }
-
-    .top-team p {
-        font-size: 16px !important;
-        line-height: 26px;
-        padding: 30px 0 0 0
-    }
-
     .right-content .booking-tour {
         display: none
     }
 
     article.featured .cover {
         height: 220px
-    }
-
-    .menu-detail-under ul li a {
-        margin-right: 20px
-    }
-
-    .compare-house .article div.info {
-        text-align: left;
-        width: 30%;
-        padding-left: 10px
-    }
-
-    .compare-house .article div.info-price {
-        width: 100%;
-        display: block;
-        text-align: left
-    }
-
-    .compare-house .article div.action {
-        width: 100%;
-        display: block;
-        text-align: left
-    }
-
-    .compare-house .article div.action a {
-        float: left
     }
 
     .width-70-ber {
@@ -369,10 +306,6 @@
         width: 100%;
         border: 0;
         background: 0 0
-    }
-
-    .contact-agency {
-        display: none
     }
 
     .booking-tour .bg-gray {
@@ -525,17 +458,8 @@
         text-align: justify
     }
 
-    .top-sell h5 {
-        font-size: 28px
-    }
-
     .marketing li .cover-mkt {
         height: 276px
-    }
-
-    .top-sell .contact-agency-info {
-        width: 80%;
-        margin: 0 auto
     }
 
     .share-social {
@@ -543,23 +467,6 @@
         left: 72px;
         top: auto;
         right: auto
-    }
-
-    .left-recruitment {
-        width: 100%;
-        margin-right: 0
-    }
-
-    .right-recruitment {
-        width: 100%;
-        margin-top: 30px
-    }
-
-    section.apartment article.featured {
-        width: 100%;
-        margin-right: 0 !important;
-        border: 1px solid #ececec;
-        border-top: 0
     }
 
     .thumb-duan {
@@ -652,14 +559,6 @@
         padding-top: 60px
     }
 
-    .full-width > div > article.featured {
-        width: calc(50% - 30px) !important;
-        margin: 30px 30px 0 0 !important;
-        float: left;
-        display: inline-block;
-        background: #fff
-    }
-
     .detail-more li {
         width: 100%
     }
@@ -668,32 +567,20 @@
         width: 50%
     }
 
-    .detail-building li {
-        width: calc(33.33% - 20px)
-    }
-
-    .detail-building li:nth-child(3n+3) {
-        margin: unset
-    }
-
-    .list-part-t .p-id, .sort-lch .p-head-id {
+    .list-part-t .p-id {
         width: 12%
     }
 
-    .list-part-t li, .sort-lch li {
+    .list-part-t li {
         width: 16%
     }
 
-    .list-part-t .p-name, .sort-lch .p-head-name {
+    .list-part-t .p-name {
         display: none
     }
 }
 
 @media only screen and (max-width: 720px) {
-    .contact-tgnp .hs-form {
-        max-width: 100% !important
-    }
-
     .width-750 {
         width: 100%
     }
@@ -854,23 +741,12 @@
         margin-right: 0
     }
 
-    .news-box .more-button-box {
-        padding-top: 20px
-    }
-
     .exclusive > .more-button-box {
         padding-top: 20px
     }
 
     .main-content {
         padding-bottom: 30px
-    }
-
-    .mota-duan {
-        font-size: 16px !important;
-        line-height: 26px !important;
-        max-width: none !important;
-        padding-top: 20px !important
     }
 
     .main-content > .more-button-box {
@@ -1307,10 +1183,6 @@
         padding-top: 0
     }
 
-    .sort-lch {
-        display: none
-    }
-
     .bed-sort {
         width: 100%
     }
@@ -1331,22 +1203,6 @@
 
     .left-70 {
         width: 100%
-    }
-
-    .map-loca-project {
-        height: auto
-    }
-
-    .detail-building li {
-        width: 95%
-    }
-
-    .detail-building li:nth-child(3n+3) {
-        margin: 20px 20px 0 0
-    }
-
-    .detail-building li:nth-child(2) {
-        margin: 20px 20px 0 0
     }
 
     .info-sticky-header {
@@ -1401,14 +1257,6 @@
         background: 0 0
     }
 
-    .list-view section.project article.featured header {
-        height: auto
-    }
-
-    .list-view section.project article.featured header .info-project {
-        bottom: auto
-    }
-
     .icon-s-h {
         color: #fff;
         position: absolute;
@@ -1449,65 +1297,8 @@
         font-size: 15px
     }
 
-    .list-view article.featured .cover {
-        width: 113px;
-        height: 75px;
-        margin: 15px 0
-    }
-
-    .list-view article.featured header {
-        padding: 12px 0 10px 15px;
-        width: calc(100% - 113px)
-    }
-
-    .list-view article header a {
-        width: 100%
-    }
-
-    .list-view article header a h3 {
-        width: 100%;
-        max-height: 44px;
-        margin-bottom: 0
-    }
-
     .info-agent-ct {
         display: none
-    }
-
-    .list-view .action-list {
-        display: none
-    }
-
-    .list-view section.project .action-list {
-        display: block
-    }
-
-    .list-view section.project .action-list .follow-button {
-        background: rgba(255, 255, 255, .5);
-        border: 0;
-        color: #666
-    }
-
-    .list-view section.project .action-list a.active {
-        background: #00779a;
-        color: #fff
-    }
-
-    .list-view article.featured {
-        padding: 0 15px;
-        border: 0
-    }
-
-    .list-view article.featured header ul li {
-        display: none
-    }
-
-    .list-view article.featured header ul li:first-child {
-        display: inline-block
-    }
-
-    .list-view article.featured header ul li:nth-child(3) {
-        display: inline-block
     }
 
     .info-bs div {
@@ -1553,42 +1344,6 @@
         padding: 0 10px !important
     }
 
-    .list-view section.project article.featured .cover {
-        width: 100%;
-        height: 256px;
-        margin: 15px 0 0
-    }
-
-    .list-view section.project article.featured header {
-        width: auto;
-        position: absolute;
-        z-index: 10;
-        bottom: 0;
-        left: 15px;
-        right: 15px;
-        color: #fff;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .9)) !important
-    }
-
-    .list-view section.project article.featured header h3 {
-        color: #fff
-    }
-
-    .list-view section.project article.featured header h4 {
-        color: #fff
-    }
-
-    .list-view section.project article.featured header h4 a {
-        color: #fff
-    }
-
-    .list-view section.project article.featured .price {
-        right: 15px;
-        color: #fff;
-        font-weight: 600;
-        bottom: 40px
-    }
-
     .info-project td.gray {
         color: rgba(255, 255, 255, .7) !important
     }
@@ -1597,19 +1352,7 @@
         font-size: 13px
     }
 
-    .list-view section.project article.featured:nth-child(2n+2) {
-        background: #fff
-    }
-
-    .list-view {
-        margin-top: 0
-    }
-
-    .list-view .title-sum {
-        padding-left: 0
-    }
-
-    .search-sidebar_content {
+   .search-sidebar_content {
         margin-left: 0
     }
 
@@ -1706,10 +1449,6 @@
         display: block
     }
 
-    .contact-tgnp .hs-button {
-        margin: 0 auto
-    }
-
     .content-detail-house header.detail-house ul.detailroom {
         margin-top: 15px;
         padding-bottom: 15px
@@ -1780,24 +1519,6 @@
         z-index: 220
     }
 
-    li {
-        width: 100%;
-        border-right: 0;
-        border-left: 2px solid #e6e6e6
-    }
-
-    li:nth-child(2n) {
-        width: 100%;
-        border-left: 2px solid #e6e6e6;
-        margin-top: 0;
-        padding-top: 80px
-    }
-
-    li:nth-child(2n) article.featured {
-        width: 95%;
-        margin-left: 5%
-    }
-
     li article.featured {
         margin-left: 5%;
         width: 95%
@@ -1841,15 +1562,6 @@
 
     .title-sticky-header {
         display: none
-    }
-
-    .btn-sticky-header {
-        width: 100%
-    }
-
-    .btn-sticky-header .black-button {
-        margin: 0 auto;
-        width: 100%
     }
 
     article.featured {
@@ -2034,11 +1746,6 @@
         margin: 10px 0
     }
 
-    .menu-black li {
-        width: 115px;
-        font-size: 14px
-    }
-
     .box-name-neighborhood h2 {
         font-size: 28px;
         line-height: 42px
@@ -2046,10 +1753,6 @@
 
     .padding-40-0 {
         padding: 20px 0
-    }
-
-    .menu-detail-under {
-        display: none
     }
 
     .state-ap {
@@ -2207,10 +1910,6 @@
 
     .colum3 {
         padding-top: 0
-    }
-
-    .news-box section.news-content {
-        padding-top: 20px
     }
 
     .collection-box-left {
@@ -2416,27 +2115,6 @@
         margin-left: 0
     }
 
-    .list-search02 article.featured .cover {
-        width: 100%;
-        height: 220px
-    }
-
-    .list-search02 article.featured header {
-        width: 100%
-    }
-
-    .list-search02 article.featured header .price p {
-        text-align: left
-    }
-
-    .list-search02 article.featured header ul {
-        padding: 0
-    }
-
-    .list-search02 article.featured header ul li {
-        padding: 0
-    }
-
     .left-content .rating-value li {
         width: 100%;
         padding: 10px 0
@@ -2527,10 +2205,6 @@
         margin: 10px 0 0;
         width: 100%;
         border: 0
-    }
-
-    .contact-agency {
-        display: none
     }
 
     .booking-tour .bg-gray {
@@ -2633,10 +2307,6 @@
     #slider4 {
         width: 83%;
         margin: 0 auto
-    }
-
-    .list-search02 .price {
-        position: static
     }
 
     #slider {
@@ -2760,15 +2430,6 @@
         height: 185px
     }
 
-    .form-signup {
-        width: 300px;
-        margin: 20px auto
-    }
-
-    .box-form {
-        padding: 20px 10px
-    }
-
     .or {
         margin: 30px 0
     }
@@ -2826,11 +2487,6 @@
 
     .about-agent {
         padding: 20px 15px
-    }
-
-    .team-member .member-detail {
-        width: 100%;
-        margin: 0 0 20px 0
     }
 
     ul.slidemap li a.img {
@@ -2917,26 +2573,12 @@
         display: none
     }
 
-    .top-sell h3 {
-        font-size: 22px
-    }
-
-    .top-sell .buttondangky-pd a {
-        width: 90%;
-        margin: 0 auto
-    }
-
     .img-scale img {
         width: 100%
     }
 
     .colum3 h4 {
         padding-top: 10px
-    }
-
-    .top-sell h5 {
-        font-size: 26px;
-        padding-top: 20px
     }
 
     .cover-left-sell {
@@ -2968,10 +2610,6 @@
         padding: 20px 10px
     }
 
-    .top-sell p {
-        padding: 15px 0 0
-    }
-
     .marketing li .bg-content-white h4 {
         font-size: 20px
     }
@@ -2993,10 +2631,6 @@
         padding: 30px 0 20px 0
     }
 
-    .top-sell .contact-agency-info {
-        width: 100%
-    }
-
     .founder .avatar {
         width: 100%;
         margin-right: 0
@@ -3011,19 +2645,9 @@
         font-size: 28px
     }
 
-    .top-team h3 {
-        font-size: 26px;
-        line-height: 30px
-    }
-
     .founder {
         margin-top: 10px;
         padding: 30px
-    }
-
-    .top-team p {
-        font-size: 16px;
-        padding: 10px 0
     }
 
     .share-social {
@@ -3031,14 +2655,6 @@
         padding: 20px 0;
         bottom: 0;
         left: 0
-    }
-
-    .location-navgroup {
-        display: none
-    }
-
-    .location-navgroup-black {
-        display: none
     }
 
     .comment-owner {
@@ -3071,15 +2687,6 @@
 
     .gallery-property div:first-child {
         height: 240px
-    }
-
-    .box-form {
-        padding: 20px 24px
-    }
-
-    .form-signup {
-        width: auto;
-        margin: 0 auto
     }
 
     .left-content-news article.featured {
@@ -3173,10 +2780,6 @@
 }
 
 @media only screen and (max-width: 375px) {
-    .detail-building li {
-        width: 93%
-    }
-
     .price {
         position: static;
         padding-top: 0
@@ -3353,10 +2956,6 @@
         overflow: hidden
     }
 
-    .list-view section.project article.featured .cover {
-        height: 230px
-    }
-
     .info-project {
         display: none
     }
@@ -3448,10 +3047,6 @@
 
     .tab-choose ul li a {
         font-size: 16px
-    }
-
-    .list-view section.project article.featured .cover {
-        height: 190px
     }
 
     .info-project {
@@ -3623,7 +3218,4 @@
         position: initial
     }
 
-    .list-view article.featured header ul {
-        display: none
-    }
 }
