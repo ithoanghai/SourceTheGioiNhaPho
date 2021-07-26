@@ -420,6 +420,7 @@
 }
 
 .main-header .col-right .top-menu ul .sub-menu ul {
+    display: inline-block;
     position: absolute;
     top: 59px;
     right: 0;
@@ -620,7 +621,7 @@
 }
 
 .main-header .col-right .login .user-avatar .user-content li:last-child a,
-.main-header#home .col-left .logo .main-nav-menu ul li a .zmdi,
+.main-header .col-left .logo .main-nav-menu ul li a .zmdi,
 .main-header .col-left .top-menu ul li:not(.sub-menu) a:hover .zmdi, .main-header .col-left .top-menu ul li:not(.sub-menu) a:hover span,
 .main-header .col-right .top-menu ul li:not(.sub-menu) a:hover .zmdi, .main-header .col-right .top-menu ul li:not(.sub-menu) a:hover span{
     color: #c72628

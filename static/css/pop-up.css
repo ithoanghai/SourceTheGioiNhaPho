@@ -7,6 +7,29 @@
 }
 
 @media (max-width: 480px) {
+   .popup-contact {
+        max-width: 100%;
+        position: initial;
+        transform: translate(0, 0);
+        margin: 0;
+        height: 100%
+    }
+
+    .popup-contact .form-contact {
+        border: none;
+        min-height: 100%
+    }
+
+    .popup-contact .form-contact .contact {
+        padding-top: 50px;
+        height: 100%
+    }
+
+    .popup-contact .header {
+        display: none
+    }
+
+
     .popup-send-info {
         max-width: 100%;
         height: 100%
@@ -94,16 +117,6 @@
         background: #f3f4f7
     }
 
-    .visible-pc {
-        display: none
-    }
-
-    .visible-sm {
-        display: block;
-        text-align: left;
-        font-family: rv-font1, Arial, Helvetica, sans-serif
-    }
-
     .popup-feedback .popup-body-fb {
         width: unset;
         clear: unset;
@@ -124,47 +137,9 @@
         padding: 5px 10px
     }
 
-    .visible-sm .header-sm {
-        padding: 21px;
-        box-shadow: 0 2px 10px 0 #e4e4e4
-    }
-
-    .visible-sm .header-sm h4 {
-        font-size: 14px;
-        line-height: 1.29;
-        text-align: center;
-        font-family: rv-font1, Arial, Helvetica, sans-serif;
-        text-transform: uppercase;
-        font-weight: 400
-    }
-
-    .visible-sm .content {
-        padding: 30px 18px;
-        border-bottom: 1px solid rgba(0, 0, 0, .1)
-    }
-
-    .visible-sm .content p {
-        font-family: rv-font1, Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        line-height: 1.29
-    }
-
-    .visible-sm .choose-number ul li {
-        width: calc(20% - 7px)
-    }
-
-    .visible-sm .choose-number ul li:nth-child(n+6) {
-        margin-top: 20px
-    }
-
     .inner {
         display: block;
         overflow: hidden
-    }
-
-    .visible-sm .use-easy {
-        margin-top: 45px
     }
 
     .large-butt-grey {
@@ -183,43 +158,6 @@
 
     .btn-use:last-child {
         margin-right: 0
-    }
-
-    .visible-sm .improve {
-        margin-top: 40px;
-        font-size: 14px
-    }
-
-    .visible-sm .improve .checkbox-sm {
-        margin-top: 10px
-    }
-
-    .visible-sm .note {
-        padding-top: 10px
-    }
-
-    .visible-sm .note p {
-        font-weight: 400
-    }
-
-    .visible-sm .note textarea {
-        resize: none;
-        height: 75px;
-        font-size: 14px
-    }
-
-    .visible-sm .btn {
-        padding: 20px 18px
-    }
-
-    .visible-sm .btn .btn-red {
-        height: 40px;
-        line-height: 40px;
-        color: #fff;
-        border: none;
-        width: 100%;
-        max-width: 100%;
-        font-family: rv-font1, Arial, Helvetica, sans-serif
     }
 
     .choose-number ul li a {
@@ -291,6 +229,10 @@
 }
 
 @media (max-width: 800px) {
+    .popup-contact {
+        margin: 150px auto
+    }
+
      .popup-feedback .popup-close-btn {
         top: 11px;
         right: 11px;
@@ -307,6 +249,27 @@
 
     .popup-login-rv .bottom-row .left .check + label:before {
         vertical-align: middle
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .popup-sketup {
+        max-height: none;
+        overflow: auto
+    }
+
+    .popup-sketup .image-sketch {
+        height: auto;
+        max-width: none;
+        width: 100%
+    }
+
+    .popup-sketup .image-sketch img {
+        top: auto;
+        left: auto;
+        transform: none;
+        height: auto;
+        position: static
     }
 }
 
@@ -441,6 +404,64 @@
     background: #00a6bd
 }
 
+.popup-contact {
+    max-width: 440px;
+    margin: 0 auto;
+    overflow: auto;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%
+}
+
+.popup-contact .header {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    background-color: #f2f2f2;
+    width: 100%
+}
+
+.popup-contact{
+    top: 0;
+    height: 60px;
+    line-height: 40px;
+    background: 0 0;
+    color: #000;
+    margin-right: 20px
+}
+
+.popup-contact .contact {
+    margin: 20px 30px 30px
+}
+
+.popup-contact .btn {
+    width: 100%;
+    padding-top: 10px
+}
+
+.popup-contact .btn a {
+    max-width: 100%
+}
+
+.popup-contact .form-contact {
+    width: 100%;
+    border: 1px solid #bfbfbf;
+    border-top: none;
+    background: #fff;
+    overflow: auto;
+    font-size: 16px;
+    padding: 0
+}
+
+.popup-contact .bg-e1e2e6.header {
+    border: 1px solid #bfbfbf;
+    border-bottom: none;
+    padding: 20px 30px;
+    text-align: left
+}
+
 .popup-overlay {
     border: none;
     width: 100%;
@@ -456,6 +477,32 @@
     justify-content: center;
     z-index: 99999;
     background-color: rgba(0, 0, 0, .7)
+}
+
+.popup-overlay {
+    background: rgba(0, 0, 0, .8) !important;
+    height: 100vh !important;
+    overflow: auto;
+    position: relative
+}
+
+.popup-overlay .title span:first-child {
+    display: block;
+    width: 10%;
+    float: left
+}
+
+.popup-overlay .title .house-type {
+    display: block;
+    float: right;
+    width: 90%;
+    max-height: 45px;
+    overflow: hidden;
+    padding-top: 5px
+}
+
+.popup-overlay .full-screen-act.close {
+    position: fixed
 }
 
 .popup-container {
@@ -475,6 +522,76 @@
     justify-content: center;
     width: 100%;
     height: 100%
+}
+
+.popup-sketup {
+    overflow: hidden;
+    width: 100%;
+    max-height: 530px;
+    max-width: 1096px;
+    height: 100%;
+    position: relative;
+    margin: 0;
+    background: #f8f8f8;
+    z-index: 1003;
+    font-size: 14px
+}
+
+.popup-sketup .image-sketch {
+    display: block;
+    max-width: 710px;
+    width: 100%;
+    height: 100%;
+    float: left;
+    position: relative
+}
+
+.popup-sketup .image-sketch .slides-sketch li {
+    text-align: center;
+    background-color: #fff;
+    position: relative
+}
+
+.popup-sketup .image-sketch img {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.popup-sketup .popup-detail-sketch {
+    max-width: 386px;
+    width: 100%;
+    float: right;
+    height: 100%
+}
+
+.popup-detail-sketch .popup-detail-sketch-title {
+    border-bottom: 1px solid #eee;
+    padding: 0 40px 0 20px;
+    font-size: 24px;
+    line-height: 70px;
+    height: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.popup-detail-sketch .info-sketch {
+    float: left;
+    padding: 3%;
+    margin: 0;
+    overflow-y: auto;
+    width: 100%;
+    height: calc(100% - 70px)
+}
+
+.popup-sketup .actionIcon {
+    top: 0;
+    right: 0;
+    font-size: 16px
 }
 
 .popup-send-info {
@@ -1768,6 +1885,437 @@
     position: relative;
     overflow: hidden;
     background: #f3f4f7
+}
+
+.popup-dialog-large .popup-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row;
+    flex-flow: row
+}
+
+.popup-dialog-large .popup-left {
+    width: 50%;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    padding: 0;
+    margin: 0
+}
+
+.popup-dialog-large .popup-left-content {
+    padding: 1.75rem
+}
+
+.popup-dialog-large .popup-left-cover {
+    width: 100%;
+    height: 285px;
+    overflow: hidden;
+    border-radius: 0;
+    position: relative
+}
+
+.popup-dialog-large .popup-left-cover img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover
+}
+
+.popup-dialog-large .popup-left-title {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: #13202a;
+    width: 100%;
+    max-height: 48px;
+    height: 100%;
+    overflow: hidden;
+    font-family: Tiempos, Arial, Helvetica, sans-serif
+}
+
+.popup-dialog-large .popup-left-title a {
+    color: #13202a;
+    font-size: 1rem;
+    line-height: 1.5
+}
+
+.popup-dialog-large .popup-left-address {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: .5rem
+}
+
+.popup-dialog-large .popup-left-address h4 {
+    display: inline-block;
+    font-weight: 400;
+    color: #71797f;
+    font-size: .875rem;
+    line-height: 1.5
+}
+
+.popup-dialog-large .popup-left-address h4 a {
+    color: #71797f;
+    font-weight: 400;
+    font-size: .875rem;
+    line-height: 1.5
+}
+
+.popup-dialog-large .popup-left-info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    list-style: none;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    width: 100%;
+    margin-top: 1rem
+}
+
+.popup-dialog-large .popup-left-info li {
+    padding: 0;
+    text-align: center;
+    width: 45%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between
+}
+
+.popup-dialog-large .popup-left-info li + li {
+    border-left: 0;
+    padding-top: .875rem
+}
+
+.popup-dialog-large .popup-left-info li + li:last-child {
+    padding-top: 1rem
+}
+
+.popup-dialog-large .popup-left-info li:first-child {
+    padding-top: 0
+}
+
+.popup-dialog-large .popup-left-info li:nth-child(2) {
+    padding-top: 0
+}
+
+.popup-dialog-large .popup-left-info li p, .popup-dialog-large .popup-left-info li strong {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #71797f;
+    text-align: left
+}
+
+.popup-dialog-large .popup-left-info li strong {
+    font-weight: 600;
+    color: #30333a
+}
+
+.popup-dialog-large .popup-left-info li .list span {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #13202a;
+    text-align: right
+}
+
+.popup-dialog-large .popup-left-info li .list span + span::before {
+    content: ', '
+}
+
+.popup-dialog-large .popup-right {
+    width: 50%;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
+    position: relative
+}
+
+.popup-dialog-large .popup-right-rva {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center
+}
+
+.popup-dialog-large .popup-right-rva .rva-cover {
+    min-width: 60px;
+    width: 60px;
+    height: 60px;
+    margin-right: 1.25rem;
+    border-radius: 50%;
+    overflow: hidden
+}
+
+.popup-dialog-large .popup-right-rva .rva-cover img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover
+}
+
+.popup-dialog-large .popup-right-rva .rva-info {
+    display: block;
+    width: auto;
+    border: 0;
+    padding: 0
+}
+
+.popup-dialog-large .popup-right-rva .rva-info-name {
+    font-size: 1.125rem;
+    line-height: 1.5;
+    color: #13202a;
+    font-weight: 700
+}
+
+.popup-dialog-large .popup-right-rva .rva-info-job-title {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #71797f
+}
+
+.popup-dialog-large .popup-right-phone {
+    display: inline-block;
+    max-width: 100%;
+    width: 100%;
+    margin-top: 1.75rem
+}
+
+.popup-dialog-large .popup-right-phone .zmdi {
+    padding: 0 4px 2px 0
+}
+
+.popup-dialog-large .popup-right-cta {
+    display: block;
+    width: 100%
+}
+
+.popup-dialog-large .popup-right-cta button {
+    max-width: 100%
+}
+
+.popup-dialog-large .popup-right-cta button + button {
+    margin-top: .75rem
+}
+
+.popup-dialog-large .popup-right-form-up {
+    position: relative;
+    display: none;
+    background: #fff;
+    opacity: 0;
+    visibility: hidden;
+    width: 100%
+}
+
+.popup-dialog-large .popup-right-form-up.show {
+    opacity: 1;
+    visibility: visible;
+    display: block;
+    left: 0;
+    -webkit-transition: opacity .25s linear, visibility .25s linear, -webkit-transform .25s;
+    transition: opacity .25s linear, visibility .25s linear, -webkit-transform .25s;
+    transition: opacity .25s linear, visibility .25s linear, transform .25s;
+    transition: opacity .25s linear, visibility .25s linear, transform .25s, -webkit-transform .25s;
+    -webkit-transform: translateX(0);
+    transform: translateX(0)
+}
+
+.popup-dialog-large .popup-right-form-up form .form-element {
+    margin-bottom: .875rem;
+    height: auto
+}
+
+.popup-dialog-large .popup-right-form-up form .form-element input {
+    padding: .875rem .625rem .3rem;
+    font-size: .875rem
+}
+
+.popup-dialog-large .popup-right-form-up form .form-element input:focus ~ label {
+    top: 3px;
+    font-size: .625rem
+}
+
+.popup-dialog-large .popup-right-form-up form .form-element input:valid ~ label {
+    top: 3px;
+    font-size: .625rem
+}
+
+.popup-dialog-large .popup-right-form-up form .form-element textarea {
+    padding: .875rem .625rem .5rem;
+    font-size: .875rem
+}
+
+.popup-dialog-large .popup-right-form-up form .form-element textarea:focus ~ label {
+    top: 3px;
+    font-size: .625rem
+}
+
+.popup-dialog-large .popup-right-form-up form .form-element textarea:valid ~ label {
+    top: 3px;
+    font-size: .625rem
+}
+
+.popup-dialog-large .popup-right-form-up form .form-element label {
+    top: 9px;
+    font-size: .875rem;
+    line-height: 1.5
+}
+
+.popup-dialog-large .popup-right-form-up form .form-element button {
+    max-width: 100%;
+    height: 44px !important;
+    line-height: 44px !important;
+    border: 0;
+    margin-top: 1.25rem
+}
+
+.popup-dialog {
+    position: relative;
+    width: auto;
+    margin: .5rem;
+    pointer-events: none
+}
+
+.popup-dialog-centered {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: calc(100% - (.5rem * 1))
+}
+
+.popup-content {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 0;
+    outline: 0;
+    border: 0;
+    z-index: 100
+}
+
+.popup-content form {
+    width: 100%
+}
+
+
+.popup-content {
+    width: 35%;
+    float: left
+}
+
+.popup-content {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 0;
+    outline: 0;
+    border: 0;
+    z-index: 100
+}
+
+.popup-dialog-large .popup-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row;
+    flex-flow: row
+}
+
+.fixed-form-r .popup-content-rv {
+    padding: 20px
+}
+
+.popup-content {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 0;
+    outline: 0;
+    border: 0;
+    z-index: 100
+}
+
+.popup-content form {
+    width: 100%
+}
+
+@media (max-width: 576px) {
+    .popup-content form .col-6-left {
+        width: 100%;
+        float: none
+    }
+}
+
+@media (max-width: 576px) {
+    .popup-content form .col-6-right {
+        width: 100%;
+        float: none
+    }
 }
 
 .popup-content-rv {

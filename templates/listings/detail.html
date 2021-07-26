@@ -364,7 +364,6 @@
       </div>
     </div>
     <section class="page-listing-detail">
-      <div class="width1140">
         <div class="left-content">
           <div class="content-detail-house">
             <header class="detail-house">
@@ -774,7 +773,6 @@
             </ul>
           </div>
         </div>
-      </div>
     </section>
     <div class="cta-bottom-wrapper listing__cta--bottom">
       <p class="listing__cta--bottom-id">{% trans "Mã nhà đất: " %}<strong>{{ listing.code }}</strong>
@@ -793,11 +791,9 @@
     </div>
 
     <section id="sticky" class="bg-white mgb-0">
-      <section class="width1140">
         <div class="right-content">
           <div id="agent-fix" class="fixed-form"></div>
         </div>
-      </section>
     </section>
     <div class="mdialog" id="sell-now-form" style="background: none">
       <div class="popup-overlay">
@@ -818,7 +814,7 @@
     </div>
 
     <section class="background-gray">
-      <section class="width1140 main-content">
+      <section class="main-content">
         <div class="heading-02 mgt-10">Nhà đất lân cận</div>
         <section class="compare-house">
           {% for listing in listings_neighborhood %}
@@ -828,7 +824,7 @@
       </section>
     </section>
     <section class="bg-gray-e6 pdt-0">
-      <section class="width1140">
+      <section style="padding: 10px">
         <div class="heading-02">Bạn đang cần bán hay cho thuê nhà?</div>
         <div class="ads3d-box pdt-15">
           <div class="ads3d-box-left">
@@ -880,8 +876,9 @@
       </section>
     </section>
 
+  {% if listings_same %}
     <section class="background-gray">
-      <div class="width1140">
+      <div>
         <div class="heading-02 pd-tb-30 mgt-10">Nhà đất tương tự</div>
         <div id="similar-property" class="flexslider main-content">
           <div class="slider-buttons">
@@ -896,6 +893,7 @@
         </div>
       </div>
     </section>
+  {% endif %}
 
     <div id="property-contactbox-v2-app"></div>
     <div id="detailPopupContact">{% include "listings/_detailPopupContactTemplate.html" %}</div>

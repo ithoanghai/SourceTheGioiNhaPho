@@ -40,7 +40,7 @@
       <li class="marea" title="Diện tích"><span
         class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} {{ listing.area_unit }}
       </li>
-      <li title="Giá">{{ listing.price }} tỷ</li>
+        <li title="Giá"><b>{{ listing.price }} tỷ</b></li>
       {% if listing.sale_price and listing.sale_price < listing.price %}
         <li title="Bán nhanh">Còn {{ listing.sale_price }} tỷ</li> {% endif %}
     </ul>
