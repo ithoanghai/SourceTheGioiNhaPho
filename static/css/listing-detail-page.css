@@ -181,21 +181,6 @@ ul.breadcrumb li a:hover {
     }
 }
 
-.btn-primary {
-    display: inline-block;
-    width: 100%;
-    margin: 0 auto;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 16px;
-    max-width: fit-content;
-    min-width: fit-content;
-    text-align: center;
-    border-radius: 2px;
-    padding: 0 20px;
-    white-space: nowrap
-}
-
 .btn-primary:focus {
     outline: 0
 }
