@@ -254,7 +254,8 @@
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 5px;
-    position: relative
+    position: relative;
+    padding: 5px;
 }
 
 #footer .inner .row .info-container > li span .zmdi {
@@ -268,13 +269,11 @@
 
 #footer .inner .row .info-container > li ul {
     display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -ms-flex-flow: column wrap;
     flex-flow: column wrap;
-    width: 100%
+    width: 100%;
+    padding-left: 5px;
 }
 
 #footer .inner .row .info-container > li ul li {

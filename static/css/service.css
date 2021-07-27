@@ -116,10 +116,6 @@
     color: #337588
 }
 
-.form-contact .contact form .hs-richtext > h5 {
-    padding-bottom: 20px
-}
-
 #contact-now-form .mdialog-body {
     margin: auto;
     height: auto;
@@ -645,11 +641,6 @@
 }
 
 @media (max-width: 1024px) {
-    .width1140 {
-        padding-left: 18px !important;
-        padding-right: 18px !important
-    }
-
     .s-col-3 .item .icon-wrapper > span {
         font-size: 48px
     }
@@ -1099,16 +1090,16 @@
     padding: 0
 }
 
-.policy-heading {
+.service-heading {
     background: #f4f5f9;
     padding: 50px 0 50px !important
 }
 
-.policy-heading > .heading-wrapper {
+.service-heading > .heading-wrapper {
     top: 50%
 }
 
-.policy-heading .heading-wrapper .heading-inner h1 {
+.service-heading .heading-wrapper .heading-inner h1 {
     color: #303339
 }
 
@@ -1316,23 +1307,6 @@
     margin-top: 5px;
     color: #337588;
     font-size: 14px
-}
-
-.cta-form {
-    display: block;
-    background: #fff;
-    color: #30333a;
-    border-radius: 2px;
-    width: 100%;
-    height: 40px;
-    border: 1px solid #30333a;
-    line-height: 40px;
-    font-weight: 500
-}
-
-.fone-b:before {
-    content: "\f115";
-    font-size: 1em
 }
 
 .sub-title {
@@ -2003,22 +1977,6 @@
     margin-bottom: 10px
 }
 
-.investor-item .right .investor-btn-more {
-    margin-bottom: 40px
-}
-
-.investor-item .right .investor-btn-more > a {
-    font-size: 14px;
-    color: #337588;
-    font-weight: 600
-}
-
-.investor-item .right .investor-btn-more > a .zmdi {
-    margin-left: 10px;
-    font-size: 18px;
-    padding: 0
-}
-
 @media only screen and (max-width: 1080px) {
     .s-banner-bg-inner {
         padding: 0 30px
@@ -2567,18 +2525,6 @@
     margin: 0 !important
 }
 
-.mt-15 {
-    margin-top: 15px !important
-}
-
-.mt-20 {
-    margin-top: 30px !important
-}
-
-.mt-30 {
-    margin-top: 30px !important
-}
-
 .mt-40 {
     margin-top: 40px !important
 }
@@ -2636,24 +2582,8 @@
     display: block !important
 }
 
-.container {
-    width: 100%;
-    padding-right: 18px;
-    padding-left: 18px;
-    margin-right: auto;
-    margin-left: auto;
-    display: block
-}
-
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1140px
-    }
-}
-
 .row {
-    /*display: flex;*/
-    display: inline;
+    display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin-right: -18px;
