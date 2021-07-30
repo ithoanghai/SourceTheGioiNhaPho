@@ -77,16 +77,9 @@
       </ul>
     </div>
 
-    <div class="login">
-      <ul class="welcome-user">
-        <li class="">
-          {% if user.is_authenticated %}
-            <span style="font-size: smaller; line-height: 1.1em">Chào {{ user.name }}</span>
-          {% else %}
-            <a href="#login" title="Đăng nhập / Đăng ký" class="btn-login">Đăng nhập</a>
-          {% endif %}
-        </li>
-
+    <div class="top-menu login">
+      <ul {% comment %}class="welcome-user"{% endcomment %}>
+        {% include "menu/_subMenuUserProfile.html" %}
       </ul>
       <div class="agency-tgnp">
         <a href="{% url 'sell_with_us' %}" title="Đăng tin nhà đất">Đăng bán nhà đất</a>

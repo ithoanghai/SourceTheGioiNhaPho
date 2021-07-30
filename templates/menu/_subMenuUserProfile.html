@@ -1,0 +1,45 @@
+{% load static i18n %}
+
+<li class="sub-menu" style="line-height: 1.5em; margin: 5px">
+
+    {% if user.is_authenticated %}
+        <span style="font-size: smaller; line-height: 1em; color: orange">Chào <a href="{% url "profile" %}"
+                                                                                  style="color: greenyellow"> {{ user.name }}</a></span>
+    {% else %}
+        <span><a href="#login" title="Đăng nhập / Đăng ký" class="btn-login"
+           style="color: yellowgreen"> {% translate 'Đăng nhập' %}</a></span>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <ul>
+            <li>
+                <a href="{% url "profile" %}"> <i class="ni ni-single-02"></i> {% translate 'Thông tin cá nhân' %}</a>
+            </li>
+            <li>
+                <a href="{% url "profile" %}"><i class="ni ni-settings-gear-65"></i> {% translate 'Thiết lập' %} </a>
+            </li>
+            {% if user.is_active and user.is_staff %}
+                {% url 'django-admindocs-docroot' as docsroot %}
+                {% if docsroot %}
+                    <li>
+                        <a href="{{ docsroot }}">{% translate 'Tài liệu' %}</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+            <li>
+                {% if user.has_usable_password %}
+                    <a href="{% url 'admin:password_change' %}"> {% translate 'Đổi mật khẩu' %}</a>
+                {% endif %}
+            </li>
+{% comment %}            <li>
+                <a href="#" target="_blank"><i class="ni ni-support-16"></i> {% translate 'Hỗ trợ' %}</a>
+            </li>{% endcomment %}
+            <li class="dropdown-divider divide"></li>
+            <li>
+                <a href="{% url 'logout' %}"><i class="ni ni-user-run"></i> {% translate 'Đăng xuất' %}</a>
+            </li>
+
+        </ul>
+    {% endif %}
+
+</li>

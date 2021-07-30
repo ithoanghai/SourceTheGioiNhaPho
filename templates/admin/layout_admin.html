@@ -1,4 +1,4 @@
-{% load static i18n%}
+{% load static i18n %}
 
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
@@ -9,112 +9,86 @@
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
       data-admin-utc-offset="{% now "Z" %}">
-{% if layout_id == 1 %}
-    {% include 'admin/includes/theme-light.html' %}
-{% elif layout_id == 2 %}
-    {% include 'admin/includes/theme-static.html' %}
-{% else %}
-    <!-- Container -->
-    <div id="container">
+<!-- Container -->
+<div id="container">
 
-        {% if not is_popup %}
-            <!-- Header -->
-            {% block header %}
-                <div id="header">
-                    <!-- Brand -->
-                    <a class="navbar-brand pt-0" href="/admin">
-                        <img src="{% static 'img/logo.svg' %}" width="80px" class="navbar-brand-img" alt="...">
-                    </a>
-                    <div id="branding">
-                        {% block branding %}{% endblock %}
-                    </div>
-                    {% block usertools %}
-                        {% if has_permission %}
-                            <div id="user-tools">
-                                {% block welcome-msg %}
-                                    {% translate 'Chào mừng bạn,' %}
-                                    <strong>{% firstof user.get_short_name user.get_username %}</strong>.
-                                {% endblock %}
-                                {% block userlinks %}
-                                    {% if site_url %}
-                                        <a href="{{ site_url }}">{% translate 'Xem trang' %}</a> /
-                                    {% endif %}
-                                    {% if user.is_active and user.is_staff %}
-                                        {% url 'django-admindocs-docroot' as docsroot %}
-                                        {% if docsroot %}
-                                            <a href="{{ docsroot }}">{% translate 'Tài liệu' %}</a> /
-                                        {% endif %}
-                                    {% endif %}
-                                    {% if user.has_usable_password %}
-                                        <a href="{% url 'admin:password_change' %}">{% translate 'Đổi mật khẩu' %}</a> /
-                                    {% endif %}
-                                    <a href="{% url 'admin:logout' %}">{% translate 'Đăng xuất' %}</a>
-                                {% endblock %}
-                            </div>
-                        {% endif %}
-                    {% endblock %}
-                    {% block nav-global %}{% endblock %}
-                </div>
-            {% endblock %}
-            <!-- END Header -->
-            {% block breadcrumbs %}
-                <div class="breadcrumbs">
-                    <a href="{% url 'admin:index' %}">{% translate 'Trang chủ' %}</a>
-                    {% if title %} &rsaquo; {{ title }}{% endif %}
-                </div>
-            {% endblock %}
-        {% endif %}
-
-        <div class="main" id="main">
-            {% block nav-sidebar %}
-                <!-- Side Nav Bar -->
-                {% include "admin/includes/nav_sidebar.html" %}
-            {% endblock %}
-            <div class="content">
-                {% block messages %}
-                    {% if messages %}
-                        <ul class="messagelist">{% for message in messages %}
-                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-                        {% endfor %}</ul>
-                    {% endif %}
-                {% endblock messages %}
-                <!-- Content -->
-
-                {% include "admin/includes/navigation.html" %}
-
-                <div id="content" class="{% block coltype %}colM{% endblock %}">
-                    {% block pretitle %}{% endblock %}
-                    {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
-                    {% block content_subtitle %}{% if subtitle %}<h2>{{ subtitle }}</h2>{% endif %}{% endblock %}
-                    <!-- Main Content -->
-                    <div class="main-content">
-                        {% block content %}{% block object-tools %}{% endblock %}
-                            {{ content }}
-                        {% endblock content %}
-                    </div>
-                    <!-- END Main Content -->
-                    {% block sidebar %}{% endblock %}
-
-                    <br class="clear">
-                </div>
-
-            </div>
+    <!-- Header -->
+    {% block header %}
+        <div id="header">
+            {% include "admin/includes/_headerbar.html" %}
         </div>
+        {% block nav-global %}{% endblock %}
+    {% endblock %}
+    <!-- END Header -->
 
-        {% block footer %}
-            <div id="footer">
-                {% include "admin/includes/footer.html" %}
-            </div>{% endblock %}
+    <!-- Breadcrumbs -->
+    {% block breadcrumbs %}
+        <div class="breadcrumbs">
+            <a href="{% url 'admin:index' %}"><i class="fas fa-home"></i> {% translate 'Trang chủ quản trị' %}</a>
+            {% if title %} &rsaquo; {{ title }}{% endif %}
+        </div>
+    {% endblock %}
+    <!-- END Breadcrumbs -->
 
+    <!-- Main -->
+    <div class="main" id="main">
+        {% block nav-sidebar %}
+            <!-- Side Nav Bar menu-->
+            {% include "admin/includes/nav_sidebar.html" %}
+        {% endblock %}
+
+{% comment %}        <!-- Alerts -->
+        {% include 'partials/_alerts.html' %}{% endcomment %}
+
+        <!-- Conten main -->
+        <div class="content">
+            {% block messages %}
+                {% if messages %}
+                    <ul class="messagelist">{% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+                    {% endfor %}</ul>
+                {% endif %}
+            {% endblock messages %}
+            <!-- Content -->
+
+            <div id="content" class="{% block coltype %}colM{% endblock %}">
+                {% block pretitle %}{% endblock %}
+                {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+                {% block content_subtitle %}{% if subtitle %}<h2>{{ subtitle }}</h2>{% endif %}{% endblock %}
+                <!-- Main Content -->
+                <div class="main-content">
+                    {% block content %}{% block object-tools %}{% endblock %}
+                        {{ content }}
+                    {% endblock content %}
+                </div>
+                <!-- END Main Content -->
+                {% block sidebar %}{% endblock %}
+
+                <br class="clear">
+            </div>
+
+        </div>
+    
     </div>
-    <!-- END Container -->
-{% endif %}
+    <!-- END Main Content -->
+
+    <!-- Header -->
+    {% block footer %}
+        <div id="footer">
+            {% include "admin/includes/footer.html" %}
+        </div>
+    {% endblock %}
+    <!-- END Header -->
+
+</div>
+<!-- END Container -->
+
 <!-- Specific JS goes HERE -->
 {% block javascripts %}
     <script src="{% static 'admin/js/nav_sidebar.js' %}" defer></script>
     <!-- Scripts for Admin -->
     {% include "admin/includes/scripts.html" %}
- {% endblock javascripts %}
+{% endblock javascripts %}
 
 </body>
 

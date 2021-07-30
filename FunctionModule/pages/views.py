@@ -110,25 +110,6 @@ def privacyPolicy(request):
 
 
 """Admin url here"""
-
-
-def dashboard(request):
-    return redirect('admin/login')
-
-
-def admin_login(request):
-    return render(request, 'admin/login.html')
-
-
-def layout(request, layout_id):
-    app_list = site.get_app_list(request)
-    context = {
-        'layout_id': layout_id,
-        'available_apps': app_list
-    }
-    return render(request, 'admin/index.html', context)
-
-
 def error403(request):
     context = {
 
@@ -191,15 +172,6 @@ def map(request):
         'available_apps': app_list
     }
     return render(request, 'admin/maps.html', context)
-
-
-def profile(request):
-    app_list = site.get_app_list(request)
-    context = {
-        'available_apps': app_list
-    }
-    return render(request, 'admin/profile.html', context)
-
 
 def table(request):
     app_list = site.get_app_list(request)

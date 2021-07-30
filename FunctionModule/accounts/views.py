@@ -1,4 +1,5 @@
 from django.contrib import messages, auth
+from django.contrib.admin import site
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from allauth.account.views import get_adapter
@@ -44,7 +45,6 @@ def register(request):
     else:
         return render(request, 'accounts/register.html')
 
-
 def login_handler(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -70,22 +70,42 @@ def login_handler(request):
         messages.error(request, 'Bạn cần gửi đủ thông tin đăng nhập')
         return render(request, 'home/index.html')
 
+def logout_handler(request):
+        if request.user is not None and (request.user.is_staff or request.user.is_superuser):
+            auth.logout(request)
+            messages.success(request, 'Bạn vừa đăng xuất')
+            return redirect('/admin/')
+        else:
+            auth.logout(request)
+            messages.success(request, 'Bạn vừa đăng xuất')
+            return redirect('index')
 
-def logout(request):
-    if request.method == 'POST':
-        auth.logout(request)
-        messages.success(request, 'Bạn đã đăng xuất')
-        return redirect('index')
+def profile(request):
 
-
-def dashboard(request):
+    app_list = site.get_app_list(request)
     user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
 
     context = {
-        'contacts': user_contacts
+        'contacts': user_contacts,
+        'available_apps': app_list
     }
-    return render(request, 'accounts/dashboard.html', context)
+    if request.user.is_authenticated:
+        return render(request, 'accounts/profile.html', context)
+    else:
+        return redirect('/admin/')
 
+def password_change(request):
+    app_list = site.get_app_list(request)
+    user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
+
+    context = {
+        'contacts': user_contacts,
+        'available_apps': app_list
+    }
+    if request.user.is_authenticated:
+        return render(request, 'accounts/change_password.html', context)
+    else:
+        return redirect('index')
 
 def social_login_cancelled(request):
     messages.warning(request, 'Bạn đã hủy đăng nhập. Xin đăng nhập lại.')

@@ -1,4 +1,3 @@
-from django.contrib.auth import views as auth_views
 from django.urls import path
 from django.views.generic import TemplateView
 
@@ -26,14 +25,7 @@ urlpatterns = [
     path('privacyPolicy', views.privacyPolicy, name='privacyPolicy'),
 
     # Url for Backend
-    # path('admin/', admin.site.urls), #for Backend from default lib
-    # path('admin/', views.dashboard , name ='dashboard'),
-    path('admin/login', views.admin_login, name='admin_login'),
-    path('admin/logout/', auth_views.LogoutView.as_view(next_page='/admin/'), name='logout'),
-
-    path('<int:layout_id>', views.layout, name='layout'),
     path('admin/map', views.map, name='map'),
-    path('admin/profile', views.profile, name='profile'),
     path('admin/table', views.table, name='table'),
     path('admin/chart', views.chart, name='chart'),
     path('admin/pageblank', views.pageblank, name='page-blank'),

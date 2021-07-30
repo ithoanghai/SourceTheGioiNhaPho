@@ -6526,6 +6526,10 @@ a.bg-neutral:focus, a.bg-neutral:hover, button.bg-neutral:focus, button.bg-neutr
     align-items: center !important
 }
 
+.align-items-center {
+    align-items: right !important
+}
+
 .align-items-baseline {
     align-items: baseline !important
 }

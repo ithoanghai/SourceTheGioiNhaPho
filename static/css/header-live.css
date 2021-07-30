@@ -75,12 +75,12 @@
 }
 
 .main-header a {
-    color: #303330;
+    color: orange;
     text-decoration: none
 }
 
 .main-header a:hover {
-    color: rgba(48, 51, 48, .86)
+    color: greenyellow;
 }
 
 .main-header .col-left {
