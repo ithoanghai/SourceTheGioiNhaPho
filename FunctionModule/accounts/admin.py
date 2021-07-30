@@ -22,10 +22,10 @@ class AccountAdmin(AuthUserAdmin):
             'classes': ('wide',),
             'fields': ('username', 'email', 'phone', 'password1', 'password2',),
         }), ('THÔNG TIN BỔ SUNG', {'fields': (
-        'is_realtor', 'first_time',
-        'first_name', 'last_name',
-        'address', 'dob', 'gender',
-        'bio', 'website', 'facebook', 'youtube',)})
+            'is_realtor', 'first_time',
+            'first_name', 'last_name',
+            'address', 'dob', 'gender',
+            'bio', 'website', 'facebook', 'youtube',)})
     )
 
     fieldsets = (
@@ -101,6 +101,7 @@ class AccountAdmin(AuthUserAdmin):
 class GroupAdmin(admin.ModelAdmin):
     form = GroupAdminForm
     filter_horizontal = ['permissions']
+
 
 admin.site.register(Group, GroupAdmin)
 admin.site.register(User, AccountAdmin)

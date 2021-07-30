@@ -19,27 +19,25 @@ def split_url(url: str) -> str:
 
 
 phone_regex = RegexValidator(regex=r'^(09|03|07|08|05)+([0-9]{8})$',
-                             message="Sai định dạng số điện thoại")
+                     message="Số điện thoại 10 số với chỉ các đầu số 09|03|07|08|05")
 
 
 class User(AbstractUser):
     # These two fields are for backend (admin) login form to display correctly
     username = models.CharField(
-        _('Tên đăng nhập'),
-        max_length=150,
-        unique=True,
+        _('Tên đăng nhập'), max_length=150, unique=True,
         help_text=_('Bắt buộc nhập. Không quá 150 ký tự. Có thể bao gồm ký tự, chữ số và chỉ ký tự đặc biệt @/./+/-/_.'),
-        error_messages={
-            'unique': _("Người dùng này đã tồn tại trên hệ thống."),
-        },
+        error_messages={'unique': _("Người dùng này đã tồn tại trên hệ thống.")},
     )
-    email = models.EmailField(_('Email'), blank=True)
+    email = models.EmailField(_('Email'), blank=True, unique=True, error_messages={
+       'unique': _("Email này đã được sử dụng trên hệ thống.")})
+
     is_realtor = models.BooleanField(_("Là đầu chủ"), default=True)
     # Basic Info
     first_name = models.CharField(_('Tên'), max_length=150, blank=True)
     last_name = models.CharField(_('Họ'), max_length=150, blank=True)
-    phone = models.CharField(_('Điện thoại'), max_length=20, db_index=True, unique=True,
-                             validators=[phone_regex])
+    phone = models.CharField(_('Điện thoại'), max_length=20, db_index=True, unique=True, validators=[phone_regex],
+                             error_messages={'unique': _("Số điện thoại này đã được sử dụng trên hệ thống.")})
     address = models.CharField(_('Địa chỉ'), blank=True, max_length=255)
     dob = models.DateField(_('Ngày sinh'), blank=True, null=True)
     gender = models.CharField(_('Giới tính'), max_length=20, choices=GENDER_CHOICES, blank=True, default='male')

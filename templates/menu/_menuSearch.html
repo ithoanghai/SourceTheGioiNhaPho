@@ -26,7 +26,7 @@
                title="Đăng nhập / Đăng ký" class="btn-primary btn-black-outline btn-medium btn-login">
               Đăng nhập
             </a>
-            <a href="#register" data-mix-header-click="group: authen, action: click_sign_up"
+            <a href="{% url 'register' %}" data-mix-header-click="group: authen, action: click_sign_up"
                class="btn-primary btn-red-outline btn-medium btn-signup">Đăng ký</a>
           </div>
         </div>
@@ -69,7 +69,7 @@
     <div class="top-menu">
       <ul>
         <li>
-          <a href="tel:0916286256" data-mix-header-click="group: hotline, action: click_hotline">
+          <a href="tel:0971841941" data-mix-header-click="group: hotline, action: click_hotline">
             <i class="zmdi zmdi-phone"></i>
             <span>0916 286 256</span>
           </a>
@@ -84,23 +84,15 @@
         {% include "menu/_subMenuSupport.html" %}
       </ul>
     </div>
-    <div class="login">
-
-      <style>
-          a[waiting-login-js] {
-              opacity: 0.2;
-          }
-      </style>
-      {% if user.is_authenticated %}
-        <span style="font-size: smaller; line-height: 1.1em">Chào {{ user.name }}</span>
-      {% else %}
-        <a href="#login" data-mix-header-click="group: authen, action: click_login" waiting-login-js
-           title="Đăng nhập / Đăng ký" class="btn-login">Đăng nhập</a>
-      {% endif %}
+    <div class="top-menu login">
+      <ul {% comment %}class="welcome-user"{% endcomment %}>
+        {% include "menu/_subMenuUserProfile.html" %}
+      </ul>
       <div class="agency-tgnp">
         <a href="{% url 'sell_with_us' %}" title="Đăng tin nhà đất">Đăng bán nhà đất</a>
       </div>
     </div>
+  </div>
   </div>
 
   <div class="search-mobile-component" keyword="" init-title=""

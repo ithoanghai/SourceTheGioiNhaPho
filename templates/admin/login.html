@@ -1,5 +1,7 @@
 {% extends 'admin/layout_fullscreen.html' %}
 
+{% load static i18n %}
+
 {% block title %} Đăng nhập {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
@@ -16,34 +18,26 @@
               <div class="text-muted text-center mt-2 mb-3"><small>Đăng nhập với</small></div>
               <div class="btn-wrapper text-center">
                 <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"><img src="/img/Facebook.svg"></span>
+                  <span class="btn-inner--icon"><img src="{% static 'img/Facebook.svg'%} "></span>
                   <span class="btn-inner--text">Facebook</span>
                 </a>
                 <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"><img src="/img/google.svg"></span>
+                  <span class="btn-inner--icon"><img src="{% static 'img/google.svg' %} "></span>
                   <span class="btn-inner--text">Google</span>
                 </a>
               </div>
             </div>
             <div class="card-body px-lg-5">
               <div class="text-center text-muted mb-4">
-
-                {% if msg %}
+               {% if msg %}
                   <p>{{ msg | safe }}</p>
-                {% else %}
-                  <p>
-                    Thao tác với tài khoản của bạn
-                    <br />
-                    Hoặc <a href={% url 'register' %} >tạo tài khoản thành viên mới</a>
-                  </p>
-                {% endif %}  
-
+                {% endif %}
               </div>
 
               <form method="POST">
 
                 {% csrf_token %}
-
+                <p><b>Đăng nhập với tài khoản của bạn</b></p>
                 <div class="form-group mb-3">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
@@ -60,6 +54,7 @@
                     {{ form.password }}
                   </div>
                 </div>
+
                 <div class="custom-control custom-control-alternative custom-checkbox">
                   <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
                   <label class="custom-control-label" for=" customCheckLogin">
@@ -70,11 +65,14 @@
                   <button type="submit" class="btn btn-primary my-4">Đăng nhập</button>
                 </div>
               </form>
+
+              <b> <h4 align="center"><a href={% url 'register' %} >Tạo tài khoản thành viên mới</a></h4> </b>
             </div>
           </div>
           <div class="row mt-3">
-            <div class="col-6">
+            <div class="col-6"><h4>
               <a href="{% url 'register' %}" class="text-light"><small>Đăng ký</small></a>
+                </h4>
             </div>
             <div class="col-6 text-right">
               <a target="_blank" 

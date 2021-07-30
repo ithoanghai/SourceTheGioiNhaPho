@@ -3,8 +3,7 @@
 <li class="sub-menu" style="line-height: 1.5em; margin: 5px">
 
     {% if user.is_authenticated %}
-        <span style="font-size: smaller; line-height: 1em; color: orange">Chào <a href="{% url "profile" %}"
-                                                                                  style="color: greenyellow"> {{ user.name }}</a></span>
+        <span style="font-size: smaller; line-height: 1em; color: orange">Chào <a href="{% url "profile" %}"  style="color: greenyellow"> {{ user.name }}</a></span>
     {% else %}
         <span><a href="#login" title="Đăng nhập / Đăng ký" class="btn-login"
            style="color: yellowgreen"> {% translate 'Đăng nhập' %}</a></span>
@@ -13,11 +12,11 @@
     {% if user.is_authenticated %}
         <ul>
             <li>
-                <a href="{% url "profile" %}"> <i class="ni ni-single-02"></i> {% translate 'Thông tin cá nhân' %}</a>
+                <a href="{% url "profile" %}"> <i class="ni ni-single-02"></i> {% translate 'Trang cá nhân' %}</a>
             </li>
-            <li>
+            {% comment %}<li>
                 <a href="{% url "profile" %}"><i class="ni ni-settings-gear-65"></i> {% translate 'Thiết lập' %} </a>
-            </li>
+            </li>{% endcomment %}
             {% if user.is_active and user.is_staff %}
                 {% url 'django-admindocs-docroot' as docsroot %}
                 {% if docsroot %}

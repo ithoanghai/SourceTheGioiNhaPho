@@ -37,11 +37,9 @@
             {% include "admin/includes/nav_sidebar.html" %}
         {% endblock %}
 
-{% comment %}        <!-- Alerts -->
-        {% include 'partials/_alerts.html' %}{% endcomment %}
-
-        <!-- Conten main -->
+        <!-- Content main -->
         <div class="content">
+            <!-- Messages -->
             {% block messages %}
                 {% if messages %}
                     <ul class="messagelist">{% for message in messages %}
@@ -49,7 +47,7 @@
                     {% endfor %}</ul>
                 {% endif %}
             {% endblock messages %}
-            <!-- Content -->
+            <!-- End Messages -->
 
             <div id="content" class="{% block coltype %}colM{% endblock %}">
                 {% block pretitle %}{% endblock %}

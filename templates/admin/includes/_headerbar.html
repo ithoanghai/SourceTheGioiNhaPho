@@ -25,6 +25,7 @@
             </div>
         </form>
 
+        {% if user.is_authenticated %}
         <div class="navbar-nav align-items-right row" style="width: auto">
             {% if not is_popup %}
                 <!-- User -->
@@ -37,12 +38,12 @@
                             </div>
                             <a href="{% url "profile" %}" class="dropdown-item">
                                 <i class="ni ni-single-02"></i>
-                                <span>Thông tin cá nhân</span>
+                                <span>Quản lý cá nhân</span>
                             </a>
-                            <a href="{% url "profile" %}" class="dropdown-item">
+                            {% comment %}<a href="{% url "profile" %}" class="dropdown-item">
                                 <i class="ni ni-settings-gear-65"></i>
                                 <span>Thiết lập</span>
-                            </a>
+                            </a>{% endcomment %}
                             {% comment %}<a href="#" target="_blank" class="dropdown-item">
                                 <i class="ni ni-support-16"></i>
                                 <span>Hỗ trợ</span>
@@ -94,6 +95,7 @@
 
             {% endif %}
         </div>
+        {% endif %}
 
     </div>
 </nav>

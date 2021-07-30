@@ -213,7 +213,7 @@
 }
 
 .main-header .col-left .main-nav-menu ul li {
-    display: list-item
+    display: block;
 }
 
 .main-header .col-left .main-nav-menu ul li a {

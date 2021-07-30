@@ -2,9 +2,9 @@ from django import forms
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import Group
-from django.forms import Textarea
+from django.forms import Textarea, TextInput, EmailInput
 
-from .models import User
+from .models import User, phone_regex
 
 
 class MyUserChangeForm(UserChangeForm):
@@ -47,3 +47,14 @@ class GroupAdminForm(forms.ModelForm):
         # Save many-to-many data
         self.save_m2m()
         return instance
+
+
+class UserRegisterForm(UserChangeForm):
+    class Meta(UserChangeForm.Meta):
+        model = User
+        fields = ('first_name', 'last_name', 'username', 'phone', 'email')
+        # fields = UserChangeForm.Meta.fields #+ ("email",)
+
+    def __init__(self, *args, **kwargs):
+        super(UserRegisterForm, self).__init__(*args, **kwargs)
+
