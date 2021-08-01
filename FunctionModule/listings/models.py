@@ -22,6 +22,9 @@ def get_image_path(instance, filename: str):
 
 
 class Listing(models.Model):
+    class Meta:
+        verbose_name_plural = "DS Bất động sản"
+
     realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, verbose_name=_("Đầu chủ"))
     transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,
                                         default=TransactionType.SELL, verbose_name=_("Hình thức giao dịch"))

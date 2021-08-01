@@ -19,7 +19,7 @@
 {% if not is_popup %}
   {% block breadcrumbs %}
     <div class="breadcrumbs">
-      <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+      <a href="{% url 'admin:index' %}"><i class="fas fa-home"></i>{% translate 'Trang chủ quản trị' %}</a>
       &rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
       &rsaquo; {% if has_view_permission %}
       <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}
@@ -51,8 +51,8 @@
         {% if save_on_top %}{% block submit_buttons_top %}{% submit_row %}{% endblock %}{% endif %}
         {% if errors %}
           <p class="errornote">
-            {% if errors|length == 1 %}{% translate "Please correct the error below." %}{% else %}
-              {% translate "Please correct the errors below." %}{% endif %}
+            {% if errors|length == 1 %}{% translate "Hoàn thành các trường bị lỗi bên dưới." %}{% else %}
+              {% translate "Hoàn thành các trường bị lỗi bên dưới." %}{% endif %}
           </p>
           {{ adminform.form.non_field_errors }}
         {% endif %}

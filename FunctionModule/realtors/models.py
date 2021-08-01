@@ -9,6 +9,9 @@ def default_hire_date():
 
 
 class Realtor(models.Model):
+    class Meta:
+        verbose_name_plural = "DS Đầu chủ"
+
     user = models.OneToOneField(User, on_delete=models.RESTRICT)
     hire_date = models.DateTimeField(default=default_hire_date, blank=True)
 

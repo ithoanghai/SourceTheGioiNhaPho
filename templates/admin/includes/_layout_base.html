@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n admin_urls admin_modify %}
 
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
@@ -34,7 +34,7 @@
     <!-- Breadcrumbs -->
     {% block breadcrumbs %}
         <div class="breadcrumbs">
-            <a href="{% url 'admin:index' %}"><i class="fas fa-home"></i> {% translate 'Trang chủ quản trị' %}</a>
+            <a href="{% url 'admin:index' %}"><i class="fas fa-home"></i></i> {% translate 'Trang chủ quản trị' %}</a>
             {% if title %} &rsaquo; {{ title }}{% endif %}
         </div>
     {% endblock %}

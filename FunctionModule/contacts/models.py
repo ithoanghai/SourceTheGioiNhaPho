@@ -4,6 +4,9 @@ from django.db import models
 
 
 class Contact(models.Model):
+    class Meta:
+        verbose_name_plural = "DS liên hệ"
+
     listing = models.CharField(max_length=200)
     listing_id = models.IntegerField()
     name = models.CharField(max_length=200)

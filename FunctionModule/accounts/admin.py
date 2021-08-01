@@ -99,6 +99,8 @@ class AccountAdmin(AuthUserAdmin):
 
 
 class GroupAdmin(admin.ModelAdmin):
+    class Meta:
+        verbose_name_plural = "DS Nhóm người dùng"
     form = GroupAdminForm
     filter_horizontal = ['permissions']
 

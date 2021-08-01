@@ -10,4 +10,4 @@ class AccountsConfig(AppConfig):
 
 class CustomAuthConfig(AppConfig):
     name = 'django.contrib.auth'
-    verbose_name = 'Xác thực & Phân quyền'
+    verbose_name = "Xác thực & Phân quyền"
