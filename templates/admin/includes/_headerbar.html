@@ -4,8 +4,8 @@
 <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
     <div class="container-fluid">
         <!-- Brand -->
-        <div class="navbar-brand col-md-1 col-sm-2 col-xs-2" style="width: 20%">
-            <a class="pt-0" href="/admin">
+        <div class="navbar-brand col-md-1 col-sm-2 col-xs-2" style="width: 15%">
+            <a class="pt-0" href="{% url "admin" %}">
                 <img src="{% static 'img/logo.svg' %}" width="80px" class="navbar-brand-img" alt="...">
             </a>
             <div id="branding">
@@ -14,7 +14,8 @@
         </div>
 
         <!-- Form -->
-        <form class="navbar-search col-md-4 col-sm-3 col-xs-0 form-inline mr-3 d-none d-md-flex ml-lg-auto" style="width: 50%">
+        <form class="navbar-search col-md-4 col-sm-3 col-xs-0 form-inline mr-3 d-none d-md-flex"
+              style="width: 50%">
             <div class="form-group mb-0">
                 <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
@@ -26,78 +27,81 @@
         </form>
 
         {% if user.is_authenticated %}
-        <div class="navbar-nav align-items-right row" style="width: auto">
-            {% if not is_popup %}
-                <!-- User -->
-                {% block usertools %}
-                 <ul class=" {% comment %}d-none{% endcomment %} d-md-flex" style="margin: 0">
-                    <li class="nav-item dropdown"  >
-                        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                            <div class=" dropdown-header noti-title" style="z-index: 5">
-                                <h6 class="text-overflow m-0">Chào mừng bạn!</h6>
-                            </div>
-                            <a href="{% url "profile" %}" class="dropdown-item">
-                                <i class="ni ni-single-02"></i>
-                                <span>Quản lý cá nhân</span>
+            <div class="navbar-nav align-items-right row" style="width: auto">
+                {% if not is_popup %}
+                    <!-- User -->
+                    {% block usertools %}
+                        <div class="nav-item dropdown">
+                            <a class="nav-link pr-0" href="{% url "profile" %}" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <div class="media align-items-center">
+                                    <span class="avatar {% comment %}avatar-sm{% endcomment %} rounded-circle">
+                                      <img alt="Image placeholder" src="{% static 'admin/img/team-4-800x800.jpg' %}">
+                                    </span>
+                                    <div class="media-body ml-2 d-none d-lg-block">
+                                      <span class="mb-0 text-sm  font-weight-bold">
+                                         {% block welcome-msg %}
+                                             {% translate 'Chào mừng bạn ' %}
+                                             <strong>{% firstof user.last_name user.first_name %}</strong>
+                                         {% endblock %}
+                                      </span>
+                                    </div>
+                                </div>
                             </a>
-                            {% comment %}<a href="{% url "profile" %}" class="dropdown-item">
+                            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                                <div class=" dropdown-header noti-title" style="z-index: 5">
+                                    <h6 class="text-overflow m-0">Chào mừng bạn!</h6>
+                                </div>
+                                <a href="{% url "profile" %}" class="dropdown-item">
+                                    <i class="ni ni-single-02"></i>
+                                    <span>Quản lý cá nhân</span>
+                                </a>
+                                {% comment %}<a href="{% url "profile" %}" class="dropdown-item">
                                 <i class="ni ni-settings-gear-65"></i>
                                 <span>Thiết lập</span>
                             </a>{% endcomment %}
-                            {% comment %}<a href="#" target="_blank" class="dropdown-item">
+                                {% comment %}<a href="#" target="_blank" class="dropdown-item">
                                 <i class="ni ni-support-16"></i>
                                 <span>Hỗ trợ</span>
                             </a>{% endcomment %}
-                            {% block userlinks %}
-                                {% if site_url %}
-                                <a href="{{ site_url }}" target="_blank" class="dropdown-item">
-                                <i class="ni ni-support-16"></i><span>{% translate 'Trang sản phẩm' %}</span>
-                                </a>
-                                {% endif %}
-                                {% if user.is_active and user.is_staff %}
-                                    {% url 'django-admindocs-docroot' as docsroot %}
-                                    {% if docsroot %}
-                                        <a href="{{ docsroot }}">{% translate 'Tài liệu' %}</a> /
+                                {% block userlinks %}
+                                    {% if site_url %}
+                                        <a href="{{ site_url }}" target="_blank" class="dropdown-item">
+                                            <i class="ni ni-support-16"></i><span>{% translate 'Trang sản phẩm' %}</span>
+                                        </a>
                                     {% endif %}
-                                {% endif %}
-                                {% if user.has_usable_password %}
-                                <a href="{% url 'admin:password_change' %}" target="_blank" class="dropdown-item">
-                                <i class="ni ni-support-16"></i><span>{% translate 'Đổi mật khẩu' %}</span>
+                                    {% if user.is_active and user.is_staff %}
+                                        {% url 'django-admindocs-docroot' as docsroot %}
+                                        {% if docsroot %}
+                                            <a href="{{ docsroot }}">{% translate 'Tài liệu' %}</a> /
+                                        {% endif %}
+                                    {% endif %}
+                                    {% if user.has_usable_password %}
+                                        <a href="{% url 'admin:password_change' %}" target="_blank"
+                                           class="dropdown-item">
+                                            <i class="ni ni-support-16"></i><span>{% translate 'Đổi mật khẩu' %}</span>
+                                        </a>
+                                    {% endif %}
+                                {% endblock %}
+                                <div class="dropdown-divider"></div>
+                                <a href="{% url 'logout' %}" class="dropdown-item">
+                                    <i class="ni ni-user-run"></i>
+                                    <span>Đăng xuất</span>
                                 </a>
-                                 {% endif %}
-                            {% endblock %}
-                            <div class="dropdown-divider"></div>
-                            <a href="{% url 'admin:logout' %}" class="dropdown-item">
-                                <i class="ni ni-user-run"></i>
-                                <span>Đăng xuất</span>
-                            </a>
-                        </div>
-                        <a class="nav-link pr-0" href="{% url "profile" %}" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            <div class="media align-items-center">
-                            <span class="avatar {% comment %}avatar-sm{% endcomment %} rounded-circle">
-                              <img alt="Image placeholder" src="{% static 'admin/img/team-4-800x800.jpg' %}">
-                            </span>
-                            <div class="media-body ml-2 d-none d-lg-block">
-                              <span class="mb-0 text-sm  font-weight-bold">
-                             {% block welcome-msg %}
-                                {% translate 'Chào mừng bạn ' %}
-                                <strong>{% firstof user.last_name user.first_name %}</strong>.
-                            {% endblock %}
-                              </span>
-                                </div>
                             </div>
-                        </a>
-                    </li>
-                </ul>
+                        </div>
+                    {% endblock %}
 
-                {% endblock %}
+                {% endif %}
 
-            {% endif %}
-        </div>
+
+            </div>
         {% endif %}
+
+        <button class=" toggle-nav-sidebar" id="toggle-nav-sidebar" style="width: 10%" aria-label="{% translate 'Menu admin' %}"></button>
 
     </div>
 </nav>
+
 <!-- End Navbar -->
 

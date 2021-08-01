@@ -1160,6 +1160,10 @@ header#home::before {
     height: 0 !important
 }
 
+.main-header .col-left .logo {
+    width: 100px
+}
+
 .main-header .col-right .top-menu ul li:not(.sub-menu) a .zmdi {
     padding: 0 4px 1px 0;
     color: #30333a;

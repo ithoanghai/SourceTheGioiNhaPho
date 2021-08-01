@@ -1,34 +1,47 @@
 {% load static i18n %}
 
 <head>
-  <title> Quản trị hệ thống Thế giới Nhà phố {% block title %}{% endblock %}</title>
+    <title> Quản trị hệ thống Thế giới Nhà phố {% block title %}{% endblock %}</title>
+    <!-- Favicon - loaded as static -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon" type="image/x-icon"/>
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %} " type="image/x-icon"/>
 
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  {% block blockbots %}
-    <meta name="robots" content="NONE,NOARCHIVE">
-  {% endblock %}
-  <!-- Favicon - loaded as static -->
-  <link href="{% static 'img/favicon.ico' %}" rel="icon" type="image/x-icon"/>
-  <link rel="shortcut icon" href="{% static 'img/favicon.ico' %} " type="image/x-icon"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  {% block extrastyle %}{% endblock %}
-  {% block extrahead %}{% endblock %}
-  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}">
-  <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}">
-  <!-- Icons -->
-  <link href="{% static 'admin/css/nucleo.css' %}" rel="stylesheet"/>
-  <link href="/static/admin/css/styles.css" rel="stylesheet"/>
-  <link rel="stylesheet" type="text/css" href="{% static "admin/css/base.css" %}">
-  <link rel="stylesheet" type="text/css" href="{% static "admin/css/nav_sidebar.css" %}">
-  <!-- CSS Files -->
-  <link href="{% static 'admin/css/admin-dashboard.css' %}" rel="stylesheet"/>
+    {% block blockbots %}
+        <meta name="robots" content="NONE,NOARCHIVE">
+    {% endblock %}
 
-  <!-- Specific CSS goes HERE -->
-  {% block stylesheets %}  {% endblock stylesheets %}
+    {% block extrastyle %}{% endblock %}
+    {% block extrahead %}{% endblock %}
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-          crossorigin="anonymous"></script>
+    <!-- Specific CSS goes HERE -->
+    {% block stylesheets %}
+        <!-- Style sheet CSS for admin page -->
+        {% comment %}{% if not is_popup and is_nav_sidebar_enabled %}{% endcomment %}
+            <link rel="stylesheet" type="text/css" href="{% static "admin/css/nav_sidebar.css" %}">
+       {% comment %} {% endif %}{% endcomment %}
+
+        {% if LANGUAGE_BIDI %}
+            <link rel="stylesheet" type="text/css"
+                  href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}">
+        {% endif %}
+
+        {% block responsive %}
+            <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+            <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}">
+            {% if LANGUAGE_BIDI %}
+                <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}">
+            {% endif %}
+        {% endblock %}
+        <link href="{% static "admin/css/base.css" %}" rel="stylesheet" type="text/css"/>
+
+        <!-- Custom CSS for admin page -->
+        <link href="{% static "admin/css/nucleo.css" %}" rel="stylesheet"/>
+        <link href="{% static "admin/css/custom-dashboard.css" %}" rel="stylesheet" type="text/css"/>
+
+    {% endblock stylesheets %}
+
 </head>

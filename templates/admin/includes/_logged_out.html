@@ -1,0 +1,14 @@
+{% extends "admin/includes/_layout_base.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% url 'admin:index' %}">{% translate 'Home' %}</a></div>{% endblock %}
+
+{% block nav-sidebar %}{% endblock %}
+
+{% block content %}
+
+<p>{% translate "Bạn là thành viên tích cực. Cảm ơn bạn đã hợp tác nhiệt tình với THẾ GIỚI NHÀ PHỐ." %}</p>
+<br>
+<p><a class="btn btn-primary" href="{% url 'admin:index' %}">{% translate 'Đăng nhập lại' %}</a></p>
+
+{% endblock %}

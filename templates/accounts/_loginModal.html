@@ -7,7 +7,7 @@
   <div class="popup-login-rv" v-if="isShowPopup">
 
     <div class="popup-fixed">
-      <form class="popup-form-login-rv" method="POST" action="{% url 'login_username' %}">
+      <form class="popup-form-login-rv" method="POST" action="{% url 'login' %}">
         <span class="popup-close-btn" v-on:click="closeModal"><i class="zmdi zmdi-hc-2x zmdi-close"></i></span>
         <div class="popup-info-form-up-login"><p class="login--title mb-40">Đăng nhập</p>
           <div class="btn-group__account">
@@ -22,18 +22,12 @@
           <input type="hidden" name="remember" id="id_remember" checked="checked">
           <div class="form-group username">
             <input name="username" type="text" placeholder="" required/>
-            <label class="error__star">
-              <i class="fas fa-user"></i>
-              <span>Tên đăng nhập hoặc email</span>
-            </label>
+            <label class="error__star"><i class="fas fa-user"></i><span>Tên đăng nhập hoặc email</span></label>
             <p class="error username-error" style="display: none;"></p>
           </div>
           <div class="form-group">
             <input name="password" type="password" placeholder="" required/>
-            <label class="error__star">
-              <i class="fas fa-lock"></i>
-              <span>Mật khẩu</span>
-            </label>
+            <label class="error__star"><i class="fas fa-lock"></i><span>Mật khẩu</span></label>
             <p class="error password-error" style="display: none;"></p>
           </div>
           <div class="butt-groups">

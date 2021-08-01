@@ -44,7 +44,7 @@ def listing(request, listing_id):
                          .filter(is_published=True, house_type=listing_detail.house_type,
                                  area=listing_detail.area)
                          .exclude(id=listing_id)
-                         .order_by('-list_date')[:10])
+                         .order_by('-list_date'))
     context = {
         'listing': listing_detail,
         'listings_neighborhood': listings_neighborhood,

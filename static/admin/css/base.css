@@ -7,7 +7,7 @@
 /* VARIABLE DEFINITIONS */
 :root {
   --primary: #5e72e4;
-  --secondary: #f7fafc;
+  --secondary: #dee5e3;
   --accent: #f5dd5d;
   --primary-fg: #400303;
 
@@ -30,7 +30,7 @@
   --link-selected-fg: #5b80b2;
 
   --hairline-color: #e8e8e8;
-  --border-color: #ccc;
+  --border-color: #eeb20e;
 
   --error-fg: #ba2121;
 
@@ -38,7 +38,7 @@
   --message-warning-bg: #ffc;
   --message-error-bg: #ffefef;
 
-  --darkened-bg: #f8f8f8; /* A bit darker than --body-bg */
+  --darkened-bg: #f3eded; /* A bit darker than --body-bg */
   --selected-bg: #e4e4e4; /* E.g. selected table cells */
   --selected-row: #ffc;
 
@@ -91,6 +91,12 @@
   }
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 html, body {
     height: 100%;
 }
@@ -101,7 +107,7 @@ body {
     font-size: 14px;
     font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     color: var(--body-fg);
-    background: var(--body-bg);
+    background-color: rgba(220, 243, 239, 0.5);
 }
 
 /* LINKS */
@@ -492,10 +498,11 @@ input[type=text], input[type=password], input[type=email], input[type=url],
 input[type=number], input[type=tel], textarea, select, .vTextField {
     border: 1px solid var(--border-color);
     border-radius: 4px;
-    padding: 5px 6px;
-    margin-top: 0;
+    padding: 0;
+    margin: 0;
     color: var(--body-fg);
     background-color: var(--body-bg);
+    width: 85%;
 }
 
 input[type=text]:focus, input[type=password]:focus, input[type=email]:focus,
@@ -564,7 +571,7 @@ input[type=button][disabled].default {
 
 .module {
     border: none;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     background: var(--body-bg);
     width: 100%;
 }
@@ -949,7 +956,7 @@ table#change-history tbody th {
     padding: 10px 40px;
     background: var(--header-bg);
     color: var(--header-color);
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 #header a:link, #header a:visited {

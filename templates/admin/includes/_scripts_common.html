@@ -1,9 +1,16 @@
-{% load static %}
+{% load static load_static %}
 
 <!--   Core   -->
 <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
 <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>
+
+<!--   Scripts Django admin   -->
+{% comment %}{% if not is_popup and is_nav_sidebar_enabled %}{% endcomment %}
+  <script src="{% static 'admin/js/nav_sidebar.js' %}" defer></script>
+{% comment %}{% endif %}{% endcomment %}
+
 <!--   Optional JS   -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 <script src="{% static 'admin/js/Chart.min.js' %} "></script>
 <script src="{% static 'admin/js/Chart.extension.js' %} "></script>
 <!--   G.Maps   -->

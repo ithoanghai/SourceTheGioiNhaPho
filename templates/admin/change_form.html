@@ -1,4 +1,4 @@
-{% extends "admin/admin_base.html" %}
+{% extends "admin/includes/_layout_base.html" %}
 {% load i18n admin_urls static admin_modify %}
 
 {% block extrahead %}
@@ -93,7 +93,7 @@
   </div>
 
   <!-- [MODAL FOR DISPLAY WARNINGS] -->
-  <div class="modal micromodal-slide" id="warning-modal" aria-hidden="true">
+{% comment %}  <div class="modal micromodal-slide" id="warning-modal" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
       <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="warning-modal-title">
         <header class="modal__header">
@@ -113,5 +113,5 @@
         </footer>
       </div>
     </div>
-  </div>
+  </div>{% endcomment %}
 {% endblock %}

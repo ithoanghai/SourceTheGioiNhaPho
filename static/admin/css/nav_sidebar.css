@@ -6,7 +6,7 @@
 
 .toggle-nav-sidebar {
     z-index: 20;
-    left: 0;
+    right: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,8 +22,8 @@
 }
 
 [dir="rtl"] .toggle-nav-sidebar {
-    border-left: 1px solid var(--hairline-color);
-    border-right: 0;
+    border-right: 1px solid var(--hairline-color);
+    border-left: 0;
 }
 
 .toggle-nav-sidebar:hover,
@@ -39,7 +39,7 @@
     border-top: 1px solid transparent;
     border-right: 1px solid var(--hairline-color);
     background-color: var(--body-bg);
-    overflow: auto;
+    overflow: scroll;
 }
 
 [dir="rtl"] #nav-sidebar {
@@ -107,7 +107,7 @@
 
 @media (max-width: 767px) {
     #nav-sidebar, #toggle-nav-sidebar {
-        display: inline;
+        display: flex;
     }
 
     .main > #nav-sidebar + .content,
@@ -119,11 +119,12 @@
 #nav-filter {
     width: 100%;
     box-sizing: border-box;
-    padding: 2px 5px;
-    margin: 5px 0;
+    padding: 10px 5px;
+    margin: 10px;
     border: 1px solid var(--border-color);
     background-color: var(--darkened-bg);
     color: var(--body-fg);
+    font-size: 12px;
 }
 
 #nav-filter:focus {

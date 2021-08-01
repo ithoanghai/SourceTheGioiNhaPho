@@ -5,14 +5,16 @@
 
 <html lang="{{ LANGUAGE_CODE|default:"vi" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 
+<!-- Head html-->
 {% include 'admin/includes/_head.html' %}
+<!-- End head html -->
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
       data-admin-utc-offset="{% now "Z" %}">
 <!-- Container -->
 <div id="container">
 
-    <!-- Header -->
+    <!-- Header admin page-->
     {% block header %}
         <div id="header">
             {% include "admin/includes/_headerbar.html" %}
@@ -34,7 +36,7 @@
     <div class="main" id="main">
         {% block nav-sidebar %}
             <!-- Side Nav Bar menu-->
-            {% include "admin/includes/nav_sidebar.html" %}
+            {% include "admin/includes/_nav_sidebar.html" %}
         {% endblock %}
 
         <!-- Content main -->
@@ -53,14 +55,17 @@
                 {% block pretitle %}{% endblock %}
                 {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
                 {% block content_subtitle %}{% if subtitle %}<h2>{{ subtitle }}</h2>{% endif %}{% endblock %}
+
                 <!-- Main Content -->
-                <div class="main-content">
+                <div class="content-main">
+                    <main>
                     {% block content %}{% block object-tools %}{% endblock %}
                         {{ content }}
                     {% endblock content %}
+                    </main>
                 </div>
                 <!-- END Main Content -->
-                {% block sidebar %}{% endblock %}
+
 
                 <br class="clear">
             </div>
@@ -73,7 +78,7 @@
     <!-- Header -->
     {% block footer %}
         <div id="footer">
-            {% include "admin/includes/footer.html" %}
+            {% include "admin/includes/_footer.html" %}
         </div>
     {% endblock %}
     <!-- END Header -->
@@ -83,9 +88,7 @@
 
 <!-- Specific JS goes HERE -->
 {% block javascripts %}
-    <script src="{% static 'admin/js/nav_sidebar.js' %}" defer></script>
-    <!-- Scripts for Admin -->
-    {% include "admin/includes/scripts.html" %}
+    {% include "admin/includes/_scripts_common.html" %}
 {% endblock javascripts %}
 
 </body>
