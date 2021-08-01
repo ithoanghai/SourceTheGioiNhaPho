@@ -6,7 +6,7 @@
 
 /* VARIABLE DEFINITIONS */
 :root {
-  --primary: #5e72e4;
+  --primary: #8d9ad9;
   --secondary: #dee5e3;
   --accent: #f5dd5d;
   --primary-fg: #400303;
@@ -59,7 +59,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary: #264b5d;
+    --primary: #759db0;
     --primary-fg: #eee;
 
     --body-fg: #eeeeee;
@@ -593,7 +593,7 @@ input[type=button][disabled].default {
     font-weight: 400;
     font-size: 13px;
     text-align: left;
-    background: var(--primary);
+    background: #b6bcd9;
     color: var(--header-link-color);
 }
 
@@ -891,7 +891,8 @@ table#change-history tbody th {
 }
 
 #content {
-    padding: 40px 40px;
+    /*padding: 40px 40px;*/
+    padding-top: 40px;
 }
 
 .dashboard #content {
