@@ -83,7 +83,7 @@ form ul.inline li {
     padding: 6px 0;
     margin-top: 0;
     margin-bottom: 0;
-    margin-left: 170px;
+    margin-left: 10px;
 }
 
 .aligned ul label {
@@ -260,11 +260,11 @@ body.popup .submit-row {
 .submit-row input {
     height: 35px;
     line-height: 15px;
-    margin: 0 0 0 5px;
+    margin: 5px;
 }
 
 .submit-row input.default {
-    margin: 0 0 0 8px;
+    margin: 5px;
     text-transform: uppercase;
 }
 
@@ -274,7 +274,7 @@ body.popup .submit-row {
 
 .submit-row p.deletelink-box {
     float: left;
-    margin: 0;
+   margin: 5px;
 }
 
 .submit-row a.deletelink {

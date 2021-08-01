@@ -311,7 +311,7 @@ table {
 }
 
 td, th {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 16px;
     border-bottom: 1px solid var(--hairline-color);
     vertical-align: top;
@@ -891,7 +891,7 @@ table#change-history tbody th {
 }
 
 #content {
-    padding: 20px 40px;
+    padding: 40px 40px;
 }
 
 .dashboard #content {

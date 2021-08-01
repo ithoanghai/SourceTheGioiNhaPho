@@ -90,6 +90,7 @@ class Listing(models.Model):
         "Gần trường mầm non, tiểu học, THCS,...Bệnh viện, Trung tâm spa, chăm sóc sức khoẻ, sắc đẹp..."))
 
     def __str__(self):
+        self.title = "Bất động sản"
         return self.title
 
     def save(self, *args, **kwargs):
