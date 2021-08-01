@@ -1,3 +1,9 @@
+/**,
+*::before,
+*::after {
+    box-sizing: border-box;
+}*/
+
 html {
     font-family: sans-serif;
     line-height: 1.15;
@@ -13428,9 +13434,11 @@ main {
     display: block;
 }
 
+/*
 main {
     overflow: hidden;
 }
+*/
 
 .bg-blue {
     background-color: #5e72e4 !important;

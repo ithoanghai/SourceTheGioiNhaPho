@@ -12,6 +12,7 @@
     justify-content: center;
     flex: 0 0 23px;
     width: 23px;
+    height: 50px;
     border: 0;
     border-right: 1px solid var(--hairline-color);
     background-color: var(--body-bg);
@@ -28,7 +29,7 @@
 
 .toggle-nav-sidebar:hover,
 .toggle-nav-sidebar:focus {
-    background-color: var(--darkened-bg);
+    background-color: orange;
 }
 
 #nav-sidebar {
@@ -38,7 +39,7 @@
     margin-left: -276px;
     border-top: 1px solid transparent;
     border-right: 1px solid var(--hairline-color);
-    background-color: var(--body-bg);
+/*    background-color: var(--body-bg);*/
     overflow: scroll;
 }
 
@@ -122,7 +123,7 @@
     padding: 10px 5px;
     margin: 10px;
     border: 1px solid var(--border-color);
-    background-color: var(--darkened-bg);
+/*    background-color: var(--darkened-bg);*/
     color: var(--body-fg);
     font-size: 12px;
 }

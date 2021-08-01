@@ -6,7 +6,15 @@
 <html lang="{{ LANGUAGE_CODE|default:"vi" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 
 <!-- Head html-->
-{% include 'admin/includes/_head.html' %}
+<head>
+  {% include 'admin/includes/_head.html' %}
+
+  {% block stylesheets %} {% endblock %}
+
+  {% block extrahead %}{% endblock %}
+
+  {% block extrastyle %}{% endblock %}
+</head>
 <!-- End head html -->
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
@@ -33,42 +41,33 @@
     <!-- END Breadcrumbs -->
 
     <!-- Main -->
-    <div class="main" id="main">
+    <div class="main shifted" id="main">
+      {% if not is_popup and is_nav_sidebar_enabled %}
         {% block nav-sidebar %}
             <!-- Side Nav Bar menu-->
             {% include "admin/includes/_nav_sidebar.html" %}
         {% endblock %}
-
-        <!-- Content main -->
-        <div class="content">
-            <!-- Messages -->
-            {% block messages %}
-                {% if messages %}
-                    <ul class="messagelist">{% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-                    {% endfor %}</ul>
-                {% endif %}
-            {% endblock messages %}
-            <!-- End Messages -->
-
-            <div id="content" class="{% block coltype %}colM{% endblock %}">
-                {% block pretitle %}{% endblock %}
-                {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
-                {% block content_subtitle %}{% if subtitle %}<h2>{{ subtitle }}</h2>{% endif %}{% endblock %}
-
-                <!-- Main Content -->
-                <div class="content-main">
-                    <main>
-                    {% block content %}{% block object-tools %}{% endblock %}
-                        {{ content }}
-                    {% endblock content %}
-                    </main>
-                </div>
-                <!-- END Main Content -->
-
-
-                <br class="clear">
-            </div>
+      {% endif %}
+      <div class="content">
+        {% block messages %}
+          {% if messages %}
+            <ul class="messagelist">{% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+            {% endfor %}</ul>
+          {% endif %}
+        {% endblock messages %}
+        <!-- Content -->
+        <div id="content" class="{% block coltype %}colM{% endblock %}">
+          {% block pretitle %}{% endblock %}
+          {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+          {% block content %}
+            {% block object-tools %}{% endblock %}
+            {{ content }}
+          {% endblock %}
+          {% comment %}{% block sidebar %}{% endblock %}{% endcomment %}
+          <br class="clear">
+        </div>
+        <!-- END Content -->
 
         </div>
     

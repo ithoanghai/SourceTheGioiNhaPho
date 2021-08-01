@@ -12,7 +12,7 @@
   --primary-fg: #400303;
 
   --body-fg: #333;
-  --body-bg: #fff;
+  --body-bg: #f1f1e7;
   --body-quiet-color: #666;
   --body-loud-color: #000;
 
@@ -38,7 +38,7 @@
   --message-warning-bg: #ffc;
   --message-error-bg: #ffefef;
 
-  --darkened-bg: #f3eded; /* A bit darker than --body-bg */
+  --darkened-bg: #e5f3d5; /* A bit darker than --body-bg */
   --selected-bg: #e4e4e4; /* E.g. selected table cells */
   --selected-row: #ffc;
 
@@ -89,12 +89,6 @@
     --close-button-bg: #333333;
     --close-button-hover-bg: #666666;
   }
-}
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
 }
 
 html, body {
@@ -501,8 +495,8 @@ input[type=number], input[type=tel], textarea, select, .vTextField {
     padding: 0;
     margin: 0;
     color: var(--body-fg);
-    background-color: var(--body-bg);
-    width: 85%;
+    /*background-color: var(--body-bg);
+    width: 85%;*/
 }
 
 input[type=text]:focus, input[type=password]:focus, input[type=email]:focus,
@@ -572,7 +566,7 @@ input[type=button][disabled].default {
 .module {
     border: none;
     margin-bottom: 10px;
-    background: var(--body-bg);
+    background: rgb(50 50 93 / 11%);
     width: 100%;
 }
 
