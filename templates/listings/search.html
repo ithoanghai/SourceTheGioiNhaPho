@@ -52,13 +52,15 @@
           {% include "listings/_searchFilterBar.html" %}
           {% include "listings/_searchResult.html" %}
         </div>
-
       </div>
+
       <contact-popup v-bind:show-contact-popup="showContactPopup"
                      v-bind:close-popup="closeContactProject"></contact-popup>
       <div class="search-map">
         <div class="map-container" id="search-map"></div>
       </div>
+
+      {% include "partials/_mobileFilter.html" %}
     </div>
   </div>
 

@@ -7,39 +7,17 @@
     Lưu tìm kiếm</a>{% endcomment %}
 </div>
 
-
 <div class="actionBar" v-cloak>
   <div class="filter">
     <ul>
+
       <li class="filter-item filter-item--mobile" v-click-outside="hideHouseFilters">
-        <a href="#" class="btnMobileFilter" v-on:click="toggleFilterType('houseType')" v-bind:class="{active: houseTypeFilter.length>0}">
+        <a href="#" class="btnMobileFilter" v-on:click="toggleFilterType('mobilePopupFilter')" v-bind:class="{active: houseTypeFilter.length>0}">
           <span>Bộ lọc</span>
           <span v-if="houseTypeFilter.length>0" class="mark">[[houseTypeFilter.length]]</span>
         </a>
-          {% comment %}<div class="DropdownMenu" v-bind:class="{expanded: showFilterType=='houseType'}">
-          <div>
-            <div class="row">
-              <div class="col col-ful">
-                <div class="inner">
-                  <p>Chọn loại bất động sản</p>
-                  <ul>
-                    <li v-for="item in houseTypes">
-                      <input v-bind:id="`list-check-item-${item.type}`" type="checkbox" name="houseTypeFilter"
-                             class="check" :value="item.type"/>
-                      <label v-bind:for="`list-check-item-${item.type}`">[[item.text]]</label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-{#              <button class="btn-primary btn-small btn-reset" v-on:click="resetHouseFilter">Đặt lại </button>#}
-              <button class="btn-primary btn-small btn-black-outline" v-on:click="cancelHouseFilter">Huỷ</button>
-              <button class="btn-primary btn-small btn-red-outline" v-on:click="applyHouseFilter">Áp dụng</button>
-            </div>
-          </div>
-        </div>{% endcomment %}
       </li>
+
       <li class="filter-item" v-click-outside="hideHouseFilters">
         <a href="#" v-on:click="toggleFilterType('houseType')" v-bind:class="{active: houseTypeFilter.length>0}">
           <span>Loại hình</span>
@@ -101,7 +79,7 @@
           <div class="row">
             <button v-on:click="resetPriceSlider" disabled="disabled" class="btn-primary btn-small btn-reset disabled">Đặt lại</button>
             <button v-on:click="hideHouseFilters" class="btn-primary btn-small btn-black-outline"> Huỷ</button>
-            <button class="btn-primary btn-small btn-red-outline" @click.prevent="applySliderPrice"> Áp dụng</button>
+            <button class="btn-primary btn-small btn-red-outline" v-on:click="applySliderPrice"> Áp dụng</button>
           </div>
         </div>
       </li>
@@ -135,7 +113,7 @@
           <div class="row">
            <button v-on:click="resetAreaSlider" disabled="disabled" class="btn-primary btn-small btn-reset disabled">Đặt lại</button>
             <button v-on:click="hideHouseFilters" class="btn-primary btn-small btn-black-outline">Huỷ</button>
-            <button @click.prevent="applySliderArea" class="btn-primary btn-small btn-red-outline">Áp dụng</button>
+            <button v-on:click="applySliderArea" class="btn-primary btn-small btn-red-outline">Áp dụng</button>
           </div>
         </div>
       </li>
