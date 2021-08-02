@@ -4598,6 +4598,10 @@ div > img {
     overflow: auto
 }
 
+.mobileFilter.show {
+    display: block !important;
+}
+
 .mobileFilter .inner {
     overflow: unset
 }
