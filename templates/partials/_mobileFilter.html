@@ -1,4 +1,4 @@
-<div class="mobileFilter show">
+<div class="mobileFilter" v-bind:class="{show: showFilterType=='mobilePopupFilter'}">
   <div class="inner">
     <div class="topFilter">
       <a href="#" class="btnBack"><i class="zmdi zmdi-arrow-left"></i></a>
@@ -8,50 +8,16 @@
     <div class="bodyFilter">
       <div class="row">
         <div class="col col-ful">
-          <div class="inner"><p>Chọn loại bất động sản</p>
-            <ul>
-              <li>
-                <input id="list-check-item-1-9" type="checkbox" class="check" value="1"/>
-                <label for="list-check-item-1-9">Căn hộ</label>
-              </li>
-              <li>
-                <input id="list-check-item-3-9" type="checkbox" class="check" value="3"/>
-                <label for="list-check-item-3-9">Pent-house</label>
-              </li>
-              <li>
-                <input id="list-check-item-9-9" type="checkbox"
-                       class="check" value="9"/>
-                <label for="list-check-item-9-9">Shop-house</label>
-              </li>
-              <li>
-                <input id="list-check-item-6-9" type="checkbox"
-                       class="check" value="6"/>
-                <label for="list-check-item-6-9">Office-tel</label>
-              </li>
-              <li>
-                <input id="list-check-item-8-9" type="checkbox"
-                       class="check" value="8"/>
-                <label for="list-check-item-8-9">Nhà phố</label>
-              </li>
-              <li>
-                <input id="list-check-item-4-9" type="checkbox"
-                       class="check" value="4"/>
-                <label for="list-check-item-4-9">Biệt thự</label>
-              </li>
-              <li>
-                <input id="list-check-item-32-9" type="checkbox" class="check" value="32"/>
-                <label for="list-check-item-32-9">Văn phòng</label>
-              </li>
-              <li>
-                <input id="list-check-item-34-9" type="checkbox" class="check" value="34">
-                <label for="list-check-item-34-9">Mặt bằng KD</label>
-              </li>
-              <li>
-                <input id="list-check-item-16-9" type="checkbox" class="check" value="16">
-                <label for="list-check-item-16-9">Đất nền</label>
-              </li>
-            </ul>
-          </div>
+            <div class="inner">
+              <p>Chọn loại bất động sản</p>
+              <ul>
+                <li v-for="item in houseTypes">
+                  <input v-bind:id="`list-check-item-mobile-${item.type}`" type="checkbox" name="houseTypeFilterMobile"
+                         class="check" :value="item.type"/>
+                  <label v-bind:for="`list-check-item-mobile-${item.type}`">[[item.text]]</label>
+                </li>
+              </ul>
+            </div>
         </div>
       </div>
       <div class="row">
