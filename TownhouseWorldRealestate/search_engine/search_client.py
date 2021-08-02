@@ -25,3 +25,4 @@ class SearchEngineClient(object):
 engine_client = SearchEngineClient()
 search_client: meilisearch.Client = engine_client.get_client()
 listing_search = search_client.index('listings')
+suggestions_search = search_client.index('suggestions')

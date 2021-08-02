@@ -59,17 +59,40 @@ def get_district_name(code):
         return ""
 
 
+def get_wards_by_district(district):
+    return ward_data[district]
+
+
+@functools.cache
+def get_ward(district, ward):
+    ward = [x for x in get_wards_by_district(district) if x['code'] == ward]
+    return ward[0]
+
+
 @functools.cache
 def get_ward_name(district, ward):
     try:
-        ward = [x for x in ward_data[district] if x['code'] == ward]
-        return ward[0]['name']
+        ward = get_ward(district, ward)
+        return ward['name']
     except (KeyError, IndexError):
         return ""
+
+
+def get_state(code):
+    return state_data[code]
 
 
 def get_all_states():
     return state_data
 
+
+def get_all_districts():
+    return all_districts
+
+
 def get_default_districts():
     return district_data['01']
+
+
+def get_district(code):
+    return all_districts[code]

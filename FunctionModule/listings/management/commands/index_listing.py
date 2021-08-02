@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 
 from FunctionModule.listings.models import Listing, ListingSerializer
-from FunctionModule.listings.search_engine import search_client
+from TownhouseWorldRealestate.search_engine import search_client
 
 
 class Command(BaseCommand):
