@@ -42,12 +42,12 @@
 
     <!-- Main -->
     <div class="main shifted" id="main">
-      {% if not is_popup and is_nav_sidebar_enabled %}
+      {% comment %}{% if not is_popup and is_nav_sidebar_enabled %}{% endcomment %}
         {% block nav-sidebar %}
             <!-- Side Nav Bar menu-->
             {% include "admin/includes/_nav_sidebar.html" %}
         {% endblock %}
-      {% endif %}
+      {% comment %}{% endif %}{% endcomment %}
       <div class="content">
         {% block messages %}
           {% if messages %}

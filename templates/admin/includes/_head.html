@@ -17,9 +17,9 @@
     <!-- Specific CSS goes HERE -->
     {% block stylesheets %}
         <!-- Style sheet CSS for admin page -->
-        {% if not is_popup and is_nav_sidebar_enabled %}
+        {% comment %}{% if not is_popup and is_nav_sidebar_enabled %}{% endcomment %}
             <link rel="stylesheet" type="text/css" href="{% static "admin/css/nav_sidebar.css" %}">
-        {% endif %}
+        {% comment %}{% endif %}{% endcomment %}
 
         {% if LANGUAGE_BIDI %}
             <link rel="stylesheet" type="text/css"
@@ -38,6 +38,7 @@
         <!-- Custom CSS for admin page -->
         <link href="{% static "admin/css/nucleo.css" %}" rel="stylesheet"/>
         <link href="{% static "admin/css/custom-dashboard.css" %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css"/>
 
     {% endblock stylesheets %}
 

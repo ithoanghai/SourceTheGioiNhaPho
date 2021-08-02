@@ -21,7 +21,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-search"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Tìm kiếm" type="text">
+                    <input class="form-control" placeholder="Tìm kiếm"  style="border-radius: 30px;" type="text">
                 </div>
             </div>
         </form>
@@ -77,7 +77,7 @@
                                         {% endif %}
                                     {% endif %}
                                     {% if user.has_usable_password %}
-                                        <a href="{% url 'admin:password_change' %}" target="_blank"
+                                        <a href="{% url 'password_change' %}" target="_blank"
                                            class="dropdown-item">
                                             <i class="ni ni-support-16"></i><span>{% translate 'Đổi mật khẩu' %}</span>
                                         </a>

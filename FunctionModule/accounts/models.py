@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser, Group
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
@@ -21,9 +21,6 @@ def split_url(url: str) -> str:
 phone_regex = RegexValidator(regex=r'^(09|03|07|08|05)+([0-9]{8})$',
                      message="Số điện thoại 10 số với chỉ các đầu số 09|03|07|08|05")
 
-class Group(Group):
-    class Meta:
-        verbose_name_plural = "DS Người dùng"
 
 class User(AbstractUser):
     class Meta:

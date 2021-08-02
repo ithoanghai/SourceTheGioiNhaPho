@@ -1,5 +1,7 @@
 from django.contrib import messages, auth
 from django.contrib.admin import site
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.db.models import Q
 from django.shortcuts import render, redirect
@@ -115,10 +117,8 @@ def logout_handler(request):
 
 def profile(request):
     app_list = site.get_app_list(request)
-    user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
 
     context = {
-        'contacts': user_contacts,
         'available_apps': app_list
     }
     if request.user.is_authenticated:
@@ -128,17 +128,26 @@ def profile(request):
 
 
 def password_change(request):
+    form = PasswordChangeForm(request.user, request.POST)
     app_list = site.get_app_list(request)
-    user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
-
     context = {
-        'contacts': user_contacts,
-        'available_apps': app_list
+        'available_apps': app_list,
+        'form': form
     }
-    if request.user.is_authenticated:
-        return render(request, 'accounts/change_password.html', context)
+    if request.method == 'POST':
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Mật khẩu của bạn đã được thay đổi, cập nhật thành công!')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Hãy hoàn thành các lỗi ở dưới.')
     else:
-        return redirect('index')
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/change_password.html', context)
+
+
+
 
 
 def social_login_cancelled(request):

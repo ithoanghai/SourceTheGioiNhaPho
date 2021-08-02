@@ -3,82 +3,82 @@
 {% load static i18n %}
 {% block title %} {% trans 'Thông tin cá nhân' %} {% endblock title %}
 
+
 {% block content %}
     <!-- Header -->
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" 
+    <div class="header d-flex align-items-center"
          style="min-height: 310px; height: 310px; background-image: url({% static 'images/service/image6.jpg' %}); background-size: 320px ; background-position: center top;">
       <!-- Mask -->
       <span class="mask bg-gradient-default opacity-2"></span>
       <!-- Header container -->
       <div class="container-fluid d-flex align-items-center">
-        <div class="row">
+        <div class="row mt--7">
           <div class="col-lg-7 col-md-10">
-            <h1 class="display-4 text-white">{% trans 'Chào bạn' %}  {{ user.first_name }} {{ user.last_name }} </h1>
-            <p class="text-white mt-0 mb-5">{% trans 'Đây là trang hồ sơ cá nhân của bạn. Bạn có thể xem công việc đã thực hiện, quản lý các dự án hoặc nhiệm vụ được giao' %} </p>
+            <h1 class="display-4 text-blue">{% trans 'Chào bạn' %}  {{ user.first_name }} {{ user.last_name }} </h1>
+            <p class="text-blue mt-0 mb-5">{% trans 'Đây là trang hồ sơ cá nhân của bạn. Bạn có thể xem công việc đã thực hiện, quản lý các dự án hoặc nhiệm vụ được giao' %} </p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt--6">
 
-      <div class="row">
-        <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+        <div class="row col-xl-12">
+        <div class="col-xl-3 order-xl-2 mb-5 mb-xl-0">
           <div class="card card-profile shadow">
             <div class="row justify-content-center">
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
-            {% if not is_popup %}
-                <!-- User -->
-                {% block usertools %}
-                 <ul class="d-md-flex" style="margin: 0">
-                    <li class="nav-item dropdown"  >
-                        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                            <a href="{% url "profile" %}" class="dropdown-item">
-                                <i class="ni ni-single-02"></i>
-                                <span>Thông tin cá nhân</span>
-                            </a>
-                            <a href="{% url "profile" %}" class="dropdown-item">
-                                <i class="ni ni-settings-gear-65"></i>
-                                <span>Thiết lập</span>
-                            </a>
-                            </a>
-                            {% block userlinks %}
-                                {% if site_url %}
-                                <a href="{{ site_url }}" target="_blank" class="dropdown-item">
-                                <i class="ni ni-support-16"></i><span>{% translate 'Trang sản phẩm' %}</span>
-                                </a>
-                                {% endif %}
-                                {% if user.is_active and user.is_staff %}
-                                    {% url 'django-admindocs-docroot' as docsroot %}
-                                    {% if docsroot %}
-                                        <a href="{{ docsroot }}">{% translate 'Tài liệu' %}</a> /
-                                    {% endif %}
-                                {% endif %}
-                                {% if user.has_usable_password %}
-                                <a href="{% url 'password_change' %}" target="_blank" class="dropdown-item">
-                                <i class="ni ni-support-16"></i><span>{% translate 'Đổi mật khẩu' %}</span>
-                                </a>
-                                 {% endif %}
-                            {% endblock %}
-                            <div class="dropdown-divider"></div>
-                            <a href="{% url 'logout' %}" class="dropdown-item">
-                                <i class="ni ni-user-run"></i>
-                                <span>{% translate 'Đăng xuất' %}</span>
-                            </a>
-                        </div>
-                        <a class="nav-link pr-0" href="{% url "profile" %}" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            <div class="align-items-center">
-                              <img src="{% static 'admin/img/team-4-800x800.jpg' %}" class="rounded-circle">
-                             </div>
-                        </a>
-                    </li>
-                </ul>
+                   <a class="nav-link pr-0" href="{% url "profile" %}" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <div class="align-items-center">
+                          <img src="{% static 'admin/img/team-4-800x800.jpg' %}" class="rounded-circle">
+                         </div>
+                    </a>
+                  {% if not is_popup %}
+                    <!-- User -->
+                    {% block usertools %}
+                         <ul class="d-md-flex" style="margin: 0">
+                            <li class="nav-item dropdown"  >
+                                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                                    <a href="{% url "profile" %}" class="dropdown-item">
+                                        <i class="ni ni-single-02"></i>
+                                        <span>Thông tin cá nhân</span>
+                                    </a>
+                                    <a href="{% url "profile" %}" class="dropdown-item">
+                                        <i class="ni ni-settings-gear-65"></i>
+                                        <span>Thiết lập</span>
+                                    </a>
+                                    </a>
+                                    {% block userlinks %}
+                                        {% if site_url %}
+                                        <a href="{{ site_url }}" target="_blank" class="dropdown-item">
+                                        <i class="ni ni-support-16"></i><span>{% translate 'Trang sản phẩm' %}</span>
+                                        </a>
+                                        {% endif %}
+                                        {% if user.is_active and user.is_staff %}
+                                            {% url 'django-admindocs-docroot' as docsroot %}
+                                            {% if docsroot %}
+                                                <a href="{{ docsroot }}">{% translate 'Tài liệu' %}</a> /
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if user.has_usable_password %}
+                                        <a href="{% url 'password_change' %}" target="_blank" class="dropdown-item">
+                                        <i class="ni ni-support-16"></i><span>{% translate 'Đổi mật khẩu' %}</span>
+                                        </a>
+                                         {% endif %}
+                                    {% endblock %}
+                                    <div class="dropdown-divider"></div>
+                                    <a href="{% url 'logout' %}" class="dropdown-item">
+                                        <i class="ni ni-user-run"></i>
+                                        <span>{% translate 'Đăng xuất' %}</span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    {% endblock %}
 
-                {% endblock %}
-
-            {% endif %}
+                    {% endif %}
                 </div>
               </div>
             </div>
@@ -103,7 +103,8 @@
 
                 <div class="h5 mt-4">
 
-                  <i class="ni business_briefcase-24 mr-2"></i>Giám đốc Kinh doanh - Hoàng Mai
+                  <i class="ni business_briefcase-24 mr-2"></i>{{ request.user.email }}
+                    Giám đốc Kinh doanh - Hoàng Mai
                 </div>
                 <div class="h5 mt-4">
                   <i class="ni business_briefcase-24 mr-2"></i>Chuyên viên Cấp 6
@@ -145,7 +146,7 @@
                 <div class="col-8">
                   <h3 class="mb-0">Quản lý tài khoản cá nhân</h3>
                 </div>
-                <div class="col-4 text-right">
+                <div class="col-3 text-right">
                   <a href="#!" class="btn btn-sm btn-primary">Thiết lập</a>
                 </div>
               </div>
@@ -227,13 +228,13 @@
         </div>
       </div>
 
-    <div class="row">
+        <div class="row">
         <div class="col-xl-8 order-xl-1">
           <div class="card bg-secondary shadow">
             <div class="card-header bg-white border-0">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Lịch sử giao dịch</h3>
+                  <h3 class="mb-0">Lịch sử liên hệ giao dịch</h3>
                 </div>
                 {% comment %}<div class="col-4 text-right">
                   <a href="#!" class="btn btn-sm btn-primary">Thiết lập</a>
@@ -242,12 +243,12 @@
             </div>
             <div class="card-body">
                 {% if contacts %}
-                    <p>{% trans "Danh sách sản phẩm đã yêu cầu" %}</p>
+                    <p>{% trans "Danh sách liên hệ đã yêu cầu" %}</p>
                     <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">{% trans "Thuộc tính" %}</th>
+                            <th scope="col">{% trans "Sản phẩm BĐS" %}</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -258,14 +259,14 @@
                                 <td>{{ contact.listing }}</td>
                                 <td>
                                     <a class="btn btn-light"
-                                       href="{% url 'listing' contact.listing_id %}">{% trans "Xem danh sách" %}</a>
+                                       href="{% url 'listing' contact.listing_id %}">{% trans "Xem sản phẩm" %}</a>
                                 </td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
                 {% else %}
-                    <p>{% trans "Bạn chưa có tương tác sản phẩm nào" %}</p>
+                    <p>{% trans "Bạn chưa có tương tác liên hệ sản phẩm nào" %}</p>
                 {% endif %}
             </div>
           </div>

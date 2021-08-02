@@ -68,7 +68,7 @@
                         {% endif %}
                         <li>
                             {% if user.has_usable_password %}
-                                <a href="{% url 'admin:password_change' %}"> {% translate 'Đổi mật khẩu' %}</a>
+                                <a href="{% url 'password_change' %}"> {% translate 'Đổi mật khẩu' %}</a>
                             {% endif %}
                         </li>
             {% comment %}            <li>
