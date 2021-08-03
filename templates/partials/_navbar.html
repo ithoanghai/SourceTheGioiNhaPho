@@ -71,12 +71,16 @@
         <span>Tìm Kiếm</span>
       </button>
       <ul class="recent-search" v-show="suggestions.length && isFocus">
-        <li v-for="suggestion in suggestions" :key="suggestion.type" class=""
+        <li v-for="suggestion in suggestions" :key="suggestion.type" class="search-result"
             v-bind:class="{'search-result-type-heading': suggestion.isHeader}">
             <span v-if="suggestion.isHeader">
               <strong>${ suggestion.text }$</strong>
             </span>
-          <span v-else><a v-bind:href="suggestion.link">${ suggestion.text }$ </a></span>
+          <span v-else>
+            <a v-bind:href="suggestion.link">
+              ${ suggestion.text }$ <i v-if="suggestion.subText">${ suggestion.subText }$</i>
+            </a>
+          </span>
         </li>
       </ul>
     </div>

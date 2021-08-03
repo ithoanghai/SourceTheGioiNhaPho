@@ -31,30 +31,47 @@ new Vue({
         }
     },
     created() {
+
+        const getHeaderText = (itemType) => {
+            switch (itemType) {
+                case 'area':
+                    return 'Khu vực';
+                case 'street':
+                    return 'Đường';
+                case 'urban_area':
+                    return 'Khu dân cư'
+                default:
+                    return 'Khu vực'
+            }
+        }
+
         this.getAutoComplete = _.debounce(async (q) => {
             const resp = await axios.get(`/api/s-suggest/sell/${q}`)
             if (resp && resp.status && resp.status == 200) {
                 let suggestions = [];
+                let headers = {};
                 for (const item of resp.data) {
-                    if (item.type == 'area') {
+                    console.log(item);
+                    if (!(item.type in headers)) {
                         suggestions.push({
                             code: "",
-                            text: "Khu vực",
+                            text: getHeaderText(item.type),
                             subText: "",
                             link: "",
                             isHeader: true,
                         })
+                        headers[item.type] = 1
                     }
-                    for (const record of item.records) {
+                    if (item.sub_type !== 'state') {
                         suggestions.push({
-                            code: record.code,
-                            text: record.name,
-                            subText: "",
-                            link: `/listings/search?district=${record.slug}`,
+                            code: item.id,
+                            text: item.text,
+                            subText: item.sub_text,
+                            link: `/listings/search?keywords=${item.text}`,
                             isHeader: false,
-
                         })
                     }
+
                 }
                 this.suggestions = suggestions;
             }

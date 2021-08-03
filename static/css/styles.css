@@ -1173,3 +1173,11 @@ textarea:focus, input:focus {
         height: 420px
     }
 }
+
+.recent-search .search-result i {
+    padding-left: 4px;
+    color: #838383;
+}
+.recent-search .search-result a {
+    text-decoration: none;
+}

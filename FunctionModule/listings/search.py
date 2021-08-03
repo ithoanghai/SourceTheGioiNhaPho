@@ -1,12 +1,13 @@
 from django.db.models import Q
 from django.utils.text import slugify
 
+from TownhouseWorldRealestate.search_engine import listing_search, suggestions_search
 from .models import Listing
-from .search_engine import listing_search
 from ..cadastral.constants import district_data
+from ..cadastral.lookups import get_district, get_state, get_state_name, get_ward
 
 
-def search_by_keywords(q: str, limit: int = 10, offset: int = 0,):
+def search_by_keywords(q: str, limit: int = 10, offset: int = 0, ):
     if not q:
         return []
     results = listing_search.search(q, {
@@ -14,6 +15,20 @@ def search_by_keywords(q: str, limit: int = 10, offset: int = 0,):
         'offset': offset
     })
     return results
+
+
+def get_suggestions(q: str, limit: int = 50, offset: int = 0, ):
+    if not q:
+        return []
+    try:
+        results = suggestions_search.search(q, {
+            'limit': limit,
+            'offset': offset
+        })
+        return results["hits"]
+    except Exception as e:
+        print(e)
+        return []
 
 
 def prepare_listing_queryset(input_params):
@@ -123,3 +138,52 @@ def prepare_listing_queryset(input_params):
             queryset_list = queryset_list.order_by('-list_date')
 
     return queryset_list
+
+def prepare_index_from_listing(listing):
+    suggestions_data = []
+    street = listing.street
+    district = get_district(listing.district)
+    street_id = slugify(f'{street} {district["path"]}'.lower().replace('đ', 'd').replace('õ', 'o'))
+    suggestions_data.append({
+        "id": street_id,
+        "type": 'street',
+        'sub_type': '',
+        "text": street,
+        "sub_text": district['path'],
+    })
+    state = get_state(listing.state)
+    suggestions_data.append({
+        "id": state['code'],
+        "type": 'area',
+        'sub_type': 'state',
+        "text": state['name'],
+        "sub_text": '',
+    })
+    suggestions_data.append({
+        "id": district['code'],
+        "type": 'area',
+        'sub_type': 'district',
+        "text": district['name'],
+        "sub_text": get_state_name(district['parent_code'])
+    })
+    if listing.urban_area:
+        suggestions_data.append({
+            "id": slugify(f"{state['name']}-{listing.urban_area}"
+                          .lower().replace('đ', 'd').replace('õ', 'o')),
+            "type": 'urban_area',
+            'sub_type': '',
+            'text': listing.urban_area,
+            'sub_text': district['path'],
+        })
+
+    if listing.ward:
+        ward = get_ward(listing.district, listing.ward)
+        suggestions_data.append({
+            "id": ward['code'],
+            "type": 'area',
+            'sub_type': 'ward',
+            "text": ward['name'],
+            "sub_text": district['path'],
+        })
+
+    return suggestions_data
