@@ -12,10 +12,10 @@
           >
             <span><i>Xem chi tiết</i></span>
           </a>
-          <button class="btn-favorite btn-favorite__v2 " data-action="favorite" data-id="{{ listing.id }}"
-            data-alias="{{ listing.title }}"
-            data-type="sale_property" data-favorited="false"
-            class="btn-favorite zmdi zmdi-favorite-outline"></button>
+          <button data-action="favorite" data-id="{{ listing.id }}"
+                  data-alias="{{ listing.title }}"
+                  data-type="sale_property" data-favorited="false"
+                  class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>
           <div class="label-group">
             <label class="label-primary unique p-1"><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></label>
             <label v-if="listing.is_exclusive" class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
@@ -67,7 +67,7 @@
             </h4>
             <h4>
               <a :href="`/listings/search?district=${listing.district}`"
-                    title=""><b>[[getDistrict(listing.district)]]</b></a>
+                 title=""><b>[[getDistrict(listing.district)]]</b></a>
             </h4>
           </div>
           <ul class="listing-info">
@@ -82,14 +82,14 @@
           <div class="action-group">
             <div class="action-group--left">
               <div class="listing-price">[[listing.price]] {% trans "tỷ" %}</div>
-                <label class="label-primary unique p-1"><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></label>
-                <label v-if="listing.is_exclusive" class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
-           </div>
+              <label class="label-primary unique p-1"><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></label>
+              <label v-if="listing.is_exclusive" class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
+            </div>
             <div class="action-group--right action-group--cta">
-               <button class="btn-favorite btn-favorite__v2 " data-action="favorite" data-id="{{ listing.id }}"
-                data-alias="{{ listing.title }}"
-                data-type="sale_property" data-favorited="false"
-                class="btn-favorite zmdi zmdi-favorite-outline"></button>
+              <button data-action="favorite" data-id="{{ listing.id }}"
+                      data-alias="{{ listing.title }}"
+                      data-type="sale_property" data-favorited="false"
+                      class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>
             </div>
           </div>
         </div>

@@ -3,53 +3,12 @@
 <script type="text/javascript" src="{% load_static 'js/jquery-3.3.1.min.js' %}"></script>
 <script type="text/javascript" src="{% load_static "js/vue-2.16.12.min.js" %}"></script>
 <script type="text/javascript" src="{% load_static 'js/vue-resource-1.5.2.min.js' %}"></script>
-<script>
-    Vue.directive('click-outside', {
-        bind: function (el, binding, vnode) {
-            el.eventSetDrag = function () {
-                el.setAttribute('data-dragging', 'yes');
-            }
-            el.eventClearDrag = function () {
-                el.removeAttribute('data-dragging');
-            }
-            el.eventOnClick = function (event) {
-                var dragging = el.getAttribute('data-dragging');
-                // Check that the click was outside the el and its children, and wasn't a drag
-                if (!(el == event.target || el.contains(event.target)) && !dragging) {
-                    // call method provided in attribute value
-                    vnode.context[binding.expression](event);
-                }
-            };
-            document.addEventListener('touchstart', el.eventClearDrag);
-            document.addEventListener('touchmove', el.eventSetDrag);
-            document.addEventListener('click', el.eventOnClick);
-            document.addEventListener('touchend', el.eventOnClick);
-        }, unbind: function (el) {
-            document.removeEventListener('touchstart', el.eventClearDrag);
-            document.removeEventListener('touchmove', el.eventSetDrag);
-            document.removeEventListener('click', el.eventOnClick);
-            document.removeEventListener('touchend', el.eventOnClick);
-            el.removeAttribute('data-dragging');
-        },
-    });
-    const removeElements = (elms) => [...elms].forEach(el => el.remove());
-    function hideAlert(timeout=5000) {
-        setTimeout(() => {
-           removeElements(document.getElementsByClassName('alert'));
-        }, timeout)
-    }
-    window.addEventListener("load", function () {
-        hideAlert();
-    })
-
-</script>
-
+>
 {#  <script src="{% load_static 'js/jquery-ui.min.js' %}"></script>#}
-
 <script defer src="{% load_static 'js/feedback-modal.js' %}"></script>
 <script defer src="{% load_static 'js/header-v2.min.js' %}"></script>
 <script defer src="{% load_static 'js/service-sale.min.js' %}"></script>
-
+<script defer type="text/javascript" src="{% load_static 'js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% load_static 'js/vendors.min.js' %}"></script>
 <script defer src="{% load_static 'js/login-popup.js' %}"></script>
 
@@ -65,7 +24,19 @@
 <!-- Your Plugin chat code -->
 <div id="fb-customer-chat" class="fb-customerchat">
 </div>
+<script>
+    Vue.directive('click-outside', VueClickOutside());
+    const removeElements = (elms) => [...elms].forEach(el => el.remove());
+    function hideAlert(timeout=5000) {
+        setTimeout(() => {
+           removeElements(document.getElementsByClassName('alert'));
+        }, timeout)
+    }
+    window.addEventListener("load", function () {
+        hideAlert();
+    })
 
+</script
 <script>
     var chatbox = document.getElementById('fb-customer-chat');
     chatbox.setAttribute("page_id", "108470991299693");

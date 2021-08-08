@@ -74,6 +74,7 @@ BUILT_IN_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.postgres',
 ]
 
 INSTALLED_APPS = BUILT_IN_APPS + THIRD_PARTIES + MODULES

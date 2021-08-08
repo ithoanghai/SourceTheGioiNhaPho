@@ -1,0 +1,195 @@
+<div class="mobileFilter" v-bind:class="{show: showMobileFilter}">
+  <div class="inner">
+    <div class="topFilter">
+      <a href="#" class="btnBack" v-on:click="toggleMobileFilter">
+        <i class="zmdi zmdi-arrow-left"></i>
+      </a>
+      <div class="mobile-filter-title">BỘ LỌC</div>
+{#      <a href="#" class="btnReset"><i class="zmdi zmdi-replay"></i> <span>Đặt lại</span></a>#}
+    </div>
+    <div class="bodyFilter">
+      <div class="row">
+        <div>
+          <div>
+            <div class="col col-ful">
+              <div class="inner">
+                <p>Chọn loại bất động sản</p>
+                <ul>
+                  <li v-for="item in houseTypes">
+                    <input v-bind:id="`mobile-check-item-${item.type}`"
+                           v-bind:checked="houseTypeFilter[item.type] === item.type"
+                           type="checkbox" name="houseTypeFilter" class="check" :value="item.type"/>
+                    <label v-bind:for="`mobile-check-item-${item.type}`">[[item.text]]</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <div>
+            <div class="col col-ful">
+              <div class="inner"><p>Chọn số phòng ngủ</p>
+                <ul>
+                  <li>
+                    <input id="1-bedrooms" name="bedrooms" type="checkbox" class="check" value="1"/>
+                    <label for="1-bedrooms">1 phòng ngủ</label>
+                  </li>
+                  <li>
+                    <input id="2-bedrooms" name="bedrooms" type="checkbox" class="check" value="2"/>
+                    <label for="2-bedrooms">2 phòng ngủ</label>
+                  </li>
+                  <li>
+                    <input id="3-bedrooms" name="bedrooms" type="checkbox" class="check" value="3"/>
+                    <label for="3-bedrooms">3 phòng ngủ</label>
+                  </li>
+                  <li>
+                    <input id="4-bedrooms" name="bedrooms" type="checkbox" class="check" value="4"/>
+                    <label for="4-bedrooms">4 phòng ngủ</label>
+                  </li>
+                  <li>
+                    <input id="5-bedrooms" name="bedrooms" type="checkbox" class="check" value="5"/>
+                    <label for="5-bedrooms">5 phòng ngủ</label>
+                  </li>
+                  <li>
+                    <input id="6+-bedrooms" name="bedrooms" type="checkbox" class="check" value="6+"/>
+                    <label for="6+-bedrooms">6+ phòng ngủ</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="inner sliderFilter">
+          <p>Chọn khoảng giá (tỷ)</p>
+          <div class="runner">
+            <input ref="mobilePriceInput"/>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="inner sliderFilter">
+          <p>Chọn diện tích</p>
+          <div class="runner">
+            <input ref="mobileAreaInput"/>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div>
+            <div class="col col-ful">
+              <div class="inner">
+                <p>Chọn số phòng tắm</p>
+                <ul>
+                  <li>
+                    <input id="bathrooms-all" name="bathrooms" type="radio" value="all"/>
+                    <label for="bathrooms-all" class="radio">Tất cả</label>
+                  </li>
+                  <li>
+                    <input id="bathrooms-1" name="bathrooms" type="radio" value="1"/>
+                    <label for="bathrooms-1" class="radio">1 phòng tắm</label>
+                  </li>
+                  <li>
+                    <input id="bathrooms-2" name="bathrooms" type="radio" value="2"/>
+                    <label for="bathrooms-2" class="radio">2 phòng tắm</label>
+                  </li>
+                  <li>
+                    <input id="bathrooms-3" name="bathrooms" type="radio" value="3"/>
+                    <label for="bathrooms-3" class="radio">3 phòng tắm</label>
+                  </li>
+                  <li>
+                    <input id="bathrooms-4" name="bathrooms" type="radio" value="4"/>
+                    <label for="bathrooms-4" class="radio">4 phòng tắm</label>
+                  </li>
+                  <li>
+                    <input id="bathrooms-5+" name="bathrooms" type="radio" value="5+"/>
+                    <label for="bathrooms-5+" class="radio">5+ phòng tắm</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div>
+            <div class="col col-ful">
+              <div class="inner"><p>Chọn hướng</p>
+                <ul>
+                  <li>
+                    <input id="direction-east" name="direction" type="checkbox" class="check" value="east"/>
+                    <label for="direction-east">Đông</label>
+                  </li>
+                  <li>
+                    <input id="direction-west" name="direction" type="checkbox" class="check" value="west"/>
+                    <label for="direction-west">Tây</label>
+                  </li>
+                  <li>
+                    <input id="direction-south" name="direction" type="checkbox" class="check" value="south"/>
+                    <label for="direction-south">Nam</label>
+                  </li>
+                  <li>
+                    <input id="direction-north" name="direction" type="checkbox" class="check" value="north"/>
+                    <label for="direction-north">Bắc</label>
+                  </li>
+                  <li>
+                    <input id="direction-south-east" name="direction" type="checkbox" class="check" value="south-east"/>
+                    <label for="direction-south-east">Đông Nam</label>
+                  </li>
+                  <li>
+                    <input id="direction-south-west" name="direction" type="checkbox" class="check" value="south-west"/>
+                    <label for="direction-south-west">Tây Nam</label>
+                  </li>
+                  <li>
+                    <input id="direction-north-east" name="direction" type="checkbox" class="check" value="north-east"/>
+                    <label for="direction-north-east">Đông Bắc</label>
+                  </li>
+                  <li>
+                    <input id="direction-north-west" name="direction" type="checkbox" class="check" value="north-west"/>
+                    <label for="direction-north-west">Tây Bắc</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div> <!----></div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div>
+            <div class="col col-ful">
+              <div class="inner"><p>Chọn trạng thái</p>
+                <ul>
+                  <li>
+                    <input id="tgnp_is_verified" name="is_verified" type="checkbox" class="check" value="true"/>
+                    <label for="tgnp_is_verified">Đăng thường</label>
+                  </li>
+                  <li>
+                    <input id="tgnp_is_exclusive" name="is_exclusive" type="checkbox" class="check" value="true"/>
+                    <label for="tgnp_is_exclusive">TGNP độc quyền</label>
+                  </li>
+                  <li>
+                    <input id="status-selling" name="status" type="checkbox" class="check" value="selling,sale"/>
+                    <label for="status-selling">Đang GD</label>
+                  </li>
+                  <li>
+                    <input id="status-others" name="status" type="checkbox" class="check" value="sold,stop_selling"/>
+                    <label for="status-others">Đã bán/thuê</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottomFilter">
+      <a @click.prevent="applyMobileFilter" href="#" class="btn-primary btn-red btn-medium">Áp dụng</a>
+    </div>
+  </div>
+</div>

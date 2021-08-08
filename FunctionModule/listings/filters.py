@@ -1,21 +1,10 @@
-from __future__ import absolute_import
 
-try:
-    from django_filters import BaseInFilter
-
-    _df_version = 2
-except ImportError:
-    from django_filters.fields import Lookup
-
-    _df_version = 1.1
-
-from django_filters import FilterSet, CharFilter
+from django_filters import FilterSet, CharFilter, BaseInFilter
 
 from FunctionModule.listings.models import Listing
 
-if _df_version >= 2:
-    class MultipleCharFilter(BaseInFilter, CharFilter):
-        pass
+class MultipleCharFilter(BaseInFilter, CharFilter):
+    pass
 
 
 class ListingFilter(FilterSet):

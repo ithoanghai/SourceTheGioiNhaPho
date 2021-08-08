@@ -1,3 +1,4 @@
+var log = console.log;
 new Vue({
     el: '#topSearchForm',
     // delimiters: ["[[", "]]"],
@@ -34,26 +35,29 @@ new Vue({
             const resp = await axios.get(`/api/s-suggest/sell/${q}`)
             if (resp && resp.status && resp.status == 200) {
                 let suggestions = [];
+                let headers = {};
                 for (const item of resp.data) {
-                    if (item.type == 'area') {
+                    console.log(item);
+                    if (!(item.type in headers)) {
                         suggestions.push({
                             code: "",
-                            text: "Khu vực",
+                            text: getHeaderText(item.type),
                             subText: "",
                             link: "",
                             isHeader: true,
                         })
+                        headers[item.type] = 1
                     }
-                    for (const record of item.records) {
+                    if (item.sub_type !== 'state') {
                         suggestions.push({
-                            code: record.code,
-                            text: record.name,
-                            subText: "",
-                            link: `/listings/search?district=${record.slug}`,
+                            code: item.id,
+                            text: item.text,
+                            subText: item.sub_text,
+                            link: `/listings/search?keywords=${item.text}`,
                             isHeader: false,
-
                         })
                     }
+
                 }
                 this.suggestions = suggestions;
             }
@@ -317,13 +321,19 @@ new Vue({
     data() {
         return {
             showFilterType: '',
+            showMobileFilter: false,
             houseTypes: houseTypes,
-            houseTypeFilter: [],
-            tmpHouseTypeFilter: [],
+            houseTypeFilter: {},
             minPrice: 0,
-            maxPrice: 1000,
+            maxPrice: 20,
             minArea: 0,
-            maxArea: 20000,
+            maxArea: 500,
+            bedroomFilter: [],
+            bathroomFilter: '',
+            directionFilters: [],
+            isVerifiedFilter: undefined,
+            isExclusiveFilter: undefined,
+            statusFilters: [],
             isViewGrid: true,
             isFirstLoad: true,
             isLoading: false,
@@ -339,17 +349,10 @@ new Vue({
     },
     computed: {
         displayListingNumText: function () {
-            // if (this.pagination && this.pagination.current_page > 1) {
-            //     const from = (this.pagination.current_page) * this.pagination.limit;
-            //     const to = (this.pagination.current_page + 1) * this.pagination.limit;
-            //     return `${from} - ${to} trong số ${this.pagination.total} sản phẩm`;
-            // } else {
-            //     return `${this.listings.length} trong số ${this.pagination.total} sản phẩm`;
-            // }
             return `${this.listings.length} trong số ${this.pagination.total} sản phẩm`;
         },
         filterPriceText: function () {
-            if (this.minPrice == 0 && this.maxPrice == 1000) {
+            if (this.minPrice === 0 && this.maxPrice === 20) {
                 return "Khoảng giá";
             } else if (this.minPrice >= 20) {
                 return "Trên 20 tỷ";
@@ -358,7 +361,7 @@ new Vue({
             }
         },
         filterAreaText: function () {
-            if (this.minArea == 0 && this.maxArea == 20000) {
+            if (this.minArea === 0 && this.maxArea === 500) {
                 return "Diện tích";
             } else if (this.minArea >= 500) {
                 return "Trên 500 m²";
@@ -375,97 +378,276 @@ new Vue({
                 default:
                     return 'Mới nhất'
             }
-        }
+        },
+        mobileFilterMark: function () {
+            let curLength = 0;
+            if (this.minPrice !== 0 || this.maxPrice !== 20)
+                curLength += 1;
+
+            if (this.minArea !== 0 || this.maxArea !== 500)
+                curLength += 1;
+
+            if (Object.values(this.houseTypeFilter).filter(item => item !== '').length > 0)
+                curLength += 1;
+
+            if (this.bedroomFilter.length > 0)
+                curLength += 1;
+
+            if (this.bathroomFilter)
+                curLength += 1;
+
+            if (this.directionFilters.length > 0)
+                curLength += 1;
+
+            if (this.isVerifiedFilter === true)
+                curLength += 1;
+
+            if (this.isExclusiveFilter === true)
+                curLength += 1;
+
+            if (this.statusFilters.length > 0)
+                curLength += 1;
+
+            return curLength
+        },
     },
     methods: {
+        closeFilterPopup: function (e) {
+            const target$ = $(e.target);
+            if (!target$.closest(`#${e.data.type}`).length) {
+                this.showFilterType = '';
+            }
+        },
         toggleFilterType: function (type) {
-            setTimeout(() => {
-                if (this.showFilterType != type)
-                    this.showFilterType = type;
-                else
-                    this.showFilterType = '';
-            }, 10)
+            $(document).off('click.searchFilter');
+
+            if (this.showFilterType !== type) {
+                this.showFilterType = type;
+            } else {
+                this.showFilterType = '';
+            }
 
         },
-        hideHouseFilters: function () {
-            if (this.showFilterType)
-                this.showFilterType = '';
+        toggleMobileFilter: function () {
+            this.showMobileFilter = !this.showMobileFilter;
+        },
+        resetMobileFilter: function () {
+
+        },
+        applyMobileFilter: async function () {
+            const priceFrom = this.$mobilePriceSlider.result.from;
+            const priceTo = this.$mobilePriceSlider.result.to;
+            this.setPrices(priceFrom, priceTo);
+
+            const {from, to} = this.$mobileAreaSlider.result;
+            this.setArea(from, to);
+
+            let houseTypeFilter = {...this.houseTypeFilter};
+            $('#mobileFilter [name="houseTypeFilter"]:checked').map((index, item) => {
+                if (item.value) {
+                    houseTypeFilter[item.value] = (item.value);
+                }
+            });
+            this.setHouseFilter(houseTypeFilter);
+
+            let bedFilter = [];
+            $('#mobileFilter [name="bedrooms"]:checked').map((index, item) => {
+                bedFilter.push(item.value)
+            });
+            this.setBedroomFilter(bedFilter);
+
+            const bathrooms = $('#mobileFilter [name="bathrooms"]:checked').first().val()
+            this.setBathroomFilter(bathrooms);
+
+            let directions = [];
+            $('#mobileFilter [name="direction"]:checked').map((index, item) => {
+                directions.push(item.value)
+            });
+            this.setDirectionFilter(directions);
+
+            const isVerified = $('#tgnp_is_verified').first().prop('checked')
+            this.setIsVerifiedFilter(isVerified);
+
+            const isExclusive = $('#tgnp_is_exclusive').first().prop('checked');
+            this.setIsExclusiveFilter(isExclusive)
+
+            let statuses = []
+            $('#mobileFilter [name="status"]:checked').map((index, item) => {
+                statuses.push(item.value);
+            });
+            this.setStatusFilter(statuses);
+
+            await this.getListings();
+            this.setMarkers();
+            this.toggleMobileFilter();
+
         },
         resetHouseFilter: function () {
-            this.houseTypeFilter = [];
+            let htFilter = {};
+            this.houseTypes.map(ht => {
+                htFilter[ht.type] = '';
+            })
+            this.houseTypeFilter = htFilter;
             $('#leads .check').prop('checked', false);
         },
         cancelHouseFilter: function () {
-            this.hideHouseFilters();
+            this.toggleFilterType('houseFilter');
             $('#leads .check').prop('checked', false);
-            this.houseTypeFilter.map(item => {
-                $(`#leads .check[value=${item}]`).prop('checked', true);
+            Object.values(this.houseTypeFilter).map(item => {
+                if (item)
+                    $(`#leads .check[value=${item}]`).prop('checked', true);
             })
         },
-        applyHouseFilter: async function () {
-            let houseTypeFilter = [];
-            $('#leads .check:checked').map((index, item) => {
-                if (item.value && this.houseTypes.filter(ht => ht.type === item.value).length > 0) {
-                    houseTypeFilter.push(item.value);
-                }
-            });
+        setHouseFilter: function (houseTypeFilter) {
             if (JSON.stringify(this.houseTypeFilter) === JSON.stringify(houseTypeFilter)) return;
             this.houseTypeFilter = houseTypeFilter;
-            this.updateQueryParams({'housetype': houseTypeFilter.join(',')})
-            this.hideHouseFilters();
+            const houseParam = Object.values(houseTypeFilter).filter(item => item !== '').join(',');
+            this.updateQueryParams({'house_type': houseParam})
+        },
+        applyHouseFilter: async function () {
+            let houseTypeFilter = {...this.houseTypeFilter};
+            $('#leads .check:checked').map((index, item) => {
+                console.log(item.value)
+                if (item.value) {
+                    houseTypeFilter[item.value] = (item.value);
+                }
+            });
+            this.setHouseFilter(houseTypeFilter);
+            this.toggleFilterType('houseFilter');
             await this.getListings();
             this.setMarkers();
         },
         toggleShowSortOptions: function () {
             this.showSortOptions = !this.showSortOptions;
         },
-        setPrices: async function (from, to) {
-            if (this.minPrice == from && this.maxPrice == to) return;
+        setPrices: function (from, to) {
+            if (from === undefined || to === undefined) return;
+            if (this.minPrice === from && this.maxPrice === to) return;
+
+            let newTo = to;
+            let newFrom = from;
+
+            if (newTo >= 20) newTo = 1000;
+
+            if (newFrom >= 20) {
+                newFrom = 20;
+                newTo = 1000;
+            }
+
             this.minPrice = from;
             this.maxPrice = to;
             this.$priceSlider.update({
                 ...this.$priceSlider.options,
                 from, to
             });
-            this.updateQueryParams({minPrice: from, maxPrice: to})
-            this.hideHouseFilters();
+            this.$mobilePriceSlider.update({
+                ...this.$mobilePriceSlider.options,
+                from, to
+            })
+            console.log(newFrom, newTo)
+            this.updateQueryParams({minPrice: newFrom, maxPrice: newTo})
+        },
+        quickSetPrice: async function (from, to) {
+            console.log(from, to)
+            this.setPrices(from, to);
+            this.toggleFilterType('priceFilter');
             await this.getListings();
             this.setMarkers();
         },
         resetPriceSlider: function () {
             this.$priceSlider.update(defaultSliderPriceOptions);
+            this.$mobilePriceSlider.update(defaultSliderPriceOptions);
         },
-        applySliderPrice: function () {
+        applySliderPrice: async function () {
             const {from, to} = this.$priceSlider.result;
-            if (from >= 20) {
-                this.setPrices(from, 1000);
-            } else {
-                this.setPrices(from, to)
-            }
+            this.setPrices(from, to);
+            this.toggleFilterType('priceFilter');
+            await this.getListings();
+            this.setMarkers();
         },
-        setArea: async function (from, to) {
-            if (this.minArea == from && this.maxArea == to) return;
+        setArea: function (from, to) {
+            if (!from || !to) return;
+            if (this.minArea === from && this.maxArea === to) return;
+            let newTo = to;
+            let newFrom = from;
+
+            if (newTo >= 500) newTo = 20000;
+
+            if (newFrom >= 500) {
+                newTo = 20000;
+            }
+
             this.minArea = from;
             this.maxArea = to;
             this.$areaSlider.update({
                 ...this.$areaSlider.options,
                 from, to
             });
-            this.updateQueryParams({minArea: from, maxArea: to})
-            this.hideHouseFilters();
+            this.$mobileAreaSlider.update({
+                ...this.$mobileAreaSlider.options,
+                from, to
+            });
+            this.updateQueryParams({minArea: newFrom, maxArea: newTo})
+        },
+        quickSetArea: async function (from, to) {
+            this.setArea(from, to);
+            this.toggleFilterType('acreFilter');
             await this.getListings();
             this.setMarkers();
         },
         resetAreaSlider: function () {
             this.$areaSlider.update(defaultAreaSliderOptions);
+            this.$mobileAreaSlider.update(defaultAreaSliderOptions);
         },
-        applySliderArea: function () {
+        applySliderArea: async function () {
             const {from, to} = this.$areaSlider.result;
-            if (from >= 500) {
-                this.setArea(from, 20000);
-            } else {
-                this.setArea(from, to)
-            }
+            this.setArea(from, to);
+            this.toggleFilterType('acreFilter');
+            await this.getListings();
+            this.setMarkers();
+        },
+        setBedroomFilter: function (filters) {
+            if (!filters) return;
+            if (JSON.stringify(this.bedroomFilter) === JSON.stringify(filters)) return;
+
+            this.bedroomFilter = filters;
+            this.updateQueryParams({'bedrooms': filters})
+        },
+        setBathroomFilter: function (filter) {
+            if (!filter) return;
+            if (this.bathroomFilter === filter) return;
+            this.bedroomFilter = filter;
+            this.updateQueryParams({'bathrooms': filter})
+        },
+        setDirectionFilter: function (filters) {
+            if (!filters) return;
+            if (JSON.stringify(this.directionFilters) === JSON.stringify(filters)) return;
+
+            this.directionFilters = filters;
+            this.updateQueryParams({'directions': filters})
+        },
+        setIsVerifiedFilter: function (value) {
+            if (this.isVerifiedFilter === value) return;
+            this.isVerifiedFilter = value;
+            if (value === true)
+                this.updateQueryParams({'is_verified': value});
+            else
+                this.removeQueryParams('is_verified')
+        },
+        setIsExclusiveFilter: function (value) {
+            if (this.isExclusiveFilter === value) return;
+            this.isExclusiveFilter = value;
+            if (value === true)
+                this.updateQueryParams({'is_exclusive': value});
+            else
+                this.removeQueryParams('is_exclusive')
+        },
+        setStatusFilter: function (filters) {
+            if (!filters) return;
+            if (JSON.stringify(this.statusFilters) === JSON.stringify(filters)) return;
+
+            this.statusFilters = filters;
+            this.updateQueryParams({'status': filters})
         },
         sortBy: async function (sortOption) {
             if (this.sortOption == sortOption) return;
@@ -473,6 +655,23 @@ new Vue({
             this.showSortOptions = false;
             this.updateQueryParams({sort: sortOption});
             await this.getListings();
+
+            const sort_price_ascend = (a, b) => a.price - b.price;
+            const sort_price_descend = (a, b) => b.price - a.price;
+            const sort_created = (a, b) => a.list_date - b.list_date
+
+            switch (sortOption) {
+                case 'price_ascend':
+                    this.listings.sort(sort_price_ascend)
+                    break;
+                case 'price_descend':
+                    this.listings.sort(sort_price_descend)
+                    break;
+                default:
+                    this.listings.sort(sort_created)
+                    break;
+            }
+
             this.setMarkers();
         },
         viewAsGrid: function () {
@@ -495,14 +694,9 @@ new Vue({
             })
             this.queryParams = urlParams;
         },
-        removeQueryParams: function (params) {
-            const urlParams = this.getQueryParams();
-            Object.keys(params).map((key) => {
-                if (urlParams.has(key)) {
-                    urlParams.delete(key, params[key])
-                }
-            })
-            this.queryParams = urlParams;
+        removeQueryParams: function (key) {
+            if (this.queryParams.has(key))
+                this.queryParams.delete(key)
         },
         getListings: async function () {
             this.isLoading = true;
@@ -522,7 +716,6 @@ new Vue({
             this.isLoading = false;
         },
         goTo: async function (page) {
-            console.log(page);
             this.updateQueryParams({page})
             await this.getListings();
             this.setMarkers();
@@ -599,18 +792,24 @@ new Vue({
     created() {
         this.checkingInterval = setInterval(this.checkIntervalCallback, 200);
         window.initMap = this.initMap;
+
+        let htFilter = {};
+        this.houseTypes.map(ht => {
+            htFilter[ht.type] = '';
+        })
+        this.houseTypeFilter = htFilter;
     },
     mounted() {
         setTimeout(() => {
-            $(this.$refs.priceInput).ionRangeSlider({
-                ...defaultSliderPriceOptions,
-            });
+            $(this.$refs.priceInput).ionRangeSlider(defaultSliderPriceOptions);
+            $(this.$refs.mobilePriceInput).ionRangeSlider(defaultSliderPriceOptions);
             this.$priceSlider = $(this.$refs.priceInput).data('ionRangeSlider');
+            this.$mobilePriceSlider = $(this.$refs.mobilePriceInput).data('ionRangeSlider');
 
-            $(this.$refs.areaInput).ionRangeSlider({
-                ...defaultAreaSliderOptions,
-            });
+            $(this.$refs.areaInput).ionRangeSlider(defaultAreaSliderOptions);
+            $(this.$refs.mobileAreaInput).ionRangeSlider(defaultAreaSliderOptions);
             this.$areaSlider = $(this.$refs.areaInput).data('ionRangeSlider');
+            this.$mobileAreaSlider = $(this.$refs.mobileAreaInput).data('ionRangeSlider');
         }, 100);
     },
     watch: {
@@ -618,6 +817,11 @@ new Vue({
             clearInterval(this.checkingInterval);
             await this.getListings();
             this.setMarkers();
+        },
+        showFilterType: async function () {
+            if (this.showFilterType) {
+                $(document).on('click.searchFilter', {type: this.showFilterType}, this.closeFilterPopup)
+            }
         }
     },
     destroyed: function () {

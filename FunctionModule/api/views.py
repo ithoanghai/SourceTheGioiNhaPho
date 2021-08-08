@@ -18,6 +18,86 @@ def get_states(r: request.Request, **kwargs):
     return response.Response(data)
 
 
+def query_params_to_filters(input_params):
+    query = []
+
+    is_verified = input_params.get('is_verified', None)
+    if is_verified:
+        query.append(['is_verified=true'])
+
+    is_exclusive = input_params.get('is_exclusive', None)
+    if is_exclusive:
+        query.append(['is_exclusive=true'])
+
+    # Status: List
+    status: str = input_params.get('status', None)
+    if status:
+        statuses = status.split(',')
+        if len(statuses):
+            st_query = [f'status={s}' for s in statuses]
+            query.append(st_query)
+
+    # Directions: List
+    directions = input_params.get('directions', None)
+    if directions:
+        directions = directions.split(',')
+        if len(directions):
+            direction_query = [f'status={s}' for s in directions]
+            query.append(direction_query)
+
+    # House type: List
+    house_type = input_params.get('house_type', None)
+    if house_type:
+        house_type = house_type.split(',')
+        if len(house_type):
+            ht_query = [f'status={s}' for s in house_type]
+            query.append(ht_query)
+
+    # Bedrooms: List
+    bedrooms = input_params.get('bedrooms', None)
+    if bedrooms:
+        bedrooms = bedrooms.split(',')
+        to_filter = []
+        for f in bedrooms:
+            if f == '6+':
+                to_filter.append('bedrooms>=6')
+            else:
+                to_filter.append(f'bedrooms={f}')
+        if len(to_filter):
+            query.append(to_filter)
+
+    # Bathrooms: Single string
+    bathrooms = input_params.get('bathrooms', None)
+    if bathrooms:
+        if bathrooms == 'all':
+            pass
+        elif bathrooms == '5+':
+            query.append(['bathrooms>=5'])
+        else:
+            query.append([f'bathrooms={bathrooms}'])
+
+    # Price: minPrice and maxPrice each single number
+    price = input_params.get('minPrice', None)
+    if price and price.isnumeric():
+        query.append([f'price>={price}'])
+    max_price = input_params.get('maxPrice', None)
+    if max_price and max_price.isnumeric():
+        query.append([f'price<{max_price}'])
+
+    # Area: minArea and maxArea each single number
+    area = input_params.get('minArea')
+    if area and area.isnumeric():
+        query.append([f'area>={area}'])
+    max_area = input_params.get('maxArea')
+    if max_area and max_area.isnumeric():
+        query.append([f'area>={max_area}'])
+
+    if 'sort' in input_params:
+        sort_by = input_params.get('sort')
+
+    return query
+
+
 @api_view(['GET'])
 @authentication_classes([])
 @permission_classes([])
@@ -34,7 +114,8 @@ def search_listing(req: request.Request, **kwargs):
 
     keywords = req.query_params.get('keywords', '')
     if keywords:
-        results = search_by_keywords(keywords, limit, offset)
+        filters = query_params_to_filters(req.query_params)
+        results = search_by_keywords(keywords, limit, offset, filters)
         total: int = results['nbHits']
         total_pages = int(math.ceil(total / limit))
         next_page = page + 1 if total_pages > page else None
