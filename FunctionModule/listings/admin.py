@@ -6,6 +6,7 @@ from django.http import HttpRequest, JsonResponse
 from FunctionModule.listings.import_csv import handle_import
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage
+from ..realtors.models import Realtor
 
 
 class ContractPhotoAdmin(admin.TabularInline):
@@ -30,9 +31,9 @@ class ListingVideoAdmin(admin.TabularInline):
 
 
 class ListingAdmin(admin.ModelAdmin):
-    list_display = ('code', 'title', 'price', 'list_date', 'realtor', 'is_published')
+    list_display = ('code', 'title', 'price', 'list_date', 'realtor_name', 'is_published')
     list_display_links = ('code',)
-    # list_filter = ('realtor',)
+    list_filter = ('price', 'list_date',)
     list_editable = ('title',)
     search_fields = ('title', 'code', 'address', 'price', 'street', 'district',)
     list_per_page = 25
@@ -45,6 +46,9 @@ class ListingAdmin(admin.ModelAdmin):
         css = {
             'all': ('admin/css/dropzone.css', 'admin/css/listing.css', 'admin/css/filepond.min.css')
         }
+
+    def realtor_name(self, obj: Realtor):
+        return obj.realtor.user.name
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
