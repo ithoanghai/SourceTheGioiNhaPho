@@ -2590,7 +2590,8 @@ label {
     background: #fff;
     -webkit-box-flex: 0;
     -ms-flex: 0 1 790px;
-    flex: 0 1 790px
+    flex: 0 1 790px;
+    z-index: 0;
 }
 
 .search-result > div {
@@ -3483,7 +3484,7 @@ label {
     width: 100%;
     height: calc(100vh - 60px);
     padding: 0;
-    z-index: 10;
+    z-index: 0;
     background-color: #f7f7f7;
     -webkit-transition: all .3s;
     transition: all .3s;
