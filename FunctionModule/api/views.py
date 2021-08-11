@@ -112,28 +112,28 @@ def search_listing(req: request.Request, **kwargs):
     offset = (page - 1) * limit
     min_page = page - 1 if page - 1 > 0 else page
 
-    keywords = req.query_params.get('keywords', '')
-    if keywords:
-        filters = query_params_to_filters(req.query_params)
-        results = search_by_keywords(keywords, limit, offset, filters)
-        total: int = results['nbHits']
-        total_pages = int(math.ceil(total / limit))
-        next_page = page + 1 if total_pages > page else None
-        next_5_pages = list(range(min_page, page + 5 if page + 5 < total_pages else total_pages))
-        next_5_pages = next_5_pages if len(next_5_pages) > 1 else [page]
-
-        return response.Response({
-            'listings': results['hits'],
-            'pagination': {
-                'current_page': page,
-                'previous_page': previous_page,
-                'next_page': next_page,
-                'next_5_pages': next_5_pages,
-                'limit': limit,
-                'offset': offset,
-                'total': results['nbHits']
-            }
-        })
+    # keywords = req.query_params.get('keywords', '')
+    # if keywords:
+    #     filters = query_params_to_filters(req.query_params)
+    #     results = search_by_keywords(keywords, limit, offset, filters)
+    #     total: int = results['nbHits']
+    #     total_pages = int(math.ceil(total / limit))
+    #     next_page = page + 1 if total_pages > page else None
+    #     next_5_pages = list(range(min_page, page + 5 if page + 5 < total_pages else total_pages))
+    #     next_5_pages = next_5_pages if len(next_5_pages) > 1 else [page]
+    #
+    #     return response.Response({
+    #         'listings': results['hits'],
+    #         'pagination': {
+    #             'current_page': page,
+    #             'previous_page': previous_page,
+    #             'next_page': next_page,
+    #             'next_5_pages': next_5_pages,
+    #             'limit': limit,
+    #             'offset': offset,
+    #             'total': results['nbHits']
+    #         }
+    #     })
 
     queryset_list = prepare_listing_queryset(req.query_params)
     paginator = Paginator(queryset_list, limit)

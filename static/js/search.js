@@ -379,6 +379,12 @@ new Vue({
                     return 'Mới nhất'
             }
         },
+        houseTypeFilterMark: function () {
+            return Object.values(this.houseTypeFilter).filter(item => item !== '').length;
+        },
+        otherFilterMark: function () {
+            return this.countOtherFilter();
+        },
         mobileFilterMark: function () {
             let curLength = 0;
             if (this.minPrice !== 0 || this.maxPrice !== 20)
@@ -387,26 +393,13 @@ new Vue({
             if (this.minArea !== 0 || this.maxArea !== 500)
                 curLength += 1;
 
-            if (Object.values(this.houseTypeFilter).filter(item => item !== '').length > 0)
+            if (this.houseTypeFilterMark > 0)
                 curLength += 1;
 
             if (this.bedroomFilter.length > 0)
                 curLength += 1;
 
-            if (this.bathroomFilter)
-                curLength += 1;
-
-            if (this.directionFilters.length > 0)
-                curLength += 1;
-
-            if (this.isVerifiedFilter === true)
-                curLength += 1;
-
-            if (this.isExclusiveFilter === true)
-                curLength += 1;
-
-            if (this.statusFilters.length > 0)
-                curLength += 1;
+            curLength += this.countOtherFilter();
 
             return curLength
         },
@@ -429,6 +422,11 @@ new Vue({
 
         },
         toggleMobileFilter: function () {
+            if (this.showFilterType) {
+                $('.main-header').css('z-index', '')
+            } else {
+                $('.main-header').css('z-index', 0)
+            }
             this.showMobileFilter = !this.showMobileFilter;
         },
         resetMobileFilter: function () {
@@ -450,32 +448,7 @@ new Vue({
             });
             this.setHouseFilter(houseTypeFilter);
 
-            let bedFilter = [];
-            $('#mobileFilter [name="bedrooms"]:checked').map((index, item) => {
-                bedFilter.push(item.value)
-            });
-            this.setBedroomFilter(bedFilter);
-
-            const bathrooms = $('#mobileFilter [name="bathrooms"]:checked').first().val()
-            this.setBathroomFilter(bathrooms);
-
-            let directions = [];
-            $('#mobileFilter [name="direction"]:checked').map((index, item) => {
-                directions.push(item.value)
-            });
-            this.setDirectionFilter(directions);
-
-            const isVerified = $('#tgnp_is_verified').first().prop('checked')
-            this.setIsVerifiedFilter(isVerified);
-
-            const isExclusive = $('#tgnp_is_exclusive').first().prop('checked');
-            this.setIsExclusiveFilter(isExclusive)
-
-            let statuses = []
-            $('#mobileFilter [name="status"]:checked').map((index, item) => {
-                statuses.push(item.value);
-            });
-            this.setStatusFilter(statuses);
+            this.setOtherFilters($('#mobileFilter'))
 
             await this.getListings();
             this.setMarkers();
@@ -501,15 +474,21 @@ new Vue({
         setHouseFilter: function (houseTypeFilter) {
             if (JSON.stringify(this.houseTypeFilter) === JSON.stringify(houseTypeFilter)) return;
             this.houseTypeFilter = houseTypeFilter;
-            const houseParam = Object.values(houseTypeFilter).filter(item => item !== '').join(',');
-            this.updateQueryParams({'house_type': houseParam})
+            const houseFilterItems = Object.values(houseTypeFilter).filter(item => item !== '');
+            if (houseFilterItems.length > 0) {
+                const houseParam = houseFilterItems.join(',');
+                this.updateQueryParams({'house_type': houseParam})
+            } else {
+                this.removeQueryParams('house_type')
+            }
         },
         applyHouseFilter: async function () {
             let houseTypeFilter = {...this.houseTypeFilter};
-            $('#leads .check:checked').map((index, item) => {
-                console.log(item.value)
-                if (item.value) {
-                    houseTypeFilter[item.value] = (item.value);
+            $('#houseFilter input[name="houseTypeFilter"]').map((index, item) => {
+                if (item.checked) {
+                    houseTypeFilter[item.value] = item.value;
+                } else {
+                    houseTypeFilter[item.value] = '';
                 }
             });
             this.setHouseFilter(houseTypeFilter);
@@ -606,10 +585,44 @@ new Vue({
             await this.getListings();
             this.setMarkers();
         },
+        setOtherFilters: function (parentSelector) {
+            let bedFilter = [];
+            parentSelector.find('input[name="bedrooms"]:checked').map((index, item) => {
+                bedFilter.push(item.value)
+            });
+            this.setBedroomFilter(bedFilter);
+
+            const bathrooms = parentSelector.find('input[name="bathrooms"]:checked').first().val()
+            if (bathrooms !== 'all')
+                this.setBathroomFilter(bathrooms);
+
+            let directions = [];
+            parentSelector.find('input[name="direction"]:checked').map((index, item) => {
+                directions.push(item.value)
+            });
+            this.setDirectionFilter(directions);
+
+            const isVerified = parentSelector.find('input[name="is_verified"]').first().prop('checked')
+            this.setIsVerifiedFilter(isVerified);
+
+            const isExclusive = parentSelector.find('input[name="is_exclusive"]').first().prop('checked');
+            this.setIsExclusiveFilter(isExclusive)
+
+            let statuses = []
+            parentSelector.find('input[name="status"]:checked').map((index, item) => {
+                statuses.push(item.value);
+            });
+            this.setStatusFilter(statuses);
+        },
+        applyOthersFilter: async function () {
+            this.setOtherFilters($('#otherFilters'));
+            this.toggleFilterType('otherFilters');
+            await this.getListings();
+            this.setMarkers();
+        },
         setBedroomFilter: function (filters) {
             if (!filters) return;
             if (JSON.stringify(this.bedroomFilter) === JSON.stringify(filters)) return;
-
             this.bedroomFilter = filters;
             this.updateQueryParams({'bedrooms': filters})
         },
@@ -628,24 +641,27 @@ new Vue({
         },
         setIsVerifiedFilter: function (value) {
             if (this.isVerifiedFilter === value) return;
-            this.isVerifiedFilter = value;
-            if (value === true)
+            if (value === true) {
+                this.isVerifiedFilter = value;
                 this.updateQueryParams({'is_verified': value});
-            else
+
+            } else {
                 this.removeQueryParams('is_verified')
+            }
         },
         setIsExclusiveFilter: function (value) {
             if (this.isExclusiveFilter === value) return;
-            this.isExclusiveFilter = value;
-            if (value === true)
+            if (value === true) {
+                this.isExclusiveFilter = value;
                 this.updateQueryParams({'is_exclusive': value});
-            else
+
+            } else {
                 this.removeQueryParams('is_exclusive')
+            }
         },
         setStatusFilter: function (filters) {
             if (!filters) return;
             if (JSON.stringify(this.statusFilters) === JSON.stringify(filters)) return;
-
             this.statusFilters = filters;
             this.updateQueryParams({'status': filters})
         },
@@ -673,6 +689,29 @@ new Vue({
             }
 
             this.setMarkers();
+        },
+        countOtherFilter: function () {
+            let curLength = 0;
+            console.log(this.bathroomFilter)
+            if (this.bathroomFilter && this.bathroomFilter !== 'all')
+                curLength += 1;
+
+            if (this.bedroomFilter.length > 0)
+                curLength += 1;
+
+            if (this.directionFilters.length > 0)
+                curLength += 1;
+
+            if (this.isVerifiedFilter === true)
+                curLength += 1;
+
+            if (this.isExclusiveFilter === true)
+                curLength += 1;
+
+            if (this.statusFilters.length > 0)
+                curLength += 1;
+
+            return curLength;
         },
         viewAsGrid: function () {
             this.isViewGrid = true;
