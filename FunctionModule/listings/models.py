@@ -199,13 +199,10 @@ class Listing(models.Model):
 
 
 class ListingImage(models.Model):
-    class Meta:
-        verbose_name = "Ảnh chụp BDS"
-        verbose_name_plural = "Ảnh Bất động sản"
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("ẢNH CHỤP BĐS"))
     sort = models.IntegerField(default=0, verbose_name=_("Thứ tự hiện"))
     description = models.CharField(max_length=255, blank=True, default="", verbose_name=_("Thông tin"))
-    photo = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Ảnh BĐS"))
+    photo = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Ảnh"))
 
     def __str__(self):
         return f'{self.listing_id}_{self.sort}__{self.photo.url}'
@@ -226,6 +223,11 @@ class ListingVideo(models.Model):
         verbose_name_plural = "Đường dẫn video Youtube"
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("BĐS"))
     video = EmbedVideoField(blank=True, null=True, verbose_name=_("Link video"))
+
+
+class TimestampField(serializers.Field):
+    def to_representation(self, value):
+        return value.timestamp()
 
 
 class TimestampField(serializers.Field):
