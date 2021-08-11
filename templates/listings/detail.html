@@ -417,12 +417,12 @@
                 <p class="right"><a href="{% url 'listing_search' %}?house_type={{ listing.house_type }}"
                                     target="_blank">
                   {% if listing.house_type == 'town_house' %}{% translate 'Nhà Phố' %}
-                  {% elif listing.registration_type == 'street_house' %} {% translate 'Nhà mặt phố' %}
-                  {% elif listing.registration_type == 'shop_house' %} {% translate 'Cửa hàng' %}
-                  {% elif listing.registration_type == 'building' %} {% translate 'Toà nhà' %}
-                  {% elif listing.registration_type == 'apartment' %} {% translate 'Căn hộ CC' %}
-                  {% elif listing.registration_type == 'villa' %} {% translate 'Biệt thự' %}
-                  {% elif listing.registration_type == 'office' %} {% translate 'Văn phòng' %}
+                  {% elif listing.house_type == 'street_house' %} {% translate 'Nhà mặt phố' %}
+                  {% elif listing.house_type == 'shop_house' %} {% translate 'Cửa hàng' %}
+                  {% elif listing.house_type == 'building' %} {% translate 'Toà nhà' %}
+                  {% elif listing.house_type == 'apartment' %} {% translate 'Căn hộ CC' %}
+                  {% elif listing.house_type == 'villa' %} {% translate 'Biệt thự' %}
+                  {% elif listing.house_type == 'office' %} {% translate 'Văn phòng' %}
                   {% else %} {% translate 'Đất' %}  {% endif %}
                 </a></p>
               </li>
@@ -432,7 +432,7 @@
               </li>
               <li>
                 <p class="left">Số phòng ngủ</p>
-                <p class="right">{{ listing.bedrooms }}</p>
+                <p class="right"> {% if listing.bedrooms %}{{ listing.bedrooms }}{% else %} 0 {% endif %}</p>
               </li>
               <li>
                 <p class="left">Số phòng tắm</p>
@@ -443,12 +443,17 @@
                 <p class="left">Diện tích</p>
                 <p class="right">{{ listing.area }} {{ listing.area_unit }}</p>
               </li>
+
               {% if listing.lot_size %}
                 <li>
                   <p class="left">Diện tích khuân viên</p>
                   <p class="right">{{ listing.lot_size }}</p>
                 </li>
               {% endif %}
+                <li>
+                <p class="left">Hướng</p>
+                <p class="right">{{ listing.direction }} {{ listing.direction }}</p>
+              </li>
               <li>
                 <p class="left">Loại chứng nhận</p>
                 <p class="right"><a

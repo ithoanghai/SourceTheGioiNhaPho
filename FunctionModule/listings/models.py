@@ -4,6 +4,7 @@ import os.path
 from datetime import datetime
 
 from django.contrib.gis.geos import Point
+from django.contrib.postgres.indexes import GinIndex, BTreeIndex
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext as _
@@ -25,6 +26,17 @@ class Listing(models.Model):
     class Meta:
         verbose_name = "Bất động sản"
         verbose_name_plural = "DS Bất động sản"
+        indexes = (
+            # Full text search index
+            GinIndex(fields=["street", "address"]),
+            # Search for code with like
+            BTreeIndex(fields=['code']),
+            # Search using IN query
+            BTreeIndex(fields=['bedrooms', 'bathrooms', 'direction']),
+            # Exact search
+            models.Index(fields=["state", "district", "ward"]),
+            models.Index(fields=["house_type", "transaction_type"]),
+        )
 
     realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, verbose_name=_("Chuyên viên"))
     transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,
@@ -216,10 +228,22 @@ class ListingVideo(models.Model):
     video = EmbedVideoField(blank=True, null=True, verbose_name=_("Link video"))
 
 
+class TimestampField(serializers.Field):
+    def to_representation(self, value):
+        return value.timestamp()
+
+
 class ListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Listing
         exclude = ('address',)
+
+    area = serializers.FloatField()
+    area_real = serializers.FloatField()
+    price = serializers.FloatField()
+    receive_price = serializers.FloatField()
+    sale_price = serializers.FloatField()
+    lane_width = serializers.FloatField()
 
     lat = serializers.CharField()
     long = serializers.CharField()
@@ -227,6 +251,7 @@ class ListingSerializer(serializers.ModelSerializer):
     state_name = serializers.CharField()
     district_name = serializers.CharField()
     main_photo = serializers.SerializerMethodField()
+    list_date = TimestampField()
 
     def get_main_photo(self, obj):
         photo = obj.main_photo

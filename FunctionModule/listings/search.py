@@ -1,19 +1,26 @@
+from django.contrib.postgres.search import SearchVector, SearchQuery
 from django.db.models import Q
 from django.utils.text import slugify
 
 from TownhouseWorldRealestate.search_engine import listing_search, suggestions_search
+from .choices import Status
 from .models import Listing
 from ..cadastral.constants import district_data
 from ..cadastral.lookups import get_district, get_state, get_state_name, get_ward
 
 
-def search_by_keywords(q: str, limit: int = 10, offset: int = 0, ):
+def search_by_keywords(q: str, limit: int = 10, offset: int = 0, filters=None):
     if not q:
         return []
-    results = listing_search.search(q, {
+
+    search_dict = {
         'limit': limit,
-        'offset': offset
-    })
+        'offset': offset,
+    }
+    if filters:
+        search_dict['filter'] = filters
+
+    results = listing_search.search(q, search_dict)
     return results
 
 
@@ -41,10 +48,27 @@ def prepare_listing_queryset(input_params):
         if trans_type:
             queryset_list = queryset_list.filter(transaction_type=trans_type)
 
+    is_verified = input_params.get('is_verified', None)
+    if is_verified:
+        queryset_list = queryset_list.filter(is_verified=bool(is_verified))
+
+    is_exclusive = input_params.get('is_exclusive', None)
+    if is_exclusive:
+        queryset_list = queryset_list.filter(is_exclusive=bool(is_exclusive))
+
+    status = input_params.get('status', None)
+    if status:
+        statuses = status.split(',')
+        queryset_list = queryset_list.filter(status__in=statuses)
+
+    directions = input_params.get('directions', None)
+    if directions:
+        directions = directions.split(',')
+        queryset_list = queryset_list.filter(direction__in=directions)
+
     # Housetype
-    if 'housetype' in input_params:
-        housetype = input_params.get('housetype').split(',')
-        if housetype:
+    house_type = input_params.get('housetype', None)
+    if house_type:
             queryset_list = queryset_list.filter(house_type__in=housetype)
 
     # urban_area
@@ -57,27 +81,9 @@ def prepare_listing_queryset(input_params):
     if 'keywords' in input_params:
         keywords = input_params.get('keywords')
         if keywords:
-            query = Q(description__icontains=keywords) | Q(title__icontains=keywords) | Q(
-                address__icontains=keywords) | Q(code=keywords)
-            slug_keyword = slugify(keywords.lower().replace('đ', 'd').replace('õ', 'o'))
-            try:
-                district_code = next(
-                    x['code'] for x in hn_district if
-                    (x['name'] == keywords or x['slug'] == slug_keyword or x['code'] == slug_keyword))
-            except StopIteration:
-                district_code = ''
-            if district_code:
-                query = query | Q(district=district_code)
-            queryset_list = queryset_list.filter(query)
-
-            queryset_list = queryset_list.filter(query)
-
-    # street
-    if 'street' in input_params:
-        street = input_params.get('street')
-        if street:
-            queryset_list = queryset_list.filter(
-                Q(address__icontains=street) | Q(street__icontains=street))
+            search_vector = SearchVector("address", "street")
+            search_query = SearchQuery(keywords)
+            queryset_list = queryset_list.annotate(search=search_vector).filter(search=search_query)
 
     # District
     if 'district' in input_params:
@@ -89,20 +95,41 @@ def prepare_listing_queryset(input_params):
                 queryset_list = queryset_list.filter(district=district_code)
 
     # State
-    if 'state' in input_params:
-        state = input_params.get('state')
-        if state:
-            queryset_list = queryset_list.filter(state=state)
+    state = input_params.get('state')
+    if state:
+        queryset_list = queryset_list.filter(state=state)
 
     ward = input_params.get('ward', None)
     if ward:
         queryset_list = queryset_list.filter(ward=ward)
 
     # Bedrooms
-    if 'bedrooms' in input_params:
-        bedrooms = input_params.get('bedrooms')
-        if bedrooms:
+    bedrooms = input_params.get('bedrooms', None)
+    if bedrooms:
+        if bedrooms.isnumeric():
             queryset_list = queryset_list.filter(bedrooms__lte=bedrooms)
+        else:
+            bedrooms = bedrooms.split(',')
+            to_filter = []
+            filter_over_6 = False
+            for f in bedrooms:
+                if f == '6+':
+                    filter_over_6 = True
+                else:
+                    to_filter.append(f)
+            query = Q(bedrooms__in=to_filter)
+            if filter_over_6:
+                query = query | Q(bedrooms__gte=6)
+            queryset_list = queryset_list.filter(query)
+
+    bathrooms = input_params.get('bathrooms', None)
+    if bathrooms:
+        if bathrooms == 'all':
+            pass
+        elif bathrooms == '5+':
+            queryset_list = queryset_list.filter(bathrooms__gte=5)
+        else:
+            queryset_list = queryset_list.filter(bathrooms=bathrooms)
 
     # Price
     if 'minPrice' in input_params:

@@ -31,7 +31,6 @@ new Vue({
         }
     },
     created() {
-
         const getHeaderText = (itemType) => {
             switch (itemType) {
                 case 'area':
@@ -51,7 +50,6 @@ new Vue({
                 let suggestions = [];
                 let headers = {};
                 for (const item of resp.data) {
-                    console.log(item);
                     if (!(item.type in headers)) {
                         suggestions.push({
                             code: "",

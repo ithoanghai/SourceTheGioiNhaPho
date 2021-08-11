@@ -5,7 +5,7 @@
     left: 0;
     width: 100%;
     height: 60px;
-    z-index: 12;
+    z-index: 3;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -108,6 +108,10 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, .2);
     -webkit-transition: all .3s ease;
     transition: all .3s ease
+}
+
+.actionBar .filter-item .DropdownMenu.show {
+    display: block;
 }
 
 .actionBar .filter-item .DropdownMenu .row {
@@ -422,7 +426,7 @@
     .actionBar .filter {
         width: 100%;
         white-space: nowrap;
-        z-index: 1
+        /*z-index: 1*/
     }
 
     .actionBar .filter::after {
@@ -434,7 +438,7 @@
         height: 32px;
         background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), color-stop(61%, #fff));
         background-image: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 61%);
-        z-index: 2
+        /*z-index: 2*/
     }
 
     .actionBar .filter ul {
@@ -478,6 +482,7 @@
 
 @media (max-width: 1170px) {
     .actionBar .filter-item.filter-item--mobile a {
+        flex: 0;
         height: 32px;
         padding: 0 12px;
         border-radius: 2px;
@@ -1041,7 +1046,7 @@ body {
     cursor: pointer;
     color: #fff;
     background: rgba(48, 51, 58, .3);
-    z-index: 9;
+    z-index: 2;
     opacity: 1;
 }
 
@@ -2103,27 +2108,6 @@ label {
     content: url(../images/icon/bath-room.svg)
 }
 
-.btn-favorite {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    height: 32px;
-    width: 32px;
-    padding: 0;
-    margin: auto;
-    text-align: center;
-    font-size: 24px;
-    outline: 0;
-    border: 0;
-    border-radius: 2px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    cursor: pointer;
-    color: #fff;
-    background: rgba(48, 51, 58, .3);
-    z-index: 9
-}
-
 .btn-favorite .zmdi {
     padding: 0;
     font-size: 24px
@@ -2709,7 +2693,7 @@ label {
     padding: 0 30px;
     background: #fff;
     border-bottom: 1px solid rgba(204, 204, 204, .63);
-    z-index: 14;
+    z-index: 1;
     -webkit-transition: all .3s;
     transition: all .3s
 }
@@ -3176,7 +3160,7 @@ label {
     bottom: 10px;
     width: auto;
     padding: 0;
-    z-index: 2;
+    /*z-index: 2;*/
     display: block
 }
 
@@ -4594,12 +4578,13 @@ div > img {
     bottom: 0;
     left: 0;
     background: #fff;
-    z-index: 100;
+    z-index: 2;
     overflow: auto
 }
 
 .mobileFilter.show {
-    display: block !important;
+    display: block;
+    height: 100vh;
 }
 
 .mobileFilter .inner {
@@ -4620,7 +4605,7 @@ div > img {
     flex-flow: row nowrap;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    justify-content: space-between;
+    justify-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -4639,7 +4624,9 @@ div > img {
 }
 
 .mobileFilter .inner .topFilter .mobile-filter-title {
-    margin-left: 44px;
+    flex: 1;
+    justify-content: center;
+    display: flex;
     font-size: 14px;
     line-height: 1.5;
     color: #30333a;
@@ -4676,6 +4663,12 @@ div > img {
     padding: 20px 0;
     margin: 0 18px;
     border-bottom: 1px solid rgba(48, 51, 58, .1)
+}
+
+.mobileFilter .inner .bodyFilter .row .inner.sliderFilter {
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .mobileFilter .inner .bodyFilter .row .inner p {
@@ -4860,7 +4853,8 @@ div > img {
 }
 
 .mobileFilter .inner .bottomFilter .btn-primary {
-    max-width: 100%
+    max-width: 100%;
+    justify-content: center;
 }
 
 .status-green {
