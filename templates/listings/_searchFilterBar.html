@@ -25,7 +25,7 @@
            v-on:click="toggleFilterType('houseFilter')"
            v-bind:class="{active: houseTypeFilter.length>0}">
           <span>Loại hình</span>
-          <span v-if="houseTypeFilter.length>0" class="mark">[[houseTypeFilter.length]]</span>
+          <span v-if="houseTypeFilterMark>0" class="mark">[[houseTypeFilterMark]]</span>
         </a>
         <div class=" DropdownMenu"
              v-bind:class="{expanded: showFilterType=='houseFilter'}"
@@ -94,7 +94,8 @@
             {#            <button v-on:click="resetPriceSlider" disabled="disabled" class="btn-primary btn-small btn-reset disabled">#}
             {#              Đặt lại#}
             {#            </button>#}
-            <button v-on:click="toggleFilterType('priceFilter')" class="btn-primary btn-small btn-black-outline"> Huỷ</button>
+            <button v-on:click="toggleFilterType('priceFilter')" class="btn-primary btn-small btn-black-outline"> Huỷ
+            </button>
             <button class="btn-primary btn-small btn-red-outline" @click.prevent="applySliderPrice"> Áp dụng</button>
           </div>
         </div>
@@ -131,13 +132,17 @@
             {#            <button v-on:click="resetAreaSlider" disabled="disabled" class="btn-primary btn-small btn-reset disabled">#}
             {#              Đặt lại#}
             {#            </button>#}
-            <button v-on:click="toggleFilterType('acreFilter')" class="btn-primary btn-small btn-black-outline">Huỷ</button>
+            <button v-on:click="toggleFilterType('acreFilter')" class="btn-primary btn-small btn-black-outline">Huỷ
+            </button>
             <button @click.prevent="applySliderArea" class="btn-primary btn-small btn-red-outline">Áp dụng</button>
           </div>
         </div>
       </li>
       <li class="filter-item" id="otherFilters">
-        <a href="#" v-on:click="toggleFilterType('otherFilters')"> <span>Thêm</span> </a>
+        <a href="#" v-on:click="toggleFilterType('otherFilters')">
+          <span>Thêm</span>
+          <span v-if="otherFilterMark>0" class="mark">[[otherFilterMark]]</span>
+        </a>
         <div class="DropdownMenu fix--width__dropdown"
              v-bind:class="{expanded: showFilterType=='otherFilters'}">
           <div class="fix--width__dropdown--inner">
@@ -149,37 +154,27 @@
                       <p>Chọn số phòng ngủ</p>
                       <ul>
                         <li>
-                          <input id="list-check-item-1-24" type="checkbox" class="check" value="1"/>
-                          <label for="list-check-item-1-24">
-                            1 phòng ngủ
-                          </label>
+                          <input id="list-check-item-1-24" name="bedrooms" type="checkbox" class="check" value="1"/>
+                          <label for="list-check-item-1-24"> 1 phòng ngủ </label>
                         </li>
                         <li>
-                          <input id="list-check-item-2-24" type="checkbox" class="check" value="2"/>
-                          <label for="list-check-item-2-24">
-                            2 phòng ngủ
-                          </label>
+                          <input id="list-check-item-2-24" name="bedrooms" type="checkbox" class="check" value="2"/>
+                          <label for="list-check-item-2-24"> 2 phòng ngủ </label>
                         </li>
                         <li>
-                          <input id="list-check-item-3-24" type="checkbox" class="check" value="3"/>
-                          <label for="list-check-item-3-24">
-                            3 phòng ngủ
-                          </label>
+                          <input id="list-check-item-3-24" name="bedrooms" type="checkbox" class="check" value="3"/>
+                          <label for="list-check-item-3-24"> 3 phòng ngủ </label>
                         </li>
                         <li>
-                          <input id="list-check-item-4-24" type="checkbox" class="check" value="4"/>
-                          <label for="list-check-item-4-24">
-                            4 phòng ngủ
-                          </label>
+                          <input id="list-check-item-4-24" name="bedrooms" type="checkbox" class="check" value="4"/>
+                          <label for="list-check-item-4-24"> 4 phòng ngủ </label>
                         </li>
                         <li>
-                          <input id="list-check-item-5-24" type="checkbox" class="check" value="5"/>
-                          <label for="list-check-item-5-24">
-                            5 phòng ngủ
-                          </label>
+                          <input id="list-check-item-5-24" name="bedrooms" type="checkbox" class="check" value="5"/>
+                          <label for="list-check-item-5-24"> 5 phòng ngủ </label>
                         </li>
                         <li>
-                          <input id="list-check-item-6+-24" type="checkbox" class="check" value="6+"/>
+                          <input id="list-check-item-6+-24" name="bedrooms" type="checkbox" class="check" value="6+"/>
                           <label for="list-check-item-6+-24">
                             6+ phòng ngủ
                           </label>
@@ -196,40 +191,28 @@
                       <p>Chọn số phòng tắm</p>
                       <ul>
                         <li>
-                          <input id="list-check-item--25" type="radio" value=""/>
-                          <label for="list-check-item--25" class="radio">
-                            Tất cả
-                          </label>
+                          <input id="list-check-item--25" name="bathrooms" type="radio" value="all"/>
+                          <label for="list-check-item--25" class="radio"> Tất cả </label>
                         </li>
                         <li>
-                          <input id="list-check-item-1-25" type="radio" value="1"/>
-                          <label for="list-check-item-1-25" class="radio">
-                            1 phòng tắm
-                          </label>
+                          <input id="list-check-item-1-25" name="bathrooms" type="radio" value="1"/>
+                          <label for="list-check-item-1-25" class="radio"> 1 phòng tắm </label>
                         </li>
                         <li>
-                          <input id="list-check-item-2-25" type="radio" value="2"/>
-                          <label for="list-check-item-2-25" class="radio">
-                            2 phòng tắm
-                          </label>
+                          <input id="list-check-item-2-25" name="bathrooms" type="radio" value="2"/>
+                          <label for="list-check-item-2-25" class="radio"> 2 phòng tắm </label>
                         </li>
                         <li>
-                          <input id="list-check-item-3-25" type="radio" value="3"/>
-                          <label for="list-check-item-3-25" class="radio">
-                            3 phòng tắm
-                          </label>
+                          <input id="list-check-item-3-25" name="bathrooms" type="radio" value="3"/>
+                          <label for="list-check-item-3-25" class="radio"> 3 phòng tắm </label>
                         </li>
                         <li>
-                          <input id="list-check-item-4-25" type="radio" value="4"/>
-                          <label for="list-check-item-4-25" class="radio">
-                            4 phòng tắm
-                          </label>
+                          <input id="list-check-item-4-25" name="bathrooms" type="radio" value="4"/>
+                          <label for="list-check-item-4-25" class="radio"> 4 phòng tắm </label>
                         </li>
                         <li>
-                          <input id="list-check-item-5+-25" type="radio" value="5+"/>
-                          <label for="list-check-item-5+-25" class="radio">
-                            5+ phòng tắm
-                          </label>
+                          <input id="list-check-item-5+-25" name="bathrooms" type="radio" value="5+"/>
+                          <label for="list-check-item-5+-25" class="radio"> 5+ phòng tắm </label>
                         </li>
                       </ul>
                     </div>
@@ -245,28 +228,21 @@
                       <p>Chọn trạng thái</p>
                       <ul>
                         <li>
-                          <input id="list-check-item-1-26" type="checkbox" class="check" value="1"/>
-                          <label for="list-check-item-1-26">
-                            Đăng thường
-                          </label>
+                          <input id="list-check-item-1-26" name="is_verified" type="checkbox" class="check" value="1"/>
+                          <label for="list-check-item-1-26"> Đăng thường </label>
                         </li>
                         <li>
-                          <input id="list-check-item-2-26" type="checkbox" class="check" value="2"/>
-                          <label for="list-check-item-2-26">
-                            TGNP độc quyền
-                          </label>
+                          <input id="list-check-item-2-26" name="is_exclusive" type="checkbox" class="check" value="2"/>
+                          <label for="list-check-item-2-26"> TGNP độc quyền </label>
                         </li>
                         <li>
-                          <input id="list-check-item-3-26" type="checkbox" class="check" value="3"/>
-                          <label for="list-check-item-3-26">
-                            Đang GD
-                          </label>
+                          <input id="filter-sell" name="status" type="checkbox" class="check" value="selling,sale"/>
+                          <label for="filter-sell"> Đang GD </label>
                         </li>
                         <li>
-                          <input id="list-check-item-4-26" type="checkbox" class="check" value="4"/>
-                          <label for="list-check-item-4-26">
-                            Đã bán/thuê
-                          </label>
+                          <input id="filter-stop" name="status" type="checkbox" class="check"
+                                 value="sold,stop_selling"/>
+                          <label for="filter-stop"> Đã bán/thuê </label>
                         </li>
                       </ul>
                     </div>
@@ -277,8 +253,9 @@
           </div>
           <div class="row fixed-footer">
             {#            <button v-on:click="" disabled="disabled" class="btn-primary btn-small btn-reset disabled">Đặt lại</button>#}
-            <button v-on:click="toggleFilterType('othersFilter')" class="btn-primary btn-small btn-black-outline"> Huỷ</button>
-            <button class="btn-primary btn-small btn-red-outline">
+            <button v-on:click="toggleFilterType('othersFilter')" class="btn-primary btn-small btn-black-outline"> Huỷ
+            </button>
+            <button @click.prevent="applyOthersFilter" class="btn-primary btn-small btn-red-outline">
               Áp dụng
             </button>
           </div>

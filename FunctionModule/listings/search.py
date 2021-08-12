@@ -66,12 +66,11 @@ def prepare_listing_queryset(input_params):
         directions = directions.split(',')
         queryset_list = queryset_list.filter(direction__in=directions)
 
-    # Housetype
-    house_type = input_params.get('housetype', None)
+    house_type = input_params.get('house_type', None)
     if house_type:
-            queryset_list = queryset_list.filter(house_type__in=housetype)
+        ht = house_type.split(',')
+        queryset_list = queryset_list.filter(house_type__in=ht)
 
-    # urban_area
     if 'urban_area' in input_params:
         urban_area = input_params.get('urban_area')
         if urban_area:
