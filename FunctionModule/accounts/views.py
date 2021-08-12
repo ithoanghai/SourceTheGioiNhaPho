@@ -63,7 +63,7 @@ def register(request):
             user.set_password(user_password)
             user.save()
             messages.success(request,
-                             'Bạn đã đăng ký người dùng thành công và có thể đăng nhập. Để sử dụng các tính năng của chuyên viên TGNP, bạn cần liên hệ với admin để đươc cấp quyền.')
+                    'Bạn đã đăng ký người dùng thành công và có thể đăng nhập. (chú ý: Để trở thành Chuyên viên và sử dụng các tính năng của Chuyên viên TGNP, bạn cần liên hệ với admin.)')
             return redirect('login')
 
         return render(request, 'accounts/_register.html', {'reg_user': reg_user, 'form': form})
@@ -99,7 +99,6 @@ def login_handler(request):
 
         return redirect('index')
     else:
-        messages.error(request, 'Bạn cần gửi đủ thông tin đăng nhập')
         return redirect('/admin/')
 
 

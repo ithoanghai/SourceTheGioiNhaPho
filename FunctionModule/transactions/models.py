@@ -20,6 +20,7 @@ class Status(models.TextChoices):
 
 class Transaction(models.Model):
     class Meta:
+        verbose_name = "Giao dịch BĐS"
         verbose_name_plural = "DS Giao dịch"
 
     code = models.CharField(max_length=13, help_text="Mã giao dịch")
