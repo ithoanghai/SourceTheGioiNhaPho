@@ -14,5 +14,17 @@
 }
 
 .filepond--file-info {
-    color: #fff;
+    color: #8d9ad9;
+}
+
+.filepond--item {
+    /*max-width: calc(50% - 20px);*/
+    max-width: calc(33% - 5px);
+    list-style-type: none;
+}
+
+@media only screen and (max-width: 720px) {
+    .filepond--item {
+        max-width: calc(100% - 10px);
+    }
 }
