@@ -7,7 +7,6 @@ new Vue({
     },
     methods: {
         showPopupModal: function () {
-            console.log('click show popup modal')
             this.isShowPopup = true;
         },
         closeModal: function () {
@@ -27,23 +26,4 @@ new Vue({
         document.addEventListener('keydown', this.closePopupOnKey);
     }
 
-})
-
-$(document).ready(function () {
-    // const secondaryBar$ = $('.secondaryBar');
-    // const actionBar$ = $('.actionBar');
-    // $('.menu-humber').click(() => {
-    //     secondaryBar$.css('position', 'static');
-    //     actionBar$.css('position', 'static');
-    // });
-    //
-    // $(".main-nav-menu__overlay").click(() => {
-    //     secondaryBar$.css('position', '');
-    //     actionBar$.css('position', '');
-    // });
-    //
-    // $(".close__main-menu").click(() => {
-    //     secondaryBar$.css('position', '');
-    //     actionBar$.css('position', '');
-    // });
 })

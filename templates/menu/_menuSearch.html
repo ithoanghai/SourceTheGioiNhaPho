@@ -61,6 +61,9 @@
           Mua •
         </div>
         <input placeholder="Nhập địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
+               v-model="query" v-on:input="handleQueryChange"
+               v-bind:class="{ inputInProgress: isLoading, }"
+               v-on:focus="handleFocus"
                spellcheck="false" dir="auto" name="keywords">
       </form>
     </div>
@@ -95,14 +98,12 @@
   </div>
   </div>
 
-  <div class="search-mobile-component" keyword="" init-title=""
-       placeholder="Nhập địa điểm, khu dân cư, tòa nhà"></div>
+  <div class="search-mobile-component" keyword="" init-title="" placeholder="Nhập địa điểm, khu dân cư, tòa nhà"></div>
 </header>
-
 
 <script type="text/x-template" id="topSearchTemplate">
   <div class="top-search">
-    <a href="#"></a>
+    <a href="#">aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</a>
     <form action="{% url "listing_search" %}">
       <div tabindex="0" class="search-type"><span>Mua nhà</span>
         <ul class="hide">
@@ -122,18 +123,23 @@
       <div style="width: 100%" v-click-outside="handleFocus">
         <input placeholder="Nhập địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
                name="keywords"
-               spellcheck="false" dir="auto" v-model="query"
+               spellcheck="false" dir="auto"
+               v-model="query"
                v-on:input="handleQueryChange"
                v-bind:class="{ inputInProgress: isLoading, }"
                v-on:focus="handleFocus"
         />
         <ul class="search-suggest-list" v-show="suggestions.length && isFocus">
-          <li v-for="suggestion in suggestions" :key="suggestion.type" class=""
+          <li v-for="suggestion in suggestions" :key="suggestion.type" class="search-result"
               v-bind:class="{'search-result-type-heading': suggestion.isHeader}">
             <span v-if="suggestion.isHeader">
               <strong>${ suggestion.text }$</strong>
             </span>
-            <span v-else><a v-bind:href="suggestion.link"><span>${ suggestion.text }$</span> </a></span>
+            <span v-else>
+            <a v-bind:href="suggestion.link">
+              ${ suggestion.text }$ <i v-if="suggestion.subText">${ suggestion.subText }$</i>
+            </a>
+          </span>
           </li>
         </ul>
       </div>
