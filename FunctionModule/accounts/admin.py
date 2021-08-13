@@ -22,10 +22,9 @@ class AccountAdmin(AuthUserAdmin):
             'classes': ('wide',),
             'fields': ('username', 'email', 'phone', 'password1', 'password2',),
         }), ('THÔNG TIN BỔ SUNG', {'fields': (
-            'is_realtor', 'first_time',
-            'first_name', 'last_name',
+            'first_time', 'first_name', 'last_name',
             'address', 'dob', 'gender',
-            'bio', 'website', 'facebook', 'youtube',)})
+            'avatar', 'facebook',)})
     )
 
     fieldsets = (
@@ -33,22 +32,19 @@ class AccountAdmin(AuthUserAdmin):
             'classes': ('wide',),
             'fields': ('username', 'email', 'phone', 'password',)}),
         ('THÔNG TIN BỔ SUNG', {'fields': (
-            'is_realtor', 'first_time',
-            'last_name', 'first_name',
+            'first_time', 'last_name', 'first_name',
             'address', 'dob', 'gender',
-            'bio', 'website', 'facebook', 'youtube',)}),
+            'bio', 'avatar', 'website', 'facebook', 'youtube',)}),
         ('PHÂN QUYỀN SỬ DỤNG', {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
         }),
         ('THỜI GIAN HOẠT ĐỘNG', {'fields': ('last_login', 'date_joined')}),
     )
 
-    list_display = ('id', 'name', 'email', 'date_joined', 'phone', 'is_realtor')
-    list_display_links = ('id', 'email')
-    search_fields = ['email', 'phone']
-    list_filter = (
-        'date_joined', 'is_realtor', 'is_superuser', 'is_staff'
-    )
+    list_display = ('id', 'name', 'email', 'phone', 'date_joined', 'is_staff')
+    list_display_links = ('name', 'email')
+    search_fields = ['name', 'email', 'phone']
+    list_filter = ('date_joined', 'is_superuser', 'is_staff')
     readonly_fields = [
         'date_joined',
     ]

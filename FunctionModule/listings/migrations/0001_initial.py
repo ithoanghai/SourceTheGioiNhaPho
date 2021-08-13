@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('transaction_type', models.CharField(choices=[('sell', 'Bán'), ('for_rent', 'Cho thuê'), ('project', 'Dự án')], default='sell', max_length=20, verbose_name='Hình thức giao dịch')),
                 ('house_type', models.CharField(choices=[('street_house', 'Nhà mặt phố'), ('town_house', 'Nhà phố'), ('loft_house', 'Nhà gác xép/Cấp 4'), ('shop_house', 'Cửa hàng'), ('building', 'Toà nhà'), ('building_business', 'Toà nhà kinh doanh'), ('office', 'Văn phòng'), ('office_tel', 'Văn phòng khách sạn'), ('condo_tel', 'Căn hộ khách sạn'), ('apartment', 'Căn hộ'), ('service_apartment', 'Căn hộ dịch vụ'), ('pent_house', 'Căn hộ áp mái'), ('villa', 'Biệt thự'), ('villa_rest', 'Biệt thự nghỉ dưỡng'), ('land', 'Đất nền'), ('land_business', 'Mặt bằng kinh doanh'), ('plot', 'Đất phân lô'), ('industrial_land', 'Đất công nghiệp'), ('warehouse_workshop', 'Kho xưởng'), ('other', 'Khác')], default='town_house', max_length=20, verbose_name='Loại BĐS')),
-                ('code', models.CharField(help_text='Quy tắc: Viết tắt chữ cái đầu Loại BĐS + 2 chữ số Năm + Tháng + Chữ cái đầu tên Đầu chủ + Số BĐS của ĐC', max_length=80, unique=True, verbose_name='Mã BĐS (VIẾT HOA)')),
+                ('code', models.CharField(help_text='Quy tắc: Viết tắt chữ cái đầu Loại BĐS + 2 chữ số Năm + Tháng + Chữ cái đầu tên của Chuyên viên + Số BĐS của ĐC', max_length=80, unique=True, verbose_name='Mã BĐS (VIẾT HOA)')),
                 ('title', models.CharField(help_text='Gợi ý: Từ khoá + Vị trí (Đường/Phố/Khu) + Diện tích + Tiện ích + Giá + Sổ', max_length=200, verbose_name='Tiêu đề đăng (VIẾT HOA)')),
                 ('address', models.CharField(help_text='Ngõ.Ngách.Hẻm.Số nhà, Khu dân cư, Phố, Quận/Huyện, Tỉnh/TP', max_length=255, verbose_name='Địa chỉ đầy đủ')),
                 ('urban_area', models.CharField(blank=True, max_length=100, null=True, verbose_name='Khu đô thị/Khu dân cư')),
@@ -67,7 +67,7 @@ class Migration(migrations.Migration):
                 ('is_published', models.BooleanField(default=True, verbose_name='CHO PHÉP ĐĂNG')),
                 ('list_date', models.DateTimeField(default=datetime.datetime.now, verbose_name='Ngày đăng')),
                 ('location', location_field.models.spatial.LocationField(default=django.contrib.gis.geos.point.Point(105.8401439, 21.0334474), help_text='Nhập toạ độ hoặc chọn vị trí trên bản đồ', null=True, srid=4326, verbose_name='Toạ độ vị trí BĐS')),
-                ('realtor', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='realtors.realtor', verbose_name='Đầu chủ')),
+                ('realtor', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='realtors.realtor', verbose_name='Chuyên viên')),
             ],
         ),
         migrations.CreateModel(

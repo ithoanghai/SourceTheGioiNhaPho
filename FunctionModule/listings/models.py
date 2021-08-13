@@ -24,6 +24,7 @@ def get_image_path(instance, filename: str):
 
 class Listing(models.Model):
     class Meta:
+        verbose_name = "Bất động sản"
         verbose_name_plural = "DS Bất động sản"
         indexes = (
             # Full text search index
@@ -37,14 +38,14 @@ class Listing(models.Model):
             models.Index(fields=["house_type", "transaction_type"]),
         )
 
-    realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, verbose_name=_("Đầu chủ"))
+    realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, verbose_name=_("Chuyên viên"))
     transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,
                                         default=TransactionType.SELL, verbose_name=_("Hình thức giao dịch"))
     house_type = models.CharField(max_length=20, choices=HouseType.choices, default=HouseType.TOWN_HOUSE,
                                   verbose_name=_("Loại BĐS"))
 
     code = models.CharField(max_length=80, verbose_name=_("Mã BĐS (VIẾT HOA)"), help_text=_(
-        "Quy tắc: Viết tắt chữ cái đầu Loại BĐS + 2 chữ số Năm + Tháng + Chữ cái đầu tên Đầu chủ + Số BĐS của ĐC"),
+        "Quy tắc: Viết tắt chữ cái đầu Loại BĐS + 2 chữ số Năm + Tháng + Chữ cái đầu tên của Chuyên viên + Số BĐS của ĐC"),
                             unique=True)
     title = models.CharField(max_length=200, verbose_name=_("Tiêu đề đăng (VIẾT HOA)"),
                              help_text=_(
@@ -198,10 +199,13 @@ class Listing(models.Model):
 
 
 class ListingImage(models.Model):
+    class Meta:
+        verbose_name = "Ảnh chụp BDS"
+        verbose_name_plural = "Ảnh Bất động sản"
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("ẢNH CHỤP BĐS"))
     sort = models.IntegerField(default=0, verbose_name=_("Thứ tự hiện"))
     description = models.CharField(max_length=255, blank=True, default="", verbose_name=_("Thông tin"))
-    photo = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Ảnh"))
+    photo = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Ảnh BĐS"))
 
     def __str__(self):
         return f'{self.listing_id}_{self.sort}__{self.photo.url}'
@@ -217,8 +221,16 @@ class ListingImage(models.Model):
 
 
 class ListingVideo(models.Model):
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("VIDEO BĐS"))
-    video = EmbedVideoField(blank=True, null=True)
+    class Meta:
+        verbose_name = "Đường dẫn video Youtube"
+        verbose_name_plural = "Đường dẫn video Youtube"
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("BĐS"))
+    video = EmbedVideoField(blank=True, null=True, verbose_name=_("Link video"))
+
+
+class TimestampField(serializers.Field):
+    def to_representation(self, value):
+        return value.timestamp()
 
 
 class TimestampField(serializers.Field):
@@ -262,11 +274,14 @@ class ListingIndexSerializer(ListingSerializer):
 
 
 class ContractImage(models.Model):
+    class Meta:
+        verbose_name = "Ảnh chụp hợp đồng, sổ đỏ"
+        verbose_name_plural = "Ảnh hợp đồng, sổ đỏ"
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE,
                                 verbose_name=_("ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"))
     sort = models.IntegerField(default=0, verbose_name=_("Thứ tự hiện"))
     description = models.CharField(max_length=255, blank=True, default="", verbose_name=_("Thông tin"))
-    photo = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Ảnh"))
+    photo = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Link Ảnh"))
 
     def __str__(self):
         return f'{self.listing_id}_{self.sort}__{self.photo.url}'

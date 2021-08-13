@@ -4,9 +4,9 @@ from .models import Realtor
 
 
 class RealtorAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'realtor_name', 'hire_date')
-    list_display_links = ('id', 'user')
-    search_fields = ('user',)
+    list_display = ('id', 'realtor_name', 'hire_date')
+    list_display_links = ('realtor_name',)
+    search_fields = ('realtor_name',)
     list_per_page = 25
 
     def realtor_name(self, obj: Realtor):

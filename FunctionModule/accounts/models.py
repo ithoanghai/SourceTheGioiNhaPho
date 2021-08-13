@@ -24,6 +24,7 @@ phone_regex = RegexValidator(regex=r'^(09|03|07|08|05)+([0-9]{8})$',
 
 class User(AbstractUser):
     class Meta:
+        verbose_name = "Người dùng"
         verbose_name_plural = "DS Người dùng"
 
     # These two fields are for backend (admin) login form to display correctly
@@ -35,7 +36,6 @@ class User(AbstractUser):
     email = models.EmailField(_('Email'), blank=True, unique=True, error_messages={
        'unique': _("Email này đã được sử dụng trên hệ thống.")})
 
-    is_realtor = models.BooleanField(_("Là đầu chủ"), default=True)
     # Basic Info
     first_name = models.CharField(_('Tên'), max_length=150, blank=True)
     last_name = models.CharField(_('Họ'), max_length=150, blank=True)
@@ -45,7 +45,7 @@ class User(AbstractUser):
     dob = models.DateField(_('Ngày sinh'), blank=True, null=True)
     gender = models.CharField(_('Giới tính'), max_length=20, choices=GENDER_CHOICES, blank=True, default='male')
     bio = models.TextField(_('Lý lịch'), blank=True)
-    avatar = models.ImageField(_("Ảnh đại diện"), upload_to="photos/%Y/%m/%d/")
+    avatar = models.ImageField(_("Ảnh đại diện"), upload_to="photos/%Y/%m/%d/", default='img/logo tgnp brown.jpg')
 
     # Social Fields
     website = models.CharField(_('Website'), blank=True, max_length=255)
