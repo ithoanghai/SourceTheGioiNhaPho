@@ -9,6 +9,7 @@ services:
       - POSTGRES_PASSWORD=bBtv7V96uSV590
     volumes:
       - db-data:/var/lib/postgresql
+      - ./data/db:/home/db
     #ports:
     #  - "5432:5432"
     expose:
