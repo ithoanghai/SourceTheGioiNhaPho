@@ -1,10 +1,17 @@
+import csv
 import math
+import os
+import tempfile
+from datetime import datetime
 
 from django.core.paginator import Paginator
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_protect
 from rest_framework import request, response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
-from FunctionModule.listings.models import ListingSerializer
+from FunctionModule.listings.export import prepare_fb_headers, prepare_fb_listing_data
+from FunctionModule.listings.models import ListingSerializer, Listing
 from FunctionModule.listings.search import prepare_listing_queryset, search_by_keywords, get_suggestions
 
 
@@ -160,3 +167,20 @@ def search_listing(req: request.Request, **kwargs):
             'total': queryset_list.count()
         }
     })
+
+
+@api_view(['POST'])
+@csrf_protect
+def download_exported_listing(req: request.Request, **kwargs):
+    file_path = os.path.join(tempfile.gettempdir(), 'tmp.csv')
+    with open(file_path, 'w', encoding='utf-8') as fp:
+        headers = prepare_fb_headers()
+        writer = csv.DictWriter(fp, fieldnames=headers)
+        writer.writeheader()
+        for listing in Listing.objects.all():
+            listing_data = prepare_fb_listing_data(listing)
+            writer.writerow(listing_data)
+    with open(file_path, 'r', encoding='utf-8') as fp:
+        resp = HttpResponse(fp.read(), content_type="text/csv")
+        resp['Content-Disposition'] = f'filename=tgnp_bds_facebook_export-{datetime.today().strftime("%Y-%m-%d")}.csv'
+        return resp
