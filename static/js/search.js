@@ -84,7 +84,6 @@ new Vue({
     },
     created() {
        this.interval = setInterval(() => {
-           log('run interval')
            if (window._ && axios) {
                this.setupAutoComplete();
            }
@@ -566,7 +565,7 @@ new Vue({
             this.setMarkers();
         },
         setArea: function (from, to) {
-            if (!from || !to) return;
+            if (from === undefined || to === undefined) return;
             if (this.minArea === from && this.maxArea === to) return;
             let newTo = to;
             let newFrom = from;
@@ -614,8 +613,7 @@ new Vue({
             this.setBedroomFilter(bedFilter);
 
             const bathrooms = parentSelector.find('input[name="bathrooms"]:checked').first().val()
-            if (bathrooms !== 'all')
-                this.setBathroomFilter(bathrooms);
+            this.setBathroomFilter(bathrooms);
 
             let directions = [];
             parentSelector.find('input[name="direction"]:checked').map((index, item) => {
@@ -650,8 +648,11 @@ new Vue({
         setBathroomFilter: function (filter) {
             if (!filter) return;
             if (this.bathroomFilter === filter) return;
-            this.bedroomFilter = filter;
-            this.updateQueryParams({'bathrooms': filter})
+            this.bathroomFilter = filter;
+            if (filter !== 'all')
+                this.updateQueryParams({'bathrooms': filter})
+            else
+                this.removeQueryParams('bathrooms')
         },
         setDirectionFilter: function (filters) {
             if (!filters) return;
@@ -662,18 +663,17 @@ new Vue({
         },
         setIsVerifiedFilter: function (value) {
             if (this.isVerifiedFilter === value) return;
+            this.isVerifiedFilter = value;
             if (value === true) {
-                this.isVerifiedFilter = value;
                 this.updateQueryParams({'is_verified': value});
-
             } else {
                 this.removeQueryParams('is_verified')
             }
         },
         setIsExclusiveFilter: function (value) {
             if (this.isExclusiveFilter === value) return;
+            this.isExclusiveFilter = value;
             if (value === true) {
-                this.isExclusiveFilter = value;
                 this.updateQueryParams({'is_exclusive': value});
 
             } else {

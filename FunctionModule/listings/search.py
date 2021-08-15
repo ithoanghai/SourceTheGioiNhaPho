@@ -105,21 +105,18 @@ def prepare_listing_queryset(input_params):
     # Bedrooms
     bedrooms = input_params.get('bedrooms', None)
     if bedrooms:
-        if bedrooms.isnumeric():
-            queryset_list = queryset_list.filter(bedrooms__lte=bedrooms)
-        else:
-            bedrooms = bedrooms.split(',')
-            to_filter = []
-            filter_over_6 = False
-            for f in bedrooms:
-                if f == '6+':
-                    filter_over_6 = True
-                else:
-                    to_filter.append(f)
-            query = Q(bedrooms__in=to_filter)
-            if filter_over_6:
-                query = query | Q(bedrooms__gte=6)
-            queryset_list = queryset_list.filter(query)
+        bedrooms = bedrooms.split(',')
+        to_filter = []
+        filter_over_6 = False
+        for f in bedrooms:
+            if f == '6+':
+                filter_over_6 = True
+            else:
+                to_filter.append(f)
+        query = Q(bedrooms__in=to_filter)
+        if filter_over_6:
+            query = query | Q(bedrooms__gte=6)
+        queryset_list = queryset_list.filter(query)
 
     bathrooms = input_params.get('bathrooms', None)
     if bathrooms:
@@ -143,16 +140,15 @@ def prepare_listing_queryset(input_params):
             queryset_list = queryset_list.filter(query)
 
     # Area
-    if 'minArea' in input_params:
-        area = input_params.get('minArea')
-        if area:
-            query = Q(area__gte=area)
-            queryset_list = queryset_list.filter(query)
-    if 'maxArea' in input_params:
-        area = input_params.get('maxArea')
-        if area:
-            query = Q(area__lte=area)
-            queryset_list = queryset_list.filter(query)
+    area = input_params.get('minArea')
+    if area and area.isnumeric():
+        query = Q(area__gte=area)
+        queryset_list = queryset_list.filter(query)
+    max_area = input_params.get('maxArea')
+    if max_area and max_area.isnumeric():
+        query = Q(area__lte=max_area)
+        queryset_list = queryset_list.filter(query)
+    print(input_params, area, max_area)
 
     if 'sort' in input_params:
         sort_by = input_params.get('sort')
