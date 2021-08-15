@@ -3,7 +3,7 @@
 
 <article class="listingCard">
   <div class="cover-image">
-    <a href="{% url 'listing' listing.id %}" title="{{ listing.title }}">
+    <a href="{% url "listing_detail" listing.id %}" title="{{ listing.title }}">
     {% if listing.main_photo %}
       {% with listing.main_photo as photo %}
         {{ photo }}
@@ -55,7 +55,7 @@
       </ul>
     </div>
 {% comment %}    <h3>
-      <a class="listing-name" href="{% url 'listing' listing.id %}"
+      <a class="listing-name" href="{% url "listing_detail"' listing.id %}"
          title="{{ listing.title }}">{{ listing.title }}</a>
     </h3>{% endcomment %}
 

@@ -3,7 +3,7 @@
 <div class="article">
   <div class="img">
     <a class="cover"
-       href="{% url 'listing' listing.id %}"
+       href="{% url "listing_detail" listing.id %}"
        title="{{ listing.title }}">
       {% with listing.main_photo as photo %}
           <img class="lazy" data-src="{{ photo.url }}"
@@ -15,7 +15,7 @@
     </a>
   </div>
   <div class="title">
-    <h3><a href="{% url 'listing' listing.id %}"
+    <h3><a href="{% url "listing_detail" listing.id %}"
            title="{{ listing.title }}">{{ listing.title }}</a></h3>
   </div>
   <div class="status tgnp-color">
@@ -45,7 +45,7 @@
         <li title="Bán nhanh">Còn {{ listing.sale_price }} tỷ</li> {% endif %}
     </ul>
   </div>
-  <input name="url" type="hidden" value="{% url 'listing' listing.id %}">
+  <input name="url" type="hidden" value="{% url "listing_detail" listing.id %}">
   <input name="lat" type="hidden" value="{{ listing.lat }}">
   <input name="lon" type="hidden" value="{{ listing.long }}">
 </div>
