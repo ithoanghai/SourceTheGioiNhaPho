@@ -1,95 +1,95 @@
+from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, render
-from pydantic import BaseModel
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render, redirect
+from django.views.decorators.csrf import csrf_protect
+from django.utils import timezone
+from datetime import timedelta
 from rest_framework import status, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from .forms import RequestQuoteForm
+from .models import TransTypeInit
 from .serializers import *
+from ..accounts.models import User
+from ..listings.models import Listing
 
 
-class TransactionSearchQuery(BaseModel):
-    keywords: str = None
-    state: int = None
-    bedrooms: int = None
-    price: int = None
+@csrf_protect
+def contact(request):
+    if request.method == 'POST':
+        listing_id = request.POST['listing_id']
+        trantype = TransTypeInit.CONTACT
+
+        lastname = request.POST['lastname']
+        firstname = request.POST['firstname']
+        name = f'{firstname} {lastname}'
+        email = request.POST['email']
+        phone = request.POST['phone']
+        message = request.POST['message']
+        yesterday = timezone.now() - timedelta(days=1)
+
+        if listing_id is not None:
+            listing = Listing.objects.get(pk=listing_id)
+        #  Check if user has made inquiry already
+        if request.user.is_authenticated:
+            user = request.user
+            if listing is not None:
+                has_contacted = Transaction.objects.filter(listing=listing, user=user, date__gte=yesterday)
+                if has_contacted:
+                    messages.error(request,'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
+        else:
+            ses_id = request.session.session_key
+            print(ses_id)
+
+        user = User.objects.create(name=name, email=email, phone=phone)
+        Transaction.objects.create(listing=listing, user=user, trantype=trantype, message=message)
+
+        messages.success(request, 'Yêu cầu được gửi thành công. Chúng tôi sẽ liên lạc lại với bạn sớm nhất.')
+        if listing is not None:
+            return redirect('/listings/' + listing_id)
+
+    return redirect('contacts')
+        # return JsonResponse({})
 
 
-def index(request):
-    transactions = Transaction.objects.order_by('-date').filter()
-    paginator = Paginator(transactions, 6)
-    page = request.GET.get('page')
-    paged_transations = paginator.get_page(page)
+@csrf_protect
+def request_quote(request):
+    form = RequestQuoteForm(request.POST)
+    if not form.is_valid():
+        return JsonResponse({
+            "error": form.errors
+        }, status=400)
+    trantype = TransTypeInit.ORDER
+    lastname = form.cleaned_data.get('lastname')
+    firstname = form.cleaned_data.get('firstname')
+    name = f'{firstname} {lastname}'
+    email = form.cleaned_data.get('email')
+    phone = form.cleaned_data.get('phone')
+    message = form.cleaned_data.get('message')
+    house_type = form.cleaned_data.get('house_type')
+    district = form.cleaned_data.get('district')
+    request_price = form.cleaned_data.get('request_price')
+    yesterday = timezone.now() - timedelta(days=1)
+    #  Check if user has made inquiry already
+    if request.user.is_authenticated:
+        user = request.user
+        has_contacted = Transaction.objects.filter(user=user, date__gte=yesterday)
+        if has_contacted:
+            return JsonResponse({
+                'message': 'Chúng tôi đã nhận được thông tin của quý khách và sẽ liên hệ lại trong thời gian sớm nhất.'
+            })
+    else:
+        user = None
+    user = User.objects.create(name=name, email=email, phone=phone)
+    Transaction.objects.create(user=user, trantype=trantype, message=message, house_type=house_type, district=district, request_price=request_price)
 
-    context = {
-        'transactions': paged_transations
-    }
-
-    return render(request, 'transactions/search.html', context)
-
-
-def transaction(request, transaction_id):
-    transaction = get_object_or_404(Transaction, pk=transaction_id)
-    transactions_same = Transaction.objects.order_by('-date').filter(status=transaction.status)
-    context = {
-        'transaction': transaction,
-        'transactions_same': transactions_same
-    }
-
-    return render(request, 'transactions/detail.html', context)
-
-
-def detail(request):
-    transaction_id = request.GET.get('id', '')
-    transaction = get_object_or_404(Transaction, pk=transaction_id)
-    context = {
-        'transaction': transaction,
-    }
-
-    return render(request, 'transactions/detail.html', context)
-
-
-def search(request):
-    queryset_list = Transaction.objects.order_by('-date')
-
-    # Trang thai giao dich
-    if 'reason' in request.GET:
-        reason = request.GET['reason']
-        if reason:
-            queryset_list = queryset_list.filter(reason=reason)
-
-    # Tim theo khach hang
-    if 'user' in request.GET:
-        user = request.GET['user']
-        if user:
-            queryset_list = queryset_list.filter(user=user)
-
-    # tim theo bat dong san
-    if 'listing' in request.GET:
-        listing = request.GET['listing']
-        if listing:
-            queryset_list = queryset_list.filter(listing=listing)
-
-    # Keywords
-    if 'keywords' in request.GET:
-        keywords = request.GET['keywords']
-        if keywords:
-            query = Q(comment__icontains=keywords)
-            queryset_list = queryset_list.filter(query)
-
-    # Price
-    if 'price' in request.GET:
-        price = request.GET['price']
-        if price:
-            query = Q(price__lte=price)
-            queryset_list = queryset_list.filter(query)
-
-    context = {
-        'transactions': queryset_list,
-    }
-
-    return render(request, 'transactions/search.html', context)
+    return JsonResponse(
+        {
+            'message': 'Chúng tôi đã nhận được thông tin của quý khách và sẽ liên hệ lại trong thời gian sớm nhất.'
+        })
 
 
 @api_view(['GET', 'POST'])

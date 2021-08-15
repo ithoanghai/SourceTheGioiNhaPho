@@ -26,6 +26,7 @@ class User(AbstractUser):
     class Meta:
         verbose_name = "Người dùng"
         verbose_name_plural = "DS Người dùng"
+        ordering = ["first_name", "last_name"]
 
     # These two fields are for backend (admin) login form to display correctly
     username = models.CharField(
@@ -37,8 +38,8 @@ class User(AbstractUser):
        'unique': _("Email này đã được sử dụng trên hệ thống.")})
 
     # Basic Info
-    first_name = models.CharField(_('Tên'), max_length=150, blank=True)
-    last_name = models.CharField(_('Họ'), max_length=150, blank=True)
+    first_name = models.CharField(_('Họ'), max_length=150, blank=True)
+    last_name = models.CharField(_('Tên'), max_length=150, blank=True)
     phone = models.CharField(_('Điện thoại'), max_length=20, db_index=True, unique=True, validators=[phone_regex],
                              error_messages={'unique': _("Số điện thoại này đã được sử dụng trên hệ thống.")})
     address = models.CharField(_('Địa chỉ'), blank=True, max_length=255)
@@ -56,7 +57,7 @@ class User(AbstractUser):
     first_time = models.BooleanField(_('Đăng nhập lần đầu'), default=True)
 
     def __str__(self):
-        return self.username
+        return self.name
 
     def get_absolute_url(self):
         return reverse('users:detail', kwargs={'username': self.username})
