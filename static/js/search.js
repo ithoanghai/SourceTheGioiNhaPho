@@ -9,8 +9,10 @@ new Vue({
             isLoading: false,
             isFocus: false,
             suggestions: [],
-            query: '',
         }
+    },
+    props: {
+        query: String
     },
     methods: {
         getAutoComplete: () => {
@@ -29,43 +31,64 @@ new Vue({
         handleFocus: function (e) {
             this.isFocus = !this.isFocus;
         },
+        setupAutoComplete: function () {
+            clearInterval(this.interval);
+            const getHeaderText = (itemType) => {
+                switch (itemType) {
+                    case 'area':
+                        return 'Khu vực';
+                    case 'street':
+                        return 'Đường';
+                    case 'urban_area':
+                        return 'Khu dân cư'
+                    default:
+                        return 'Khu vực'
+                }
+            }
+
+            this.getAutoComplete = _.debounce(async (q) => {
+                const resp = await axios.get(`/api/s-suggest/sell/${q}`)
+                if (resp && resp.status && resp.status == 200) {
+                    let suggestions = [];
+                    let headers = {};
+                    for (const item of resp.data) {
+                        if (!(item.type in headers)) {
+                            suggestions.push({
+                                code: "",
+                                text: getHeaderText(item.type),
+                                subText: "",
+                                link: "",
+                                isHeader: true,
+                            })
+                            headers[item.type] = 1
+                        }
+                        if (item.sub_type !== 'state') {
+                            suggestions.push({
+                                code: item.id,
+                                text: item.text,
+                                subText: item.sub_text,
+                                link: `/listings/search?keywords=${item.text}`,
+                                isHeader: false,
+                            })
+                        }
+
+                    }
+                    this.suggestions = suggestions;
+                }
+                setTimeout(() => {
+                    this.isLoading = false;
+                }, 200);
+                return resp;
+            }, 300);
+        },
     },
     created() {
-        this.getAutoComplete = _.debounce(async (q) => {
-            const resp = await axios.get(`/api/s-suggest/sell/${q}`)
-            if (resp && resp.status && resp.status == 200) {
-                let suggestions = [];
-                let headers = {};
-                for (const item of resp.data) {
-                    console.log(item);
-                    if (!(item.type in headers)) {
-                        suggestions.push({
-                            code: "",
-                            text: getHeaderText(item.type),
-                            subText: "",
-                            link: "",
-                            isHeader: true,
-                        })
-                        headers[item.type] = 1
-                    }
-                    if (item.sub_type !== 'state') {
-                        suggestions.push({
-                            code: item.id,
-                            text: item.text,
-                            subText: item.sub_text,
-                            link: `/listings/search?keywords=${item.text}`,
-                            isHeader: false,
-                        })
-                    }
-
-                }
-                this.suggestions = suggestions;
-            }
-            setTimeout(() => {
-                this.isLoading = false;
-            }, 200);
-            return resp;
-        }, 300);
+       this.interval = setInterval(() => {
+           log('run interval')
+           if (window._ && axios) {
+               this.setupAutoComplete();
+           }
+       }, 100)
     }
 })
 
@@ -394,10 +417,10 @@ new Vue({
                 curLength += 1;
 
             if (this.houseTypeFilterMark > 0)
-                curLength += 1;
+                curLength += this.houseTypeFilterMark;
 
             if (this.bedroomFilter.length > 0)
-                curLength += 1;
+                curLength += this.bedroomFilter.length;
 
             curLength += this.countOtherFilter();
 
@@ -422,7 +445,7 @@ new Vue({
 
         },
         toggleMobileFilter: function () {
-            if (this.showFilterType) {
+            if (this.showMobileFilter) {
                 $('.main-header').css('z-index', '')
             } else {
                 $('.main-header').css('z-index', 0)
@@ -523,11 +546,9 @@ new Vue({
                 ...this.$mobilePriceSlider.options,
                 from, to
             })
-            console.log(newFrom, newTo)
             this.updateQueryParams({minPrice: newFrom, maxPrice: newTo})
         },
         quickSetPrice: async function (from, to) {
-            console.log(from, to)
             this.setPrices(from, to);
             this.toggleFilterType('priceFilter');
             await this.getListings();
@@ -692,15 +713,14 @@ new Vue({
         },
         countOtherFilter: function () {
             let curLength = 0;
-            console.log(this.bathroomFilter)
             if (this.bathroomFilter && this.bathroomFilter !== 'all')
                 curLength += 1;
 
             if (this.bedroomFilter.length > 0)
-                curLength += 1;
+                curLength += this.bedroomFilter.length;
 
             if (this.directionFilters.length > 0)
-                curLength += 1;
+                curLength += this.directionFilters.length;
 
             if (this.isVerifiedFilter === true)
                 curLength += 1;
@@ -709,7 +729,7 @@ new Vue({
                 curLength += 1;
 
             if (this.statusFilters.length > 0)
-                curLength += 1;
+                curLength += this.statusFilters.length;
 
             return curLength;
         },

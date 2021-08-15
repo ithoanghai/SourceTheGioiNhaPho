@@ -724,6 +724,15 @@
     .headerNoScroll .secondaryBar, .headerNoScroll .actionBar {
         position: static;
     }
+
+    .main-header, .secondaryBar, .actionBar {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        /*-webkit-perspective: 100px;*/
+        /*transform: translateZ(0);*/
+        /*-webkit-transform:translate3d(0,0,0);*/
+        overflow-x: hidden;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -1356,7 +1365,7 @@
         font-size: 13px
     }
 
-   .search-sidebar_content {
+    .search-sidebar_content {
         margin-left: 0
     }
 
@@ -1550,12 +1559,10 @@
 
     article.featured header {
         padding: 20px
-    }
-
-    {
-        margin-top: 0;
-        padding-top: 0
-    }
+    } {
+    margin-top: 0;
+    padding-top: 0
+}
 
     article.featured header {
         float: left;

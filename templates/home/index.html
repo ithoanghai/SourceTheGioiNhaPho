@@ -156,4 +156,37 @@
       }
   </script>
 
+  <style>
+    .search-suggest-list {
+    display: block;
+    position: absolute;
+    background: #fff;
+    top: 76%;
+    right: 0;
+    width: 100%;
+    max-width: 400px;
+    z-index: 10;
+    border: 1px solid rgba(131, 131, 131, .2);
+    border-radius: 2px;
+    padding: 5px 0;
+    font-size: 14px
+}
+    .search-suggest-list li {
+    height: auto;
+    min-height: 40px
+}
+    .search-suggest-list li:hover {
+    background: #f3f4f7
+}
+    .search-suggest-list li a {
+    width: 100%;
+    display: block;
+    padding: 10px 15px;
+    color: #30333a
+}
+    .search-suggest-list li a span {
+    display: block;
+    line-height: 20px
+}
+  </style>
 {% endblock %}

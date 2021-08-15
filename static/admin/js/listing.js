@@ -333,7 +333,7 @@ function multipleImages($) {
         })
         selector$.find("input.filepond--browser").prop("files", lst.files);
     });
-   
+
     pond.on('removefile', (error, file) => {
         const imgId = file.getMetadata('id');
         deleteBoxes$[imgId].attr('checked', true);
@@ -351,11 +351,58 @@ function multipleImages($) {
 
 }
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function exportFBData($) {
+    const csrftoken = getCookie('csrftoken');
+
+    function downloadURI(uri, name) {
+        let link = document.createElement("a");
+        link.download = name;
+        link.href = uri;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    $.ajax('/api/download_fb_export', {
+        type: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+    }).done((data, status, xhr) => {
+        if (status === 'success') {
+            const fileName = xhr.getResponseHeader('Content-Disposition').split('=').pop()
+            downloadURI(`data:text/csv,${data}`, fileName)
+        }
+    }).fail(err => {
+        console.log(err);
+    })
+
+}
+
+function exportListing($) {
+    $('.object-tools').append('<li><button class="button" onclick="exportFBData($)" type="button">Xuất dữ liệu csv (Facebook)</button></li>');
+}
+
 window.addEventListener("load", function () {
     (function (jQuery) {
         // priceToText(jQuery);
         addressSelect(jQuery);
         // importListing(jQuery);
         multipleImages(jQuery)
+        exportListing(jQuery);
     })(django.jQuery);
 });

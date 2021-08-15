@@ -9,20 +9,18 @@
     height: 60px;
     line-height: 60px;
     padding: 0 30px;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
     position: relative;
-    z-index: 100;
+    z-index: 3;
     background: #fff;
     border-bottom: 1px solid rgba(48, 51, 58, .1);
     font-family: tgnp-font, Arial, Helvetica, sans-serif;
     font-size: 16px;
     color: #444c59;
-    font-weight: 400
+    font-weight: 400;
 }
 
 .main-header ::after, .main-header ::before {
@@ -67,7 +65,6 @@
     border: 0;
     outline: 0;
     font-size: 100%;
-    vertical-align: baseline;
     background: 0 0;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -126,8 +123,7 @@
 .main-header .search-mobile .optionsList .option input,
 .main-header#home .col-left .top-search,
 .main-header .col-right .top-menu ul li .menu-humber,
-.main-header .col-left .top-menu ul li .menu-humber
-{
+.main-header .col-left .top-menu ul li .menu-humber {
     display: none
 }
 
@@ -409,8 +405,7 @@
 
 .main-header .col-right .top-menu ul .sub-menu:hover ul, .main-header .col-right .top-menu ul .sub-menu:hover::after, .main-header .col-right .top-menu ul .sub-menu:hover::before,
 .main-header .col-left .top-menu ul .sub-menu:hover::before, .main-header .col-left .top-menu ul .sub-menu:hover::after, .main-header .col-left .top-menu ul .sub-menu:hover ul,
-.main-header .col-right .login .user-avatar:hover .user-content, .main-header .col-right .login .user-avatar:hover:after, .main-header .col-right .login .user-avatar:hover:before
-{
+.main-header .col-right .login .user-avatar:hover .user-content, .main-header .col-right .login .user-avatar:hover:after, .main-header .col-right .login .user-avatar:hover:before {
     opacity: 1;
     visibility: visible
 }
@@ -623,7 +618,7 @@
 .main-header .col-right .login .user-avatar .user-content li:last-child a,
 .main-header .col-left .logo .main-nav-menu ul li a .zmdi,
 .main-header .col-left .top-menu ul li:not(.sub-menu) a:hover .zmdi, .main-header .col-left .top-menu ul li:not(.sub-menu) a:hover span,
-.main-header .col-right .top-menu ul li:not(.sub-menu) a:hover .zmdi, .main-header .col-right .top-menu ul li:not(.sub-menu) a:hover span{
+.main-header .col-right .top-menu ul li:not(.sub-menu) a:hover .zmdi, .main-header .col-right .top-menu ul li:not(.sub-menu) a:hover span {
     color: #c72628
 }
 
@@ -781,8 +776,7 @@
 }
 
 .main-header .search-mobile .search-suggest-list li a span i,
-.main-header .col-left .top-search form .search-suggest-list li a span i
-{
+.main-header .col-left .top-search form .search-suggest-list li a span i {
     color: #838383
 }
 
@@ -1170,7 +1164,7 @@ header#home::before {
     line-height: 15px
 }
 
-.main-header .col-right .welcome-user  {
+.main-header .col-right .welcome-user {
     margin-right: 2px;
     margin-left: 2px;
     color: antiquewhite;
@@ -1194,8 +1188,7 @@ header#home::before {
     .main-header .col-right .top-menu ul li a span,
     .main-header .col-left .top-menu,
     .main-header .col-left .top-search form .search-type,
-    .main-header .col-left .top-search form .zmdi
-    {
+    .main-header .col-left .top-search form .zmdi {
         display: none
     }
 
@@ -1231,12 +1224,6 @@ header#home::before {
 
 }
 
-@media (max-width: 768px) {
-    .main-header .col-left .top-search form .search-suggest-list {
-        width: calc(100% - 100px)
-    }
-}
-
 @media (min-width: 768px) {
     .main-header .btn-facebook:hover {
         color: #fff;
@@ -1253,7 +1240,7 @@ header#home::before {
         background: orange
     }
 
-        .main-header .btn-black:hover {
+    .main-header .btn-black:hover {
         color: #fff;
         background: rgba(48, 51, 58, .86)
     }
@@ -1369,8 +1356,7 @@ header#home::before {
     .main-header .col-left .top-menu ul .sub-menu,
     .main-header .col-right .login,
     .main-header .col-left .top-menu,
-    .main-header .col-right .top-menu ul .sub-menu
-    {
+    .main-header .col-right .top-menu ul .sub-menu {
         display: none
     }
 
@@ -1379,7 +1365,7 @@ header#home::before {
         min-width: -webkit-min-content;
         min-width: -moz-min-content;
         min-width: fit-content;
-        width: initial
+        width: initial;
     }
 
     .main-header .col-right .top-menu ul li {
@@ -1388,16 +1374,6 @@ header#home::before {
 
     .main-header .col-left .top-menu ul li {
         margin: 0
-    }
-
-     /*noinspection ALL,CssInvalidPropertyValue*/
-    .main-header .col-right {
-        max-width: -webkit-max-content;
-        max-width: -moz-max-content;
-        max-width: fit-content;
-        min-width: -webkit-min-content;
-        min-width: -moz-min-content;
-        min-width: fit-content
     }
 
     .main-header .col-right .top-menu ul li {
@@ -1439,7 +1415,7 @@ header#home::before {
 
 @media only screen and (max-width: 1096px) {
     .main-header .col-left .logo-large,
-    .main-header .col-right .top-menu ul .sub-menu ,
+    .main-header .col-right .top-menu ul .sub-menu,
     .main-header .col-right .login {
         display: none
     }
@@ -1457,6 +1433,7 @@ header#home::before {
     .main-header .col-right .top-menu ul li {
         margin: 0
     }
+
     .main-header .col-right .top-menu ul li:first-of-type {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -1466,7 +1443,7 @@ header#home::before {
         align-items: center
     }
 
-.main-header .col-right .top-menu ul li:first-of-type .menu-humber {
+    .main-header .col-right .top-menu ul li:first-of-type .menu-humber {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
