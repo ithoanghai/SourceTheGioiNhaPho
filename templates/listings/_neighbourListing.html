@@ -1,6 +1,6 @@
 {% load get_cadastral %}
 <li class="featured">
-  <a href="{% url 'listing' listing.id %}"
+  <a href="{% url 'listing_detail' listing.id %}"
      title="{{ listing.title }}" data-imp-click>
     <div class="cover">
       {% with listing.main_photo as photo %}
@@ -12,7 +12,7 @@
     </div>
   </a>
   <header>
-    <a href="{% url 'listing' listing.id %}"
+    <a href="{% url 'listing_detail' listing.id %}"
        title="{{ listing.title }}" data-imp-click>
       <h3 class="heading">{{ listing.title }}</h3>
     </a>

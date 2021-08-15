@@ -4291,15 +4291,17 @@ label {
 }
 
 .searchlisting article.featured header ul {
-    padding: 0;
+    padding: 5px;
     position: absolute;
     bottom: 0;
-    left: 0
+    left: 0;
+    display: flex;
 }
 
 .searchlisting article.featured header ul li {
     padding: 0;
-    font-size: 12px
+    font-size: 12px;
+    margin: 5px;
 }
 
 .searchlisting article.featured header ul li .font-icon {
@@ -4307,7 +4309,7 @@ label {
 }
 
 .searchlisting article.featured header .price-marker {
-    right: 10px;
+    left: 10px;
     bottom: 0;
     font-size: 14px
 }
