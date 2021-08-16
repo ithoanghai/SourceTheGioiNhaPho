@@ -383,6 +383,62 @@ section.bg-gray-e6 div.more-info-black {
     opacity: 1
 }
 
+.form-element {
+    position: relative;
+    width: 100%;
+    height: 44px;
+    margin-bottom: 20px;
+    float: left
+}
+
+.form-element:before {
+    clear: both;
+    width: 100%;
+    content: '';
+    display: table
+}
+
+.form-element .placeholder {
+    pointer-events: none;
+    color: rgba(68, 76, 89, .7);
+    position: absolute;
+    top: 0;
+    max-width: 100%;
+    z-index: 1;
+    transition: .3s;
+    transform-origin: 0 0;
+    font-size: 14px;
+    left: 10px;
+    font-weight: 400
+}
+
+.form-element .input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 0 0;
+    box-sizing: border-box;
+    outline: 0 !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 14px
+}
+
+.form-element textarea {
+    font-size: 14px;
+    max-width: 100%;
+    resize: none
+}
+
+.form-element.focused .placeholder {
+    transform: scale(.72) !important;
+    line-height: 20px !important;
+    margin-top: 5px
+}
+
 .contact-form .hs-form fieldset.form-columns-1 .input {
     margin: 0
 }

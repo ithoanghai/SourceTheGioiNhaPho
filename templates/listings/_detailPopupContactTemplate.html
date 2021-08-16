@@ -14,7 +14,7 @@
             href="javascript:void(0)">{{ listing.title }}</a></h3>
             <div class="popup-left-address"></div>
             <ul class="popup-left-info">
-              <li> <i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b>></li>
+              <li> <i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b></li>
                 {% if listing.floors %}
                 <li><p>Số tầng:</p> <strong>{{ listing.floors }}</strong></li>
               {% endif %}
@@ -65,37 +65,25 @@
                 {% csrf_token %}
                 <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
                 <div class="form-element">
-                  <input required type="text" name="firstname"
-                         v-model="data.firstname"
-                         v-on:blur="validateRequired('firstname')"
-                         v-on:input="e => handleInputChange('firstname', e)"
-                  />
+                  <input required type="text" name="firstname" v-model="data.firstname" v-on:blur="validateRequired('firstname')"
+                         v-on:input="e => handleInputChange('firstname', e)"/>
                   <span class="text-error" v-if="errors.firstname">[[errors.firstname]]</span>
                   <label>Họ</label>
                 </div>
                 <div class="form-element">
-                  <input required type="text" name="lastname"
-                         v-model="data.lastname"
-                         v-on:blur="validateRequired('lastname')"
-                         v-on:input="e => handleInputChange('lastname', e)"
-                  />
+                  <input required type="text" name="lastname" v-model="data.lastname" v-on:blur="validateRequired('lastname')"
+                         v-on:input="e => handleInputChange('lastname', e)"/>
                   <span class="text-error" v-if="errors.lastname">[[errors.lastname]]</span>
                   <label>Tên</label>
                 </div>
                 <div class="form-element">
-                  <input type="text" name="phone" required
-                         v-model="data.phone"
-                         v-on:blur="validatePhone"
-                         v-on:input="e => handleInputChange('phone', e)"
-                  />
+                  <input type="text" name="phone" required v-model="data.phone" v-on:blur="validatePhone"
+                         v-on:input="e => handleInputChange('phone', e)"/>
                   <span v-if="errors.phone" class="text-error">[[errors.phone]]</span>
                   <label>Số điện thoại</label>
                 </div>
                 <div class="form-element">
-                  <input type="text" name="email"
-                         v-model="data.email"
-                         v-on:input="e => handleInputChange('email', e)"
-                         v-on:blur="validateEmail"/>
+                  <input type="text" name="email" v-model="data.email" v-on:input="e => handleInputChange('email', e)" v-on:blur="validateEmail"/>
                   <span class="text-error">[[errors.email]]</span>
                   <label>Email (không bắt buộc)</label>
                 </div>
@@ -105,8 +93,7 @@
                   </div>
                   <label>Giá mong muốn</label></div>
                 <div class="form-element" style="">
-                  <input required name="message" type="text"
-                         value="Tôi liên hệ để xem BĐS có mã {{ listing.code }}"/>
+                  <input required name="message" type="text" value="Tôi liên hệ để xem BĐS có mã {{ listing.code }}"/>
                   <label>Lời nhắn</label>
                 </div>
                 <div class="form-element">

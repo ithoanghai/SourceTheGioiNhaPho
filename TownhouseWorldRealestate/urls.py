@@ -20,7 +20,6 @@ urlpatterns = [
     path('listings/', include('FunctionModule.listings.urls')),
     path('transactions/', include('FunctionModule.transactions.urls')),
     path('accounts/', include('FunctionModule.accounts.urls')),
-    path('contacts/', include('FunctionModule.contacts.urls')),
     path('cadastral/', include('FunctionModule.cadastral.urls')),
     path('accounts/', include('allauth.urls')),
     path('admin', redirect_view, name='admin'),

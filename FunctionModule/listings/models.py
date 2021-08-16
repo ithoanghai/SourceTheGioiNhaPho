@@ -106,7 +106,7 @@ class Listing(models.Model):
         "Gần trường mầm non, tiểu học, THCS,...Bệnh viện, Trung tâm spa, chăm sóc sức khoẻ, sắc đẹp..."))
 
     def __str__(self):
-        return f'%s - %s' % (self.code, self.title)
+        return f'%s' % (self.code)
 
     def save(self, *args, **kwargs):
         if not self.id and not self.address:

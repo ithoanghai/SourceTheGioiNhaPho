@@ -45,9 +45,9 @@ class Transaction(models.Model):
         verbose_name_plural = "DS Giao dịch"
         ordering = ['date']
 
-    listing = models.ForeignKey(Listing, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name=_("Bất động sản"))
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name=_("Khách hàng"))
     trantype = models.CharField(max_length=25, choices=TransTypeInit.choices, default=TransTypeInit.CONTACT, verbose_name='Loại giao dịch')
+    listing = models.ForeignKey(Listing, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name=_("Bất động sản"))
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name=_("Khách hàng"))
 
     house_type = models.CharField(max_length=20, null=True, blank=True, verbose_name=_("Loại BĐS quan tâm"))
     district = models.CharField(max_length=100, null=True, blank=True, verbose_name=_("Khu vực quan tâm"))
@@ -59,4 +59,4 @@ class Transaction(models.Model):
     realtor = models.ForeignKey(Realtor, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name=_("Giao Chuyên viên quản lý"))
 
     def __str__(self):
-        return f'Giao dịch:  %s' % (self.message)
+        return f'%s:  %s' % (self.trantype, self.message)

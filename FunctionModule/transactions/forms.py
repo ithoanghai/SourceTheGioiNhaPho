@@ -1,4 +1,18 @@
 from django import forms
+from django.forms import Textarea
+
+from FunctionModule.transactions.models import Transaction
+
+
+class TransactionAdminForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = '__all__'
+
+        widgets = {
+            'message': Textarea(attrs={'class': '???', 'rows': 5}),
+            'comment': Textarea(attrs={'class': '???', 'rows': 5}),
+        }
 
 
 class RequestQuoteForm(forms.Form):

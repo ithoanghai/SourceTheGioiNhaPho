@@ -20,6 +20,7 @@ def prepare_fb_headers():
         "garden_type",
         "days_on_market",
         "url",
+        "image",
         "fee_schedule_url",
         "heating_type",
         "laundry_type",
@@ -108,6 +109,7 @@ def prepare_fb_listing_data(listing):
     price = listing.sale_price or listing.price
     url = reverse('listing_detail', kwargs={'listing_id': listing.id})
     full_url = f'https://thegioinhaphovietnam.com.vn/{url}'
+    main_photo_url = f'https://thegioinhaphovietnam.com.vn/{listing.main_photo.url}'
     listing_data = {
         "home_listing_id": listing.code,
         "name": listing.title,
@@ -124,6 +126,7 @@ def prepare_fb_listing_data(listing):
         "garden_type": None,
         "days_on_market": None,
         "url": full_url,
+        "image": main_photo_url,
         "fee_schedule_url": None,
         "heating_type": None,
         "laundry_type": None,

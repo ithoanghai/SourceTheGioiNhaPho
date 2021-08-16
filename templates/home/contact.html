@@ -85,6 +85,7 @@
             <form method="post" action="{% url 'post_contact' %}">
               <fieldset>
                 {% csrf_token %}
+                  <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
                 <div class="form-element per50-left ">
                   <div class="placeholder">Họ</div>
                   <input class="input" type="text" name="lastname" value="" data-fr="string" placeholder="" required/>
@@ -107,7 +108,7 @@
                 </div>
                 <div class="form-element textarea-height">
                   <div class="placeholder">Lời nhắn</div>
-                  <textarea name="description_note" placeholder="" required></textarea>
+                  <textarea name="message" placeholder="" required></textarea>
                 </div>
               </fieldset>
               <div class="action">

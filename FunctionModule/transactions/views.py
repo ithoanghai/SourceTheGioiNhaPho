@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.mail.backends import console
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import JsonResponse
@@ -31,28 +32,35 @@ def contact(request):
         message = request.POST['message']
         yesterday = timezone.now() - timedelta(days=1)
 
-        if listing_id is not None:
+        if listing_id != '':
             listing = Listing.objects.get(pk=listing_id)
-        #  Check if user has made inquiry already
-        if request.user.is_authenticated:
-            user = request.user
+            if request.user.is_authenticated:
+                user = request.user
             if listing is not None:
-                has_contacted = Transaction.objects.filter(listing=listing, user=user, date__gte=yesterday)
-                if has_contacted:
-                    messages.error(request,'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
-        else:
-            ses_id = request.session.session_key
-            print(ses_id)
-
-        user = User.objects.create(name=name, email=email, phone=phone)
-        Transaction.objects.create(listing=listing, user=user, trantype=trantype, message=message)
-
-        messages.success(request, 'Yêu cầu được gửi thành công. Chúng tôi sẽ liên lạc lại với bạn sớm nhất.')
-        if listing is not None:
+                if user is not None:
+                    has_contacted = Transaction.objects.filter(listing=listing, user=user, date__gte=yesterday)
+                    if has_contacted:
+                        messages.error(request, 'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
+                    else:
+                        # user = User.objects.create(name=name, email=email, phone=phone)
+                        Transaction.objects.create(listing=listing, user=user, trantype=trantype, message=message)
+                        messages.error(request, 'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
+                else:
+                    # user = User.objects.create(name=name, email=email, phone=phone)
+                    Transaction.objects.create(listing=listing, trantype=trantype, message=message)
+                    messages.error(request,'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
             return redirect('/listings/' + listing_id)
+        else:
+            if request.user.is_authenticated:
+                user = request.user
+                if user is not None:
+                    Transaction.objects.create(user=user, trantype=trantype, message=message)
+            else:
+                print("here")
+                Transaction.objects.create(trantype=trantype, message=message)
 
-    return redirect('contacts')
-        # return JsonResponse({})
+            messages.success(request, 'Yêu cầu được gửi thành công. Chúng tôi sẽ liên lạc lại với bạn sớm nhất.')
+            return redirect('contacts')
 
 
 @csrf_protect

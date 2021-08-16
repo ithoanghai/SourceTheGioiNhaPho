@@ -8,7 +8,6 @@ from django.shortcuts import render, redirect
 from allauth.account.views import get_adapter
 
 from FunctionModule.accounts.models import User
-from FunctionModule.contacts.models import Contact
 from FunctionModule.accounts.forms import UserRegisterForm
 
 
