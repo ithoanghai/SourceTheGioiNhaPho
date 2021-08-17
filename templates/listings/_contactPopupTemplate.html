@@ -1,0 +1,440 @@
+<script type="text/x-template" id="detailPopupContactTemplate">
+    <div v-show="showContactPopup" class="popup-fade popup-property popup__listing--contact show">
+        <div class="popup-dialog popup-dialog-centered popup-dialog-large">
+            <div class="popup-content">
+                <button class="popup-close" @click.prevent="closePopup"><i class="zmdi zmdi-close"></i></button>
+                <div class="popup-left">
+                    <div class="popup-left-cover" style="padding-left: 5px; padding-top: 5px "><a
+                            href="javascript:void(0)">
+                        {% with listing.main_photo as photo %}
+                            <img class="card-img-top" src="{{ photo.url }}" alt="TGNP">
+                        {% endwith %}
+                    </a> <label class="status status-top status-monopoly" style="display: none;">Độc
+                        quyền</label></div>
+                    <div class="popup-left-content"><h3 class="popup-left-title"><a
+                            href="javascript:void(0)">{{ listing.title }}</a></h3>
+                        <div class="popup-left-address"></div>
+                        <ul class="popup-left-info">
+                            <li><i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b></li>
+                            {% if listing.floors %}
+                                <li><p>Số tầng:</p> <strong>{{ listing.floors }}</strong></li>
+                            {% endif %}
+                            {% if listing.bedrooms %}
+                                <li><p>Phòng ngủ:</p> <strong>{{ listing.bedrooms }}</strong></li>
+                            {% endif %}
+                            <li><p>Diện tích:</p> <strong>{{ listing.area }}</strong></li>
+                            {% if listing.bathrooms %}
+                                <li><p>Phòng tắm:</p> <strong>None</strong></li>
+                            {% endif %}
+                            <li><p>Giá:</p> <strong class="color-red-base">{{ listing.price }} tỷ</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="popup-right">
+                    <div class="popup-right-content" style="display: none;">
+                        <div class="popup-header"><h5 class="popup-title">Liên hệ tư vấn</h5>
+                        </div>
+                        <div class="popup-body">
+                            <div class="popup-right-rva">
+                                <div class="rva-cover"><img src="/static/images/isa-team-v2.png"
+                                                            alt="TGNP"></div>
+                                <div class="rva-info">
+                                    <h3 class="rva-info-name">Chuyên viên đã sẵn sàng hỗ trợ!</h3>
+                                    <p class="rva-info-job-title">Tư vấn hoàn toàn miễn phí</p>
+                                </div>
+                            </div>
+                            <a href="tel:0971841941"
+                               class="phone-hidden_popup btn-primary btn-large btn-red popup-right-phone"><i
+                                    class="zmdi zmdi-phone"></i>
+                                <span class="text">Liên hệ chuyên viên ngay</span></a> <span
+                                class="text-small-centered">Hoặc</span>
+                            <div class="popup-right-cta">
+                                <button class="btn-primary btn-large btn-black-outline">Thương lượng giá</button>
+                                <button class="btn-primary btn-large btn-black-outline">Liên hệ lại tôi</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popup-right-form-up show ask-view" style="">
+                        <div class="popup-header"><h5 class="popup-title">Liên hệ lại tôi</h5>
+                            <button class="popup-back back-negotiate"><i
+                                    class="zmdi zmdi zmdi-hc-2x zmdi-long-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="popup-body">
+                            <form id="detailContactForm" data-formtype="property-form"
+                                  data-formitem="property-request-info"
+                                  method="post" action="{% url 'post_contact' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
+                                <div class="form-element">
+                                    <input required type="text" name="firstname" v-model="data.firstname"
+                                           v-on:blur="validateRequired('firstname')"
+                                           v-on:input="e => handleInputChange('firstname', e)"/>
+                                    <span class="text-error" v-if="errors.firstname">[[errors.firstname]]</span>
+                                    <label>Họ</label>
+                                </div>
+                                <div class="form-element">
+                                    <input required type="text" name="lastname" v-model="data.lastname"
+                                           v-on:blur="validateRequired('lastname')"
+                                           v-on:input="e => handleInputChange('lastname', e)"/>
+                                    <span class="text-error" v-if="errors.lastname">[[errors.lastname]]</span>
+                                    <label>Tên</label>
+                                </div>
+                                <div class="form-element">
+                                    <input type="text" name="phone" required v-model="data.phone"
+                                           v-on:blur="validatePhone"
+                                           v-on:input="e => handleInputChange('phone', e)"/>
+                                    <span v-if="errors.phone" class="text-error">[[errors.phone]]</span>
+                                    <label>Số điện thoại</label>
+                                </div>
+                                <div class="form-element">
+                                    <input type="text" name="email" v-model="data.email"
+                                           v-on:input="e => handleInputChange('email', e)" v-on:blur="validateEmail"/>
+                                    <span class="text-error">[[errors.email]]</span>
+                                    <label>Email (không bắt buộc)</label>
+                                </div>
+                                <div class="form-element focused" style="display: none;">
+                                    <input inputmode="decimal"/>
+                                    <div style="display: none;"><span
+                                            class="text-error">Giá thương lượng không hợp lệ</span>
+                                    </div>
+                                    <label>Giá mong muốn</label></div>
+                                <div class="form-element" style="">
+                                    <input required name="message" type="text"
+                                           value="Tôi liên hệ để xem BĐS có mã {{ listing.code }}"/>
+                                    <label>Lời nhắn</label>
+                                </div>
+                                <div class="form-element">
+                                    <button type="submit" class="btn-primary btn-red btn-medium">Gửi ngay</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-template" id="contactPopupTemplate">
+    <div v-show="showContactPopup" wrapper-name="default">
+        <div class="popup-overlay">
+            <div class="popup-container">
+                <div class="popup-send-info">
+                    <div class="header-w-close">
+                        <button class="close-popup-btn" v-on:click="closePopup">
+                            <i class="zmdi zmdi-hc-2x zmdi-close"></i>
+                        </button>
+                        <h3 class="font-tiempos">Liên hệ tư vấn</h3>
+                    </div>
+                    <div id="contact-now-form-body" class="form-info" style="background: rgb(255, 255, 255);">
+                        <div class="server-message">
+                        </div>
+                        <form id="quoteContactForm" data-formtype="property-form" method="post"
+                              action="{% url "request_quote" %}"
+                              v-on:submit="handleFormSubmit">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="form-element per50-left"
+                                     v-bind:class="{focused: shouldFocusedClass('firstname')}">
+                                    <div class="placeholder">Họ</div>
+                                    <input type="text" name="firstname" class="input" required
+                                           v-model="data.firstname"
+                                           v-on:focus="onFocusField('firstname')"
+                                           v-on:blur="onBlur('firstname')"
+                                           v-on:input="e => handleInputChange('firstname', e)"
+                                    />
+                                    <span class="error-text" v-if="errors.firstname">[[errors.firstname]]</span>
+                                </div>
+                                <div class="form-element per50-right"
+                                     v-bind:class="{focused: shouldFocusedClass('lastname')}">
+                                    <div class="placeholder">Tên</div>
+                                    <input type="text" name="lastname" class="input" required
+                                           v-model="data.lastname"
+                                           v-on:focus="onFocusField('lastname')"
+                                           v-on:blur="onBlur('lastname')"
+                                           v-on:input="e => handleInputChange('lastname', e)"
+                                    />
+                                    <span class="error-text" v-if="errors.lastname">[[errors.lastname]]</span>
+                                </div>
+                                <div class="form-element per50-left"
+                                     v-bind:class="{focused: shouldFocusedClass('email')}">
+                                    <div class="placeholder">Email (Không bắt buộc)</div>
+                                    <input type="text" name="email" class="input"
+                                           v-model="data.email"
+                                           v-on:focus="onFocusField('email')"
+                                           v-on:blur="onBlur('email')"/>
+                                    <span class="error-text">[[errors.email]]</span>
+                                </div>
+                                <div class="form-element per50-right"
+                                     v-bind:class="{focused: shouldFocusedClass('phone')}">
+                                    <div class="placeholder">Số điện thoại</div>
+                                    <input type="text" name="phone" class="input" required
+                                           v-model="data.phone"
+                                           v-on:focus="onFocusField('phone')"
+                                           v-on:blur="onBlur('phone')"
+                                           v-on:input="e => handleInputChange('phone', e)"
+                                    />
+                                    <span class="error-text">[[errors.phone]]</span>
+                                </div>
+                                <div class="form-element form-dropdown"
+                                     v-bind:class="{focused: focusedField==='district' || data.district.code !== ''}">
+                                    <div class="placeholder">Khu vực bạn quan tâm (Không bắt buộc)</div>
+                                    <div class="" v-bind:class="{active: focusedField==='district'}">
+                                        <input type="hidden" name="district" v-model="data.district.code"/>
+                                        <input type="text" autocomplete="false" class="input"
+                                               v-model="data.district.text"
+                                               v-on:focus="onFocusField('district')"
+                                               v-on:blur="onBlur('district')"/>
+                                        <ul tabindex="-1" class="form-dropdown-content">
+                                            {#                      <li class="active"><a href="#">Quận 2</a></li>#}
+                                            <li v-for="item in districtData"
+                                                v-bind:class="{active: data.district.code===item.code}"
+                                                @click.prevent="onSelectDistrict(item)">
+                                                <a href="#">[[item.text]]</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <span class="error-text"></span>
+                                </div>
+                                <div class="form-element form-dropdown focused"
+                                     v-bind:class="{active: focusedField==='houseType'}">
+                                    <div class="placeholder">Loại nhà đất bạn muốn mua</div>
+                                    <div class="">
+                                         <span class="input" style="color: initial; padding: 8px 10px 5px;"
+                          v-on:click="toggleFocusField('houseType')">[[getSelectedHouseTypeText()]]</span>
+                                        <select name="house_type" style="display: none">
+                                            <option v-for="item in houseTypes" :value="item.type">[[item.text]]</option>
+                                        </select>
+                                        <ul tabindex="-1" class="form-dropdown-content">
+                                            <li v-for="item in houseTypes"
+                                                v-bind:class="{active: data.houseType===item.type}"
+                                                @click.prevent="onSelectHouseType(item.type)">
+                                                <a href="#">[[item.text]]</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <span class="error-text"></span>
+                                </div>
+                                <div class="form-element" :class="{focused: shouldFocusedClass('requestPrice')}">
+                                    <div class="placeholder">Mức giá cần mua - Tỷ đồng (Không bắt buộc)</div>
+                                    <input type="text" name="request_price" class="input"
+                                           v-model="data.requestPrice"
+                                           v-on:focus="onFocusField('requestPrice')"
+                                           v-on:blur="onBlur('requestPrice')"
+                                    />
+                                    <span class="error-text">[[errors.requestPrice]]</span>
+                                </div>
+                                <div class="form-element textarea-height"
+                                     :class="{focused: focusedField === 'message' || data.message!==''}">
+                                    <div class="placeholder">Lời nhắn</div>
+                                    <input name="message" type="hidden" :value="data.message"/>
+                                    <textarea required
+                                              v-model="data.message"
+                                              v-on:focus="onFocusField('message')"
+                                              v-on:blur="onBlur('message')"
+                                              v-on:input="e => handleInputChange('message', e)"
+                                    >
+                  </textarea>
+                                    <span class="error-text">[[errors.message]]</span>
+                                </div>
+                            </fieldset>
+                            <div class="action">
+                                <button type="submit" class="large-btn-red ld-ext-right">
+                                    Gửi thông tin cdfsdf
+                                    <div class="ld ld-ring ld-spin"></div>
+                                </button>
+                            </div>
+                            <div class="or-direct-call">
+                                <p> Hoặc gọi ngay <a
+                                        href="tel:0971841941"><strong>0971841941</strong></a> để gặp chuyên viên tư vấn
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-template" id="whyBuyContactPopupTemplate">
+    <div v-show="showContactPopup" class="popup-fade popup-property popup__listing--contact show">
+        <div class="popup-dialog popup-dialog-centered">
+            <div class="popup-content">
+                <button class="popup-close" @click.prevent="closePopup"><i class="zmdi zmdi-close"></i></button>
+                <div class="popup-right">
+                    <div class="popup-right-form-up show ask-view" style="">
+                        <div class="popup-header"><h5 class="popup-title">Mua BĐS với TGNP</h5>
+                            <button class="popup-back back-negotiate"><i
+                                    class="zmdi zmdi zmdi-hc-2x zmdi-long-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="form-info">
+                            <form data-formtype="contact-buy-form" data-formitem="contact-agent">
+                                <fieldset>
+                                    <div class="form-element per50-left">
+                                        <div class="placeholder">Họ</div>
+                                        <input class="input" type="text" name="lastname" value="" data-fr="string">
+                                        <span class="error-text"></span>
+                                    </div>
+                                    <div class="form-element per50-right">
+                                        <div class="placeholder">Tên</div>
+                                        <input class="input" type="text" name="firstname" value="" data-fr="string">
+                                        <span class="error-text"></span>
+                                    </div>
+                                    <div class="form-element per50-left">
+                                        <div class="placeholder">Số điện thoại</div>
+                                        <input class="input" type="text" name="phone" value="" data-fr="phone">
+                                        <span class="error-text"></span>
+                                    </div>
+                                    <div class="form-element per50-right">
+                                        <div class="placeholder">Email</div>
+                                        <input class="input" type="text" name="email" value="" data-fr="email">
+                                        <span class="error-text"></span>
+                                    </div>
+                                    <div class="form-element">
+                                        <div class="placeholder">Khu vực mà bạn quan tâm</div>
+                                        <input class="input" type="text" name="location" value="" data-fr-optional
+                                               data-fr="string">
+                                        <span class="error-text"></span>
+                                    </div>
+                                    <div class="form-element textarea-height">
+                                        <div class="placeholder">Lời nhắn</div>
+                                        <textarea name="note"></textarea>
+                                    </div>
+                                </fieldset>
+                                <div class="action">
+                                    <button type="submit" class="large-btn-red">Gửi thông tin</button>
+                                </div>
+                                <div class="or-direct-call">
+                                    <p>Hoặc gọi trực tiếp vào Hotline (24/7)
+                                        {% comment %}<a href="tel:%hotline%"><strong>%hotline%</strong></a>{% endcomment %}
+                                        <a href="tel:0916286256"><strong>0916286256</strong></a>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-template" id="whyRentContactPopupTemplate">
+    <div v-show="showContactPopup" class="popup-fade popup-property popup__listing--contact show">
+        <div class="popup-dialog popup-dialog-centered">
+            <div class="popup-content">
+                <button class="popup-close" @click.prevent="closePopup"><i class="zmdi zmdi-close"></i></button>
+                <div class="popup-right">
+                    <div class="popup-right-form-up show ask-view" style="">
+                        <div class="popup-header"><h5 class="popup-title">Thuê BĐS với TGNP</h5>
+                            <button class="popup-back back-negotiate"><i
+                                    class="zmdi zmdi zmdi-hc-2x zmdi-long-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="form-info">
+                            <form data-formtype="contact-rent-form" data-formitem="buying-renting" action="{% url "request_quote" %}"
+                              v-on:submit="handleFormSubmit">
+                            {% csrf_token %}
+                                 <input class="input" type="hidden" name="service_type" value="Cho Thuê">
+                            <fieldset>
+                                <div class="form-element per50-left"
+                                     v-bind:class="{focused: shouldFocusedClass('firstname')}">
+                                    <div class="placeholder">Họ</div>
+                                    <input type="text" name="firstname" class="input" required v-model="data.firstname"
+                                           v-on:focus="onFocusField('firstname')" v-on:blur="onBlur('firstname')" v-on:input="e => handleInputChange('firstname', e)"/>
+                                    <span class="error-text" v-if="errors.firstname">[[errors.firstname]]</span>
+                                </div>
+                                <div class="form-element per50-right"
+                                     v-bind:class="{focused: shouldFocusedClass('lastname')}">
+                                    <div class="placeholder">Tên</div>
+                                    <input type="text" name="lastname" class="input" required v-model="data.lastname" v-on:focus="onFocusField('lastname')"
+                                           v-on:blur="onBlur('lastname')" v-on:input="e => handleInputChange('lastname', e)"/>
+                                    <span class="error-text" v-if="errors.lastname">[[errors.lastname]]</span>
+                                </div>
+                                <div class="form-element per50-left" v-bind:class="{focused: shouldFocusedClass('email')}">
+                                    <div class="placeholder">Email (Không bắt buộc)</div>
+                                    <input type="text" name="email" class="input" v-model="data.email"
+                                           v-on:focus="onFocusField('email')" v-on:blur="onBlur('email')"/>
+                                    <span class="error-text">[[errors.email]]</span>
+                                </div>
+                                <div class="form-element per50-right" v-bind:class="{focused: shouldFocusedClass('phone')}">
+                                    <div class="placeholder">Số điện thoại</div>
+                                    <input type="text" name="phone" class="input" required v-model="data.phone"
+                                           v-on:focus="onFocusField('phone')" v-on:blur="onBlur('phone')" v-on:input="e => handleInputChange('phone', e)"/>
+                                    <span class="error-text">[[errors.phone]]</span>
+                                </div>
+
+                                <div class="form-element per50-right" v-bind:class="{focused: shouldFocusedClass('neighborhood')}">
+                                 <div class="placeholder">Khu vực bạn quan tâm?</div>
+                                    <input class="input" type="text" name="neighborhood" required v-model="data.neighborhood"
+                                           v-on:focus="onFocusField('neighborhood')" v-on:blur="onBlur('neighborhood')" v-on:input="e => handleInputChange('neighborhood', e)"
+                                           value="" data-fr-optional data-fr="string" data-suggest=""/>
+                                    <span class="error-text"></span>
+                                </div>
+                                  {% comment %}<div class="form-element form-dropdown"
+                                     v-bind:class="{focused: focusedField==='district' || data.district.code !== ''}">
+                                    <div class="placeholder">Khu vực bạn quan tâm (Không bắt buộc)</div>
+                                    <div class="" v-bind:class="{active: focusedField==='district'}">
+                                        <input type="hidden" name="district" v-model="data.district.code"/>
+                                        <input type="text" autocomplete="false" class="input"
+                                               v-model="data.district.text"
+                                               v-on:focus="onFocusField('district')"
+                                               v-on:blur="onBlur('district')"/>
+                                        <ul tabindex="-1" class="form-dropdown-content">
+                                              <li v-for="item in districtData"
+                                                v-bind:class="{active: data.district.code===item.code}"
+                                                @click.prevent="onSelectDistrict(item)">
+                                                <a href="#">[[item.text]]</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <span class="error-text"></span>
+                                </div>{% endcomment %}
+                                <div class="form-element form-dropdown focused"
+                                     v-bind:class="{active: focusedField==='houseType'}">
+                                    <div class="placeholder">Loại nhà đất bạn muốn thuê</div>
+                                    <div class="">
+                                         <span class="input" style="color: initial; padding: 8px 10px 5px;" v-on:click="toggleFocusField('houseType')">{% comment %}[[getSelectedHouseTypeText()]]{% endcomment %}</span>
+                                        {% comment %}<select name="house_type" style="display: none">
+                                            <option v-for="item in houseTypes" :value="item.type">[[item.text]]</option>
+                                        </select>
+                                        <ul tabindex="-1" class="form-dropdown-content">
+                                            <li v-for="item in houseTypes" v-bind:class="{active: data.houseType===item.type}"
+                                                @click.prevent="onSelectHouseType(item.type)">
+                                                <a href="#">[[item.text]]</a>
+                                            </li>
+                                        </ul>{% endcomment %}
+                                    </div>
+                                    <span class="error-text"></span>
+                                </div>
+                                <div class="form-element" :class="{focused: shouldFocusedClass('requestPrice')}">
+                                    <div class="placeholder">Mức giá muốn thuê (tr/tháng)</div>
+                                    <input type="text" name="request_price" class="input" v-model="data.requestPrice"
+                                           v-on:focus="onFocusField('requestPrice')" v-on:blur="onBlur('requestPrice')"/>
+                                    <span class="error-text">[[errors.requestPrice]]</span>
+                                </div>
+                                <div class="form-element textarea-height" :class="{focused: focusedField === 'message' || data.message!==''}">
+                                    <div class="placeholder">Lời nhắn gửi</div>
+                                    <input name="message" type="hidden" :value="data.message"/>
+                                    <textarea required  v-model="data.message" v-on:focus="onFocusField('message')"
+                                              v-on:blur="onBlur('message')" v-on:input="e => handleInputChange('message', e)"></textarea>
+                                    <span class="error-text">[[errors.message]]</span>
+                                </div>
+                            </fieldset>
+                            <div class="action">
+                                <button type="submit" class="large-btn-red ld-ext-right">Gửi thông tin<div class="ld ld-ring ld-spin"></div></button>
+                            </div>
+                            <div class="or-direct-call">
+                                <p> Hoặc gọi ngay <a href="tel:0971841941"><strong>0971841941</strong></a> để gặp chuyên viên tư vấn</p>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="{% static 'css/service.css' %}"/>
 
+  {% include "listings/_contactPopupTemplate.html" %}
 {% endblock %}
 
 {% block content %}
@@ -65,7 +66,7 @@
                         <a href="bang-dieu-khien.html">Bảng điều khiển</a>
                     </li>{% endcomment %}
             <li class="s-btn-contact">
-              <a href="javascript:void(0)" data-action="contact-agent" style="font-size: 14px">Liên hệ ngay</a>
+                <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê BĐS</a>
             </li>
           </ul>
         </div>
@@ -82,7 +83,7 @@
             chóng.
           </div>
           <div class="btn-contact">
-            <a class="s-btn-red mgb-0" data-action="contact-agent">Liên hệ ngay</a>
+            <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê ngay</a>
           </div>
         </div>
         <div id="whyrent-search-form" class="s-sreach-cover">
@@ -189,7 +190,7 @@
                 vực bạn quan tâm, đồng thời gợi ý những căn giá tốt phù hợp với bạn nhất. Hoàn toàn miễn
                 phí !
               </p>
-              <p class="s-btn-inner"><a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a></p>
+              <p class="s-btn-inner"><a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê ngay</a></p>
             </div>
           </div>
         </div>
@@ -211,7 +212,7 @@
                 xác từ chủ nhà. TGNP kiên quyết nói KHÔNG
                 với tin đăng ảo.
               </p>
-              <p class="s-btn-inner"><a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a></p>
+              <p class="s-btn-inner"><a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê ngay</a></p>
             </div>
           </div>
         </div>
@@ -233,7 +234,7 @@
                 trên TGNP) bạn sẽ không bỏ sót bất kỳ chi tiết
                 nào của ngôi nhà, qua đó dễ dàng đưa ra quyết định mà không cần phải đi xem tận nơi.
               </p>
-              <p class="s-btn-inner"><a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a></p>
+              <p class="s-btn-inner"><a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê ngay</a></p>
             </div>
           </div>
         </div>
@@ -280,7 +281,7 @@
                 mọi thủ tục và quy trình cần thiết để việc hoàn
                 tất giao dịch diễn ra an toàn và nhanh chóng.
               </p>
-              <p class="s-btn-inner"><a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a></p>
+              <p class="s-btn-inner"><a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê ngay</a></p>
             </div>
           </div>
         </div>
@@ -372,7 +373,8 @@
             TGNP.
           </div>
           <div class="btn-contact">
-            <a class="s-btn-red mgb-0" data-action="contact-agent">Liên hệ ngay</a>
+            {% comment %}<a class="s-btn-red mgb-0" data-action="contact-agent">Liên hệ ngay</a>{% endcomment %}
+              <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê ngay</a>
           </div>
         </div>
       </div>
@@ -397,6 +399,8 @@
       </div>
     </div>
 
+     <div id="whyRentPopupContact"></div>
+
     {% include "partials/_detailFeedbackForm.html" %}
 
   </div>
@@ -406,9 +410,9 @@
 
 {% block scripts %}
 
-  <script async defer src="{% static 'js/whyrent-old.min.js' %}"></script>
+  {% comment %}<script async defer src="{% static 'js/whyrent-old.min.js' %}"></script>{% endcomment %}
   <script async defer src="{% static 'js/whyrent.min.js' %}"></script>
-
+  <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
   <script type="text/javascript" src="https://www.googleadservices.com/pagead/f.txt"></script>
 
 {% endblock %}

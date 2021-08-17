@@ -9510,16 +9510,6 @@ section.project article.featured {
     opacity: .86
 }
 
-.large-btn-red {
-    padding: 13px 40px;
-    color: #fff;
-    background: orange;
-    border-radius: 2px;
-    font-size: 18px;
-    border: 0;
-    cursor: pointer
-}
-
 .large-font {
     font-size: 26px
 }

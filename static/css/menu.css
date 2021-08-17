@@ -277,14 +277,13 @@
 
 }
 
-
 /*for other menu*/
 .s-menu {
     position: sticky;
     top: 0;
     height: 50px;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
     color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
 }

@@ -10,6 +10,8 @@
 
   <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
 
+  {% include "listings/_contactPopupTemplate.html" %}
+
 {% endblock %}
 
 {% block content %}
@@ -65,7 +67,7 @@
                         <a href="bang-dieu-khien.html">Bảng điều khiển</a>
                     </li>{% endcomment %}
             <li class="s-btn-contact">
-              <a href="javascript:void(0)" data-action="contact-agent" style="font-size: 14px">Liên hệ ngay</a>
+              <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
             </li>
           </ul>
         </div>
@@ -80,7 +82,7 @@
           <h1>Mua nhà ưng ý với giá hợp lý</h1>
           <div class="sumary">Tìm nhà dễ dàng, mua nhanh chóng, được hỗ trợ mọi lúc bởi chuyên viên.</div>
           <div class="btn-contact">
-            <a class="s-btn-red mgb-0" data-action="contact-agent">Liên hệ ngay</a>
+            <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
           </div>
         </div>
         <div id="whybuy-search-form" class="s-sreach-cover">
@@ -190,7 +192,8 @@
                 đưa ra lời khuyên hợp lý cũng như gợi ý những căn giá tốt phù hợp với bạn nhất. Hoàn
                 toàn miễn phí !
               </p>
-              <p class="s-btn-inner"><a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a>
+              <p class="s-btn-inner">
+                  <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
               </p>
             </div>
           </div>
@@ -215,7 +218,8 @@
                 <li>Ứng dụng công nghệ để đẩy nhanh quá trình thương lượng.</li>
                 <li>Cùng bạn thuyết phục chủ nhà mức giá mong muốn.</li>
               </ul>
-              <p class="s-btn-inner"><a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a>
+              <p class="s-btn-inner">
+                  <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
               </p>
             </div>
           </div>
@@ -238,7 +242,8 @@
                 xem nhà hay thương lượng & đề xuất giá ngay trên
                 TGNP và theo dõi, quản lý thông tin này ngay trong mục Cá nhân.
               </p>
-              <p class="s-btn-inner"><a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a>
+              <p class="s-btn-inner">
+                  <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
               </p>
             </div>
           </div>
@@ -262,7 +267,8 @@
                 bạn chọn. Chuyên viên TGNP sẽ giải thích cặn kẽ và hỗ trợ bạn miễn phí mọi thủ tục
                 liên quan đến quá trình vay.
               </p>
-              <p class="s-btn-inner"><a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a>
+              <p class="s-btn-inner">
+                  <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
               </p>
             </div>
           </div>
@@ -285,7 +291,8 @@
                 dẫn bạn mọi thủ tục và quy trình cần thiết để việc hoàn
                 tất giao dịch diễn ra an toàn và nhanh chóng.
               </p>
-              <p class="s-btn-inner"><a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a>
+              <p class="s-btn-inner">
+                 <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
               </p>
             </div>
           </div>
@@ -357,7 +364,7 @@
             căn nhà ưng ý nhanh chóng với giá hợp lý dưới sự đồng hành hỗ trợ bởi chuyên viên TGNP.
           </div>
           <div class="btn-contact">
-            <a class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a>
+              <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua ngay</a>
           </div>
         </div>
       </div>
@@ -384,15 +391,15 @@
 
   </div>
 
+   <div id="property-contactbox-v2-app"></div>
+    <div id="whybuyPopupContact"></div>
   {% include "partials/_detailFeedbackForm.html" %}
+
   <!-- Footer content below-->
 {% endblock %}
 
 {% block scripts %}
-
-  <script defer src="{% static 'js/whybuy-old.min.js' %}"></script>
-  <script defer src="{% static 'js/whybuy.min.js' %}"></script>
-
+    <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
 {% endblock %}
 
 
