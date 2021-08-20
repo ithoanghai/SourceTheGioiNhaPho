@@ -42,7 +42,7 @@ class TransactionType(models.TextChoices):
 
 class HouseType(models.TextChoices):
     STREET_HOUSE = 'street_house', _("Nhà mặt phố")
-    TOWN_HOUSE = 'town_house', _("Nhà phố")
+    TOWN_HOUSE = 'town_house', _("Nhà trong ngõ")
     LOFT_HOUSE = 'loft_house', _("Nhà gác xép/Cấp 4")
     SHOP_HOUSE = 'shop_house', _("Cửa hàng")
 

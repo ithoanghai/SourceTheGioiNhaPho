@@ -335,7 +335,7 @@
 .main-header .col-right .top-menu ul li {
     position: relative;
     display: inline-block;
-    margin-right: 20px
+    margin-right: 10px
 }
 
 .main-header .col-right .top-menu ul li:first-child:hover a:first-child .zmdi, .main-header .col-right .top-menu ul li:first-child:hover a:first-child span {

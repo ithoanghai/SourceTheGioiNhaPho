@@ -10,8 +10,8 @@ const houseTypes = [
 ];
 
 new Vue({
-    el: '#detailPopupContact',
-    template: '#detailPopupContactTemplate',
+    el: '#withUs_PopupContact',
+    template: '#withUs_ContactPopupTemplate',
     delimiters: ["[[", "]]"],
     data: {
         showContactPopup: false,
@@ -31,183 +31,11 @@ new Vue({
         }
     },
     beforeMount() {
-        this.data.message = $('#detailContactForm input[name="message"]').val();
+        this.data.message = $('#contact-now-form input[name="message"]').val();
     },
     mounted() {
         const e = this;
-        document.querySelectorAll(".btn-contact-me").forEach(function (t) {
-            t.style.opacity = "1", t.addEventListener("click", e.onClickContactMe.bind(e))
-        });
-        document.addEventListener('keydown', this.closePopupOnKey);
-    },
-    methods: {
-
-        onClickContactMe: function () {
-            this.showContactPopup = true;
-        },
-        closePopup: function () {
-            this.showContactPopup = false;
-        },
-        closePopupOnKey: function (e) {
-            if (this.showContactPopup) {
-                if (e.key === 'Escape') {
-                    this.showContactPopup = false;
-                }
-            }
-        },
-        validateRequired(field) {
-            if (!this.data[field]) {
-                this.errors[field] = "Thông tin bắt buộc";
-            }
-        },
-        validatePhone() {
-            //Auto Input
-            this.data.phone = $('#detailContactForm input[name="phone"]').val();
-            if (this.data.phone) {
-                if (vnf_regex.test(this.data.phone) === false) {
-                    this.errors.phone = 'Số điện thoại không hợp lệ.'
-                }
-            } else {
-                this.errors.phone = 'Vui lòng điền số điện thoại.'
-            }
-        },
-        validateEmail() {
-            this.data.phone = $('#detailContactForm input[name="email"]').val();
-            if (this.data.email) {
-                if (email_regex.test(this.data.email) === false) {
-                    this.errors.email = 'Email không hợp lệ.'
-                }
-            }
-        },
-        handleInputChange(field, e) {
-            this.errors[field] = '';
-        },
-        handleFormSubmit(e) {
-            Object.values(this.errors).forEach((err) => {
-                if (err) {
-                    e.preventDefault()
-                }
-            })
-        }
-    },
-    destroyed() {
-        document.removeEventListener('keydown', this.closePopupOnKey)
-    }
-})
-
-new Vue({
-    el: '#whybuyPopupContact',
-    template: '#whyBuyContactPopupTemplate',
-    delimiters: ["[[", "]]"],
-    data: {
-        showContactPopup: false,
-        data: {
-            firstname: '',
-            lastname: '',
-            phone: '',
-            email: '',
-            message: ''
-        },
-        errors: {
-            firstname: '',
-            lastname: '',
-            phone: '',
-            email: '',
-            message: ''
-        }
-    },
-    beforeMount() {
-        this.data.message = $('#contact-buy-form input[name="message"]').val();
-    },
-    mounted() {
-        const e = this;
-        document.querySelectorAll(".btn-contact-buy").forEach(function (t) {
-            t.style.opacity = "1", t.addEventListener("click", e.onClickContactMe.bind(e))
-        });
-        document.addEventListener('keydown', this.closePopupOnKey);
-    },
-    methods: {
-
-        onClickContactMe: function () {
-            this.showContactPopup = true;
-        },
-        closePopup: function () {
-            this.showContactPopup = false;
-        },
-        closePopupOnKey: function (e) {
-            if (this.showContactPopup) {
-                if (e.key === 'Escape') {
-                    this.showContactPopup = false;
-                }
-            }
-        },
-        validateRequired(field) {
-            if (!this.data[field]) {
-                this.errors[field] = "Thông tin bắt buộc";
-            }
-        },
-        validatePhone() {
-            //Auto Input
-            this.data.phone = $('#contact-buy-form input[name="phone"]').val();
-            if (this.data.phone) {
-                if (vnf_regex.test(this.data.phone) === false) {
-                    this.errors.phone = 'Số điện thoại không hợp lệ.'
-                }
-            } else {
-                this.errors.phone = 'Vui lòng điền số điện thoại.'
-            }
-        },
-        validateEmail() {
-            this.data.phone = $('#contact-buy-form input[name="email"]').val();
-            if (this.data.email) {
-                if (email_regex.test(this.data.email) === false) {
-                    this.errors.email = 'Email không hợp lệ.'
-                }
-            }
-        },
-        handleInputChange(field, e) {
-            this.errors[field] = '';
-        },
-        handleFormSubmit(e) {
-            Object.values(this.errors).forEach((err) => {
-                if (err) {
-                    e.preventDefault()
-                }
-            })
-        }
-    },
-    destroyed() {
-        document.removeEventListener('keydown', this.closePopupOnKey)
-    }
-})
-
-new Vue({
-    el: '#whyRentPopupContact',
-    template: '#whyRentContactPopupTemplate',
-    delimiters: ["[[", "]]"],
-    data: {
-        showContactPopup: false,
-        data: {
-            firstname: '',
-            lastname: '',
-            phone: '',
-            email: '',
-            message: ''
-        },
-        errors: {
-            firstname: '',
-            lastname: '',
-            phone: '',
-            email: '',
-            message: ''
-        }
-    },
-    beforeMount() {
-        this.data.message = $('#contact-rent-form input[name="message"]').val();
-    },
-    mounted() {
-        const e = this;
-        document.querySelectorAll(".btn-contact-rent").forEach(function (t) {
+        document.querySelectorAll(".btn-contact").forEach(function (t) {
             t.style.opacity = "1", t.addEventListener("click", e.onClickContactMe.bind(e))
         });
         document.addEventListener('keydown', this.closePopupOnKey);
@@ -278,7 +106,7 @@ new Vue({
         },
         validatePhone() {
             //Auto Input
-            const phone = $('#contact-rent-form input[name="phone"]').val();
+            const phone = $('#contact-now-form input[name="phone"]').val();
             if (phone) {
                 const isValid = vnf_regex.test(phone.trim());
                 if (!isValid) {
@@ -292,10 +120,12 @@ new Vue({
             }
         },
         validateEmail() {
-            this.data.email = $('#contact-rent-form input[name="email"]').val();
+            this.data.email = $('#contact-now-form input[name="email"]').val();
             if (this.data.email) {
-                if (email_regex.test(this.data.email) === false) {
+                const isValid = email_regex.test(this.data.email);
+                 if (!isValid) {
                     this.errors.email = 'Email không hợp lệ.'
+                    return this.errors.email;
                 }
             }
         },
@@ -324,7 +154,7 @@ new Vue({
                 return;
             }
             // const data = this.data;
-            const $form = $('#contact-rent-form form');
+            const $form = $('#contact-now-form form');
             const formData = $form.serialize();
             $.ajax({
                 method: $form.attr('method'),
@@ -492,7 +322,7 @@ const ContactPopUpComponent = Vue.extend({
                 return;
             }
             // const data = this.data;
-            const $form = $('#contact-rent-form form');
+            const $form = $('#contact-now-form form');
             const formData = $form.serialize();
             $.ajax({
                 method: $form.attr('method'),

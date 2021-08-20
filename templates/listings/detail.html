@@ -901,8 +901,126 @@
   {% endif %}
 
     <div id="property-contactbox-v2-app"></div>
-    <div id="detailPopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
-    {% include "partials/_detailFeedbackForm.html" %}
+    <div id="detailPopupContact">
+        <script type="text/x-template" id="detailPopupContactTemplate">
+    <div v-show="showContactPopup" class="popup-fade popup-property popup__listing--contact show">
+        <div class="popup-dialog popup-dialog-centered popup-dialog-large">
+            <div class="popup-content">
+                <button class="popup-close" @click.prevent="closePopup"><i class="zmdi zmdi-close"></i></button>
+                <div class="popup-left">
+                    <div class="popup-left-cover" style="padding-left: 5px; padding-top: 5px "><a
+                            href="javascript:void(0)">
+                        {% with listing.main_photo as photo %}
+                            <img class="card-img-top" src="{{ photo.url }}" alt="TGNP">
+                        {% endwith %}
+                    </a> <label class="status status-top status-monopoly" style="display: none;">Độc
+                        quyền</label></div>
+                    <div class="popup-left-content"><h3 class="popup-left-title"><a
+                            href="javascript:void(0)">{{ listing.title }}</a></h3>
+                        <div class="popup-left-address"></div>
+                        <ul class="popup-left-info">
+                            <li><i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b></li>
+                            {% if listing.floors %}
+                                <li><p>Số tầng:</p> <strong>{{ listing.floors }}</strong></li>
+                            {% endif %}
+                            {% if listing.bedrooms %}
+                                <li><p>Phòng ngủ:</p> <strong>{{ listing.bedrooms }}</strong></li>
+                            {% endif %}
+                            <li><p>Diện tích:</p> <strong>{{ listing.area }}</strong></li>
+                            {% if listing.bathrooms %}
+                                <li><p>Phòng tắm:</p> <strong>None</strong></li>
+                            {% endif %}
+                            <li><p>Giá:</p> <strong class="color-red-base">{{ listing.price }} tỷ</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="popup-right">
+                    <div class="popup-right-content" style="display: none;">
+                        <div class="popup-header"><h5 class="popup-title">Liên hệ tư vấn</h5>
+                        </div>
+                        <div class="popup-body">
+                            <div class="popup-right-rva">
+                                <div class="rva-cover"><img src="/static/images/isa-team-v2.png"
+                                                            alt="TGNP"></div>
+                                <div class="rva-info">
+                                    <h3 class="rva-info-name">Chuyên viên đã sẵn sàng hỗ trợ!</h3>
+                                    <p class="rva-info-job-title">Tư vấn hoàn toàn miễn phí</p>
+                                </div>
+                            </div>
+                            <a href="tel:0971841941"
+                               class="phone-hidden_popup btn-primary btn-large btn-red popup-right-phone"><i
+                                    class="zmdi zmdi-phone"></i>
+                                <span class="text">Liên hệ chuyên viên ngay</span></a> <span
+                                class="text-small-centered">Hoặc</span>
+                            <div class="popup-right-cta">
+                                <button class="btn-primary btn-large btn-black-outline">Thương lượng giá</button>
+                                <button class="btn-primary btn-large btn-black-outline">Liên hệ lại tôi</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popup-right-form-up show ask-view" style="">
+                        <div class="popup-header"><h5 class="popup-title">Liên hệ lại tôi</h5>
+                            <button class="popup-back back-negotiate"><i
+                                    class="zmdi zmdi zmdi-hc-2x zmdi-long-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="popup-body">
+                            <form id="detailContactForm" data-formtype="property-form"
+                                  data-formitem="property-request-info"
+                                  method="post" action="{% url 'post_contact' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
+                                <input type="hidden" name="trantype" value="oder">
+                                <div class="form-element">
+                                    <input required type="text" name="firstname" v-model="data.firstname"
+                                           v-on:blur="validateRequired('firstname')"
+                                           v-on:input="e => handleInputChange('firstname', e)"/>
+                                    <span class="text-error" v-if="errors.firstname">[[errors.firstname]]</span>
+                                    <label>Họ</label>
+                                </div>
+                                <div class="form-element">
+                                    <input required type="text" name="lastname" v-model="data.lastname"
+                                           v-on:blur="validateRequired('lastname')"
+                                           v-on:input="e => handleInputChange('lastname', e)"/>
+                                    <span class="text-error" v-if="errors.lastname">[[errors.lastname]]</span>
+                                    <label>Tên</label>
+                                </div>
+                                <div class="form-element">
+                                    <input type="text" name="phone" required v-model="data.phone"
+                                           v-on:blur="validatePhone"
+                                           v-on:input="e => handleInputChange('phone', e)"/>
+                                    <span v-if="errors.phone" class="text-error">[[errors.phone]]</span>
+                                    <label>Số điện thoại</label>
+                                </div>
+                                <div class="form-element">
+                                    <input type="text" name="email" v-model="data.email"
+                                           v-on:input="e => handleInputChange('email', e)" v-on:blur="validateEmail"/>
+                                    <span class="text-error">[[errors.email]]</span>
+                                    <label>Email (không bắt buộc)</label>
+                                </div>
+                                <div class="form-element focused" style="display: none;">
+                                    <input inputmode="decimal"/>
+                                    <div style="display: none;"><span
+                                            class="text-error">Giá thương lượng không hợp lệ</span>
+                                    </div>
+                                    <label>Giá mong muốn</label></div>
+                                <div class="form-element" style="">
+                                    <input required name="message" type="text"
+                                           value="Tôi liên hệ để xem BĐS có mã {{ listing.code }}"/>
+                                    <label>Lời nhắn</label>
+                                </div>
+                                <div class="form-element">
+                                    <button type="submit" class="btn-primary btn-red btn-medium">Gửi ngay</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+    </div>
   </div>
 
 {% endblock %}
@@ -910,10 +1028,9 @@
 {% block scripts %}
   {{ block.super }}
   <script async src="{% load_static 'js/listing.js' %}"></script>
-  <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
   <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
   <script defer src="{% load_static 'js/home-recent-view.min.js' %}"></script>
-
+  <script defer src="{% load_static 'js/listing-detail.js' %}"></script>
   <script>
       window['isListing'] = true;
       window['favorite_api'] = 'api/favorite';
@@ -922,347 +1039,6 @@
       var addthis_share = {
           url: window.location.href
       }
-  </script>
-
-  <script type="deferjs">
-  function setupViewMore(heightLimit, $itemsWrapper, $items, $viewMoreWrapper, $viewMoreLink){
-    var isCollapse = false
-    var itemHeight = $items.height()
-    $itemsWrapper.css("box-sizing", "content-box")
-    $viewMoreLink.click(function () {
-      if(!isCollapse){
-        showMore()
-      }else{
-        hide()
-      }
-    })
-
-    function showMore(){
-      isCollapse = true
-      $viewMoreLink.html('Thu gọn<i class="zmdi zmdi-chevron-up zmdi-hc-fw"></i>')
-      //$itemsWrapper.css('height', 'auto')
-      $itemsWrapper.animate({height: itemHeight + "px"}, 500)
-    }
-
-    function hide(){
-      isCollapse = false
-      $viewMoreLink.html('Xem thêm<i class="zmdi zmdi-chevron-down zmdi-hc-fw"></i>')
-      //$itemsWrapper.css('height', heightLimit + 'px')
-      $itemsWrapper.animate({height: heightLimit + "px"}, 500)
-    }
-
-    if(itemHeight > heightLimit){
-      $viewMoreWrapper.show()
-    }else{
-      $itemsWrapper.css('height', itemHeight + "px")
-    }
-  }
-
-  var publicFacEle = {
-    wrapper: $("#public-facilities .items"),
-    items: $("#public-facilities .items ul"),
-    viewMore: $("#public-facilities .view-more-wrapper"),
-    viewMoreLink: $("#public-facilities .view-more-wrapper a")
-  }
-  $(document).ready(function(){
-    setupViewMore(114, publicFacEle.wrapper, publicFacEle.items, publicFacEle.viewMore, publicFacEle.viewMoreLink)
-  })
-  </script>
-
-  <script type="deferjs">
-  (function () {
-    var formQueue = [];
-
-    function queuedForm(opt) {
-
-        formQueue.push(opt);
-      }
-    }
-
-    var awaitTimeout = 0;
-    var awaitHSForm = function () {
-      awaitHSForm.called = true;
-      if (formQueue && hbspt && hbspt.forms && hbspt.forms.deps) {
-        formQueue.forEach(function (_opt) {
-          hbspt.forms.create(_opt);
-        });
-        clearTimeout(awaitTimeout);
-        delete formQueue;
-      } else {
-        awaitTimeout = setTimeout(awaitHSForm, 500);
-      }
-    };
-    window['hbspt'] = {
-      forms: {
-        create: function (opt) {
-          if (!awaitHSForm.called) {
-            awaitHSForm();
-          }
-          queuedForm(opt);
-        }
-      }
-    };
-  })();
-  </script>
-  {% comment %}  <script charset="utf-8" type="deferjs" src="https://js.hsforms.net/forms/v2.js"></script>{% endcomment %}
-  <script type="deferjs">
-  function createHSForm(opt) {
-    function getClientId() {
-      try {
-        return ga.getAll()[0].get('clientId');
-      } catch (e) {
-        return ""
-      }
-    }
-
-    var optFS = opt['onFormSubmit'];
-    var defaultOpt = Object.create(opt);
-    defaultOpt.onFormSubmit = function () {
-      var $gaClientId = $('[name=ga_client_id]');
-      if ($gaClientId[0]) {
-        $gaClientId.val(getClientId());
-      }
-      if (typeof optFS === 'function') {
-        optFS.apply(this, arguments)
-      }
-    };
-    return hbspt.forms.create(defaultOpt);
-  }
-  var dialogManager = (function DialogService() {
-    var fact = this;
-    fact.bodyClassSpecs = "mdialog-body";
-    fact.bodyLoadingClass = "mdialog-loading";
-    fact.cachedBodyStyle = null;
-    fact.default = {
-      zindex: 99999,
-      width: 300,
-      minHeight: 100,
-      background: "rgba(0,0,0,.5)",
-      opacity: 0.5
-    };
-    fact.key = {
-      cachedStyle: "cached-style"
-    };
-    var v0 = 0.05;
-    var a = 0.0002;
-    fact.show = function (selectorId, options, hideFn, showFn) {
-      options = $.extend(true, {
-        outSideClick: true
-      }, options || {});
-      options.maxWidth = "100%";
-      var dialog, oldStyle = document.body.getAttribute("style");
-      document.body.setAttribute(fact.key.cachedStyle, oldStyle);
-      if (selectorId && typeof selectorId === 'string') {
-        dialog = $(document.getElementById(selectorId));
-      } else {
-        dialog = selectorId;
-      }
-      dialog.css("opacity", 0);
-      dialog.css("overflow-y", "auto");
-      dialog.css("overflow-x", "hidden");
-      dialog.addClass("opened");
-      var bodyClass = (options ? options.body : "") || ".body";
-      dialog.find(bodyClass).css(options);
-      dialog.find(bodyClass).addClass(fact.bodyClassSpecs)
-      dialog[0] ? dialog[0]["$dialogCallback"] = hideFn : null;
-      dialog[0] ? dialog[0]["$dialogInitTime"] = +new Date() : null;
-      if (options && options.close) {
-        dialog.find(bodyClass + " " + options.close).off().click(function (e) {
-          e.preventDefault();
-          fact.hide(selectorId, hideFn);
-        });
-      }
-      if (options && options.outSideClick) {
-        dialog.off().click(function () {
-          fact.hide(selectorId, hideFn);
-        });
-      }
-      dialog.find(bodyClass).click(function (e) {
-        e.stopPropagation();
-      });
-      //.preventParentScroll();
-      fact.animation(dialog, 0, 0, 1, function () {
-        showFn ? showFn() : null;
-      });
-      fact.loadingEnd(dialog);
-      return dialog;
-    };
-    fact.animation = function (dialog, opa, t, delta, callback) {
-      dialog.css("opacity", opa);
-      if ((delta > 0 && opa > 1) || (delta < 0 && opa < 0)) {
-        if (callback) {
-          callback();
-        }
-        return;
-      }
-      setTimeout(function () {
-        opa += delta * (v0 * t + 1 / 2 * a * t * t);
-        fact.animation(dialog, opa, t + 1, delta, callback);
-      }, 10);
-    };
-    fact.hide = function (selectorId, fn) {
-      var dialog;
-      if (!selectorId) {
-        dialog = $(".mdialog.opened");
-      } else if (typeof selectorId === 'string') {
-        dialog = $(document.getElementById(selectorId));
-      } else {
-        dialog = selectorId;
-      }
-      fact.animation(dialog, 1, 0, -1, function () {
-        dialog.removeClass("opened");
-        fn ? fn(dialog) : null;
-      });
-    };
-    fact.loadingStart = function (selectorId) {
-      var dialog;
-      if (!selectorId) {
-        dialog = $(".mdialog.opened");
-      } else if (typeof selectorId === 'string') {
-        dialog = $(document.getElementById(selectorId));
-      } else {
-        dialog = selectorId;
-      }
-      dialog.find("." + fact.bodyClassSpecs).addClass(fact.bodyLoadingClass);
-    };
-    fact.loadingEnd = function (selectorId) {
-      var dialog;
-      if (!selectorId) {
-        dialog = $(".mdialog.opened");
-      } else if (typeof selectorId === 'string') {
-        dialog = $(document.getElementById(selectorId));
-      } else {
-        dialog = selectorId;
-      }
-      dialog.find("." + fact.bodyClassSpecs + "." + fact.bodyLoadingClass).removeClass(fact.bodyLoadingClass);
-    };
-    $(window).keydown(function (e) {
-      var openedDialog = $(".mdialog.opened");
-      if (openedDialog.length && e.keyCode == 27) {
-        var arr = [];
-        arr.length = openedDialog.length;
-        for (var i = 0; i < openedDialog.length; i++) {
-          for (var j = i; j < openedDialog.length; j++) {
-            if (openedDialog[i]["$dialogInitTime"] > openedDialog[j]["$dialogInitTime"]) {
-              arr[j] = openedDialog[i];
-              arr[i] = openedDialog[j];
-            } else {
-              arr[i] = openedDialog[i];
-              arr[j] = openedDialog[j];
-            }
-          }
-        }
-        var lastedOpen = arr[arr.length - 1];
-        if (lastedOpen) {
-          fact.hide($(lastedOpen), lastedOpen ? lastedOpen["$dialogCallback"] : null);
-        }
-      }
-    });
-    fact.initStyles = function () {
-      var css = "";
-      var style = document.createElement("STYLE");
-      var head = document.head || document.getElementsByTagName("head")[0];
-      style.type = "text/css";
-      if (style.styleSheet) {
-        style.styleSheet.cssText = css;
-      } else {
-        style.appendChild(document.createTextNode(this.getCss()));
-      }
-      head.appendChild(style);
-    };
-    fact.getCss = function () {
-      var options = fact.default;
-      var css = "";
-      var dialog = {};
-      dialog["display"] = "none";
-      dialog["position"] = "fixed";
-      dialog["top"] = "0";
-      dialog["height"] = "100%";
-      dialog["left"] = "0";
-      dialog["width"] = "100%";
-      dialog["z-index"] = options.zindex;
-      dialog["background"] = options.background;
-      css += fact.assignStyle(".mdialog", dialog);
-      css += ".mdialog.opened{display: block;}";
-      var body = {};
-      body["width"] = options.width + "px";
-      body["min-height"] = options.minHeight + "px";
-      body["background"] = "#fff";
-      body["margin"] = "60px auto 140px auto";
-      css += fact.assignStyle(".mdialog .body", body);
-      var bodySpecs = {};
-      bodySpecs["position"] = "relative"
-      css += fact.assignStyle("." + fact.bodyLoadingClass, bodySpecs);
-      var loadingFrame = {};
-      loadingFrame["content"] = "' '";
-      loadingFrame["top"] = 0;
-      loadingFrame["left"] = 0;
-      loadingFrame["width"] = "100%";
-      loadingFrame["height"] = "100%";
-      loadingFrame["position"] = "absolute";
-      loadingFrame["background"] = "#fff";
-      loadingFrame["opacity"] = 0.4;
-      loadingFrame["z-index"] = 1;
-      css += fact.assignStyle("." + fact.bodyLoadingClass + ":before", loadingFrame);
-      var loading = {};
-      loading["content"] = "' '";
-      loading["border"] = "2px solid #303339";
-      loading["border-top"] = "2px solid #fff;";
-      loading["border-radius"] = "50%";
-      loading["width"] = "30px";
-      loading["height"] = "30px";
-      loading["position"] = "absolute";
-      loading["top"] = "calc(50% - 15px)";
-      loading["left"] = "calc(50% - 15px)";
-      loading["-webkit-animation"] = "spin 2s linear infinite";
-      loading["animation"] = "spin 2s linear infinite";
-      loading["z-index"] = 1;
-      css += fact.assignStyle("." + fact.bodyLoadingClass + ":after", loading);
-      css += "@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }";
-      return css;
-    };
-    fact.assignStyle = function (name, cssobj) {
-      var res = name + "{";
-      for (var key in cssobj) {
-        var val = cssobj[key];
-        res += key + ":" + val + ";";
-      }
-      res += "}";
-      return res;
-    };
-    fact.initStyles();
-    return fact;
-  })();
-
-  if (!window['showDialog']) {
-    window['showDialog'] = function (id, closeClass, bodyClass) {
-      dialogManager.show("contact-now", {
-        close: closeClass,
-        body: bodyClass
-      }, function hideFn() {
-      }, function showFn(dialog) {
-        $('#' + id).find("input").first().focus();
-        $(bodyClass).css("max-width", "").css("width", "100%")
-            .find(".popup-contact").scrollTop(0);
-      });
-    }
-  }
-  </script>
-
-  <script type="deferjs">
-        createHSForm({
-            css: '',
-            target: '#sell-now-form-body',
-            portalId: '2775524',
-            formId: '9cc2fa2e-59d1-410a-a910-217a24437963',
-            onFormReady: function($form){
-                $form.on("submit", function(e){
-                    goog_report_conversion ? goog_report_conversion() : null;
-                });
-            }
-        });
-
-
   </script>
 
   {% if listing.videos %}

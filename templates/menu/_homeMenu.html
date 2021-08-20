@@ -95,8 +95,8 @@
     </div>
   </div>
   <div class="col-right">
-    <div class="top-menu">
-      <ul>
+    <div class="top-menu col-3">
+      <ul class="col-left">
         <li>
           <a href="tel:0971841941">
             <i class="zmdi zmdi-phone"></i>
@@ -109,12 +109,12 @@
       </ul>
     </div>
 
-    <div class="top-menu login">
-      <ul {% comment %}class="welcome-user"{% endcomment %}>
+    <div class="top-menu login col-9">
+      <ul class="col-6" {% comment %}class="welcome-user"{% endcomment %}>
         {% include "menu/_subMenuUserProfile.html" %}
       </ul>
-      <div class="agency-tgnp">
-        <a href="{% url 'sell_with_us' %}" title="Đăng tin nhà đất">Đăng bán nhà đất</a>
+      <div class="agency-tgnp col-5">
+        <a href="{% url 'sell_lease_with_us' %}" title="Đăng tin nhà đất">Đăng bán & Cho thuê</a>
       </div>
     </div>
   </div>

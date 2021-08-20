@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+
+{% load static load_static humanize i18n %}
+
+{% block head %}
+    {{ block.super }}
+    <link rel="canonical" href="{% url 'specialistDetail' %}"/>
+    <link rel="stylesheet" href="{% static 'css/browse-agent.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/agent-detail.css' %}"/>
+
+{% endblock %}
+
+{% block content %}
+
+    <div id="wrap">
+        <!-- Search menu -->
+        {% include 'menu/_menuSearch.html' %}
+
+        <!-- Header -->
+        {% include 'menu/_secondMenu.html' %}
+
+        <!-- Main Content  -->
+    <div class="agent-detail-app">
+        <section class="agents-container col-12 intro-staff-agent mgb-45">
+            <div class="view-all">
+                <i class="zmdi zmdi-chevron-left"><a href="{% url 'specialist' %}">Xem tất cả</a></i>
+            </div>
+            <div class="info-staff">
+                <div class="agent-img-staff">
+                    <a class="img-info"><img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Hoàng Hải"/>
+                </div>
+                <div class="agent-contact">
+                    <div class="agent-name">
+                        <h1>Hoàng Hải</h1>
+                        <p>Sales Manager</p>
+                    </div>
+                    <table>
+                        <tr>
+                            <td>Số điện thoại:</td>
+                            <td><a href="tel:0916 286 256" title="0916 286 256">0916 286 256</a></td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td><a href="mailto: hoanghai.bdsvn@gmail.com"
+                                   title="hoanghai.bdsvn@gmail.com"><span class="" data-cfemail="">hoanghai.bdsvn@gmail.com</span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Văn phòng:</td>
+                            <td><a href="#" title="Bùi Quốc Khái">Linh Đàm - Hoàng Mai - Hà Nội</a></td>
+                        </tr>
+                        <tr>
+                            <td>Khu vực:</td>
+                            <td>
+                                <a href="{% url 'listing_search' %}?district='Thanh Xuân'" title="Các BĐS tại quận Hoàng Mai"> Thanh Xuân</a>
+                                <a href="{% url 'listing_search' %}?district='Hoàng Mai'" title="Các BĐS tại quận Hoàng Mai"> Hoàng Mai</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <ul class="agent-social">
+                        <li>
+                            <a href="https://www.facebook.com/HoangHai.BatDongSanNhaPho" target="_blank"><i
+                                    class="zmdi zmdi-facebook"></i>https://www.facebook.com/HoangHai.BatDongSanNhaPho</a>
+                        </li>
+                    </ul>
+                    <div class="agent-btn">
+                        <a class="btn-primary-agent btn-red" href="tel:0916 286 256" title="0916 286 256"><i
+                                class="zmdi zmdi-phone"></i>0916 286 256</a>
+                        <button class="agent-contact-modal btn-primary-agent btn-transparent">Liên hệ tư vấn</button>
+                        <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
+                        data-type="sale_property" data-favorited="false"  class="btn-favorite zmdi zmdi-favorite-outline"></button>
+                    <button data-action="favorite" data-id="{{ listing.id }}"  data-alias="{{ listing.title }}"
+                            data-type="sale_property" data-favorited="false"  class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="intro-exp-agent">
+                <div class="experience">
+                    <h2>Kinh nghiệm</h2>
+                    <table class="exp">
+                        <tr>
+                            <td width="100px">Ngoại ngữ:</td>
+                            <td>English</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="intro-staff" id="staff">
+                    <h2>Giới thiệu</h2>
+                    <p class="more-p normal">Là một thạc sỹ, Hoàng Hải đã những tưởng rằng
+                        những tháng ngày sau khi ra trường của mình sẽ công việc nghiên cứu phòng thí nghiệm. Bất động sản đến với Hoàng Hải như một cơ duyên kéo Hoàng Hải ra khỏi những chuỗi
+                        ngày làm ca xoay vòng.&#10;Sau một thời gian làm nhà nước, anh bước vào Bất Động Sản với tất cả tâm huyết của một người dày dạn kinh nghiệm làm việc. Bất Động Sản cho Hoàng Hải nhiều điều hơn những thứ Hoàng Hải từng mong đợi ở nó. &#10;Đến với Bất
+                        Động Sản, Hoàng Hải chỉ hi vọng mình có thể kiếm được một khoảng thu nhập khá hơn so với nghề làm cán bộ nhà nước.
+                        Nhưng đến bây giờ, không chỉ là những khoảng hoa hồng sau mỗi giao dịch, mỗi khách hàng đến đều
+                        mang lại cho Hoàng Hải những câu chuyện, những trải nghiệm đáng quý. &#10; Dù trò chuyện với một khách
+                        hàng có trong tài khoản hàng trăm tỷ đồng hay một cặp vợ chồng mới cưới, Hoàng Hải cũng tìm được nhiều
+                        cái hay ho trong vốn sống của họ để chiêm nghiệm. Đối với những người trẻ như Hoàng Hải, thay vì trải
+                        qua và vấp phải để có thì kinh nghiệm thông qua sự chia sẻ của những người đi trước là rất quý
+                        báu. Hoàng Hải có thể dành thời gian để trải nghiệm những cái khác nữa, vì thế giới này thì rộng lớn
+                        và xã hội thì muôn màu. Cảm ơn anh, chị đã hiện diện trong tuổi trẻ của Hoàng Hải.&#10;Với kinh nghiệm
+                        hơn 1 năm trên thị trường BDS, Hoàng Hải luôn lắng nghe mọi nguyện vọng và đặt khách hàng là trọng
+                        tâm. Luôn luôn có mặt khi khách hàng cần, cam kết đi đến cuối con đường dù có bất cứ trở ngại
+                        nào. Cảm ơn anh, chị đã tin tưởng Hoàng Hải trong suốt con đường vừa qua.&#10;Trân Trọng.</p>
+                </div>
+            </div>
+        </section>
+        <section class="bg-grey all-project">
+            <div class="agents-container col-12">
+                <div class="row">
+                    <h2 class="pd-t-55 pd-bt-10">Nhà đất bán của Hoàng Hải</h2>
+                    <div class="agents-inner block-project">
+                        <div class="col-12">
+                            <div ref="propertyForSaleWrapper">
+                                {% for listing in listings_for_sale %}
+                                    {% include "listings/_listingCard2.html" %}
+                                  {% endfor %}
+                                <component v-for="html in morePropertyForSaleHTML" :is="html"></component>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bg-grey all-project">
+            <div class="agents-container col-12">
+                <div class="row">
+                    <h2 class="pd-t-55 pd-bt-10">Nhà đất cho thuê của Hoàng Hải</h2>
+                    <div class="agents-inner block-project">
+                        <div class="col-12">
+                            <div ref="propertiesForRentWrapper">
+                                {% for listing in listings_for_sale %}
+                                    {% include "listings/_listingCard2.html" %}
+                                  {% endfor %}
+                                <component v-for="html in morePropertyForRentHTML" :is="html"></component>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <dialogs-wrapper wrapper-name="default"/>
+    </div>
+    <section class="bg-black call-now">
+        <div class="img-call">
+            <a href="">
+               <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Hoàng Hải"/>
+            </a>
+        </div>
+        <div class="question">
+            <h3 class="team_title">Bạn có nhu cầu về bất động sản, bạn muốn được tư vấn, <br/> bạn cần hỏi thêm thông
+                tin thị trường? Liên hệ với Hoàng Hải ngay!</h3>
+            <a class="btn-primary-agent btn-red" href="tel:0916 286 256" title="0916 286 256"><i
+                    class="zmdi zmdi-phone"></i>0916 286 256</a>
+                <a class="btn-contact agent-contact-modal btn-primary-agent btn-red s-btn-red mgb-0" data-target="contact-agent">Liên hệ tư vấn</a>
+        </div>
+    </section>
+
+    </div>
+
+    <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
+
+    <!-- Footer content below-->
+{% endblock %}
+
+{% block scripts %}
+    <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
+
+    <script>
+        window.AGENT_PREFIX = "[Cần chuyên viên Hoàng Hải [email=hoanghai.bdsvn@gmail.com, phone=0916286256] tư vấn]\n";
+        window.RGlobal = {
+            agentId: "12",
+            loadMoreProjectUrl: "/chuyen-vien/loadMoreProject",
+            loadMorePropertyUrl: "/chuyen-vien/loadMoreProperty",
+            searchUrl: "/chuyen-vien/search",
+            numProjectShow: 6,
+            totalProjectForSale: 0,
+            numPropertyShow: 9,
+            totalPropertyForSale: 1,
+            totalPropertyForRent: 1,
+            totalPropertyTraded: 0,
+        }
+    </script>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,47 @@
+{% load load_static humanize i18n %}
+
+{% include "listings/_contactPopupTemplate.html" %}
+
+<div class="cta-bottom-wrapper">
+  <div class="cta-bottom-inner">
+    <div class="phone">
+      <a class="cta-hotline" href="tel:0964399436"><span class="font-icon fone-b font-20"> </span>
+        <strong>09 6439 9436</strong></a>
+    </div>
+    <div class="btn-contact">
+      <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
+    </div>
+  </div>
+</div>
+<div class="s-menu about-menu">
+  <div class="width-1600">
+    <div class="s-menu-wrapper">
+          <ul>
+                    <li class="s-menu-items ">
+                        <a href="{% url 'privacyPolicy' %}">Chính sách bảo mật</a>
+
+                    <li class="s-menu-items active">
+                        <a href="{% url 'termsOfUse' %}">Điều khoản sử dụng</a>
+
+                </ul>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-header">
+    <div class="stickyTrigger is-stuck sticky-sMenu">
+        <div class="s-menu-wrapper">
+              <ul>
+                    <li class="s-menu-items ">
+                        <a href="{% url 'privacyPolicy' %}">Chính sách bảo mật</a>
+
+                    <li class="s-menu-items active">
+                        <a href="{% url 'termsOfUse' %}">Điều khoản sử dụng</a>
+
+                </ul>
+        </div>
+    </div>
+</div>
+
+
+<script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>

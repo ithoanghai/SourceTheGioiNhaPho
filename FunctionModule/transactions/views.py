@@ -22,17 +22,20 @@ from ..listings.models import Listing
 def contact(request):
     if request.method == 'POST':
         listing_id = request.POST['listing_id']
-        trantype = TransTypeInit.CONTACT
+        trantype = request.POST['trantype']
 
         lastname = request.POST['lastname']
         firstname = request.POST['firstname']
         name = f'{firstname} {lastname}'
         email = request.POST['email']
         phone = request.POST['phone']
+        location = request.POST['location']
+        house_type = request.POST['houseType']
+        price = request.POST['price']
         message = request.POST['message']
         yesterday = timezone.now() - timedelta(days=1)
 
-        if listing_id != '':
+        if listing_id != 'none':
             listing = Listing.objects.get(pk=listing_id)
             if request.user.is_authenticated:
                 user = request.user
@@ -43,28 +46,28 @@ def contact(request):
                         messages.error(request, 'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
                     else:
                         # user = User.objects.create(name=name, email=email, phone=phone)
-                        Transaction.objects.create(listing=listing, user=user, trantype=trantype, message=message)
+                        Transaction.objects.create(listing=listing, user=user, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
                         messages.error(request, 'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
                 else:
                     # user = User.objects.create(name=name, email=email, phone=phone)
-                    Transaction.objects.create(listing=listing, trantype=trantype, message=message)
+                    Transaction.objects.create(listing=listing, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
                     messages.error(request,'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
             return redirect('/listings/' + listing_id)
         else:
             if request.user.is_authenticated:
                 user = request.user
                 if user is not None:
-                    Transaction.objects.create(user=user, trantype=trantype, message=message)
+                    Transaction.objects.create(user=user, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
             else:
-                print("here")
-                Transaction.objects.create(trantype=trantype, message=message)
+                Transaction.objects.create(trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
 
             messages.success(request, 'Yêu cầu được gửi thành công. Chúng tôi sẽ liên lạc lại với bạn sớm nhất.')
-            return redirect('contacts')
+        return redirect('message')
 
 
 @csrf_protect
 def request_quote(request):
+    print("request_quote")
     form = RequestQuoteForm(request.POST)
     if not form.is_valid():
         return JsonResponse({

@@ -43,6 +43,14 @@ def home_view(request):
     return render(request, 'home/index.html', context)
 
 
+def message(request):
+    context = {
+
+    }
+
+    return render(request, 'home/message.html', context)
+
+
 def about(request):
     # Get all realtors
     realtors = Realtor.objects.order_by('-hire_date')
@@ -68,6 +76,13 @@ def specialist(request):
     return render(request, 'home/specialist.html', context)
 
 
+def specialist_detail(request):
+    context = {
+    }
+
+    return render(request, 'home/specialistDetail.html', context)
+
+
 def whyChoose(request):
     context = {
     }
@@ -82,7 +97,7 @@ def services(request):
     return render(request, 'home/services.html', context)
 
 
-def contact(request):
+def contacts(request):
     context = {
     }
 

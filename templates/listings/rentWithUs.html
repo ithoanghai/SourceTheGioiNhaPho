@@ -3,291 +3,237 @@
 {% load static humanize i18n load_static %}
 
 {% block head %}
-  {{ block.super }}
-
-  <link rel="canonical" href="{% url 'rent_with_us' %}"/>
-
-  <link rel="stylesheet" href="{% static 'css/service.css' %}"/>
-
-  {% include "listings/_contactPopupTemplate.html" %}
+    {{ block.super }}
+    <link rel="canonical" href="{% url 'rent_with_us' %}"/>
+    <link rel="stylesheet" href="{% static 'css/service.css' %}"/>
 {% endblock %}
 
 {% block content %}
 
+    <div id="whyrent-app">
+        <!-- Search menu -->
+        {% include 'menu/_menuSearch.html' %}
 
-  <div id="whyrent-app">
-    <!-- Search menu -->
-    {% include 'menu/_menuSearch.html' %}
+        <!-- Header -->
+        {% include 'menu/_secondMenu.html' %}
 
-    <!-- Header -->
-    <div class="cta-bottom-wrapper">
-      <div class="cta-bottom-inner">
-        <div class="phone">
-          <a class="cta-hotline" href="tel:0971841941"><span class="font-icon fone-b font-20"> </span>
-            <strong>0971 841 941</strong></a>
+        <!-- Main Content  -->
+        <div id="s-rv-buy" class="s-banner-bg"
+             style=" background: url({% static 'images/bg-service-rent.jpg' %}) 50% 50% / cover no-repeat;">
+            <div class="s-banner-bg-inner">
+                <div class="s-banner-header-wrapper">
+                    <h1>Thuê được nhà phù hợp với giá tốt</h1>
+                    <div class="sumary">Thấu hiểu nhu cầu về chỗ ở của bạn, hỗ trợ bạn thuê được nhà dễ dàng và nhanh
+                        chóng.
+                    </div>
+                    <div class="btn-contact">
+                        <a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên hệ Thuê ngay</a>
+                    </div>
+                </div>
+                <div id="whyrent-search-form" class="s-sreach-cover">
+                    <form id="search-form-app" ref="searchFormApp" @submit.prevent="startSearch" action="#"
+                          class="s-sreach-cover-inner">
+                        <div class="s-sreach-type s-dropdown">
+                            <select title="Loại nhà đất" name="property_type" data-placeholder="Loại nhà đất"
+                                    style="display: none;">
+                                <option value="town_house">Nhà phố</option>
+                                <option value="loft_house">Nhà gác xép/Cấp 4</option>
+                                <option value="street_house">Nhà mặt phố</option>
+                                <option value="shop_house">Cửa hàng</option>
+                                <option value="villa">Biệt thự</option>
+                                <option value="villa_rest">Biệt thự nghỉ dưỡng</option>
+                                <option value="building">Toà nhà</option>
+                                <option value="building_business">Toà nhà kinh doanh</option>
+                                <option value="apartment">Căn hộ</option>
+                                <option value="pent_house">Căn hộ áp mái</option>
+                                <option value="service_apartment">Căn hộ dịch vụ</option>
+                                <option value="condo_tel">Căn hộ khách sạn</option>
+                                <option value="office">Văn phòng</option>
+                                <option value="office_tel">Văn phòng khách sạn</option>
+                                <option value="land">Đất nền</option>
+                                <option value="plot">Đất phân lô</option>
+                                <option value="industrial_land">Đất công nghiệp</option>
+                                <option value="warehouse_workshop">Kho xưởng</option>
+                                <option value="land_business">Mặt bằng kinh doanh</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                        <div class="s-sreach-type s-dropdown">
+                            <select name="bedroom" title="Số phòng ngủ" data-placeholder="Số phòng ngủ"
+                                    style="display: none;">
+                                <option value="1">1 phòng</option>
+                                <option value="2">2 phòng</option>
+                                <option value="3">3 phòng</option>
+                                <option value="4">4 phòng</option>
+                                <option value="5">5+ phòng</option>
+                            </select>
+                        </div>
+                        <suggest-input placeholder="Địa điểm, dự án bạn muốn mua?" hide-button ref="suggestInput"
+                                       :value="keyword" :search-service-type="searchServiceType"
+                                       @select="onSelectSuggest" suggest-list-class="suggest-result"
+                                       class="search-desktop-component s-sreach-type s-sreach-input">
+                        </suggest-input>
+                        <div class="s-sreach-type s-sreach-btn">
+                            <button type="submit">Tìm ngay</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div>
-          <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
-        </div>
-      </div>
-    </div>
-    <div class="s-menu">
-      <div class="width-1600">
-        <div class="s-menu-wrapper">
-          <ul>
-            <li class="s-menu-items ">
-              <a href="{% url 'services' %}">Tất cả dịch vụ</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
-            </li>
-            <li class="s-menu-items active">
-              <a href="{% url 'sell_with_us' %}">Bán BĐS với Thế giới Nhà Phố</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
-            </li>
-            {% comment %}                    <li class="s-menu-items ">
-                        <a href="tgnp-photo.html">Chụp hình</a>
+        <section class="background-gray">
+            <div class="width1140 s-padding-tb pd-t-100">
+                <ul>
+                    <li class="s-col-3">
+                        <div class="item">
+                            <div class="icon-wrapper">
+                                <img src="{% static 'images/icon-real-info.svg' %}" alt="icon-save"/>
+                            </div>
+                            <h4>Thông tin thật, hình ảnh thật</h4>
+                            <p>Nhà đất được xác thực và cập nhật liên tuc từ chủ nhà. Xem nhà nhanh chóng, thương lượng
+                                giá dễ dàng.</p>
+                        </div>
                     </li>
-                    <li class="s-menu-items ">
-                        <a href="3d.html">Thực tế ảo</a>
+                    <li class="s-col-3">
+                        <div class="item">
+                            <div class="icon-wrapper">
+                                <img src="{% static 'images/icon-price.svg' %}" alt="icon-price"/>
+                            </div>
+                            <h4>Chi phí luôn thấp nhất</h4>
+                            <p>Với lợi thế công nghệ và miễn phí một số dịch vụ, TGNP giúp bạn tiết kiệm đáng kể chi
+                                phí, công sức và thời gian.</p>
+                        </div>
                     </li>
-                    <li class="s-menu-items ">
-                        <a href="thu-tuc-giay-to.html">Hành chính</a>
+                    <li class="s-col-3">
+                        <div class="item">
+                            <div class="icon-wrapper">
+                                <img src="{% static 'images/buy-team.svg' %}" alt="icon-buy"/>
+                            </div>
+                            <h4>Được hỗ trợ mọi lúc</h4>
+                            <p>TGNP hỗ trợ mọi vấn đề để giúp bạn tìm được ngôi nhà ưng ý. Sự hài lòng của bạn chính là
+                                mục tiêu cao nhất.</p>
+                        </div>
                     </li>
-                    <li class="s-menu-items ">
-                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
-                    </li>{% endcomment %}
-            <li class="s-btn-contact">
-                <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê BĐS</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+                </ul>
+            </div>
+        </section>
+        <section id="rv-guide">
+            <div class="s-padding-tb">
+                <div class="guide-item">
+                    <div class="s-col">
+                        <div class="img-wrapper">
+                            <img src="{% static 'images/dong-hanh.jpg' %}"
+                                 alt="Chuyên viên TGNP đồng hành cùng bạn"/>
+                        </div>
+                    </div>
+                    <div class="s-col">
+                        <div class="s-content mgr-l-0">
+                            <h2 class="s-feature-heading">Được đồng hành hỗ trợ bởi chuyên viên</h2>
+                            <p>
+                                Chuyên viên của TGNP sẽ hướng dẫn và hỗ trợ bạn mọi thứ trong suốt quá trình tìm thuê
+                                nhà. Chia sẻ tất cả thông tin về biến động giá thuê, tình hình giao thông, các tiện ích
+                                xung quanh và cộng đồng dân cư ở những khu
+                                vực bạn quan tâm, đồng thời gợi ý những căn giá tốt phù hợp với bạn nhất. Hoàn toàn miễn phí !
+                            </p>
+                            <p class="btn-contact"><a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên hệ Thuê ngay</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="s-padding-tb background-gray">
+                <div class="guide-item">
+                    <div class="s-col">
+                        <div class="img-wrapper">
+                            <img src="{% static 'images/real-info.jpg' %}"
+                                 alt="Chuyên viên TGNP đồng hành cùng bạn"/>
+                        </div>
+                    </div>
+                    <div class="s-col">
+                        <div class="s-content">
+                            <h2 class="s-feature-heading">Thông tin thật, được xác thực bởi chủ nhà</h2>
+                            <p>
+                                Hàng ngàn nhà đất cho thuê giá tốt được cập nhật mỗi ngày, cho bạn nhiều sự lựa chọn và
+                                so sánh để tìm được căn ưng ý nhất. Thông tin đầy đủ, rõ ràng và đều được xác thực chính
+                                xác từ chủ nhà. TGNP kiên quyết nói KHÔNG với tin đăng ảo.
+                            </p>
+                            <p class="btn-contact"><a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên hệ Thuê ngay</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sell-photo" class="s-padding-tb">
+                <div class="guide-item">
+                    <div class="s-col">
+                        <div class="img-wrapper">
+                            <img src="{% static 'images/group18%402x.png' %}"
+                                 alt="Miễn phí hình ảnh chuyên nghiệp"/>
+                        </div>
+                    </div>
+                    <div class="s-col">
+                        <div class="s-content mgr-l-0">
+                            <h2 class="s-feature-heading">Hình ảnh rõ ràng, 3D tour trực quan</h2>
+                            <p>
+                                Hình ảnh chất lượng cao không qua chỉnh sửa sẽ thể hiện rõ từng vị trí, đặc điểm của
+                                ngôi nhà, cho bạn cái nhìn chân thực nhất. Ngoài ra, với nội dung 3D trực quan (chỉ có
+                                trên TGNP) bạn sẽ không bỏ sót bất kỳ chi tiết
+                                nào của ngôi nhà, qua đó dễ dàng đưa ra quyết định mà không cần phải đi xem tận nơi.
+                            </p>
+                            <p class="btn-contact"><a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên
+                                hệ Thuê ngay</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="s-padding-tb background-gray">
+                <div class="guide-item">
+                    <div class="s-col">
+                        <div class="img-wrapper">
+                            <img src="{% static 'images/rent.jpg' %}" alt="Miễn phí quảng bá"/>
+                        </div>
+                    </div>
+                    <div class="s-col">
+                        <div class="s-content">
+                            <h2 class="s-feature-heading">Giá thuê tốt nhất, chi phí thấp nhất</h2>
+                            <p>TGNP giúp bạn thương lượng mức giá hợp lý, bằng cách:</p>
+                            <ul>
+                                <li>Chỉ ra những ưu điểm và nhược điểm của căn nhà.</li>
+                                <li>Cùng xem giá thuê trung bình của các căn lân cận.</li>
+                                <li>Giúp bạn tìm hiểu rõ thông tin chủ nhà.</li>
+                                <li>Đề xuất giúp bạn mức giá thuê có thể chấp nhận được.</li>
+                                <li>Nền tảng công nghệ giúp đẩy nhanh quá trình thương lượng.</li>
+                                <li>Thuyết phục chủ nhà mức giá bạn mong muốn.</li>
+                            </ul>
+                            <p class="btn-contact"><a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên
+                                hệ Thuê ngay</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="s-padding-tb">
+                <div class="guide-item">
+                    <div class="s-col">
+                        <div class="img-wrapper">
+                            <img src="{% static 'images/screenShot20171025At92331Am.jpg' %}"
+                                 alt="Hỗ trợ đầy đủ các thủ tục pháp lý"/>
+                        </div>
+                    </div>
+                    <div class="s-col">
+                        <div class="s-content mgr-l-0">
+                            <h2 class="s-feature-heading">Hỗ trợ đầy đủ các thủ tục pháp lý</h2>
+                            <p>
+                                Không cần phải lo lắng về những rắc rối và phức tạp về pháp lý liên quan đến giao dịch
+                                bất động sản. Chuyên viên TGNP được đào tạo chuyên nghiệp sẽ hỗ trợ và hướng dẫn bạn
+                                mọi thủ tục và quy trình cần thiết để việc hoàn
+                                tất giao dịch diễn ra an toàn và nhanh chóng.
+                            </p>
+                            <p class="btn-contact"><a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên
+                                hệ Thuê ngay</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Main Content  -->
-    <div id="s-rv-buy" class="s-banner-bg"
-         style=" background: url({% static 'images/bg-service-rent.jpg' %}) 50% 50% / cover no-repeat;">
-      <div class="s-banner-bg-inner">
-        <div class="s-banner-header-wrapper">
-          <h1>Thuê được nhà phù hợp với giá tốt</h1>
-          <div class="sumary">Thấu hiểu nhu cầu về chỗ ở của bạn, hỗ trợ bạn thuê được nhà dễ dàng và nhanh
-            chóng.
-          </div>
-          <div class="btn-contact">
-            <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê ngay</a>
-          </div>
-        </div>
-        <div id="whyrent-search-form" class="s-sreach-cover">
-          <form id="search-form-app" ref="searchFormApp" @submit.prevent="startSearch" action="#"
-                class="s-sreach-cover-inner">
-            <div class="s-sreach-type s-dropdown">
-              <select title="Loại nhà đất" name="property_type" data-placeholder="Loại nhà đất" style="display: none;">
-                <option value="town_house">Nhà phố</option>
-                <option value="loft_house">Nhà gác xép/Cấp 4</option>
-                <option value="street_house">Nhà mặt phố</option>
-                <option value="shop_house">Cửa hàng</option>
-                <option value="villa">Biệt thự</option>
-                <option value="villa_rest">Biệt thự nghỉ dưỡng</option>
-                <option value="building">Toà nhà</option>
-                <option value="building_business">Toà nhà kinh doanh</option>
-                <option value="apartment">Căn hộ</option>
-                <option value="pent_house">Căn hộ áp mái</option>
-                <option value="service_apartment">Căn hộ dịch vụ</option>
-                <option value="condo_tel">Căn hộ khách sạn</option>
-                <option value="office">Văn phòng</option>
-                <option value="office_tel">Văn phòng khách sạn</option>
-                <option value="land">Đất nền</option>
-                <option value="plot">Đất phân lô</option>
-                <option value="industrial_land">Đất công nghiệp</option>
-                <option value="warehouse_workshop">Kho xưởng</option>
-                <option value="land_business">Mặt bằng kinh doanh</option>
-                <option value="other">Khác</option>
-              </select>
-            </div>
-            <div class="s-sreach-type s-dropdown">
-              <select name="bedroom" title="Số phòng ngủ" data-placeholder="Số phòng ngủ"
-                      style="display: none;">
-                <option value="1">1 phòng</option>
-                <option value="2">2 phòng</option>
-                <option value="3">3 phòng</option>
-                <option value="4">4 phòng</option>
-                <option value="5">5+ phòng</option>
-              </select>
-            </div>
-            <suggest-input placeholder="Địa điểm, dự án bạn muốn mua?" hide-button ref="suggestInput"
-                           :value="keyword" :search-service-type="searchServiceType"
-                           @select="onSelectSuggest" suggest-list-class="suggest-result"
-                           class="search-desktop-component s-sreach-type s-sreach-input">
-            </suggest-input>
-            <div class="s-sreach-type s-sreach-btn">
-              <button type="submit">Tìm ngay</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <section class="background-gray">
-      <div class="width1140 s-padding-tb pd-t-100">
-        <ul>
-          <li class="s-col-3">
-            <div class="item">
-              <div class="icon-wrapper">
-                <img src="{% static 'images/icon-real-info.svg' %}" alt="icon-save"/>
-              </div>
-              <h4>Thông tin thật, hình ảnh thật</h4>
-              <p>Nhà đất được xác thực và cập nhật liên tuc từ chủ nhà. Xem nhà nhanh chóng, thương lượng
-                giá dễ dàng.</p>
-            </div>
-          </li>
-          <li class="s-col-3">
-            <div class="item">
-              <div class="icon-wrapper">
-                <img src="{% static 'images/icon-price.svg' %}" alt="icon-price"/>
-              </div>
-              <h4>Chi phí luôn thấp nhất</h4>
-              <p>Với lợi thế công nghệ và miễn phí một số dịch vụ, TGNP giúp bạn tiết kiệm đáng kể chi
-                phí, công sức và thời gian.</p>
-            </div>
-          </li>
-          <li class="s-col-3">
-            <div class="item">
-              <div class="icon-wrapper">
-                <img src="{% static 'images/buy-team.svg' %}" alt="icon-buy"/>
-              </div>
-              <h4>Được hỗ trợ mọi lúc</h4>
-              <p>TGNP hỗ trợ mọi vấn đề để giúp bạn tìm được ngôi nhà ưng ý. Sự hài lòng của bạn chính là
-                mục tiêu cao nhất.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <section id="rv-guide">
-      <div class="s-padding-tb">
-        <div class="guide-item">
-          <div class="s-col">
-            <div class="img-wrapper">
-              <img src="{% static 'images/dong-hanh.jpg' %}"
-                   alt="Chuyên viên TGNP đồng hành cùng bạn"/>
-            </div>
-          </div>
-          <div class="s-col">
-            <div class="s-content mgr-l-0">
-              <h2 class="s-feature-heading">Được đồng hành hỗ trợ bởi chuyên viên</h2>
-              <p>
-                Chuyên viên của TGNP sẽ hướng dẫn và hỗ trợ bạn mọi thứ trong suốt quá trình tìm thuê
-                nhà. Chia sẻ tất cả thông tin về biến động giá thuê, tình hình giao thông, các tiện ích
-                xung quanh và cộng đồng dân cư ở những khu
-                vực bạn quan tâm, đồng thời gợi ý những căn giá tốt phù hợp với bạn nhất. Hoàn toàn miễn
-                phí !
-              </p>
-              <p class="s-btn-inner"><a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê ngay</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="s-padding-tb background-gray">
-        <div class="guide-item">
-          <div class="s-col">
-            <div class="img-wrapper">
-              <img src="{% static 'images/real-info.jpg' %}"
-                   alt="Chuyên viên TGNP đồng hành cùng bạn"/>
-            </div>
-          </div>
-          <div class="s-col">
-            <div class="s-content">
-              <h2 class="s-feature-heading">Thông tin thật, được xác thực bởi chủ nhà</h2>
-              <p>
-                Hàng ngàn nhà đất cho thuê giá tốt được cập nhật mỗi ngày, cho bạn nhiều sự lựa chọn và
-                so sánh để tìm được căn ưng ý nhất. Thông tin đầy đủ, rõ ràng và đều được xác thực chính
-                xác từ chủ nhà. TGNP kiên quyết nói KHÔNG
-                với tin đăng ảo.
-              </p>
-              <p class="s-btn-inner"><a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê ngay</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="sell-photo" class="s-padding-tb">
-        <div class="guide-item">
-          <div class="s-col">
-            <div class="img-wrapper">
-              <img src="{% static 'images/group18%402x.png' %}"
-                   alt="Miễn phí hình ảnh chuyên nghiệp"/>
-            </div>
-          </div>
-          <div class="s-col">
-            <div class="s-content mgr-l-0">
-              <h2 class="s-feature-heading">Hình ảnh rõ ràng, 3D tour trực quan</h2>
-              <p>
-                Hình ảnh chất lượng cao không qua chỉnh sửa sẽ thể hiện rõ từng vị trí, đặc điểm của
-                ngôi nhà, cho bạn cái nhìn chân thực nhất. Ngoài ra, với nội dung 3D trực quan (chỉ có
-                trên TGNP) bạn sẽ không bỏ sót bất kỳ chi tiết
-                nào của ngôi nhà, qua đó dễ dàng đưa ra quyết định mà không cần phải đi xem tận nơi.
-              </p>
-              <p class="s-btn-inner"><a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê ngay</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="s-padding-tb background-gray">
-        <div class="guide-item">
-          <div class="s-col">
-            <div class="img-wrapper">
-              <img src="{% static 'images/rent.jpg' %}" alt="Miễn phí quảng bá"/>
-            </div>
-          </div>
-          <div class="s-col">
-            <div class="s-content">
-              <h2 class="s-feature-heading">Giá thuê tốt nhất, chi phí thấp nhất</h2>
-              <p>TGNP giúp bạn thương lượng mức giá hợp lý, bằng cách:</p>
-              <ul>
-                <li>Chỉ ra những ưu điểm và nhược điểm của căn nhà.</li>
-                <li>Cùng xem giá thuê trung bình của các căn lân cận.</li>
-                <li>Giúp bạn tìm hiểu rõ thông tin chủ nhà.</li>
-                <li>Đề xuất giúp bạn mức giá thuê có thể chấp nhận được.</li>
-                <li>Nền tảng công nghệ giúp đẩy nhanh quá trình thương lượng.</li>
-                <li>Thuyết phục chủ nhà mức giá bạn mong muốn.</li>
-              </ul>
-              <p class="s-btn-inner"><a href="#" class="s-btn-red" data-action="contact-agent">Liên hệ
-                ngay</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="s-padding-tb">
-        <div class="guide-item">
-          <div class="s-col">
-            <div class="img-wrapper">
-              <img src="{% static 'images/screenShot20171025At92331Am.jpg' %}"
-                   alt="Hỗ trợ đầy đủ các thủ tục pháp lý"/>
-            </div>
-          </div>
-          <div class="s-col">
-            <div class="s-content mgr-l-0">
-              <h2 class="s-feature-heading">Hỗ trợ đầy đủ các thủ tục pháp lý</h2>
-              <p>
-                Không cần phải lo lắng về những rắc rối và phức tạp về pháp lý liên quan đến giao dịch
-                bất động sản. Chuyên viên TGNP được đào tạo chuyên nghiệp sẽ hỗ trợ và hướng dẫn bạn
-                mọi thủ tục và quy trình cần thiết để việc hoàn
-                tất giao dịch diễn ra an toàn và nhanh chóng.
-              </p>
-              <p class="s-btn-inner"><a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê ngay</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section style="background: orange;">
+        {% comment %} <section style="background: orange;">
       <div class="width1140 s-padding-tb">
         <div class="s-heading s-text-w">Khách hàng nói gì</div>
         <div id="customer" class="s-customer-rating">
@@ -364,22 +310,22 @@
           </div>
         </div>
       </div>
-    </section>
-    <section class="s-bg-subcription">
-      <div class="width1140 s-padding-tb">
-        <div class="s-subcription-inner">
-          <div class="title">Hàng ngàn khách hàng đã chọn <strong>Thuê nhà cùng TGNP</strong> và hài lòng khi
-            sở hữu được căn nhà ưng ý nhanh chóng với giá hợp lý dưới sự đồng hành hỗ trợ bởi chuyên viên
-            TGNP.
-          </div>
-          <div class="btn-contact">
-            {% comment %}<a class="s-btn-red mgb-0" data-action="contact-agent">Liên hệ ngay</a>{% endcomment %}
-              <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-rent">Liên hệ thuê ngay</a>
-          </div>
-        </div>
-      </div>
-    </section>
-{% comment %}    <section class="ft-line">
+    </section>{% endcomment %}
+
+        <section class="s-bg-subcription">
+            <div class="width1140 s-padding-tb">
+                <div class="s-subcription-inner">
+                    <div class="title">Hàng ngàn khách hàng đã chọn <strong>Thuê nhà cùng TGNP</strong> và hài lòng khi
+                        sở hữu được căn nhà ưng ý nhanh chóng với giá hợp lý dưới sự đồng hành hỗ trợ bởi chuyên viên
+                        TGNP.
+                    </div>
+                    <div class="btn-contact">
+                        <a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên hệ Thuê ngay</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% comment %}    <section class="ft-line">
       <div class="width1140 pdt-40 ft-browser">
         <div class="browser-heading">Địa điểm nổi bật</div>
         <ul class="popular-location">
@@ -389,31 +335,146 @@
     </ul>
       </div>
     </section>{% endcomment %}
-    <div class="mdialog" id="contact-now-form" style="background: none;">
-      <div class="popup-520" style="overflow: visible;">
-        <div class="header-w-close">
-          <button class="close-popup-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i></button>
-          <h3 class="font-tiempos">Thuê nhà với TGNP</h3>
+        <div class="mdialog" id="contact-now-form" style="background: none;">
+            <div class="popup-520" style="overflow: visible;">
+                <div class="header-w-close">
+                    <button class="close-popup-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+                    <h3 class="font-tiempos">Thuê nhà với TGNP</h3>
+                </div>
+                <div class="form-info" id="contact-now-form-body"></div>
+            </div>
         </div>
-        <div class="form-info" id="contact-now-form-body"></div>
-      </div>
+
+        <div id="withUs_PopupContact">
+            <script type="text/x-template" id="withUs_ContactPopupTemplate">
+                <div v-show="showContactPopup" class="popup-fade popup-property popup__listing--contact show">
+                    <div class="popup-dialog popup-dialog-centered">
+                        <div class="popup-content">
+                            <button class="popup-close" @click.prevent="closePopup"><i class="zmdi zmdi-close"></i>
+                            </button>
+                            <div class="popup-right">
+                                <div class="popup-right-form-up show ask-view" style="">
+                                    <div class="popup-header"><h5 class="popup-title">Thuê BĐS với TGNP</h5>
+                                        <button class="popup-back back-negotiate"><i
+                                                class="zmdi zmdi zmdi-hc-2x zmdi-long-arrow-left"></i>
+                                        </button>
+                                    </div>
+                                    <div class="form-info">
+                                        <form data-formtype="contact-now-form" data-formitem="buying-renting" method="post"
+                                              action="{% url "post_contact" %}"  {% comment %}v-on:submit="handleFormSubmit"{% endcomment %}>
+                                            {% csrf_token %}
+                                            <input type="hidden" name="listing_id" value="none"/>
+                                             <input type="hidden" name="trantype" value="rent">
+                                            <fieldset>
+                                                <div class="form-element per50-left"
+                                                     v-bind:class="{focused: shouldFocusedClass('firstname')}">
+                                                    <div class="placeholder">Họ</div>
+                                                    <input type="text" name="firstname" class="input" required
+                                                           v-model="data.firstname"
+                                                           v-on:focus="onFocusField('firstname')"
+                                                           v-on:blur="onBlur('firstname')"
+                                                           v-on:input="e => handleInputChange('firstname', e)"/>
+                                                    <span class="error-text" v-if="errors.firstname">[[errors.firstname]]</span>
+                                                </div>
+                                                <div class="form-element per50-right"
+                                                     v-bind:class="{focused: shouldFocusedClass('lastname')}">
+                                                    <div class="placeholder">Tên</div>
+                                                    <input type="text" name="lastname" class="input" required
+                                                           v-model="data.lastname" v-on:focus="onFocusField('lastname')"
+                                                           v-on:blur="onBlur('lastname')"
+                                                           v-on:input="e => handleInputChange('lastname', e)"/>
+                                                    <span class="error-text"
+                                                          v-if="errors.lastname">[[errors.lastname]]</span>
+                                                </div>
+                                                <div class="form-element per50-left" v-bind:class="{focused: shouldFocusedClass('email')}">
+                                                    <div class="placeholder">Email (Không bắt buộc)</div>
+                                                    <input type="text" name="email" class="input" v-model="data.email"
+                                                           v-on:focus="onFocusField('email')" {% comment %}v-on:blur="onBlur('email')"{% endcomment %}/>
+                                                    <span class="error-text" v-if="errors.lastname">[[errors.email]]</span>
+                                                </div>
+                                                <div class="form-element per50-right"
+                                                     v-bind:class="{focused: shouldFocusedClass('phone')}">
+                                                    <div class="placeholder">Số điện thoại</div>
+                                                    <input type="text" name="phone" class="input" required
+                                                           v-model="data.phone"
+                                                           v-on:focus="onFocusField('phone')"
+                                                           v-on:blur="onBlur('phone')"
+                                                           v-on:input="e => handleInputChange('phone', e)"/>
+                                                    <span class="error-text"
+                                                          v-if="errors.lastname">[[errors.phone]]</span>
+                                                </div>
+
+                                                <div class="form-element per50-left" {% comment %}v-bind:class="{focused: shouldFocusedClass('location')}"{% endcomment %}>
+                                                    <div class="placeholder">Khu vực bạn quan tâm?</div>
+                                                    <input class="input" type="text" name="location"
+                                                           required {% comment %}v-model="data.district.text"{% endcomment %}
+                                                           v-on:focus="onFocusField('location')"
+                                                           v-on:blur="onBlur('location')"
+                                                           v-on:input="e => handleInputChange('location', e)"
+                                                           value="" data-fr-optional data-fr="string" data-suggest=""/>
+                                                    <span class="error-text"
+                                                          v-if="errors.lastname">[[errors.district]]</span>
+                                                </div>
+                                                <div class="form-element per50-left">
+                                                    <div class="placeholder">Loại BĐS bạn muốn thuê</div>
+                                                          <select class="option-group" style="width: 100%; margin-bottom: 0; height: 44px; border: 1px solid rgba(131, 131, 131, .3) " data-model="type" required name="houseType" id="">
+                                                               <option value=""></option>
+                                                              <option value="apartment">Căn hộ</option>
+                                                              <option value="town_house">Nhà riêng</option>
+                                                              <option value="shop_house">Cửa hàng</option>
+                                                              <option value="office">Văn phòng</option>
+                                                              <option value="villa">Biệt thự</option>
+                                                              <option value="land">Đất</option>
+                                                              <option value="other">Loại hình khác</option>
+                                                          </select>
+                                                </div>
+                                                <div class="form-element per50-right"
+                                                     v-bin:class="{focused: shouldFocusedClass('price')}">
+                                                    <div class="placeholder">Mức giá muốn thuê (tr/tháng)</div>
+                                                    <label>
+                                                        <input type="text" name="price" class="input" required
+                                                               v-model="data.requestPrice" v-on:focus="onFocusField('price')" v-on:blur="onBlur('price')"/>
+                                                    </label>
+                                                    <span class="error-text" v-if="errors.lastname">[[errors.price]]</span>
+                                                </div>
+                                                <div class="form-element per50-right textarea-height"
+                                                     v-bin:class="{focused: shouldFocusedClass('message')}">
+                                                    <div class="placeholder">Lời nhắn gửi</div>
+                                                    <textarea name="message" required v-model="data.message"
+                                                              v-on:focus="onFocusField('message')" v-on:blur="onBlur('message')"
+                                                              v-on:input="e => handleInputChange('message', e)"></textarea>
+                                                    <span class="error-text"
+                                                          v-if="errors.lastname">[[errors.message]]</span>
+                                                </div>
+                                            </fieldset>
+                                            <div class="action">
+                                                <button type="submit" class="large-btn-red ld-ext-right">Gửi thông tin
+                                                    <div class="ld ld-ring ld-spin"></div>
+                                                </button>
+                                            </div>
+                                            <div class="or-direct-call">
+                                                <p> Hoặc gọi ngay <a
+                                                        href="tel:0971841941"><strong>0971841941</strong></a> để gặp chuyên viên tư vấn</p>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </script>
+        </div>
+
     </div>
 
-     <div id="whyRentPopupContact"></div>
-
-    {% include "partials/_detailFeedbackForm.html" %}
-
-  </div>
-
-  <!-- Footer content below-->
+    <!-- Footer content below-->
 {% endblock %}
 
 {% block scripts %}
 
-  {% comment %}<script async defer src="{% static 'js/whyrent-old.min.js' %}"></script>{% endcomment %}
-  <script async defer src="{% static 'js/whyrent.min.js' %}"></script>
-  <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
-  <script type="text/javascript" src="https://www.googleadservices.com/pagead/f.txt"></script>
+    <script type="text/javascript" src="https://www.googleadservices.com/pagead/f.txt"></script>
 
 {% endblock %}
 

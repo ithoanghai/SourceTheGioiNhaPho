@@ -1,15 +1,11 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n %}
+{% load static load_static humanize i18n %}
 
 {% block head %}
 {{ block.super }}
-
     <link rel="canonical" href="{% url 'specialist_us' %}"/>
-
     <link rel="stylesheet" href="{% static 'css/browse-agent.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}"/>
-
 
 {% endblock %}
 
@@ -20,99 +16,7 @@
         {% include 'menu/_menuSearch.html' %}
 
         <!-- Header -->
-        <div class="cta-bottom-wrapper">
-            <div class="cta-bottom-inner">
-                <div class="phone">
-                    <a class="cta-hotline" href="tel:0971841941"><span class="font-icon fone-b font-20"> </span>
-                        <strong>0971 841 941</strong></a>
-                </div>
-                <div>
-                    <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
-                </div>
-            </div>
-        </div>
-        <div class="s-menu">
-            <div class="width-1600">
-                <div class="s-menu-wrapper">
-                    <ul>
-                        <li class="s-menu-items ">
-                            <a href="{% url 'services' %}">Tất cả dịch vụ</a>
-                        </li>
-                        <li class="s-menu-items ">
-                            <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
-                        </li>
-                        <li class="s-menu-items active">
-                            <a href="{% url 'sell_with_us' %}">Bán BĐS với Thế giới Nhà Phố</a>
-                        </li>
-                        <li class="s-menu-items ">
-                            <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
-                        </li>
-                        <li class="s-menu-items ">
-                            <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
-                        </li>
-                        <li class="s-menu-items ">
-                            <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
-                        </li>
-{% comment %}                    <li class="s-menu-items ">
-                        <a href="tgnp-photo.html">Chụp hình</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="3d.html">Thực tế ảo</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="thu-tuc-giay-to.html">Hành chính</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
-                    </li>{% endcomment %}
-                        <li class="s-btn-contact">
-                            <a href="javascript:void(0)" data-action="contact-agent" style="font-size: 14px">Liên hệ ngay</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="sticky-header">
-            <div class="stickyTrigger is-stuck sticky-sMenu">
-                <div class="s-menu-wrapper">
-                    <ul>
-                        <li class="s-menu-items ">
-                            <a href="{% url 'services' %}">Tất cả dịch vụ</a>
-                        </li>
-                        <li class="s-menu-items ">
-                            <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
-                        </li>
-                        <li class="s-menu-items active">
-                            <a href="{% url 'sell_with_us' %}">Bán với TG Nhà Phố</a>
-                        </li>
-                        <li class="s-menu-items ">
-                            <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
-                        </li>
-                        <li class="s-menu-items ">
-                            <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
-                        </li>
-                        <li class="s-menu-items ">
-                            <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
-                        </li>
-{% comment %}                    <li class="s-menu-items ">
-                        <a href="tgnp-photo.html">Chụp hình</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="3d.html">Thực tế ảo</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="thu-tuc-giay-to.html">Hành chính</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
-                    </li>{% endcomment %}
-                        <li class="s-btn-contact">
-                            <a href="javascript:void(0)" data-action="request-service">Đăng ký ngay</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        {% include 'menu/_secondMenu.html' %}
 
         <!-- Main Content  -->
         <div id="agent-intro-app">
@@ -290,7 +194,7 @@
                                     <p>Nếu biết TGNP ngay từ đầu thì tôi đã tiết kiệm được bao nhiêu thời gian. Thật
                                         không ngờ làm việc với TGNP lại hiệu quả như vậy. Các bạn chuyên viên quá tận
                                         tâm và chuyên nghiệp. Cuối cùng thì tôi đã sở hữu được căn hộ tuyệt đẹp tại Quận
-                                        2 với giá quá tốt sau thời gian dài chuẩn bị và tìm hiểu thông tin. </p>
+                                        Hoàn Kiếm với giá quá tốt sau thời gian dài chuẩn bị và tìm hiểu thông tin. </p>
                                     <img src="{% static 'images/double-quotes.png' %}">
                                 </div>
                             </div>
@@ -334,8 +238,7 @@
 
         </div>
 
-        {% include "partials/_detailFeedbackForm.html" %}
-
+        <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
     </div>
 
 
@@ -344,15 +247,18 @@
 
 {% block scripts %}
 
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'js/owl.carousel2.thumbs.js' %}"></script>
-     <script async defer src="{% static 'js/agent-intro.min.js' %}"></script>
+    {% comment %}  <script>
+      window.AGENT_PREFIX = "[Cần gặp chuyên viên tư vấn]\n";
+      window.RHome = {
+          searchUrl: "../listings/search?specialist=",
+          loadMoreAgentUrl: "../listings/search?specialist=loadMoreHomeAgent",
+          totalAgent: 291,
+          numAgentShow: 24, //Số lượng hiển thị trước tại trang chủ
+          numAgentLoadMore: 24, //Số lượng load thêm agent
+      }
 
-    <script>
-        window.RHome = {
-            searchUrl: "../listings/search?specialist=",
-        }
-    </script>
+      window.initAgentHome();
+  </script>{% endcomment %}
 
 {% endblock %}
 

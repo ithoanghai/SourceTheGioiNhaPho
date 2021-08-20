@@ -5,28 +5,22 @@
   </a>
   <ul>
     <li>
-      <a href="{% url 'sell_with_us' %}"
-         data-mix-header-click="group: sell_lease, action: select_post_sell_lease">Đăng
-        bán</a>
-    </li>
-    <li>
-      <a href="{% url 'rent_with_us' %}"
-         data-mix-header-click="group: sell_lease, action: select_post_sell_lease">Đăng
-        thuê</a>
+      <a href="{% url 'sell_lease_with_us' %}"
+         data-mix-header-click="group: sell_lease, action: select_post_sell_lease">Bán | Cho thuê với TGNP</a>
     </li>
     <li class="divide"></li>
-    <li>
+{% comment %}    <li>
       <a href="{% url 'contacts' %}"
-         data-mix-header-click="group: sell_lease, action: select_agent_sell_lease">Giới thiệu BĐS bán</a>
+         data-mix-header-click="group: sell_lease, action: select_agent_sell_lease">Giới thiệu BĐS Bán</a>
     </li>
     <li>
       <a href="{% url 'contacts' %}"
-         data-mix-header-click="group: sell_lease, action: select_agent_sell_lease">Giới thiệu BĐS cho thuê</a>
+         data-mix-header-click="group: sell_lease, action: select_agent_sell_lease">Giới thiệu BĐS Cho thuê</a>
     </li>
+    <li class="divide"></li>{% endcomment %}
     <li>
-      <a href="{% url 'whyChoose' %}"
-         data-mix-header-click="group: sell_lease, action: select_pr_sell_lease">Vì
-        sao chọn TGNP?</a>
+      <a href="{% url 'services' %}"
+         data-mix-header-click="group: sell_lease, action: select_pr_sell_lease">Tất cả dịch vụ</a>
     </li>
   </ul>
 </li>

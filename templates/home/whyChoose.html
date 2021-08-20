@@ -1,339 +1,228 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n %}
+{% load static load_static humanize i18n %}
 
 {% block head %}
-  {{ block.super }}
-  <link rel="canonical" href="{% url 'whyChoose' %}"/>
-  <link rel="stylesheet" href="{% static 'css/browse-agent.css' %}"/>
-   <link rel="stylesheet" href="{% static 'css/service.css' %}"/>
+    {{ block.super }}
+    <link rel="canonical" href="{% url 'whyChoose' %}"/>
+    <link rel="stylesheet" href="{% static 'css/service.css' %}"/>
 
 {% endblock %}
 
 {% block content %}
 
-  <div id="wrap">
-  <!-- Search menu -->
-  {% include 'menu/_menuSearch.html' %}
+    <div id="wrap">
+        <!-- Search menu -->
+        {% include 'menu/_menuSearch.html' %}
 
-  <!-- Header -->
-  <div class="cta-bottom-wrapper">
-    <div class="cta-bottom-inner">
-      <div class="phone">
-        <a class="cta-hotline" href="tel:0971841941"><span class="font-icon fone-b font-20"> </span>
-          <strong>0971 841 941</strong></a>
-      </div>
-      <div>
-        <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
-      </div>
-    </div>
-  </div>
-  <div class="s-menu">
-    <div class="width-1600">
-      <div class="s-menu-wrapper">
-        <ul>
-          <li class="s-menu-items ">
-            <a href="{% url 'services' %}">Tất cả dịch vụ</a>
-          </li>
-          <li class="s-menu-items ">
-            <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
-          </li>
-          <li class="s-menu-items active">
-            <a href="{% url 'sell_with_us' %}">Bán BĐS với Thế giới Nhà Phố</a>
-          </li>
-          <li class="s-menu-items ">
-            <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
-          </li>
-          <li class="s-menu-items ">
-            <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
-          </li>
-          <li class="s-menu-items ">
-            <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
-          </li>
-          {% comment %}                    <li class="s-menu-items ">
-                        <a href="tgnp-photo.html">Chụp hình</a>
+        <!-- Header -->
+        {% include 'menu/_secondMenu.html' %}
+
+        <!-- Main Content  -->
+        <div id="s-all" class="s-banner-bg"
+             style=" background: url({% static 'images/bg-service-sell.jpg' %}) 50% 50% / cover no-repeat;
+                     ">
+            <div class="s-banner-bg-inner">
+                <div class="s-banner-header-wrapper">
+                    <h1>Mua bán nhà đất theo phương thức mới</h1>
+                    <div class="sumary">TGNP mong muốn mang đến cho bạn trải nghiệm tốt nhất trong việc tìm kiếm và giao
+                        dịch bất động sản. Lợi thế về
+                        công nghệ từ TGNP sẽ giúp bạn tiết kiệm đáng kể chi phí, công sức và thời gian
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="background-gray">
+            <div class="width1140 s-padding-tb">
+                <ul>
+                    <li class="s-col-3">
+                        <div class="item">
+                            <div class="icon-wrapper">
+                                <img src="{% static 'images/ho-tro-icon.svg' %}" alt="icon-save">
+                            </div>
+                            <h4>Được hỗ trợ mọi lúc</h4>
+                            <p>Chuyên viên TGNP am hiểu từng khu vực sẽ hỗ trợ bạn tất cả mọi vấn đề và đưa ra lời khuyên phù hợp nhất
+                            </p>
+                        </div>
                     </li>
-                    <li class="s-menu-items ">
-                        <a href="3d.html">Thực tế ảo</a>
+                    <li class="s-col-3">
+                        <div class="item">
+                            <div class="icon-wrapper">
+                                <img src="{% static 'images/chi-phi-icon.svg' %}" alt="icon-price">
+                            </div>
+                            <h4>Chi phí thấp nhất</h4>
+                            <p>Với lợi thế công nghệ và miễn phí các dịch vụ, TGNP giúp bạn tiết kiệm đến 15% so với thị trường</p>
+                        </div>
                     </li>
-                    <li class="s-menu-items ">
-                        <a href="thu-tuc-giay-to.html">Hành chính</a>
+                    <li class="s-col-3">
+                        <div class="item">
+                            <div class="icon-wrapper">
+                                <img src="{% static 'images/dich-vu-icon.svg' %}" alt="icon-buy">
+                            </div>
+                            <h4>Đầy đủ các dịch vụ</h4>
+                            <p>Dịch vụ TGNP được tối ưu để hỗ trợ bạn từng bước, từ lúc tìm kiếm, thương lượng cho đến khi giao dịch hoàn tất
+                            </p>
+                        </div>
                     </li>
-                    <li class="s-menu-items ">
-                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
-                    </li>{% endcomment %}
-          <li class="s-btn-contact">
-            <a href="javascript:void(0)" data-action="contact-agent" style="font-size: 14px">Liên hệ ngay</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="sticky-header">
-    <div class="stickyTrigger is-stuck sticky-sMenu">
-      <div class="s-menu-wrapper">
-        <ul>
-          <li class="s-menu-items ">
-            <a href="{% url 'services' %}">Tất cả dịch vụ</a>
-          </li>
-          <li class="s-menu-items ">
-            <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
-          </li>
-          <li class="s-menu-items active">
-            <a href="{% url 'sell_with_us' %}">Bán với TG Nhà Phố</a>
-          </li>
-          <li class="s-menu-items ">
-            <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
-          </li>
-          <li class="s-menu-items ">
-            <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
-          </li>
-          <li class="s-menu-items ">
-            <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
-          </li>
-          {% comment %}                    <li class="s-menu-items ">
-                        <a href="tgnp-photo.html">Chụp hình</a>
+                </ul>
+            </div>
+        </section>
+
+        <section id="rv-guide" class="service-all">
+            <div class="s-padding-tb bg-gray">
+                <div class="guide-item">
+                    <div class="s-col">
+                        <div class="img-wrapper">
+                            <img src="{% static 'images/dong-hanh.jpg' %}"
+                                 alt="Chuyên viên TGNP đồng hành cùng bạn">
+                        </div>
+                    </div>
+                    <div class="s-col">
+                        <div class="s-content mgr-l-0">
+                            <h2 class="s-feature-heading">Đồng hành hỗ trợ từng bước</h2>
+                            <p>
+                                Chuyên viên TGNP - được đào tạo chuyên nghiệp, luôn đặt sự hài lòng của khách hàng là mục tiêu cao nhất. Với vai trò là
+                                người đồng hành hỗ trợ bạn trong suốt quá trình mua / bán, sẽ tư vấn kỹ càng cho bạn về xu hướng & biến động
+                                thị trường, thông tin quy hoạch, tiện ích và cộng đồng cư dân ở khu vực bạn quan tâm,
+                                đưa ra những gợi ý phù hợp nhất ứng với nhu cầu và tình hình tài chính của bạn.
+                            </p>
+                            <p class="s-btn-inner">
+                                <a class="s-btn-red" href="{% url 'specialist' %}">Tìm hiểu Chuyên viên TGNP</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="s-padding-tb background-gray">
+                <div class="guide-item">
+                    <div class="s-col">
+                        <div class="img-wrapper">
+                            <img src="{% static 'images/ban-voi-gia-tot-nhat.jpg' %}"
+                                 alt="Miễn phí quảng bá">
+                        </div>
+                    </div>
+                    <div class="s-col">
+                        <div class="s-content">
+                            <h2 class="s-feature-heading">Bán với giá tốt nhất, chi phí bỏ ra thấp nhất</h2>
+                            <p>
+                                TGNP hỗ trợ miễn phí cho chủ nhà mọi thứ từ hình ảnh chuyên nghiệp, scan 3D đến việc
+                                quảng bá nhà của bạn ở tất cả các kênh
+                                phổ biến và hỗ trợ các thủ tục khi giao dịch. Công nghệ mới đưa thông tin chính xác đến
+                                người có nhu cầu phù hợp giúp cho chủ nhà tìm được khách mua | thuê nhanh nhất.
+                            </p>
+                            <p class="s-btn-inner">
+                                <a class="s-btn-red" href="sell_lease_with_us">Bán & Cho thuê với TGNP</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="s-padding-tb">
+                <div class="guide-item">
+                    <div class="s-col">
+                        <div class="img-wrapper">
+                            <img src="{% static 'images/nhanh-chong.jpg' %}"
+                                 alt="Hỗ trợ đầy đủ các thủ tục pháp lý">
+                        </div>
+                    </div>
+                    <div class="s-col">
+                        <div class="s-content mgr-l-0">
+                            <h2 class="s-feature-heading">Nhanh chóng tìm được ngôi nhà ưng ý với giá hợp lý</h2>
+                            <p>Nhà đất giá tốt được cập nhật liên tục trên TGNP với thông tin và hình ảnh chính xác đến từ
+                                chủ nhà. Bạn có thể đăng ký xem nhà, thương lượng giá và nhận tư vấn nhanh chóng ngay trên web và ứng dụng.
+                                Dịch vụ TGNP sẽ hỗ trợ bạn mọi thứ phát sinh trong quá trình giao dịch (giấy tờ, pháp lý và vay ngân hàng...)</p>
+                            <div class="s-btn-inner">
+                                <a class="s-btn-red s-btn-red2" href="buy_with_us">Mua với TGNP</a>
+                                <a class="s-btn-red s-btn-red2" href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="s-padding-tb background-gray">
+                <div class="guide-item">
+                    <div class="s-col">
+                        <div class="img-wrapper">
+                            <img src="{% static 'images/agent-contact-mobile.png' %}" alt="Miễn phí quảng bá">
+                        </div>
+                    </div>
+                    <div class="s-col">
+                        <div class="s-content">
+                            <h2 class="s-feature-heading">Văn phòng của TGNP hiện diện tại các điểm nóng</h2>
+                            <p>TGNP hiện đã có văn phòng giao dịch tại các Quận nội thành Hà Nội...
+                                và không ngừng mở rộng sự hiện diện rộng khắp ở các khu vực khác, nhằm mang đến sự hỗ
+                                trợ tốt nhất cho nhu cầu về bất động sản của bạn.</p>
+                            <p class="s-btn-inner">
+                                <a href="{% comment %}san-giao-dich.html{% endcomment %}" class="s-btn-red">Tìm văn phòng gần bạn</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="width1140 s-padding-tb">
+                <div class="s-heading pd-bt-30">Thông tin chính xác, liên tục cập nhật</div>
+                <p class="s-description" style="">
+                    Thông tin nhà đất được xác thực và cập nhật liên tục theo biến động thị trường nhờ mối liên kết chặt chẽ giữa TGNP với chủ
+                    nhà. Số liệu và trạng thái của nhà đất được hiển thị rõ ràng cho cả chủ nhà lẫn khách hàng tiềm năng.
+                    Ngoài ra, công nghệ phân tích dữ liệu sẽ cung cấp các thông tin tham khảo hữu ích khác dựa vào thống kê từ thị trường chung.
+                </p>
+            </div>
+        </section>
+
+        <section class="serivce-slider">
+            <div id="service-all" class="flexslider">
+                <ul class="slides">
+                    <li class="flex-active-slide">
+                        <div class="section-container">
+                            <img class="img" src="{% static 'images/service-all-slider1.jpg' %}" alt="">
+                            <div class="section-content">
+                                <span class="line-header"></span>
+                                <h4 class="section-heading">Tìm kiếm nhà đất dễ dàng</h4>
+                                <p>Tìm và xem danh mục nhà đất đang bán và cho thuê cập nhật mới nhất theo quận, khu dân cư hoặc tên dự án.
+                                </p>
+                            </div>
+                        </div>
                     </li>
-                    <li class="s-menu-items ">
-                        <a href="3d.html">Thực tế ảo</a>
+                    <li>
+                        <div class="section-container">
+                            <img class="img" src="{% static 'images/service-all-slider2.jpg' %}" alt="">
+                            <div class="section-content">
+                                <span class="line-header"></span>
+                                <h4 class="section-heading">Giá tốt mỗi ngày</h4>
+                                <p>Bạn luôn theo dõi được những căn giá tốt hoặc mới cập nhật giảm giá từ chủ nhà.</p>
+                            </div>
+                        </div>
                     </li>
-                    <li class="s-menu-items ">
-                        <a href="thu-tuc-giay-to.html">Hành chính</a>
+                    <li>
+                        <div class="section-container">
+                            <img class="img" src="{% static 'images/service-all-slider4.jpg' %}" alt="">
+                            <div class="section-content">
+                                <span class="line-header"></span>
+                                <h4 class="section-heading">Thương lượng giá, đăng ký xem nhà</h4>
+                                <p>TGNP kết nối bạn với chủ nhà để giúp quá trình thương lượng, giao dịch diễn ra nhanh chóng và tin cậy.
+                                </p>
+                            </div>
+                        </div>
                     </li>
-                    <li class="s-menu-items ">
-                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
-                    </li>{% endcomment %}
-          <li class="s-btn-contact">
-            <a href="javascript:void(0)" data-action="request-service">Đăng ký ngay</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
+                    <li>
+                        <div class="section-container">
+                            <img class="img" src="{% static 'images/service-all-slider3.jpg' %}" alt="">
+                            <div class="section-content">
+                                <span class="line-header"></span>
+                                <h4 class="section-heading">Theo dõi nhà đất của tôi</h4>
+                                <p>Công cụ dành cho chủ nhà giúp theo dõi tình trạng nhà đất đang đăng trên TGNP mọi lúc mọi nơi.</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
 
-  <!-- Main Content  -->
-  <div id="s-all" class="s-banner-bg"
-       style=" background: url({% static 'images/bg-service-sell.jpg' %}) 50% 50% / cover no-repeat;
-         ">
-    <div class="s-banner-bg-inner">
-      <div class="s-banner-header-wrapper">
-        <h1>Mua bán nhà đất theo phương thức mới</h1>
-        <div class="sumary">TGNP mong muốn mang đến cho bạn trải nghiệm tốt nhất trong việc tìm kiếm và giao
-          dịch bất động sản. Lợi thế về
-          công nghệ từ TGNP sẽ giúp bạn tiết kiệm đáng kể chi phí, công sức và thời gian
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <section class="background-gray">
-    <div class="width1140 s-padding-tb">
-      <ul>
-        <li class="s-col-3">
-          <div class="item">
-            <div class="icon-wrapper">
-              <img src="{% static 'images/ho-tro-icon.svg' %}" alt="icon-save">
-            </div>
-            <h4>Được hỗ trợ mọi lúc</h4>
-            <p>Chuyên viên TGNP am hiểu từng khu vực sẽ hỗ trợ bạn tất cả mọi vấn đề và đưa ra lời khuyên
-              phù hợp nhất
-            </p>
-          </div>
-        </li>
-        <li class="s-col-3">
-          <div class="item">
-            <div class="icon-wrapper">
-              <img src="{% static 'images/chi-phi-icon.svg' %}" alt="icon-price">
-            </div>
-            <h4>Chi phí thấp nhất</h4>
-            <p>Với lợi thế công nghệ và miễn phí các dịch vụ, TGNP giúp bạn tiết kiệm đến 15% so với thị
-              trường</p>
-          </div>
-        </li>
-        <li class="s-col-3">
-          <div class="item">
-            <div class="icon-wrapper">
-              <img src="{% static 'images/dich-vu-icon.svg' %}" alt="icon-buy">
-            </div>
-            <h4>Đầy đủ các dịch vụ</h4>
-            <p>Dịch vụ TGNP được tối ưu để hỗ trợ bạn từng bước, từ lúc tìm kiếm, thương lượng cho đến khi
-              giao dịch hoàn
-              tất
-            </p>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="rv-guide" class="service-all">
-    <div class="s-padding-tb bg-gray">
-      <div class="guide-item">
-        <div class="s-col">
-          <div class="img-wrapper">
-            <img src="{% static 'images/dong-hanh.jpg' %}"
-                 alt="Chuyên viên TGNP đồng hành cùng bạn">
-          </div>
-        </div>
-        <div class="s-col">
-          <div class="s-content mgr-l-0">
-            <h2 class="s-feature-heading">Đồng hành hỗ trợ từng bước</h2>
-            <p>
-              Chuyên viên TGNP - được đào tạo chuyên nghiệp, luôn đặt sự hài lòng của khách hàng là mục
-              tiêu cao nhất. Với vai trò là
-              người đồng hành hỗ trợ bạn trong suốt quá trình mua / bán, sẽ tư vấn kỹ càng cho bạn về xu
-              hướng & biến động
-              thị trường, thông tin quy hoạch, tiện ích và cộng đồng cư dân ở khu vực bạn quan tâm, đưa ra
-              những gợi ý
-              phù hợp nhất ứng với nhu cầu và tình hình tài chính của bạn.
-            </p>
-            <p class="s-btn-inner">
-              <a class="s-btn-red" href="{% url 'specialist' %}">Tìm hiểu Chuyên viên TGNP</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="s-padding-tb background-gray">
-      <div class="guide-item">
-        <div class="s-col">
-          <div class="img-wrapper">
-            <img src="{% static 'images/ban-voi-gia-tot-nhat.jpg' %}"
-                 alt="Miễn phí quảng bá">
-          </div>
-        </div>
-        <div class="s-col">
-          <div class="s-content">
-            <h2 class="s-feature-heading">Bán với giá tốt nhất, chi phí bỏ ra thấp nhất</h2>
-            <p>
-              TGNP hỗ trợ miễn phí cho chủ nhà mọi thứ từ hình ảnh chuyên nghiệp, scan 3D đến việc quảng
-              bá nhà của bạn ở tất cả các kênh
-              phổ biến và hỗ trợ các thủ tục khi giao dịch. Công nghệ mới đưa thông tin chính xác đến
-              người có nhu cầu
-              phù hợp giúp cho chủ nhà tìm được khách mua / thuê nhanh nhất.
-            </p>
-            <p class="s-btn-inner">
-              <a class="s-btn-red" href="sell_with_us">Bán & Cho thuê với TGNP</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="s-padding-tb">
-      <div class="guide-item">
-        <div class="s-col">
-          <div class="img-wrapper">
-            <img src="{% static 'images/nhanh-chong.jpg' %}"
-                 alt="Hỗ trợ đầy đủ các thủ tục pháp lý">
-          </div>
-        </div>
-        <div class="s-col">
-          <div class="s-content mgr-l-0">
-            <h2 class="s-feature-heading">Nhanh chóng tìm được ngôi nhà ưng ý với giá hợp lý</h2>
-            <p>Nhà đất giá tốt được cập nhật liên tục trên TGNP với thông tin và hình ảnh chính xác đến từ
-              chủ nhà. Bạn có
-              thể đăng ký xem nhà, thương lượng giá và nhận tư vấn nhanh chóng ngay trên web và ứng dụng.
-              Dịch vụ TGNP
-              sẽ hỗ trợ bạn mọi thứ phát sinh trong quá trình giao dịch (giấy tờ, pháp lý và vay ngân
-              hàng...)</p>
-            <div class="s-btn-inner">
-              <a class="s-btn-red s-btn-red2" href="buy_with_us">Mua với TGNP</a>
-              <a class="s-btn-red s-btn-red2" href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="s-padding-tb background-gray">
-      <div class="guide-item">
-        <div class="s-col">
-          <div class="img-wrapper">
-            <img src="{% static 'images/van-phong-tgnp.jpg' %}" alt="Miễn phí quảng bá">
-          </div>
-        </div>
-        <div class="s-col">
-          <div class="s-content">
-            <h2 class="s-feature-heading">Văn phòng của TGNP hiện diện tại các điểm nóng</h2>
-            <p>TGNP hiện đã có văn phòng giao dịch tại các Quận nội thành Hà Nội...
-              và không ngừng mở rộng sự hiện diện rộng khắp ở các khu vực khác, nhằm mang đến sự hỗ trợ
-              tốt nhất cho nhu
-              cầu về bất động sản của bạn.</p>
-            <p class="s-btn-inner">
-              <a href="san-giao-dich.html" class="s-btn-red">Tìm văn phòng gần bạn</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="width1140 s-padding-tb">
-      <div class="s-heading pd-bt-30">Thông tin chính xác, liên tục cập nhật</div>
-      <p class="s-description" style="">
-        Thông tin nhà đất được xác thực và cập nhật liên tục theo biến động thị trường nhờ mối liên kết chặt chẽ
-        giữa TGNP với chủ
-        nhà. Số liệu và trạng thái của nhà đất được hiển thị rõ ràng cho cả chủ nhà lẫn khách hàng tiềm năng.
-        Ngoài ra,
-        công nghệ phân tích dữ liệu sẽ cung cấp các thông tin tham khảo hữu ích khác dựa vào thống kê từ thị
-        trường chung.
-      </p>
-    </div>
-  </section>
-
-  <section class="serivce-slider">
-    <div id="service-all">
-      <ul class="slides">
-        <li class="flex-active-slide">
-          <div class="section-container">
-            <img class="img" src="{% static 'images/service-all-slider1.jpg' %}" alt="">
-            <div class="section-content">
-              <span class="line-header"></span>
-              <h4 class="section-heading">Tìm kiếm nhà đất dễ dàng</h4>
-              <p>Tìm và xem danh mục nhà đất đang bán và cho thuê cập nhật mới nhất theo quận, khu dân cư
-                hoặc tên dự án.
-              </p>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="section-container">
-            <img class="img" src="{% static 'images/service-all-slider2.jpg' %}" alt="">
-            <div class="section-content">
-              <span class="line-header"></span>
-              <h4 class="section-heading">Giá tốt mỗi ngày</h4>
-              <p>Bạn luôn theo dõi được những căn giá tốt hoặc mới cập nhật giảm giá từ chủ nhà.</p>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="section-container">
-            <img class="img" src="{% static 'images/service-all-slider4.jpg' %}" alt="">
-            <div class="section-content">
-              <span class="line-header"></span>
-              <h4 class="section-heading">Thương lượng giá, đăng ký xem nhà</h4>
-              <p>TGNP kết nối bạn với chủ nhà để giúp quá trình thương lượng, giao dịch diễn ra nhanh
-                chóng và tin cậy.
-              </p>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="section-container">
-            <img class="img" src="{% static 'images/service-all-slider3.jpg' %}" alt="">
-            <div class="section-content">
-              <span class="line-header"></span>
-              <h4 class="section-heading">Theo dõi nhà đất của tôi</h4>
-              <p>Công cụ dành cho chủ nhà giúp theo dõi tình trạng nhà đất đang đăng trên TGNP mọi lúc
-                mọi nơi.</p>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="cus-say-what">
+        {% comment %}<section class="cus-say-what">
     <div class="agents-container col-12">
       <div class="agents-inner">
           <div class="s-heading s-text-w">Khách hàng nói gì</div>
@@ -393,135 +282,48 @@
       </div>
       </div>
     </div>
-  </section>
+  </section>{% endcomment %}
 
-  <section class="s-bg-subcription">
-    <div class="width1140 s-padding-tb">
-      <div class="s-subcription-inner">
-        <div class="s-heading s-text-w pd-bt-20">Liên hệ tư vấn miễn phí</div>
-        <div class="title">TGNP hoạt động 24/7 để sẵn sàng hỗ trợ bạn các nhu cầu, thắc mắc về nhà đất</div>
-        <div class="btn-contact">
-          <a href="#" class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a>
+        <section class="s-bg-subcription">
+            <div class="width1140 s-padding-tb">
+                <div class="s-subcription-inner">
+                    <div class="s-heading s-text-w pd-bt-20">Liên hệ tư vấn miễn phí</div>
+                    <div class="title">TGNP hoạt động 24/7 để sẵn sàng hỗ trợ bạn các nhu cầu, thắc mắc về nhà đất</div>
+                    <div class="btn-contact">
+                        <a href="#" class="s-btn-red" data-action="contact-agent">Liên hệ ngay</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="mdialog" id="contact-now-form" style="background: none">
+            <div class="popup-520" style="overflow: visible;">
+                <div class="header-w-close">
+                    <button class="close-popup-btn">
+                        <i class="zmdi zmdi-hc-2x zmdi-close"></i>
+                    </button>
+                    <h3 class="font-tiempos">Liên hệ chuyên viên tư vấn</h3>
+                </div>
+                <div class="form-info" id="contact-now-form-body">
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div id="consultation_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
+
     </div>
-  </section>
-
-  <div class="mdialog" id="contact-now-form" style="background: none">
-    <div class="popup-520" style="overflow: visible;">
-      <div class="header-w-close">
-        <button class="close-popup-btn">
-          <i class="zmdi zmdi-hc-2x zmdi-close"></i>
-        </button>
-        <h3 class="font-tiempos">Liên hệ chuyên viên tư vấn</h3>
-      </div>
-      <div class="form-info" id="contact-now-form-body">
-      </div>
-    </div>
-  </div>
-
-  {% include "partials/_detailFeedbackForm.html" %}
-
-  <!-- Footer content below-->
+    <!-- Footer content below-->
 {% endblock %}
 
 {% block scripts %}
 
-  <script async defer src="{% static 'js/suggest-v2.min.js' %}"></script>
+  <script>
+  // Can also be used with $(document).ready()
 
-  <script src="{% static 'js/agent-home-app.min.js' %}"></script>
-  <script async defer src="{% static 'js/overview.js' %}"></script>
-  <script type="text/javascript">
-      window.$dialog = function () {
-          var e = {
-              bodyClassSpecs: "mdialog-body",
-              bodyLoadingClass: "mdialog-loading",
-              cachedBodyStyle: null,
-              default: {zindex: 99999, width: 300, minHeight: 100, background: "rgba(0,0,0,.5)", opacity: .5},
-              key: {cachedStyle: "cached-style"}
-          };
-          return e.show = function (t, n, i, o) {
-              (n = $.extend(!0, {outSideClick: !0}, n || {})).maxWidth = "100%";
-              var a, d = document.body.getAttribute("style");
-              document.body.setAttribute(e.key.cachedStyle, d), (a = t && "string" == typeof t ? $(document.getElementById(t)) : t).css("opacity", 0), a.css("overflow-y", "auto"), a.css("overflow-x", "hidden"), a.addClass("opened");
-              var s = (n ? n.body : "") || ".body";
-              return a.find(s).css(n), a.find(s).addClass(e.bodyClassSpecs), a[0] && (a[0].$dialogCallback = i), a[0] && (a[0].$dialogInitTime = +new Date), n && n.close && a.find(s + " " + n.close).off().click(function (n) {
-                  n.preventDefault(), e.hide(t, i)
-              }), n && n.outSideClick && a.off().click(function () {
-                  e.hide(t, i)
-              }), a.find(s).click(function (e) {
-                  e.stopPropagation()
-              }), e.animation(a, 0, 0, 1, function () {
-                  o && o()
-              }), e.loadingEnd(a), a
-          }, e.animation = function (t, n, i, o, a) {
-              t.css("opacity", n), o > 0 && n > 1 || o < 0 && n < 0 ? a && a() : setTimeout(function () {
-                  n += o * (.05 * i + 1e-4 * i * i), e.animation(t, n, i + 1, o, a)
-              }, 10)
-          }, e.hide = function (t, n) {
-              var i;
-              i = t ? "string" == typeof t ? $(document.getElementById(t)) : t : $(".mdialog.opened"), e.animation(i, 1, 0, -1, function () {
-                  i.removeClass("opened"), n && n(i)
-              })
-          }, e.loadingStart = function (t) {
-              (t ? "string" == typeof t ? $(document.getElementById(t)) : t : $(".mdialog.opened")).find("." + e.bodyClassSpecs).addClass(e.bodyLoadingClass)
-          }, e.loadingEnd = function (t) {
-              (t ? "string" == typeof t ? $(document.getElementById(t)) : t : $(".mdialog.opened")).find("." + e.bodyClassSpecs + "." + e.bodyLoadingClass).removeClass(e.bodyLoadingClass)
-          }, $(window).keydown(function (t) {
-              var n = $(".mdialog.opened");
-              if (n.length && 27 == t.keyCode) {
-                  var i = [];
-                  i.length = n.length;
-                  for (var o = 0; o < n.length; o++) for (var a = o; a < n.length; a++) n[o].$dialogInitTime > n[a].$dialogInitTime ? (i[a] = n[o], i[o] = n[a]) : (i[o] = n[o], i[a] = n[a]);
-                  var d = i[i.length - 1];
-                  d && e.hide($(d), d ? d.$dialogCallback : null)
-              }
-          }), e.initStyles = function () {
-              var e = document.createElement("STYLE"), t = document.head || document.getElementsByTagName("head")[0];
-              e.type = "text/css", e.styleSheet ? e.styleSheet.cssText = "" : e.appendChild(document.createTextNode(this.getCss())), t.appendChild(e)
-          }, e.getCss = function () {
-              var t = e.default, n = "",
-                  i = {display: "none", position: "fixed", top: "0", height: "100%", left: "0", width: "100%"};
-              i["z-index"] = t.zindex, i.background = t.background, n += e.assignStyle(".mdialog", i), n += ".mdialog.opened{display: block;}";
-              var o = {};
-              o.width = t.width + "px", o["min-height"] = t.minHeight + "px", o.background = "#fff", o.margin = "60px auto 140px auto", n += e.assignStyle(".mdialog .body", o);
-              var a = {position: "relative"};
-              n += e.assignStyle("." + e.bodyLoadingClass, a);
-              var d = {
-                  content: "' '",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  position: "absolute",
-                  background: "#fff",
-                  opacity: .4,
-                  "z-index": 1
-              };
-              n += e.assignStyle("." + e.bodyLoadingClass + ":before", d);
-              var s = {
-                  content: "' '",
-                  border: "2px solid #303339",
-                  "border-top": "2px solid #fff;",
-                  "border-radius": "50%",
-                  width: "30px",
-                  height: "30px",
-                  position: "absolute",
-                  top: "calc(50% - 15px)",
-                  left: "calc(50% - 15px)",
-                  "-webkit-animation": "spin 2s linear infinite",
-                  animation: "spin 2s linear infinite",
-                  "z-index": 1
-              };
-              return n += e.assignStyle("." + e.bodyLoadingClass + ":after", s), n += "@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }"
-          }, e.assignStyle = function (e, t) {
-              var n = e + "{";
-              for (var i in t) {
-                  n += i + ":" + t[i] + ";"
-              }
-              return n += "}"
-          }, e.initStyles(), e
-      }();
+        $(window).load(function() {
+          $('.flexslider').flexslider({
+            animation: "slide", animationLoop: !0, minItems: 1, maxItems: 1
+          });
+        });
   </script>
-
 {% endblock %}

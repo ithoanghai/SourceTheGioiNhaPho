@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n %}
+{% load static load_static humanize i18n %}
 
 {% block head %}
   {{ block.super }}
   <link rel="canonical" href="{% url 'specialist' %}"/>
-
   <link rel="stylesheet" href="{% static 'css/browse-agent.css' %}"/>
-
 {% endblock %}
 
 {% block content %}
@@ -17,99 +15,7 @@
     {% include 'menu/_menuSearch.html' %}
 
     <!-- Header -->
-    <div class="cta-bottom-wrapper">
-      <div class="cta-bottom-inner">
-        <div class="phone">
-          <a class="cta-hotline" href="tel:0971841941"><span class="font-icon fone-b font-20"> </span>
-            <strong>0971 841 941</strong></a>
-        </div>
-        <div>
-          <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
-        </div>
-      </div>
-    </div>
-    <div class="s-menu">
-      <div class="width-1600">
-        <div class="s-menu-wrapper">
-          <ul>
-            <li class="s-menu-items ">
-              <a href="{% url 'services' %}">Tất cả dịch vụ</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
-            </li>
-            <li class="s-menu-items active">
-              <a href="{% url 'sell_with_us' %}">Bán BĐS với Thế giới Nhà Phố</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
-            </li>
-            {% comment %}                    <li class="s-menu-items ">
-                        <a href="tgnp-photo.html">Chụp hình</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="3d.html">Thực tế ảo</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="thu-tuc-giay-to.html">Hành chính</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
-                    </li>{% endcomment %}
-            <li class="s-btn-contact">
-              <a href="javascript:void(0)" data-action="contact-agent" style="font-size: 14px">Liên hệ ngay</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="sticky-header">
-      <div class="stickyTrigger is-stuck sticky-sMenu">
-        <div class="s-menu-wrapper">
-          <ul>
-            <li class="s-menu-items ">
-              <a href="{% url 'services' %}">Tất cả dịch vụ</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
-            </li>
-            <li class="s-menu-items active">
-              <a href="{% url 'sell_with_us' %}">Bán với TG Nhà Phố</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
-            </li>
-            {% comment %}                    <li class="s-menu-items ">
-                        <a href="tgnp-photo.html">Chụp hình</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="3d.html">Thực tế ảo</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="thu-tuc-giay-to.html">Hành chính</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
-                    </li>{% endcomment %}
-            <li class="s-btn-contact">
-              <a href="javascript:void(0)" data-action="request-service">Đăng ký ngay</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    {% include 'menu/_secondMenu.html' %}
 
     <!-- Main Content  -->
     <div class="agent-home-app">
@@ -131,61 +37,39 @@
             <div class="col-12 agents__grid">
               <div class="agents-listing">
                 <div class="agents-image">
-                  <a href="">
-                   <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                 <button v-favorite-icon="{
-                                    id: 'gg-103107983737927056479',
-                                    alias: 'gg-103107983737927056479',
-                                    type: 'agent',
-                                    favorited: 'false'
-                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
-
+                    <a href="{% url 'specialistDetail' %}"> <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                    <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
+                        data-type="sale_property" data-favorited="false"  class="btn-favorite zmdi zmdi-favorite-outline"></button>
                   </a>
                 </div>
                 <div class="agents-content">
-                  <a href=""><h3 class="font-tiempos"></h3></a>
+                  <a href="{% url 'specialistDetail' %}"><h3 class="font-tiempos"></h3></a>
                   <p class="team-name-sale">Sales Director</p>
                   <div class="agents-email">
                     <a href=""><span  class="__cf_email__" data-cfemail="">[email&#160;protected]</span></a>
                   </div>
-
-
                 </div>
               </div>
               <div class="agents-listing">
                 <div class="agents-image">
-                  <a href="">
-                   <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                  <button v-favorite-icon="{
-                                    id: 'gg-103107983737927056479',
-                                    alias: 'gg-103107983737927056479',
-                                    type: 'agent',
-                                    favorited: 'false'
-                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
-
+                    <a href="{% url 'specialistDetail' %}"> <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                    <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
+                        data-type="sale_property" data-favorited="false"  class="btn-favorite zmdi zmdi-favorite-outline"></button>
                   </a>
                 </div>
                 <div class="agents-content">
-                  <a href=""><h3 class="font-tiempos"></h3></a>
+                  <a href="{% url 'specialistDetail' %}"><h3 class="font-tiempos"></h3></a>
                   <p class="team-name-sale">Sales Director</p>
                   <div class="agents-email">
                     <a href=""><span  class="__cf_email__" data-cfemail="">[email&#160;protected]</span></a>
                   </div>
-
-
                 </div>
               </div>
               <div class="agents-listing">
                 <div class="agents-image">
-                  <a href="">
-                     <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                    <button v-favorite-icon="{
-                                    id: 'gg-103107983737927056479',
-                                    alias: 'gg-103107983737927056479',
-                                    type: 'agent',
-                                    favorited: 'false'
-                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
-
+                  <a href="{% url 'specialistDetail' %}"> <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                    <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
+                        data-type="sale_property" data-favorited="false"  class="btn-favorite zmdi zmdi-favorite-outline"></button>
                   </a>
                 </div>
                 <div class="agents-content">
@@ -194,39 +78,26 @@
                   <div class="agents-email">
                     <a href=""><span  class="__cf_email__" data-cfemail="">[email&#160;protected]</span></a>
                   </div>
-
-
                 </div>
                 </div>
               <div class="agents-listing">
                 <div class="agents-image">
-                  <a href="">
-                    <img src="{% static 'img/logo tgnp brown.jpg' %}" alt=""/>
-                    <button v-favorite-icon="{
-                                    id: 'gg-103107983737927056479',
-                                    alias: 'gg-103107983737927056479',
-                                    type: 'agent',
-                                    favorited: 'false'
-                                  }" class=" btn-favorite zmdi zmdi-favorite"></button>
-
+                     <a href="{% url 'specialistDetail' %}"> <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                    <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
+                        data-type="sale_property" data-favorited="false"  class="btn-favorite zmdi zmdi-favorite-outline"></button>
                   </a>
                 </div>
                 <div class="agents-content">
-                  <a href=""><h3 class="font-tiempos"></h3></a>
+                  <a href="{% url 'specialistDetail' %}"><h3 class="font-tiempos"></h3></a>
                   <p class="team-name-sale">Sales Director</p>
                   <div class="agents-email">
                     <a href=""><span  class="__cf_email__" data-cfemail="">[email&#160;protected]</span></a>
                   </div>
-
-
-                </div>
+               </div>
               </div>
               <component v-for="html in moreAgentHTML" :is="html"></component>
             </div>
-            <span class="view-more-agent">
-                        <div v-show="loadingMoreAgent" v-cloak class="loading-gif"></div>
-
-                        </span>
+            <span class="view-more-agent">  <div v-show="loadingMoreAgent" v-cloak class="loading-gif"></div> </span>
           </div>
         </div>
       </section>
@@ -235,7 +106,9 @@
           <div class="agents-contact-content">
             <h2>Gặp ngay chuyên viên tư vấn</h2>
             <p class="pb-20">Chuyên viên TGNP luôn sẵn sàn lắng nghe và hỗ trợ bạn mọi lúc</p>
-            <button class="agent-contact-modal btn-primary-agent btn-red">Liên hệ tư vấn</button>
+              <div class="btn-contact">
+                <a class="agent-contact-modal btn-primary-agent btn-red s-btn-red mgb-0" data-target="contact-agent">Liên hệ tư vấn</a>
+              </div>
           </div>
         </div>
       </section>
@@ -245,14 +118,13 @@
 
   </div>
 
-  {% include "partials/_detailFeedbackForm.html" %}
+    <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
 
   <!-- Footer content below-->
 {% endblock %}
 
 {% block scripts %}
-  {% comment %}<script src="{% static 'js/agent-home-app.min.js' %}"></script>{% endcomment %}
-
+   <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
 {% comment %}  <script>
       window.AGENT_PREFIX = "[Cần gặp chuyên viên tư vấn]\n";
       window.RHome = {

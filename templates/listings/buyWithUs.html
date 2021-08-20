@@ -5,12 +5,8 @@
 {% block head %}
 
   {{ block.super }}
-
   <link rel="canonical" href="{% url 'buy_with_us' %}"/>
-
   <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
-
-  {% include "listings/_contactPopupTemplate.html" %}
 
 {% endblock %}
 
@@ -21,58 +17,7 @@
     {% include 'menu/_menuSearch.html' %}
 
     <!-- Header -->
-    <div class="cta-bottom-wrapper">
-      <div class="cta-bottom-inner">
-        <div class="phone">
-          <a class="cta-hotline" href="tel:0971841941"><span class="font-icon fone-b font-20"> </span>
-            <strong>0971 841 941</strong></a>
-        </div>
-        <div>
-          <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
-        </div>
-      </div>
-    </div>
-    <div class="s-menu">
-      <div class="width-1600">
-        <div class="s-menu-wrapper">
-          <ul>
-            <li class="s-menu-items ">
-              <a href="{% url 'services' %}">Tất cả dịch vụ</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
-            </li>
-            <li class="s-menu-items active">
-              <a href="{% url 'sell_with_us' %}">Bán BĐS với Thế giới Nhà Phố</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
-            </li>
-            {% comment %}                    <li class="s-menu-items ">
-                        <a href="tgnp-photo.html">Chụp hình</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="3d.html">Thực tế ảo</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="thu-tuc-giay-to.html">Hành chính</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
-                    </li>{% endcomment %}
-            <li class="s-btn-contact">
-              <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    {% include 'menu/_secondMenu.html' %}
 
     <!-- Main Content  -->
     <div id="s-rv-buy" class="s-banner-bg"
@@ -82,7 +27,7 @@
           <h1>Mua nhà ưng ý với giá hợp lý</h1>
           <div class="sumary">Tìm nhà dễ dàng, mua nhanh chóng, được hỗ trợ mọi lúc bởi chuyên viên.</div>
           <div class="btn-contact">
-            <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
+            <a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên hệ Mua ngay</a>
           </div>
         </div>
         <div id="whybuy-search-form" class="s-sreach-cover">
@@ -192,8 +137,8 @@
                 đưa ra lời khuyên hợp lý cũng như gợi ý những căn giá tốt phù hợp với bạn nhất. Hoàn
                 toàn miễn phí !
               </p>
-              <p class="s-btn-inner">
-                  <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
+              <p class="btn-contact">
+                  <a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên hệ Mua ngay</a>
               </p>
             </div>
           </div>
@@ -218,8 +163,8 @@
                 <li>Ứng dụng công nghệ để đẩy nhanh quá trình thương lượng.</li>
                 <li>Cùng bạn thuyết phục chủ nhà mức giá mong muốn.</li>
               </ul>
-              <p class="s-btn-inner">
-                  <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
+              <p class="btn-contact">
+                  <a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên hệ Mua ngay</a>
               </p>
             </div>
           </div>
@@ -242,8 +187,8 @@
                 xem nhà hay thương lượng & đề xuất giá ngay trên
                 TGNP và theo dõi, quản lý thông tin này ngay trong mục Cá nhân.
               </p>
-              <p class="s-btn-inner">
-                  <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
+              <p class="btn-contact">
+                  <a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên hệ Mua ngay</a>
               </p>
             </div>
           </div>
@@ -267,8 +212,8 @@
                 bạn chọn. Chuyên viên TGNP sẽ giải thích cặn kẽ và hỗ trợ bạn miễn phí mọi thủ tục
                 liên quan đến quá trình vay.
               </p>
-              <p class="s-btn-inner">
-                  <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
+              <p class="btn-contact">
+                  <a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên hệ Mua ngay</a>
               </p>
             </div>
           </div>
@@ -291,8 +236,8 @@
                 dẫn bạn mọi thủ tục và quy trình cần thiết để việc hoàn
                 tất giao dịch diễn ra an toàn và nhanh chóng.
               </p>
-              <p class="s-btn-inner">
-                 <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua BĐS</a>
+              <p class="btn-contact">
+                 <a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên hệ Mua ngay</a>
               </p>
             </div>
           </div>
@@ -300,7 +245,7 @@
       </div>
     </section>
 
-    <section style="background: orange;">
+    {% comment %}<section style="background: orange;">
       <div class="width1140 s-padding-tb">
         <div class="s-heading s-text-w">Khách hàng nói gì?</div>
         <div id="customer" class="s-customer-rating">
@@ -355,7 +300,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section>{% endcomment %}
 
     <section class="s-bg-subcription">
       <div class="width1140 s-padding-tb">
@@ -364,7 +309,7 @@
             căn nhà ưng ý nhanh chóng với giá hợp lý dưới sự đồng hành hỗ trợ bởi chuyên viên TGNP.
           </div>
           <div class="btn-contact">
-              <a href="javascript:void(0)" style="opacity: 0.3" class="s-btn-red btn-contact-buy">Liên hệ mua ngay</a>
+              <a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên hệ Mua ngay</a>
           </div>
         </div>
       </div>
@@ -392,14 +337,101 @@
   </div>
 
    <div id="property-contactbox-v2-app"></div>
-    <div id="whybuyPopupContact"></div>
-  {% include "partials/_detailFeedbackForm.html" %}
+   <div id="withUs_PopupContact">
+       <script type="text/x-template" id="withUs_ContactPopupTemplate">
+         <div v-show="showContactPopup" class="popup-fade popup-property popup__listing--contact show">
+            <div class="popup-dialog popup-dialog-centered">
+                <div class="popup-content">
+                    <button class="popup-close" @click.prevent="closePopup"><i class="zmdi zmdi-close"></i></button>
+                    <div class="popup-right">
+                        <div class="popup-right-form-up show ask-view" style="">
+                            <div class="popup-header"><h5 class="popup-title">Mua BĐS với TGNP</h5>
+                                <button class="popup-back back-negotiate"><i
+                                        class="zmdi zmdi zmdi-hc-2x zmdi-long-arrow-left"></i>
+                                </button>
+                            </div>
+                            <div class="form-info">
+                            <form data-formtype="contact-now-form" data-formitem="contact-agent" method="post" action="{% url 'post_contact' %}">
+                                {% csrf_token %}
+                                    <input type="hidden" name="listing_id" value="none"/>
+                                    <input type="hidden" name="trantype" value="buy">
+                                <fieldset>
+                                    <div class="form-element per50-left" v-bind:class="{focused: shouldFocusedClass('firstname')}">
+                                        <div class="placeholder">Họ</div>
+                                        <input type="text" name="firstname" class="input" required v-model="data.firstname"
+                                               v-on:focus="onFocusField('firstname')" v-on:blur="onBlur('firstname')" v-on:input="e => handleInputChange('firstname', e)"/>
+                                        <span class="error-text" v-if="errors.firstname">[[errors.firstname]]</span>
+                                    </div>
+                                    <div class="form-element per50-right" v-bind:class="{focused: shouldFocusedClass('lastname')}">
+                                        <div class="placeholder">Tên</div>
+                                        <input type="text" name="lastname" class="input" required v-model="data.lastname" v-on:focus="onFocusField('lastname')"
+                                               v-on:blur="onBlur('lastname')" v-on:input="e => handleInputChange('lastname', e)"/>
+                                        <span class="error-text" v-if="errors.lastname">[[errors.lastname]]</span>
+                                    </div>
+                                    <div class="form-element per50-left" v-bind:class="{focused: shouldFocusedClass('email')}">
+                                        <div class="placeholder">Email (Không bắt buộc)</div>
+                                        <input type="text" name="email" class="input" v-model="data.email"
+                                               v-on:focus="onFocusField('email')" {% comment %}v-on:blur="onBlur('email')"{% endcomment %}/>
+                                        <span class="error-text" v-if="errors.lastname">[[errors.email]]</span>
+                                    </div>
+                                    <div class="form-element per50-right"  v-bind:class="{focused: shouldFocusedClass('phone')}">
+                                    <div class="placeholder">Số điện thoại</div>
+                                    <input type="text" name="phone" class="input" required v-model="data.phone"
+                                           v-on:focus="onFocusField('phone')" v-on:blur="onBlur('phone')" v-on:input="e => handleInputChange('phone', e)"/>
+                                    <span class="error-text" v-if="errors.lastname">[[errors.phone]]</span>
+                                </div>
+                                    <div class="form-element per50-left" >
+                                        <div class="placeholder">Khu vực mà bạn quan tâm</div>
+                                        <input class="input" type="text" name="location" required value="" data-fr-optional data-fr="string"/>
+                                        <span class="error-text"></span>
+                                    </div>
+                                    <div class="form-element per50-left">
+                                        <div class="placeholder">Loại BĐS bạn muốn mua</div>
+                                              <select class="option-group" style="width: 100%; margin-bottom: 0; height: 44px; border: 1px solid rgba(131, 131, 131, .3) " data-model="type" required name="houseType" id="">
+                                                   <option value=""></option>
+                                                  <option value="town_house">Nhà trong ngõ</option>
+                                                  <option value="street_house">Nhà mặt phố</option>
+                                                  <option value="apartment">Căn hộ</option>
+                                                  <option value="villa">Biệt thự</option>
+                                                  <option value="shop_house">Cửa hàng</option>
+                                                  <option value="land">Đất</option>
+                                                  <option value="other">Loại hình khác</option>
+                                              </select>
+                                   </div>
+                                    <div class="form-element per50-left" >
+                                        <div class="placeholder">Tầm tài chính đầu tư (tỷ)</div>
+                                        <input class="input" type="text" name="price" required value="" data-fr-optional data-fr="string"/>
+                                        <span class="error-text"></span>
+                                    </div>
+                                    <div class="form-element textarea-height per50-right">
+                                        <div class="placeholder">Lời nhắn</div>
+                                        <textarea name="message" required></textarea>
+                                    </div>
+                                </fieldset>
+                                <div class="action">
+                                    <button type="submit" class="large-btn-red">Gửi thông tin</button>
+                                </div>
+                                <div class="or-direct-call">
+                                    <p>Hoặc gọi trực tiếp vào Hotline (24/7)
+                                        {% comment %}<a href="tel:%hotline%"><strong>%hotline%</strong></a>{% endcomment %}
+                                        <a href="tel:0916286256"><strong>0916286256</strong></a>
+                                    </p>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       </script>
+   </div>
 
   <!-- Footer content below-->
 {% endblock %}
 
 {% block scripts %}
-    <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
+
 {% endblock %}
 
 

@@ -386,6 +386,21 @@
     }
 </script>
 
+<script type="deferjs">
+        createHSForm({
+            css: '',
+            target: '#sell-now-form-body',
+            portalId: '2775524',
+            formId: '9cc2fa2e-59d1-410a-a910-217a24437963',
+            onFormReady: function($form){
+                $form.on("submit", function(e){
+                    goog_report_conversion ? goog_report_conversion() : null;
+                });
+            }
+        });
+
+  </script>
+
 <script>
     /*Footer*/
     let footerContent = $("#footer .info-container li")

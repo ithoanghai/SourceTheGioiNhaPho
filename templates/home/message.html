@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static humanize i18n %}
+
+{% block head %}
+  {{ block.super }}
+
+  <link rel="canonical" href="{% url 'about' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
+
+{% endblock %}
+
+{% block content %}
+
+  <div id="wraps">
+    <!-- Search menu -->
+    {% include 'menu/_menuSearch.html' %}
+
+    <!-- Header -->
+    {% include 'menu/_secondMenu2.html' %}
+
+    <!-- Main Content  -->
+
+    <div class="bg-about" style=" background: url({% static 'images/bg-tgnp.jpg' %}) 50% 50% / cover no-repeat;">
+      <div class="heading-wrapper">
+        <div class="heading-inner">
+          <h1>Bạn đã gửi liên hệ thành công!</h1>
+        </div>
+      </div>
+    </div>
+
+    <section class="bg-white">
+      <div class="width1140 s-padding-tb">
+        <p class="s-heading" style="text-align:center">
+          Chuyên viên Thế Giới Nhà Phố sẽ liên hệ với bạn sớm nhất!
+        </p>
+
+        <div class="branch-map">
+          <img src="" alt="">
+        </div>
+      </div>
+
+    </section>
+
+    <section class="background-gray">
+      <div class="width1140 s-padding-tb">
+        <div class="s-grid s-column-4 s-gutters">
+          <div class="s-cell s-btn">
+            <a href="{% url 'specialist' %}">Gặp chuyên viên tư vấn</a>
+          </div>
+          <div class="s-cell s-btn">
+            <a href="{% url 'sell_lease_with_us' %}">Đăng bán, cho thuê</a>
+          </div>
+          <div class="s-cell s-btn">
+            <a href="https://forms.gle/LM41QBEMSZvwmSta7">Gia nhập TGNP</a>
+          </div>
+          <div class="s-cell s-btn">
+            <a href="{% url 'contacts' %}">Liên hệ</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
+
+  </div>
+
+  <!-- Footer content below-->
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

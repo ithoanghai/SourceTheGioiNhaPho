@@ -69,11 +69,11 @@ def search(request):
     return render(request, 'listings/search.html', context)
 
 
-def sell_with_us(request):
+def sell_lease_with_us(request):
     context = {
     }
 
-    return render(request, 'listings/sellWithUs.html', context)
+    return render(request, 'listings/sellLeaseWithUs.html', context)
 
 
 def buy_with_us(request):

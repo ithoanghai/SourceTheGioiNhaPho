@@ -15,43 +15,7 @@
     {% include 'menu/_menuSearch.html' %}
 
     <!-- Header -->
-    <div class="cta-bottom-wrapper">
-      <div class="cta-bottom-inner">
-        <div class="phone">
-          <a class="cta-hotline" href="tel:0971841941"><span class="font-icon fone-b font-20"> </span>
-            <strong>0971 841 941</strong></a>
-        </div>
-        <div>
-          <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
-        </div>
-      </div>
-    </div>
-    <div class="s-menu about-menu">
-      <div class="width-1600">
-        <div class="s-menu-wrapper">
-          <ul>
-            <li class="s-menu-items"><a href="{% url 'about' %}">Giới thiệu TGNP</a>
-            </li>
-            <li class="s-menu-items">
-              <a href="{% url 'specialist_us' %}">Đội ngũ chuyên viên</a>
-            </li>
-
-
-            {% comment %}<li class="s-menu-items">
-                            <a href="#">Phòng giao dịch</a>
-                        </li>{% endcomment %}
-
-
-            <li class="s-menu-items">
-              <a href="{% url 'recruitment' %}">Tuyển dụng</a>
-            </li>
-            <li class="s-menu-items active">
-              <a href="{% url 'contacts' %}">Liên hệ</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    {% include 'menu/_secondMenu2.html' %}
 
 
     <!-- Main Content  -->
@@ -85,7 +49,12 @@
             <form method="post" action="{% url 'post_contact' %}">
               <fieldset>
                 {% csrf_token %}
-                  <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
+                  <input type="hidden" name="listing_id" value="none"/>
+                  <input type="hidden" name="trantype" value="contact">
+                  <input type="hidden" name="location" value=""/>
+                  <input type="hidden" name="houseType" value="">
+                  <input type="hidden" name="price" value="0"/>
+
                 <div class="form-element per50-left ">
                   <div class="placeholder">Họ</div>
                   <input class="input" type="text" name="lastname" value="" data-fr="string" placeholder="" required/>
@@ -223,7 +192,7 @@
             </div>
         </section>{% endcomment %}
 
-    {% include "partials/_detailFeedbackForm.html" %}
+    <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
 
   </div>
 
@@ -231,8 +200,6 @@
 {% endblock %}
 
 {% block scripts %}
-
-  <script async defer src="{% static 'js/services.min.js' %}"></script>
 
 {% endblock %}
 

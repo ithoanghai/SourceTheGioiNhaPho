@@ -12,7 +12,7 @@ urlpatterns = [
 
     path('search', views.search, name='listing_search'),
 
-    path('sell_with_us', views.sell_with_us, name='sell_with_us'),
+    path('sell_lease_with_us', views.sell_lease_with_us, name='sell_lease_with_us'),
     path('buy_with_us', views.buy_with_us, name='buy_with_us'),
     path('rent_with_us', views.rent_with_us, name='rent_with_us'),
 

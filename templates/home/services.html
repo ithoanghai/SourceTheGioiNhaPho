@@ -3,10 +3,9 @@
 {% load static humanize i18n load_static %}
 
 {% block head %}
-  {{ block.super }}
-  <link rel="canonical" href="{% url 'services' %}"/>
+    {{ block.super }}
+    <link rel="canonical" href="{% url 'services' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
-
 {% endblock %}
 
 {% block content %}
@@ -16,98 +15,9 @@
     {% include 'menu/_menuSearch.html' %}
 
     <!-- Header -->
-    <div class="cta-bottom-wrapper">
-      <div class="cta-bottom-inner">
-        <div class="phone">
-          <a class="cta-hotline" href="tel:0971841941"><span class="font-icon fone-b font-20"> </span>
-            <strong>0971 841 941</strong></a>
-        </div>
-        <div>
-          <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
-        </div>
-      </div>
-    </div>
-    <div class="s-menu">
-      <div class="width-1600">
-        <div class="s-menu-wrapper">
-          <ul>
-            <li class="s-menu-items ">
-              <a href="{% url 'services' %}">Tất cả dịch vụ</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
-            </li>
-            <li class="s-menu-items active">
-              <a href="{% url 'sell_with_us' %}">Bán BĐS với Thế giới Nhà Phố</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
-            </li>
-            {% comment %}                    <li class="s-menu-items ">
-                        <a href="tgnp-photo.html">Chụp hình</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="3d.html">Thực tế ảo</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="thu-tuc-giay-to.html">Hành chính</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
-                    </li>{% endcomment %}
-          </ul>
-        </div>
-      </div>
-    </div>
+    {% include 'menu/_secondMenu.html' %}
 
-    <!-- Main Content  -->
-    <div class="sticky-header">
-      <div class="stickyTrigger is-stuck sticky-sMenu">
-        <div class="s-menu-wrapper">
-          <ul>
-            <li class="s-menu-items active">
-              <a href="{% url 'services' %}">Tất cả dịch vụ</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'sell_with_us' %}">Bán với TGNP</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
-            </li>
-            <li class="s-menu-items ">
-              <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
-            </li>
-            {% comment %}                    <li class="s-menu-items ">
-                        <a href="tgnp-photo.html">Chụp hình</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="3d.html">Thực tế ảo</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="thu-tuc-giay-to.html">Hành chính</a>
-                    </li>
-                    <li class="s-menu-items ">
-                        <a href="bang-dieu-khien.html">Bảng điều khiển</a>
-                    </li>{% endcomment %}
-            <li class="s-btn-contact">
-              <a href="javascript:void(0)" data-action="request-service">Đăng ký ngay</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+     <!-- Main content -->
     <div class="s-banner-bg"
          style="background: url({% static 'images/all-service-banner.jpg' %}) 50% 50% / cover no-repeat;">
       <div class="s-banner-bg-inner">
@@ -136,12 +46,16 @@
           </div>
           <div class="col-right">
             <h2 class="s-heading">
-              <a href="{% url 'sell_with_us' %}" target="_blank">Bán với TGNP</a>
+              <a href="{% url 'sell_lease_with_us' %}" target="_blank">Bán & Cho thuê với TGNP</a>
             </h2>
-            <p class="all-service-desc">Bán nhà đất với các dịch vụ hỗ trợ nhanh chóng và tiện lợi, với chi
+            <p class="all-service-desc">Bán & Cho thuê nhà đất với các dịch vụ hỗ trợ nhanh chóng và tiện lợi, với chi
               phí tiết kiệm và đội ngũ hỗ trợ mọi lúc, cùng các dịch vụ bổ sung đi kèm trong các gói dịch
               vụ linh hoạt. Đặc biệt, người bán có thể theo dõi sát tiến trình bán nhà bằng “Bảng điều
               khiển cho người bán” độc quyền, chỉ có tại TGNP.</p>
+            <p class="all-service-desc">Dịch vụ môi giới của TGNP dành cho chủ nhà cần bán | cho thuê, giúp tiếp
+              cận khách hàng tiềm năng qua hệ thống trực tuyến, điểm giao dịch TGNP, các website rao vặt
+              lớn và quảng cáo Google, facebook. Người cho bán | thuê sẽ nhận được tư vấn trong toàn bộ quá
+              trình bán | cho thuê nhà.</p>
             <ul class="all-service-list">
               <p class="title-list">Dịch vụ đi kèm:</p>
               <li>
@@ -150,54 +64,16 @@
               {% comment %}                            <li>
                                 <a href="3d.html" target="_blank">Thực tế ảo (3D)</a>
                             </li>{% endcomment %}
-
-
               <li>
                 <a href="thu-tuc-giay-to.html" target="_blank">Hoàn tất thủ tục giấy tờ</a>
               </li>
             </ul>
-            <a href="{% url 'sell_with_us' %}" class="s-btn-red research" target="_blank">Tìm hiểu thêm</a>
+            <a href="{% url 'sell_lease_with_us' %}" class="s-btn-red research" target="_blank">Tìm hiểu thêm</a>
           </div>
         </div>
       </div>
     </section>
-    <section class="all-service">
-      <div class="container">
-        <div class="row">
-          <div class="col-left">
-            <div class="all-service-cover">
-              <a href="{% url 'rent_with_us' %}" target="_blank">
-                <img src="{% static 'images/all-service-for-rent-tgnp.jpg' %}"
-                     alt="TGNP">
-              </a>
-            </div>
-          </div>
-          <div class="col-right">
-            <h2 class="s-heading">
-              <a href="{% url 'rent_with_us' %}" target="_blank">Cho thuê với TGNP</a>
-            </h2>
-            <p class="all-service-desc">Dịch vụ môi giới của TGNP dành cho chủ nhà cần cho thuê, giúp tiếp
-              cận khách hàng tiềm năng qua hệ thống trực tuyến, điểm giao dịch TGNP, các website rao vặt
-              lớn và quảng cáo Google, facebook. Người cho thuê sẽ nhận được tư vấn trong toàn bộ quá
-              trình thuê nhà và theo dõi được tiến trình cho thuê bằng “Bảng điều khiển” độc quyền tại
-              TGNP.</p>
-            <ul class="all-service-list">
-              <p class="title-list">Dịch vụ đi kèm:</p>
-              <li>
-                <a href="#" target="_blank">Chụp hình chuyên nghiệp</a>
-              </li>
-              {% comment %}                            <li>
-                                <a href="3d.html" target="_blank">Thực tế ảo (3D)</a>
-                            </li>{% endcomment %}
-              <li>
-                <a href="#" target="_blank">Hoàn tất thủ tục giấy tờ</a>
-              </li>
-            </ul>
-            <a href="{% url 'rent_with_us' %}" target="_blank" class="s-btn-red research">Tìm hiểu thêm</a>
-          </div>
-        </div>
-      </div>
-    </section>
+
     <section class="background-gray all-service">
       <div class="container">
         <div class="row">
@@ -265,17 +141,13 @@
       </div>
     </div>
 
-    {% include "partials/_detailFeedbackForm.html" %}
-
+    <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
   </div>
 
   <!-- Footer content below-->
 {% endblock %}
 
 {% block scripts %}
-
-  <script async defer src="{% static 'js/services.min.js' %}"></script>
-
 
 {% endblock %}
 
