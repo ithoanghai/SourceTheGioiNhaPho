@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .forms import TransactionAdminForm
-from .models import Transaction
+from .models import Transaction, TransactionHistory
 
 
 class TransactionAdmin(admin.ModelAdmin):
@@ -13,3 +13,4 @@ class TransactionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Transaction, TransactionAdmin)
+admin.site.register(TransactionHistory)

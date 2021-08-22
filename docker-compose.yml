@@ -7,7 +7,7 @@ services:
   db:
     image: 'kartoza/postgis:13-3.1'
     environment:
-      - POSTGRES_DBNAME=real_estate
+      - POSTGRES_DBNAME=tgnp
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:

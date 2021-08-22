@@ -10,6 +10,7 @@ from FunctionModule.listings.choices import HouseType
 from FunctionModule.listings.models import Listing
 from FunctionModule.realtors.models import Realtor
 
+
 class TransTypeInit(models.TextChoices):
     CONTACT = 'contact', _("Liên hệ")
     ORDER = 'oder', _("Đặt hàng")
@@ -60,3 +61,20 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f'%s:  %s' % (self.trantype, self.message)
+
+
+class TransactionHistory(models.Model):
+    class Meta:
+        verbose_name = "Lịch sử Giao dịch"
+        verbose_name_plural = "DS Lịch sử Giao dịch"
+        ordering = ['date']
+
+    transaction = models.ForeignKey(Transaction, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name=_("Giao dịch"))
+    realtor = models.ForeignKey(Realtor, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name=_("Chuyên viên thực hiện"))
+    reason = models.CharField(max_length=25, choices=Reason.choices, default=Reason.FEEDBACK, verbose_name='Lý do giao dịch')
+    #status = models.CharField(max_length=25, choices=Status.choices, default=Status.ACTIVE, verbose_name='Trạng thái giao dịch')
+    comment = models.TextField(max_length=100, blank=True, null=True, verbose_name="Diễn giải thêm")
+    date = models.DateTimeField(default=datetime.now, blank=True, verbose_name="Thời gian phát sinh giao dịch")
+
+    def __str__(self):
+        return f'%s - %s' % (self.status, self.message)

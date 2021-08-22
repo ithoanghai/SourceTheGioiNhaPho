@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import Group
 from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
@@ -80,3 +81,9 @@ class User(AbstractUser):
             return f"{self.first_name} {self.last_name}"
         else:
             return self.username
+
+
+class Group(Group):
+    class Meta:
+        verbose_name = "Nhóm người dùng"
+        verbose_name_plural = "DS Nhóm người dùng"

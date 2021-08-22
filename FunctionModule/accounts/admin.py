@@ -1,16 +1,19 @@
 from typing import Set
 
 import django.contrib.admin.sites
+from allauth.account.models import EmailAddress
+from allauth.socialaccount.models import SocialToken
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
-from django.contrib.auth.models import Group
+from rest_framework.authtoken.models import TokenProxy
 
 from .forms import MyUserChangeForm, GroupAdminForm
-from .models import User
+from .models import User, Group
 
 # Unregister the original Group admin.
 try:
     admin.site.unregister(Group)
+
 except django.contrib.admin.sites.NotRegistered:
     pass
 
@@ -101,3 +104,6 @@ class GroupAdmin(admin.ModelAdmin):
 
 admin.site.register(Group, GroupAdmin)
 admin.site.register(User, AccountAdmin)
+admin.site.unregister(TokenProxy)
+admin.site.unregister(SocialToken)
+admin.site.unregister(EmailAddress)
