@@ -248,10 +248,6 @@ function importListing($) {
         formData.append('csrfmiddlewaretoken', csrf)
     })
 
-    // myDropzone.on('addedfile', (file) => {
-    //     console.log(file)
-    // })
-
     myDropzone.on("success", function (file, response) {
         this.removeFile(file);
         $('.modal-alert').removeClass().text('Tải lên thành công!').addClass('alert alert-success')

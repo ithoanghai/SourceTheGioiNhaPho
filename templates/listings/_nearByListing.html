@@ -3,7 +3,7 @@
 <div class="article">
   <div class="img">
     <a class="cover"
-       href="{% url 'listing_detail' listing.id %}"
+       href="{% url "listing_detail" listing.id %}"
        title="{{ listing.title }}">
       {% with listing.main_photo as photo %}
           <img class="lazy" data-src="{{ photo.url }}"
