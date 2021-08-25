@@ -7,13 +7,14 @@ services:
       - POSTGRES_DBNAME=tgnp
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=bBtv7V96uSV590
+      - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
       - db-data:/var/lib/postgresql
       - ./data/db:/home/db
-    #ports:
-    #  - "5432:5432"
-    expose:
-      - "5432"
+    ports:
+      - "5432:5432"
+    #expose:
+    #  - "5432"
     restart: on-failure
   redis:
     image: 'redis:6.2'
@@ -77,7 +78,7 @@ services:
       - redis
       - search_engine
     tty: true
-    
+
 volumes:
   db-data:
     driver: local

@@ -15,6 +15,8 @@ services:
     ports:
       - "5432:5432"
     restart: on-failure
+    networks:
+      - djangonetwork
   search_engine:
     image: 'getmeili/meilisearch:v0.21.0rc3'
     ports:
@@ -43,3 +45,8 @@ services:
       - db
       - redis
       - search_engine
+    networks:
+      - djangonetwork
+  networks:
+    djangonetwork:
+      driver: bridge

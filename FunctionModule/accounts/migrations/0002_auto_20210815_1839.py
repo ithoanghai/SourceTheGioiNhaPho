@@ -14,10 +14,6 @@ class Migration(migrations.Migration):
             name='user',
             options={'verbose_name': 'Người dùng', 'verbose_name_plural': 'DS Người dùng'},
         ),
-        migrations.RemoveField(
-            model_name='user',
-            name='is_realtor',
-        ),
         migrations.AlterField(
             model_name='user',
             name='avatar',
