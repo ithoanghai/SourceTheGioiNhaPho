@@ -83,7 +83,7 @@ def get_direction(direction: str) -> str:
 def handle_import(file_path):
     line_count = 0
     try:
-        realtors = Realtor.objects.select_related().filter(user__is_realtor=True)
+        realtors = Realtor.objects.all()
         user_dict = {}
         for obj in realtors:
             user_dict[obj.user.phone] = obj
@@ -241,8 +241,7 @@ def handle_import(file_path):
                             user_dict[phone] = admin_realtor
                         else:
                             new_user = User.objects.create_user(username=phone, password=default_password,
-                                                                is_realtor=True, phone=phone,
-                                                                last_name=name[3:])
+                                                                phone=phone, last_name=name[3:])
                             new_realtor = Realtor.objects.create(user=new_user)
                             user_dict[phone] = new_realtor
                     realtor = user_dict[phone]

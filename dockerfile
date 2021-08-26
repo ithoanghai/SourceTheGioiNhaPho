@@ -25,5 +25,5 @@ RUN apt install -y nodejs yarn
 COPY package.json /app
 
 COPY . /app
-# RUN useradd --create-home appuser
-# USER appuser
+RUN useradd --create-home appuser
+USER appuser

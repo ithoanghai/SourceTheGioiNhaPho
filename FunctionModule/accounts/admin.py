@@ -1,21 +1,14 @@
 from typing import Set
 
-import django.contrib.admin.sites
 from allauth.account.models import EmailAddress
 from allauth.socialaccount.models import SocialToken
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
+from django.contrib.auth.models import Group
 from rest_framework.authtoken.models import TokenProxy
 
 from .forms import MyUserChangeForm, GroupAdminForm
-from .models import User, Group
-
-# Unregister the original Group admin.
-try:
-    admin.site.unregister(Group)
-
-except django.contrib.admin.sites.NotRegistered:
-    pass
+from .models import User
 
 
 class AccountAdmin(AuthUserAdmin):
@@ -76,25 +69,6 @@ class AccountAdmin(AuthUserAdmin):
                 form.base_fields[f].disabled = True
 
         return form
-
-    # def get_urls(self):
-    #     urls = super(AccountAdmin, self).get_urls()
-    #     custom_urls = []
-    #     custom_urls = [
-    #         url(
-    #             r'^change/$',
-    #             self.admin_site.admin_view(self.changelist_view),
-    #             name='user-change',
-    #         ),
-    #         url(
-    #             r'^delete/$',
-    #             self.admin_site.admin_view(self.delete_view),
-    #             name='user-delete',
-    #         ),
-    #     ]
-    #     print urls
-    #     print custom_urls
-    #     return custom_urls + urls
 
 
 class GroupAdmin(admin.ModelAdmin):

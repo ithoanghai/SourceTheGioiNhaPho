@@ -1,5 +1,4 @@
 from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.models import Group
 from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
@@ -20,7 +19,7 @@ def split_url(url: str) -> str:
 
 
 phone_regex = RegexValidator(regex=r'^(09|03|07|08|05)+([0-9]{8})$',
-                     message="Số điện thoại 10 số với chỉ các đầu số 09|03|07|08|05")
+                             message="Số điện thoại 10 số với chỉ các đầu số 09|03|07|08|05")
 
 
 class User(AbstractUser):
@@ -32,22 +31,26 @@ class User(AbstractUser):
     # These two fields are for backend (admin) login form to display correctly
     username = models.CharField(
         _('Tên đăng nhập'), max_length=150, unique=True,
-        help_text=_('Bắt buộc nhập. Không quá 150 ký tự. Có thể bao gồm ký tự, chữ số và chỉ ký tự đặc biệt @/./+/-/_.'),
+        help_text=_(
+            'Bắt buộc nhập. Không quá 150 ký tự. Có thể bao gồm ký tự, chữ số và chỉ ký tự đặc biệt @/./+/-/_.'),
         error_messages={'unique': _("Người dùng này đã tồn tại trên hệ thống.")},
     )
     email = models.EmailField(_('Email'), blank=True, unique=True, error_messages={
-       'unique': _("Email này đã được sử dụng trên hệ thống.")})
+        'unique': _("Email này đã được sử dụng trên hệ thống.")})
 
     # Basic Info
     first_name = models.CharField(_('Họ'), max_length=150, blank=True)
     last_name = models.CharField(_('Tên'), max_length=150, blank=True)
-    phone = models.CharField(_('Điện thoại'), max_length=20, db_index=True, unique=True, validators=[phone_regex],
+    phone = models.CharField(_('Điện thoại'), max_length=20, db_index=True, unique=True,
+                             validators=[phone_regex],
                              error_messages={'unique': _("Số điện thoại này đã được sử dụng trên hệ thống.")})
     address = models.CharField(_('Địa chỉ'), blank=True, max_length=255)
     dob = models.DateField(_('Ngày sinh'), blank=True, null=True)
-    gender = models.CharField(_('Giới tính'), max_length=20, choices=GENDER_CHOICES, blank=True, default='male')
+    gender = models.CharField(_('Giới tính'), max_length=20, choices=GENDER_CHOICES, blank=True,
+                              default='male')
     bio = models.TextField(_('Lý lịch'), blank=True)
-    avatar = models.ImageField(_("Ảnh đại diện"), upload_to="photos/%Y/%m/%d/", default='img/logo tgnp brown.jpg')
+    avatar = models.ImageField(_("Ảnh đại diện"), upload_to="photos/%Y/%m/%d/",
+                               default='img/logo tgnp brown.jpg')
 
     # Social Fields
     website = models.CharField(_('Website'), blank=True, max_length=255)
@@ -81,9 +84,3 @@ class User(AbstractUser):
             return f"{self.first_name} {self.last_name}"
         else:
             return self.username
-
-
-class Group(Group):
-    class Meta:
-        verbose_name = "Nhóm người dùng"
-        verbose_name_plural = "DS Nhóm người dùng"

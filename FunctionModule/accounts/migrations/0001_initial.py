@@ -27,7 +27,6 @@ class Migration(migrations.Migration):
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
                 ('username', models.CharField(error_messages={'unique': 'Người dùng này đã tồn tại trên hệ thống.'}, help_text='Bắt buộc nhập. Không quá 150 ký tự. Có thể bao gồm ký tự, chữ số và chỉ ký tự đặc biệt @/./+/-/_.', max_length=150, unique=True, verbose_name='Tên đăng nhập')),
                 ('email', models.EmailField(blank=True, error_messages={'unique': 'Email này đã được sử dụng trên hệ thống.'}, max_length=254, unique=True, verbose_name='Email')),
-                ('is_realtor', models.BooleanField(default=True, verbose_name='Là đầu chủ')),
                 ('first_name', models.CharField(blank=True, max_length=150, verbose_name='Tên')),
                 ('last_name', models.CharField(blank=True, max_length=150, verbose_name='Họ')),
                 ('phone', models.CharField(db_index=True, error_messages={'unique': 'Số điện thoại này đã được sử dụng trên hệ thống.'}, max_length=20, unique=True, validators=[django.core.validators.RegexValidator(message='Số điện thoại 10 số với chỉ các đầu số 09|03|07|08|05', regex='^(09|03|07|08|05)+([0-9]{8})$')], verbose_name='Điện thoại')),
