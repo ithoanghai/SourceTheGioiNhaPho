@@ -1,5 +1,6 @@
 Django==3.1.7
 gunicorn==20.1.0
+gevent==21.8.0
 paytmchecksum==1.7.0
 Pillow==8.1.0
 pycryptodome==3.10.1

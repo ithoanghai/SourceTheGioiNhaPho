@@ -1,6 +1,6 @@
 from django.urls import reverse
 
-from .choices import Status
+from .choices import Status, RoadType, Condition
 
 
 def prepare_fb_headers():
@@ -104,18 +104,44 @@ def prepare_fb_headers():
         "applink.windows_phone_url",
     ]
 
+ONE_BILLION = 1000000000
+
+def get_parking_type(road_type):
+    if road_type == RoadType.ALLEY_CAR_2:
+        return 'off_street'
+    elif road_type == RoadType.ALLEY_CAR_TRIBIKE:
+        return 'street'
+    else:
+        return 'none'
+
+def get_status(status):
+    if status == Status.SELLING:
+        return 'for_sale'
+    elif status == Status.SALE:
+        return 'for_sale'
+    elif status == Status.SOLD:
+        return 'recently_sold'
+    else:
+        return 'off_market'
+
+def get_listing_type(listing):
+    if listing.condition == Condition.NEW:
+        return 'new_construction'
+    else:
+        return 'for_sale_by_owner'
 
 def prepare_fb_listing_data(listing):
     price = listing.sale_price or listing.price
     url = reverse('listing_detail', kwargs={'listing_id': listing.id})
     full_url = f'https://thegioinhaphovietnam.com.vn/{url}'
-    main_photo_url = f'https://thegioinhaphovietnam.com.vn/{listing.main_photo.url}'
+    main_photo_url = f'https://thegioinhaphovietnam.com.vn{listing.main_photo.url}'
+    real_size = listing.area_real or listing.are
     listing_data = {
         "home_listing_id": listing.code,
         "name": listing.title,
         "description": listing.description,
-        "availability": listing.get_status_display(),
-        "price": f'{price:5.2f} tỷ VND',
+        "availability": get_status(listing.status),
+        "price": f'{price:5.2f}',
         "home_listing_group_id": None,
         "ac_type": None,
         "agent_name": listing.realtor.user.name,
@@ -130,26 +156,26 @@ def prepare_fb_listing_data(listing):
         "fee_schedule_url": None,
         "heating_type": None,
         "laundry_type": None,
-        "listing_type": listing.get_house_type_display(),
+        "listing_type": get_listing_type(listing),
         "agent_rera_id": None,
         "property_rera_id": None,
         "num_baths": listing.bathrooms if listing.bathrooms else None,
         "num_beds": listing.bedrooms,
         "num_rooms": listing.bedrooms,
         "num_units": None,
-        "parking_type": listing.get_road_type_display(),
-        "partner_verification": listing.is_verified,
+        "parking_type": get_parking_type(listing.road_type),
+        "partner_verification": "verified" if listing.is_verified else 'none',
         "pet_policy": None,
         "min_price": None,
         "max_price": None,
         "property_type": listing.get_house_type_display(),
-        "area_size": listing.area,
-        "built_up_area_size": listing.area_real or listing.area,
+        "area_size": float(listing.area),
+        "built_up_area_size": float(real_size),
         "property_tax": None,
         "condo_fee": None,
         "coownership_charge": None,
         "parking_spaces": listing.get_road_type_display(),
-        "area_unit": 'm2',
+        "area_unit": 'sq_m',
         "year_built": None,
         "address.addr1": listing.district_name(),
         "address.addr2": listing.ward_name(),
@@ -169,21 +195,21 @@ def prepare_fb_listing_data(listing):
         "co2_emission_rating_eu.value": None,
         "additional_fees_description": None,
         "num_pets_allowed": None,
-        "land_area_size": listing.area,
+        "land_area_size": float(listing.area),
         "security_deposit": None,
         "holding_deposit": None,
         "application_fee": None,
         "pet_deposit": None,
         "pet_monthly_fee": None,
-        "floor_types[0]": f'{listing.floors:2.0f} tầng',
-        "unit_features[0]": listing.salient_features,
+        "floor_types": None,
+        "unit_features": None,
         "construction_status": listing.get_condition_display(),
         "coownership_num_lots": None,
         "coownership_status": None,
         "coownership_proceedings_status": None,
         "special_offers[0]": None,
         "pet_restrictions[0]": None,
-        "building_amenities[0]": listing.living_facilities,
+        "building_amenities": listing.living_facilities,
         "broker_fee": None,
         "first_month_rent": None,
         "last_month_rent": None,
