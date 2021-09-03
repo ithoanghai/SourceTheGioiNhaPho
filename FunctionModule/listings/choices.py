@@ -39,7 +39,10 @@ class TransactionType(models.TextChoices):
     FOR_RENT = 'for_rent', _("Cho thuê")
     PROJECT = 'project', _("Dự án")
 
-
+# House type in facebook
+# "apartment", "apartment_room", "builder_floor", "bungalow", "condo", "condo_room", "house", "house_in_condominium", \
+# "house_in_villa", "house_room", "land", "loft", "manufactured", "other", "other_room", "penthouse", "single_family_home", \
+# "studio", "townhouse", "townhouse_room"
 class HouseType(models.TextChoices):
     STREET_HOUSE = 'street_house', _("Nhà mặt phố")
     TOWN_HOUSE = 'town_house', _("Nhà trong ngõ")
@@ -64,10 +67,17 @@ class HouseType(models.TextChoices):
     OTHER = 'other', _("Khác")
 
 
+class FurnishType(models.TextChoices):
+    FURNISHED = 'furnished', _("Đủ đồ đạc")
+    SEMI_FURNISHED = 'semi_furnished', _("Một số đồ đạc")
+    UNFURNISHED = 'unfurnished', _("Không có đồ đạc")
+
+
 class RegistrationType(models.TextChoices):
     RED_BOOK = 'red_book', _("Sổ Đỏ")
     PINK_BOOK = 'pink_book', _("Sổ Hồng")
     DONT_BOOK = 'dont_book', _("Chưa làm sổ")
+    OTHER = 'other', _("Khác")
 
 
 class RoadType(models.TextChoices):
@@ -78,16 +88,34 @@ class RoadType(models.TextChoices):
     ALLEY_TRIBIKE_BIKE = 'alley_tribike_bike', _("Ba gác tránh Xe máy")
     ALLEY_BIKE = 'alley_bike', _("Xe máy tránh nhau")
 
+
+class ParkingType(models.TextChoices):
+    GARAGE = 'garage', _("Có gara ô tô")
+    OFF_STREET = 'off_street', _("Đỗ trước nhà")
+    STREET = 'street', _("Đỗ ngoài đường")
+    NONE = 'none', _("Không có chỗ đỗ")
+    OTHER = 'other', _("Khác")
+
+
 class Condition(models.TextChoices):
-    NEW = 'new', _("Mới")
-    OLD = 'old', _("Cũ")
-    NONE = 'none', _("Chưa xác định")
+    NEW = 'new', _("Xây mới")
+    OLD = 'old', _("Nhà cũ")
+    OTHER = 'other', _("Khác")
+
+
+class Construction (models.TextChoices):
+    RELEASE = 'release', _("Đã hoàn thiện")
+    UNDER_CONSTRUCTION = 'under_construction', _("Đang thi công")
+    PRERELEASE = 'pre_release', _("Sắp thi công")
+    OTHER = 'other', _("Khác")
+
 
 class Status(models.TextChoices):
     SELLING = 'selling', _("Còn bán")
     SALE = 'sale', _("Hạ chào")
     SOLD = 'sold', _("Đã bán")
     STOP_SELLING = 'stop_selling', _("Dừng bán")
+
 
 class Direction(models.TextChoices):
     none = 'none', _("Chưa xác định")

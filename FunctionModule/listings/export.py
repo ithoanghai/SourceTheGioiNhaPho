@@ -1,6 +1,6 @@
 from django.urls import reverse
 
-from .choices import Status, RoadType, Condition
+from .choices import Status, RoadType, Condition, HouseType, FurnishType, RegistrationType
 
 
 def prepare_fb_headers():
@@ -20,7 +20,7 @@ def prepare_fb_headers():
         "garden_type",
         "days_on_market",
         "url",
-        "image",
+        "image[0].url",
         "fee_schedule_url",
         "heating_type",
         "laundry_type",
@@ -31,7 +31,6 @@ def prepare_fb_headers():
         "num_beds",
         "num_rooms",
         "num_units",
-        "parking_type",
         "partner_verification",
         "pet_policy",
         "min_price",
@@ -42,6 +41,7 @@ def prepare_fb_headers():
         "property_tax",
         "condo_fee",
         "coownership_charge",
+        "parking_type",
         "parking_spaces",
         "area_unit",
         "year_built",
@@ -69,15 +69,15 @@ def prepare_fb_headers():
         "application_fee",
         "pet_deposit",
         "pet_monthly_fee",
-        "floor_types[0]",
-        "unit_features[0]",
+      # "floor_types[0]",
+      #  "unit_features[0]",
         "construction_status",
         "coownership_num_lots",
         "coownership_status",
         "coownership_proceedings_status",
         "special_offers[0]",
         "pet_restrictions[0]",
-        "building_amenities[0]",
+      #  "building_amenities[0]",
         "broker_fee",
         "first_month_rent",
         "last_month_rent",
@@ -106,6 +106,7 @@ def prepare_fb_headers():
 
 ONE_BILLION = 1000000000
 
+
 def get_parking_type(road_type):
     if road_type == RoadType.ALLEY_CAR_2:
         return 'off_street'
@@ -113,6 +114,7 @@ def get_parking_type(road_type):
         return 'street'
     else:
         return 'none'
+
 
 def get_status(status):
     if status == Status.SELLING:
@@ -124,18 +126,92 @@ def get_status(status):
     else:
         return 'off_market'
 
+
 def get_listing_type(listing):
     if listing.condition == Condition.NEW:
         return 'new_construction'
     else:
         return 'for_sale_by_owner'
 
+
+ # return value  "new", "resale", "former"
+def get_sale_type(listing):
+    if listing.status == Status.SELLING:
+        return 'new'
+    elif listing.status == Status.SALE:
+        return 'resale'
+    else:
+        return'former'
+
+
+  # return value in  "apartment", "apartment_room", "builder_floor", "bungalow", "condo", "condo_room",
+# "house", "house_in_condominium", "house_in_villa", "house_room", "land", "loft", "manufactured", "other", "other_room",
+# "penthouse", "single_family_home", "studio", "townhouse", "townhouse_room"
+def get_property_type(listing):
+    if listing.house_type == HouseType.STREET_HOUSE or listing.house_type == HouseType.LOFT_HOUSE or listing.house_type == HouseType.SHOP_HOUSE:
+        return 'house'
+    elif listing.house_type == HouseType.TOWN_HOUSE:
+        return 'townhouse'
+    elif listing.house_type == HouseType.APARTMENT or listing.house_type == HouseType.SERVICE_APARTMENT or listing.house_type == HouseType.OFFICE_TEL or listing.house_type == HouseType.OFFICE:
+        return 'apartment'
+    elif listing.status == HouseType.PENT_HOUSE:
+        return 'penthouse'
+    elif listing.house_type == HouseType.CONDO_TEL or listing.house_type == HouseType.BUILDING or listing.house_type == HouseType.BUILDING_BUSINESS:
+        return 'condo'
+    elif listing.house_type == HouseType.VILLA or listing.house_type == HouseType.VILLA_REST:
+        return 'house_in_villa'
+    elif listing.house_type == HouseType.LAND or listing.house_type == HouseType.LAND_BUSINESS or listing.house_type == HouseType.PLOT or listing.house_type == HouseType.PLOT or listing.house_type == HouseType.INDUSTRIAL_LAND:
+        return 'land'
+    elif listing.house_type == HouseType.WAREHOUSE_WORKSHOP:
+        return 'manufactured'
+    else:
+        return'other'
+
+
+    #"furnished", "semi-furnished", "unfurnished"
+def get_furnish_type(listing):
+    if listing.furnish_type == FurnishType.FURNISHED:
+        return 'furnished'
+    elif listing.furnish_type == FurnishType.SEMI_FURNISHED:
+        return 'semi-furnished'
+    else:
+        return 'unfurnished'
+
+
+    # "freehold", "leasehold", "strata_title", "cooperative", "power_of_attorney", "other",
+    # "indonesia_hak_guna_banguan", "indonesia_hak_pakai", "indonesia_girik"
+def get_tenure_type(listing):
+        if listing.registration_type == RegistrationType.RED_BOOK:
+            return 'strata_title'
+        elif listing.registration_type == RegistrationType.PINK_BOOK:
+            return 'leasehold'
+        elif listing.registration_type == RegistrationType.DONT_BOOK:
+            return 'cooperative'
+        else:
+            return 'other'
+
+
+# Các giá trị được công nhận cho những trường thông tin này bao gồm "garage", "none", "off_street", "other", "street"
+def get_parking_type(listing):
+    if listing.parking_type == RoadType.ALLEY_CAR_2 or listing.road_type == RoadType.ALLEY_CAR:
+        return '1'
+    else:
+        return '0'
+
+
+def get_parking_spaces(listing):
+    if listing.road_type == RoadType.ALLEY_CAR_2 or listing.road_type == RoadType.ALLEY_CAR:
+        return '1'
+    else:
+        return '0'
+
+
 def prepare_fb_listing_data(listing):
     price = listing.sale_price or listing.price
     url = reverse('listing_detail', kwargs={'listing_id': listing.id})
     full_url = f'https://thegioinhaphovietnam.com.vn/{url}'
     main_photo_url = f'https://thegioinhaphovietnam.com.vn{listing.main_photo.url}'
-    real_size = listing.area_real or listing.are
+    real_size = listing.area_real or listing.area
     listing_data = {
         "home_listing_id": listing.code,
         "name": listing.title,
@@ -146,13 +222,13 @@ def prepare_fb_listing_data(listing):
         "ac_type": None,
         "agent_name": listing.realtor.user.name,
         "agent_company": "TGNP",
-        "furnish_type": listing.furniture_design,
-        "tenure_type": listing.get_registration_type_display(),
-        "sale_type": listing.get_status_display() if listing.status == Status.SALE else None,
+        "furnish_type": get_furnish_type(listing),
+        "tenure_type": get_tenure_type(listing),
+        "sale_type": get_sale_type(listing),
         "garden_type": None,
         "days_on_market": None,
         "url": full_url,
-        "image": main_photo_url,
+        "image[0].url": main_photo_url,
         "fee_schedule_url": None,
         "heating_type": None,
         "laundry_type": None,
@@ -163,18 +239,18 @@ def prepare_fb_listing_data(listing):
         "num_beds": listing.bedrooms,
         "num_rooms": listing.bedrooms,
         "num_units": None,
-        "parking_type": get_parking_type(listing.road_type),
         "partner_verification": "verified" if listing.is_verified else 'none',
         "pet_policy": None,
         "min_price": None,
         "max_price": None,
-        "property_type": listing.get_house_type_display(),
-        "area_size": float(listing.area),
-        "built_up_area_size": float(real_size),
+        "property_type": get_property_type(listing),
+        "area_size": int(listing.area),
+        "built_up_area_size": int(real_size),
         "property_tax": None,
         "condo_fee": None,
         "coownership_charge": None,
-        "parking_spaces": listing.get_road_type_display(),
+        "parking_type": listing.parking_type,
+        "parking_spaces": get_parking_spaces(listing),
         "area_unit": 'sq_m',
         "year_built": None,
         "address.addr1": listing.district_name(),
@@ -195,21 +271,21 @@ def prepare_fb_listing_data(listing):
         "co2_emission_rating_eu.value": None,
         "additional_fees_description": None,
         "num_pets_allowed": None,
-        "land_area_size": float(listing.area),
+        "land_area_size": int(listing.area),
         "security_deposit": None,
         "holding_deposit": None,
         "application_fee": None,
         "pet_deposit": None,
         "pet_monthly_fee": None,
-        "floor_types": None,
-        "unit_features": None,
-        "construction_status": listing.get_condition_display(),
+       # "floor_types": None,
+       # "unit_features": None,
+        "construction_status": listing.construction,
         "coownership_num_lots": None,
         "coownership_status": None,
         "coownership_proceedings_status": None,
         "special_offers[0]": None,
         "pet_restrictions[0]": None,
-        "building_amenities": listing.living_facilities,
+      #  "building_amenities": listing.living_facilities,
         "broker_fee": None,
         "first_month_rent": None,
         "last_month_rent": None,

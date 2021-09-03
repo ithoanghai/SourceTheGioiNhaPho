@@ -15,7 +15,7 @@ from rest_framework import serializers
 from FunctionModule.cadastral.lookups import get_state_name, get_district_name, get_ward_name
 from FunctionModule.realtors.models import Realtor
 from .choices import (TransactionType, city_choices, HouseType, RegistrationType,
-                      RoadType, Status, Direction, Condition)
+                      RoadType, Status, Direction, Condition, FurnishType, ParkingType, Construction)
 
 
 def get_image_path(instance, filename: str):
@@ -63,10 +63,14 @@ class Listing(models.Model):
 
     condition = models.CharField(max_length=20, choices=Condition.choices, default=Condition.OLD,
                                  verbose_name=_("Tình trạng BĐS"), null=True)
-    year = models.CharField(max_length=50, verbose_name=_("Năm xây dựng/Còn lại"), blank=True, null=True,
-                            help_text=_("Điền năm xây dựng/Tỷ lệ % sử dụng còn lại"))
+    construction = models.CharField(max_length=20, choices=Construction.choices, default=Construction.RELEASE,
+                                 verbose_name=_("Tình trạng xây dựng"), null=True)
+    year = models.CharField(max_length=50, verbose_name=_("Năm xây dựng và tỉ lệ sử dụng còn lại"), blank=True, null=True,
+                            help_text=_("Điền năm hoàn thành xây dựng và Tỷ lệ % sử dụng còn lại"))
     road_type = models.CharField(max_length=20, choices=RoadType.choices, default=RoadType.ALLEY_CAR,
                                  verbose_name=_("Đường/Ngõ trước nhà"))
+    parking_type = models.CharField(max_length=20, choices=ParkingType.choices, blank=True,
+                                    null=True, verbose_name=_("Có chỗ đỗ ô tô không?"))
     lane_width = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True,
                                      verbose_name=_("Chiều rộng đường/ngõ (m)"))
     area = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Diện tích (m2)"), default="30")
@@ -162,6 +166,9 @@ class Listing(models.Model):
 
         }
 
+    furnish_type = models.CharField(max_length=20, choices=FurnishType.choices, blank=True,
+                                    null=True, default=FurnishType.SEMI_FURNISHED,
+                                    verbose_name=_("Có kèm đồ đạc?"))
     registration_type = models.CharField(max_length=20, choices=RegistrationType.choices, blank=True,
                                          null=True, default=RegistrationType.RED_BOOK,
                                          verbose_name=_("Loại chứng nhận"))
