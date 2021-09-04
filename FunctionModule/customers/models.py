@@ -31,4 +31,4 @@ class Customer(models.Model):
     hire_date = models.DateTimeField(default=default_hire_date, blank=True)
 
     def __str__(self):
-        return str(self.user)
+        return str(self.name)

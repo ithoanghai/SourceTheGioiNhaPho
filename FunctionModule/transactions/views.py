@@ -36,22 +36,22 @@ def contact(request):
         message = request.POST['message']
         yesterday = timezone.now() - timedelta(days=1)
 
-        customer = Customer.objects.filter(phone=phone).first()
-
         if listing_id != 'none':
             listing = Listing.objects.get(pk=listing_id)
-            if request.user.is_authenticated:
-                user = request.user
             if listing is not None:
-                if user is not None:
-                    has_contacted = Transaction.objects.filter(listing=listing, user=user, date__gte=yesterday)
-                    if has_contacted:
-                        messages.error(request, 'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
-                    else:
-                        if customer is None: customer = Customer.objects.create(user=user, name=name, email=email, phone=phone)
-                        Transaction.objects.create(listing=listing, customer=customer, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
-                        messages.error(request, 'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
+                if request.user.is_authenticated:
+                    user = request.user
+                    if user is not None:
+                        customer = Customer.objects.filter(Q(phone=phone) | Q(user=user)).first()
+                        has_contacted = Transaction.objects.filter(listing=listing, user=user, date__gte=yesterday)
+                        if has_contacted:
+                            messages.error(request, 'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
+                        else:
+                            if customer is None: customer = Customer.objects.create(user=user, name=name, email=email, phone=phone)
+                            Transaction.objects.create(listing=listing, customer=customer, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
+                            messages.error(request, 'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
                 else:
+                    customer = Customer.objects.filter(Q(phone=phone)).first()
                     if customer is None: customer = Customer.objects.create(name=name, email=email, phone=phone)
                     Transaction.objects.create(listing=listing, customer=customer, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
                     messages.error(request,'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
@@ -60,9 +60,11 @@ def contact(request):
             if request.user.is_authenticated:
                 user = request.user
                 if user is not None:
+                    customer = Customer.objects.filter(Q(phone=phone)).first()
                     if customer is None: customer = Customer.objects.create(user=user, name=name, email=email, phone=phone)
                     Transaction.objects.create(customer=customer, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
             else:
+                customer = Customer.objects.filter(Q(phone=phone)).first()
                 if customer is None: customer = Customer.objects.create(name=name, email=email, phone=phone)
                 Transaction.objects.create(customer=customer, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
 
