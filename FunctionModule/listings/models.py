@@ -80,12 +80,12 @@ class Listing(models.Model):
     area_real = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Diện tích thực tế(m2)"),
                                     null=True, blank=True)
     floors = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)],
-                                 choices=([(i, i) for i in range(0, 20)]), verbose_name=_("Số tầng"))
+                                 choices=([(i, i) for i in range(0, 50)]), verbose_name=_("Số tầng"))
     bedrooms = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)],
-                                   choices=([(i, i) for i in range(0, 20)]), verbose_name=_("Số phòng ngủ"),
+                                   choices=([(i, i) for i in range(0, 100)]), verbose_name=_("Số phòng ngủ"),
                                    null=True)
     bathrooms = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)],
-                                    choices=([(i, i) for i in range(0, 20)]), verbose_name=_("Số phòng tắm"),
+                                    choices=([(i, i) for i in range(0, 100)]), verbose_name=_("Số phòng tắm"),
                                     null=True)
     direction = models.CharField(max_length=20, choices=Direction.choices, default=Direction.none,
                                  verbose_name=_("Hướng"))

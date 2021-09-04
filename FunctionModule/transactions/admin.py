@@ -5,9 +5,9 @@ from .models import Transaction, TransactionHistory
 
 
 class TransactionAdmin(admin.ModelAdmin):
-  list_display = ('id', 'trantype', 'message', 'location', 'request_price', 'house_type', 'listing', 'user', 'date', 'status')
+  list_display = ('id', 'trantype', 'message', 'location', 'request_price', 'house_type', 'listing', 'customer', 'date', 'status')
   list_display_links = ('id', 'message',)
-  search_fields = ('listing', 'message', 'user',)
+  search_fields = ('listing', 'message', 'customer',)
   list_per_page = 25
   form = TransactionAdminForm
 

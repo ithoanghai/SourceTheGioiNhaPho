@@ -15,6 +15,7 @@ from .forms import RequestQuoteForm
 from .models import TransTypeInit
 from .serializers import *
 from ..accounts.models import User
+from ..customers.models import Customer
 from ..listings.models import Listing
 
 
@@ -35,6 +36,8 @@ def contact(request):
         message = request.POST['message']
         yesterday = timezone.now() - timedelta(days=1)
 
+        customer = Customer.objects.filter(phone=phone).first()
+
         if listing_id != 'none':
             listing = Listing.objects.get(pk=listing_id)
             if request.user.is_authenticated:
@@ -45,21 +48,23 @@ def contact(request):
                     if has_contacted:
                         messages.error(request, 'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
                     else:
-                        # user = User.objects.create(name=name, email=email, phone=phone)
-                        Transaction.objects.create(listing=listing, user=user, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
+                        if customer is None: customer = Customer.objects.create(user=user, name=name, email=email, phone=phone)
+                        Transaction.objects.create(listing=listing, customer=customer, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
                         messages.error(request, 'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
                 else:
-                    # user = User.objects.create(name=name, email=email, phone=phone)
-                    Transaction.objects.create(listing=listing, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
+                    if customer is None: customer = Customer.objects.create(name=name, email=email, phone=phone)
+                    Transaction.objects.create(listing=listing, customer=customer, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
                     messages.error(request,'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
             return redirect('/listings/' + listing_id)
         else:
             if request.user.is_authenticated:
                 user = request.user
                 if user is not None:
-                    Transaction.objects.create(user=user, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
+                    if customer is None: customer = Customer.objects.create(user=user, name=name, email=email, phone=phone)
+                    Transaction.objects.create(customer=customer, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
             else:
-                Transaction.objects.create(trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
+                if customer is None: customer = Customer.objects.create(name=name, email=email, phone=phone)
+                Transaction.objects.create(customer=customer, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
 
             messages.success(request, 'Yêu cầu được gửi thành công. Chúng tôi sẽ liên lạc lại với bạn sớm nhất.')
         return redirect('message')

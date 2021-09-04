@@ -43,6 +43,7 @@ MODULES = [
     'FunctionModule.listings.apps.ListingsConfig',
     'FunctionModule.transactions.apps.TransactionsConfig',
     'FunctionModule.realtors.apps.RealtorsConfig',
+    'FunctionModule.customers.apps.CustomersConfig',
     'FunctionModule.cadastral.apps.CadastralConfig',
 ]
 

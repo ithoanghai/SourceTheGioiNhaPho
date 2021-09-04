@@ -5,7 +5,7 @@ from datetime import datetime
 from django.db import models
 from django.utils.translation import gettext as _
 
-from FunctionModule.accounts.models import User
+from FunctionModule.customers.models import Customer
 from FunctionModule.listings.choices import HouseType
 from FunctionModule.listings.models import Listing
 from FunctionModule.realtors.models import Realtor
@@ -48,7 +48,7 @@ class Transaction(models.Model):
 
     trantype = models.CharField(max_length=25, choices=TransTypeInit.choices, default=TransTypeInit.CONTACT, verbose_name='Loại giao dịch')
     listing = models.ForeignKey(Listing, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name=_("Bất động sản"))
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name=_("Khách hàng"))
+    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name=_("Khách hàng"))
 
     house_type = models.CharField(max_length=20, null=True, blank=True, choices=HouseType.choices, verbose_name=_("Loại BĐS quan tâm"))
     location = models.CharField(max_length=100, null=True, blank=True, verbose_name=_("Khu vực quan tâm"))
@@ -72,9 +72,9 @@ class TransactionHistory(models.Model):
     transaction = models.ForeignKey(Transaction, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name=_("Giao dịch"))
     realtor = models.ForeignKey(Realtor, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name=_("Chuyên viên thực hiện"))
     reason = models.CharField(max_length=25, choices=Reason.choices, default=Reason.FEEDBACK, verbose_name='Lý do giao dịch')
-    #status = models.CharField(max_length=25, choices=Status.choices, default=Status.ACTIVE, verbose_name='Trạng thái giao dịch')
+    status = models.CharField(max_length=25, choices=Status.choices, default=Status.ACTIVE, verbose_name='Trạng thái giao dịch')
     comment = models.TextField(max_length=100, blank=True, null=True, verbose_name="Diễn giải thêm")
     date = models.DateTimeField(default=datetime.now, blank=True, verbose_name="Thời gian phát sinh giao dịch")
 
     def __str__(self):
-        return f'%s - %s' % (self.status, self.message)
+        return f'%s - %s' % (self.status, self.comment)

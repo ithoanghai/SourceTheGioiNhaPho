@@ -36,7 +36,7 @@ class ListingAdmin(admin.ModelAdmin):
     list_filter = ('price', 'list_date',)
     list_editable = ('title',)
     search_fields = ('title', 'code', 'address', 'price', 'street', 'district',)
-    list_per_page = 25
+    list_per_page = 50
     inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
     form = ListingAdminForm
 
