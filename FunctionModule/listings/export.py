@@ -5,10 +5,14 @@ from .choices import Status, RoadType, Condition, HouseType, FurnishType, Regist
 
 def prepare_fb_headers():
     return [
-        "home_listing_id",
+        "id",
+        "title",
         "name",
         "description",
         "availability",
+        "visibility",
+        "condition",
+       # "status",
         "price",
         "home_listing_group_id",
         "ac_type",
@@ -20,7 +24,9 @@ def prepare_fb_headers():
         "garden_type",
         "days_on_market",
         "url",
-        "image[0].url",
+        "link",
+        "image_link",
+        "additional_image_link",
         "fee_schedule_url",
         "heating_type",
         "laundry_type",
@@ -45,6 +51,7 @@ def prepare_fb_headers():
         "parking_spaces",
         "area_unit",
         "year_built",
+        "address",
         "address.addr1",
         "address.addr2",
         "address.addr3",
@@ -102,6 +109,11 @@ def prepare_fb_headers():
         "applink.windows_phone_app_id",
         "applink.windows_phone_app_name",
         "applink.windows_phone_url",
+        "google_product_category",
+        "brand",
+        "identifier_exists",
+        "gtin",
+        "mpn",
     ]
 
 ONE_BILLION = 1000000000
@@ -114,6 +126,28 @@ def get_parking_type(road_type):
         return 'street'
     else:
         return 'none'
+
+
+def get_availability(listing):
+    if listing.is_published == True:
+        return 'available for order'
+    else:
+        return 'out of stock'
+
+def get_visibility(listing):
+    if listing.is_published == True:
+        return 'published'
+    else:
+        return 'hidden'
+
+ # return value  new, refurbished, used
+def get_condition(listing):
+    if listing.condition == Condition.NEW:
+        return 'new'
+    elif listing.condition == Condition.OLD:
+        return 'used'
+    else:
+        return'refurbished'
 
 
 def get_status(status):
@@ -206,6 +240,38 @@ def get_parking_spaces(listing):
         return '0'
 
 
+def get_additional_image_link_data(photos):
+    list = ""
+    for index, photo in enumerate(photos):
+        list = list.__add__(f'https://thegioinhaphovietnam.com.vn{photo.url},')
+    return list
+
+
+def get_video_link(listing):
+    link_main = ""
+    for video in listing.videos:
+        link_main = link_main.__add__(f'<a href="{video.video}">{video.video}</a>,')
+    return link_main
+
+
+def get_description(listing):
+    description = f'<div><p><bold> Mã BĐS: %s </bold></p> </div> ' \
+                  f'<p> %s </p> <br> <p> %s </p> <p> %s </p> <p> %s </p> <p> %s </p> <p> %s </p> <p> %s </p> ' \
+                  f'<p> Để xem video BĐS này, bạn copy và truy cập Link Video Youtube này %s </p> </br>' \
+                  f'<p>Liên hệ ngay hotline của Thế giới Nhà Phố để được hỗ trợ tốt nhất</p>' \
+                  f'<p>------------o0o--------------</p>' \
+                  f'<p>BẤT ĐỘNG SẢN THẾ GIỚI NHÀ PHỐ</p>' \
+                  f'<p>- Tìm kiếm toàn bộ BĐS TGNP dễ dàng tại: https://Thegioinhaphovietnam.com.vn</p>' \
+                  f'<p>- Hotline: 0916.286.256 - 0971.841.941 - 09.6439.9436 (Call/Zalo/Facebook)</p>' \
+                  f'<p>- Fanpage: https://www.facebook.com/TheGioiNhaPhoVietNam</p>' \
+                  f'<p>- Kho hàng Facebook: chứa toàn bộ BĐS TGNP tại https://www.facebook.com/groups/khohang.thegioinhaphovietnam</p>' \
+                  f'<p>- Kênh Youtube Kho hàng: chứa toàn bộ Video BĐS TGNP: https://www.youtube.com/channel/UCiW13E8_8AHnHGiJGeZliug</p>' \
+                  f'<p>- Để trở thành Chuyên viên TGNP, mời bạn điền form Ứng tuyển ngay https://forms.gle/fBXyTb397SdoMJ3SA</p>' \
+                  % (listing.code, listing.description, listing.furniture_design, listing.living_facilities, listing.location_advantage,
+                     listing.residential_community, listing.regional_welfare, listing.salient_features, get_video_link(listing))
+    return description
+
+
 def prepare_fb_listing_data(listing):
     price = listing.sale_price or listing.price
     url = reverse('listing_detail', kwargs={'listing_id': listing.id})
@@ -213,11 +279,15 @@ def prepare_fb_listing_data(listing):
     main_photo_url = f'https://thegioinhaphovietnam.com.vn{listing.main_photo.url}'
     real_size = listing.area_real or listing.area
     listing_data = {
-        "home_listing_id": listing.code,
+        "id": listing.id,
+        "title": listing.title.title(),
         "name": listing.title,
-        "description": listing.description,
-        "availability": get_status(listing.status),
-        "price": f'{price:5.2f}',
+        "description": get_description(listing),
+        "availability": get_availability(listing),
+        "visibility": get_visibility(listing),
+        "condition": get_condition(listing),
+      #  "status":  get_status(listing.status),
+        "price": f'{price:5.2f} VND',
         "home_listing_group_id": None,
         "ac_type": None,
         "agent_name": listing.realtor.user.name,
@@ -228,7 +298,9 @@ def prepare_fb_listing_data(listing):
         "garden_type": None,
         "days_on_market": None,
         "url": full_url,
-        "image[0].url": main_photo_url,
+        "link": full_url,
+        "image_link": main_photo_url,
+        "additional_image_link": get_additional_image_link_data(listing.photos),
         "fee_schedule_url": None,
         "heating_type": None,
         "laundry_type": None,
@@ -253,6 +325,7 @@ def prepare_fb_listing_data(listing):
         "parking_spaces": get_parking_spaces(listing),
         "area_unit": 'sq_m',
         "year_built": None,
+        "address": f'%s, %s, %s, %s' % (listing.street, listing.ward_name(), listing.district_name(), listing.state_name()),
         "address.addr1": listing.district_name(),
         "address.addr2": listing.ward_name(),
         "address.addr3": listing.street,
@@ -310,5 +383,10 @@ def prepare_fb_listing_data(listing):
         "applink.windows_phone_app_id": None,
         "applink.windows_phone_app_name": None,
         "applink.windows_phone_url": None,
+        "google_product_category": "Home & Garden",
+         "brand": "Thế Giới Nhà Phố",
+         "identifier_exists": "no",
+         "gtin": "false",
+         "mpn": listing.code,
     }
     return listing_data
