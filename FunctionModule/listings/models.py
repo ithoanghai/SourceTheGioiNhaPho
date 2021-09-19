@@ -50,8 +50,8 @@ class Listing(models.Model):
     title = models.CharField(max_length=200, verbose_name=_("Tiêu đề đăng (VIẾT HOA)"),
                              help_text=_(
                                  "Gợi ý: Từ khoá + Vị trí (Đường/Phố/Khu) + Diện tích + Tiện ích + Giá + Sổ"))
-    address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ"),
-                               help_text=_("Ngõ.Ngách.Hẻm.Số nhà, Khu dân cư, Phố, Quận/Huyện, Tỉnh/TP"))
+    address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ"), unique=True,
+                               help_text=_("Nhập theo định dạng sau: Ngõ.Ngách.Hẻm.Số nhà, Khu dân cư, Phố, Quận/Huyện, Tỉnh/TP"))
     urban_area = models.CharField(max_length=100, verbose_name=_("Khu đô thị/Khu dân cư"), blank=True,
                                   null=True)
     street = models.CharField(max_length=125, verbose_name=_("Tên đường, phố"),
