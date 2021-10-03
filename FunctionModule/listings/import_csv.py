@@ -104,7 +104,7 @@ def handle_import(file_path):
             for item in listings:  # type: Listing
                 listing_obj[item.code] = item
 
-        with open(file_path, 'r') as fp:
+        with open(file_path, 'r', encoding="utf-8", errors='ignore') as fp:
             csv_reader = csv.reader(fp, delimiter=',')
             new_listings = []
             updated_listings = []
@@ -175,7 +175,7 @@ def handle_import(file_path):
                     desc = row[header_dict['dac-diem']]
                     trans_type = TransactionType.SELL
                     house_type = HouseType.TOWN_HOUSE
-                    road_type = RoadType.STREET_SURFACE
+                    road_type = RoadType.ALLEY_CAR_2
 
                     if desc == 'Đất Dự Án':
                         trans_type = TransactionType.PROJECT
@@ -183,7 +183,6 @@ def handle_import(file_path):
                         house_type = HouseType.SHOP_HOUSE
                     elif desc == 'Mặt Phố':
                         house_type = HouseType.STREET_HOUSE
-                        road_type = RoadType.STREET_SURFACE
                     elif desc == 'Ngõ Ô Tô':
                         road_type = RoadType.ALLEY_CAR
                     elif desc == 'Ngõ 3 Gác':
@@ -226,9 +225,10 @@ def handle_import(file_path):
                         continue
                     direction = get_direction(row[header_dict['huong']])
                     try:
-                        area = float(row[header_dict['dt']].replace('C4', ''))
+                        #area = float(row[header_dict['dt']].replace('c4', ''))
+                        area = float(row[header_dict['dt']])
                     except ValueError:
-                        logger.info(f"Cannot decode area. Continue in line {line_count}")
+                        #logger.info(f"Cannot decode area. Continue in line {line_count}")
                         continue
                     # price_per_area = float(row[header_dict['trm2']])
                     extra_data = {
@@ -264,7 +264,7 @@ def handle_import(file_path):
 
                     if trans_type == TransactionType.PROJECT:
                         description += ' Dự án.'
-                    if road_type == RoadType.STREET_SURFACE:
+                    if road_type == RoadType.ALLEY_CAR_2:
                         description += ' Nhà mặt phố.'
                     elif road_type == RoadType.ALLEY_TRIBIKE:
                         description += ' Ngõ 3 gác.'

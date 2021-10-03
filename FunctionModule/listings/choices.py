@@ -1,10 +1,15 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
-from FunctionModule.cadastral.constants import state_data
+from FunctionModule.cadastral.constants import state_data, district_data, ward_data, all_districts
+from FunctionModule.cadastral.lookups import get_all_districts
+
+city_choices = [(k, v['name']) for k, v in state_data.items()]
+city_choices.sort()
+district_choices = [(k, v['name']) for k, v in all_districts.items()]
+ward_default_choices = [(d['code'], d['name']) for d in ward_data['008']]
 
 bedroom_choices = {
-    '0': 0,
     '1': 1,
     '2': 2,
     '3': 3,
@@ -74,9 +79,11 @@ class FurnishType(models.TextChoices):
 
 
 class RegistrationType(models.TextChoices):
-    RED_BOOK = 'red_book', _("Sổ Đỏ")
-    PINK_BOOK = 'pink_book', _("Sổ Hồng")
-    DONT_BOOK = 'dont_book', _("Chưa làm sổ")
+    RED_PINK_BOOK = 'red_pink_book', _("Sổ Đỏ/ Sổ hồng")
+    VALID_DOCUMENTS = 'valid_documents', _("Giấy tờ hợp lệ")
+    CONSTRUCTION_LICENSE = 'construction_license', _("Giấy phép xây dựng")
+    BUSINESS_LICENSE = 'business_license', _("Giấy phép kinh doanh")
+    DONT_BOOK = 'dont_book', _("Sắp làm sổ")
     OTHER = 'other', _("Khác")
 
 

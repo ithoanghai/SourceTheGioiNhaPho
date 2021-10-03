@@ -3855,6 +3855,7 @@ ul.slideimg li a.img:hover {
 }
 
 #carousel .slides li a {
+    padding-top: 5px;
     overflow: hidden
 }
 

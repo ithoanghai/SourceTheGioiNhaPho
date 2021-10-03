@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template import loader
 
-from FunctionModule.cadastral.lookups import get_all_states, get_default_districts
+from FunctionModule.cadastral.lookups import get_all_states, get_all_districts
 from FunctionModule.listings.choices import price_choices, bedroom_choices
 from FunctionModule.listings.models import Listing, TransactionType
 from FunctionModule.realtors.models import Realtor
@@ -29,7 +29,7 @@ def home_view(request):
     listings_project = (Listing.objects
                             .order_by('-list_date')
                             .filter(is_published=True, transaction_type=TransactionType.PROJECT)[:9])
-    list_district_hn = get_default_districts()
+    list_district_hn = get_all_districts()
     context = {
         'listings_for_sale': listings_for_sale,
         'listings_for_rent': listings_for_rent,

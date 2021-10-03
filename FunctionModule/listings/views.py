@@ -9,7 +9,7 @@ from rest_framework import status, generics, mixins, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from FunctionModule.cadastral.lookups import get_default_districts, get_all_states
+from FunctionModule.cadastral.lookups import get_all_states, get_all_districts
 from .filters import ListingFilter
 from .serializers import *
 
@@ -60,7 +60,7 @@ def search(request):
     context = {
         'listings': [],
         'state_data': get_all_states(),
-        'districts': get_default_districts(),
+        'districts': get_all_districts(),
         'GOOGLE_MAP_API_KEY': settings.GOOGLE_MAP_API_KEY,
         'environment': settings.ENVIRONMENT,
         "pagination": {}

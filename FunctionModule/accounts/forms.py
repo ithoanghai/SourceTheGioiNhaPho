@@ -54,6 +54,7 @@ class UserRegisterForm(UserChangeForm):
         model = User
         fields = ('first_name', 'last_name', 'username', 'phone', 'email')
         # fields = UserChangeForm.Meta.fields #+ ("email",)
+        field_order = ['first_name', 'last_name', ]
 
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)

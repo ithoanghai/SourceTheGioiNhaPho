@@ -209,11 +209,22 @@
                 </li>
               {% empty %}
                 <li>
-                  <img class="lazy fade image-normalized"
-                       data-src="{% static 'img/default.png' %}"
-                       alt="{{ listing.title }}"
-                       title="{{ listing.title }}"
-                       draggable="false"/>
+                    <a href="#" class="cover">
+                    {% if forloop.first %}
+                      <img class="image-normalized"
+                           src="{% static 'img/default.png' %}"
+                           alt="{{ listing.title }}"
+                           title="{{ listing.title }}"
+                           draggable="false"/>
+                    {% else %}
+                      <img class="lazy fade image-normalized"
+                           data-src="{% static 'img/default.png' %}"
+                           alt="{{ listing.title }}"
+                           title="{{ listing.title }}"
+                           draggable="false"/>
+                    {% endif %}
+
+                  </a>
                 </li>
               {% endfor %}
             </ul>
@@ -263,10 +274,14 @@
               </li>
             {% empty %}
               <li>
-                <img src="{% static 'img/default.png' %}"
+                <a href="#" class="cover"
+                   title="{{ listing.title }}">
+                  <img src="{% static 'img/default.png' %}"
                      pos="0"
                      alt="{{ listing.title }}"
                      title="{{ listing.title }}">
+                </a>
+
               </li>
             {% endfor %}
           </ul>
@@ -329,12 +344,15 @@
                 </li>
               {% empty %}
                 <li class="flex-active-slide">
-                  <img class="lazy image-normalized fade"
+                <a class="img cover" href="javascript:void(0)"
+                     title="{{ listing.title }}">
+                    <img class="lazy image-normalized fade"
                        data-src="{% static 'img/default.png' %}"
                        title="{{ listing.title }}"
                        alt="{{ listing.title }}"
                        draggable="false">
-                </li>
+                  </a>
+               </li>
               {% endfor %}
             </ul>
           </div>
@@ -426,21 +444,27 @@
                   {% else %} {% translate 'Đất' %}  {% endif %}
                 </a></p>
               </li>
+            {% if listing.floors %}
               <li>
                 <p class="left">Số tầng</p>
-                <p class="right">{% if listing.floors %}{{ listing.floors }}{% else %} 0 {% endif %}</p>
+                <p class="right">{{ listing.floors }}</p>
               </li>
+            {% endif %}
+            {% if listing.bedrooms %}
               <li>
                 <p class="left">Số phòng ngủ</p>
-                <p class="right"> {% if listing.bedrooms %}{{ listing.bedrooms }}{% else %} 0 {% endif %}</p>
+                <p class="right"> {{ listing.bedrooms }} </p>
               </li>
+            {% endif %}
+                {% if listing.bathrooms %}
               <li>
                 <p class="left">Số phòng tắm</p>
                 <p class="right">
-                  {% if listing.bathrooms %}{{ listing.bathrooms }}{% else %} 0 {% endif %}</p>
+                  {{ listing.bathrooms }} </p>
+               {% endif %}
               </li>
               <li>
-                <p class="left">Diện tích</p>
+                <p class="left">Diện tích (m2)</p>
                 <p class="right">{{ listing.area }} {{ listing.area_unit }}</p>
               </li>
 
@@ -450,18 +474,36 @@
                   <p class="right">{{ listing.lot_size }}</p>
                 </li>
               {% endif %}
+             {% if listing.width and listing.width > 4 %}
+                <li>
+                  <p class="left">Mặt tiền (m)</p>
+                  <p class="right">{{ listing.width }}</p>
+                </li>
+              {% endif %}
+            {% if listing.direction %}
                 <li>
                 <p class="left">Hướng</p>
-                <p class="right">{{ listing.direction }} {{ listing.direction }}</p>
+                  {% if listing.direction == 'east' %}<p class="right">{% translate 'Đông' %}</p>
+                  {% elif listing.direction == 'south_east' %}<p class="right">{% translate 'Đông - Nam' %}</p>
+                  {% elif listing.direction == 'south' %} <p class="right">{% translate 'Nam' %}</p>
+                  {% elif listing.direction == 'south-west' %} <p class="right">{% translate 'Tây - Nam' %}</p>
+                  {% elif listing.direction == 'west' %} <p class="right">{% translate 'Tây' %}</p>
+                  {% elif listing.direction == 'north-west' %} <p class="right">{% translate 'Tây - Bắc' %}</p>
+                  {% elif listing.direction == 'north' %} <p class="right">{% translate 'Bắc' %}</p>
+                  {% else %} {% translate 'Đông - Bắc' %}  {% endif %}
               </li>
+            {% endif %}
               <li>
                 <p class="left">Loại chứng nhận</p>
                 <p class="right"><a
                   href="{% url 'listing_search' %}?registration_type={{ listing.registration_type }}"
                   target="_blank">
-                  {% if listing.registration_type == 'red_book' %}{% translate 'Sổ đỏ' %}
-                  {% elif listing.registration_type == 'pink_book' %} {% translate 'Sổ hồng' %}
-                  {% else %} {% translate 'Chưa làm sổ' %}  {% endif %}</a></p>
+                  {% if listing.registration_type == 'red_pink_book' %}{% translate 'Sổ đỏ/ Sổ hồng' %}
+                  {% elif listing.registration_type == 'valid_documents' %} {% translate 'Giấy tờ hợp lệ' %}
+                  {% elif listing.registration_type == 'construction_license' %} {% translate 'Giấy phép xây dựng' %}
+                  {% elif listing.registration_type == 'business_license' %} {% translate 'Giấy phép kinh doanh' %}
+                  {% elif listing.registration_type == 'dont_book' %} {% translate 'Sắp làm sổ' %}
+                  {% else %} {% translate 'Khác' %}  {% endif %}</a></p>
               </li>
               <li>
                 <p class="left">Giá bán</p>
@@ -490,7 +532,7 @@
           </div>
           <div id="booking-form-sm-wrapper"></div>
 
-          <div class="heading-02">Ưu điểm ngôi nhà</div>
+          <div class="heading-02">Một số ưu điểm khác</div>
           <div class="content">
             <div class="list-advantage clear">
               <div class="advantage-name">
@@ -557,11 +599,11 @@
               <div class="advantage-name">
                 <p>Tình trạng BĐS</p>
               </div>
-              <div class="advance-date-content">{% if listing.status == 'selling' %} {% trans 'Đang bán' %}
+              <div class="advance-date-content"><b>{% if listing.status == 'selling' %} {% trans 'Đang bán' %}
               {% elif listing.status == 'sold' %} {% trans 'Đã bán' %}
               {% elif listing.status == 'stop_selling' %} {% trans 'Dừng bán' %}
               {% else %} {% trans 'Mới' %}
-              {% endif %}
+              {% endif %}</b>
               </div>
             </div>
           </div>
@@ -703,7 +745,7 @@
             <a href="#" title="Xem thêm / thu gọn" style="text-underline: none" class="collapse pdt-0"
                is-more="true" more="Xem thêm" less="Thu gọn">Xem tất cả</a>
           </p>
-          <div class="heading-02">Bản đồ khu vực</div>
+          <div class="heading-02">Vị trí Bất động sản</div>
           <section class="mgt-15 map-detail gmap-render">
             {#            background-image: url(https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap)#}
             <div class="_map-bg openBtn img-map"
@@ -803,7 +845,7 @@
     <div class="mdialog" id="sell-now-form" style="background: none">
       <div class="popup-overlay">
         <div class="title title-res">
-          <span> <a class="back-icon cnb-close" href="javascript:void(0)"></a> </span>
+          <span> <a class="back-icon cnb-close" href="{% url 'contacts' %}"></a> </span>
           <span class="house-type">Bán, cho thuê nhà với TGNP</span>
         </div>
         <div class="popup-contact">
@@ -872,7 +914,7 @@
                 </p>
               </div>
             </div>
-            <a class="like-button" href="#sell-now-form" title="Liên hệ">Liên hệ</a>
+            <a class="like-button" href="{% url 'contacts' %}" title="Liên hệ">Liên hệ</a>
             <input type="hidden" name="contact-agent" value="thegioinhaphovietnam@gmail.com">
             <input type="hidden" name="contact-agent-msg"
                    value="Tôi có nhu cầu muốn bán nhà thông qua TGNP. Liên lạc với tôi ngay.">
@@ -926,9 +968,9 @@
                             {% if listing.bedrooms %}
                                 <li><p>Phòng ngủ:</p> <strong>{{ listing.bedrooms }}</strong></li>
                             {% endif %}
-                            <li><p>Diện tích:</p> <strong>{{ listing.area }}</strong></li>
-                            {% if listing.bathrooms %}
-                                <li><p>Phòng tắm:</p> <strong>None</strong></li>
+                            <li><p>Diện tích:</p> <strong>{{ listing.area }} m2</strong></li>
+                            {% if listing.bathrooms > 0%}
+                                <li><p>Phòng tắm:</p> <strong>{{ listing.bathrooms }}</strong></li>
                             {% endif %}
                             <li><p>Giá:</p> <strong class="color-red-base">{{ listing.price }} tỷ</strong></li>
                         </ul>

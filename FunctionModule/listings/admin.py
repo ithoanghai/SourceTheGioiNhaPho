@@ -79,8 +79,8 @@ def import_csv_view(request: HttpRequest) -> JsonResponse:
         form = ImportListingForm(request.POST, request.FILES)
         if form.is_valid():
             file: UploadedFile = form.cleaned_data.get('file')
-            with file.open() as fp:
-                default_storage.save(f'import-listing/{file.name}', fp)
+            #with open(file, 'r', encoding="utf-8", errors='ignore') as fp:
+            #    default_storage.save(f'photos/{file.name}', fp)
 
             handle_import(f'media/import-listing/{file.name}')
 

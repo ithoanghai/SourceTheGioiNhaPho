@@ -203,61 +203,6 @@ function addressSelect($) {
     })
 }
 
-function importListing($) {
-    $('body').append('<!-- Modal -->\n' +
-        '<div class="modal fade" id="importListingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\n' +
-        '  <div class="modal-dialog" role="document">\n' +
-        '    <div class="modal-content">\n' +
-        '      <div class="modal-header">\n' +
-        '        <h5 class="modal-title" id="exampleModalLabel">Nhập dữ liệu nhà phố từ file</h5>\n' +
-        '        <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
-        '          <span aria-hidden="true">&times;</span>\n' +
-        '        </button>\n' +
-        '      </div>\n' +
-        '      <div class="modal-body">\n' +
-        '        <form action="import-listing"\n' +
-        '              class="dropzone"\n' +
-        '              id="fileUpload">' +
-        '         </form>' +
-        '      <p style="margin-top: 1em" class="modal-alert"></p>\n' +
-        '      </div>\n' +
-        '      <div class="modal-footer">\n' +
-        '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>\n' +
-        '        <button type="button" id="sendImportFile" class="btn btn-primary">Gửi lên</button>\n' +
-        '      </div>\n' +
-        '    </div>\n' +
-        '  </div>\n' +
-        '</div>')
-    $('.object-tools').append('<li><button type="button" class="addlink" data-toggle="modal" data-target="#importListingModal">Nhập từ Excel</button></li>')
-    const csrfCookie = document.cookie.split('; ').find(item => item.startsWith('csrftoken=')).split('=')
-    let csrf = ''
-    try {
-        csrf = csrfCookie[1];
-    } catch (e) {
-    }
-    // const fileUploader = $('#fileUpload').dropzone({url: 'import-listing', autoProcessQueue: false});
-    var myDropzone = new Dropzone("#fileUpload", {
-        url: "import-listing",
-        autoProcessQueue: false,
-        maxFilesize: 10,    // MB
-        createImageThumbnails: false,
-        maxFiles: 1,
-        acceptedFiles: 'text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    });
-    myDropzone.on('sending', (file, xhr, formData) => {
-        formData.append('csrfmiddlewaretoken', csrf)
-    })
-
-    myDropzone.on("success", function (file, response) {
-        this.removeFile(file);
-        $('.modal-alert').removeClass().text('Tải lên thành công!').addClass('alert alert-success')
-    });
-
-    $('#sendImportFile').on('click', () => {
-        myDropzone.processQueue();
-    })
-}
-
 function multipleImages($) {
     // Delete link available  -> is editing listing
     const isEdit = $('p.deletelink-box .deletelink').length > 0;
@@ -363,6 +308,65 @@ function getCookie(name) {
     return cookieValue;
 }
 
+function importToDB($) {
+    const csrfCookie = document.cookie.split('; ').find(item => item.startsWith('csrftoken=')).split('=')
+    let csrf = ''
+    try {
+        csrf = csrfCookie[1];
+    } catch (e) {
+    }
+    // const fileUploader = $('#fileUpload').dropzone({url: 'import-listing', autoProcessQueue: false});
+    var myDropzone = new Dropzone("#fileUpload", {
+        url: "import-listing",
+        autoProcessQueue: false,
+        maxFilesize: 10,    // MB
+        createImageThumbnails: false,
+        maxFiles: 1,
+        acceptedFiles: 'text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    });
+    myDropzone.on('sending', (file, xhr, formData) => {
+        formData.append('csrfmiddlewaretoken', csrf)
+    })
+
+    myDropzone.on("success", function (file, response) {
+        this.removeFile(file);
+        $('.modal-alert').removeClass().text('Tải lên thành công!').addClass('alert alert-success')
+    });
+
+    $('#sendImportFile').on('click', () => {
+        myDropzone.processQueue();
+    })
+}
+
+
+function importListing($) {
+    $('body').append('<!-- Modal -->\n' +
+        '<div class="modal fade" id="importListingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\n' +
+        '  <div class="modal-dialog" role="document">\n' +
+        '    <div class="modal-content">\n' +
+        '      <div class="modal-header">\n' +
+        '        <h5 class="modal-title" id="exampleModalLabel">Nhập dữ liệu BĐS từ file .csv</h5>\n' +
+        '        <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
+        '          <span aria-hidden="true">&times;</span>\n' +
+        '        </button>\n' +
+        '      </div>\n' +
+        '      <div class="modal-body">\n' +
+        '        <form action="import-listing"\n' +
+        '              class="dropzone"\n' +
+        '              id="fileUpload">' +
+        '         </form>' +
+        '      <p style="margin-top: 1em" class="modal-alert"></p>\n' +
+        '      </div>\n' +
+        '      <div class="modal-footer">\n' +
+        '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>\n' +
+        '        <button type="button" id="sendImportFile" class="btn btn-primary">Gửi lên</button>\n' +
+        '      </div>\n' +
+        '    </div>\n' +
+        '  </div>\n' +
+        '</div>')
+   $('.object-tools').append('<li><button onclick="importToDB($)" class="button" type="button" data-toggle="modal" data-target="#importListingModal">Nhập dữ liệu từ file Excel</button></li>');
+}
+
 function exportFBData($) {
     const csrftoken = getCookie('csrftoken');
 
@@ -397,7 +401,7 @@ window.addEventListener("load", function () {
     (function (jQuery) {
         // priceToText(jQuery);
         addressSelect(jQuery);
-        // importListing(jQuery);
+        importListing(jQuery);
         multipleImages(jQuery)
         exportListing(jQuery);
     })(django.jQuery);

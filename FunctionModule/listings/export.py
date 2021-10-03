@@ -215,9 +215,9 @@ def get_furnish_type(listing):
     # "freehold", "leasehold", "strata_title", "cooperative", "power_of_attorney", "other",
     # "indonesia_hak_guna_banguan", "indonesia_hak_pakai", "indonesia_girik"
 def get_tenure_type(listing):
-        if listing.registration_type == RegistrationType.RED_BOOK:
+        if listing.registration_type == RegistrationType.RED_PINK_BOOK or RegistrationType.VALID_DOCUMENTS:
             return 'strata_title'
-        elif listing.registration_type == RegistrationType.PINK_BOOK:
+        elif listing.registration_type == RegistrationType.BUSINESS_LICENSE or RegistrationType.CONSTRUCTION_LICENSE:
             return 'leasehold'
         elif listing.registration_type == RegistrationType.DONT_BOOK:
             return 'cooperative'
@@ -271,12 +271,20 @@ def get_description(listing):
                      listing.residential_community, listing.regional_welfare, listing.salient_features, get_video_link(listing))
     return description
 
+def get_main_photo_url(listing):
+    main_photo_url = listing.main_photo
+    if main_photo_url is None:
+        photo_url = f'https://thegioinhaphovietnam.com.vn/static/img/default.png'
+    else:
+        photo_url = main_photo_url.url
+    return photo_url
+
 
 def prepare_fb_listing_data(listing):
     price = listing.sale_price or listing.price
     url = reverse('listing_detail', kwargs={'listing_id': listing.id})
     full_url = f'https://thegioinhaphovietnam.com.vn/{url}'
-    main_photo_url = f'https://thegioinhaphovietnam.com.vn{listing.main_photo.url}'
+    main_photo_url = get_main_photo_url(listing)
     real_size = listing.area_real or listing.area
     listing_data = {
         "id": listing.id,

@@ -6,11 +6,7 @@ from django import forms
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.forms import Textarea, ModelForm, BaseInlineFormSet
 
-from FunctionModule.cadastral.constants import district_data, ward_data
 from .models import Listing, ListingImage
-
-district_default_choices = [(d['code'], d['name']) for d in district_data['01']]
-ward_default_choices = [(d['code'], d['name']) for d in ward_data['008']]
 
 
 class ListingAdminForm(forms.ModelForm):
@@ -31,10 +27,8 @@ class ListingAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['district'] = forms.ChoiceField(choices=district_default_choices, label="Quận/Huyện",
-                                                    required=True)
-        # self.fields['ward'] = forms.ChoiceField(choices=ward_default_choices, label="Chọn phường/xã", required=True)
         # self.fields['ward'].widget = forms.Select()
+        self.fields['realtor'].disabled = False
 
 
 class ImportListingForm(forms.Form):
@@ -54,6 +48,7 @@ TOTAL_FORM_COUNT = 'TOTAL_FORMS'
 INITIAL_FORM_COUNT = 'INITIAL_FORMS'
 MIN_NUM_FORM_COUNT = 'MIN_NUM_FORMS'
 MAX_NUM_FORM_COUNT = 'MAX_NUM_FORMS'
+
 
 def compress_image(f: InMemoryUploadedFile):
     if 'png' in f.content_type.lower():
@@ -75,6 +70,7 @@ def compress_image(f: InMemoryUploadedFile):
     new_img = InMemoryUploadedFile(output, 'ImageField', new_name, f.content_type,
                                    sys.getsizeof(output), None, f.content_type_extra)
     return new_img
+
 
 class ImageFormSet(BaseInlineFormSet):
     form = ImageForm

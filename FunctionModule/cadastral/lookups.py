@@ -10,16 +10,15 @@ from .constants import (DISTRICT_LOOKUP_CHANNEL, WARD_LOOKUP_CHANNEL, ward_data,
 class DistrictLookup(LookupChannel):
 
     def get_query(self, q, request):
-        state_code = q
         try:
-            districts = district_data[state_code]
+            districts = district_data[q]
             return districts
         except Exception as e:
             print(e)
             return []
 
-    def format_item_display(self, item):
-        return f"<option value='{item['code']}'>{item['name']}</option>"
+    def format_item_display(self, obj):
+        return obj['name']
 
     def get_result(self, obj):
         return obj['code']
@@ -86,13 +85,11 @@ def get_all_states():
     return state_data
 
 
+@functools.cache
 def get_all_districts():
     return all_districts
 
 
-def get_default_districts():
-    return district_data['01']
-
-
+@functools.cache
 def get_district(code):
     return all_districts[code]
