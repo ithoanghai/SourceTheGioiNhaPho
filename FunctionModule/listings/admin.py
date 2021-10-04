@@ -31,7 +31,7 @@ class ListingVideoAdmin(admin.TabularInline):
 
 
 class ListingAdmin(admin.ModelAdmin):
-    list_display = ('code', 'title', 'price', 'list_date', 'realtor_name', 'is_published')
+    list_display = ('code', 'title', 'price', 'location_name', 'list_date', 'realtor_name', 'is_published')
     list_display_links = ('code',)
     list_filter = ('price', 'list_date',)
     list_editable = ('title',)
@@ -49,6 +49,9 @@ class ListingAdmin(admin.ModelAdmin):
 
     def realtor_name(self, obj: Realtor):
         return obj.realtor.user.name
+
+    def location_name(self, obj: Listing):
+        return f'%s - %s' % (obj.ward_name() , obj.district_name())
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)

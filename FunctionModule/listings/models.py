@@ -46,20 +46,17 @@ class Listing(models.Model):
                                         default=TransactionType.SELL, verbose_name=_("Hình thức giao dịch"))
     house_type = models.CharField(max_length=20, choices=HouseType.choices, default=HouseType.TOWN_HOUSE,
                                   verbose_name=_("Loại BĐS"))
-
     code = models.CharField(max_length=80, verbose_name=_("Mã BĐS (VIẾT HOA)"), help_text=_(
         "Quy tắc: Viết tắt chữ cái đầu Loại BĐS + 2 chữ số Năm + Tháng + Chữ cái đầu tên của Chuyên viên + Số BĐS của ĐC"),
                             unique=True)
     state = models.CharField(max_length=50, choices=city_choices, default="01", verbose_name=_("Thành phố/Tỉnh"))
     district = models.CharField(max_length=50, choices=district_choices, verbose_name=_("Quận/Huyện"))
     ward = models.CharField(max_length=50, verbose_name=_("Phường/Xã"), blank=True, null=True)
-
-    address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ"), unique=True,
-                               help_text=_("Nhập theo định dạng: Ngõ.Ngách.Hẻm.Số nhà, Khu dân cư, Phố, Quận/Huyện, Tỉnh/TP"))
     urban_area = models.CharField(max_length=100, verbose_name=_("Khu đô thị/Khu dân cư"), blank=True, null=True)
     street = models.CharField(max_length=125, verbose_name=_("Tên đường, phố"),
                               help_text=_("Nhập tên Đường/Phố/Thôn/Xóm"), null=True)
-
+    address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ"), unique=True,
+                               help_text=_("Nhập theo định dạng: Ngõ.Ngách.Hẻm.Số nhà, Khu dân cư, Phố, Quận/Huyện, Tỉnh/TP"))
     condition = models.CharField(max_length=20, choices=Condition.choices, default=Condition.OLD,
                                  verbose_name=_("Tình trạng BĐS"), null=True)
     construction = models.CharField(max_length=20, choices=Construction.choices, default=Construction.RELEASE,

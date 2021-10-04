@@ -28,7 +28,7 @@ class ListingAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # self.fields['ward'].widget = forms.Select()
-        self.fields['realtor'].disabled = False
+        #self.fields['realtor'].disabled = False
 
 
 class ImportListingForm(forms.Form):
