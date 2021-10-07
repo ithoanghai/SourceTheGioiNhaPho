@@ -364,7 +364,7 @@ function importListing($) {
         '    </div>\n' +
         '  </div>\n' +
         '</div>')
-   $('.object-tools').append('<li><button onclick="importToDB($)" class="button" type="button" data-toggle="modal" data-target="#importListingModal">Nhập dữ liệu từ file Excel</button></li>');
+    $('.object-tools').append('<li><button onclick="importToDB($)" class="button" type="button" data-toggle="modal" data-target="#importListingModal">Nhập dữ liệu từ file Excel</button></li>');
 }
 
 function exportFBData($) {
@@ -399,10 +399,18 @@ function exportListing($) {
 
 window.addEventListener("load", function () {
     (function (jQuery) {
+        $.ajax('/api/current_user', {
+            type: 'GET'
+        }).done((data, status) => {
+            if (data.can_import_listing) {
+                importListing(jQuery);
+            }
+            if (data.can_export_listing) {
+                exportListing(jQuery);
+            }
+        })
         // priceToText(jQuery);
         addressSelect(jQuery);
-        importListing(jQuery);
         multipleImages(jQuery)
-        exportListing(jQuery);
     })(django.jQuery);
 });
