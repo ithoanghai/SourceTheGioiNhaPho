@@ -12,7 +12,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('listings', '0005_auto_20210824_1742'),
         ('realtors', '0003_auto_20210815_1839'),
     ]
 
