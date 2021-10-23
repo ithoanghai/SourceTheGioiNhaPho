@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from rest_framework import request, response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 from FunctionModule.listings.export import prepare_fb_headers, prepare_fb_listing_data
 from FunctionModule.listings.models import ListingSerializer, Listing
@@ -23,6 +24,17 @@ def get_states(r: request.Request, **kwargs):
     action = kwargs.get('action', 'sell')
     data = get_suggestions(query)
     return response.Response(data)
+
+
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+def get_user(r: request.Request, **kwargs):
+
+    return response.Response({
+        "username": r.user.username,
+        "can_export_listing": r.user.is_superuser,
+        "can_import_listing": r.user.is_superuser,
+    })
 
 
 def query_params_to_filters(input_params):
