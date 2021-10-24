@@ -41,7 +41,7 @@ class Listing(models.Model):
         )
         #ordering = ["state", "district"]
 
-    realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, verbose_name=_("Chuyên viên"), default=Realtor.user)
+    realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, verbose_name=_("Chuyên viên"))
     transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,
                                         default=TransactionType.SELL, verbose_name=_("Hình thức giao dịch"))
     house_type = models.CharField(max_length=20, choices=HouseType.choices, default=HouseType.TOWN_HOUSE,
@@ -55,7 +55,7 @@ class Listing(models.Model):
     urban_area = models.CharField(max_length=100, verbose_name=_("Khu đô thị/Khu dân cư"), blank=True, null=True)
     street = models.CharField(max_length=125, verbose_name=_("Tên đường, phố"),
                               help_text=_("Nhập tên Đường/Phố/Thôn/Xóm"), null=True)
-    address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ"), unique=True,
+    address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ"),
                                help_text=_("Nhập theo định dạng: Ngõ.Ngách.Hẻm.Số nhà, Khu dân cư, Phố, Quận/Huyện, Tỉnh/TP"))
     condition = models.CharField(max_length=20, choices=Condition.choices, default=Condition.OLD,
                                  verbose_name=_("Tình trạng BĐS"), null=True)
@@ -68,7 +68,7 @@ class Listing(models.Model):
     parking_type = models.CharField(max_length=20, choices=ParkingType.choices, blank=True,
                                     null=True, verbose_name=_("Có chỗ đỗ ô tô không?"))
     area = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Diện tích (m2)"))
-    width = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Mặt tiền (m)"))
+    width = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Mặt tiền (m)"), null=True)
     length = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Chiều dài (m)"), null=True,
                                  blank=True)
     area_real = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Diện tích thực tế(m2)"),
@@ -111,9 +111,8 @@ class Listing(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id and not self.address:
-            state_name = get_state_name(self.state)
-            district_name = get_ward_name(self.district)
             self.address = f"{self.street}, {self.district_name} {self.state_name}"
+        print(self.address)
         super().save(*args, **kwargs)
 
     @property
