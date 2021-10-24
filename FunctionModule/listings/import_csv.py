@@ -104,7 +104,7 @@ def handle_import(file_path):
             for item in listings:  # type: Listing
                 listing_obj[item.code] = item
 
-        with open(file_path, 'r', encoding="utf-8", errors='ignore') as fp:
+        with open(file_path, 'w', encoding="utf-8", errors='ignore') as fp:
             csv_reader = csv.reader(fp, delimiter=',')
             new_listings = []
             updated_listings = []
