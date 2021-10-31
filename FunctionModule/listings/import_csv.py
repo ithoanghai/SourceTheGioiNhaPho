@@ -224,7 +224,7 @@ def handle_import(file_path, listing_type='K2'):
                 }
 
                 starter = get_house_type_short(house_type)
-                code = f'{starter}{created}{listing_type}{last_id + line_count:05}'
+                code = f'{starter}{created.strftime("%y%m")}{listing_type}{last_id + line_count:05}'
                 if code in listing_obj:
                     continue
 
