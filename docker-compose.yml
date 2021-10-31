@@ -14,7 +14,6 @@ services:
       - ./data/db:/var/lib/postgresql
     ports:
       - "5432:5432"
-    restart: on-failure
   search_engine:
     image: 'getmeili/meilisearch:v0.21.0rc3'
     ports:

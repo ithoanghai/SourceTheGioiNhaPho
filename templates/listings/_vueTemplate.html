@@ -1,12 +1,15 @@
-{% load static i18n get_cadastral %}
+{% load static i18n get_cadastral listing %}
 
 <script type="text/x-template" id="propertyListTemplate">
   <div id="propertyList" class="row" v-bind:class="{grid: isViewGrid}">
     <div v-for="listing in listings" :key="listing.id" class="col property-itemz" :id="`property-tgnp-${listing.id}`">
       <article class="box listView">
         <div class="cover-image realty-search pic-realty-search" style="height: 240px">
-          <img :src="listing.main_photo || '{% static 'img/default.png' %}'" v-bind:alt="listing.title"
-               onerror="this.src='{% static "img/default.png" %}'"/>
+          <img
+            :src="listing.main_photo || '{{ listing.house_type|default_img_by_house_type }}'"
+            v-bind:alt="listing.title"
+            onerror="this.src='{% static "img/default.png" %}'"
+          />
           <a class="view-realty-search transition" :href="getListingDetailURL(listing.id)" target="_blank"
              :title="listing.title"
           >
@@ -147,7 +150,9 @@
            :href="getListingDetailURL(listing.id)"
            class="property_detail">
           <div class="cover">
-            <img :src="listing.main_photo || '{% static 'img/default.png' %}'" v-bind:alt="listing.title"/>
+            <img :src="listing.main_photo || '{{ listing.house_type|default_img_by_house_type }}'"
+                 onerror="this.src='{% static "img/default.png" %}'"
+                 v-bind:alt="listing.title"/>
           </div>
         </a>
         <header>

@@ -1,48 +1,52 @@
 {% load static %}
-{% load humanize i18n get_cadastral%}
+{% load humanize i18n get_cadastral listing %}
 
 <article class="listingCard">
   <div class="cover-image">
     <a href="{% url "listing_detail" listing.id %}" title="{{ listing.title }}">
-    {% if listing.main_photo %}
-      {% with listing.main_photo as photo %}
-        {{ photo }}
-        <img src="{{ photo.url }}" data-src="{{ photo.url }}"
-             alt="{{ listing.title }}"
-             title="{{ listing.title }}"
-                class="lazy" draggable="false"
+      {% if listing.main_photo %}
+        {% with listing.main_photo as photo %}
+          <img src=""
+               data-src="{{ photo.url }}"
+               alt="{{ listing.title }}"
+               title="{{ listing.title }}"
+               class="lazy" draggable="false"
                onerror="this.src='{% static "img/default.png" %}'"
           />
-      {% endwith %}
-    {% else %}
-      <img src="{% static 'img/default.png' %}" data-src="{% static 'img/default.png' %}"
+        {% endwith %}
+      {% else %}
+        <img src=""
+             data-src="{{ listing.house_type|default_img_by_house_type }}"
              alt="{{ listing.title }}"
              title="{{ listing.title }}"
-             class="lazy" draggable="false">
-    {% endif %}
+             class="lazy" draggable="false"
+             onerror="this.src='{% static "img/default.png" %}'"
+        />
+      {% endif %}
 
     </a>
     <div class="label-group">
-       <label class="label-primary unique p-1"><i class="zmdi zmdi-key"></i><b>{{listing.code}}</b></label>
+      <label class="label-primary unique p-1"><i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b></label>
 
-              {% if listing.is_exclusive %}
-        <label class="label-primary unique p-1" >{% trans "Độc quyền" %}</label>
+      {% if listing.is_exclusive %}
+        <label class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
       {% endif %}
     </div>
-    <button data-action="favorite" data-id="{{ listing.id }}"  data-alias="{{ listing.title }}"
-            data-type="sale_property" data-favorited="false"  class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>
+    <button data-action="favorite" data-id="{{ listing.id }}" data-alias="{{ listing.title }}"
+            data-type="sale_property" data-favorited="false"
+            class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>
   </div>
   <div class="info-container">
     <div class="flex align-items-center justify-content-space-between">
-        <div class="listing-price">{{ listing.price }} {% trans "tỷ" %}</div>
+      <div class="listing-price">{{ listing.price }} {% trans "tỷ" %}</div>
       <ul class="listing-info">
-         <li>
+        <li>
           <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2" %}
         </li>
         {% if listing.floors %}
           <li><i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}
           </li> {% endif %}
-         {% if listing.bedrooms %}
+        {% if listing.bedrooms %}
           <li>
             <i class="zmdi zmdi-airline-seat-individual-suite"></i>{{ listing.bedrooms }} {% trans "ngủ" %}
           </li>
@@ -52,30 +56,30 @@
           </li> {% endif %}{% endcomment %}
       </ul>
     </div>
-{% comment %}    <h3>
+    {% comment %}    <h3>
       <a class="listing-name" href="{% url 'listing' listing.id %}"
          title="{{ listing.title }}">{{ listing.title }}</a>
     </h3>{% endcomment %}
 
     <div class="listing-address">
-        {% if listing.urban_area %}
-      <h4>
-        <a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}"
-           title="">{{ listing.urban_area }}</a>
-      </h4>
+      {% if listing.urban_area %}
+        <h4>
+          <a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}"
+             title="">{{ listing.urban_area }}</a>
+        </h4>
       {% endif %}
       <h4>
         <a href="{% url 'listing_search' %}?street={{ listing.street }}"
            title="">{{ listing.street }}</a>
       </h4>
-    {% if listing.ward %}
+      {% if listing.ward %}
         <h4>
           <a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
-                 title="Phường/Xã">{{ listing.ward_name }}</a>
+             title="Phường/Xã">{{ listing.ward_name }}</a>
         </h4>
-     {% endif %}
-        <h4><b><a href="{% url 'listing_search' %}?district={{ listing.district }}"
-           title=""> {% get_district listing.district %}</a></b></h4>
+      {% endif %}
+      <h4><b><a href="{% url 'listing_search' %}?district={{ listing.district }}"
+                title=""> {% get_district listing.district %}</a></b></h4>
     </div>
   </div>
 </article>

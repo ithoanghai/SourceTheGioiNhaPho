@@ -148,7 +148,6 @@ def prepare_listing_queryset(input_params):
     if max_area and max_area.isnumeric():
         query = Q(area__lte=max_area)
         queryset_list = queryset_list.filter(query)
-    print(input_params, area, max_area)
 
     if 'sort' in input_params:
         sort_by = input_params.get('sort')

@@ -2,36 +2,23 @@ import csv
 import datetime
 import json
 import logging
-import sys
-import traceback
 from decimal import Decimal
 
 import pytz
 from django.conf import settings
 from django.contrib.gis.geos import Point
+from django.template.loader import render_to_string
 from django.utils.text import slugify
 from geopy import GeocodeEarth
 
 from FunctionModule.accounts.models import User
 from FunctionModule.cadastral.constants import district_data
+from FunctionModule.listings.helpers import print_trace, get_house_type_short, get_short_title_from_house_type
 from FunctionModule.listings.models import Listing, Status, TransactionType, HouseType, RoadType
 from FunctionModule.realtors.models import Realtor
 
 default_password = 'tgnpvn@2021'
 logger = logging.getLogger(__name__)
-
-
-def print_trace(e: Exception):
-    trace = traceback.extract_tb(sys.exc_info()[2])
-    # Add the event to the log
-    output = "Error in the server: %s.\n" % (e)
-    output += "\tTraceback is:\n"
-    for (file, linenumber, affected, line) in trace:
-        output += "\t> Error at function %s\n" % (affected)
-        output += "\t  At: %s:%s\n" % (file, linenumber)
-        output += "\t  Source: %s\n" % (line)
-    output += "\t> Exception: %s\n" % (e)
-    print(output)
 
 
 def read_header(header_row):
@@ -82,7 +69,7 @@ def get_direction(direction: str) -> str:
     return code
 
 
-def handle_import(file_path):
+def handle_import(file_path, listing_type='K2'):
     line_count = 0
     with open('saved_search.json', 'r', encoding='utf-8') as f:
         searched_locations = json.load(f)
@@ -96,6 +83,7 @@ def handle_import(file_path):
         limit = 1000
         listing_obj = {}
         api_key = getattr(settings, 'GEOEARTH_API_KEY', '')
+        last_id = Listing.objects.latest('id').id
         if listing_count > limit:
             cur = 0
             while cur < listing_count:
@@ -155,10 +143,7 @@ def handle_import(file_path):
                 street = row[header_dict['pho']]
                 # Hanoi
                 state = '01'
-                code = f"{district}-{street}-{addr}".lower().replace('đ', 'd').replace('õ', 'o')[:80]
-                code = slugify(code)
-                if code in listing_obj:
-                    continue
+
                 encoded_num = row[header_dict['thong-so']]
                 # billion vnd
                 price = row[header_dict['gia']]
@@ -237,6 +222,12 @@ def handle_import(file_path):
                     "floor_area": floor_area,
                     # "price_per_area": price_per_area
                 }
+
+                starter = get_house_type_short(house_type)
+                code = f'{starter}{created}{listing_type}{last_id + line_count:05}'
+                if code in listing_obj:
+                    continue
+
                 if phone not in user_dict:
                     if not phone:
                         admin_realtor = Realtor.objects.get(pk=1)
@@ -253,27 +244,6 @@ def handle_import(file_path):
                 else:
                     full_addr = f'{addr}, {street}, {district}'
                 full_addr = f'{full_addr}, Hà Nội'
-                title = f'{street} - {district} [{area} - {floor} - {lane_width}] [{price} tỷ]'
-                description = f"Khu vực {street} - {district}. Diện tích {area}."
-                if floor_code == 'c4' or floor_code == 'c' or floor_code == 'cap 4':
-                    description += ' Nhà cấp 4.'
-                if floor > 1:
-                    description += f' Nhà {floor} tầng.'
-                if house_type == HouseType.LAND:
-                    description += ' Đất nền.'
-                elif house_type == HouseType.SHOP_HOUSE:
-                    description += ' Kinh Doanh.'
-
-                if trans_type == TransactionType.PROJECT:
-                    description += ' Dự án.'
-                if road_type == RoadType.ALLEY_CAR_2:
-                    description += ' Nhà mặt phố.'
-                elif road_type == RoadType.ALLEY_TRIBIKE:
-                    description += ' Ngõ 3 gác.'
-                elif road_type == RoadType.ALLEY_CAR:
-                    description += ' Ngõ ô tô.'
-                elif road_type == RoadType.ALLEY_BIKE:
-                    description += ' Ngõ xe máy.'
 
                 if code not in listing_obj:
                     new_listing = Listing(realtor=realtor, code=code, status=status, street=street,
@@ -281,11 +251,22 @@ def handle_import(file_path):
                                           house_type=house_type, road_type=road_type, list_date=created,
                                           direction=direction, price=price, sale_price=price,
                                           extra_data=extra_data, state=state, district=district_code,
-                                          lane_width=lane_width, floors=int(floor), title=title,
-                                          length=None, width=None)
+                                          lane_width=lane_width, floors=int(floor), length=None, width=None)
+                    title = f'Bán {get_short_title_from_house_type(new_listing.house_type)} {new_listing.street} {new_listing.district_name()} '
+                    if new_listing.area >= 30:
+                        title += f'{new_listing.area:.0f}m '
+                    if new_listing.floors and new_listing.floors > 1:
+                        title += f'{new_listing.floors} tầng '
+                    title += f'{new_listing.display_price}'
+                    title = title.upper()
+                    new_listing.title = title
+                    description = render_to_string('listings/defaultDescription.html',
+                                                   context={"listing": new_listing})
+                    new_listing.desc = description
                     if full_addr in searched_locations:
                         if searched_locations[full_addr]:
-                            listing_loc = Point(searched_locations[full_addr][0], searched_locations[full_addr][1])
+                            listing_loc = Point(searched_locations[full_addr][0],
+                                                searched_locations[full_addr][1])
                             new_listing.location = listing_loc
                     else:
                         if api_key:
@@ -295,7 +276,8 @@ def handle_import(file_path):
                             if location and location.point:
                                 listing_loc = Point(location.point.longitude, location.point.latitude)
                                 new_listing.location = listing_loc
-                                searched_locations[full_addr] = [location.point.longitude, location.point.latitude]
+                                searched_locations[full_addr] = [location.point.longitude,
+                                                                 location.point.latitude]
                             else:
                                 searched_locations[full_addr] = None
 
@@ -310,6 +292,7 @@ def handle_import(file_path):
                     print(code)
     except Exception as ex:
         print(f"Error occurred at line: {line_count}")
+        print(type(ex))
         print_trace(ex)
     finally:
         print(f'Read {line_count} lines')

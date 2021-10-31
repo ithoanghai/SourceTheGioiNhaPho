@@ -112,7 +112,6 @@ class Listing(models.Model):
     def save(self, *args, **kwargs):
         if not self.id and not self.address:
             self.address = f"{self.street}, {self.district_name} {self.state_name}"
-        print(self.address)
         super().save(*args, **kwargs)
 
     @property
@@ -147,18 +146,12 @@ class Listing(models.Model):
         return self.location.x
 
     def state_name(self):
-        if not self.ward:
-            return ""
         return get_state_name(self.state)
 
     def ward_name(self):
-        if not self.ward:
-            return ""
         return get_ward_name(self.district, self.ward)
 
     def district_name(self):
-        if not self.ward:
-            return ""
         return get_district_name(self.district)
 
     def as_dict(self):
@@ -205,6 +198,14 @@ class Listing(models.Model):
     location = LocationField(based_fields=['address'], zoom=7, null=True,
                              default=Point(20.963142552138365, 105.82331127236745), verbose_name=_("Toạ độ vị trí BĐS"),
                              help_text="Nhập toạ độ hoặc chọn vị trí trên bản đồ")
+
+    @property
+    def display_price(self):
+        price = self.sale_price or self.price
+        if price % 1 == 0:
+            return f'{int(price)} tỷ'
+        else:
+            return f'{price:.2f} tỷ'
 
 
 class ListingImage(models.Model):

@@ -1,0 +1,13 @@
+{% load get_cadastral listing %}
+
+{{ lisiting.house_type|get_house_type }} cần bán tại {{ listing.street }} {{ listing.district_name }}.
+
+Diện tích {{ listing.area }} mét, {% if listing.floors %}{{ listing.floors }} tầng{% endif %}{% if listing.width %}, {{ listing.width }} mét{% endif %}.
+
+Đặc điểm bất động sản{% if listing.salient_features %}{{ listing.salient_features }} ,{% endif %} nằm tại vị trí trung tâm {{ listing.district_name }}, gần trường, chợ, dân trí cao, giao thông tiện lợi. {% if listing.direction %}Hướng {{ listing.get_choice_display }}{% endif %}
+
+Sổ đỏ chính chủ, sẵn sàng giao dịch.
+
+Giá: {{ listing.display_price }}. (Có thương lượng).
+
+Tất cả thông tin đăng trên TGNP cam kết đều xác thực chính xác.

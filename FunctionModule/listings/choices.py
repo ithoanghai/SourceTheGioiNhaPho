@@ -1,8 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
-from FunctionModule.cadastral.constants import state_data, district_data, ward_data, all_districts
-from FunctionModule.cadastral.lookups import get_all_districts
+from FunctionModule.cadastral.constants import state_data, ward_data, all_districts
 
 city_choices = [(k, v['name']) for k, v in state_data.items()]
 city_choices.sort()
@@ -44,6 +43,7 @@ class TransactionType(models.TextChoices):
     FOR_RENT = 'for_rent', _("Cho thuê")
     PROJECT = 'project', _("Dự án")
 
+
 # House type in facebook
 # "apartment", "apartment_room", "builder_floor", "bungalow", "condo", "condo_room", "house", "house_in_condominium", \
 # "house_in_villa", "house_room", "land", "loft", "manufactured", "other", "other_room", "penthouse", "single_family_home", \
@@ -53,7 +53,6 @@ class HouseType(models.TextChoices):
     TOWN_HOUSE = 'town_house', _("Nhà trong ngõ")
     LOFT_HOUSE = 'loft_house', _("Nhà gác xép/Cấp 4")
     SHOP_HOUSE = 'shop_house', _("Cửa hàng")
-
     BUILDING = 'building', _("Toà nhà")
     BUILDING_BUSINESS = 'building_business', _("Toà nhà kinh doanh")
     OFFICE = 'office', _("Văn phòng")
@@ -110,7 +109,7 @@ class Condition(models.TextChoices):
     OTHER = 'other', _("Khác")
 
 
-class Construction (models.TextChoices):
+class Construction(models.TextChoices):
     RELEASE = 'release', _("Đã hoàn thiện")
     UNDER_CONSTRUCTION = 'under_construction', _("Đang thi công")
     PRERELEASE = 'pre_release', _("Sắp thi công")
@@ -134,4 +133,3 @@ class Direction(models.TextChoices):
     north_west = 'north-west', _("Tây - Bắc")
     north = 'north', _("Bắc")
     north_east = 'north-east', _("Đông - Bắc")
-

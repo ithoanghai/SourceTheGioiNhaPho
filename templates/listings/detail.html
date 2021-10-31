@@ -202,26 +202,30 @@
                            data-src="{{ photo.url }}"
                            alt="{{ listing.title }}"
                            title="{{ listing.title }}"
-                           draggable="false"/>
+                           draggable="false"
+                      />
                     {% endif %}
-
                   </a>
                 </li>
               {% empty %}
                 <li>
-                    <a href="#" class="cover">
+                  <a href="#" class="cover">
                     {% if forloop.first %}
                       <img class="image-normalized"
-                           src="{% static 'img/default.png' %}"
+                           data-src="{{ listing.house_type|default_img_by_house_type }}"
                            alt="{{ listing.title }}"
                            title="{{ listing.title }}"
-                           draggable="false"/>
+                           draggable="false"
+                           onerror="this.src='{% static "img/default.png" %}'"
+                      />
                     {% else %}
                       <img class="lazy fade image-normalized"
-                           data-src="{% static 'img/default.png' %}"
+                           data-src="{{ listing.house_type|default_img_by_house_type }}"
                            alt="{{ listing.title }}"
                            title="{{ listing.title }}"
-                           draggable="false"/>
+                           draggable="false"
+                           onerror="this.src='{% static "img/default.png" %}'"
+                      />
                     {% endif %}
 
                   </a>
@@ -276,10 +280,13 @@
               <li>
                 <a href="#" class="cover"
                    title="{{ listing.title }}">
-                  <img src="{% static 'img/default.png' %}"
-                     pos="0"
-                     alt="{{ listing.title }}"
-                     title="{{ listing.title }}">
+                  <img
+                    src="{{ listing.house_type|default_img_by_house_type }}"
+                    pos="0"
+                    alt="{{ listing.title }}"
+                    title="{{ listing.title }}"
+                    onerror="this.src='{% static "img/default.png" %}'"
+                  />
                 </a>
 
               </li>
@@ -306,10 +313,12 @@
               </li>
             {% empty %}
               <li>
-                <img class="lazy image-normalized fade" src="{% static 'img/default.png' %}"
-                     data-src="{% static 'img/default.png' %}"
+                <img class="lazy image-normalized fade"
+                     data-src="{{ listing.house_type|default_img_by_house_type }}"
                      alt="{{ listing.title }}"
-                     title="{{ listing.title }}"/>
+                     title="{{ listing.title }}"
+                     onerror="this.src='{% static "img/default.png" %}'"
+                />
               </li>
             {% endfor %}
           </ul>
@@ -344,15 +353,17 @@
                 </li>
               {% empty %}
                 <li class="flex-active-slide">
-                <a class="img cover" href="javascript:void(0)"
+                  <a class="img cover" href="javascript:void(0)"
                      title="{{ listing.title }}">
                     <img class="lazy image-normalized fade"
-                       data-src="{% static 'img/default.png' %}"
-                       title="{{ listing.title }}"
-                       alt="{{ listing.title }}"
-                       draggable="false">
+                         data-src="{{ listing.house_type|default_img_by_house_type }}"
+                         title="{{ listing.title }}"
+                         alt="{{ listing.title }}"
+                         draggable="false"
+                         onerror="this.src='{% static "img/default.png" %}'"
+                    />
                   </a>
-               </li>
+                </li>
               {% endfor %}
             </ul>
           </div>
@@ -382,68 +393,68 @@
       </div>
     </div>
     <section class="page-listing-detail">
-        <div class="left-content">
-          <div class="content-detail-house">
-            <header class="detail-house">
-              <div class="address">
-                {% if listing.urban_area %}
-                  <h2><a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}"
-                         title="Khu đô thị/ khu dân cư">{{ listing.urban_area }}</a></h2>
-                {% endif %}
-                <h2><a href="{% url 'listing_search' %}?street={{ listing.street }}"
-                       title="Đường">{{ listing.street }}</a></h2>
-                {% if listing.ward %}
-                  <h2><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
-                         title="Phường/Xã">{{ listing.ward_name }}</a></h2>
-                {% endif %}
-                <h2><a href="{% url 'listing_search' %}?district={{ listing.district }}"
-                       title="Quận/Huyện">{% get_district listing.district %}</a></h2>
-                <h2><a href="{% url 'listing_search' %}?state={{ listing.state }}"
-                       title="Tỉnh/Thành phố">{% get_state listing.state %}</a></h2>
+      <div class="left-content">
+        <div class="content-detail-house">
+          <header class="detail-house">
+            <div class="address">
+              {% if listing.urban_area %}
+                <h2><a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}"
+                       title="Khu đô thị/ khu dân cư">{{ listing.urban_area }}</a></h2>
+              {% endif %}
+              <h2><a href="{% url 'listing_search' %}?street={{ listing.street }}"
+                     title="Đường">{{ listing.street }}</a></h2>
+              {% if listing.ward %}
+                <h2><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
+                       title="Phường/Xã">{{ listing.ward_name }}</a></h2>
+              {% endif %}
+              <h2><a href="{% url 'listing_search' %}?district={{ listing.district }}"
+                     title="Quận/Huyện">{% get_district listing.district %}</a></h2>
+              <h2><a href="{% url 'listing_search' %}?state={{ listing.state }}"
+                     title="Tỉnh/Thành phố">{% get_state listing.state %}</a></h2>
 
+            </div>
+            <h2>{{ listing.title }}</h2>
+            <div class="detail-row">
+              <ul class="detailroom">
+                <li title="Diện tích"><span
+                  class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} m2
+                </li>
+                <li title="Giá"><strong>$</strong><b>{{ listing.price }} tỷ</b></li>
+                {% if listing.sale_price  and listing.sale_price < listing.price %}
+                  <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price }} tỷ </strong></li> {% endif %}
+              </ul>
+              <div class="listing-id">
+                <span>Mã nhà đất: </span>
+                <span style="padding-left: 0px">{{ listing.code }}</span>
               </div>
-              <h2>{{ listing.title }}</h2>
-              <div class="detail-row">
-                <ul class="detailroom">
-                  <li title="Diện tích"><span
-                    class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} m2
-                  </li>
-                  <li title="Giá"><strong>$</strong><b>{{ listing.price }} tỷ</b></li>
-                  {% if listing.sale_price  and listing.sale_price < listing.price %}
-                    <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price }} tỷ </strong></li> {% endif %}
-                </ul>
-                <div class="listing-id">
-                  <span>Mã nhà đất: </span>
-                  <span style="padding-left: 0px">{{ listing.code }}</span>
-                </div>
-              </div>
-            </header>
-          </div>
-          <div class="heading-02">Mô tả ngắn</div>
-          <div class="content collapsed pdb-0" data-height="150">
-            <p class="summary">{{ listing.description }}</p>
-          </div>
-          <p class="more">
-            <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="true" more="Xem thêm"
-               less="Thu gọn">Xem thêm</a>
-          </p>
-          <div class="heading-02">Thông tin cơ bản</div>
-          <div class="content">
-            <ul class="detail-more">
-              <li>
-                <p class="left">Loại hình</p>
-                <p class="right"><a href="{% url 'listing_search' %}?house_type={{ listing.house_type }}"
-                                    target="_blank">
-                  {% if listing.house_type == 'town_house' %}{% translate 'Nhà Phố' %}
-                  {% elif listing.house_type == 'street_house' %} {% translate 'Nhà mặt phố' %}
-                  {% elif listing.house_type == 'shop_house' %} {% translate 'Cửa hàng' %}
-                  {% elif listing.house_type == 'building' %} {% translate 'Toà nhà' %}
-                  {% elif listing.house_type == 'apartment' %} {% translate 'Căn hộ CC' %}
-                  {% elif listing.house_type == 'villa' %} {% translate 'Biệt thự' %}
-                  {% elif listing.house_type == 'office' %} {% translate 'Văn phòng' %}
-                  {% else %} {% translate 'Đất' %}  {% endif %}
-                </a></p>
-              </li>
+            </div>
+          </header>
+        </div>
+        <div class="heading-02">Mô tả ngắn</div>
+        <div class="content collapsed pdb-0" data-height="150">
+          <p class="summary">{{ listing.description }}</p>
+        </div>
+        <p class="more">
+          <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="true" more="Xem thêm"
+             less="Thu gọn">Xem thêm</a>
+        </p>
+        <div class="heading-02">Thông tin cơ bản</div>
+        <div class="content">
+          <ul class="detail-more">
+            <li>
+              <p class="left">Loại hình</p>
+              <p class="right"><a href="{% url 'listing_search' %}?house_type={{ listing.house_type }}"
+                                  target="_blank">
+                {% if listing.house_type == 'town_house' %}{% translate 'Nhà Phố' %}
+                {% elif listing.house_type == 'street_house' %} {% translate 'Nhà mặt phố' %}
+                {% elif listing.house_type == 'shop_house' %} {% translate 'Cửa hàng' %}
+                {% elif listing.house_type == 'building' %} {% translate 'Toà nhà' %}
+                {% elif listing.house_type == 'apartment' %} {% translate 'Căn hộ CC' %}
+                {% elif listing.house_type == 'villa' %} {% translate 'Biệt thự' %}
+                {% elif listing.house_type == 'office' %} {% translate 'Văn phòng' %}
+                {% else %} {% translate 'Đất' %}  {% endif %}
+              </a></p>
+            </li>
             {% if listing.floors %}
               <li>
                 <p class="left">Số tầng</p>
@@ -456,159 +467,159 @@
                 <p class="right"> {{ listing.bedrooms }} </p>
               </li>
             {% endif %}
-                {% if listing.bathrooms %}
+            {% if listing.bathrooms %}
               <li>
-                <p class="left">Số phòng tắm</p>
-                <p class="right">
-                  {{ listing.bathrooms }} </p>
-               {% endif %}
-              </li>
-              <li>
-                <p class="left">Diện tích (m2)</p>
-                <p class="right">{{ listing.area }} {{ listing.area_unit }}</p>
-              </li>
+              <p class="left">Số phòng tắm</p>
+              <p class="right">
+                {{ listing.bathrooms }} </p>
+            {% endif %}
+            </li>
+            <li>
+              <p class="left">Diện tích (m2)</p>
+              <p class="right">{{ listing.area }} {{ listing.area_unit }}</p>
+            </li>
 
-              {% if listing.lot_size %}
-                <li>
-                  <p class="left">Diện tích khuân viên</p>
-                  <p class="right">{{ listing.lot_size }}</p>
-                </li>
-              {% endif %}
-             {% if listing.width and listing.width > 4 %}
-                <li>
-                  <p class="left">Mặt tiền (m)</p>
-                  <p class="right">{{ listing.width }}</p>
-                </li>
-              {% endif %}
+            {% if listing.lot_size %}
+              <li>
+                <p class="left">Diện tích khuân viên</p>
+                <p class="right">{{ listing.lot_size }}</p>
+              </li>
+            {% endif %}
+            {% if listing.width and listing.width > 4 %}
+              <li>
+                <p class="left">Mặt tiền (m)</p>
+                <p class="right">{{ listing.width }}</p>
+              </li>
+            {% endif %}
             {% if listing.direction %}
-                <li>
+              <li>
                 <p class="left">Hướng</p>
-                  {% if listing.direction == 'east' %}<p class="right">{% translate 'Đông' %}</p>
-                  {% elif listing.direction == 'south_east' %}<p class="right">{% translate 'Đông - Nam' %}</p>
-                  {% elif listing.direction == 'south' %} <p class="right">{% translate 'Nam' %}</p>
-                  {% elif listing.direction == 'south-west' %} <p class="right">{% translate 'Tây - Nam' %}</p>
-                  {% elif listing.direction == 'west' %} <p class="right">{% translate 'Tây' %}</p>
-                  {% elif listing.direction == 'north-west' %} <p class="right">{% translate 'Tây - Bắc' %}</p>
-                  {% elif listing.direction == 'north' %} <p class="right">{% translate 'Bắc' %}</p>
-                  {% else %} {% translate 'Đông - Bắc' %}  {% endif %}
+                {% if listing.direction == 'east' %}<p class="right">{% translate 'Đông' %}</p>
+                {% elif listing.direction == 'south_east' %}<p class="right">{% translate 'Đông - Nam' %}</p>
+                {% elif listing.direction == 'south' %} <p class="right">{% translate 'Nam' %}</p>
+                {% elif listing.direction == 'south-west' %} <p class="right">{% translate 'Tây - Nam' %}</p>
+                {% elif listing.direction == 'west' %} <p class="right">{% translate 'Tây' %}</p>
+                {% elif listing.direction == 'north-west' %} <p class="right">{% translate 'Tây - Bắc' %}</p>
+                {% elif listing.direction == 'north' %} <p class="right">{% translate 'Bắc' %}</p>
+                {% else %} {% translate 'Đông - Bắc' %}  {% endif %}
               </li>
             {% endif %}
+            <li>
+              <p class="left">Loại chứng nhận</p>
+              <p class="right"><a
+                href="{% url 'listing_search' %}?registration_type={{ listing.registration_type }}"
+                target="_blank">
+                {% if listing.registration_type == 'red_pink_book' %}{% translate 'Sổ đỏ/ Sổ hồng' %}
+                {% elif listing.registration_type == 'valid_documents' %} {% translate 'Giấy tờ hợp lệ' %}
+                {% elif listing.registration_type == 'construction_license' %} {% translate 'Giấy phép xây dựng' %}
+                {% elif listing.registration_type == 'business_license' %} {% translate 'Giấy phép kinh doanh' %}
+                {% elif listing.registration_type == 'dont_book' %} {% translate 'Sắp làm sổ' %}
+                {% else %} {% translate 'Khác' %}  {% endif %}</a></p>
+            </li>
+            <li>
+              <p class="left">Giá bán</p>
+              <p class="right">{{ listing.price }} tỷ</p>
+            </li>
+            {% if listing.sale_price %}
               <li>
-                <p class="left">Loại chứng nhận</p>
-                <p class="right"><a
-                  href="{% url 'listing_search' %}?registration_type={{ listing.registration_type }}"
-                  target="_blank">
-                  {% if listing.registration_type == 'red_pink_book' %}{% translate 'Sổ đỏ/ Sổ hồng' %}
-                  {% elif listing.registration_type == 'valid_documents' %} {% translate 'Giấy tờ hợp lệ' %}
-                  {% elif listing.registration_type == 'construction_license' %} {% translate 'Giấy phép xây dựng' %}
-                  {% elif listing.registration_type == 'business_license' %} {% translate 'Giấy phép kinh doanh' %}
-                  {% elif listing.registration_type == 'dont_book' %} {% translate 'Sắp làm sổ' %}
-                  {% else %} {% translate 'Khác' %}  {% endif %}</a></p>
+                <p class="left">Bán nhanh</p>
+                <p class="right">{{ listing.sale_price }} tỷ</p>
               </li>
-              <li>
-                <p class="left">Giá bán</p>
-                <p class="right">{{ listing.price }} tỷ</p>
-              </li>
-              {% if listing.sale_price %}
-                <li>
-                  <p class="left">Bán nhanh</p>
-                  <p class="right">{{ listing.sale_price }} tỷ</p>
-                </li>
-              {% endif %}
-            </ul>
-          </div>
-          <div class="form-real-estate visible-sm">
-            <div class="heading-02">Liên hệ tư vấn</div>
-            <div class="form-real-estate__row">
-              <div class="col-left">
-                <div class="cover__isa">
-                  <img class="lazy" data-src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
-                </div>
-                <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="form-real-estate visible-sm">
+          <div class="heading-02">Liên hệ tư vấn</div>
+          <div class="form-real-estate__row">
+            <div class="col-left">
+              <div class="cover__isa">
+                <img class="lazy" data-src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
               </div>
-              <a style="opacity: 0.3" href="javascript:void(0)"
-                 class="btn-contact-me btn-primary btn-black btn-form-real-estate">Yêu cầu liên hệ lại</a>
+              <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
+            </div>
+            <a style="opacity: 0.3" href="javascript:void(0)"
+               class="btn-contact-me btn-primary btn-black btn-form-real-estate">Yêu cầu liên hệ lại</a>
+          </div>
+        </div>
+        <div id="booking-form-sm-wrapper"></div>
+
+        <div class="heading-02">Một số ưu điểm khác</div>
+        <div class="content">
+          <div class="list-advantage clear">
+            <div class="advantage-name">
+              <p>Tag</p>
+            </div>
+            <div class="advance-date-content">
+              <div class="tag-news pd-0">
+                <span>{{ listing.house_type }} {{ listing.district }}</span>
+                <span>{{ listing.house_type }} {{ listing.floors }} tầng</span>
+                <span>{{ listing.house_type }} {{ listing.bedrooms }} phòng ngủ</span>
+              </div>
             </div>
           </div>
-          <div id="booking-form-sm-wrapper"></div>
-
-          <div class="heading-02">Một số ưu điểm khác</div>
-          <div class="content">
+          {% if listing.salient_features %}
             <div class="list-advantage clear">
               <div class="advantage-name">
-                <p>Tag</p>
+                <p>Đặc điểm nổi bật</p>
               </div>
-              <div class="advance-date-content">
-                <div class="tag-news pd-0">
-                  <span>{{ listing.house_type }} {{ listing.district }}</span>
-                  <span>{{ listing.house_type }} {{ listing.floors }} tầng</span>
-                  <span>{{ listing.house_type }} {{ listing.bedrooms }} phòng ngủ</span>
-                </div>
-              </div>
+              <div class="advance-date-content">{{ listing.salient_features }}</div>
             </div>
-            {% if listing.salient_features %}
-              <div class="list-advantage clear">
-                <div class="advantage-name">
-                  <p>Đặc điểm nổi bật</p>
-                </div>
-                <div class="advance-date-content">{{ listing.salient_features }}</div>
-              </div>
-            {% endif %}
-            {% if listing.location_advantage %}
-              <div class="list-advantage clear">
-                <div class="advantage-name">
-                  <p>Ưu điểm vị trí</p>
-                </div>
-                <div class="advance-date-content">{{ listing.location_advantage }}</div>
-              </div>
-            {% endif %}
-            {% if listing.furniture_included %}
-              <div class="list-advantage clear">
-                <div class="advantage-name">
-                  <p>Nội thất kèm theo</p>
-                </div>
-                <div class="advance-date-content">{{ listing.furniture_included }}</div>
-              </div>
-            {% endif %}
-            {% if listing.living_facilities %}
-              <div class="list-advantage clear">
-                <div class="advantage-name">
-                  <p>Tiện ích sinh hoạt</p>
-                </div>
-                <div class="advance-date-content">{{ listing.living_facilities }}</div>
-              </div>
-            {% endif %}
-            {% if listing.residential_community %}
-              <div class="list-advantage clear">
-                <div class="advantage-name">
-                  <p>Cộng đồng dân cư</p>
-                </div>
-                <div class="advance-date-content">{{ listing.residential_community }}</div>
-              </div>
-            {% endif %}
-            {% if listing.regional_welfare %}
-              <div class="list-advantage clear">
-                <div class="advantage-name">
-                  <p>An sinh khu vực</p>
-                </div>
-                <div class="advance-date-content">{{ listing.regional_welfare }}
-                </div>
-              </div>
-            {% endif %}
+          {% endif %}
+          {% if listing.location_advantage %}
             <div class="list-advantage clear">
               <div class="advantage-name">
-                <p>Tình trạng BĐS</p>
+                <p>Ưu điểm vị trí</p>
               </div>
-              <div class="advance-date-content"><b>{% if listing.status == 'selling' %} {% trans 'Đang bán' %}
-              {% elif listing.status == 'sold' %} {% trans 'Đã bán' %}
-              {% elif listing.status == 'stop_selling' %} {% trans 'Dừng bán' %}
-              {% else %} {% trans 'Mới' %}
-              {% endif %}</b>
+              <div class="advance-date-content">{{ listing.location_advantage }}</div>
+            </div>
+          {% endif %}
+          {% if listing.furniture_included %}
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Nội thất kèm theo</p>
+              </div>
+              <div class="advance-date-content">{{ listing.furniture_included }}</div>
+            </div>
+          {% endif %}
+          {% if listing.living_facilities %}
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Tiện ích sinh hoạt</p>
+              </div>
+              <div class="advance-date-content">{{ listing.living_facilities }}</div>
+            </div>
+          {% endif %}
+          {% if listing.residential_community %}
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>Cộng đồng dân cư</p>
+              </div>
+              <div class="advance-date-content">{{ listing.residential_community }}</div>
+            </div>
+          {% endif %}
+          {% if listing.regional_welfare %}
+            <div class="list-advantage clear">
+              <div class="advantage-name">
+                <p>An sinh khu vực</p>
+              </div>
+              <div class="advance-date-content">{{ listing.regional_welfare }}
               </div>
             </div>
+          {% endif %}
+          <div class="list-advantage clear">
+            <div class="advantage-name">
+              <p>Tình trạng BĐS</p>
+            </div>
+            <div class="advance-date-content"><b>{% if listing.status == 'selling' %} {% trans 'Đang bán' %}
+            {% elif listing.status == 'sold' %} {% trans 'Đã bán' %}
+            {% elif listing.status == 'stop_selling' %} {% trans 'Dừng bán' %}
+            {% else %} {% trans 'Mới' %}
+            {% endif %}</b>
+            </div>
           </div>
+        </div>
 
-          {% comment %}<div class="heading-02">Tiện ích</div>
+        {% comment %}<div class="heading-02">Tiện ích</div>
           <div id="details-amenities" class="content collapsed">
             <ul class="detail-more">
               <li><p class="left">Ban công</p>
@@ -726,100 +737,100 @@
                less="Thu gọn">Xem thêm</a>
           </p>{% endcomment %}
 
-          <div class="heading-02">Hình ảnh</div>
-          <div class="gallery-property collapsed" data-height="900">
-            {% for photo in listing.photos %}
-              <div class="cover">
-                <a href="#" title="{{ listing.title }}">
-                  <img class="lazy fadeout"
-                       data-src="{{ photo.url }}"
-                       alt="{{ listing.title }}"
-                       title="{{ listing.title }}">
-                  <span>Hình sản phẩm</span>
-                </a>
-              </div>
-            {% endfor %}
-            <div class="last-div"></div>
-          </div>
-          <p class="view-more-gray more">
-            <a href="#" title="Xem thêm / thu gọn" style="text-underline: none" class="collapse pdt-0"
-               is-more="true" more="Xem thêm" less="Thu gọn">Xem tất cả</a>
-          </p>
-          <div class="heading-02">Vị trí Bất động sản</div>
-          <section class="mgt-15 map-detail gmap-render">
-            {#            background-image: url(https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap)#}
-            <div class="_map-bg openBtn img-map"
-                 style="">
-              <img src="{{ listing.id|location_image }}"
-                   title="{{ listing.code }}" alt="{{ listing.title }}"/>
-              {% comment %}<div class="tooltip-map">
+        <div class="heading-02">Hình ảnh</div>
+        <div class="gallery-property collapsed" data-height="900">
+          {% for photo in listing.photos %}
+            <div class="cover">
+              <a href="#" title="{{ listing.title }}">
+                <img class="lazy fadeout"
+                     data-src="{{ photo.url }}"
+                     alt="{{ listing.title }}"
+                     title="{{ listing.title }}">
+                <span>Hình sản phẩm</span>
+              </a>
+            </div>
+          {% endfor %}
+          <div class="last-div"></div>
+        </div>
+        <p class="view-more-gray more">
+          <a href="#" title="Xem thêm / thu gọn" style="text-underline: none" class="collapse pdt-0"
+             is-more="true" more="Xem thêm" less="Thu gọn">Xem tất cả</a>
+        </p>
+        <div class="heading-02">Vị trí Bất động sản</div>
+        <section class="mgt-15 map-detail gmap-render">
+          {#            background-image: url(https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap)#}
+          <div class="_map-bg openBtn img-map"
+               style="">
+            <img src="{{ listing.id|location_image }}"
+                 title="{{ listing.code }}" alt="{{ listing.title }}"/>
+            {% comment %}<div class="tooltip-map">
                 <a>Nhấn vào để xem chi tiết</a>
               </div>{% endcomment %}
-              <div class="map--address">
-                <div class="address-property">
-                  <div class="left-100"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>
-                    <strong>{{ listing.title }}</strong>
-                  </div>
+            <div class="map--address">
+              <div class="address-property">
+                <div class="left-100"><i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>
+                  <strong>{{ listing.title }}</strong>
                 </div>
               </div>
             </div>
-
-            <div class="map-wrapper">
-              <a href="" class="full-screen-act" title="Fullscreen"></a>
-              <div id="render-map"></div>
-              <div class="cover-nearby">
-                <div class="nearby">
-                  <div class="parent-content">
-                    <form name="search-nearby">
-                      <input type="text" id="nearby-search" class="" autocomplete="on"
-                             spellcheck="false" dir="auto"
-                             placeholder="Tìm kiếm địa điểm gần đây">
-                    </form>
-                    <div class="title">
-                      <span>Bản đồ</span>
-                      <div class="list-icon traffic-type">
-                      </div>
-                    </div>
-                    <ul class="content directions pdb-0">
-                    </ul>
-                    <div class="title">Địa điểm gần nhất</div>
-                    <ul class="type checkbox nearby-places">
-                    </ul>
-                  </div>
-                </div>
-                <div class="icon-left-nearby ">
-                  <a class="location" href="#" title="Vị trí của BĐS"></a>
-                  <a class="icon-slide" href="#" title="Mở rộng / thu gọn"></a>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-        <div class="right-content visible-pc">
-          <div v-pre class="form-real-estate">
-            <h3 class="font-tiempos">Liên hệ tư vấn</h3>
-            <div class="cover__isa">
-              <img class="lazy fade" data-src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
-            </div>
-            <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
-            <p class="advisory__sub-title">Tư vấn hoàn toàn miễn phí</p>
-            <p class="text-small-center">
-              <span>Mã nhà đất:  <strong> {{ listing.code }} </strong></span>
-            </p>
-            <a data-phone-hidden="category: ContactProperty, event: ClickHiddenHotline" style="opacity: 0.6"
-               href="tel:{{ listing.realtor.user.phone }}" class="btn-primary btn-large btn-red btn-phone phone-hidden"><i
-              class="zmdi zmdi-phone"></i><span class="text">Gọi chuyên viên ngay</span></a>
-            <div class="divive">hoặc</div>
-            <ul class="group-cta">
-              <li>
-                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-hubspot-chat">Chat với TGNP</a>
-              </li>
-              <li>
-                <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-contact-me">Liên hệ lại tôi</a>
-              </li>
-            </ul>
           </div>
+
+          <div class="map-wrapper">
+            <a href="" class="full-screen-act" title="Fullscreen"></a>
+            <div id="render-map"></div>
+            <div class="cover-nearby">
+              <div class="nearby">
+                <div class="parent-content">
+                  <form name="search-nearby">
+                    <input type="text" id="nearby-search" class="" autocomplete="on"
+                           spellcheck="false" dir="auto"
+                           placeholder="Tìm kiếm địa điểm gần đây">
+                  </form>
+                  <div class="title">
+                    <span>Bản đồ</span>
+                    <div class="list-icon traffic-type">
+                    </div>
+                  </div>
+                  <ul class="content directions pdb-0">
+                  </ul>
+                  <div class="title">Địa điểm gần nhất</div>
+                  <ul class="type checkbox nearby-places">
+                  </ul>
+                </div>
+              </div>
+              <div class="icon-left-nearby ">
+                <a class="location" href="#" title="Vị trí của BĐS"></a>
+                <a class="icon-slide" href="#" title="Mở rộng / thu gọn"></a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="right-content visible-pc">
+        <div v-pre class="form-real-estate">
+          <h3 class="font-tiempos">Liên hệ tư vấn</h3>
+          <div class="cover__isa">
+            <img class="lazy fade" data-src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
+          </div>
+          <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
+          <p class="advisory__sub-title">Tư vấn hoàn toàn miễn phí</p>
+          <p class="text-small-center">
+            <span>Mã nhà đất:  <strong> {{ listing.code }} </strong></span>
+          </p>
+          <a data-phone-hidden="category: ContactProperty, event: ClickHiddenHotline" style="opacity: 0.6"
+             href="tel:{{ listing.realtor.user.phone }}" class="btn-primary btn-large btn-red btn-phone phone-hidden"><i
+            class="zmdi zmdi-phone"></i><span class="text">Gọi chuyên viên ngay</span></a>
+          <div class="divive">hoặc</div>
+          <ul class="group-cta">
+            <li>
+              <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-hubspot-chat">Chat với TGNP</a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-contact-me">Liên hệ lại tôi</a>
+            </li>
+          </ul>
         </div>
+      </div>
     </section>
     <div class="cta-bottom-wrapper listing__cta--bottom">
       <p class="listing__cta--bottom-id">{% trans "Mã nhà đất: " %}<strong>{{ listing.code }}</strong>
@@ -838,9 +849,9 @@
     </div>
 
     <section id="sticky" class="bg-white mgb-0">
-        <div class="right-content">
-          <div id="agent-fix" class="fixed-form"></div>
-        </div>
+      <div class="right-content">
+        <div id="agent-fix" class="fixed-form"></div>
+      </div>
     </section>
     <div class="mdialog" id="sell-now-form" style="background: none">
       <div class="popup-overlay">
@@ -923,145 +934,146 @@
       </section>
     </section>
 
-  {% if listings_same %}
-    <section class="background-gray">
-      <div>
-        <div class="heading-02 pd-tb-30 mgt-10">Nhà đất tương tự</div>
-        <div id="similar-property" class="flexslider main-content">
-          <div class="slider-buttons">
-            <a href="#" title="next"><span class="but-nextdetail-news flex-next"></span> </a>
-            <a href="#" title="prev"><span class="but-predetail-news flex-prev flex-disabled" tabindex="-1"></span> </a>
+    {% if listings_same %}
+      <section class="background-gray">
+        <div>
+          <div class="heading-02 pd-tb-30 mgt-10">Nhà đất tương tự</div>
+          <div id="similar-property" class="flexslider main-content">
+            <div class="slider-buttons">
+              <a href="#" title="next"><span class="but-nextdetail-news flex-next"></span> </a>
+              <a href="#" title="prev"><span class="but-predetail-news flex-prev flex-disabled" tabindex="-1"></span>
+              </a>
+            </div>
+            <ul class="exclusive slides">
+              {% for listing in listings_same %}
+                {% include "listings/_neighbourListing.html" %}
+              {% endfor %}
+            </ul>
           </div>
-          <ul class="exclusive slides">
-            {% for listing in listings_same %}
-              {% include "listings/_neighbourListing.html" %}
-            {% endfor %}
-          </ul>
         </div>
-      </div>
-    </section>
-  {% endif %}
+      </section>
+    {% endif %}
 
     <div id="property-contactbox-v2-app"></div>
     <div id="detailPopupContact">
-        <script type="text/x-template" id="detailPopupContactTemplate">
-    <div v-show="showContactPopup" class="popup-fade popup-property popup__listing--contact show">
-        <div class="popup-dialog popup-dialog-centered popup-dialog-large">
+      <script type="text/x-template" id="detailPopupContactTemplate">
+        <div v-show="showContactPopup" class="popup-fade popup-property popup__listing--contact show">
+          <div class="popup-dialog popup-dialog-centered popup-dialog-large">
             <div class="popup-content">
-                <button class="popup-close" @click.prevent="closePopup"><i class="zmdi zmdi-close"></i></button>
-                <div class="popup-left">
-                    <div class="popup-left-cover" style="padding-left: 5px; padding-top: 5px "><a
-                            href="javascript:void(0)">
-                        {% with listing.main_photo as photo %}
-                            <img class="card-img-top" src="{{ photo.url }}" alt="TGNP">
-                        {% endwith %}
-                    </a> <label class="status status-top status-monopoly" style="display: none;">Độc
-                        quyền</label></div>
-                    <div class="popup-left-content"><h3 class="popup-left-title"><a
-                            href="javascript:void(0)">{{ listing.title }}</a></h3>
-                        <div class="popup-left-address"></div>
-                        <ul class="popup-left-info">
-                            <li><i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b></li>
-                            {% if listing.floors %}
-                                <li><p>Số tầng:</p> <strong>{{ listing.floors }}</strong></li>
-                            {% endif %}
-                            {% if listing.bedrooms %}
-                                <li><p>Phòng ngủ:</p> <strong>{{ listing.bedrooms }}</strong></li>
-                            {% endif %}
-                            <li><p>Diện tích:</p> <strong>{{ listing.area }} m2</strong></li>
-                            {% if listing.bathrooms > 0%}
-                                <li><p>Phòng tắm:</p> <strong>{{ listing.bathrooms }}</strong></li>
-                            {% endif %}
-                            <li><p>Giá:</p> <strong class="color-red-base">{{ listing.price }} tỷ</strong></li>
-                        </ul>
-                    </div>
+              <button class="popup-close" @click.prevent="closePopup"><i class="zmdi zmdi-close"></i></button>
+              <div class="popup-left">
+                <div class="popup-left-cover" style="padding-left: 5px; padding-top: 5px "><a
+                  href="javascript:void(0)">
+                  {% with listing.main_photo as photo %}
+                    <img class="card-img-top" src="{{ photo.url }}" alt="TGNP">
+                  {% endwith %}
+                </a> <label class="status status-top status-monopoly" style="display: none;">Độc
+                  quyền</label></div>
+                <div class="popup-left-content"><h3 class="popup-left-title"><a
+                  href="javascript:void(0)">{{ listing.title }}</a></h3>
+                  <div class="popup-left-address"></div>
+                  <ul class="popup-left-info">
+                    <li><i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b></li>
+                    {% if listing.floors %}
+                      <li><p>Số tầng:</p> <strong>{{ listing.floors }}</strong></li>
+                    {% endif %}
+                    {% if listing.bedrooms %}
+                      <li><p>Phòng ngủ:</p> <strong>{{ listing.bedrooms }}</strong></li>
+                    {% endif %}
+                    <li><p>Diện tích:</p> <strong>{{ listing.area }} m2</strong></li>
+                    {% if listing.bathrooms > 0 %}
+                      <li><p>Phòng tắm:</p> <strong>{{ listing.bathrooms }}</strong></li>
+                    {% endif %}
+                    <li><p>Giá:</p> <strong class="color-red-base">{{ listing.price }} tỷ</strong></li>
+                  </ul>
                 </div>
-                <div class="popup-right">
-                    <div class="popup-right-content" style="display: none;">
-                        <div class="popup-header"><h5 class="popup-title">Liên hệ tư vấn</h5>
-                        </div>
-                        <div class="popup-body">
-                            <div class="popup-right-rva">
-                                <div class="rva-cover"><img src="/static/images/isa-team-v2.png"
-                                                            alt="TGNP"></div>
-                                <div class="rva-info">
-                                    <h3 class="rva-info-name">Chuyên viên đã sẵn sàng hỗ trợ!</h3>
-                                    <p class="rva-info-job-title">Tư vấn hoàn toàn miễn phí</p>
-                                </div>
-                            </div>
-                            <a href="tel:0971841941"
-                               class="phone-hidden_popup btn-primary btn-large btn-red popup-right-phone"><i
-                                    class="zmdi zmdi-phone"></i>
-                                <span class="text">Liên hệ chuyên viên ngay</span></a> <span
-                                class="text-small-centered">Hoặc</span>
-                            <div class="popup-right-cta">
-                                <button class="btn-primary btn-large btn-black-outline">Thương lượng giá</button>
-                                <button class="btn-primary btn-large btn-black-outline">Liên hệ lại tôi</button>
-                            </div>
-                        </div>
+              </div>
+              <div class="popup-right">
+                <div class="popup-right-content" style="display: none;">
+                  <div class="popup-header"><h5 class="popup-title">Liên hệ tư vấn</h5>
+                  </div>
+                  <div class="popup-body">
+                    <div class="popup-right-rva">
+                      <div class="rva-cover"><img src="/static/images/isa-team-v2.png"
+                                                  alt="TGNP"></div>
+                      <div class="rva-info">
+                        <h3 class="rva-info-name">Chuyên viên đã sẵn sàng hỗ trợ!</h3>
+                        <p class="rva-info-job-title">Tư vấn hoàn toàn miễn phí</p>
+                      </div>
                     </div>
-                    <div class="popup-right-form-up show ask-view" style="">
-                        <div class="popup-header"><h5 class="popup-title">Liên hệ lại tôi</h5>
-                            <button class="popup-back back-negotiate"><i
-                                    class="zmdi zmdi zmdi-hc-2x zmdi-long-arrow-left"></i>
-                            </button>
-                        </div>
-                        <div class="popup-body">
-                            <form id="detailContactForm" data-formtype="property-form"
-                                  data-formitem="property-request-info"
-                                  method="post" action="{% url 'post_contact' %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
-                                <input type="hidden" name="trantype" value="oder">
-                                <div class="form-element">
-                                    <input required type="text" name="firstname" v-model="data.firstname"
-                                           v-on:blur="validateRequired('firstname')"
-                                           v-on:input="e => handleInputChange('firstname', e)"/>
-                                    <span class="text-error" v-if="errors.firstname">[[errors.firstname]]</span>
-                                    <label>Họ</label>
-                                </div>
-                                <div class="form-element">
-                                    <input required type="text" name="lastname" v-model="data.lastname"
-                                           v-on:blur="validateRequired('lastname')"
-                                           v-on:input="e => handleInputChange('lastname', e)"/>
-                                    <span class="text-error" v-if="errors.lastname">[[errors.lastname]]</span>
-                                    <label>Tên</label>
-                                </div>
-                                <div class="form-element">
-                                    <input type="text" name="phone" required v-model="data.phone"
-                                           v-on:blur="validatePhone"
-                                           v-on:input="e => handleInputChange('phone', e)"/>
-                                    <span v-if="errors.phone" class="text-error">[[errors.phone]]</span>
-                                    <label>Số điện thoại</label>
-                                </div>
-                                <div class="form-element">
-                                    <input type="text" name="email" v-model="data.email"
-                                           v-on:input="e => handleInputChange('email', e)" v-on:blur="validateEmail"/>
-                                    <span class="text-error">[[errors.email]]</span>
-                                    <label>Email (không bắt buộc)</label>
-                                </div>
-                                <div class="form-element focused" style="display: none;">
-                                    <input inputmode="decimal"/>
-                                    <div style="display: none;"><span
-                                            class="text-error">Giá thương lượng không hợp lệ</span>
-                                    </div>
-                                    <label>Giá mong muốn</label></div>
-                                <div class="form-element" style="">
-                                    <input required name="message" type="text"
-                                           value="Tôi liên hệ để xem BĐS có mã {{ listing.code }}"/>
-                                    <label>Lời nhắn</label>
-                                </div>
-                                <div class="form-element">
-                                    <button type="submit" class="btn-primary btn-red btn-medium">Gửi ngay</button>
-                                </div>
-                            </form>
-                        </div>
+                    <a href="tel:0971841941"
+                       class="phone-hidden_popup btn-primary btn-large btn-red popup-right-phone"><i
+                      class="zmdi zmdi-phone"></i>
+                      <span class="text">Liên hệ chuyên viên ngay</span></a> <span
+                    class="text-small-centered">Hoặc</span>
+                    <div class="popup-right-cta">
+                      <button class="btn-primary btn-large btn-black-outline">Thương lượng giá</button>
+                      <button class="btn-primary btn-large btn-black-outline">Liên hệ lại tôi</button>
                     </div>
+                  </div>
                 </div>
+                <div class="popup-right-form-up show ask-view" style="">
+                  <div class="popup-header"><h5 class="popup-title">Liên hệ lại tôi</h5>
+                    <button class="popup-back back-negotiate"><i
+                      class="zmdi zmdi zmdi-hc-2x zmdi-long-arrow-left"></i>
+                    </button>
+                  </div>
+                  <div class="popup-body">
+                    <form id="detailContactForm" data-formtype="property-form"
+                          data-formitem="property-request-info"
+                          method="post" action="{% url 'post_contact' %}">
+                      {% csrf_token %}
+                      <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
+                      <input type="hidden" name="trantype" value="oder">
+                      <div class="form-element">
+                        <input required type="text" name="firstname" v-model="data.firstname"
+                               v-on:blur="validateRequired('firstname')"
+                               v-on:input="e => handleInputChange('firstname', e)"/>
+                        <span class="text-error" v-if="errors.firstname">[[errors.firstname]]</span>
+                        <label>Họ</label>
+                      </div>
+                      <div class="form-element">
+                        <input required type="text" name="lastname" v-model="data.lastname"
+                               v-on:blur="validateRequired('lastname')"
+                               v-on:input="e => handleInputChange('lastname', e)"/>
+                        <span class="text-error" v-if="errors.lastname">[[errors.lastname]]</span>
+                        <label>Tên</label>
+                      </div>
+                      <div class="form-element">
+                        <input type="text" name="phone" required v-model="data.phone"
+                               v-on:blur="validatePhone"
+                               v-on:input="e => handleInputChange('phone', e)"/>
+                        <span v-if="errors.phone" class="text-error">[[errors.phone]]</span>
+                        <label>Số điện thoại</label>
+                      </div>
+                      <div class="form-element">
+                        <input type="text" name="email" v-model="data.email"
+                               v-on:input="e => handleInputChange('email', e)" v-on:blur="validateEmail"/>
+                        <span class="text-error">[[errors.email]]</span>
+                        <label>Email (không bắt buộc)</label>
+                      </div>
+                      <div class="form-element focused" style="display: none;">
+                        <input inputmode="decimal"/>
+                        <div style="display: none;"><span
+                          class="text-error">Giá thương lượng không hợp lệ</span>
+                        </div>
+                        <label>Giá mong muốn</label></div>
+                      <div class="form-element" style="">
+                        <input required name="message" type="text"
+                               value="Tôi liên hệ để xem BĐS có mã {{ listing.code }}"/>
+                        <label>Lời nhắn</label>
+                      </div>
+                      <div class="form-element">
+                        <button type="submit" class="btn-primary btn-red btn-medium">Gửi ngay</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</script>
+      </script>
     </div>
   </div>
 
