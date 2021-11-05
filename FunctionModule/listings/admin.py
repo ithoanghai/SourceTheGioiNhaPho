@@ -30,14 +30,17 @@ class ListingVideoAdmin(admin.TabularInline):
     verbose_name = "VIDEO QUAY BĐS"
 
 
+
+
 class ListingAdmin(admin.ModelAdmin):
     list_display = ('code', 'title', 'price', 'location_name', 'list_date', 'realtor_name', 'is_published')
     list_display_links = ('code',)
-    list_filter = ('price', 'list_date',)
+    list_filter = ('is_published',)
     list_editable = ('title',)
     search_fields = ('title', 'code', 'address', 'price', 'street', 'district',)
     list_per_page = 50
     inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
+    actions = ['make_published', 'unpublished']
     form = ListingAdminForm
 
     class Media:
@@ -75,6 +78,13 @@ class ListingAdmin(admin.ModelAdmin):
         except TypeError:
             return to_exclude
 
+    def make_published(self, request, queryset):
+        updated = queryset.update(is_published=True)
+        self.message_user(request, f'Đã đổi trạng thái cho {updated} căn')
+
+    def unpublished(self, request, queryset):
+        updated = queryset.update(is_published=False)
+        self.message_user(request, f'Đã đổi trạng thái cho {updated} căn')
 
 @admin.site.register_view('listings/listing/import-listing')
 def import_csv_view(request: HttpRequest) -> JsonResponse:
