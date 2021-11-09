@@ -58,12 +58,14 @@
 </script>
 
 <!-- Chống sao chép website-->
+{% comment %}
     <script type="text/javascript">
     $(document).ready(function(){
     $('*').bind('cut copy paste contextmenu', function (e) {
         e.preventDefault();
     })});
     </script>
+{% endcomment %}
 
 <!-- Start of HubSpot Embed Code -->
 <script type="text/javascript" id="hs-script-loader" async src="//js-na1.hs-scripts.com/19875873.js"></script>

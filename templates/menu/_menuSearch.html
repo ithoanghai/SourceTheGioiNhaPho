@@ -37,7 +37,7 @@
           {% include "menu/_subMenuBuy.html" %}
           {% include "menu/_subMenuSell.html" %}
           {% include "menu/_subMenuBuySell.html" %}
-          {% include "menu/_subMenuProject.html" %}
+          {% comment %}{% include "menu/_subMenuProject.html" %}{% endcomment %}
           {% include "menu/_subMenuSupport.html" %}
         </ul>
       </div>
@@ -83,7 +83,7 @@
         {% include "menu/_subMenuBuy.html" %}
         {% include "menu/_subMenuSell.html" %}
         {% include "menu/_subMenuBuySell.html" %}
-        {% include "menu/_subMenuProject.html" %}
+        {% comment %}{% include "menu/_subMenuProject.html" %}{% endcomment %}
         {% include "menu/_subMenuSupport.html" %}
       </ul>
     </div>
@@ -103,7 +103,7 @@
 
 <script type="text/x-template" id="topSearchTemplate">
   <div class="top-search">
-    <a href="#">aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</a>
+    <a href="#"></a>
     <form action="{% url "listing_search" %}">
       <div tabindex="0" class="search-type"><span>Mua nhà</span>
         <ul class="hide">

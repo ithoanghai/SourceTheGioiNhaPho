@@ -91,7 +91,8 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    margin-right: 20px
+    margin-right: 20px;
+    width:100%;
 }
 
 .main-header .col-left .top-menu ul li {
@@ -108,8 +109,9 @@
     display: block;
     position: relative;
     width: 44px;
-    min-width: 44px;
-    height: 44px
+/*    min-width: 44px;
+    height: 44px*/
+    margin: auto;
 }
 
 .main-header .col-left .logo-large > a img {
@@ -130,8 +132,9 @@
     display: block;
     position: relative;
     width: 44px;
-    min-width: 44px;
-    height: 44px
+/*    min-width: 44px;
+    height: 44px*/
+    margin: auto;
 }
 
 .main-header .col-left .logo > a img {
@@ -1484,3 +1487,4 @@ header#home::before {
         padding: 0 18px
     }
 }
+

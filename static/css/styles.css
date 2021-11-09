@@ -656,7 +656,7 @@ section div.width1140 div div.flex-viewport ul.slides li div.title {
 .cta-bottom-wrapper.listing__cta--bottom {
     height: auto;
     padding: 8px 16px;
-    z-index: 40000
+    z-index: 2
 }
 
 .cta-bottom-wrapper.listing__cta--bottom p {

@@ -1,3 +1,5 @@
+import fractions
+
 from django.contrib import admin
 from django.core.files.storage import default_storage
 from django.core.files.uploadedfile import UploadedFile
@@ -7,6 +9,7 @@ from FunctionModule.listings.import_csv import handle_import
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage
 from ..realtors.models import Realtor
+from fractions import *
 
 
 class ContractPhotoAdmin(admin.TabularInline):
@@ -33,11 +36,11 @@ class ListingVideoAdmin(admin.TabularInline):
 
 
 class ListingAdmin(admin.ModelAdmin):
-    list_display = ('code', 'title', 'price', 'location_name', 'list_date', 'realtor_name', 'is_published')
-    list_display_links = ('code',)
-    list_filter = ('is_published',)
-    list_editable = ('title',)
-    search_fields = ('title', 'code', 'address', 'price', 'street', 'district',)
+    list_display = ('code', 'address', 'district','area', 'floors', 'width', 'price', 'house_type', 'road_type', 'realtor', 'is_published')
+    list_display_links = ('code','district',)
+    list_filter = ('is_published', 'realtor', 'state')
+    list_editable = ('address',)
+    search_fields = ('title', 'code', 'address','area', 'price','house_type', 'road_type', 'urban_area', 'street','ward', 'district','state', 'list_date',)
     list_per_page = 50
     inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
     actions = ['make_published', 'unpublished']
@@ -49,12 +52,6 @@ class ListingAdmin(admin.ModelAdmin):
         css = {
             'all': ('admin/css/dropzone.css', 'admin/css/listing.css', 'admin/css/filepond.min.css')
         }
-
-    def realtor_name(self, obj: Realtor):
-        return obj.realtor.user.name
-
-    def location_name(self, obj: Listing):
-        return f'%s - %s' % (obj.ward_name() , obj.district_name())
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)

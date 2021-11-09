@@ -27,7 +27,7 @@
       </a>
       <div class="banner-app-info">
         <a href="javascript:void(0)">Thế giới Nhà Phố</a>
-        <p>Mua bán nhà dễ dàng</p>
+        <p>Mua bán, tìm kiếm Bất động sản thật, nhanh chóng, tin cậy</p>
         <div class="rating-star">
           <i class="zmdi zmdi-star evaluated"></i>
           <i class="zmdi zmdi-star evaluated"></i>
@@ -39,17 +39,6 @@
     </div>
     <a href="javascript:void(0)" class="btn-install">Mở</a>
   </div>
-
-  <section class="container col-12">
-    <div class="inner text-center-index block-introduce">
-      <h2 class="heading-02">Hỗ trợ từng bước, chi phí thấp nhất</h2>
-      <p class="col-8">Thế Giới Nhà Phố (TGNP) với thế mạnh về công nghệ và cung cấp đầy đủ các dịch vụ, cùng với đội
-        ngũ chuyên
-        viên hiểu biết sâu sắc thị trường từng khu vực, sẽ đồng hành hỗ trợ bạn từng bước, giúp bạn tiết kiệm
-        đáng kể chi phí, công sức và thời gian.</p>
-      <a class="btn-primary btn-large btn-black-outline" target="_blank" href="{% url 'whyChoose' %}">Tìm hiểu thêm</a>
-    </div>
-  </section>
 
   {% if listings_for_sale %}
     <section class="container col-12">
@@ -70,6 +59,16 @@
       </div>
     </section>
   {% endif %}
+
+  <section class="container col-12">
+    <div class="inner text-center-index block-introduce">
+      <h2 class="heading-02">Tìm kiếm cực nhanh - Thông tin chính xác - Hỗ trợ miễn phí</h2>
+      <p class="col-8">Thế Giới Nhà Phố (TGNP) với thế mạnh về công nghệ và cung cấp đầy đủ các dịch vụ, cùng với đội
+        ngũ chuyên viên hiểu biết sâu sắc thị trường từng khu vực, sẽ đồng hành hỗ trợ bạn tìm kiếm bất động sản tốt nhất, thông tin chúng tôi cung cấp là hoàn toàn chính xác, giúp bạn tiết kiệm
+        đáng kể chi phí, công sức và thời gian.</p>
+      <a class="btn-primary btn-large btn-black-outline" target="_blank" href="{% url 'whyChoose' %}">Tìm hiểu thêm</a>
+    </div>
+  </section>
 
   <section class="container col-12">
     <div class="inner pd-top-bottom-block quickly-sell">

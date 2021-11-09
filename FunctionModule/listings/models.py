@@ -83,7 +83,7 @@ class Listing(models.Model):
     bathrooms = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)],
                                     choices=([(i, i) for i in range(1, 100)]), verbose_name=_("Số phòng tắm"),
                                     null=True, blank=True)
-    direction = models.CharField(max_length=20, choices=Direction.choices, verbose_name=_("Hướng"))
+    direction = models.CharField(max_length=20, blank=True, null=True, choices=Direction.choices, verbose_name=_("Hướng"))
     title = models.CharField(max_length=200, verbose_name=_("Tiêu đề đăng (VIẾT HOA)"),
                              help_text=_("Gợi ý: Từ khoá + Vị trí (Đường/Phố/Khu) + Diện tích + Tiện ích + Giá + Sổ"))
     description = models.TextField(blank=True, verbose_name=_("Mô tả bất động sản"), help_text=_(

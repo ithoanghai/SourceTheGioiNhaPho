@@ -124,7 +124,6 @@ class Status(models.TextChoices):
 
 
 class Direction(models.TextChoices):
-    none = 'none', _("Chưa xác định")
     east = 'east', _("Đông")
     south_east = 'south-east', _("Đông - Nam")
     south = 'south', _("Nam")

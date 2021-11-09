@@ -3471,7 +3471,7 @@ ul.exclusive li.featured header li .zmdi {
     -ms-flex-align: center;
     align-items: center;
     position: absolute;
-    z-index: 5;
+    z-index: 1;
     right: 30px;
     top: 30px
 }
@@ -4455,7 +4455,8 @@ ul.detailroom li div span:hover + div.detail-house-info {
 .content-detail-house header.detail-house ul.detailroom li {
     margin-right: 3%;
     font-size: 15px;
-    color: #212025
+    color: #212025;
+    margin: auto;
 }
 
 .content-detail-house .right-content {

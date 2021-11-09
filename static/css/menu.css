@@ -239,7 +239,7 @@
 
 .main-header .col-left .main-nav-menu ul li ul {
     background: #f3f4f7;
-    display: block
+    display: none
 }
 
 .main-header .col-left .main-nav-menu ul li ul li a {

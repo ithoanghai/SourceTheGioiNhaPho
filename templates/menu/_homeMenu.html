@@ -10,7 +10,7 @@
         {% include "menu/_subMenuBuy.html" %}
         {% include "menu/_subMenuSell.html" %}
         {% include "menu/_subMenuBuySell.html" %}
-        {% include "menu/_subMenuProject.html" %}
+        {% comment %}{% include "menu/_subMenuProject.html" %}{% endcomment %}
         {% include "menu/_subMenuSupport.html" %}
       </ul>
     </div>
@@ -19,7 +19,9 @@
       <a href="{% url 'index' %}" title="Thế giới Nhà Phố logo">
         <img src="{% static 'img/logo-nen-trang.svg' %}" alt="Thế giới Nhà Phố">
       </a>
-      <div class="main-nav-menu">
+    </div>
+
+     <div class="main-nav-menu">
         <div class="main-nav-menu__head">
           <a href="{% url 'index' %}" class="logo">
             <img src="{% static 'img/logo-ko-chu.svg' %}" alt="Thế giới Nhà Phố">
@@ -28,30 +30,11 @@
             <i class="zmdi zmdi-close"></i>
           </button>
         </div>
-        <div class="login">
-          <div class="user-login">
-            {% if user.is_authenticated %}
-              <span style="font-size: smaller; line-height: 1.1em">Chào <a href="{% url "profile" %}"> {{ user.name }}</a></span>
-            {% else %}
-                <a href="#login" title="Đăng nhập" class="btn-primary btn-black-outline btn-medium btn-login"> {% translate 'Đăng nhập' %}</a>
-              <a href="{% url 'register' %}" title="Đăng ký"
-                 class="btn-primary btn-red-outline btn-medium btn-signup">Đăng ký</a>
-            {% endif %}
-          </div>
-        </div>
         <ul>
           <li class="sub-menu">
-            <a href="{% url 'index' %}">Trang chủ</a>
-          </li>
-          {% include "menu/_subMenuBuy.html" %}
-          {% include "menu/_subMenuSell.html" %}
-          {% include "menu/_subMenuBuySell.html" %}
-          {% include "menu/_subMenuProject.html" %}
-          {% include "menu/_subMenuSupport.html" %}
-          <li class="sub-menu">
-                {% if user.is_authenticated %}
-                    <a>Người dùng<i class="zmdi zmdi-chevron-down"></i></a>
-                    <ul>
+            {% if user.is_authenticated %}
+                <a>Chào {{ user.name }} <i class="zmdi zmdi-chevron-down"></i></a>
+                <ul style="display: none">
                         <li>
                             <a href="{% url "profile" %}"> <i class="ni ni-single-02"></i> {% translate 'Trang cá nhân' %}</a>
                         </li>
@@ -80,12 +63,26 @@
                         </li>
 
                     </ul>
-                {% endif %}
-            </li>
+            {% else %}
+                <a href="#login" title="Đăng nhập" class="btn-primary btn-black-outline btn-medium btn-login"> {% translate 'Đăng nhập' %}</a>
+              <a href="{% url 'register' %}" title="Đăng ký"
+                 class="btn-primary btn-red-outline btn-medium btn-signup">Đăng ký</a>
+            {% endif %}
+          </li>
+        </ul>
+        <ul>
+          <li class="sub-menu">
+            <a href="{% url 'index' %}">Trang chủ</a>
+          </li>
+          {% include "menu/_subMenuBuy.html" %}
+          {% include "menu/_subMenuSell.html" %}
+          {% include "menu/_subMenuBuySell.html" %}
+          {% include "menu/_subMenuProject.html" %}
+          {% include "menu/_subMenuSupport.html" %}
+
         </ul>
       </div>
       <div class="main-nav-menu__overlay"></div>
-    </div>
   </div>
   <div class="col-center">
     <div class="logo-large">
