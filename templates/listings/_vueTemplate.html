@@ -1,18 +1,14 @@
 {% load static i18n get_cadastral listing %}
 
 <script type="text/x-template" id="propertyListTemplate">
-  <div id="propertyList" class="row" v-bind:class="{grid: isViewGrid}">
+  <div id="propertyList" class="row " v-bind:class="{grid: isViewGrid}">
     <div v-for="listing in listings" :key="listing.id" class="col property-itemz" :id="`property-tgnp-${listing.id}`">
-      <article class="box listView">
-        <div class="cover-image realty-search pic-realty-search" style="height: 240px">
-          <img
-            :src="listing.main_photo || '{{ listing.house_type|default_img_by_house_type }}'"
-            v-bind:alt="listing.title"
-            onerror="this.src='{% static "img/default.png" %}'"
-          />
+      <article v-show="isViewGrid" class="box listView">
+        <div class="cover-image realty-search pic-realty-search" style="height: 240px;">
+          <img :src="listing.main_photo || '{{ listing.house_type|default_img_by_house_type }}'"
+            v-bind:alt="listing.title" onerror="this.src='{% static "img/default.png" %}'"/>
           <a class="view-realty-search transition" :href="getListingDetailURL(listing.id)" target="_blank"
-             :title="listing.title"
-          >
+             :title="listing.title">
             <span><i>Xem chi tiết</i></span>
           </a>
           <button data-action="favorite" data-id="{{ listing.id }}"
@@ -23,23 +19,10 @@
             <label class="label-primary unique p-1"><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></label>
             <label v-if="listing.is_exclusive" class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
           </div>
-          <div style="display: none" class="overview-quick-look">
-            <div class="btn-quick-look">
-              <a class="btn-primary" id="quick-look" href="#">
-                Xem nhanh
-              </a>
-              <a class="btn-primary" target="_blank"
-                 :href="getListingDetailURL(listing.id)"
-                 title="{{ listing.title }}">
-                Xem chi tiết
-              </a>
-            </div>
-          </div>
         </div>
         <div class="info-container">
           <div class="group-grid__view">
-            <div class="listing-price">[[ listing.price
-              ]] {% trans "tỷ" %}</div>
+            <div class="listing-price">[[ listing.price ]] {% trans "tỷ" %}</div>
             <ul class="listing-info">
               <li>
                 <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}
@@ -59,7 +42,72 @@
           <h3>
             <a class="listing-name" :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.title]]</a>
           </h3>
-          <div class="listing-address">
+          <div class="listing-address" >
+            <h4 v-if="listing.urban_area">
+              <a :href="`/listings/search?urban_area=${listing.urban_area}`" title="">[[listing.urban_area]]</a>
+            </h4>
+            <h4>
+              <a :href="`/listings/search?street=${listing.street}`" title="">[[listing.street]]</a>
+            </h4>
+            <h4 v-if="listing.ward"><a :href="`/listings/search?ward=${listing.ward}`" title="Phường/Xã">[[listing.ward_name]]</a>
+            </h4>
+            <h4 v-if="listing.district">
+              <a :href="`/listings/search?district=${listing.district}`"
+                 title=""><b>[[listing.district_name]]</b></a>
+            </h4>
+            <h4 v-if="listing.state">
+              <a :href="`/listings/search?state=${listing.state}`"
+                 title=""><b>[[listing.state_name]]</b></a>
+            </h4>
+          </div>
+          <ul  class="listing-info">
+            <li><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]]{% trans "m2" %}</li>
+              <li v-if="listing.floors && listing.floors > 0">
+                <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
+              </li>
+              <li v-if="listing.bedrooms && listing.bedrooms > 0">
+                <i class="fa fas fa-bed"></i> [[listing.bedrooms]] {% trans "ngủ" %}
+              </li>
+              <li v-if="listing.bathrooms && listing.bathrooms > 0">
+                <i class="fa fa-bath"></i> [[listing.bathrooms]] {% trans "tắm" %}
+              </li>
+          </ul>
+          <div class="action-group" >
+            <div class="action-group--left">
+              <div class="listing-price">[[listing.price]] {% trans "tỷ" %}</div>
+            <label class="label-primary unique p-1"><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></label>
+            <label v-if="listing.is_exclusive" class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
+            </div>
+            <div class="action-group--right action-group--cta">
+              <button data-action="favorite" data-id="{{ listing.id }}"
+                      data-alias="{{ listing.title }}"
+                      data-type="sale_property" data-favorited="false"
+                      class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>
+            </div>
+          </div>
+        </div>
+      </article>
+       <article v-show="!isViewGrid" class="box listView">
+        <div class="row" >
+          <div class="group-grid__view">
+            <div class="listing-price">[[ listing.price ]] {% trans "tỷ" %}</div>
+            <ul class="listing-info">
+              <li>
+                <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}
+              </li>
+              <li v-if="listing.floors && listing.floors > 0">
+                <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
+              </li>
+              <li v-if="listing.bedrooms && listing.bedrooms > 0">
+                <i class="fa fas fa-bed"></i> [[listing.bedrooms]] {% trans "ngủ" %}
+              </li>
+              <li v-if="listing.bathrooms && listing.bathrooms > 0">
+                <i class="fa fa-bath"></i> [[listing.bathrooms]] {% trans "tắm" %}
+              </li>
+            </ul>
+
+          </div>
+          <div class="listing-address" >
             <h4 v-if="listing.urban_area">
               <a :href="`/listings/search?urban_area=${listing.urban_area}`" title="">[[listing.urban_area]]</a>
             </h4>
@@ -79,28 +127,25 @@
           </div>
           <ul class="listing-info">
             <li><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]]{% trans "m2" %}</li>
-            <li v-if="listings.floors && listing.floors > 0"><i class="fa fa-h-square"></i>
-              [[listing.floors]] {% trans "tầng" %}</li>
-            <li v-if="listing.bedrooms > 0"><i
-              class="fa fas fa-bed"></i> [[listing.bedrooms]] {% trans "ngủ" %}</li>
-            <li v-if="listing.bathrooms > 0"><i
-              class="fa fa-bath"></i> [[listing.bathrooms]] {% trans "tắm" %} </li>
+              <li v-if="listing.floors && listing.floors > 0">
+                <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
+              </li>
+              <li v-if="listing.bedrooms && listing.bedrooms > 0">
+                <i class="fa fas fa-bed"></i> [[listing.bedrooms]] {% trans "ngủ" %}
+              </li>
+              <li v-if="listing.bathrooms && listing.bathrooms > 0">
+                <i class="fa fa-bath"></i> [[listing.bathrooms]] {% trans "tắm" %}
+              </li>
           </ul>
-          <div class="action-group">
+          <div class="action-group" >
             <div class="action-group--left">
               <div class="listing-price">[[listing.price]] {% trans "tỷ" %}</div>
-              <label class="label-primary unique p-1"><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></label>
-              <label v-if="listing.is_exclusive" class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
-            </div>
-            <div class="action-group--right action-group--cta">
-              <button data-action="favorite" data-id="{{ listing.id }}"
-                      data-alias="{{ listing.title }}"
-                      data-type="sale_property" data-favorited="false"
-                      class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>
+            <label class="label-primary unique p-1"><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></label>
             </div>
           </div>
         </div>
       </article>
+
     </div>
 
     <div class="search-noresult">

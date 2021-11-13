@@ -80,7 +80,7 @@ def prepare_listing_queryset(input_params):
     if 'keywords' in input_params:
         keywords = input_params.get('keywords')
         if keywords:
-            search_vector = SearchVector("address", "street")
+            search_vector = SearchVector("address", "street", "code")
             search_query = SearchQuery(keywords)
             queryset_list = queryset_list.annotate(search=search_vector).filter(search=search_query)
 

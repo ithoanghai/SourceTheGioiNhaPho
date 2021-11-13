@@ -60,7 +60,7 @@
         <div class="search-type-mobile">
           Mua •
         </div>
-        <input placeholder="Nhập địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
+        <input placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
                v-model="query" v-on:input="handleQueryChange"
                v-bind:class="{ inputInProgress: isLoading, }"
                v-on:focus="handleFocus"
@@ -121,7 +121,7 @@
         Mua •
       </div>
       <div style="width: 100%" v-click-outside="handleFocus">
-        <input placeholder="Nhập địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
+        <input placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
                name="keywords"
                spellcheck="false" dir="auto"
                v-model="query"

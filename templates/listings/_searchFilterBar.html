@@ -1,6 +1,6 @@
 <div class="secondaryBar">
   <div class="secondaryBar-left">
-    <p class="text-verified">100% xác thực <span class="tooltip verified-tooltip" aria-expanded="false"><i
+    <p class="text-verified">Thông tin 100% chính xác, đã xác thực <span class="tooltip verified-tooltip" aria-expanded="false"><i
       class="zmdi zmdi-info-outline"></i></span></p>
     <h1 title="Mua bán nhà đất căn hộ Hồ Chí Minh" class="keyword">Mua bán nhà đất căn hộ tốt nhất Hà Nội</h1>
   </div>
@@ -264,7 +264,8 @@
     </ul>
   </div>
   <div class="view">
-    <button @click.prevent="viewAsGrid()" :class="{active: isViewGrid}" class="zmdi zmdi-view-module"></button>
-    <button @click.prevent="viewAsList()" :class="{active: !isViewGrid}" class="zmdi zmdi-view-stream"></button>
+    <button @click.prevent="viewAsGrid()" :class="{active: isViewGrid}" title="Xem danh sách BĐS dạng ô" class="zmdi zmdi-view-module"></button>
+    <button @click.prevent="viewAsList()" :class="{active: isViewAsList}" title="Xem danh sách BĐS có ảnh" class="zmdi zmdi-view-stream"></button>
+    <button @click.prevent="viewAsSimple()" :class="{active: isViewAsSimple}" title="Xem danh sách BĐS đơn giản" class="zmdi zmdi-view-list"></button>
   </div>
 </div>

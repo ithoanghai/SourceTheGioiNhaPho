@@ -149,6 +149,9 @@ const PropertyListComponent = Vue.extend({
         listings: Array,
         pagination: Object,
         isViewGrid: Boolean,
+        isViewAsList: Boolean,
+        isViewAsSimple: Boolean,
+        Simple: Boolean,
         isLoading: Boolean,
         goTo: Function,
         showContactProject: Function,
@@ -190,6 +193,8 @@ new Vue({
             isExclusiveFilter: undefined,
             statusFilters: [],
             isViewGrid: true,
+            isViewAsList: false,
+            isViewAsSimple: false,
             isFirstLoad: true,
             isLoading: false,
             sortOption: 'created',
@@ -568,9 +573,18 @@ new Vue({
         },
         viewAsGrid: function () {
             this.isViewGrid = true;
+            this.isViewAsList = false;
+            this.isViewAsSimple = false;
         },
         viewAsList: function () {
+            this.isViewAsList = true;
             this.isViewGrid = false;
+            this.isViewAsSimple = false;
+        },
+        viewAsSimple: function () {
+            this.isViewAsSimple = true;
+            this.isViewGrid = false;
+            this.isViewAsList = false;
         },
         getQueryParams: function () {
             return this.queryParams;

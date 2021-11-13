@@ -205,25 +205,24 @@ def handle_import(file_path, listing_type='K1'):
                     except ValueError:
                         # logger.info(f"Cannot decode floor_area. Continue in line {line_count}")
                         continue
-
-                floor_code = slugify(splitter[1].lower().replace('đ', 'd').replace('t', ''))
+                floor = 0
+                floor_code = slugify(splitter[1].lower().replace('đ', 'd').replace('ấ', 'a').replace('t', ''))
                 if floor_code == 'C4' or floor_code == 'c' or floor_code == 'cap 4':
-                    floor = 1.0
+                    floor = 1
                     house_type = HouseType.TOWN_HOUSE
                 elif floor_code == 'da' or floor_code == 'd':
+                    floor = 0
                     house_type = HouseType.LAND
                 else:
                     house_type = HouseType.TOWN_HOUSE
                     if splitter_len == 2:
-                        floor = float(len(floor_area))
+                        floor = int(len(floor_area))
                     else:
                         try:
-                            floor = float(floor_code)
+                            floor = int(floor_code)
                         except ValueError:
                             # logger.info(f"Cannot decode floor_code. Continue in line {line_count}")
                             continue
-                if not floor.is_integer():
-                    continue
                 direction = get_direction(row[header_dict['huong']])
                 try:
                     # area = float(row[header_dict['dt']].replace('c4', ''))
@@ -250,7 +249,7 @@ def handle_import(file_path, listing_type='K1'):
                 extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch'
 
                 starter = get_house_type_short(house_type)
-                code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}_{int(area)}_{int(floor)}_{width}_{price}'
+                code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
 
                 new_listing = Listing(realtor=realtor, code=code, status=status, street=street,
                                       address=full_addr, area=area, transaction_type=trans_type,

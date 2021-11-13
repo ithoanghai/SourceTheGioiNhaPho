@@ -11,13 +11,13 @@
     </a>
     <ul v-show="showSortOptions" class="sort-listing--option">
       <li style="cursor: pointer" :class="{active: sortOption=='created'}" title="Mới nhất"
-          @click.prevent="sortBy('created')">Mới nhất
+          @click.prevent="sortBy('created')">Sắp xếp BĐS mới nhất trước
       </li>
       <li style="cursor: pointer" :class="{active: sortOption=='price_higher'}" title="Giá tăng dần"
-          @click.prevent="sortBy('price_ascend')">Giá tăng dần
+          @click.prevent="sortBy('price_ascend')">Sắp xếp theo Giá BĐS tăng dần
       </li>
       <li style="cursor: pointer" :class="{active: sortOption=='price_lower'}" title="Giá giảm dần"
-          @click.prevent="sortBy('price_descend')">Giá giảm dần
+          @click.prevent="sortBy('price_descend')">Sắp xếp theo Giá giảm dần
       </li>
     </ul>
   </div>
@@ -25,30 +25,6 @@
 
 <div class="result-body">
   <div class="row grid" v-if="isLoading">
-    <div class="col lazy-loading">
-      <div class="box listView vue-content-placeholders vue-content-placeholders-is-animated">
-        <div class="cover-image vue-content-placeholders-img"></div>
-        <div class="info-container vue-content-placeholders-text">
-          <div class="vue-content-placeholders-text__line"></div>
-          <div class="vue-content-placeholders-text__line"></div>
-          <div class="vue-content-placeholders-text__line"></div>
-          <div class="vue-content-placeholders-text__line"></div>
-          <div class="vue-content-placeholders-text__line"></div>
-        </div>
-      </div>
-    </div>
-    <div class="col lazy-loading">
-      <div class="box listView vue-content-placeholders vue-content-placeholders-is-animated">
-        <div class="cover-image vue-content-placeholders-img"></div>
-        <div class="info-container vue-content-placeholders-text">
-          <div class="vue-content-placeholders-text__line"></div>
-          <div class="vue-content-placeholders-text__line"></div>
-          <div class="vue-content-placeholders-text__line"></div>
-          <div class="vue-content-placeholders-text__line"></div>
-          <div class="vue-content-placeholders-text__line"></div>
-        </div>
-      </div>
-    </div>
     <div class="col lazy-loading">
       <div class="box listView vue-content-placeholders vue-content-placeholders-is-animated">
         <div class="cover-image vue-content-placeholders-img"></div>

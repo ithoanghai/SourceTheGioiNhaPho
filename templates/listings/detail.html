@@ -884,6 +884,26 @@
       </div>
     </div>
 
+        {% if listings_same %}
+      <section class="background-gray">
+        <div>
+          <div class="heading-02 pd-tb-30 mgt-10">Nhà đất tương tự</div>
+          <div id="similar-property" class="flexslider main-content">
+            <div class="slider-buttons">
+              <a href="#" title="next"><span class="but-nextdetail-news flex-next"></span> </a>
+              <a href="#" title="prev"><span class="but-predetail-news flex-prev flex-disabled" tabindex="-1"></span>
+              </a>
+            </div>
+            <ul class="exclusive slides">
+              {% for listing in listings_same %}
+                {% include "listings/_neighbourListing.html" %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
     <section class="background-gray">
       <section class="main-content">
         <div class="heading-02 mgt-10">Nhà đất lân cận</div>
@@ -947,26 +967,6 @@
         </div>
       </section>
     </section>
-
-    {% if listings_same %}
-      <section class="background-gray">
-        <div>
-          <div class="heading-02 pd-tb-30 mgt-10">Nhà đất tương tự</div>
-          <div id="similar-property" class="flexslider main-content">
-            <div class="slider-buttons">
-              <a href="#" title="next"><span class="but-nextdetail-news flex-next"></span> </a>
-              <a href="#" title="prev"><span class="but-predetail-news flex-prev flex-disabled" tabindex="-1"></span>
-              </a>
-            </div>
-            <ul class="exclusive slides">
-              {% for listing in listings_same %}
-                {% include "listings/_neighbourListing.html" %}
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </section>
-    {% endif %}
 
     <div id="property-contactbox-v2-app"></div>
     <div id="detailPopupContact">
