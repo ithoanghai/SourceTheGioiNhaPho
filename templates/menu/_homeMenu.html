@@ -30,7 +30,7 @@
             <i class="zmdi zmdi-close"></i>
           </button>
         </div>
-        <ul>
+        <ul class="login">
           <li class="sub-menu">
             {% if user.is_authenticated %}
                 <a>Chào {{ user.name }} <i class="zmdi zmdi-chevron-down"></i></a>
@@ -64,9 +64,11 @@
 
                     </ul>
             {% else %}
+                <div class="user-login">
                 <a href="#login" title="Đăng nhập" class="btn-primary btn-black-outline btn-medium btn-login"> {% translate 'Đăng nhập' %}</a>
               <a href="{% url 'register' %}" title="Đăng ký"
                  class="btn-primary btn-red-outline btn-medium btn-signup">Đăng ký</a>
+                </div>
             {% endif %}
           </li>
         </ul>
@@ -77,7 +79,7 @@
           {% include "menu/_subMenuBuy.html" %}
           {% include "menu/_subMenuSell.html" %}
           {% include "menu/_subMenuBuySell.html" %}
-          {% include "menu/_subMenuProject.html" %}
+          {% comment %}{% include "menu/_subMenuProject.html" %}{% endcomment %}
           {% include "menu/_subMenuSupport.html" %}
 
         </ul>

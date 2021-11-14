@@ -24,7 +24,7 @@ class ListingSearchQuery(BaseModel):
 def index(request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)
 
-    paginator = Paginator(listings, 15)
+    paginator = Paginator(listings, 50)
     page = request.GET.get('page')
     paged_listings = paginator.get_page(page)
 
@@ -39,9 +39,8 @@ def listing(request, listing_id):
     listing_detail = get_object_or_404(Listing, pk=listing_id)
     listings_neighborhood = Listing.objects.order_by('-list_date').filter(is_published=True,
                                                                           state=listing_detail.state).exclude(
-        id=listing_id)[:10]
-    listings_same = (Listing.objects
-                         .filter(is_published=True, house_type=listing_detail.house_type,
+        id=listing_id)[:50]
+    listings_same = (Listing.objects.filter(is_published=True, house_type=listing_detail.house_type,
                                  area=listing_detail.area)
                          .exclude(id=listing_id)
                          .order_by('-list_date'))

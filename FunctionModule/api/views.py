@@ -127,7 +127,7 @@ def search_listing(req: request.Request, **kwargs):
         page = 1
 
     previous_page = None if page == 1 else page - 1
-    limit = req.query_params.get('limit', 10)
+    limit = req.query_params.get('limit', 50)
     offset = (page - 1) * limit
     min_page = page - 1 if page - 1 > 0 else page
 

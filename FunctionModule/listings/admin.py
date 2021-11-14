@@ -41,7 +41,7 @@ class ListingAdmin(admin.ModelAdmin):
     list_filter = ('is_published', 'realtor', 'state')
     list_editable = ('address',)
     search_fields = ('title', 'code', 'address','area', 'price','house_type', 'road_type', 'urban_area', 'street','ward', 'district','state', 'list_date',)
-    list_per_page = 50
+    list_per_page = 100
     inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
     actions = ['make_published', 'unpublished']
     form = ListingAdminForm

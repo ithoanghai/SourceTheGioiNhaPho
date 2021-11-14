@@ -9,7 +9,7 @@ from ..cadastral.constants import district_data
 from ..cadastral.lookups import get_district, get_state, get_state_name, get_ward
 
 
-def search_by_keywords(q: str, limit: int = 10, offset: int = 0, filters=None):
+def search_by_keywords(q: str, limit: int = 20, offset: int = 0, filters=None):
     if not q:
         return []
 

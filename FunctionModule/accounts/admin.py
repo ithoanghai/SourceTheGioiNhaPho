@@ -41,6 +41,7 @@ class AccountAdmin(AuthUserAdmin):
     list_display_links = ('name', 'email')
     search_fields = ['name', 'email', 'phone']
     list_filter = ('date_joined', 'is_superuser', 'is_staff')
+    list_per_page = 100
     readonly_fields = [
         'date_joined',
     ]

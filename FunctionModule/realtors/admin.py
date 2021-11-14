@@ -7,7 +7,7 @@ class RealtorAdmin(admin.ModelAdmin):
     list_display = ('id', 'realtor_name', 'hire_date')
     list_display_links = ('realtor_name',)
     search_fields = ('realtor_name',)
-    list_per_page = 25
+    list_per_page = 100
 
     def realtor_name(self, obj: Realtor):
         return obj.user.name
