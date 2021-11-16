@@ -37,13 +37,10 @@ def index(request):
 
 def listing(request, listing_id):
     listing_detail = get_object_or_404(Listing, pk=listing_id)
-    listings_neighborhood = Listing.objects.order_by('-list_date').filter(is_published=True,
-                                                                          state=listing_detail.state).exclude(
-        id=listing_id)[:50]
-    listings_same = (Listing.objects.filter(is_published=True, house_type=listing_detail.house_type,
-                                 area=listing_detail.area)
-                         .exclude(id=listing_id)
-                         .order_by('-list_date'))
+    listings_neighborhood = (Listing.objects.order_by('-list_date').filter(is_published=True,
+                                                                          state=listing_detail.state)[:10])
+    listings_same = (Listing.objects.order_by('-list_date').filter(is_published=True, house_type=listing_detail.house_type,area=listing_detail.area)[:30])
+
     context = {
         'listing': listing_detail,
         'environment': settings.ENVIRONMENT,
@@ -54,7 +51,6 @@ def listing(request, listing_id):
     return render(request, 'listings/detail.html', context)
 
 
-
 def search(request):
     context = {
         'listings': [],
@@ -62,10 +58,23 @@ def search(request):
         'districts': get_all_districts(),
         'GOOGLE_MAP_API_KEY': settings.GOOGLE_MAP_API_KEY,
         'environment': settings.ENVIRONMENT,
-        "pagination": {}
+        "pagination": {},
     }
 
     return render(request, 'listings/search.html', context)
+
+
+def search_simple(request):
+    context = {
+        'listings': [],
+        'state_data': get_all_states(),
+        'districts': get_all_districts(),
+        'GOOGLE_MAP_API_KEY': settings.GOOGLE_MAP_API_KEY,
+        'environment': settings.ENVIRONMENT,
+        "pagination": {},
+    }
+
+    return render(request, 'listings/search_list_simple.html', context)
 
 
 def sell_lease_with_us(request):

@@ -11,6 +11,7 @@ urlpatterns = [
     path('<int:listing_id>', views.listing, name='listing_detail'),
 
     path('search', views.search, name='listing_search'),
+    path('search_simple', views.search_simple, name='listing_search_simple'),
 
     path('sell_lease_with_us', views.sell_lease_with_us, name='sell_lease_with_us'),
     path('buy_with_us', views.buy_with_us, name='buy_with_us'),

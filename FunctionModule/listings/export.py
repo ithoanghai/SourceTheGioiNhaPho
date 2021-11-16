@@ -254,30 +254,43 @@ def get_video_link(listing):
     return link_main
 
 
-def get_description(listing):
-    description = f'<div><p><bold> Mã BĐS: %s </bold></p> </div> ' \
-                  f'<p> %s </p> <br> <p> %s </p> <p> %s </p> <p> %s </p> <p> %s </p> <p> %s </p> <p> %s </p> ' \
-                  f'<p> Để xem video BĐS này, bạn copy và truy cập Link Video Youtube này %s </p> </br>' \
-                  f'<p>Liên hệ ngay hotline của Thế giới Nhà Phố để được hỗ trợ tốt nhất</p>' \
-                  f'<p>------------o0o--------------</p>' \
-                  f'<p>BẤT ĐỘNG SẢN THẾ GIỚI NHÀ PHỐ</p>' \
-                  f'<p>- Tìm kiếm toàn bộ BĐS TGNP dễ dàng tại: https://Thegioinhaphovietnam.com.vn</p>' \
-                  f'<p>- Hotline: 0916.286.256 - 0971.841.941 - 09.6439.9436 (Call/Zalo/Facebook)</p>' \
-                  f'<p>- Fanpage: https://www.facebook.com/TheGioiNhaPhoVietNam</p>' \
-                  f'<p>- Kho hàng Facebook: chứa toàn bộ BĐS TGNP tại https://www.facebook.com/groups/khohang.thegioinhaphovietnam</p>' \
-                  f'<p>- Kênh Youtube Kho hàng: chứa toàn bộ Video BĐS TGNP: https://www.youtube.com/channel/UCiW13E8_8AHnHGiJGeZliug</p>' \
-                  f'<p>- Để trở thành Chuyên viên TGNP, mời bạn điền form Ứng tuyển ngay https://forms.gle/fBXyTb397SdoMJ3SA</p>' \
-                  % (listing.code, listing.description, listing.furniture_design, listing.living_facilities, listing.location_advantage,
-                     listing.residential_community, listing.regional_welfare, listing.salient_features, get_video_link(listing))
-    return description
-
 def get_main_photo_url(listing):
     main_photo_url = listing.main_photo
     if main_photo_url is None:
-        photo_url = f'https://thegioinhaphovietnam.com.vn/static/img/default.png'
+        photo_url = f'https://thegioinhaphovietnam.com.vn/static/img/default_house_type/{listing.house_type}.jpg'
     else:
         photo_url = main_photo_url.url
     return photo_url
+
+
+def get_description(listing):
+    description = f'<div><p><bold> Mã BĐS: %s </bold></p> </div> ' \
+                  f'<p> %s </p> <br>' \
+                  % (listing.code, listing.description)
+    if listing.furniture_design is not None:
+        description = description + '<br> <p> %s </p>' + listing.furniture_design
+    if listing.living_facilities is not None:
+        description = description + '<br> <p> %s </p>' + listing.living_facilities
+    if listing.location_advantage is not None:
+        description = description + '<br> <p> %s </p>' + listing.location_advantage
+    if listing.residential_community is not None:
+        description = description + '<br> <p> %s </p>' + listing.residential_community
+    if listing.regional_welfare is not None:
+        description = description + '<br> <p> %s </p>' + listing.regional_welfare
+    if listing.salient_features is not None:
+        description = description + '<br> <p> %s </p>' + listing.salient_features
+    if get_video_link(listing) != "":
+        description = description + '<p> Để xem video BĐS này, bạn truy cập Link Video Youtube sau %s </p> </br>' % (get_video_link(listing))
+    description1 = f'<p>Liên hệ ngay Thế giới Nhà Phố để được tư vấn, xem bđs</p>' \
+                  f'<p>------------o0o--------------</p>' \
+                  f'<p>BẤT ĐỘNG SẢN THẾ GIỚI NHÀ PHỐ</p>' \
+                  f'<p>- Hàng chục nghìn sản phẩm BĐS, cam kết thông tin thật, chính xác 100%, không có thông tin ảo</p>' \
+                  f'<p>- Tìm kiếm BĐS dễ dàng tại website của TGNP: https://Thegioinhaphovietnam.com.vn</p>' \
+                  f'<p>- Hotline: 0916.286.256 - 0971.841.941 - 09.6439.9436 (Call/Zalo/Facebook)</p>' \
+                  f'<p>- <a href= "https://www.facebook.com/TheGioiNhaPhoVietNam">Cửa hàng Facebook.com/TheGioiNhaPhoVietNam</a> </p>' \
+                  f'<p>- <a href= "https://www.facebook.com/groups/khohang.thegioinhaphovietnam">Kho hàng Facebook.com/groups/khohang.thegioinhaphovietnam</a> </p>' \
+                  f'<p>- <a href= "https://www.youtube.com/channel/UCiW13E8_8AHnHGiJGeZliug">Kênh Youtube KHO HÀNG THẾ GIỚI NHÀ PHỐ</a> </p>'
+    return description + description1
 
 
 def prepare_fb_listing_data(listing):

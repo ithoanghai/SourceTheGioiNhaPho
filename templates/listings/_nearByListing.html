@@ -1,17 +1,29 @@
-{% load i18n static %}
+{% load i18n static listing %}
 
 <div class="article">
   <div class="img">
     <a class="cover"
        href="{% url "listing_detail" listing.id %}"
        title="{{ listing.title }}">
-      {% with listing.main_photo as photo %}
-          <img class="lazy" data-src="{{ photo.url }}"
-               alt="{{ listing.title }}" title="{{ listing.title }}"
-               draggable="false"
-               onerror="this.src='{% static "img/default.png" %}'"
-          />
-      {% endwith %}
+            {% if listing.main_photo %}
+                {% with listing.main_photo as photo %}
+                    <img src=""
+                         data-src="{{ photo.url }}"
+                         alt="{{ listing.title }}"
+                         title="{{ listing.title }}"
+                         class="lazy" draggable="false"
+                         onerror="this.src='{% static "img/default.png" %}'"
+                    />
+                {% endwith %}
+            {% else %}
+                <img src=""
+                     data-src="{{ listing.house_type|default_img_by_house_type }}"
+                     alt="{{ listing.title }}"
+                     title="{{ listing.title }}"
+                     class="lazy" draggable="false"
+                     onerror="this.src='{% static "img/default.png" %}'"
+                />
+            {% endif %}
     </a>
   </div>
   <div class="title">
@@ -26,8 +38,11 @@
     {% endif %}</div>
   <div class="info">
     <ul>
-        {% if listing.floors %}
-          <li><span class="fa fa-h-square"></span> {{ listing.floors }}
+      <li class="marea" title="Diện tích"><span
+        class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }}m2
+      </li>
+          {% if listing.floors %}
+          <li><span class="fa fa-h-square"></span> {{ listing.floors }} tầng
           </li> {% endif %}
       {% if listing.bedrooms %}
         <li title="Phòng ngủ">
@@ -37,9 +52,6 @@
       {% if listing.bathrooms %}
         <li title="Phòng tắm" class="icon-bath-room"><span></span> {{ listing.bathrooms }} </li>
       {% endif %}
-      <li class="marea" title="Diện tích"><span
-        class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} {{ listing.area_unit }}
-      </li>
         <li title="Giá"><b>{{ listing.price }} tỷ</b></li>
       {% if listing.sale_price and listing.sale_price < listing.price %}
         <li title="Bán nhanh">Còn {{ listing.sale_price }} tỷ</li> {% endif %}

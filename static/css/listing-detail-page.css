@@ -5872,7 +5872,7 @@ picture img {
     top: 36%;
     right: 5px;
     width: 40px;
-    height: 40px;
+    height: auto;
     padding: 0 5px;
     color: #337588;
     font-family: tgnp-icon, arial;

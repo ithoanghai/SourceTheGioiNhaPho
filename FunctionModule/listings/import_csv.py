@@ -187,6 +187,7 @@ def handle_import(file_path, listing_type='K1'):
                 elif desc == 'Ngõ Xe Máy':
                     road_type = RoadType.ALLEY_BIKE
                 elif desc == 'Đất Dự Án':
+                    house_type = HouseType.PLOT
                     road_type = RoadType.ALLEY_CAR_2
                     trans_type = TransactionType.PROJECT
 

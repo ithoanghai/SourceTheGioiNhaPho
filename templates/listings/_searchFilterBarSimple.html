@@ -264,8 +264,6 @@
     </ul>
   </div>
   <div class="view">
-    <button @click.prevent="viewAsGrid" :class="{active: isViewGrid}" title="Xem danh sách BĐS dạng ô" class="zmdi zmdi-view-module"></button>
-    <button @click.prevent="viewAsList" :class="{active: isViewAsList}" title="Xem danh sách BĐS có ảnh" class="zmdi zmdi-view-stream"></button>
-    <a :class="{active: isViewAsSimple}" href="{% url 'listing_search_simple' %}"  title="Xem danh sách BĐS đơn giản" class="zmdi zmdi-view-list"></a>
+    <a href="{% url 'listing_search' %}" title="Chuyển chế độ xem danh sách BĐS dạng ô" class="zmdi zmdi-view-module"></a>
   </div>
 </div>

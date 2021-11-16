@@ -475,20 +475,20 @@
             {% endif %}
             </li>
             <li>
-              <p class="left">Diện tích (m2)</p>
-              <p class="right">{{ listing.area }} {{ listing.area_unit }}</p>
+              <p class="left">Diện tích</p>
+              <p class="right">{{ listing.area }} m</p>
             </li>
 
             {% if listing.lot_size %}
               <li>
                 <p class="left">Diện tích khuân viên</p>
-                <p class="right">{{ listing.lot_size }}</p>
+                <p class="right">{{ listing.lot_size }} m</p>
               </li>
             {% endif %}
             {% if listing.width and listing.width > 4 %}
               <li>
-                <p class="left">Mặt tiền (m)</p>
-                <p class="right">{{ listing.width }}</p>
+                <p class="left">Mặt tiền </p>
+                <p class="right">{{ listing.width }} m</p>
               </li>
             {% endif %}
             {% if listing.direction %}
@@ -558,13 +558,17 @@
         <div class="content">
           <div class="list-advantage clear">
             <div class="advantage-name">
-              <p>Tag</p>
+              <p>Tags</p>
             </div>
             <div class="advance-date-content">
               <div class="tag-news pd-0">
-                <span>{{ listing.house_type }} {{ listing.district }}</span>
-                <span>{{ listing.house_type }} {{ listing.floors }} tầng</span>
-                <span>{{ listing.house_type }} {{ listing.bedrooms }} phòng ngủ</span>
+                <span>{{ listing.house_type|get_house_type }} {{ listing.street }}</span>
+                <span>{{ listing.house_type|get_house_type }} {% get_district listing.district %}</span>
+                <span>{{ listing.house_type|get_house_type }} {% get_state listing.state %}</span>
+                <span>{{ listing.house_type|get_house_type }} {{ listing.price }} tỷ</span>
+                {% if  listing.area > 0 %}<span>{{ listing.house_type|get_house_type }} {{ listing.area }} m2</span> {% endif %}
+                {% if  listing.floors > 0 %}<span>{{ listing.house_type|get_house_type }} {{ listing.floors }} tầng</span> {% endif %}
+                {% if  listing.bedrooms > 0 %}<span>{{ listing.house_type|get_house_type }} {{ listing.bedrooms }} phòng ngủ</span> {% endif %}
               </div>
             </div>
           </div>
@@ -884,10 +888,10 @@
       </div>
     </div>
 
-        {% if listings_same %}
+    {% if listings_neighborhood %}
       <section class="background-gray">
-        <div>
-          <div class="heading-02 pd-tb-30 mgt-10">Nhà đất tương tự</div>
+        <section class="main-content">
+          <div class="heading-02 pd-tb-30 mgt-10">Nhà đất lân cận</div>
           <div id="similar-property" class="flexslider main-content">
             <div class="slider-buttons">
               <a href="#" title="next"><span class="but-nextdetail-news flex-next"></span> </a>
@@ -895,25 +899,27 @@
               </a>
             </div>
             <ul class="exclusive slides">
-              {% for listing in listings_same %}
+              {% for listing in listings_neighborhood %}
                 {% include "listings/_neighbourListing.html" %}
               {% endfor %}
             </ul>
           </div>
-        </div>
+        </section>
       </section>
-    {% endif %}
+     {% endif %}
 
+    {% if listings_same %}
     <section class="background-gray">
       <section class="main-content">
-        <div class="heading-02 mgt-10">Nhà đất lân cận</div>
+        <div class="heading-02 mgt-10">Nhà đất tương tự</div>
         <section class="compare-house">
-          {% for listing in listings_neighborhood %}
-            {% include "listings/_nearByListing.html" %}
-          {% endfor %}
+         {% for listing in listings_same %}
+                {% include "listings/_nearByListing.html" %}
+              {% endfor %}
         </section>
       </section>
     </section>
+    {% endif %}
 
     <section class="bg-gray-e6 pdt-0">
       <section style="padding: 10px">

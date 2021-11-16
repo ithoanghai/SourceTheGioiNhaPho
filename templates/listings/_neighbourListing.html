@@ -1,14 +1,26 @@
-{% load get_cadastral %}
+{% load get_cadastral i18n static listing%}
 <li class="featured">
   <a href="{% url 'listing_detail' listing.id %}"
      title="{{ listing.title }}" data-imp-click>
     <div class="cover">
-      {% with listing.main_photo as photo %}
-        <img class="image-pixelated lazy"
-             data-src="{{ photo.url }}"
-             alt="{{ listing.title }}"
-             title="{{ listing.title }}"/>
-      {% endwith %}
+            {% if listing.main_photo %}
+                {% with listing.main_photo as photo %}
+                    <img src=""
+                         data-src="{{ photo.url }}"
+                         alt="{{ listing.title }}"
+                         title="{{ listing.title }}"
+                         class="lazy" draggable="false"
+                         onerror="this.src='{% static "img/default.png" %}'"/>
+                {% endwith %}
+            {% else %}
+                <img src=""
+                     data-src="{{ listing.house_type|default_img_by_house_type }}"
+                     alt="{{ listing.title }}"
+                     title="{{ listing.title }}"
+                     class="lazy" draggable="false"
+                     onerror="this.src='{% static "img/default.png" %}'"
+                />
+            {% endif %}
     </div>
   </a>
   <header>
@@ -26,8 +38,19 @@
            title="Quận/Huyện">{% get_district listing.district %}</a></b>
     <ul>
       <li title="Diện tích"><span
-        class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} {{ listing.area_unit }}
+        class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }}m2
       </li>
+      {% if listing.floors %}
+          <li><span class="fa fa-h-square"></span> {{ listing.floors }} tầng
+          </li> {% endif %}
+      {% if listing.bedrooms %}
+        <li title="Phòng ngủ">
+          <span class="zmdi zmdi-airline-seat-individual-suite"></span> {{ listing.bedrooms }}
+        </li>
+      {% endif %}
+      {% if listing.bathrooms %}
+        <li title="Phòng tắm" class="icon-bath-room"><span></span> {{ listing.bathrooms }} </li>
+      {% endif %}
     </ul>
     <div class="price">{{ listing.price }} tỷ</div>
      <div class="unique p-1"><i class="zmdi zmdi-key"></i><b>{{listing.code}}</b></div>
