@@ -291,7 +291,8 @@ def handle_import(file_path, listing_type='K1'):
                 if code in listing_obj:
                     t = Listing.objects.get(code=code)
                     t.is_published = new_listing.is_published
-                    t.description  =  new_listing.description
+                    t.title = new_listing.title
+                    t.description = new_listing.description
                     t.status = new_listing.status
                     t.price = new_listing.price
                     t.save()

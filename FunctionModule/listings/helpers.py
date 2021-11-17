@@ -28,6 +28,10 @@ def get_short_title_from_house_type(house_type: str):
         return 'Biệt thự'
     elif house_type == HouseType.VILLA_REST:
         return 'Biệt thự nghỉ dưỡng'
+    elif house_type == HouseType.STREET_HOUSE:
+        return 'Nhà mặt phố'
+    elif house_type == HouseType.TOWN_HOUSE or HouseType.LOFT_HOUSE:
+        return 'Nhà'
     elif house_type == HouseType.LAND or HouseType.INDUSTRIAL_LAND:
         return 'Đất'
     elif HouseType.PLOT:
@@ -46,12 +50,8 @@ def get_short_title_from_house_type(house_type: str):
         return 'Văn phòng'
     elif house_type == HouseType.BUILDING or HouseType.BUILDING_BUSINESS:
         return 'Tòa nhà'
-    elif house_type == HouseType.STREET_HOUSE:
-        return 'Nhà mặt phố'
-    elif house_type == HouseType.TOWN_HOUSE or HouseType.LOFT_HOUSE:
-        return 'Nhà trong ngõ'
     else:
-        return 'Khác'
+        return 'Nhà'
 
 
 def print_trace(e: Exception):
