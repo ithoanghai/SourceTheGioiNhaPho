@@ -10,6 +10,7 @@ from django.contrib.gis.geos import Point
 from django.template.loader import render_to_string
 from django.utils.text import slugify
 from geopy import GeocodeEarth
+from geopy.geocoders import Nominatim
 
 from FunctionModule.accounts.models import User
 from FunctionModule.cadastral.constants import district_data
@@ -277,7 +278,8 @@ def handle_import(file_path, listing_type='K1'):
                         new_listing.location = listing_loc
                 else:
                     if api_key:
-                        geolocator = GeocodeEarth(api_key=api_key)
+                       #/geolocator = GeocodeEarth(api_key=api_key)
+                        geolocator = Nominatim()
                         hanoi_bounds = ((21.097341, 105.929947), (20.920105, 105.702667))
                         location = geolocator.geocode(full_addr, boundary_rect=hanoi_bounds)
                         if location and location.point:
