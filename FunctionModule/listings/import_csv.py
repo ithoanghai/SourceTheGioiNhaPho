@@ -276,19 +276,19 @@ def handle_import(file_path, listing_type='K1'):
                         listing_loc = Point(searched_locations[full_addr][0],
                                             searched_locations[full_addr][1])
                         new_listing.location = listing_loc
-                else:
-                    if api_key:
-                       #/geolocator = GeocodeEarth(api_key=api_key)
-                        geolocator = Nominatim()
-                        hanoi_bounds = ((21.097341, 105.929947), (20.920105, 105.702667))
-                        location = geolocator.geocode(full_addr, boundary_rect=hanoi_bounds)
-                        if location and location.point:
-                            listing_loc = Point(location.point.longitude, location.point.latitude)
-                            new_listing.location = listing_loc
-                            searched_locations[full_addr] = [location.point.longitude,
-                                                             location.point.latitude]
-                        else:
-                            searched_locations[full_addr] = None
+                # else:
+                #     if api_key:
+                #         geolocator = GeocodeEarth(api_key=api_key)
+                #         #geolocator = Nominatim()
+                #         hanoi_bounds = ((21.097341, 105.929947), (20.920105, 105.702667))
+                #         location = geolocator.geocode(full_addr, boundary_rect=hanoi_bounds)
+                #         if location and location.point:
+                #             listing_loc = Point(location.point.longitude, location.point.latitude)
+                #             new_listing.location = listing_loc
+                #             searched_locations[full_addr] = [location.point.longitude,
+                #                                              location.point.latitude]
+                #         else:
+                #             searched_locations[full_addr] = None
 
                 if code in listing_obj:
                     t = Listing.objects.get(code=code)
