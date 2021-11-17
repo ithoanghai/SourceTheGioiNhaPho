@@ -30,9 +30,9 @@ def get_short_title_from_house_type(house_type: str):
         return 'Biệt thự nghỉ dưỡng'
     elif house_type == HouseType.STREET_HOUSE:
         return 'Nhà mặt phố'
-    elif house_type == HouseType.TOWN_HOUSE or HouseType.LOFT_HOUSE:
+    elif house_type == HouseType.TOWN_HOUSE or house_type == HouseType.LOFT_HOUSE:
         return 'Nhà'
-    elif house_type == HouseType.LAND or HouseType.INDUSTRIAL_LAND:
+    elif house_type == HouseType.LAND or house_type == HouseType.INDUSTRIAL_LAND:
         return 'Đất'
     elif HouseType.PLOT:
         return 'Đất phân lô'
@@ -42,13 +42,13 @@ def get_short_title_from_house_type(house_type: str):
         return 'Kho xưởng'
     elif house_type == HouseType.SHOP_HOUSE:
         return 'Cửa hàng'
-    elif house_type == HouseType.APARTMENT or house_type.PENT_HOUSE:
+    elif house_type == HouseType.APARTMENT or house_type == house_type.PENT_HOUSE:
         return 'Căn hộ'
-    elif house_type == HouseType.CONDO_TEL or HouseType.ERVICE_APARTMENT:
+    elif house_type == HouseType.CONDO_TEL or house_type == HouseType.ERVICE_APARTMENT:
         return 'Căn hộ nghỉ dưỡng'
-    elif house_type == HouseType.OFFICE or HouseType.OFFICE_TEL:
+    elif house_type == HouseType.OFFICE or house_type == HouseType.OFFICE_TEL:
         return 'Văn phòng'
-    elif house_type == HouseType.BUILDING or HouseType.BUILDING_BUSINESS:
+    elif house_type == HouseType.BUILDING or house_type == HouseType.BUILDING_BUSINESS:
         return 'Tòa nhà'
     else:
         return 'Nhà'
