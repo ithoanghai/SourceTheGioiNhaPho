@@ -6,6 +6,7 @@ from django.core.files.uploadedfile import UploadedFile
 from django.http import HttpRequest, JsonResponse
 
 from FunctionModule.listings.import_csv import handle_import
+from .filters import ListingFilter
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage
 from ..realtors.models import Realtor
@@ -35,9 +36,9 @@ class ListingVideoAdmin(admin.TabularInline):
 
 
 class ListingAdmin(admin.ModelAdmin):
-    list_display = ('code', 'address', 'district','area', 'floors', 'width', 'price', 'house_type', 'road_type', 'realtor', 'is_published')
+    list_display = ('code', 'address', 'district','area', 'floors', 'width', 'price', 'house_type', 'road_type', 'status', 'is_published')
     list_display_links = ('code','district',)
-    list_filter = ('is_published', 'realtor', 'state')
+    list_filter = ('is_published', 'realtor', 'state',)
     list_editable = ('address',)
     search_fields = ('title', 'code', 'address','area', 'price','house_type', 'road_type', 'urban_area', 'street','ward', 'district','state', 'list_date',)
     list_per_page = 100

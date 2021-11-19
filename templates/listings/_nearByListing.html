@@ -30,12 +30,6 @@
     <h3><a href="{% url 'listing_detail' listing.id %}"
            title="{{ listing.title }}">{{ listing.title }}</a></h3>
   </div>
-  <div class="status tgnp-color">
-    {% if listing.status == 'selling' %} {% trans 'Đang bán' %}
-    {% elif listing.status == 'sold' %} {% trans 'Đã bán' %}
-    {% elif listing.status == 'stop_selling' %} {% trans 'Dừng bán' %}
-    {% else %} {% trans 'Mới' %}
-    {% endif %}</div>
   <div class="info">
     <ul>
       <li title="Giá/m2"><strong>$</strong><b>{% widthratio listing.price listing.area 1000 %}tr/m2</b></li>
@@ -57,7 +51,14 @@
       {% if listing.sale_price and listing.sale_price < listing.price %}
         <li title="Bán nhanh">Còn {{ listing.sale_price }} tỷ</li> {% endif %}
     </ul>
+
   </div>
+    <div class="status tgnp-color">
+    {% if listing.status == 'selling' %} {% trans 'Đang bán' %}
+    {% elif listing.status == 'sold' %} {% trans 'Đã bán' %}
+    {% elif listing.status == 'stop_selling' %} {% trans 'Dừng bán' %}
+    {% elif listing.status == 'sale' %} {% trans 'Bán gấp' %}
+    {% endif %}</div>
   <input name="url" type="hidden" value="{% url 'listing_detail' listing.id %}">
   <input name="lat" type="hidden" value="{{ listing.lat }}">
   <input name="lon" type="hidden" value="{{ listing.long }}">

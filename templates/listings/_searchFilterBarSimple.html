@@ -6,6 +6,9 @@
   </div>
   {% comment %}<a href="#" class="btn-primary btn-red btn-save-search btn-medium" view-all-url="#"><i class="zmdi zmdi-bookmark-outline"></i>
     Lưu tìm kiếm</a>{% endcomment %}
+   <div class="view">
+    <a href="{% url 'listing_search' %}" title="Chuyển chế độ xem danh sách BĐS dạng ô" class="zmdi zmdi-view-module"></a>
+  </div>
 </div>
 
 <div class="actionBar" v-cloak>
@@ -262,8 +265,5 @@
         </div>
       </li>
     </ul>
-  </div>
-  <div class="view">
-    <a href="{% url 'listing_search' %}" title="Chuyển chế độ xem danh sách BĐS dạng ô" class="zmdi zmdi-view-module"></a>
   </div>
 </div>

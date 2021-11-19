@@ -428,6 +428,10 @@
               <div class="listing-id">
                 <span>Mã nhà đất: </span>
                 <span style="padding-left: 0px">{{ listing.code }}</span>
+                <span style="padding-left: 0px">  ( {% if listing.status == 'selling' %}{% trans 'Đang bán' %}
+    {% elif listing.status == 'sold' %}{% trans 'Đã bán' %}
+    {% elif listing.status == 'stop_selling' %}{% trans 'Dừng bán' %}
+    {% elif listing.status == 'sale' %}{% trans 'Bán gấp' %}{% endif %})</span>
               </div>
             </div>
           </header>
@@ -487,7 +491,7 @@
                 <p class="right">{{ listing.lot_size }} m</p>
               </li>
             {% endif %}
-            {% if listing.width and listing.width > 4 %}
+            {% if listing.width and listing.width > 3 %}
               <li>
                 <p class="left">Mặt tiền </p>
                 <p class="right">{{ listing.width }} m</p>
@@ -519,6 +523,13 @@
                 {% elif listing.registration_type == 'dont_book' %} {% translate 'Sắp làm sổ' %}
                 {% else %} {% translate 'Khác' %}  {% endif %}</a></p>
             </li>
+          {% if listing.road_type %}
+          <li>
+              <p class="left">Đường đi</p>
+              <p class="right"><a href="{% url 'listing_search' %}?road_type={{ listing.road_type }}"
+                target="_blank"><span>{{ listing.road_type|get_road_type }}</span></a></p>
+            </li>
+           {% endif %}
             <li>
               <p class="left">Giá bán</p>
               <p class="right">{{ listing.price }} tỷ</p>
@@ -538,7 +549,7 @@
             <h6 class="right"><b>{% if listing.status == 'selling' %} {% trans 'Đang bán' %}
             {% elif listing.status == 'sold' %} {% trans 'Đã bán' %}
             {% elif listing.status == 'stop_selling' %} {% trans 'Dừng bán' %}
-            {% else %} {% trans 'Mới' %}
+            {% elif listing.status == 'sale' %} {% trans 'Bán gấp' %}
             {% endif %}</b>
             </h6>
         </div>

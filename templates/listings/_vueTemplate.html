@@ -139,18 +139,25 @@
 <script type="text/x-template" id="propertyListTemplateSimple">
     <div id="propertyListSimple" style="overflow-x:auto;" v-bind:class="{grid: isViewGrid}">
         <table class="table" style="border-style: dotted; border: 1px solid;">
-            <th>Loại BĐS</th>
-            <th>Địa chỉ</th>
-            <th>Diện tích</th>
-            <th>Số tầng</th>
-            <th>Mặt tiền</th>
-            <th>Giá</th>
-
+            <th class="unique col-md-2">Trạng thái</th>
+            <th class="col-md-2">Địa chỉ</th>
+            <th class="col-md-2">Diện tích</th>
+            <th class="col-md-2">Số tầng</th>
+            <th class="col-md-2">Mặt tiền</th>
+            <th class="col-md-1">Giá</th>
+            <tbody>
             <tr v-for="listing in listings" :key="listing.id" :id="`property-tgnp-${listing.id}`" :title="listing.title">
-                    <td class="unique col-md-3" style="word-wrap: break-word; " >
-                        <a :href="getListingDetailURL(listing.id)" target="_blank"
+                <td class="unique col-md-2" style="word-wrap: break-word; " >
+                       <a v-if="listing.status == 'selling'" :href="getListingDetailURL(listing.id)" target="_blank"
+                       :title="listing.title">Đang bán</a>
+                    <a v-if="listing.status == 'sold'" :href="getListingDetailURL(listing.id)" target="_blank"
+                       :title="listing.title">Đã bán</a>
+                    <a v-if="listing.status == 'stop_selling'" :href="getListingDetailURL(listing.id)" target="_blank"
+                       :title="listing.title">Dừng bán</a>
+                    <a v-if="listing.status == 'sale'" :href="getListingDetailURL(listing.id)" target="_blank"
+                       :title="listing.title">Bán gấp</a>
+                    <a :href="getListingDetailURL(listing.id)" target="_blank"
                        :title="listing.title">
-                            [[ listing.house_type ]]
 {% comment %}                        <b>{{ listing.house_type|get_house_type }}</b>
                         {% if listing.house_type == HouseType.VILLA %} <b>Biệt thự</b>
                         {% elif listing.house_type == HouseType.VILLA_REST %} <b>Biệt thự nghỉ dưỡng</b>
@@ -168,38 +175,39 @@
                         {% elif listing.house_type == HouseType.STREET_HOUSE %} <b>Loại khác</b>
                         {% endif %}{% endcomment %}
                     </a>
-                        </td>
-                    <td class="col-md-4">
-                        <span v-if="listing.urban_area">
-                            <a :href="`/listings/search?urban_area=${listing.urban_area}`"
-                               title="">[[listing.urban_area]]</a>
-                        </span>
-                        <span>
-                            <a :href="`/listings/search?street=${listing.street}`" title="">[[listing.street]]</a>
-                        </span>
-                        <span v-if="listing.ward"><a :href="`/listings/search?ward=${listing.ward}`" title="Phường/Xã">[[listing.ward_name]]</a>
-                        </span>
-                        <span v-if="listing.district">
-                            <a :href="`/listings/search?district=${listing.district}`"
-                               title=""><b>[[listing.district_name]]</b></a>
-                        </span>
+                     </td>
+                <td class="col-md-2">
+                    <span v-if="listing.urban_area">
+                        <a :href="`/listings/search?urban_area=${listing.urban_area}`"
+                           title="">[[listing.urban_area]]</a>
+                    </span>
+                    <span>
+                        <a :href="`/listings/search?street=${listing.street}`" title="">[[listing.street]]</a>
+                    </span>
+                    <span v-if="listing.ward"><a :href="`/listings/search?ward=${listing.ward}`" title="Phường/Xã">[[listing.ward_name]]</a>
+                    </span>
+                    <span v-if="listing.district">
+                        <a :href="`/listings/search?district=${listing.district}`"
+                           title=""><b>[[listing.district_name]]</b></a>
+                    </span>
 {% comment %}                        <h5 v-if="listing.state">
-                            <a :href="`/listings/search?state=${listing.state}`"
-                               title=""><b>[[listing.state_name]]</b></a>
-                        </h5>{% endcomment %}
-                    </td>
-                    <td class="col-md-2">
-                        <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}
-                    </td>
-                    <td  class="col-md-2">
-                        <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
-                    </td>
-                    <td  class="col-md-2">
-                        <i class="fa fas fa-bed"></i> [[listing.width]] {% trans "m" %}
-                    </td>
-                    <td class="listing-price">[[ listing.price ]] {% trans "tỷ" %}</td>
-
+                        <a :href="`/listings/search?state=${listing.state}`"
+                           title=""><b>[[listing.state_name]]</b></a>
+                    </h5>{% endcomment %}
+                </td>
+                <td class="col-md-2">
+                    <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}
+                </td>
+                <td  class="col-md-2">
+                    <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
+                </td>
+                <td  class="col-md-2">
+                    <i class="fa fas fa-arrows-alt-h"></i> [[listing.width]] {% trans "m" %}
+                </td>
+                <td class="listing-price col-md-1"><a :href="getListingDetailURL(listing.id)" target="_blank"
+                       :title="listing.title">[[ listing.price ]] {% trans "tỷ" %}</a></td>
             </tr>
+            </tbody>
         </table>
         <div class="search-noresult">
             <div v-if="!listings.length && !isLoading" class="search-noresult-main">

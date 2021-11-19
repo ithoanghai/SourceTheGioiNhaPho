@@ -1,7 +1,7 @@
 import sys
 import traceback
 
-from FunctionModule.listings.choices import HouseType
+from FunctionModule.listings.choices import HouseType, RoadType
 
 
 def get_house_type_short(house_type: str) -> str:
@@ -34,11 +34,11 @@ def get_short_title_from_house_type(house_type: str):
         return 'Nhà'
     elif house_type == HouseType.LAND or house_type == HouseType.INDUSTRIAL_LAND:
         return 'Đất'
-    elif HouseType.PLOT:
+    elif house_type == HouseType.PLOT:
         return 'Đất phân lô'
-    elif HouseType.LAND_BUSINESS:
+    elif house_type == HouseType.LAND_BUSINESS:
         return 'Mặt bằng kinh doanh'
-    elif HouseType.WAREHOUSE_WORKSHOP:
+    elif house_type == HouseType.WAREHOUSE_WORKSHOP:
         return 'Kho xưởng'
     elif house_type == HouseType.SHOP_HOUSE:
         return 'Cửa hàng'
@@ -52,6 +52,21 @@ def get_short_title_from_house_type(house_type: str):
         return 'Tòa nhà'
     else:
         return 'Nhà'
+
+
+def get_short_title_from_road_type(road_type: str):
+    if road_type == RoadType.ALLEY_CAR_2:
+        return 'Ô tô tránh'
+    elif road_type == RoadType.ALLEY_CAR_TRIBIKE:
+        return 'Ô tô tránh Ba gác'
+    elif road_type == RoadType.ALLEY_CAR:
+        return 'Chỉ 1 Ô tô'
+    elif road_type == RoadType.ALLEY_TRIBIKE_BIKE:
+        return 'Ba gác tránh Xe máy'
+    elif road_type == RoadType.ALLEY_TRIBIKE:
+        return 'Chỉ 1 Ba gác'
+    elif road_type == RoadType.ALLEY_BIKE:
+        return 'Xe máy tránh nhau'
 
 
 def print_trace(e: Exception):
