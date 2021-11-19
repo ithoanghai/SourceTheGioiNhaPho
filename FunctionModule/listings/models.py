@@ -11,9 +11,10 @@ from django.utils.translation import gettext as _
 from embed_video.fields import EmbedVideoField
 from location_field.models.spatial import LocationField
 from rest_framework import serializers
-
+from FunctionModule.accounts.models import User
 from FunctionModule.cadastral.lookups import get_state_name, get_district_name, get_ward_name
 from FunctionModule.realtors.models import Realtor
+from . import get_house_type_short
 from .choices import (TransactionType, HouseType, RegistrationType,
                       RoadType, Status, Direction, Condition, FurnishType, ParkingType, Construction, city_choices,
                       district_choices,
@@ -31,6 +32,7 @@ class Listing(models.Model):
         indexes = (
             # Full text search index
             GinIndex(fields=["street", "address"]),
+            GinIndex(fields=["street", "code"]),
             # Search for code with like
             BTreeIndex(fields=['code']),
             # Search using IN query
@@ -41,14 +43,12 @@ class Listing(models.Model):
         )
         #ordering = ["state", "district"]
 
-    realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, verbose_name=_("Chuyên viên"))
+    user = models.ForeignKey(User,  on_delete=models.DO_NOTHING, blank=True, null=True, verbose_name=_("Người thêm BĐS"))
+    realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, verbose_name=_("Chuyên viên quản lý BĐS"))
     transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,
                                         default=TransactionType.SELL, verbose_name=_("Hình thức giao dịch"))
     house_type = models.CharField(max_length=20, choices=HouseType.choices, default=HouseType.TOWN_HOUSE,
                                   verbose_name=_("Loại BĐS"))
-    code = models.CharField(max_length=80, verbose_name=_("Mã BĐS (VIẾT HOA)"), help_text=_(
-        "Quy tắc: Viết tắt chữ cái đầu Loại BĐS + 2 chữ số Năm + Tháng + Chữ cái đầu tên của Chuyên viên + Số BĐS của ĐC"),
-                            unique=True)
     state = models.CharField(max_length=50, choices=city_choices, default="01", verbose_name=_("Thành phố/Tỉnh"))
     district = models.CharField(max_length=50, choices=district_choices, verbose_name=_("Quận/Huyện"))
     ward = models.CharField(max_length=50, verbose_name=_("Phường/Xã"), blank=True, null=True)
@@ -67,16 +67,16 @@ class Listing(models.Model):
                                  verbose_name=_("Đường/Ngõ trước nhà"))
     parking_type = models.CharField(max_length=20, choices=ParkingType.choices, blank=True,
                                     null=True, verbose_name=_("Có chỗ đỗ ô tô không?"))
-    area = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Diện tích (m2)"))
+    area = models.DecimalField(max_digits=10, decimal_places=1, verbose_name=_("Diện tích (m2)"))
+    floors = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)],null=True, blank=True,
+                                 choices=([(i, i) for i in range(1, 50)]), verbose_name=_("Số tầng"))
     width = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Mặt tiền (m)"), null=True)
     length = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Chiều dài (m)"), null=True,
                                  blank=True)
-    area_real = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Diện tích thực tế(m2)"),
+    area_real = models.DecimalField(max_digits=10, decimal_places=1, verbose_name=_("Diện tích thực tế(m2)"),
                                     null=True, blank=True)
     lane_width = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True,
                                      verbose_name=_("Chiều rộng đường/ngõ (m)"))
-    floors = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)],null=True, blank=True,
-                                 choices=([(i, i) for i in range(1, 50)]), verbose_name=_("Số tầng"))
     bedrooms = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)],
                                    choices=([(i, i) for i in range(1, 100)]), verbose_name=_("Số phòng ngủ"),
                                    null=True, blank=True)
@@ -84,6 +84,9 @@ class Listing(models.Model):
                                     choices=([(i, i) for i in range(1, 100)]), verbose_name=_("Số phòng tắm"),
                                     null=True, blank=True)
     direction = models.CharField(max_length=20, blank=True, null=True, choices=Direction.choices, verbose_name=_("Hướng"))
+    code = models.CharField(max_length=80, verbose_name=_("Mã BĐS (VIẾT HOA)"), help_text=_(
+        "Quy tắc: Viết tắt chữ cái đầu Loại BĐS + 2 chữ số Năm + Tháng + Chữ cái đầu tên của Chuyên viên + Số BĐS của ĐC"),
+                            unique=True)
     title = models.CharField(max_length=200, verbose_name=_("Tiêu đề đăng (VIẾT HOA)"),
                              help_text=_("Gợi ý: Từ khoá + Vị trí (Đường/Phố/Khu) + Diện tích + Tiện ích + Giá + Sổ"))
     description = models.TextField(blank=True, verbose_name=_("Mô tả bất động sản"), help_text=_(
@@ -112,6 +115,7 @@ class Listing(models.Model):
     def save(self, *args, **kwargs):
         if not self.id and not self.address:
             self.address = f"{self.street}, {self.district_name} {self.state_name}"
+
         super().save(*args, **kwargs)
 
     @property
@@ -190,10 +194,11 @@ class Listing(models.Model):
 
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING,
                               verbose_name=_("Trạng thái giao dịch"))
+    list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày đăng bán/cho thuê"))
+
     is_verified = models.BooleanField(default=False, verbose_name=_("ĐÃ XÁC MINH THÔNG TIN"))
     is_exclusive = models.BooleanField(default=False, verbose_name=_("THẾ GIỚI NHÀ PHỐ ĐỘC QUYỀN"))
     is_published = models.BooleanField(default=True, verbose_name=_("CHO PHÉP ĐĂNG"))
-    list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày đăng"))
 
     location = LocationField(based_fields=['address'], zoom=7, null=True,
                              default=Point(20.963142552138365, 105.82331127236745), verbose_name=_("Toạ độ vị trí BĐS"),
@@ -251,7 +256,7 @@ class TimestampField(serializers.Field):
 class ListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Listing
-        exclude = ('address',)
+        exclude = ('address','code')
 
     area = serializers.FloatField()
     area_real = serializers.FloatField()

@@ -59,11 +59,11 @@ def compress_image(f: InMemoryUploadedFile):
     img = Image.open(f.file)
     output = BytesIO()
     if f.size > 3029237:
+        quality = 25
+    elif f.size > 1000000:
         quality = 35
-    elif f.size > 1500000:
-        quality = 50
     else:
-        quality = 75
+        quality = 65
     img.save(output, image_type, quality=quality)
     output.seek(0)
     new_name = f"{f.name.split('.')[0]}.{image_type.lower()}"

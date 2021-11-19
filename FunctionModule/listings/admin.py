@@ -9,6 +9,7 @@ from FunctionModule.listings.import_csv import handle_import
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage
 from ..realtors.models import Realtor
+from django.db.models import Q
 from fractions import *
 
 
@@ -33,8 +34,6 @@ class ListingVideoAdmin(admin.TabularInline):
     verbose_name = "VIDEO QUAY BĐS"
 
 
-
-
 class ListingAdmin(admin.ModelAdmin):
     list_display = ('code', 'address', 'district','area', 'floors', 'width', 'price', 'house_type', 'road_type', 'realtor', 'is_published')
     list_display_links = ('code','district',)
@@ -53,21 +52,44 @@ class ListingAdmin(admin.ModelAdmin):
             'all': ('admin/css/dropzone.css', 'admin/css/listing.css', 'admin/css/filepond.min.css')
         }
 
-    def get_queryset(self, request):
-        queryset = super().get_queryset(request)
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        form = super(ListingAdmin, self).get_form(request, obj, **kwargs)
+        form.base_fields['user'].initial = request.user
+        disabled_fields = set()  # type: Set[str]
+        disabled_fields |= {
+            'user'
+        }
         if request.user.is_superuser:
+            realtor = Realtor.objects.filter(user=request.user)
+            form.base_fields['realtor'].initial = realtor
+        else:
+            self.exclude = ("realtor",)
+
+        for f in disabled_fields:
+            if f in form.base_fields:
+                form.base_fields[f].disabled = True
+        return form
+
+    def get_queryset(self, request):
+        if request.user.is_superuser:
+            queryset = super().get_queryset(request)
             return queryset
         else:
-            return queryset.filter(realtor__user=request.user.id)
+            queryset_list = Listing.objects.order_by('-list_date')
+            query = Q(realtor__user=request.user.id)
+            query = query | Q(user=request.user)
+            queryset_list = queryset_list.filter(query)
+            return queryset_list
 
     def get_exclude(self, request, obj=None):
         excluded = super().get_exclude(request, obj)
         user = request.user
-        to_exclude = ['list_date']
+        to_exclude = []
         if obj is None:
             to_exclude += []
         else:
             if not user.is_superuser:
+                to_exclude.append(('realtor', 'user'))
                 if obj.realtor.user != user.id:
                     to_exclude.append('address')
         try:

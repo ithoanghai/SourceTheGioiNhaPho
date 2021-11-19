@@ -37,6 +37,7 @@
     <b><a href="{% url 'listing_search' %}?district={{ listing.district }}"
            title="Quận/Huyện">{% get_district listing.district %}</a></b>
     <ul>
+      <li title="Giá/m2"><strong>$</strong><b>{% widthratio listing.price listing.area 1000 %}tr/m2</b></li>
       <li title="Diện tích"><span
         class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }}m2
       </li>

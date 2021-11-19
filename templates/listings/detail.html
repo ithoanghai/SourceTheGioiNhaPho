@@ -422,6 +422,8 @@
                 <li title="Giá"><strong>$</strong><b>{{ listing.price }} tỷ</b></li>
                 {% if listing.sale_price  and listing.sale_price < listing.price %}
                   <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price }} tỷ </strong></li> {% endif %}
+                <li title="Giá/m2"><strong>$</strong><b>{% widthratio listing.price listing.area 1000 %} triệu/m2</b></li>
+
               </ul>
               <div class="listing-id">
                 <span>Mã nhà đất: </span>

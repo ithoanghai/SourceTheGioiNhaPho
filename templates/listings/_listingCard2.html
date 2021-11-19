@@ -40,6 +40,7 @@
         <div class="flex align-items-center justify-content-space-between">
             <div class="listing-price">{{ listing.price }} {% trans "tỷ" %}</div>
             <ul class="listing-info">
+                <li title="Giá/m2"><strong>$</strong><b>{% widthratio listing.price listing.area 1000 %}tr/m2</b></li>
                 <li>
                     <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area }}{% trans "m2" %}
                 </li>

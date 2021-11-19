@@ -1100,7 +1100,7 @@ body {
 }
 
 .label-primary.unique {
-    background: rgba(255, 169, 19 , 0.5);
+    background: rgba(255, 169, 19 , 0.2);
 }
 
 .label-primary.free {

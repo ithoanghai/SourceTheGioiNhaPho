@@ -61,6 +61,8 @@
           {% for fieldset in adminform %}
             {% include "admin/includes/fieldset.html" %}
           {% endfor %}
+                <button> Your Custom Button </button>
+    <input type="submit" value="{% trans 'Save' %}" class="default" name="_save">
         {% endblock %}
 
         {% block after_field_sets %}{% endblock %}
