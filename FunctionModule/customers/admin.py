@@ -9,7 +9,6 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display_links = ('name', 'phone',)
     search_fields = ('name', 'phone', 'email', 'address', 'financial_range', 'district', 'status', 'classify')
     list_per_page = 100
-    change_form_template = 'custom_change_form.html'
 
     def get_queryset(self, request):
         if request.user.is_superuser:
