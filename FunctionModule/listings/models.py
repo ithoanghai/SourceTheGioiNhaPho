@@ -71,6 +71,13 @@ class Listing(models.Model):
     floors = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)],null=True, blank=True,
                                  choices=([(i, i) for i in range(1, 50)]), verbose_name=_("Số tầng"))
     width = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Mặt tiền (m)"), null=True)
+    price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá chào (tỷ)"))
+    receive_price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá thu về (tỷ)"),
+                                        blank=True, null=True)
+    sale_price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá Hạ chào (tỷ)"),
+                                     blank=True, null=True)
+    average_price = models.DecimalField(max_digits=5, decimal_places=0, verbose_name=_("Giá TB/m2 (triệu)"),
+                                     blank=True, null=True)
     length = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Chiều dài (m)"), null=True,
                                  blank=True)
     area_real = models.DecimalField(max_digits=10, decimal_places=1, verbose_name=_("Diện tích thực tế(m2)"),
@@ -115,6 +122,8 @@ class Listing(models.Model):
     def save(self, *args, **kwargs):
         if not self.id and not self.address:
             self.address = f"{self.street}, {self.district_name} {self.state_name}"
+        ave = float(self.price)/float(self.area)*1000
+        self.average_price = int(ave)
 
         super().save(*args, **kwargs)
 
@@ -172,11 +181,6 @@ class Listing(models.Model):
     registration_type = models.CharField(max_length=20, choices=RegistrationType.choices, blank=True,
                                          null=True, default=RegistrationType.RED_PINK_BOOK,
                                          verbose_name=_("Loại chứng nhận"))
-    price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá chào (tỷ)"))
-    receive_price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá thu về (tỷ)"),
-                                        blank=True, null=True)
-    sale_price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá Hạ chào (tỷ)"),
-                                     blank=True, null=True)
     bonus_rate = models.DecimalField(max_digits=2, decimal_places=1, verbose_name=_("Tỷ lệ trích thưởng (%)"),
                                      default="3")
     reward = models.DecimalField(max_digits=5, decimal_places=0,

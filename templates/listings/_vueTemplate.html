@@ -30,6 +30,7 @@
                                :title="listing.title">Dừng bán</a>
                             <a v-if="listing.status == 'sale'" :href="getListingDetailURL(listing.id)" target="_blank"
                                :title="listing.title">Hạ giá</a></label>
+                         <label class="label-primary unique p-1">[[ listing.average_price ]] tr/m2</label>
                     </div>
                 </div>
                 <div class="info-container">

@@ -232,7 +232,12 @@ def handle_import(file_path, listing_type='K1'):
                 except ValueError:
                     # logger.info(f"Cannot decode area. Continue in line {line_count}")
                     continue
-                # price_per_area = float(row[header_dict['trm2']])
+
+                try:
+                    price_per_area = float(price) / float(area) * 1000
+                except ValueError:
+                    price_per_area = Decimal(row[header_dict['trm2']])
+                    pass
 
                 if phone not in user_dict:
                     if not phone:
@@ -259,7 +264,7 @@ def handle_import(file_path, listing_type='K1'):
                                       direction=direction, price=price, reward_person=realtor,
                                       reward_person_mobile=phone,
                                       extra_data=extra_data, state=state, district=district_code,
-                                      width=width, floors=int(floor), length=None, lane_width=None)
+                                      width=width, floors=int(floor), average_price=price_per_area, length=None, lane_width=None)
                 title = f'Bán {get_short_title_from_house_type(new_listing.house_type)} {new_listing.street} {new_listing.district_name()} '
                 if new_listing.area >= 30:
                     title += f'{new_listing.area:.0f}m '
