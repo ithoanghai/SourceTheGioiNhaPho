@@ -54,9 +54,6 @@
       {% endif %}
     </ul>
     <div class="price">{{ listing.price }} tỷ</div>
-     <div class="unique p-1"><i class="zmdi zmdi-key"></i><b>{{listing.code}} &nbsp;( {% if listing.status == 'selling' %}{% trans 'Đang bán' %}
-    {% elif listing.status == 'sold' %}{% trans 'Đã bán' %}
-    {% elif listing.status == 'stop_selling' %}{% trans 'Dừng bán' %}
-    {% elif listing.status == 'sale' %}{% trans 'Bán gấp' %}{% endif %})</b></div>
+     <div class="unique p-1"><i class="zmdi zmdi-key"></i><b>{{listing.code}} &nbsp;({{ listing.status|get_listing_status }})</b></div>
   </header>
 </li>

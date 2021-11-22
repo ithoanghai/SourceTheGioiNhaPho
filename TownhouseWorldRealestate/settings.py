@@ -65,6 +65,7 @@ THIRD_PARTIES = [
 ]
 
 BUILT_IN_APPS = [
+    #'admin_numeric_filter',
     # 'django.contrib.admin',
     'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.auth',

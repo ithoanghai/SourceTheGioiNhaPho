@@ -1,7 +1,8 @@
 from django import template
 from django.conf import settings
 
-from FunctionModule.listings import get_short_title_from_house_type, get_short_title_from_road_type
+from FunctionModule.listings import get_short_title_from_house_type, get_short_title_from_road_type, \
+    get_listing_status_title_from_code
 
 register = template.Library()
 
@@ -23,6 +24,11 @@ def tag_get_house_type(house_type):
 @register.filter(name='get_road_type')
 def tag_get_road_type(road_type):
     return get_short_title_from_road_type(road_type)
+
+
+@register.filter(name='get_listing_status')
+def tag_get_listing_status(listing_status):
+    return get_listing_status_title_from_code(listing_status)
 
 
 @register.filter(name='default_img_by_house_type')

@@ -53,12 +53,7 @@
     </ul>
 
   </div>
-    <div class="status tgnp-color">
-    {% if listing.status == 'selling' %} {% trans 'Đang bán' %}
-    {% elif listing.status == 'sold' %} {% trans 'Đã bán' %}
-    {% elif listing.status == 'stop_selling' %} {% trans 'Dừng bán' %}
-    {% elif listing.status == 'sale' %} {% trans 'Bán gấp' %}
-    {% endif %}</div>
+  <div class="status tgnp-color">{{ listing.status|get_listing_status }}</div>
   <input name="url" type="hidden" value="{% url 'listing_detail' listing.id %}">
   <input name="lat" type="hidden" value="{{ listing.lat }}">
   <input name="lon" type="hidden" value="{{ listing.long }}">

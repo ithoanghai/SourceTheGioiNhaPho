@@ -123,7 +123,7 @@ class Listing(models.Model):
         if self.listingimage_set is None:
             return './static/img/logo.svg'
         else:
-            return self.listingimage_set.order_by('sort').first()
+            return self.listingimage_set.first()
 
     @property
     def photos(self):
@@ -183,12 +183,12 @@ class Listing(models.Model):
                                  verbose_name=_("Số tiền trích thưởng (triệu)"), default="100", blank=True,
                                  null=True)
 
-    reward_person = models.CharField(max_length=50, blank=True, verbose_name=_("Tên chủ sở hữu BĐS"),
+    reward_person = models.CharField(max_length=100, blank=True, verbose_name=_("Tên chủ sở hữu BĐS"),
                                      help_text="Tên người chủ sở hữu BĐS. Ví dụ Nguyễn Văn A. Nếu BĐS của ĐC thì ghi tên của Chuyên viên ĐC và tên Cty")
     reward_person_mobile = models.CharField(max_length=50, blank=True, verbose_name=_("Số ĐT chủ sở hữu BĐS hoặc của Chuyên viên ĐC"),
                                             help_text="Số ĐT chủ sở hữu BĐS, ví dụ 0916286256")
 
-    extra_data = models.TextField(max_length=250, verbose_name=_("Ghi chú"), null=True, blank=True,
+    extra_data = models.TextField(max_length=500, verbose_name=_("Ghi chú"), null=True, blank=True,
                                   default="Chủ nhà hiểu chuyện, tôn trọng môi giới, thiện chí hợp tác,..",
                                   help_text="Ghi các thông tin khác quan trọng về chủ nhà hoặc các yếu tố khác liên quan đến tương tác với Chuyên viên...")
 

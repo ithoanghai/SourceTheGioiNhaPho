@@ -45,7 +45,7 @@ class Customer(models.Model):
                                 help_text=_("Mới đi xem nhà. Cần mua gấp. Xem đã nhiều nhưng chưa ưng BĐS nào? Chốt hụt căn nào không?"))
     classify = models.CharField(max_length=50, choices=CustomerClassify.choices, default=CustomerClassify.FOCUSED_CARE, verbose_name=_("Phân loại khách"),
                               help_text=_("Cần chăm tập trung? Chăm bình thường? Chăm từ từ?"))
-    potential_points = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], blank=True, default='0', verbose_name=_("Điểm tiềm năng"))
+    #potential_points = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], blank=True, default='0', verbose_name=_("Điểm tiềm năng"))
     hire_date = models.DateTimeField(verbose_name=_("Thời điểm thêm"), default=default_hire_date, blank=True)
     last_interaction = models.DateTimeField(verbose_name=_("Thời điểm tương tác gần nhất"), default=default_hire_date, blank=True)
 

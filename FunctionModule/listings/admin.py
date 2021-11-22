@@ -1,12 +1,13 @@
 import fractions
 
 from django.contrib import admin
+from django.contrib.admin import FieldListFilter, BooleanFieldListFilter, DateFieldListFilter
 from django.core.files.storage import default_storage
 from django.core.files.uploadedfile import UploadedFile
 from django.http import HttpRequest, JsonResponse
 
-from FunctionModule.listings.import_csv import handle_import
-from .filters import ListingFilter
+from FunctionModule.listings.import_csv import handle_import, logger
+from .filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter, IsWithinRangeFilter
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage
 from ..realtors.models import Realtor
@@ -38,7 +39,17 @@ class ListingVideoAdmin(admin.TabularInline):
 class ListingAdmin(admin.ModelAdmin):
     list_display = ('code', 'address', 'district','area', 'floors', 'width', 'price', 'house_type', 'road_type', 'status', 'is_published')
     list_display_links = ('code','district',)
-    list_filter = ('is_published', 'realtor', 'state',)
+    list_filter = (
+        ('house_type', ChoiceDropdownFilter),
+        ('status', ChoiceDropdownFilter),
+        ('road_type', ChoiceDropdownFilter),
+        (IsWithinRangeFilter),
+        ('registration_type', ChoiceDropdownFilter),
+        ('realtor', RelatedDropdownFilter),
+        ('transaction_type', ChoiceDropdownFilter),
+        ('list_date', DateFieldListFilter),
+        ('is_published', BooleanFieldListFilter),
+    )
     list_editable = ('address',)
     search_fields = ('title', 'code', 'address','area', 'price','house_type', 'road_type', 'urban_area', 'street','ward', 'district','state', 'list_date',)
     list_per_page = 100
