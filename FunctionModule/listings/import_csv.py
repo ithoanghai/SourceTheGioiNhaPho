@@ -177,7 +177,7 @@ def handle_import(file_path, listing_type):
 
                 try:
                     # area = float(row[header_dict['dt']].replace('c4', ''))
-                    area = float(row[header_dict['dt']])
+                    area = Decimal(row[header_dict['dt']])
                 except ValueError:
                     # logger.info(f"Cannot decode area. Continue in line {line_count}")
                     continue
@@ -297,9 +297,15 @@ def handle_import(file_path, listing_type):
                     full_addr = f'{addr}, {district}, {state_name}'
 
                     # billion vnd
-                    price = Decimal(row[header_dict['gia']].split(' ')[0])
+                    try:
+                        price = Decimal(row[header_dict['gia']].split(' ')[0])
+                    except ValueError:
+                        logger.info(f"price {price}")
+                        continue
+
                     width = Decimal(row[header_dict['mat-tien']])
                     floor = float(row[header_dict['so-tang']])
+
                     if floor == 0:
                         house_type = HouseType.LAND
                     elif floor == 1:

@@ -71,7 +71,7 @@ class Listing(models.Model):
     floors = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)],null=True, blank=True,
                                  choices=([(i, i) for i in range(1, 50)]), verbose_name=_("Số tầng"))
     width = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Mặt tiền (m)"), null=True)
-    price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá chào (tỷ)"))
+    price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá chào (tỷ)"))
     receive_price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá thu về (tỷ)"),
                                         blank=True, null=True)
     sale_price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá Hạ chào (tỷ)"),
@@ -123,7 +123,7 @@ class Listing(models.Model):
         if not self.id and not self.address:
             self.address = f"{self.street}, {self.district_name} {self.state_name}"
         ave = float(self.price)/float(self.area)*1000
-        self.average_price = int(ave)
+        self.average_price = int(round(ave, 4))
 
         super().save(*args, **kwargs)
 
