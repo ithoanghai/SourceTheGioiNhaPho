@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from FunctionModule.listings.import_csv import handle_import
+from FunctionModule.listings.import_csv import handle_import, logger
 
 
 class Command(BaseCommand):

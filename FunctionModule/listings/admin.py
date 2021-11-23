@@ -129,7 +129,7 @@ def import_csv_view(request: HttpRequest) -> JsonResponse:
             #with open(file, 'r', encoding="utf-8", errors='ignore') as fp:
             #    default_storage.save(f'photos/{file.name}', fp)
 
-            handle_import(f'media/import-listing/{file.name}')
+            handle_import(f'media/import-listing/{file.name}', listing_type=request.POST.get('listing_type'))
 
             return JsonResponse({})
         else:

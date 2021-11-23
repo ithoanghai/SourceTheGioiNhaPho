@@ -325,6 +325,10 @@ function importToDB($) {
         acceptedFiles: 'text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     });
     myDropzone.on('sending', (file, xhr, formData) => {
+        if (document.getElementById("k1").checked)
+            formData.append('listing_type','K1');
+        else
+            formData.append('listing_type','K2');
         formData.append('csrfmiddlewaretoken', csrf)
     })
 
@@ -334,6 +338,7 @@ function importToDB($) {
     });
 
     $('#sendImportFile').on('click', () => {
+
         myDropzone.processQueue();
     })
 }
@@ -358,6 +363,8 @@ function importListing($) {
         '      <p style="margin-top: 1em" class="modal-alert"></p>\n' +
         '      </div>\n' +
         '      <div class="modal-footer">\n' +
+        '        <input type="radio" id="k1" name="listing_input" value="K1">K1</input>\n' +
+        '        <input type="radio" id="k2" name="listing_input" value="K2">K2</input>\n' +
         '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>\n' +
         '        <button type="button" id="sendImportFile" class="btn btn-primary">Gửi lên</button>\n' +
         '      </div>\n' +

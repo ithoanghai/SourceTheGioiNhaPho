@@ -30,7 +30,7 @@
                                :title="listing.title">Dừng bán</a>
                             <a v-if="listing.status == 'sale'" :href="getListingDetailURL(listing.id)" target="_blank"
                                :title="listing.title">Hạ giá</a></label>
-                         <label class="label-primary unique p-1">[[ listing.average_price ]] tr/m2</label>
+                         <label v-if="listing.average_price" class="label-primary unique p-1">[[ listing.average_price ]] tr/m2</label>
                     </div>
                 </div>
                 <div class="info-container">
@@ -155,13 +155,14 @@
 
 <script type="text/x-template" id="propertyListTemplateSimple">
     <div id="propertyListSimple" style="overflow-x:auto;" v-bind:class="{grid: isViewGrid}">
-        <table class="table" style="border-style: dotted; border: 1px solid;">
+        <table style="border-style: dotted; border: 1px solid; font-size: small;">
             <th class="unique col-md-2">Trạng thái</th>
             <th class="col-md-2">Địa chỉ</th>
             <th class="col-md-2">Diện tích</th>
             <th class="col-md-2">Số tầng</th>
             <th class="col-md-2">Mặt tiền</th>
             <th class="col-md-1">Giá</th>
+            <th class="col-md-1">Giá TB</th>
             <tbody>
             <tr v-for="listing in listings" :key="listing.id" :id="`property-tgnp-${listing.id}`"
                 :title="listing.title">
@@ -194,7 +195,7 @@
                         {% endif %}{% endcomment %}
                     </a>
                 </td>
-                <td class="col-md-2">
+                <td class="col-md-2 col-sm-2">
                     <span v-if="listing.urban_area">
                         <a :href="`/listings/search?urban_area=${listing.urban_area}`"
                            title="">[[listing.urban_area]]</a>
@@ -213,17 +214,20 @@
                            title=""><b>[[listing.state_name]]</b></a>
                     </h5>{% endcomment %}
                 </td>
-                <td class="col-md-2">
+                <td class="col-md-2 col-sm-2">
                     <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}
                 </td>
-                <td class="col-md-2">
+                <td class="col-md-2 col-sm-2">
                     <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
                 </td>
-                <td class="col-md-2">
+                <td class="col-md-2 col-sm-2">
                     <span v-if="listing.width > 3.2"><i class="fa fas fa-arrows-alt-h"></i> [[listing.width]] {% trans "m" %}</span>
                 </td>
-                <td class="listing-price col-md-1"><a :href="getListingDetailURL(listing.id)" target="_blank"
+                <td class="col-md-1 col-sm-2"><a :href="getListingDetailURL(listing.id)" target="_blank"
                                                       :title="listing.title">[[ listing.price ]] {% trans "tỷ" %}</a>
+                </td>
+                <td class="col-md-1 col-sm-2"><a :href="getListingDetailURL(listing.id)" target="_blank"
+                                                      :title="listing.title">[[ listing.average_price ]] {% trans "tr/m" %}</a>
                 </td>
             </tr>
             </tbody>

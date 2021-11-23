@@ -50,8 +50,8 @@ class TransactionType(models.TextChoices):
 # "studio", "townhouse", "townhouse_room"
 class HouseType(models.TextChoices):
     STREET_HOUSE = 'street_house', _("Nhà mặt phố")
-    TOWN_HOUSE = 'town_house', _("Nhà trong ngõ")
-    LOFT_HOUSE = 'loft_house', _("Nhà gác xép/Cấp 4")
+    TOWN_HOUSE = 'town_house', _("Nhà phố")
+    LOFT_HOUSE = 'loft_house', _("Nhà 1 tầng/Cấp 4")
     SHOP_HOUSE = 'shop_house', _("Cửa hàng")
     BUILDING = 'building', _("Toà nhà")
     BUILDING_BUSINESS = 'building_business', _("Toà nhà kinh doanh")
@@ -65,7 +65,7 @@ class HouseType(models.TextChoices):
     VILLA_REST = 'villa_rest', _("Biệt thự nghỉ dưỡng")
     LAND = 'land', _("Đất nền")
     LAND_BUSINESS = 'land_business', _("Mặt bằng kinh doanh")
-    PLOT = 'plot', _("Đất phân lô")
+    PLOT = 'plot', _("Liền kề - Phân lô")
     INDUSTRIAL_LAND = 'industrial_land', _("Đất công nghiệp")
     WAREHOUSE_WORKSHOP = 'warehouse_workshop', _("Kho xưởng")
     OTHER = 'other', _("Khác")

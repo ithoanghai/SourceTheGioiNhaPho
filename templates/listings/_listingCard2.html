@@ -28,7 +28,9 @@
         </a>
         <div class="label-group">
             <label class="label-primary unique p-1"><b>{{ listing.status|get_listing_status }}</b></label>
-            <label class="label-blue--sky unique p-1" title="Giá/m2"><strong></strong><b>{% widthratio listing.price listing.area 1000 %} tr/m2</b></label>
+            {% if listing.average_price %}
+            <label class="label-blue--sky unique p-1" title="Giá/m2"><strong></strong><b>{{ listing.average_price }} tr/m2</b></label>
+           {% endif %}
             {% if listing.is_exclusive %}
                 <label class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
             {% endif %}

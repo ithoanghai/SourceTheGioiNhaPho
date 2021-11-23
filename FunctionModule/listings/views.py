@@ -10,6 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from FunctionModule.cadastral.lookups import get_all_states, get_all_districts
+from . import Status
 from .filters import ListingFilter
 from .serializers import *
 
@@ -24,7 +25,7 @@ class ListingSearchQuery(BaseModel):
 def index(request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)
 
-    paginator = Paginator(listings, 50)
+    paginator = Paginator(listings, 100)
     page = request.GET.get('page')
     paged_listings = paginator.get_page(page)
 
