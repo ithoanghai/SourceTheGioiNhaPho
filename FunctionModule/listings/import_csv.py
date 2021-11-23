@@ -291,11 +291,7 @@ def handle_import(file_path, listing_type):
 
                     addr = row[header_dict['dia-chi']].replace('.', '/').replace('Số ', '').replace(' ', ' ')
                     so_nha = addr.split(' ')
-                    logger.info(f"so_nha[0] {so_nha[0]}")
-                    lensonha = 0
                     lensonha = int(len(so_nha[0]))
-                    logger.info(f"len(so_nha[0] {lensonha}")
-
                     street = addr[lensonha:]
                     state_name = row[header_dict['thanh-pho']]
                     full_addr = f'{addr}, {district}, {state_name}'
@@ -303,7 +299,7 @@ def handle_import(file_path, listing_type):
                     # billion vnd
                     price = Decimal(row[header_dict['gia']].split(' ')[0])
                     width = Decimal(row[header_dict['mat-tien']])
-                    floor = int(row[header_dict['so-tang']])
+                    floor = float(row[header_dict['so-tang']])
                     if floor == 0:
                         house_type = HouseType.LAND
                     elif floor == 1:
