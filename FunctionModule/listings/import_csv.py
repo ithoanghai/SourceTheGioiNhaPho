@@ -24,6 +24,7 @@ logger = logging.getLogger(__name__)
 
 def read_header(header_row, listing_type):
     if listing_type == 'K1':
+        logger.info(f"listing_type {listing_type} Nha Pho VN")
         header_dict = {
             "tgian": 0,
             "hien-trang": 1,
@@ -40,7 +41,8 @@ def read_header(header_row, listing_type):
             "dt": 14,
             "trm2": 15,
         }
-    else:
+    elif listing_type == 'K2':
+        logger.info(f"listing_type {listing_type} Thien Khoi")
         header_dict = {
             "dia-chi": 1,
             "dt": 2,
@@ -135,7 +137,7 @@ def handle_import(file_path, listing_type):
                 line_count += 1
 
                 if line_count == 1:
-                    header_dict = read_header(row,listing_type)
+                    header_dict = read_header(row, listing_type)
                 district = row[header_dict['quan']]
                 if not district:
                     logger.info(f"No district. Continue in line {line_count}")
@@ -174,19 +176,20 @@ def handle_import(file_path, listing_type):
                 reward = 100
                 bonus_rate = 3
                 desc = ""
-                is_published = False
+                is_published = True
 
                 try:
                     # area = float(row[header_dict['dt']].replace('c4', ''))
                     area = Decimal(row[header_dict['dt']])
                 except ValueError:
                     # logger.info(f"Cannot decode area. Continue in line {line_count}")
-                    continue
+                    pass
 
                 if listing_type == "K1":
                     status = row[header_dict['hien-trang']]
                     if not status:
                         status = Status.SELLING
+                        is_published = True
                     else:
                         if status == 'Hạ chào':
                             status = Status.SALE
@@ -197,12 +200,13 @@ def handle_import(file_path, listing_type):
                         elif status == 'Đã bán':
                             status = Status.SOLD
                             is_published = False
-                        else:
+                        elif status == 'Dừng bán':
                             status = Status.STOP_SELLING
                             is_published = False
 
                     addr = row[header_dict['dia-chi']].replace('.', '/').replace(',', '/')
                     street = row[header_dict['pho']]
+                    deep_address = addr.split('/')
                     # Hanoi
                     state = '01'
                     if street in addr:
@@ -210,6 +214,7 @@ def handle_import(file_path, listing_type):
                     else:
                         full_addr = f'{addr}, {street}, {district}'
                     full_addr = f'{full_addr}, Hà Nội'
+                    full_addr = full_addr.replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ')
 
                     # billion vnd
                     price = row[header_dict['gia']]
@@ -219,14 +224,16 @@ def handle_import(file_path, listing_type):
                         continue
                     price = Decimal(price.replace(',', '.'))
 
-                    encoded_num = row[header_dict['thong-so']]
+                    encoded_num = row[header_dict['thong-so']].replace('.', ' ')
                     splitter = encoded_num.split(' ')
                     splitter_len = len(splitter)
+
                     if splitter_len < 3:
                         # logger.info(f"Cannot decode encoded_num. Continue in line {line_count}")
                         continue
                     # splitter = list(filter(None, splitter))
                     floor_area = splitter[0].split('/')
+                    area = Decimal(floor_area[0])
                     if splitter_len == 2:
                         width = float(splitter[1].replace(',', '.'))
                     else:
@@ -254,23 +261,22 @@ def handle_import(file_path, listing_type):
                                 # logger.info(f"Cannot decode floor_code. Continue in line {line_count}")
                                 continue
 
-                    deep_address = splitter[0].split('/')
                     shop_house = "shophouse"
                     biet_thu = "bt"
                     lien_ke = "lk"
                     dich_vu = "dv"
                     thap_tang = "tt"
                     lo = "lô"
-                    chung_cu = "cc"
-                    chung_cu_mn = "ccmn"
-                    chung_cu_cc = "cccc"
+                    chung_cu = "chung cư"
+                    cao_tang = "ct"
                     tap_the = "tập thể"
                     du_an = "dự án"
                     desc = row[header_dict['dac-diem']]
-                    if desc == 'Mặt Phố' or len(deep_address) == 1:
+                    if desc == 'Mặt Phố' or (len(deep_address) == 1 and price > 6):
                         house_type = HouseType.STREET_HOUSE
                         road_type = RoadType.ALLEY_CAR_2
-                        is_published = False
+                        if price > 30:
+                            is_published = False
                     elif desc == 'Ngõ Ô Tô':
                         road_type = RoadType.ALLEY_CAR
                     elif desc == 'Ngõ 3 Gác':
@@ -284,18 +290,20 @@ def handle_import(file_path, listing_type):
                     elif shop_house in full_addr.lower() or desc == 'Kinh Doanh':
                         house_type = HouseType.SHOP_HOUSE
                         road_type = RoadType.ALLEY_CAR_2
-                    elif chung_cu in full_addr.lower() or chung_cu_cc in full_addr.lower() or tap_the in full_addr.lower():
-                        house_type = HouseType.APARTMENT
-                        road_type = RoadType.ALLEY_CAR_2
-                    elif chung_cu_mn in full_addr.lower():
-                        house_type = HouseType.APARTMENT
-                        road_type = RoadType.ALLEY_CAR
-                    elif lien_ke in full_addr.lower() or dich_vu in full_addr.lower() or lo in full_addr.lower() or du_an in full_addr.lower():
-                        house_type = HouseType.PLOT
-                        road_type = RoadType.ALLEY_CAR_2
-                    elif biet_thu in full_addr.lower() or thap_tang in full_addr.lower():
+                    if biet_thu in full_addr.lower():
                         house_type = HouseType.VILLA
                         road_type = RoadType.ALLEY_CAR_2
+                    elif lien_ke in full_addr.lower() or dich_vu in full_addr.lower() or lo in full_addr.lower() or du_an in full_addr.lower() or desc == 'Liền Kề' or thap_tang in full_addr.lower():
+                        house_type = HouseType.PLOT
+                        road_type = RoadType.ALLEY_CAR_2
+                    elif cao_tang in full_addr.lower() or chung_cu in full_addr.lower() or " tt " in full_addr.lower() or tap_the in full_addr.lower():
+                        full_addr = full_addr.replace(' TT ', ' tập thể ').replace('CCCC', 'Chung cư cao cấp')
+                        house_type = HouseType.APARTMENT
+                        road_type = RoadType.ALLEY_CAR_2
+                    elif "chung cư mini" in full_addr.lower():
+                        full_addr = full_addr.replace('CCMN', 'Chung cư Mini')
+                        house_type = HouseType.APARTMENT
+                        road_type = RoadType.ALLEY_CAR
 
                     direction = get_direction(row[header_dict['huong']])
 
@@ -308,7 +316,6 @@ def handle_import(file_path, listing_type):
                     don_vi = row[header_dict['don-vi']]
                     extra_add = f' Nguồn {name}, hoa hồng chưa có thông tin, hỏi lại đầu chủ.'
                     extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
-
                 elif listing_type == "K2":
                     status = row[header_dict['hien-trang']]
                     if not status:
@@ -332,6 +339,7 @@ def handle_import(file_path, listing_type):
                     so_nha = addr.split(' ')
                     lensonha = int(len(so_nha[0]))
                     street = addr[lensonha:]
+                    addr = addr.replace(' TT ', ' tập thể ').replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ')
                     state_name = row[header_dict['thanh-pho']]
                     full_addr = f'{addr}, {district}, {state_name}'
 
@@ -359,30 +367,30 @@ def handle_import(file_path, listing_type):
                     thap_tang = "tt"
                     dich_vu = "dv"
                     lo = "lô"
-                    chung_cu = "cc"
-                    chung_cu_mn = "ccmn"
-                    chung_cu_cc = "cccc"
+                    chung_cu = "chung cư"
+                    cao_tang = "ct"
                     tap_the = "tập thể"
                     du_an = "dự án"
-                    if len(deep_address) == 1:
+                    if len(deep_address) == 1 and price > 6:
                         house_type = HouseType.STREET_HOUSE
                         road_type = RoadType.ALLEY_CAR_2
-                        is_published = False
+                        if price > 30:
+                            is_published = False
                     elif shop_house in full_addr.lower():
                         house_type = HouseType.SHOP_HOUSE
                         road_type = RoadType.ALLEY_CAR_2
-                    elif chung_cu in full_addr.lower() or chung_cu_cc in full_addr.lower() or tap_the in full_addr.lower():
-                        house_type = HouseType.APARTMENT
-                        road_type = RoadType.ALLEY_CAR_2
-                    elif chung_cu_mn in full_addr.lower():
-                        house_type = HouseType.APARTMENT
-                        road_type = RoadType.ALLEY_CAR
-                    elif lien_ke in full_addr.lower() or dich_vu in full_addr.lower() or lo in full_addr.lower() or du_an in full_addr.lower():
-                        house_type = HouseType.PLOT
-                        road_type = RoadType.ALLEY_CAR_2
-                    elif biet_thu in full_addr.lower() or thap_tang in full_addr.lower():
+                    if biet_thu in full_addr.lower():
                         house_type = HouseType.VILLA
                         road_type = RoadType.ALLEY_CAR_2
+                    elif lien_ke in full_addr.lower() or dich_vu in full_addr.lower() or lo in full_addr.lower() or du_an in full_addr.lower() or desc == 'Liền Kề' or thap_tang in full_addr.lower():
+                        house_type = HouseType.PLOT
+                        road_type = RoadType.ALLEY_CAR_2
+                    elif cao_tang in full_addr.lower() or chung_cu in full_addr.lower() or tap_the in full_addr.lower():
+                        house_type = HouseType.APARTMENT
+                        road_type = RoadType.ALLEY_CAR_2
+                    elif "chung cư mini" in full_addr.lower():
+                        house_type = HouseType.APARTMENT
+                        road_type = RoadType.ALLEY_CAR
 
                     nguon = row[header_dict['nguon']]
                     hoa_hong = row[header_dict['hoa-hong']]
@@ -404,11 +412,11 @@ def handle_import(file_path, listing_type):
 
                 starter = get_house_type_short(house_type)
                 code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
-
+                logger.info(f"row {line_count} {code}")
                 new_listing = Listing(realtor=realtor, code=code, status=status, street=street,
                                       address=full_addr, area=area, transaction_type=trans_type,
                                       house_type=house_type, road_type=road_type, list_date=created,
-                                      direction=direction, price=price, reward_person=realtor,
+                                      direction=direction, price=round(price,2), reward_person=realtor,
                                       reward_person_mobile=phone, reward=reward, bonus_rate=bonus_rate,
                                       extra_data=extra_data, state=state_code, district=district_code, is_published=is_published,
                                       width=width, floors=int(floor), average_price=price_per_area, length=None, lane_width=None)

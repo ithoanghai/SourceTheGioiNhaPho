@@ -72,11 +72,11 @@ class Listing(models.Model):
                                  choices=([(i, i) for i in range(1, 50)]), verbose_name=_("Số tầng"))
     width = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Mặt tiền (m)"), null=True)
     price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá chào (tỷ)"))
-    receive_price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá thu về (tỷ)"),
+    receive_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá thu về (tỷ)"),
                                         blank=True, null=True)
-    sale_price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Giá Hạ chào (tỷ)"),
+    sale_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá Hạ chào (tỷ)"),
                                      blank=True, null=True)
-    average_price = models.DecimalField(max_digits=5, decimal_places=0, verbose_name=_("Giá TB/m2 (triệu)"),
+    average_price = models.DecimalField(max_digits=9, decimal_places=0, verbose_name=_("Giá TB/m2 (triệu)"),
                                      blank=True, null=True)
     length = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Chiều dài (m)"), null=True,
                                  blank=True)

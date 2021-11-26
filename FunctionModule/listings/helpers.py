@@ -6,19 +6,27 @@ from FunctionModule.listings.choices import HouseType, RoadType, Status
 
 def get_house_type_short(house_type: str) -> str:
     if house_type == HouseType.STREET_HOUSE:
-        return 'NP'
+        return 'SH'
     elif house_type == HouseType.TOWN_HOUSE:
         return 'NG'
-    elif house_type == HouseType.VILLA:
+    elif house_type == HouseType.VILLA or house_type == HouseType.VILLA_REST:
         return 'BT'
+    elif house_type == HouseType.PLOT:
+        return 'LK'
     elif house_type == HouseType.LOFT_HOUSE:
         return 'C4'
     elif house_type == HouseType.LAND:
         return 'DN'
     elif house_type == HouseType.SHOP_HOUSE:
         return 'CH'
-    elif house_type == HouseType.APARTMENT:
+    elif house_type == HouseType.APARTMENT or house_type == HouseType.CONDO_TEL or house_type == HouseType.SERVICE_APARTMENT or house_type == HouseType.PENT_HOUSE:
         return 'CC'
+    elif house_type == HouseType.BUILDING or house_type == HouseType.BUILDING_BUSINESS:
+        return 'BD'
+    elif house_type == HouseType.OFFICE or house_type == HouseType.OFFICE_TEL:
+        return 'OF'
+    elif house_type == HouseType.WAREHOUSE_WORKSHOP:
+        return 'WF'
     else:
         return 'NP'
 
