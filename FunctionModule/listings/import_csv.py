@@ -174,6 +174,7 @@ def handle_import(file_path, listing_type):
                 reward = 100
                 bonus_rate = 3
                 desc = ""
+                is_published = False
 
                 try:
                     # area = float(row[header_dict['dt']].replace('c4', ''))
@@ -189,12 +190,16 @@ def handle_import(file_path, listing_type):
                     else:
                         if status == 'Hạ chào':
                             status = Status.SALE
+                            is_published = True
                         elif status == 'Còn bán':
                             status = Status.SELLING
+                            is_published = True
                         elif status == 'Đã bán':
                             status = Status.SOLD
+                            is_published = False
                         else:
                             status = Status.STOP_SELLING
+                            is_published = False
 
                     addr = row[header_dict['dia-chi']].replace('.', '/').replace(',', '/')
                     street = row[header_dict['pho']]
@@ -213,24 +218,6 @@ def handle_import(file_path, listing_type):
                     if price == '#VALUE!':
                         continue
                     price = Decimal(price.replace(',', '.'))
-
-                    desc = row[header_dict['dac-diem']]
-                    if desc == 'Mặt Phố':
-                        house_type = HouseType.STREET_HOUSE
-                        road_type = RoadType.ALLEY_CAR_2
-                    elif desc == 'Kinh Doanh':
-                        house_type = HouseType.SHOP_HOUSE
-                        road_type = RoadType.ALLEY_CAR
-                    elif desc == 'Ngõ Ô Tô':
-                        road_type = RoadType.ALLEY_CAR
-                    elif desc == 'Ngõ 3 Gác':
-                        road_type = RoadType.ALLEY_TRIBIKE
-                    elif desc == 'Ngõ Xe Máy':
-                        road_type = RoadType.ALLEY_BIKE
-                    elif desc == 'Đất Dự Án':
-                        house_type = HouseType.PLOT
-                        road_type = RoadType.ALLEY_CAR_2
-                        trans_type = TransactionType.PROJECT
 
                     encoded_num = row[header_dict['thong-so']]
                     splitter = encoded_num.split(' ')
@@ -252,7 +239,7 @@ def handle_import(file_path, listing_type):
                     floor_code = slugify(splitter[1].lower().replace('đ', 'd').replace('ấ', 'a').replace('t', ''))
                     if floor_code == 'C4' or floor_code == 'c' or floor_code == 'cap 4':
                         floor = 1
-                        house_type = HouseType.TOWN_HOUSE
+                        house_type = HouseType.LOFT_HOUSE
                     elif floor_code == 'da' or floor_code == 'd':
                         floor = 0
                         house_type = HouseType.LAND
@@ -266,6 +253,50 @@ def handle_import(file_path, listing_type):
                             except ValueError:
                                 # logger.info(f"Cannot decode floor_code. Continue in line {line_count}")
                                 continue
+
+                    deep_address = splitter[0].split('/')
+                    shop_house = "shophouse"
+                    biet_thu = "bt"
+                    lien_ke = "lk"
+                    dich_vu = "dv"
+                    thap_tang = "tt"
+                    lo = "lô"
+                    chung_cu = "cc"
+                    chung_cu_mn = "ccmn"
+                    chung_cu_cc = "cccc"
+                    tap_the = "tập thể"
+                    du_an = "dự án"
+                    desc = row[header_dict['dac-diem']]
+                    if desc == 'Mặt Phố' or len(deep_address) == 1:
+                        house_type = HouseType.STREET_HOUSE
+                        road_type = RoadType.ALLEY_CAR_2
+                        is_published = False
+                    elif desc == 'Ngõ Ô Tô':
+                        road_type = RoadType.ALLEY_CAR
+                    elif desc == 'Ngõ 3 Gác':
+                        road_type = RoadType.ALLEY_TRIBIKE
+                    elif desc == 'Ngõ Xe Máy':
+                        road_type = RoadType.ALLEY_BIKE
+                    elif desc == 'Đất Dự Án':
+                        house_type = HouseType.PLOT
+                        road_type = RoadType.ALLEY_CAR_2
+                        trans_type = TransactionType.PROJECT
+                    elif shop_house in full_addr.lower() or desc == 'Kinh Doanh':
+                        house_type = HouseType.SHOP_HOUSE
+                        road_type = RoadType.ALLEY_CAR_2
+                    elif chung_cu in full_addr.lower() or chung_cu_cc in full_addr.lower() or tap_the in full_addr.lower():
+                        house_type = HouseType.APARTMENT
+                        road_type = RoadType.ALLEY_CAR_2
+                    elif chung_cu_mn in full_addr.lower():
+                        house_type = HouseType.APARTMENT
+                        road_type = RoadType.ALLEY_CAR
+                    elif lien_ke in full_addr.lower() or dich_vu in full_addr.lower() or lo in full_addr.lower() or du_an in full_addr.lower():
+                        house_type = HouseType.PLOT
+                        road_type = RoadType.ALLEY_CAR_2
+                    elif biet_thu in full_addr.lower() or thap_tang in full_addr.lower():
+                        house_type = HouseType.VILLA
+                        road_type = RoadType.ALLEY_CAR_2
+
                     direction = get_direction(row[header_dict['huong']])
 
                     try:
@@ -275,19 +306,27 @@ def handle_import(file_path, listing_type):
                         pass
 
                     don_vi = row[header_dict['don-vi']]
+                    extra_add = f' Nguồn {name}, hoa hồng chưa có thông tin, hỏi lại đầu chủ.'
+                    extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
+
                 elif listing_type == "K2":
                     status = row[header_dict['hien-trang']]
                     if not status:
                         status = Status.SELLING
+                        is_published = True
                     else:
                         if status == 'Chuẩn' or status == 'Chờ duyệt' or status == 'Chim trời cá bể':
                             status = Status.SELLING
+                            is_published = True
                         elif status == 'Tạm dừng bán':
                             status = Status.STOP_SELLING
+                            is_published = False
                         elif status == 'Đã bán' or status == 'Đã cọc':
                             status = Status.SOLD
+                            is_published = False
                         else:
                             status = Status.SALE
+                            is_published = True
 
                     addr = row[header_dict['dia-chi']].replace('.', '/').replace('Số ', '').replace(' ', ' ')
                     so_nha = addr.split(' ')
@@ -313,6 +352,38 @@ def handle_import(file_path, listing_type):
                     else:
                         house_type = HouseType.TOWN_HOUSE
 
+                    deep_address = so_nha[0].split('/')
+                    shop_house = "shophouse"
+                    biet_thu = "bt"
+                    lien_ke = "lk"
+                    thap_tang = "tt"
+                    dich_vu = "dv"
+                    lo = "lô"
+                    chung_cu = "cc"
+                    chung_cu_mn = "ccmn"
+                    chung_cu_cc = "cccc"
+                    tap_the = "tập thể"
+                    du_an = "dự án"
+                    if len(deep_address) == 1:
+                        house_type = HouseType.STREET_HOUSE
+                        road_type = RoadType.ALLEY_CAR_2
+                        is_published = False
+                    elif shop_house in full_addr.lower():
+                        house_type = HouseType.SHOP_HOUSE
+                        road_type = RoadType.ALLEY_CAR_2
+                    elif chung_cu in full_addr.lower() or chung_cu_cc in full_addr.lower() or tap_the in full_addr.lower():
+                        house_type = HouseType.APARTMENT
+                        road_type = RoadType.ALLEY_CAR_2
+                    elif chung_cu_mn in full_addr.lower():
+                        house_type = HouseType.APARTMENT
+                        road_type = RoadType.ALLEY_CAR
+                    elif lien_ke in full_addr.lower() or dich_vu in full_addr.lower() or lo in full_addr.lower() or du_an in full_addr.lower():
+                        house_type = HouseType.PLOT
+                        road_type = RoadType.ALLEY_CAR_2
+                    elif biet_thu in full_addr.lower() or thap_tang in full_addr.lower():
+                        house_type = HouseType.VILLA
+                        road_type = RoadType.ALLEY_CAR_2
+
                     nguon = row[header_dict['nguon']]
                     hoa_hong = row[header_dict['hoa-hong']]
                     num_reward = float(hoa_hong.split(' ')[0])
@@ -323,6 +394,7 @@ def handle_import(file_path, listing_type):
 
                     don_vi = "Thiên Khôi"
                     extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
+                    extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
 
                     try:
                         price_per_area = float(price) / float(area) * 1000
@@ -330,7 +402,6 @@ def handle_import(file_path, listing_type):
                         price_per_area = Decimal(row[header_dict['trm2']])
                         pass
 
-                extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
                 starter = get_house_type_short(house_type)
                 code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
 
@@ -339,7 +410,7 @@ def handle_import(file_path, listing_type):
                                       house_type=house_type, road_type=road_type, list_date=created,
                                       direction=direction, price=price, reward_person=realtor,
                                       reward_person_mobile=phone, reward=reward, bonus_rate=bonus_rate,
-                                      extra_data=extra_data, state=state_code, district=district_code,
+                                      extra_data=extra_data, state=state_code, district=district_code, is_published=is_published,
                                       width=width, floors=int(floor), average_price=price_per_area, length=None, lane_width=None)
                 title = f'Bán {get_short_title_from_house_type(new_listing.house_type)} {new_listing.street} {new_listing.district_name()} '
                 if new_listing.area >= 30:
@@ -374,14 +445,16 @@ def handle_import(file_path, listing_type):
                 if code in listing_obj:
                     t = Listing.objects.get(code=code)
                     t.is_published = new_listing.is_published
-                    #t.title = new_listing.title
-                    #t.description = new_listing.description
+                    t.title = new_listing.title
+                    t.description = new_listing.description
+                    t.house_type = new_listing.house_type
+                    t.road_type = new_listing.road_type
                     t.status = new_listing.status
                     t.price = new_listing.price
                     t.save()
 
                 if code not in listing_obj:
-                    new_listing.is_published = False
+                    new_listing.is_published = new_listing.is_published
                     new_listing.save()
                     new_listings.append(new_listing)
                     listing_obj[code] = new_listing

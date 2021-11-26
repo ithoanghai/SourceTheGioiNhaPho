@@ -37,7 +37,7 @@ class ListingVideoAdmin(admin.TabularInline):
 
 
 class ListingAdmin(admin.ModelAdmin):
-    list_display = ('code', 'address', 'district','area', 'floors', 'width', 'price', 'average_price', 'status', 'house_type', 'road_type', 'is_published')
+    list_display = ('address', 'district','area', 'floors', 'width', 'price', 'average_price', 'house_type', 'road_type', 'code', 'status', 'is_published')
     list_display_links = ('code','district',)
     list_filter = (
         ('house_type', ChoiceDropdownFilter),
