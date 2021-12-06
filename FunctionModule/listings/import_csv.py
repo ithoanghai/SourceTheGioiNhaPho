@@ -167,6 +167,7 @@ def handle_import(file_path, listing_type):
                                                             phone=phone, email=email, last_name=name[3:])
                         new_realtor = Realtor.objects.create(user=new_user)
                         user_dict[phone] = new_realtor
+
                 realtor = user_dict[phone]
                 trans_type = TransactionType.SELL
                 house_type = HouseType.TOWN_HOUSE
@@ -310,12 +311,6 @@ def handle_import(file_path, listing_type):
 
                     direction = get_direction(row[header_dict['huong']])
 
-                    try:
-                        price_per_area = float(price) / float(area) * 1000
-                    except ValueError:
-                        price_per_area = Decimal(row[header_dict['trm2']])
-                        pass
-
                     don_vi = row[header_dict['don-vi']]
                     extra_add = f' Nguồn {name}, hoa hồng hỏi lại đầu chủ cho chính xác.'
                     extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
@@ -423,16 +418,13 @@ def handle_import(file_path, listing_type):
                     extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
                     extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
 
-                    try:
-                        price_per_area = float(price) / float(area) * 1000
-                    except ValueError:
-                        price_per_area = Decimal(row[header_dict['trm2']])
-                        pass
+                try:
+                    price_per_area = float(price) / float(area) * 1000
+                except ValueError:
+                    pass
 
                 starter = get_house_type_short(house_type)
                 code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
-
-                logger.info(f"row {line_count} {code}")
 
                 new_listing = Listing(realtor=realtor, code=code, status=status, street=street,
                                       address=full_addr, area=area, transaction_type=trans_type,
@@ -472,66 +464,39 @@ def handle_import(file_path, listing_type):
                 #         else:
                 #             searched_locations[full_addr] = None
 
-                queryset_list = Listing.objects.filter(district=new_listing.district, area=new_listing.area, width=new_listing.width,
+                queryset_list = Listing.objects.filter(district=new_listing.district, area=new_listing.area,
                                                        floors=new_listing.floors)
                 listing = queryset_list.first()
                 for f in queryset_list:
-                    if listing_type in listing.code:
-                        f.is_published = new_listing.is_published
-                        f.house_type = new_listing.house_type
-                        f.road_type = new_listing.road_type
-                        f.status = new_listing.status
-                        f.area = new_listing.area
-                        f.floors = new_listing.floors
-                        f.width = new_listing.width
-                        f.price = new_listing.price
-                        f.list_date = new_listing.list_date
-                        f.reward_person_mobile = new_listing.reward_person_mobile
-                        f.extra_data = new_listing.extra_data
-                        f.title = new_listing.title
-                        f.description = new_listing.description
-                        if f.main_photo or f.code == code:
-                            print(f"update listing edited: {listing}")
-                            f.save()
-                        elif f.price != new_listing.price and f.address in new_listing.address:
-                            print(f"update listing same address, not same price: {listing}")
-                            f.save()
-                        elif f.price == new_listing.price and f.address not in new_listing.address:
-                            print(f"update listing not same address, same price: {listing}")
-                            f.save()
-                        elif f.price != new_listing.price and f.address not in new_listing.address:
-                            print(f"update listing not same address, not same price: {listing}")
-                            f.save()
-                        elif f.code not in listing_obj:
-                            print(f"new listing not exist code: {new_listing}")
-                            f = new_listing
-                            f.save()
-                        else:
-                            print(f"del listing don't match: {f}")
+                    if listing_type in f.code:
+                        if f.address == new_listing.address and f.code != code and listing_type in f.code:
+                            print(f"delete listing same address, not same code: {listing}")
+                            f.delete()
+                        elif f.price == new_listing.price and f.address in new_listing.address and f.code != code and listing_type in f.code:
+                            print(f"delete listing contains address, same price, not same code: {listing}")
                             f.delete()
 
-                if listing is None:
-                    if code in listing_obj:
-                        print(f"update listing have code exist: {listing}")
-                        f = Listing.objects.get(code=code)
-                        f.is_published = new_listing.is_published
-                        f.house_type = new_listing.house_type
-                        f.road_type = new_listing.road_type
-                        f.status = new_listing.status
-                        f.area = new_listing.area
-                        f.floors = new_listing.floors
-                        f.width = new_listing.width
-                        f.price = new_listing.price
-                        f.list_date = new_listing.list_date
-                        f.reward_person_mobile = new_listing.reward_person_mobile
-                        f.extra_data = new_listing.extra_data
-                        f.save()
-                    else:
-                        new_listing.save()
-                        new_listings.append(new_listing)
-                        listing_obj[code] = new_listing
-                        print(f"new listing not exist: {new_listing}")
-                        del new_listing
+                if code in listing_obj:
+                    f = Listing.objects.get(code=code)
+                    f.is_published = new_listing.is_published
+                    f.house_type = new_listing.house_type
+                    f.road_type = new_listing.road_type
+                    f.status = new_listing.status
+                    f.area = new_listing.area
+                    f.floors = new_listing.floors
+                    f.width = new_listing.width
+                    f.price = new_listing.price
+                    f.list_date = new_listing.list_date
+                    f.reward_person_mobile = new_listing.reward_person_mobile
+                    f.extra_data = new_listing.extra_data
+                    f.save()
+                    logger.info(f"row {line_count}: update listing {f}")
+                else:
+                    new_listing.save()
+                    new_listings.append(new_listing)
+                    listing_obj[code] = new_listing
+                    print(f"row {line_count}: new listing don't exist: {new_listing}")
+                    del new_listing
 
     except Exception as ex:
         print(f"Error occurred at line: {line_count}")
