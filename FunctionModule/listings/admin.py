@@ -40,6 +40,7 @@ class ListingAdmin(admin.ModelAdmin):
     list_display = ('address', 'district','area', 'floors', 'width', 'price', 'average_price', 'house_type', 'road_type', 'code', 'status', 'is_published')
     list_display_links = ('code','district',)
     list_filter = (
+        ('district', ChoiceDropdownFilter),
         ('house_type', ChoiceDropdownFilter),
         ('status', ChoiceDropdownFilter),
         ('area', ChoiceDropdownFilter),

@@ -57,13 +57,13 @@ class Listing(models.Model):
                               help_text=_("Nhập tên Đường/Phố/Thôn/Xóm"), null=True)
     address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ"),
                                help_text=_("Nhập theo định dạng: Ngõ.Ngách.Hẻm.Số nhà, Khu dân cư, Phố, Quận/Huyện, Tỉnh/TP"))
-    condition = models.CharField(max_length=20, choices=Condition.choices, default=Condition.OLD,
-                                 verbose_name=_("Tình trạng BĐS"), null=True)
-    construction = models.CharField(max_length=20, choices=Construction.choices, default=Construction.RELEASE,
-                                 verbose_name=_("Tình trạng xây dựng"), null=True)
+    condition = models.CharField(max_length=20, choices=Condition.choices,
+                                 verbose_name=_("Tình trạng BĐS"), blank=True, null=True)
+    construction = models.CharField(max_length=20, choices=Construction.choices,
+                                 verbose_name=_("Tình trạng xây dựng"), blank=True, null=True)
     year = models.CharField(max_length=50, verbose_name=_("Năm xây dựng và tỉ lệ sử dụng còn lại"), blank=True, null=True,
                             help_text=_("Điền năm hoàn thành xây dựng và Tỷ lệ % sử dụng còn lại"))
-    road_type = models.CharField(max_length=20, choices=RoadType.choices, default=RoadType.ALLEY_CAR,
+    road_type = models.CharField(max_length=20, choices=RoadType.choices, default=RoadType.ALLEY_CAR_TRIBIKE,
                                  verbose_name=_("Đường/Ngõ trước nhà"))
     parking_type = models.CharField(max_length=20, choices=ParkingType.choices, blank=True,
                                     null=True, verbose_name=_("Có chỗ đỗ ô tô không?"))

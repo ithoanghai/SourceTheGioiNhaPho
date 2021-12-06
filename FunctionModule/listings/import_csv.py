@@ -3,10 +3,12 @@ import datetime
 import json
 import logging
 from decimal import Decimal
+from string import digits
 
 import pytz
 from django.conf import settings
 from django.contrib.gis.geos import Point
+from django.db.models import Q
 from django.template.loader import render_to_string
 from django.utils.text import slugify
 from geopy import GeocodeEarth
@@ -147,14 +149,11 @@ def handle_import(file_path, listing_type):
                 else:
                     # logger.info(f"District code not found. Continue in line {line_count}")
                     continue
-                try:
-                    created = datetime.datetime.strptime(row[header_dict['tgian']], '%d/%m/%Y %H:%M:%S')
-                    created = created.replace(tzinfo=timezone)
-                except ValueError:
-                    created = datetime.datetime.now(tz=timezone)
+
                 name = row[header_dict['dau-chu']]
                 phone = row[header_dict['sdt']]
                 phone = phone.split(' ')[0]
+                phone = phone.split('-')[0]
                 if not phone.isalnum():
                     logger.info(f"Phone invalid. Continue in line {line_count}")
                     continue
@@ -171,21 +170,19 @@ def handle_import(file_path, listing_type):
                 realtor = user_dict[phone]
                 trans_type = TransactionType.SELL
                 house_type = HouseType.TOWN_HOUSE
-                road_type = RoadType.ALLEY_TRIBIKE
+                road_type = RoadType.ALLEY_TRIBIKE_BIKE
                 direction = ""
                 reward = 100
                 bonus_rate = 3
                 desc = ""
                 is_published = True
 
-                try:
-                    # area = float(row[header_dict['dt']].replace('c4', ''))
-                    area = Decimal(row[header_dict['dt']])
-                except ValueError:
-                    # logger.info(f"Cannot decode area. Continue in line {line_count}")
-                    pass
-
                 if listing_type == "K1":
+                    try:
+                        created = datetime.datetime.strptime(row[header_dict['tgian']], '%d/%m/%Y %H:%M:%S')
+                        created = created.replace(tzinfo=timezone)
+                    except ValueError:
+                        created = datetime.datetime.now(tz=timezone)
                     status = row[header_dict['hien-trang']]
                     if not status:
                         status = Status.SELLING
@@ -214,7 +211,7 @@ def handle_import(file_path, listing_type):
                     else:
                         full_addr = f'{addr}, {street}, {district}'
                     full_addr = f'{full_addr}, Hà Nội'
-                    full_addr = full_addr.replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ')
+                    full_addr = full_addr.replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ').replace(' , ', ', ')
 
                     # billion vnd
                     price = row[header_dict['gia']]
@@ -224,7 +221,7 @@ def handle_import(file_path, listing_type):
                         continue
                     price = Decimal(price.replace(',', '.'))
 
-                    encoded_num = row[header_dict['thong-so']].replace('.', ' ')
+                    encoded_num = row[header_dict['thong-so']].replace('  ', ' ')
                     splitter = encoded_num.split(' ')
                     splitter_len = len(splitter)
 
@@ -233,18 +230,24 @@ def handle_import(file_path, listing_type):
                         continue
                     # splitter = list(filter(None, splitter))
                     floor_area = splitter[0].split('/')
-                    area = Decimal(floor_area[0])
                     if splitter_len == 2:
-                        width = float(splitter[1].replace(',', '.'))
+                        width = Decimal(splitter[1].replace(',', '.'))
                     else:
                         try:
                             width = float(splitter[2].replace(',', '.'))
                         except ValueError:
                             # logger.info(f"Cannot decode floor_area. Continue in line {line_count}")
                             continue
+                    try:
+                        # area = float(row[header_dict['dt']].replace('c4', ''))
+                        area = Decimal(row[header_dict['dt']].replace('#VALUE!', floor_area[0].replace(',', '.').replace(' ', '')))
+                    except ValueError:
+                        area = Decimal(floor_area[0].replace(',', '.').replace(' ', ''))
+                        continue
+
                     floor = 0
                     floor_code = slugify(splitter[1].lower().replace('đ', 'd').replace('ấ', 'a').replace('t', ''))
-                    if floor_code == 'C4' or floor_code == 'c' or floor_code == 'cap 4':
+                    if floor_code == 'c4' or floor_code == 'c' or floor_code == 'cap 4':
                         floor = 1
                         house_type = HouseType.LOFT_HOUSE
                     elif floor_code == 'da' or floor_code == 'd':
@@ -253,10 +256,10 @@ def handle_import(file_path, listing_type):
                     else:
                         house_type = HouseType.TOWN_HOUSE
                         if splitter_len == 2:
-                            floor = int(len(floor_area))
+                            floor = Decimal(len(floor_area))
                         else:
                             try:
-                                floor = int(floor_code)
+                                floor = Decimal(floor_code)
                             except ValueError:
                                 # logger.info(f"Cannot decode floor_code. Continue in line {line_count}")
                                 continue
@@ -280,7 +283,7 @@ def handle_import(file_path, listing_type):
                     elif desc == 'Ngõ Ô Tô':
                         road_type = RoadType.ALLEY_CAR
                     elif desc == 'Ngõ 3 Gác':
-                        road_type = RoadType.ALLEY_TRIBIKE
+                        road_type = RoadType.ALLEY_TRIBIKE_BIKE
                     elif desc == 'Ngõ Xe Máy':
                         road_type = RoadType.ALLEY_BIKE
                     elif desc == 'Đất Dự Án':
@@ -303,7 +306,7 @@ def handle_import(file_path, listing_type):
                     elif "chung cư mini" in full_addr.lower():
                         full_addr = full_addr.replace('CCMN', 'Chung cư Mini')
                         house_type = HouseType.APARTMENT
-                        road_type = RoadType.ALLEY_CAR
+                        road_type = RoadType.ALLEY_CAR_TRIBIKE
 
                     direction = get_direction(row[header_dict['huong']])
 
@@ -314,9 +317,20 @@ def handle_import(file_path, listing_type):
                         pass
 
                     don_vi = row[header_dict['don-vi']]
-                    extra_add = f' Nguồn {name}, hoa hồng chưa có thông tin, hỏi lại đầu chủ.'
+                    extra_add = f' Nguồn {name}, hoa hồng hỏi lại đầu chủ cho chính xác.'
                     extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
                 elif listing_type == "K2":
+                    try:
+                        created = datetime.datetime.strptime(row[header_dict['tgian']], '%m/%d/%y %H:%M')
+                        created = created.replace(tzinfo=timezone)
+                    except ValueError:
+                        created = datetime.datetime.now(tz=timezone)
+                    try:
+                        # area = float(row[header_dict['dt']].replace('c4', ''))
+                        area = Decimal(row[header_dict['dt']])
+                    except ValueError:
+                        pass
+
                     status = row[header_dict['hien-trang']]
                     if not status:
                         status = Status.SELLING
@@ -338,7 +352,9 @@ def handle_import(file_path, listing_type):
                     addr = row[header_dict['dia-chi']].replace('.', '/').replace('Số ', '').replace(' ', ' ')
                     so_nha = addr.split(' ')
                     lensonha = int(len(so_nha[0]))
-                    street = addr[lensonha:]
+                    street = addr[lensonha:].replace('(', '').replace(')', '').replace('/', '').replace('  ', '')
+                    remove_digits = street.maketrans('', '', digits)
+                    street = street.translate(remove_digits)
                     addr = addr.replace(' TT ', ' tập thể ').replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ')
                     state_name = row[header_dict['thanh-pho']]
                     full_addr = f'{addr}, {district}, {state_name}'
@@ -346,6 +362,8 @@ def handle_import(file_path, listing_type):
                     # billion vnd
                     try:
                         price = Decimal(row[header_dict['gia']].split(' ')[0])
+                        if price > 10000:
+                            price = Decimal(price/10000)
                     except ValueError:
                         logger.info(f"price {price}")
                         continue
@@ -400,6 +418,7 @@ def handle_import(file_path, listing_type):
                     else:
                         bonus_rate = num_reward
 
+                    phone = f'0{phone}'
                     don_vi = "Thiên Khôi"
                     extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
                     extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
@@ -412,25 +431,28 @@ def handle_import(file_path, listing_type):
 
                 starter = get_house_type_short(house_type)
                 code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
+
                 logger.info(f"row {line_count} {code}")
+
                 new_listing = Listing(realtor=realtor, code=code, status=status, street=street,
                                       address=full_addr, area=area, transaction_type=trans_type,
                                       house_type=house_type, road_type=road_type, list_date=created,
-                                      direction=direction, price=round(price,2), reward_person=realtor,
+                                      direction=direction, price=price, reward_person=realtor,
                                       reward_person_mobile=phone, reward=reward, bonus_rate=bonus_rate,
                                       extra_data=extra_data, state=state_code, district=district_code, is_published=is_published,
-                                      width=width, floors=int(floor), average_price=price_per_area, length=None, lane_width=None)
+                                      width=width, floors=floor, average_price=price_per_area, length=None, lane_width=None)
                 title = f'Bán {get_short_title_from_house_type(new_listing.house_type)} {new_listing.street} {new_listing.district_name()} '
                 if new_listing.area >= 30:
                     title += f'{new_listing.area:.0f}m '
                 if new_listing.floors and new_listing.floors > 1:
                     title += f'{new_listing.floors} tầng '
                 title += f'{new_listing.display_price}'
-                title = title.upper()
+                title = title.upper().replace('  ', ' ')
                 new_listing.title = title
                 description = render_to_string('listings/defaultDescription.html',
                                                context={"listing": new_listing, "desc": desc})
                 new_listing.description = description
+                new_listing.description = new_listing.description.replace('  ', ' ')
                 if full_addr in searched_locations:
                     if searched_locations[full_addr]:
                         listing_loc = Point(searched_locations[full_addr][1],
@@ -450,23 +472,66 @@ def handle_import(file_path, listing_type):
                 #         else:
                 #             searched_locations[full_addr] = None
 
-                if code in listing_obj:
-                    t = Listing.objects.get(code=code)
-                    t.is_published = new_listing.is_published
-                    t.title = new_listing.title
-                    t.description = new_listing.description
-                    t.house_type = new_listing.house_type
-                    t.road_type = new_listing.road_type
-                    t.status = new_listing.status
-                    t.price = new_listing.price
-                    t.save()
+                queryset_list = Listing.objects.filter(district=new_listing.district, area=new_listing.area, width=new_listing.width,
+                                                       floors=new_listing.floors)
+                listing = queryset_list.first()
+                for f in queryset_list:
+                    if listing_type in listing.code:
+                        f.is_published = new_listing.is_published
+                        f.house_type = new_listing.house_type
+                        f.road_type = new_listing.road_type
+                        f.status = new_listing.status
+                        f.area = new_listing.area
+                        f.floors = new_listing.floors
+                        f.width = new_listing.width
+                        f.price = new_listing.price
+                        f.list_date = new_listing.list_date
+                        f.reward_person_mobile = new_listing.reward_person_mobile
+                        f.extra_data = new_listing.extra_data
+                        f.title = new_listing.title
+                        f.description = new_listing.description
+                        if f.main_photo or f.code == code:
+                            print(f"update listing edited: {listing}")
+                            f.save()
+                        elif f.price != new_listing.price and f.address in new_listing.address:
+                            print(f"update listing same address, not same price: {listing}")
+                            f.save()
+                        elif f.price == new_listing.price and f.address not in new_listing.address:
+                            print(f"update listing not same address, same price: {listing}")
+                            f.save()
+                        elif f.price != new_listing.price and f.address not in new_listing.address:
+                            print(f"update listing not same address, not same price: {listing}")
+                            f.save()
+                        elif f.code not in listing_obj:
+                            print(f"new listing not exist code: {new_listing}")
+                            f = new_listing
+                            f.save()
+                        else:
+                            print(f"del listing don't match: {f}")
+                            f.delete()
 
-                if code not in listing_obj:
-                    new_listing.is_published = new_listing.is_published
-                    new_listing.save()
-                    new_listings.append(new_listing)
-                    listing_obj[code] = new_listing
-                    del new_listing
+                if listing is None:
+                    if code in listing_obj:
+                        print(f"update listing have code exist: {listing}")
+                        f = Listing.objects.get(code=code)
+                        f.is_published = new_listing.is_published
+                        f.house_type = new_listing.house_type
+                        f.road_type = new_listing.road_type
+                        f.status = new_listing.status
+                        f.area = new_listing.area
+                        f.floors = new_listing.floors
+                        f.width = new_listing.width
+                        f.price = new_listing.price
+                        f.list_date = new_listing.list_date
+                        f.reward_person_mobile = new_listing.reward_person_mobile
+                        f.extra_data = new_listing.extra_data
+                        f.save()
+                    else:
+                        new_listing.save()
+                        new_listings.append(new_listing)
+                        listing_obj[code] = new_listing
+                        print(f"new listing not exist: {new_listing}")
+                        del new_listing
 
     except Exception as ex:
         print(f"Error occurred at line: {line_count}")

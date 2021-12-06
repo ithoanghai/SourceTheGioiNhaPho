@@ -11,15 +11,15 @@ class CustomerAdmin(admin.ModelAdmin):
     list_per_page = 100
 
     def get_queryset(self, request):
-        if request.user.is_superuser:
-            queryset = super().get_queryset(request)
-            return queryset
-        else:
-            queryset_list = Customer.objects.order_by('-hire_date')
-            query = Q(realtor__user=request.user.id)
-            query = query | Q(user=request.user)
-            queryset_list = queryset_list.filter(query)
-            return queryset_list
+        #if request.user.is_superuser:
+        #    queryset = super().get_queryset(request)
+        #    return queryset
+        #else:
+        queryset_list = Customer.objects.order_by('-hire_date')
+        query = Q(realtor__user=request.user.id)
+        query = query | Q(user=request.user)
+        queryset_list = queryset_list.filter(query)
+        return queryset_list
 
     def get_form(self, request, obj=None, change=False, **kwargs):
         form = super(CustomerAdmin, self).get_form(request, obj, **kwargs)

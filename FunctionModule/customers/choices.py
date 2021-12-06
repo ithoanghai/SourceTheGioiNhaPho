@@ -15,3 +15,4 @@ class CustomerClassify(models.TextChoices):
     SLOWLY_CARE = 'slowly_care', _("Chăm từ từ")
     STOP_CARE = 'stop_care', _("Dừng chăm sóc")
     AGAIN_CARE = 'again_care', _("Chăm sóc lại")
+    BOUGHT = 'bought', _("Đã mua nhà rồi")
