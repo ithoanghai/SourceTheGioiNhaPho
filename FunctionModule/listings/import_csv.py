@@ -150,25 +150,6 @@ def handle_import(file_path, listing_type):
                     # logger.info(f"District code not found. Continue in line {line_count}")
                     continue
 
-                name = row[header_dict['dau-chu']]
-                phone = row[header_dict['sdt']]
-                phone = phone.split(' ')[0]
-                phone = phone.split('-')[0]
-                if not phone.isalnum():
-                    logger.info(f"Phone invalid. Continue in line {line_count}")
-                    continue
-                if phone not in user_dict:
-                    if not phone:
-                        admin_realtor = Realtor.objects.get(pk=1)
-                        user_dict[phone] = admin_realtor
-                    else:
-                        email = f'{phone}@gmail.com'
-                        new_user = User.objects.create_user(username=phone, password=default_password,
-                                                            phone=phone, email=email, last_name=name[3:])
-                        new_realtor = Realtor.objects.create(user=new_user)
-                        user_dict[phone] = new_realtor
-
-                realtor = user_dict[phone]
                 trans_type = TransactionType.SELL
                 house_type = HouseType.TOWN_HOUSE
                 road_type = RoadType.ALLEY_TRIBIKE_BIKE
@@ -247,8 +228,8 @@ def handle_import(file_path, listing_type):
                         continue
 
                     floor = 0
-                    floor_code = slugify(splitter[1].lower().replace('đ', 'd').replace('ấ', 'a').replace('t', ''))
-                    if floor_code == 'c4' or floor_code == 'c' or floor_code == 'cap 4':
+                    floor_code = slugify(splitter[1].lower().replace('đ', 'd').replace('ấ', 'a').replace('t', '').replace('4', '').replace(' ', ''))
+                    if floor_code == 'c' or floor_code == 'cap':
                         floor = 1
                         house_type = HouseType.LOFT_HOUSE
                     elif floor_code == 'da' or floor_code == 'd':
@@ -313,7 +294,6 @@ def handle_import(file_path, listing_type):
 
                     don_vi = row[header_dict['don-vi']]
                     extra_add = f' Nguồn {name}, hoa hồng hỏi lại đầu chủ cho chính xác.'
-                    extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
                 elif listing_type == "K2":
                     try:
                         created = datetime.datetime.strptime(row[header_dict['tgian']], '%m/%d/%y %H:%M')
@@ -322,7 +302,7 @@ def handle_import(file_path, listing_type):
                         created = datetime.datetime.now(tz=timezone)
                     try:
                         # area = float(row[header_dict['dt']].replace('c4', ''))
-                        area = Decimal(row[header_dict['dt']])
+                        area = Decimal(row[header_dict['dt']].replace(',', '.'))
                     except ValueError:
                         pass
 
@@ -357,8 +337,6 @@ def handle_import(file_path, listing_type):
                     # billion vnd
                     try:
                         price = Decimal(row[header_dict['gia']].split(' ')[0])
-                        if price > 10000:
-                            price = Decimal(price/10000)
                     except ValueError:
                         logger.info(f"price {price}")
                         continue
@@ -413,15 +391,56 @@ def handle_import(file_path, listing_type):
                     else:
                         bonus_rate = num_reward
 
-                    phone = f'0{phone}'
                     don_vi = "Thiên Khôi"
                     extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
-                    extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
-
                 try:
+                    if price > 10000:
+                        price = Decimal(price / 1000)
                     price_per_area = float(price) / float(area) * 1000
                 except ValueError:
                     pass
+
+                name = row[header_dict['dau-chu']]
+                phone = row[header_dict['sdt']]
+                phone = phone.split(' ')[0]
+                phone = phone.split('-')[0]
+                if not phone.isalnum():
+                    logger.info(f"Phone invalid. Continue in line {line_count}")
+                    continue
+                if phone not in user_dict:
+                    if not phone:
+                        admin_realtor = Realtor.objects.get(pk=1)
+                        user_dict[phone] = admin_realtor
+                    else:
+                        if len(phone) == 9:
+                            query = Q(phone=phone) | Q(phone=f'0{phone}')
+                            usr = User.objects.filter(query)
+                            phone = f'0{phone}'
+                            email = f'{phone}@gmail.com'
+                            extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
+                            bio = f'{name}, {phone}, {don_vi}.'
+                            if usr.exists():
+                                usr.username = phone
+                                usr.phone = phone
+                                usr.last_name = name
+                                usr.update()
+                                print(f"user: {usr}")
+                            else:
+                                new_user = User.objects.create_user(username=phone, password=default_password,
+                                                                    phone=phone, email=email, last_name=name, bio=bio)
+                                new_realtor = Realtor.objects.create(user=new_user)
+                                user_dict[phone] = new_realtor
+                                print(f"new_user: {new_user}")
+                        else:
+                            extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
+                            bio = f'{name}, {phone}, {don_vi}.'
+                            email = f'{phone}@gmail.com'
+                            new_user = User.objects.create_user(username=phone, password=default_password,
+                                                                phone=phone, email=email, last_name=name, bio=bio)
+                            new_realtor = Realtor.objects.create(user=new_user)
+                            user_dict[phone] = new_realtor
+
+                realtor = user_dict[phone]
 
                 starter = get_house_type_short(house_type)
                 code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
@@ -477,7 +496,7 @@ def handle_import(file_path, listing_type):
                             f.delete()
 
                 if code in listing_obj:
-                    f = Listing.objects.get(code=code)
+                    f = Listing.objects.filter(code=code)
                     f.is_published = new_listing.is_published
                     f.house_type = new_listing.house_type
                     f.road_type = new_listing.road_type
@@ -489,7 +508,7 @@ def handle_import(file_path, listing_type):
                     f.list_date = new_listing.list_date
                     f.reward_person_mobile = new_listing.reward_person_mobile
                     f.extra_data = new_listing.extra_data
-                    f.save()
+                    f.update()
                     logger.info(f"row {line_count}: update listing {f}")
                 else:
                     new_listing.save()
