@@ -404,6 +404,7 @@ def handle_import(file_path, listing_type):
                 phone = row[header_dict['sdt']]
                 phone = phone.split(' ')[0]
                 phone = phone.split('-')[0]
+                extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
                 if not phone.isalnum():
                     logger.info(f"Phone invalid. Continue in line {line_count}")
                     continue
