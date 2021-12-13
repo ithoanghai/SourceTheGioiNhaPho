@@ -122,8 +122,9 @@ class Listing(models.Model):
     def save(self, *args, **kwargs):
         if not self.id and not self.address:
             self.address = f"{self.street}, {self.district_name} {self.state_name}"
-        ave = float(self.price)/float(self.area)*1000
-        self.average_price = int(round(ave, 4))
+        if float(self.area) > 0:
+            ave = float(self.price)/float(self.area)*1000
+            self.average_price = int(round(ave, 4))
 
         super().save(*args, **kwargs)
 

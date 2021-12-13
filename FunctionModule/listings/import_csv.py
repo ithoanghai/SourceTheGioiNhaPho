@@ -158,6 +158,7 @@ def handle_import(file_path, listing_type):
                 bonus_rate = 3
                 desc = ""
                 is_published = True
+                name = row[header_dict['dau-chu']]
 
                 if listing_type == "K1":
                     try:
@@ -238,10 +239,10 @@ def handle_import(file_path, listing_type):
                     else:
                         house_type = HouseType.TOWN_HOUSE
                         if splitter_len == 2:
-                            floor = Decimal(len(floor_area))
+                            floor = int(len(floor_area))
                         else:
                             try:
-                                floor = Decimal(floor_code)
+                                floor = int(floor_code)
                             except ValueError:
                                 # logger.info(f"Cannot decode floor_code. Continue in line {line_count}")
                                 continue
@@ -293,7 +294,7 @@ def handle_import(file_path, listing_type):
                     direction = get_direction(row[header_dict['huong']])
 
                     don_vi = row[header_dict['don-vi']]
-                    extra_add = f' Nguồn {name}, hoa hồng hỏi lại đầu chủ cho chính xác.'
+                    extra_add = f' Nguồn {name}, hoa hồng 3%, hỏi lại đầu chủ cho chính xác.'
                 elif listing_type == "K2":
                     try:
                         created = datetime.datetime.strptime(row[header_dict['tgian']], '%m/%d/%y %H:%M')
@@ -386,21 +387,31 @@ def handle_import(file_path, listing_type):
                     nguon = row[header_dict['nguon']]
                     hoa_hong = row[header_dict['hoa-hong']]
                     num_reward = float(hoa_hong.split(' ')[0])
-                    if int(num_reward) > 3:
+                    if 3 < int(num_reward) < 10000:
                         reward = num_reward
-                    else:
+                    elif int(num_reward) > 0:
                         bonus_rate = num_reward
+                    else:
+                        bonus_rate = 3
 
                     don_vi = "Thiên Khôi"
                     extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
                 try:
-                    if price > 10000:
+                    if price > 1000000 and area < 10000000:
+                        price = Decimal(price / 1000000)
+                    elif price > 100000 and area < 1000000:
+                        price = Decimal(price / 100000)
+                    elif price > 10000 and area < 100000:
+                        price = Decimal(price / 10000)
+                    elif price > 1000 and area < 10000:
                         price = Decimal(price / 1000)
-                    price_per_area = float(price) / float(area) * 1000
+                    if float(area) > 0:
+                        price_per_area = Decimal(float(price) / float(area) * 1000)
+                    else:
+                        price_per_area = None
                 except ValueError:
                     pass
 
-                name = row[header_dict['dau-chu']]
                 phone = row[header_dict['sdt']]
                 phone = phone.split(' ')[0]
                 phone = phone.split('-')[0]
@@ -408,6 +419,7 @@ def handle_import(file_path, listing_type):
                 if not phone.isalnum():
                     logger.info(f"Phone invalid. Continue in line {line_count}")
                     continue
+                tmp_phone = phone
                 if phone not in user_dict:
                     if not phone:
                         admin_realtor = Realtor.objects.get(pk=1)
@@ -425,7 +437,7 @@ def handle_import(file_path, listing_type):
                                 usr.phone = phone
                                 usr.last_name = name
                                 usr.update()
-                                print(f"user: {usr}")
+                                print(f"update user: {usr}")
                             else:
                                 new_user = User.objects.create_user(username=phone, password=default_password,
                                                                     phone=phone, email=email, last_name=name, bio=bio)
@@ -440,8 +452,27 @@ def handle_import(file_path, listing_type):
                                                                 phone=phone, email=email, last_name=name, bio=bio)
                             new_realtor = Realtor.objects.create(user=new_user)
                             user_dict[phone] = new_realtor
+                elif len(phone) == 9 and user_dict.get(f'0{phone}') is None:
+                    query = Q(phone=phone) | Q(phone=f'0{phone}')
+                    usr = User.objects.get(query)
+                    phone = f'0{phone}'
+                    email = f'{phone}@gmail.com'
+                    bio = f'{name}, {phone}, {don_vi}.'
+                    if usr is not None:
+                        usr.username = phone
+                        usr.phone = phone
+                        usr.last_name = name
+                        usr.email = email
+                        usr.bio = bio
+                        usr.save()
+                        if user_dict.get(tmp_phone) is not None:
+                            user_dict[tmp_phone].user = usr
+                        print(f"update user: {usr}")
 
-                realtor = user_dict[phone]
+                if user_dict.get(tmp_phone) is not None:
+                    realtor = user_dict[tmp_phone]
+                else:
+                    realtor = user_dict[phone]
 
                 starter = get_house_type_short(house_type)
                 code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
@@ -489,11 +520,11 @@ def handle_import(file_path, listing_type):
                 listing = queryset_list.first()
                 for f in queryset_list:
                     if listing_type in f.code:
-                        if f.address == new_listing.address and f.code != code and listing_type in f.code:
-                            print(f"delete listing same address, not same code: {listing}")
+                        if f.address == new_listing.address and f.code != code:
+                            print(f"delete listing same address, not same code: {f}")
                             f.delete()
-                        elif f.price == new_listing.price and f.address in new_listing.address and f.code != code and listing_type in f.code:
-                            print(f"delete listing contains address, same price, not same code: {listing}")
+                        elif f.price == new_listing.price and f.address in new_listing.address and f.code != code:
+                            print(f"delete listing contains address, same price, not same code: {f}")
                             f.delete()
 
                 if code in listing_obj:
