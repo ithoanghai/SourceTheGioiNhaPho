@@ -5,9 +5,9 @@ from ..realtors.models import Realtor
 
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'phone', 'financial_range', 'district', 'status', 'classify', 'user')
+    list_display = ('id', 'name', 'phone', 'financial_range', 'district', 'request', 'status', 'classify')
     list_display_links = ('name', 'phone',)
-    search_fields = ('name', 'phone', 'email', 'address', 'financial_range', 'district', 'status', 'classify')
+    search_fields = ('name', 'phone', 'email', 'address', 'financial_range', 'request', 'descriptions', 'district', 'status', 'classify')
     list_per_page = 100
 
     def get_queryset(self, request):
