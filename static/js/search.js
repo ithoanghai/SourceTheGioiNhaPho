@@ -227,7 +227,7 @@ new Vue({
             isViewAsSimple: false,
             isFirstLoad: true,
             isLoading: false,
-            sortOption: 'created',
+            sortOption: 'priority',
             showSortOptions: false,
             queryParams: new URLSearchParams(window.location.search),
             listings: [],
@@ -265,8 +265,10 @@ new Vue({
                     return 'Giá giảm dần';
                 case 'price_ascend':
                     return 'Giá tăng dần';
+                case 'created':
+                    return 'Mới nhất';
                 default:
-                    return 'Mới nhất'
+                    return 'Ưu tiên'
             }
         },
         houseTypeFilterMark: function () {
@@ -563,7 +565,8 @@ new Vue({
 
             const sort_price_ascend = (a, b) => a.price - b.price;
             const sort_price_descend = (a, b) => b.price - a.price;
-            const sort_created = (a, b) => a.list_date - b.list_date
+            const sort_priority = (a, b) => a.priority - b.priority;
+            const sort_created = (a, b) => a.list_date - b.list_date;
 
             switch (sortOption) {
                 case 'price_ascend':
@@ -572,8 +575,11 @@ new Vue({
                 case 'price_descend':
                     this.listings.sort(sort_price_descend)
                     break;
-                default:
+                case 'created':
                     this.listings.sort(sort_created)
+                    break;
+                default:
+                    this.listings.sort(sort_priority)
                     break;
             }
 
@@ -640,9 +646,10 @@ new Vue({
             try {
                 const resp = await axios.get(`/api/search?${urlParams.toString()}`)
                 if (resp && resp.status === 200) {
-                    const {listings, pagination} = resp.data;
+                    const {listings, pagination, sortOption} = resp.data;
                     this.listings = listings;
                     this.pagination = pagination;
+                    this.sortOption = sortOption;
                 }
             } catch (e) {
                 this.listings = [];

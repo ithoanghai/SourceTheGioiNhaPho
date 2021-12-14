@@ -21,7 +21,7 @@ def get_client_ip(request):
 
 def home_view(request):
     listings_for_sale = (Listing.objects
-                             .order_by('-list_date')
+                             .order_by('priority','-list_date')
                              .filter(is_published=True, transaction_type=TransactionType.SELL)[:30])
     listings_for_rent = (Listing.objects
                              .order_by('-list_date')

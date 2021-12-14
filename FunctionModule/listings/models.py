@@ -201,6 +201,9 @@ class Listing(models.Model):
                               verbose_name=_("Trạng thái giao dịch"))
     list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày đăng bán/cho thuê"))
 
+    priority = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)],
+                                   choices=([(i, i) for i in range(1, 10)]), verbose_name=_("Thứ tự ưu tiên đăng"),
+                                   null=True, blank=True, default=9)
     is_verified = models.BooleanField(default=False, verbose_name=_("ĐÃ XÁC MINH THÔNG TIN"))
     is_exclusive = models.BooleanField(default=False, verbose_name=_("THẾ GIỚI NHÀ PHỐ ĐỘC QUYỀN"))
     is_published = models.BooleanField(default=True, verbose_name=_("CHO PHÉP ĐĂNG"))
@@ -277,6 +280,7 @@ class ListingSerializer(serializers.ModelSerializer):
     district_name = serializers.CharField()
     main_photo = serializers.SerializerMethodField()
     list_date = TimestampField()
+    priority = serializers.IntegerField()
 
     def get_main_photo(self, obj):
         photo = obj.main_photo

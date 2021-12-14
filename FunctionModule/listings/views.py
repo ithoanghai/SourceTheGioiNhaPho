@@ -23,7 +23,7 @@ class ListingSearchQuery(BaseModel):
 
 
 def index(request):
-    listings = Listing.objects.order_by('-list_date').filter(is_published=True)
+    listings = Listing.objects.order_by('-priority','-list_date').filter(is_published=True)
 
     paginator = Paginator(listings, 100)
     page = request.GET.get('page')
@@ -38,9 +38,9 @@ def index(request):
 
 def listing(request, listing_id):
     listing_detail = get_object_or_404(Listing, pk=listing_id)
-    listings_neighborhood = (Listing.objects.order_by('-list_date').filter(is_published=True,
+    listings_neighborhood = (Listing.objects.order_by('-priority','-list_date').filter(is_published=True,
                                                                           state=listing_detail.state)[:10])
-    listings_same = (Listing.objects.order_by('-list_date').filter(is_published=True, house_type=listing_detail.house_type,area=listing_detail.area)[:30])
+    listings_same = (Listing.objects.order_by('-priority','-list_date').filter(is_published=True, house_type=listing_detail.house_type,area=listing_detail.area)[:30])
 
     context = {
         'listing': listing_detail,
@@ -60,6 +60,7 @@ def search(request):
         'GOOGLE_MAP_API_KEY': settings.GOOGLE_MAP_API_KEY,
         'environment': settings.ENVIRONMENT,
         "pagination": {},
+        'sortOption': 'priority',
     }
 
     return render(request, 'listings/search.html', context)

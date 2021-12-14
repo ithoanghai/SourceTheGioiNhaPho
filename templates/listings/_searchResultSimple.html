@@ -6,10 +6,13 @@
   </span>
   <div class="sort-listing" ref="projectSort">
     <a href="#" @click.prevent="toggleShowSortOptions">
-      <span ref="labelSortProperty" v-text="sortString || 'Mới nhất'"></span>
+      <span ref="labelSortProperty" v-text="sortString || 'Ưu tiên'"></span>
       <i class="zmdi zmdi-chevron-down" style="cursor: pointer"></i>
     </a>
     <ul v-show="showSortOptions" class="sort-listing--option">
+      <li style="cursor: pointer" :class="{active: sortOption=='priority'}" title="Ưu tiên"
+          @click.prevent="sortBy('priority')">Sắp xếp BĐS ưu tiên
+      </li>
       <li style="cursor: pointer" :class="{active: sortOption=='created'}" title="Mới nhất"
           @click.prevent="sortBy('created')">Sắp xếp BĐS mới nhất trước
       </li>

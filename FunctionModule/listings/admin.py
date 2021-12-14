@@ -40,8 +40,8 @@ class ListingAdmin(admin.ModelAdmin):
     list_display = ('address', 'district','area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status', 'is_published')
     list_display_links = ('code','district',)
     list_filter = (
-        ('house_type', ChoiceDropdownFilter),
         ('status', ChoiceDropdownFilter),
+        ('house_type', ChoiceDropdownFilter),
         ('floors', ChoiceDropdownFilter),
         ('road_type', ChoiceDropdownFilter),
         ('registration_type', ChoiceDropdownFilter),
@@ -56,6 +56,7 @@ class ListingAdmin(admin.ModelAdmin):
     inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
     actions = ['make_published', 'unpublished']
     form = ListingAdminForm
+    ordering = ('-list_date','price', 'average_price', 'road_type','-area', 'district')
 
     class Media:
         js = ('admin/js/dropzone.js', 'admin/js/listing.js', 'admin/js/filepond-4.28.2.min.js',

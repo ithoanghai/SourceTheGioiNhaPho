@@ -70,26 +70,26 @@
         <div class="listing-address">
             {% if listing.urban_area %}
                 <h4>
-                    <a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}"
+                    <a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}&sort=priority"
                        title="">{{ listing.urban_area }}</a>
                 </h4>
             {% endif %}
             <h4>
-                <a href="{% url 'listing_search' %}?street={{ listing.street }}"
+                <a href="{% url 'listing_search' %}?street={{ listing.street }}&sort=priority"
                    title="">{{ listing.street }}</a>
             </h4>
             {% if listing.ward %}
                 <h4>
-                    <a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
+                    <a href="{% url 'listing_search' %}?ward={{ listing.ward }}&sort=priority"
                        title="Phường/Xã">{{ listing.ward_name }}</a>
                 </h4>
             {% endif %}
             {% if listing.district %}
-                <h4><b><a href="{% url 'listing_search' %}?district={{ listing.district }}"
+                <h4><b><a href="{% url 'listing_search' %}?district={{ listing.district }}&sort=priority"
                           title=""> {% get_district listing.district %}</a></b></h4>
             {% endif %}
             {% if listing.state %}
-                <h4><b><a href="{% url 'listing_search' %}?state={{ listing.state }}"
+                <h4><b><a href="{% url 'listing_search' %}?state={{ listing.state }}&sort=priority"
                           title=""> {% get_state listing.state %}</a></b></h4>
             {% endif %}
         </div>
