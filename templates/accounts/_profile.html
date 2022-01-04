@@ -8,270 +8,314 @@
     <!-- Header -->
     <div class="header d-flex align-items-center"
          style="min-height: 310px; height: 310px; background-image: url({% static 'images/service/image6.jpg' %}); background-size: 320px ; background-position: center top;">
-      <!-- Mask -->
-      <span class="mask bg-gradient-default opacity-2"></span>
-      <!-- Header container -->
-      <div class="container-fluid d-flex align-items-center">
-        <div class="row mt--7">
-          <div class="col-lg-7 col-md-10">
-            <h1 class="display-4 text-blue">{% trans 'Chào bạn' %}  {{ user.first_name }} {{ user.last_name }} </h1>
-            <p class="text-blue mt-0 mb-5">{% trans 'Đây là trang hồ sơ cá nhân của bạn. Bạn có thể xem công việc đã thực hiện, quản lý các dự án hoặc nhiệm vụ được giao' %} </p>
-          </div>
+        <!-- Mask -->
+        <span class="mask bg-gradient-default opacity-2"></span>
+        <!-- Header container -->
+        <div class="container-fluid d-flex align-items-center">
+            <div class="row mt--7">
+                <div class="col-lg-7 col-md-10">
+                    <h1 class="display-4 text-blue">{% trans 'Chào bạn' %} {{ user.first_name }} {{ user.last_name }} </h1>
+                    <p class="text-blue mt-0 mb-5">{% trans 'Đây là trang hồ sơ cá nhân của bạn. Bạn có thể xem công việc đã thực hiện, quản lý các dự án hoặc nhiệm vụ được giao' %} </p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <div class="container-fluid mt--6">
 
         <div class="row col-xl-12">
-        <div class="col-xl-3 order-xl-2 mb-5 mb-xl-0">
-          <div class="card card-profile shadow">
-            <div class="row justify-content-center">
-              <div class="col-lg-3 order-lg-2">
-                <div class="card-profile-image">
-                   <a class="nav-link pr-0" href="{% url "profile" %}" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        <div class="align-items-center">
-                          <img src="{% static 'admin/img/team-4-800x800.jpg' %}" class="rounded-circle">
-                         </div>
-                    </a>
-                  {% if not is_popup %}
-                    <!-- User -->
-                    {% block usertools %}
-                         <ul class="d-md-flex" style="margin: 0">
-                            <li class="nav-item dropdown"  >
-                                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                                    <a href="{% url "profile" %}" class="dropdown-item">
-                                        <i class="ni ni-single-02"></i>
-                                        <span>Thông tin cá nhân</span>
-                                    </a>
-                                    <a href="{% url "profile" %}" class="dropdown-item">
-                                        <i class="ni ni-settings-gear-65"></i>
-                                        <span>Thiết lập</span>
-                                    </a>
-                                    </a>
-                                    {% block userlinks %}
-                                        {% if site_url %}
-                                        <a href="{{ site_url }}" target="_blank" class="dropdown-item">
-                                        <i class="ni ni-support-16"></i><span>{% translate 'Trang sản phẩm' %}</span>
-                                        </a>
+            <div class="col-xl-3 order-xl-2 mb-5 mb-xl-0">
+                <div class="card card-profile shadow">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 order-lg-2">
+                            <div class="card-profile-image">
+                                <a class="nav-link pr-0" href="{% url "profile" %}" role="button" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    <div class="align-items-center">
+                                        {% if user.avatar %}
+                                            <img alt="" src="/media/{{ user.avatar }} " class="rounded-circle">
+                                        {% else %}
+                                            <img alt="" src="{% static 'admin/img/team-4-800x800.jpg' %}"
+                                                 class="rounded-circle">
                                         {% endif %}
-                                        {% if user.is_active and user.is_staff %}
-                                            {% url 'django-admindocs-docroot' as docsroot %}
-                                            {% if docsroot %}
-                                                <a href="{{ docsroot }}">{% translate 'Tài liệu' %}</a> /
-                                            {% endif %}
-                                        {% endif %}
-                                        {% if user.has_usable_password %}
-                                        <a href="{% url 'password_change' %}" target="_blank" class="dropdown-item">
-                                        <i class="ni ni-support-16"></i><span>{% translate 'Đổi mật khẩu' %}</span>
-                                        </a>
-                                         {% endif %}
+                                    </div>
+                                </a>
+                                {% if not is_popup %}
+                                    <!-- User -->
+                                    {% block usertools %}
+                                        <ul class="d-md-flex" style="margin: 0">
+                                            <li class="nav-item dropdown">
+                                                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                                                    <a href="{% url "profile" %}" class="dropdown-item">
+                                                        <i class="ni ni-single-02"></i>
+                                                        <span>Thông tin cá nhân</span>
+                                                    </a>
+                                                    <a href="{% url "profile" %}" class="dropdown-item">
+                                                        <i class="ni ni-settings-gear-65"></i>
+                                                        <span>Thiết lập</span>
+                                                    </a>
+                                                    </a>
+                                                    {% block userlinks %}
+                                                        {% if site_url %}
+                                                            <a href="{{ site_url }}" target="_blank"
+                                                               class="dropdown-item">
+                                                                <i class="ni ni-support-16"></i><span>{% translate 'Trang sản phẩm' %}</span>
+                                                            </a>
+                                                        {% endif %}
+                                                        {% if user.is_active and user.is_staff %}
+                                                            {% url 'django-admindocs-docroot' as docsroot %}
+                                                            {% if docsroot %}
+                                                                <a href="{{ docsroot }}">{% translate 'Tài liệu' %}</a>
+                                                                /
+                                                            {% endif %}
+                                                        {% endif %}
+                                                        {% if user.has_usable_password %}
+                                                            <a href="{% url 'password_change' %}" target="_blank"
+                                                               class="dropdown-item">
+                                                                <i class="ni ni-support-16"></i><span>{% translate 'Đổi mật khẩu' %}</span>
+                                                            </a>
+                                                        {% endif %}
+                                                    {% endblock %}
+                                                    <div class="dropdown-divider"></div>
+                                                    <a href="{% url 'logout' %}" class="dropdown-item">
+                                                        <i class="ni ni-user-run"></i>
+                                                        <span>{% translate 'Đăng xuất' %}</span>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     {% endblock %}
-                                    <div class="dropdown-divider"></div>
-                                    <a href="{% url 'logout' %}" class="dropdown-item">
-                                        <i class="ni ni-user-run"></i>
-                                        <span>{% translate 'Đăng xuất' %}</span>
-                                    </a>
+
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header text-center border-0 pt-8 pb-0 pb-md-4">
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-sm btn-info mr-4">DS giao dịch</a>
+                            <a href="#" class="btn btn-sm btn-default float-right">DS giới thiệu</a>
+                        </div>
+                    </div>
+                    <div class="row card-body pt-0 pt-md-4">
+                        <div class="text-center">
+                            <h3>
+                                Anh/chị: {{ user.first_name }} {{ user.last_name }}
+                            </h3>
+                            <div class="h5 mt-4">
+                                <i class="ni business_briefcase-24 mr-2"></i>
+                                Giám đốc Kinh doanh - Hoàng Mai
+                            </div>
+                            <div class="h5 mt-4">
+                                <i class="ni business_briefcase-24 mr-2"></i>Chuyên viên Cấp 6
+                            </div>
+                            <div>
+                                <i class="ni education_hat mr-2"></i>Danh hiệu: Chuyên gia chốt nhà tỷ phú giỏi
+                            </div>
+                            <hr class="my-4"/>
+
+                            <div>
+                                <span class="description">Điểm uy tín</span>
+                                <span class="heading">22</span>
+
+                                <span class="description">Mức uy tín</span>
+                                <span class="heading">5*</span>
+
+                                <span class="description">Điểm giới thiệu BĐS</span>
+                                <span class="heading">10</span>
+
+                                <span class="description">Điểm giới thiệu khách</span>
+                                <span class="heading">24</span>
+
+                            </div>
+
+                            <div class="h5 mt-4">
+
+                                <i class="ni business_briefcase-24 mr-2"></i>Tài khoản đầu tư (1 Điểm = 1 triệu)
+                                <span class="heading">100 điểm </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8 order-xl-1">
+                <div class="card bg-secondary shadow">
+{% comment %}                    <div class="card-header bg-white border-0">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h3 class="mb-0">Quản lý tài khoản cá nhân</h3>
+                            </div>
+                            <div class="col-3 text-right">
+                                <a href="#!" class="btn btn-sm btn-primary">Thiết lập</a>
+                            </div>
+                        </div>
+                    </div>{% endcomment %}
+                    <div class="card-body">
+                        <form>
+                            <h6 class="heading-small text-muted mb-4">Thông tin cá nhân</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-username">Tên đăng nhập</label>
+                                            <input type="text" id="input-username"
+                                                   class="form-control form-control-alternative" placeholder="Username"
+                                                   value="{{ request.user.username }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-email">Email</label>
+                                            <input type="email" id="input-email"
+                                                   class="form-control form-control-alternative"
+                                                   placeholder="{{ request.user.email }}">
+                                        </div>
+                                    </div>
                                 </div>
-                            </li>
-                        </ul>
-                    {% endblock %}
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-first-name">Họ Tên</label>
+                                            <input type="text" id="input-first-name"
+                                                   class="form-control form-control-alternative"
+                                                   placeholder="{{ request.user }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-last-name">Ngày sinh</label>
+                                            <input type="text" id="input-last-name"
+                                                   class="form-control form-control-alternative"
+                                                   placeholder="{{ request.user.dob }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-last-name">Giới tính</label>
+                                            <input type="text" id="input-last-name"
+                                                   class="form-control form-control-alternative"
+                                                   placeholder="{{ request.user.gender }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4"/>
+                            <!-- Address -->
+                            <h6 class="heading-small text-muted mb-4">Thông tin liên hệ</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-address">Địa chỉ</label>
+                                            <input id="input-address" class="form-control form-control-alternative"
+                                                   placeholder="{{ request.user.address }}"
+                                                   value="{{ request.user.address }}" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-last-name">Số điện
+                                                thoại</label>
+                                            <input type="text" id="input-last-name"
+                                                   class="form-control form-control-alternative"
+                                                   placeholder="{{ request.user.phone }}">
+                                        </div>
+                                    </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-city">Facebook</label>
+                                    <input type="text" id="input-city" class="form-control form-control-alternative"
+                                           placeholder="{{ request.user.facebook }}"
+                                           value="{{ request.user.facebook }}">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-country">Youtube</label>
+                                    <input type="number" id="input-postal-code"
+                                           class="form-control form-control-alternative"
+                                           placeholder="{{ request.user.youtube }}" value="{{ request.user.youtube }}">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-country">Website</label>
+                                    <input type="number" id="input-postal-code"
+                                           class="form-control form-control-alternative"
+                                           placeholder="{{ request.user.website }}" value="{{ request.user.website }}">
+                                </div>
+                            </div>
+                                </div>
 
-                    {% endif %}
+                            </div>
+                            <hr class="my-4"/>
+                            <!-- Description -->
+                            <h6 class="heading-small text-muted mb-4">Về tôi</h6>
+                            <div class="pl-lg-4">
+                                <div class="form-group">
+                                    <textarea rows="4" class="form-control form-control-alternative"
+                                              placeholder="{{ request.user.bio }}">{{ request.user.bio }}</textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                      <div class="card-footer text-center border-0">
+                        <a href="#!" class="btn btn-info">{% trans 'Ghi nhớ thông tin' %}</a>
+                    </div>
                 </div>
-              </div>
             </div>
-
-            <div class="card-header text-center border-0 pt-8 pb-0 pb-md-4">
-              <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-sm btn-info mr-4">DS giao dịch</a>
-                <a href="#" class="btn btn-sm btn-default float-right">DS giới thiệu</a>
-              </div>
-            </div>
-              <div class="card-header text-center border-0">
-                <a href="#!" class="btn btn-info">{% trans 'Sửa thông tin cá nhân' %}</a>
-            </div>
-            <div class="row card-body pt-0 pt-md-4">
-              <div class="text-center">
-                <h3>
-                  Anh/chị: {{ user.first_name }} {{ user.last_name }}
-                </h3>
-                <div class="h5 font-weight-300">
-                  {{ request.user.email }}
-                </div>
-
-                <div class="h5 mt-4">
-
-                  <i class="ni business_briefcase-24 mr-2"></i>{{ request.user.email }}
-                    Giám đốc Kinh doanh - Hoàng Mai
-                </div>
-                <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>Chuyên viên Cấp 6
-                </div>
-                <div>
-                  <i class="ni education_hat mr-2"></i>Danh hiệu: Chuyên gia chốt nhà tỷ phú giỏi
-                </div>
-                <hr class="my-4" />
-
-                    <div>
-                      <span class="description">Điểm uy tín</span>
-                      <span class="heading">22</span>
-
-                      <span class="description">Mức uy tín</span>
-                      <span class="heading">5*</span>
-
-                      <span class="description">Điểm giới thiệu BĐS</span>
-                      <span class="heading">10</span>
-
-                      <span class="description">Điểm giới thiệu khách</span>
-                      <span class="heading">24</span>
-
-                  </div>
-
-                  <div class="h5 mt-4">
-
-                  <i class="ni business_briefcase-24 mr-2"></i>Tài khoản đầu tư (1 Điểm = 1 triệu)
-                      <span class="heading">100 điểm </span>
-                </div>
-
-              </div>
-            </div>
-          </div>
         </div>
-        <div class="col-xl-8 order-xl-1">
-          <div class="card bg-secondary shadow">
-            <div class="card-header bg-white border-0">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h3 class="mb-0">Quản lý tài khoản cá nhân</h3>
-                </div>
-                <div class="col-3 text-right">
-                  <a href="#!" class="btn btn-sm btn-primary">Thiết lập</a>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <form>
-                <h6 class="heading-small text-muted mb-4">Thông tin cá nhân</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-username">Tên đăng nhập</label>
-                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" 
-                               value="{{ request.user.username }}">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Email</label>
-                        <input type="email" id="input-email" class="form-control form-control-alternative" 
-                               placeholder="{{ request.user.email }}">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">Họ Tên</label>
-                        <input type="text" id="input-first-name" class="form-control form-control-alternative" >
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-last-name">Số điện thoại</label>
-                        <input type="text" id="input-last-name" class="form-control form-control-alternative" >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">Thông tin liên hệ</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-address">Địa chỉ</label>
-                        <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Quận/Huyện</label>
-                        <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-city">Tỉnh/Thành phố</label>
-                        <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">Về tôi</h6>
-                <div class="pl-lg-4">
-                  <div class="form-group">
-                    <label>Giới thiệu</label>
-                    <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
 
         <div class="row">
-        <div class="col-xl-8 order-xl-1">
-          <div class="card bg-secondary shadow">
-            <div class="card-header bg-white border-0">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h3 class="mb-0">Lịch sử liên hệ giao dịch</h3>
-                </div>
-                {% comment %}<div class="col-4 text-right">
+            <div class="col-xl-8 order-xl-1">
+                <div class="card bg-secondary shadow">
+                    <div class="card-header bg-white border-0">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h3 class="mb-0">Lịch sử liên hệ giao dịch</h3>
+                            </div>
+                            {% comment %}<div class="col-4 text-right">
                   <a href="#!" class="btn btn-sm btn-primary">Thiết lập</a>
                 </div>{% endcomment %}
-              </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="input-country">Đăng ký gia nhập: {{ request.user.date_joined }}</label>
+                            </div>
+                        </div>
+                        {% if contacts %}
+                            <p>{% trans "Danh sách liên hệ đã yêu cầu" %}</p>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">{% trans "Sản phẩm BĐS" %}</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for contact in contacts %}
+                                    <tr>
+                                        <td>{{ contact.id }}</td>
+                                        <td>{{ contact.listing }}</td>
+                                        <td>
+                                            <a class="btn btn-light"
+                                               href="{% url "listing_detail" contact.listing_id %}">{% trans "Xem sản phẩm" %}</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p>{% trans "Bạn chưa có tương tác liên hệ sản phẩm nào" %}</p>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                {% if contacts %}
-                    <p>{% trans "Danh sách liên hệ đã yêu cầu" %}</p>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">{% trans "Sản phẩm BĐS" %}</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for contact in contacts %}
-                            <tr>
-                                <td>{{ contact.id }}</td>
-                                <td>{{ contact.listing }}</td>
-                                <td>
-                                    <a class="btn btn-light"
-                                       href="{% url "listing_detail" contact.listing_id %}">{% trans "Xem sản phẩm" %}</a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                {% else %}
-                    <p>{% trans "Bạn chưa có tương tác liên hệ sản phẩm nào" %}</p>
-                {% endif %}
-            </div>
-          </div>
         </div>
-      </div>
 
     </div>
 

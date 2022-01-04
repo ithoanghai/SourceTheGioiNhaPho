@@ -36,7 +36,11 @@
                                aria-haspopup="true" aria-expanded="false">
                                 <div class="media align-items-center">
                                     <span class="avatar {% comment %}avatar-sm{% endcomment %} rounded-circle">
-                                      <img alt="Image placeholder" src="{% static 'admin/img/team-4-800x800.jpg' %}">
+                                      {% if user.avatar %}
+                                      <img alt="" src="/media/{{ user.avatar }} ">
+                                        {% else %}
+                                      <img alt="" src="{% static 'admin/img/team-4-800x800.jpg' %}">
+                                       {% endif %}
                                     </span>
                                     <div class="media-body ml-2 d-none d-lg-block">
                                       <span class="mb-0 text-sm  font-weight-bold">

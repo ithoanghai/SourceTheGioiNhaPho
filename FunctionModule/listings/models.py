@@ -65,10 +65,12 @@ class Listing(models.Model):
                             help_text=_("Điền năm hoàn thành xây dựng và Tỷ lệ % sử dụng còn lại"))
     road_type = models.CharField(max_length=20, choices=RoadType.choices, default=RoadType.ALLEY_CAR_TRIBIKE,
                                  verbose_name=_("Đường/Ngõ trước nhà"))
+    lane_width = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True,
+                                     verbose_name=_("Chiều rộng đường/ngõ (m)"))
     parking_type = models.CharField(max_length=20, choices=ParkingType.choices, blank=True,
                                     null=True, verbose_name=_("Có chỗ đỗ ô tô không?"))
     area = models.DecimalField(max_digits=10, decimal_places=1, verbose_name=_("Diện tích (m2)"))
-    floors = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)],null=True, blank=True,
+    floors = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)], null=True,
                                  choices=([(i, i) for i in range(1, 50)]), verbose_name=_("Số tầng"))
     width = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Mặt tiền (m)"), null=True)
     price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá chào (tỷ)"))
@@ -82,8 +84,6 @@ class Listing(models.Model):
                                  blank=True)
     area_real = models.DecimalField(max_digits=10, decimal_places=1, verbose_name=_("Diện tích thực tế(m2)"),
                                     null=True, blank=True)
-    lane_width = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True,
-                                     verbose_name=_("Chiều rộng đường/ngõ (m)"))
     bedrooms = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)],
                                    choices=([(i, i) for i in range(1, 100)]), verbose_name=_("Số phòng ngủ"),
                                    null=True, blank=True)
@@ -193,9 +193,8 @@ class Listing(models.Model):
     reward_person_mobile = models.CharField(max_length=50, blank=True, verbose_name=_("Số ĐT chủ sở hữu BĐS hoặc của Chuyên viên ĐC"),
                                             help_text="Số ĐT chủ sở hữu BĐS, ví dụ 0916286256")
 
-    extra_data = models.TextField(max_length=500, verbose_name=_("Ghi chú"), null=True, blank=True,
-                                  default="Chủ nhà hiểu chuyện, tôn trọng môi giới, thiện chí hợp tác,..",
-                                  help_text="Ghi các thông tin khác quan trọng về chủ nhà hoặc các yếu tố khác liên quan đến tương tác với Chuyên viên...")
+    extra_data = models.TextField(verbose_name=_("Mô tả của đầu chủ"), null=True, blank=True,
+                                  help_text="Ghi các thông tin mô tả đầy đủ của đầu chủ về chủ nhà hoặc các yếu tố khác liên quan đến tương tác với Chuyên viên...")
 
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING,
                               verbose_name=_("Trạng thái giao dịch"))

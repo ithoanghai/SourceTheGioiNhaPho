@@ -37,7 +37,7 @@ class ListingVideoAdmin(admin.TabularInline):
 
 
 class ListingAdmin(admin.ModelAdmin):
-    list_display = ('address', 'district','area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status', 'is_published')
+    list_display = ('address', 'street', 'district','area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status', 'is_published')
     list_display_links = ('code','district',)
     list_filter = (
         ('status', ChoiceDropdownFilter),
@@ -50,13 +50,13 @@ class ListingAdmin(admin.ModelAdmin):
         ('list_date', DateFieldListFilter),
         ('is_published', BooleanFieldListFilter),
     )
-    list_editable = ('address',)
+    list_editable = ('address', 'price',)
     search_fields = ('title', 'code', 'address','area', 'price','house_type', 'road_type', 'urban_area', 'street','ward', 'district','state', 'list_date',)
     list_per_page = 100
     inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
     actions = ['make_published', 'unpublished']
     form = ListingAdminForm
-    ordering = ('-list_date','price', 'average_price', 'road_type','-area', 'district')
+    ordering = ('price', 'average_price', 'road_type','-area', 'district')
 
     class Media:
         js = ('admin/js/dropzone.js', 'admin/js/listing.js', 'admin/js/filepond-4.28.2.min.js',
@@ -70,17 +70,17 @@ class ListingAdmin(admin.ModelAdmin):
         form.base_fields['user'].initial = request.user
         disabled_fields = set()  # type: Set[str]
         disabled_fields |= {
-            'user'
+            'user',
+            'realtor'
         }
         if request.user.is_superuser:
             realtor = Realtor.objects.filter(user=request.user)
             form.base_fields['realtor'].initial = realtor
+            form.base_fields['user'].disabled = True
         else:
-            self.exclude = ("realtor",)
-
-        for f in disabled_fields:
-            if f in form.base_fields:
-                form.base_fields[f].disabled = True
+            for f in disabled_fields:
+                if f in form.base_fields:
+                    form.base_fields[f].disabled = True
         return form
 
     def get_queryset(self, request):
@@ -102,9 +102,9 @@ class ListingAdmin(admin.ModelAdmin):
             to_exclude += []
         else:
             if not user.is_superuser:
-                to_exclude.append(('realtor', 'user'))
-                if obj.realtor.user != user.id:
-                    to_exclude.append('address')
+                to_exclude.append('realtor')
+                #if obj.realtor.user != user.id:
+                #    to_exclude.append('address')
         try:
             return list(excluded) + to_exclude
         except TypeError:

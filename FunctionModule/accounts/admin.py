@@ -30,21 +30,22 @@ class AccountAdmin(AuthUserAdmin):
         ('THÔNG TIN BỔ SUNG', {'fields': (
             'first_time', 'last_name', 'first_name',
             'address', 'dob', 'gender',
-            'bio', 'avatar', 'website', 'facebook', 'youtube',)}),
+            'bio', 'avatar', 'image_tag',  'website', 'facebook', 'youtube',)}),
         ('PHÂN QUYỀN SỬ DỤNG', {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
         }),
         ('THỜI GIAN HOẠT ĐỘNG', {'fields': ('last_login', 'date_joined')}),
     )
 
-    list_display = ('id', 'name', 'email', 'phone', 'date_joined', 'is_staff')
+    list_display = ('id', 'name', 'user_image', 'email', 'phone', 'date_joined', 'is_staff')
     list_display_links = ('name', 'email')
     search_fields = ['username','first_name', 'last_name', 'email', 'phone']
     list_filter = ('date_joined', 'is_superuser', 'is_staff')
     list_per_page = 100
     readonly_fields = [
-        'date_joined',
+        'date_joined', 'user_image',
     ]
+    ordering = ('last_name', 'id', 'date_joined',)
 
     # change_list_template = 'admin/auth/user/change_list.html'
     def get_queryset(self, request):

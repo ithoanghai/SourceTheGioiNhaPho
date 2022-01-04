@@ -8,6 +8,6 @@ class RealtorAdmin(admin.ModelAdmin):
     list_display_links = ('user',)
     search_fields = ('id', 'hire_date')
     list_per_page = 100
-
+    ordering = ('user', 'hire_date')
 
 admin.site.register(Realtor, RealtorAdmin)

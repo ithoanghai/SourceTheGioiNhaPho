@@ -1,14 +1,24 @@
 from django.contrib import admin
+from django.contrib.admin import DateFieldListFilter, BooleanFieldListFilter
 from django.db.models import Q
 from .models import Customer
+from ..listings.filters import ChoiceDropdownFilter, RelatedDropdownFilter
 from ..realtors.models import Realtor
 
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'phone', 'financial_range', 'district', 'request', 'status', 'classify')
+    list_display = ('id', 'name', 'phone', 'financial_range', 'district', 'request', 'custormer_type', 'classify', )
     list_display_links = ('name', 'phone',)
-    search_fields = ('name', 'phone', 'email', 'address', 'financial_range', 'request', 'descriptions', 'district', 'status', 'classify')
+    search_fields = ('name', 'phone', 'email', 'address', 'financial_range', 'request', 'descriptions', 'district', 'custormer_type', 'status', 'classify')
     list_per_page = 100
+    ordering = ('financial_range', 'district', 'name', 'hire_date')
+    list_filter = (
+        ('transactionStatus', ChoiceDropdownFilter),
+        ('custormer_type', ChoiceDropdownFilter),
+        ('classify', ChoiceDropdownFilter),
+        ('status', ChoiceDropdownFilter),
+        ('hire_date', DateFieldListFilter),
+    )
 
     def get_queryset(self, request):
         #if request.user.is_superuser:
