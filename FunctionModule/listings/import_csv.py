@@ -134,24 +134,26 @@ def handle_import(file_path, listing_type):
             hanoi_district_list = district_data[state_code]
             hanoi_districts = {}
             timezone = pytz.timezone('Asia/Ho_Chi_Minh')
+            row_count = 0
 
             for item in hanoi_district_list:  # type: dict
                 hanoi_districts[item['name']] = item['code']
 
             for row in reversed(list(csv_reader)):
-                line_count += 1
-
+                row_count += 1
+                line_count = csv_reader.line_num - row_count
                 district = row[header_dict['quan']]
                 if not district:
                     logger.info(f"No district. Continue in line {line_count}")
                     continue
                 if district in hanoi_districts:
                     district_code = hanoi_districts[district]
-                    if district_code == '008' or district_code == '009' or district_code == '020':
-                        priority = 8
                 else:
                     # logger.info(f"District code not found. Continue in line {line_count}")
                     continue
+
+                if district_code == '008' or district_code == '009' or district_code == '020':
+                    priority = 8
 
                 trans_type = TransactionType.SELL
                 house_type = HouseType.TOWN_HOUSE
@@ -218,7 +220,7 @@ def handle_import(file_path, listing_type):
                     # splitter = list(filter(None, splitter))
                     floor_area = splitter[0].split('/')
                     if splitter_len == 2:
-                        width = Decimal(splitter[1].replace(',', '.'))
+                        width = float(splitter[1].replace(',', '.'))
                     else:
                         try:
                             width = float(splitter[2].replace(',', '.'))
@@ -227,7 +229,7 @@ def handle_import(file_path, listing_type):
                             continue
                     try:
                         # area = float(row[header_dict['dt']].replace('c4', ''))
-                        area = Decimal(row[header_dict['dt']].replace('#VALUE!', floor_area[0].replace(',', '.').replace(' ', '')))
+                        area = Decimal(row[header_dict['dt']].replace('Đất', splitter[0]).replace('đất', splitter[0]).replace('#VALUE!', splitter[0]).replace(',', '.').replace(' ', ''))
                     except ValueError:
                         area = Decimal(floor_area[0].replace(',', '.').replace(' ', ''))
                         continue
@@ -484,8 +486,8 @@ def handle_import(file_path, listing_type):
                 new_listing = Listing(realtor=realtor, code=code, status=status, street=street,
                                       address=full_addr, area=area, transaction_type=trans_type,
                                       house_type=house_type, road_type=road_type, list_date=created,
-                                      direction=direction, price=price, reward_person=realtor,
-                                      reward_person_mobile=phone, reward=reward, bonus_rate=bonus_rate, priority=priority,
+                                      direction=direction, price=price, reward_person=realtor, priority=priority,
+                                      reward_person_mobile=phone, reward=reward, bonus_rate=bonus_rate,
                                       extra_data=extra_data, state=state_code, district=district_code, is_published=is_published,
                                       width=width, floors=floor, average_price=price_per_area, length=None, lane_width=None)
                 title = f'Bán {get_short_title_from_house_type(new_listing.house_type)} {new_listing.street} {new_listing.district_name()} '
