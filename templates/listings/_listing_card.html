@@ -7,7 +7,7 @@
     {% endwith %}
     <div class="card-img-overlay">
         <h2>
-            <span class="badge badge-secondary text-white">{{ listing.price }} tỷ</span>
+            <span class="badge badge-secondary text-white">{{ listing.price.normalize }} tỷ</span>
         </h2>
     </div>
     <div class="card-body">
@@ -17,8 +17,8 @@
                 <i class="fas fa-map-marker text-secondary"></i>
                 {% if listing.urban_area %}
                   <h4>
-                    <a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}&sort=priority"
-                       title="">{{ listing.urban_area }}</a>
+                    <a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area.normalize }}&sort=priority"
+                       title="">{{ listing.urban_area.normalize }}</a>
                   </h4>
                   {% endif %}
                 <h4>
@@ -42,7 +42,7 @@
         <hr>
         <div class="row py-2 text-secondary">
             <div class="col-6">
-                <i class="fas fa-th-large"></i> {% trans "Diện tích" %}: {{ listing.area }}</div>
+                <i class="fas fa-th-large"></i> {% trans "Diện tích" %}: {{ listing.area.normalize }}</div>
               {% if listing.bedrooms and listing.bedrooms > 0 %}
               <div class="col-6">
                   <i class="fas fa-bed"></i> {% trans "Phòng ngủ" %}: {{ listing.bedrooms }}

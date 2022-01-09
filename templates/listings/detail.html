@@ -416,13 +416,13 @@
                     <div class="detail-row">
                         <ul class="detailroom">
                             <li title="Diện tích"><span
-                                    class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }} m2
+                                    class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area.normalize }} m2
                             </li>
                             {% if listing.floors %}
                                 <li><i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}
                                 </li> {% endif %}
                             {% if listing.width > 3.5 %}
-                                <li><i class="fa fas fa-arrows-alt-h"></i> {{ listing.width }}{% trans "m" %}</li>
+                                <li><i class="fa fas fa-arrows-alt-h"></i> {{ listing.width.normalize }} {% trans "m" %}</li>
                             {% endif %}
                             {% if listing.bedrooms %}
                                 <li>
@@ -434,9 +434,9 @@
                                 </li> {% endif %}
                         </ul>
                         <ul class="listing-price">
-                            <li title="Giá">$<b>{{ listing.price }}</b> tỷ &nbsp ⇔ &nbsp</li>
+                            <li title="Giá">$<b>{{ listing.price.normalize }}</b> tỷ &nbsp ⇔ &nbsp</li>
                             {% if listing.sale_price  and listing.sale_price < listing.price %}
-                                <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price }}</strong> tỷ &nbsp ⇔ &nbsp </li> {% endif %}
+                                <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price.normalize }}</strong> tỷ &nbsp ⇔ &nbsp </li> {% endif %}
                             <li title="Giá/m2">$<b>{% widthratio listing.price listing.area 1000 %}</b> triệu/m2
                             </li>
                         </ul>
@@ -494,19 +494,19 @@
                     </li>
                     <li>
                         <p class="left">Diện tích</p>
-                        <p class="right">{{ listing.area }} m</p>
+                        <p class="right">{{ listing.area.normalize }} m</p>
                     </li>
 
                     {% if listing.lot_size %}
                         <li>
                             <p class="left">Diện tích khuân viên</p>
-                            <p class="right">{{ listing.lot_size }} m</p>
+                            <p class="right">{{ listing.lot_size.normalize }} m</p>
                         </li>
                     {% endif %}
                     {% if listing.width and listing.width > 3 %}
                         <li>
                             <p class="left">Mặt tiền </p>
-                            <p class="right">{{ listing.width }} m</p>
+                            <p class="right">{{ listing.width.normalize }} m</p>
                         </li>
                     {% endif %}
                     {% if listing.direction %}
@@ -552,12 +552,12 @@
                     {% endif %}
                     <li>
                         <p class="left">Giá bán</p>
-                        <p class="right">{{ listing.price }} tỷ</p>
+                        <p class="right">{{ listing.price.normalize }} tỷ</p>
                     </li>
                     {% if listing.sale_price %}
                         <li>
                             <p class="left">Bán nhanh</p>
-                            <p class="right">{{ listing.sale_price }} tỷ</p>
+                            <p class="right">{{ listing.sale_price.normalize }} tỷ</p>
                         </li>
                     {% endif %}
                 </ul>
@@ -594,9 +594,9 @@
                             <span>{{ listing.house_type|get_house_type }} {{ listing.street }}</span>
                             <span>{{ listing.house_type|get_house_type }} {% get_district listing.district %}</span>
                             <span>{{ listing.house_type|get_house_type }} {% get_state listing.state %}</span>
-                            <span>{{ listing.house_type|get_house_type }} {{ listing.price }} tỷ</span>
+                            <span>{{ listing.house_type|get_house_type }} {{ listing.price.normalize }} tỷ</span>
                             {% if  listing.area > 0 %}
-                                <span>{{ listing.house_type|get_house_type }} {{ listing.area }} m2</span> {% endif %}
+                                <span>{{ listing.house_type|get_house_type }} {{ listing.area.normalize }} m2</span> {% endif %}
                             {% if  listing.floors > 0 %}
                                 <span>{{ listing.house_type|get_house_type }} {{ listing.floors }} tầng</span> {% endif %}
 
@@ -1035,11 +1035,11 @@
                                     {% if listing.bedrooms %}
                                         <li><p>Phòng ngủ:</p> <strong>{{ listing.bedrooms }}</strong></li>
                                     {% endif %}
-                                    <li><p>Diện tích:</p> <strong>{{ listing.area }} m2</strong></li>
+                                    <li><p>Diện tích:</p> <strong>{{ listing.area.normalize }} m2</strong></li>
                                     {% if listing.bathrooms > 0 %}
                                         <li><p>Phòng tắm:</p> <strong>{{ listing.bathrooms }}</strong></li>
                                     {% endif %}
-                                    <li><p>Giá:</p> <strong class="color-red-base">{{ listing.price }} tỷ</strong></li>
+                                    <li><p>Giá:</p> <strong class="color-red-base">{{ listing.price.normalize }} tỷ</strong></li>
                                 </ul>
                             </div>
                         </div>

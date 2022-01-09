@@ -13,6 +13,7 @@ from django.template.loader import render_to_string
 from django.utils.text import slugify
 from geopy import GeocodeEarth
 from geopy.geocoders import Nominatim
+from oauthlib.uri_validate import reserved
 
 from FunctionModule.accounts.models import User
 from FunctionModule.cadastral.constants import district_data
@@ -126,6 +127,7 @@ def handle_import(file_path, listing_type):
 
         with open(file_path, 'r', encoding="utf-8", errors='ignore') as fp:
             csv_reader = csv.reader(fp, delimiter=',')
+            header_dict = read_header(next(csv_reader), listing_type)
             new_listings = []
             updated_listings = []
             state_code = "01"
@@ -135,17 +137,18 @@ def handle_import(file_path, listing_type):
 
             for item in hanoi_district_list:  # type: dict
                 hanoi_districts[item['name']] = item['code']
-            for row in csv_reader:
+
+            for row in reversed(list(csv_reader)):
                 line_count += 1
 
-                if line_count == 1:
-                    header_dict = read_header(row, listing_type)
                 district = row[header_dict['quan']]
                 if not district:
                     logger.info(f"No district. Continue in line {line_count}")
                     continue
                 if district in hanoi_districts:
                     district_code = hanoi_districts[district]
+                    if district_code == '008' or district_code == '009' or district_code == '020':
+                        priority = 8
                 else:
                     # logger.info(f"District code not found. Continue in line {line_count}")
                     continue
@@ -159,6 +162,7 @@ def handle_import(file_path, listing_type):
                 desc = ""
                 is_published = True
                 name = row[header_dict['dau-chu']]
+                priority = 9
 
                 if listing_type == "K1":
                     try:
@@ -481,14 +485,14 @@ def handle_import(file_path, listing_type):
                                       address=full_addr, area=area, transaction_type=trans_type,
                                       house_type=house_type, road_type=road_type, list_date=created,
                                       direction=direction, price=price, reward_person=realtor,
-                                      reward_person_mobile=phone, reward=reward, bonus_rate=bonus_rate,
+                                      reward_person_mobile=phone, reward=reward, bonus_rate=bonus_rate, priority=priority,
                                       extra_data=extra_data, state=state_code, district=district_code, is_published=is_published,
                                       width=width, floors=floor, average_price=price_per_area, length=None, lane_width=None)
                 title = f'Bán {get_short_title_from_house_type(new_listing.house_type)} {new_listing.street} {new_listing.district_name()} '
                 if new_listing.area >= 30:
                     title += f'{new_listing.area:.0f}m '
                 if new_listing.floors and new_listing.floors > 1:
-                    title += f'{new_listing.floors} tầng '
+                    title += f'{new_listing.floors:.0f} tầng '
                 title += f'{new_listing.display_price}'
                 title = title.upper().replace('  ', ' ')
                 new_listing.title = title
@@ -528,13 +532,14 @@ def handle_import(file_path, listing_type):
                     f.list_date = new_listing.list_date
                     f.reward_person_mobile = new_listing.reward_person_mobile
                     f.extra_data = new_listing.extra_data
+                    f.priority = new_listing.priority
                     f.update()
-                    logger.info(f"row {line_count}: update listing {f}")
+                    logger.info(f"row {line_count}: update {f}")
                 else:
                     queryset_list = Listing.objects.filter(address=new_listing.address,price=new_listing.price, district=new_listing.district, area=new_listing.area,
-                                                           floors=new_listing.floors)
-                    listing = queryset_list.first()
+                                                           floors=new_listing.floors).order_by('-list_date')
                     if queryset_list.exists():
+                        listing = queryset_list.first()
                         listing.is_published = new_listing.is_published
                         listing.house_type = new_listing.house_type
                         listing.road_type = new_listing.road_type
@@ -546,13 +551,18 @@ def handle_import(file_path, listing_type):
                         listing.list_date = new_listing.list_date
                         listing.reward_person_mobile = new_listing.reward_person_mobile
                         listing.extra_data = new_listing.extra_data
+                        listing.priority = new_listing.priority
+                        listing.code = new_listing.code
                         listing.save()
                         logger.info(f"row {line_count}: update listing {listing}")
+                        for ite in queryset_list[1:]:
+                            ite.delete()
+                            logger.info(f"row {line_count}: del listing {listing}")
                     else:
                         new_listing.save()
                         new_listings.append(new_listing)
                         listing_obj[code] = new_listing
-                        print(f"row {line_count}: new listing don't exist: {new_listing}")
+                        print(f"row {line_count}: new listing: {new_listing}")
                         del new_listing
 
     except Exception as ex:

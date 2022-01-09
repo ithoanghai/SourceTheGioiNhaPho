@@ -78,12 +78,12 @@
                     </div>
  {% comment %}                   <v:label class="listing-name" :href="getListingDetailURL(listing.id)" :title="listing.title" ><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></v:label>
  {% endcomment %}   <ul class="listing-info">
-                        <li><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}</li>
+                        <li><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area.normalize]] {% trans "m2" %}</li>
                         <li v-if="listing.floors && listing.floors > 0">
                             <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
                         </li>
-                        <li v-if="listing.width > 3.5">
-                           <i class="fa fas fa-arrows-alt-h"></i> [[listing.width]] {% trans "m" %}
+                        <li v-if="listing.width > 3.2">
+                           <i class="fa fas fa-arrows-alt-h"></i> [[listing.width.normalize]] {% trans "m" %}
                         </li>
 
                         <li v-if="listing.bedrooms && listing.bedrooms > 0">
@@ -95,7 +95,7 @@
                     </ul>
                     <div class="action-group">
                         <div class="action-group--left">
-                            <div class="listing-price">[[listing.price]] {% trans "tỷ" %}</div>
+                            <div class="listing-price">[[listing.price.normalize]] {% trans "tỷ" %}</div>
                             <label v-if="listing.is_exclusive"
                                    class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
                         </div>

@@ -33,10 +33,10 @@
   <div class="info">
     <ul>
         {% if listing.average_price %}
-             <li title="Giá/m2"><strong>$</strong><b>{{ listing.average_price }} tr/m2</b></li>
+             <li title="Giá/m2"><strong>$</strong><b>{{ listing.average_price.normalize }} tr/m2</b></li>
         {% endif %}
       <li class="marea" title="Diện tích"><span
-        class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area }}m2
+        class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area.normalize }} m2
       </li>
           {% if listing.floors %}
           <li><span class="fa fa-h-square"></span> {{ listing.floors }} tầng
@@ -49,9 +49,9 @@
       {% if listing.bathrooms %}
         <li title="Phòng tắm" class="icon-bath-room"><span></span> {{ listing.bathrooms }} </li>
       {% endif %}
-        <li title="Giá"><b>{{ listing.price }} tỷ</b></li>
+        <li title="Giá"><b>{{ listing.price.normalize }} tỷ</b></li>
       {% if listing.sale_price and listing.sale_price < listing.price %}
-        <li title="Bán nhanh">Còn {{ listing.sale_price }} tỷ</li> {% endif %}
+        <li title="Bán nhanh">Còn {{ listing.sale_price.normalize }} tỷ</li> {% endif %}
     </ul>
 
   </div>

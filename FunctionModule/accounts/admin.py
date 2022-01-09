@@ -30,7 +30,7 @@ class AccountAdmin(AuthUserAdmin):
         ('THÔNG TIN BỔ SUNG', {'fields': (
             'first_time', 'last_name', 'first_name',
             'address', 'dob', 'gender',
-            'bio', 'avatar', 'image_tag',  'website', 'facebook', 'youtube',)}),
+            'bio', 'avatar', 'user_image',  'website', 'facebook', 'youtube',)}),
         ('PHÂN QUYỀN SỬ DỤNG', {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
         }),

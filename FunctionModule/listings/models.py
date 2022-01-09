@@ -70,7 +70,7 @@ class Listing(models.Model):
     parking_type = models.CharField(max_length=20, choices=ParkingType.choices, blank=True,
                                     null=True, verbose_name=_("Có chỗ đỗ ô tô không?"))
     area = models.DecimalField(max_digits=10, decimal_places=1, verbose_name=_("Diện tích (m2)"))
-    floors = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)], null=True,
+    floors = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], null=True, default="0",
                                  choices=([(i, i) for i in range(1, 50)]), verbose_name=_("Số tầng"))
     width = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Mặt tiền (m)"), null=True)
     price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá chào (tỷ)"))

@@ -24,5 +24,8 @@ Build Deploy to server
 Open/Close port DB
 - comment/uncomment 2 dòng ports, comment 2 dòng expose trong file docker-compose.production.yml
 - chạy lệnh: docker-compose -f docker-compose.production.yml up -d
-
 pg_restore -c --dbname=postgresql://postgres:postgres@127.0.0.1/tgnp tgnp-2021-08-24.dump
+
+Show Log docker
+- docker logs -f --tail 5 app_web_1
+

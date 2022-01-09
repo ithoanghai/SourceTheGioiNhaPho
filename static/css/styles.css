@@ -607,8 +607,8 @@ section.bg-gray-e6 div.more-info-black {
 .container {
     width: 100%;
     padding-top: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
     margin-right: auto;
     margin-left: auto;
     display: block;
