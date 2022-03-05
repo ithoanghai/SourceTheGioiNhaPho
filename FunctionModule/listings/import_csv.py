@@ -2,6 +2,7 @@ import csv
 import datetime
 import json
 import logging
+import string
 from decimal import Decimal
 from string import digits
 
@@ -151,9 +152,13 @@ def handle_import(file_path, listing_type):
                 else:
                     # logger.info(f"District code not found. Continue in line {line_count}")
                     continue
-
-                if district_code == '008' or district_code == '009' or district_code == '020':
+                #008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
+                if district_code == '008' or district_code == '009' or district_code == '020' or district_code == '278' or district_code == '268':
                     priority = 8
+                    is_published = True
+                else:
+                    priority = 9
+                    is_published = False
 
                 trans_type = TransactionType.SELL
                 house_type = HouseType.TOWN_HOUSE
@@ -162,9 +167,7 @@ def handle_import(file_path, listing_type):
                 reward = 100
                 bonus_rate = 3
                 desc = ""
-                is_published = True
                 name = row[header_dict['dau-chu']]
-                priority = 9
 
                 if listing_type == "K1":
                     try:
@@ -343,6 +346,8 @@ def handle_import(file_path, listing_type):
 
                     # billion vnd
                     try:
+                        if row[header_dict['gia']].split(' ')[0] == string.empty:
+                            continue
                         price = Decimal(row[header_dict['gia']].split(' ')[0])
                     except ValueError:
                         logger.info(f"price {price}")
@@ -392,7 +397,9 @@ def handle_import(file_path, listing_type):
 
                     nguon = row[header_dict['nguon']]
                     hoa_hong = row[header_dict['hoa-hong']]
-                    num_reward = float(hoa_hong.split(' ')[0])
+                    if hoa_hong.split(' ')[0] == string.empty:
+                        num_reward = 100
+                        bonus_rate = 3
                     if 3 < int(num_reward) < 10000:
                         reward = num_reward
                     elif int(num_reward) > 0:

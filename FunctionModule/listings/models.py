@@ -10,6 +10,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 from embed_video.fields import EmbedVideoField
 from location_field.models.spatial import LocationField
+from pydantic.errors import Decimal
 from rest_framework import serializers
 from FunctionModule.accounts.models import User
 from FunctionModule.cadastral.lookups import get_state_name, get_district_name, get_ward_name
@@ -124,7 +125,7 @@ class Listing(models.Model):
             self.address = f"{self.street}, {self.district_name} {self.state_name}"
         if float(self.area) > 0:
             ave = float(self.price)/float(self.area)*1000
-            self.average_price = int(round(ave, 4))
+            self.average_price = Decimal(round(ave, 4))
 
         super().save(*args, **kwargs)
 

@@ -1,6 +1,6 @@
 {% load get_cadastral listing %}{{ listing.house_type|get_house_type }} {{ desc }} tại {{ listing.street }}, {{ listing.district_name }}.
 
-Diện tích {{ listing.area.normalize }} mét{% if listing.floors > 1  %}, {{ listing.floors }} tầng{% endif %}{% if listing.width > 3.5%}, mặt tiền {{ listing.width.normalize }} mét{% endif %}.
+Diện tích {{ listing.area.normalize }} mét{% if listing.floors > 1  %}, {{ listing.floors }} tầng{% endif %}{% if listing.width > 3.5%}, mặt tiền {{ listing.width }} mét{% endif %}.
 
 {{ listing.house_type|get_house_type }}{% if listing.salient_features %}{{ listing.salient_features }} ,{% endif %} nằm tại {% if listing.urban_area %}khu {{ listing.urban_area }},{% endif %} phố {{ listing.street }}, ở vị trí trung tâm {{ listing.state_name }} khu vực sầm uất, nhiều tiện ích, gần trường, chợ, dân trí cao, an ninh tốt, giao thông tiện lợi.{% if listing.direction %}
 {% if listing.get_choice_display %}
@@ -9,6 +9,6 @@ Hướng {{ listing.get_choice_display }}{% endif %}
 
 Sổ đỏ chính chủ, sẵn sàng giao dịch.
 
-Giá: {{ listing.display_price.normalize }}. (Có thương lượng).
+Giá: {{ listing.display_price }}. (Có thương lượng).
 
 Chú ý: Tất cả thông tin được đăng bởi TGNP đều là thông tin thật, xác thực chính xác.
