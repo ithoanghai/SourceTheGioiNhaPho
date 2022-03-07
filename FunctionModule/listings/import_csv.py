@@ -152,13 +152,6 @@ def handle_import(file_path, listing_type):
                 else:
                     # logger.info(f"District code not found. Continue in line {line_count}")
                     continue
-                #008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
-                if district_code == '008' or district_code == '009' or district_code == '020' or district_code == '278' or district_code == '268':
-                    priority = 8
-                    is_published = True
-                else:
-                    priority = 9
-                    is_published = False
 
                 trans_type = TransactionType.SELL
                 house_type = HouseType.TOWN_HOUSE
@@ -231,6 +224,9 @@ def handle_import(file_path, listing_type):
                             # logger.info(f"Cannot decode floor_area. Continue in line {line_count}")
                             continue
                     try:
+                        splitter[0] = splitter[0].split('/').split('(').split('\\')
+                        if splitter[0] == 'Đất' or splitter[0] == 'đất':
+                            splitter[0] = float(splitter[1].replace(',', '.'))
                         # area = float(row[header_dict['dt']].replace('c4', ''))
                         area = Decimal(row[header_dict['dt']].replace('Đất', splitter[0]).replace('đất', splitter[0]).replace('#VALUE!', splitter[0]).replace(',', '.').replace(' ', ''))
                     except ValueError:
@@ -489,6 +485,13 @@ def handle_import(file_path, listing_type):
 
                 starter = get_house_type_short(house_type)
                 code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
+                #008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
+                if district_code == '008' or district_code == '009' or district_code == '020' or district_code == '278' or district_code == '268':
+                    priority = 8
+                    is_published = True
+                else:
+                    priority = 9
+                    is_published = False
 
                 new_listing = Listing(realtor=realtor, code=code, status=status, street=street,
                                       address=full_addr, area=area, transaction_type=trans_type,
