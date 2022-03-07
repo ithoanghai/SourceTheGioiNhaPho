@@ -304,7 +304,7 @@ def handle_import(file_path, listing_type):
                     extra_add = f' Nguồn {name}, hoa hồng 3%, hỏi lại đầu chủ cho chính xác.'
                 elif listing_type == "K2":
                     try:
-                        created = datetime.datetime.strptime(row[header_dict['tgian']], '%d/%m/%y %H:%M')
+                        created = datetime.datetime.strptime(row[header_dict['tgian']], '%d/%m/%Y %H:%M')
                         created = created.replace(tzinfo=timezone)
                     except ValueError:
                         created = datetime.datetime.now(tz=timezone)
