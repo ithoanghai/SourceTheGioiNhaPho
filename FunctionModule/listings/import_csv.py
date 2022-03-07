@@ -135,7 +135,7 @@ def handle_import(file_path, listing_type):
             hanoi_district_list = district_data[state_code]
             hanoi_districts = {}
             timezone = pytz.timezone('Asia/Ho_Chi_Minh')
-            row_count = 0
+            row_count = 1
 
             for item in hanoi_district_list:  # type: dict
                 hanoi_districts[item['name']] = item['code']
@@ -344,7 +344,7 @@ def handle_import(file_path, listing_type):
 
                     # billion vnd
                     try:
-                        if row[header_dict['gia']].split(' ')[0] == string.empty:
+                        if (not (row[header_dict['gia']].split(' ')[0] and row[header_dict['gia']].split(' ')[0].strip())):
                             continue
                         price = Decimal(row[header_dict['gia']].split(' ')[0])
                     except ValueError:
