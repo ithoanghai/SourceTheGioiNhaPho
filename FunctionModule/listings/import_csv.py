@@ -395,6 +395,7 @@ def handle_import(file_path, listing_type):
 
                     nguon = row[header_dict['nguon']]
                     hoa_hong = row[header_dict['hoa-hong']]
+                    num_reward = 100
                     if (not (hoa_hong.split(' ')[0] and hoa_hong.split(' ')[0].strip())):
                         num_reward = 100
                         bonus_rate = 3
