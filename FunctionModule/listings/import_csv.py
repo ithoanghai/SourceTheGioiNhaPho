@@ -224,7 +224,9 @@ def handle_import(file_path, listing_type):
                             # logger.info(f"Cannot decode floor_area. Continue in line {line_count}")
                             continue
                     try:
-                        splitter[0] = splitter[0].split('/').split('(').split('\\')
+                        splitter = splitter[0].split('/')
+                        splitter = splitter[0].split('(')
+                        splitter = splitter[0].split('\\')
                         if splitter[0] == 'Đất' or splitter[0] == 'đất':
                             splitter[0] = float(splitter[1].replace(',', '.'))
                         # area = float(row[header_dict['dt']].replace('c4', ''))
