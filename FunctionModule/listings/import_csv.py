@@ -224,15 +224,15 @@ def handle_import(file_path, listing_type):
                             # logger.info(f"Cannot decode floor_area. Continue in line {line_count}")
                             continue
                     try:
-                        splitter = splitter[0].split('/')
-                        splitter = splitter[0].split('(')
-                        splitter = splitter[0].split('\\')
-                        if splitter[0] == 'Đất' or splitter[0] == 'đất':
-                            splitter[0] = float(splitter[1].replace(',', '.'))
+                        area_p1 = splitter[0].split('/')
+                        area_p2 = area_p1[0].split('(')
+                        area_tmp = area_p2[0].split('\\')
+                        if area_tmp[0] == 'Đất' or area_tmp[0] == 'đất':
+                            area_tmp = splitter[1].replace(',', '.')
                         # area = float(row[header_dict['dt']].replace('c4', ''))
-                        area = Decimal(row[header_dict['dt']].replace('Đất', splitter[0]).replace('đất', splitter[0]).replace('#VALUE!', splitter[0]).replace(',', '.').replace(' ', ''))
+                        area = Decimal(row[header_dict['dt']].replace('Đất', area_tmp[0]).replace('đất', area_tmp[0]).replace('#VALUE!', area_tmp[0]).replace(',', '.').replace(' ', ''))
                     except ValueError:
-                        area = Decimal(floor_area[0].replace(',', '.').replace(' ', ''))
+                        area = Decimal(area_tmp[0].replace(',', '.').replace(' ', ''))
                         continue
 
                     floor = 0
