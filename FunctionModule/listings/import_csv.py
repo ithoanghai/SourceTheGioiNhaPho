@@ -135,14 +135,14 @@ def handle_import(file_path, listing_type):
             hanoi_district_list = district_data[state_code]
             hanoi_districts = {}
             timezone = pytz.timezone('Asia/Ho_Chi_Minh')
-            row_count = 1
+            row_count = 0
 
             for item in hanoi_district_list:  # type: dict
                 hanoi_districts[item['name']] = item['code']
 
             for row in reversed(list(csv_reader)):
                 row_count += 1
-                line_count = csv_reader.line_num - row_count
+                line_count = csv_reader.line_num - row_count + 1
                 district = row[header_dict['quan']]
                 if not district:
                     logger.info(f"No district. Continue in line {line_count}")
@@ -304,7 +304,7 @@ def handle_import(file_path, listing_type):
                     extra_add = f' Nguồn {name}, hoa hồng 3%, hỏi lại đầu chủ cho chính xác.'
                 elif listing_type == "K2":
                     try:
-                        created = datetime.datetime.strptime(row[header_dict['tgian']], '%m/%d/%y %H:%M')
+                        created = datetime.datetime.strptime(row[header_dict['tgian']], '%d/%m/%y %H:%M')
                         created = created.replace(tzinfo=timezone)
                     except ValueError:
                         created = datetime.datetime.now(tz=timezone)
@@ -449,13 +449,13 @@ def handle_import(file_path, listing_type):
                                 usr.phone = phone
                                 usr.last_name = name
                                 usr.update()
-                                print(f"update user: {usr}")
+                                #print(f"update user: {usr}")
                             else:
                                 new_user = User.objects.create_user(username=phone, password=default_password,
                                                                     phone=phone, email=email, last_name=name, bio=bio)
                                 new_realtor = Realtor.objects.create(user=new_user)
                                 user_dict[phone] = new_realtor
-                                print(f"new_user: {new_user}")
+                                #print(f"new_user: {new_user}")
                         else:
                             extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
                             bio = f'{name}, {phone}, {don_vi}.'
