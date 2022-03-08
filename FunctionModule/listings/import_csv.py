@@ -517,6 +517,7 @@ def handle_import(file_path, listing_type):
                                                context={"listing": new_listing, "desc": desc})
                 new_listing.description = description
                 new_listing.description = new_listing.description.replace('  ', ' ')
+                new_listing.is_published = published
                 if full_addr in searched_locations:
                     if searched_locations[full_addr]:
                         listing_loc = Point(searched_locations[full_addr][1],
@@ -571,10 +572,10 @@ def handle_import(file_path, listing_type):
                         listing.priority = new_listing.priority
                         listing.code = new_listing.code
                         listing.save()
-                        logger.info(f"row {line_count}: update listing {listing}")
+                        logger.info(f"row {line_count}: update listing {listing.code}")
                         for ite in queryset_list[1:]:
                             ite.delete()
-                            logger.info(f"row {line_count}: del listing {listing}")
+                            logger.info(f"row {line_count}: del listing {listing.code}")
                     else:
                         new_listing.save()
                         new_listings.append(new_listing)
