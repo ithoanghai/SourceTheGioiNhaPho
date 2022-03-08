@@ -171,20 +171,20 @@ def handle_import(file_path, listing_type):
                     status = row[header_dict['hien-trang']]
                     if not status:
                         status = Status.SELLING
-                        is_published = True
+                        published = True
                     else:
                         if status == 'Hạ chào':
                             status = Status.SALE
-                            is_published = True
+                            published = True
                         elif status == 'Còn bán':
                             status = Status.SELLING
-                            is_published = True
+                            published = True
                         elif status == 'Đã bán':
                             status = Status.SOLD
-                            is_published = False
+                            published = False
                         elif status == 'Dừng bán':
                             status = Status.STOP_SELLING
-                            is_published = False
+                            published = False
 
                     addr = row[header_dict['dia-chi']].replace('.', '/').replace(',', '/')
                     street = row[header_dict['pho']]
@@ -269,7 +269,7 @@ def handle_import(file_path, listing_type):
                         house_type = HouseType.STREET_HOUSE
                         road_type = RoadType.ALLEY_CAR_2
                         if price > 30:
-                            is_published = False
+                            published = False
                     elif desc == 'Ngõ Ô Tô':
                         road_type = RoadType.ALLEY_CAR
                     elif desc == 'Ngõ 3 Gác':
@@ -317,20 +317,20 @@ def handle_import(file_path, listing_type):
                     status = row[header_dict['hien-trang']]
                     if not status:
                         status = Status.SELLING
-                        is_published = True
+                        published = True
                     else:
                         if status == 'Chuẩn' or status == 'Chờ duyệt' or status == 'Chim trời cá bể':
                             status = Status.SELLING
-                            is_published = True
+                            published = True
                         elif status == 'Tạm dừng bán':
                             status = Status.STOP_SELLING
-                            is_published = False
+                            published = False
                         elif status == 'Đã bán' or status == 'Đã cọc':
                             status = Status.SOLD
-                            is_published = False
+                            published = False
                         else:
                             status = Status.SALE
-                            is_published = True
+                            published = True
 
                     addr = row[header_dict['dia-chi']].replace('.', '/').replace('Số ', '').replace(' ', ' ')
                     so_nha = addr.split(' ')
@@ -376,7 +376,7 @@ def handle_import(file_path, listing_type):
                         house_type = HouseType.STREET_HOUSE
                         road_type = RoadType.ALLEY_CAR_2
                         if price > 30:
-                            is_published = False
+                            published = False
                     elif shop_house in full_addr.lower():
                         house_type = HouseType.SHOP_HOUSE
                         road_type = RoadType.ALLEY_CAR_2
@@ -491,17 +491,19 @@ def handle_import(file_path, listing_type):
                 #008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
                 if district_code == '008' or district_code == '009' or district_code == '020' or district_code == '278' or district_code == '268':
                     priority = 8
-                    is_published = True
+                    published = True
+                    if price > 30:
+                        published = False
                 else:
                     priority = 9
-                    is_published = False
+                    published = False
 
                 new_listing = Listing(realtor=realtor, code=code, status=status, street=street,
                                       address=full_addr, area=area, transaction_type=trans_type,
                                       house_type=house_type, road_type=road_type, list_date=created,
                                       direction=direction, price=price, reward_person=realtor, priority=priority,
                                       reward_person_mobile=phone, reward=reward, bonus_rate=bonus_rate,
-                                      extra_data=extra_data, state=state_code, district=district_code, is_published=is_published,
+                                      extra_data=extra_data, state=state_code, district=district_code, is_published=published,
                                       width=width, floors=floor, average_price=price_per_area, length=None, lane_width=None)
                 title = f'Bán {get_short_title_from_house_type(new_listing.house_type)} {new_listing.street} {new_listing.district_name()} '
                 if new_listing.area >= 30:
