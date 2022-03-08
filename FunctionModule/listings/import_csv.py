@@ -589,12 +589,12 @@ def handle_import(file_path, listing_type):
             # 008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
             if r.code == '008' or r.code == '009' or r.code == '020' or r.code == '278' or r.code == '268':
                 r.priority = 8
-                r.published = True
+                r.is_published = True
                 if r.price > 30:
-                    r.published = False
+                    r.is_published = False
             else:
                 r.priority = 9
-                r.published = False
+                r.is_published = False
             r.save()
 
     except Exception as ex:
