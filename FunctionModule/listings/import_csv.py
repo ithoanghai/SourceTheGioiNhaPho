@@ -584,10 +584,10 @@ def handle_import(file_path, listing_type):
                         print(f"row {line_count}: new listing: {new_listing}")
                         del new_listing
 
-        f = Listing.objects.filter()
+        f = Listing.objects.filter(is_published=True)
         for r in f:
             # 008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
-            if r.code == '008' or r.code == '009' or r.code == '020' or r.code == '278' or r.code == '268':
+            if r.district == '008' or r.district == '009' or r.district == '020' or r.district == '278' or r.district == '268':
                 r.priority = 8
                 r.is_published = True
                 if r.price > 30:
@@ -596,6 +596,7 @@ def handle_import(file_path, listing_type):
                 r.priority = 9
                 r.is_published = False
             r.save()
+            print(f"update published {line_count}: new listing: {new_listing}")
 
     except Exception as ex:
         print(f"Error occurred at line: {line_count}")
