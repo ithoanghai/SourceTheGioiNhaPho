@@ -539,7 +539,6 @@ def handle_import(file_path, listing_type):
 
                 if code in listing_obj:
                     f = Listing.objects.filter(code=code)
-                    f.is_published = new_listing.is_published
                     f.house_type = new_listing.house_type
                     f.road_type = new_listing.road_type
                     f.status = new_listing.status
@@ -551,8 +550,9 @@ def handle_import(file_path, listing_type):
                     f.reward_person_mobile = new_listing.reward_person_mobile
                     f.extra_data = new_listing.extra_data
                     f.priority = new_listing.priority
+                    f.is_published = published
                     f.update()
-                    logger.info(f"row {line_count}: update {f}")
+                    logger.info(f"row {line_count}: update {code}, district {district_code} publish is {f.is_published} to {published}")
                 else:
                     queryset_list = Listing.objects.filter(address=new_listing.address,price=new_listing.price, district=new_listing.district, area=new_listing.area,
                                                            floors=new_listing.floors).order_by('-list_date')
@@ -570,9 +570,10 @@ def handle_import(file_path, listing_type):
                         listing.reward_person_mobile = new_listing.reward_person_mobile
                         listing.extra_data = new_listing.extra_data
                         listing.priority = new_listing.priority
+                        code_old = listing.code
                         listing.code = new_listing.code
                         listing.save()
-                        logger.info(f"row {line_count}: update listing {listing.code}")
+                        logger.info(f"row {line_count}: cập nhật listing code {code_old} sang {listing.code}")
                         for ite in queryset_list[1:]:
                             ite.delete()
                             logger.info(f"row {line_count}: del listing {listing.code}")
