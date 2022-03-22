@@ -2,10 +2,10 @@
 <div class="actions">
   {% block actions %}
     {% block actions-form %}
-    {% for field in action_form %}{% if field.label %}<label>{{ field.label }} {% endif %}{{ field }}{% if field.label %}</label>{% endif %}{% endfor %}
+    {% for field in action_form %}{% if field.label %}<label>{% comment %}{{ field.label }}{% endcomment %} Hành động {% endif %}{{ field }}{% if field.label %}</label>{% endif %}{% endfor %}
     {% endblock %}
     {% block actions-submit %}
-    <button type="submit" class="button" title="{% translate "Thục hiện lựa chợn" %}" name="index" value="{{ action_index|default:0 }}">{% translate "Go" %}</button>
+    <button type="submit" class="button" title="{% translate "Thực hiện lựa chọn" %}" name="index" value="{{ action_index|default:0 }}">{% translate "Thực hiện" %}</button>
     {% endblock %}
     {% block actions-counter %}
     {% if actions_selection_counter %}

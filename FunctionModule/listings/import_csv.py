@@ -509,8 +509,8 @@ def handle_import(file_path, listing_type):
                 if new_listing.area >= 30:
                     title += f'{new_listing.area:.0f}m '
                 if new_listing.floors and new_listing.floors > 1:
-                    title += f'{new_listing.floors:.0f} tầng '
-                title += f'{new_listing.display_price}'
+                    title += f'{new_listing.floors.normalize} tầng '
+                title += f'{new_listing.display_price.normalize}'
                 title = title.upper().replace('  ', ' ')
                 new_listing.title = title
                 description = render_to_string('listings/defaultDescription.html',
@@ -520,8 +520,8 @@ def handle_import(file_path, listing_type):
                 new_listing.is_published = published
                 if full_addr in searched_locations:
                     if searched_locations[full_addr]:
-                        listing_loc = Point(searched_locations[full_addr][1],
-                                            searched_locations[full_addr][0])
+                        listing_loc = Point(searched_locations[full_addr][0],
+                                            searched_locations[full_addr][1])
                         new_listing.location = listing_loc
                 # else:
                 #     if api_key:
@@ -539,44 +539,55 @@ def handle_import(file_path, listing_type):
 
                 if code in listing_obj:
                     f = Listing.objects.filter(code=code)
-                    f.house_type = new_listing.house_type
-                    f.road_type = new_listing.road_type
-                    f.status = new_listing.status
-                    f.area = new_listing.area
-                    f.floors = new_listing.floors
-                    f.width = new_listing.width
-                    f.price = new_listing.price
-                    f.list_date = new_listing.list_date
-                    f.reward_person_mobile = new_listing.reward_person_mobile
-                    f.extra_data = new_listing.extra_data
-                    f.priority = new_listing.priority
-                    f.is_published = published
-                    f.update()
-                    logger.info(f"row {line_count}: update {code}, district {district_code} publish is {f.is_published} to {published}")
+                    if f.priority == 1 or f.priority == 2:
+                        f.status = new_listing.status
+                        f.update()
+                        logger.info(f"row {line_count}: chỉ cập nhật {code} đã biên tập dữ liệu, từ trạng thái {f.status} sang {new_listing.status}")
+                    else:
+                        f.house_type = new_listing.house_type
+                        f.road_type = new_listing.road_type
+                        f.status = new_listing.status
+                        f.area = new_listing.area
+                        f.floors = new_listing.floors
+                        f.width = new_listing.width
+                        f.price = new_listing.price
+                        f.list_date = new_listing.list_date
+                        f.reward_person_mobile = new_listing.reward_person_mobile
+                        f.extra_data = new_listing.extra_data
+                        f.priority = new_listing.priority
+                        f.is_published = published
+                        f.update()
+                        logger.info(f"row {line_count}: update {code}, district {district_code} publish is {f.is_published} to {published}")
                 else:
                     queryset_list = Listing.objects.filter(address=new_listing.address,price=new_listing.price, district=new_listing.district, area=new_listing.area,
                                                            floors=new_listing.floors).order_by('-list_date')
                     if queryset_list.exists():
                         listing = queryset_list.first()
-                        listing.is_published = new_listing.is_published
-                        listing.house_type = new_listing.house_type
-                        listing.road_type = new_listing.road_type
-                        listing.status = new_listing.status
-                        listing.area = new_listing.area
-                        listing.floors = new_listing.floors
-                        listing.width = new_listing.width
-                        listing.price = new_listing.price
-                        listing.list_date = new_listing.list_date
-                        listing.reward_person_mobile = new_listing.reward_person_mobile
-                        listing.extra_data = new_listing.extra_data
-                        listing.priority = new_listing.priority
-                        code_old = listing.code
-                        listing.code = new_listing.code
-                        listing.save()
-                        logger.info(f"row {line_count}: cập nhật listing code {code_old} sang {listing.code}")
-                        for ite in queryset_list[1:]:
-                            ite.delete()
-                            logger.info(f"row {line_count}: del listing {listing.code}")
+                        if listing.priority == 1 or listing.priority == 2:
+                            listing.status = new_listing.status
+                            listing.update()
+                            logger.info(
+                                f"row {line_count}: cập nhật bđs đã có nhưng ko tìm thấy code {code} đã biên tập dữ liệu, từ trạng thái {listing.status} sang {new_listing.status}")
+                        else:
+                            listing.is_published = new_listing.is_published
+                            listing.house_type = new_listing.house_type
+                            listing.road_type = new_listing.road_type
+                            listing.status = new_listing.status
+                            listing.area = new_listing.area
+                            listing.floors = new_listing.floors
+                            listing.width = new_listing.width
+                            listing.price = new_listing.price
+                            listing.list_date = new_listing.list_date
+                            listing.reward_person_mobile = new_listing.reward_person_mobile
+                            listing.extra_data = new_listing.extra_data
+                            listing.priority = new_listing.priority
+                            code_old = listing.code
+                            listing.code = new_listing.code
+                            listing.save()
+                            logger.info(f"row {line_count}: cập nhật listing code {code_old} sang {listing.code}")
+                        # for ite in queryset_list[1:]:
+                        #     ite.delete()
+                        #     logger.info(f"row {line_count}: xóa mã {listing.code} trùng")
                     else:
                         new_listing.save()
                         new_listings.append(new_listing)
@@ -586,17 +597,17 @@ def handle_import(file_path, listing_type):
 
         f = Listing.objects.filter(is_published=True)
         for r in f:
+            if r.price > 30 or r.status == 'sold' or r.status == 'stop_selling':
+                r.is_published = False
             # 008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
-            if r.district == '008' or r.district == '009' or r.district == '020' or r.district == '278' or r.district == '268':
-                r.priority = 8
+            elif r.district == '008' or r.district == '009' or r.district == '020' or r.district == '278' or r.district == '268':
                 r.is_published = True
-                if r.price > 30:
-                    r.is_published = False
+            elif r.priority == 1 or r.priority == 2:
+                r.is_published = True
             else:
-                r.priority = 9
                 r.is_published = False
             r.save()
-            print(f"update published {line_count}: new listing: {new_listing}")
+            print(f"cập nhật hiển thị cho {r.code}")
 
     except Exception as ex:
         print(f"Error occurred at line: {line_count}")

@@ -209,14 +209,14 @@ class Listing(models.Model):
     is_published = models.BooleanField(default=True, verbose_name=_("CHO PHÉP ĐĂNG"))
 
     location = LocationField(based_fields=['address'], zoom=7, null=True,
-                             default=Point(20.963142552138365, 105.82331127236745), verbose_name=_("Toạ độ vị trí BĐS"),
+                             default=Point(20.976849471615992, 105.83546474394188), verbose_name=_("Toạ độ vị trí BĐS"),
                              help_text="Nhập toạ độ hoặc chọn vị trí trên bản đồ")
 
     @property
     def display_price(self):
         price = self.sale_price or self.price
         if price % 1 == 0:
-            return f'{int(price)} tỷ'
+            return f'{price.normalize} tỷ'
         else:
             return f'{price:.2f} tỷ'
 

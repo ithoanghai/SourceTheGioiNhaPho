@@ -8,7 +8,7 @@
                 <table>
                     <div style=" text-transform: uppercase; font-size: 12px; padding: 5px 5px 5px 5px">
                         <a href="{{ app.app_url }}" class="nav-link"
-                           title="{% blocktranslate with name=app.name %}Đối tượng {{ name }} của ứng dụng{% endblocktranslate %}">{{ app.name }}</a>
+                           title="{% blocktranslate with name=app.verbose_name %}Tính năng {{ name }}{% endblocktranslate %}">{{ app.verbose_name }}</a>
                     </div>
                     {% for model in app.models %}
                         <tr style="font-size: 14px" class="model-
@@ -21,7 +21,7 @@
                                 <th scope="row">{{ model.name }}</th>
                             {% endif %}
 
-                            {% if model.add_url %}
+                            {% comment %}{% if model.add_url %}
                                 <td><a class="nav-link" href="{{ model.add_url }}"
                                        class="addlink">{% translate 'Thêm' %}</a></td>
                             {% else %}
@@ -38,7 +38,7 @@
                                 {% endif %}
                             {% elif show_changelinks %}
                                 <td></td>
-                            {% endif %}
+                            {% endif %}{% endcomment %}
                         </tr>
                     {% endfor %}
                 </table>
