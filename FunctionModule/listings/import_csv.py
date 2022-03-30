@@ -491,8 +491,9 @@ def handle_import(file_path, listing_type):
                 #008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
                 if district_code == '008' or district_code == '009' or district_code == '020' or district_code == '278' or district_code == '268':
                     priority = 8
-                    published = True
-                    if price > 30:
+                    if price < 50 or status == Status.SELLING:
+                        published = True
+                    else:
                         published = False
                 else:
                     priority = 9
@@ -518,7 +519,7 @@ def handle_import(file_path, listing_type):
                                                context={"listing": new_listing, "desc": desc})
                 new_listing.description = description
                 new_listing.description = new_listing.description.replace('  ', ' ')
-                new_listing.is_published = published
+                new_listing.is_published = new_listing.is_published
                 if full_addr in searched_locations:
                     if searched_locations[full_addr]:
                         listing_loc = Point(searched_locations[full_addr][0],
@@ -544,6 +545,7 @@ def handle_import(file_path, listing_type):
                         f = queryset_list.first()
                         if f.priority == 1 or f.priority == 2:
                             f.status = new_listing.status
+                            f.is_published = new_listing.is_published
                             f.save()
                             logger.info(f"row {line_count}: chỉ cập nhật {code} đã biên tập dữ liệu, từ trạng thái {f.status} sang {new_listing.status}")
                         else:
@@ -558,7 +560,7 @@ def handle_import(file_path, listing_type):
                             f.reward_person_mobile = new_listing.reward_person_mobile
                             f.extra_data = new_listing.extra_data
                             f.priority = new_listing.priority
-                            f.is_published = published
+                            f.is_published = new_listing.is_published
                             f.save()
                             logger.info(f"row {line_count}: update {code}, district {district_code} publish is {f.is_published} to {published}")
                 else:
@@ -568,6 +570,7 @@ def handle_import(file_path, listing_type):
                         listing = queryset_list.first()
                         if listing.priority == 1 or listing.priority == 2:
                             listing.status = new_listing.status
+                            listing.is_published = new_listing.is_published
                             listing.save()
                             logger.info(
                                 f"row {line_count}: cập nhật bđs đã có nhưng ko tìm thấy code {code} đã biên tập dữ liệu, từ trạng thái {listing.status} sang {new_listing.status}")
@@ -598,19 +601,20 @@ def handle_import(file_path, listing_type):
                         print(f"row {line_count}: new listing: {new_listing}")
                         del new_listing
 
-        f = Listing.objects.filter(is_published=True)
-        for r in f:
-            if r.price > 30 or r.status == 'sold' or r.status == 'stop_selling':
-                r.is_published = False
-            # 008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
-            elif r.district == '008' or r.district == '009' or r.district == '020' or r.district == '278' or r.district == '268':
-                r.is_published = True
-            elif r.priority == 1 or r.priority == 2:
-                r.is_published = True
-            else:
-                r.is_published = False
-            r.save()
-            print(f"cập nhật hiển thị cho {r.code}")
+        # đoạn code phục vụ
+        # f = Listing.objects.filter(is_published=True)
+        # for r in f:
+        #     if r.priority == 1 or r.priority == 2:
+        #         r.is_published = True
+        #     elif r.price > 50 or r.status == 'sold' or r.status == 'stop_selling':
+        #         r.is_published = False
+        #     # 008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
+        #     elif r.district == '008' or r.district == '009' or r.district == '020' or r.district == '278' or r.district == '268':
+        #         r.is_published = True
+        #     else:
+        #         r.is_published = False
+        #     r.save()
+        #     print(f"cập nhật hiển thị cho {r.code}")
 
     except Exception as ex:
         print(f"Error occurred at line: {line_count}")
