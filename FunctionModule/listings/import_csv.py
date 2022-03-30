@@ -539,26 +539,28 @@ def handle_import(file_path, listing_type):
                 #             searched_locations[full_addr] = None
 
                 if code in listing_obj:
-                    f = Listing.objects.filter(code=code)
-                    if f.priority == 1 or f.priority == 2:
-                        f.status = new_listing.status
-                        f.update()
-                        logger.info(f"row {line_count}: chỉ cập nhật {code} đã biên tập dữ liệu, từ trạng thái {f.status} sang {new_listing.status}")
-                    else:
-                        f.house_type = new_listing.house_type
-                        f.road_type = new_listing.road_type
-                        f.status = new_listing.status
-                        f.area = new_listing.area
-                        f.floors = new_listing.floors
-                        f.width = new_listing.width
-                        f.price = new_listing.price
-                        f.list_date = new_listing.list_date
-                        f.reward_person_mobile = new_listing.reward_person_mobile
-                        f.extra_data = new_listing.extra_data
-                        f.priority = new_listing.priority
-                        f.is_published = published
-                        f.update()
-                        logger.info(f"row {line_count}: update {code}, district {district_code} publish is {f.is_published} to {published}")
+                    queryset_list = Listing.objects.filter(code=code)
+                    if queryset_list.exists():
+                        f = queryset_list.first()
+                        if f.priority == 1 or f.priority == 2:
+                            f.status = new_listing.status
+                            f.update()
+                            logger.info(f"row {line_count}: chỉ cập nhật {code} đã biên tập dữ liệu, từ trạng thái {f.status} sang {new_listing.status}")
+                        else:
+                            f.house_type = new_listing.house_type
+                            f.road_type = new_listing.road_type
+                            f.status = new_listing.status
+                            f.area = new_listing.area
+                            f.floors = new_listing.floors
+                            f.width = new_listing.width
+                            f.price = new_listing.price
+                            f.list_date = new_listing.list_date
+                            f.reward_person_mobile = new_listing.reward_person_mobile
+                            f.extra_data = new_listing.extra_data
+                            f.priority = new_listing.priority
+                            f.is_published = published
+                            f.update()
+                            logger.info(f"row {line_count}: update {code}, district {district_code} publish is {f.is_published} to {published}")
                 else:
                     queryset_list = Listing.objects.filter(address=new_listing.address,price=new_listing.price, district=new_listing.district, area=new_listing.area,
                                                            floors=new_listing.floors).order_by('-list_date')
