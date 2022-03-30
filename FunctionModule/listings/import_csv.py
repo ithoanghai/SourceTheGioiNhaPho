@@ -544,7 +544,7 @@ def handle_import(file_path, listing_type):
                         f = queryset_list.first()
                         if f.priority == 1 or f.priority == 2:
                             f.status = new_listing.status
-                            f.update()
+                            f.save()
                             logger.info(f"row {line_count}: chỉ cập nhật {code} đã biên tập dữ liệu, từ trạng thái {f.status} sang {new_listing.status}")
                         else:
                             f.house_type = new_listing.house_type
@@ -559,7 +559,7 @@ def handle_import(file_path, listing_type):
                             f.extra_data = new_listing.extra_data
                             f.priority = new_listing.priority
                             f.is_published = published
-                            f.update()
+                            f.save()
                             logger.info(f"row {line_count}: update {code}, district {district_code} publish is {f.is_published} to {published}")
                 else:
                     queryset_list = Listing.objects.filter(address=new_listing.address,price=new_listing.price, district=new_listing.district, area=new_listing.area,
@@ -568,7 +568,7 @@ def handle_import(file_path, listing_type):
                         listing = queryset_list.first()
                         if listing.priority == 1 or listing.priority == 2:
                             listing.status = new_listing.status
-                            listing.update()
+                            listing.save()
                             logger.info(
                                 f"row {line_count}: cập nhật bđs đã có nhưng ko tìm thấy code {code} đã biên tập dữ liệu, từ trạng thái {listing.status} sang {new_listing.status}")
                         else:
