@@ -1035,7 +1035,7 @@
                                 <ul class="popup-left-info">
                                     <li><i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b></li>
                                     {% if listing.floors %}
-                                        <li><p>Số tầng:</p> <strong>{{ listing.floors }}</strong></li>
+                                        <li><p>Số tầng:</p> <strong>{{ listing.floors.normalize }}</strong></li>
                                     {% endif %}
                                     {% if listing.bedrooms %}
                                         <li><p>Phòng ngủ:</p> <strong>{{ listing.bedrooms }}</strong></li>

@@ -506,11 +506,12 @@ def handle_import(file_path, listing_type):
                                       extra_data=extra_data, state=state_code, district=district_code, is_published=published,
                                       width=width, floors=floor, average_price=price_per_area, length=None, lane_width=None)
                 title = f'Bán {get_short_title_from_house_type(new_listing.house_type)} {new_listing.street} {new_listing.district_name()} '
+
                 if new_listing.area >= 30:
                     title += f'{new_listing.area:.0f}m '
                 if new_listing.floors and new_listing.floors > 1:
-                    title += f'{new_listing.floors.normalize} tầng '
-                title += f'{new_listing.display_price.normalize}'
+                    title += f'{new_listing.floors:.0f} tầng '
+                title += f'{new_listing.display_price}'
                 title = title.upper().replace('  ', ' ')
                 new_listing.title = title
                 description = render_to_string('listings/defaultDescription.html',
