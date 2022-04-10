@@ -37,26 +37,26 @@ class ListingVideoAdmin(admin.TabularInline):
 
 
 class ListingAdmin(admin.ModelAdmin):
-    list_display = ('address', 'street', 'district','area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status', 'is_published')
-    list_display_links = ('code','district',)
+    list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status', 'is_published','district',)
+    list_display_links = ('code','address',)
     list_filter = (
         ('status', ChoiceDropdownFilter),
         ('house_type', ChoiceDropdownFilter),
-        ('floors', ChoiceDropdownFilter),
         ('road_type', ChoiceDropdownFilter),
+        ('floors', ChoiceDropdownFilter),
         ('registration_type', ChoiceDropdownFilter),
         ('realtor', RelatedDropdownFilter),
         ('transaction_type', ChoiceDropdownFilter),
         ('list_date', DateFieldListFilter),
         ('is_published', BooleanFieldListFilter),
     )
-    list_editable = ('address', 'price',)
+    list_editable = ('price',)
     search_fields = ('title', 'code', 'address','area', 'price','house_type', 'road_type', 'urban_area', 'street','ward', 'district','state', 'list_date',)
     list_per_page = 100
     inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
     actions = ['make_published', 'unpublished']
     form = ListingAdminForm
-    ordering = ('price', 'average_price', 'road_type','-area', 'district')
+    ordering = ('-list_date',)
 
     class Media:
         js = ('admin/js/dropzone.js', 'admin/js/listing.js', 'admin/js/filepond-4.28.2.min.js',

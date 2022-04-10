@@ -4,45 +4,38 @@
 
     {% if app_list %}
         {% for app in app_list %}
-            <div class="app-{{ app.app_label }} module{% if app.app_url in request.path %} current-app{% endif %}">
-                <table>
-                    <div style=" text-transform: uppercase; font-size: 12px; padding: 5px 5px 5px 5px">
-                        <a href="{{ app.app_url }}" class="nav-link"
-                           title="{% blocktranslate with name=app.verbose_name %}Tính năng {{ name }}{% endblocktranslate %}">{{ app.verbose_name }}</a>
-                    </div>
-                    {% for model in app.models %}
-                        <tr style="font-size: 14px" class="model-
-                                {{ model.object_name }}{% if model.admin_url in request.path %} current-model{% endif %}">
-                            {% if model.admin_url %}
-                                <th scope="row"><a class="nav-link" href="{{ model.admin_url }}"
-                                        {% if model.admin_url in request.path %}
-                                                   aria-current="page"{% endif %}>{{ model.name }}</a></th>
-                            {% else %}
-                                <th scope="row">{{ model.name }}</th>
-                            {% endif %}
+            {% comment %}            <a href="{{ app.app_url }}" title="{% blocktranslate with name=app.verbose_name %}Tính năng {{ name }}{% endblocktranslate %}">
+                        <i class="ni ni-single-02"></i> <span>{{ app.verbose_name }}</span>
+                    </a>{% endcomment %}
+            {% for model in app.models %}
+                {% if model.admin_url %}
+                    <a href="{{ model.admin_url }}" {% if model.admin_url in request.path %}
+                       aria-current="page"{% endif %} class="dropdown-item model-
+                            {{ model.object_name }}{% if model.admin_url in request.path %} current-model{% endif %}">
+                        <i class="ni ni-app"></i> <span>{{ model.name }}</span>
+                    </a>
+                {% else %}
+                    <span>{{ model.name }}</span>
+                {% endif %}
 
-                            {% comment %}{% if model.add_url %}
-                                <td><a class="nav-link" href="{{ model.add_url }}"
-                                       class="addlink">{% translate 'Thêm' %}</a></td>
-                            {% else %}
-                                <td></td>
-                            {% endif %}
+{% comment %}                {% if model.add_url %}
+                    <td><a class="dropdown-item" href="{{ model.add_url }}"
+                           class="addlink">{% translate 'Thêm' %}</a></td>
+                {% else %}
+                    <td></td>
+                {% endif %}
 
-                            {% if model.admin_url and show_changelinks %}
-                                {% if model.view_only %}
-                                    <td><a class="nav-link" href="{{ model.admin_url }}"
-                                           class="viewlink">{% translate 'Xem' %}</a></td>
-                                {% else %}
-                                    <td><a class="nav-link" href="{{ model.admin_url }}"
-                                           class="changelink">{% translate 'Sửa' %}</a></td>
-                                {% endif %}
-                            {% elif show_changelinks %}
-                                <td></td>
-                            {% endif %}{% endcomment %}
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
+                {% if model.admin_url and show_changelinks %}
+                    {% if model.view_only %}
+                        <a class="dropdown-item" href="{{ model.admin_url }}"
+                           class="viewlink">{% translate 'Xem' %}</a>
+                    {% else %}
+                        <a class="dropdown-item" href="{{ model.admin_url }}"
+                           class="changelink">{% translate 'Sửa' %}</a>
+                    {% endif %}
+                {% elif show_changelinks %}
+                {% endif %}{% endcomment %}
+            {% endfor %}
         {% endfor %}
 
         {% comment %}    CÁC TÍNH NĂNG NÀY SỬA ĐỔI, PHÁT TRIỂN SAU{% endcomment %}
@@ -112,14 +105,14 @@
             {% translate 'Trang trắng' %}
         </a>
     </div>{% endcomment %}
-        <hr/>
+        {% comment %}        <hr/>
         <div style=" padding: 5px 5px 5px 5px">
             <a style="display: flex; position: relative;" style="text-transform: uppercase; font-size: 12px;"
                href="{% url 'logout' %}">
                 <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
                 {% translate 'Đăng xuất' %}
             </a>
-        </div>
+        </div>{% endcomment %}
 
 
     {% else %}

@@ -21,7 +21,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-search"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Tìm kiếm"  style="border-radius: 30px;" type="text">
+                    <input class="form-control" placeholder="Tìm kiếm" style="border-radius: 30px;" type="text">
                 </div>
             </div>
         </form>
@@ -29,7 +29,7 @@
         {% if user.is_authenticated %}
             <div class="navbar-nav align-items-right row" style="width: auto">
                 {% if not is_popup %}
-                    <!-- User -->
+                    <!-- User menu-->
                     {% block usertools %}
                         <div class="nav-item dropdown">
                             <a class="nav-link pr-0" href="{% url "profile" %}" role="button" data-toggle="dropdown"
@@ -37,10 +37,10 @@
                                 <div class="media align-items-center">
                                     <span class="avatar {% comment %}avatar-sm{% endcomment %} rounded-circle">
                                       {% if user.avatar %}
-                                      <img alt="" src="/media/{{ user.avatar }} ">
-                                        {% else %}
-                                      <img alt="" src="{% static 'admin/img/team-4-800x800.jpg' %}">
-                                       {% endif %}
+                                          <img alt="" src="/media/{{ user.avatar }} ">
+                                      {% else %}
+                                          <img alt="" src="{% static 'admin/img/team-4-800x800.jpg' %}">
+                                      {% endif %}
                                     </span>
                                     <div class="media-body ml-2 d-none d-lg-block">
                                       <span class="mb-0 text-sm  font-weight-bold">
@@ -54,10 +54,12 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                                 <div class=" dropdown-header noti-title" style="z-index: 5">
-                                    <h6 class="text-overflow m-0">Chào mừng bạn!</h6>
+                                    <h6 class="text-overflow m-0">CHỨC NĂNG CHÍNH!</h6>
                                 </div>
+                                {% include 'admin/app_list.html' with app_list=available_apps show_changelinks=True %}
+                                <div class="dropdown-divider"></div>
                                 <a href="{% url "profile" %}" class="dropdown-item">
-                                    <i class="ni ni-single-02"></i>
+                                    <i class="ni ni-archive-2"></i>
                                     <span>Quản lý cá nhân</span>
                                 </a>
                                 {% comment %}<a href="{% url "profile" %}" class="dropdown-item">
@@ -71,7 +73,7 @@
                                 {% block userlinks %}
                                     {% if site_url %}
                                         <a href="{{ site_url }}" target="_blank" class="dropdown-item">
-                                            <i class="ni ni-support-16"></i><span>{% translate 'Trang sản phẩm' %}</span>
+                                            <i class="ni ni-shop"></i><span>{% translate 'Trang sản phẩm' %}</span>
                                         </a>
                                     {% endif %}
                                     {% if user.is_active and user.is_staff %}
@@ -83,7 +85,7 @@
                                     {% if user.has_usable_password %}
                                         <a href="{% url 'password_change' %}" target="_blank"
                                            class="dropdown-item">
-                                            <i class="ni ni-support-16"></i><span>{% translate 'Đổi mật khẩu' %}</span>
+                                            <i class="ni ni-settings"></i><span>{% translate 'Đổi mật khẩu' %}</span>
                                         </a>
                                     {% endif %}
                                 {% endblock %}
@@ -101,8 +103,6 @@
 
             </div>
         {% endif %}
-
-        <button class=" toggle-nav-sidebar" id="toggle-nav-sidebar" style="width: 10%" aria-label="{% translate 'Menu admin' %}"></button>
 
     </div>
 </nav>

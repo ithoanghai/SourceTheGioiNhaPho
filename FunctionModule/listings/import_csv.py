@@ -492,19 +492,19 @@ def handle_import(file_path, listing_type):
                 if district_code == '008' or district_code == '009' or district_code == '020' or district_code == '278' or district_code == '268':
                     priority = 8
                     if price < 50 or status == Status.SELLING:
-                        published = True
+                        is_published = True
                     else:
-                        published = False
+                        is_published = False
                 else:
                     priority = 9
-                    published = False
+                    is_published = False
 
                 new_listing = Listing(realtor=realtor, code=code, status=status, street=street,
                                       address=full_addr, area=area, transaction_type=trans_type,
                                       house_type=house_type, road_type=road_type, list_date=created,
                                       direction=direction, price=price, reward_person=realtor, priority=priority,
                                       reward_person_mobile=phone, reward=reward, bonus_rate=bonus_rate,
-                                      extra_data=extra_data, state=state_code, district=district_code, is_published=published,
+                                      extra_data=extra_data, state=state_code, district=district_code, is_published=is_published,
                                       width=width, floors=floor, average_price=price_per_area, length=None, lane_width=None)
                 title = f'Bán {get_short_title_from_house_type(new_listing.house_type)} {new_listing.street} {new_listing.district_name()} '
 

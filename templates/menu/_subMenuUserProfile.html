@@ -3,16 +3,63 @@
 <li class="sub-menu" style="line-height: 1.5em; margin: 5px">
 
     {% if user.is_authenticated %}
-        <span style="font-size: smaller; {% comment %} line-height: 1em;{% endcomment %} color: orange">Chào <a href="{% url "profile" %}"  style="color: greenyellow"> {{ user.name }}</a></span>
+        <span style="font-size: smaller; {% comment %} line-height: 1em;{% endcomment %} color: orange">Chào <a
+                href="{% url "profile" %}" style="color: greenyellow"> {{ user.name }}</a></span>
     {% else %}
         <span><a href="#login" title="Đăng nhập / Đăng ký" class="btn-login"
-           style="color: yellowgreen"> {% translate 'Đăng nhập' %}</a></span>
+                 style="color: yellowgreen"> {% translate 'Đăng nhập' %}</a></span>
     {% endif %}
 
     {% if user.is_authenticated %}
+        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+            <div class=" dropdown-header noti-title" style="z-index: 5">
+                <h6 class="text-overflow m-0">CHỨC NĂNG CHÍNH!</h6>
+            </div>
+            {% include 'admin/app_list.html' with app_list=available_apps show_changelinks=True %}
+            <div class="dropdown-divider"></div>
+            <a href="{% url "profile" %}" class="dropdown-item">
+                <i class="ni ni-archive-2"></i>
+                <span>Quản lý cá nhân</span>
+            </a>
+            {% comment %}<a href="{% url "profile" %}" class="dropdown-item">
+                                <i class="ni ni-settings-gear-65"></i>
+                                <span>Thiết lập</span>
+                            </a>{% endcomment %}
+            {% comment %}<a href="#" target="_blank" class="dropdown-item">
+                                <i class="ni ni-support-16"></i>
+                                <span>Hỗ trợ</span>
+                            </a>{% endcomment %}
+            {% block userlinks %}
+                {% if site_url %}
+                    <a href="{{ site_url }}" target="_blank" class="dropdown-item">
+                        <i class="ni ni-shop"></i><span>{% translate 'Trang sản phẩm' %}</span>
+                    </a>
+                {% endif %}
+                {% if user.is_active and user.is_staff %}
+                    {% url 'django-admindocs-docroot' as docsroot %}
+                    {% if docsroot %}
+                        <a href="{{ docsroot }}">{% translate 'Tài liệu' %}</a> /
+                    {% endif %}
+                {% endif %}
+                {% if user.has_usable_password %}
+                    <a href="{% url 'password_change' %}" target="_blank"
+                       class="dropdown-item">
+                        <i class="ni ni-settings"></i><span>{% translate 'Đổi mật khẩu' %}</span>
+                    </a>
+                {% endif %}
+            {% endblock %}
+            <div class="dropdown-divider"></div>
+            <a href="{% url 'logout' %}" class="dropdown-item">
+                <i class="ni ni-user-run"></i>
+                <span>Đăng xuất</span>
+            </a>
+        </div>
         <ul>
             <li>
-                <a href="{% url "profile" %}"> <i class="ni ni-single-02"></i> {% translate 'Trang cá nhân' %}</a>
+                <a href="{% url "admin" %}"> <i class="fa fa-user-astronaut"></i> {% translate 'Trang quản trị' %}</a>
+            </li>
+            <li>
+                <a href="{% url "profile" %}"> <i class="fa fa-user-edit"></i> {% translate 'Trang cá nhân' %}</a>
             </li>
             {% comment %}<li>
                 <a href="{% url "profile" %}"><i class="ni ni-settings-gear-65"></i> {% translate 'Thiết lập' %} </a>
@@ -27,15 +74,15 @@
             {% endif %}
             <li>
                 {% if user.has_usable_password %}
-                    <a href="{% url 'password_change' %}"> {% translate 'Đổi mật khẩu' %}</a>
+                    <a href="{% url 'password_change' %}"><i class="fa fa-user-secret"></i> {% translate 'Đổi mật khẩu' %}</a>
                 {% endif %}
             </li>
-{% comment %}            <li>
+            {% comment %}            <li>
                 <a href="#" target="_blank"><i class="ni ni-support-16"></i> {% translate 'Hỗ trợ' %}</a>
             </li>{% endcomment %}
             <li class="dropdown-divider divide"></li>
             <li>
-                <a href="{% url 'logout' %}"><i class="ni ni-user-run"></i> {% translate 'Đăng xuất' %}</a>
+                <a href="{% url 'logout' %}"><i class="fa fa-user-lock"></i> {% translate 'Đăng xuất' %}</a>
             </li>
 
         </ul>

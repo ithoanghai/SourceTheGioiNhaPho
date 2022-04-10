@@ -28,6 +28,9 @@
             {% include "admin/includes/_headerbar.html" %}
         </div>
         {% block nav-global %}{% endblock %}
+
+              {% comment %}{% if not is_popup and is_nav_sidebar_enabled %}{% endcomment %}
+
     {% endblock %}
     <!-- END Header -->
 
@@ -42,11 +45,7 @@
 
     <!-- Main -->
     <div class="main shifted" id="main">
-      {% comment %}{% if not is_popup and is_nav_sidebar_enabled %}{% endcomment %}
-        {% block nav-sidebar %}
-            <!-- Side Nav Bar menu-->
-            {% include "admin/includes/_nav_sidebar.html" %}
-        {% endblock %}
+
       {% comment %}{% endif %}{% endcomment %}
       <div class="content">
         {% block messages %}
@@ -74,13 +73,13 @@
     </div>
     <!-- END Main Content -->
 
-    <!-- Header -->
+    <!-- Footer -->
     {% block footer %}
         <div id="footer">
             {% include "admin/includes/_footer.html" %}
         </div>
     {% endblock %}
-    <!-- END Header -->
+    <!-- END Footer -->
 
 </div>
 <!-- END Container -->

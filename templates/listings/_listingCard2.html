@@ -47,10 +47,10 @@
                     <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area.normalize }}{% trans "m2" %}
                 </li>
                 {% if listing.floors %}
-                    <li><i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}
+                    <li><i class="zmdi zmdi-home"></i>{{ listing.floors }} {% trans "tầng" %}
                     </li> {% endif %}
                 {% if listing.width > 3.2 %}
-                    <li><i class="fa fas fa-arrows-alt-h"></i> {{ listing.width.normalize }}{% trans "m" %}</li>
+                    <li><i class="fa fas fa-road"></i>{{ listing.width.normalize }}{% trans "m" %}</li>
                 {% endif %}
                 {% if listing.bedrooms %}
                     <li>

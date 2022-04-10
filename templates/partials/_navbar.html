@@ -1,86 +1,90 @@
 {% load static i18n %}
 
 <div class="banner-top-bg">
-  {% include 'menu/_homeMenu.html' %}
+    {% include 'menu/_homeMenu.html' %}
 
-  <div class="banner-cover">
-    <img srcset="{% static 'img/banner_trang_chupsd.png' %}"
-         src="{% static 'img/banner_trang_chupsd.png' %}" alt="Thế giới Nhà Phố">
-  </div>
-  <div class="banner-content" style="">
-    <div class="banner-content-inner">
-      <h1 class="heading-01">TÌM KIẾM NGÔI NHÀ TỐT NHẤT, NHANH NHẤT</h1>
-      <h5 class="heading-04">Hàng chục nghìn căn nhà với thông tin thật, chính xác 100%, không có tin ảo, giúp bạn nhanh chóng tìm kiếm ngôi nhà ưng ý nhất</h5 class="heading-04">
-      <form id="searchForm" class="search-desktop-component" action="{% url "listing_search" %}">
-        {% csrf_token %}
-        <div class="tab-container">
-          <div class="tab">
-            <input type="radio" name="service-type" value="sell" checked id="buy-house">
-            <label for="buy-house">Mua nhà</label>
-          </div>
-{% comment %}          <div class="tab">
+    <div class="banner-cover">
+        <img srcset="{% static 'img/banner_trang_chupsd.png' %}"
+             src="{% static 'img/banner_trang_chupsd.png' %}" alt="Thế giới Nhà Phố">
+    </div>
+    <div class="banner-content" style="">
+        <div class="banner-content-inner">
+            <h1 class="heading-01">TÌM KIẾM NGÔI NHÀ TỐT NHẤT, NHANH NHẤT</h1>
+
+            <form id="searchForm" class="search-desktop-component" action="{% url "listing_search" %}">
+                {% csrf_token %}
+                <div class="tab-container">
+                    <div class="tab">
+                        <input type="radio" name="service-type" style="color: red" value="sell" checked id="buy-house">
+                        <label for="buy-house">Mua nhà</label>
+                    </div>
+                    {% comment %}          <div class="tab">
             <input type="radio" name="service-type" value="rent" id="rent-house">
             <label for="rent-house">Thuê nhà</label>
           </div>{% endcomment %}
+                </div>
+                <input type="hidden" placeholder="NNhập mã BĐS, địa điểm, khu dân cư, tòa nhà"
+                       id="hidServiceTypeChecked"
+                       name="searchData"/>
+                <div class="search-container">
+                    <i class="zmdi zmdi-search" style="opacity: 0.3"></i>
+                    <input disabled style="cursor: progress"
+                           class="search-input" type="search" autocomplete="off"
+                           spellcheck="false" dir="auto" placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà">
+                    <button type="submit" class="btn-primary btn-ultra btn-search" style="background-color: orange">
+                        <i class="zmdi zmdi-search"></i>
+                        <span>TÌM KIẾM</span>
+                    </button>
+                    <ul class="recent-search hidden">
+                    </ul>
+                </div>
+            </form>
+            <p class="heading-03" style="color: white">TGNP có hơn 30.000 căn nhà, bạn chọn được BĐS ưng ý, liên hệ với chúng tôi sớm</p>
+            <p class="heading-03" style="color: white">Các thông số, giá BĐS 100% chính xác ở thời điểm hiện tại</p>
+            <p class="heading-03" style="color: white">Tư vấn, hỗ trợ hoàn toàn miễn phí</p>
         </div>
-        <input type="hidden" placeholder="NNhập mã BĐS, địa điểm, khu dân cư, tòa nhà" id="hidServiceTypeChecked"
-               name="searchData"/>
-        <div class="search-container">
-          <i class="zmdi zmdi-search" style="opacity: 0.3"></i>
-          <input disabled style="cursor: progress"
-                 class="search-input" type="search" autocomplete="off"
-                 spellcheck="false" dir="auto" placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà">
-          <button type="submit" class="btn-primary btn-ultra btn-search" style="background-color: orange">
-            <i class="zmdi zmdi-search"></i>
-            <span>TÌM KIẾM</span>
-          </button>
-          <ul class="recent-search hidden">
-          </ul>
-        </div>
-      </form>
     </div>
-  </div>
 </div>
 
 <script type="text/x-template" id="searchFormTemplate">
-  <form class="search-desktop-component" action="{% url "listing_search" %}">
-    <div class="tab-container">
-      <div class="tab">
-        <input type="radio" name="trans_type" value="sell" checked id="buy-house">
-        <label for="buy-house">Mua nhà</label>
-      </div>
-      {% comment %}<div class="tab">
+    <form class="search-desktop-component" action="{% url "listing_search" %}">
+        <div class="tab-container">
+            <div class="tab">
+                <input type="radio" name="trans_type" value="sell" checked id="buy-house">
+                <label for="buy-house">Mua nhà</label>
+            </div>
+            {% comment %}<div class="tab">
         <input type="radio" name="service-type" value="rent" id="rent-house">
         <label for="rent-house">Thuê nhà</label>
       </div>{% endcomment %}
-    </div>
-    <div class="search-container" v-click-outside="handleFocus">
-      <i v-show="!isLoading" class="zmdi zmdi-search" style="opacity: 0.3"></i>
-      <i v-show="isLoading" class="zmdi zmdi-refresh zmdi-hc-spin"></i>
-      <input
-        name="keywords"
-        v-model="query" v-on:input="handleQueryChange"
-        v-bind:class="{ inputInProgress: isLoading, }"
-        v-on:focus="handleFocus"
-        class="search-input" type="search" autocomplete="off"
-        spellcheck="false" dir="auto" placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà">
-      <button type="submit" class="btn-primary btn-ultra btn-search" style="background-color: orange">
-        <i class="zmdi zmdi-search"></i>
-        <span>TÌM KIẾM</span>
-      </button>
-      <ul class="recent-search" v-show="suggestions.length && isFocus">
-        <li v-for="suggestion in suggestions" :key="suggestion.type" class="search-result"
-            v-bind:class="{'search-result-type-heading': suggestion.isHeader}">
+        </div>
+        <div class="search-container" v-click-outside="handleFocus">
+            <i v-show="!isLoading" class="zmdi zmdi-search" style="opacity: 0.3"></i>
+            <i v-show="isLoading" class="zmdi zmdi-refresh zmdi-hc-spin"></i>
+            <input
+                    name="keywords"
+                    v-model="query" v-on:input="handleQueryChange"
+                    v-bind:class="{ inputInProgress: isLoading, }"
+                    v-on:focus="handleFocus"
+                    class="search-input" type="search" autocomplete="off"
+                    spellcheck="false" dir="auto" placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà">
+            <button type="submit" class="btn-primary btn-ultra btn-search" style="background-color: orange">
+                <i class="zmdi zmdi-search"></i>
+                <span>TÌM KIẾM</span>
+            </button>
+            <ul class="recent-search" v-show="suggestions.length && isFocus">
+                <li v-for="suggestion in suggestions" :key="suggestion.type" class="search-result"
+                    v-bind:class="{'search-result-type-heading': suggestion.isHeader}">
             <span v-if="suggestion.isHeader">
               <strong>${ suggestion.text }$</strong>
             </span>
-          <span v-else>
+                    <span v-else>
             <a v-bind:href="suggestion.link">
               ${ suggestion.text }$ <i v-if="suggestion.subText">${ suggestion.subText }$</i>
             </a>
           </span>
-        </li>
-      </ul>
-    </div>
-  </form>
+                </li>
+            </ul>
+        </div>
+    </form>
 </script>
