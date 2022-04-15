@@ -435,10 +435,12 @@ def handle_import(file_path, listing_type):
                 # update, delete user, realtor
                 if len(phone) == 9:
                     phone = f'0{phone}'
+
                 if phone not in user_dict:
-                    if not phone:
+                    if not phone or len(phone) != 10:
                         admin_realtor = Realtor.objects.get(pk=1)
                         user_dict[phone] = admin_realtor
+                        print(f"user_dict[phone]: {admin_realtor}")
                     elif len(phone) == 10:
                         query = Q(phone=phone)
                         usr = User.objects.filter(query)
@@ -456,7 +458,7 @@ def handle_import(file_path, listing_type):
                             new_realtor = Realtor.objects.create(user=new_user)
                             user_dict[phone] = new_realtor
                             print(f"new_user: {new_user}")
-                elif user_dict.get(phone) and (len(phone) == 10) is None:
+                elif user_dict.get(phone) and len(phone) != 10:
                     query = Q(phone=phone)
                     usr = User.objects.get(query)
                     email = f'{phone}@gmail.com'
@@ -470,24 +472,25 @@ def handle_import(file_path, listing_type):
                         usr.save()
                         print(f"update user: {usr}")
 
-                if tmp_phone in user_dict and len(tmp_phone) != 10:
+                if user_dict.get(tmp_phone) and len(tmp_phone) != 10:
                     realtor = user_dict[tmp_phone]
                     queryset_list = Listing.objects.filter(realtor=realtor).order_by('-list_date')
+                    usr_list = User.objects.filter(phone__contains=tmp_phone)
+                    for usr in usr_list:
+                        if len(usr.phone) == 10:
+                            phone = usr.phone
                     for listing in queryset_list:
                         listing.realtor = user_dict[phone]
                         listing.save()
-                    query = Q(phone=tmp_phone)
-                    usr = User.objects.filter(query)
                     if realtor is not None:
                         realtor.delete()
-                        user_dict[tmp_phone].clean()
+                        realtor = listing.realtor
                         print(f"Xóa realtor: {realtor}, tmp_phone {tmp_phone}")
-                    if usr is not None:
-                        usr.delete()
+                    for usr in usr_list:
+                        if len(usr.phone) != 10:
+                            usr.delete()
 
-                if user_dict.get(phone) and (len(phone) == 10) is not None:
-                    realtor = user_dict[phone]
-
+                realtor = user_dict[phone]
                 starter = get_house_type_short(house_type)
                 code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
                 # 008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
