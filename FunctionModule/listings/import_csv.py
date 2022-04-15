@@ -472,7 +472,7 @@ def handle_import(file_path, listing_type):
                         usr.save()
                         print(f"update user: {usr}")
 
-                if user_dict.get(tmp_phone) and len(tmp_phone) != 10:
+                if user_dict.get(tmp_phone) and len(tmp_phone) == 10:
                     realtor = user_dict[tmp_phone]
                     queryset_list = Listing.objects.filter(realtor=realtor).order_by('-list_date')
                     usr_list = User.objects.filter(phone__contains=tmp_phone)
