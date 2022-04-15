@@ -244,7 +244,7 @@ function multipleImages($) {
         acceptedFileTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'],
         files: existingImages,
         maxFiles: 20,
-        maxFileSize: '5MB',
+        maxFileSize: '10MB',
         // beforeRemoveFile: async function (item) {
         //     const imgId = item.getMetadata('id');
         //     if (imgId) {
@@ -319,9 +319,9 @@ function importToDB($) {
     var myDropzone = new Dropzone("#fileUpload", {
         url: "import-listing",
         autoProcessQueue: false,
-        maxFilesize: 10,    // MB
+        maxFilesize: 20,    // MB
         createImageThumbnails: false,
-        maxFiles: 1,
+        maxFiles: 10,
         acceptedFiles: 'text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     });
     myDropzone.on('sending', (file, xhr, formData) => {

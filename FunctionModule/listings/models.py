@@ -97,7 +97,7 @@ class Listing(models.Model):
                             unique=True)
     title = models.CharField(max_length=200, verbose_name=_("Tiêu đề đăng (VIẾT HOA)"),
                              help_text=_("Gợi ý: Từ khoá + Vị trí (Đường/Phố/Khu) + Diện tích + Tiện ích + Giá + Sổ"))
-    description = models.TextField(blank=True, verbose_name=_("Mô tả bất động sản"), help_text=_(
+    description = models.TextField(verbose_name=_("Mô tả bất động sản"), help_text=_(
         "Mô tả giới thiệu về BĐS "))
     salient_features = models.TextField(blank=True, null=True, verbose_name=_("Đặc điểm nổi bật"),
                                         help_text=_(
@@ -116,6 +116,41 @@ class Listing(models.Model):
                                                  "Cộng đồng dân cư dân trí cao, văn minh, an ninh, thân thiện hay không"))
     regional_welfare = models.TextField(blank=True, null=True, verbose_name=_("An sinh khu vực"), help_text=_(
         "Gần trường mầm non, tiểu học, THCS,...Bệnh viện, Trung tâm spa, chăm sóc sức khoẻ, sắc đẹp..."))
+
+    furnish_type = models.CharField(max_length=20, choices=FurnishType.choices, blank=True,
+                                    null=True, default=FurnishType.SEMI_FURNISHED,
+                                    verbose_name=_("Có kèm đồ đạc?"))
+    registration_type = models.CharField(max_length=20, choices=RegistrationType.choices, blank=True,
+                                         null=True, default=RegistrationType.RED_PINK_BOOK,
+                                         verbose_name=_("Loại chứng nhận"))
+    bonus_rate = models.DecimalField(max_digits=2, decimal_places=1, verbose_name=_("Tỷ lệ trích thưởng (%)"),
+                                     default="3")
+    reward = models.DecimalField(max_digits=5, decimal_places=0,
+                                 verbose_name=_("Số tiền trích thưởng (triệu)"), default="100", blank=True,
+                                 null=True)
+
+    reward_person = models.CharField(max_length=100, blank=True, verbose_name=_("Tên chủ sở hữu BĐS"),
+                                     help_text="Tên người chủ sở hữu BĐS. Ví dụ Nguyễn Văn A. Nếu BĐS của ĐC thì ghi tên của Chuyên viên ĐC và tên Cty")
+    reward_person_mobile = models.CharField(max_length=50, blank=True, verbose_name=_("Số ĐT chủ sở hữu BĐS hoặc của Chuyên viên ĐC"),
+                                            help_text="Số ĐT chủ sở hữu BĐS, ví dụ 0916286256")
+
+    extra_data = models.TextField(verbose_name=_("Mô tả của đầu chủ"), null=True, blank=True,
+                                  help_text="Ghi các thông tin mô tả đầy đủ của đầu chủ về chủ nhà hoặc các yếu tố khác liên quan đến tương tác với Chuyên viên...")
+
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING,
+                              verbose_name=_("Trạng thái giao dịch"))
+    list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày đăng bán/cho thuê"))
+
+    priority = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)],
+                                   choices=([(i, i) for i in range(1, 10)]), verbose_name=_("Thứ tự ưu tiên đăng"),
+                                   null=True, blank=True, default=1)
+    is_verified = models.BooleanField(default=False, verbose_name=_("ĐÃ XÁC MINH THÔNG TIN"))
+    is_exclusive = models.BooleanField(default=False, verbose_name=_("THẾ GIỚI NHÀ PHỐ ĐỘC QUYỀN"))
+    is_published = models.BooleanField(default=True, verbose_name=_("CHO PHÉP ĐĂNG"))
+
+    location = LocationField(based_fields=['address'], zoom=7, null=True,
+                             default=Point(20.976849471615992, 105.83546474394188), verbose_name=_("Toạ độ vị trí BĐS"),
+                             help_text="Nhập toạ độ hoặc chọn vị trí trên bản đồ")
 
     def __str__(self):
         return f'%s' % (self.code)
@@ -176,41 +211,6 @@ class Listing(models.Model):
             "district": self.district,
 
         }
-
-    furnish_type = models.CharField(max_length=20, choices=FurnishType.choices, blank=True,
-                                    null=True, default=FurnishType.SEMI_FURNISHED,
-                                    verbose_name=_("Có kèm đồ đạc?"))
-    registration_type = models.CharField(max_length=20, choices=RegistrationType.choices, blank=True,
-                                         null=True, default=RegistrationType.RED_PINK_BOOK,
-                                         verbose_name=_("Loại chứng nhận"))
-    bonus_rate = models.DecimalField(max_digits=2, decimal_places=1, verbose_name=_("Tỷ lệ trích thưởng (%)"),
-                                     default="3")
-    reward = models.DecimalField(max_digits=5, decimal_places=0,
-                                 verbose_name=_("Số tiền trích thưởng (triệu)"), default="100", blank=True,
-                                 null=True)
-
-    reward_person = models.CharField(max_length=100, blank=True, verbose_name=_("Tên chủ sở hữu BĐS"),
-                                     help_text="Tên người chủ sở hữu BĐS. Ví dụ Nguyễn Văn A. Nếu BĐS của ĐC thì ghi tên của Chuyên viên ĐC và tên Cty")
-    reward_person_mobile = models.CharField(max_length=50, blank=True, verbose_name=_("Số ĐT chủ sở hữu BĐS hoặc của Chuyên viên ĐC"),
-                                            help_text="Số ĐT chủ sở hữu BĐS, ví dụ 0916286256")
-
-    extra_data = models.TextField(verbose_name=_("Mô tả của đầu chủ"), null=True, blank=True,
-                                  help_text="Ghi các thông tin mô tả đầy đủ của đầu chủ về chủ nhà hoặc các yếu tố khác liên quan đến tương tác với Chuyên viên...")
-
-    status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING,
-                              verbose_name=_("Trạng thái giao dịch"))
-    list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày đăng bán/cho thuê"))
-
-    priority = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)],
-                                   choices=([(i, i) for i in range(1, 10)]), verbose_name=_("Thứ tự ưu tiên đăng"),
-                                   null=True, blank=True, default=1)
-    is_verified = models.BooleanField(default=False, verbose_name=_("ĐÃ XÁC MINH THÔNG TIN"))
-    is_exclusive = models.BooleanField(default=False, verbose_name=_("THẾ GIỚI NHÀ PHỐ ĐỘC QUYỀN"))
-    is_published = models.BooleanField(default=True, verbose_name=_("CHO PHÉP ĐĂNG"))
-
-    location = LocationField(based_fields=['address'], zoom=7, null=True,
-                             default=Point(20.976849471615992, 105.83546474394188), verbose_name=_("Toạ độ vị trí BĐS"),
-                             help_text="Nhập toạ độ hoặc chọn vị trí trên bản đồ")
 
     @property
     def display_price(self):

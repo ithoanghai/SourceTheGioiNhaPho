@@ -51,8 +51,8 @@ class ListingAdmin(admin.ModelAdmin):
         ('is_published', BooleanFieldListFilter),
     )
     list_editable = ('price',)
-    search_fields = ('title', 'code', 'address','area', 'price','house_type', 'road_type', 'urban_area', 'street','ward', 'district','state', 'list_date',)
-    list_per_page = 100
+    search_fields = ('id','title', 'code', 'address','area', 'price','house_type', 'road_type', 'urban_area', 'street','ward', 'district','state', 'list_date',)
+    list_per_page = 200
     inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
     actions = ['make_published', 'unpublished']
     form = ListingAdminForm

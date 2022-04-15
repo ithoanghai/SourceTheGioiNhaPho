@@ -29,3 +29,8 @@ pg_restore -c --dbname=postgresql://postgres:postgres@127.0.0.1/tgnp tgnp-2021-0
 Show Log docker
 - docker logs -f --tail 5 app_web_1
 
+Restart certificate on docker
+docker-compose -f docker-compose.production.yml exec -it certbot /bin/sh
+docker-compose -f docker-compose.production.yml up -d certbot  
+docker-compose -f docker-compose.production.yml exec nginx bash -c "nginx -s reload"
+

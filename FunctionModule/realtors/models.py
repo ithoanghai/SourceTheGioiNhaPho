@@ -17,4 +17,7 @@ class Realtor(models.Model):
     hire_date = models.DateTimeField(default=default_hire_date, blank=True)
 
     def __str__(self):
-        return str(self.user)
+        return f'%s ' % (self.user)
+
+    def phone(self):
+        return f'%s' % (self.user.phone)

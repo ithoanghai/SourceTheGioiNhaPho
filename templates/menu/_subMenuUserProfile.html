@@ -3,7 +3,7 @@
 <li class="sub-menu" style="line-height: 1.5em; margin: 5px">
 
     {% if user.is_authenticated %}
-        <span style="font-size: smaller; {% comment %} line-height: 1em;{% endcomment %} color: orange">Chào <a
+        <span style="font-size: smaller; {% comment %} line-height: 1em;{% endcomment %} color: orange">Chào bạn <a
                 href="{% url "profile" %}" style="color: greenyellow"> {{ user.name }}</a></span>
     {% else %}
         <span><a href="#login" title="Đăng nhập / Đăng ký" class="btn-login"

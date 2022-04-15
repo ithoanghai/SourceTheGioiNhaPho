@@ -432,42 +432,33 @@ def handle_import(file_path, listing_type):
                     logger.info(f"Phone invalid. Continue in line {line_count}")
                     continue
                 tmp_phone = phone
+                # update, delete user, realtor
+                if len(phone) == 9:
+                    phone = f'0{phone}'
                 if phone not in user_dict:
                     if not phone:
                         admin_realtor = Realtor.objects.get(pk=1)
                         user_dict[phone] = admin_realtor
-                    else:
-                        if len(phone) == 9:
-                            query = Q(phone=phone) | Q(phone=f'0{phone}')
-                            usr = User.objects.filter(query)
-                            phone = f'0{phone}'
-                            email = f'{phone}@gmail.com'
-                            extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
-                            bio = f'{name}, {phone}, {don_vi}.'
-                            if usr.exists():
-                                usr.username = phone
-                                usr.phone = phone
-                                usr.last_name = name
-                                usr.update()
-                                #print(f"update user: {usr}")
-                            else:
-                                new_user = User.objects.create_user(username=phone, password=default_password,
-                                                                    phone=phone, email=email, last_name=name, bio=bio)
-                                new_realtor = Realtor.objects.create(user=new_user)
-                                user_dict[phone] = new_realtor
-                                #print(f"new_user: {new_user}")
+                    elif len(phone) == 10:
+                        query = Q(phone=phone)
+                        usr = User.objects.filter(query)
+                        email = f'{phone}@gmail.com'
+                        extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
+                        bio = f'{name}, {phone}, {don_vi}.'
+                        if usr.exists():
+                            usr.username = phone
+                            usr.last_name = name
+                            usr.update()
+                            print(f"update user: {usr}")
                         else:
-                            extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
-                            bio = f'{name}, {phone}, {don_vi}.'
-                            email = f'{phone}@gmail.com'
                             new_user = User.objects.create_user(username=phone, password=default_password,
                                                                 phone=phone, email=email, last_name=name, bio=bio)
                             new_realtor = Realtor.objects.create(user=new_user)
                             user_dict[phone] = new_realtor
-                elif len(phone) == 9 and user_dict.get(f'0{phone}') is None:
-                    query = Q(phone=phone) | Q(phone=f'0{phone}')
+                            print(f"new_user: {new_user}")
+                elif user_dict.get(phone) and (len(phone) == 10) is None:
+                    query = Q(phone=phone)
                     usr = User.objects.get(query)
-                    phone = f'0{phone}'
                     email = f'{phone}@gmail.com'
                     bio = f'{name}, {phone}, {don_vi}.'
                     if usr is not None:
@@ -477,18 +468,29 @@ def handle_import(file_path, listing_type):
                         usr.email = email
                         usr.bio = bio
                         usr.save()
-                        if user_dict.get(tmp_phone) is not None:
-                            user_dict[tmp_phone].user = usr
                         print(f"update user: {usr}")
 
-                if user_dict.get(tmp_phone) is not None:
+                if tmp_phone in user_dict and len(tmp_phone) != 10:
                     realtor = user_dict[tmp_phone]
-                else:
+                    queryset_list = Listing.objects.filter(realtor=realtor).order_by('-list_date')
+                    for listing in queryset_list:
+                        listing.realtor = user_dict[phone]
+                        listing.save()
+                    query = Q(phone=tmp_phone)
+                    usr = User.objects.filter(query)
+                    if realtor is not None:
+                        realtor.delete()
+                        user_dict[tmp_phone].clean()
+                        print(f"Xóa realtor: {realtor}, tmp_phone {tmp_phone}")
+                    if usr is not None:
+                        usr.delete()
+
+                if user_dict.get(phone) and (len(phone) == 10) is not None:
                     realtor = user_dict[phone]
 
                 starter = get_house_type_short(house_type)
                 code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
-                #008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
+                # 008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
                 if district_code == '008' or district_code == '009' or district_code == '020' or district_code == '278' or district_code == '268':
                     priority = 8
                     if price < 50 or status == Status.SELLING:
@@ -520,6 +522,7 @@ def handle_import(file_path, listing_type):
                 new_listing.description = description
                 new_listing.description = new_listing.description.replace('  ', ' ')
                 new_listing.is_published = new_listing.is_published
+                new_listing.realtor = realtor
                 if full_addr in searched_locations:
                     if searched_locations[full_addr]:
                         listing_loc = Point(searched_locations[full_addr][0],
@@ -542,39 +545,43 @@ def handle_import(file_path, listing_type):
                 if code in listing_obj:
                     queryset_list = Listing.objects.filter(code=code)
                     if queryset_list.exists():
-                        f = queryset_list.first()
-                        if f.priority == 1 or f.priority == 2:
-                            f.status = new_listing.status
-                            f.is_published = new_listing.is_published
-                            f.save()
-                            logger.info(f"row {line_count}: chỉ cập nhật {code} đã biên tập dữ liệu, từ trạng thái {f.status} sang {new_listing.status}")
+                        listing = queryset_list.first()
+                        if listing.priority == 1 or listing.priority == 2:
+                            listing.realtor = new_listing.realtor
+                            listing.status = new_listing.status
+                            listing.is_published = new_listing.is_published
+                            listing.save()
+                            logger.info(f"row {line_count}: chỉ cập nhật {code} đã biên tập dữ liệu")
                         else:
-                            f.house_type = new_listing.house_type
-                            f.road_type = new_listing.road_type
-                            f.status = new_listing.status
-                            f.area = new_listing.area
-                            f.floors = new_listing.floors
-                            f.width = new_listing.width
-                            f.price = new_listing.price
-                            f.list_date = new_listing.list_date
-                            f.reward_person_mobile = new_listing.reward_person_mobile
-                            f.extra_data = new_listing.extra_data
-                            f.priority = new_listing.priority
-                            f.is_published = new_listing.is_published
-                            f.save()
-                            logger.info(f"row {line_count}: update {code}, district {district_code} publish is {f.is_published} to {published}")
+                            listing.realtor = new_listing.realtor
+                            listing.house_type = new_listing.house_type
+                            listing.road_type = new_listing.road_type
+                            listing.status = new_listing.status
+                            listing.area = new_listing.area
+                            listing.floors = new_listing.floors
+                            listing.width = new_listing.width
+                            listing.price = new_listing.price
+                            listing.list_date = new_listing.list_date
+                            listing.reward_person_mobile = new_listing.reward_person_mobile
+                            listing.extra_data = new_listing.extra_data
+                            listing.priority = new_listing.priority
+                            listing.is_published = new_listing.is_published
+                            listing.save()
+                            logger.info(f"row {line_count}: update {code}")
                 else:
                     queryset_list = Listing.objects.filter(address=new_listing.address,price=new_listing.price, district=new_listing.district, area=new_listing.area,
                                                            floors=new_listing.floors).order_by('-list_date')
                     if queryset_list.exists():
                         listing = queryset_list.first()
                         if listing.priority == 1 or listing.priority == 2:
+                            listing.realtor = new_listing.realtor
                             listing.status = new_listing.status
                             listing.is_published = new_listing.is_published
                             listing.save()
                             logger.info(
                                 f"row {line_count}: cập nhật bđs đã có nhưng ko tìm thấy code {code} đã biên tập dữ liệu, từ trạng thái {listing.status} sang {new_listing.status}")
                         else:
+                            listing.realtor = new_listing.realtor
                             listing.is_published = new_listing.is_published
                             listing.house_type = new_listing.house_type
                             listing.road_type = new_listing.road_type

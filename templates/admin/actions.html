@@ -13,7 +13,7 @@
         {% if cl.result_count != cl.result_list|length %}
         <span class="all hidden">{{ selection_note_all }}</span>
         <span class="question hidden">
-            <a href="#" title="{% translate "Lựa chọn đối tượng trên tất cả các trang" %}">{% blocktranslate with cl.result_count as total_count %}Select all {{ total_count }} {{ module_name }}{% endblocktranslate %}</a>
+            <a href="#" title="{% translate "Lựa chọn đối tượng trên tất cả các trang" %}">{% blocktranslate with cl.result_count as total_count %} Chọn toàn bộ {{ total_count }} trong {{ module_name }}{% endblocktranslate %}</a>
         </span>
         <span class="clear hidden"><a href="#">{% translate "Huỷ lựa chợn" %}</a></span>
         {% endif %}
