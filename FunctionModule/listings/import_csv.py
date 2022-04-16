@@ -115,8 +115,9 @@ def handle_import(file_path, listing_type):
                 for listing in queryset_list:
                     if len(fone) == 10 or len(fone) == 9:
                         listing.realtor = Realtor.objects.filter(user__phone=fone).first()
-                        listing.save()
-                        print(f"cập nhật listing có realtor lỗi sang realtor đầy đủ: {listing.realtor}, phone {fone}")
+                        if listing.realtor is not None:
+                            listing.save()
+                            print(f"cập nhật listing có realtor lỗi sang realtor đầy đủ: {listing.realtor}, phone {fone}")
                     else:
                         listing.delete()
                         print(f"xóa listing rác do không có realtor phù hợp: {listing}")
