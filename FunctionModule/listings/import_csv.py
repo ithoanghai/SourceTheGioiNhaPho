@@ -116,7 +116,7 @@ def handle_import(file_path, listing_type):
                     if len(fone) == 10 or len(fone) == 9:
                         usr = User.objects.get(phone=fone)
                         print(f"user: {usr}")
-                        rel = Realtor.objects.get(user=usr)
+                        rel = Realtor.objects.filter(user__phone=fone)
                         print(f"realtor: {rel}")
                         listing.realtor = rel
                         listing.save()
