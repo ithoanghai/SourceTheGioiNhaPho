@@ -9,7 +9,7 @@
          data-mix-header-click="group: rent, action: select_all_project">Tất
         cả dự án</a>
     </li>
-    <li>
+{% comment %}    <li>
       <a href="{% url 'listing_search' %}?trans_type=project&district=Hoàng Mai&sort=priority"
          data-mix-header-click="group: rent, action: select_district_binhthanh_project">
         Hoàng Mai
@@ -80,17 +80,20 @@
          data-mix-header-click="group: rent, action: select_district_binhthanh_project">
         Đông Anh
       </a>
-    </li>
+    </li>{% endcomment %}
     <li class="divide"></li>
     <li>
       <a href="{% url 'specialist' %}"
          data-mix-header-click="group: rent, action: select_agent_project">Gặp chuyên viên tư
-        vấn</a>
+        vấn dự án</a>
     </li>
-    {% comment %} <li>
-                                <a href="chu-dau-tu.html"
-                                   data-mix-header-click="group: rent, action: select_investor_project">Danh mục Chủ đầu
-                                    tư</a>
-                            </li>{% endcomment %}
+      <li>
+          {% comment %}<a href="chu-dau-tu.html"
+             data-mix-header-click="group: rent, action: select_investor_project">Danh mục Chủ đầu
+              tư</a>{% endcomment %}
+          <a href="#"
+             data-mix-header-click="group: rent, action: select_investor_project">Danh mục Chủ đầu
+              tư</a>
+      </li>
   </ul>
 </li>

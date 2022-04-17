@@ -1,0 +1,17 @@
+<li class="sub-menu">
+  <a>
+    <span>Tin rao chính chủ</span>
+    <i class="zmdi zmdi-chevron-down"></i>
+  </a>
+  <ul>
+    <li>
+      <a href="{% url 'listing_search' %}?trans_type=sell&sort=priority"
+         data-mix-header-click="group: rent, action: select_all_rent">Tin đăng Bán</a>
+    </li>
+    <li class="divide"></li>
+    <li>
+      <a href="{% url 'listing_search' %}?trans_type=rent&sort=priority"
+         data-mix-header-click="group: buy, action: select_all_buy">Tin đăng Cho thuê</a>
+    </li>
+  </ul>
+</li>

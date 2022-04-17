@@ -2,9 +2,12 @@
   <a>Hỗ trợ<i class="zmdi zmdi-chevron-down"></i></a>
   <ul>
     <li>
-      <a href="{% url 'specialist' %}"
-         data-mix-header-click="group: buy, action: select_agent_buy">Gặp chuyên viên tư
-        vấn</a>
+      <a href="{% url 'services' %}"
+         data-mix-header-click="group: sell_lease, action: select_pr_sell_lease">Tất cả dịch vụ</a>
+    </li>
+    <li>
+      <a href="{% url 'sell_lease_with_us' %}"
+         data-mix-header-click="group: sell_lease, action: select_post_sell_lease">Bán | Cho thuê với TGNP</a>
     </li>
     <li>
       <a href="{% url 'whyChoose' %}"
@@ -26,13 +29,19 @@
                         </li>{% endcomment %}
     <li class="divide"></li>
     <li>
-      <a href="{% url 'recruitment' %}" title="Tuyển dụng">Tuyển dụng</a>
+      <a href="{% url 'specialist' %}"
+         data-mix-header-click="group: buy, action: select_agent_buy">Gặp chuyên viên tư
+        vấn</a>
     </li>
     <li>
       <a href="{% url 'contacts' %}" title="Liên hệ">Liên hệ</a>
     </li>
+    <li class="divide"></li>
     <li>
       <a href="{% url 'about' %}" title="Về TGNP">Giới thiệu Về TGNP</a>
+    </li>
+    <li>
+      <a href="{% url 'recruitment' %}" title="Tuyển dụng">Tuyển dụng</a>
     </li>
   </ul>
 </li>
