@@ -496,7 +496,7 @@ input[type=number], input[type=tel], textarea, select, .vTextField {
     margin: 0;
     color: var(--body-fg);
     background-color: var(--body-bg);
-    width: 85%;
+    width: -webkit-fill-available;
 }
 
 input[type=text]:focus, input[type=password]:focus, input[type=email]:focus,

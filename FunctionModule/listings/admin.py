@@ -37,6 +37,22 @@ class ListingVideoAdmin(admin.TabularInline):
 
 
 class ListingAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('THÔNG TIN CHUYÊN VIÊN', {
+            'classes': ('wide',),
+            'fields': (('realtor', 'user'),)}),
+        ('THÔNG TIN GIAO DỊCH', {'fields': (
+            ('transaction_type','house_type','status'),)}),
+        ('THÔNG TIN BẤT ĐỘNG SẢN', {'fields': (
+            ('title','code'),('description','extra_data'),
+            ('area', 'floors', 'width'), ('price', 'registration_type','road_type'),
+            )}),
+        ('ĐỊA CHỈ & VỊ TRÍ BĐS', {'fields': (
+            ('state', 'district', 'ward'),('address', 'location'), )}),
+        ('TRẠNG THÁI ĐĂNG TIN', {
+            'fields': (('is_verified','is_published','is_exclusive'),'priority',)}),
+    )
+
     list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status', 'is_published','district',)
     list_display_links = ('code','address',)
     list_filter = (

@@ -16,25 +16,25 @@ class AccountAdmin(AuthUserAdmin):
     add_fieldsets = (
         ('THÔNG TIN CƠ BẢN', {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'phone', 'password1', 'password2',),
+            'fields': (('username','first_name', 'last_name'),('password1', 'password2'), ('phone','email','facebook')),
         }), ('THÔNG TIN BỔ SUNG', {'fields': (
-            'first_time', 'first_name', 'last_name',
-            'address', 'dob', 'gender',
-            'avatar', 'facebook',)})
+            'first_time',
+            ('address', 'dob', 'gender'),
+            'avatar',)})
     )
 
     fieldsets = (
         ('THÔNG TIN CƠ BẢN', {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'phone', 'password',)}),
+            'fields': (('username', 'password'), ('phone', 'email'))}),
         ('THÔNG TIN BỔ SUNG', {'fields': (
-            'first_time', 'last_name', 'first_name',
-            'address', 'dob', 'gender',
-            'bio', 'avatar', 'user_image',  'website', 'facebook', 'youtube',)}),
+            'first_time', ('first_name', 'last_name'),
+            ('address', 'dob', 'gender'),
+            ('bio', 'avatar'), ('website', 'facebook', 'youtube',))}),
         ('PHÂN QUYỀN SỬ DỤNG', {
-            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
+            'fields': (('is_active', 'is_staff', 'is_superuser'), ('groups', 'user_permissions'))
         }),
-        ('THỜI GIAN HOẠT ĐỘNG', {'fields': ('last_login', 'date_joined')}),
+        ('THỜI GIAN HOẠT ĐỘNG', {'fields': ('date_joined',)}),
     )
 
     list_display = ('id', 'name', 'phone', 'email', 'date_joined', 'is_staff','user_image')

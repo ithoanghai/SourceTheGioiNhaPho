@@ -14,6 +14,14 @@ class TransactionAdminForm(forms.ModelForm):
             'comment': Textarea(attrs={'class': '???', 'rows': 5}),
         }
 
+class TransactionHistoryAdminForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = '__all__'
+
+        widgets = {
+            'comment': Textarea(attrs={'class': '???', 'rows': 5}),
+        }
 
 class RequestQuoteForm(forms.Form):
     firstname = forms.CharField(max_length=100)

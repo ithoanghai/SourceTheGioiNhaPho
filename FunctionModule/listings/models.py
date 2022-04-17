@@ -9,6 +9,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext as _
 from embed_video.fields import EmbedVideoField
+from geopy import location
 from location_field.models.spatial import LocationField
 from pydantic.errors import Decimal
 from rest_framework import serializers
@@ -93,11 +94,11 @@ class Listing(models.Model):
                                     null=True, blank=True)
     direction = models.CharField(max_length=20, blank=True, null=True, choices=Direction.choices, verbose_name=_("Hướng"))
     code = models.CharField(max_length=80, verbose_name=_("Mã BĐS (VIẾT HOA)"), help_text=_(
-        "Quy tắc: Viết tắt chữ cái đầu Loại BĐS + 2 chữ số Năm + Tháng + Chữ cái đầu tên của Chuyên viên + Số BĐS của ĐC"),
+        "Chữ cái đầu Loại BĐS + 2 số cuối Năm Tháng + tên viết tắt Chuyên viên + Số BĐS của ĐC"),
                             unique=True)
     title = models.CharField(max_length=200, verbose_name=_("Tiêu đề đăng (VIẾT HOA)"),
                              help_text=_("Gợi ý: Từ khoá + Vị trí (Đường/Phố/Khu) + Diện tích + Tiện ích + Giá + Sổ"))
-    description = models.TextField(verbose_name=_("Mô tả bất động sản"), help_text=_(
+    description = models.TextField(verbose_name=_("Mô tả cho khách về bất động sản"), help_text=_(
         "Mô tả giới thiệu về BĐS "))
     salient_features = models.TextField(blank=True, null=True, verbose_name=_("Đặc điểm nổi bật"),
                                         help_text=_(
@@ -120,11 +121,10 @@ class Listing(models.Model):
     furnish_type = models.CharField(max_length=20, choices=FurnishType.choices, blank=True,
                                     null=True, default=FurnishType.SEMI_FURNISHED,
                                     verbose_name=_("Có kèm đồ đạc?"))
-    registration_type = models.CharField(max_length=20, choices=RegistrationType.choices, blank=True,
-                                         null=True, default=RegistrationType.RED_PINK_BOOK,
+    registration_type = models.CharField(max_length=20, choices=RegistrationType.choices, default=RegistrationType.RED_PINK_BOOK,
                                          verbose_name=_("Loại chứng nhận"))
     bonus_rate = models.DecimalField(max_digits=2, decimal_places=1, verbose_name=_("Tỷ lệ trích thưởng (%)"),
-                                     default="3")
+                                     default="3", blank=True, null=True)
     reward = models.DecimalField(max_digits=5, decimal_places=0,
                                  verbose_name=_("Số tiền trích thưởng (triệu)"), default="100", blank=True,
                                  null=True)
@@ -134,7 +134,7 @@ class Listing(models.Model):
     reward_person_mobile = models.CharField(max_length=50, blank=True, verbose_name=_("Số ĐT chủ sở hữu BĐS hoặc của Chuyên viên ĐC"),
                                             help_text="Số ĐT chủ sở hữu BĐS, ví dụ 0916286256")
 
-    extra_data = models.TextField(verbose_name=_("Mô tả của đầu chủ"), null=True, blank=True,
+    extra_data = models.TextField(verbose_name=_("Mô tả bđs của chuyên viên"), null=True, blank=True,
                                   help_text="Ghi các thông tin mô tả đầy đủ của đầu chủ về chủ nhà hoặc các yếu tố khác liên quan đến tương tác với Chuyên viên...")
 
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING,
@@ -149,7 +149,7 @@ class Listing(models.Model):
     is_published = models.BooleanField(default=True, verbose_name=_("CHO PHÉP ĐĂNG"))
 
     location = LocationField(based_fields=['address'], zoom=7, null=True,
-                             default=Point(20.976849471615992, 105.83546474394188), verbose_name=_("Toạ độ vị trí BĐS"),
+                             default=Point(105.83549388560711,20.976795401917798), verbose_name=_("Toạ độ vị trí BĐS"),
                              help_text="Nhập toạ độ hoặc chọn vị trí trên bản đồ")
 
     def __str__(self):
@@ -227,7 +227,7 @@ class ListingImage(models.Model):
         verbose_name_plural = "Ảnh Bất động sản"
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("ẢNH CHỤP BĐS"))
     sort = models.IntegerField(default=0, verbose_name=_("Thứ tự hiện"))
-    description = models.CharField(max_length=255, blank=True, default="", verbose_name=_("Thông tin"))
+    #description = models.CharField(max_length=255, blank=True, default="", verbose_name=_("Thông tin"))
     photo = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Ảnh BĐS"))
 
     def __str__(self):

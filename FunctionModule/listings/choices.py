@@ -82,7 +82,8 @@ class RegistrationType(models.TextChoices):
     VALID_DOCUMENTS = 'valid_documents', _("Giấy tờ hợp lệ")
     CONSTRUCTION_LICENSE = 'construction_license', _("Giấy phép xây dựng")
     BUSINESS_LICENSE = 'business_license', _("Giấy phép kinh doanh")
-    DONT_BOOK = 'dont_book', _("Sắp làm sổ")
+    PREPARE_BOOK = 'prepare_book', _("Chuẩn bị làm sổ")
+    DONT_BOOK = 'dont_book', _("Chưa có sổ")
     OTHER = 'other', _("Khác")
 
 
@@ -106,6 +107,8 @@ class ParkingType(models.TextChoices):
 class Condition(models.TextChoices):
     NEW = 'new', _("Xây mới")
     OLD = 'old', _("Nhà cũ")
+    RAW = 'raw', _("Xây thô")
+    LAND = 'land', _("Đất nền")
     OTHER = 'other', _("Khác")
 
 
