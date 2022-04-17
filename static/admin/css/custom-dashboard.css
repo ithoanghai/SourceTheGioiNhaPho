@@ -174,7 +174,10 @@ body {
     line-height: 1.5;
     color: #525f7f;
     text-align: left;
-    /*background-color: #f8f9fe;*/
+    background-color: lawngreen;
+    background-image: url("../img/earnmoney.png");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
 }
 
 [tabindex="-1"]:focus {
