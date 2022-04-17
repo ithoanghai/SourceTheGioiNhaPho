@@ -9,32 +9,31 @@
 <!-- End head html -->
 
 <body>
-    <img src="">
-    <!-- Brand -->
-    <div class="navbar-brand col-md-1 col-sm-2 col-xs-2" style="width: 20%">
-        <a class="pt-0" href="{% url "admin" %}">
-            <img src="{% static 'img/logo.svg' %}" width="80px" class="navbar-brand-img" alt="...">
-        </a>
-        <div id="branding">
-            {% block branding %}{% endblock %}
-        </div>
-    </div>
+<!-- Messages -->
+{% block messages %}
+    {% if messages %}
+        <ul class="messagelist">{% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+        {% endfor %}</ul>
+    {% endif %}
+{% endblock messages %}
+<!-- End Messages -->
 
-     <!-- Messages -->
-    {% block messages %}
-        {% if messages %}
-            <ul class="messagelist">{% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-            {% endfor %}</ul>
-        {% endif %}
-    {% endblock messages %}
-    <!-- End Messages -->
-
-    <!-- Header -->
-    <div class="header py-4 py-lg-4">
-      <div class="container">
+<!-- Header -->
+<div class="header py-4 py-lg-4">
+    <div class="container">
         <div class="header-body text-center mb-7">
-          <div class="row justify-content-center">
+            <img src="">
+            <!-- Brand -->
+            <div class="navbar-brand col-md-1 col-sm-2 col-xs-2" style="width: 20%">
+                <a class="pt-0" href="{% url "admin" %}">
+                    <img src="{% static 'img/logo.svg' %}" width="80px" class="navbar-brand-img" alt="...">
+                </a>
+                <div id="branding">
+                    {% block branding %}{% endblock %}
+                </div>
+            </div>
+            {% comment %}<div class="row justify-content-center">
             <div class="col-lg-5 col-md-6">
               <h2 class="text-black" >
                   {% trans "Chào mừng Bạn gia nhập THẾ GIỚI NHÀ PHỐ" %}
@@ -43,21 +42,21 @@
                 {% trans "Chúng tôi luôn sẵn sàng đón nhận bạn, chia sẻ cơ hội kiếm thêm thu nhập, hợp tác, cùng phát triển. Còn chờ gì nữa? Hãy gia nhập trở thành thành viên thành công nhất!" %}
               </p>
             </div>
-          </div>
+          </div>{% endcomment %}
         </div>
-      </div>
     </div>
-    <br>
-    {% block content %}{% endblock content %}
+</div>
 
-    {% include "admin/includes/_footer.html" %}
+{% block content %}{% endblock content %}
 
-    <!-- Specific JS goes HERE -->
-    {% block javascripts %}
-       <!--   Core   -->
-      <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    {% endblock javascripts %}
+{% include "admin/includes/_footer.html" %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+    <!--   Core   -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+{% endblock javascripts %}
 
 </body>
 

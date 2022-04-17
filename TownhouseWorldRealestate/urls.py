@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from adminplus.sites import AdminSitePlus
 
+from FunctionModule.admin.sites import site
+
 admin.site = AdminSitePlus()
 admin.autodiscover()
 admin.site.site_header = 'Quản trị hệ thống thế giới nhà phố'
@@ -24,5 +26,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('admin', redirect_view, name='admin'),
     path('admin/', admin.site.urls),
+    #path('admin/', site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

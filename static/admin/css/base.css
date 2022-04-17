@@ -495,8 +495,8 @@ input[type=number], input[type=tel], textarea, select, .vTextField {
     padding: 0;
     margin: 0;
     color: var(--body-fg);
-    /*background-color: var(--body-bg);
-    width: 85%;*/
+    background-color: var(--body-bg);
+    width: 85%;
 }
 
 input[type=text]:focus, input[type=password]:focus, input[type=email]:focus,
@@ -1104,8 +1104,18 @@ table#change-history tbody th {
 }
 
 .change-list .filtered table, .change-list .filtered .paginator,
-.filtered #toolbar, .filtered div.xfull {
-    margin-right: 160px !important;
-    width: auto !important;
+.filtered #toolbar, .filtered div.xfull{
+    /*margin-right: 160px !important;
+    width: auto !important;*/
+    display: inline !important;
+    flex-wrap: nowrap !important;
+    padding: 15px 0;
+}
+
+#changelist-search > div{
+    /*margin-right: 160px !important;
+    width: auto !important;*/
+    display: flex !important;
+    flex-wrap: nowrap !important;
 }
 
