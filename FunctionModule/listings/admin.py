@@ -53,7 +53,7 @@ class ListingAdmin(admin.ModelAdmin):
             'fields': (('is_verified','is_published','is_exclusive'),'priority',)}),
     )
 
-    list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status', 'is_published','district',)
+    list_display = ('realtor', 'address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status', 'is_published','district',)
     list_display_links = ('code','address',)
     list_filter = (
         ('status', ChoiceDropdownFilter),
@@ -110,21 +110,21 @@ class ListingAdmin(admin.ModelAdmin):
             queryset_list = queryset_list.filter(query)
             return queryset_list
 
-    def get_exclude(self, request, obj=None):
-        excluded = super().get_exclude(request, obj)
-        user = request.user
-        to_exclude = []
-        if obj is None:
-            to_exclude += []
-        else:
-            if not user.is_superuser:
-                to_exclude.append('realtor')
-                #if obj.realtor.user != user.id:
-                #    to_exclude.append('address')
-        try:
-            return list(excluded) + to_exclude
-        except TypeError:
-            return to_exclude
+    # def get_exclude(self, request, obj=None):
+    #     excluded = super().get_exclude(request, obj)
+    #     user = request.user
+    #     to_exclude = []
+    #     if obj is None:
+    #         to_exclude += []
+    #     else:
+    #         if not user.is_superuser:
+    #             to_exclude.append('realtor')
+    #             #if obj.realtor.user != user.id:
+    #             #    to_exclude.append('address')
+    #     try:
+    #         return list(excluded) + to_exclude
+    #     except TypeError:
+    #         return to_exclude
 
     def make_published(self, request, queryset):
         updated = queryset.update(is_published=True)
