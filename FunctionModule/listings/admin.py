@@ -10,6 +10,7 @@ from FunctionModule.listings.import_csv import handle_import, logger
 from .filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter, IsWithinRangeFilter
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage
+from .choices import district_default_choices
 from ..realtors.models import Realtor
 from django.db.models import Q
 from fractions import *
@@ -42,19 +43,21 @@ class ListingAdmin(admin.ModelAdmin):
             'classes': ('wide',),
             'fields': (('realtor', 'user'),)}),
         ('THÔNG TIN GIAO DỊCH', {'fields': (
-            ('transaction_type','house_type','status'),)}),
+            ('transaction_type', 'house_type', 'status'),)}),
         ('THÔNG TIN BẤT ĐỘNG SẢN', {'fields': (
-            ('title','code'),('description','extra_data'),
-            ('area', 'floors', 'width'), ('price', 'registration_type','road_type'),
-            )}),
+            ('title', 'code'), ('description', 'extra_data'),
+            ('area', 'floors', 'width'), ('price', 'registration_type', 'road_type'),
+        )}),
         ('ĐỊA CHỈ & VỊ TRÍ BĐS', {'fields': (
-            ('state', 'district', 'ward'),('address', 'location'), )}),
+            ('state', 'district', 'ward'), ('address', 'location'),)}),
         ('TRẠNG THÁI ĐĂNG TIN', {
-            'fields': (('is_verified','is_published','is_exclusive'),'priority',)}),
+            'fields': (('is_verified', 'is_published', 'is_exclusive'), 'priority',)}),
     )
 
-    list_display = ('realtor', 'address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status', 'is_published','district',)
-    list_display_links = ('code','address',)
+    list_display = (
+    'address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status',
+    'is_published', 'district',)
+    list_display_links = ('code', 'address',)
     list_filter = (
         ('status', ChoiceDropdownFilter),
         ('house_type', ChoiceDropdownFilter),
@@ -67,7 +70,9 @@ class ListingAdmin(admin.ModelAdmin):
         ('is_published', BooleanFieldListFilter),
     )
     list_editable = ('price',)
-    search_fields = ('id','title', 'code', 'address','area', 'price','house_type', 'road_type', 'urban_area', 'street','ward', 'district','state', 'list_date',)
+    search_fields = (
+    'id', 'title', 'code', 'address', 'area', 'price', 'house_type', 'road_type', 'urban_area', 'street', 'ward',
+    'district', 'state', 'list_date',)
     list_per_page = 200
     inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
     actions = ['make_published', 'unpublished']
@@ -84,6 +89,7 @@ class ListingAdmin(admin.ModelAdmin):
     def get_form(self, request, obj=None, change=False, **kwargs):
         form = super(ListingAdmin, self).get_form(request, obj, **kwargs)
         form.base_fields['user'].initial = request.user
+        form.base_fields['district'].choices = district_default_choices
         disabled_fields = set()  # type: Set[str]
         disabled_fields |= {
             'user',
@@ -134,13 +140,14 @@ class ListingAdmin(admin.ModelAdmin):
         updated = queryset.update(is_published=False)
         self.message_user(request, f'Đã đổi trạng thái cho {updated} căn')
 
+
 @admin.site.register_view('listings/listing/import-listing')
 def import_csv_view(request: HttpRequest) -> JsonResponse:
     if request.method == 'POST':
         form = ImportListingForm(request.POST, request.FILES)
         if form.is_valid():
             file: UploadedFile = form.cleaned_data.get('file')
-            #with open(file, 'r', encoding="utf-8", errors='ignore') as fp:
+            # with open(file, 'r', encoding="utf-8", errors='ignore') as fp:
             #    default_storage.save(f'photos/{file.name}', fp)
 
             handle_import(f'media/import-listing/{file.name}', listing_type=request.POST.get('listing_type'))
