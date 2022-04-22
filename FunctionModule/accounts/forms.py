@@ -59,3 +59,24 @@ class UserRegisterForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
 
+
+from django import forms
+
+from allauth.account.forms import SignupForm
+
+
+class CustomUserCreationForm(SignupForm):
+
+    email = forms.IntegerField()
+    first_name = forms.CharField(max_length=20)
+    last_name = forms.CharField(max_length=20)
+
+    def save(self, request):
+
+        user = super(CustomUserCreationForm, self).save(request)
+        user.email = self.cleaned_data['email']
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.save()
+        # You must return the original result.
+        return user

@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY','w6rm%l&xim0ivll-li$u6fg8)6k8-$7uar^f#33ht5sutw8e!#')
+SECRET_KEY = os.getenv('SECRET_KEY', 'w6rm%l&xim0ivll-li$u6fg8)6k8-$7uar^f#33ht5sutw8e!#')
 
 DEBUG = strtobool(os.getenv('DEBUG', 'true'))
 DEBUG_PROPAGATE_EXCEPTIONS = True
@@ -65,7 +65,7 @@ THIRD_PARTIES = [
 ]
 
 BUILT_IN_APPS = [
-    #'admin_numeric_filter',
+    # 'admin_numeric_filter',
     # 'django.contrib.admin',
     'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.auth',
@@ -209,7 +209,8 @@ MESSAGE_TAGS = {
 
 GOOGLE_MAP_API_KEY = os.getenv('GOOGLE_MAP_API_KEY', '')
 GEOEARTH_API_KEY = os.getenv('GEOEARTH_API_KEY', '')
-MAPBOX_API_KEY = os.getenv('MAPBOX_API_KEY', 'pk.eyJ1Ijoia2llbm5ndXllbjExMDEiLCJhIjoiY2ttaHRqZTgzMGF0YzJ3bXVvYW9ncnh0ZiJ9.xar2mZcYZJ1qK4i2mRDa0Q')
+MAPBOX_API_KEY = os.getenv('MAPBOX_API_KEY',
+                           'pk.eyJ1Ijoia2llbm5ndXllbjExMDEiLCJhIjoiY2ttaHRqZTgzMGF0YzJ3bXVvYW9ncnh0ZiJ9.xar2mZcYZJ1qK4i2mRDa0Q')
 
 LOCATION_FIELD = {
     'map.provider': 'google',
@@ -265,7 +266,7 @@ LOGGING = {
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 15  # 15M
 FILE_UPLOAD_MAX_MEMORY_SIZE = DATA_UPLOAD_MAX_MEMORY_SIZE
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 4000 # higher than the count of fields
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 4000  # higher than the count of fields
 
 CACHES = {
     'default': {
@@ -275,6 +276,9 @@ CACHES = {
 }
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_FORMS = {
+    'signup': 'accounts.forms.CustomUserCreationForm'
+}
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
         'METHOD': 'oauth2',
