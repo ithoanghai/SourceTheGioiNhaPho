@@ -76,6 +76,7 @@ class AccountAdmin(AuthUserAdmin):
 class GroupAdmin(admin.ModelAdmin):
     form = GroupAdminForm
     filter_horizontal = ['permissions']
+    verbose_name = "VIDEO QUAY BĐS"
 
 
 admin.site.register(Group, GroupAdmin)

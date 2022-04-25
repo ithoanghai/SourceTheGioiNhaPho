@@ -90,3 +90,14 @@ class User(AbstractUser):
 
     user_image.allow_tags = True
 
+
+class CustomGroup(models.Model):
+        """
+        Overwrites original Django Group.
+        """
+
+        def __str__(self):
+            return "{}".format(self.group.name)
+
+        group = models.OneToOneField('auth.Group', on_delete=models.RESTRICT, unique=True)
+        email_alias = models.EmailField(max_length=70, blank=True, default="")

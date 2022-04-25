@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import Group
 from django.forms import Textarea, TextInput, EmailInput
 
-from .models import User, phone_regex
+from .models import User, phone_regex, CustomGroup
 
 
 class MyUserChangeForm(UserChangeForm):
@@ -18,7 +18,7 @@ class MyUserChangeForm(UserChangeForm):
 
 class GroupAdminForm(forms.ModelForm):
     class Meta:
-        model = Group
+        model = CustomGroup
         exclude = []
 
     # Add the users field.

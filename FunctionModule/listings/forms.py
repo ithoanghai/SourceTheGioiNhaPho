@@ -22,7 +22,7 @@ class ListingAdminForm(forms.ModelForm):
             'living_facilities': Textarea(attrs={'class': '???', 'rows': 3}),
             'residential_community': Textarea(attrs={'class': '???', 'rows': 3}),
             'regional_welfare': Textarea(attrs={'class': '???', 'rows': 3}),
-            'extra_data': Textarea(attrs={'class': '???', 'rows': 5}),
+            'extra_data': Textarea(attrs={'class': '???', 'rows': 12}),
         }
 
     def __init__(self, *args, **kwargs):

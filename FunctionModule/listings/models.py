@@ -227,7 +227,7 @@ class ListingImage(models.Model):
         verbose_name_plural = "Ảnh Bất động sản"
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("ẢNH CHỤP BĐS"))
     sort = models.IntegerField(default=0, verbose_name=_("Thứ tự hiện"))
-    #description = models.CharField(max_length=255, blank=True, default="", verbose_name=_("Thông tin"))
+    description = models.CharField(max_length=255, blank=True, default="", verbose_name=_("Thông tin"))
     photo = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Ảnh BĐS"))
 
     def __str__(self):
