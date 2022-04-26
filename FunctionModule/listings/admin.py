@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.contrib.admin import FieldListFilter, BooleanFieldListFilter, DateFieldListFilter
 from django.core.files.storage import default_storage
 from django.core.files.uploadedfile import UploadedFile
+from django import forms
 from django.http import HttpRequest, JsonResponse
 
 from FunctionModule.listings.import_csv import handle_import, logger
@@ -51,7 +52,7 @@ class ListingAdmin(admin.ModelAdmin):
         ('ĐỊA CHỈ & VỊ TRÍ BĐS', {'fields': (
             ('state', 'district', 'ward'), ('street', 'address', 'location'))}),
         ('TRẠNG THÁI ĐĂNG TIN', {
-            'fields': (('is_verified', 'is_published', 'is_exclusive'), ('priority','list_date'),)}),
+            'fields': (('priority','list_date'), ('is_verified', 'is_published', 'is_exclusive'),)}),
     )
 
     list_display = (
@@ -95,10 +96,18 @@ class ListingAdmin(admin.ModelAdmin):
             'user',
             'realtor'
         }
+        excludes = ('reward_person_mobile', 'extra_data',)
         if request.user.is_superuser:
             realtor = Realtor.objects.filter(user=request.user)
             form.base_fields['realtor'].initial = realtor
             form.base_fields['user'].disabled = True
+        elif request.user.is_staff:
+            for exc in excludes:
+                if exc in form.base_fields:
+                    form.base_fields[exc].widget = forms.HiddenInput()
+            for f in disabled_fields:
+                if f in form.base_fields:
+                    form.base_fields[f].disabled = True
         else:
             for f in disabled_fields:
                 if f in form.base_fields:
@@ -106,7 +115,7 @@ class ListingAdmin(admin.ModelAdmin):
         return form
 
     def get_queryset(self, request):
-        if request.user.is_superuser:
+        if request.user.is_superuser or request.user.is_staff:
             queryset = super().get_queryset(request)
             return queryset
         else:

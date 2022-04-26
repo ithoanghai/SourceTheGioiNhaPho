@@ -36,9 +36,12 @@
                 <a>Chào bạn {{ user.name }} <i class="zmdi zmdi-chevron-down"></i></a>
 
                 <ul style="display: none">
-                            <li>
-                            <a href="{% url "admin" %}"> <i class="fa fa-user-astronaut"></i> {% translate 'Trang quản trị' %}</a>
+                    {% if user.is_staff or user.is_superuser %}
+                        <li>
+                            <a href="{% url "admin" %}"> <i
+                                    class="fa fa-user-astronaut"></i> {% translate 'Trang quản trị' %}</a>
                         </li>
+                    {% endif %}
             <li>
                 <a href="{% url "profile" %}"> <i class="fa fa-user-edit"></i> {% translate 'Trang cá nhân' %}</a>
             </li>

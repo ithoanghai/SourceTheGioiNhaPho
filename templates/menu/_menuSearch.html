@@ -1,109 +1,119 @@
 {% load static i18n load_static %}
 
 <header class="main-header" style="position:sticky; top:0">
-  <div class="col-left">
-    <div class="logo-large">
-      <a href="{% url 'index' %}" title="Thế giới Nhà Phố logo">
-        <img src="{% static 'img/logo-ko-chu.svg' %}" alt="Thế giới Nhà Phố">
-      </a>
-    </div>
-    <div class="logo">
-      <a href="{% url 'index' %}" data-mix-header-click="group: logo, action: click_logo" title="Thế giới Nhà Phố logo">
-        <img src="{% static 'img/logo-ko-chu.svg' %}" alt="Thế giới Nhà Phố">
-      </a>
-      <div class="main-nav-menu">
-        <div class="main-nav-menu__head">
-          <a href="{% url 'index' %}" class="logo">
-            <img src="{% static 'img/logo-ko-chu.svg' %}" alt="Thế giới Nhà Phố">
-          </a>
-          <button class="close__main-menu">
-            <i class="zmdi zmdi-close"></i>
-          </button>
+    <div class="col-left">
+        <div class="logo-large">
+            <a href="{% url 'index' %}" title="Thế giới Nhà Phố logo">
+                <img src="{% static 'img/logo-ko-chu.svg' %}" alt="Thế giới Nhà Phố">
+            </a>
         </div>
-        <ul class="login">
-          <li class="sub-menu">
-            {% if user.is_authenticated %}
-                <a>Chào {{ user.name }} <i class="zmdi zmdi-chevron-down"></i></a>
-                <ul style="display: none">
-                        <li>
-                            <a href="{% url "profile" %}"> <i class="ni ni-single-02"></i> {% translate 'Trang cá nhân' %}</a>
-                        </li>
-                        {% comment %}<li>
+        <div class="logo">
+            <a href="{% url 'index' %}" data-mix-header-click="group: logo, action: click_logo"
+               title="Thế giới Nhà Phố logo">
+                <img src="{% static 'img/logo-ko-chu.svg' %}" alt="Thế giới Nhà Phố">
+            </a>
+            <div class="main-nav-menu">
+                <div class="main-nav-menu__head">
+                    <a href="{% url 'index' %}" class="logo">
+                        <img src="{% static 'img/logo-ko-chu.svg' %}" alt="Thế giới Nhà Phố">
+                    </a>
+                    <button class="close__main-menu">
+                        <i class="zmdi zmdi-close"></i>
+                    </button>
+                </div>
+                <ul class="login">
+                    <li class="sub-menu">
+                        {% if user.is_authenticated %}
+                            <a>Chào {{ user.name }} <i class="zmdi zmdi-chevron-down"></i></a>
+                            <ul style="display: none">
+                                {% if user.is_staff or user.is_superuser %}
+                                    <li>
+                                        <a href="{% url "admin" %}"> <i
+                                                class="fa fa-user-astronaut"></i> {% translate 'Trang quản trị' %}</a>
+                                    </li>
+                                {% endif %}
+                                <li>
+                                    <a href="{% url "profile" %}"> <i
+                                            class="ni ni-single-02"></i> {% translate 'Trang cá nhân' %}</a>
+                                </li>
+                                {% comment %}<li>
                             <a href="{% url "profile" %}"><i class="ni ni-settings-gear-65"></i> {% translate 'Thiết lập' %} </a>
                         </li>{% endcomment %}
-                        {% if user.is_active and user.is_staff %}
-                            {% url 'django-admindocs-docroot' as docsroot %}
-                            {% if docsroot %}
+                                {% if user.is_active and user.is_staff %}
+                                    {% url 'django-admindocs-docroot' as docsroot %}
+                                    {% if docsroot %}
+                                        <li>
+                                            <a href="{{ docsroot }}">{% translate 'Tài liệu' %}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endif %}
                                 <li>
-                                    <a href="{{ docsroot }}">{% translate 'Tài liệu' %}</a>
+                                    {% if user.has_usable_password %}
+                                        <a href="{% url 'password_change' %}"> {% translate 'Đổi mật khẩu' %}</a>
+                                    {% endif %}
                                 </li>
-                            {% endif %}
-                        {% endif %}
-                        <li>
-                            {% if user.has_usable_password %}
-                                <a href="{% url 'password_change' %}"> {% translate 'Đổi mật khẩu' %}</a>
-                            {% endif %}
-                        </li>
-            {% comment %}            <li>
+                                {% comment %}            <li>
                             <a href="#" target="_blank"><i class="ni ni-support-16"></i> {% translate 'Hỗ trợ' %}</a>
                         </li>{% endcomment %}
-                        <li class="dropdown-divider divide"></li>
-                        <li>
-                            <a href="{% url 'logout' %}"><i class="ni ni-user-run"></i> {% translate 'Đăng xuất' %}</a>
-                        </li>
+                                <li class="dropdown-divider divide"></li>
+                                <li>
+                                    <a href="{% url 'logout' %}"><i
+                                            class="ni ni-user-run"></i> {% translate 'Đăng xuất' %}</a>
+                                </li>
 
+                            </ul>
+                        {% else %}
+                            <div class="user-login">
+                                <a href="#login" title="Đăng nhập"
+                                   class="btn-primary btn-black-outline btn-medium btn-login"> {% translate 'Đăng nhập' %}</a>
+                                <a href="{% url 'register' %}" title="Đăng ký"
+                                   class="btn-primary btn-red-outline btn-medium btn-signup">Đăng ký</a>
+                            </div>
+                        {% endif %}
+                    </li>
+                </ul>
+                <ul>
+                    <li class="sub-menu">
+                        <a href="{% url 'index' %}">Trang chủ</a>
+                    </li>
+                    {% include "menu/_subMenuBuy.html" %}
+                    {% include "menu/_subMenuSell.html" %}
+                    {% include "menu/_subMenuBuySellNews.html" %}
+                    {% include "menu/_subMenuProject.html" %}
+                    {% include "menu/_subMenuSupport.html" %}
+                </ul>
+            </div>
+            <div class="main-nav-menu__overlay"></div>
+        </div>
+        <div class="top-search" id="topSearchForm">
+            <a href="#"></a>
+            <form action="{% url 'listing_search' %}">
+                <div tabindex="0" class="search-type"><span>Mua nhà</span>
+                    <ul class="hide">
+                        <li>
+                            Thuê nhà
+                        </li>
+                        <li>
+                            Dự án
+                        </li>
                     </ul>
-            {% else %}
-                <div class="user-login">
-                <a href="#login" title="Đăng nhập" class="btn-primary btn-black-outline btn-medium btn-login"> {% translate 'Đăng nhập' %}</a>
-              <a href="{% url 'register' %}" title="Đăng ký"
-                 class="btn-primary btn-red-outline btn-medium btn-signup">Đăng ký</a>
                 </div>
-            {% endif %}
-          </li>
-        </ul>
-        <ul>
-          <li class="sub-menu">
-            <a href="{% url 'index' %}">Trang chủ</a>
-          </li>
-          {% include "menu/_subMenuBuy.html" %}
-          {% include "menu/_subMenuSell.html" %}
-          {% include "menu/_subMenuBuySellNews.html" %}
-          {% include "menu/_subMenuProject.html" %}
-          {% include "menu/_subMenuSupport.html" %}
-        </ul>
-      </div>
-      <div class="main-nav-menu__overlay"></div>
-    </div>
-    <div class="top-search" id="topSearchForm">
-      <a href="#"></a>
-      <form action="{% url 'listing_search' %}">
-        <div tabindex="0" class="search-type"><span>Mua nhà</span>
-          <ul class="hide">
-            <li>
-              Thuê nhà
-            </li>
-            <li>
-              Dự án
-            </li>
-          </ul>
+                <i class="zmdi zmdi-search"></i>
+                <div class="search-type-mobile">
+                    Mua •
+                </div>
+                <input placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
+                       v-model="query" v-on:input="handleQueryChange"
+                       v-bind:class="{ inputInProgress: isLoading, }"
+                       v-on:focus="handleFocus"
+                       spellcheck="false" dir="auto" name="keywords">
+            </form>
         </div>
-        <i class="zmdi zmdi-search"></i>
-        <div class="search-type-mobile">
-          Mua •
-        </div>
-        <input placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
-               v-model="query" v-on:input="handleQueryChange"
-               v-bind:class="{ inputInProgress: isLoading, }"
-               v-on:focus="handleFocus"
-               spellcheck="false" dir="auto" name="keywords">
-      </form>
     </div>
-  </div>
-  <div class="col-right">
-    <div class="top-menu">
-      <ul>
-{% comment %}        <li>
+    <div class="col-right">
+        <div class="top-menu">
+            <ul>
+                {% comment %}        <li>
           <a href="tel:0916 286 256" data-mix-header-click="group: hotline, action: click_hotline">
             <i class="zmdi zmdi-phone"></i>
             <span>0916 286 256</span>
@@ -112,70 +122,72 @@
             <i class="zmdi zmdi-menu"></i>
           </a>
         </li>{% endcomment %}
-        {% include "menu/_subMenuBuy.html" %}
-        {% include "menu/_subMenuSell.html" %}
-        {% include "menu/_subMenuBuySellNews.html" %}
-        {% include "menu/_subMenuProject.html" %}
-        {% include "menu/_subMenuSupport.html" %}
-      </ul>
+                {% include "menu/_subMenuBuy.html" %}
+                {% include "menu/_subMenuSell.html" %}
+                {% include "menu/_subMenuBuySellNews.html" %}
+                {% include "menu/_subMenuProject.html" %}
+                {% include "menu/_subMenuSupport.html" %}
+            </ul>
+        </div>
+        <div class="top-menu login">
+            <ul {% comment %}class="welcome-user"{% endcomment %}>
+                {% include "menu/_subMenuUserProfile.html" %}
+            </ul>
+            <div class="agency-tgnp">
+                <a href="{% url 'sell_lease_with_us' %}" title="Đăng ký gửi Bán & Cho thuê BĐS nhanh chóng">Đăng bán &
+                    cho thuê</a>
+            </div>
+        </div>
     </div>
-    <div class="top-menu login">
-      <ul {% comment %}class="welcome-user"{% endcomment %}>
-        {% include "menu/_subMenuUserProfile.html" %}
-      </ul>
-      <div class="agency-tgnp">
-        <a href="{% url 'sell_lease_with_us' %}" title="Đăng ký gửi Bán & Cho thuê BĐS nhanh chóng">Đăng bán & cho thuê</a>
-      </div>
     </div>
-  </div>
-  </div>
 
-  <div class="search-mobile-component" keyword="" init-title="" placeholder="Nhập địa điểm, khu dân cư, tòa nhà"></div>
+    <div class="search-mobile-component" keyword="" init-title=""
+         placeholder="Nhập địa điểm, khu dân cư, tòa nhà"></div>
 </header>
 
 <script type="text/x-template" id="topSearchTemplate">
-  <div class="top-search">
-    <a href="#"></a>
-    <form action="{% url "listing_search" %}">
-      <div tabindex="0" class="search-type"><span>Mua nhà</span>
-        <ul class="hide">
-          <li>
-            Thuê nhà
-          </li><!---->
-          <li>
-            Dự án
-          </li>
-        </ul>
-      </div>
-      <i v-show="!isLoading" class="zmdi zmdi-search" style="opacity: 0.3"></i>
-      <i v-show="isLoading" class="zmdi zmdi-refresh zmdi-hc-spin"></i>
-      <div class="search-type-mobile">
-        Mua •
-      </div>
-      <div style="width: 100%" v-click-outside="handleFocus">
-        <input placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
-               name="keywords"
-               spellcheck="false" dir="auto"
-               v-model="query"
-               v-on:input="handleQueryChange"
-               v-bind:class="{ inputInProgress: isLoading, }"
-               v-on:focus="handleFocus"
-        />
-        <ul class="search-suggest-list" v-show="suggestions.length && isFocus">
-          <li v-for="suggestion in suggestions" :key="suggestion.type" class="search-result"
-              v-bind:class="{'search-result-type-heading': suggestion.isHeader}">
+    <div class="top-search">
+        <a href="#"></a>
+        <form action="{% url "listing_search" %}">
+            <div tabindex="0" class="search-type"><span>Mua nhà</span>
+                <ul class="hide">
+                    <li>
+                        Thuê nhà
+                    </li><!---->
+                    <li>
+                        Dự án
+                    </li>
+                </ul>
+            </div>
+            <i v-show="!isLoading" class="zmdi zmdi-search" style="opacity: 0.3"></i>
+            <i v-show="isLoading" class="zmdi zmdi-refresh zmdi-hc-spin"></i>
+            <div class="search-type-mobile">
+                Mua •
+            </div>
+            <div style="width: 100%" v-click-outside="handleFocus">
+                <input placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
+                       name="keywords"
+                       spellcheck="false" dir="auto"
+                       v-model="query"
+                       v-on:input="handleQueryChange"
+                       v-bind:class="{ inputInProgress: isLoading, }"
+                       v-on:focus="handleFocus"
+                />
+                <ul class="search-suggest-list" v-show="suggestions.length && isFocus">
+                    <li v-for="suggestion in suggestions" :key="suggestion.type" class="search-result"
+                        v-bind:class="{'search-result-type-heading': suggestion.isHeader}">
             <span v-if="suggestion.isHeader">
               <strong>${ suggestion.text }$</strong>
             </span>
-            <span v-else>
+                        <span v-else>
             <a v-bind:href="suggestion.link">
               ${ suggestion.text }$ <i v-if="suggestion.subText">${ suggestion.subText }$</i>
             </a>
           </span>
-          </li>
-        </ul>
-      </div>
+                    </li>
+                </ul>
+            </div>
 
-    </form>
-  </div>
+        </form>
+    </div>
 </script>

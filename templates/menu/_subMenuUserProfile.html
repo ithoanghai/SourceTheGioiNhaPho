@@ -55,9 +55,12 @@
             </a>
         </div>
         <ul>
-            <li>
-                <a href="{% url "admin" %}"> <i class="fa fa-user-astronaut"></i> {% translate 'Trang quản trị' %}</a>
-            </li>
+            {% if user.is_staff or user.is_superuser %}
+                <li>
+                    <a href="{% url "admin" %}"> <i class="fa fa-user-astronaut"></i> {% translate 'Trang quản trị' %}
+                    </a>
+                </li>
+            {% endif %}
             <li>
                 <a href="{% url "profile" %}"> <i class="fa fa-user-edit"></i> {% translate 'Trang cá nhân' %}</a>
             </li>
@@ -73,9 +76,10 @@
                 {% endif %}
             {% endif %}
             {% if user.has_usable_password %}
-            <li>
-                    <a href="{% url 'password_change' %}"><i class="fa fa-user-secret"></i> {% translate 'Đổi mật khẩu' %}</a>
-            </li>
+                <li>
+                    <a href="{% url 'password_change' %}"><i
+                            class="fa fa-user-secret"></i> {% translate 'Đổi mật khẩu' %}</a>
+                </li>
             {% endif %}
             {% comment %}            <li>
                 <a href="#" target="_blank"><i class="ni ni-support-16"></i> {% translate 'Hỗ trợ' %}</a>

@@ -49,8 +49,7 @@ class User(AbstractUser):
     gender = models.CharField(_('Giới tính'), max_length=20, choices=GENDER_CHOICES, blank=True,
                               default='male')
     bio = models.TextField(_('Lý lịch'), blank=True)
-    avatar = models.ImageField(_("Ảnh đại diện"), upload_to="photos/%Y%m%d/",
-                               default='img/logo tgnp brown.jpg')
+    avatar = models.ImageField(_("Ảnh đại diện"), upload_to="photos/%Y%m%d/", blank=True)
 
     # Social Fields
     website = models.CharField(_('Website'), blank=True, max_length=255)

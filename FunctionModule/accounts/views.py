@@ -83,7 +83,7 @@ def login_handler(request):
         password = request.POST['password']
 
         try:
-            query = Q(username=username) | Q(email=username)
+            query = Q(username=username) | Q(phone=username) | Q(email=username)
             user = User.objects.get(query)
             adapter = get_adapter(request)
 
@@ -94,13 +94,15 @@ def login_handler(request):
 
                 adapter.login(request, user)
                 messages.success(request, 'Bạn đã đăng nhập thành công')
+                return redirect('index')
             else:
                 messages.error(request, 'Người dùng không tồn tại')
+                return render(request, 'accounts/_logged_out.html')
 
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             messages.success(request, 'Xuất hiện lỗi khi đăng nhập, bạn cần liên hệ quản trị viên')
+            return render(request, 'accounts/_logged_out.html')
 
-        return redirect('index')
     else:
         return redirect('/admin/')
 

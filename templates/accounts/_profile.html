@@ -1,13 +1,19 @@
-{% extends 'admin/includes/_layout_base.html' %}
+{% extends 'base.html' %}
 
 {% load static i18n %}
 {% block title %} {% trans 'Thông tin cá nhân' %} {% endblock title %}
 
-
 {% block content %}
+  <div id="wrap">
+    <!-- Search menu -->
+    {% include 'menu/_menuSearch.html' %}
+
     <!-- Header -->
-    <div class="header d-flex align-items-center"
-         style="min-height: 310px; height: 310px; background-image: url({% static 'images/service/image6.jpg' %}); background-size: 320px ; background-position: center top;">
+    {% include 'menu/_secondMenu2.html' %}
+
+    <!-- Main Content  -->
+    <!-- Header -->
+    <div class="header d-flex align-items-center">
         <!-- Mask -->
         <span class="mask bg-gradient-default opacity-2"></span>
         <!-- Header container -->
@@ -35,7 +41,7 @@
                                         {% if user.avatar %}
                                             <img alt="" src="/media/{{ user.avatar }} " class="rounded-circle">
                                         {% else %}
-                                            <img alt="" src="{% static 'admin/img/team-4-800x800.jpg' %}"
+                                            <img alt="" src="{% static '/media/team-4-800x800.jpg' %}"
                                                  class="rounded-circle">
                                         {% endif %}
                                     </div>
@@ -318,6 +324,12 @@
         </div>
 
     </div>
+    <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
 
-{% endblock content %}
+  </div>
+
+  <!-- Footer content below-->
+{% endblock %}
+
+
 
