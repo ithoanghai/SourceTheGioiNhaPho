@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static humanize i18n %}
+
+{% block head %}
+    {{ block.super }}
+
+    <link rel="canonical" href="{% url 'about' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
+
+{% endblock %}
+
+{% block content %}
+
+    <div id="wraps">
+        <!-- Search menu -->
+        {% include 'menu/_menuSearch.html' %}
+
+        <!-- Header -->
+        {% include 'menu/_secondMenu2.html' %}
+
+        <!-- Main Content  -->
+        <section class="background-gray">
+            <div class="width1140 s-padding-tb">
+                <div>
+                    <h4>{% translate "Bạn là thành viên tích cực. Cảm ơn bạn đã hợp tác nhiệt tình với THẾ GIỚI NHÀ PHỐ." %}</h4>
+                    <br/>
+                    <p><a class="btn btn-primary" href="#login">{% translate 'Đăng nhập lại' %}</a></p>
+                    <br/><br/>
+                </div>
+                <div class="s-grid s-column-4 s-gutters">
+                    <div class="s-cell s-btn">
+                        <a href="{% url 'specialist' %}">Gặp chuyên viên tư vấn</a>
+                    </div>
+                    <div class="s-cell s-btn">
+                        <a href="{% url 'sell_lease_with_us' %}">Đăng bán, cho thuê</a>
+                    </div>
+                    <div class="s-cell s-btn">
+                        <a href="https://forms.gle/LM41QBEMSZvwmSta7">Gia nhập TGNP</a>
+                    </div>
+                    <div class="s-cell s-btn">
+                        <a href="{% url 'contacts' %}">Liên hệ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
+
+    </div>
+
+    <!-- Footer content below-->
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

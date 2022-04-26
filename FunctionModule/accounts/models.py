@@ -61,7 +61,7 @@ class User(AbstractUser):
     first_time = models.BooleanField(_('Đăng nhập lần đầu'), default=True)
 
     def __str__(self):
-        return self.name
+        return f'%s - %s' % (self.name, self.phone)
 
     def get_absolute_url(self):
         return reverse('users:detail', kwargs={'username': self.username})

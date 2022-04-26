@@ -37,15 +37,15 @@ class AccountAdmin(AuthUserAdmin):
         ('THỜI GIAN HOẠT ĐỘNG', {'fields': ('date_joined',)}),
     )
 
-    list_display = ('id', 'name', 'phone', 'email', 'date_joined', 'is_staff','user_image')
+    list_display = ('id', 'name', 'phone', 'email', 'date_joined', 'is_staff', 'is_superuser', 'user_image')
     list_display_links = ('name', 'email')
     search_fields = ['username', 'first_name', 'last_name', 'email', 'phone']
-    list_filter = ('date_joined', 'is_superuser', 'is_staff')
+    list_filter = ('date_joined', 'is_superuser', 'is_staff', 'is_active')
     list_per_page = 200
     readonly_fields = [
         'date_joined', 'user_image',
     ]
-    ordering = ('username', 'last_name', 'id', 'date_joined',)
+    ordering = ('last_name', 'date_joined', )
 
     # change_list_template = 'admin/auth/user/change_list.html'
     def get_queryset(self, request):

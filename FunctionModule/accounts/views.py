@@ -63,7 +63,7 @@ def register(request):
             user.save()
             messages.success(request,
                     'Bạn đã đăng ký người dùng thành công và có thể đăng nhập. (chú ý: Để trở thành Chuyên viên và sử dụng các tính năng của Chuyên viên TGNP, bạn cần liên hệ với admin.)')
-            return redirect('login')
+            return redirect('register_success')
 
         return render(request, 'accounts/_register.html', {'reg_user': reg_user, 'form': form})
 
@@ -71,6 +71,10 @@ def register(request):
         form = UserRegisterForm()
 
     return render(request, 'accounts/_register.html')
+
+
+def register_success(request):
+    return render(request, 'accounts/_registerSuccess.html')
 
 
 def login_handler(request):
@@ -110,7 +114,7 @@ def logout_handler(request):
             auth.logout(request)
             messages.success(request, 'Bạn vừa đăng xuất')
 
-        return render(request, 'admin/includes/_logged_out.html')
+        return render(request, 'accounts/_logged_out.html')
 
 
 def profile(request):

@@ -7,6 +7,8 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.forms import Textarea, ModelForm, BaseInlineFormSet
 
 from .models import Listing, ListingImage
+from ..accounts.models import User
+from ..realtors.models import Realtor
 
 
 class ListingAdminForm(forms.ModelForm):
@@ -24,6 +26,15 @@ class ListingAdminForm(forms.ModelForm):
             'regional_welfare': Textarea(attrs={'class': '???', 'rows': 3}),
             'extra_data': Textarea(attrs={'class': '???', 'rows': 12}),
         }
+
+    # users_list = User.objects.values_list('last_name',flat=True).order_by('last_name').distinct()
+    # choice_list = []
+    # for rel in users_list:
+    #     choice_list.append((rel, rel))
+    # USER_CHOICES = choice_list
+    #
+    # # Used 'ChoiceField' as you want dropdown list for carmodels stored in text fields
+    # title = forms.ChoiceField(widget=forms.Select, choices=USER_CHOICES)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
