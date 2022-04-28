@@ -98,7 +98,7 @@ class Listing(models.Model):
                             unique=True)
     title = models.CharField(max_length=200, verbose_name=_("Tiêu đề đăng (VIẾT HOA)"),
                              help_text=_("Gợi ý: Từ khoá + Vị trí (Đường/Phố/Khu) + Diện tích + Tiện ích + Giá + Sổ"))
-    description = models.TextField(verbose_name=_("Mô tả cho khách về bất động sản"), help_text=_(
+    description = models.TextField(verbose_name=_("Mô tả cho khách về bất động sản"), default=" Chú ý: Tất cả thông tin được đăng bởi TGNP đều là thông tin thật, xác thực chính xác.", help_text=_(
         "Mô tả giới thiệu về BĐS "))
     salient_features = models.TextField(blank=True, null=True, verbose_name=_("Đặc điểm nổi bật"),
                                         help_text=_(

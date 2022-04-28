@@ -1,11 +1,8 @@
 from typing import Set
 
-from allauth.account.models import EmailAddress
-from allauth.socialaccount.models import SocialToken
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import Group
-from rest_framework.authtoken.models import TokenProxy
 
 from .forms import MyUserChangeForm, GroupAdminForm
 from .models import User
@@ -81,6 +78,4 @@ class GroupAdmin(admin.ModelAdmin):
 
 admin.site.register(Group, GroupAdmin)
 admin.site.register(User, AccountAdmin)
-admin.site.unregister(TokenProxy)
-admin.site.unregister(SocialToken)
-admin.site.unregister(EmailAddress)
+

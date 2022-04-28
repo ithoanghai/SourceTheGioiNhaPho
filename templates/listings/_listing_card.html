@@ -17,12 +17,12 @@
                 <i class="fas fa-map-marker text-secondary"></i>
                 {% if listing.urban_area %}
                   <h4>
-                    <a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area.normalize }}&sort=priority"
+                    <a href="{% url 'listing_search' %}?keywords={{ listing.urban_area.normalize }}&sort=priority"
                        title="">{{ listing.urban_area.normalize }}</a>
                   </h4>
                   {% endif %}
                 <h4>
-                    <a href="{% url 'listing_search' %}?street={{ listing.street }}&sort=priority"
+                    <a href="{% url 'listing_search' %}?keywords={{ listing.street }}&sort=priority"
                        title="">{{ listing.street }}</a>
                   </h4>
                 {% if listing.ward %}
@@ -34,7 +34,7 @@
                        title="Quận/Huyện"> {% get_district listing.district %}</a></b>
                   </h4>
                     {% if listing.state %}
-                              <h4><b><a href="{% url 'listing_search' %}?ward={{ listing.state }}&sort=priority"
+                              <h4><b><a href="{% url 'listing_search' %}?state={{ listing.state }}&sort=priority"
                                      title="Tỉnh/TP">{{ listing.state }}</a></b></h4>
                  {% endif %}
             </p>

@@ -91,12 +91,15 @@ class User(AbstractUser):
 
 
 class CustomGroup(models.Model):
-        """
-        Overwrites original Django Group.
-        """
+    """
+    Overwrites original Django Group.
+    """
+    class Meta:
+        verbose_name = "Nhóm người dùng"
+        verbose_name_plural = "DS Nhóm người dùng"
 
-        def __str__(self):
-            return "{}".format(self.group.name)
+    def __str__(self):
+        return "{}".format(self.group.name)
 
-        group = models.OneToOneField('auth.Group', on_delete=models.RESTRICT, unique=True)
-        email_alias = models.EmailField(max_length=70, blank=True, default="")
+    group = models.OneToOneField('auth.Group', on_delete=models.RESTRICT, unique=True)
+    email_alias = models.EmailField(max_length=70, blank=True, default="")

@@ -31,36 +31,46 @@ def read_header(header_row, listing_type):
         logger.info(f"listing_type {listing_type} Nha Pho VN")
         header_dict = {
             "tgian": 0,
-            "hien-trang": 1,
-            "dia-chi": 2,
-            "pho": 3,
-            "quan": 4,
-            "thong-so": 5,
-            "gia": 6,
-            "dau-chu": 7,
-            "sdt": 8,
-            "don-vi": 9,
-            "dac-diem": 10,
-            "huong": 11,
-            "dt": 14,
-            "trm2": 15,
+            "tieude": 1,
+            "mota": 2,
+            "mota-dauchu": 3,
+            "anh-nha": 4,
+            "anh-so": 5,
+            "hien-trang": 6,
+            "dia-chi": 7,
+            "pho": 8,
+            "quan": 9,
+            "thong-so": 10,
+            "gia": 11,
+            "dau-chu": 12,
+            "sdt": 13,
+            "don-vi": 14,
+            "dac-diem": 15,
+            "huong": 16,
+            "dt": 19,
+            "trm2": 20,
         }
     elif listing_type == 'K2':
         logger.info(f"listing_type {listing_type} Thien Khoi")
         header_dict = {
-            "dia-chi": 1,
-            "dt": 2,
-            "so-tang": 3,
-            "mat-tien": 4,
-            "gia": 5,
-            "quan": 6,
-            "dau-chu": 8,
-            "sdt": 9,
-            "hoa-hong": 10,
-            "nguon": 11,
-            "hien-trang": 12,
-            "tgian": 13,
-            "thanh-pho": 15,
+            "tieude": 1,
+            "mota": 2,
+            "mota-dauchu": 3,
+            "anh-nha": 4,
+            "anh-so": 5,
+            "dia-chi": 6,
+            "dt": 7,
+            "so-tang": 8,
+            "mat-tien": 9,
+            "gia": 10,
+            "quan": 11,
+            "dau-chu": 13,
+            "sdt": 14,
+            "hoa-hong": 15,
+            "nguon": 16,
+            "hien-trang": 17,
+            "tgian": 18,
+            "thanh-pho": 20,
         }
 
     for index, field in enumerate(header_row):
@@ -100,6 +110,7 @@ def handle_import(file_path, listing_type):
     with open('saved_search.json', 'r', encoding='utf-8') as f:
         searched_locations = json.load(f)
     try:
+    # realtor scan and reorder
         realtors = Realtor.objects.all()
         user_dict = {}
         for obj in realtors:
@@ -139,6 +150,7 @@ def handle_import(file_path, listing_type):
         else:
           last_id = 0
 
+    #realtor scan and reorder
         if listing_count > limit:
             cur = 0
             while cur < listing_count:
@@ -151,33 +163,26 @@ def handle_import(file_path, listing_type):
             for item in listings:  # type: Listing
                 listing_obj[item.code] = item
 
+    # get a list of all districts in Hanoi
+        state_code = "01"
+        hanoi_district_list = district_data[state_code]
+        hanoi_districts = {}
+        for item in hanoi_district_list:  # type: dict
+            hanoi_districts[item['name']] = item['code']
+
+    #Open the listing file and import it into the system
         with open(file_path, 'r', encoding="utf-8", errors='ignore') as fp:
             csv_reader = csv.reader(fp, delimiter=',')
             header_dict = read_header(next(csv_reader), listing_type)
             new_listings = []
             updated_listings = []
-            state_code = "01"
-            hanoi_district_list = district_data[state_code]
-            hanoi_districts = {}
             timezone = pytz.timezone('Asia/Ho_Chi_Minh')
             row_count = 0
 
-            for item in hanoi_district_list:  # type: dict
-                hanoi_districts[item['name']] = item['code']
-
+        #start reading and scanning the file from the bottom up
             for row in reversed(list(csv_reader)):
                 row_count += 1
                 line_count = csv_reader.line_num - row_count + 1
-                district = row[header_dict['quan']]
-                if not district:
-                    logger.info(f"No district. Continue in line {line_count}")
-                    continue
-                if district in hanoi_districts:
-                    district_code = hanoi_districts[district]
-                else:
-                    # logger.info(f"District code not found. Continue in line {line_count}")
-                    continue
-
                 trans_type = TransactionType.SELL
                 house_type = HouseType.TOWN_HOUSE
                 road_type = RoadType.ALLEY_TRIBIKE_BIKE
@@ -188,30 +193,190 @@ def handle_import(file_path, listing_type):
                 name = row[header_dict['dau-chu']]
                 realtor = Realtor.objects.filter(pk=1).first()
 
-                if listing_type == "K1":
-                    try:
-                        created = datetime.datetime.strptime(row[header_dict['tgian']], '%d/%m/%Y %H:%M:%S')
-                        created = created.replace(tzinfo=timezone)
-                    except ValueError:
-                        created = datetime.datetime.now(tz=timezone)
-                    status = row[header_dict['hien-trang']]
-                    if not status:
-                        status = Status.SELLING
-                        published = True
-                    else:
-                        if status == 'Hạ chào':
-                            status = Status.SALE
-                            published = True
-                        elif status == 'Còn bán':
-                            status = Status.SELLING
-                            published = True
-                        elif status == 'Đã bán':
-                            status = Status.SOLD
-                            published = False
-                        elif status == 'Dừng bán':
-                            status = Status.STOP_SELLING
-                            published = False
+                #read district information
+                district = row[header_dict['quan']]
+                if not district:
+                    logger.info(f"No district. Continue in line {line_count}")
+                    continue
+                if district in hanoi_districts:
+                    district_code = hanoi_districts[district]
+                else:
+                    # logger.info(f"District code not found. Continue in line {line_count}")
+                    continue
 
+                #Read information about date and time listing
+                created_date = row[header_dict['tgian']]
+                try:
+                    created = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M')
+                    created = created.replace(tzinfo=timezone)
+                except ValueError:
+                    logger.info(f"error date create {created_date}")
+                    created = datetime.datetime.now(tz=timezone)
+
+                #Read information about real estate
+                area = row[header_dict['dt']]
+                try:
+                    # area = float(row[header_dict['dt']].replace('c4', ''))
+                    area = Decimal(area.replace(',', '.').replace(' ', ''))
+                except ValueError:
+                    logger.info(f"error area {area}")
+                    pass
+
+                # Read real estate price information
+                price = row[header_dict['gia']]
+                try:
+                    price = price.split(' ')[0].strip().replace(',', '.')
+                    if not price or price == '#VALUE!':
+                        continue
+                    if price > 1000000 and area < 10000000:
+                        price = Decimal(price / 1000000)
+                    elif price > 100000 and area < 1000000:
+                        price = Decimal(price / 100000)
+                    elif price > 10000 and area < 100000:
+                        price = Decimal(price / 10000)
+                    elif price > 1000 and area < 10000:
+                        price = Decimal(price / 1000)
+                    if float(area) > 0:
+                        price_per_area = Decimal(float(price) / float(area) * 1000)
+                    else:
+                        price_per_area = None
+                except ValueError:
+                    logger.info(f"error price {price}")
+                    pass
+
+                # Read information about the current state of the sale and set priority, show/hide into web by district
+                status = row[header_dict['hien-trang']]
+                try:
+                    if status == 'Còn bán' or status == 'Chuẩn' or status == 'Chờ duyệt' or status == 'Chim trời cá bể':
+                        status = Status.SELLING
+                    elif status == 'Đã bán' or status == 'Đã cọc':
+                        status = Status.SOLD
+                    elif status == 'Dừng bán' or status == 'Tạm dừng bán':
+                        status = Status.STOP_SELLING
+                    elif status == 'Hạ chào':
+                        status = Status.SALE
+                    else:
+                        status = Status.SOLD
+                    # 008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
+                    if district_code == '008' or district_code == '009' or district_code == '020' or district_code == '278' or district_code == '268':
+                        priority = 8
+                        if status == Status.SELLING:
+                            is_published = True
+                        else:
+                            is_published = False
+                    else:
+                        priority = 9
+                        is_published = False
+
+                except ValueError:
+                    logger.info(f"error status {status}")
+                    pass
+
+                #Read information about specialist phone number
+                try:
+                    phone = row[header_dict['sdt']]
+                    phone = phone.split(' ')[0]
+                    phone = phone.split('-')[0]
+                    if not phone.isalnum():
+                        admin_realtor = Realtor.objects.filter(pk=1)
+                        user_dict[phone] = admin_realtor.first()
+                        logger.info(f"Phone invalid. Continue in line {line_count}")
+                        continue
+                    else:
+                        # update, delete user, realtor
+                        tmp_phone = phone
+                        if len(phone) == 9:
+                            phone = f'0{phone}'
+                        if phone not in user_dict and len(phone) == 10:
+                            if not phone:
+                                admin_realtor = Realtor.objects.get(pk=1)
+                                user_dict[phone] = admin_realtor
+                                print(f"user_dict[phone]: {admin_realtor}")
+                            else:
+                                query = Q(phone=phone) | Q(phone=tmp_phone)
+                                usr = User.objects.filter(query)
+                                email = f'{phone}@gmail.com'
+                                extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
+                                bio = f'{name}, {phone}, {don_vi}.'
+                                if usr.exists():
+                                    usr.username = phone
+                                    usr.last_name = name
+                                    usr.phone = phone
+                                    usr.bio = f'{name}, {phone}, {don_vi}.'
+                                    usr.update()
+                                    user_dict[phone] = Realtor.objects.get(usr)
+                                    print(f"update user: {usr}")
+                                else:
+                                    new_user = User.objects.create_user(username=phone, password=default_password,
+                                                                        phone=phone, email=email, last_name=name, bio=bio)
+                                    new_realtor = Realtor.objects.create(user=new_user)
+                                    user_dict[phone] = new_realtor
+                                    print(f"new_user: {new_user}")
+                            realtor = user_dict[phone]
+                        elif user_dict.get(phone) and len(phone) == 10:
+                            query = Q(phone=phone) | Q(phone=tmp_phone)
+                            usrs = User.objects.filter(query)
+                            email = f'{phone}@gmail.com'
+                            bio = f'{name}, {phone}, {don_vi}.'
+                            for usr in usrs:
+                                if usr.phone != tmp_phone:
+                                    usr.username = phone
+                                    usr.phone = phone
+                                    usr.last_name = name
+                                    usr.email = email
+                                    usr.bio = bio
+                                    usr.save()
+                                    #print(f"cập nhật user: {usr}")
+                            if len(phone) == 10 and len(tmp_phone) == 10:
+                                dt = phone[1:]
+                                if user_dict.get(dt) is not None:
+                                    realtor_tmp = user_dict[dt]
+                                    queryset_list = Listing.objects.filter(realtor=realtor_tmp).order_by('-list_date')
+                                    for listing in queryset_list:
+                                        listing.realtor = user_dict[phone]
+                                        listing.save()
+                                    if realtor_tmp is not None:
+                                        realtor_list = Realtor.objects.filter(user__phone__contains=dt)
+                                        if realtor_list.count() > 1:
+                                            realtor_tmp.delete()
+                                            usr_list = User.objects.filter(phone=dt)
+                                            for usr in usr_list:
+                                                if len(usr.phone) == 9:
+                                                    usr.delete()
+                                            user_dict[dt].clean()
+                                            print(f"Xóa realtor và user rác kho K1: {realtor_tmp}, phone {dt}")
+
+                            realtor = user_dict[phone]
+                        elif len(phone) != 10:
+                            if user_dict.get(phone):
+                                realtor_tmp = user_dict[phone]
+                                queryset_list = Listing.objects.filter(realtor=realtor_tmp).order_by('-list_date')
+                                usr_list = User.objects.filter(phone__contains=phone)
+                                for usr in usr_list:
+                                    if len(usr.phone) == 10:
+                                        for listing in queryset_list:
+                                            listing.realtor = user_dict[usr.phone]
+                                            realtor = user_dict[usr.phone]
+                                            listing.save()
+                                if realtor_tmp is not None:
+                                    realtor_tmp.delete()
+                                    user_dict[phone].clean()
+                                    usr = User.objects.get(phone=phone)
+                                    usr.delete()
+                                    print(f"Xóa realtor và user rác : {realtor_tmp}, phone {phone}")
+                                if realtor is None:
+                                    realtor = Realtor.objects.get(pk=1)
+                            elif phone not in user_dict:
+                                usr_list = User.objects.filter(last_name=name)
+                                for usr in usr_list:
+                                    if len(usr.phone) == 10:
+                                        realtor = usr.realtor
+                except ValueError:
+                    logger.info(f"error phone {phone}")
+
+                if listing_type == "K0":
+                    logger.info(f"import data from TGNP template")
+                elif listing_type == "K1":
                     addr = row[header_dict['dia-chi']].replace('.', '/').replace(',', '/')
                     street = row[header_dict['pho']]
                     deep_address = addr.split('/')
@@ -223,14 +388,6 @@ def handle_import(file_path, listing_type):
                         full_addr = f'{addr}, {street}, {district}'
                     full_addr = f'{full_addr}, Hà Nội'
                     full_addr = full_addr.replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ').replace(' , ', ', ')
-
-                    # billion vnd
-                    price = row[header_dict['gia']]
-                    if not price:
-                        continue
-                    if price == '#VALUE!':
-                        continue
-                    price = Decimal(price.replace(',', '.'))
 
                     encoded_num = row[header_dict['thong-so']].replace('  ', ' ')
                     splitter = encoded_num.split(' ')
@@ -249,17 +406,6 @@ def handle_import(file_path, listing_type):
                         except ValueError:
                             # logger.info(f"Cannot decode floor_area. Continue in line {line_count}")
                             continue
-                    try:
-                        area_p1 = splitter[0].split('/')
-                        area_p2 = area_p1[0].split('(')
-                        area_tmp = area_p2[0].split('\\')
-                        if area_tmp[0] == 'Đất' or area_tmp[0] == 'đất':
-                            area_tmp = splitter[1].replace(',', '.')
-                        # area = float(row[header_dict['dt']].replace('c4', ''))
-                        area = Decimal(row[header_dict['dt']].replace('Đất', area_tmp[0]).replace('đất', area_tmp[0]).replace('#VALUE!', area_tmp[0]).replace(',', '.').replace(' ', ''))
-                    except ValueError:
-                        area = Decimal(area_tmp[0].replace(',', '.').replace(' ', ''))
-                        continue
 
                     floor = 0
                     floor_code = slugify(splitter[1].lower().replace('đ', 'd').replace('ấ', 'a').replace('t', '').replace('4', '').replace(' ', ''))
@@ -329,35 +475,6 @@ def handle_import(file_path, listing_type):
                     don_vi = row[header_dict['don-vi']]
                     extra_add = f' Nguồn {name}, hoa hồng 3%, hỏi lại đầu chủ cho chính xác.'
                 elif listing_type == "K2":
-                    try:
-                        created = datetime.datetime.strptime(row[header_dict['tgian']], '%d/%m/%Y %H:%M')
-                        created = created.replace(tzinfo=timezone)
-                    except ValueError:
-                        created = datetime.datetime.now(tz=timezone)
-                    try:
-                        # area = float(row[header_dict['dt']].replace('c4', ''))
-                        area = Decimal(row[header_dict['dt']].replace(',', '.'))
-                    except ValueError:
-                        pass
-
-                    status = row[header_dict['hien-trang']]
-                    if not status:
-                        status = Status.SELLING
-                        published = True
-                    else:
-                        if status == 'Chuẩn' or status == 'Chờ duyệt' or status == 'Chim trời cá bể':
-                            status = Status.SELLING
-                            published = True
-                        elif status == 'Tạm dừng bán':
-                            status = Status.STOP_SELLING
-                            published = False
-                        elif status == 'Đã bán' or status == 'Đã cọc':
-                            status = Status.SOLD
-                            published = False
-                        else:
-                            status = Status.SALE
-                            published = True
-
                     addr = row[header_dict['dia-chi']].replace('.', '/').replace('Số ', '').replace(' ', ' ')
                     so_nha = addr.split(' ')
                     lensonha = int(len(so_nha[0]))
@@ -367,15 +484,6 @@ def handle_import(file_path, listing_type):
                     addr = addr.replace(' TT ', ' tập thể ').replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ')
                     state_name = row[header_dict['thanh-pho']]
                     full_addr = f'{addr}, {district}, {state_name}'
-
-                    # billion vnd
-                    try:
-                        if (not (row[header_dict['gia']].split(' ')[0] and row[header_dict['gia']].split(' ')[0].strip())):
-                            continue
-                        price = Decimal(row[header_dict['gia']].split(' ')[0])
-                    except ValueError:
-                        logger.info(f"price {price}")
-                        continue
 
                     width = Decimal(row[header_dict['mat-tien']])
                     floor = float(row[header_dict['so-tang']])
@@ -434,136 +542,10 @@ def handle_import(file_path, listing_type):
 
                     don_vi = "Thiên Khôi"
                     extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
-                try:
-                    if price > 1000000 and area < 10000000:
-                        price = Decimal(price / 1000000)
-                    elif price > 100000 and area < 1000000:
-                        price = Decimal(price / 100000)
-                    elif price > 10000 and area < 100000:
-                        price = Decimal(price / 10000)
-                    elif price > 1000 and area < 10000:
-                        price = Decimal(price / 1000)
-                    if float(area) > 0:
-                        price_per_area = Decimal(float(price) / float(area) * 1000)
-                    else:
-                        price_per_area = None
-                except ValueError:
-                    pass
-
-                phone = row[header_dict['sdt']]
-                phone = phone.split(' ')[0]
-                phone = phone.split('-')[0]
-                if not phone.isalnum():
-                    admin_realtor = Realtor.objects.filter(pk=1)
-                    user_dict[phone] = admin_realtor.first()
-                    logger.info(f"Phone invalid. Continue in line {line_count}")
-                    continue
-                else:
-                    # update, delete user, realtor
-                    tmp_phone = phone
-                    if len(phone) == 9:
-                        phone = f'0{phone}'
-                    if phone not in user_dict and len(phone) == 10:
-                        if not phone:
-                            admin_realtor = Realtor.objects.get(pk=1)
-                            user_dict[phone] = admin_realtor
-                            print(f"user_dict[phone]: {admin_realtor}")
-                        else:
-                            query = Q(phone=phone) | Q(phone=tmp_phone)
-                            usr = User.objects.filter(query)
-                            email = f'{phone}@gmail.com'
-                            extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
-                            bio = f'{name}, {phone}, {don_vi}.'
-                            if usr.exists():
-                                usr.username = phone
-                                usr.last_name = name
-                                usr.phone = phone
-                                usr.bio = f'{name}, {phone}, {don_vi}.'
-                                usr.update()
-                                user_dict[phone] = Realtor.objects.get(usr)
-                                print(f"update user: {usr}")
-                            else:
-                                new_user = User.objects.create_user(username=phone, password=default_password,
-                                                                    phone=phone, email=email, last_name=name, bio=bio)
-                                new_realtor = Realtor.objects.create(user=new_user)
-                                user_dict[phone] = new_realtor
-                                print(f"new_user: {new_user}")
-                        realtor = user_dict[phone]
-                    elif user_dict.get(phone) and len(phone) == 10:
-                        query = Q(phone=phone) | Q(phone=tmp_phone)
-                        usrs = User.objects.filter(query)
-                        email = f'{phone}@gmail.com'
-                        bio = f'{name}, {phone}, {don_vi}.'
-                        for usr in usrs:
-                            if usr.phone != tmp_phone:
-                                usr.username = phone
-                                usr.phone = phone
-                                usr.last_name = name
-                                usr.email = email
-                                usr.bio = bio
-                                usr.save()
-                                #print(f"cập nhật user: {usr}")
-                        if len(phone) == 10 and len(tmp_phone) == 10:
-                            dt = phone[1:]
-                            if user_dict.get(dt) is not None:
-                                realtor_tmp = user_dict[dt]
-                                queryset_list = Listing.objects.filter(realtor=realtor_tmp).order_by('-list_date')
-                                for listing in queryset_list:
-                                    listing.realtor = user_dict[phone]
-                                    listing.save()
-                                if realtor_tmp is not None:
-                                    realtor_list = Realtor.objects.filter(user__phone__contains=dt)
-                                    if realtor_list.count() > 1:
-                                        realtor_tmp.delete()
-                                        usr_list = User.objects.filter(phone=dt)
-                                        for usr in usr_list:
-                                            if len(usr.phone) == 9:
-                                                usr.delete()
-                                        user_dict[dt].clean()
-                                        print(f"Xóa realtor và user rác kho K1: {realtor_tmp}, phone {dt}")
-
-                        realtor = user_dict[phone]
-                    elif len(phone) != 10:
-                        if user_dict.get(phone):
-                            realtor_tmp = user_dict[phone]
-                            queryset_list = Listing.objects.filter(realtor=realtor_tmp).order_by('-list_date')
-                            usr_list = User.objects.filter(phone__contains=phone)
-                            for usr in usr_list:
-                                if len(usr.phone) == 10:
-                                    for listing in queryset_list:
-                                        listing.realtor = user_dict[usr.phone]
-                                        realtor = user_dict[usr.phone]
-                                        listing.save()
-                            if realtor_tmp is not None:
-                                realtor_tmp.delete()
-                                user_dict[phone].clean()
-                                usr = User.objects.get(phone=phone)
-                                usr.delete()
-                                print(f"Xóa realtor và user rác : {realtor_tmp}, phone {phone}")
-                            if realtor is None:
-                                realtor = Realtor.objects.get(pk=1)
-                        elif phone not in user_dict:
-                            usr_list = User.objects.filter(last_name=name)
-                            for usr in usr_list:
-                                if len(usr.phone) == 10:
-                                    realtor = usr.realtor
 
                 extra_data = f'Liên hệ với {name}, {realtor.user.phone}, {don_vi} để giao dịch. {extra_add}'
                 starter = get_house_type_short(house_type)
                 code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
-                # 008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
-
-                if district_code == '008' or district_code == '009' or district_code == '020' or district_code == '278' or district_code == '268':
-                    priority = 8
-                    if status == Status.SELLING:
-                        is_published = True
-                    elif price < 50:
-                        is_published = True
-                    else:
-                        is_published = False
-                else:
-                    priority = 9
-                    is_published = False
 
                 new_listing = Listing(realtor=realtor, code=code, status=status, street=street,
                                       address=full_addr, area=area, transaction_type=trans_type,

@@ -96,7 +96,7 @@ class ListingAdmin(admin.ModelAdmin):
             'user',
             'realtor'
         }
-        excludes = ('reward_person_mobile', 'extra_data',)
+        excludes = ('reward_person_mobile', 'extra_data', 'user', 'realtor')
         if request.user.is_superuser:
             realtor = Realtor.objects.filter(user=request.user)
             form.base_fields['realtor'].initial = realtor

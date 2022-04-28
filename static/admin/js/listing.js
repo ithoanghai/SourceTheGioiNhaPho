@@ -363,6 +363,7 @@ function importListing($) {
         '      <p style="margin-top: 1em" class="modal-alert"></p>\n' +
         '      </div>\n' +
         '      <div class="modal-footer">\n' +
+        '        <input type="radio" id="k0" name="listing_input" value="K0">TGNP</input>\n' +
         '        <input type="radio" id="k1" name="listing_input" value="K1">K1</input>\n' +
         '        <input type="radio" id="k2" name="listing_input" value="K2">K2</input>\n' +
         '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>\n' +

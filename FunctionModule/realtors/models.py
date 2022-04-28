@@ -14,6 +14,7 @@ class Realtor(models.Model):
         verbose_name_plural = "DS Chuyên viên"
 
     user = models.OneToOneField(User, on_delete=models.RESTRICT)
+    #work_area = models.CharField(max_length=100, verbose_name=_("Địa bàn khu vực Quận/Huyện hoạt động"))
     hire_date = models.DateTimeField(default=default_hire_date, blank=True)
 
     def __str__(self):
