@@ -61,7 +61,7 @@ class SocialApp(models.Model):
     # a ManyToManyField. Note that Facebook requires an app per domain
     # (unless the domains share a common base name).
     # blank=True allows for disabling apps without removing them
-    sites = models.ManyToManyField(Site, blank=True, verbose_name=_("Website dùng đăng nhập"))
+    sites = models.ManyToManyField(Site, related_name='django_site', blank=True, verbose_name=_("Website dùng đăng nhập"))
 
     # We want to move away from storing secrets in the database. So, we're
     # putting a halt towards adding more fields for additional secrets, such as
@@ -79,7 +79,7 @@ class SocialApp(models.Model):
 
 
 class SocialAccount(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_("Tài khoản đăng nhập"))
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='accounts_user', on_delete=models.CASCADE, verbose_name=_("Tài khoản đăng nhập"))
     provider = models.CharField(choices=registry.as_choices(), max_length=30, verbose_name=_("Nhà cung cấp dịch vụ"))
     # Just in case you're wondering if an OpenID identity URL is going
     # to fit in a 'uid':
