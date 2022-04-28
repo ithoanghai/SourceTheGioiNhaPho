@@ -10,14 +10,14 @@ class TransactionAdmin(admin.ModelAdmin):
       'classes': ('wide',),
       'fields': ('realtor',)}),
     ('THÔNG TIN GIAO DỊCH', {'fields': (
-      ('trantype', 'status'),'date')}),
+      ('trantype', 'status','date'),)}),
     ('THÔNG TIN BẤT ĐỘNG SẢN', {'fields': (
       ('listing', 'house_type'),)}),
     ('THÔNG TIN KHÁCH HÀNG', {'fields': (
-      ('customer', 'location', 'request_price'), ('message', 'comment'),)}),
+      ('customer', 'caring_area', 'request_price'), ('message', 'comment'),)}),
   )
 
-  list_display = ('id', 'trantype', 'message', 'location', 'request_price', 'house_type', 'listing', 'customer', 'date', 'status')
+  list_display = ('id', 'trantype', 'message', 'caring_area', 'request_price', 'house_type', 'listing', 'customer', 'date', 'status')
   list_display_links = ('id', 'trantype', 'message',)
   search_fields = ('listing', 'message', 'customer',)
   list_per_page = 100
