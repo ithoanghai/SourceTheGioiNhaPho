@@ -71,6 +71,7 @@ def read_header(header_row, listing_type):
             "hien-trang": 17,
             "tgian": 18,
             "thanh-pho": 20,
+            "don-vi": 21,
         }
 
     for index, field in enumerate(header_row):
@@ -225,7 +226,7 @@ def handle_import(file_path, listing_type):
                 # Read real estate price information
                 price = row[header_dict['gia']]
                 try:
-                    price = price.split(' ')[0].strip().replace(',', '.')
+                    price = Decimal(price.split(' ')[0].strip().replace(',', '.'))
                     if not price or price == '#VALUE!':
                         continue
                     if price > 1000000 and area < 10000000:
@@ -271,6 +272,14 @@ def handle_import(file_path, listing_type):
                 except ValueError:
                     logger.info(f"error status {status}")
                     pass
+
+                #read đơn vị
+                try:
+                    don_vi = row[header_dict['don-vi']]
+                    if don_vi is None:
+                        don_vi = "Thiên Khôi"
+                except ValueError:
+                    don_vi = "Thiên Khôi"
 
                 #Read information about specialist phone number
                 try:
@@ -471,8 +480,6 @@ def handle_import(file_path, listing_type):
                         road_type = RoadType.ALLEY_CAR_TRIBIKE
 
                     direction = get_direction(row[header_dict['huong']])
-
-                    don_vi = row[header_dict['don-vi']]
                     extra_add = f' Nguồn {name}, hoa hồng 3%, hỏi lại đầu chủ cho chính xác.'
                 elif listing_type == "K2":
                     addr = row[header_dict['dia-chi']].replace('.', '/').replace('Số ', '').replace(' ', ' ')
@@ -540,8 +547,27 @@ def handle_import(file_path, listing_type):
                     else:
                         bonus_rate = 3
 
-                    don_vi = "Thiên Khôi"
                     extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
+
+                # update, delete user, realtor
+                if full_addr in searched_locations:
+                    if searched_locations[full_addr]:
+                        listing_loc = Point(searched_locations[full_addr][0],
+                                            searched_locations[full_addr][1])
+                else:
+                    listing_loc = Point(105.83549388560711,20.976795401917798)
+                #     if api_key:
+                #         geolocator = GeocodeEarth(api_key=api_key)
+                #         #geolocator = Nominatim()
+                #         hanoi_bounds = ((21.097341, 105.929947), (20.920105, 105.702667))
+                #         location = geolocator.geocode(full_addr, boundary_rect=hanoi_bounds)
+                #         if location and location.point:
+                #             listing_loc = Point(location.point.longitude, location.point.latitude)
+                #             new_listing.location = listing_loc
+                #             searched_locations[full_addr] = [location.point.longitude,
+                #                                              location.point.latitude]
+                #         else:
+                #             searched_locations[full_addr] = None
 
                 extra_data = f'Liên hệ với {name}, {realtor.user.phone}, {don_vi} để giao dịch. {extra_add}'
                 starter = get_house_type_short(house_type)
@@ -553,7 +579,8 @@ def handle_import(file_path, listing_type):
                                       direction=direction, price=price, reward_person=realtor.user.name, priority=priority,
                                       reward_person_mobile=realtor.user.phone, reward=reward, bonus_rate=bonus_rate,
                                       extra_data=extra_data, state=state_code, district=district_code, is_published=is_published,
-                                      width=width, floors=floor, average_price=price_per_area, length=None, lane_width=None)
+                                      width=width, floors=floor, average_price=price_per_area, length=None, lane_width=None,
+                                      location=listing_loc)
                 title = f'Bán {get_short_title_from_house_type(new_listing.house_type)} {new_listing.street} {new_listing.district_name()} '
 
                 if new_listing.area >= 30:
@@ -569,24 +596,6 @@ def handle_import(file_path, listing_type):
                 new_listing.description = new_listing.description.replace('  ', ' ')
                 new_listing.is_published = new_listing.is_published
                 new_listing.realtor = realtor
-                if full_addr in searched_locations:
-                    if searched_locations[full_addr]:
-                        listing_loc = Point(searched_locations[full_addr][0],
-                                            searched_locations[full_addr][1])
-                        new_listing.location = listing_loc
-                # else:
-                #     if api_key:
-                #         geolocator = GeocodeEarth(api_key=api_key)
-                #         #geolocator = Nominatim()
-                #         hanoi_bounds = ((21.097341, 105.929947), (20.920105, 105.702667))
-                #         location = geolocator.geocode(full_addr, boundary_rect=hanoi_bounds)
-                #         if location and location.point:
-                #             listing_loc = Point(location.point.longitude, location.point.latitude)
-                #             new_listing.location = listing_loc
-                #             searched_locations[full_addr] = [location.point.longitude,
-                #                                              location.point.latitude]
-                #         else:
-                #             searched_locations[full_addr] = None
 
                 if code in listing_obj:
                     queryset_list = Listing.objects.filter(code=code)

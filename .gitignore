@@ -93,3 +93,6 @@ data/
 
 media/
 *.sh
+/FunctionModule/social_account/migrations/0001_initial.py
+/FunctionModule/social_account/migrations/0002_auto_20220429_0047.py
+/FunctionModule/social_account/migrations/0003_auto_20220429_0052.py
