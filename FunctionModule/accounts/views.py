@@ -1,16 +1,12 @@
-from allauth.account.utils import get_login_redirect_url
-from allauth.exceptions import ImmediateHttpResponse
 from django.contrib import messages, auth
 from django.contrib.admin import site
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.db.models import Q
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from allauth.account.views import get_adapter, _ajax_response
+from allauth.account.views import get_adapter
 
-from FunctionModule.accounts import app_settings
 from FunctionModule.accounts.models import User
 from FunctionModule.accounts.forms import UserRegisterForm
 
@@ -155,90 +151,9 @@ def password_change(request):
     return render(request, 'accounts/change_password.html', context)
 
 
+
+
+
 def social_login_cancelled(request):
     messages.warning(request, 'Bạn đã hủy đăng nhập. Xin đăng nhập lại.')
     return redirect('/')
-
-
-class AjaxCapableProcessFormViewMixin(object):
-    def get(self, request, *args, **kwargs):
-        response = super(AjaxCapableProcessFormViewMixin, self).get(
-            request, *args, **kwargs
-        )
-        form = self.get_form()
-        return _ajax_response(
-            self.request, response, form=form, data=self._get_ajax_data_if()
-        )
-
-    def post(self, request, *args, **kwargs):
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        if form.is_valid():
-            response = self.form_valid(form)
-        else:
-            response = self.form_invalid(form)
-        return _ajax_response(
-            self.request, response, form=form, data=self._get_ajax_data_if()
-        )
-
-    def get_form(self, form_class=None):
-        form = getattr(self, "_cached_form", None)
-        if form is None:
-            form = super(AjaxCapableProcessFormViewMixin, self).get_form(form_class)
-            self._cached_form = form
-        return form
-
-    def _get_ajax_data_if(self):
-        return (
-            self.get_ajax_data()
-            if get_adapter(self.request).is_ajax(self.request)
-            else None
-        )
-
-    def get_ajax_data(self):
-        return None
-
-
-class CloseableSignupMixin(object):
-    template_name_signup_closed = (
-        "account/signup_closed." + app_settings.TEMPLATE_EXTENSION
-    )
-
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            if not self.is_open():
-                return self.closed()
-        except ImmediateHttpResponse as e:
-            return e.response
-        return super(CloseableSignupMixin, self).dispatch(request, *args, **kwargs)
-
-    def is_open(self):
-        return get_adapter(self.request).is_open_for_signup(self.request)
-
-    def closed(self):
-        response_kwargs = {
-            "request": self.request,
-            "template": self.template_name_signup_closed,
-        }
-        return self.response_class(**response_kwargs)
-
-
-class RedirectAuthenticatedUserMixin(object):
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and app_settings.AUTHENTICATED_LOGIN_REDIRECTS:
-            redirect_to = self.get_authenticated_redirect_url()
-            response = HttpResponseRedirect(redirect_to)
-            return _ajax_response(request, response)
-        else:
-            response = super(RedirectAuthenticatedUserMixin, self).dispatch(
-                request, *args, **kwargs
-            )
-        return response
-
-    def get_authenticated_redirect_url(self):
-        redirect_field_name = self.redirect_field_name
-        return get_login_redirect_url(
-            self.request,
-            url=self.get_success_url(),
-            redirect_field_name=redirect_field_name,
-        )

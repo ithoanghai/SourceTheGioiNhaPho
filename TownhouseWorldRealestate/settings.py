@@ -45,19 +45,20 @@ MODULES = [
     'FunctionModule.realtors.apps.RealtorsConfig',
     'FunctionModule.customers.apps.CustomersConfig',
     'FunctionModule.cadastral.apps.CadastralConfig',
-    'FunctionModule.social_account',
-    'FunctionModule.social_account.providers.facebook',
-    'FunctionModule.social_account.providers.google',
 ]
 
 THIRD_PARTIES = [
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
     'location_field.apps.DefaultConfig',
     'ajax_select',
     'rolepermissions',
     'debug_toolbar',
     'rest_framework',
+    'rest_framework.authtoken',
     'django_filters',
     'adminplus',
     'cachalot',
@@ -120,7 +121,7 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': os.getenv('DB_NAME', 'tgnp'),
         'USER': os.getenv('DB_USER', 'postgres'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'bBtv7V96uSV590'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
         'HOST': os.getenv('DB_HOST', 'db'),
         'PORT': '5432',
     }
@@ -274,7 +275,7 @@ CACHES = {
     }
 }
 
-ACCOUNT_AUTHENTICATION_METHOD = "username_email_phone"
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_FORMS = {
     'signup': 'accounts.forms.CustomUserCreationForm'
 }
@@ -298,19 +299,9 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
         'EXCHANGE_TOKEN': True,
         'VERSION': 'v10.0',
-    },
-    'google': {
-            'SCOPE': [
-                'profile',
-                'email',
-                'openid',
-                'https://www.googleapis.com/auth/calendar.readonly'
-            ],
     }
 }
 LOGIN_REDIRECT_URL = '/'
-SOCIALACCOUNT_ENABLED = "FunctionModule.social_account" in INSTALLED_APPS
-SOCIALACCOUNT_UID_MAX_LENGTH = 191
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

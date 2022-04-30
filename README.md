@@ -11,8 +11,8 @@ A simple, reponsive  website. Built with:
 - JQuery
 
 
-Search Engine - Meilisearch:
-- Run docker-compose up --build web. Setup port and environment variables (MEILI_HOST, MEILI_PORT)
+Search Engine - Meilisearch:   Setup port and environment variables (MEILI_HOST, MEILI_PORT)
+- Run docker-compose up --build web. 
 - Run docker-compose exec web bash -c "python manage.py index_area"
 - Run "python manage.py index_area" to create indexer
 
@@ -29,8 +29,32 @@ pg_restore -c --dbname=postgresql://postgres:postgres@127.0.0.1/tgnp tgnp-2021-0
 Show Log docker
 - docker logs -f --tail 5 app_web_1
 
-Restart certificate on docker
+Restart certificate on docker server
 docker-compose -f docker-compose.production.yml exec -it certbot /bin/sh
 docker-compose -f docker-compose.production.yml up -d certbot  
 docker-compose -f docker-compose.production.yml exec nginx bash -c "nginx -s reload"
 
+gộp dữ liệu
+python manage.py makemigrations
+python manage.py migrate
+
+server:
+docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate"
+local:
+docker-compose exec web bash -c "python manage.py makemigrations"
+docker-compose exec web bash -c "python manage.py showmigrations"
+docker-compose exec web bash -c "python manage.py migrate --fake contenttypes"
+docker-compose exec web bash -c "python manage.py migrate --fake accounts"
+docker-compose exec web bash -c "python manage.py migrate --fake customers"
+docker-compose exec web bash -c "python manage.py migrate --fake listings"
+docker-compose exec web bash -c "python manage.py migrate --fake transactions"
+docker-compose exec web bash -c "python manage.py migrate --fake-initial"
+docker-compose exec web bash -c "python manage.py migrate"
+
+#auto update & build new code on localserver
+docker-compose exec web bash -c "pip install -r requirements.txt"
+docker-compose exec web bash -c "python manage.py collectstatic --noinput"
+docker-compose exec web bash -c "npx gulp build"
+docker-compose exec web bash -c "python manage.py migrate"
+docker-compose restart web
+docker-compose up -d search_engine

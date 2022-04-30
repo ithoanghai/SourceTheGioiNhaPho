@@ -273,14 +273,6 @@ def handle_import(file_path, listing_type):
                     logger.info(f"error status {status}")
                     pass
 
-                #read đơn vị
-                try:
-                    don_vi = row[header_dict['don-vi']]
-                    if don_vi is None:
-                        don_vi = "Thiên Khôi"
-                except ValueError:
-                    don_vi = "Thiên Khôi"
-
                 #Read information about specialist phone number
                 try:
                     phone = row[header_dict['sdt']]

@@ -50,7 +50,7 @@ class Transaction(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name=_("Bất động sản"))
     customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name=_("Khách hàng"))
 
-    house_type = models.CharField(max_length=20, null=True, blank=True, choices=HouseType.choices, verbose_name=_("Loại BĐS"))
+    house_type = models.CharField(max_length=20, null=True, blank=True, choices=HouseType.choices, verbose_name=_("Loại BĐS quan tâm"))
     caring_area = models.CharField(max_length=100, null=True, blank=True, verbose_name=_("Khu vực quan tâm"))
     request_price = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name=_("Giá kỳ vọng"))
     message = models.TextField(blank=True, null=True, verbose_name="Thông điệp của khách hàng")
