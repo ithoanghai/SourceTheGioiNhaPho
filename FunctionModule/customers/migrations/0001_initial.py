@@ -21,12 +21,10 @@ class Migration(migrations.Migration):
             name='Customer',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(blank=True, max_length=150, verbose_name='Họ')),
-                ('last_name', models.CharField(blank=True, max_length=150, verbose_name='Tên')),
                 ('phone', models.CharField(db_index=True, error_messages={'unique': 'Số điện thoại này đã được sử dụng trên hệ thống.'}, max_length=20, unique=True, validators=[django.core.validators.RegexValidator(message='Số điện thoại 10 số với chỉ các đầu số 09|03|07|08|05', regex='^(09|03|07|08|05)+([0-9]{8})$')], verbose_name='Điện thoại')),
                 ('email', models.EmailField(blank=True, error_messages={'unique': 'Email này đã được sử dụng trên hệ thống.'}, max_length=254, unique=True, verbose_name='Email')),
                 ('address', models.CharField(blank=True, max_length=255, verbose_name='Địa chỉ')),
-                ('desire', models.TextField(blank=True, verbose_name='Nhu cầu')),
+                ('request', models.TextField(blank=True, null=True, verbose_name='Nhu cầu')),
                 ('potential_points', models.IntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)], verbose_name='Điểm tiềm năng')),
                 ('hire_date', models.DateTimeField(blank=True, default=FunctionModule.customers.models.default_hire_date)),
                 ('realtor', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='realtors.realtor', verbose_name='Chuyên viên phụ trách')),

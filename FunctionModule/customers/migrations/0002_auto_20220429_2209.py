@@ -18,18 +18,6 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RemoveField(
             model_name='customer',
-            name='desire',
-        ),
-        migrations.RemoveField(
-            model_name='customer',
-            name='first_name',
-        ),
-        migrations.RemoveField(
-            model_name='customer',
-            name='last_name',
-        ),
-        migrations.RemoveField(
-            model_name='customer',
             name='potential_points',
         ),
         migrations.AddField(

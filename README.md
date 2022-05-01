@@ -38,10 +38,11 @@ gộp dữ liệu
 python manage.py makemigrations
 python manage.py migrate
 
-server:
-docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate"
-local:
-docker-compose exec web bash -c "python manage.py makemigrations"
+#auto update & build new code on localserver
+docker-compose exec web bash -c "pip install -r requirements.txt"
+docker-compose exec web bash -c "python manage.py collectstatic --noinput"
+docker-compose exec web bash -c "npx gulp build"
+docker-compose exec web bash -c "python manage.py makemigrations --merge"
 docker-compose exec web bash -c "python manage.py showmigrations"
 docker-compose exec web bash -c "python manage.py migrate --fake contenttypes"
 docker-compose exec web bash -c "python manage.py migrate --fake accounts"
@@ -50,11 +51,24 @@ docker-compose exec web bash -c "python manage.py migrate --fake listings"
 docker-compose exec web bash -c "python manage.py migrate --fake transactions"
 docker-compose exec web bash -c "python manage.py migrate --fake-initial"
 docker-compose exec web bash -c "python manage.py migrate"
-
-#auto update & build new code on localserver
-docker-compose exec web bash -c "pip install -r requirements.txt"
-docker-compose exec web bash -c "python manage.py collectstatic --noinput"
-docker-compose exec web bash -c "npx gulp build"
-docker-compose exec web bash -c "python manage.py migrate"
 docker-compose restart web
 docker-compose up -d search_engine
+
+#update and build release on server
+cd app
+git reset --hard
+git clean -fd
+git fetch && git checkout release/$1
+docker-compose -f docker-compose.production.yml exec web bash -c "pip install -r requirements.txt"
+docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py collectstatic --noinput"
+docker-compose -f docker-compose.production.yml exec web bash -c "npx gulp build"
+docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py makemigrations --merge"
+docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake accounts"
+docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake customers"
+docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake listings"
+docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake transactions"
+docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake-initial"
+docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake"
+docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate"
+docker-compose -f docker-compose.production.yml restart web
+docker-compose -f docker-compose.production.yml up -d search_engine
