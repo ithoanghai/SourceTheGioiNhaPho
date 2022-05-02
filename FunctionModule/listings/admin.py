@@ -1,5 +1,6 @@
 import fractions
 
+from advanced_filters.admin import AdminAdvancedFiltersMixin
 from django.contrib import admin
 from django.contrib.admin import FieldListFilter, BooleanFieldListFilter, DateFieldListFilter
 from django.core.files.storage import default_storage
@@ -8,7 +9,8 @@ from django import forms
 from django.http import HttpRequest, JsonResponse
 
 from FunctionModule.listings.import_csv import handle_import, logger
-from .filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter, IsWithinRangeFilter
+from .filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter, IsWithinRangeFilter, \
+    SimpleDropdownFilter, AreaFilter
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage
 from .choices import district_default_choices
@@ -63,13 +65,15 @@ class ListingAdmin(admin.ModelAdmin):
         ('status', ChoiceDropdownFilter),
         ('house_type', ChoiceDropdownFilter),
         ('road_type', ChoiceDropdownFilter),
-        ('floors', ChoiceDropdownFilter),
+        #('floors', ChoiceDropdownFilter),
         ('registration_type', ChoiceDropdownFilter),
-        ('realtor', RelatedDropdownFilter),
+        #('realtor', RelatedDropdownFilter),
         ('transaction_type', ChoiceDropdownFilter),
         ('list_date', DateFieldListFilter),
         ('is_published', BooleanFieldListFilter),
+        #AreaFilter,
     )
+    #advanced_filter_fields = ('status', ('house_type', 'road_type'))
     list_editable = ('price',)
     search_fields = (
     'id', 'title', 'code', 'address', 'area', 'price', 'house_type', 'road_type', 'urban_area', 'street', 'ward',
@@ -90,16 +94,17 @@ class ListingAdmin(admin.ModelAdmin):
     def get_form(self, request, obj=None, change=False, **kwargs):
         form = super(ListingAdmin, self).get_form(request, obj, **kwargs)
         form.base_fields['user'].initial = request.user
+        realtor_list = Realtor.objects.filter(user=request.user)
+        if realtor_list is not None:
+            form.base_fields['realtor'].initial = realtor_list.first()
         form.base_fields['district'].choices = district_default_choices
         disabled_fields = set()  # type: Set[str]
         disabled_fields |= {
             'user',
             'realtor'
         }
-        excludes = ('reward_person_mobile', 'extra_data', 'user', 'realtor')
+        excludes = ('reward_person_mobile', 'extra_data')
         if request.user.is_superuser:
-            realtor = Realtor.objects.filter(user=request.user)
-            form.base_fields['realtor'].initial = realtor
             form.base_fields['user'].disabled = True
         elif request.user.is_staff:
             for exc in excludes:
@@ -159,7 +164,7 @@ def import_csv_view(request: HttpRequest) -> JsonResponse:
             # with open(file, 'r', encoding="utf-8", errors='ignore') as fp:
             #    default_storage.save(f'photos/{file.name}', fp)
 
-            handle_import(f'media/import-listing/{file.name}', listing_type=request.POST.get('listing_type'))
+            handle_import(request, f'media/import-listing/{file.name}', listing_type=request.POST.get('listing_type'))
 
             return JsonResponse({})
         else:

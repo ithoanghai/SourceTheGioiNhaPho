@@ -49,6 +49,20 @@
                 {% endblock %}
             </ul>
         {% endblock %}
+        {% block filters %}
+            {% if cl.has_filters %}
+                <h2>{% translate 'Bộ lọc:' %}</h2>
+                <div id="changelist-filter" class="module filtered">
+                    {% if cl.has_active_filters %}
+                        <h3 id="changelist-filter-clear">
+                        <a href="{{ cl.clear_all_filters_qs }}">&#10006; {% translate "Xoá toàn bộ lọc" %}</a>
+                        </h3>
+                    {% endif %}
+                    {% for spec in cl.filter_specs %}<div>{% admin_list_filter cl spec %}</div>{% endfor %}
+                </div>
+            {% endif %}
+            {{ advanced_filters }} {{ advanced_filters.formset }}
+        {% endblock %}
         {% if cl.formset and cl.formset.errors %}
             <p class="errornote">
                 {% if cl.formset.total_error_count == 1 %}{% translate "Hãy sửa thông tin bị lỗi ở dưới." %}{% else %}
@@ -76,17 +90,6 @@
                     {% block pagination %}{% pagination cl %}{% endblock %}
                 </form>
             </div>
-            {% block filters %}
-                {% if cl.has_filters %}
-                    <div id="changelist-filter">
-                        <h2>{% translate 'Bộ lọc' %}</h2>
-                        {% if cl.has_active_filters %}<h3 id="changelist-filter-clear">
-                            <a href="{{ cl.clear_all_filters_qs }}">&#10006; {% translate "Xoá toàn bộ lọc" %}</a>
-                        </h3>{% endif %}
-                        {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
-                    </div>
-                {% endif %}
-            {% endblock %}
         </div>
     </div>
 {% endblock %}

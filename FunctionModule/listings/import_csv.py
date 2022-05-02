@@ -49,6 +49,9 @@ def read_header(header_row, listing_type):
             "huong": 16,
             "dt": 19,
             "trm2": 20,
+            "hoa-hong": 21,
+            "nguon": 22,
+            "thanh-pho": 23
         }
     elif listing_type == 'K2':
         logger.info(f"listing_type {listing_type} Thien Khoi")
@@ -106,11 +109,17 @@ def get_direction(direction: str) -> str:
     return code
 
 
-def handle_import(file_path, listing_type):
+def handle_import(request, file_path, listing_type):
     line_count = 0
     with open('saved_search.json', 'r', encoding='utf-8') as f:
         searched_locations = json.load(f)
     try:
+        if request.user is not None:
+            user = request.user
+            real = Realtor.objects.filter(user=user)
+            if real.first() is None:
+                Realtor.objects.create(user=user)
+
     # realtor scan and reorder
         realtors = Realtor.objects.all()
         user_dict = {}
@@ -194,7 +203,11 @@ def handle_import(file_path, listing_type):
                 name = row[header_dict['dau-chu']]
                 realtor = Realtor.objects.filter(pk=1).first()
 
-                #read district information
+                #read state, district information
+                state_name = row[header_dict['thanh-pho']]
+                if not state_name:
+                    # Hanoi
+                    state_name = 'Hà Nội'
                 district = row[header_dict['quan']]
                 if not district:
                     logger.info(f"No district. Continue in line {line_count}")
@@ -208,7 +221,10 @@ def handle_import(file_path, listing_type):
                 #Read information about date and time listing
                 created_date = row[header_dict['tgian']]
                 try:
-                    created = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M')
+                    if listing_type == "K1":
+                        created = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M:%S')
+                    elif listing_type == "K2":
+                        created = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M')
                     created = created.replace(tzinfo=timezone)
                 except ValueError:
                     logger.info(f"error date create {created_date}")
@@ -220,7 +236,7 @@ def handle_import(file_path, listing_type):
                     # area = float(row[header_dict['dt']].replace('c4', ''))
                     area = Decimal(area.replace(',', '.').replace(' ', ''))
                 except ValueError:
-                    logger.info(f"error area {area}")
+                    logger.info(f"error area  {area}")
                     pass
 
                 # Read real estate price information
@@ -273,6 +289,35 @@ def handle_import(file_path, listing_type):
                     logger.info(f"error status {status}")
                     pass
 
+                #read đơn vị
+                try:
+                    don_vi = row[header_dict['don-vi']]
+                    if don_vi is None:
+                        don_vi = "Thiên Khôi"
+                except ValueError:
+                    don_vi = "Thiên Khôi"
+
+                #read nguồn & hoa hồng
+                try:
+                    nguon = row[header_dict['nguon']]
+                    hoa_hong = row[header_dict['hoa-hong']]
+                    num_reward = 100
+                    if (not (hoa_hong.split(' ')[0] and hoa_hong.split(' ')[0].strip())):
+                        num_reward = 100
+                        bonus_rate = 3
+                    if 3 < int(num_reward) < 10000:
+                        reward = num_reward
+                    elif int(num_reward) > 0:
+                        bonus_rate = num_reward
+                    else:
+                        bonus_rate = 3
+                    if nguon is not None:
+                        extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
+                    else:
+                        extra_add = f' Nguồn nhà phố, hoa hồng 3%, xác minh lại với đầu chủ {name}.'
+                except ValueError:
+                    extra_add = f' Nguồn nhà phố, hoa hồng 3%, xác minh lại với đầu chủ {name}.'
+
                 #Read information about specialist phone number
                 try:
                     phone = row[header_dict['sdt']]
@@ -288,28 +333,38 @@ def handle_import(file_path, listing_type):
                         tmp_phone = phone
                         if len(phone) == 9:
                             phone = f'0{phone}'
+                        extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
                         if phone not in user_dict and len(phone) == 10:
                             if not phone:
                                 admin_realtor = Realtor.objects.get(pk=1)
                                 user_dict[phone] = admin_realtor
                                 print(f"user_dict[phone]: {admin_realtor}")
                             else:
-                                query = Q(phone=phone) | Q(phone=tmp_phone)
-                                usr = User.objects.filter(query)
+                                query = Q(phone=phone) | Q(phone=tmp_phone) | Q(last_name=name)
+                                querylist_usr = User.objects.filter(query)
                                 email = f'{phone}@gmail.com'
-                                extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
-                                bio = f'{name}, {phone}, {don_vi}.'
-                                if usr.exists():
+                                if querylist_usr.exists():
+                                    usr = querylist_usr.first()
                                     usr.username = phone
                                     usr.last_name = name
+                                    if usr.phone == phone:
+                                        extra_phone = {phone}
+                                    else:
+                                        extra_phone = f'{usr.phone} hoặc {phone}'
                                     usr.phone = phone
-                                    usr.bio = f'{name}, {phone}, {don_vi}.'
-                                    usr.update()
-                                    user_dict[phone] = Realtor.objects.get(usr)
+                                    usr.bio = f'{name}, {extra_phone}, {don_vi}.'
+                                    usr.save()
+                                    query = Q(user__phone=phone) | Q(user__phone=tmp_phone) | Q(user__last_name=name)
+                                    user_dict[phone] = Realtor.objects.filter(query).first()
+                                    if user_dict[phone] is None:
+                                        new_realtor = Realtor.objects.create(user=usr)
+                                        user_dict[phone] = new_realtor
+                                    extra_data = f'Liên hệ với {name}, {extra_phone}, {don_vi} để giao dịch. {extra_add}'
                                     print(f"update user: {usr}")
                                 else:
                                     new_user = User.objects.create_user(username=phone, password=default_password,
                                                                         phone=phone, email=email, last_name=name, bio=bio)
+                                    new_user.save()
                                     new_realtor = Realtor.objects.create(user=new_user)
                                     user_dict[phone] = new_realtor
                                     print(f"new_user: {new_user}")
@@ -381,14 +436,14 @@ def handle_import(file_path, listing_type):
                     addr = row[header_dict['dia-chi']].replace('.', '/').replace(',', '/')
                     street = row[header_dict['pho']]
                     deep_address = addr.split('/')
-                    # Hanoi
-                    state = '01'
+
                     if street in addr:
                         full_addr = f'{addr}, {district}'
                     else:
                         full_addr = f'{addr}, {street}, {district}'
                     full_addr = f'{full_addr}, Hà Nội'
                     full_addr = full_addr.replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ').replace(' , ', ', ')
+                    add_search_map = f'{deep_address[0]}, {street}, {district}, {state_name}'
 
                     encoded_num = row[header_dict['thong-so']].replace('  ', ' ')
                     splitter = encoded_num.split(' ')
@@ -472,17 +527,18 @@ def handle_import(file_path, listing_type):
                         road_type = RoadType.ALLEY_CAR_TRIBIKE
 
                     direction = get_direction(row[header_dict['huong']])
-                    extra_add = f' Nguồn {name}, hoa hồng 3%, hỏi lại đầu chủ cho chính xác.'
+
                 elif listing_type == "K2":
                     addr = row[header_dict['dia-chi']].replace('.', '/').replace('Số ', '').replace(' ', ' ')
+                    addr = addr.replace(' TT ', ' tập thể ').replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ')
                     so_nha = addr.split(' ')
                     lensonha = int(len(so_nha[0]))
-                    street = addr[lensonha:].replace('(', '').replace(')', '').replace('/', '').replace('  ', '')
-                    remove_digits = street.maketrans('', '', digits)
-                    street = street.translate(remove_digits)
-                    addr = addr.replace(' TT ', ' tập thể ').replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ')
-                    state_name = row[header_dict['thanh-pho']]
+                    deep_address = so_nha[0].split('/')
+                    street = addr[lensonha:].replace('(', '').replace(')', '').replace('/', '').replace('  ', ' ')
+                    street = street.translate(street.maketrans('', '', digits))
                     full_addr = f'{addr}, {district}, {state_name}'
+                    add_search_map = f'{deep_address[0]}, {street}, {district}, {state_name}'
+                    add_search_map = add_search_map.replace('  ', ' ')
 
                     width = Decimal(row[header_dict['mat-tien']])
                     floor = float(row[header_dict['so-tang']])
@@ -494,7 +550,6 @@ def handle_import(file_path, listing_type):
                     else:
                         house_type = HouseType.TOWN_HOUSE
 
-                    deep_address = so_nha[0].split('/')
                     shop_house = "shophouse"
                     biet_thu = "bt"
                     lien_ke = "lk"
@@ -526,46 +581,30 @@ def handle_import(file_path, listing_type):
                         house_type = HouseType.APARTMENT
                         road_type = RoadType.ALLEY_CAR
 
-                    nguon = row[header_dict['nguon']]
-                    hoa_hong = row[header_dict['hoa-hong']]
-                    num_reward = 100
-                    if (not (hoa_hong.split(' ')[0] and hoa_hong.split(' ')[0].strip())):
-                        num_reward = 100
-                        bonus_rate = 3
-                    if 3 < int(num_reward) < 10000:
-                        reward = num_reward
-                    elif int(num_reward) > 0:
-                        bonus_rate = num_reward
-                    else:
-                        bonus_rate = 3
-
-                    extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
-
-                # update, delete user, realtor
-                if full_addr in searched_locations:
-                    if searched_locations[full_addr]:
+                # search location on map
+                listing_loc = Point(105.83549388560711, 20.976795401917798)
+                if add_search_map in searched_locations:
+                    if searched_locations[add_search_map]:
                         listing_loc = Point(searched_locations[full_addr][0],
                                             searched_locations[full_addr][1])
+                        logger.info(f"listing_loc search ok {searched_locations[full_addr][0]} , {searched_locations[full_addr][1]}")
                 else:
-                    listing_loc = Point(105.83549388560711,20.976795401917798)
-                #     if api_key:
-                #         geolocator = GeocodeEarth(api_key=api_key)
-                #         #geolocator = Nominatim()
-                #         hanoi_bounds = ((21.097341, 105.929947), (20.920105, 105.702667))
-                #         location = geolocator.geocode(full_addr, boundary_rect=hanoi_bounds)
-                #         if location and location.point:
-                #             listing_loc = Point(location.point.longitude, location.point.latitude)
-                #             new_listing.location = listing_loc
-                #             searched_locations[full_addr] = [location.point.longitude,
-                #                                              location.point.latitude]
-                #         else:
-                #             searched_locations[full_addr] = None
+                    #if api_key:
+                    #geolocator = GeocodeEarth(api_key=api_key)
+                    geolocator = Nominatim(user_agent="thegioinhaphovietnam.com.vn")
+                    #GeocodeEarth.geocoders.options.default_user_agent = "my-application"
+                    hanoi_bounds = ((21.097341, 105.929947), (20.920105, 105.702667))
+                    location = geolocator.geocode(add_search_map, bounded=True, viewbox=hanoi_bounds)
+                    if location and location.point:
+                        listing_loc = Point(location.point.longitude, location.point.latitude)
+                        searched_locations[full_addr] = [location.point.longitude,
+                                                         location.point.latitude]
+                    else:
+                        searched_locations[full_addr] = None
 
-                extra_data = f'Liên hệ với {name}, {realtor.user.phone}, {don_vi} để giao dịch. {extra_add}'
                 starter = get_house_type_short(house_type)
                 code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
-
-                new_listing = Listing(realtor=realtor, code=code, status=status, street=street,
+                new_listing = Listing(user=user, realtor=user.realtor, code=code, status=status, street=street,
                                       address=full_addr, area=area, transaction_type=trans_type,
                                       house_type=house_type, road_type=road_type, list_date=created,
                                       direction=direction, price=price, reward_person=realtor.user.name, priority=priority,
@@ -586,23 +625,25 @@ def handle_import(file_path, listing_type):
                                                context={"listing": new_listing, "desc": desc})
                 new_listing.description = description
                 new_listing.description = new_listing.description.replace('  ', ' ')
-                new_listing.is_published = new_listing.is_published
-                new_listing.realtor = realtor
 
                 if code in listing_obj:
                     queryset_list = Listing.objects.filter(code=code)
                     if queryset_list.exists():
                         listing = queryset_list.first()
                         if listing.priority == 1 or listing.priority == 2:
+                            if listing.user is None:
+                                listing.user = new_listing.user
                             listing.realtor = new_listing.realtor
                             listing.status = new_listing.status
                             listing.reward_person = new_listing.reward_person
                             listing.reward_person_mobile = new_listing.reward_person_mobile
                             listing.extra_data = new_listing.extra_data
+                            listing.location = new_listing.location
                             listing.is_published = new_listing.is_published
                             listing.save()
                             logger.info(f"row {line_count}: chỉ cập nhật {code} đã biên tập dữ liệu")
                         else:
+                            listing.user = new_listing.user
                             listing.realtor = new_listing.realtor
                             listing.house_type = new_listing.house_type
                             listing.road_type = new_listing.road_type
@@ -616,6 +657,7 @@ def handle_import(file_path, listing_type):
                             listing.reward_person_mobile = new_listing.reward_person_mobile
                             listing.extra_data = new_listing.extra_data
                             listing.priority = new_listing.priority
+                            listing.location = new_listing.location
                             listing.is_published = new_listing.is_published
                             listing.save()
                             logger.info(f"row {line_count}: update {code}")
@@ -625,6 +667,8 @@ def handle_import(file_path, listing_type):
                     if queryset_list.exists():
                         listing = queryset_list.first()
                         if listing.priority == 1 or listing.priority == 2:
+                            if listing.user is None:
+                                listing.user = new_listing.user
                             listing.realtor = new_listing.realtor
                             listing.status = new_listing.status
                             listing.is_published = new_listing.is_published
@@ -632,6 +676,7 @@ def handle_import(file_path, listing_type):
                             logger.info(
                                 f"row {line_count}: cập nhật bđs đã có nhưng ko tìm thấy code {code} đã biên tập dữ liệu, từ trạng thái {listing.status} sang {new_listing.status}")
                         else:
+                            listing.user = new_listing.user
                             listing.realtor = new_listing.realtor
                             listing.is_published = new_listing.is_published
                             listing.house_type = new_listing.house_type
@@ -645,6 +690,7 @@ def handle_import(file_path, listing_type):
                             listing.reward_person = new_listing.reward_person
                             listing.reward_person_mobile = new_listing.reward_person_mobile
                             listing.extra_data = new_listing.extra_data
+                            listing.location = new_listing.location
                             listing.priority = new_listing.priority
                             code_old = listing.code
                             listing.code = new_listing.code

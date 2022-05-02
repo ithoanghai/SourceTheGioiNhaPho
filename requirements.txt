@@ -16,6 +16,7 @@ django-adminplus==0.5
 geopy==2.1.0
 pydantic==1.8.1
 django_filter==2.4.0
+django-advanced-filters==1.4.0
 python-dotenv==0.17.1
 django-redis==4.12.1
 django-cachalot==2.4.1

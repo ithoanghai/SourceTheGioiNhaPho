@@ -1,3 +1,5 @@
+from datetime import date
+
 import django_filters
 from django_filters import FilterSet, CharFilter, BaseInFilter, RangeFilter
 from django.contrib.admin.filters import (
@@ -21,15 +23,38 @@ class ListingFilter(FilterSet):
 
     class Meta:
         model = Listing
-        fields = ['realtor', 'transaction_type', 'registration_type']
+        fields = {
+            'realtor': ['exact'],
+            'transaction_type': ['exact'],
+        }
 
 
-class AreaFilter(FilterSet):
-    area = django_filters.AllValuesFilter()
+class AreaFilter(SimpleListFilter):
+    title = 'Diện tích:'
+    parameter_name = 'scoreRange'
+    template = 'admin/input_filter.html'
 
     class Meta:
         model = Listing
         fields = ['area']
+
+    def lookups(self, request, model_admin):
+        return (
+            ('30', 'in the eighties'),
+            ('50', 'in the nineties'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == '30':
+            return queryset.filter(
+                area__gte=30,
+                area__gte__lte=0,
+            )
+        if self.value() == '50':
+            return queryset.filter(
+                area__gte__gte=50,
+                area__gte__lte=0,
+            )
 
 
 class IsWithinRangeFilter(SimpleListFilter):
@@ -39,12 +64,21 @@ class IsWithinRangeFilter(SimpleListFilter):
 
     def lookups(self, request, model_admin):
         return (
-            ('Yes', 'Yes'),
+            ('80s', 'in the eighties'),
+            ('90s', 'in the nineties'),
         )
 
     def queryset(self, request, queryset):
-        value = self.value()
-        return queryset
+        if self.value() == '80s':
+            return queryset.filter(
+                list_date__gte=date(1980, 1, 1),
+                list_date__gte__lte=date(1989, 12, 31),
+            )
+        if self.value() == '90s':
+            return queryset.filter(
+                list_date__gte__gte=date(1990, 1, 1),
+                list_date__gte__lte=date(1999, 12, 31),
+            )
 
 
 class SimpleDropdownFilter(SimpleListFilter):

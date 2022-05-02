@@ -1,6 +1,6 @@
 from rest_framework.authtoken.views import obtain_auth_token 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from . import views
 
@@ -21,4 +21,6 @@ urlpatterns = [
     path('listingsAPI', views.listing_api_view),
     path('ListingAPIAllView', views.ListingAPIAllView.as_view()),
     path('listings-api-token-auth/', obtain_auth_token, name='listings_api_token_auth'),
+
+    path('advanced_filters/', include('advanced_filters.urls'))
 ]

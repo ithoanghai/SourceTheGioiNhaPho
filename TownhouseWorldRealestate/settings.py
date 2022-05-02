@@ -60,6 +60,7 @@ THIRD_PARTIES = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
+    'advanced_filters',
     'adminplus',
     'cachalot',
 ]
