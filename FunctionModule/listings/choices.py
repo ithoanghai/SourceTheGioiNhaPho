@@ -52,7 +52,7 @@ class HouseType(models.TextChoices):
     TOWN_HOUSE = 'town_house', _("Nhà phố")
     LOFT_HOUSE = 'loft_house', _("Nhà 1 tầng/Cấp 4")
     SHOP_HOUSE = 'shop_house', _("Cửa hàng/ShopHouse")
-    APARTMENT = 'apartment', _("Căn hộ/Nhà tập thể/CCMN")
+    APARTMENT = 'apartment', _("Căn hộ/Chung cư MN/Nhà tập thể")
     VILLA = 'villa', _("Biệt thự")
     PLOT = 'plot', _("Liền kề/Phân lô/Dịch vụ")
     LAND = 'land', _("Đất nền")
@@ -87,12 +87,12 @@ class RegistrationType(models.TextChoices):
 
 
 class RoadType(models.TextChoices):
-    ALLEY_CAR_2 = 'alley_car_2', _("Ô tô tránh")
-    ALLEY_CAR_TRIBIKE = 'alley_car_tribike', _("Ô tô tránh Ba gác")
-    ALLEY_CAR = 'alley_car', _("Chỉ 1 Ô tô")
-    ALLEY_TRIBIKE = 'alley_tribike', _("Chỉ 1 Ba gác")
-    ALLEY_TRIBIKE_BIKE = 'alley_tribike_bike', _("Ba gác tránh Xe máy")
-    ALLEY_BIKE = 'alley_bike', _("Xe máy tránh nhau")
+    ALLEY_CAR_2 = 'alley_car_2', _("Ngõ Ô tô tránh")
+    ALLEY_CAR_TRIBIKE = 'alley_car_tribike', _("Ngõ Ô tô tránh Ba gác")
+    ALLEY_CAR = 'alley_car', _("Ngõ Ô tô")
+    ALLEY_TRIBIKE = 'alley_tribike', _("Ngõ Ba gác")
+    ALLEY_TRIBIKE_BIKE = 'alley_tribike_bike', _("Ngõ Ba gác tránh Xe máy")
+    ALLEY_BIKE = 'alley_bike', _("Ngõ Xe máy tránh nhau")
 
 
 class ParkingType(models.TextChoices):

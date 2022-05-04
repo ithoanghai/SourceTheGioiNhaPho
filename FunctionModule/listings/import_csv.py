@@ -18,6 +18,7 @@ from oauthlib.uri_validate import reserved
 
 from FunctionModule.accounts.models import User
 from FunctionModule.cadastral.constants import district_data
+from FunctionModule.cadastral.lookups import get_district_name
 from FunctionModule.listings.helpers import print_trace, get_house_type_short, get_short_title_from_house_type
 from FunctionModule.listings.models import Listing, Status, TransactionType, HouseType, RoadType
 from FunctionModule.realtors.models import Realtor
@@ -30,12 +31,12 @@ def read_header(header_row, listing_type):
     if listing_type == 'K1':
         logger.info(f"listing_type {listing_type} Nha Pho VN")
         header_dict = {
-            "tgian": 0,
-            "tieude": 1,
-            "mota": 2,
-            "mota-dauchu": 3,
-            "anh-nha": 4,
-            "anh-so": 5,
+            "tieude": 0,
+            "mota": 1,
+            "mota-dauchu": 2,
+            "anh-nha": 3,
+            "anh-so": 4,
+            "tgian": 5,
             "hien-trang": 6,
             "dia-chi": 7,
             "pho": 8,
@@ -49,18 +50,20 @@ def read_header(header_row, listing_type):
             "huong": 16,
             "dt": 19,
             "trm2": 20,
-            "hoa-hong": 21,
-            "nguon": 22,
-            "thanh-pho": 23
+            "so-tang": 50,
+            "mat-tien": 50,
+            "hoa-hong": 50,
+            "nguon": 50,
+            "thanh-pho": 50
         }
     elif listing_type == 'K2':
         logger.info(f"listing_type {listing_type} Thien Khoi")
         header_dict = {
-            "tieude": 1,
-            "mota": 2,
-            "mota-dauchu": 3,
-            "anh-nha": 4,
-            "anh-so": 5,
+            "tieude": 0,
+            "mota": 1,
+            "mota-dauchu": 2,
+            "anh-nha": 3,
+            "anh-so": 4,
             "dia-chi": 6,
             "dt": 7,
             "so-tang": 8,
@@ -75,6 +78,9 @@ def read_header(header_row, listing_type):
             "tgian": 18,
             "thanh-pho": 20,
             "don-vi": 21,
+            "pho": 21,
+            "dac-diem": 21,
+            "huong": 21,
         }
 
     for index, field in enumerate(header_row):
@@ -136,9 +142,7 @@ def handle_import(request, file_path, listing_type):
                 for listing in queryset_list:
                     if len(fone) == 10 or len(fone) == 9:
                         usr = User.objects.get(phone=fone)
-                        print(f"user: {usr}")
                         rel = Realtor.objects.filter(user__phone=fone)
-                        print(f"realtor: {rel}")
                         listing.realtor = rel
                         listing.save()
                         print(f"cập nhật listing có realtor lỗi sang realtor đầy đủ: {listing.realtor}, phone {fone}")
@@ -195,11 +199,21 @@ def handle_import(request, file_path, listing_type):
                 line_count = csv_reader.line_num - row_count + 1
                 trans_type = TransactionType.SELL
                 house_type = HouseType.TOWN_HOUSE
-                road_type = RoadType.ALLEY_TRIBIKE_BIKE
+                road_type = RoadType.ALLEY_TRIBIKE
                 direction = ""
                 reward = 100
                 bonus_rate = 3
                 desc = ""
+                shop_house = "shophouse"
+                biet_thu = "bt"
+                lien_ke = "lk"
+                dich_vu = "dv"
+                thap_tang = "tt"
+                lo = "lô"
+                chung_cu = "chung cư"
+                cao_tang = "ct"
+                tap_the = "tập thể"
+                du_an = "dự án"
                 name = row[header_dict['dau-chu']]
                 realtor = Realtor.objects.filter(pk=1).first()
 
@@ -230,20 +244,49 @@ def handle_import(request, file_path, listing_type):
                     logger.info(f"error date create {created_date}")
                     created = datetime.datetime.now(tz=timezone)
 
-                #Read information about real estate
+                #Read information about area
                 area = row[header_dict['dt']]
                 try:
                     # area = float(row[header_dict['dt']].replace('c4', ''))
+                    if not area or area == '#VALUE!':
+                        continue
                     area = Decimal(area.replace(',', '.').replace(' ', ''))
                 except ValueError:
                     logger.info(f"error area  {area}")
                     pass
 
+                # Read information about floor
+                floor = row[header_dict['so-tang']]
+                try:
+                    if len(floor) > 0:
+                        floor = Decimal(floor.replace(',', '.').replace(' ', ''))
+                        if floor == 0:
+                            house_type = HouseType.LAND
+                        elif floor == 1:
+                            house_type = HouseType.LOFT_HOUSE
+                        else:
+                            house_type = HouseType.TOWN_HOUSE
+                except ValueError:
+                    logger.info(f"error floor  {floor}")
+                    pass
+
+                # Read information about width
+                width = row[header_dict['mat-tien']]
+                try:
+                    if len(width) > 0:
+                        width = Decimal(width.replace(',', '.').replace(' ', ''))
+                except ValueError:
+                    logger.info(f"error width  {width}")
+                    pass
+
                 # Read real estate price information
                 price = row[header_dict['gia']]
                 try:
-                    price = Decimal(price.split(' ')[0].strip().replace(',', '.'))
-                    if not price or price == '#VALUE!':
+                    if price == '#VALUE!':
+                        continue
+                    price = price.split(' ')[0]
+                    price = Decimal(price.replace(',', '.').replace(' ', ''))
+                    if not price:
                         continue
                     if price > 1000000 and area < 10000000:
                         price = Decimal(price / 1000000)
@@ -266,41 +309,40 @@ def handle_import(request, file_path, listing_type):
                 try:
                     if status == 'Còn bán' or status == 'Chuẩn' or status == 'Chờ duyệt' or status == 'Chim trời cá bể':
                         status = Status.SELLING
+                        is_published = True
                     elif status == 'Đã bán' or status == 'Đã cọc':
                         status = Status.SOLD
+                        is_published = False
                     elif status == 'Dừng bán' or status == 'Tạm dừng bán':
                         status = Status.STOP_SELLING
+                        is_published = False
                     elif status == 'Hạ chào':
                         status = Status.SALE
+                        is_published = True
                     else:
                         status = Status.SOLD
+                        is_published = False
                     # 008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
                     if district_code == '008' or district_code == '009' or district_code == '020' or district_code == '278' or district_code == '268':
                         priority = 8
-                        if status == Status.SELLING:
-                            is_published = True
-                        else:
-                            is_published = False
                     else:
                         priority = 9
-                        is_published = False
-
                 except ValueError:
                     logger.info(f"error status {status}")
                     pass
 
                 #read đơn vị
+                don_vi = row[header_dict['don-vi']]
                 try:
-                    don_vi = row[header_dict['don-vi']]
                     if don_vi is None:
                         don_vi = "Thiên Khôi"
                 except ValueError:
                     don_vi = "Thiên Khôi"
 
                 #read nguồn & hoa hồng
+                nguon = row[header_dict['nguon']]
+                hoa_hong = row[header_dict['hoa-hong']]
                 try:
-                    nguon = row[header_dict['nguon']]
-                    hoa_hong = row[header_dict['hoa-hong']]
                     num_reward = 100
                     if (not (hoa_hong.split(' ')[0] and hoa_hong.split(' ')[0].strip())):
                         num_reward = 100
@@ -311,16 +353,16 @@ def handle_import(request, file_path, listing_type):
                         bonus_rate = num_reward
                     else:
                         bonus_rate = 3
-                    if nguon is not None:
-                        extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
-                    else:
+                    if listing_type == 'K1':
                         extra_add = f' Nguồn nhà phố, hoa hồng 3%, xác minh lại với đầu chủ {name}.'
+                    else:
+                        extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
                 except ValueError:
                     extra_add = f' Nguồn nhà phố, hoa hồng 3%, xác minh lại với đầu chủ {name}.'
 
                 #Read information about specialist phone number
+                phone = row[header_dict['sdt']]
                 try:
-                    phone = row[header_dict['sdt']]
                     phone = phone.split(' ')[0]
                     phone = phone.split('-')[0]
                     if not phone.isalnum():
@@ -430,201 +472,161 @@ def handle_import(request, file_path, listing_type):
                 except ValueError:
                     logger.info(f"error phone {phone}")
 
-                if listing_type == "K0":
-                    logger.info(f"import data from TGNP template")
-                elif listing_type == "K1":
-                    addr = row[header_dict['dia-chi']].replace('.', '/').replace(',', '/')
-                    street = row[header_dict['pho']]
-                    deep_address = addr.split('/')
-
-                    if street in addr:
-                        full_addr = f'{addr}, {district}'
+                # get address and street
+                addr = row[header_dict['dia-chi']].replace('.', '/').replace(' , ', ', ').replace(',', '/').replace(
+                    'Số ', '').replace(' ', ' ')
+                street = row[header_dict['pho']]
+                try:
+                    so_nha = addr.split(' ')
+                    deep_address = so_nha[0].split('/')
+                    if len(street) > 0:
+                        full_addr = f'{addr}, {street}, {district}, {state_name}'
                     else:
-                        full_addr = f'{addr}, {street}, {district}'
-                    full_addr = f'{full_addr}, Hà Nội'
-                    full_addr = full_addr.replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ').replace(' , ', ', ')
+                        lensonha = int(len(so_nha[0]))
+                        street = addr[lensonha:].replace('(', '').replace(')', '').replace('/', '').replace('  ', '')
+                        street = street.translate(street.maketrans('', '', digits))
+                        full_addr = f'{addr}, {district}, {state_name}'
+                    full_addr = full_addr.replace(' TT ', ' tập thể ').replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ')
                     add_search_map = f'{deep_address[0]}, {street}, {district}, {state_name}'
+                    add_search_map = add_search_map.replace('  ', '')
+                except ValueError:
+                    logger.info(f'error address {full_addr}')
 
-                    encoded_num = row[header_dict['thong-so']].replace('  ', ' ')
-                    splitter = encoded_num.split(' ')
-                    splitter_len = len(splitter)
-
-                    if splitter_len < 3:
-                        # logger.info(f"Cannot decode encoded_num. Continue in line {line_count}")
-                        continue
-                    # splitter = list(filter(None, splitter))
-                    floor_area = splitter[0].split('/')
-                    if splitter_len == 2:
-                        width = float(splitter[1].replace(',', '.'))
+                # search location on map
+                try:
+                    listing_loc = Point(105.83549388560711, 20.976795401917798)
+                    if add_search_map in searched_locations:
+                        if searched_locations[add_search_map]:
+                            listing_loc = Point(searched_locations[full_addr][0],
+                                                searched_locations[full_addr][1])
                     else:
-                        try:
-                            width = float(splitter[2].replace(',', '.'))
-                        except ValueError:
-                            # logger.info(f"Cannot decode floor_area. Continue in line {line_count}")
-                            continue
-
-                    floor = 0
-                    floor_code = slugify(splitter[1].lower().replace('đ', 'd').replace('ấ', 'a').replace('t', '').replace('4', '').replace(' ', ''))
-                    if floor_code == 'c' or floor_code == 'cap':
-                        floor = 1
-                        house_type = HouseType.LOFT_HOUSE
-                    elif floor_code == 'da' or floor_code == 'd':
-                        floor = 0
-                        house_type = HouseType.LAND
-                    else:
-                        house_type = HouseType.TOWN_HOUSE
-                        if splitter_len == 2:
-                            floor = int(len(floor_area))
+                        #if api_key:
+                        #geolocator = GeocodeEarth(api_key=api_key)
+                        geolocator = Nominatim(user_agent="thegioinhaphovietnam.com.vn")
+                        #GeocodeEarth.geocoders.options.default_user_agent = "my-application"
+                        hanoi_bounds = ((21.097341, 105.929947), (20.920105, 105.702667))
+                        location = geolocator.geocode(add_search_map, bounded=True, viewbox=hanoi_bounds)
+                        if location and location.point:
+                            listing_loc = Point(location.point.longitude, location.point.latitude)
+                            searched_locations[full_addr] = [location.point.longitude,
+                                                             location.point.latitude]
                         else:
-                            try:
-                                floor = int(floor_code)
-                            except ValueError:
-                                # logger.info(f"Cannot decode floor_code. Continue in line {line_count}")
-                                continue
+                            searched_locations[full_addr] = None
+                except ValueError:
+                    logger.info(f"error search location {add_search_map}")
 
-                    shop_house = "shophouse"
-                    biet_thu = "bt"
-                    lien_ke = "lk"
-                    dich_vu = "dv"
-                    thap_tang = "tt"
-                    lo = "lô"
-                    chung_cu = "chung cư"
-                    cao_tang = "ct"
-                    tap_the = "tập thể"
-                    du_an = "dự án"
-                    desc = row[header_dict['dac-diem']]
-                    if desc == 'Mặt Phố' or (len(deep_address) == 1 and price > 6):
-                        house_type = HouseType.STREET_HOUSE
-                        road_type = RoadType.ALLEY_CAR_2
-                        if price > 30:
-                            published = False
-                    elif desc == 'Ngõ Ô Tô':
-                        road_type = RoadType.ALLEY_CAR
-                    elif desc == 'Ngõ 3 Gác':
-                        road_type = RoadType.ALLEY_TRIBIKE_BIKE
-                    elif desc == 'Ngõ Xe Máy':
-                        road_type = RoadType.ALLEY_BIKE
-                    elif desc == 'Đất Dự Án':
-                        house_type = HouseType.PLOT
-                        road_type = RoadType.ALLEY_CAR_2
-                        trans_type = TransactionType.PROJECT
-                    elif shop_house in full_addr.lower() or desc == 'Kinh Doanh':
-                        house_type = HouseType.SHOP_HOUSE
-                        road_type = RoadType.ALLEY_CAR_2
+                #get đặc điểm bđs, title
+                title_hot = ''
+                desc = row[header_dict['dac-diem']].replace('N', 'n').replace('K', 'k').replace('B', 'b').replace('X', 'x').replace('D', 'd')\
+                    .replace('M', 'm').replace('G', 'g').replace('Ô', 'ô').replace('T', 't').replace('G', 'g')\
+                    .replace('Á', 'á').replace('Đ', 'đ').replace('P', 'p').replace('C', 'c')
+                try:
                     if biet_thu in full_addr.lower():
                         house_type = HouseType.VILLA
+                        road_type = RoadType.ALLEY_CAR_2
+                    elif shop_house in full_addr.lower():
+                        house_type = HouseType.SHOP_HOUSE
                         road_type = RoadType.ALLEY_CAR_2
                     elif lien_ke in full_addr.lower() or dich_vu in full_addr.lower() or lo in full_addr.lower() or du_an in full_addr.lower() or desc == 'Liền Kề' or thap_tang in full_addr.lower():
                         house_type = HouseType.PLOT
                         road_type = RoadType.ALLEY_CAR_2
+                    elif "chung cư mini" in full_addr.lower():
+                        house_type = HouseType.APARTMENT
+                        road_type = RoadType.ALLEY_CAR
                     elif cao_tang in full_addr.lower() or chung_cu in full_addr.lower() or " tt " in full_addr.lower() or tap_the in full_addr.lower():
                         full_addr = full_addr.replace(' TT ', ' tập thể ').replace('CCCC', 'Chung cư cao cấp')
                         house_type = HouseType.APARTMENT
                         road_type = RoadType.ALLEY_CAR_2
-                    elif "chung cư mini" in full_addr.lower():
-                        full_addr = full_addr.replace('CCMN', 'Chung cư Mini')
-                        house_type = HouseType.APARTMENT
-                        road_type = RoadType.ALLEY_CAR_TRIBIKE
 
-                    direction = get_direction(row[header_dict['huong']])
-
-                elif listing_type == "K2":
-                    addr = row[header_dict['dia-chi']].replace('.', '/').replace('Số ', '').replace(' ', ' ')
-                    addr = addr.replace(' TT ', ' tập thể ').replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ')
-                    so_nha = addr.split(' ')
-                    lensonha = int(len(so_nha[0]))
-                    deep_address = so_nha[0].split('/')
-                    street = addr[lensonha:].replace('(', '').replace(')', '').replace('/', '').replace('  ', ' ')
-                    street = street.translate(street.maketrans('', '', digits))
-                    full_addr = f'{addr}, {district}, {state_name}'
-                    add_search_map = f'{deep_address[0]}, {street}, {district}, {state_name}'
-                    add_search_map = add_search_map.replace('  ', ' ')
-
-                    width = Decimal(row[header_dict['mat-tien']])
-                    floor = float(row[header_dict['so-tang']])
-
-                    if floor == 0:
-                        house_type = HouseType.LAND
-                    elif floor == 1:
-                        house_type = HouseType.LOFT_HOUSE
-                    else:
-                        house_type = HouseType.TOWN_HOUSE
-
-                    shop_house = "shophouse"
-                    biet_thu = "bt"
-                    lien_ke = "lk"
-                    thap_tang = "tt"
-                    dich_vu = "dv"
-                    lo = "lô"
-                    chung_cu = "chung cư"
-                    cao_tang = "ct"
-                    tap_the = "tập thể"
-                    du_an = "dự án"
-                    if len(deep_address) == 1 and price > 6:
-                        house_type = HouseType.STREET_HOUSE
-                        road_type = RoadType.ALLEY_CAR_2
-                        if price > 30:
-                            published = False
-                    elif shop_house in full_addr.lower():
-                        house_type = HouseType.SHOP_HOUSE
-                        road_type = RoadType.ALLEY_CAR_2
-                    if biet_thu in full_addr.lower():
-                        house_type = HouseType.VILLA
-                        road_type = RoadType.ALLEY_CAR_2
-                    elif lien_ke in full_addr.lower() or dich_vu in full_addr.lower() or lo in full_addr.lower() or du_an in full_addr.lower() or desc == 'Liền Kề' or thap_tang in full_addr.lower():
+                    if 'đất dự án' in desc:
                         house_type = HouseType.PLOT
                         road_type = RoadType.ALLEY_CAR_2
-                    elif cao_tang in full_addr.lower() or chung_cu in full_addr.lower() or tap_the in full_addr.lower():
+                        trans_type = TransactionType.PROJECT
+                    elif 'chung cư' in desc:
                         house_type = HouseType.APARTMENT
                         road_type = RoadType.ALLEY_CAR_2
-                    elif "chung cư mini" in full_addr.lower():
-                        house_type = HouseType.APARTMENT
+                    elif 'ngõ ô tô' in desc:
+                        house_type = HouseType.TOWN_HOUSE
                         road_type = RoadType.ALLEY_CAR
+                        title_hot = 'ngõ ô tô'
+                    elif 'ngõ 3 gác' in desc:
+                        house_type = HouseType.TOWN_HOUSE
+                        road_type = RoadType.ALLEY_TRIBIKE
+                    elif 'ngõ xe máy' in desc:
+                        house_type = HouseType.TOWN_HOUSE
+                        road_type = RoadType.ALLEY_BIKE
+                    elif 'kinh doanh' in desc:
+                        road_type = RoadType.ALLEY_CAR
+                        title_hot = 'kinh doanh tốt'
 
-                # search location on map
-                listing_loc = Point(105.83549388560711, 20.976795401917798)
-                if add_search_map in searched_locations:
-                    if searched_locations[add_search_map]:
-                        listing_loc = Point(searched_locations[full_addr][0],
-                                            searched_locations[full_addr][1])
-                        logger.info(f"listing_loc search ok {searched_locations[full_addr][0]} , {searched_locations[full_addr][1]}")
+                    if (len(deep_address) == 1 and deep_address[0].isalnum()) or ('mặt phố' in desc):
+                        house_type = HouseType.STREET_HOUSE
+                        road_type = RoadType.ALLEY_CAR_2
+
+                    if len(desc) > 0:
+                        extra_data = f'Bất động sản {desc}. ' + extra_data
+                except ValueError:
+                    logger.info(f"error dac-diem {desc}")
+
+                # Phân tích cú pháp thông số để lấy diện tích, số tầng, mặt tiền từ file nguồn nhà phố
+                if listing_type == "K1":
+                    encoded_num = row[header_dict['thong-so']].replace('  ', ' ')
+                    splitter = encoded_num.split(' ')
+                    floor = 0
+                    try:
+                        floor_code = splitter[1]
+                        floor_code = slugify(floor_code.lower().replace('đ', 'd').replace('ấ', 'a').replace('t', '')
+                                    .replace('c4', 'c').replace(' ', ''))
+                        if floor_code == 'c' or floor_code == 'cap':
+                            floor = 1
+                            house_type = HouseType.LOFT_HOUSE
+                        elif floor_code == 'da' or floor_code == 'd':
+                            floor = 0
+                            house_type = HouseType.LAND
+                        else:
+                            floor = int(floor_code)
+
+                        splitter_len = len(splitter)
+                        if splitter_len == 4:
+                            width = splitter[3]
+                            width = Decimal(width.replace(',', '.').replace(' ', ''))
+                        elif splitter_len == 3:
+                            width = splitter[2]
+                            width = Decimal(width.replace(',', '.').replace(' ', ''))
+                        else:
+                            width = None
+
+                    except ValueError:
+                        logger.info(f"Cannot decode encoded_num {encoded_num}. Continue in line {line_count}")
+
+                title = f'Bán {get_short_title_from_house_type(house_type)} {title_hot} {street} {get_district_name(district_code)} '
+                if area >= 30:
+                    title += f'{area:.0f}m '
+                if house_type == HouseType.APARTMENT or house_type == HouseType.CONDO_TEL or house_type == HouseType.SERVICE_APARTMENT or house_type == HouseType.PENT_HOUSE:
+                    title += f'tầng {floor:.0f} giá '
+                elif int(floor) > 3:
+                    title += f'{floor:.0f} tầng'
+                if price % 1 == 0:
+                    title += f'{price:.0f} tỷ'
                 else:
-                    #if api_key:
-                    #geolocator = GeocodeEarth(api_key=api_key)
-                    geolocator = Nominatim(user_agent="thegioinhaphovietnam.com.vn")
-                    #GeocodeEarth.geocoders.options.default_user_agent = "my-application"
-                    hanoi_bounds = ((21.097341, 105.929947), (20.920105, 105.702667))
-                    location = geolocator.geocode(add_search_map, bounded=True, viewbox=hanoi_bounds)
-                    if location and location.point:
-                        listing_loc = Point(location.point.longitude, location.point.latitude)
-                        searched_locations[full_addr] = [location.point.longitude,
-                                                         location.point.latitude]
-                    else:
-                        searched_locations[full_addr] = None
-
+                    title += f'{price:.1f} tỷ'
+                title = title.upper().replace('  ', ' ')
                 starter = get_house_type_short(house_type)
-                code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
-                new_listing = Listing(user=user, realtor=user.realtor, code=code, status=status, street=street,
-                                      address=full_addr, area=area, transaction_type=trans_type,
+                if width is not None:
+                    code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
+                else:
+                    code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{price}'
+
+                new_listing = Listing(user=user, realtor=user.realtor, code=code, status=status, title=title,
+                                      street=street, address=full_addr, area=area, transaction_type=trans_type,
                                       house_type=house_type, road_type=road_type, list_date=created,
                                       direction=direction, price=price, reward_person=realtor.user.name, priority=priority,
                                       reward_person_mobile=realtor.user.phone, reward=reward, bonus_rate=bonus_rate,
                                       extra_data=extra_data, state=state_code, district=district_code, is_published=is_published,
                                       width=width, floors=floor, average_price=price_per_area, length=None, lane_width=None,
                                       location=listing_loc)
-                title = f'Bán {get_short_title_from_house_type(new_listing.house_type)} {new_listing.street} {new_listing.district_name()} '
-
-                if new_listing.area >= 30:
-                    title += f'{new_listing.area:.0f}m '
-                if new_listing.floors and new_listing.floors > 1:
-                    title += f'{new_listing.floors:.0f} tầng '
-                title += f'{new_listing.display_price}'
-                title = title.upper().replace('  ', ' ')
-                new_listing.title = title
-                description = render_to_string('listings/defaultDescription.html',
-                                               context={"listing": new_listing, "desc": desc})
-                new_listing.description = description
-                new_listing.description = new_listing.description.replace('  ', ' ')
+                new_listing.description = render_to_string('listings/defaultDescription.html',
+                                               context={"listing": new_listing, "desc": desc}).replace('  ', ' ')
 
                 if code in listing_obj:
                     queryset_list = Listing.objects.filter(code=code)
@@ -638,6 +640,8 @@ def handle_import(request, file_path, listing_type):
                             listing.reward_person = new_listing.reward_person
                             listing.reward_person_mobile = new_listing.reward_person_mobile
                             listing.extra_data = new_listing.extra_data
+                            listing.street = new_listing.street
+                            listing.address = new_listing.address
                             listing.location = new_listing.location
                             listing.is_published = new_listing.is_published
                             listing.save()
@@ -652,11 +656,15 @@ def handle_import(request, file_path, listing_type):
                             listing.floors = new_listing.floors
                             listing.width = new_listing.width
                             listing.price = new_listing.price
+                            listing.title = new_listing.title
+                            listing.description = new_listing.description
                             listing.list_date = new_listing.list_date
                             listing.reward_person = new_listing.reward_person
                             listing.reward_person_mobile = new_listing.reward_person_mobile
                             listing.extra_data = new_listing.extra_data
                             listing.priority = new_listing.priority
+                            listing.street = new_listing.street
+                            listing.address = new_listing.address
                             listing.location = new_listing.location
                             listing.is_published = new_listing.is_published
                             listing.save()
@@ -670,7 +678,12 @@ def handle_import(request, file_path, listing_type):
                             if listing.user is None:
                                 listing.user = new_listing.user
                             listing.realtor = new_listing.realtor
+                            listing.house_type = new_listing.house_type
+                            listing.road_type = new_listing.road_type
                             listing.status = new_listing.status
+                            listing.street = new_listing.street
+                            listing.address = new_listing.address
+                            listing.location = new_listing.location
                             listing.is_published = new_listing.is_published
                             listing.save()
                             logger.info(
@@ -686,10 +699,14 @@ def handle_import(request, file_path, listing_type):
                             listing.floors = new_listing.floors
                             listing.width = new_listing.width
                             listing.price = new_listing.price
+                            listing.title = new_listing.title
+                            listing.description = new_listing.description
                             listing.list_date = new_listing.list_date
                             listing.reward_person = new_listing.reward_person
                             listing.reward_person_mobile = new_listing.reward_person_mobile
                             listing.extra_data = new_listing.extra_data
+                            listing.street = new_listing.street
+                            listing.address = new_listing.address
                             listing.location = new_listing.location
                             listing.priority = new_listing.priority
                             code_old = listing.code
@@ -706,24 +723,8 @@ def handle_import(request, file_path, listing_type):
                         print(f"row {line_count}: new listing: {new_listing}")
                         del new_listing
 
-        # đoạn code phục vụ
-        # f = Listing.objects.filter(is_published=True)
-        # for r in f:
-        #     if r.priority == 1 or r.priority == 2:
-        #         r.is_published = True
-        #     elif r.price > 50 or r.status == 'sold' or r.status == 'stop_selling':
-        #         r.is_published = False
-        #     # 008 Q. Hoàng Mai,009 Q. Thanh Xuân, 020 H. Thanh Trì, 278 H. Thanh Oai, 268 Q. Hà Đông
-        #     elif r.district == '008' or r.district == '009' or r.district == '020' or r.district == '278' or r.district == '268':
-        #         r.is_published = True
-        #     else:
-        #         r.is_published = False
-        #     r.save()
-        #     print(f"cập nhật hiển thị cho {r.code}")
-
     except Exception as ex:
-        print(f"Error occurred at line: {line_count}")
-        print(type(ex))
+        print(f"Error occurred at line: {line_count} type {type(ex)}")
         print_trace(ex)
     finally:
         print(f'Read {line_count} lines')

@@ -46,7 +46,7 @@ class ListingAdmin(admin.ModelAdmin):
             'classes': ('wide',),
             'fields': (('realtor', 'user'),)}),
         ('THÔNG TIN GIAO DỊCH', {'fields': (
-            ('transaction_type', 'house_type', 'status'),)}),
+            ('transaction_type', 'house_type'),)}),
         ('THÔNG TIN BẤT ĐỘNG SẢN', {'fields': (
             ('title', 'code'), ('description', 'extra_data'),
             ('area', 'floors', 'width'), ('price', 'registration_type', 'road_type'),
@@ -54,7 +54,7 @@ class ListingAdmin(admin.ModelAdmin):
         ('ĐỊA CHỈ & VỊ TRÍ BĐS', {'fields': (
             ('state', 'district', 'ward'), ('street', 'address', 'location'))}),
         ('TRẠNG THÁI ĐĂNG TIN', {
-            'fields': (('priority','list_date'), ('is_verified', 'is_published', 'is_exclusive'),)}),
+            'fields': (('status', 'priority','list_date'), ('is_verified', 'is_published', 'is_exclusive'),)}),
     )
 
     list_display = (
