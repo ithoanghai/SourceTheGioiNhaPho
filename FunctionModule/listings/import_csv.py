@@ -644,16 +644,16 @@ def handle_import(request, file_path, listing_type):
 
                 query = (Q(address__contains=so_nha[0]) & Q(area=area) & Q(floors=floor) & Q(width=width))| \
                         (Q(address__contains=so_nha[0]) & Q(state=state_code) & Q(district=district_code))
-                querylist_list = Listing.objects.filter(Q(code=code) | Q(address__contains=so_nha[0]) | query).order_by('-list_date')
+                querylist_list = Listing.objects.filter(Q(code=code) | query).order_by('-list_date')
                 #Nếu kho đã tồn tại bđs
                 if querylist_list.exists():
-                    print(f"row {line_count}: nếu kho đã tồn tại {querylist_list.count()} bđs: {new_listing}")
+                    print(f"row {line_count}: kho đang có {querylist_list.count()} bđs: {new_listing}")
                     count_update = 0
                     listing_fisrt = None
                     # duyệt toàn bộ tìm các listing trùng lặp đang có trong kho
                     for listing in querylist_list:
                         #Kiểm tra listing tiếp theo, nếu cũ hơn thì xóa, mới hơn thì cập nhật
-                        logger.info(f"row {line_count}: duyệt và gán listing {listing.code} address {full_addr}")
+                        logger.info(f"row {line_count}: bắt đầu cập nhật listing {listing.code}:")
                         if listing_fisrt is None:
                             listing_fisrt = Listing.objects.get(id=listing.id)
 
@@ -668,7 +668,7 @@ def handle_import(request, file_path, listing_type):
                                               reward_person=new_listing.reward_person, extra_data=new_listing.extra_data,
                                               warehouse=listing_type, list_date=new_listing.list_date)
                                 new_listhis.save()
-                                logger.info(f"row {line_count}: new listing history {new_listhis}")
+                                logger.info(f"row {line_count}: tạo mới lịch sử bđs {new_listhis} - listing import {new_listing}")
 
                         #Nếu listing đưa vào là mới nhất là lần đầu thì cập nhật thông tin mới cho listing
                         elif listing.list_date < new_listing.list_date:
@@ -700,7 +700,7 @@ def handle_import(request, file_path, listing_type):
                                 listing_fisrt.list_date = new_listing.list_date
                                 listing_fisrt.is_published = new_listing.is_published
                                 listing_fisrt.save()
-                                logger.info(f"row {line_count}: cập nhật {listing} đã tồn tại có thứ tự ưu tiên cao với dữ liệu mới đưa vào mới nhất ngày {new_listing.list_date} ")
+                                logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} từ {new_listing}")
                             else:
                                 listing_fisrt.user = new_listing.user
                                 listing_fisrt.realtor = new_listing.realtor
@@ -725,7 +725,7 @@ def handle_import(request, file_path, listing_type):
                                 listing_fisrt.list_date = new_listing.list_date
                                 listing_fisrt.is_published = new_listing.is_published
                                 listing_fisrt.save()
-                                logger.info(f"row {line_count}: cập nhật {listing.code} đã tồn tại ưu tiên thấp với dữ liệu mới nhất")
+                                logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} từ {new_listing}")
                         #Nếu listing đưa vào cùng ngày listing đã có thì cập nhật thông tin
                         elif listing.list_date == new_listing.list_date:
                             #chỉ cập nhật thông tin có trong ds cho listing cũ
@@ -746,7 +746,7 @@ def handle_import(request, file_path, listing_type):
                                 listing_fisrt.list_date = new_listing.list_date
                                 listing_fisrt.is_published = new_listing.is_published
                                 listing_fisrt.save()
-                                logger.info(f"row {line_count}: cập nhật {listing} đã tồn tại ưu tiên cao với dữ liệu mới nhất ngày {new_listing.list_date} ")
+                                logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} same listdate từ {new_listing}")
                             else:
                                 listing_fisrt.user = new_listing.user
                                 listing_fisrt.realtor = new_listing.realtor
@@ -771,7 +771,7 @@ def handle_import(request, file_path, listing_type):
                                 listing_fisrt.list_date = new_listing.list_date
                                 listing_fisrt.is_published = new_listing.is_published
                                 listing_fisrt.save()
-                                logger.info(f"row {line_count}: cập nhật {listing.code} đã tồn tại ưu tiên thấp với dữ liệu đưa vào")
+                                logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} same listdate từ {new_listing}")
 
                         if count_update >= 1:
                             listing.delete()
