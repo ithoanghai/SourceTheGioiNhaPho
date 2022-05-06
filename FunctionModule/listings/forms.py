@@ -6,7 +6,7 @@ from django import forms
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.forms import Textarea, ModelForm, BaseInlineFormSet
 
-from .models import Listing, ListingImage
+from .models import Listing, ListingImage, ListingHistory
 from ..accounts.models import User
 from ..realtors.models import Realtor
 
@@ -40,6 +40,19 @@ class ListingAdminForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # self.fields['ward'].widget = forms.Select()
         #self.fields['realtor'].disabled = False
+
+
+class ListingHistoryAdminForm(forms.ModelForm):
+    class Meta:
+        model = ListingHistory
+        fields = '__all__'
+
+        widgets = {
+            'extra_data': Textarea(attrs={'class': '???', 'rows': 12}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
 
 class ImportListingForm(forms.Form):

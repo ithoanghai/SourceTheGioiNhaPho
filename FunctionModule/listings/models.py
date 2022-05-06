@@ -153,7 +153,7 @@ class Listing(models.Model):
                              help_text="Nhập toạ độ hoặc chọn vị trí trên bản đồ")
 
     def __str__(self):
-        return f'%s' % (self.code)
+        return f'%s - %s' % (self.code, self.address)
 
     def save(self, *args, **kwargs):
         if not self.id and not self.address:
@@ -318,3 +318,50 @@ class ContractImage(models.Model):
         if os.path.isfile(self.photo.path):
             os.remove(self.photo.path)
         return super().delete(using, keep_parents)
+
+
+class ListingHistory(models.Model):
+    class Meta:
+        verbose_name = "Lịch sử Bất động sản"
+        verbose_name_plural = "Lịch sử bất động sản"
+
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("Bất động sản gốc"))
+    user = models.ForeignKey(User,  on_delete=models.DO_NOTHING, blank=True, null=True, verbose_name=_("Người thêm BĐS"))
+    realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, blank=True, null=True, verbose_name=_("Chuyên viên quản lý BĐS"))
+    address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ"),
+                               help_text=_("Nhập theo định dạng: Ngõ.Ngách.Hẻm.Số nhà, Khu dân cư, Phố, Quận/Huyện, Tỉnh/TP"))
+    area = models.DecimalField(max_digits=10, decimal_places=1, verbose_name=_("Diện tích (m2)"))
+    floors = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], null=True, default="0",
+                                 choices=([(i, i) for i in range(1, 50)]), verbose_name=_("Số tầng"))
+    width = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Mặt tiền (m)"), null=True)
+    price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá chào (tỷ)"))
+    bedrooms = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)],
+                                   choices=([(i, i) for i in range(1, 100)]), verbose_name=_("Số phòng ngủ"),
+                                   null=True, blank=True)
+    bathrooms = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)],
+                                    choices=([(i, i) for i in range(1, 100)]), verbose_name=_("Số phòng tắm"),
+                                    null=True, blank=True)
+    reward_person = models.CharField(max_length=100, blank=True, verbose_name=_("Tên chủ sở hữu BĐS"),
+                                     help_text="Tên người chủ sở hữu BĐS. Ví dụ Nguyễn Văn A. Nếu BĐS của ĐC thì ghi tên của Chuyên viên ĐC và tên Cty")
+    reward_person_mobile = models.CharField(max_length=50, blank=True, verbose_name=_("Số ĐT chủ sở hữu BĐS hoặc của Chuyên viên ĐC"),
+                                            help_text="Số ĐT chủ sở hữu BĐS, ví dụ 0916286256")
+
+    extra_data = models.TextField(verbose_name=_("Mô tả bđs của chuyên viên"), null=True, blank=True,
+                                  help_text="Ghi các thông tin mô tả đầy đủ của đầu chủ về chủ nhà hoặc các yếu tố khác liên quan đến tương tác với Chuyên viên...")
+
+    warehouse = models.CharField(max_length=100, blank=True, verbose_name=_("Kho hàng"))
+    list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày khởi tạo BĐS"))
+
+    def __str__(self):
+        return f'%s' % (self.listing)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+    @property
+    def display_price(self):
+        price = self.sale_price or self.price
+        if price % 1 == 0:
+            return f'{price.normalize} tỷ'
+        else:
+            return f'{price:.2f} tỷ'

@@ -12,7 +12,7 @@ from FunctionModule.listings.import_csv import handle_import, logger
 from .filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter, IsWithinRangeFilter, \
     SimpleDropdownFilter, AreaFilter
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
-from .models import Listing, ListingImage, ListingVideo, ContractImage
+from .models import Listing, ListingImage, ListingVideo, ContractImage, ListingHistory
 from .choices import district_default_choices
 from ..realtors.models import Realtor
 from django.db.models import Q
@@ -155,6 +155,77 @@ class ListingAdmin(admin.ModelAdmin):
         self.message_user(request, f'Đã đổi trạng thái cho {updated} căn')
 
 
+class ListingHistoryAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('THÔNG TIN CHUYÊN VIÊN', {
+            'classes': ('wide',),
+            'fields': (('realtor', 'user'),)}),
+        ('THÔNG TIN BẤT ĐỘNG SẢN', {'fields': (
+            'listing', ('warehouse', 'list_date'), ('reward_person', 'reward_person_mobile', 'extra_data'),
+            ('area', 'floors', 'width'), ('price', 'bedrooms', 'bathrooms'),
+        )}),
+    )
+
+    list_display = ('listing', 'area', 'floors', 'width', 'price', 'bedrooms', 'bathrooms', 'warehouse', 'list_date',)
+    list_display_links = ('listing',)
+    list_filter = (
+        ('list_date', DateFieldListFilter),
+        ('listing', ChoiceDropdownFilter),
+    )
+    list_editable = ()
+    search_fields = ('id', 'area', 'price', 'list_date',)
+    list_per_page = 200
+    inlines = []
+    actions = []
+    form = ListingAdminForm
+    ordering = ('-list_date',)
+
+    class Media:
+        js = ('admin/js/dropzone.js', 'admin/js/listing.js', 'admin/js/filepond-4.28.2.min.js',
+              'admin/js/micromodal-0.4.6.min.js')
+        css = {
+            'all': ('admin/css/dropzone.css', 'admin/css/listing.css', 'admin/css/filepond.min.css')
+        }
+
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        form = super(ListingHistoryAdmin, self).get_form(request, obj, **kwargs)
+        form.base_fields['user'].initial = request.user
+        realtor_list = Realtor.objects.filter(user=request.user)
+        if realtor_list is not None:
+            form.base_fields['realtor'].initial = realtor_list.first()
+        disabled_fields = set()  # type: Set[str]
+        disabled_fields |= {
+            'user',
+            'realtor'
+        }
+        excludes = ('reward_person_mobile', 'extra_data')
+        if request.user.is_superuser:
+            form.base_fields['user'].disabled = True
+        elif request.user.is_staff:
+            for exc in excludes:
+                if exc in form.base_fields:
+                    form.base_fields[exc].widget = forms.HiddenInput()
+            for f in disabled_fields:
+                if f in form.base_fields:
+                    form.base_fields[f].disabled = True
+        else:
+            for f in disabled_fields:
+                if f in form.base_fields:
+                    form.base_fields[f].disabled = True
+        return form
+
+    def get_queryset(self, request):
+        if request.user.is_superuser or request.user.is_staff:
+            queryset = super().get_queryset(request)
+            return queryset
+        else:
+            queryset_list = Listing.objects.order_by('-list_date')
+            query = Q(realtor__user=request.user.id)
+            query = query | Q(user=request.user)
+            queryset_list = queryset_list.filter(query)
+            return queryset_list
+
+
 @admin.site.register_view('listings/listing/import-listing')
 def import_csv_view(request: HttpRequest) -> JsonResponse:
     if request.method == 'POST':
@@ -173,3 +244,4 @@ def import_csv_view(request: HttpRequest) -> JsonResponse:
 
 
 admin.site.register(Listing, ListingAdmin)
+admin.site.register(ListingHistory, ListingHistoryAdmin)

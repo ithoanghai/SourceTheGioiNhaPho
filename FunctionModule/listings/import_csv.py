@@ -20,7 +20,7 @@ from FunctionModule.accounts.models import User
 from FunctionModule.cadastral.constants import district_data
 from FunctionModule.cadastral.lookups import get_district_name
 from FunctionModule.listings.helpers import print_trace, get_house_type_short, get_short_title_from_house_type
-from FunctionModule.listings.models import Listing, Status, TransactionType, HouseType, RoadType
+from FunctionModule.listings.models import Listing, Status, TransactionType, HouseType, RoadType, ListingHistory
 from FunctionModule.realtors.models import Realtor
 
 default_password = 'tgnpvn@2021'
@@ -48,13 +48,14 @@ def read_header(header_row, listing_type):
             "don-vi": 14,
             "dac-diem": 15,
             "huong": 16,
-            "dt": 19,
-            "trm2": 20,
-            "so-tang": 50,
-            "mat-tien": 50,
-            "hoa-hong": 50,
-            "nguon": 50,
-            "thanh-pho": 50
+            "dt": 20,
+            "trm2": 21,
+            "hientrang": 22,
+            # "thanh-pho": 20,
+            # "so-tang": 23,
+            # "mat-tien": 23,
+            # "hoa-hong": 23,
+            # "nguon": 23,
         }
     elif listing_type == 'K2':
         logger.info(f"listing_type {listing_type} Thien Khoi")
@@ -218,19 +219,23 @@ def handle_import(request, file_path, listing_type):
                 realtor = Realtor.objects.filter(pk=1).first()
 
                 #read state, district information
-                state_name = row[header_dict['thanh-pho']]
-                if not state_name:
-                    # Hanoi
+                try:
+                    if listing_type=='K1':
+                        state_name = 'Hà Nội'
+                    else:
+                        state_name = row[header_dict['thanh-pho']]
+                    district = row[header_dict['quan']]
+                    if not district:
+                        logger.info(f"No district. Continue in line {line_count}")
+                        continue
+                    if district in hanoi_districts:
+                        district_code = hanoi_districts[district]
+                    else:
+                        # logger.info(f"District code not found. Continue in line {line_count}")
+                        continue
+                except ValueError:
                     state_name = 'Hà Nội'
-                district = row[header_dict['quan']]
-                if not district:
-                    logger.info(f"No district. Continue in line {line_count}")
-                    continue
-                if district in hanoi_districts:
-                    district_code = hanoi_districts[district]
-                else:
-                    # logger.info(f"District code not found. Continue in line {line_count}")
-                    continue
+                    pass
 
                 #Read information about date and time listing
                 created_date = row[header_dict['tgian']]
@@ -256,9 +261,12 @@ def handle_import(request, file_path, listing_type):
                     pass
 
                 # Read information about floor
-                floor = row[header_dict['so-tang']]
                 try:
-                    if len(floor) > 0:
+                    if listing_type != "K1":
+                        floor = row[header_dict['so-tang']]
+                    else:
+                        floor = None
+                    if floor is not None:
                         floor = Decimal(floor.replace(',', '.').replace(' ', ''))
                         if floor == 0:
                             house_type = HouseType.LAND
@@ -271,9 +279,12 @@ def handle_import(request, file_path, listing_type):
                     pass
 
                 # Read information about width
-                width = row[header_dict['mat-tien']]
                 try:
-                    if len(width) > 0:
+                    if listing_type != "K1":
+                        width = row[header_dict['mat-tien']]
+                    else:
+                        width = None
+                    if width is not None:
                         width = Decimal(width.replace(',', '.').replace(' ', ''))
                 except ValueError:
                     logger.info(f"error width  {width}")
@@ -340,9 +351,14 @@ def handle_import(request, file_path, listing_type):
                     don_vi = "Thiên Khôi"
 
                 #read nguồn & hoa hồng
-                nguon = row[header_dict['nguon']]
-                hoa_hong = row[header_dict['hoa-hong']]
                 try:
+                    if listing_type != 'K1':
+                        nguon = row[header_dict['nguon']]
+                        hoa_hong = row[header_dict['hoa-hong']]
+                        extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
+                    else:
+                        hoa_hong = ''
+                        extra_add = f' Nguồn nhà phố, hoa hồng 3%, xác minh lại với đầu chủ {name}.'
                     num_reward = 100
                     if (not (hoa_hong.split(' ')[0] and hoa_hong.split(' ')[0].strip())):
                         num_reward = 100
@@ -353,10 +369,6 @@ def handle_import(request, file_path, listing_type):
                         bonus_rate = num_reward
                     else:
                         bonus_rate = 3
-                    if listing_type == 'K1':
-                        extra_add = f' Nguồn nhà phố, hoa hồng 3%, xác minh lại với đầu chủ {name}.'
-                    else:
-                        extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
                 except ValueError:
                     extra_add = f' Nguồn nhà phố, hoa hồng 3%, xác minh lại với đầu chủ {name}.'
 
@@ -375,7 +387,7 @@ def handle_import(request, file_path, listing_type):
                         tmp_phone = phone
                         if len(phone) == 9:
                             phone = f'0{phone}'
-                        extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch. {extra_add}'
+                        extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch.\n{extra_add}'
                         if phone not in user_dict and len(phone) == 10:
                             if not phone:
                                 admin_realtor = Realtor.objects.get(pk=1)
@@ -401,7 +413,7 @@ def handle_import(request, file_path, listing_type):
                                     if user_dict[phone] is None:
                                         new_realtor = Realtor.objects.create(user=usr)
                                         user_dict[phone] = new_realtor
-                                    extra_data = f'Liên hệ với {name}, {extra_phone}, {don_vi} để giao dịch. {extra_add}'
+                                    extra_data = f'Liên hệ với {name}, {extra_phone}, {don_vi} để giao dịch.\n' + extra_add
                                     print(f"update user: {usr}")
                                 else:
                                     new_user = User.objects.create_user(username=phone, password=default_password,
@@ -479,6 +491,8 @@ def handle_import(request, file_path, listing_type):
                 try:
                     so_nha = addr.split(' ')
                     deep_address = so_nha[0].split('/')
+                    if "+" in deep_address:
+                        deep_address = deep_address.split('+')
                     if len(street) > 0:
                         full_addr = f'{addr}, {street}, {district}, {state_name}'
                     else:
@@ -487,8 +501,8 @@ def handle_import(request, file_path, listing_type):
                         street = street.translate(street.maketrans('', '', digits))
                         full_addr = f'{addr}, {district}, {state_name}'
                     full_addr = full_addr.replace(' TT ', ' tập thể ').replace('CCCC', 'Chung cư cao cấp').replace('CCMN', 'Chung cư mini').replace('CC ', 'Chung cư ')
-                    add_search_map = f'{deep_address[0]}, {street}, {district}, {state_name}'
-                    add_search_map = add_search_map.replace('  ', '')
+                    add_search_map = f'{deep_address[0]} {street}, {district}, {state_name}'
+                    add_search_map = add_search_map.replace('  ', ' ')
                 except ValueError:
                     logger.info(f'error address {full_addr}')
 
@@ -497,8 +511,8 @@ def handle_import(request, file_path, listing_type):
                     listing_loc = Point(105.83549388560711, 20.976795401917798)
                     if add_search_map in searched_locations:
                         if searched_locations[add_search_map]:
-                            listing_loc = Point(searched_locations[full_addr][0],
-                                                searched_locations[full_addr][1])
+                            listing_loc = Point(searched_locations[add_search_map][0],
+                                                searched_locations[add_search_map][1])
                     else:
                         #if api_key:
                         #geolocator = GeocodeEarth(api_key=api_key)
@@ -508,10 +522,10 @@ def handle_import(request, file_path, listing_type):
                         location = geolocator.geocode(add_search_map, bounded=True, viewbox=hanoi_bounds)
                         if location and location.point:
                             listing_loc = Point(location.point.longitude, location.point.latitude)
-                            searched_locations[full_addr] = [location.point.longitude,
+                            searched_locations[add_search_map] = [location.point.longitude,
                                                              location.point.latitude]
                         else:
-                            searched_locations[full_addr] = None
+                            searched_locations[add_search_map] = None
                 except ValueError:
                     logger.info(f"error search location {add_search_map}")
 
@@ -564,7 +578,7 @@ def handle_import(request, file_path, listing_type):
                         road_type = RoadType.ALLEY_CAR_2
 
                     if len(desc) > 0:
-                        extra_data = f'Bất động sản {desc}. ' + extra_data
+                        extra_data = f'Bất động sản {desc}. {full_addr}.\n' + extra_data
                 except ValueError:
                     logger.info(f"error dac-diem {desc}")
 
@@ -588,11 +602,11 @@ def handle_import(request, file_path, listing_type):
 
                         splitter_len = len(splitter)
                         if splitter_len == 4:
-                            width = splitter[3]
-                            width = Decimal(width.replace(',', '.').replace(' ', ''))
+                            width = splitter[3].split('/')
+                            width = Decimal(width[0].replace(',', '.').replace(' ', ''))
                         elif splitter_len == 3:
-                            width = splitter[2]
-                            width = Decimal(width.replace(',', '.').replace(' ', ''))
+                            width = splitter[2].split('/')
+                            width = Decimal(width[0].replace(',', '.').replace(' ', ''))
                         else:
                             width = None
 
@@ -628,100 +642,239 @@ def handle_import(request, file_path, listing_type):
                 new_listing.description = render_to_string('listings/defaultDescription.html',
                                                context={"listing": new_listing, "desc": desc}).replace('  ', ' ')
 
-                if code in listing_obj:
-                    queryset_list = Listing.objects.filter(code=code)
-                    if queryset_list.exists():
-                        listing = queryset_list.first()
-                        if listing.priority == 1 or listing.priority == 2:
-                            if listing.user is None:
-                                listing.user = new_listing.user
-                            listing.realtor = new_listing.realtor
-                            listing.status = new_listing.status
-                            listing.reward_person = new_listing.reward_person
-                            listing.reward_person_mobile = new_listing.reward_person_mobile
-                            listing.extra_data = new_listing.extra_data
-                            listing.street = new_listing.street
-                            listing.address = new_listing.address
-                            listing.location = new_listing.location
-                            listing.is_published = new_listing.is_published
-                            listing.save()
-                            logger.info(f"row {line_count}: chỉ cập nhật {code} đã biên tập dữ liệu")
-                        else:
-                            listing.user = new_listing.user
-                            listing.realtor = new_listing.realtor
-                            listing.house_type = new_listing.house_type
-                            listing.road_type = new_listing.road_type
-                            listing.status = new_listing.status
-                            listing.area = new_listing.area
-                            listing.floors = new_listing.floors
-                            listing.width = new_listing.width
-                            listing.price = new_listing.price
-                            listing.title = new_listing.title
-                            listing.description = new_listing.description
-                            listing.list_date = new_listing.list_date
-                            listing.reward_person = new_listing.reward_person
-                            listing.reward_person_mobile = new_listing.reward_person_mobile
-                            listing.extra_data = new_listing.extra_data
-                            listing.priority = new_listing.priority
-                            listing.street = new_listing.street
-                            listing.address = new_listing.address
-                            listing.location = new_listing.location
-                            listing.is_published = new_listing.is_published
-                            listing.save()
-                            logger.info(f"row {line_count}: update {code}")
+                query = (Q(address__contains=so_nha[0]) & Q(area=area) & Q(floors=floor) & Q(width=width))| \
+                        (Q(address__contains=so_nha[0]) & Q(state=state_code) & Q(district=district_code))
+                querylist_list = Listing.objects.filter(Q(code=code) | Q(address__contains=so_nha[0]) | query).order_by('-list_date')
+                #Nếu kho đã tồn tại bđs
+                if querylist_list.exists():
+                    print(f"row {line_count}: nếu kho đã tồn tại {querylist_list.count()} bđs: {new_listing}")
+                    count_update = 0
+                    listing_fisrt = None
+                    # duyệt toàn bộ tìm các listing trùng lặp đang có trong kho
+                    for listing in querylist_list:
+                        #Kiểm tra listing tiếp theo, nếu cũ hơn thì xóa, mới hơn thì cập nhật
+                        logger.info(f"row {line_count}: duyệt và gán listing {listing.code} address {full_addr}")
+                        if listing_fisrt is None:
+                            listing_fisrt = Listing.objects.get(id=listing.id)
+
+                        # nếu listing mới import cũ hơn listing trong kho thì chỉ đẩy listing này sang bảng listing history
+                        if listing.list_date > new_listing.list_date:
+                            querylist_listhistory = ListingHistory.objects.filter(listing=listing, list_date=new_listing.list_date)
+                            #Kiểm tra trong listing history đã có trùng lặp chưa, nếu chưa có thì đẩy vào, nếu có rồi bỏ qua
+                            if not querylist_listhistory.exists() and count_update >= 1:
+                                new_listhis = ListingHistory.objects.create(listing=listing, user=new_listing.user,
+                                              realtor=new_listing.realtor, area=new_listing.area, floors=new_listing.floors, width=new_listing.width,
+                                              bathrooms=new_listing.bathrooms, bedrooms=new_listing.bedrooms, price=new_listing.price, reward_person_mobile=new_listing.reward_person_mobile,
+                                              reward_person=new_listing.reward_person, extra_data=new_listing.extra_data,
+                                              warehouse=listing_type, list_date=new_listing.list_date)
+                                new_listhis.save()
+                                logger.info(f"row {line_count}: new listing history {new_listhis}")
+
+                        #Nếu listing đưa vào là mới nhất là lần đầu thì cập nhật thông tin mới cho listing
+                        elif listing.list_date < new_listing.list_date:
+                            querylist_listhistory = ListingHistory.objects.filter(listing=listing, list_date=listing.list_date)
+                            # Kiểm tra trong listing history đã có trùng lặp chưa, nếu chưa có thì đẩy vào, nếu có rồi bỏ qua
+                            if not querylist_listhistory.exists() and count_update >= 1:
+                                #Đẩy thông tin listing cũ vào lịch sử listing
+                                new_listhis = ListingHistory.objects.create(listing=listing, user=listing.user,
+                                              realtor=listing.realtor, area=listing.area, floors=listing.floors, width=listing.width,
+                                              bathrooms=listing.bathrooms, bedrooms=listing.bedrooms, price=listing.price, reward_person_mobile=listing.reward_person_mobile,
+                                              reward_person=listing.reward_person, extra_data=listing.extra_data, warehouse=listing_type, list_date=listing.list_date)
+                                new_listhis.save()
+                                logger.info(f"row {line_count}: Đẩy thông tin listing cũ {listing} vào lịch sử listing {new_listhis}")
+                            #Cập nhật thông tin mới nhất cho listing đang có
+                            if listing.priority == 1 or listing.priority == 2:
+                                if listing_fisrt.user is None:
+                                    listing_fisrt.user = new_listing.user
+                                listing_fisrt.realtor = new_listing.realtor
+                                listing_fisrt.status = new_listing.status
+                                listing_fisrt.street = new_listing.street
+                                listing_fisrt.address = new_listing.address
+                                listing_fisrt.location = new_listing.location
+                                listing_fisrt.code = new_listing.code
+                                listing_fisrt.house_type = new_listing.house_type
+                                listing_fisrt.road_type = new_listing.road_type
+                                listing_fisrt.reward_person = new_listing.reward_person
+                                listing_fisrt.reward_person_mobile = new_listing.reward_person_mobile
+                                listing_fisrt.extra_data = new_listing.extra_data
+                                listing_fisrt.list_date = new_listing.list_date
+                                listing_fisrt.is_published = new_listing.is_published
+                                listing_fisrt.save()
+                                logger.info(f"row {line_count}: cập nhật {listing} đã tồn tại có thứ tự ưu tiên cao với dữ liệu mới đưa vào mới nhất ngày {new_listing.list_date} ")
+                            else:
+                                listing_fisrt.user = new_listing.user
+                                listing_fisrt.realtor = new_listing.realtor
+                                listing_fisrt.house_type = new_listing.house_type
+                                listing_fisrt.road_type = new_listing.road_type
+                                listing_fisrt.status = new_listing.status
+                                listing_fisrt.area = new_listing.area
+                                listing_fisrt.floors = new_listing.floors
+                                listing_fisrt.width = new_listing.width
+                                listing_fisrt.price = new_listing.price
+                                listing_fisrt.title = new_listing.title
+                                listing_fisrt.description = new_listing.description
+                                listing_fisrt.reward_person = new_listing.reward_person
+                                listing_fisrt.reward_person_mobile = new_listing.reward_person_mobile
+                                listing_fisrt.extra_data = new_listing.extra_data
+                                listing_fisrt.priority = new_listing.priority
+                                listing_fisrt.street = new_listing.street
+                                listing_fisrt.address = new_listing.address
+                                listing_fisrt.location = new_listing.location
+                                listing_fisrt.code = new_listing.code
+                                listing_fisrt.status = new_listing.status
+                                listing_fisrt.list_date = new_listing.list_date
+                                listing_fisrt.is_published = new_listing.is_published
+                                listing_fisrt.save()
+                                logger.info(f"row {line_count}: cập nhật {listing.code} đã tồn tại ưu tiên thấp với dữ liệu mới nhất")
+                        #Nếu listing đưa vào cùng ngày listing đã có thì cập nhật thông tin
+                        elif listing.list_date == new_listing.list_date:
+                            #chỉ cập nhật thông tin có trong ds cho listing cũ
+                            if listing.priority == 1 or listing.priority == 2:
+                                if listing_fisrt.user is None:
+                                    listing_fisrt.user = new_listing.user
+                                listing_fisrt.realtor = new_listing.realtor
+                                listing_fisrt.status = new_listing.status
+                                listing_fisrt.street = new_listing.street
+                                listing_fisrt.address = new_listing.address
+                                listing_fisrt.location = new_listing.location
+                                listing_fisrt.code = new_listing.code
+                                listing_fisrt.house_type = new_listing.house_type
+                                listing_fisrt.road_type = new_listing.road_type
+                                listing_fisrt.reward_person = new_listing.reward_person
+                                listing_fisrt.reward_person_mobile = new_listing.reward_person_mobile
+                                listing_fisrt.extra_data = new_listing.extra_data
+                                listing_fisrt.list_date = new_listing.list_date
+                                listing_fisrt.is_published = new_listing.is_published
+                                listing_fisrt.save()
+                                logger.info(f"row {line_count}: cập nhật {listing} đã tồn tại ưu tiên cao với dữ liệu mới nhất ngày {new_listing.list_date} ")
+                            else:
+                                listing_fisrt.user = new_listing.user
+                                listing_fisrt.realtor = new_listing.realtor
+                                listing_fisrt.house_type = new_listing.house_type
+                                listing_fisrt.road_type = new_listing.road_type
+                                listing_fisrt.status = new_listing.status
+                                listing_fisrt.area = new_listing.area
+                                listing_fisrt.floors = new_listing.floors
+                                listing_fisrt.width = new_listing.width
+                                listing_fisrt.price = new_listing.price
+                                listing_fisrt.title = new_listing.title
+                                listing_fisrt.description = new_listing.description
+                                listing_fisrt.reward_person = new_listing.reward_person
+                                listing_fisrt.reward_person_mobile = new_listing.reward_person_mobile
+                                listing_fisrt.extra_data = new_listing.extra_data
+                                listing_fisrt.priority = new_listing.priority
+                                listing_fisrt.street = new_listing.street
+                                listing_fisrt.address = new_listing.address
+                                listing_fisrt.location = new_listing.location
+                                listing_fisrt.code = new_listing.code
+                                listing_fisrt.status = new_listing.status
+                                listing_fisrt.list_date = new_listing.list_date
+                                listing_fisrt.is_published = new_listing.is_published
+                                listing_fisrt.save()
+                                logger.info(f"row {line_count}: cập nhật {listing.code} đã tồn tại ưu tiên thấp với dữ liệu đưa vào")
+
+                        if count_update >= 1:
+                            listing.delete()
+                            print(f"row {line_count}: xóa listing thừa: {listing}")
+
+                        count_update += 1
                 else:
-                    queryset_list = Listing.objects.filter(address=new_listing.address,price=new_listing.price, district=new_listing.district, area=new_listing.area,
-                                                           floors=new_listing.floors).order_by('-list_date')
-                    if queryset_list.exists():
-                        listing = queryset_list.first()
-                        if listing.priority == 1 or listing.priority == 2:
-                            if listing.user is None:
-                                listing.user = new_listing.user
-                            listing.realtor = new_listing.realtor
-                            listing.house_type = new_listing.house_type
-                            listing.road_type = new_listing.road_type
-                            listing.status = new_listing.status
-                            listing.street = new_listing.street
-                            listing.address = new_listing.address
-                            listing.location = new_listing.location
-                            listing.is_published = new_listing.is_published
-                            listing.save()
-                            logger.info(
-                                f"row {line_count}: cập nhật bđs đã có nhưng ko tìm thấy code {code} đã biên tập dữ liệu, từ trạng thái {listing.status} sang {new_listing.status}")
-                        else:
-                            listing.user = new_listing.user
-                            listing.realtor = new_listing.realtor
-                            listing.is_published = new_listing.is_published
-                            listing.house_type = new_listing.house_type
-                            listing.road_type = new_listing.road_type
-                            listing.status = new_listing.status
-                            listing.area = new_listing.area
-                            listing.floors = new_listing.floors
-                            listing.width = new_listing.width
-                            listing.price = new_listing.price
-                            listing.title = new_listing.title
-                            listing.description = new_listing.description
-                            listing.list_date = new_listing.list_date
-                            listing.reward_person = new_listing.reward_person
-                            listing.reward_person_mobile = new_listing.reward_person_mobile
-                            listing.extra_data = new_listing.extra_data
-                            listing.street = new_listing.street
-                            listing.address = new_listing.address
-                            listing.location = new_listing.location
-                            listing.priority = new_listing.priority
-                            code_old = listing.code
-                            listing.code = new_listing.code
-                            listing.save()
-                            logger.info(f"row {line_count}: cập nhật listing code {code_old} sang {listing.code}")
-                        # for ite in queryset_list[1:]:
-                        #     ite.delete()
-                        #     logger.info(f"row {line_count}: xóa mã {listing.code} trùng")
-                    else:
-                        new_listing.save()
-                        new_listings.append(new_listing)
-                        listing_obj[code] = new_listing
-                        print(f"row {line_count}: new listing: {new_listing}")
-                        del new_listing
+                    new_listing.save()
+                    print(f"row {line_count}: tạo mới listing: {new_listing} chưa có")
+                # if code in listing_obj:
+                #     queryset_list = Listing.objects.filter(code=code)
+                #     if queryset_list.exists():
+                #         listing = queryset_list.first()
+                #         if listing.priority == 1 or listing.priority == 2:
+                #             if listing.user is None:
+                #                 listing.user = new_listing.user
+                #             listing.realtor = new_listing.realtor
+                #             listing.status = new_listing.status
+                #             listing.reward_person = new_listing.reward_person
+                #             listing.reward_person_mobile = new_listing.reward_person_mobile
+                #             listing.extra_data = new_listing.extra_data
+                #             listing.street = new_listing.street
+                #             listing.address = new_listing.address
+                #             listing.location = new_listing.location
+                #             listing.is_published = new_listing.is_published
+                #             listing.save()
+                #             logger.info(f"row {line_count}: chỉ cập nhật {code} đã biên tập dữ liệu")
+                #         else:
+                #             listing.user = new_listing.user
+                #             listing.realtor = new_listing.realtor
+                #             listing.house_type = new_listing.house_type
+                #             listing.road_type = new_listing.road_type
+                #             listing.status = new_listing.status
+                #             listing.area = new_listing.area
+                #             listing.floors = new_listing.floors
+                #             listing.width = new_listing.width
+                #             listing.price = new_listing.price
+                #             listing.title = new_listing.title
+                #             listing.description = new_listing.description
+                #             listing.list_date = new_listing.list_date
+                #             listing.reward_person = new_listing.reward_person
+                #             listing.reward_person_mobile = new_listing.reward_person_mobile
+                #             listing.extra_data = new_listing.extra_data
+                #             listing.priority = new_listing.priority
+                #             listing.street = new_listing.street
+                #             listing.address = new_listing.address
+                #             listing.location = new_listing.location
+                #             listing.is_published = new_listing.is_published
+                #             listing.save()
+                #             logger.info(f"row {line_count}: update {code}")
+                # else:
+                #     queryset_list = Listing.objects.filter(address=new_listing.address,price=new_listing.price, district=new_listing.district, area=new_listing.area,
+                #                                            floors=new_listing.floors).order_by('-list_date')
+                #     if queryset_list.exists():
+                #         listing = queryset_list.first()
+                #         if listing.priority == 1 or listing.priority == 2:
+                #             if listing.user is None:
+                #                 listing.user = new_listing.user
+                #             listing.realtor = new_listing.realtor
+                #             listing.house_type = new_listing.house_type
+                #             listing.road_type = new_listing.road_type
+                #             listing.status = new_listing.status
+                #             listing.street = new_listing.street
+                #             listing.address = new_listing.address
+                #             listing.location = new_listing.location
+                #             listing.is_published = new_listing.is_published
+                #             listing.save()
+                #             logger.info(
+                #                 f"row {line_count}: cập nhật bđs đã có nhưng ko tìm thấy code {code} đã biên tập dữ liệu, từ trạng thái {listing.status} sang {new_listing.status}")
+                #         else:
+                #             listing.user = new_listing.user
+                #             listing.realtor = new_listing.realtor
+                #             listing.is_published = new_listing.is_published
+                #             listing.house_type = new_listing.house_type
+                #             listing.road_type = new_listing.road_type
+                #             listing.status = new_listing.status
+                #             listing.area = new_listing.area
+                #             listing.floors = new_listing.floors
+                #             listing.width = new_listing.width
+                #             listing.price = new_listing.price
+                #             listing.title = new_listing.title
+                #             listing.description = new_listing.description
+                #             listing.list_date = new_listing.list_date
+                #             listing.reward_person = new_listing.reward_person
+                #             listing.reward_person_mobile = new_listing.reward_person_mobile
+                #             listing.extra_data = new_listing.extra_data
+                #             listing.street = new_listing.street
+                #             listing.address = new_listing.address
+                #             listing.location = new_listing.location
+                #             listing.priority = new_listing.priority
+                #             code_old = listing.code
+                #             listing.code = new_listing.code
+                #             listing.save()
+                #             logger.info(f"row {line_count}: cập nhật listing code {code_old} sang {listing.code}")
+                #         # for ite in queryset_list[1:]:
+                #         #     ite.delete()
+                #         #     logger.info(f"row {line_count}: xóa mã {listing.code} trùng")
+                #     else:
+                #         new_listing.save()
+                #         new_listings.append(new_listing)
+                #         listing_obj[code] = new_listing
+                #         print(f"row {line_count}: tạo mới listing: {new_listing}")
+                #         del new_listing
 
     except Exception as ex:
         print(f"Error occurred at line: {line_count} type {type(ex)}")
