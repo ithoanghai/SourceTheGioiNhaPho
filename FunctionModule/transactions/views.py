@@ -48,12 +48,12 @@ def contact(request):
                             messages.error(request, 'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
                         else:
                             if customer is None: customer = Customer.objects.create(user=user, name=name, email=email, phone=phone)
-                            Transaction.objects.create(listing=listing, customer=customer, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
+                            Transaction.objects.create(listing=listing, customer=customer, trantype=trantype, caring_area=location, house_type=house_type, request_price=listing.price, message=message)
                             messages.error(request, 'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
                 else:
                     customer = Customer.objects.filter(Q(phone=phone)).first()
                     if customer is None: customer = Customer.objects.create(name=name, email=email, phone=phone)
-                    Transaction.objects.create(listing=listing, customer=customer, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
+                    Transaction.objects.create(listing=listing, customer=customer, trantype=trantype, caring_area=location, house_type=house_type, request_price=listing.price, message=message)
                     messages.error(request,'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
             return redirect('/listings/' + listing_id)
         else:
@@ -62,11 +62,11 @@ def contact(request):
                 if user is not None:
                     customer = Customer.objects.filter(Q(phone=phone)).first()
                     if customer is None: customer = Customer.objects.create(user=user, name=name, email=email, phone=phone)
-                    Transaction.objects.create(customer=customer, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
+                    Transaction.objects.create(customer=customer, trantype=trantype, caring_area=location, house_type=house_type, request_price=price, message=message)
             else:
                 customer = Customer.objects.filter(Q(phone=phone)).first()
                 if customer is None: customer = Customer.objects.create(name=name, email=email, phone=phone)
-                Transaction.objects.create(customer=customer, trantype=trantype, location=location, house_type=house_type, request_price=price, message=message)
+                Transaction.objects.create(customer=customer, trantype=trantype, caring_area=location, house_type=house_type, request_price=price, message=message)
 
             messages.success(request, 'Yêu cầu được gửi thành công. Chúng tôi sẽ liên lạc lại với bạn sớm nhất.')
         return redirect('message')
@@ -102,7 +102,7 @@ def request_quote(request):
     else:
         user = None
     user = User.objects.create(name=name, email=email, phone=phone)
-    Transaction.objects.create(user=user, trantype=trantype, message=message, house_type=house_type, district=district, request_price=request_price)
+    Transaction.objects.create(user=user, trantype=trantype, message=message, house_type=house_type, caring_area=district, request_price=request_price)
 
     return JsonResponse(
         {

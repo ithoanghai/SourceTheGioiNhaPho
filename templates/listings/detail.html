@@ -572,7 +572,7 @@
                 </div>
                 <div class="list-advantage clear">
                     <h6>Trạng thái BĐS:
-                    <b style="color: green">{{ listing.status|get_listing_status }}</b>
+                        <b style="color: green">{{ listing.status|get_listing_status }}</b>
                     </h6>
                 </div>
                 <div class="form-real-estate visible-sm">
@@ -1031,18 +1031,33 @@
                         <div class="popup-left">
                             <div class="popup-left-cover" style="padding-left: 5px; padding-top: 5px "><a
                                     href="javascript:void(0)">
-                                {% with listing.main_photo as photo %}
-                                    <img class="card-img-top" src="{{ photo.url }}" alt="TGNP">
-                                {% endwith %}
+                                {% if listing.main_photo %}
+                                    {% with listing.main_photo as photo %}
+                                        <img src=""
+                                             data-src="{{ photo.url }}"
+                                             alt="{{ listing.title }}"
+                                             title="{{ listing.title }}"
+                                             class="card-img-top" draggable="false"
+                                             onerror="this.src='{% static "img/default.png" %}'"
+                                        />
+                                    {% endwith %}
+                                {% else %}
+                                    <img src=""
+                                         data-src="{{ listing.house_type|default_img_by_house_type }}"
+                                         alt="{{ listing.title }}"
+                                         title="{{ listing.title }}"
+                                         class="card-img-top" draggable="false"
+                                         onerror="this.src='{% static "img/default.png" %}'"
+                                    />
+                                {% endif %}
                             </a> <label class="status status-top status-monopoly" style="display: none;">Độc
                                 quyền</label></div>
                             <div class="popup-left-content"><h3 class="popup-left-title"><a
                                     href="javascript:void(0)">{{ listing.title }}</a></h3>
-                                <div class="popup-left-address"></div>
+                                <div class="popup-left-address">Mã: <b>{{ listing.code }}</b></div>
                                 <ul class="popup-left-info">
-                                    <li><i class="zmdi zmdi-key"></i><b>{{ listing.code }}</b></li>
                                     {% if listing.floors %}
-                                        <li><p>Số tầng:</p> <strong>{{ listing.floors.normalize }}</strong></li>
+                                        <li><p>Số tầng:</p> <strong>{{ listing.floors }}</strong></li>
                                     {% endif %}
                                     {% if listing.bedrooms %}
                                         <li><p>Phòng ngủ:</p> <strong>{{ listing.bedrooms }}</strong></li>
@@ -1095,7 +1110,11 @@
                                           method="post" action="{% url 'post_contact' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
-                                        <input type="hidden" name="trantype" value="oder">
+                                        <input type="hidden" name="trantype" value="contact">
+                                        <input type="hidden" name="location" value="">
+                                        <input type="hidden" name="houseType" value="">
+                                        <input type="hidden" name="price" value="">
+                                        <input type="hidden" name="user" value="">
                                         <div class="form-element">
                                             <input required type="text" name="firstname"
                                                    v-model="data.firstname"
@@ -1134,7 +1153,7 @@
                                             <label>Giá mong muốn</label></div>
                                         <div class="form-element" style="">
                                             <input required name="message" type="text"
-                                                   value="Tôi liên hệ để xem BĐS có mã {{ listing.code }}"/>
+                                                   value="Tôi liên hệ xem BĐS có mã {{ listing.code }}"/>
                                             <label>Lời nhắn</label>
                                         </div>
                                         <div class="form-element">

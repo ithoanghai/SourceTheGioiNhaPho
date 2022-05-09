@@ -91,6 +91,17 @@ new Vue({
     }
 })
 
+const houseTypes = [
+    {type: 'town_house', text: 'Nhà phố'},
+    {type: 'shop_house', text: 'Cửa hàng'},
+    {type: 'apartment', text: 'Căn hộ'},
+    {type: 'land', text: 'Đất nền'},
+    {type: 'land_business', text: 'Mặt bằng kinh doanh'},
+    {type: 'villa', text: 'Biệt thự'}
+];
+const vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/;
+const email_regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
 const InfoWindowComponent = Vue.extend({
     template: '#infoWindowTemplate',
     delimiters: ["[[", "]]"],
