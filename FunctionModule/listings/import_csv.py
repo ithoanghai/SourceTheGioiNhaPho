@@ -650,10 +650,11 @@ def handle_import(request, file_path, listing_type):
                     print(f"row {line_count}: kho đang có {querylist_list.count()} bđs: {new_listing}")
                     count_update = 0
                     listing_fisrt = None
+                    logger.info(f"row {line_count}: bắt đầu cập nhật listing {new_listing}")
                     # duyệt toàn bộ tìm các listing trùng lặp đang có trong kho
                     for listing in querylist_list:
+                        logger.info(f"listing {listing}: count_update {count_update}")
                         #Kiểm tra listing tiếp theo, nếu cũ hơn thì xóa, mới hơn thì cập nhật
-                        logger.info(f"row {line_count}: bắt đầu cập nhật listing {listing.code}:")
                         if listing_fisrt is None:
                             listing_fisrt = Listing.objects.get(id=listing.id)
 
@@ -728,50 +729,55 @@ def handle_import(request, file_path, listing_type):
                                 logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} từ {new_listing}")
                         #Nếu listing đưa vào cùng ngày listing đã có thì cập nhật thông tin
                         elif listing.list_date == new_listing.list_date:
-                            #chỉ cập nhật thông tin có trong ds cho listing cũ
-                            if listing.priority == 1 or listing.priority == 2:
-                                if listing_fisrt.user is None:
-                                    listing_fisrt.user = new_listing.user
-                                listing_fisrt.realtor = new_listing.realtor
-                                listing_fisrt.status = new_listing.status
-                                listing_fisrt.street = new_listing.street
-                                listing_fisrt.address = new_listing.address
-                                listing_fisrt.location = new_listing.location
-                                listing_fisrt.code = new_listing.code
-                                listing_fisrt.house_type = new_listing.house_type
-                                listing_fisrt.road_type = new_listing.road_type
-                                listing_fisrt.reward_person = new_listing.reward_person
-                                listing_fisrt.reward_person_mobile = new_listing.reward_person_mobile
-                                listing_fisrt.extra_data = new_listing.extra_data
-                                listing_fisrt.list_date = new_listing.list_date
-                                listing_fisrt.is_published = new_listing.is_published
-                                listing_fisrt.save()
-                                logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} same listdate từ {new_listing}")
+                            if listing.list_date == listing_fisrt.list_date and count_update >= 1:
+                                listing.delete()
+                                print(f"row {line_count}: xóa listing thừa: {listing} cập nhật cùng ngày")
                             else:
-                                listing_fisrt.user = new_listing.user
-                                listing_fisrt.realtor = new_listing.realtor
-                                listing_fisrt.house_type = new_listing.house_type
-                                listing_fisrt.road_type = new_listing.road_type
-                                listing_fisrt.status = new_listing.status
-                                listing_fisrt.area = new_listing.area
-                                listing_fisrt.floors = new_listing.floors
-                                listing_fisrt.width = new_listing.width
-                                listing_fisrt.price = new_listing.price
-                                listing_fisrt.title = new_listing.title
-                                listing_fisrt.description = new_listing.description
-                                listing_fisrt.reward_person = new_listing.reward_person
-                                listing_fisrt.reward_person_mobile = new_listing.reward_person_mobile
-                                listing_fisrt.extra_data = new_listing.extra_data
-                                listing_fisrt.priority = new_listing.priority
-                                listing_fisrt.street = new_listing.street
-                                listing_fisrt.address = new_listing.address
-                                listing_fisrt.location = new_listing.location
-                                listing_fisrt.code = new_listing.code
-                                listing_fisrt.status = new_listing.status
-                                listing_fisrt.list_date = new_listing.list_date
-                                listing_fisrt.is_published = new_listing.is_published
-                                listing_fisrt.save()
-                                logger.info(f"row {line_count}: cập nhật {listing_fisrt} prior {listing_fisrt.priority} same listdate từ {new_listing}")
+                                logger.info(f"listing {listing} listing.list_date == new_listing.list_date {listing.list_date}")
+                                #chỉ cập nhật thông tin có trong ds cho listing cũ
+                                if listing.priority == 1 or listing.priority == 2:
+                                    if listing.user is None:
+                                        listing.user = new_listing.user
+                                    listing.realtor = new_listing.realtor
+                                    listing.status = new_listing.status
+                                    listing.street = new_listing.street
+                                    listing.address = new_listing.address
+                                    listing.location = new_listing.location
+                                    listing.house_type = new_listing.house_type
+                                    listing.road_type = new_listing.road_type
+                                    listing.reward_person = new_listing.reward_person
+                                    listing.reward_person_mobile = new_listing.reward_person_mobile
+                                    listing.extra_data = new_listing.extra_data
+                                    listing.list_date = new_listing.list_date
+                                    listing.code = new_listing.code
+                                    listing.is_published = new_listing.is_published
+                                    listing.save()
+                                    logger.info(f"row {line_count}: update {listing} prior {listing.priority} same listdate từ {new_listing}")
+                                else:
+                                    listing_fisrt.user = new_listing.user
+                                    listing_fisrt.realtor = new_listing.realtor
+                                    listing_fisrt.house_type = new_listing.house_type
+                                    listing_fisrt.road_type = new_listing.road_type
+                                    listing_fisrt.status = new_listing.status
+                                    listing_fisrt.area = new_listing.area
+                                    listing_fisrt.floors = new_listing.floors
+                                    listing_fisrt.width = new_listing.width
+                                    listing_fisrt.price = new_listing.price
+                                    listing_fisrt.title = new_listing.title
+                                    listing_fisrt.description = new_listing.description
+                                    listing_fisrt.reward_person = new_listing.reward_person
+                                    listing_fisrt.reward_person_mobile = new_listing.reward_person_mobile
+                                    listing_fisrt.extra_data = new_listing.extra_data
+                                    listing_fisrt.priority = new_listing.priority
+                                    listing_fisrt.street = new_listing.street
+                                    listing_fisrt.address = new_listing.address
+                                    listing_fisrt.location = new_listing.location
+                                    listing_fisrt.code = new_listing.code
+                                    listing_fisrt.status = new_listing.status
+                                    listing_fisrt.list_date = new_listing.list_date
+                                    listing_fisrt.is_published = new_listing.is_published
+                                    listing_fisrt.save()
+                                    logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} same listdate từ {new_listing}")
 
                         if count_update >= 1:
                             listing.delete()
