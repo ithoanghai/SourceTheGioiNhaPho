@@ -779,7 +779,7 @@ def handle_import(request, file_path, listing_type):
                                     listing_fisrt.save()
                                     logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} same listdate từ {new_listing}")
 
-                        if count_update >= 1 and listing is not None:
+                        if count_update >= 1 and listing.id is not None:
                             listing.delete()
                             print(f"row {line_count}: xóa listing rác: {listing}")
 
