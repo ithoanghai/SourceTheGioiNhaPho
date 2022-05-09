@@ -732,7 +732,7 @@ def handle_import(request, file_path, listing_type):
                             if listing.list_date == listing_fisrt.list_date and count_update >= 1:
                                 listing.delete()
                                 print(f"row {line_count}: xóa listing thừa: {listing} cập nhật cùng ngày")
-                            elif listing.code != new_listing.code:
+                            elif listing.code == new_listing.code:
                                 logger.info(f"listing {listing} same date {listing.list_date} and same code")
                                 #chỉ cập nhật thông tin có trong ds cho listing cũ
                                 if listing.priority == 1 or listing.priority == 2:

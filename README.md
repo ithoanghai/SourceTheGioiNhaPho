@@ -72,6 +72,7 @@ gộp dữ liệu
     git reset --hard
     git clean -fd
     git fetch && git checkout release/$1
+    git pull
     docker-compose -f docker-compose.production.yml exec web bash -c "pip install -r requirements.txt"
     docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py collectstatic --noinput"
     docker-compose -f docker-compose.production.yml exec web bash -c "npx gulp build"
