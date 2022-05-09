@@ -642,9 +642,9 @@ def handle_import(request, file_path, listing_type):
                 new_listing.description = render_to_string('listings/defaultDescription.html',
                                                context={"listing": new_listing, "desc": desc}).replace('  ', ' ')
 
-                query = (Q(address__contains=so_nha[0]) & Q(area=area) & Q(floors=floor) & Q(width=width))| \
-                        (Q(address__contains=so_nha[0]) & Q(state=state_code) & Q(district=district_code))
-                querylist_list = Listing.objects.filter(Q(code=code) | query).order_by('-list_date')
+                query = (Q(address__contains=so_nha[0]) & Q(area=area) & Q(floors=floor) & Q(width=width) & Q(price=price))| \
+                        (Q(address__contains=so_nha[0]) & Q(area=area) & Q(street=street) & Q(state=state_code) & Q(district=district_code))
+                querylist_list = Listing.objects.filter(Q(code=code) | Q(address=full_addr) | query).order_by('-list_date')
                 #Nếu kho đã tồn tại bđs
                 if querylist_list.exists():
                     print(f"row {line_count}: kho đang có {querylist_list.count()} bđs: {new_listing}")
@@ -771,7 +771,7 @@ def handle_import(request, file_path, listing_type):
                                 listing_fisrt.list_date = new_listing.list_date
                                 listing_fisrt.is_published = new_listing.is_published
                                 listing_fisrt.save()
-                                logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} same listdate từ {new_listing}")
+                                logger.info(f"row {line_count}: cập nhật {listing_fisrt} prior {listing_fisrt.priority} same listdate từ {new_listing}")
 
                         if count_update >= 1:
                             listing.delete()

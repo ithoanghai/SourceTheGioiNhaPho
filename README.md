@@ -40,7 +40,7 @@ Setup next id when save database
     COMMIT;
 
 Show Log docker
-- docker logs -f --tail 5 app_web_1
+    docker logs -f --tail 5 app_web_1
 
 Restart certificate on docker server
     docker-compose -f docker-compose.production.yml exec -it certbot /bin/sh
@@ -75,7 +75,7 @@ gộp dữ liệu
     docker-compose -f docker-compose.production.yml exec web bash -c "pip install -r requirements.txt"
     docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py collectstatic --noinput"
     docker-compose -f docker-compose.production.yml exec web bash -c "npx gulp build"
-    docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py makemigrations --merge"
+    docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py makemigrations"
     docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake accounts"
     docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake customers"
     docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake listings"
