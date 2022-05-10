@@ -660,10 +660,10 @@ def handle_import(request, file_path, listing_type):
 
                         # nếu listing mới import cũ hơn listing trong kho thì chỉ đẩy listing này sang bảng listing history
                         if listing.list_date >= new_listing.list_date:
-                            querylist_listhistory = ListingHistory.objects.filter(listing=listing, list_date=new_listing.list_date)
+                            querylist_listhistory = ListingHistory.objects.filter(listing=new_listing, list_date=new_listing.list_date)
                             #Kiểm tra trong listing history đã có trùng lặp chưa, nếu chưa có thì đẩy vào, nếu có rồi bỏ qua
                             if not querylist_listhistory.exists() and count_update >= 1:
-                                new_listhis = ListingHistory.objects.create(listing=listing, user=new_listing.user,
+                                new_listhis = ListingHistory.objects.create(listing=listing_fisrt, user=new_listing.user,
                                               realtor=new_listing.realtor, area=new_listing.area, floors=new_listing.floors, width=new_listing.width,
                                               bathrooms=new_listing.bathrooms, bedrooms=new_listing.bedrooms, price=new_listing.price, reward_person_mobile=new_listing.reward_person_mobile,
                                               reward_person=new_listing.reward_person, extra_data=new_listing.extra_data,
@@ -677,7 +677,7 @@ def handle_import(request, file_path, listing_type):
                             # Kiểm tra trong listing history đã có trùng lặp chưa, nếu chưa có thì đẩy vào, nếu có rồi bỏ qua
                             if not querylist_listhistory.exists() and count_update >= 1:
                                 #Đẩy thông tin listing cũ vào lịch sử listing
-                                new_listhis = ListingHistory.objects.create(listing=listing, user=listing.user,
+                                new_listhis = ListingHistory.objects.create(listing=listing_fisrt, user=listing.user,
                                               realtor=listing.realtor, area=listing.area, floors=listing.floors, width=listing.width,
                                               bathrooms=listing.bathrooms, bedrooms=listing.bedrooms, price=listing.price, reward_person_mobile=listing.reward_person_mobile,
                                               reward_person=listing.reward_person, extra_data=listing.extra_data, warehouse=listing_type, list_date=listing.list_date)
