@@ -601,10 +601,7 @@ def handle_import(request, file_path, listing_type):
                             floor = int(floor_code)
 
                         splitter_len = len(splitter)
-                        if splitter_len == 4:
-                            width = splitter[3].split('/')
-                            width = Decimal(width[0].replace(',', '.').replace(' ', ''))
-                        elif splitter_len == 3:
+                        if splitter_len == 4 or splitter_len == 3:
                             width = splitter[2].split('/')
                             width = Decimal(width[0].replace(',', '.').replace(' ', ''))
                         else:
