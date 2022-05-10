@@ -100,15 +100,6 @@
 {% block content %}
     <!-- Search menu -->
     {% include 'menu/_menuSearch.html' %}
-    {% for message in messages %}
-        <div class="alert {{ message.tags }} alert-dismissible " role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <p class="alert-message blink"> {{ message }}</p>
-            {#      {{ message }}#}
-        </div>
-    {% endfor %}
 
     <div id="wrap">
         <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">

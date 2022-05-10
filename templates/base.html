@@ -9,7 +9,8 @@
   {% block head %} {% endblock %}
   {% block head_script %}
     <script>
-        const vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        const vnf_regex = /^((09|03|07|08|05)+([0-9]{8})\b)/;
+        const phone12 = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
         const email_regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         const houseTypes = [
             {type: 'town_house', text: 'Nhà phố'},

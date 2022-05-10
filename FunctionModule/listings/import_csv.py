@@ -732,53 +732,28 @@ def handle_import(request, file_path, listing_type):
                             if listing.list_date == listing_fisrt.list_date and count_update >= 1:
                                 listing.delete()
                                 print(f"row {line_count}: xóa listing thừa: {listing} cập nhật cùng ngày")
-                            elif listing.code == new_listing.code:
-                                logger.info(f"listing {listing} same date {listing.list_date} and same code")
-                                #chỉ cập nhật thông tin có trong ds cho listing cũ
-                                if listing.priority == 1 or listing.priority == 2:
-                                    if listing.user is None:
-                                        listing.user = new_listing.user
-                                    listing.realtor = new_listing.realtor
-                                    listing.status = new_listing.status
-                                    listing.street = new_listing.street
-                                    listing.address = new_listing.address
-                                    listing.location = new_listing.location
-                                    listing.house_type = new_listing.house_type
-                                    listing.road_type = new_listing.road_type
-                                    listing.reward_person = new_listing.reward_person
-                                    listing.reward_person_mobile = new_listing.reward_person_mobile
-                                    listing.extra_data = new_listing.extra_data
-                                    listing.list_date = new_listing.list_date
-                                    listing.code = new_listing.code
-                                    listing.is_published = new_listing.is_published
-                                    listing.save()
-                                    logger.info(f"row {line_count}: update {listing} prior {listing.priority} same listdate từ {new_listing}")
-                                else:
-                                    listing_fisrt.user = new_listing.user
-                                    listing_fisrt.realtor = new_listing.realtor
-                                    listing_fisrt.house_type = new_listing.house_type
-                                    listing_fisrt.road_type = new_listing.road_type
-                                    listing_fisrt.status = new_listing.status
-                                    listing_fisrt.area = new_listing.area
-                                    listing_fisrt.floors = new_listing.floors
-                                    listing_fisrt.width = new_listing.width
-                                    listing_fisrt.price = new_listing.price
-                                    listing_fisrt.title = new_listing.title
-                                    listing_fisrt.description = new_listing.description
-                                    listing_fisrt.reward_person = new_listing.reward_person
-                                    listing_fisrt.reward_person_mobile = new_listing.reward_person_mobile
-                                    listing_fisrt.extra_data = new_listing.extra_data
-                                    listing_fisrt.priority = new_listing.priority
-                                    listing_fisrt.street = new_listing.street
-                                    listing_fisrt.address = new_listing.address
-                                    listing_fisrt.location = new_listing.location
-                                    listing_fisrt.code = new_listing.code
-                                    listing_fisrt.status = new_listing.status
-                                    listing_fisrt.list_date = new_listing.list_date
-                                    listing_fisrt.is_published = new_listing.is_published
-                                    listing_fisrt.save()
-                                    logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} same listdate từ {new_listing}")
-
+                            elif listing.code != new_listing.code:
+                                querylist_listhistory = ListingHistory.objects.filter(listing=listing,
+                                                                                      list_date=listing.list_date)
+                                # Kiểm tra trong listing history đã có trùng lặp chưa, nếu chưa có thì đẩy vào, nếu có rồi bỏ qua
+                                if not querylist_listhistory.exists() and count_update >= 1:
+                                    # Đẩy thông tin listing cũ vào lịch sử listing
+                                    new_listhis = ListingHistory.objects.create(listing=listing, user=listing.user,
+                                                                                realtor=listing.realtor,
+                                                                                area=listing.area,
+                                                                                floors=listing.floors,
+                                                                                width=listing.width,
+                                                                                bathrooms=listing.bathrooms,
+                                                                                bedrooms=listing.bedrooms,
+                                                                                price=listing.price,
+                                                                                reward_person_mobile=listing.reward_person_mobile,
+                                                                                reward_person=listing.reward_person,
+                                                                                extra_data=listing.extra_data,
+                                                                                warehouse=listing_type,
+                                                                                list_date=listing.list_date)
+                                    new_listhis.save()
+                                    logger.info(
+                                        f"row {line_count}: Đẩy thông tin listing cũ {listing} vào lịch sử listing {new_listhis}")
                         if count_update >= 1 and listing.id is not None:
                             listing.delete()
                             print(f"row {line_count}: xóa listing rác: {listing}")
