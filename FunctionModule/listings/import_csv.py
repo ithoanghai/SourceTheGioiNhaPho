@@ -647,10 +647,10 @@ def handle_import(request, file_path, listing_type):
                 querylist_list = Listing.objects.filter(Q(code=code) | Q(address=full_addr) | query).order_by('-list_date')
                 #Nếu kho đã tồn tại bđs
                 if querylist_list.exists():
-                    print(f"row {line_count}: kho đang có {querylist_list.count()} bđs: {new_listing}")
                     count_update = 0
                     listing_fisrt = None
-                    logger.info(f"row {line_count}: bắt đầu cập nhật listing {new_listing}")
+                    if querylist_list.count() > 1:
+                        print(f"row {line_count}: kho đang có {querylist_list.count()} bđs: {new_listing}")
                     # duyệt toàn bộ tìm các listing trùng lặp đang có trong kho
                     for listing in querylist_list:
                         logger.info(f"listing {listing}: count_update {count_update}")
@@ -659,7 +659,7 @@ def handle_import(request, file_path, listing_type):
                             listing_fisrt = Listing.objects.get(id=listing.id)
 
                         # nếu listing mới import cũ hơn listing trong kho thì chỉ đẩy listing này sang bảng listing history
-                        if listing.list_date > new_listing.list_date:
+                        if listing.list_date >= new_listing.list_date:
                             querylist_listhistory = ListingHistory.objects.filter(listing=listing, list_date=new_listing.list_date)
                             #Kiểm tra trong listing history đã có trùng lặp chưa, nếu chưa có thì đẩy vào, nếu có rồi bỏ qua
                             if not querylist_listhistory.exists() and count_update >= 1:
@@ -669,7 +669,7 @@ def handle_import(request, file_path, listing_type):
                                               reward_person=new_listing.reward_person, extra_data=new_listing.extra_data,
                                               warehouse=listing_type, list_date=new_listing.list_date)
                                 new_listhis.save()
-                                logger.info(f"row {line_count}: tạo mới lịch sử bđs {new_listhis} - listing import {new_listing}")
+                                logger.info(f"row {line_count}: tạo mới lịch sử bđs {new_listhis} từ listing import cũ hơn {new_listing}")
 
                         #Nếu listing đưa vào là mới nhất là lần đầu thì cập nhật thông tin mới cho listing
                         elif listing.list_date < new_listing.list_date:
@@ -682,7 +682,7 @@ def handle_import(request, file_path, listing_type):
                                               bathrooms=listing.bathrooms, bedrooms=listing.bedrooms, price=listing.price, reward_person_mobile=listing.reward_person_mobile,
                                               reward_person=listing.reward_person, extra_data=listing.extra_data, warehouse=listing_type, list_date=listing.list_date)
                                 new_listhis.save()
-                                logger.info(f"row {line_count}: Đẩy thông tin listing cũ {listing} vào lịch sử listing {new_listhis}")
+                                logger.info(f"row {line_count}: Đẩy thông tin listing {listing} cũ hơn trên server vào lịch sử listing {new_listhis}")
                             #Cập nhật thông tin mới nhất cho listing đang có
                             if listing.priority == 1 or listing.priority == 2:
                                 if listing_fisrt.user is None:
@@ -727,36 +727,9 @@ def handle_import(request, file_path, listing_type):
                                 listing_fisrt.is_published = new_listing.is_published
                                 listing_fisrt.save()
                                 logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} từ {new_listing}")
-                        #Nếu listing đưa vào cùng ngày listing đã có thì cập nhật thông tin
-                        elif listing.list_date == new_listing.list_date:
-                            if listing.list_date == listing_fisrt.list_date and count_update >= 1:
-                                listing.delete()
-                                print(f"row {line_count}: xóa listing thừa: {listing} cập nhật cùng ngày")
-                            elif listing.code != new_listing.code:
-                                querylist_listhistory = ListingHistory.objects.filter(listing=listing,
-                                                                                      list_date=listing.list_date)
-                                # Kiểm tra trong listing history đã có trùng lặp chưa, nếu chưa có thì đẩy vào, nếu có rồi bỏ qua
-                                if not querylist_listhistory.exists() and count_update >= 1:
-                                    # Đẩy thông tin listing cũ vào lịch sử listing
-                                    new_listhis = ListingHistory.objects.create(listing=listing, user=listing.user,
-                                                                                realtor=listing.realtor,
-                                                                                area=listing.area,
-                                                                                floors=listing.floors,
-                                                                                width=listing.width,
-                                                                                bathrooms=listing.bathrooms,
-                                                                                bedrooms=listing.bedrooms,
-                                                                                price=listing.price,
-                                                                                reward_person_mobile=listing.reward_person_mobile,
-                                                                                reward_person=listing.reward_person,
-                                                                                extra_data=listing.extra_data,
-                                                                                warehouse=listing_type,
-                                                                                list_date=listing.list_date)
-                                    new_listhis.save()
-                                    logger.info(
-                                        f"row {line_count}: Đẩy thông tin listing cũ {listing} vào lịch sử listing {new_listhis}")
                         if count_update >= 1 and listing.id is not None:
                             listing.delete()
-                            print(f"row {line_count}: xóa listing rác: {listing}")
+                            print(f"row {line_count}: xóa listing thừa: {listing}")
 
                         count_update += 1
                 else:
