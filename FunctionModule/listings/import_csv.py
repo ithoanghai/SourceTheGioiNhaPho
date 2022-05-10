@@ -669,7 +669,7 @@ def handle_import(request, file_path, listing_type):
                                               reward_person=new_listing.reward_person, extra_data=new_listing.extra_data,
                                               warehouse=listing_type, list_date=new_listing.list_date)
                                 new_listhis.save()
-                                logger.info(f"row {line_count}: tạo mới lịch sử bđs {new_listhis} từ listing import cũ hơn {new_listing}")
+                                logger.info(f"row {line_count}: tạo mới lịch sử bđs {new_listhis} từ listing import cũ hơn {new_listing}, bđs gốc {listing_fisrt}")
 
                         #Nếu listing đưa vào là mới nhất là lần đầu thì cập nhật thông tin mới cho listing
                         elif listing.list_date < new_listing.list_date:
