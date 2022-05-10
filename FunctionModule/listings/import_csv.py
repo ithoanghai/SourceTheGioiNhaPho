@@ -519,7 +519,7 @@ def handle_import(request, file_path, listing_type):
                         geolocator = Nominatim(user_agent="thegioinhaphovietnam.com.vn")
                         #GeocodeEarth.geocoders.options.default_user_agent = "my-application"
                         hanoi_bounds = ((21.097341, 105.929947), (20.920105, 105.702667))
-                        location = geolocator.geocode(add_search_map, bounded=True, viewbox=hanoi_bounds)
+                        location = geolocator.geocode(add_search_map, timeout=None, bounded=True, viewbox=hanoi_bounds)
                         if location and location.point:
                             listing_loc = Point(location.point.longitude, location.point.latitude)
                             searched_locations[add_search_map] = [location.point.longitude,
