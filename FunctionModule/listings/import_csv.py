@@ -584,7 +584,7 @@ def handle_import(request, file_path, listing_type):
 
                 # Phân tích cú pháp thông số để lấy diện tích, số tầng, mặt tiền từ file nguồn nhà phố
                 if listing_type == "K1":
-                    encoded_num = row[header_dict['thong-so']].replace('  ', ' ')
+                    encoded_num = row[header_dict['thong-so']].trim().replace('  ', ' ')
                     splitter = encoded_num.split(' ')
                     floor = 0
                     try:
@@ -602,7 +602,7 @@ def handle_import(request, file_path, listing_type):
 
                         splitter_len = len(splitter)
                         if splitter_len == 4 or splitter_len == 3:
-                            width = splitter[2].split('/')
+                            width = splitter[2].replace(',', '.').replace(' ', '').split('/')
                             width = Decimal(width[0].replace(',', '.').replace(' ', ''))
                         else:
                             width = None
@@ -650,14 +650,14 @@ def handle_import(request, file_path, listing_type):
                         print(f"row {line_count}: kho đang có {querylist_list.count()} bđs: {new_listing}")
                     # duyệt toàn bộ tìm các listing trùng lặp đang có trong kho
                     for listing in querylist_list:
-                        logger.info(f"listing {listing}: count_update {count_update}")
+                        logger.info(f"row {line_count}: listing {listing}, count_update {count_update}")
                         #Kiểm tra listing tiếp theo, nếu cũ hơn thì xóa, mới hơn thì cập nhật
                         if listing_fisrt is None:
                             listing_fisrt = Listing.objects.get(id=listing.id)
 
                         # nếu listing mới import cũ hơn listing trong kho thì chỉ đẩy listing này sang bảng listing history
                         if listing.list_date >= new_listing.list_date:
-                            querylist_listhistory = ListingHistory.objects.filter(listing=new_listing, list_date=new_listing.list_date)
+                            querylist_listhistory = ListingHistory.objects.filter(listing=listing_fisrt, list_date=new_listing.list_date)
                             #Kiểm tra trong listing history đã có trùng lặp chưa, nếu chưa có thì đẩy vào, nếu có rồi bỏ qua
                             if not querylist_listhistory.exists() and count_update >= 1:
                                 new_listhis = ListingHistory.objects.create(listing=listing_fisrt, user=new_listing.user,
@@ -670,7 +670,7 @@ def handle_import(request, file_path, listing_type):
 
                         #Nếu listing đưa vào là mới nhất là lần đầu thì cập nhật thông tin mới cho listing
                         elif listing.list_date < new_listing.list_date:
-                            querylist_listhistory = ListingHistory.objects.filter(listing=listing, list_date=listing.list_date)
+                            querylist_listhistory = ListingHistory.objects.filter(listing=listing_fisrt, list_date=listing.list_date)
                             # Kiểm tra trong listing history đã có trùng lặp chưa, nếu chưa có thì đẩy vào, nếu có rồi bỏ qua
                             if not querylist_listhistory.exists() and count_update >= 1:
                                 #Đẩy thông tin listing cũ vào lịch sử listing

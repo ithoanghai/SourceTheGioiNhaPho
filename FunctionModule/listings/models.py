@@ -325,7 +325,7 @@ class ListingHistory(models.Model):
         verbose_name = "Lịch sử Bất động sản"
         verbose_name_plural = "Lịch sử bất động sản"
 
-    listing = models.ForeignKey(Listing, on_delete=models.DO_NOTHING, verbose_name=_("Bất động sản gốc"))
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("Bất động sản gốc"))
     user = models.ForeignKey(User,  on_delete=models.DO_NOTHING, blank=True, null=True, verbose_name=_("Người thêm BĐS"))
     realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING, blank=True, null=True, verbose_name=_("Chuyên viên quản lý BĐS"))
     address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ"),
