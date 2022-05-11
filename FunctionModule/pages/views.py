@@ -1,5 +1,8 @@
+from itertools import groupby
+
 from django import template
 from django.contrib.admin import site
+from django.db.models import QuerySet
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template import loader
@@ -22,18 +25,24 @@ def get_client_ip(request):
 def home_view(request):
     listings_for_sale = (Listing.objects
                              .order_by('priority','-list_date')
-                             .filter(is_published=True, transaction_type=TransactionType.SELL)[:30])
+                             .filter(is_published=True, transaction_type=TransactionType.SELL)[:60])
+
     listings_for_rent = (Listing.objects
                              .order_by('-list_date')
-                             .filter(is_published=True, transaction_type=TransactionType.FOR_RENT)[:15])
+                             .filter(is_published=True, transaction_type=TransactionType.FOR_RENT)[:30])
     listings_project = (Listing.objects
                             .order_by('-list_date')
-                            .filter(is_published=True, transaction_type=TransactionType.PROJECT)[:9])
+                            .filter(is_published=True, transaction_type=TransactionType.PROJECT)[:15])
+    query = Listing.objects.all().query
+    query.group_by = ['district']
+    listing_by_group = QuerySet(query=query, model=Listing)
+    listing_by_group = listing_by_group.filter(is_published=True, transaction_type=TransactionType.SELL)[:60]
     list_district_hn = get_all_districts()
     context = {
         'listings_for_sale': listings_for_sale,
         'listings_for_rent': listings_for_rent,
         'listings_project': listings_project,
+        'listing_by_group': listing_by_group,
         'state_data': get_all_states(),
         'district_data': list_district_hn,
         'bedroom_choices': bedroom_choices,

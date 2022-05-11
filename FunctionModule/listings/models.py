@@ -357,11 +357,3 @@ class ListingHistory(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-
-    @property
-    def display_price(self):
-        price = self.sale_price or self.price
-        if price % 1 == 0:
-            return f'{price.normalize} tỷ'
-        else:
-            return f'{price:.2f} tỷ'

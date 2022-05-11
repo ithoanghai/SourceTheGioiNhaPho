@@ -725,7 +725,13 @@ def handle_import(request, file_path, listing_type):
                                 listing_fisrt.save()
                                 logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} từ {new_listing}")
                         if count_update >= 1 and listing.id is not None:
-                            listing.delete()
+                            findlisthistory = ListingHistory.objects.filter(listing=listing)
+                            if findlisthistory.exists():
+                                for hislist in findlisthistory:
+                                    hislist.first()
+                                    hislist.save()
+                            else:
+                                listing.delete()
                             print(f"row {line_count}: xóa listing thừa: {listing}")
 
                         count_update += 1
