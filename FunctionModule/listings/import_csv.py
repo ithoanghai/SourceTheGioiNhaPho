@@ -728,7 +728,7 @@ def handle_import(request, file_path, listing_type):
                             findlisthistory = ListingHistory.objects.filter(listing=listing)
                             if findlisthistory.exists():
                                 for hislist in findlisthistory:
-                                    hislist.first()
+                                    hislist.listing = listing_fisrt
                                     hislist.save()
                             else:
                                 listing.delete()
