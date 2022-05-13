@@ -23,8 +23,8 @@ class Customer(models.Model):
         models.Index(fields=["district"]),
     )
 
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name=_("Người thêm KH"))
-    realtor = models.ForeignKey(Realtor, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name=_("Giao Chuyên viên chăm sóc"))
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.RESTRICT, verbose_name=_("Người thêm KH"))
+    realtor = models.ForeignKey(Realtor, null=True, blank=True, on_delete=models.RESTRICT, verbose_name=_("Giao Chuyên viên chăm sóc"))
     custormer_type = models.CharField(max_length=20, choices=CustomerType.choices, default=CustomerType.BUY_LIVE,
                                  verbose_name=_("Loại khách"))
     name = models.CharField(_('Tên khách hàng'), null=True, max_length=150)

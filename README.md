@@ -62,7 +62,7 @@ gộp dữ liệu
     docker-compose exec web bash -c "python manage.py migrate --fake customers"
     docker-compose exec web bash -c "python manage.py migrate --fake listings"
     docker-compose exec web bash -c "python manage.py migrate --fake transactions"
-    docker-compose exec web bash -c "python manage.py migrate --fake advanced_filters"
+    docker-compose exec web bash -c "python manage.py migrate advanced_filters"
     docker-compose exec web bash -c "python manage.py migrate --fake-initial"
     docker-compose restart web
     docker-compose up -d search_engine

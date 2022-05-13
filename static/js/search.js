@@ -138,8 +138,6 @@ const PropertyListComponent = Vue.extend({
         listings: Array,
         pagination: Object,
         isViewGrid: Boolean,
-        isViewAsList: Boolean,
-        isViewAsSimple: Boolean,
         Simple: Boolean,
         isLoading: Boolean,
         goTo: Function,
@@ -150,7 +148,7 @@ const PropertyListComponent = Vue.extend({
             return `/listings/${id}`
         },
         getDistrict: function (district_code) {
-            try {
+            try {infoWindowTemplate
                 return districts.find(item => item.code == district_code).text;
             } catch (e) {
                 return '';
@@ -160,37 +158,6 @@ const PropertyListComponent = Vue.extend({
 })
 
 Vue.component('property-list', PropertyListComponent)
-
-const PropertyListComponentSimple = Vue.extend({
-    template: '#propertyListTemplateSimple',
-    delimiters: ["[[", "]]"],
-    props: {
-        listings: Array,
-        pagination: Object,
-        isViewGrid: Boolean,
-        isViewAsList: Boolean,
-        isViewAsSimple: Boolean,
-        Simple: Boolean,
-        isLoading: Boolean,
-        goTo: Function,
-        showContactProject: Function,
-    },
-    methods: {
-        getListingDetailURL: function (id) {
-            return `/listings/${id}`
-        },
-        getDistrict: function (district_code) {
-            try {
-                return districts.find(item => item.code == district_code).text;
-            } catch (e) {
-                return '';
-            }
-        }
-    },
-})
-
-Vue.component('property-list-simple', PropertyListComponentSimple)
-
 
 new Vue({
     el: "#search-content",
@@ -212,8 +179,6 @@ new Vue({
             isExclusiveFilter: undefined,
             statusFilters: [],
             isViewGrid: true,
-            isViewAsList: false,
-            isViewAsSimple: false,
             isFirstLoad: true,
             isLoading: false,
             sortOption: 'priority',
@@ -598,18 +563,12 @@ new Vue({
         },
         viewAsGrid: async function () {
             this.isViewGrid = true;
-            this.isViewAsList = false;
-            this.isViewAsSimple = false;
         },
         viewAsList: async function () {
-            this.isViewAsList = true;
             this.isViewGrid = false;
-            this.isViewAsSimple = false;
         },
         viewAsSimple: async function () {
             this.isViewGrid = false;
-            this.isViewAsList = false;
-            this.isViewAsSimple = true;
         },
         getQueryParams: function () {
             return this.queryParams;

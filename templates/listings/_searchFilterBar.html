@@ -6,11 +6,12 @@
   </div>
   {% comment %}<a href="#" class="btn-primary btn-red btn-save-search btn-medium" view-all-url="#"><i class="zmdi zmdi-bookmark-outline"></i>
     Lưu tìm kiếm</a>{% endcomment %}
-<div class="view">
-    <button @click.prevent="viewAsGrid" :class="{active: isViewGrid}" title="Xem danh sách BĐS dạng ô" class="zmdi zmdi-view-module"></button>
-    <button @click.prevent="viewAsList" :class="{active: isViewAsList}" title="Xem danh sách BĐS có ảnh" class="zmdi zmdi-view-stream"></button>
-    <a :class="{active: isViewAsSimple}" href="{% url 'listing_search_simple' %}"  title="Xem danh sách BĐS đơn giản" class="zmdi zmdi-view-list"></a>
-  </div>
+<div>
+    <button @click="viewAsGrid" :class="{active: isViewGrid}" title="Xem danh sách BĐS dạng ô" class="zmdi zmdi-view-module"></button>
+  {% comment %}  <button @click="viewAsList" :class="{active: !isViewGrid}" title="Xem danh sách BĐS có ảnh" class="zmdi zmdi-view-stream"></button>
+ {% endcomment %}
+    <button v-on:click="viewAsSimple" v-bind:class="{active: !isViewGrid}" title="Xem danh sách BĐS dạng list" class="zmdi zmdi-view-list"></button>
+</div>
 </div>
 
 <div class="actionBar" v-cloak>

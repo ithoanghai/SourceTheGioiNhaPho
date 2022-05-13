@@ -410,17 +410,17 @@ def handle_import(request, file_path, listing_type):
                                     usr.save()
                                     query = Q(user__phone=phone) | Q(user__phone=tmp_phone) | Q(user__last_name=name)
                                     user_dict[phone] = Realtor.objects.filter(query).first()
-                                    if user_dict[phone] is None:
-                                        new_realtor = Realtor.objects.create(user=usr)
-                                        user_dict[phone] = new_realtor
+                                    #if user_dict[phone] is None:
+                                        #new_realtor = Realtor.objects.create(user=usr)
+                                      #  user_dict[phone] = new_realtor
                                     extra_data = f'Liên hệ với {name}, {extra_phone}, {don_vi} để giao dịch.\n' + extra_add
                                     print(f"update user: {usr}")
                                 else:
                                     new_user = User.objects.create_user(username=phone, password=default_password,
                                                                         phone=phone, email=email, last_name=name, bio=bio)
                                     new_user.save()
-                                    new_realtor = Realtor.objects.create(user=new_user)
-                                    user_dict[phone] = new_realtor
+                                    #new_realtor = Realtor.objects.create(user=new_user)
+                                    #user_dict[phone] = new_realtor
                                     print(f"new_user: {new_user}")
                             realtor = user_dict[phone]
                         elif user_dict.get(phone) and len(phone) == 10:
@@ -584,7 +584,7 @@ def handle_import(request, file_path, listing_type):
 
                 # Phân tích cú pháp thông số để lấy diện tích, số tầng, mặt tiền từ file nguồn nhà phố
                 if listing_type == "K1":
-                    encoded_num = row[header_dict['thong-so']].trim().replace('  ', ' ')
+                    encoded_num = row[header_dict['thong-so']].replace('  ', ' ')
                     splitter = encoded_num.split(' ')
                     floor = 0
                     try:

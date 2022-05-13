@@ -85,6 +85,14 @@ def prepare_listing_queryset(input_params):
             queryset_list = queryset_list.annotate(search=search_vector).filter(search=search_query)
 
     # District
+    if 'street' in input_params:
+        street = input_params.get('street')
+        if street:
+            search_vector = SearchVector("address", "street")
+            search_query = SearchQuery(keywords)
+            queryset_list = queryset_list.annotate(search=search_vector).filter(search=search_query)
+
+    # District
     if 'district' in input_params:
         district = input_params.get('district')
         if district:

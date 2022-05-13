@@ -2,7 +2,7 @@ from itertools import groupby
 
 from django import template
 from django.contrib.admin import site
-from django.db.models import QuerySet
+from django.db.models import QuerySet, Count
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template import loader
@@ -33,10 +33,11 @@ def home_view(request):
     listings_project = (Listing.objects
                             .order_by('-list_date')
                             .filter(is_published=True, transaction_type=TransactionType.PROJECT)[:15])
-    query = Listing.objects.all().query
-    query.group_by = ['district']
-    listing_by_group = QuerySet(query=query, model=Listing)
-    listing_by_group = listing_by_group.filter(is_published=True, transaction_type=TransactionType.SELL)[:60]
+    listing_by_group = (Listing.objects
+              .values('district')
+              .annotate(dcount=Count('district'))
+              .order_by()
+              )
     list_district_hn = get_all_districts()
     context = {
         'listings_for_sale': listings_for_sale,
