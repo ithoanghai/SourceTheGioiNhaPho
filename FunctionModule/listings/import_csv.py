@@ -851,5 +851,6 @@ def handle_import(request, file_path, listing_type):
                 for listing in listings:
                     listing.realtor = real
                     listing.save()
-                rl.delete()
-                print("del realtor %s", rl)
+                if rl.id !=3:
+                    rl.delete()
+                    print("del realtor %s", rl)
