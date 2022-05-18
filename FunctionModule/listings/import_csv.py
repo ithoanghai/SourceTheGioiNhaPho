@@ -846,10 +846,11 @@ def handle_import(request, file_path, listing_type):
         real = Realtor.objects.filter(user=user).first()
         realtors = Realtor.objects.all()
         for rl in realtors:
-            if rl != real:
+            print(f"realtor {rl} {real}")
+            if rl != user.realtor:
                 listings = Listing.objects.filter(realtor=rl)
                 for listing in listings:
-                    listing.realtor = real
+                    listing.realtor = user.realtor
                     listing.save()
                 if rl.id !=3:
                     rl.delete()
