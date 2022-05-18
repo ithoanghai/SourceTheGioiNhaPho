@@ -7,7 +7,7 @@
                 href="{% url "profile" %}" style="color: greenyellow"> {{ user.name }}</a></span>
     {% else %}
         <span><a href="#login" title="Đăng nhập / Đăng ký" class="btn-login"
-                 style="color: yellowgreen"> {% translate 'Đăng nhập' %}</a></span>
+                 style="color: yellowgreen"><i class="fa fa-user-lock"></i> {% translate 'Đăng nhập' %}</a></span>
     {% endif %}
 
     {% if user.is_authenticated %}
@@ -15,6 +15,7 @@
             <div class=" dropdown-header noti-title" style="z-index: 5">
                 <h6 class="text-overflow m-0">CHỨC NĂNG CHÍNH!</h6>
             </div>
+            <a href="./admin/listings/listing/add/"> <i class="fa fa-user-edit"></i> {% translate 'Đăng tin' %}</a>
             {% include 'admin/app_list.html' with app_list=available_apps show_changelinks=True %}
             <div class="dropdown-divider"></div>
             <a href="{% url "profile" %}" class="dropdown-item">
@@ -44,20 +45,23 @@
                 {% if user.has_usable_password %}
                     <a href="{% url 'password_change' %}" target="_blank"
                        class="dropdown-item">
-                        <i class="ni ni-settings"></i><span>{% translate 'Đổi mật khẩu' %}</span>
+                        <i class="fa fa-user-cog"></i><span>{% translate 'Đổi mật khẩu' %}</span>
                     </a>
                 {% endif %}
             {% endblock %}
             <div class="dropdown-divider"></div>
             <a href="{% url 'logout' %}" class="dropdown-item">
-                <i class="ni ni-user-run"></i>
+                <i class="fa fa-user-lock"></i>
                 <span>Đăng xuất</span>
             </a>
         </div>
         <ul>
+            <li>
+                <a href="{% url "post_listings" %}"> <i class="fa fa-pencil-alt"></i> {% translate 'Đăng tin miễn phí' %}</a>
+            </li>
             {% if user.is_staff or user.is_superuser %}
                 <li>
-                    <a href="{% url "admin" %}"> <i class="fa fa-user-astronaut"></i> {% translate 'Trang quản trị' %}
+                    <a href="{% url "admin" %}"> <i class="fa fa-chart-area"></i> {% translate 'Trang quản trị' %}
                     </a>
                 </li>
             {% endif %}
@@ -78,7 +82,7 @@
             {% if user.has_usable_password %}
                 <li>
                     <a href="{% url 'password_change' %}"><i
-                            class="fa fa-user-secret"></i> {% translate 'Đổi mật khẩu' %}</a>
+                            class="fa fa-user-cog"></i> {% translate 'Đổi mật khẩu' %}</a>
                 </li>
             {% endif %}
             {% comment %}            <li>

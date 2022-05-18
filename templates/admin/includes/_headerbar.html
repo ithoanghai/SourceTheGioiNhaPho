@@ -38,10 +38,10 @@
                                     <span class="avatar {% comment %}avatar-sm{% endcomment %} rounded-circle">
 
                                       {% if user.avatar %}
-                                          {% if user.avatar == 'img/logo tgnp brown.jpg'%}
-                                            <img alt="" src="{% static 'admin/img/team-4-800x800.jpg' %}">
+                                          {% if user.avatar == 'img/logo tgnp brown.jpg' %}
+                                              <img alt="" src="{% static 'admin/img/team-4-800x800.jpg' %}">
                                           {% else %}
-                                             <img alt="" src="/media/{{ user.avatar }} ">
+                                              <img alt="" src="/media/{{ user.avatar }} ">
                                           {% endif %}
                                       {% else %}
                                           <img alt="" src="{% static 'admin/img/team-4-800x800.jpg' %}">
@@ -61,10 +61,13 @@
                                 <div class=" dropdown-header noti-title" style="z-index: 5">
                                     <h6 class="text-overflow m-0">CHỨC NĂNG CHÍNH!</h6>
                                 </div>
+                                <a class="dropdown-item" href="{% url "post_listings" %}"> <i
+                                        class="fa fa-pencil-alt"></i> {% translate 'Đăng tin BĐS' %}</a>
+                                <div class="dropdown-divider"></div>
                                 {% include 'admin/app_list.html' with app_list=available_apps show_changelinks=True %}
                                 <div class="dropdown-divider"></div>
                                 <a href="{% url "profile" %}" class="dropdown-item">
-                                    <i class="ni ni-archive-2"></i>
+                                    <i class="fa fa-user-edit"></i>
                                     <span>Quản lý cá nhân</span>
                                 </a>
                                 {% comment %}<a href="{% url "profile" %}" class="dropdown-item">
@@ -90,7 +93,7 @@
                                     {% if user.has_usable_password %}
                                         <a href="{% url 'password_change' %}" target="_blank"
                                            class="dropdown-item">
-                                            <i class="ni ni-settings"></i><span>{% translate 'Đổi mật khẩu' %}</span>
+                                            <i class="fa fa-user-lock"></i><span>{% translate 'Đổi mật khẩu' %}</span>
                                         </a>
                                     {% endif %}
                                 {% endblock %}

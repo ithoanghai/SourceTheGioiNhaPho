@@ -12,7 +12,7 @@
                     <a href="{{ model.admin_url }}" {% if model.admin_url in request.path %}
                        aria-current="page"{% endif %} class="dropdown-item model-
                             {{ model.object_name }}{% if model.admin_url in request.path %} current-model{% endif %}">
-                        <i class="ni ni-app"></i> <span>{{ model.name }}</span>
+                        <i class="ni ni-folder-17"></i> <span>{{ model.name }}</span>
                     </a>
                 {% else %}
                     <span>{{ model.name }}</span>
@@ -116,7 +116,7 @@
 
 
     {% else %}
-        <p>{% translate 'Bạn không có quyền xem hoặc sửa bất cứ tính năng nào.' %}</p>
+        <p>{% translate 'Bạn không có quyền xem hoặc sửa các tính năng nâng cao.' %}</p>
     {% endif %}
 
 {% endif %}

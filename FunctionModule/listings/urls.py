@@ -9,6 +9,7 @@ admin.autodiscover()
 urlpatterns = [
     path('', views.index, name='listings'),
     path('<int:listing_id>', views.listing, name='listing_detail'),
+    path('post_listing', views.post_listing, name='post_listings'),
 
     path('search', views.search, name='listing_search'),
     path('search_simple', views.search_simple, name='listing_search_simple'),
@@ -22,5 +23,5 @@ urlpatterns = [
     path('ListingAPIAllView', views.ListingAPIAllView.as_view()),
     path('listings-api-token-auth/', obtain_auth_token, name='listings_api_token_auth'),
 
-    path('advanced_filters/', include('advanced_filters.urls'))
+    #path('advanced_filters/', include('advanced_filters.urls'))
 ]

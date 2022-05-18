@@ -79,6 +79,44 @@ def search_simple(request):
     return render(request, 'listings/search_list_simple.html', context)
 
 
+def post_listing(request):
+    context = {
+    }
+    if request.method == 'GET':
+        return render(request, 'listings/postListing.html', context)
+    elif request.method == 'POST':
+        # listing_id = request.POST['listing_id']
+        # lastname = request.POST['lastname']
+        # firstname = request.POST['firstname']
+        # name = f'{firstname} {lastname}'
+        # email = request.POST['email']
+        # phone = request.POST['phone']
+        # message = request.POST['message']
+        # user_id = request.POST.get('user_id', None)
+        # yesterday = timezone.now() - timedelta(days=1)
+        # #  Check if user has made inquiry already
+        # if request.user.is_authenticated:
+        #     user_id = request.user.id
+        #     has_contacted = Contact.objects.filter(listing_id=listing_id, user_id=user_id,
+        #                                            contact_date__gte=yesterday)
+        #     if has_contacted:
+        #         messages.error(request,
+        #                        'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
+        #         return redirect('/listings/' + listing_id)
+        # else:
+        #     ses_id = request.session.session_key
+        #     print(ses_id)
+        #
+        # listing = Listing.objects.get(pk=listing_id)
+
+        # Contact.objects.create(listing=listing.code, listing_id=listing_id, name=name, email=email,
+        #                        phone=phone, message=message, user_id=user_id)
+        #
+        # messages.success(request, 'Yêu cầu được gửi thành công. Chúng tôi sẽ liên lạc lại với bạn sớm nhất.')
+
+        return render(request, 'listings/postListingSuccess.html', context)
+
+
 def sell_lease_with_us(request):
     context = {
     }

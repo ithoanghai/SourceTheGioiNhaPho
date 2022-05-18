@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load static humanize i18n %}
+
+{% block head %}
+    {{ block.super }}
+
+    <link rel="canonical" href="{% url 'about' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
+
+{% endblock %}
+
+{% block content %}
+
+    <div id="wraps">
+        <!-- Search menu -->
+        {% include 'menu/_menuSearch.html' %}
+
+        <!-- Header -->
+        {% include 'menu/_secondMenu2.html' %}
+
+        <!-- Main Content  -->
+        <section class="background-gray">
+            <div class="width1140 s-padding-tb">
+                <div style="align-content: center">
+                    <h4>{% translate "Chào mừng bạn! Bạn đã đăng ký thành công tài khoản trên hệ thống THẾ GIỚI NHÀ PHỐ." %}</h4>
+                    <br/>
+                    <h6>{% translate "- Để sử dụng hệ thống mời bạn đăng nhập với tài khoản & mật khẩu vừa đăng ký." %}</h6>
+                    <p><a class="btn btn-primary" href="#login">{% translate 'Đăng nhập bằng tài khoản thường' %}</a></p>
+                    <br/>
+                    <h6>{% translate "- Để trở thành chuyên viên Thế giới nhà phố, mời bạn liên hệ với quản trị viên hoặc trợ lý để được kích hoạt. Sau khi trở thành chuyên viên bạn sẽ được sử dụng nhiều tính năng mạnh khác của hệ thống." %}</h6>
+                    <p><a class="btn btn-primary" href="login">{% translate 'Đăng nhập bằng tài khoản chuyên viên TGNP' %}</a></p>
+
+                    <br/><br/>
+                </div>
+                <div class="s-grid s-column-4 s-gutters">
+                    <div class="s-cell s-btn">
+                        <a href="{% url 'specialist' %}">Gặp chuyên viên tư vấn</a>
+                    </div>
+                    <div class="s-cell s-btn">
+                        <a href="{% url 'sell_lease_with_us' %}">Đăng bán, cho thuê</a>
+                    </div>
+                    <div class="s-cell s-btn">
+                        <a href="https://forms.gle/LM41QBEMSZvwmSta7">Gia nhập TGNP</a>
+                    </div>
+                    <div class="s-cell s-btn">
+                        <a href="{% url 'contacts' %}">Liên hệ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
+
+    </div>
+
+    <!-- Footer content below-->
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

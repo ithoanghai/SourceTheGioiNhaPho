@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% load static i18n %}
+{% block title %} {% trans 'Thông tin cá nhân' %} {% endblock title %}
+
+{% block content %}
+  <div id="wrap">
+    <!-- Search menu -->
+    {% include 'menu/_menuSearch.html' %}
+
+    <!-- Header -->
+    {% include 'menu/_secondMenu2.html' %}
+
+    <!-- Main Content  -->
+    <!-- Header -->
+    <div class="header d-flex align-items-center">
+        <!-- Mask -->
+        <span class="mask bg-gradient-default opacity-2"></span>
+        <!-- Header container -->
+        <div class="container-fluid d-flex align-items-center">
+            <div class="row mt--7">
+                <div class="col-lg-7 col-md-10">
+                    <h1 class="display-4 text-blue">{% trans 'Chào bạn' %} {{ user.first_name }} {{ user.last_name }} </h1>
+                    <p class="text-blue mt-0 mb-5">{% trans 'Bạn đăng tin bất động sản thành công. Quản trị viên sớm duyệt tin đăng của bạn.' %} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt--6">
+
+        <div class="row">
+            <div class="col-xl-8 order-xl-1">
+                <div class="card bg-secondary shadow">
+                    <div class="card-header bg-white border-0">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h3 class="mb-0">Lịch sử liên hệ giao dịch</h3>
+                            </div>
+                            {% comment %}<div class="col-4 text-right">
+                  <a href="#!" class="btn btn-sm btn-primary">Thiết lập</a>
+                </div>{% endcomment %}
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="input-country">Đăng ký gia nhập: {{ request.user.date_joined }}</label>
+                            </div>
+                        </div>
+                        {% if contacts %}
+                            <p>{% trans "Danh sách liên hệ đã yêu cầu" %}</p>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">{% trans "Sản phẩm BĐS" %}</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for contact in contacts %}
+                                    <tr>
+                                        <td>{{ contact.id }}</td>
+                                        <td>{{ contact.listing }}</td>
+                                        <td>
+                                            <a class="btn btn-light"
+                                               href="{% url "listing_detail" contact.listing_id %}">{% trans "Xem sản phẩm" %}</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p>{% trans "Bạn chưa có tương tác liên hệ sản phẩm nào" %}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
+
+  </div>
+
+  <!-- Footer content below-->
+{% endblock %}
+
+
+

@@ -36,15 +36,18 @@
                 <a>Chào bạn {{ user.name }} <i class="zmdi zmdi-chevron-down"></i></a>
 
                 <ul style="display: none">
+                    <li>
+                        <a href="./admin/listings/listing/add/"> <i class="fa fa-user-edit"></i> {% translate 'Đăng tin miễn phí' %}</a>
+                    </li>
                     {% if user.is_staff or user.is_superuser %}
                         <li>
                             <a href="{% url "admin" %}"> <i
                                     class="fa fa-user-astronaut"></i> {% translate 'Trang quản trị' %}</a>
                         </li>
                     {% endif %}
-            <li>
-                <a href="{% url "profile" %}"> <i class="fa fa-user-edit"></i> {% translate 'Trang cá nhân' %}</a>
-            </li>
+                    <li>
+                        <a href="{% url "profile" %}"> <i class="fa fa-user-edit"></i> {% translate 'Trang cá nhân' %}</a>
+                    </li>
                         {% comment %}<li>
                             <a href="{% url "profile" %}"><i class="ni ni-settings-gear-65"></i> {% translate 'Thiết lập' %} </a>
                         </li>{% endcomment %}
@@ -58,7 +61,7 @@
                         {% endif %}
                         <li>
                 {% if user.has_usable_password %}
-                    <a href="{% url 'password_change' %}"><i class="fa fa-user-secret"></i> {% translate 'Đổi mật khẩu' %}</a>
+                    <a href="{% url 'password_change' %}"><i class="fa fa-user-cog"></i> {% translate 'Đổi mật khẩu' %}</a>
                 {% endif %}
                         </li>
             {% comment %}            <li>
@@ -72,7 +75,7 @@
                     </ul>
             {% else %}
                 <div class="user-login">
-                <a href="#login" title="Đăng nhập" class="btn-primary btn-black-outline btn-medium btn-login"> {% translate 'Đăng nhập' %}</a>
+                <a href="#login" title="Đăng nhập" class="btn-primary btn-black-outline btn-medium btn-login"><i class="fa fa-user-edit"> {% translate 'Đăng nhập' %}</a>
               <a href="{% url 'register' %}" title="Đăng ký"
                  class="btn-primary btn-red-outline btn-medium btn-signup">Đăng ký</a>
                 </div>
@@ -120,7 +123,7 @@
         {% include "menu/_subMenuUserProfile.html" %}
       </ul>
       <div class="agency-tgnp col-5">
-        <a href="{% url 'sell_lease_with_us' %}" title="Đăng tin nhà đất">Đăng bán & Cho thuê</a>
+        <a href="{% url "post_listings" %}" title="Đăng tin nhà đất"><i class="fa fa-pencil-alt"></i> {% translate 'Đăng tin miễn phí' %}</a>
       </div>
     </div>
   </div>

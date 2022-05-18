@@ -3,197 +3,218 @@
 {% load static humanize i18n get_cadastral load_static %}
 
 {% block head_script %}
-  {{ block.super }}
-  <meta name="facebook-domain-verification" content="3g449o0k74keromcp6ksrzkk4t8fxm"/>
-  <link rel="stylesheet" type="text/css" href="{% load_static 'css/index-merge.css' %}"/>
-  <link rel="canonical" href="{% url 'index' %}"/>
+    {{ block.super }}
+    <meta name="facebook-domain-verification" content="3g449o0k74keromcp6ksrzkk4t8fxm"/>
+    <link rel="stylesheet" type="text/css" href="{% load_static 'css/index-merge.css' %}"/>
+    <link rel="canonical" href="{% url 'index' %}"/>
 
 {% endblock %}
 
 {% block content %}
 
-  <!-- NavBar -->
-  {% include 'partials/_navbar.html' %}
-  <!-- Banner -->
-  {% comment %}{% include 'partials/_banner.html' %}{% endcomment %}
+    <!-- NavBar -->
+    {% include 'partials/_navbar.html' %}
+    <!-- Banner -->
+    {% comment %}{% include 'partials/_banner.html' %}{% endcomment %}
 
-  <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">
-    <div class="banner-app-content">
-      <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
-        <i class="zmdi zmdi-close"></i>
-      </button>
-      <a href="javascript:void(0)" class="cover">
-        <img src="{% static 'img/logo.svg' %}" alt="Thế giới Nhà Phố">
-      </a>
-      <div class="banner-app-info">
-        <a href="javascript:void(0)">Thế giới Nhà Phố</a>
-        <p>Mua bán, tìm kiếm Bất động sản thật, nhanh chóng, tin cậy</p>
-        <div class="rating-star">
-          <i class="zmdi zmdi-star evaluated"></i>
-          <i class="zmdi zmdi-star evaluated"></i>
-          <i class="zmdi zmdi-star evaluated"></i>
-          <i class="zmdi zmdi-star evaluated"></i>
-          <i class="zmdi zmdi-star-half evaluated"></i>
-        </div>
-      </div>
-    </div>
-    <a href="javascript:void(0)" class="btn-install">Mở</a>
-  </div>
-
-  {% if listings_for_sale %}
-    <section class="container col-12">
-      <div class="inner pd-top-bottom-block block-project-listing" style="padding-top: 0">
-        <h2 class="heading-03">
-          <a href="{% url 'listing_search' %} {{ key }}">BẤT ĐỘNG SẢN BÁN </a>
-        </h2>
-        <div class="col-12">
-
-          {% for listing in listings_for_sale %}
-            {% include "listings/_listingCard2.html" %}
-          {% endfor %}
-
-          <a class="more" href="{% url "listing_search" %}?trans_type=sell">
-            <span>Xem thêm nhà đất <i class="zmdi zmdi-chevron-right"></i></span>
-          </a>
-        </div>
-      </div>
-    </section>
-  {% endif %}
-
-  <section class="container col-12">
-    <div class="inner text-center-index block-introduce">
-      <h2 class="heading-02">Tìm kiếm cực nhanh - Thông tin chính xác - Hỗ trợ miễn phí</h2>
-      <p class="col-8">Thế Giới Nhà Phố (TGNP) với thế mạnh về công nghệ và cung cấp đầy đủ các dịch vụ, cùng với đội
-        ngũ chuyên viên hiểu biết sâu sắc thị trường từng khu vực, sẽ đồng hành hỗ trợ bạn tìm kiếm bất động sản tốt nhất, thông tin chúng tôi cung cấp là hoàn toàn chính xác, giúp bạn tiết kiệm
-        đáng kể chi phí, công sức và thời gian.</p>
-      <a class="btn-primary btn-large btn-black-outline" target="_blank" href="{% url 'whyChoose' %}">Tìm hiểu thêm</a>
-    </div>
-  </section>
-
-  <section class="container col-12">
-    <div class="inner pd-top-bottom-block quickly-sell">
-      <div class="quickly-sell-cover">
-        <img data-src="{% static 'images/background-quick-sell-small@1x.jpg' %}"
-             data-srcset="{% static 'images/background-quick-sell-small@1x.jpg' %} 600w, {% static 'images/background-quick-sell-small@1x.jpg' %} 1920w"
-             class="lazy" alt="TGNP">
-      </div>
-      <div class="detail-block">
-        <div class="content-detail-block">
-          <h2 class="font-tiempos-h2">
-            Bán nhanh nhất,<br>cho thuê giá tốt nhất!
-            <br>
-          </h2>
-          <p class="font-rvharmonia">
-            Gần 90% chủ nhà chốt giao dịch trong vòng 90 ngày sau khi chọn TGNP.
-          </p>
-          <div class="option-group">
-            <a class="btn-primary btn-large btn-black-outline" href="{% url 'sell_lease_with_us' %}">
-              Bán | Cho thuê với Thế giới Nhà Phố
+    <div class="banner-app-tgnp" id="tgnp-banner-prompt" style="display: none">
+        <div class="banner-app-content">
+            <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
+                <i class="zmdi zmdi-close"></i>
+            </button>
+            <a href="javascript:void(0)" class="cover">
+                <img src="{% static 'img/logo.svg' %}" alt="Thế giới Nhà Phố">
             </a>
-          </div>
+            <div class="banner-app-info">
+                <a href="javascript:void(0)">Thế giới Nhà Phố</a>
+                <p>Mua bán, tìm kiếm Bất động sản thật, nhanh chóng, tin cậy</p>
+                <div class="rating-star">
+                    <i class="zmdi zmdi-star evaluated"></i>
+                    <i class="zmdi zmdi-star evaluated"></i>
+                    <i class="zmdi zmdi-star evaluated"></i>
+                    <i class="zmdi zmdi-star evaluated"></i>
+                    <i class="zmdi zmdi-star-half evaluated"></i>
+                </div>
+            </div>
         </div>
-      </div>
+        <a href="javascript:void(0)" class="btn-install">Mở</a>
     </div>
-  </section>
 
-  {% if listings_for_rent %}
+    {% if listings_for_sale %}
+        <section class="container col-12">
+            <div class="inner pd-top-bottom-block block-project-listing">
+                <h2 class="heading-04">
+                    <b><a href="{% url 'listing_search' %} {{ key }}">BẤT ĐỘNG SẢN BÁN </a></b>
+                </h2>
+
+                <div class="col-12">
+                        {% for listing in listings_for_sale %}
+                                {% include "listings/_listingCard2.html" %}
+                        {% endfor %}
+                </div>
+            <div><a class="more" href="{% url "listing_search" %}?trans_type=sell">
+                        <span >Xem thêm nhà đất <i class="zmdi zmdi-chevron-right"></i></span>
+                    </a></div>
+
+            </div>
+        </section>
+    {% endif %}
+
     <section class="container col-12">
-      <div class="inner pd-top-bottom-block block-project" style="padding-top: 0">
-        <h2 class="heading-03">
-          <a href="{% url 'listing_search' %}?trans_type=rent&district='Hoàn Kiếm'">Cho thuê BĐS</a>
-        </h2>
-        <div class="col-12">
-
-          {% for listing in listings_for_rent %}
-            {% include "listings/_listingCard2.html" %}
-          {% endfor %}
-
-          <input type="hidden" value=""/>
-          <a class="more" href="{% url 'listing_search' %}?trans_type=sell&district=">Xem thêm nhà đất
-            <i class="zmdi zmdi-chevron-right"></i>
-          </a>
+        <div class="inner pd-top-bottom-block block-project-listing">
+            <h3 class="heading-05">
+                <b>NHÀ ĐẤT HÀ NỘI BÁN THEO QUẬN:</b>
+            </h3>
+            <div class="col-12" style="padding-top: 10px;">
+                {% for district in listing_by_group %}
+                        <a href="{% url 'listing_search' %}?district={{ district.district }}&sort=priority"
+                           title=""> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
+                {% endfor %}
+            </div>
         </div>
-      </div>
     </section>
-  {% endif %}
+
+    <section class="container col-12">
+        <div class="inner text-center-index block-introduce">
+            <h2 class="heading-02">Tìm kiếm cực nhanh - Thông tin chính xác - Hỗ trợ miễn phí</h2>
+            <p class="col-8">Thế Giới Nhà Phố (TGNP) với thế mạnh về công nghệ và cung cấp đầy đủ các dịch vụ, cùng với
+                đội
+                ngũ chuyên viên hiểu biết sâu sắc thị trường từng khu vực, sẽ đồng hành hỗ trợ bạn tìm kiếm bất động sản
+                tốt nhất, thông tin chúng tôi cung cấp là hoàn toàn chính xác, giúp bạn tiết kiệm
+                đáng kể chi phí, công sức và thời gian.</p>
+            <a class="btn-primary btn-large btn-black-outline" target="_blank" href="{% url 'whyChoose' %}">Tìm hiểu
+                thêm</a>
+        </div>
+    </section>
+
+    <section class="container col-12">
+        <div class="inner pd-top-bottom-block quickly-sell">
+            <div class="quickly-sell-cover">
+                <img data-src="{% static 'images/background-quick-sell-small@1x.jpg' %}"
+                     data-srcset="{% static 'images/background-quick-sell-small@1x.jpg' %} 600w, {% static 'images/background-quick-sell-small@1x.jpg' %} 1920w"
+                     class="lazy" alt="TGNP">
+            </div>
+            <div class="detail-block">
+                <div class="content-detail-block">
+                    <h2 class="font-tiempos-h2">
+                        Bán nhanh nhất,<br>cho thuê giá tốt nhất!
+                        <br>
+                    </h2>
+                    <p class="font-rvharmonia">
+                        Gần 90% chủ nhà chốt giao dịch trong vòng 90 ngày sau khi chọn TGNP.
+                    </p>
+                    <div class="option-group">
+                        <a class="btn-primary btn-large btn-black-outline" href="{% url 'sell_lease_with_us' %}">
+                            Bán | Cho thuê với Thế giới Nhà Phố
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if listings_for_rent %}
+        <section class="container col-12">
+            <div class="inner pd-top-bottom-block block-project" style="padding-top: 0">
+                <h2 class="heading-03">
+                    <a href="{% url 'listing_search' %}?trans_type=rent&district='Hoàn Kiếm'">Cho thuê BĐS</a>
+                </h2>
+                <div class="col-12">
+
+                    {% for listing in listings_for_rent %}
+                        {% include "listings/_listingCard2.html" %}
+                    {% endfor %}
+
+                    <input type="hidden" value=""/>
+                    <a class="more" href="{% url 'listing_search' %}?trans_type=sell&district=">Xem thêm nhà đất
+                        <i class="zmdi zmdi-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    {% endif %}
 
     <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
 
     <div class="cta-bottom-wrapper">
-      <div class="cta-bottom-inner">
-        <div class="phone">
-          <a class="cta-hotline" href="tel:0964399436"><span class="font-icon fone-b font-20"> </span>
-            <strong>0964 399 436</strong></a>
+        <div class="cta-bottom-inner">
+            <div class="phone">
+                <a class="cta-hotline" href="tel:0964399436"><span class="font-icon fone-b font-20"> </span>
+                    <strong>0964 399 436</strong></a>
+            </div>
+            <div class="btn-contact">
+                <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
+            </div>
         </div>
-        <div class="btn-contact">
-          <a class="cta-form" href="#" data-action="contact-agent">ĐĂNG KÝ NGAY</a>
-        </div>
-      </div>
     </div>
 
 {% endblock %}
 
 
 {% block scripts %}
-  {{ block.super }}
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-          integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
-          integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="{% load_static 'js/homepage-search.js' %}"></script>
-  <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
-<script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          applyImageLazyLoad(document)
-      });
-  </script>
-  <script>
-      window.hsConversationsSettings = {
-          loadImmediately: false // Delay the load of the chat widget
-      };
-      window.RFeedback = {
-          API: "https://thegioinhaphovietnam.com.vn/mapi",
-          email: "",
-          name: "",
-          phone: "",
-          ip: "10.244.0.0"
-      }
-  </script>
+    {{ block.super }}
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+            integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+            integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% load_static 'js/homepage-search.js' %}"></script>
+    <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
+    <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            applyImageLazyLoad(document)
+        });
+    </script>
+    <script>
+        window.hsConversationsSettings = {
+            loadImmediately: false // Delay the load of the chat widget
+        };
+        window.RFeedback = {
+            API: "https://thegioinhaphovietnam.com.vn/mapi",
+            email: "",
+            name: "",
+            phone: "",
+            ip: "10.244.0.0"
+        }
+    </script>
 
-  <style>
-    .search-suggest-list {
-    display: block;
-    position: absolute;
-    background: #fff;
-    top: 76%;
-    right: 0;
-    width: 100%;
-    max-width: 400px;
-    z-index: 10;
-    border: 1px solid rgba(131, 131, 131, .2);
-    border-radius: 2px;
-    padding: 5px 0;
-    font-size: 14px
-}
-    .search-suggest-list li {
-    height: auto;
-    min-height: 40px
-}
-    .search-suggest-list li:hover {
-    background: #f3f4f7
-}
-    .search-suggest-list li a {
-    width: 100%;
-    display: block;
-    padding: 10px 15px;
-    color: #30333a
-}
-    .search-suggest-list li a span {
-    display: block;
-    line-height: 20px
-}
-  </style>
+    <style>
+        .search-suggest-list {
+            display: block;
+            position: absolute;
+            background: #fff;
+            top: 76%;
+            right: 0;
+            width: 100%;
+            max-width: 400px;
+            z-index: 10;
+            border: 1px solid rgba(131, 131, 131, .2);
+            border-radius: 2px;
+            padding: 5px 0;
+            font-size: 14px
+        }
+
+        .search-suggest-list li {
+            height: auto;
+            min-height: 40px
+        }
+
+        .search-suggest-list li:hover {
+            background: #f3f4f7
+        }
+
+        .search-suggest-list li a {
+            width: 100%;
+            display: block;
+            padding: 10px 15px;
+            color: #30333a
+        }
+
+        .search-suggest-list li a span {
+            display: block;
+            line-height: 20px
+        }
+    </style>
 {% endblock %}

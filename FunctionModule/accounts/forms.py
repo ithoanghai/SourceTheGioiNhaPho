@@ -60,6 +60,19 @@ class UserRegisterForm(UserChangeForm):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
 
 
+class UserProfileForm(UserChangeForm):
+    avatar = forms.ImageField(required=False)
+
+    class Meta(UserChangeForm.Meta):
+        model = User
+        fields = ('first_name', 'last_name', 'username', 'phone', 'email', 'bio', 'gender', 'dob', 'address','website','facebook','youtube','avatar',)
+        # fields = UserChangeForm.Meta.fields #+ ("email",)
+        field_order = ['first_name', 'last_name', ]
+
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+
+
 from django import forms
 
 from allauth.account.forms import SignupForm

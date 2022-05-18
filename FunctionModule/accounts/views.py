@@ -6,9 +6,11 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from allauth.account.views import get_adapter
+from gevent import os
 
 from FunctionModule.accounts.models import User
-from FunctionModule.accounts.forms import UserRegisterForm
+from FunctionModule.accounts.forms import UserRegisterForm, UserProfileForm
+from TownhouseWorldRealestate.settings import MEDIA_ROOT
 
 
 def register(request):
@@ -126,9 +128,73 @@ def profile(request):
         'available_apps': app_list
     }
     if request.user.is_authenticated:
-        return render(request, 'accounts/_profile.html', context)
+        if request.method == 'GET':
+            return render(request, 'accounts/_profile.html', context)
+        elif request.method == 'POST':
+            form = UserProfileForm(request.POST or None, request.FILES, instance=request.user)
+            # Get form values
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            username = request.POST['username']
+            phone = request.POST['phone']
+            email = request.POST['email']
+            dob = request.POST['dob']
+            gender = request.POST['gender']
+            address = request.POST['address']
+            youtube = request.POST['youtube']
+            facebook = request.POST['facebook']
+            website = request.POST['website']
+            bio = request.POST['bio']
+            avatar = request.FILES['avatar']
+            reg_user = {
+                'first_name': first_name,
+                'last_name': last_name,
+                'username': username,
+                'phone': phone,
+                'email': email,
+                'dob': dob,
+                'gender': gender,
+                'address': address,
+                'youtube': youtube,
+                'facebook': facebook,
+                'website': website,
+                'bio': bio,
+                'avatar': avatar,
+            }
+
+            if form.is_valid():
+                # Looks good
+                # user = User.objects.create_user(username=username, password=password, email=email,
+                #                                first_name=first_name, last_name=last_name)
+
+                if request.FILES.get('avatar', None) != None and form.is_multipart():
+                    try:
+                        save_file(avatar)
+                        os.remove(request.user.avatar.url)
+                    except Exception as e:
+                        print('Exception in removing old profile image: ', e)
+                    request.user.avatar = request.FILES['avatar']
+                    request.user.save()
+                user = form.save()
+                update_session_auth_hash(request, user)  # Important!
+                messages.success(request,'Bạn đã lưu thông tin thành công')
+
+                return redirect('profile')
+
+            return render(request, 'accounts/_profile.html', {'reg_user': reg_user, 'form': form})
     else:
-        return redirect('/admin/')
+        return render(request, 'accounts/_profile.html')
+
+
+def save_file(file, path=''):
+    ''' Little helper to save a file
+    '''
+    filename = file._get_name()
+    fd = open('%s/photos/%Y%m%d/%s' % (MEDIA_ROOT, str(path) + str(filename)), 'wb')
+    for chunk in file.chunks():
+        fd.write(chunk)
+    fd.close()
+    return filename
 
 
 def password_change(request):

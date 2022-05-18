@@ -68,7 +68,7 @@ class Transaction(models.Model):
 class TransactionHistory(models.Model):
     class Meta:
         verbose_name = "Lịch sử Giao dịch"
-        verbose_name_plural = "DS Lịch sử Giao dịch"
+        verbose_name_plural = "Lịch sử Giao dịch"
         ordering = ['date']
 
     transaction = models.ForeignKey(Transaction, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name=_("Giao dịch"))
