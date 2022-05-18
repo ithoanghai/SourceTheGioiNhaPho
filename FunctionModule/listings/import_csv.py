@@ -845,7 +845,7 @@ def handle_import(request, file_path, listing_type):
         user = request.user
         real = Realtor.objects.filter(user=user).first()
         realtors = Realtor.objects.all()
-        listings = Listing.objects.all()[:2000]
+        listings = Listing.objects.all()[:30000]
         for listing in listings:
             if listing.realtor != real:
                 listing.realtor = real
