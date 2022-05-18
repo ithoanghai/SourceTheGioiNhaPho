@@ -845,11 +845,12 @@ def handle_import(request, file_path, listing_type):
         user = request.user
         real = Realtor.objects.filter(user=user).first()
         realtors = Realtor.objects.all()
-        listings = Listing.objects.all()
+        listings = Listing.objects.all()[:2000]
         for listing in listings:
-            listing.realtor = real
-            listing.save()
-            print("update realtor listing %s", listing)
+            if listing.realtor != real:
+                listing.realtor = real
+                listing.save()
+                print("update realtor listing %s", listing)
 
         for rl in realtors:
             if rl != real:
