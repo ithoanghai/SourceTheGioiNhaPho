@@ -843,15 +843,15 @@ def handle_import(request, file_path, listing_type):
 
     if request.user is not None:
         user = request.user
-        real = Realtor.objects.filter(user=user)
+        real = Realtor.objects.filter(user=user).first()
         realtors = Realtor.objects.all()
         listings = Listing.objects.all()
         for listing in listings:
-            listing.realtor = real.first()
+            listing.realtor = real
             listing.save()
             print("update realtor listing %s", listing)
 
         for rl in realtors:
-            if rl != real.first():
+            if rl != real:
                 rl.delete()
                 print("del realtor %s", rl)
