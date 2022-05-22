@@ -77,12 +77,6 @@ gộp dữ liệu
     docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py collectstatic --noinput"
     docker-compose -f docker-compose.production.yml exec web bash -c "npx gulp build"
     docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py makemigrations"
-    docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake accounts"
-    docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake customers"
-    docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake listings"
-    docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake transactions"
-    docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake-initial"
-    docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate --fake"
     docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate"
     docker-compose -f docker-compose.production.yml restart web
     docker-compose -f docker-compose.production.yml up -d search_engine

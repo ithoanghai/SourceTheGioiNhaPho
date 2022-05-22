@@ -4,7 +4,7 @@
 
 {% block head %}
     {{ block.super }}
-    <link rel="canonical" href="{% url 'specialistDetail' realtor.id%}"/>
+    <link rel="canonical" href="{% url 'specialistDetail' realtor.id %}"/>
     <link rel="stylesheet" href="{% static 'css/browse-agent.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/agent-detail.css' %}"/>
 
@@ -20,139 +20,146 @@
         {% include 'menu/_secondMenu.html' %}
 
         <!-- Main Content  -->
-    <div class="agent-detail-app">
-        <section class="agents-container col-12 intro-staff-agent mgb-45">
-            <div class="view-all">
-                <i class="zmdi zmdi-chevron-left"><a href="{% url 'specialist' %}">Xem tất cả</a></i>
-            </div>
-            <div class="info-staff">
-                <div class="agent-img-staff">
-                    <a class="img-info">
-                        {% if realtor.user.avatar %}
-                                    <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                                {% else %}
-                                    <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                                {% endif %}
-                    </a>
+        <div class="agent-detail-app">
+            <section class="agents-container col-12 intro-staff-agent mgb-45">
+                <div class="view-all">
+                    <i class="zmdi zmdi-chevron-left"><a href="{% url 'specialist' %}">Xem tất cả</a></i>
                 </div>
-                <div class="agent-contact">
-                    <div class="agent-name">
-                        <h1>{{ realtor.user.name }}</h1>
-                        <p>{{ realtor.position|get_position_type}}</p>
-                      </div>
-                    <table>
-                        <tr>
-                            <td>Ngày sinh:</td>
-                            <td><a href="tel:{{ realtor.user.dob }}" title="{{ realtor.user.dob }}">{{ realtor.user.dob }}</a></td>
-                        </tr>
-                        <tr>
-                            <td>Email:</td>
-                            <td><a href="mailto: {{ realtor.user.email }}"
-                                   title="{{ realtor.user.email }}"><span class="" data-cfemail="">{{ realtor.user.email }}</span></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Địa chỉ:</td>
-                            <td><a href="#" title="{{ realtor.user.address }}">{{ realtor.user.address }}</a></td>
-                        </tr>
-
-                    </table>
-                    <ul class="agent-social">
-                    {% if realtor.user.facebook %}
-                        <li>
-                            <a href="{{ realtor.user.facebook }}" target="_blank"><i
-                                    class="zmdi zmdi-facebook"></i>{{ realtor.user.facebook }}</a>
-                        </li>
-                    {% endif %}
-                        {% if realtor.user.website %}
-                        <li>
-                            <a href="{{ realtor.user.website }}" target="_blank"><i
-                                    class="zmdi zmdi-view-web"></i>{{ realtor.user.website }}</a>
-                        </li>
-                        {% endif %}
-                    {% if realtor.user.youtube %}
-                        <li>
-                            <a href="{{ realtor.user.youtube }}" target="_blank"><i
-                                    class="zmdi zmdi-youtube"></i>{{ realtor.user.youtube }}</a>
-                        </li>
-                    {% endif %}
-                    </ul>
-                    <div class="agent-btn">
-                        <a class="btn-primary-agent btn-red" href="tel:{{ realtor.user.phone }}" title="{{ realtor.user.phone }}"><i
-                                class="zmdi zmdi-phone"></i>{{ realtor.user.phone }}</a>
-                        <div class="btn-contact">
-                            <a class="agent-contact-modal btn-primary-agent btn-transparent" data-target="contact-agent"><i class="zmdi zmdi-email-open"></i>Liên hệ tư vấn</a>
-                          </div>
-                        <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
-                        data-type="sale_property" data-favorited="false"  class="btn-favorite zmdi zmdi-favorite-outline"></button>
-                    <button data-action="favorite" data-id="{{ listing.id }}"  data-alias="{{ listing.title }}"
-                            data-type="sale_property" data-favorited="false"  class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>
+                <div class="info-staff">
+                    <div class="agent-img-staff">
+                        <a class="img-info">
+                            {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' %}
+                                <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                            {% else %}
+                                <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                            {% endif %}
+                        </a>
                     </div>
-                </div>
-            </div>
-            <div class="intro-exp-agent">
-                <div class="experience">
-                    <h2>Kinh nghiệm</h2>
-                    <table class="exp">
-                        <tr>
-                            <td width="100px">Danh hiệu:</td>
-                            <td>{{ realtor.title|get_title_type}}</td>
-                        </tr>
-                        <tr>
-                            <td width="100px">Trình độ:</td>
-                            <td>Chuyên môn BĐS cấp {{ realtor.level}}</td>
-                        </tr>
-                        <tr>
-                            <td>Địa bàn:</td>
-                            <td>
-                                <a href="{% url 'listing_search' %}?keywords='{{ realtor.work_area}}'" title="Các BĐS tại {{ realtor.work_area}}">{{ realtor.work_area}}</a>
-                             </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="intro-staff" id="staff">
-                    <h2>Giới thiệu</h2>
-                    <p class="more-p normal">{{ realtor.user.bio }}</p>
-                </div>
-            </div>
-        </section>
-        <section class="bg-grey all-project">
-            <div class="agents-container col-12">
-                <div class="row">
-                    <h2 class="pd-t-55 pd-bt-10">Nhà đất bán của {{ realtor.user.name }}</h2>
-                    <div class="agents-inner block-project">
-                        <div class="col-12">
-                            <div ref="propertyForSaleWrapper">
-                                {% for listing in listings %}
-                                    {% include "listings/_listingCard2.html" %}
-                                  {% endfor %}
-                                <component v-for="html in morePropertyForSaleHTML" :is="html"></component>
+                    <div class="agent-contact">
+                        <div class="agent-name">
+                            <h1>{{ realtor.user.name }}</h1>
+                            <p>{{ realtor.position|get_position_type }}</p>
+                        </div>
+                        <table>
+                            <tr>
+                                <td>Ngày sinh:</td>
+                                <td><a href="tel:{{ realtor.user.dob }}"
+                                       title="{{ realtor.user.dob }}">{{ realtor.user.dob }}</a></td>
+                            </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td><a href="mailto: {{ realtor.user.email }}"
+                                       title="{{ realtor.user.email }}"><span class=""
+                                                                              data-cfemail="">{{ realtor.user.email }}</span></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Địa chỉ:</td>
+                                <td><a href="#" title="{{ realtor.user.address }}">{{ realtor.user.address }}</a></td>
+                            </tr>
+
+                        </table>
+                        <ul class="agent-social">
+                            {% if realtor.user.facebook %}
+                                <li>
+                                    <a href="{{ realtor.user.facebook }}" target="_blank"><i
+                                            class="zmdi zmdi-facebook"></i>{{ realtor.user.facebook }}</a>
+                                </li>
+                            {% endif %}
+                            {% if realtor.user.website %}
+                                <li>
+                                    <a href="{{ realtor.user.website }}" target="_blank"><i
+                                            class="zmdi zmdi-view-web"></i>{{ realtor.user.website }}</a>
+                                </li>
+                            {% endif %}
+                            {% if realtor.user.youtube %}
+                                <li>
+                                    <a href="{{ realtor.user.youtube }}" target="_blank"><i
+                                            class="zmdi zmdi-youtube"></i>{{ realtor.user.youtube }}</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                        <div class="agent-btn">
+                            <a class="btn-primary-agent btn-red" href="tel:{{ realtor.user.phone }}"
+                               title="{{ realtor.user.phone }}"><i
+                                    class="zmdi zmdi-phone"></i>{{ realtor.user.phone }}</a>
+                            <div class="btn-contact">
+                                <a class="agent-contact-modal btn-primary-agent btn-transparent"
+                                   data-target="contact-agent"><i class="zmdi zmdi-email-open"></i>Liên hệ tư vấn</a>
                             </div>
+                            <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
+                                    data-type="sale_property" data-favorited="false"
+                                    class="btn-favorite zmdi zmdi-favorite-outline"></button>
+                            <button data-action="favorite" data-id="{{ listing.id }}" data-alias="{{ listing.title }}"
+                                    data-type="sale_property" data-favorited="false"
+                                    class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>
                         </div>
                     </div>
-                                        {% if listings %}
-                        <div class="pagination">
+                </div>
+                <div class="intro-exp-agent">
+                    <div class="experience">
+                        <h2>Kinh nghiệm</h2>
+                        <table class="exp">
+                            <tr>
+                                <td width="100px">Danh hiệu:</td>
+                                <td>{{ realtor.title|get_title_type }}</td>
+                            </tr>
+                            <tr>
+                                <td width="100px">Trình độ:</td>
+                                <td>Chuyên môn BĐS cấp {{ realtor.level }}</td>
+                            </tr>
+                            <tr>
+                                <td>Địa bàn:</td>
+                                <td>
+                                    <a href="{% url 'listing_search' %}?keywords='{{ realtor.work_area }}'"
+                                       title="Các BĐS tại {{ realtor.work_area }}">{{ realtor.work_area }}</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="intro-staff" id="staff">
+                        <h2>Giới thiệu</h2>
+                        <p class="more-p normal">{{ realtor.user.bio }}</p>
+                    </div>
+                </div>
+            </section>
+            <section class="bg-grey all-project">
+                <div class="agents-container col-12">
+                    <div class="row">
+                        <h2 class="pd-t-55 pd-bt-10">Nhà đất bán của {{ realtor.user.name }}</h2>
+                        <div class="agents-inner block-project">
+                            <div class="col-12">
+                                <div ref="propertyForSaleWrapper">
+                                    {% for listing in listings %}
+                                        {% include "listings/_listingCard2.html" %}
+                                    {% endfor %}
+                                    <component v-for="html in morePropertyForSaleHTML" :is="html"></component>
+                                </div>
+                            </div>
+                        </div>
+                        {% if listings %}
+                            <div class="pagination">
                             <span class="step-links">
                                 {% if listings.has_previous %}
                                     <a href="?page={{ listings.previous_page_number }}">Trang trước </a> &nbsp;
                                 {% endif %}
                             </span>
 
-                            <span class="current">
+                                <span class="current">
                                 (Trang {{ listings.number }} trong {{ listings.paginator.num_pages }} trang)
                             </span>
 
-                            <span>
+                                <span>
                                 {% if listings.has_next %}
                                     &nbsp;<a href="?page={{ listings.next_page_number }}"> Trang sau</a>
                                 {% endif %}
                             </span>
-                        </div>
+                            </div>
                         {% endif %}
+                    </div>
                 </div>
-            </div>
-        </section>
-       {% comment %} <section class="bg-grey all-project">
+            </section>
+            {% comment %} <section class="bg-grey all-project">
             <div class="agents-container col-12">
                 <div class="row">
                     <h2 class="pd-t-55 pd-bt-10">Nhà đất cho thuê của Hoàng Hải</h2>
@@ -169,26 +176,30 @@
                 </div>
             </div>
         </section>{% endcomment %}
-        <dialogs-wrapper wrapper-name="default"/>
-    </div>
-    <section class="bg-black call-now">
-        <div class="img-call">
-            <a href="">
-               {% if realtor.user.avatar %}
-                    <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                {% else %}
-                    <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                {% endif %}
-            </a>
+            <dialogs-wrapper wrapper-name="default"/>
         </div>
-        <div class="question">
-            <h3 class="team_title">Bạn có nhu cầu về bất động sản, bạn muốn được tư vấn, <br/> bạn cần hỏi thêm thông
-                tin thị trường? Liên hệ với {{ realtor.position|get_position_type}} {{ realtor.user.name }} ngay!</h3>
-            <a class="btn-primary-agent btn-red" href="tel:{{ realtor.user.phone }}" title="{{ realtor.user.phone }}"><i
-                    class="zmdi zmdi-phone"></i>{{ realtor.user.phone }}</a>
-                <a class="btn-contact agent-contact-modal btn-primary-agent btn-red s-btn-red mgb-0" data-target="contact-agent">Liên hệ tư vấn</a>
-        </div>
-    </section>
+        <section class="bg-black call-now">
+            <div class="img-call">
+                <a href="">
+                    {% if realtor.user.avatar %}
+                        <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                    {% else %}
+                        <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                    {% endif %}
+                </a>
+            </div>
+            <div class="question">
+                <h3 class="team_title">Bạn có nhu cầu về bất động sản, bạn muốn được tư vấn, <br/> bạn cần hỏi thêm
+                    thông
+                    tin thị trường? Liên hệ với {{ realtor.position|get_position_type }} {{ realtor.user.name }} ngay!
+                </h3>
+                <a class="btn-primary-agent btn-red" href="tel:{{ realtor.user.phone }}"
+                   title="{{ realtor.user.phone }}"><i
+                        class="zmdi zmdi-phone"></i>{{ realtor.user.phone }}</a>
+                <a class="btn-contact agent-contact-modal btn-primary-agent btn-red s-btn-red mgb-0"
+                   data-target="contact-agent">Liên hệ tư vấn</a>
+            </div>
+        </section>
 
     </div>
 

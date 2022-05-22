@@ -6,11 +6,11 @@
             <a class="nav-link pr-0" href="{% url "profile" %}" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
                 <div class="align-items-center">
-                    {% if user.avatar %}
+                    {% if user.avatar and user.avatar != 'img/logo tgnp brown.jpg'%}
                         <img alt="" src="/media/{{ user.avatar }} "
                              style="height: 200px; width: auto" class="avatar rounded-circle">
                     {% else %}
-                        <img alt="" src="{% static '/media/team-4-800x800.jpg' %}"
+                        <img alt="" src="{% static '/img/logo tgnp brown.jpg' %}"
                              class="avatar rounded-circle">
                     {% endif %}
                 </div>

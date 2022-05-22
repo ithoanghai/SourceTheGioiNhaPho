@@ -39,7 +39,7 @@
                     <div class="agents-listing">
                         <div class="agents-image">
                             <a href="{% url "specialistDetail" realtor.id %}">
-                                {% if realtor.user.avatar %}
+                                 {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' %}
                                     <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
                                 {% else %}
                                     <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
