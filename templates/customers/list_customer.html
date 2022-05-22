@@ -1,0 +1,67 @@
+{% load static listing i18n %}
+<div class="card bg-secondary shadow">
+    <div class="card-header bg-white border-0">
+        <div class="row align-items-center">
+            <div class="col-8">
+                <h5 class="mb-0">Chi tiết khách hàng</h5>
+            </div>
+            {% comment %}                                <div class="col-4 text-right">
+                                  <a href="#!" class="btn btn-sm btn-primary">Thiết lập</a>
+                                </div>{% endcomment %}
+        </div>
+    </div>
+    <div class="card-body">
+        {% if customers %}
+            <p>{% trans "Danh sách khách hàng của tôi" %}</p>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">{% trans "Loại" %}</th>
+                    <th>{% trans "Nhu cầu" %}</th>
+                    <th>{% trans "Số điện thoại" %}</th>
+                    <th>{% trans "Thời gian" %}</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for customs in customers %}
+                    <tr>
+                        <td>{{ customs.id }}</td>
+                        <td>{{ customs.custormer_type | get_customs_type }}</td>
+                        <td>{{ customs.request }}</td>
+                        <td>{{ customs.phone }}</td>
+                        <td>{{ customs.hire_date }}</td>
+                        <td>
+                            <a class="btn btn-light"
+                               href="{% url "customer_detail" customs.id %}">{% trans "Chi tiết" %}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>{% trans "Bạn chưa có khách hàng nào" %}</p>
+        {% endif %}
+    </div>
+</div>
+
+{% if customers %}
+<div class="pagination">
+    <span class="step-links">
+        {% if customers.has_previous %}
+            <a href="?page={{ customers.previous_page_number }}">Trang trước </a> &nbsp;
+        {% endif %}
+    </span>
+
+    <span class="current">
+        (Trang {{ customers.number }} trong {{ customers.paginator.num_pages }} trang)
+    </span>
+
+    <span>
+        {% if customers.has_next %}
+            &nbsp;<a href="?page={{ customers.next_page_number }}"> Trang sau</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}

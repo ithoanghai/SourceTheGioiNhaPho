@@ -2,7 +2,9 @@ from django import template
 from django.conf import settings
 
 from FunctionModule.listings import get_short_title_from_house_type, get_short_title_from_road_type, \
-    get_listing_status_title_from_code
+    get_listing_status_title_from_code, get_short_title_from_transaction_type
+from FunctionModule.transactions.helpers import get_short_title_from_trans_type, get_short_title_from_customer_type, \
+    get_short_title_from_position_type, get_short_title_type
 
 register = template.Library()
 
@@ -14,6 +16,11 @@ def tag_get_listing_location_image(value):
     # if os.path.isfile(path):
     #     return TextNode(settings.MEDIA_URL + img_path)
     return settings.MEDIA_URL + img_path
+
+
+@register.filter(name='get_transaction_type')
+def tag_get_transaction_type(transaction_type):
+    return get_short_title_from_transaction_type(transaction_type)
 
 
 @register.filter(name='get_house_type')
@@ -34,3 +41,23 @@ def tag_get_listing_status(listing_status):
 @register.filter(name='default_img_by_house_type')
 def tag_get_default_img(house_type):
     return f'/static/img/default_house_type/{house_type}.jpg'
+
+
+@register.filter(name='get_trans_type')
+def tag_get_house_type(trans_type):
+    return get_short_title_from_trans_type(trans_type)
+
+
+@register.filter(name='get_customs_type')
+def tag_get_customer_type(customs_type):
+    return get_short_title_from_customer_type(customs_type)
+
+
+@register.filter(name='get_position_type')
+def tag_get_position_type(position_type):
+    return get_short_title_from_position_type(position_type)
+
+
+@register.filter(name='get_title_type')
+def tag_get_title_type(title_type):
+    return get_short_title_type(title_type)

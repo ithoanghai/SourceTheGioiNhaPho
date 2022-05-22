@@ -54,12 +54,12 @@ class ListingAdmin(admin.ModelAdmin):
         ('ĐỊA CHỈ & VỊ TRÍ BĐS', {'fields': (
             ('state', 'district', 'ward'), ('street', 'address', 'location'))}),
         ('TRẠNG THÁI ĐĂNG TIN', {
-            'fields': (('status', 'priority','list_date'), ('is_verified', 'is_published', 'is_exclusive'),)}),
+            'fields': (('status', 'priority','list_date'), ('is_published', 'is_verified', 'is_exclusive'),)}),
     )
 
     list_display = (
     'address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status',
-    'is_published', 'district',)
+     'district',)
     list_display_links = ('code', 'address',)
     list_filter = (
         ('status', ChoiceDropdownFilter),
@@ -71,6 +71,7 @@ class ListingAdmin(admin.ModelAdmin):
         ('transaction_type', ChoiceDropdownFilter),
         ('list_date', DateFieldListFilter),
         ('is_published', BooleanFieldListFilter),
+        ('is_advertising', BooleanFieldListFilter),
         #AreaFilter,
     )
     #advanced_filter_fields = ('status', ('house_type', 'road_type'))

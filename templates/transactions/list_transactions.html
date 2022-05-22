@@ -1,0 +1,93 @@
+{% load static listing i18n %}
+<div class="card bg-secondary shadow">
+    <div class="card-header bg-white border-0">
+        <div class="row align-items-center">
+            <div class="col-8">
+                <h5 class="mb-0">Danh sách giao dịch</h5>
+            </div>
+            {% comment %}                                <div class="col-4 text-right">
+                                  <a href="#!" class="btn btn-sm btn-primary">Thiết lập</a>
+                                </div>{% endcomment %}
+        </div>
+    </div>
+    {% comment %}                        <div class="card-body">
+                            {% if contacts_list %}
+                                <p>{% trans "Danh sách liên hệ đã yêu cầu" %}</p>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">{% trans "Khách hàng" %}</th>
+                                        <th>{% trans "Sản phẩm BĐS" %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for contact in contacts_list %}
+                                        <tr>
+                                            <td>{{ contact.id }}</td>
+                                            <td>{{ contact.listing }}</td>
+                                            <td>
+                                                <a class="btn btn-light"
+                                                   href="{% url "listing_detail" contact.listing_id %}">{% trans "Xem sản phẩm" %}</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                <p>{% trans "Bạn chưa có tương tác liên hệ sản phẩm nào" %}</p>
+                            {% endif %}
+                        </div>{% endcomment %}
+    <div class="card-body">
+        {% if transactions %}
+            <p>{% trans "Danh sách giao dịch của bạn đã thực hiện" %}</p>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">{% trans "Loại giao dịch" %}</th>
+                    <th>{% trans "Lời nhắn gửi Thế giới nhà phố" %}</th>
+                    <th>{% trans "Ngày giao dịch" %}</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for trans in transactions %}
+                    <tr>
+                        <td>{{ trans.id }}</td>
+                        <td>{{ trans.trantype | get_trans_type }}</td>
+                        <td>{{ trans.message }}</td>
+                        <td>{{ trans.date }}</td>
+                        <td>
+                            <a class="btn btn-light"
+                               href="{% url "transaction_detail" trans.id %}">{% trans "Chi tiết" %}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>{% trans "Bạn chưa có giao dịch nào" %}</p>
+        {% endif %}
+    </div>
+</div>
+
+{% if transactions %}
+<div class="pagination">
+    <span class="step-links">
+        {% if transactions.has_previous %}
+            <a href="?page={{ transactions.previous_page_number }}">Trang trước </a> &nbsp;
+        {% endif %}
+    </span>
+
+    <span class="current">
+        (Trang {{ transactions.number }} trong {{ transactions.paginator.num_pages }} trang)
+    </span>
+
+    <span>
+        {% if transactions.has_next %}
+            &nbsp;<a href="?page={{ transactions.next_page_number }}"> Trang sau</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}

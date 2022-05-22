@@ -9,10 +9,11 @@ admin.autodiscover()
 urlpatterns = [
     path('', views.index, name='listings'),
     path('<int:listing_id>', views.listing, name='listing_detail'),
+    path('my_listing', views.my_listing, name='my_listing'),
     path('post_listing', views.post_listing, name='post_listings'),
+    path('post_listings/<str:typeTran>', views.post_listings, name='view_post_listings'),
 
     path('search', views.search, name='listing_search'),
-    path('search_simple', views.search_simple, name='listing_search_simple'),
 
     path('sell_lease_with_us', views.sell_lease_with_us, name='sell_lease_with_us'),
     path('buy_with_us', views.buy_with_us, name='buy_with_us'),

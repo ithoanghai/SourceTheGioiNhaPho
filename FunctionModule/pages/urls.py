@@ -18,7 +18,7 @@ urlpatterns = [
 
     path('specialistUs', views.specialist_us, name='specialist_us'),
     path('specialist', views.specialist, name='specialist'),
-    path('specialistDetail', views.specialist_detail, name='specialistDetail'),
+    path('specialist/<int:realtor_id>', views.specialist_detail, name='specialistDetail'),
     path('whyChoose', views.whyChoose, name='whyChoose'),
     path('services', views.services, name='services'),
     path('contacts', views.contacts, name='contacts'),

@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.core.mail.backends import console
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import JsonResponse
@@ -7,9 +6,6 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.views.decorators.csrf import csrf_protect
 from django.utils import timezone
 from datetime import timedelta
-from rest_framework import status, generics
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 
 from .forms import RequestQuoteForm
 from .models import TransTypeInit
@@ -17,6 +13,32 @@ from .serializers import *
 from ..accounts.models import User
 from ..customers.models import Customer
 from ..listings.models import Listing
+
+@csrf_protect
+def index(request):
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            trans = Transaction.objects.filter(user=request.user).order_by('-date')
+            paginator = Paginator(trans, 10)
+            page = request.GET.get('page')
+            paged_trans = paginator.get_page(page)
+            context = {
+                'transactions': paged_trans,
+            }
+
+            return render(request, 'transactions/transactions.html', context)
+
+    else:
+        return render(request, 'accounts/_profile.html')
+
+
+def transaction(request, transaction_id):
+    transaction_detail = get_object_or_404(Transaction, pk=transaction_id)
+    context = {
+        'transaction': transaction_detail,
+    }
+
+    return render(request, 'transactions/detail.html', context)
 
 
 @csrf_protect
@@ -43,26 +65,26 @@ def contact(request):
                     user = request.user
                     if user is not None:
                         customer = Customer.objects.filter(Q(phone=phone) | Q(user=user)).first()
-                        has_contacted = Transaction.objects.filter(listing=listing, user=user, date__gte=yesterday)
+                        has_contacted = Transaction.objects.filter(listing=listing, customer=customer, date__gte=yesterday)
                         if has_contacted:
-                            messages.error(request, 'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
+                            messages.success(request, 'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
                         else:
                             if customer is None: customer = Customer.objects.create(user=user, name=name, email=email, phone=phone)
-                            Transaction.objects.create(listing=listing, customer=customer, trantype=trantype, caring_area=location, house_type=house_type, request_price=listing.price, message=message)
-                            messages.error(request, 'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
+                            Transaction.objects.create(listing=listing, user=user, customer=customer, trantype=trantype, caring_area=location, house_type=house_type, request_price=listing.price, message=message)
+                            messages.success(request, 'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
                 else:
                     customer = Customer.objects.filter(Q(phone=phone)).first()
                     if customer is None: customer = Customer.objects.create(name=name, email=email, phone=phone)
                     Transaction.objects.create(listing=listing, customer=customer, trantype=trantype, caring_area=location, house_type=house_type, request_price=listing.price, message=message)
-                    messages.error(request,'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
+                    messages.success(request,'Bạn đã gửi yêu cầu thành công tới chúng tôi về BĐS %s.' % (listing.code))
             return redirect('/listings/' + listing_id)
         else:
             if request.user.is_authenticated:
                 user = request.user
                 if user is not None:
-                    customer = Customer.objects.filter(Q(phone=phone)).first()
+                    customer = Customer.objects.filter(Q(phone=phone) | Q(user=user)).first()
                     if customer is None: customer = Customer.objects.create(user=user, name=name, email=email, phone=phone)
-                    Transaction.objects.create(customer=customer, trantype=trantype, caring_area=location, house_type=house_type, request_price=price, message=message)
+                    Transaction.objects.create(user=user, customer=customer, trantype=trantype, caring_area=location, house_type=house_type, request_price=price, message=message)
             else:
                 customer = Customer.objects.filter(Q(phone=phone)).first()
                 if customer is None: customer = Customer.objects.create(name=name, email=email, phone=phone)
@@ -108,35 +130,3 @@ def request_quote(request):
         {
             'message': 'Chúng tôi đã nhận được thông tin của quý khách và sẽ liên hệ lại trong thời gian sớm nhất.'
         })
-
-
-@api_view(['GET', 'POST'])
-def transactionsAPIViewWay1(request):
-    """
-    List all transactions, or create a new transaction.
-    """
-    if request.method == 'GET':
-        transactions = Transaction.objects.all()
-        serializer = TransactionSerializer(transactions, context={'request': request}, many=True)
-        return Response(serializer.data)
-    elif request.method == 'POST':
-        serializer = TransactionSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class transactionsAPIView(generics.RetrieveAPIView):
-    queryset = Transaction.objects.all()
-    serializer_class = TransactionSerializer
-
-    def get(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-
-        serializer_context = {
-            'request': request,
-        }
-        serializer = TransactionSerializer(queryset, many=True, context=serializer_context)
-
-        return Response(serializer.data, status=status.HTTP_200_OK)

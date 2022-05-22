@@ -1,7 +1,7 @@
 import sys
 import traceback
 
-from FunctionModule.listings.choices import HouseType, RoadType, Status
+from FunctionModule.listings.choices import HouseType, RoadType, Status, TransactionType
 
 
 def get_house_type_short(house_type: str) -> str:
@@ -29,6 +29,15 @@ def get_house_type_short(house_type: str) -> str:
         return 'WF'
     else:
         return 'NP'
+
+
+def get_short_title_from_transaction_type(transaction_type: str):
+    if transaction_type == TransactionType.SELL:
+        return 'Bán'
+    elif transaction_type == TransactionType.FOR_RENT:
+        return 'Cho thuê'
+    elif transaction_type == TransactionType.PROJECT:
+        return 'Dự án'
 
 
 def get_short_title_from_house_type(house_type: str):

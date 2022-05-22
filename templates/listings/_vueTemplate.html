@@ -210,9 +210,9 @@
                     </a>
                 </li>
 
-                <li v-else class="page-item disabled">
+{% comment %}                <li v-else class="page-item disabled">
                     <a class="page-link">&laquo;</a>
-                </li>
+                </li>{% endcomment %}
 
                 <li v-for="i in pagination.next_5_pages">
                     <a :class="{active: pagination.current_page == i}" @click.prevent="goTo(i)">[[i]]</a>
@@ -224,9 +224,9 @@
                     </a>
                 </li>
 
-                <li v-else class="page-item disabled">
+{% comment %}                <li v-else class="page-item disabled">
                     <a class="page-link">&raquo;</a>
-                </li>
+                </li>{% endcomment %}
 
             </ul>
         </div>

@@ -103,3 +103,19 @@ class CustomGroup(models.Model):
 
     group = models.OneToOneField('auth.Group', on_delete=models.RESTRICT, unique=True)
     email_alias = models.EmailField(max_length=70, blank=True, default="")
+
+
+class Point(models.Model):
+    class Meta:
+        verbose_name = "Điểm số"
+        verbose_name_plural = "Điểm đạt được"
+
+    user = models.OneToOneField(User, on_delete=models.RESTRICT)
+    investment_point = models.CharField(max_length=50, verbose_name=_("Điểm đầu tư"), null=True, blank=True, default=0)
+    prestige_points = models.CharField(max_length=50, verbose_name=_("Điểm uy tín"), null=True, blank=True, default=0)
+    potential_points = models.CharField(max_length=50, verbose_name=_("Điểm tiềm năng"), null=True, blank=True, default=0)
+    bds_referral_point = models.CharField(max_length=50, verbose_name=_("Điểm giới thiệu BĐS"), null=True, blank=True,default=0)
+    customer_referral_point = models.CharField(max_length=50, verbose_name=_("Điểm giới thiệu khách"), null=True, blank=True,default=0)
+
+    def __str__(self):
+        return f'%s' % (self.user)

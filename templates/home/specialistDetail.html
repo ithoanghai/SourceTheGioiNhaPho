@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% load static load_static humanize i18n %}
+{% load static load_static listing humanize i18n %}
 
 {% block head %}
     {{ block.super }}
-    <link rel="canonical" href="{% url 'specialistDetail' %}"/>
+    <link rel="canonical" href="{% url 'specialistDetail' realtor.id%}"/>
     <link rel="stylesheet" href="{% static 'css/browse-agent.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/agent-detail.css' %}"/>
 
@@ -27,46 +27,62 @@
             </div>
             <div class="info-staff">
                 <div class="agent-img-staff">
-                    <a class="img-info"><img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Hoàng Hải"/>
+                    <a class="img-info">
+                        {% if realtor.user.avatar %}
+                                    <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                                {% else %}
+                                    <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                                {% endif %}
+                    </a>
                 </div>
                 <div class="agent-contact">
                     <div class="agent-name">
-                        <h1>Hoàng Hải</h1>
-                        <p>Sales Manager</p>
-                    </div>
+                        <h1>{{ realtor.user.name }}</h1>
+                        <p>{{ realtor.position|get_position_type}}</p>
+                      </div>
                     <table>
                         <tr>
-                            <td>Số điện thoại:</td>
-                            <td><a href="tel:0916 286 256" title="0916 286 256">0916 286 256</a></td>
+                            <td>Ngày sinh:</td>
+                            <td><a href="tel:{{ realtor.user.dob }}" title="{{ realtor.user.dob }}">{{ realtor.user.dob }}</a></td>
                         </tr>
                         <tr>
                             <td>Email:</td>
-                            <td><a href="mailto: hoanghai.bdsvn@gmail.com"
-                                   title="hoanghai.bdsvn@gmail.com"><span class="" data-cfemail="">hoanghai.bdsvn@gmail.com</span></a>
+                            <td><a href="mailto: {{ realtor.user.email }}"
+                                   title="{{ realtor.user.email }}"><span class="" data-cfemail="">{{ realtor.user.email }}</span></a>
                             </td>
                         </tr>
                         <tr>
-                            <td>Văn phòng:</td>
-                            <td><a href="#" title="Bùi Quốc Khái">Linh Đàm - Hoàng Mai - Hà Nội</a></td>
+                            <td>Địa chỉ:</td>
+                            <td><a href="#" title="{{ realtor.user.address }}">{{ realtor.user.address }}</a></td>
                         </tr>
-                        <tr>
-                            <td>Khu vực:</td>
-                            <td>
-                                <a href="{% url 'listing_search' %}?district='Thanh Xuân'" title="Các BĐS tại quận Hoàng Mai"> Thanh Xuân</a>
-                                <a href="{% url 'listing_search' %}?district='Hoàng Mai'" title="Các BĐS tại quận Hoàng Mai"> Hoàng Mai</a>
-                            </td>
-                        </tr>
+
                     </table>
                     <ul class="agent-social">
+                    {% if realtor.user.facebook %}
                         <li>
-                            <a href="https://www.facebook.com/HoangHai.BatDongSanNhaPho" target="_blank"><i
-                                    class="zmdi zmdi-facebook"></i>https://www.facebook.com/HoangHai.BatDongSanNhaPho</a>
+                            <a href="{{ realtor.user.facebook }}" target="_blank"><i
+                                    class="zmdi zmdi-facebook"></i>{{ realtor.user.facebook }}</a>
                         </li>
+                    {% endif %}
+                        {% if realtor.user.website %}
+                        <li>
+                            <a href="{{ realtor.user.website }}" target="_blank"><i
+                                    class="zmdi zmdi-view-web"></i>{{ realtor.user.website }}</a>
+                        </li>
+                        {% endif %}
+                    {% if realtor.user.youtube %}
+                        <li>
+                            <a href="{{ realtor.user.youtube }}" target="_blank"><i
+                                    class="zmdi zmdi-youtube"></i>{{ realtor.user.youtube }}</a>
+                        </li>
+                    {% endif %}
                     </ul>
                     <div class="agent-btn">
-                        <a class="btn-primary-agent btn-red" href="tel:0916 286 256" title="0916 286 256"><i
-                                class="zmdi zmdi-phone"></i>0916 286 256</a>
-                        <button class="agent-contact-modal btn-primary-agent btn-transparent">Liên hệ tư vấn</button>
+                        <a class="btn-primary-agent btn-red" href="tel:{{ realtor.user.phone }}" title="{{ realtor.user.phone }}"><i
+                                class="zmdi zmdi-phone"></i>{{ realtor.user.phone }}</a>
+                        <div class="btn-contact">
+                            <a class="agent-contact-modal btn-primary-agent btn-transparent" data-target="contact-agent"><i class="zmdi zmdi-email-open"></i>Liên hệ tư vấn</a>
+                          </div>
                         <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
                         data-type="sale_property" data-favorited="false"  class="btn-favorite zmdi zmdi-favorite-outline"></button>
                     <button data-action="favorite" data-id="{{ listing.id }}"  data-alias="{{ listing.title }}"
@@ -79,48 +95,64 @@
                     <h2>Kinh nghiệm</h2>
                     <table class="exp">
                         <tr>
-                            <td width="100px">Ngoại ngữ:</td>
-                            <td>English</td>
+                            <td width="100px">Danh hiệu:</td>
+                            <td>{{ realtor.title|get_title_type}}</td>
+                        </tr>
+                        <tr>
+                            <td width="100px">Trình độ:</td>
+                            <td>Chuyên môn BĐS cấp {{ realtor.level}}</td>
+                        </tr>
+                        <tr>
+                            <td>Địa bàn:</td>
+                            <td>
+                                <a href="{% url 'listing_search' %}?keywords='{{ realtor.work_area}}'" title="Các BĐS tại {{ realtor.work_area}}">{{ realtor.work_area}}</a>
+                             </td>
                         </tr>
                     </table>
                 </div>
                 <div class="intro-staff" id="staff">
                     <h2>Giới thiệu</h2>
-                    <p class="more-p normal">Là một thạc sỹ, Hoàng Hải đã những tưởng rằng
-                        những tháng ngày sau khi ra trường của mình sẽ công việc nghiên cứu phòng thí nghiệm. Bất động sản đến với Hoàng Hải như một cơ duyên kéo Hoàng Hải ra khỏi những chuỗi
-                        ngày làm ca xoay vòng.&#10;Sau một thời gian làm nhà nước, anh bước vào Bất Động Sản với tất cả tâm huyết của một người dày dạn kinh nghiệm làm việc. Bất Động Sản cho Hoàng Hải nhiều điều hơn những thứ Hoàng Hải từng mong đợi ở nó. &#10;Đến với Bất
-                        Động Sản, Hoàng Hải chỉ hi vọng mình có thể kiếm được một khoảng thu nhập khá hơn so với nghề làm cán bộ nhà nước.
-                        Nhưng đến bây giờ, không chỉ là những khoảng hoa hồng sau mỗi giao dịch, mỗi khách hàng đến đều
-                        mang lại cho Hoàng Hải những câu chuyện, những trải nghiệm đáng quý. &#10; Dù trò chuyện với một khách
-                        hàng có trong tài khoản hàng trăm tỷ đồng hay một cặp vợ chồng mới cưới, Hoàng Hải cũng tìm được nhiều
-                        cái hay ho trong vốn sống của họ để chiêm nghiệm. Đối với những người trẻ như Hoàng Hải, thay vì trải
-                        qua và vấp phải để có thì kinh nghiệm thông qua sự chia sẻ của những người đi trước là rất quý
-                        báu. Hoàng Hải có thể dành thời gian để trải nghiệm những cái khác nữa, vì thế giới này thì rộng lớn
-                        và xã hội thì muôn màu. Cảm ơn anh, chị đã hiện diện trong tuổi trẻ của Hoàng Hải.&#10;Với kinh nghiệm
-                        hơn 1 năm trên thị trường BDS, Hoàng Hải luôn lắng nghe mọi nguyện vọng và đặt khách hàng là trọng
-                        tâm. Luôn luôn có mặt khi khách hàng cần, cam kết đi đến cuối con đường dù có bất cứ trở ngại
-                        nào. Cảm ơn anh, chị đã tin tưởng Hoàng Hải trong suốt con đường vừa qua.&#10;Trân Trọng.</p>
+                    <p class="more-p normal">{{ realtor.user.bio }}</p>
                 </div>
             </div>
         </section>
         <section class="bg-grey all-project">
             <div class="agents-container col-12">
                 <div class="row">
-                    <h2 class="pd-t-55 pd-bt-10">Nhà đất bán của Hoàng Hải</h2>
+                    <h2 class="pd-t-55 pd-bt-10">Nhà đất bán của {{ realtor.user.name }}</h2>
                     <div class="agents-inner block-project">
                         <div class="col-12">
                             <div ref="propertyForSaleWrapper">
-                                {% for listing in listings_for_sale %}
+                                {% for listing in listings %}
                                     {% include "listings/_listingCard2.html" %}
                                   {% endfor %}
                                 <component v-for="html in morePropertyForSaleHTML" :is="html"></component>
                             </div>
                         </div>
                     </div>
+                                        {% if listings %}
+                        <div class="pagination">
+                            <span class="step-links">
+                                {% if listings.has_previous %}
+                                    <a href="?page={{ listings.previous_page_number }}">Trang trước </a> &nbsp;
+                                {% endif %}
+                            </span>
+
+                            <span class="current">
+                                (Trang {{ listings.number }} trong {{ listings.paginator.num_pages }} trang)
+                            </span>
+
+                            <span>
+                                {% if listings.has_next %}
+                                    &nbsp;<a href="?page={{ listings.next_page_number }}"> Trang sau</a>
+                                {% endif %}
+                            </span>
+                        </div>
+                        {% endif %}
                 </div>
             </div>
         </section>
-        <section class="bg-grey all-project">
+       {% comment %} <section class="bg-grey all-project">
             <div class="agents-container col-12">
                 <div class="row">
                     <h2 class="pd-t-55 pd-bt-10">Nhà đất cho thuê của Hoàng Hải</h2>
@@ -136,20 +168,24 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>{% endcomment %}
         <dialogs-wrapper wrapper-name="default"/>
     </div>
     <section class="bg-black call-now">
         <div class="img-call">
             <a href="">
-               <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Hoàng Hải"/>
+               {% if realtor.user.avatar %}
+                    <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                {% else %}
+                    <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                {% endif %}
             </a>
         </div>
         <div class="question">
             <h3 class="team_title">Bạn có nhu cầu về bất động sản, bạn muốn được tư vấn, <br/> bạn cần hỏi thêm thông
-                tin thị trường? Liên hệ với Hoàng Hải ngay!</h3>
-            <a class="btn-primary-agent btn-red" href="tel:0916 286 256" title="0916 286 256"><i
-                    class="zmdi zmdi-phone"></i>0916 286 256</a>
+                tin thị trường? Liên hệ với {{ realtor.position|get_position_type}} {{ realtor.user.name }} ngay!</h3>
+            <a class="btn-primary-agent btn-red" href="tel:{{ realtor.user.phone }}" title="{{ realtor.user.phone }}"><i
+                    class="zmdi zmdi-phone"></i>{{ realtor.user.phone }}</a>
                 <a class="btn-contact agent-contact-modal btn-primary-agent btn-red s-btn-red mgb-0" data-target="contact-agent">Liên hệ tư vấn</a>
         </div>
     </section>

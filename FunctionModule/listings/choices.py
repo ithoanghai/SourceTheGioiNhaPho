@@ -134,3 +134,27 @@ class Direction(models.TextChoices):
     north_west = 'north-west', _("Tây - Bắc")
     north = 'north', _("Bắc")
     north_east = 'north-east', _("Đông - Bắc")
+
+
+class Position(models.TextChoices):
+    CHAIRPERSON = 'chairperson', _("Chủ tịch")
+    GENERAL_MANAGER = 'general_manager', _("Tổng giám đốc")
+    MANAGING_DIRECTOR = 'manager_director', _("Giám đốc điều hành")
+    BUSINESS_MANAGER = 'business_manager', _("Giám đốc kinh doanh")
+    REGIONAL_DIRECTOR = 'regional_director', _("Giám đốc khu vực")
+    TECHNICAL_DIRECTOR = 'technical_director', _("Giám đốc kỹ thuật")
+    MANAGER = 'manager', _("Quản lý/Trưởng phòng")
+    ASSISTANT = 'assistant', _("Trợ lý")
+    ACCOUNTANT = 'accountant', _("Kế toán")
+    COORDINATOR = 'coordinator', _("Điều phối viên")
+    EXPERT = 'expert', _("Chuyên viên")
+    INTERNS = 'interns', _("Học viên")
+    USER = 'user', _("Người dùng thông thường")
+
+
+class Title(models.TextChoices):
+    PROFESSOR = 'professor', _("Giáo sư")
+    EXPERT = 'expert', _("Chuyên gia")
+    MASTER = 'master', _("Cao thủ")
+    PROBATIONARY = 'probationary', _("Tập sự")
+    ROOKIE = 'rookie',_("Tân binh")

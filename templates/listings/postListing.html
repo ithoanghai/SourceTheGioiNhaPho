@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static i18n %}
-{% block title %} {% trans 'Thông tin cá nhân' %} {% endblock title %}
+{% block title %} {% trans 'TIN RAO ĐĂNG CHÍNH CHỦ' %} {% endblock title %}
 
 {% block content %}
     <div id="wrap">
@@ -30,113 +30,7 @@
 
             <div class="row col-xl-12">
                 <div class="col-xl-3 order-xl-2 mb-5 mb-xl-0">
-                    <div class="card card-profile shadow">
-                        <div class="row justify-content-center">
-                            <div class="card-profile-image">
-                                <a class="nav-link pr-0" href="{% url "profile" %}" role="button" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                        {% if user.avatar %}
-                                            <img alt="" src="/media/{{ user.avatar }} " style="height: 200px; width: 200px" class="avatar rounded-circle">
-                                        {% else %}
-                                            <img alt="" src="{% static '/media/team-4-800x800.jpg' %}"
-                                                 class="avatar rounded-circle">
-                                        {% endif %}
-                                </a>
-                                {% if not is_popup %}
-                                    <!-- User -->
-                                    {% block usertools %}
-                                        <ul class="d-md-flex" style="margin: 0">
-                                            <li class="nav-item dropdown">
-                                                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                                                    <a href="{% url "profile" %}" class="dropdown-item">
-                                                        <i class="fa fa-user-alt"></i>
-                                                        <span>Thông tin cá nhân</span>
-                                                    </a>
-                                                    {% block userlinks %}
-                                                        {% if site_url %}
-                                                            <a href="{{ site_url }}" target="_blank"
-                                                               class="dropdown-item">
-                                                                <i class="fa fa-shopping-cart"></i><span> {% translate 'Trang sản phẩm' %}</span>
-                                                            </a>
-                                                        {% endif %}
-                                                        {% if user.is_active and user.is_staff %}
-                                                            {% url 'django-admindocs-docroot' as docsroot %}
-                                                            {% if docsroot %}
-                                                                <a href="{{ docsroot }}"> {% translate 'Tài liệu' %}</a>
-                                                                /
-                                                            {% endif %}
-                                                        {% endif %}
-                                                        {% if user.has_usable_password %}
-                                                            <a href="{% url 'password_change' %}" target="_blank"
-                                                               class="dropdown-item">
-                                                                <i class="fa fa-user-cog"></i><span> {% translate 'Đổi mật khẩu' %}</span>
-                                                            </a>
-                                                        {% endif %}
-                                                    {% endblock %}
-                                                    <div class="dropdown-divider"></div>
-                                                    <a href="{% url 'logout' %}" class="dropdown-item">
-                                                        <i class="fa fa-user-lock"></i>
-                                                        <span>{% translate 'Đăng xuất' %}</span>
-                                                    </a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    {% endblock %}
-
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div class="card-header text-center border-0 pt-8 pb-0 pb-md-4">
-                            <div class="d-flex justify-content-between">
-                                <a href="#" class="btn btn-sm btn-info mr-4">DS giao dịch</a>
-                                <a href="#" class="btn btn-sm btn-default float-right">DS giới thiệu</a>
-                            </div>
-                        </div>
-                        <div class="row card-body pt-0 pt-md-4">
-                            <div class="text-center">
-                                <h5>
-                                    Bạn {{ user.first_name }} {{ user.last_name }}
-                                </h5>
-                                <div class="mt-4">
-                                    <label>Tham gia TGNP vào lúc {{ request.user.date_joined }}</label>
-                                </div>
-                                <div class="h6 mt-4">
-                                    <i class="ni business_briefcase-24 mr-2"></i>
-                                    Giám đốc Kinh doanh - Hoàng Mai
-                                </div>
-                                <div class="h6 mt-4">
-                                    <i class="ni business_briefcase-24 mr-2"></i>Chuyên viên Cấp 6
-                                </div>
-                                <div>
-                                    <i class="ni education_hat mr-2"></i>Danh hiệu: Chuyên gia chốt nhà tỷ phú giỏi
-                                </div>
-                                <hr class="my-4"/>
-
-                                <div>
-                                    <span class="description">Điểm uy tín</span>
-                                    <span class="heading">22</span>
-
-                                    <span class="description">Mức uy tín</span>
-                                    <span class="heading">5*</span>
-
-                                    <span class="description">Điểm giới thiệu BĐS</span>
-                                    <span class="heading">10</span>
-
-                                    <span class="description">Điểm giới thiệu khách</span>
-                                    <span class="heading">24</span>
-
-                                </div>
-
-                                <div class="h6 mt-4">
-
-                                    <i class="ni business_briefcase-24 mr-2"></i>Tài khoản đầu tư (1 Điểm = 1 triệu)
-                                    <span class="heading">100 điểm </span>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                    {% include 'accounts/_profilePanelRight.html' %}
                 </div>
                 <div class="col-xl-8 order-xl-1">
                     <div class="card bg-secondary shadow">
@@ -153,7 +47,7 @@
                         <div class="card-body">
                             <form action="{% url 'profile' %}" method="POST" enctype='multipart/form-data'>
                                 {% csrf_token %}
-                                <h5 class="h5 heading-small text-muted mb-4">Thông tin cá nhân</h5>
+                                <h5 class="h5 heading-small text-muted mb-4">TIN RAO ĐĂNG CHÍNH CHỦ</h5>
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-4">
@@ -318,51 +212,6 @@
                         </div>
                         <div class="card-footer text-center border-0">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <div class="row col-xl-12">
-                <div class="col-xl-8 order-xl-1">
-                    <div class="card bg-secondary shadow">
-                        <div class="card-header bg-white border-0">
-                            <div class="row align-items-center">
-                                <div class="col-8">
-                                    <h5 class="mb-0">Lịch sử liên hệ giao dịch</h5>
-                                </div>
-                                {% comment %}<div class="col-4 text-right">
-                  <a href="#!" class="btn btn-sm btn-primary">Thiết lập</a>
-                </div>{% endcomment %}
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            {% if contacts %}
-                                <p>{% trans "Danh sách liên hệ đã yêu cầu" %}</p>
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">{% trans "Sản phẩm BĐS" %}</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for contact in contacts %}
-                                        <tr>
-                                            <td>{{ contact.id }}</td>
-                                            <td>{{ contact.listing }}</td>
-                                            <td>
-                                                <a class="btn btn-light"
-                                                   href="{% url "listing_detail" contact.listing_id %}">{% trans "Xem sản phẩm" %}</a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            {% else %}
-                                <p>{% trans "Bạn chưa có tương tác liên hệ sản phẩm nào" %}</p>
-                            {% endif %}
                         </div>
                     </div>
                 </div>

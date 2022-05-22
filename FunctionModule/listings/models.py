@@ -146,6 +146,7 @@ class Listing(models.Model):
                                    null=True, blank=True, default=1)
     is_verified = models.BooleanField(default=False, verbose_name=_("ĐÃ XÁC MINH THÔNG TIN"))
     is_exclusive = models.BooleanField(default=False, verbose_name=_("THẾ GIỚI NHÀ PHỐ ĐỘC QUYỀN"))
+    is_advertising = models.BooleanField(default=False, verbose_name=_("LÀ TIN RAO VẶT"))
     is_published = models.BooleanField(default=True, verbose_name=_("CHO PHÉP ĐĂNG"))
 
     location = LocationField(based_fields=['address'], zoom=7, null=True,

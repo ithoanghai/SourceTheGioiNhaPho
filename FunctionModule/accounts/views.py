@@ -3,6 +3,7 @@ from django.contrib.admin import site
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from allauth.account.views import get_adapter
@@ -10,6 +11,7 @@ from gevent import os
 
 from FunctionModule.accounts.models import User
 from FunctionModule.accounts.forms import UserRegisterForm, UserProfileForm
+from FunctionModule.transactions.models import Transaction
 from TownhouseWorldRealestate.settings import MEDIA_ROOT
 
 
@@ -124,12 +126,18 @@ def logout_handler(request):
 def profile(request):
     app_list = site.get_app_list(request)
 
-    context = {
-        'available_apps': app_list
-    }
     if request.user.is_authenticated:
         if request.method == 'GET':
+            trans = Transaction.objects.filter(user=request.user).order_by('-date')
+            paginator = Paginator(trans, 10)
+            page = request.GET.get('page')
+            paged_trans = paginator.get_page(page)
+            context = {
+                'transactions': paged_trans,
+            }
+
             return render(request, 'accounts/_profile.html', context)
+
         elif request.method == 'POST':
             form = UserProfileForm(request.POST or None, request.FILES, instance=request.user)
             # Get form values
@@ -145,7 +153,10 @@ def profile(request):
             facebook = request.POST['facebook']
             website = request.POST['website']
             bio = request.POST['bio']
-            avatar = request.FILES['avatar']
+            if request.FILES.get('avatar', None) is not None:
+                avatar = request.FILES.get('avatar')
+            else:
+                avatar = request.POST['avatar']
             reg_user = {
                 'first_name': first_name,
                 'last_name': last_name,
@@ -167,7 +178,7 @@ def profile(request):
                 # user = User.objects.create_user(username=username, password=password, email=email,
                 #                                first_name=first_name, last_name=last_name)
 
-                if request.FILES.get('avatar', None) != None and form.is_multipart():
+                if request.FILES.get('avatar', None) is not None and form.is_multipart():
                     try:
                         save_file(avatar)
                         os.remove(request.user.avatar.url)

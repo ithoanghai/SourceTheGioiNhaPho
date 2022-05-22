@@ -17,9 +17,9 @@ class TransactionAdmin(admin.ModelAdmin):
       ('customer', 'caring_area', 'request_price'), ('message', 'comment'),)}),
   )
 
-  list_display = ('id', 'trantype', 'message', 'caring_area', 'request_price', 'house_type', 'listing', 'customer', 'date', 'status')
+  list_display = ('id', 'trantype', 'message', 'caring_area', 'request_price', 'house_type', 'listing', 'customer', 'user', 'date', 'status')
   list_display_links = ('id', 'trantype', 'message',)
-  search_fields = ('listing', 'message', 'customer',)
+  search_fields = ('listing', 'message', 'customer', 'user',)
   list_per_page = 100
   form = TransactionAdminForm
 

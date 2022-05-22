@@ -4,7 +4,7 @@
 
     {% if user.is_authenticated %}
         <span style="font-size: smaller; {% comment %} line-height: 1em;{% endcomment %} color: orange">Chào bạn <a
-                href="{% url "profile" %}" style="color: greenyellow"> {{ user.name }}</a></span>
+                href="{% url "profile" %}" style="color: greenyellow"> {{ user.name }} <i class="zmdi zmdi-chevron-down"> </i></a> </span>
     {% else %}
         <span><a href="#login" title="Đăng nhập / Đăng ký" class="btn-login"
                  style="color: yellowgreen"><i class="fa fa-user-lock"></i> {% translate 'Đăng nhập' %}</a></span>
@@ -59,6 +59,10 @@
             <li>
                 <a href="{% url "post_listings" %}"> <i class="fa fa-pencil-alt"></i> {% translate 'Đăng tin miễn phí' %}</a>
             </li>
+            <li>
+                <a href="{% url 'post_listings' %}"> <i class="fa fa-newspaper"></i> {% translate 'Danh sách tin đăng của tôi' %}</a>
+            </li>
+            <li class="dropdown-divider divide"></li>
             {% if user.is_staff or user.is_superuser %}
                 <li>
                     <a href="{% url "admin" %}"> <i class="fa fa-chart-area"></i> {% translate 'Trang quản trị' %}
@@ -68,9 +72,16 @@
             <li>
                 <a href="{% url "profile" %}"> <i class="fa fa-user-edit"></i> {% translate 'Trang cá nhân' %}</a>
             </li>
-            {% comment %}<li>
-                <a href="{% url "profile" %}"><i class="ni ni-settings-gear-65"></i> {% translate 'Thiết lập' %} </a>
-            </li>{% endcomment %}
+            <li class="dropdown-divider divide"></li>
+            <li>
+                <a href="{% url 'transaction' %}"> <i class="fa fa-exchange-alt"></i> {% translate 'Danh sách giao dịch' %} </a>
+            </li>
+            <li>
+                <a href="{% url 'customer' %}"> <i class="fa fa-passport"></i> {% translate 'Danh sách khách hàng' %}</a>
+            </li>
+            <li>
+                <a href="{% url 'my_listing' %}"> <i class="fa fa-building"></i> {% translate 'Danh sách bất động sản' %}</a>
+            </li>
             {% if user.is_active and user.is_staff %}
                 {% url 'django-admindocs-docroot' as docsroot %}
                 {% if docsroot %}
@@ -79,16 +90,16 @@
                     </li>
                 {% endif %}
             {% endif %}
+            {% comment %}            <li>
+                <a href="#" target="_blank"><i class="ni ni-support-16"></i> {% translate 'Hỗ trợ' %}</a>
+            </li>{% endcomment %}
+            <li class="dropdown-divider divide"></li>
             {% if user.has_usable_password %}
                 <li>
                     <a href="{% url 'password_change' %}"><i
                             class="fa fa-user-cog"></i> {% translate 'Đổi mật khẩu' %}</a>
                 </li>
             {% endif %}
-            {% comment %}            <li>
-                <a href="#" target="_blank"><i class="ni ni-support-16"></i> {% translate 'Hỗ trợ' %}</a>
-            </li>{% endcomment %}
-            <li class="dropdown-divider divide"></li>
             <li>
                 <a href="{% url 'logout' %}"><i class="fa fa-user-lock"></i> {% translate 'Đăng xuất' %}</a>
             </li>

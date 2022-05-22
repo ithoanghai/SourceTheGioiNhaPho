@@ -1,0 +1,123 @@
+{% load static listing i18n %}
+
+<div class="card card-profile shadow">
+    <div class="row justify-content-center">
+        <div class="card-profile-image">
+            <a class="nav-link pr-0" href="{% url "profile" %}" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <div class="align-items-center">
+                    {% if user.avatar %}
+                        <img alt="" src="/media/{{ user.avatar }} "
+                             style="height: 200px; width: auto" class="avatar rounded-circle">
+                    {% else %}
+                        <img alt="" src="{% static '/media/team-4-800x800.jpg' %}"
+                             class="avatar rounded-circle">
+                    {% endif %}
+                </div>
+            </a>
+            {% if not is_popup %}
+                <!-- User -->
+                {% block usertools %}
+                    <ul class="d-md-flex">
+                        <li class="nav-item dropdown">
+                            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                                <a href="{% url "profile" %}" class="dropdown-item">
+                                    <i class="fa fa-user-alt"></i>
+                                    <span>Thông tin cá nhân</span>
+                                </a>
+                                {% block userlinks %}
+                                    {% if site_url %}
+                                        <a href="{{ site_url }}" target="_blank"
+                                           class="dropdown-item">
+                                            <i class="fa fa-shopping-cart"></i><span> {% translate 'Trang sản phẩm' %}</span>
+                                        </a>
+                                    {% endif %}
+                                    {% if user.is_active and user.is_staff %}
+                                        {% url 'django-admindocs-docroot' as docsroot %}
+                                        {% if docsroot %}
+                                            <a href="{{ docsroot }}"> {% translate 'Tài liệu' %}</a>
+                                        {% endif %}
+                                    {% endif %}
+                                    {% if user.has_usable_password %}
+                                        <a href="{% url 'password_change' %}" target="_blank"
+                                           class="dropdown-item">
+                                            <i class="fa fa-user-cog"></i><span> {% translate 'Đổi mật khẩu' %}</span>
+                                        </a>
+                                    {% endif %}
+                                {% endblock %}
+                                <div class="dropdown-divider"></div>
+                                <a href="{% url 'logout' %}" class="dropdown-item">
+                                    <i class="fa fa-user-lock"></i>
+                                    <span>{% translate 'Đăng xuất' %}</span>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                {% endblock %}
+
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card-header text-center border-0 pt-8 pb-0 pb-md-4">
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'transaction' %}"><i class="fa fa-exchange-alt"></i> {% translate 'Danh sách giao dịch' %}
+            </a>
+            <a href="{% url 'customer' %}"><i class="fa fa-passport"></i> {% translate 'Danh sách khách hàng' %}</a>
+        </div>
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'my_listing' %}"><i class="fa fa-building"></i> {% translate 'Danh sách bất động sản' %}</a>
+            <a href="{% url 'post_listings' %}"><i class="fa fa-newspaper"></i> {% translate 'Danh sách tin đăng' %}</a>
+        </div>
+    </div>
+    <div class="row card-body pt-0 pt-md-4">
+        <div class="text-center">
+            <h5>
+                Bạn {{ user.first_name }} {{ user.last_name }}
+            </h5>
+            <div class="mt-4">
+                <label>Tham gia TGNP vào lúc {{ request.user.date_joined }}</label>
+            </div>
+            {% if user.realtor %}
+                <div class="h6 mt-4">
+                    <i class="fa fa-users"></i>
+                    {% translate 'Chức danh:' %} {{ user.realtor.position | get_position_type }}
+                </div>
+
+                <div class="h6 mt-4">
+                    <i class="fa fa-dollar-sign"></i> {% translate 'Đẳng cấp chuyên môn: Cấp ' %} {{ user.realtor.level }}
+                </div>
+
+                <div class="h6 mt-4">
+                    <i class="fa fa-star"></i>{% translate 'Danh hiệu:' %} {{ user.realtor.title | get_title_type }}
+                </div>
+            {% endif %}
+            <hr class="my-4"/>
+            {% if user.point %}
+                <div>
+                    <span class="description">{% translate 'Điểm đầu tư' %}</span>
+                    <span class="heading">{{ user.point.investment_point }}</span>
+
+                    <span class="description">{% translate 'Điểm uy tín' %}</span>
+                    <span class="heading">{{ user.point.prestige_points }}</span>
+
+                    <span class="description">{% translate 'Điểm tiềm năng' %}</span>
+                    <span class="heading">{{ user.point.potential_points }}</span>
+
+                    <span class="description">{% translate 'Điểm giới thiệu BĐS' %}</span>
+                    <span class="heading">{{ user.point.bds_referral_point }}</span>
+
+                    <span class="description">{% translate 'Điểm giới thiệu khách' %}</span>
+                    <span class="heading">{{ user.point.customer_referral_point }}</span>
+
+                </div>
+
+                <div class="h6 mt-4">
+
+                    <i class="ni business_briefcase-24 mr-2"></i>Tài khoản đầu tư:
+                    <span class="heading">{{ user.point.investment_point }} * 100 triệu (1 Điểm = 1 triệu)</span>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.core.paginator import Paginator
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.utils.encoding import force_text
 from django_filters.rest_framework import DjangoFilterBackend
@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from FunctionModule.cadastral.lookups import get_all_states, get_all_districts
-from . import Status
+from . import Status, TransactionType
 from .filters import ListingFilter
 from .serializers import *
 
@@ -23,7 +23,7 @@ class ListingSearchQuery(BaseModel):
 
 
 def index(request):
-    listings = Listing.objects.order_by('-priority','-list_date').filter(is_published=True)
+    listings = Listing.objects.order_by('-priority','-list_date').filter(is_published=True, is_advertising=False)
 
     paginator = Paginator(listings, 100)
     page = request.GET.get('page')
@@ -38,9 +38,9 @@ def index(request):
 
 def listing(request, listing_id):
     listing_detail = get_object_or_404(Listing, pk=listing_id)
-    listings_neighborhood = (Listing.objects.order_by('-priority','-list_date').filter(is_published=True,
+    listings_neighborhood = (Listing.objects.order_by('-priority','-list_date').filter(is_published=True, is_advertising=False,
                                                                           state=listing_detail.state)[:10])
-    listings_same = (Listing.objects.order_by('-priority','-list_date').filter(is_published=True, house_type=listing_detail.house_type,area=listing_detail.area)[:30])
+    listings_same = (Listing.objects.order_by('-priority','-list_date').filter(is_published=True, is_advertising=False, house_type=listing_detail.house_type,area=listing_detail.area)[:30])
 
     context = {
         'listing': listing_detail,
@@ -66,55 +66,74 @@ def search(request):
     return render(request, 'listings/search.html', context)
 
 
-def search_simple(request):
-    context = {
-        'listings': [],
-        'state_data': get_all_states(),
-        'districts': get_all_districts(),
-        'GOOGLE_MAP_API_KEY': settings.GOOGLE_MAP_API_KEY,
-        'environment': settings.ENVIRONMENT,
-        "pagination": {},
-    }
-
-    return render(request, 'listings/search_list_simple.html', context)
-
-
 def post_listing(request):
     context = {
     }
-    if request.method == 'GET':
-        return render(request, 'listings/postListing.html', context)
-    elif request.method == 'POST':
-        # listing_id = request.POST['listing_id']
-        # lastname = request.POST['lastname']
-        # firstname = request.POST['firstname']
-        # name = f'{firstname} {lastname}'
-        # email = request.POST['email']
-        # phone = request.POST['phone']
-        # message = request.POST['message']
-        # user_id = request.POST.get('user_id', None)
-        # yesterday = timezone.now() - timedelta(days=1)
-        # #  Check if user has made inquiry already
-        # if request.user.is_authenticated:
-        #     user_id = request.user.id
-        #     has_contacted = Contact.objects.filter(listing_id=listing_id, user_id=user_id,
-        #                                            contact_date__gte=yesterday)
-        #     if has_contacted:
-        #         messages.error(request,
-        #                        'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
-        #         return redirect('/listings/' + listing_id)
-        # else:
-        #     ses_id = request.session.session_key
-        #     print(ses_id)
-        #
-        # listing = Listing.objects.get(pk=listing_id)
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            return render(request, 'listings/postListing.html', context)
+        elif request.method == 'POST':
+            # listing_id = request.POST['listing_id']
+            # lastname = request.POST['lastname']
+            # firstname = request.POST['firstname']
+            # name = f'{firstname} {lastname}'
+            # email = request.POST['email']
+            # phone = request.POST['phone']
+            # message = request.POST['message']
+            # user_id = request.POST.get('user_id', None)
+            # yesterday = timezone.now() - timedelta(days=1)
+            # #  Check if user has made inquiry already
+            # if request.user.is_authenticated:
+            #     user_id = request.user.id
+            #     has_contacted = Contact.objects.filter(listing_id=listing_id, user_id=user_id,
+            #                                            contact_date__gte=yesterday)
+            #     if has_contacted:
+            #         messages.error(request,
+            #                        'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
+            #         return redirect('/listings/' + listing_id)
+            # else:
+            #     ses_id = request.session.session_key
+            #     print(ses_id)
+            #
+            # listing = Listing.objects.get(pk=listing_id)
 
-        # Contact.objects.create(listing=listing.code, listing_id=listing_id, name=name, email=email,
-        #                        phone=phone, message=message, user_id=user_id)
-        #
-        # messages.success(request, 'Yêu cầu được gửi thành công. Chúng tôi sẽ liên lạc lại với bạn sớm nhất.')
+            # Contact.objects.create(listing=listing.code, listing_id=listing_id, name=name, email=email,
+            #                        phone=phone, message=message, user_id=user_id)
+            #
+            # messages.success(request, 'Yêu cầu được gửi thành công. Chúng tôi sẽ liên lạc lại với bạn sớm nhất.')
 
-        return render(request, 'listings/postListingSuccess.html', context)
+            return render(request, 'listings/postListingSuccess.html', context)
+    else:
+        return redirect('login')
+
+
+def post_listings(request,typeTran):
+    listings = Listing.objects.order_by('-priority','-list_date').filter(is_published=True, is_advertising=True, transaction_type=typeTran,)
+
+    paginator = Paginator(listings, 100)
+    page = request.GET.get('page')
+    paged_listings = paginator.get_page(page)
+
+    context = {
+        'listings': paged_listings
+    }
+
+    return render(request, 'listings/postListing.html', context)
+
+
+def my_listing(request):
+    if request.user.is_authenticated and request.method == 'GET':
+        listings = Listing.objects.filter(user=request.user).order_by('-list_date')
+        paginator = Paginator(listings, 10)
+        page = request.GET.get('page')
+        paged_listings = paginator.get_page(page)
+        context = {
+            'listings': paged_listings,
+        }
+
+        return render(request, 'listings/myListings.html', context)
+    else:
+        return render(request, 'accounts/_profile.html')
 
 
 def sell_lease_with_us(request):

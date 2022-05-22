@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static load_static humanize i18n %}
+{% load static load_static listing humanize i18n %}
 
 {% block head %}
   {{ block.super }}
@@ -35,66 +35,28 @@
         <div class="agents-container col-12">
           <div class="agents-inner">
             <div class="col-12 agents__grid">
-              <div class="agents-listing">
-                <div class="agents-image">
-                    <a href="{% url 'specialistDetail' %}"> <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                    <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
-                        data-type="sale_property" data-favorited="false"  class="btn-favorite zmdi zmdi-favorite-outline"></button>
-                  </a>
-                </div>
-                <div class="agents-content">
-                  <a href="{% url 'specialistDetail' %}"><h3 class="font-tiempos"></h3></a>
-                  <p class="team-name-sale">Sales Director</p>
+                {% for realtor in specialists %}
+                    <div class="agents-listing">
+                        <div class="agents-image">
+                            <a href="{% url "specialistDetail" realtor.id %}">
+                                {% if realtor.user.avatar %}
+                                    <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                                {% else %}
+                                    <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                                {% endif %}
+                            <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
+                                data-type="sale_property" data-favorited="false"  class="btn-favorite zmdi zmdi-favorite-outline"></button>
+                          </a>
+                        </div>
+                        <div class="agents-content">
+                  <a href="{% url "specialistDetail" realtor.id %}"><h3 class="font-tiempos">{{ realtor.user.name }}</h3></a>
+                  <p class="team-name-sale">{{ realtor.position|get_position_type}}</p>
                   <div class="agents-email">
-                    <a href=""><span  class="__cf_email__" data-cfemail="">[email&#160;protected]</span></a>
+                    <a href="mailto:{{ realtor.user.email }}"><span  class="__cf_email__" data-cfemail="">[email&#160;protected]</span></a>
                   </div>
                 </div>
-              </div>
-              <div class="agents-listing">
-                <div class="agents-image">
-                    <a href="{% url 'specialistDetail' %}"> <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                    <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
-                        data-type="sale_property" data-favorited="false"  class="btn-favorite zmdi zmdi-favorite-outline"></button>
-                  </a>
-                </div>
-                <div class="agents-content">
-                  <a href="{% url 'specialistDetail' %}"><h3 class="font-tiempos"></h3></a>
-                  <p class="team-name-sale">Sales Director</p>
-                  <div class="agents-email">
-                    <a href=""><span  class="__cf_email__" data-cfemail="">[email&#160;protected]</span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="agents-listing">
-                <div class="agents-image">
-                  <a href="{% url 'specialistDetail' %}"> <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                    <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
-                        data-type="sale_property" data-favorited="false"  class="btn-favorite zmdi zmdi-favorite-outline"></button>
-                  </a>
-                </div>
-                <div class="agents-content">
-                  <a href=""><h3 class="font-tiempos"></h3></a>
-                  <p class="team-name-sale">Sales Director</p>
-                  <div class="agents-email">
-                    <a href=""><span  class="__cf_email__" data-cfemail="">[email&#160;protected]</span></a>
-                  </div>
-                </div>
-                </div>
-              <div class="agents-listing">
-                <div class="agents-image">
-                     <a href="{% url 'specialistDetail' %}"> <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                    <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
-                        data-type="sale_property" data-favorited="false"  class="btn-favorite zmdi zmdi-favorite-outline"></button>
-                  </a>
-                </div>
-                <div class="agents-content">
-                  <a href="{% url 'specialistDetail' %}"><h3 class="font-tiempos"></h3></a>
-                  <p class="team-name-sale">Sales Director</p>
-                  <div class="agents-email">
-                    <a href=""><span  class="__cf_email__" data-cfemail="">[email&#160;protected]</span></a>
-                  </div>
-               </div>
-              </div>
+                   </div>
+                {% endfor %}
               <component v-for="html in moreAgentHTML" :is="html"></component>
             </div>
             <span class="view-more-agent">  <div v-show="loadingMoreAgent" v-cloak class="loading-gif"></div> </span>

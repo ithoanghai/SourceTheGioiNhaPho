@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import Textarea
 
+from FunctionModule.listings import HouseType
 from FunctionModule.transactions.models import Transaction
 
 
@@ -32,3 +33,9 @@ class RequestQuoteForm(forms.Form):
     house_type = forms.CharField(required=False)
     district = forms.CharField(max_length=100, required=False)
     request_price = forms.DecimalField(max_digits=5, decimal_places=2, required=False)
+
+
+class TransactionForm(forms.Form):
+    house_type = forms.ChoiceField(choices=HouseType,required=False)
+
+

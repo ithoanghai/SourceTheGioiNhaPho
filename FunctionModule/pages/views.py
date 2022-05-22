@@ -2,9 +2,10 @@ from itertools import groupby
 
 from django import template
 from django.contrib.admin import site
+from django.core.paginator import Paginator
 from django.db.models import QuerySet, Count
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 
 from FunctionModule.cadastral.lookups import get_all_states, get_all_districts
@@ -80,14 +81,26 @@ def specialist_us(request):
 
 
 def specialist(request):
+    trans = Realtor.objects.filter().order_by('-hire_date')
+    paginator = Paginator(trans, 10)
+    page = request.GET.get('page')
+    paged_spect = paginator.get_page(page)
     context = {
+        'specialists': paged_spect,
     }
 
     return render(request, 'home/specialist.html', context)
 
 
-def specialist_detail(request):
+def specialist_detail(request, realtor_id):
+    listings = Listing.objects.filter(realtor__id=realtor_id).order_by('-list_date')
+    paginator = Paginator(listings, 9)
+    page = request.GET.get('page')
+    paged_listings = paginator.get_page(page)
+    realtor_detail = get_object_or_404(Realtor, pk=realtor_id)
     context = {
+        'realtor': realtor_detail,
+        'listings': paged_listings,
     }
 
     return render(request, 'home/specialistDetail.html', context)

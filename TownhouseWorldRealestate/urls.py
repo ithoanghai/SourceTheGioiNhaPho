@@ -21,6 +21,7 @@ urlpatterns = [
     path('api/', include('FunctionModule.api.urls')),
     path('listings/', include('FunctionModule.listings.urls')),
     path('transactions/', include('FunctionModule.transactions.urls')),
+    path('customers/', include('FunctionModule.customers.urls')),
     path('accounts/', include('FunctionModule.accounts.urls')),
     path('cadastral/', include('FunctionModule.cadastral.urls')),
     path('accounts/', include('allauth.urls')),

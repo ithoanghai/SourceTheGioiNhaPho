@@ -31,56 +31,7 @@
           </button>
         </div>
         <ul class="login">
-          <li class="sub-menu">
-            {% if user.is_authenticated %}
-                <a>Chào bạn {{ user.name }} <i class="zmdi zmdi-chevron-down"></i></a>
-
-                <ul style="display: none">
-                    <li>
-                        <a href="./admin/listings/listing/add/"> <i class="fa fa-user-edit"></i> {% translate 'Đăng tin miễn phí' %}</a>
-                    </li>
-                    {% if user.is_staff or user.is_superuser %}
-                        <li>
-                            <a href="{% url "admin" %}"> <i
-                                    class="fa fa-user-astronaut"></i> {% translate 'Trang quản trị' %}</a>
-                        </li>
-                    {% endif %}
-                    <li>
-                        <a href="{% url "profile" %}"> <i class="fa fa-user-edit"></i> {% translate 'Trang cá nhân' %}</a>
-                    </li>
-                        {% comment %}<li>
-                            <a href="{% url "profile" %}"><i class="ni ni-settings-gear-65"></i> {% translate 'Thiết lập' %} </a>
-                        </li>{% endcomment %}
-                        {% if user.is_active and user.is_staff %}
-                            {% url 'django-admindocs-docroot' as docsroot %}
-                            {% if docsroot %}
-                                <li>
-                                    <a href="{{ docsroot }}">{% translate 'Tài liệu' %}</a>
-                                </li>
-                            {% endif %}
-                        {% endif %}
-                        <li>
-                {% if user.has_usable_password %}
-                    <a href="{% url 'password_change' %}"><i class="fa fa-user-cog"></i> {% translate 'Đổi mật khẩu' %}</a>
-                {% endif %}
-                        </li>
-            {% comment %}            <li>
-                            <a href="#" target="_blank"><i class="ni ni-support-16"></i> {% translate 'Hỗ trợ' %}</a>
-                        </li>{% endcomment %}
-                        <li class="dropdown-divider divide"></li>
-            <li>
-                <a href="{% url 'logout' %}"><i class="fa fa-user-lock"></i> {% translate 'Đăng xuất' %}</a>
-            </li>
-
-                    </ul>
-            {% else %}
-                <div class="user-login">
-                <a href="#login" title="Đăng nhập" class="btn-primary btn-black-outline btn-medium btn-login"><i class="fa fa-user-edit"> {% translate 'Đăng nhập' %}</a>
-              <a href="{% url 'register' %}" title="Đăng ký"
-                 class="btn-primary btn-red-outline btn-medium btn-signup">Đăng ký</a>
-                </div>
-            {% endif %}
-          </li>
+          {% include "menu/_subMenuUserProfile.html" %}
         </ul>
         <ul>
           <li class="sub-menu">

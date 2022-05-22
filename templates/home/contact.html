@@ -3,112 +3,118 @@
 {% load static humanize i18n load_static %}
 
 {% block head %}
-  {{ block.super }}
-  <link rel="canonical" href="{% url 'contacts' %}"/>
+    {{ block.super }}
+    <link rel="canonical" href="{% url 'contacts' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
 
 {% endblock %}
 
 {% block content %}
-  <div id="wrap">
-    <!-- Search menu -->
-    {% include 'menu/_menuSearch.html' %}
+    <div id="wrap">
+        <!-- Search menu -->
+        {% include 'menu/_menuSearch.html' %}
 
-    <!-- Header -->
-    {% include 'menu/_secondMenu2.html' %}
+        <!-- Header -->
+        {% include 'menu/_secondMenu2.html' %}
 
 
-    <!-- Main Content  -->
-    <div class="bg-about service-heading none-bg-overlay">
-      <div class="heading-wrapper">
-        <div class="heading-inner">
-          <h1>Liên hệ</h1>
-        </div>
-      </div>
-    </div>
-
-    <section class="bg-white">
-      <div class="width1140 s-padding-tb">
-        <div class="contact-warpper">
-          <div class="contact-left">
-            <img src="{% static 'images/contact.jpg' %}" alt="liên hệ">
-            <p>Thế giới Nhà phố Việt Nam</p>
-            <div class="address">
-              <div class="address-content">
-                <span class="left">Địa chỉ:</span>
-                <a href="https://goo.gl/maps/AAR637GM7hh1JMFf9" target="_blank"><span
-                  class="right">Số nhà 119 A3 - KĐT Đại Kim, P. Định Công, Hoàng Mai, HN </span></a>
-              </div>
-              <div class="address-content">
-                <span class="left">Mr. Dương:</span>
-                <span class="right"><a href="tel:0916 413 599">0916 413 599</a> - <a href="tel:0971841941">0971 841 941</a></span>
-              </div>
-              <div class="address-content">
-                <span class="left">Mr. Hải:</span>
-                <span class="right"><a href="tel:0916 286 256">0916 286 256</a> - <a href="tel:09 6439 9436">09 6439 9436</a></span>
-              </div>
+        <!-- Main Content  -->
+        <div class="bg-about service-heading none-bg-overlay">
+            <div class="heading-wrapper">
+                <div class="heading-inner">
+                    <h1>Liên hệ</h1>
+                </div>
             </div>
-          </div>
-          <div class="contact-right form-info">
-            <form method="post" action="{% url 'post_contact' %}">
-              <fieldset>
-                {% csrf_token %}
-                  <input type="hidden" name="listing_id" value="none"/>
-                  <input type="hidden" name="trantype" value="contact">
-                  <input type="hidden" name="location" value=""/>
-                  <input type="hidden" name="houseType" value="">
-                  <input type="hidden" name="price" value="0"/>
-
-                <div class="form-element per50-left ">
-                  <div class="placeholder">Họ</div>
-                  <input class="input" type="text" name="lastname" value="" data-fr="string" placeholder="" required/>
-                  <span class="error-text"></span>
-                </div>
-                <div class="form-element per50-right">
-                  <div class="placeholder">Tên</div>
-                  <input class="input" type="text" name="firstname" value="" data-fr="string" placeholder="" required/>
-                  <span class="error-text"></span>
-                </div>
-                <div class="form-element">
-                  <div class="placeholder">Số điện thoại</div>
-                  <input class="input" type="text" name="phone" value="" data-fr="phone" placeholder="" required/>
-                  <span class="error-text"></span>
-                </div>
-                <div class="form-element">
-                  <div class="placeholder">Email (Không bắt buộc)</div>
-                  <input class="input" type="text" name="email" value="" data-fr="email" placeholder=""/>
-                  <span class="error-text"></span>
-                </div>
-                <div class="form-element textarea-height">
-                  <div class="placeholder">Lời nhắn</div>
-                  <textarea name="message" placeholder="" required></textarea>
-                </div>
-              </fieldset>
-              <div class="action">
-                <button class="large-btn-red">Gửi thông tin</button>
-              </div>
-            </form>
-          </div>
         </div>
-      </div>
-    </section>
 
-    <section class="s-bg-subcription">
-      <div class="width1140 s-padding-tb">
-        <div class="s-subcription-inner">
-          <div class="title">Chuyên viên của TGNP sẽ đồng hành hỗ trợ bạn trong suốt quá trình mua, bán, thuê
-            & cho thuê nhà đất. Không còn lo lắng khi tìm kiếm và giao dịch nhà đất với đầy các thủ tục phức
-            tạp khi đã có chuyên viên tư vấn đáng tin cậy của TGNP bên cạnh!
-          </div>
-          <div class="btn-contact" style="max-width: 250px">
-            <a href="{% url 'specialist' %}" class="s-btn-red" data-action="contact-agent">Gặp chuyên viên
-              TGNP</a>
-          </div>
-        </div>
-      </div>
-    </section>
+        <section class="bg-white">
+            <div class="width1140 s-padding-tb">
+                <div class="contact-warpper">
+                    <div class="contact-left">
+                        <img src="{% static 'images/contact.jpg' %}" alt="liên hệ">
+                        <p>Thế giới Nhà phố Việt Nam</p>
+                        <div class="address">
+                            <div class="address-content">
+                                <span class="left">Địa chỉ:</span>
+                                <a href="https://goo.gl/maps/AAR637GM7hh1JMFf9" target="_blank"><span
+                                        class="right">Số nhà 119 A3 - KĐT Đại Kim, P. Định Công, Hoàng Mai, HN </span></a>
+                            </div>
+                            <div class="address-content">
+                                <span class="left">Mr. Hải:</span>
+                                <span class="right"><a href="tel:0916 286 256">0916 286 256</a> - <a
+                                        href="tel:09 6439 9436">09 6439 9436</a></span>
+                            </div>
+                            <div class="address-content">
+                                <span class="left">Mr.Dương:</span>
+                                <span class="right"><a href="tel:0971841941">0971 841 941</a></span>
+                            </div>
 
-    {% comment %}<section class="bg-white">
+                        </div>
+                    </div>
+                    <div class="contact-right form-info">
+                        <form method="post" action="{% url 'post_contact' %}">
+                            <fieldset>
+                                {% csrf_token %}
+                                <input type="hidden" name="listing_id" value="none"/>
+                                <input type="hidden" name="trantype" value="contact">
+                                <input type="hidden" name="location" value=""/>
+                                <input type="hidden" name="houseType" value="">
+                                <input type="hidden" name="price" value="0"/>
+
+                                <div class="form-element per50-left ">
+                                    <div class="placeholder">Họ</div>
+                                    <input class="input" type="text" name="lastname" value="" data-fr="string"
+                                           placeholder="" required/>
+                                    <span class="error-text"></span>
+                                </div>
+                                <div class="form-element per50-right">
+                                    <div class="placeholder">Tên</div>
+                                    <input class="input" type="text" name="firstname" value="" data-fr="string"
+                                           placeholder="" required/>
+                                    <span class="error-text"></span>
+                                </div>
+                                <div class="form-element">
+                                    <div class="placeholder">Số điện thoại</div>
+                                    <input class="input" type="text" name="phone" value="" data-fr="phone"
+                                           placeholder="" required/>
+                                    <span class="error-text"></span>
+                                </div>
+                                <div class="form-element">
+                                    <div class="placeholder">Email (Không bắt buộc)</div>
+                                    <input class="input" type="text" name="email" value="" data-fr="email"
+                                           placeholder=""/>
+                                    <span class="error-text"></span>
+                                </div>
+                                <div class="form-element textarea-height">
+                                    <div class="placeholder">Lời nhắn</div>
+                                    <textarea name="message" placeholder="" required></textarea>
+                                </div>
+                            </fieldset>
+                            <div class="action">
+                                <button class="large-btn-red">Gửi thông tin</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="s-bg-subcription">
+            <div class="width1140 s-padding-tb">
+                <div class="s-subcription-inner">
+                    <div class="title">Chuyên viên của TGNP sẽ đồng hành hỗ trợ bạn trong suốt quá trình mua, bán, thuê
+                        & cho thuê nhà đất. Không còn lo lắng khi tìm kiếm và giao dịch nhà đất với đầy các thủ tục phức
+                        tạp khi đã có chuyên viên tư vấn đáng tin cậy của TGNP bên cạnh!
+                    </div>
+                    <div class="btn-contact" style="max-width: 250px">
+                        <a href="{% url 'specialist' %}" class="s-btn-red" data-action="contact-agent">Gặp chuyên viên
+                            TGNP</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% comment %}<section class="bg-white">
             <div class="width1140 s-padding-tb">
                 <div class="s-heading">Liên hệ trực tiếp</div>
                 <div class="contact-btn-list">
@@ -196,11 +202,11 @@
             </div>
         </section>{% endcomment %}
 
-    <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
+        <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
 
-  </div>
+    </div>
 
-  <!-- Footer content below-->
+    <!-- Footer content below-->
 {% endblock %}
 
 {% block scripts %}
