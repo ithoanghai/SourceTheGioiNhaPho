@@ -23,7 +23,7 @@ class Realtor(models.Model):
     title = models.CharField(max_length=20, choices=Title.choices, verbose_name=_("Danh hiệu"), default=Title.ROOKIE)
     level = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)], choices=([(i, i) for i in range(1, 10)]), default=1, verbose_name=_("Đẳng cấp chuyên môn"))
     work_area = models.CharField(max_length=100, verbose_name=_("Địa bàn khu vực Quận/Huyện hoạt động"), null=True, blank=True, default="Hoàng Mai")
-    hire_date = models.DateTimeField(default=default_hire_date, blank=True)
+    hire_date = models.DateTimeField(default=default_hire_date, verbose_name=_("Ngày thêm") , blank=True)
 
     def __str__(self):
         return f'%s' % (self.user)

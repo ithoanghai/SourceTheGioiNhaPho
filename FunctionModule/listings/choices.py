@@ -147,6 +147,7 @@ class Position(models.TextChoices):
     ASSISTANT = 'assistant', _("Trợ lý")
     ACCOUNTANT = 'accountant', _("Kế toán")
     COORDINATOR = 'coordinator', _("Điều phối viên")
+    EXPERT_HOME = 'expert_home', _("Chuyên viên Đầu chủ")
     EXPERT = 'expert', _("Chuyên viên")
     INTERNS = 'interns', _("Học viên")
     USER = 'user', _("Người dùng thông thường")
