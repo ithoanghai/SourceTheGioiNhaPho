@@ -76,7 +76,7 @@ gộp dữ liệu
     docker-compose -f docker-compose.production.yml exec web bash -c "pip install -r requirements.txt"
     docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py collectstatic --noinput"
     docker-compose -f docker-compose.production.yml exec web bash -c "npx gulp build"
-    docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py makemigrations"
+    docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py makemigrations --merge"
     docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py migrate"
     docker-compose -f docker-compose.production.yml restart web
     docker-compose -f docker-compose.production.yml up -d search_engine
