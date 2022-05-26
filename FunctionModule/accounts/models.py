@@ -107,7 +107,7 @@ class Point(models.Model):
         verbose_name = "Điểm số"
         verbose_name_plural = "Điểm đạt được"
 
-    user = models.OneToOneField(User, on_delete=models.RESTRICT, db_constraint=User)
+    user = models.OneToOneField(User, on_delete=models.RESTRICT, db_constraint=User, blank=True, null=True)
     investment_point = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(999999)], verbose_name=_("Điểm đầu tư"), null=True, blank=True, default=0)
     investment_account = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(999999999)],
                                            verbose_name=_("Tài khoản có đầu tư (Triệu đồng)"), null=True, blank=True, default=0)
