@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 from allauth.account.views import get_adapter
 from gevent import os
 
-from FunctionModule.accounts.models import User
+from FunctionModule.accounts.models import User, Point
 from FunctionModule.accounts.forms import UserRegisterForm, UserProfileForm
 from FunctionModule.transactions.models import Transaction
 from TownhouseWorldRealestate.settings import MEDIA_ROOT
@@ -32,6 +32,14 @@ def register(request):
         email = request.POST['email']
         password = request.POST['password']
         password2 = request.POST['password2']
+        if request.POST.get('is_broker') == 'on':
+            is_broker = True
+        else:
+            is_broker = False
+        if request.POST.get('is_investor') == 'on':
+            is_investor = True
+        else:
+            is_investor = False
         reg_user = {
             'first_name': first_name,
             'last_name': last_name,
@@ -39,7 +47,9 @@ def register(request):
             'phone': phone,
             'email': email,
             'password': password,
-            'password2': password2
+            'password2': password2,
+            'is_broker': is_broker,
+            'is_investor': is_investor
         }
 
         # Check username
@@ -55,9 +65,9 @@ def register(request):
 
             # Check if passwords match
         if password != password2:
-            messages.error(request, 'Mật khẩu không trùng khớps')
+            messages.error(request, 'Mật khẩu không trùng khớp')
 
-        if form.is_valid():
+        if form.is_valid() and form.cleaned_data:
             # Looks good
             # user = User.objects.create_user(username=username, password=password, email=email,
             #                                first_name=first_name, last_name=last_name)
@@ -65,11 +75,14 @@ def register(request):
             user_password = form.cleaned_data.get('password')
             user.set_password(user_password)
             user.save()
+            Point.objects.create_base(user__id=user.id, investment_point=0, investment_account=0, prestige_points=1, potential_points=1, bds_referral_point=0, customer_referral_point=0)
             messages.success(request,
-                    'Bạn đã đăng ký người dùng thành công và có thể đăng nhập. (chú ý: Để trở thành Chuyên viên và sử dụng các tính năng của Chuyên viên TGNP, bạn cần liên hệ với admin.)')
+                             'Bạn đã đăng ký người dùng thành công và có thể đăng nhập. (chú ý: Để trở thành Chuyên viên và sử dụng các tính năng của Chuyên viên TGNP, bạn cần liên hệ với admin.)')
             return redirect('register_success')
+        else:
+            messages.error(request,'Đã xảy ra lỗi. Bạn đăng ký chưa được!')
 
-        return render(request, 'accounts/_register.html', {'reg_user': reg_user, 'form': form})
+            return render(request, 'accounts/_register.html', {'reg_user': reg_user, 'form': form})
 
     else:
         form = UserRegisterForm()
@@ -129,11 +142,14 @@ def profile(request):
     if request.user.is_authenticated:
         if request.method == 'GET':
             trans = Transaction.objects.filter(user=request.user).order_by('-date')
+            point = Point.objects.filter(user=request.user).first()
             paginator = Paginator(trans, 10)
             page = request.GET.get('page')
             paged_trans = paginator.get_page(page)
+            print(point)
             context = {
                 'transactions': paged_trans,
+                'point': point,
             }
 
             return render(request, 'accounts/_profile.html', context)
@@ -149,9 +165,14 @@ def profile(request):
             dob = request.POST['dob']
             gender = request.POST['gender']
             address = request.POST['address']
-            youtube = request.POST['youtube']
-            facebook = request.POST['facebook']
-            website = request.POST['website']
+            if request.POST.get('is_broker') == 'on':
+                is_broker = True
+            else:
+                is_broker = False
+            if request.POST.get('is_investor') == 'on':
+                is_investor = True
+            else:
+                is_investor = False
             bio = request.POST['bio']
             if request.FILES.get('avatar', None) is not None:
                 avatar = request.FILES.get('avatar')
@@ -166,14 +187,13 @@ def profile(request):
                 'dob': dob,
                 'gender': gender,
                 'address': address,
-                'youtube': youtube,
-                'facebook': facebook,
-                'website': website,
+                'is_broker': is_broker,
+                'is_investor': is_investor,
                 'bio': bio,
                 'avatar': avatar,
             }
 
-            if form.is_valid():
+            if form.is_valid() and form.cleaned_data:
                 # Looks good
                 # user = User.objects.create_user(username=username, password=password, email=email,
                 #                                first_name=first_name, last_name=last_name)
@@ -188,7 +208,7 @@ def profile(request):
                     request.user.save()
                 user = form.save()
                 update_session_auth_hash(request, user)  # Important!
-                messages.success(request,'Bạn đã lưu thông tin thành công')
+                messages.success(request, 'Bạn đã lưu thông tin thành công')
 
                 return redirect('profile')
 
@@ -226,9 +246,6 @@ def password_change(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'accounts/change_password.html', context)
-
-
-
 
 
 def social_login_cancelled(request):

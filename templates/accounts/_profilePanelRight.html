@@ -8,9 +8,9 @@
                 <div class="align-items-center">
                     {% if user.avatar and user.avatar != 'img/logo tgnp brown.jpg'%}
                         <img alt="" src="/media/{{ user.avatar }} "
-                             style="height: 200px; width: auto" class="avatar rounded-circle">
+                             style="height: auto; width: 180px" class="avatar rounded-circle">
                     {% else %}
-                        <img alt="" src="{% static '/img/logo tgnp brown.jpg' %}"
+                        <img alt="" style="height: auto; width: 180px" src="{% static '/img/logo tgnp brown.jpg' %}"
                              class="avatar rounded-circle">
                     {% endif %}
                 </div>
@@ -93,29 +93,29 @@
                 </div>
             {% endif %}
             <hr class="my-4"/>
-            {% if user.point %}
+            {% if point%}
                 <div>
                     <span class="description">{% translate 'Điểm đầu tư' %}</span>
-                    <span class="heading">{{ user.point.investment_point }}</span>
+                    <span class="heading">{{ point.investment_point }}</span>
 
                     <span class="description">{% translate 'Điểm uy tín' %}</span>
-                    <span class="heading">{{ user.point.prestige_points }}</span>
+                    <span class="heading">{{ point.prestige_points }}</span>
 
                     <span class="description">{% translate 'Điểm tiềm năng' %}</span>
-                    <span class="heading">{{ user.point.potential_points }}</span>
+                    <span class="heading">{{ point.potential_points }}</span>
 
                     <span class="description">{% translate 'Điểm giới thiệu BĐS' %}</span>
-                    <span class="heading">{{ user.point.bds_referral_point }}</span>
+                    <span class="heading">{{ point.bds_referral_point }}</span>
 
                     <span class="description">{% translate 'Điểm giới thiệu khách' %}</span>
-                    <span class="heading">{{ user.point.customer_referral_point }}</span>
+                    <span class="heading">{{ point.customer_referral_point }}</span>
 
                 </div>
 
                 <div class="h6 mt-4">
 
                     <i class="ni business_briefcase-24 mr-2"></i>Tài khoản đầu tư:
-                    <span class="heading">{{ user.point.investment_point }} * 100 triệu (1 Điểm = 1 triệu)</span>
+                    <span class="heading">{{ point.investment_account }} triệu</span>
                 </div>
             {% endif %}
         </div>

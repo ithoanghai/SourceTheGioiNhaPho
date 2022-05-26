@@ -151,34 +151,26 @@
                                                     <span style="color: red; font-size: 12px">{{ form.email.errors.as_text }}</span>{% endif %}
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="facebook">Facebook</label>
-                                                <input type="text" name="facebook"
-                                                       class="form-control form-control-alternative"
-                                                       placeholder="{{ request.user.facebook }}"
-                                                       value="{{ request.user.facebook }}">
-                                            </div>
+                                     </div>
+                                <hr class="my-4"/>
+                                <div class="row">
+                                         <div class="col-md-6">
+                                                <label class="form-control-label" for="is_broker">Tôi muốn làm môi giới&nbsp;</label>
+                                                  {% if request.user.is_broker == True or reg_user.is_broker == True%}
+                                                    <input type="checkbox" name="is_broker" checked>
+                                                      {% else %}
+                                                      <input type="checkbox" name="is_broker">
+                                              {% endif %}
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="youtube">Youtube</label>
-                                                <input type="text" name="youtube"
-                                                       class="form-control form-control-alternative"
-                                                       placeholder="{{ request.user.youtube }}"
-                                                       value="{{ request.user.youtube }}">
-                                            </div>
+                                        <div class="col-md-6">
+                                                <label class="form-control-label" for="is_investor">Tôi muốn đầu tư &nbsp;</label>
+                                                {% if request.user.is_investor == True or reg_user.is_investor == True%}
+                                                    <input type="checkbox" name="is_broker" checked>
+                                                      {% else %}
+                                                      <input type="checkbox" name="is_broker">
+                                            {% endif %}
                                         </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="website">Website</label>
-                                                <input type="text" name="website"
-                                                       class="form-control form-control-alternative"
-                                                       placeholder="{{ request.user.website }}"
-                                                       value="{{ request.user.website }}">
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
 
                                 </div>
                                 <hr class="my-4"/>
@@ -192,10 +184,9 @@
                                     </div>
                                 </div>
 
-                                <div class="card-footer text-center border-0">
-                                    <input type="submit" value="{% trans "Ghi nhớ thông tin" %}" class="btn btn-info">
+                               <div class="card-footer text-center border-0">
+                                    <input type="submit" style="font-size: large; font-weight: bold" value="{% trans "Ghi nhớ thông tin" %}" class="btn btn-primary">
                                 </div>
-
                             </form>
                         </div>
                         <div class="card-footer text-center border-0">

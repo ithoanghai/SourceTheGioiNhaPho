@@ -3,61 +3,103 @@
 {% block title %} | {% trans "Đăng ký gia nhập Nhà Phố" %} {% endblock %}
 
 {% block content %}
-  <section id="register" class="bg-light py-5">
-    <div class="container">
-    {% comment %}   <div><h6>{% trans "Chào mừng bạn. Hãy tham gia hệ thống Thế giới Nhà phố ngay bây giờ với từng vai trò, thương vụ đặt mua, mua, bán, giới thiệu, đầu tư BĐS. Bạn sẽ được hưởng quyền lợi cao không ngờ tới mà hệ thống mang đến cho bạn." %}</h6></div>
-   {% endcomment %}   <div class="row">
-        <div class="col-md-6 mx-auto">
-          <div class="card">
-            <div class="card-header bg-primary text-white">
-              <h5>
-                <i class="fas fa-user-plus"></i> {% trans "ĐĂNG KÝ GIA NHẬP THẾ GIỚI NHÀ PHỐ" %}</h5>
-            </div>
-            <div class="card-body">
-                <form action="{% url 'register' %}" method="POST" enctype='multipart/form-data'>
-                {% csrf_token %}
-                <div class="form-group">
-                  <label for="first_name">{% trans "Họ đệm" %}</label>
-                  <input class="form-control" required type="text" name="first_name" {% if reg_user.first_name %} value="{{ reg_user.first_name }}"{% endif %} placeholder="Nhập họ tên đệm"/>
-                  {% if form.firstname.errors %}<span style="color: red; font-size: 12px">{{ form.first_name.errors.as_text }}</span>{% endif %}
-                </div>
-                <div class="form-group">
-                  <label for="last_name">{% trans "Tên" %}</label>
-                  <input class="form-control" required type="text" name="last_name" {% if reg_user.last_name %} value="{{ reg_user.last_name}}"{% endif %} placeholder="Nhập tên của bạn"/>
-                  {% if form.lastname.errors %}<span style="color: red; font-size: 12px">{{ form.last_name.errors.as_text }}</span>{% endif %}
-                 </div>
-                <div class="form-group">
-                  <label for="username">{% trans "Tên tài khoản" %}</label>
-                  <input class="form-control" required type="text" name="username"    {% if reg_user.username %} value="{{ reg_user.username }}"{% endif %} placeholder="Nhập tài khoản đăng nhập"/>
-                  {% if form.username.errors %}<span style="color: red; font-size: 12px">{{ form.username.errors.as_text }}</span>{% endif %}
-                </div>
-                <div class="form-group">
-                  <label for="phone">{% trans "Số điện thoại" %}</label>
-                   <input class="form-control" required type="text" name="phone" {% if reg_user.phone %} value="{{ reg_user.phone }}"{% endif %} placeholder="Nhập Số điện thoại"/>
-                  {% if form.phone.errors %}<span style="color: red; font-size: 12px">{{ form.phone.errors.as_text }}</span>{% endif %}
+    <section id="register" class="bg-light py-5">
+        <div class="container">
+            {% comment %}   <div><h6>{% trans "Chào mừng bạn. Hãy tham gia hệ thống Thế giới Nhà phố ngay bây giờ với từng vai trò, thương vụ đặt mua, mua, bán, giới thiệu, đầu tư BĐS. Bạn sẽ được hưởng quyền lợi cao không ngờ tới mà hệ thống mang đến cho bạn." %}</h6></div>
+   {% endcomment %}
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5>
+                                <i class="fas fa-user-plus"></i> {% trans "ĐĂNG KÝ GIA NHẬP THẾ GIỚI NHÀ PHỐ" %}</h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="{% url 'register' %}" method="POST" enctype='multipart/form-data'>
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="first_name">{% trans "Họ đệm" %}</label>
+                                    <input class="form-control" required type="text" name="first_name"
+                                            {% if reg_user.first_name %} value="{{ reg_user.first_name }}"{% endif %}
+                                           placeholder="Nhập họ tên đệm"/>
+                                    {% if form.firstname.errors %}
+                                        <span style="color: red; font-size: 12px">{{ form.first_name.errors.as_text }}</span>{% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="last_name">{% trans "Tên" %}</label>
+                                    <input class="form-control" required type="text" name="last_name"
+                                            {% if reg_user.last_name %} value="{{ reg_user.last_name }}"{% endif %}
+                                           placeholder="Nhập tên của bạn"/>
+                                    {% if form.lastname.errors %}
+                                        <span style="color: red; font-size: 12px">{{ form.last_name.errors.as_text }}</span>{% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">{% trans "Tên tài khoản" %}</label>
+                                    <input class="form-control" required type="text" name="username"
+                                            {% if reg_user.username %} value="{{ reg_user.username }}"{% endif %}
+                                           placeholder="Nhập tài khoản đăng nhập"/>
+                                    {% if form.username.errors %}
+                                        <span style="color: red; font-size: 12px">{{ form.username.errors.as_text }}</span>{% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">{% trans "Số điện thoại" %}</label>
+                                    <input class="form-control" required type="text" name="phone"
+                                            {% if reg_user.phone %} value="{{ reg_user.phone }}"{% endif %}
+                                           placeholder="Nhập Số điện thoại"/>
+                                    {% if form.phone.errors %}
+                                        <span style="color: red; font-size: 12px">{{ form.phone.errors.as_text }}</span>{% endif %}
 
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">{% trans "Email" %}</label>
+                                    <input class="form-control" required type="text" name="email"
+                                            {% if reg_user.email %} value="{{ reg_user.email }}"{% endif %}
+                                           placeholder="Nhập thư điện tử"/>
+                                    {% if form.email.errors %}
+                                        <span style="color: red; font-size: 12px">{{ form.email.errors.as_text }}</span>{% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">{% trans "Mật khẩu" %}</label>
+                                    <input class="form-control" required type="password" name="password"
+                                           {% if reg_user.password %}value="{{ reg_user.password }}"{% endif %}
+                                           placeholder="Nhập mật khẩu"/>
+                                    {% if form.password.errors %}
+                                        <span style="color: red; font-size: 12px">{{ form.password.errors.as_text }}</span>{% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="password2">{% trans "Xác nhận mật khẩu" %}</label>
+                                    <input class="form-control" required type="password" name="password2"
+                                           {% if reg_user.password2.value %}value="{{ reg_user.password2 }}"{% endif %}
+                                           placeholder="Nhập lại mật khẩu ở trên"/>
+                                    {% if form.password2.errors %}
+                                        <span style="color: red; font-size: 12px">{{ form.password2.errors.as_text }}</span>{% endif %}
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label" for="is_broker">Tôi muốn làm môi
+                                        giới&nbsp;</label>
+                                    {% if request.user.is_broker == True or reg_user.is_broker == True %}
+                                        <input class="form-control" type="checkbox" name="is_broker" checked>
+                                    {% else %}
+                                        <input class="form-control" type="checkbox" name="is_broker">
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="is_investor">Tôi muốn đầu tư &nbsp;</label>
+                                    {% if request.user.is_investor == True or reg_user.is_investor == True %}
+                                        <input class="form-control" type="checkbox" name="is_broker" checked>
+                                    {% else %}
+                                        <input class="form-control" type="checkbox" name="is_broker">
+                                    {% endif %}
+                                </div>
+
+                                <input type="submit" value="{% trans "Đăng ký tài khoản" %}"
+                                       class="btn btn-secondary btn-block">
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <label for="email">{% trans "Email" %}</label>
-                    <input class="form-control" required type="text" name="email" {% if reg_user.email %} value="{{ reg_user.email }}"{% endif %} placeholder="Nhập thư điện tử"/>
-                  {% if form.email.errors %}<span style="color: red; font-size: 12px">{{ form.email.errors.as_text }}</span>{% endif %}
-                </div>
-                <div class="form-group">
-                  <label for="password">{% trans "Mật khẩu" %}</label>
-                   <input class="form-control" required type="password" name="password" {% if reg_user.password %}value="{{ reg_user.password }}"{% endif %} placeholder="Nhập mật khẩu"/>
-                  {% if form.password.errors %}<span style="color: red; font-size: 12px">{{ form.password.errors.as_text }}</span>{% endif %}
-                     </div>
-                <div class="form-group">
-                  <label for="password2">{% trans "Xác nhận mật khẩu" %}</label>
-                  <input class="form-control" required type="password" name="password2" {% if reg_user.password2.value %}value="{{ reg_user.password2 }}"{% endif %} placeholder="Nhập lại mật khẩu ở trên"/>
-                  {% if form.password2.errors %}<span style="color: red; font-size: 12px">{{ form.password2.errors.as_text }}</span>{% endif %}
-                  </div>
-                <input type="submit" value="{% trans "Đăng ký tài khoản" %}" class="btn btn-secondary btn-block">
-              </form>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 {% endblock %}

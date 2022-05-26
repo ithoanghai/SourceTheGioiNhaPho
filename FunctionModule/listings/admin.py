@@ -22,6 +22,11 @@ from fractions import *
 class ContractPhotoAdmin(admin.TabularInline):
     model = ContractImage
     verbose_name = "ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"
+    form = ImageForm
+    formset = ImageFormSet
+
+    max_num = 20
+    extra = 0
 
 
 class ListingPhotoAdmin(admin.TabularInline):
@@ -102,7 +107,7 @@ class ListingAdmin(admin.ModelAdmin):
         disabled_fields = set()  # type: Set[str]
         disabled_fields |= {
             'user',
-            'realtor'
+            'realtor',
         }
         excludes = ('reward_person_mobile', 'extra_data')
         if request.user.is_superuser:
@@ -180,6 +185,7 @@ class ListingHistoryAdmin(admin.ModelAdmin):
     actions = []
     form = ListingAdminForm
     ordering = ('-list_date',)
+    filter_horizontal = ('realtor',)
 
     class Media:
         js = ('admin/js/dropzone.js', 'admin/js/listing.js', 'admin/js/filepond-4.28.2.min.js',
@@ -245,4 +251,4 @@ def import_csv_view(request: HttpRequest) -> JsonResponse:
 
 
 admin.site.register(Listing, ListingAdmin)
-admin.site.register(ListingHistory, ListingHistoryAdmin)
+#admin.site.register(ListingHistory, ListingHistoryAdmin)

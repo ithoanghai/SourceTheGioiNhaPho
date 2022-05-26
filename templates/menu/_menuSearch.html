@@ -21,13 +21,11 @@
                         <i class="zmdi zmdi-close"></i>
                     </button>
                 </div>
-                <ul class="login">
-                  {% include "menu/_subMenuUserProfile.html" %}
-                </ul>
                 <ul>
                     <li class="sub-menu">
                         <a href="{% url 'index' %}">Trang chủ</a>
                     </li>
+                    {% include "menu/_subMenuUserProfile.html" %}
                     {% include "menu/_subMenuBuy.html" %}
                     {% include "menu/_subMenuSell.html" %}
                     {% include "menu/_subMenuBuySellNews.html" %}

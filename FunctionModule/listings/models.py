@@ -46,7 +46,7 @@ class Listing(models.Model):
         #ordering = ["state", "district"]
 
     user = models.ForeignKey(User,  on_delete=models.RESTRICT, blank=True, null=True, verbose_name=_("Người thêm BĐS"))
-    realtor = models.ForeignKey(Realtor, on_delete=models.RESTRICT, verbose_name=_("Chuyên viên quản lý BĐS"))
+    realtor = models.ForeignKey(Realtor, on_delete=models.RESTRICT, blank=True, null=True, verbose_name=_("Chuyên viên quản lý BĐS"))
     transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,
                                         default=TransactionType.SELL, verbose_name=_("Hình thức giao dịch"))
     house_type = models.CharField(max_length=20, choices=HouseType.choices, default=HouseType.TOWN_HOUSE,
@@ -252,6 +252,29 @@ class ListingVideo(models.Model):
     video = EmbedVideoField(blank=True, null=True, verbose_name=_("Link video"))
 
 
+class ContractImage(models.Model):
+    class Meta:
+        verbose_name = "Ảnh chụp hợp đồng, sổ đỏ"
+        verbose_name_plural = "Ảnh hợp đồng, sổ đỏ"
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE,
+                                verbose_name=_("ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"))
+    sort = models.IntegerField(default=0, verbose_name=_("Thứ tự hiện"))
+    description = models.CharField(max_length=255, blank=True, default="", verbose_name=_("Thông tin"))
+    photo = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Link Ảnh"))
+
+    def __str__(self):
+        return f'{self.listing_id}_{self.sort}__{self.photo.url}'
+
+    @property
+    def url(self):
+        return self.photo.url
+
+    def delete(self, using=None, keep_parents=False):
+        if os.path.isfile(self.photo.path):
+            os.remove(self.photo.path)
+        return super().delete(using, keep_parents)
+
+
 class TimestampField(serializers.Field):
     def to_representation(self, value):
         return value.timestamp()
@@ -297,29 +320,6 @@ class ListingIndexSerializer(ListingSerializer):
         model = Listing
         fields = '__all__'
         exclude = ()
-
-
-class ContractImage(models.Model):
-    class Meta:
-        verbose_name = "Ảnh chụp hợp đồng, sổ đỏ"
-        verbose_name_plural = "Ảnh hợp đồng, sổ đỏ"
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE,
-                                verbose_name=_("ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"))
-    sort = models.IntegerField(default=0, verbose_name=_("Thứ tự hiện"))
-    description = models.CharField(max_length=255, blank=True, default="", verbose_name=_("Thông tin"))
-    photo = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Link Ảnh"))
-
-    def __str__(self):
-        return f'{self.listing_id}_{self.sort}__{self.photo.url}'
-
-    @property
-    def url(self):
-        return self.photo.url
-
-    def delete(self, using=None, keep_parents=False):
-        if os.path.isfile(self.photo.path):
-            os.remove(self.photo.path)
-        return super().delete(using, keep_parents)
 
 
 class ListingHistory(models.Model):

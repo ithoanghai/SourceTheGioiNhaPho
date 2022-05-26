@@ -1,0 +1,178 @@
+<div class="mobileFilter" v-bind:class="{show: showFilterType=='mobilePopupFilter'}">
+  <div class="inner">
+    <div class="topFilter">
+      <a href="#" class="btnBack"><i class="zmdi zmdi-arrow-left"></i></a>
+      <div class="mobile-filter-title">BỘ LỌC</div>
+      <a href="#" class="btnReset"><i class="zmdi zmdi-replay"></i> <span>Đặt lại</span></a>
+    </div>
+    <div class="bodyFilter">
+      <div class="row">
+        <div class="col col-ful">
+            <div class="inner">
+              <p>Chọn loại bất động sản</p>
+              <ul>
+                <li v-for="item in houseTypes">
+                  <input v-bind:id="`list-check-item-mobile-${item.type}`" type="checkbox" name="houseTypeFilterMobile"
+                         class="check" :value="item.type"/>
+                  <label v-bind:for="`list-check-item-mobile-${item.type}`">[[item.text]]</label>
+                </li>
+              </ul>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="col col-ful">
+            <div class="inner"><p>Chọn số phòng ngủ</p>
+              <ul>
+                <li>
+                  <input id="list-check-item-1-10" type="checkbox" class="check" value="1"/>
+                  <label for="list-check-item-1-10">1 phòng ngủ</label>
+                </li>
+                <li>
+                  <input id="list-check-item-2-10" type="checkbox" class="check" value="2"/>
+                  <label for="list-check-item-2-10">2 phòng ngủ</label>
+                </li>
+                <li>
+                  <input id="list-check-item-3-10" type="checkbox" class="check" value="3"/>
+                  <label for="list-check-item-3-10">3 phòng ngủ</label>
+                </li>
+                <li>
+                  <input id="list-check-item-4-10" type="checkbox" class="check" value="4"/>
+                  <label for="list-check-item-4-10">4 phòng ngủ</label>
+                </li>
+                <li>
+                  <input id="list-check-item-5-10" type="checkbox" class="check" value="5"/>
+                  <label for="list-check-item-5-10">5 phòng ngủ</label>
+                </li>
+                <li>
+                  <input id="list-check-item-6+-10" type="checkbox" class="check" value="6+"/>
+                  <label for="list-check-item-6+-10">6+ phòng ngủ</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div>
+            <div class="col col-ful">
+              <div class="inner"><p>Chọn số phòng tắm</p>
+                <ul>
+                  <li>
+                    <input id="list-check-item--13" type="radio" value=""/>
+                    <label for="list-check-item--13" class="radio">Tất cả</label>
+                  </li>
+                  <li>
+                    <input id="list-check-item-1-13" type="radio" value="1"/>
+                    <label for="list-check-item-1-13" class="radio">1 phòng tắm</label>
+                  </li>
+                  <li>
+                    <input id="list-check-item-2-13" type="radio" value="2"/>
+                    <label for="list-check-item-2-13" class="radio">2 phòng tắm</label>
+                  </li>
+                  <li>
+                    <input id="list-check-item-3-13" type="radio" value="3"/>
+                    <label for="list-check-item-3-13" class="radio">3 phòng tắm</label>
+                  </li>
+                  <li>
+                    <input id="list-check-item-4-13" type="radio" value="4"/>
+                    <label for="list-check-item-4-13" class="radio">4 phòng tắm</label>
+                  </li>
+                  <li>
+                    <input id="list-check-item-5+-13" type="radio" value="5+"/>
+                    <label for="list-check-item-5+-13" class="radio">5+ phòng tắm</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div>
+            <div class="col col-ful">
+              <div class="inner"><p>Chọn hướng</p>
+                <ul>
+                  <li>
+                    <input id="list-check-item-1-14" type="checkbox" class="check" value="1"/>
+                    <label for="list-check-item-1-14">Đông</label>
+                  </li>
+                  <li>
+                    <input id="list-check-item-2-14" type="checkbox" class="check" value="2"/>
+                    <label for="list-check-item-2-14">Tây</label>
+                  </li>
+                  <li>
+                    <input id="list-check-item-3-14" type="checkbox" class="check" value="3"/>
+                    <label for="list-check-item-3-14">Nam</label>
+                  </li>
+                  <li>
+                    <input id="list-check-item-4-14" type="checkbox" class="check" value="4"/>
+                    <label for="list-check-item-4-14">Bắc</label>
+                  </li>
+                  <li>
+                    <input id="list-check-item-5-14" type="checkbox" class="check" value="5"/>
+                    <label for="list-check-item-5-14">Đông Nam</label>
+                  </li>
+                  <li>
+                    <input id="list-check-item-7-14" type="checkbox" class="check" value="7"/>
+                    <label for="list-check-item-7-14">Tây Nam</label>
+                  </li>
+                  <li>
+                    <input id="list-check-item-6-14" type="checkbox" class="check" value="6"/>
+                    <label for="list-check-item-6-14">Đông Bắc</label>
+                  </li>
+                  <li>
+                    <input id="list-check-item-8-14" type="checkbox" class="check" value="8"/>
+                    <label for="list-check-item-8-14">Tây Bắc</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="col col-ful">
+            <div class="inner">
+              <p>Chọn trạng thái</p>
+              <ul>
+                <li>
+                  <input id="list-check-item-1-15" type="checkbox" class="check" value="1"/>
+                  <label for="list-check-item-1-15">Đăng thường</label>
+                </li>
+                <li><input id="list-check-item-2-15" type="checkbox" class="check" value="2"/>
+                  <label for="list-check-item-2-15">Rever độc quyền</label>
+                </li>
+                <li>
+                  <input id="list-check-item-3-15" type="checkbox" class="check" value="3"/>
+                  <label for="list-check-item-3-15">Đang GD</label>
+                </li>
+                <li>
+                  <input id="list-check-item-4-15" type="checkbox" class="check" value="4"/>
+                  <label for="list-check-item-4-15">Đã bán/thuê</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-ful">
+          <div class="inner"><p>Chọn loại nội dung</p>
+            <ul>
+              <li>
+                <input id="list-check-item-has-3d-mobile" type="checkbox" class="check"/>
+                <label for="list-check-item-has-3d-mobile">Có 3D</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottomFilter"><a href="#" class="btn-primary btn-red btn-medium">Áp dụng</a></div>
+  </div>
+</div>

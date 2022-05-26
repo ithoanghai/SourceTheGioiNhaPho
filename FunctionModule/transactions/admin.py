@@ -42,4 +42,4 @@ class TransactionHistoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Transaction, TransactionAdmin)
-admin.site.register(TransactionHistory, TransactionHistoryAdmin)
+#admin.site.register(TransactionHistory, TransactionHistoryAdmin)

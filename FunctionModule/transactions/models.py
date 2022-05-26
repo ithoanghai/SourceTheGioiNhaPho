@@ -1,10 +1,8 @@
 from __future__ import unicode_literals
 
-from datetime import datetime
-
 from django.db import models
 from django.utils.translation import gettext as _
-
+from django.utils import timezone
 from FunctionModule.accounts.models import User
 from FunctionModule.customers.models import Customer
 from FunctionModule.listings.choices import HouseType
@@ -57,7 +55,7 @@ class Transaction(models.Model):
     request_price = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name=_("Giá kỳ vọng/Giá chào"))
     message = models.TextField(blank=True, null=True, verbose_name="Thông điệp của khách hàng")
     comment = models.TextField(max_length=100, blank=True, null=True, verbose_name="Mô tả thêm")
-    date = models.DateTimeField(default=datetime.now, blank=True, verbose_name="Thời gian phát sinh giao dịch")
+    date = models.DateTimeField(default=timezone.now, blank=True, verbose_name="Thời gian phát sinh giao dịch")
     status = models.CharField(max_length=25, choices=Status.choices, default=Status.ACTIVE, verbose_name='Trạng thái giao dịch')
     realtor = models.ForeignKey(Realtor, null=True, blank=True, on_delete=models.RESTRICT, verbose_name=_("Chuyên viên quản lý"))
 
@@ -76,7 +74,7 @@ class TransactionHistory(models.Model):
     reason = models.CharField(max_length=25, choices=Reason.choices, default=Reason.FEEDBACK, verbose_name='Lý do giao dịch')
     status = models.CharField(max_length=25, choices=Status.choices, default=Status.ACTIVE, verbose_name='Trạng thái giao dịch')
     comment = models.TextField(max_length=100, blank=True, null=True, verbose_name="Diễn giải thêm")
-    date = models.DateTimeField(default=datetime.now, blank=True, verbose_name="Thời gian phát sinh giao dịch")
+    date = models.DateTimeField(default=timezone.now, blank=True, verbose_name="Thời gian phát sinh giao dịch")
 
     def __str__(self):
         return f'%s - %s' % (self.status, self.comment)

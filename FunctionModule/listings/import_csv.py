@@ -19,6 +19,7 @@ from oauthlib.uri_validate import reserved
 from FunctionModule.accounts.models import User
 from FunctionModule.cadastral.constants import district_data
 from FunctionModule.cadastral.lookups import get_district_name
+from FunctionModule.listings.choices import Position, Workplace, Title
 from FunctionModule.listings.helpers import print_trace, get_house_type_short, get_short_title_from_house_type
 from FunctionModule.listings.models import Listing, Status, TransactionType, HouseType, RoadType, ListingHistory
 from FunctionModule.realtors.models import Realtor
@@ -33,7 +34,7 @@ def read_header(header_row, listing_type):
         header_dict = {
             "tieude": 0,
             "mota": 1,
-            "mota-dauchu": 2,
+            "motadauchu": 2,
             "anh-nha": 3,
             "anh-so": 4,
             "tgian": 5,
@@ -62,7 +63,7 @@ def read_header(header_row, listing_type):
         header_dict = {
             "tieude": 0,
             "mota": 1,
-            "mota-dauchu": 2,
+            "motadauchu": 2,
             "anh-nha": 3,
             "anh-so": 4,
             "dia-chi": 6,
@@ -129,20 +130,21 @@ def handle_import(request, file_path, listing_type):
 
     # realtor scan and reorder
         realtors = Realtor.objects.all()
-        user_dict = {}
+        realtor_dict = {}
         for obj in realtors:
-            if len(obj.user.phone) == 9 or len(obj.user.phone) == 10:
-                user_dict[obj.user.phone] = obj
+            fone = obj.phone1
+            if len(fone) == 9 or (len(fone) == 10 and fone[0] == '0'):
+                if len(fone) == 9:
+                    fone = f'0{fone}'
+                realtor_dict[fone] = obj
             else:
                 queryset_list = Listing.objects.filter(realtor=obj)
                 usr_list = User.objects.filter(last_name=obj.user.last_name)
-                fone = obj.user.phone
                 for usr in usr_list:
                     if len(usr.phone) == 10:
                         fone = usr.phone
                 for listing in queryset_list:
-                    if len(fone) == 10 or len(fone) == 9:
-                        usr = User.objects.get(phone=fone)
+                    if (len(fone) == 10 and fone[0] == '0') or len(fone) == 9:
                         rel = Realtor.objects.filter(user__phone=fone)
                         listing.realtor = rel
                         listing.save()
@@ -160,12 +162,6 @@ def handle_import(request, file_path, listing_type):
         limit = 1000
         listing_obj = {}
         api_key = getattr(settings, 'GEOEARTH_API_KEY', '')
-        if listing_count>0:
-         last_id = Listing.objects.latest('id').id
-        else:
-          last_id = 0
-
-    #realtor scan and reorder
         if listing_count > limit:
             cur = 0
             while cur < listing_count:
@@ -215,8 +211,7 @@ def handle_import(request, file_path, listing_type):
                 cao_tang = "ct"
                 tap_the = "tập thể"
                 du_an = "dự án"
-                name = row[header_dict['dau-chu']]
-                realtor = Realtor.objects.filter(pk=1).first()
+                extra_data = ""
 
                 #read state, district information
                 try:
@@ -342,13 +337,34 @@ def handle_import(request, file_path, listing_type):
                     logger.info(f"error status {status}")
                     pass
 
+                #phân tích chức vụ, tên đầu chủ
+                dau_chu = row[header_dict['dau-chu']]
+                try:
+                    dau_chu_chu_thuong = dau_chu.lower()
+                    machucvu = dau_chu_chu_thuong.split(' ')[0]
+                    position = Position.EXPERT_HOME
+                    if "đầu chủ" in dau_chu_chu_thuong or machucvu == 'đc':
+                        position = Position.EXPERT_HOME
+                    if "bá tước" in dau_chu_chu_thuong or machucvu == 'bt':
+                        position = Position.REGIONAL_DIRECTOR
+                    if "trưởng phòng" in dau_chu_chu_thuong or machucvu == 'tp':
+                        position = Position.MANAGER
+                except ValueError:
+                    continue
+
                 #read đơn vị
                 don_vi = row[header_dict['don-vi']]
                 try:
-                    if don_vi is None:
-                        don_vi = "Thiên Khôi"
+                    workplace = Workplace.TGNP
+                    nguon = "Thế giới Nhà phố"
+                    if don_vi is None or don_vi == "":
+                        workplace = Workplace.THIENKHOI
+                        nguon = "Thiên khôi"
+                    else:
+                        workplace = Workplace.NHAPHO
+                        nguon = "Nhà phố"
                 except ValueError:
-                    don_vi = "Thiên Khôi"
+                    continue
 
                 #read nguồn & hoa hồng
                 try:
@@ -358,7 +374,7 @@ def handle_import(request, file_path, listing_type):
                         extra_add = f' Nguồn {nguon}, hoa hồng {hoa_hong}.'
                     else:
                         hoa_hong = ''
-                        extra_add = f' Nguồn nhà phố, hoa hồng 3%, xác minh lại với đầu chủ {name}.'
+                        extra_add = f' Nguồn {nguon}, hoa hồng 3%, xác minh lại với đầu chủ {dau_chu}.'
                     num_reward = 100
                     if (not (hoa_hong.split(' ')[0] and hoa_hong.split(' ')[0].strip())):
                         num_reward = 100
@@ -370,122 +386,56 @@ def handle_import(request, file_path, listing_type):
                     else:
                         bonus_rate = 3
                 except ValueError:
-                    extra_add = f' Nguồn nhà phố, hoa hồng 3%, xác minh lại với đầu chủ {name}.'
+                    extra_add = f'Nguồn TGNP, hoa hồng 3%, xác minh lại với đầu chủ {dau_chu}.'
 
-                #Read information about specialist phone number
-                phone = row[header_dict['sdt']]
+                #Read information about specialist phone number. Add realtor from phone list
+                phone = row[header_dict['sdt']].strip()
+                realtor = Realtor.objects.filter(pk=1).first()
                 try:
-                    phone = phone.split(' ')[0]
-                    phone = phone.split('-')[0]
+                    phones = phone.split(' ')
+                    if len(phones) > 1 and (phones[1] == 9 or phones[1] == 10):
+                        phone2 = phones[1]
+                    else:
+                        phone2 = ""
+                    phone = phones[0]
+                    if '-' in phone:
+                        phone = phone.split('-')[0]
+                        if (phones[1] == 9 or phones[1] == 10):
+                            phone2 = phone[1]
+
                     if not phone.isalnum():
-                        admin_realtor = Realtor.objects.filter(pk=1)
-                        user_dict[phone] = admin_realtor.first()
+                        realtor_dict[phone] = Realtor.objects.filter(pk=1).first()
                         logger.info(f"Phone invalid. Continue in line {line_count}")
                         continue
-                    else:
+                    elif len(phone) == 9 or (len(phone) == 10 and phone[0] == '0'):
                         # update, delete user, realtor
                         tmp_phone = phone
                         if len(phone) == 9:
                             phone = f'0{phone}'
-                        extra_data = f'Liên hệ với {name}, {phone}, {don_vi} để giao dịch.\n{extra_add}'
-                        if phone not in user_dict and len(phone) == 10:
-                            if not phone:
-                                admin_realtor = Realtor.objects.get(pk=1)
-                                user_dict[phone] = admin_realtor
-                                print(f"user_dict[phone]: {admin_realtor}")
-                            else:
-                                query = Q(phone=phone) | Q(phone=tmp_phone) | Q(last_name=name)
-                                querylist_usr = User.objects.filter(query)
-                                email = f'{phone}@gmail.com'
-                                if querylist_usr.exists():
-                                    usr = querylist_usr.first()
-                                    usr.username = phone
-                                    usr.last_name = name
-                                    if usr.phone == phone:
-                                        extra_phone = {phone}
-                                    else:
-                                        extra_phone = f'{usr.phone} hoặc {phone}'
-                                    usr.phone = phone
-                                    usr.bio = f'{name}, {extra_phone}, {don_vi}.'
-                                    usr.save()
-                                    query = Q(user__phone=phone) | Q(user__phone=tmp_phone) | Q(user__last_name=name)
-                                    user_dict[phone] = Realtor.objects.filter(query).first()
-                                    if user_dict[phone] is None:
-                                        new_realtor = Realtor.objects.create(user=usr)
-                                        user_dict[phone] = new_realtor
-                                    extra_data = f'Liên hệ với {name}, {extra_phone}, {don_vi} để giao dịch.\n' + extra_add
-                                    print(f"update user: {usr}")
-                                else:
-                                    new_user = User.objects.create_user(username=phone, password=default_password,
-                                                                        phone=phone, email=email, last_name=name, bio=bio)
-                                    new_user.save()
-                                    new_realtor = Realtor.objects.create(user=new_user)
-                                    user_dict[phone] = new_realtor
-                                    print(f"new_user: {new_user}")
-                            realtor = user_dict[phone]
-                        elif user_dict.get(phone) and len(phone) == 10:
-                            query = Q(phone=phone) | Q(phone=tmp_phone)
-                            usrs = User.objects.filter(query)
-                            email = f'{phone}@gmail.com'
-                            bio = f'{name}, {phone}, {don_vi}.'
-                            for usr in usrs:
-                                if usr.phone != tmp_phone:
-                                    usr.username = phone
-                                    usr.phone = phone
-                                    usr.last_name = name
-                                    usr.email = email
-                                    usr.bio = bio
-                                    usr.save()
-                                    #print(f"cập nhật user: {usr}")
-                            if len(phone) == 10 and len(tmp_phone) == 10:
-                                dt = phone[1:]
-                                if user_dict.get(dt) is not None:
-                                    realtor_tmp = user_dict[dt]
-                                    queryset_list = Listing.objects.filter(realtor=realtor_tmp).order_by('-list_date')
-                                    for listing in queryset_list:
-                                        listing.realtor = user_dict[phone]
-                                        listing.save()
-                                    if realtor_tmp is not None:
-                                        realtor_list = Realtor.objects.filter(user__phone__contains=dt)
-                                        if realtor_list.count() > 1:
-                                            realtor_tmp.delete()
-                                            usr_list = User.objects.filter(phone=dt)
-                                            for usr in usr_list:
-                                                if len(usr.phone) == 9:
-                                                    usr.delete()
-                                            user_dict[dt].clean()
-                                            print(f"Xóa realtor và user rác kho K1: {realtor_tmp}, phone {dt}")
+                        query = Q(phone=phone) | Q(phone=tmp_phone)
+                        user_tmp = User.objects.filter(query).first()
+                        email = f'{phone}@gmail.com'
+                        story = f'{dau_chu}, {phone}, {don_vi}.'
 
-                            realtor = user_dict[phone]
-                        elif len(phone) != 10:
-                            if user_dict.get(phone):
-                                realtor_tmp = user_dict[phone]
-                                queryset_list = Listing.objects.filter(realtor=realtor_tmp).order_by('-list_date')
-                                usr_list = User.objects.filter(phone__contains=phone)
-                                for usr in usr_list:
-                                    if len(usr.phone) == 10:
-                                        for listing in queryset_list:
-                                            listing.realtor = user_dict[usr.phone]
-                                            realtor = user_dict[usr.phone]
-                                            listing.save()
-                                if realtor_tmp is not None:
-                                    realtor_tmp.delete()
-                                    user_dict[phone].clean()
-                                    usr = User.objects.get(phone=phone)
-                                    usr.delete()
-                                    print(f"Xóa realtor và user rác : {realtor_tmp}, phone {phone}")
-                                if realtor is None:
-                                    realtor = Realtor.objects.get(pk=1)
-                            elif phone not in user_dict:
-                                usr_list = User.objects.filter(last_name=name)
-                                for usr in usr_list:
-                                    if len(usr.phone) == 10:
-                                        realtor = usr.realtor
+                        if phone not in realtor_dict:
+                            new_realtor = Realtor.objects.create(user=user_tmp, name=dau_chu,phone1=phone,phone2=phone2,email=email,story=story,position=position,title=Title.MASTER,level=5,workplace=workplace,department=don_vi)
+                            realtor_dict[phone] = new_realtor
+                            print(f"tạo realtor: {new_realtor} chưa có")
+                        elif user_tmp != realtor_dict[phone].user:
+                            realtor = realtor_dict[phone]
+                            realtor.user = user_tmp
+                            realtor.save()
+                            print(f"cập nhật user: {usr} cho realtor {realtor}")
+
+                        query = Q(phone1=phone) | Q(phone2=phone)
+                        rl = Realtor.objects.filter(query).first()
+                        if rl.is_cooperate:
+                            realtor = rl
                 except ValueError:
                     logger.info(f"error phone {phone}")
 
                 # get address and street
-                addr = row[header_dict['dia-chi']].replace('.', '/').replace(' , ', ', ').replace(',', '/').replace(
+                addr = row[header_dict['dia-chi']].strip().replace('.', '/').replace(' , ', ', ').replace(',', '/').replace(
                     'Số ', '').replace(' ', ' ')
                 street = row[header_dict['pho']]
                 try:
@@ -585,7 +535,7 @@ def handle_import(request, file_path, listing_type):
                 # Phân tích cú pháp thông số để lấy diện tích, số tầng, mặt tiền từ file nguồn nhà phố
                 if listing_type == "K1":
                     encoded_num = row[header_dict['thong-so']].replace('  ', ' ')
-                    splitter = encoded_num.split(' ')
+                    splitter = encoded_num.strip().split(' ')
                     floor = 0
                     try:
                         floor_code = splitter[1]
@@ -610,34 +560,50 @@ def handle_import(request, file_path, listing_type):
                     except ValueError:
                         logger.info(f"Cannot decode encoded_num {encoded_num}. Continue in line {line_count}")
 
-                title = f'Bán {get_short_title_from_house_type(house_type)} {title_hot} {street} {get_district_name(district_code)} '
-                if area >= 30:
-                    title += f'{area:.0f}m '
-                if house_type == HouseType.APARTMENT or house_type == HouseType.CONDO_TEL or house_type == HouseType.SERVICE_APARTMENT or house_type == HouseType.PENT_HOUSE:
-                    title += f'tầng {floor:.0f} giá '
-                elif int(floor) > 3:
-                    title += f'{floor:.0f} tầng'
-                if price % 1 == 0:
-                    title += f'{price:.0f} tỷ'
-                else:
-                    title += f'{price:.1f} tỷ'
+                #Lấy tiêu đề nhập từ file
+                title = row[header_dict['tieude']]
+                if title is None or title == "":
+                    title = f'Bán {get_short_title_from_house_type(house_type)} {title_hot} {street} {get_district_name(district_code)} '
+                    if area >= 30:
+                        title += f'{area:.0f}m '
+                    if house_type == HouseType.APARTMENT or house_type == HouseType.CONDO_TEL or house_type == HouseType.SERVICE_APARTMENT or house_type == HouseType.PENT_HOUSE:
+                        title += f'tầng {floor:.0f} giá '
+                    elif int(floor) > 3:
+                        title += f'{floor:.0f} tầng '
+                    if price % 1 == 0:
+                        title += f'{price:.0f} tỷ'
+                    else:
+                        title += f'{price:.1f} tỷ'
                 title = title.upper().replace('  ', ' ')
+
+                # Lấy mô tả bđs đầu chủ nhập từ file
+                extra_data = row[header_dict['motadauchu']]
+                if extra_data is None or extra_data == "":
+                    extra_data = f'Liên hệ với {dau_chu}, {phone}, {don_vi} để giao dịch.\n{extra_add}'
+
+
                 starter = get_house_type_short(house_type)
                 if width is not None:
-                    code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{width}{price}'
+                    code = f'{starter}{created.strftime("%y%m")}{listing_type}{int(area)}{int(floor)}{width}{price}'
                 else:
-                    code = f'{starter}{created.strftime("%y%m")}{listing_type}{district_code}{int(area)}{int(floor)}{price}'
+                    code = f'{starter}{created.strftime("%y%m")}{listing_type}{int(area)}{int(floor)}{price}'
 
-                new_listing = Listing(user=user, realtor=user.realtor, code=code, status=status, title=title,
+                new_listing = Listing(user=user, realtor=realtor, code=code, status=status, title=title,
                                       street=street, address=full_addr, area=area, transaction_type=trans_type,
                                       house_type=house_type, road_type=road_type, list_date=created,
-                                      direction=direction, price=price, reward_person=realtor.user.name, priority=priority,
-                                      reward_person_mobile=realtor.user.phone, reward=reward, bonus_rate=bonus_rate,
+                                      direction=direction, price=price, priority=priority,
+                                      reward_person_mobile=phone, reward=reward, bonus_rate=bonus_rate,
                                       extra_data=extra_data, state=state_code, district=district_code, is_published=is_published,
                                       width=width, floors=floor, average_price=price_per_area, length=None, lane_width=None,
                                       location=listing_loc)
-                new_listing.description = render_to_string('listings/defaultDescription.html',
+
+                # Lấy mô tả nội dung bđs nhập từ file
+                description = row[header_dict['mota']]
+                if description is None or description == "":
+                    new_listing.description = render_to_string('listings/defaultDescription.html',
                                                context={"listing": new_listing, "desc": desc}).replace('  ', ' ')
+                else:
+                    new_listing.description = description
 
                 query = (Q(address__contains=so_nha[0]) & Q(area=area) & Q(floors=floor) & Q(width=width) & Q(price=price))| \
                         (Q(address__contains=so_nha[0]) & Q(area=area) & Q(street=street) & Q(state=state_code) & Q(district=district_code))

@@ -65,7 +65,7 @@ class ImageForm(ModelForm):
     class Meta:
         model = ListingImage
         fields = ['photo', ]
-        # fields = '__all__'
+        #fields = '__all__'
 
 
 TOTAL_FORM_COUNT = 'TOTAL_FORMS'
