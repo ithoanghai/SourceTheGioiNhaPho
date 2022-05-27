@@ -44,36 +44,38 @@ def get_short_title_from_position_type(position_type: str):
     elif position_type == Position.GENERAL_MANAGER:
         return 'Tổng giám đốc'
     elif position_type == Position.MANAGING_DIRECTOR:
-        return 'Giám đốc điều hành'
-    elif position_type == Position.BUSINESS_MANAGER:
-        return 'Giám đốc kinh doanh'
+        return 'Phó TGĐ/Giám đốc khối'
     elif position_type == Position.REGIONAL_DIRECTOR:
-        return 'Giám đốc khu vực'
-    elif position_type == Position.TECHNICAL_DIRECTOR:
-        return 'Giám đốc kỹ thuật'
+        return 'Giám đốc khu vực/Bá tước'
     elif position_type == Position.MANAGER:
-        return 'Quản lý/Trưởng phòng'
+        return 'Giám đốc chuyên môn/Trưởng phòng'
+    elif position_type == Position.LEADER:
+        return 'Trưởng bộ phận/Trưởng nhóm'
     elif position_type == Position.ASSISTANT:
         return 'Trợ lý'
     elif position_type == Position.ACCOUNTANT:
         return 'Kế toán'
     elif position_type == Position.COORDINATOR:
         return 'Điều phối viên'
+    elif position_type == Position.EXPERT_HOME:
+        return 'Chuyên viên Đầu chủ'
     elif position_type == Position.EXPERT:
         return 'Chuyên viên'
     elif position_type == Position.INTERNS:
         return 'Học viên'
-    elif position_type == Position.USER:
-        return 'Người dùng thông thường'
 
 
 def get_short_title_type(title_type: str):
-    if title_type == Title.PROFESSOR:
+    if title_type == Title.SUPERMAN:
+        return 'Siêu nhân'
+    elif title_type == Title.PROFESSOR:
         return 'Giáo sư'
     elif title_type == Title.EXPERT:
         return 'Chuyên gia'
     elif title_type == Title.MASTER:
         return 'Cao thủ'
+    elif title_type == Title.COMPETENTLY:
+        return 'Thạo nghề'
     elif title_type == Title.PROBATIONARY:
         return 'Tập sự'
     elif title_type == Title.ROOKIE:
