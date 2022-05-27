@@ -10,9 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='listing',
-            name='is_advertising',
-            field=models.BooleanField(default=False, verbose_name='LÀ TIN RAO VẶT'),
-        ),
+
     ]

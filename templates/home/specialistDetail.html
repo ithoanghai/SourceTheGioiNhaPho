@@ -41,17 +41,22 @@
                             <p>{{ realtor.position|get_position_type }}</p>
                         </div>
                         <table>
+                        {% if realtor.birthyear %}
                             <tr>
                                 <td>Ngày sinh:</td>
                                 <td>{{ realtor.birthyear }}</td>
                             </tr>
+                        {% endif %}
+                        {% if realtor.email %}
                             <tr>
                                 <td>Email:</td>
-                                <td><a href="mailto: {{ realtor.user.email }}"
-                                       title="{{ realtor.user.email }}"><span class=""
-                                                                              data-cfemail="">{{ realtor.user.email }}</span></a>
+                                <td><a href="mailto: {{ realtor.email }}"
+                                       title="{{ realtor.email }}"><span class=""
+                                                                              data-cfemail="">{{ realtor.email }}</span></a>
                                 </td>
                             </tr>
+                        {% endif %}
+                        {% if realtor.address %}
                             <tr>
                                 <td>Địa chỉ:</td>
                                 <td>{{ realtor.address }}</td>
@@ -60,7 +65,7 @@
                                 <td>Điện thoại</td>
                                 <td>{{ realtor.phone1 }} {% if realtor.phone2%}- {{ realtor.phone2 }}{% endif %}</td>
                             </tr>
-
+                        {% endif %}
                         </table>
                         <ul class="agent-social">
                             {% if realtor.facebook %}
@@ -112,7 +117,7 @@
                                 <td>Chuyên môn BĐS cấp {{ realtor.level }}</td>
                             </tr>
                             <tr>
-                                <td>Địa bàn:</td>
+                                <td>Địa bàn chính:</td>
                                 <td>
                                     <a href="{% url 'listing_search' %}?keywords='{{ realtor.work_area }}'"
                                        title="Các BĐS tại {{ realtor.work_area }}">{{ realtor.work_area }}</a>

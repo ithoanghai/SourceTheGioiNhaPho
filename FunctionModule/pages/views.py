@@ -29,10 +29,10 @@ def home_view(request):
                              .filter(is_published=True, transaction_type=TransactionType.SELL)[:60])
 
     listings_for_rent = (Listing.objects
-                             .order_by('-list_date')
+                             .order_by('priority','-list_date')
                              .filter(is_published=True, transaction_type=TransactionType.FOR_RENT)[:30])
     listings_project = (Listing.objects
-                            .order_by('-list_date')
+                            .order_by('priority','-list_date')
                             .filter(is_published=True, transaction_type=TransactionType.PROJECT)[:15])
     listing_by_group = (Listing.objects
               .values('district')

@@ -30,7 +30,8 @@ def index(request):
     paged_listings = paginator.get_page(page)
 
     context = {
-        'listings': paged_listings
+        'listings': paged_listings,
+        'sortOption': 'priority'
     }
 
     return render(request, 'listings/search.html', context)

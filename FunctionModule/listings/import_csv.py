@@ -154,9 +154,6 @@ def handle_import(request, file_path, listing_type):
                         print(f"xóa listing rác do không có realtor phù hợp: {listing}")
 
                 obj.delete()
-                usr = User.objects.get(phone=obj.user.phone)
-                usr.delete()
-                print(f"Xóa realtor và rác: {obj}, có phone {obj.user.phone}")
 
         listing_count = Listing.objects.count()
         limit = 1000
@@ -418,7 +415,7 @@ def handle_import(request, file_path, listing_type):
                         story = f'{dau_chu}, {phone}, {don_vi}.'
 
                         if phone not in realtor_dict:
-                            new_realtor = Realtor.objects.create(user=user_tmp, name=dau_chu,phone1=phone,phone2=phone2,email=email,story=story,position=position,title=Title.MASTER,level=5,workplace=workplace,department=don_vi)
+                            new_realtor = Realtor.objects.create(user=user_tmp, name=dau_chu,phone1=phone,phone2=phone2,email=email,story=story,position=position,title=Title.MASTER,level=5,workplace=workplace,department=don_vi,hire_date=datetime.datetime.now(tz=timezone))
                             realtor_dict[phone] = new_realtor
                             print(f"tạo realtor: {new_realtor} chưa có")
                         elif user_tmp != realtor_dict[phone].user:

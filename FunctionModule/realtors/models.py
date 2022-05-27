@@ -42,7 +42,7 @@ class Realtor(models.Model):
     countryside = models.CharField(_('Quê quán'), blank=True, max_length=150)
     phone1 = models.CharField(_('Điện thoại chính'), max_length=20, db_index=True, unique=True, validators=[phone_regex],
                              error_messages={'unique': _("Số điện thoại chính này đã được sử dụng trên hệ thống.")})
-    phone2 = models.CharField(_('Điện thoại phụ'), max_length=20, db_index=True, blank=True, validators=[phone_regex],
+    phone2 = models.CharField(_('Điện thoại phụ'), max_length=20, db_index=True, blank=True, null=True, validators=[phone_regex],
                              error_messages={'unique': _("Số điện thoại phụ này đã được sử dụng trên hệ thống.")})
     email = models.EmailField(_('Email'), blank=True, null=True)
     address = models.CharField(_('Nơi ở hiện tại'), blank=True, max_length=255)
