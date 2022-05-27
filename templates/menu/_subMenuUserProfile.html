@@ -1,13 +1,15 @@
 {% load static i18n %}
-<ul class="login">
+
 <li class="sub-menu">
 
     {% if user.is_authenticated %}
         <a style="{% comment %} line-height: 1em;{% endcomment %} color: orange">
-                     Chào bạn {{ user.name }}<i class="zmdi zmdi-chevron-down"> </i></a>
+                     Chào bạn {{ user.name }}&nbsp;<i class="zmdi zmdi-chevron-down"> </i></a>
     {% else %}
+        <div class="login">
         <a href="#login" title="Đăng nhập / Đăng ký" class="btn-login"
                  style="color: yellowgreen"><i class="fa fa-user-lock"></i> {% translate 'Đăng nhập/ Đăng ký' %}</a>
+        </div>
     {% endif %}
 
     {% if user.is_authenticated %}
@@ -108,4 +110,3 @@
     {% endif %}
 
 </li>
-</ul>

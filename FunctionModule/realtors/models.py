@@ -38,7 +38,7 @@ class Realtor(models.Model):
     user = models.OneToOneField(User, on_delete=models.RESTRICT, verbose_name=_("Tài khoản đăng nhập"), blank=True, null=True)
     name = models.CharField(max_length=50, null=True, verbose_name=_("Họ và tên"))
     position = models.CharField(max_length=20, choices=Position.choices, verbose_name=_("Chức danh"),default=Position.EXPERT)
-    birthyear = models.CharField(_('Năm sinh'), max_length=4, blank=True, null=True, choices=year_dropdown, default=timezone.now().year - 15)
+    birthyear = models.IntegerField(_('Năm sinh'), blank=True, null=True, choices=year_dropdown, default=timezone.now().year - 15)
     countryside = models.CharField(_('Quê quán'), blank=True, max_length=150)
     phone1 = models.CharField(_('Điện thoại chính'), max_length=20, db_index=True, unique=True, validators=[phone_regex],
                              error_messages={'unique': _("Số điện thoại chính này đã được sử dụng trên hệ thống.")})
