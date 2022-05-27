@@ -3,90 +3,98 @@
 {% load static load_static listing humanize i18n %}
 
 {% block head %}
-  {{ block.super }}
-  <link rel="canonical" href="{% url 'specialist' %}"/>
-  <link rel="stylesheet" href="{% static 'css/browse-agent.css' %}"/>
+    {{ block.super }}
+    <link rel="canonical" href="{% url 'specialist' %}"/>
+    <link rel="stylesheet" href="{% static 'css/browse-agent.css' %}"/>
 {% endblock %}
 
 {% block content %}
 
-  <div id="wrap">
-    <!-- Search menu -->
-    {% include 'menu/_menuSearch.html' %}
+    <div id="wrap">
+        <!-- Search menu -->
+        {% include 'menu/_menuSearch.html' %}
 
-    <!-- Header -->
-    {% include 'menu/_secondMenu.html' %}
+        <!-- Header -->
+        {% include 'menu/_secondMenu.html' %}
 
-    <!-- Main Content  -->
-    <div class="agent-home-app">
-      <div class="banner-agents-top">
-        <div class="banner-agents-inner">
-          <div class="banner-agents-contain">
-            <h1 class="font-tiempos">Chuyên viên môi giới bất động sản</h1>
-            <p>Chuyên viên của TGNP mang đến sự khác biệt so với thị trường chung, đó là sự tin cậy, tận
-              tâm, được đào tạo kỹ càng, và am hiểu thị trường.</p>
-            <div class="banner-agents-form-search">
-              <agent-home-search-box :auto-focus="false"/>
-            </div>
-          </div>
-        </div>
-      </div>
-      <section class="block-agents">
-        <div class="agents-container col-12">
-          <div class="agents-inner">
-            <div class="col-12 agents__grid">
-                {% for realtor in specialists %}
-                    <div class="agents-listing">
-                        <div class="agents-image">
-                            <a href="{% url "specialistDetail" realtor.id %}">
-                                 {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' %}
-                                    <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                                {% else %}
-                                    <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                                {% endif %}
-                            <button data-action="favorite" data-id="{{ realtor.id }}" data-alias="{{ realtor.name }}"
-                                data-type="sale_property" data-favorited="false"  class="btn-favorite zmdi zmdi-favorite-outline"></button>
-                          </a>
+        <!-- Main Content  -->
+        <div class="agent-home-app">
+            <div class="banner-agents-top">
+                <div class="banner-agents-inner">
+                    <div class="banner-agents-contain">
+                        <h1 class="font-tiempos">Chuyên viên môi giới bất động sản</h1>
+                        <p>Chuyên viên của TGNP mang đến sự khác biệt so với thị trường chung, đó là sự tin cậy, tận
+                            tâm, được đào tạo kỹ càng, và am hiểu thị trường.</p>
+                        <div class="banner-agents-form-search">
+                            <agent-home-search-box :auto-focus="false"/>
                         </div>
-                        <div class="agents-content">
-                  <a href="{% url "specialistDetail" realtor.id %}"><h3 class="font-tiempos">{{ realtor.user.name }}</h3></a>
-                  <p class="team-name-sale">{{ realtor.position|get_position_type}}</p>
-                  <div class="agents-email">
-                    <a href="mailto:{{ realtor.user.email }}"><span  class="__cf_email__" data-cfemail="">[email&#160;protected]</span></a>
-                  </div>
+                    </div>
                 </div>
-                   </div>
-                {% endfor %}
-              <component v-for="html in moreAgentHTML" :is="html"></component>
             </div>
-            <span class="view-more-agent">  <div v-show="loadingMoreAgent" v-cloak class="loading-gif"></div> </span>
-          </div>
-        </div>
-      </section>
-      <section class="agents-contact">
-        <div class="agents-container col-12">
-          <div class="agents-contact-content">
-            <h2>Gặp ngay chuyên viên tư vấn</h2>
-            <p class="pb-20">Chuyên viên TGNP luôn sẵn sàn lắng nghe và hỗ trợ bạn mọi lúc</p>
-              <div class="btn-contact">
-                <a class="agent-contact-modal btn-primary-agent btn-red s-btn-red mgb-0" data-target="contact-agent">Liên hệ tư vấn</a>
-              </div>
-          </div>
-        </div>
-      </section>
+            <section class="block-agents">
+                <div class="agents-container col-12">
+                    <div class="agents-inner">
+                        <div class="col-12 agents__grid">
+                            {% for realtor in specialists %}
+                                <div class="agents-listing">
+                                    <div class="agents-image">
+                                        <a href="{% url "specialistDetail" realtor.id %}">
+                                            {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' %}
+                                                <img src="/media/{{ realtor.user.avatar }}"
+                                                     alt="Chuyên viên Thế giới Nhà Phố"/>
+                                            {% else %}
+                                                <img src="{% static 'img/logo tgnp brown.jpg' %}"
+                                                     alt="Chuyên viên Thế giới Nhà Phố"/>
+                                            {% endif %}
+                                            <button data-action="favorite" data-id="{{ realtor.id }}"
+                                                    data-alias="{{ realtor.name }}"
+                                                    data-type="sale_property" data-favorited="false"
+                                                    class="btn-favorite zmdi zmdi-favorite-outline"></button>
+                                        </a>
+                                    </div>
+                                    <div class="agents-content">
+                                        <a href="{% url "specialistDetail" realtor.id %}"><h3
+                                                class="font-tiempos">{{ realtor.name }}</h3></a>
+                                        <p class="team-name-sale">{{ realtor.position|get_position_type }}</p>
+                                        <div class="agents-email">
+                                            <a href="mailto:{{ realtor.user.email }}"><span class="__cf_email__"
+                                                                                            data-cfemail="">[email&#160;protected]</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <component v-for="html in moreAgentHTML" :is="html"></component>
+                        </div>
+                        <span class="view-more-agent">  <div v-show="loadingMoreAgent" v-cloak
+                                                             class="loading-gif"></div> </span>
+                    </div>
+                </div>
+            </section>
+            <section class="agents-contact">
+                <div class="agents-container col-12">
+                    <div class="agents-contact-content">
+                        <h2>Gặp ngay chuyên viên tư vấn</h2>
+                        <p class="pb-20">Chuyên viên TGNP luôn sẵn sàn lắng nghe và hỗ trợ bạn mọi lúc</p>
+                        <div class="btn-contact">
+                            <a class="agent-contact-modal btn-primary-agent btn-red s-btn-red mgb-0"
+                               data-target="contact-agent">Liên hệ tư vấn</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-      <dialogs-wrapper wrapper-name="default"/>
+            <dialogs-wrapper wrapper-name="default"/>
+        </div>
+
+        <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
     </div>
 
-      <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
-  </div>
-
-  <!-- Footer content below-->
+    <!-- Footer content below-->
 {% endblock %}
 
 {% block scripts %}
-   <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
-{% comment %}  <script>
+    <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
+    {% comment %}  <script>
       window.AGENT_PREFIX = "[Cần gặp chuyên viên tư vấn]\n";
       window.RHome = {
           searchUrl: "../listings/search?specialist=",

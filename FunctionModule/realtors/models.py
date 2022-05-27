@@ -44,15 +44,14 @@ class Realtor(models.Model):
                              error_messages={'unique': _("Số điện thoại chính này đã được sử dụng trên hệ thống.")})
     phone2 = models.CharField(_('Điện thoại phụ'), max_length=20, db_index=True, blank=True, validators=[phone_regex],
                              error_messages={'unique': _("Số điện thoại phụ này đã được sử dụng trên hệ thống.")})
-    email = models.EmailField(_('Email'), blank=True, null=True, error_messages={
-        'unique': _("Email này đã được sử dụng trên hệ thống.")})
+    email = models.EmailField(_('Email'), blank=True, null=True)
     address = models.CharField(_('Nơi ở hiện tại'), blank=True, max_length=255)
     title = models.CharField(max_length=20, choices=Title.choices, verbose_name=_("Danh hiệu"), default=Title.ROOKIE)
     level = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)], choices=([(i, i) for i in range(1, 10)]), default=1, verbose_name=_("Đẳng cấp chuyên môn"))
     workplace = models.CharField(max_length=50, choices=Workplace.choices, verbose_name=_("Đơn vị"), default=Workplace.TGNP)
     department = models.CharField(max_length=100, verbose_name=_("Bộ phận/Phòng/Ban"), null=True, blank=True)
     work_area = models.CharField(max_length=100, verbose_name=_("Địa bàn khu vực Quận/Huyện hoạt động"), null=True, blank=True)
-    story = models.TextField(_('Tiểu sử hoạt động'), blank=True)
+    story = models.TextField(_('Kinh nghiệm hoạt động'), blank=True)
     # Social Fields
     website = models.CharField(_('Website'), blank=True, max_length=255)
     facebook = models.CharField(_('Facebook'), null=True, max_length=255)

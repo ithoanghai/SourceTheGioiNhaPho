@@ -37,14 +37,13 @@
                     </div>
                     <div class="agent-contact">
                         <div class="agent-name">
-                            <h1>{{ realtor.user.name }}</h1>
+                            <h1>{{ realtor.name }}</h1>
                             <p>{{ realtor.position|get_position_type }}</p>
                         </div>
                         <table>
                             <tr>
                                 <td>Ngày sinh:</td>
-                                <td><a href="tel:{{ realtor.user.dob }}"
-                                       title="{{ realtor.user.dob }}">{{ realtor.user.dob }}</a></td>
+                                <td>{{ realtor.birthyear }}</td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
@@ -55,34 +54,38 @@
                             </tr>
                             <tr>
                                 <td>Địa chỉ:</td>
-                                <td><a href="#" title="{{ realtor.user.address }}">{{ realtor.user.address }}</a></td>
+                                <td>{{ realtor.address }}</td>
+                            </tr>
+                            <tr>
+                                <td>Điện thoại</td>
+                                <td>{{ realtor.phone1 }} {% if realtor.phone2%}- {{ realtor.phone2 }}{% endif %}</td>
                             </tr>
 
                         </table>
                         <ul class="agent-social">
-                            {% if realtor.user.facebook %}
+                            {% if realtor.facebook %}
                                 <li>
-                                    <a href="{{ realtor.user.facebook }}" target="_blank"><i
-                                            class="zmdi zmdi-facebook"></i>{{ realtor.user.facebook }}</a>
+                                    <a href="{{ realtor.facebook }}" target="_blank"><i
+                                            class="zmdi zmdi-facebook"></i>{{ realtor.facebook }}</a>
                                 </li>
                             {% endif %}
-                            {% if realtor.user.website %}
+                            {% if realtor.website %}
                                 <li>
-                                    <a href="{{ realtor.user.website }}" target="_blank"><i
-                                            class="zmdi zmdi-view-web"></i>{{ realtor.user.website }}</a>
+                                    <a href="{{ realtor.website }}" target="_blank"><i
+                                            class="zmdi zmdi-view-web"></i>{{ realtor.website }}</a>
                                 </li>
                             {% endif %}
-                            {% if realtor.user.youtube %}
+                            {% if realtor.youtube %}
                                 <li>
-                                    <a href="{{ realtor.user.youtube }}" target="_blank"><i
-                                            class="zmdi zmdi-youtube"></i>{{ realtor.user.youtube }}</a>
+                                    <a href="{{ realtor.youtube }}" target="_blank"><i
+                                            class="zmdi zmdi-youtube"></i>{{ realtor.youtube }}</a>
                                 </li>
                             {% endif %}
                         </ul>
                         <div class="agent-btn">
-                            <a class="btn-primary-agent btn-red" href="tel:{{ realtor.user.phone }}"
-                               title="{{ realtor.user.phone }}"><i
-                                    class="zmdi zmdi-phone"></i>{{ realtor.user.phone }}</a>
+                            <a class="btn-primary-agent btn-red" href="tel:{{ realtor.phone1 }}"
+                               title="{{ realtor.phone1 }}"><i
+                                    class="zmdi zmdi-phone"></i>{{ realtor.phone1 }}</a>
                             <div class="btn-contact">
                                 <a class="agent-contact-modal btn-primary-agent btn-transparent"
                                    data-target="contact-agent"><i class="zmdi zmdi-email-open"></i>Liên hệ tư vấn</a>
@@ -117,16 +120,25 @@
                             </tr>
                         </table>
                     </div>
+                    {% if realtor.user.bio %}
                     <div class="intro-staff" id="staff">
-                        <h2>Giới thiệu</h2>
+                        <h2>Giới thiệu bản thân</h2>
                         <p class="more-p normal">{{ realtor.user.bio }}</p>
                     </div>
+                    {% endif %}
+                    {% if realtor.story %}
+                    <div class="intro-staff" id="staff">
+                        <h2>Kinh nghiệm hoạt động</h2>
+                        <p class="more-p normal">{{ realtor.story }}</p>
+                    </div>
+                    {% endif %}
                 </div>
             </section>
+        {% if listings %}
             <section class="bg-grey all-project">
                 <div class="agents-container col-12">
                     <div class="row">
-                        <h2 class="pd-t-55 pd-bt-10">Nhà đất bán của {{ realtor.user.name }}</h2>
+                        <h2 class="pd-t-55 pd-bt-10">Nhà đất bán của {{ realtor.name }}</h2>
                         <div class="agents-inner block-project">
                             <div class="col-12">
                                 <div ref="propertyForSaleWrapper">
@@ -159,6 +171,7 @@
                     </div>
                 </div>
             </section>
+        {% endif %}
             {% comment %} <section class="bg-grey all-project">
             <div class="agents-container col-12">
                 <div class="row">
