@@ -62,6 +62,9 @@ class Transaction(models.Model):
     def __str__(self):
         return f'%s:  %s' % (self.trantype, self.message)
 
+    def housetype_verbose(self):
+        return dict(HouseType.choices)[self.house_type]
+
 
 class TransactionHistory(models.Model):
     class Meta:

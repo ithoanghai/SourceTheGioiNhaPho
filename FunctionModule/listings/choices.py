@@ -39,7 +39,7 @@ price_choices = {
 
 class TransactionType(models.TextChoices):
     SELL = 'sell', _("Bán")
-    FOR_RENT = 'for_rent', _("Cho thuê")
+    FOR_RENT = 'rent', _("Cho thuê")
     PROJECT = 'project', _("Dự án")
 
 

@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from FunctionModule.cadastral.lookups import get_all_states, get_all_districts
-from . import Status, TransactionType
+from django.db.models import Q
 from .filters import ListingFilter
 from .serializers import *
 
@@ -23,7 +23,7 @@ class ListingSearchQuery(BaseModel):
 
 
 def index(request):
-    listings = Listing.objects.order_by('-priority','-list_date').filter(is_published=True, is_advertising=False)
+    listings = Listing.objects.order_by('priority','-list_date').filter(is_published=True, is_advertising=False)
 
     paginator = Paginator(listings, 100)
     page = request.GET.get('page')
@@ -39,9 +39,9 @@ def index(request):
 
 def listing(request, listing_id):
     listing_detail = get_object_or_404(Listing, pk=listing_id)
-    listings_neighborhood = (Listing.objects.order_by('-priority','-list_date').filter(is_published=True, is_advertising=False,
+    listings_neighborhood = (Listing.objects.order_by('priority','-list_date').filter(is_published=True, is_advertising=False,
                                                                           state=listing_detail.state)[:10])
-    listings_same = (Listing.objects.order_by('-priority','-list_date').filter(is_published=True, is_advertising=False, house_type=listing_detail.house_type,area=listing_detail.area)[:30])
+    listings_same = (Listing.objects.order_by('priority','-list_date').filter(is_published=True, is_advertising=False, house_type=listing_detail.house_type,area=listing_detail.area)[:30])
 
     context = {
         'listing': listing_detail,
@@ -108,18 +108,19 @@ def post_listing(request):
         return redirect('login')
 
 
-def post_listings(request,typeTran):
-    listings = Listing.objects.order_by('-priority','-list_date').filter(is_published=True, is_advertising=True, transaction_type=typeTran,)
+def my_listing_post(request):
+    if request.user.is_authenticated and request.method == 'GET':
+        listings = Listing.objects.filter(user=request.user).order_by('-list_date')
+        paginator = Paginator(listings, 10)
+        page = request.GET.get('page')
+        paged_listings = paginator.get_page(page)
+        context = {
+            'listings': paged_listings,
+        }
 
-    paginator = Paginator(listings, 100)
-    page = request.GET.get('page')
-    paged_listings = paginator.get_page(page)
-
-    context = {
-        'listings': paged_listings
-    }
-
-    return render(request, 'listings/postListing.html', context)
+        return render(request, 'listings/myListingPosts.html', context)
+    else:
+        return render(request, 'accounts/_profile.html')
 
 
 def my_listing(request):

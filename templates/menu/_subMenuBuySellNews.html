@@ -5,13 +5,12 @@
   </a>
   <ul>
     <li>
-      <a href="{% url 'view_post_listings' 'sell'%}"
-         data-mix-header-click="group: rent, action: select_all_rent">Tin rao đăng Bán</a>
+        <a href="{% url 'listing_search' %}?trans_type=sell&advertising=True&sort=priority">Tin đăng Rao Bán</a>
     </li>
     <li class="divide"></li>
     <li>
-      <a href="{% url 'view_post_listings' 'rent'%}"
-         data-mix-header-click="group: buy, action: select_all_buy">Tin rao Cho thuê</a>
+      <a href="{% url 'listing_search' %}?trans_type=rent&advertising=True&sort=priority"
+         data-mix-header-click="group: buy, action: select_all_buy">Tin đăng Cho Thuê</a>
     </li>
   </ul>
 </li>

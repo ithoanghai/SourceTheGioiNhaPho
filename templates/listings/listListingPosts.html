@@ -1,0 +1,67 @@
+{% load load_static listing i18n %}
+
+<div class="card bg-secondary shadow">
+    <div class="card-header bg-white border-0">
+        <div class="row align-items-center">
+            <div class="col-8">
+                <h5 class="mb-0">Danh sách Tin đăng Bất động sản của bạn</h5>
+            </div>
+            {% comment %}                                <div class="col-4 text-right">
+                                  <a href="#!" class="btn btn-sm btn-primary">Thiết lập</a>
+                                </div>{% endcomment %}
+        </div>
+    </div>
+    <div class="card-body">
+        {% if listings %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">{% trans "Mã BĐS" %}</th>
+                    <th scope="col">{% trans "Địa chỉ" %}</th>
+                    <th scope="col">{% trans "Giao dịch" %}</th>
+                    <th>{% trans "Loại BĐS" %}</th>
+                    <th>{% trans "Ngày đăng" %}</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for listing in listings %}
+                    <tr>
+                        <td>{{ listing.code }}</td>
+                        <td>{{ listing.address }}</td>
+                        <td>{{ listing.transaction_type | get_transaction_type }}</td>
+                        <td>{{ listing.house_type | get_house_type }}</td>
+                        <td>{{ listing.list_date }}</td>
+                        <td>
+                            <a class="btn btn-light"
+                               href="{% url "listing_detail" listing.id %}">{% trans "Chi tiết" %}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>{% trans "Bạn chưa có bất động sản nào" %}</p>
+        {% endif %}
+    </div>
+</div>
+
+{% if listings %}
+<div class="pagination">
+    <span class="step-links">
+        {% if listings.has_previous %}
+            <a href="?page={{ listings.previous_page_number }}">Trang trước </a> &nbsp;
+        {% endif %}
+    </span>
+
+    <span class="current">
+        (Trang {{ listings.number }} trong {{ listings.paginator.num_pages }} trang)
+    </span>
+
+    <span>
+        {% if listings.has_next %}
+            &nbsp;<a href="?page={{ listings.next_page_number }}"> Trang sau</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}

@@ -12,6 +12,7 @@ from .models import TransTypeInit
 from .serializers import *
 from ..accounts.models import User
 from ..customers.models import Customer
+from ..listings import HouseType
 from ..listings.models import Listing
 
 @csrf_protect
@@ -34,8 +35,10 @@ def index(request):
 
 def transaction(request, transaction_id):
     transaction_detail = get_object_or_404(Transaction, pk=transaction_id)
+    houseType = HouseType.choices
     context = {
         'transaction': transaction_detail,
+        'houseType': houseType
     }
 
     return render(request, 'transactions/detail.html', context)

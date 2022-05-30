@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load load_static listing i18n %}
+{% block title %} {% trans 'Danh sách bất động sản của tôi' %} {% endblock title %}
+
+{% block content %}
+    <div id="wrap">
+        <!-- Search menu -->
+        {% include 'menu/_menuSearch.html' %}
+
+        <!-- Header -->
+        {% include 'menu/_secondMenu2.html' %}
+
+        <!-- Main Content  -->
+        <!-- Header -->
+        <div class="header d-flex align-items-center">
+            <!-- Mask -->
+            <span class="mask bg-gradient-default opacity-2"></span>
+            <!-- Header container -->
+            <div class="container-fluid d-flex align-items-center">
+                {% comment %}            <div class="row mt--7">
+                <div class="col-lg-7 col-md-10">
+                    <h4 class="text-blue">{% trans 'Trang cá nhân của' %} {{ user.first_name }} {{ user.last_name }} </h4>
+                </div>
+            </div>{% endcomment %}
+            </div>
+        </div>
+
+        <div class="container-fluid mt--6">
+
+            <div class="row col-xl-12">
+                <div class="col-xl-3 order-xl-2 mb-5 mb-xl-0">
+                    {% include 'accounts/_profilePanelRight.html' %}
+                </div>
+                <div class="col-xl-8 order-xl-1">
+                    {% include 'listings/listListingPosts.html' %}
+                </div>
+            </div>
+        </div>
+        <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
+
+    </div>
+    <br/>
+    <!-- Footer content below-->
+{% endblock %}

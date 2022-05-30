@@ -30,7 +30,7 @@
 
             <div class="row col-xl-12">
                 <div class="col-xl-3 order-xl-2 mb-5 mb-xl-0">
-                     {% include 'accounts/_profilePanelRight.html' %}
+                    {% include 'accounts/_profilePanelRight.html' %}
                 </div>
                 <div class="col-xl-8 order-xl-1">
                     <div class="card bg-secondary shadow">
@@ -43,25 +43,35 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label for="trantype">{% trans "Loại giao dịch" %}</label>
-                                                <select name="trantypes" id="trantypes" class="form-control">
-                                                <option value="contact" {% if reg_user.trantype == "contact" or transaction.trantype == "contact"%}
-                                                       selected{% endif %}>{% trans "Liên hệ" %}</option>
-                                                  <option value="view" {% if reg_user.trantype == "view" or transaction.trantype == "view"%}
-                                                       selected{% endif %}>{% trans "Liên hệ xem BĐS" %}</option>
-                                                  <option value="oder" {% if reg_user.trantype == "oder" or transaction.trantype == "oder"%}
-                                                       selected{% endif %}>{% trans "Đặt hàng" %}</option>
-                                                  <option value="buy" {% if reg_user.trantype == "buy" or transaction.trantype == "buy"%}
-                                                       selected{% endif %}>{% trans "Mua" %}</option>
-                                                  <option value="sell" {% if reg_user.trantype == "sell" or transaction.trantype == "sell"%}
-                                                       selected{% endif %}>{% trans "Bán" %}</option>
-                                                  <option value="rent" {% if reg_user.trantype == "rent" or transaction.trantype == "rent"%}
-                                                       selected{% endif %}>{% trans "Thuê" %}</option>
-                                                  <option value="lease" {% if reg_user.trantype == "lease" or transaction.trantype == "lease"%}
-                                                       selected{% endif %}>{% trans "Cho thuê" %}</option>
-                                                  <option value="intro_estate" {% if reg_user.trantype == "intro_estate" or transaction.trantype == "intro_estate"%}
-                                                       selected{% endif %}>{% trans "Giới thiệu BĐS" %}</option>
-                                                  <option value="intro_custo" {% if reg_user.trantype == "intro_custo" or transaction.trantype == "intro_custo"%}
-                                                       selected{% endif %}>{% trans "Giới thiệu Khách" %}</option>
+                                                <select disabled name="trantypes" id="trantypes" class="form-control">
+
+                                                    <option value="view"
+                                                            {% if reg_user.trantype == "view" or transaction.trantype == "view" %}
+                                                            selected{% endif %}>{% trans "Liên hệ xem BĐS" %}</option>
+                                                    <option value="contact"
+                                                            {% if reg_user.trantype == "contact" or transaction.trantype == "contact" %}
+                                                            selected{% endif %}>{% trans "Liên hệ" %}</option>
+                                                    <option value="oder"
+                                                            {% if reg_user.trantype == "oder" or transaction.trantype == "oder" %}
+                                                            selected{% endif %}>{% trans "Đặt hàng" %}</option>
+                                                    <option value="buy"
+                                                            {% if reg_user.trantype == "buy" or transaction.trantype == "buy" %}
+                                                            selected{% endif %}>{% trans "Mua" %}</option>
+                                                    <option value="sell"
+                                                            {% if reg_user.trantype == "sell" or transaction.trantype == "sell" %}
+                                                            selected{% endif %}>{% trans "Bán" %}</option>
+                                                    <option value="rent"
+                                                            {% if reg_user.trantype == "rent" or transaction.trantype == "rent" %}
+                                                            selected{% endif %}>{% trans "Thuê" %}</option>
+                                                    <option value="lease"
+                                                            {% if reg_user.trantype == "lease" or transaction.trantype == "lease" %}
+                                                            selected{% endif %}>{% trans "Cho thuê" %}</option>
+                                                    <option value="intro_estate"
+                                                            {% if reg_user.trantype == "intro_estate" or transaction.trantype == "intro_estate" %}
+                                                            selected{% endif %}>{% trans "Giới thiệu BĐS" %}</option>
+                                                    <option value="intro_custo"
+                                                            {% if reg_user.trantype == "intro_custo" or transaction.trantype == "intro_custo" %}
+                                                            selected{% endif %}>{% trans "Giới thiệu Khách" %}</option>
                                                 </select>
                                                 {% if form.trantype.errors %}
                                                     <span style="color: red; font-size: 12px">{{ form.trantype.errors.as_text }}</span>{% endif %}
@@ -69,8 +79,8 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group">
-                                                <label for="listing">{% trans "Bất động sản quan tâm" %}</label>
-                                                <input class="form-control" required type="text" name="listing"
+                                                <label for="listing">{% trans "Bất động sản quan tâm"%}</label>
+                                                <input disabled class="form-control" required type="text" name="listing"
                                                         {% if reg_user.listing %}
                                                        value="{{ reg_user.listing.code }}"
                                                        {% else %}value="{{ transaction.listing.code }}"{% endif %}
@@ -82,7 +92,7 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label for="customer">{% trans "Tên khách hàng" %}</label>
-                                                <input class="form-control" required type="text" name="customer"
+                                                <input disabled class="form-control" required type="text" name="customer"
                                                         {% if reg_user.customer %}
                                                        value="{{ reg_user.customer }}"
                                                        {% else %}value="{{ transaction.customer.name }}"{% endif %}
@@ -92,146 +102,69 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                            <label for="house_type">{% trans "Loại giao dịch" %}</label>
-                                            <select name="housetypes" id="housetypes" class="form-control">
-                                            {% for c in Transaction.house_type.field.choices %}
-                                            <option value="contact" {% if reg_user.trantype == "contact" or transaction.trantype == "contact"%}
-                                                   selected{% endif %}>{% trans "Liên hệ" %}</option>
-                                              <option value="view" {% if reg_user.trantype == "view" or transaction.trantype == "view"%}
-                                                   selected{% endif %}>{% trans "Liên hệ xem BĐS" %}</option>
-
-                                            {% endfor %}
-
-                                            </select>
-                                        {% comment %}<select class="form-control" name="house_type" id="house_type_form" onchange="this.form.submit()">
-                                            {% for x,y in form.fields.house_type.choices %}
-                                            <option value="{{x}}">{{y}}</option>
-                                          {% endfor %}
-                                          </select>{% endcomment %}
-                                            {% if form.trantype.errors %}
-                                                <span style="color: red; font-size: 12px">{{ form.trantype.errors.as_text }}</span>{% endif %}
-                                        </div>
                                     <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="dob">Ngày
-                                                    sinh</label>
-                                                <input type="date" name="dob"
-                                                       class="form-control form-control-alternative"
-                                                        {% if reg_user.dob %}
-                                                       value="{{ reg_user.dob }}"
-                                                       {% else %}value="{{ request.user.dob }}"{% endif %}
-                                                       placeholder="{{ request.user.dob }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-last-name">Giới
-                                                    tính</label>
-                                                <fieldset name="gendergroup">
-                                                    <input type="radio" name="gender" id="male" value="male"
-                                                            {% if reg_user.gender == 'male' or request.user.gender == 'male' %}
-                                                           checked{% endif %}> Nam
-                                                    <input type="radio" name="gender" id="female" value="female"
-                                                            {% if reg_user.gender == 'female' or request.user.gender == 'female' %}
-                                                           checked{% endif %}> Nữ
-                                                </fieldset>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="avatar">Ảnh đại diện</label>
-                                                <input type="file" name="avatar" id="avatar"
-                                                       class="form-control form-control-alternative">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="my-4"/>
-                                <!-- Address -->
-                                <h6 class="h5 heading-small text-muted mb-4">Thông tin liên hệ</h6>
-                                <div class="pl-lg-4">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="address">Địa chỉ</label>
-                                                <input name="address" class="form-control form-control-alternative"
-                                                       placeholder="{{ reg_user.address }}"
-                                                        {% if reg_user.address %}
-                                                       value="{{ reg_user.address }}"
-                                                       {% else %}value="{{ request.user.address }}"{% endif %}
-                                                       type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label for="phone">{% trans "Số điện thoại" %}</label>
-                                                <input class="form-control" required type="text" name="phone"
-                                                        {% if reg_user.phone %}
-                                                       value="{{ reg_user.phone }}"
-                                                       {% else %}value="{{ request.user.phone }}"{% endif %}
-                                                       placeholder="Số điện thoại"/>
-                                                {% if form.phone.errors %}
-                                                    <span style="color: red; font-size: 12px">{{ form.phone.errors.as_text }}</span>{% endif %}
-
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label for="email">{% trans "Email" %}</label>
-                                                <input class="form-control" required type="text" name="email"
-                                                        {% if reg_user.email %}
-                                                       value="{{ reg_user.email }}"
-                                                       {% else %}value="{{ request.user.email }}"{% endif %}
-                                                       placeholder="Thư điện tử"/>
-                                                {% if form.email.errors %}
-                                                    <span style="color: red; font-size: 12px">{{ form.email.errors.as_text }}</span>{% endif %}
-                                            </div>
-                                        </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="facebook">Facebook</label>
-                                                <input type="text" name="facebook"
-                                                       class="form-control form-control-alternative"
-                                                       placeholder="{{ request.user.facebook }}"
-                                                       value="{{ request.user.facebook }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="youtube">Youtube</label>
-                                                <input type="text" name="youtube"
-                                                       class="form-control form-control-alternative"
-                                                       placeholder="{{ request.user.youtube }}"
-                                                       value="{{ request.user.youtube }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="website">Website</label>
-                                                <input type="text" name="website"
-                                                       class="form-control form-control-alternative"
-                                                       placeholder="{{ request.user.website }}"
-                                                       value="{{ request.user.website }}">
-                                            </div>
-                                        </div>
-                                    </div>
+                                                <label for="house_type">{% trans "Loại bất động sản quan tâm" %}</label>
+                                                <select disabled name="houseType" id="housetypes" class="form-control">
+                                                    {% for c in houseType %}
+                                                        <option value="{{ c }}"
+                                                                {% if reg_user.house_type == c or transaction.house_type == c %}
+                                                                selected{% endif %}>{{ c }}</option>
+                                                    {% endfor %}
 
+                                                </select>
+                                                {% if form.houseType.errors %}
+                                                    <span style="color: red; font-size: 12px">{{ form.houseType.errors.as_text }}</span>{% endif %}
+                                            </div>
+                                        </div>
+                                    {% if transaction.caring_area %}
+                                        <div class="col-lg-5">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-caring_area">Khu vực bạn quan tâm</label>
+                                                <input disabled type="text" name="caring_area" id="caring_area" value="{{ transaction.caring_area }}">
+                                            </div>
+                                        </div>
+                                    {% endif %}
+
+                                    </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="message">Lời nhắn gửi</label>
+                                                 <textarea disabled rows="3" cols="20" name="message">
+                                                  {{ transaction.message }}
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    {% if transaction.comment%}
+                                    <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="comment">Lời nhắn gửi</label>
+                                                 <textarea disabled rows="3" cols="20" name="comment">
+                                                  {{ transaction.comment }}
+                                                </textarea>
+                                            </div>
+                                      </div>
+                                    {% endif %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="message">Thời gian giao dịch: {{ transaction.date }}</label>
+                                            </div>
+                                        </div>
+                                    <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="comment">Trạng thái giao dịch {{ transaction.status }}</label>
+                                            </div>
+                                      </div>
+                                </div>
                                 </div>
                                 <hr class="my-4"/>
-                                <!-- Description -->
-                                <h6 class="heading-small text-muted mb-4">Giới thiệu về bạn</h6>
-                                <div class="pl-lg-4">
-                                    <div class="form-group">
-                                    <textarea rows="4" class="form-control form-control-alternative" name="bio"
-                                              placeholder="{{ reg_user.bio }}">{% if reg_user.bio %}
-                                        {{ reg_user.bio }}{% else %}{{ request.user.bio }}{% endif %}</textarea>
-                                    </div>
-                                </div>
 
                                 <div class="card-footer text-center border-0">
-                                    <input type="submit" value="{% trans "Ghi nhớ thông tin" %}" class="btn btn-info">
+                                    <input type="submit" disabled value="{% trans "Ghi nhớ thông tin" %}" class="btn btn-info">
                                 </div>
 
                             </form>

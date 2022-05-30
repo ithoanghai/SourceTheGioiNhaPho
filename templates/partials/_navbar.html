@@ -15,13 +15,13 @@
                 {% csrf_token %}
                 <div class="tab-container">
                     <div class="tab">
-                        <input type="radio" name="service-type" style="color: red" value="sell" checked id="buy-house">
+                        <input type="radio" name="trans_type" style="color: red" value="sell" checked id="buy-house">
                         <label for="buy-house">Mua nhà</label>
                     </div>
-                    {% comment %}          <div class="tab">
-            <input type="radio" name="service-type" value="rent" id="rent-house">
+                              <div class="tab">
+            <input type="radio" name="trans_type" value="rent" id="rent-house">
             <label for="rent-house">Thuê nhà</label>
-          </div>{% endcomment %}
+          </div>
                 </div>
                 <input type="hidden" placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà"
                        id="hidServiceTypeChecked"
@@ -53,10 +53,11 @@
                 <input type="radio" name="trans_type" value="sell" checked id="buy-house">
                 <label for="buy-house">Mua nhà</label>
             </div>
-            {% comment %}<div class="tab">
-        <input type="radio" name="service-type" value="rent" id="rent-house">
-        <label for="rent-house">Thuê nhà</label>
-      </div>{% endcomment %}
+            <div class="tab">
+                <input type="radio" name="trans_type" value="rent" id="rent-house">
+                <label for="rent-house">Thuê nhà</label>
+            </div>
+
         </div>
         <div class="search-container" v-click-outside="handleFocus">
             <i v-show="!isLoading" class="zmdi zmdi-search" style="opacity: 0.3"></i>

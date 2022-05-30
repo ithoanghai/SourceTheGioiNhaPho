@@ -27,7 +27,7 @@
                     </li>
                     {% include "menu/_subMenuUserProfile.html" %}
                     {% include "menu/_subMenuBuy.html" %}
-                    {% include "menu/_subMenuSell.html" %}
+                    {% include "menu/_subMenuRent.html" %}
                     {% include "menu/_subMenuBuySellNews.html" %}
                     {% include "menu/_subMenuProject.html" %}
                     {% include "menu/_subMenuSupport.html" %}
@@ -38,9 +38,9 @@
         <div class="top-search" id="topSearchForm">
             <a href="#"></a>
             <form action="{% url 'listing_search' %}">
-                <div tabindex="0" class="search-type"><span>Mua nhà</span>
+                <div tabindex="1" class="search-type top-menu"><span>Mua nhà</span>
                     <ul class="hide">
-                        <li>
+                        <li class="sub-menu">
                             Thuê nhà
                         </li>
                         <li>
@@ -51,6 +51,14 @@
                 <i class="zmdi zmdi-search"></i>
                 <div class="search-type-mobile">
                     Mua •
+                    <ul class="hide">
+                        <li class="sub-menu">>
+                            Thuê nhà
+                        </li>
+                        <li>
+                            Dự án
+                        </li>
+                    </ul>
                 </div>
                 <input placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
                        v-model="query" v-on:input="handleQueryChange"
@@ -74,7 +82,7 @@
                 </li>
                 {% include "menu/_subMenuUserProfile.html" %}
                 {% include "menu/_subMenuBuy.html" %}
-                {% include "menu/_subMenuSell.html" %}
+                {% include "menu/_subMenuRent.html" %}
                 {% include "menu/_subMenuBuySellNews.html" %}
                 {% include "menu/_subMenuProject.html" %}
                 {% include "menu/_subMenuSupport.html" %}
@@ -98,9 +106,9 @@
         <form action="{% url "listing_search" %}">
             <div tabindex="0" class="search-type"><span>Mua nhà</span>
                 <ul class="hide">
-                    <li>
+                    <li class="sub-menu">>
                         Thuê nhà
-                    </li><!---->
+                    </li>
                     <li>
                         Dự án
                     </li>
