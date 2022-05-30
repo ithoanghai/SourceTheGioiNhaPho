@@ -242,9 +242,9 @@ def prepare_fb_headers():
         "address.unit_number",
         "energy_rating_eu.grade",
         "energy_rating_eu.value",
-        "co2_emission_rating_eu.grade"
-        "co2_emission_rating_eu.value"
-        "additional_fees_description"
+        "co2_emission_rating_eu.grade",
+        "co2_emission_rating_eu.value",
+        "additional_fees_description",
         "num_pets_allowed",
         "land_area_size",
         "security_deposit",
@@ -254,8 +254,8 @@ def prepare_fb_headers():
         "pet_monthly_fee",
         "floor_types[0]",
         "unit_features[0]",
-        "construction_status"
-        "coownership_num_lots"
+        "construction_status",
+        "coownership_num_lots",
         "coownership_status",
         "coownership_proceedings_status",
         "special_offers[0]",
@@ -286,7 +286,7 @@ def prepare_fb_listing_data(listing):
     real_size = listing.area_real or listing.area
     listing_data = {
         "home_listing_id": listing.code, # Bắt buộc
-        "name": listing.title, # Bắt buộc
+        "name": f'{listing.code}', # Bắt buộc
         "description": get_description(listing), # Bắt buộc
         "availability": get_availability(listing), # Bắt buộc
         "price": f'{price:5.2f} VND', # Bắt buộc
@@ -297,8 +297,8 @@ def prepare_fb_listing_data(listing):
         "latitude": listing.lat, # Bắt buộc
         "longitude": listing.long, # Bắt buộc
         "neighborhood[0]": listing.residential_community,  # Bắt buộc
-        "image[0].url": listing.main_photo,  # Bắt buộc
-        "image[0].tag[0]": listing.main_photo,  # Bắt buộc
+        "image[0].url": main_photo_url,  # Bắt buộc
+        "image[0].tag[0]": main_photo_url,  # Bắt buộc
 
         "home_listing_group_id": None,
         "custom_number_0":  1,

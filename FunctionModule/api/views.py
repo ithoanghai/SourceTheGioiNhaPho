@@ -195,4 +195,5 @@ def download_exported_listing(req: request.Request, **kwargs):
     with open(file_path, 'r', encoding='utf-8') as fp:
         resp = HttpResponse(fp.read(), content_type="text/csv")
         resp['Content-Disposition'] = f'filename=tgnp_bds_facebook_export-{datetime.today().strftime("%Y-%m-%d")}.csv'
+        print("Exported listings")
         return resp
