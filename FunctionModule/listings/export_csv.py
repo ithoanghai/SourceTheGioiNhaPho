@@ -3,119 +3,6 @@ from django.urls import reverse
 from .choices import Status, RoadType, Condition, HouseType, FurnishType, RegistrationType
 
 
-def prepare_fb_headers():
-    return [
-        "id",
-        "title",
-        "name",
-        "description",
-        "availability",
-        "visibility",
-        "condition",
-       # "status",
-        "price",
-        "home_listing_group_id",
-        "ac_type",
-        "agent_name",
-        "agent_company",
-        "furnish_type",
-        "tenure_type",
-        "sale_type",
-        "garden_type",
-        "days_on_market",
-        "url",
-        "link",
-        "image_link",
-        "additional_image_link",
-        "fee_schedule_url",
-        "heating_type",
-        "laundry_type",
-        "listing_type",
-        "agent_rera_id",
-        "property_rera_id",
-        "num_baths",
-        "num_beds",
-        "num_rooms",
-        "num_units",
-        "partner_verification",
-        "pet_policy",
-        "min_price",
-        "max_price",
-        "property_type",
-        "area_size",
-        "built_up_area_size",
-        "property_tax",
-        "condo_fee",
-        "coownership_charge",
-        "parking_type",
-        "parking_spaces",
-        "area_unit",
-        "year_built",
-        "address",
-        "address.addr1",
-        "address.addr2",
-        "address.addr3",
-        "address.city",
-        "address.city_id",
-        "address.region",
-        "address.postal_code",
-        "address.country",
-        "address.unit_number",
-        "latitude",
-        "longitude",
-        "neighborhood[0]",
-        "energy_rating_eu.grade",
-        "energy_rating_eu.value",
-        "co2_emission_rating_eu.grade",
-        "co2_emission_rating_eu.value",
-        "additional_fees_description",
-        "num_pets_allowed",
-        "land_area_size",
-        "security_deposit",
-        "holding_deposit",
-        "application_fee",
-        "pet_deposit",
-        "pet_monthly_fee",
-      # "floor_types[0]",
-      #  "unit_features[0]",
-        "construction_status",
-        "coownership_num_lots",
-        "coownership_status",
-        "coownership_proceedings_status",
-        "special_offers[0]",
-        "pet_restrictions[0]",
-      #  "building_amenities[0]",
-        "broker_fee",
-        "first_month_rent",
-        "last_month_rent",
-        "utilities_included_in_rent[0]",
-        "rental_room_type",
-        "private_room_bathroom_type",
-        "number_of_co_renters",
-        "private_room_area_size",
-        "virtual_tour_url",
-        "applink.android_app_name",
-        "applink.android_package",
-        "applink.android_url",
-        "applink.ios_app_name",
-        "applink.ios_app_store_id",
-        "applink.ios_url",
-        "applink.ipad_app_name",
-        "applink.ipad_app_store_id",
-        "applink.ipad_url",
-        "applink.iphone_app_name",
-        "applink.iphone_app_store_id",
-        "applink.iphone_url",
-        "applink.windows_phone_app_id",
-        "applink.windows_phone_app_name",
-        "applink.windows_phone_url",
-        "google_product_category",
-        "brand",
-        "identifier_exists",
-        "gtin",
-        "mpn",
-    ]
-
 ONE_BILLION = 1000000000
 
 
@@ -129,16 +16,22 @@ def get_parking_type(road_type):
 
 
 def get_availability(listing):
-    if listing.is_published == True:
-        return 'available for order'
-    else:
-        return 'out of stock'
+    if listing.status == Status.SELLING:
+        return 'available_soon'
+    elif listing.status == Status.SALE:
+        return 'off_market'
+    elif listing.status == Status.STOP_SELLING:
+        return 'sale_pending'
+    elif listing.status == Status.SOLD:
+        return 'recently_sold'
+
 
 def get_visibility(listing):
     if listing.is_published == True:
         return 'published'
     else:
         return 'hidden'
+
 
  # return value  new, refurbished, used
 def get_condition(listing):
@@ -178,9 +71,6 @@ def get_sale_type(listing):
         return'former'
 
 
-  # return value in  "apartment", "apartment_room", "builder_floor", "bungalow", "condo", "condo_room",
-# "house", "house_in_condominium", "house_in_villa", "house_room", "land", "loft", "manufactured", "other", "other_room",
-# "penthouse", "single_family_home", "studio", "townhouse", "townhouse_room"
 def get_property_type(listing):
     if listing.house_type == HouseType.STREET_HOUSE or listing.house_type == HouseType.LOFT_HOUSE or listing.house_type == HouseType.SHOP_HOUSE:
         return 'house'
@@ -293,45 +183,144 @@ def get_description(listing):
     return description + description1
 
 
+def prepare_fb_headers():
+    return [
+        "home_listing_id",  # Bắt buộc
+        "name",  # Bắt buộc
+        "description",
+        "availability",  # Bắt buộc
+        "price",                     #Bắt buộc | The cost and currency of the home listing. The price is a number followed by the currency code (ISO 4217 standards)
+        "url",  # Bắt buộc | The URL of the specific page where people can view the listing.
+        "address.addr1",  # Bắt buộc
+        "address.city",  # Bắt buộc
+        "address.country",  # Bắt buộc
+        "latitude",  # Bắt buộc
+        "longitude",  # Bắt buộc
+        "neighborhood[0]",  # Bắt buộc
+        "image[0].url",  # Bắt buộc
+        "image[0].tag[0]",  # Bắt buộc
+
+        "home_listing_group_id",
+        "custom_number_0",
+        "ac_type",
+        "agent_name",
+        "agent_company",
+        "furnish_type",
+        "tenure_type",
+        "sale_type",
+        "garden_type",
+        "days_on_market",
+        "fee_schedule_url",
+        "heating_type",
+        "laundry_type",
+        "listing_type",
+        "agent_rera_id",
+        "property_rera_id",
+        "num_baths",
+        "num_beds",
+        "num_rooms",
+        "num_units",
+        "parking_type",
+        "partner_verification",
+        "pet_policy",
+        "min_price",
+        "max_price",
+        "property_type",
+        "area_size",
+        "built_up_area_size",
+        "property_tax",
+        "condo_fee",
+        "coownership_charge",
+        "parking_spaces",
+        "area_unit",
+        "year_built",
+        "address.addr2",
+        "address.addr3",
+        "address.city_id",
+        "address.region",
+        "address.postal_code",
+        "address.unit_number",
+        "energy_rating_eu.grade",
+        "energy_rating_eu.value",
+        "co2_emission_rating_eu.grade"
+        "co2_emission_rating_eu.value"
+        "additional_fees_description"
+        "num_pets_allowed",
+        "land_area_size",
+        "security_deposit",
+        "holding_deposit",
+        "application_fee",
+        "pet_deposit",
+        "pet_monthly_fee",
+        "floor_types[0]",
+        "unit_features[0]",
+        "construction_status"
+        "coownership_num_lots"
+        "coownership_status",
+        "coownership_proceedings_status",
+        "special_offers[0]",
+        "pet_restrictions[0]",
+        "building_amenities[0]",
+        "broker_fee",
+        "first_month_rent",
+        "last_month_rent",
+        "utilities_included_in_rent[0]",
+        "rental_room_type",
+        "private_room_bathroom_type",
+        "number_of_co_renters",
+        "private_room_area_size",
+        "virtual_tour_url",
+
+        "visibility",
+        "condition",
+        "image_link",
+        "additional_image_link",
+    ]
+
+
 def prepare_fb_listing_data(listing):
     price = listing.sale_price or listing.price
     url = reverse('listing_detail', kwargs={'listing_id': listing.id})
-    full_url = f'https://thegioinhaphovietnam.com.vn/{url}'
+    full_url = f'https://thegioinhaphovietnam.com.vn{url}'
     main_photo_url = get_main_photo_url(listing)
     real_size = listing.area_real or listing.area
     listing_data = {
-        "id": listing.id,
-        "title": listing.title.title(),
-        "name": listing.title,
-        "description": get_description(listing),
-        "availability": get_availability(listing),
-        "visibility": get_visibility(listing),
-        "condition": get_condition(listing),
-      #  "status":  get_status(listing.status),
-        "price": f'{price:5.2f} VND',
+        "home_listing_id": listing.code, # Bắt buộc
+        "name": listing.title, # Bắt buộc
+        "description": get_description(listing), # Bắt buộc
+        "availability": get_availability(listing), # Bắt buộc
+        "price": f'{price:5.2f} VND', # Bắt buộc
+        "url": full_url, # Bắt buộc | The URL of the specific page where people can view the listing.
+        "address.addr1": f'%s, %s' % (listing.district_name(), listing.state_name()), # Bắt buộc
+        "address.city": f'%s' % (listing.state), # Bắt buộc
+        "address.country": f'Việt Nam', # Bắt buộc
+        "latitude": listing.lat, # Bắt buộc
+        "longitude": listing.long, # Bắt buộc
+        "neighborhood[0]": listing.residential_community,  # Bắt buộc
+        "image[0].url": listing.main_photo,  # Bắt buộc
+        "image[0].tag[0]": listing.main_photo,  # Bắt buộc
+
         "home_listing_group_id": None,
-        "ac_type": None,
-        "agent_name": listing.realtor.user.name,
+        "custom_number_0":  1,
+        "ac_type": "central",
+        "agent_name": "Hoàng Hải",
         "agent_company": "TGNP",
         "furnish_type": get_furnish_type(listing),
         "tenure_type": get_tenure_type(listing),
         "sale_type": get_sale_type(listing),
         "garden_type": None,
         "days_on_market": None,
-        "url": full_url,
-        "link": full_url,
-        "image_link": main_photo_url,
-        "additional_image_link": get_additional_image_link_data(listing.photos),
         "fee_schedule_url": None,
-        "heating_type": None,
+        "heating_type": "central",
         "laundry_type": None,
         "listing_type": get_listing_type(listing),
         "agent_rera_id": None,
         "property_rera_id": None,
         "num_baths": listing.bathrooms if listing.bathrooms else None,
         "num_beds": listing.bedrooms,
-        "num_rooms": listing.bedrooms,
+        "num_rooms": None,
         "num_units": None,
+        "parking_type": listing.parking_type,
         "partner_verification": "verified" if listing.is_verified else 'none',
         "pet_policy": None,
         "min_price": None,
@@ -342,23 +331,15 @@ def prepare_fb_listing_data(listing):
         "property_tax": None,
         "condo_fee": None,
         "coownership_charge": None,
-        "parking_type": listing.parking_type,
-        "parking_spaces": get_parking_spaces(listing),
-        "area_unit": 'sq_m',
-        "year_built": None,
-        "address": f'%s, %s, %s, %s' % (listing.street, listing.ward_name(), listing.district_name(), listing.state_name()),
-        "address.addr1": listing.district_name(),
+        "parking_spaces": None,
+        "area_unit": None,  # Total area of unit; including outer walls; balcony.
+        "year_built": "2022",
         "address.addr2": listing.ward_name(),
         "address.addr3": listing.street,
-        "address.city": listing.state_name(),
-        "address.city_id": listing.state,
+        "address.city_id": None,
         "address.region": listing.state,
         "address.postal_code": None,
-        "address.country": "Việt Nam",
-        "address.unit_number": listing.address,
-        "latitude": listing.lat,
-        "longitude": listing.long,
-        "neighborhood[0]": listing.residential_community,
+        "address.unit_number": None,
         "energy_rating_eu.grade": None,
         "energy_rating_eu.value": None,
         "co2_emission_rating_eu.grade": None,
@@ -371,15 +352,15 @@ def prepare_fb_listing_data(listing):
         "application_fee": None,
         "pet_deposit": None,
         "pet_monthly_fee": None,
-       # "floor_types": None,
-       # "unit_features": None,
-        "construction_status": listing.construction,
+        "floor_types[0]": None,
+        "unit_features[0]": None,
+        "construction_status": None,
         "coownership_num_lots": None,
         "coownership_status": None,
         "coownership_proceedings_status": None,
         "special_offers[0]": None,
         "pet_restrictions[0]": None,
-      #  "building_amenities": listing.living_facilities,
+        "building_amenities[0]": None,
         "broker_fee": None,
         "first_month_rent": None,
         "last_month_rent": None,
@@ -389,25 +370,9 @@ def prepare_fb_listing_data(listing):
         "number_of_co_renters": None,
         "private_room_area_size": None,
         "virtual_tour_url": None,
-        "applink.android_app_name": None,
-        "applink.android_package": None,
-        "applink.android_url": None,
-        "applink.ios_app_name": None,
-        "applink.ios_app_store_id": None,
-        "applink.ios_url": None,
-        "applink.ipad_app_name": None,
-        "applink.ipad_app_store_id": None,
-        "applink.ipad_url": None,
-        "applink.iphone_app_name": None,
-        "applink.iphone_app_store_id": None,
-        "applink.iphone_url": None,
-        "applink.windows_phone_app_id": None,
-        "applink.windows_phone_app_name": None,
-        "applink.windows_phone_url": None,
-        "google_product_category": "Home & Garden",
-         "brand": "Thế Giới Nhà Phố",
-         "identifier_exists": "no",
-         "gtin": "false",
-         "mpn": listing.code,
+
+        "visibility": get_visibility(listing),
+        "condition": get_condition(listing),
+        "additional_image_link": get_additional_image_link_data(listing.photos),
     }
     return listing_data

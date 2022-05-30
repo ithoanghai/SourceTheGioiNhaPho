@@ -37,7 +37,8 @@ def home_view(request):
     listing_by_group = (Listing.objects
               .values('district')
               .annotate(dcount=Count('district'))
-              .order_by()
+              .order_by('priority')
+              .filter(is_published=True)
               )
     list_district_hn = get_all_districts()
     context = {

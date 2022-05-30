@@ -154,6 +154,7 @@ def handle_import(request, file_path, listing_type):
                         print(f"xóa listing rác do không có realtor phù hợp: {listing}")
 
                 obj.delete()
+        realtor = Realtor.objects.filter(pk=1).first()
 
         listing_count = Listing.objects.count()
         limit = 1000
@@ -186,29 +187,29 @@ def handle_import(request, file_path, listing_type):
             updated_listings = []
             timezone = pytz.timezone('Asia/Ho_Chi_Minh')
             row_count = 0
+            trans_type = TransactionType.SELL
+            house_type = HouseType.TOWN_HOUSE
+            road_type = RoadType.ALLEY_TRIBIKE
+            direction = ""
+            reward = 100
+            bonus_rate = 3
+            desc = ""
+            shop_house = "shophouse"
+            biet_thu = "bt"
+            lien_ke = "lk"
+            dich_vu = "dv"
+            thap_tang = "tt"
+            lo = "lô"
+            chung_cu = "chung cư"
+            cao_tang = "ct"
+            tap_the = "tập thể"
+            du_an = "dự án"
+            extra_data = ""
 
         #start reading and scanning the file from the bottom up
             for row in reversed(list(csv_reader)):
                 row_count += 1
                 line_count = csv_reader.line_num - row_count + 1
-                trans_type = TransactionType.SELL
-                house_type = HouseType.TOWN_HOUSE
-                road_type = RoadType.ALLEY_TRIBIKE
-                direction = ""
-                reward = 100
-                bonus_rate = 3
-                desc = ""
-                shop_house = "shophouse"
-                biet_thu = "bt"
-                lien_ke = "lk"
-                dich_vu = "dv"
-                thap_tang = "tt"
-                lo = "lô"
-                chung_cu = "chung cư"
-                cao_tang = "ct"
-                tap_the = "tập thể"
-                du_an = "dự án"
-                extra_data = ""
 
                 #read state, district information
                 try:
@@ -387,7 +388,6 @@ def handle_import(request, file_path, listing_type):
 
                 #Read information about specialist phone number. Add realtor from phone list
                 phone = row[header_dict['sdt']].strip()
-                realtor = Realtor.objects.filter(pk=1).first()
                 try:
                     phones = phone.split(' ')
                     if len(phones) > 1 and (phones[1] == 9 or phones[1] == 10):
@@ -531,10 +531,10 @@ def handle_import(request, file_path, listing_type):
 
                 # Phân tích cú pháp thông số để lấy diện tích, số tầng, mặt tiền từ file nguồn nhà phố
                 if listing_type == "K1":
-                    encoded_num = row[header_dict['thong-so']].replace('  ', ' ')
-                    splitter = encoded_num.strip().split(' ')
-                    floor = 0
                     try:
+                        encoded_num = row[header_dict['thong-so']].replace('  ', ' ')
+                        splitter = encoded_num.strip().split(' ')
+                        floor = 0
                         floor_code = splitter[1]
                         floor_code = slugify(floor_code.lower().replace('đ', 'd').replace('ấ', 'a').replace('t', '')
                                     .replace('c4', 'c').replace(' ', ''))
