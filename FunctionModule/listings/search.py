@@ -74,23 +74,19 @@ def prepare_listing_queryset(input_params):
     if 'urban_area' in input_params:
         urban_area = input_params.get('urban_area')
         if urban_area:
-            queryset_list = queryset_list.filter(urban_area=urban_area)
+            queryset_list = queryset_list.filter(urban_area__in=urban_area)
 
     # Keywords
     if 'keywords' in input_params:
         keywords = input_params.get('keywords')
         if keywords:
-            search_vector = SearchVector("address", "street", "code")
-            search_query = SearchQuery(keywords)
-            queryset_list = queryset_list.annotate(search=search_vector).filter(search=search_query)
-
+            query = Q(address__icontains=keywords) | Q(street__icontains=keywords) | Q(code__icontains= keywords)
+            queryset_list = queryset_list.filter(query)
     # District
     if 'street' in input_params:
         street = input_params.get('street')
         if street:
-            search_vector = SearchVector("address", "street")
-            search_query = SearchQuery(keywords)
-            queryset_list = queryset_list.annotate(search=search_vector).filter(search=search_query)
+            queryset_list = queryset_list.filter(address__in=street, street__in=street)
 
     # District
     if 'district' in input_params:

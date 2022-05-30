@@ -40,6 +40,22 @@
         <a href="javascript:void(0)" class="btn-install">Mở</a>
     </div>
 
+    {%if listing_by_group %}
+     <section class="container col-12">
+        <div class="inner pd-top-bottom-block block-project-listing">
+            <h3 class="heading-05">
+                <b>NHÀ ĐẤT HÀ NỘI ĐANG CÒN BÁN THEO QUẬN:</b>
+            </h3>
+            <div class="col-12" style="padding-top: 10px;">
+                {% for district in listing_by_group %}
+                        <a href="{% url 'listing_search' %}?district={{ district.district }}&sort=priority"
+                           title=""> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
     {% if listings_for_sale %}
         <section class="container col-12">
             <div class="inner pd-top-bottom-block block-project-listing">
@@ -59,20 +75,6 @@
             </div>
         </section>
     {% endif %}
-
-    <section class="container col-12">
-        <div class="inner pd-top-bottom-block block-project-listing">
-            <h3 class="heading-05">
-                <b>NHÀ ĐẤT HÀ NỘI BÁN THEO QUẬN:</b>
-            </h3>
-            <div class="col-12" style="padding-top: 10px;">
-                {% for district in listing_by_group %}
-                        <a href="{% url 'listing_search' %}?district={{ district.district }}&sort=priority"
-                           title=""> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
-                {% endfor %}
-            </div>
-        </div>
-    </section>
 
     <section class="container col-12">
         <div class="inner text-center-index block-introduce">
