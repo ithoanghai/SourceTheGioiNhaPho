@@ -28,7 +28,7 @@
         </a>
         <div class="label-group">
             <label class="label-primary unique p-1"><b>{{ listing.status|get_listing_status }}</b></label>
-            {% if listing.average_price %}
+            {% if listing.average_price and listing.transaction_type != "rent" %}
             <label class="label-primary unique p-1" title="Giá/m2"><strong></strong><b>{{ listing.average_price }} tr/m2</b></label>
            {% endif %}
             {% if listing.is_exclusive %}
@@ -41,15 +41,17 @@
     </div>
     <div class="info-container">
         <div class="flex align-items-center justify-content-space-between">
-            <div class="listing-price">{{ listing.price.normalize }} {% trans "tỷ" %}</div>
-            <ul class="listing-info">
+            <div class="listing-price">{{ listing.price.normalize }} {%if listing.transaction_type == "rent" %}{% trans "triệu" %} {% else %} {% trans "tỷ" %} {% endif %}</div>
+                   <ul class="listing-info">
+                {% if listing.area > 0 %}
                 <li>
                     <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area.normalize }}{% trans "m2" %}
                 </li>
-                {% if listing.floors %}
+                {% endif %}
+                {% if listing.width > 0 %}
                     <li><i class="zmdi zmdi-home"></i>{{ listing.floors }} {% trans "tầng" %}
                     </li> {% endif %}
-                {% if listing.width > 3.2 %}
+                {% if listing.width != 0 and listing.width > 3.5 %}
                     <li><i class="fa fas fa-road"></i>{{ listing.width.normalize }}{% trans "m" %}</li>
                 {% endif %}
                 {% if listing.bedrooms %}

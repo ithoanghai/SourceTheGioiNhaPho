@@ -407,14 +407,16 @@
                         <h2>{{ listing.title }}</h2>
                         <div class="detail-row">
                             <ul class="detailroom">
-                                <li title="Diện tích"><span
-                                        class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area.normalize }}
-                                    m2
-                                </li>
+                                {% if listing.area.normalize > 0 %}
+                                    <li title="Diện tích"><span
+                                            class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area.normalize }}
+                                        m2
+                                    </li>
+                                {% endif %}
                                 {% if listing.floors %}
                                     <li><i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}
                                     </li> {% endif %}
-                                {% if listing.width > 3.5 %}
+                                {% if listing.width != 0 and listing.width > 3.5 %}
                                     <li>
                                         <i class="fa fas fa-arrows-alt-h"></i> {{ listing.width.normalize }} {% trans "m" %}
                                     </li>
@@ -429,14 +431,17 @@
                                     </li> {% endif %}
                             </ul>
                             <ul class="listing-price">
-                                <li title="Giá">$<b>{{ listing.price.normalize }}</b> tỷ &nbsp ⇔ &nbsp</li>
-                                {% if listing.sale_price  and listing.sale_price < listing.price %}
+                                <li title="Giá">$<b>{{ listing.price.normalize }}</b> {%if listing.transaction_type == "rent" %}{% trans "triệu/tháng" %} {% else %} {% trans "tỷ" %} {% endif %} </li>
+                                {% if listing.sale_price  and listing.sale_price < listing.price and listing.transaction_type != "rent" %}
+                                    &nbsp ⇔ &nbsps
                                     <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price.normalize }}</strong>
                                         tỷ
-                                        &nbsp ⇔ &nbsp
                                     </li> {% endif %}
+                             {% if listing.price > 0 and listing.area and listing.transaction_type != "rent"%}
+                                &nbsp ⇔ &nbsp
                                 <li title="Giá/m2">$<b>{% widthratio listing.price listing.area 1000 %}</b> triệu/m2
                                 </li>
+                            {% endif %}
                             </ul>
                             <div class="listing-id">
                                 <span>Mã nhà đất: </span>
@@ -490,18 +495,19 @@
                                 {{ listing.bathrooms }} </p>
                         {% endif %}
                         </li>
-                        <li>
-                            <p class="left">Diện tích</p>
-                            <p class="right">{{ listing.area.normalize }} m</p>
-                        </li>
-
+                        {% if listing.area > 0 %}
+                            <li>
+                                <p class="left">Diện tích</p>
+                                <p class="right">{{ listing.area.normalize }} m</p>
+                            </li>
+                        {% endif %}
                         {% if listing.lot_size %}
                             <li>
                                 <p class="left">Diện tích khuân viên</p>
                                 <p class="right">{{ listing.lot_size.normalize }} m</p>
                             </li>
                         {% endif %}
-                        {% if listing.width and listing.width > 3 %}
+                        {% if listing.width != 0 and listing.width > 3.2 %}
                             <li>
                                 <p class="left">Mặt tiền </p>
                                 <p class="right">{{ listing.width.normalize }} m</p>
@@ -550,10 +556,10 @@
                             </li>
                         {% endif %}
                         <li>
-                            <p class="left">Giá bán</p>
-                            <p class="right">{{ listing.price.normalize }} tỷ</p>
+                            <p class="left">Giá</p>
+                            <p class="right">{{ listing.price.normalize }}  {%if listing.transaction_type == "rent" %}{% trans "triệu" %} {% else %} {% trans "tỷ" %} {% endif %}</p>
                         </li>
-                        {% if listing.sale_price %}
+                        {% if listing.sale_price and listing.transaction_type != "rent" %}
                             <li>
                                 <p class="left">Bán nhanh</p>
                                 <p class="right">{{ listing.sale_price.normalize }} tỷ</p>

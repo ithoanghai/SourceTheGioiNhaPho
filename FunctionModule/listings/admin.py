@@ -251,4 +251,4 @@ def import_csv_view(request: HttpRequest) -> JsonResponse:
 
 
 admin.site.register(Listing, ListingAdmin)
-#admin.site.register(ListingHistory, ListingHistoryAdmin)
+admin.site.register(ListingHistory, ListingHistoryAdmin)

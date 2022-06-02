@@ -22,28 +22,29 @@
                                class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
                         <label class="label-primary unique p-1">
                             <a v-if="listing.status == 'selling'" :href="getListingDetailURL(listing.id)" target="_blank"
-                               :title="listing.title">Đang bán</a>
+                               :title="listing.title">Đang GD</a>
                             <a v-if="listing.status == 'sold'" :href="getListingDetailURL(listing.id)" target="_blank"
-                               :title="listing.title">Đã bán</a>
+                               :title="listing.title">Đã GD</a>
                             <a v-if="listing.status == 'stop_selling'" :href="getListingDetailURL(listing.id)"
                                target="_blank"
-                               :title="listing.title">Dừng bán</a>
+                               :title="listing.title">Dừng GD</a>
                             <a v-if="listing.status == 'sale'" :href="getListingDetailURL(listing.id)" target="_blank"
                                :title="listing.title">Hạ giá</a></label>
-                         <label v-if="listing.average_price" class="label-primary unique p-1">[[ listing.average_price ]] tr/m2</label>
+                         <label v-if="listing.average_price && listing.transaction_type != 'rent'" class="label-primary unique p-1">[[ listing.average_price ]] tr/m2</label>
                     </div>
                 </div>
                 <div class="info-container">
                     <div class="group-grid__view">
-                        <div class="listing-price">[[ listing.price ]] {% trans "tỷ" %}</div>
+                        <div v-if="listing.transaction_type == 'rent'" class="listing-price">[[ listing.price ]] {% trans "triệu" %} </div>
+                        <div v-if="listing.transaction_type != 'rent'" class="listing-price">[[ listing.price ]] {% trans "tỷ" %} </div>
                         <ul class="listing-info">
-                            <li>
+                            <li v-if="listing.area && listing.area > 0">
                                 <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}
                             </li>
                             <li v-if="listing.floors && listing.floors > 0">
                                 <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
                             </li>
-                            <li v-if="listing.width > 3.5">
+                            <li v-if="listing.width > 3.5 && listing.width != 0 ">
                                <i class="fa fas fa-arrows-alt-h"></i> [[listing.width]] {% trans "m" %}
                             </li>
                             <li v-if="listing.bedrooms && listing.bedrooms > 0">
@@ -79,11 +80,11 @@
                     <div class="listing-name" :href="getListingDetailURL(listing.id)" :title="listing.title" ><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></div>
 
                     <ul class="listing-info">
-                        <li><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}</li>
+                        <li v-if="listing.floors && listing.area > 0"><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}</li>
                         <li v-if="listing.floors && listing.floors > 0">
                             <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
                         </li>
-                        <li v-if="listing.width > 3.2">
+                        <li v-if="listing.width > 3.2 && listing.width != 0">
                            <i class="fa fas fa-arrows-alt-h"></i> [[listing.width]] {% trans "m" %}
                         </li>
 
@@ -96,7 +97,8 @@
                     </ul>
                     <div class="action-group">
                         <div class="action-group--left">
-                            <div class="listing-price">[[listing.price]] {% trans "tỷ" %}</div>
+                              <div v-if="listing.transaction_type == 'rent'" class="listing-price">[[ listing.price ]] {% trans "triệu" %} </div>
+                            <div v-if="listing.transaction_type == 'sell' | listing.transaction_type == 'project'" class="listing-price">[[ listing.price ]] {% trans "tỷ" %} </div>
                             <label v-if="listing.is_exclusive"
                                    class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
                         </div>
@@ -144,29 +146,32 @@
                     </span>{% endcomment %}
                 </td>
                 <td>
-                    <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}
+                    <span v-if="listing.area > 0"><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}</span>
                 </td>
                 <td>
                     <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
                 </td>
                 <td>
-                    <span v-if="listing.width > 3.2"><i class="fa fas fa-arrows-alt-h"></i> [[listing.width]] {% trans "m" %}</span>
+                    <span v-if="listing.width > 3.2 && listing.width != 0"><i class="fa fas fa-arrows-alt-h"></i> [[listing.width]] {% trans "m" %}</span>
                 </td>
-                <td><a :href="getListingDetailURL(listing.id)" target="_blank"
+                <td ><a  v-if="listing.status != 'rent'" :href="getListingDetailURL(listing.id)" target="_blank"
                                                       :title="listing.title">[[ listing.price ]] {% trans "tỷ" %}</a>
+                    <a  v-if="listing.status == 'rent'" :href="getListingDetailURL(listing.id)" target="_blank"
+                                                      :title="listing.title">[[ listing.price ]] {% trans "tỷ" %}</a>
+
                 </td>
                 <td><a :href="getListingDetailURL(listing.id)" target="_blank"
                                                       :title="listing.title">[[ listing.average_price ]] {% trans "tr/m" %}</a>
                 </td>
                 <td style="word-wrap: break-word; ">
                     <a v-if="listing.status == 'selling'" :href="getListingDetailURL(listing.id)" target="_blank"
-                       :title="listing.title">Đang bán</a>
+                       :title="listing.title">Đang giao dịch</a>
                     <a v-if="listing.status == 'sale'" :href="getListingDetailURL(listing.id)" target="_blank"
-                       :title="listing.title">Bán nhanh</a>
+                       :title="listing.title">Giao dịch nhanh</a>
                     <a v-if="listing.status == 'sold'" :href="getListingDetailURL(listing.id)" target="_blank"
-                       :title="listing.title">Đã bán</a>
+                       :title="listing.title">Đã giao dịch</a>
                     <a v-if="listing.status == 'stop_selling'" :href="getListingDetailURL(listing.id)" target="_blank"
-                       :title="listing.title">Dừng bán</a>
+                       :title="listing.title">Dừng giao dịch</a>
                     <a :href="getListingDetailURL(listing.id)" target="_blank"
                        :title="listing.title">
                         {% comment %}                        <b>{{ listing.house_type|get_house_type }}</b>

@@ -40,14 +40,14 @@
         <a href="javascript:void(0)" class="btn-install">Mở</a>
     </div>
 
-    {%if listing_by_group %}
+    {%if listing_by_group_forsale %}
      <section class="container col-12">
         <div class="inner pd-top-bottom-block block-project-listing">
             <h3 class="heading-05">
                 <b>NHÀ ĐẤT HÀ NỘI ĐANG CÒN BÁN THEO QUẬN:</b>
             </h3>
             <div class="col-12" style="padding-top: 10px;">
-                {% for district in listing_by_group %}
+                {% for district in listing_by_group_forsale %}
                         <a href="{% url 'listing_search' %}?district={{ district.district }}&sort=priority"
                            title=""> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
                 {% endfor %}
@@ -59,7 +59,7 @@
     {% if listings_for_sale %}
         <section class="container col-12">
             <div class="inner pd-top-bottom-block block-project-listing">
-                <h2 class="heading-04">
+                <h2 class="heading-05">
                     <b><a href="{% url 'listing_search' %} {{ key }}">BẤT ĐỘNG SẢN BÁN </a></b>
                 </h2>
 
@@ -115,23 +115,38 @@
         </div>
     </section>
 
+     {%if listing_by_group_forrent %}
+     <section class="container col-12">
+        <div class="inner pd-top-bottom-block block-project-listing">
+            <h3 class="heading-05">
+                <b>NHÀ ĐẤT HÀ NỘI ĐANG CHO THUÊ:</b>
+            </h3>
+            <div class="col-12" style="padding-top: 10px;">
+                {% for district in listing_by_group_forrent %}
+                        <a href="{% url 'listing_search' %}?district={{ district.district }}&sort=priority"
+                           title=""> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
     {% if listings_for_rent %}
         <section class="container col-12">
-            <div class="inner pd-top-bottom-block block-project" style="padding-top: 0">
-                <h2 class="heading-03">
-                    <a href="{% url 'listing_search' %}?trans_type=rent&district='Hoàn Kiếm'">Cho thuê BĐS</a>
+            <div class="inner pd-top-bottom-block block-project-listing">
+                <h2 class="heading-05">
+                    <b><a href="{% url 'listing_search' %} {{ key }}">BẤT ĐỘNG SẢN CHO THUÊ</a></b>
                 </h2>
+
                 <div class="col-12">
-
-                    {% for listing in listings_for_rent %}
-                        {% include "listings/_listingCard2.html" %}
-                    {% endfor %}
-
-                    <input type="hidden" value=""/>
-                    <a class="more" href="{% url 'listing_search' %}?trans_type=sell&district=">Xem thêm nhà đất
-                        <i class="zmdi zmdi-chevron-right"></i>
-                    </a>
+                        {% for listing in listings_for_rent %}
+                                {% include "listings/_listingCard2.html" %}
+                        {% endfor %}
                 </div>
+            <div><a class="more" href="{% url "listing_search" %}?trans_type=rent">
+                        <span >Xem thêm <i class="zmdi zmdi-chevron-right"></i></span>
+                    </a></div>
+
             </div>
         </section>
     {% endif %}

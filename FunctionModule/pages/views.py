@@ -34,17 +34,23 @@ def home_view(request):
     listings_project = (Listing.objects
                             .order_by('priority','-list_date')
                             .filter(is_published=True, transaction_type=TransactionType.PROJECT)[:15])
-    listing_by_group = (Listing.objects
+    listing_by_group_forsale = (Listing.objects
               .values('district')
               .annotate(dcount=Count('district'))
-              .filter(is_published=True)
+              .filter(is_published=True, transaction_type=TransactionType.SELL)
               )
+    listing_by_group_forrent = (Listing.objects
+                                .values('district')
+                                .annotate(dcount=Count('district'))
+                                .filter(is_published=True, transaction_type=TransactionType.FOR_RENT)
+                                )
     list_district_hn = get_all_districts()
     context = {
         'listings_for_sale': listings_for_sale,
         'listings_for_rent': listings_for_rent,
         'listings_project': listings_project,
-        'listing_by_group': listing_by_group,
+        'listing_by_group_forsale': listing_by_group_forsale,
+        'listing_by_group_forrent': listing_by_group_forrent,
         'state_data': get_all_states(),
         'district_data': list_district_hn,
         'bedroom_choices': bedroom_choices,
