@@ -61,7 +61,7 @@ def get_short_title_from_house_type(house_type: str):
         return 'Cửa hàng'
     elif house_type == HouseType.APARTMENT or house_type == HouseType.PENT_HOUSE:
         return 'Căn hộ'
-    elif house_type == HouseType.CONDO_TEL or house_type == HouseType.ERVICE_APARTMENT:
+    elif house_type == HouseType.CONDO_TEL or house_type == HouseType.SERVICE_APARTMENT:
         return 'Căn hộ nghỉ dưỡng'
     elif house_type == HouseType.OFFICE or house_type == HouseType.OFFICE_TEL:
         return 'Văn phòng'
@@ -108,3 +108,9 @@ def print_trace(e: Exception):
         output += "\t  Source: %s\n" % (line)
     output += "\t> Exception: %s\n" % (e)
     print(output)
+
+
+def get_menu_from_choices():
+    listChoices = []
+
+    return HouseType.choices

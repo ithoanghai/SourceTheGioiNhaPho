@@ -18,22 +18,23 @@
     <div class="width-1600">
         <div class="s-menu-wrapper">
             <ul>
-                <li class="s-menu-items ">
-                    <a href="{% url 'services' %}">Tất cả dịch vụ</a>
+                <li class="s-menu-items {% if 'services' in path %} active {% endif %}">
+                    <a href="{% url 'services' %}" >Tất cả dịch vụ</a>
                 </li>
-                <li class="s-menu-items ">
+                <li class="s-menu-items {% if 'whyChoose' in path %} active {% endif %}">
                     <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
                 </li>
-                <li class="s-menu-items ">
+                <li class="s-menu-items {% if 'buy_with_us' in path %} active {% endif %}">
                     <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
                 </li>
-                <li class="s-menu-items ">
+                <li class="s-menu-items {% if 'rent_with_us' in path %} active {% endif %}">
                     <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
                 </li>
-                <li class="s-menu-items active">
+
+                <li class="s-menu-items {% if 'sell_lease_with_us' in path %} active {% endif %}">
                     <a href="{% url 'sell_lease_with_us' %}">Bán & Cho Thuê BĐS với TGNP</a>
                 </li>
-                <li class="s-menu-items ">
+                <li class="s-menu-items {% if 'specialistUs' in path %} active {% endif %}">
                     <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
                 </li>
                 {% comment %}
@@ -49,7 +50,7 @@
                 <li class="s-menu-items ">
                     <a href="bang-dieu-khien.html">Bảng điều khiển</a>
                 </li>{% endcomment %}
-                <li class="s-btn-contact">
+                <li class="s-btn-contact ">
                     <a href="javascript:void(0)" data-action="contact-agent" data-target="contact-agent"
                        class="s-btn-red btn-contact">Liên hệ tư vấn</a>
                 </li>
@@ -62,22 +63,23 @@
     <div class="stickyTrigger is-stuck sticky-sMenu">
         <div class="s-menu-wrapper">
             <ul>
-                <li class="s-menu-items ">
-                    <a href="{% url 'services' %}">Tất cả dịch vụ</a>
+                <li class="s-menu-items {% if 'services' in path %} active {% endif %}">
+                    <a href="{% url 'services' %}" >Tất cả dịch vụ</a>
                 </li>
-                <li class="s-menu-items ">
+                <li class="s-menu-items {% if 'whyChoose' in path %} active {% endif %}">
                     <a href="{% url 'whyChoose' %}">Vì sao chọn TGNP?</a>
                 </li>
-                <li class="s-menu-items ">
+                <li class="s-menu-items {% if 'buy_with_us' in path %} active {% endif %}">
                     <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
                 </li>
-                <li class="s-menu-items ">
+                <li class="s-menu-items {% if 'rent_with_us' in path %} active {% endif %}">
                     <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
                 </li>
-                <li class="s-menu-items active">
+
+                <li class="s-menu-items {% if 'sell_lease_with_us' in path %} active {% endif %}">
                     <a href="{% url 'sell_lease_with_us' %}">Bán & Cho Thuê BĐS với TGNP</a>
                 </li>
-                <li class="s-menu-items ">
+                <li class="s-menu-items {% if 'specialistUs' in path %} active {% endif %}">
                     <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
                 </li>
                 {% comment %}
@@ -93,8 +95,9 @@
                 <li class="s-menu-items ">
                     <a href="bang-dieu-khien.html">Bảng điều khiển</a>
                 </li>{% endcomment %}
-                <li class="s-btn-contact">
-                    <a href="javascript:void(0)" data-action="request-service">Đăng ký ngay</a>
+                <li class="s-btn-contact ">
+                    <a href="javascript:void(0)" data-action="contact-agent" data-target="contact-agent"
+                       class="s-btn-red btn-contact">Liên hệ tư vấn</a>
                 </li>
             </ul>
         </div>

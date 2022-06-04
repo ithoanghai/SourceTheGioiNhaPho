@@ -87,9 +87,9 @@ class RegistrationType(models.TextChoices):
 
 
 class RoadType(models.TextChoices):
-    ALLEY_CAR_2 = 'alley_car_2', _("Ngõ Ô tô tránh")
-    ALLEY_CAR_TRIBIKE = 'alley_car_tribike', _("Ngõ Ô tô tránh Ba gác")
-    ALLEY_CAR = 'alley_car', _("Ngõ Ô tô")
+    ALLEY_CAR_2 = 'alley_car_2', _("Ô tô tránh")
+    ALLEY_CAR_TRIBIKE = 'alley_car_tribike', _("Ô tô tránh Ba gác")
+    ALLEY_CAR = 'alley_car', _("Ô tô")
     ALLEY_TRIBIKE = 'alley_tribike', _("Ngõ Ba gác")
     ALLEY_TRIBIKE_BIKE = 'alley_tribike_bike', _("Ngõ Ba gác tránh Xe máy")
     ALLEY_BIKE = 'alley_bike', _("Ngõ Xe máy tránh nhau")
@@ -171,3 +171,5 @@ class Workplace(models.TextChoices):
     SUMO = 'sumo', _("Sumo")
     VUDA = 'vuda', _("Vuda Home")
     OTHER = 'other', _("Đơn vị khác")
+
+

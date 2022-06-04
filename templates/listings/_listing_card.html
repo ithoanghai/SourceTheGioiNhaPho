@@ -25,10 +25,10 @@
                     <a href="{% url 'listing_search' %}?keywords={{ listing.street }}&sort=priority"
                        title="">{{ listing.street }}</a>
                   </h4>
-                {% if listing.ward %}
+                {% comment %}{% if listing.ward %}
                   <h4><a href="{% url 'listing_search' %}?ward={{ listing.ward }}&sort=priority"
                          title="Phường/Xã"> {% get_ward listing.ward %}</a></h4>
-                 {% endif %}
+                 {% endif %}{% endcomment %}
                   <h4><b>
                     <a href="{% url 'listing_search' %}?district={{ listing.district }}&sort=priority"
                        title="Quận/Huyện"> {% get_district listing.district %}</a></b>

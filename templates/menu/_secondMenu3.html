@@ -17,10 +17,10 @@
   <div class="width-1600">
     <div class="s-menu-wrapper">
           <ul>
-                    <li class="s-menu-items ">
+                    <li class="s-menu-items {% if 'privacyPolicy' in path %} active {% endif %}">
                         <a href="{% url 'privacyPolicy' %}">Chính sách bảo mật</a>
 
-                    <li class="s-menu-items active">
+                    <li class="s-menu-items {% if 'termsOfUse' in path %} active {% endif %}">
                         <a href="{% url 'termsOfUse' %}">Điều khoản sử dụng</a>
 
                 </ul>
@@ -32,10 +32,10 @@
     <div class="stickyTrigger is-stuck sticky-sMenu">
         <div class="s-menu-wrapper">
               <ul>
-                    <li class="s-menu-items ">
+                    <li class="s-menu-items {% if 'privacyPolicy' in path %} active {% endif %}">
                         <a href="{% url 'privacyPolicy' %}">Chính sách bảo mật</a>
 
-                    <li class="s-menu-items active">
+                    <li class="s-menu-items {% if 'termsOfUse' in path %} active {% endif %}">
                         <a href="{% url 'termsOfUse' %}">Điều khoản sử dụng</a>
 
                 </ul>

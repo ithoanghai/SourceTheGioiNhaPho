@@ -8,29 +8,41 @@
       <a href="{% url 'listing_search' %}?trans_type=rent&sort=priority"
          data-mix-header-click="group: rent, action: select_all_rent">Tất cả nhà TGNP cho thuê</a>
     </li>
+          <li>
+      <a href="{% url 'listing_search' %}?trans_type=rent&house_type=town_house&sort=priority"
+         data-mix-header-click="group: rent, action: select_house_rent">Nhà phố cho thuê</a>
+    </li>
+    <li>
+      <a href="{% url 'listing_search' %}?trans_type=rent&house_type=street_house&sort=priority"
+         data-mix-header-click="group: buy, action: select_street_house_rent">Nhà mặt phố cho thuê</a>
+    </li>
     <li>
       <a href="{% url 'listing_search' %}?trans_type=rent&house_type=apartment&sort=priority"
-         data-mix-header-click="group: rent, action: select_apartment_rent">Căn hộ cho thuê</a>
+         data-mix-header-click="group: rent, action: select_apartment_rent">Căn hộ chung cư cho thuê</a>
     </li>
     <li>
       <a href="{% url 'listing_search' %}?trans_type=rent&house_type=shop_house&sort=priority"
          data-mix-header-click="group: rent, action: select_shophouse_rent">Cửa hàng cho thuê</a>
     </li>
     <li>
-      <a href="{% url 'listing_search' %}?trans_type=rent&house_type=town_house&sort=priority"
-         data-mix-header-click="group: rent, action: select_house_rent">Nhà phố cho thuê</a>
-    </li>
-    <li>
       <a href="{% url 'listing_search' %}?trans_type=rent&house_type=villa&sort=priority"
          data-mix-header-click="group: rent, action: select_villa_rent">Biệt thự cho thuê</a>
+    </li>
+      <li>
+      <a href="{% url 'listing_search' %}?trans_type=rent&house_type=plot&sort=priority"
+         data-mix-header-click="group: buy, action: select_plot_rent">Liền kề/Phân lô cho thuê</a>
     </li>
     <li>
       <a href="{% url 'listing_search' %}?trans_type=rent&house_type=office&sort=priority"
          data-mix-header-click="group: rent, action: select_office_rent">Văn phòng cho thuê</a>
     </li>
     <li>
+      <a href="{% url 'listing_search' %}?trans_type=rent&house_type=building&sort=priority"
+         data-mix-header-click="group: buy, action: select_building_rent">Tòa nhà</a>
+    </li>
+    <li>
       <a href="{% url 'listing_search' %}?trans_type=rent&house_type=land&sort=priority"
-         data-mix-header-click="group: rent, action: select_land_rent">Mặt bằng cho thuê</a>
+         data-mix-header-click="group: rent, action: select_land_rent">Mặt bằng/Đất cho thuê</a>
     </li>
     <li class="divide"></li>
     {% comment %}<li>

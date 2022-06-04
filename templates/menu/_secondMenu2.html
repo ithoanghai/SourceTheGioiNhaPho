@@ -17,9 +17,9 @@
   <div class="width-1600">
     <div class="s-menu-wrapper">
       <ul>
-        <li class="s-menu-items"><a href="{% url 'about' %}">Giới thiệu TGNP</a>
+        <li class="s-menu-items {% if 'about' in path %} active {% endif %}"><a href="{% url 'about' %}">Giới thiệu TGNP</a>
         </li>
-        <li class="s-menu-items">
+        <li class="s-menu-items {% if 'specialist_us' in path %} active {% endif %}">
           <a href="{% url 'specialist_us' %}">Đội ngũ chuyên viên</a>
         </li>
 
@@ -27,10 +27,10 @@
                         <a href="#">Phòng giao dịch</a>
                     </li>{% endcomment %}
 
-        <li class="s-menu-items">
+        <li class="s-menu-items {% if 'recruitment' in path %} active {% endif %}">
           <a href="{% url 'recruitment' %}">Tuyển dụng</a>
         </li>
-        <li class="s-menu-items active">
+        <li class="s-menu-items {% if 'contacts' in path %} active {% endif %}">
           <a href="{% url 'contacts' %}">Liên hệ</a>
         </li>
 
@@ -46,27 +46,27 @@
     <div class="stickyTrigger is-stuck sticky-sMenu">
         <div class="s-menu-wrapper">
             <ul>
-            <li class="s-menu-items"><a href="{% url 'about' %}">Giới thiệu TGNP</a>
-            </li>
-            <li class="s-menu-items">
-              <a href="{% url 'specialist_us' %}">Đội ngũ chuyên viên</a>
-            </li>
+        <li class="s-menu-items {% if 'about' in path %} active {% endif %}"><a href="{% url 'about' %}">Giới thiệu TGNP</a>
+        </li>
+        <li class="s-menu-items {% if 'specialist_us' in path %} active {% endif %}">
+          <a href="{% url 'specialist_us' %}">Đội ngũ chuyên viên</a>
+        </li>
 
-            {% comment %}<li class="s-menu-items">
-                            <a href="#">Phòng giao dịch</a>
-                        </li>{% endcomment %}
+        {% comment %}<li class="s-menu-items">
+                        <a href="#">Phòng giao dịch</a>
+                    </li>{% endcomment %}
 
-            <li class="s-menu-items">
-              <a href="{% url 'recruitment' %}">Tuyển dụng</a>
-            </li>
-            <li class="s-menu-items active">
-              <a href="{% url 'contacts' %}">Liên hệ</a>
-            </li>
+        <li class="s-menu-items {% if 'recruitment' in path %} active {% endif %}">
+          <a href="{% url 'recruitment' %}">Tuyển dụng</a>
+        </li>
+        <li class="s-menu-items {% if 'contacts' in path %} active {% endif %}">
+          <a href="{% url 'contacts' %}">Liên hệ</a>
+        </li>
 
-             <li class="s-btn-contact">
-                      <a href="javascript:void(0)" data-action="contact-agent" data-target="contact-agent" class="s-btn-red btn-contact">Liên hệ tư vấn</a>
-            </li>
-          </ul>
+         <li class="s-btn-contact">
+                  <a href="javascript:void(0)" data-action="contact-agent" data-target="contact-agent" class="s-btn-red btn-contact">Liên hệ tư vấn</a>
+        </li>
+      </ul>
         </div>
     </div>
 </div>

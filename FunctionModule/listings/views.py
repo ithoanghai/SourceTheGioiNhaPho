@@ -1,7 +1,12 @@
+import random
+import string
+
 from django.conf import settings
+from django.contrib import messages
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.encoding import force_text
 from django_filters.rest_framework import DjangoFilterBackend
 from pydantic import BaseModel
@@ -11,8 +16,13 @@ from rest_framework.response import Response
 
 from FunctionModule.cadastral.lookups import get_all_states, get_all_districts
 from django.db.models import Q
+
+from . import HouseType
+from .choices import district_choices
 from .filters import ListingFilter
+from .models import ListingImage
 from .serializers import *
+from ..cadastral.constants import district_data
 
 
 class ListingSearchQuery(BaseModel):
@@ -68,42 +78,52 @@ def search(request):
 
 
 def post_listing(request):
+    houseTypes = HouseType.choices
+    state_code = "01"
+    hanoi_district_list = district_data[state_code]
+    district_choices = {}
+    code = f'POST22{random.choices(string.ascii_uppercase + string.digits)}'
+    for item in district_choices:  # type: dict
+        district_choices[item['name']] = item['code']
     context = {
+        'houseTypes': houseTypes,
+        'district_choices': district_choices
     }
     if request.user.is_authenticated:
         if request.method == 'GET':
             return render(request, 'listings/postListing.html', context)
         elif request.method == 'POST':
-            # listing_id = request.POST['listing_id']
-            # lastname = request.POST['lastname']
-            # firstname = request.POST['firstname']
-            # name = f'{firstname} {lastname}'
-            # email = request.POST['email']
-            # phone = request.POST['phone']
-            # message = request.POST['message']
-            # user_id = request.POST.get('user_id', None)
-            # yesterday = timezone.now() - timedelta(days=1)
+             trantypes = request.POST['trantypes']
+             housetype = request.POST['housetype']
+             title = request.POST['title']
+             description = request.POST['description']
+             street = request.POST['street']
+             address = request.POST['address']
+             district = '008'
+             area = request.POST['area']
+             width = request.POST['width']
+             floor = request.POST['floor']
+             price = request.POST['price']
+             if request.FILES.get('photomain', None) is not None:
+                 photomain = request.FILES.get('photomain')
+             else:
+                 photomain = request.POST['photomain']
+             list_date = timezone.now()
             # #  Check if user has made inquiry already
-            # if request.user.is_authenticated:
-            #     user_id = request.user.id
-            #     has_contacted = Contact.objects.filter(listing_id=listing_id, user_id=user_id,
-            #                                            contact_date__gte=yesterday)
-            #     if has_contacted:
-            #         messages.error(request,
-            #                        'Bạn đã gửi yêu cầu tới chúng tôi về căn hộ này. Xin thử gửi lại yêu cầu sau.')
-            #         return redirect('/listings/' + listing_id)
-            # else:
-            #     ses_id = request.session.session_key
-            #     print(ses_id)
-            #
-            # listing = Listing.objects.get(pk=listing_id)
+             user_id = request.user.id
+             has_listing = Listing.objects.filter(address=address, user_id=user_id,
+                                                    list_date__gte=list_date)
+             if has_listing:
+                messages.error(request,
+                                'Bạn đã gửi yêu cầu tới chúng tôi về tin đăng này. Xin thử gửi lại yêu cầu sau.')
+                return redirect('post_listings')
 
-            # Contact.objects.create(listing=listing.code, listing_id=listing_id, name=name, email=email,
-            #                        phone=phone, message=message, user_id=user_id)
-            #
-            # messages.success(request, 'Yêu cầu được gửi thành công. Chúng tôi sẽ liên lạc lại với bạn sớm nhất.')
-
-            return render(request, 'listings/postListingSuccess.html', context)
+             listing = Listing.objects.create(user_id=user_id, is_advertising=True, transaction_type=trantypes, house_type=housetype, code=code, title=title,
+                                    description=description, street=street, district=district, address=address, area=area, width=width, floors=int(floor), price=price)
+             if request.FILES.get('photomain', None) is not None:
+                ListingImage.objects.create(listing_id=listing.id, photo=photomain)
+             messages.success(request, 'Bạn đã gửi tin đăng thành công. Quản trị viên sẽ kiểm duyệt trước khi đăng.')
+             return render(request, 'listings/postListingSuccess.html', context)
     else:
         return redirect('login')
 
@@ -140,6 +160,7 @@ def my_listing(request):
 
 def sell_lease_with_us(request):
     context = {
+        'path': request.path,
     }
 
     return render(request, 'listings/sellLeaseWithUs.html', context)
@@ -147,6 +168,7 @@ def sell_lease_with_us(request):
 
 def buy_with_us(request):
     context = {
+        'path': request.path,
     }
 
     return render(request, 'listings/buyWithUs.html', context)
@@ -154,6 +176,7 @@ def buy_with_us(request):
 
 def rent_with_us(request):
     context = {
+        'path': request.path,
     }
 
     return render(request, 'listings/rentWithUs.html', context)

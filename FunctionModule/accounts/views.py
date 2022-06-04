@@ -146,7 +146,6 @@ def profile(request):
             paginator = Paginator(trans, 10)
             page = request.GET.get('page')
             paged_trans = paginator.get_page(page)
-            print(point)
             context = {
                 'transactions': paged_trans,
                 'point': point,
