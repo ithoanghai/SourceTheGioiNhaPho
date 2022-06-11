@@ -9,6 +9,7 @@ from django import forms
 from django.http import HttpRequest, JsonResponse
 
 from FunctionModule.listings.import_csv import handle_import, logger
+from TownhouseWorldRealestate.settings import BASE_DIR, MEDIA_ROOT
 from .filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter, IsWithinRangeFilter, \
     SimpleDropdownFilter, AreaFilter
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
@@ -22,11 +23,6 @@ from fractions import *
 class ContractPhotoAdmin(admin.TabularInline):
     model = ContractImage
     verbose_name = "ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"
-    form = ImageForm
-    formset = ImageFormSet
-
-    max_num = 20
-    extra = 0
 
 
 class ListingPhotoAdmin(admin.TabularInline):
@@ -185,7 +181,7 @@ class ListingHistoryAdmin(admin.ModelAdmin):
     actions = []
     form = ListingAdminForm
     ordering = ('-list_date',)
-    filter_horizontal = ('realtor',)
+    #filter_horizontal = ('realtor')
 
     class Media:
         js = ('admin/js/dropzone.js', 'admin/js/listing.js', 'admin/js/filepond-4.28.2.min.js',
@@ -233,16 +229,23 @@ class ListingHistoryAdmin(admin.ModelAdmin):
             return queryset_list
 
 
-@admin.site.register_view('listings/listing/import-listing')
+@admin.site.register_view('listings/listing/import-export')
 def import_csv_view(request: HttpRequest) -> JsonResponse:
     if request.method == 'POST':
-        form = ImportListingForm(request.POST, request.FILES)
+        form = ImportListingForm(request.POST or None, request.FILES)
         if form.is_valid():
+            #file = request.FILES.get('file')
+            #filename = file._get_name()
+            #fd = open('%s/import-export/%Y%m%d/%s' % (MEDIA_ROOT, str(filename)), 'wb')
+            #fd = open(file, 'r', encoding="utf-8", errors='ignore')
+            #for chunk in file.chunks():
+            #    fd.write(chunk)
+            #fd.close()
             file: UploadedFile = form.cleaned_data.get('file')
-            # with open(file, 'r', encoding="utf-8", errors='ignore') as fp:
-            #    default_storage.save(f'photos/{file.name}', fp)
+            #with open(file, 'r', encoding="utf-8", errors='ignore') as fp:
+            #   default_storage.save(BASE_DIR, f'media/import-export/{file.name}', fp)
 
-            handle_import(request, f'media/import-listing/{file.name}', listing_type=request.POST.get('listing_type'))
+            handle_import(request, f'media/import-export/{file.name}', listing_type=request.POST.get('listing_type'))
 
             return JsonResponse({})
         else:

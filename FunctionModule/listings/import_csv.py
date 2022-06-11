@@ -12,16 +12,14 @@ from django.contrib.gis.geos import Point
 from django.db.models import Q
 from django.template.loader import render_to_string
 from django.utils.text import slugify
-from geopy import GeocodeEarth
 from geopy.geocoders import Nominatim
-from oauthlib.uri_validate import reserved
 
 from FunctionModule.accounts.models import User
 from FunctionModule.cadastral.constants import district_data
 from FunctionModule.cadastral.lookups import get_district_name
-from FunctionModule.listings.choices import Position, Workplace, Title
 from FunctionModule.listings.helpers import print_trace, get_house_type_short, get_short_title_from_house_type
 from FunctionModule.listings.models import Listing, Status, TransactionType, HouseType, RoadType, ListingHistory
+from FunctionModule.realtors.choices import Position, Workplace
 from FunctionModule.realtors.models import Realtor
 
 default_password = 'tgnpvn@2021'
@@ -603,7 +601,7 @@ def handle_import(request, file_path, listing_type):
                     new_listing.description = description
 
                 query = (Q(address__contains=so_nha[0]) & Q(area=area) & Q(floors=floor) & Q(width=width) & Q(price=price))| \
-                        (Q(address__contains=so_nha[0]) & Q(area=area) & Q(street=street) & Q(state=state_code) & Q(district=district_code))
+                        (Q(address__contains=so_nha[0]) & Q(area=area) & Q(street=street) & Q(state=state_code))
                 querylist_list = Listing.objects.filter(Q(code=code) | Q(address=full_addr) | query).order_by('-list_date')
                 #Nếu kho đã tồn tại bđs
                 if querylist_list.exists():
@@ -613,7 +611,7 @@ def handle_import(request, file_path, listing_type):
                         print(f"row {line_count}: kho đang có {querylist_list.count()} bđs: {new_listing}")
                     # duyệt toàn bộ tìm các listing trùng lặp đang có trong kho
                     for listing in querylist_list:
-                        logger.info(f"row {line_count}: listing {listing}, count_update {count_update}")
+                        #logger.info(f"row {line_count}: listing {listing}, count_update {count_update}")
                         #Kiểm tra listing tiếp theo, nếu cũ hơn thì xóa, mới hơn thì cập nhật
                         if listing_fisrt is None:
                             listing_fisrt = Listing.objects.get(id=listing.id)
@@ -685,8 +683,10 @@ def handle_import(request, file_path, listing_type):
                                 listing_fisrt.status = new_listing.status
                                 listing_fisrt.list_date = new_listing.list_date
                                 listing_fisrt.is_published = new_listing.is_published
+                                if Listing.objects.filter(code=listing_fisrt.code).exists():
+                                    listing_fisrt.code = new_listing.code + deep_address[0]
                                 listing_fisrt.save()
-                                logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} từ {new_listing}")
+                                logger.info(f"row {line_count}: cập nhật {listing.code} prior {listing.priority} từ {new_listing}")
                         if count_update >= 1 and listing.id is not None:
                             findlisthistory = ListingHistory.objects.filter(listing=listing)
                             if findlisthistory.exists():

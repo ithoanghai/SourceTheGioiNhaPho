@@ -60,7 +60,7 @@
         <section class="container col-12">
             <div class="inner pd-top-bottom-block block-project-listing">
                 <h2 class="heading-05">
-                    <b><a href="{% url 'listing_search' %} {{ key }}">CÓ {{ listings_for_sale.count }} BẤT ĐỘNG SẢN BÁN </a></b>
+                    <b><a href="{% url 'listing_search' %} {{ key }}">CÓ {% comment %}{{ listings_for_sale.count }}{% endcomment %}BẤT ĐỘNG SẢN BÁN </a></b>
                 </h2>
 
                 <div class="col-12">

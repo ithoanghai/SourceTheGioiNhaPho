@@ -118,7 +118,7 @@ def post_listing(request):
                                 'Bạn đã gửi yêu cầu tới chúng tôi về tin đăng này. Xin thử gửi lại yêu cầu sau.')
                 return redirect('post_listings')
 
-             listing = Listing.objects.create(user_id=user_id, is_advertising=True, transaction_type=trantypes, house_type=housetype, code=code, title=title,
+             listing = Listing.objects.create(user_id=user_id, is_advertising=True, is_published=False, transaction_type=trantypes, house_type=housetype, code=code, title=title,
                                     description=description, street=street, district=district, address=address, area=area, width=width, floors=int(floor), price=price)
              if request.FILES.get('photomain', None) is not None:
                 ListingImage.objects.create(listing_id=listing.id, photo=photomain)

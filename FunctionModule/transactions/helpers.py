@@ -2,7 +2,7 @@ import sys
 import traceback
 
 from FunctionModule.customers.choices import CustomerType
-from FunctionModule.listings.choices import Position, Title
+from FunctionModule.realtors.choices import Position, Title
 from FunctionModule.transactions.models import TransTypeInit
 
 

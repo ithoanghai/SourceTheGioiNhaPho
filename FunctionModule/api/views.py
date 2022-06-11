@@ -34,6 +34,8 @@ def get_user(r: request.Request, **kwargs):
         "username": r.user.username,
         "can_export_listing": r.user.is_superuser,
         "can_import_listing": r.user.is_superuser,
+        "can_export_realtor": r.user.is_superuser,
+        "can_import_realtor": r.user.is_superuser,
     })
 
 

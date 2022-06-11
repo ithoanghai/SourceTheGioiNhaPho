@@ -315,9 +315,9 @@ function importToDB($) {
         csrf = csrfCookie[1];
     } catch (e) {
     }
-    // const fileUploader = $('#fileUpload').dropzone({url: 'import-listing', autoProcessQueue: false});
+    // const fileUploader = $('#fileUpload').dropzone({url: 'import-export', autoProcessQueue: false});
     var myDropzone = new Dropzone("#fileUpload", {
-        url: "import-listing",
+        url: "import-export",
         autoProcessQueue: false,
         maxFilesize: 20,    // MB
         createImageThumbnails: false,
@@ -356,7 +356,7 @@ function importListing($) {
         '        </button>\n' +
         '      </div>\n' +
         '      <div class="modal-body">\n' +
-        '        <form action="import-listing"\n' +
+        '        <form action="import-export"\n' +
         '              class="dropzone"\n' +
         '              id="fileUpload">' +
         '         </form>' +
