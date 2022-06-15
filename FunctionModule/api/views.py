@@ -246,10 +246,11 @@ def download_export_realtor(req: request.Request, **kwargs):
     for realtor in realtors:
         # write operation perform
         worksheet.write(row, 0, realtor.name)
-        worksheet.write(row, 1, realtor.birthyear)
+        format1 = workbook.add_format({'num_format': 'd-m-yyyy'})
+        worksheet.write(row, 1, realtor.birthyear, format1)
         worksheet.write(row, 2, realtor.phone1)
         worksheet.write(row, 3, realtor.identifier)
-        worksheet.write(row, 4, realtor.date_join)
+        #worksheet.write_datetime(row, 4, realtor.date_join)
         worksheet.write(row, 5, realtor.position)
         worksheet.write(row, 6, realtor.workplace)
         worksheet.write(row, 7, realtor.department)
