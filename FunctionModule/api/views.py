@@ -250,7 +250,7 @@ def download_export_realtor(req: request.Request, **kwargs):
         worksheet.write(row, 1, realtor.birthyear, format1)
         worksheet.write(row, 2, realtor.phone1)
         worksheet.write(row, 3, realtor.identifier)
-        #worksheet.write_datetime(row, 4, realtor.date_join)
+        worksheet.write_datetime(row, 4, realtor.date_join)
         worksheet.write(row, 5, realtor.position)
         worksheet.write(row, 6, realtor.workplace)
         worksheet.write(row, 7, realtor.department)
@@ -269,7 +269,7 @@ def download_export_realtor(req: request.Request, **kwargs):
         # with each iterations.
         row += 1
 
-    download(file_path, dest_folder="C:/")
+    #download(file_path, dest_folder="C:/")
     workbook.close()
     return response.Response()
 
