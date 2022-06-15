@@ -2,9 +2,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator, RegexVa
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext as _
-
+from rest_framework import serializers
 from FunctionModule.accounts.models import User
-from FunctionModule.realtors import serializers
 from FunctionModule.realtors.choices import Position, Title, Workplace, Status
 
 

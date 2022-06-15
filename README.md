@@ -45,6 +45,7 @@ Show Log docker
 Restart certificate on docker server
     docker-compose -f docker-compose.production.yml exec -it certbot /bin/sh
     docker-compose -f docker-compose.production.yml up -d certbot  
+    docker-compose -f docker-compose.production.yml restart web
     docker-compose -f docker-compose.production.yml exec nginx bash -c "nginx -s reload"
 
 gộp dữ liệu
