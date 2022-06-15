@@ -58,7 +58,7 @@ function importToDB($) {
     })
 }
 
-function exportFBData($) {
+function exportRealtorData($) {
     const csrftoken = getCookie('csrftoken');
 
     function downloadURI(uri, name) {
@@ -70,7 +70,7 @@ function exportFBData($) {
         document.body.removeChild(link);
     }
 
-    $.ajax('/api/download_fb_export', {
+    $.ajax('/api/download_export_realtor', {
         type: 'POST',
         headers: {'X-CSRFToken': csrftoken},
     }).done((data, status, xhr) => {
@@ -114,7 +114,7 @@ function importRealtor($) {
 }
 
 function exportRealtor($) {
-    $('.object-tools').append('<li><button class="button" onclick="exportFBData($)" type="button">Xuất dữ liệu Chuyên viên Excel</button></li>');
+    $('.object-tools').append('<li><button class="button" onclick="exportRealtorData($)" type="button">Xuất dữ liệu Chuyên viên ra Excel</button></li>');
 }
 
 window.addEventListener("load", function () {
@@ -125,9 +125,9 @@ window.addEventListener("load", function () {
             if (data.can_import_realtor) {
                 importRealtor(jQuery);
             }
-            /*if (data.can_export_realtor) {
+            if (data.can_export_realtor) {
                 exportRealtor(jQuery);
-            }*/
+            }
         })
         // priceToText(jQuery);
         addressSelect(jQuery);

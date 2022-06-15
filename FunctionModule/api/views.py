@@ -14,6 +14,8 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from FunctionModule.listings.export_csv import prepare_fb_headers, prepare_fb_listing_data
 from FunctionModule.listings.models import ListingSerializer, Listing
 from FunctionModule.listings.search import prepare_listing_queryset, search_by_keywords, get_suggestions
+from FunctionModule.realtors.export_realtor import prepare_export_realtor_data
+from FunctionModule.realtors.models import Realtor
 
 
 @api_view(['GET'])
@@ -198,4 +200,44 @@ def download_exported_listing(req: request.Request, **kwargs):
         resp = HttpResponse(fp.read(), content_type="text/csv")
         resp['Content-Disposition'] = f'filename=tgnp_bds_facebook_export-{datetime.today().strftime("%Y-%m-%d")}.csv'
         print("Exported listings")
+        return resp
+
+
+@api_view(['POST'])
+@csrf_protect
+def download_export_realtor(req: request.Request, **kwargs):
+    # Create an new Excel file and add a worksheet.
+    # workbook = xlsxwriter.Workbook(file_path)
+    # worksheet = workbook.add_worksheet()
+
+    # # Widen the first column to make the text clearer.
+    # worksheet.set_column('A:A', 20)
+    #
+    # # Add a bold format to use to highlight cells.
+    # bold = workbook.add_format({'bold': True})
+    #
+    # # Write some simple text.
+    # worksheet.write('A1', 'Hello')
+    #
+    # # Text with formatting.
+    # worksheet.write('A2', 'World', bold)
+    #
+    # # Write some numbers, with row/column notation.
+    # worksheet.write(2, 0, 123)
+    # worksheet.write(3, 0, 123.456)
+
+    # Insert an image.
+    # worksheet.insert_image('B5', 'logo.png')
+    file_path = os.path.join(tempfile.gettempdir(), 'tmp.xlsx')
+    with open(file_path, 'w', encoding='utf-8') as fp:
+        headers = prepare_fb_headers()
+        writer = csv.DictWriter(fp, fieldnames=headers)
+        writer.writeheader()
+        for realtor in Realtor.objects.all():
+            realtor_data = prepare_export_realtor_data(realtor)
+            writer.writerow(realtor_data)
+    with open(file_path, 'r', encoding='utf-8') as fp:
+        resp = HttpResponse(fp.read(), content_type="text/csv")
+        resp['Content-Disposition'] = f'filename=DS Chuyên viên TGNP-{datetime.today().strftime("%Y-%m-%d")}.csv'
+        print("Exported realtor")
         return resp

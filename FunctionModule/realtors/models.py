@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 
 from FunctionModule.accounts.models import User
+from FunctionModule.realtors import serializers
 from FunctionModule.realtors.choices import Position, Title, Workplace, Status
 
 
@@ -36,21 +37,21 @@ class Realtor(models.Model):
         verbose_name_plural = "DS Chuyên viên"
 
     user = models.OneToOneField(User, on_delete=models.RESTRICT, verbose_name=_("Tài khoản đăng nhập của chuyên viên"), blank=True, null=True)
-    name = models.CharField(max_length=50,  verbose_name=_("Họ và tên"))
+    name = models.CharField(max_length=50,  null=True,  verbose_name=_("Họ và tên"))
     position = models.CharField(max_length=20, choices=Position.choices, verbose_name=_("Chức danh"),default=Position.EXPERT)
     birthyear = models.IntegerField(_('Năm sinh'), blank=True, null=True, choices=year_dropdown, default=timezone.now().year - 15)
     countryside = models.CharField(_('Quê quán'), blank=True, null=True, max_length=150)
-    phone1 = models.CharField(_('Điện thoại chính'), max_length=40, db_index=True, unique=True, validators=[phone_regex],
+    phone1 = models.CharField(_('Điện thoại chính'), max_length=40, null=True, db_index=True, unique=True, validators=[phone_regex],
                              error_messages={'unique': _("Số điện thoại chính này đã được sử dụng trên hệ thống.")})
     phone2 = models.CharField(_('Điện thoại phụ'), max_length=40, db_index=True, blank=True, null=True, validators=[phone_regex],
                              error_messages={'unique': _("Số điện thoại phụ này đã được sử dụng trên hệ thống.")})
-    identifier = models.CharField(_('Căn cước công dân'), blank=True, null=True, max_length=12)
+    identifier = models.CharField(_('Căn cước công dân'), blank=True, null=True, max_length=15)
     workplace = models.CharField(max_length=50, choices=Workplace.choices, verbose_name=_("Đơn vị"),
                                  default=Workplace.TGNP)
     department = models.CharField(max_length=100, verbose_name=_("Bộ phận/Phòng/Ban"), null=True, blank=True)
     email = models.EmailField(_('Email'), blank=True, null=True)
     address = models.CharField(_('Nơi ở hiện tại'), blank=True, null=True, max_length=255)
-    title = models.CharField(max_length=20, choices=Title.choices, verbose_name=_("Danh hiệu"), default=Title.ROOKIE)
+    title = models.CharField(max_length=30, choices=Title.choices, verbose_name=_("Danh hiệu"), default=Title.ROOKIE)
     level = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)], choices=([(i, i) for i in range(1, 10)]), default=1, verbose_name=_("Đẳng cấp chuyên môn"))
     work_area = models.CharField(max_length=100, verbose_name=_("Địa bàn khu vực Quận/Huyện hoạt động"), null=True, blank=True)
     story = models.TextField(_('Kinh nghiệm hoạt động'), blank=True, null=True,)
@@ -81,3 +82,29 @@ class Realtor(models.Model):
     @property
     def website_url_name(self):
         return split_url(self.website)
+
+
+class RealtorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Realtor
+        exclude = ()
+
+    name = serializers.CharField()
+    phone1 = serializers.CharField()
+    identifier = serializers.CharField()
+    birthyear = serializers.IntegerField()
+    date_join = serializers.DateField()
+    position = serializers.FloatField()
+    workplace = serializers.FloatField()
+    department = serializers.CharField()
+    facebook = serializers.CharField()
+    email = serializers.CharField()
+    address = serializers.CharField()
+    countryside = serializers.CharField()
+    work_area = serializers.CharField()
+    status = serializers.CharField()
+    is_cooperate = serializers.BooleanField()
+    is_published = serializers.BooleanField()
+    training = serializers.CharField()
+    referral = serializers.CharField()
+    hire_date = serializers.DateField()
