@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from FunctionModule.realtors.models import Realtor
+from .models import Realtor
 
 
 class RealtorSerializer(serializers.ModelSerializer):

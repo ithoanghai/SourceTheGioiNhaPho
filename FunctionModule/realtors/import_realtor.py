@@ -80,20 +80,14 @@ def handle_import(request, file_path):
     try:
         if request.user is not None:
             user = request.user
-            real = Realtor.objects.filter(user=user)
+            query = Q(phone1=user.phone) or Q(user_id=user.id)
+            real = Realtor.objects.filter(query)
             if real.first() is None:
-                Realtor.objects.create(user=user)
+                Realtor.objects.create(user_id=user.id, phone1=user.phone, name=user.name, email=user.email, address=user.address, is_cooperate=True)
 
         workbook = load_workbook(file_path)
         # Define variable to read the active sheet:
         worksheet = workbook.active
-        # COLUMNS = get_columns_from_worksheet(worksheet)
-        # rows = worksheet.iter_rows(min_row=1, max_row=1)  # returns a generator of rows
-        # first_row = next(rows)  # get the first row
-        # headings = [c.value for c in first_row]  # extract the values from the cells
-        # for head in headings:
-        #    print(head)
-        # Iterate the loop to read the cell values
         for row in worksheet.iter_rows(min_row=2, max_row=worksheet.max_row):
             line_count += 1
             realtor = Realtor()

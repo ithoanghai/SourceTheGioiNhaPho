@@ -19,7 +19,7 @@ from FunctionModule.cadastral.constants import district_data
 from FunctionModule.cadastral.lookups import get_district_name
 from FunctionModule.listings.helpers import print_trace, get_house_type_short, get_short_title_from_house_type
 from FunctionModule.listings.models import Listing, Status, TransactionType, HouseType, RoadType, ListingHistory
-from FunctionModule.realtors.choices import Position, Workplace
+from FunctionModule.realtors.choices import Position, Workplace, Title
 from FunctionModule.realtors.models import Realtor
 
 default_password = 'tgnpvn@2021'
@@ -122,9 +122,10 @@ def handle_import(request, file_path, listing_type):
     try:
         if request.user is not None:
             user = request.user
-            real = Realtor.objects.filter(user=user)
+            query = Q(phone1=user.phone) or Q(user_id=user.id)
+            real = Realtor.objects.filter(query)
             if real.first() is None:
-                Realtor.objects.create(user=user)
+                Realtor.objects.create(user_id=user.id, phone1=user.phone, name=user.name, email=user.email, address=user.address, is_cooperate=True)
 
     # realtor scan and reorder
         realtors = Realtor.objects.all()
@@ -137,7 +138,9 @@ def handle_import(request, file_path, listing_type):
                 realtor_dict[fone] = obj
             else:
                 queryset_list = Listing.objects.filter(realtor=obj)
-                usr_list = User.objects.filter(last_name=obj.user.last_name)
+                usr_list = {}
+                if obj.user is not None:
+                    usr_list = User.objects.filter(last_name=obj.user.last_name)
                 for usr in usr_list:
                     if len(usr.phone) == 10:
                         fone = usr.phone
@@ -420,7 +423,7 @@ def handle_import(request, file_path, listing_type):
                             realtor = realtor_dict[phone]
                             realtor.user = user_tmp
                             realtor.save()
-                            print(f"cập nhật user: {usr} cho realtor {realtor}")
+                            print(f"cập nhật user: {user_tmp} cho realtor {realtor}")
 
                         query = Q(phone1=phone) | Q(phone2=phone)
                         rl = Realtor.objects.filter(query).first()
@@ -607,7 +610,7 @@ def handle_import(request, file_path, listing_type):
                 if querylist_list.exists():
                     count_update = 0
                     listing_fisrt = None
-                    if querylist_list.count() > 1:
+                    if querylist_list.count() > 0:
                         print(f"row {line_count}: kho đang có {querylist_list.count()} bđs: {new_listing}")
                     # duyệt toàn bộ tìm các listing trùng lặp đang có trong kho
                     for listing in querylist_list:
@@ -628,7 +631,6 @@ def handle_import(request, file_path, listing_type):
                                               warehouse=listing_type, list_date=new_listing.list_date)
                                 new_listhis.save()
                                 logger.info(f"row {line_count}: tạo mới lịch sử bđs {new_listhis} từ listing import cũ hơn {new_listing}, bđs gốc {listing_fisrt}")
-
                         #Nếu listing đưa vào là mới nhất là lần đầu thì cập nhật thông tin mới cho listing
                         elif listing.list_date < new_listing.list_date:
                             querylist_listhistory = ListingHistory.objects.filter(listing=listing_fisrt, list_date=listing.list_date)

@@ -2,11 +2,14 @@ import csv
 import math
 import os
 import tempfile
-from datetime import datetime
+from datetime import date, datetime
 
+import xlsxwriter
+import requests
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
+from openpyxl import load_workbook, Workbook
 from rest_framework import request, response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -206,38 +209,85 @@ def download_exported_listing(req: request.Request, **kwargs):
 @api_view(['POST'])
 @csrf_protect
 def download_export_realtor(req: request.Request, **kwargs):
-    # Create an new Excel file and add a worksheet.
-    # workbook = xlsxwriter.Workbook(file_path)
-    # worksheet = workbook.add_worksheet()
+    #file_path = os.path.join(tempfile.gettempdir(), 'tmp.xlsx')
+    file_path = os.path.join('./media/import-export/', 'DS NHÂN SỰ TGNP.xlsx')
+    #wb = Workbook()
+    #ws = wb.create_sheet("DS Chuyên viên TGNP")
+    #ws.title = "DS Chuyên viên TGNP"
+    #wb.save(file_path)
+    workbook = xlsxwriter.Workbook(file_path)
+    worksheet = workbook.add_worksheet('DS TOÀN BỘ CHUYÊN VIÊN TGNP')
 
-    # # Widen the first column to make the text clearer.
-    # worksheet.set_column('A:A', 20)
-    #
-    # # Add a bold format to use to highlight cells.
-    # bold = workbook.add_format({'bold': True})
-    #
-    # # Write some simple text.
-    # worksheet.write('A1', 'Hello')
-    #
-    # # Text with formatting.
-    # worksheet.write('A2', 'World', bold)
-    #
-    # # Write some numbers, with row/column notation.
-    # worksheet.write(2, 0, 123)
-    # worksheet.write(3, 0, 123.456)
+    # write header
+    row = 0
+    worksheet.write(row, 0, 'Họ và Tên')
+    worksheet.write(row, 1, 'Ngày sinh')
+    worksheet.write(row, 2, 'Số Điện Thoại')
+    worksheet.write(row, 3, 'CMT/CCCD')
+    worksheet.write(row, 4, 'Ngày vào đơn vị')
+    worksheet.write(row, 5, 'Chức vụ')
+    worksheet.write(row, 6, 'Đơn vị')
+    worksheet.write(row, 7, 'Bộ phận/Phòng/Ban')
+    worksheet.write(row, 8, 'Facebook')
+    worksheet.write(row, 9, 'Email')
+    worksheet.write(row, 10, 'Quê quán')
+    worksheet.write(row, 11, 'Nơi ở')
+    worksheet.write(row, 12, 'Địa bàn hoạt động')
+    worksheet.write(row, 13, 'Hiện trạng')
+    worksheet.write(row, 14, 'Hợp tác với TGNP')
+    worksheet.write(row, 15, 'Công khai danh tính')
+    worksheet.write(row, 16, 'Khóa đào tạo')
+    worksheet.write(row, 17, 'Nguồn tuyển/Giới thiệu')
 
-    # Insert an image.
-    # worksheet.insert_image('B5', 'logo.png')
-    file_path = os.path.join(tempfile.gettempdir(), 'tmp.xlsx')
-    with open(file_path, 'w', encoding='utf-8') as fp:
-        headers = prepare_fb_headers()
-        writer = csv.DictWriter(fp, fieldnames=headers)
-        writer.writeheader()
-        for realtor in Realtor.objects.all():
-            realtor_data = prepare_export_realtor_data(realtor)
-            writer.writerow(realtor_data)
-    with open(file_path, 'r', encoding='utf-8') as fp:
-        resp = HttpResponse(fp.read(), content_type="text/csv")
-        resp['Content-Disposition'] = f'filename=DS Chuyên viên TGNP-{datetime.today().strftime("%Y-%m-%d")}.csv'
-        print("Exported realtor")
-        return resp
+    row = 1
+    column = 0
+    realtors = Realtor.objects.all()
+    # iterating through content list
+    for realtor in realtors:
+        # write operation perform
+        worksheet.write(row, 0, realtor.name)
+        worksheet.write(row, 1, realtor.birthyear)
+        worksheet.write(row, 2, realtor.phone1)
+        worksheet.write(row, 3, realtor.identifier)
+        worksheet.write(row, 4, realtor.date_join)
+        worksheet.write(row, 5, realtor.position)
+        worksheet.write(row, 6, realtor.workplace)
+        worksheet.write(row, 7, realtor.department)
+        worksheet.write(row, 8, realtor.facebook)
+        worksheet.write(row, 9, realtor.email)
+        worksheet.write(row, 10, realtor.countryside)
+        worksheet.write(row, 11, realtor.address)
+        worksheet.write(row, 12, realtor.work_area)
+        worksheet.write(row, 13, realtor.status)
+        worksheet.write(row, 14, realtor.is_cooperate)
+        worksheet.write(row, 15, realtor.is_published)
+        worksheet.write(row, 16, realtor.training)
+        worksheet.write(row, 17, realtor.referral)
+
+        # incrementing the value of row by one
+        # with each iterations.
+        row += 1
+
+    download(file_path, dest_folder="C:/")
+    workbook.close()
+    return response.Response()
+
+
+def download(url: str, dest_folder: str):
+    if not os.path.exists(dest_folder):
+        os.makedirs(dest_folder)  # create folder if it does not exist
+
+    filename = url.split('/')[-1].replace(" ", "_")  # be careful with file names
+    file_path = os.path.join(dest_folder, filename)
+
+    r = requests.get(url, stream=True)
+    if r.ok:
+        print("saving to", os.path.abspath(file_path))
+        with open(file_path, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=1024 * 8):
+                if chunk:
+                    f.write(chunk)
+                    f.flush()
+                    os.fsync(f.fileno())
+    else:  # HTTP status code 4XX/5XX
+        print("Download failed: status code {}\n{}".format(r.status_code, r.text))
