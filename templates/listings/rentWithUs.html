@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static humanize i18n load_static %}
-
+{% block title %} {% trans "Thuê nhà với TGNP" %} {% endblock %}
 {% block head %}
     {{ block.super }}
     <link rel="canonical" href="{% url 'rent_with_us' %}"/>

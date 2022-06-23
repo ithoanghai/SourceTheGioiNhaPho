@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static load_static listing humanize i18n %}
-
+{% block title %} {% trans "Thông tin chi tiết chuyên viên " %}{{ realtor.name }} {{ realtor.phone1 }} {% endblock %}
 {% block head %}
     {{ block.super }}
     <link rel="canonical" href="{% url 'specialistDetail' realtor.id %}"/>

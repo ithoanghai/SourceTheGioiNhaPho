@@ -88,13 +88,13 @@ def get_short_title_from_road_type(road_type: str):
 
 def get_listing_status_title_from_code(listing_status: str):
     if listing_status == Status.SELLING:
-        return 'Đang giao dịch'
+        return 'ĐANG'
     elif listing_status == Status.SOLD:
-        return 'Đã bán'
+        return 'ĐÃ'
     elif listing_status == Status.STOP_SELLING:
-        return 'Dừng bán'
+        return 'DỪNG'
     elif listing_status == Status.SALE:
-        return 'Hạ giá'
+        return 'GIẢM'
 
 
 def print_trace(e: Exception):

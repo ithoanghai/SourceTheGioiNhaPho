@@ -1,10 +1,10 @@
 {% load static i18n %}
-<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
-
+<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"vi" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 
 <head>
+  <title> Thế giới Nhà Phố Việt Nam | {% block title %}Mua, bán nhà, căn hộ tốt nhất Hà Nội{% endblock %}</title>
   {% include 'partials/_head.html' %}
   {% block head %} {% endblock %}
   {% block head_script %}

@@ -17,6 +17,24 @@
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60d864aab9d3c079"></script>
 
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '425964015350296');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=425964015350296&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
 <!-- Messenger Plugin chat Code -->
 <div id="fb-root"></div>
 
@@ -68,7 +86,9 @@
 {% endcomment %}
 
 <!-- Start of HubSpot Embed Code -->
+{% comment %}
 <script type="text/javascript" id="hs-script-loader" async src="//js-na1.hs-scripts.com/19875873.js"></script>
+{% endcomment %}
 <!-- End of HubSpot Embed Code -->
 
 <script>

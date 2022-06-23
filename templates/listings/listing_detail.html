@@ -2,6 +2,8 @@
 
 {% load static humanize i18n get_cadastral load_static listing hitcount_tags %}
 
+{% block title %}{{ listing.title }}{% endblock %}
+
 {% block head %}
     {{ block.super }}
 
@@ -450,7 +452,7 @@
                             <div class="listing-id">
                                 <span>Mã nhà đất: </span>
                                 <span style="padding-left: 0px">{{ listing.code }}</span>
-                                <span>{{ listing.status|get_listing_status }}</span>
+                                <span>{{ listing.status|get_listing_status }} {%if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</span>
                             </div>
                             <div class="listing-id">
                                 <span>Lượt xem: </span>
@@ -579,7 +581,8 @@
                 </div>
                 <div class="list-advantage clear">
                     <h6>Trạng thái BĐS:
-                        <b style="color: green">{{ listing.status|get_listing_status }}</b>
+                        <b style="color: green">{{ listing.status|get_listing_status }} {%if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</b>
+
                     </h6>
                 </div>
                 <div class="form-real-estate visible-sm">

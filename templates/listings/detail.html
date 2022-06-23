@@ -2,6 +2,9 @@
 
 {% load static humanize i18n get_cadastral load_static listing %}
 
+{% block title %}<title> Thế giới Nhà Phố Việt Nam | {{ listing.title }}</title>{% endblock %}
+
+
 {% block head %}
     {{ block.super }}
 
@@ -446,7 +449,8 @@
                             <div class="listing-id">
                                 <span>Mã nhà đất: </span>
                                 <span style="padding-left: 0px">{{ listing.code }}</span>
-                                <span>{{ listing.status|get_listing_status }}</span>
+                                <span>{{ listing.status|get_listing_status }} <b style="color: blue">{%if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</b></span>
+
                             </div>
                         </div>
                     </header>
@@ -569,7 +573,8 @@
                 </div>
                 <div class="list-advantage clear">
                     <h6>Trạng thái BĐS:
-                        <b style="color: green">{{ listing.status|get_listing_status }}</b>
+                        <b style="color: green">{{ listing.status|get_listing_status }} {%if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</b>
+
                     </h6>
                 </div>
                 <div class="form-real-estate visible-sm">
@@ -1115,30 +1120,30 @@
                                         <div class="form-element">
                                             <input required type="text" name="firstname"
                                                    v-model="data.firstname"
-                                                   v-on:blur="validateRequired('firstname')"
-                                                   v-on:input="e => handleInputChange('firstname', e)"/>
+                                                   onblur="validateRequired('firstname')"
+                                                   input="e => handleInputChange('firstname', e)"/>
                                             <span class="text-error" v-if="errors.firstname">[[errors.firstname]]</span>
                                             <label>Họ</label>
                                         </div>
                                         <div class="form-element">
                                             <input required type="text" name="lastname" v-model="data.lastname"
-                                                   v-on:blur="validateRequired('lastname')"
-                                                   v-on:input="e => handleInputChange('lastname', e)"/>
+                                                   onblur="validateRequired('lastname')"
+                                                   input="e => handleInputChange('lastname', e)"/>
                                             <span class="text-error"
                                                   v-if="errors.lastname">[[errors.lastname]]</span>
                                             <label>Tên</label>
                                         </div>
                                         <div class="form-element">
                                             <input type="text" name="phone" required v-model="data.phone"
-                                                   v-on:blur="validatePhone"
-                                                   v-on:input="e => handleInputChange('phone', e)"/>
+                                                   onblur="validatePhone"
+                                                   input="e => handleInputChange('phone', e)"/>
                                             <span v-if="errors.phone" class="text-error">[[errors.phone]]</span>
                                             <label>Số điện thoại</label>
                                         </div>
                                         <div class="form-element">
                                             <input type="text" name="email" v-model="data.email"
-                                                   v-on:input="e => handleInputChange('email', e)"
-                                                   v-on:blur="validateEmail"/>
+                                                   input="e => handleInputChange('email', e)"
+                                                   onblur="validateEmail"/>
                                             <span class="text-error">[[errors.email]]</span>
                                             <label>Email (không bắt buộc)</label>
                                         </div>
