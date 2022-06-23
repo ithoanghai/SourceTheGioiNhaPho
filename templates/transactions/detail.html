@@ -79,7 +79,7 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group">
-                                                <label for="listing">{% trans "Bất động sản quan tâm"%}</label>
+                                                <label for="listing">{% trans "Mã bất động sản quan tâm"%}</label>
                                                 <input disabled class="form-control" required type="text" name="listing"
                                                         {% if reg_user.listing %}
                                                        value="{{ reg_user.listing.code }}"
@@ -105,67 +105,58 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="house_type">{% trans "Loại bất động sản quan tâm" %}</label>
-                                                <select disabled name="houseType" id="housetypes" class="form-control">
-                                                    {% for c in houseType %}
-                                                        <option value="{{ c }}"
-                                                                {% if reg_user.house_type == c or transaction.house_type == c %}
-                                                                selected{% endif %}>{{ c }}</option>
-                                                    {% endfor %}
-
-                                                </select>
-                                                {% if form.houseType.errors %}
-                                                    <span style="color: red; font-size: 12px">{{ form.houseType.errors.as_text }}</span>{% endif %}
+                                                <label for="house_type">{% trans "Loại bất động sản quan tâm: " %}{{ listing.house_type|get_house_type }}</label>
+                                                {% comment %}{% if form.houseType.errors %}
+                                                    <span style="color: red; font-size: 12px">{{ form.houseType.errors.as_text }}</span>{% endif %}{% endcomment %}
                                             </div>
                                         </div>
                                     {% if transaction.caring_area %}
                                         <div class="col-lg-5">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-caring_area">Khu vực bạn quan tâm</label>
-                                                <input disabled type="text" name="caring_area" id="caring_area" value="{{ transaction.caring_area }}">
+                                                <label class="form-control-label" for="input-caring_area">Khu vực bạn quan tâm: {{ transaction.caring_area }}</label>
+                                                {% comment %}<input disabled type="text" name="caring_area" id="caring_area" value="{{ transaction.caring_area }}">{% endcomment %}
                                             </div>
                                         </div>
                                     {% endif %}
 
                                     </div>
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="message">Lời nhắn gửi</label>
-                                                 <textarea disabled rows="3" cols="20" name="message">
+                                                   <label disabled rows="3" name="message">
                                                   {{ transaction.message }}
-                                                </textarea>
+                                                </label>
                                             </div>
                                         </div>
                                     {% if transaction.comment%}
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="comment">Lời nhắn gửi</label>
-                                                 <textarea disabled rows="3" cols="20" name="comment">
+                                                {% comment %}<label class="form-control-label" for="comment">Lời nhắn gửi</label>{% endcomment %}
+                                                 <label disabled rows="3" name="comment">
                                                   {{ transaction.comment }}
-                                                </textarea>
+                                                </label>
                                             </div>
                                       </div>
                                     {% endif %}
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="message">Thời gian giao dịch: {{ transaction.date }}</label>
                                             </div>
                                         </div>
-                                    <div class="col-lg-6">
+                                    {% comment %}<div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="comment">Trạng thái giao dịch {{ transaction.status }}</label>
                                             </div>
-                                      </div>
+                                      </div>{% endcomment %}
                                 </div>
                                 </div>
-                                <hr class="my-4"/>
+                                {% comment %}<hr class="my-4"/>
 
                                 <div class="card-footer text-center border-0">
                                     <input type="submit" disabled value="{% trans "Ghi nhớ thông tin" %}" class="btn btn-info">
-                                </div>
+                                </div>{% endcomment %}
 
                             </form>
                         </div>

@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import include, url
 from django.views.generic import TemplateView
 
 from . import views
@@ -35,5 +36,8 @@ urlpatterns = [
     path('admin/error403', views.error403, name='error403'),
     path('admin/error404', views.error404, name='error404'),
     path('admin/error500', views.error500, name='error500'),
+
+    # for our built-in ajax post view
+    url(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
 
 ]

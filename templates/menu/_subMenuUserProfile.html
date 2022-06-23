@@ -62,7 +62,7 @@
                 <a href="{% url "post_listings" %}"> <i class="fa fa-pencil-alt"></i> {% translate 'Đăng tin miễn phí' %}</a>
             </li>
             <li>
-                <a href="{% url 'post_listings' %}"> <i class="fa fa-newspaper"></i> {% translate 'Danh sách tin đăng của tôi' %}</a>
+                <a href="{% url 'my_listing' %}"> <i class="fa fa-newspaper"></i> {% translate 'Danh sách tin đăng của tôi' %}</a>
             </li>
             <li class="dropdown-divider divide"></li>
             {% if user.is_staff or user.is_superuser %}

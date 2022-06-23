@@ -1,14 +1,17 @@
 from rest_framework.authtoken.views import obtain_auth_token 
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 
 from . import views
+from .views import ListingDetailJSONView
 
 admin.autodiscover()
 
 urlpatterns = [
     path('', views.index, name='listings'),
-    path('<int:listing_id>', views.listing, name='listing_detail'),
+    path('<int:listing_id>', views.listing,  name='listing_detail'),
+    #url(r'^(?P<pk>\d+)/$', ListingDetailJSONView.as_view(), name='listing_detail'),
     path('my_listing', views.my_listing, name='my_listing'),
 
     path('my_listing_post', views.my_listing_post, name='my_listing_post'),
@@ -25,5 +28,6 @@ urlpatterns = [
     path('ListingAPIAllView', views.ListingAPIAllView.as_view()),
     path('listings-api-token-auth/', obtain_auth_token, name='listings_api_token_auth'),
 
-    #path('advanced_filters/', include('advanced_filters.urls'))
+    #path('advanced_filters/', include('advanced_filters.urls')),
+
 ]

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import os.path
 from datetime import datetime
 
+from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.gis.geos import Point
 from django.contrib.postgres.indexes import GinIndex, BTreeIndex
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -10,6 +11,8 @@ from django.db import models
 from django.utils.translation import gettext as _
 from embed_video.fields import EmbedVideoField
 from geopy import location
+from hitcount.settings import MODEL_HITCOUNT
+from hitcount.models import HitCountMixin
 from location_field.models.spatial import LocationField
 from pydantic.errors import Decimal
 from rest_framework import serializers
@@ -27,7 +30,7 @@ def get_image_path(instance, filename: str):
     return 'photos/listings/' + str(instance.listing.id) + '/' + filename
 
 
-class Listing(models.Model):
+class Listing(models.Model, HitCountMixin):
     class Meta:
         verbose_name = "Bất động sản"
         verbose_name_plural = "DS Bất động sản"
@@ -152,6 +155,8 @@ class Listing(models.Model):
     location = LocationField(based_fields=['address'], zoom=7, null=True,
                              default=Point(105.83549388560711,20.976795401917798), verbose_name=_("Toạ độ vị trí BĐS"),
                              help_text="Nhập toạ độ hoặc chọn vị trí trên bản đồ")
+    hit_count_generic = GenericRelation(MODEL_HITCOUNT, object_id_field='object_pk',
+                            related_query_name='hit_count_generic_relation')
 
     def __str__(self):
         return f'%s - %s' % (self.code, self.address)

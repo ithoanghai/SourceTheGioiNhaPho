@@ -1,4 +1,4 @@
-Django==3.1.7
+Django==3.1.14
 gunicorn==20.1.0
 gevent==21.8.0
 paytmchecksum==1.7.0
@@ -27,3 +27,5 @@ python-gettext==4.0
 requests==2.25.1
 XlsxWriter==3.0.3
 openpyxl==3.0.10
+django-etc>=1.2.0
+django-hitcount==1.3.5

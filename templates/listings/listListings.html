@@ -4,7 +4,7 @@
     <div class="card-header bg-white border-0">
         <div class="row align-items-center">
             <div class="col-8">
-                <h5 class="mb-0">Danh sách Bất động sản</h5>
+                <h5 class="mb-0">Danh sách Bất động sản của bạn</h5>
             </div>
             {% comment %}                                <div class="col-4 text-right">
                                   <a href="#!" class="btn btn-sm btn-primary">Thiết lập</a>
@@ -13,7 +13,7 @@
     </div>
     <div class="card-body">
         {% if listings %}
-            <p>{% trans "Danh sách bất động sản của bạn" %}</p>
+            {% comment %}<p>{% trans "Danh sách bất động sản của bạn" %}</p>{% endcomment %}
             <table class="table">
                 <thead>
                 <tr>

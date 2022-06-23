@@ -47,7 +47,7 @@
                         <div class="card-body">
                             <form action="{% url 'post_listings' %}" method="POST" enctype='multipart/form-data'>
                                 {% csrf_token %}
-                                <h5 class="h5 heading-small text-muted mb-4">CHI TIẾT TIN ĐĂNG:</h5>
+                                {% comment %}<h5 class="h5 heading-small text-muted mb-4">CHI TIẾT TIN ĐĂNG:</h5>{% endcomment %}
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-4">
@@ -110,7 +110,7 @@
                                                         {% if reg_user.title %}
                                                        value="{{ reg_user.listing.title }}"
                                                        {% else %}value="{{ listing.title }}"{% endif %}
-                                                       placeholder="Nhập tiêu đề tin"/>
+                                                       placeholder="Nhập tiêu đề tin ở đây"/>
                                                 {% if form.title.errors %}
                                                     <span style="color: red; font-size: 12px">{{ form.title.errors.as_text }}</span>{% endif %}
                                             </div>
@@ -120,57 +120,52 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label for="description">{% trans "Nội dung tin đăng:" %}</label>
-                                                <textarea rows="8" name="description" placeholder="Nhập nội dung tin">
-                                                  {{ listing.description }}
-                                                </textarea>
-                                                {% if form.description.errors %}
+                                                <textarea name="description" required
+                                                          placeholder="Nhập nội dung tin rao">{% if listing.description %}
+                                                    {{ listing.description }}{% endif %}</textarea>
+                                                {% if form.description == '' %}
                                                     <span style="color: red; font-size: 12px">{{ form.description.errors.as_text }}</span>{% endif %}
                                             </div>
                                         </div>
                                     </div>
-                                <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label for="street">{% trans "Đường/Phố/Thôn:" %}</label>
-                                                 <input class="form-control" required type="text" name="street"
+                                                <input class="form-control" required type="text" name="street"
+                                                       placeholder="Nhập tên đường/thôn"
                                                         {% if reg_user.street %}
                                                        value="{{ reg_user.listing.street }}"
-                                                       {% else %}value="{{ listing.street }}"{% endif %}
-                                                />
+                                                       {% else %}value="{{ listing.street }}"{% endif %}/>
                                                 {% if form.street.errors %}
                                                     <span style="color: red; font-size: 12px">{{ form.street.errors.as_text }}</span>{% endif %}
                                             </div>
                                         </div>
-                                    <div class="col-lg-4">
+                                        <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label for="district">{% trans "Quận/Huyện:" %}</label>
-                                                 <input class="form-control" required type="text" name="district"
+                                                <input class="form-control" required type="text" name="district"
+                                                       placeholder="Nhập tên Quận/Huyện"
                                                         {% if reg_user.district %}
                                                        value="{{ reg_user.listing.district }}"
-                                                       {% else %}value="{{ listing.district }}"{% endif %}
-                                                />
-                                                {% comment %}<select name="districts" id="districts" class="form-control">
-                                                {% for district in district_choices %}
-                                                     <option value="{{ district }}">{{ district}}</option>
-                                                {% endfor %}
-                                                 </select>{% endcomment %}
+                                                       {% else %}value="{{ listing.district }}"{% endif %}/>
                                                 {% if form.district.errors %}
                                                     <span style="color: red; font-size: 12px">{{ form.district.errors.as_text }}</span>{% endif %}
                                             </div>
                                         </div>
-                                                                    <div class="col-lg-4">
+                                        <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label for="state">{% trans "Thành phố/Tỉnh:" %}</label>
-                                                 <input class="form-control" required type="text" name="state"
+                                                <input class="form-control" required type="text" name="state"
+                                                       placeholder="Nhập tên Tỉnh/Thành phố"
                                                         {% if reg_user.state %}
                                                        value="{{ reg_user.listing.state }}"
-                                                       {% else %}value="{{ listing.state }}"{% endif %}
-                                                />
+                                                       {% else %}value="{{ listing.state }}"{% endif %}/>
                                                 {% if form.state.errors %}
                                                     <span style="color: red; font-size: 12px">{{ form.state.errors.as_text }}</span>{% endif %}
                                             </div>
                                         </div>
-                                </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="form-group">
@@ -179,21 +174,20 @@
                                                         {% if reg_user.address %}
                                                        value="{{ reg_user.listing.address }}"
                                                        {% else %}value="{{ listing.address }}"{% endif %}
-                                                       placeholder="Nhập theo định dạng: Ngõ/Ngách/Hẻm/Số nhà, Khu dân cư, Phố, Quận/Huyện, Tỉnh/TP"/>
+                                                       placeholder="Nhập địa chỉ đầy đủ định dạng: Ngõ/Ngách/Hẻm/Số nhà, Khu dân cư, Phố, Quận/Huyện, Tỉnh/TP"/>
                                                 {% if form.address.errors %}
                                                     <span style="color: red; font-size: 12px">{{ form.address.errors.as_text }}</span>{% endif %}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-2">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="area">Diện tích:</label>
                                                 <input class="form-control" required type="text" name="area"
-                                                        {% if reg_user.area %}
-                                                       value="{{ reg_user.listing.area }}"
-                                                       {% else %}value="{{ listing.area }}"{% endif %}
-                                                />
+                                                       placeholder="Chỉ nhập số"
+                                                        {% if reg_user.area %} value="{{ reg_user.listing.area }}"
+                                                       {% else %}value="{{ listing.area }}"{% endif %} />
                                                 {% if form.area.errors %}
                                                     <span style="color: red; font-size: 12px">{{ form.area.errors.as_text }}</span>{% endif %}
                                             </div>
@@ -202,39 +196,43 @@
                                             <div class="form-group">
                                                 <label class="form-control-label" for="floor">Số tầng:</label>
                                                 <input class="form-control" required type="text" name="floor"
-                                                        {% if reg_user.floor %}
-                                                       value="{{ reg_user.listing.floor }}"
-                                                       {% else %}value="{{ listing.floor }}"{% endif %}
-                                                />
+                                                       placeholder="Chỉ nhập số"
+                                                        {% if reg_user.floor %} value="{{ reg_user.listing.floor }}"
+                                                       {% else %}value="{{ listing.floor }}"{% endif %}/>
                                                 {% if form.floor.errors %}
                                                     <span style="color: red; font-size: 12px">{{ form.floor.errors.as_text }}</span>{% endif %}
                                             </div>
                                         </div>
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-2">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="width">Mặt tiền:</label>
                                                 <input class="form-control" required type="text" name="width"
-                                                        {% if reg_user.width %}
-                                                       value="{{ reg_user.listing.width }}"
-                                                       {% else %}value="{{ listing.width }}"{% endif %}
-                                                />
+                                                       placeholder="Chỉ nhập số"
+                                                        {% if reg_user.width %} value="{{ reg_user.listing.width }}"
+                                                       {% else %}value="{{ listing.width }}"{% endif %}/>
                                                 {% if form.width.errors %}
                                                     <span style="color: red; font-size: 12px">{{ form.width.errors.as_text }}</span>{% endif %}
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <div class="form-group">
-                                                <label class="form-control-label" style="font-weight: bold" for="price">Giá bán (tỷ)/ thuê
-                                                    (triệu):</label>
+                                                <label class="form-control-label" style="font-weight: bold" for="price">Giá
+                                                    bán:</label>
                                                 <input class="form-control" required type="text" name="price"
-                                                        {% if reg_user.price %}
-                                                       value="{{ reg_user.listing.price }}"
-                                                       {% else %}value="{{ listing.price }}"{% endif %}
-                                                />
+                                                       placeholder="Chỉ nhập số"
+                                                        {% if reg_user.price %} value="{{ reg_user.listing.price }}"
+                                                       {% else %}value="{{ listing.price }}"{% endif %}/>
                                                 {% if form.price.errors %}
                                                     <span style="color: red; font-size: 12px">{{ form.price.errors.as_text }}</span>{% endif %}
                                             </div>
                                         </div>
+                                        <div class="col-lg-2">
+                                            <label class="form-control-label" for="price">Đơn vị tính:</label>
+                                            <select class="form-control">
+                                            <option value="ty">Tỷ</option>
+                                            <option value="trieu">Triệu</option>
+                                        </select></div>
+
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12">

@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'w6rm%l&xim0ivll-li$u6fg8)6k8-$7uar^f#33ht5sutw8e!#')
 
-DEBUG = strtobool(os.getenv('DEBUG', 'true'))
+DEBUG = strtobool(os.getenv('DEBUG', 'True'))
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 SITE_ID = 1
@@ -45,6 +45,7 @@ MODULES = [
     'FunctionModule.realtors.apps.RealtorsConfig',
     'FunctionModule.customers.apps.CustomersConfig',
     'FunctionModule.cadastral.apps.CadastralConfig',
+    'FunctionModule.blog.apps.BlogConfig',
 ]
 
 THIRD_PARTIES = [
@@ -60,9 +61,10 @@ THIRD_PARTIES = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
-    'advanced_filters',
     'adminplus',
     'cachalot',
+    'advanced_filters',
+    'hitcount'
 ]
 
 BUILT_IN_APPS = [
@@ -310,3 +312,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 MEILI_MASTER_KEY = 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
 MEILI_HOST = os.getenv('MEILI_HOST', 'search_engine')
 MEILI_PORT = os.getenv('MEILI_PORT', 7700)
+
+# DJANGO HITCOUNT SPECIFIC VARIABLES
+
+# As of v1.1.1 this setting is no longer needed
+# SESSION_SAVE_EVERY_REQUEST = True
+HITCOUNT_KEEP_HIT_ACTIVE = {'minutes': 60}
+HITCOUNT_HITS_PER_IP_LIMIT = 0  # unlimited
+HITCOUNT_EXCLUDE_USER_GROUP = ()  # not used
+HITCOUNT_KEEP_HIT_IN_DATABASE = {'seconds': 10}

@@ -1,8 +1,11 @@
 from __future__ import unicode_literals
 
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils.translation import gettext as _
 from django.utils import timezone
+from hitcount.settings import MODEL_HITCOUNT
+
 from FunctionModule.accounts.models import User
 from FunctionModule.customers.models import Customer
 from FunctionModule.listings.choices import HouseType
@@ -58,6 +61,8 @@ class Transaction(models.Model):
     date = models.DateTimeField(default=timezone.now, blank=True, verbose_name="Thời gian phát sinh giao dịch")
     status = models.CharField(max_length=25, choices=Status.choices, default=Status.ACTIVE, verbose_name='Trạng thái giao dịch')
     realtor = models.ForeignKey(Realtor, null=True, blank=True, on_delete=models.RESTRICT, verbose_name=_("Chuyên viên quản lý"))
+    hit_count_generic = GenericRelation(MODEL_HITCOUNT, object_id_field='object_pk',
+                                        related_query_name='hit_count_generic_relation')
 
     def __str__(self):
         return f'%s:  %s' % (self.trantype, self.message)

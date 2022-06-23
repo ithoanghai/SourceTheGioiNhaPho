@@ -48,7 +48,7 @@ def get_short_title_from_house_type(house_type: str):
     elif house_type == HouseType.STREET_HOUSE:
         return 'Nhà mặt phố'
     elif house_type == HouseType.TOWN_HOUSE or house_type == HouseType.LOFT_HOUSE:
-        return 'Nhà'
+        return 'Nhà phố'
     elif house_type == HouseType.LAND or house_type == HouseType.INDUSTRIAL_LAND:
         return 'Đất'
     elif house_type == HouseType.PLOT:
@@ -68,7 +68,7 @@ def get_short_title_from_house_type(house_type: str):
     elif house_type == HouseType.BUILDING or house_type == HouseType.BUILDING_BUSINESS:
         return 'Tòa nhà'
     else:
-        return 'Nhà'
+        return 'Nhà trong ngõ'
 
 
 def get_short_title_from_road_type(road_type: str):
@@ -90,9 +90,9 @@ def get_listing_status_title_from_code(listing_status: str):
     if listing_status == Status.SELLING:
         return 'Đang giao dịch'
     elif listing_status == Status.SOLD:
-        return 'Đã giao dịch'
+        return 'Đã bán'
     elif listing_status == Status.STOP_SELLING:
-        return 'Dừng giao dịch'
+        return 'Dừng bán'
     elif listing_status == Status.SALE:
         return 'Hạ giá'
 

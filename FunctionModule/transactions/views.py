@@ -7,6 +7,8 @@ from django.views.decorators.csrf import csrf_protect
 from django.utils import timezone
 from datetime import timedelta
 
+from hitcount.views import HitCountDetailView
+
 from .forms import RequestQuoteForm
 from .models import TransTypeInit
 from .serializers import *
@@ -34,6 +36,7 @@ def index(request):
 
 
 def transaction(request, transaction_id):
+    TransactionCountHitDetailView()
     transaction_detail = get_object_or_404(Transaction, pk=transaction_id)
     houseType = HouseType.choices
     context = {
@@ -133,3 +136,31 @@ def request_quote(request):
         {
             'message': 'Chúng tôi đã nhận được thông tin của quý khách và sẽ liên hệ lại trong thời gian sớm nhất.'
         })
+
+
+class TransactionMixinDetailView(object):
+    """
+    Mixin to save us some typing.  Adds context for us!
+    """
+    model = Transaction
+
+    def get_context_data(self, **kwargs):
+
+        context = super(TransactionMixinDetailView, self).get_context_data(**kwargs)
+        context['transaction_list'] = Transaction.objects.all()[:5]
+        context['transaction_views'] = ["ajax", "detail", "detail-with-count"]
+        return context
+
+
+class TransactionCountHitDetailView(TransactionMixinDetailView, HitCountDetailView):
+    """
+    Generic hitcount class based view that will also perform the hitcount logic.
+    """
+    count_hit = True
+
+
+class TransactionDetailView(TransactionMixinDetailView, HitCountDetailView):
+    """
+    Generic hitcount class based view.
+    """
+    pass

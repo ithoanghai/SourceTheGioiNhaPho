@@ -1,4 +1,5 @@
 import debug_toolbar
+from django.conf.urls import url
 from django.shortcuts import redirect
 from django.urls import path, include
 from django.conf import settings
@@ -19,6 +20,7 @@ def redirect_view(request):
 urlpatterns = [
     path('', include('FunctionModule.pages.urls')),
     path('api/', include('FunctionModule.api.urls')),
+    path('blog/', include('FunctionModule.blog.urls')),
     path('listings/', include('FunctionModule.listings.urls')),
     path('transactions/', include('FunctionModule.transactions.urls')),
     path('customers/', include('FunctionModule.customers.urls')),
@@ -29,4 +31,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('admin/', site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

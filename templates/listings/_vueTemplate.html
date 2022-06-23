@@ -167,11 +167,11 @@
                     <a v-if="listing.status == 'selling'" :href="getListingDetailURL(listing.id)" target="_blank"
                        :title="listing.title">Đang giao dịch</a>
                     <a v-if="listing.status == 'sale'" :href="getListingDetailURL(listing.id)" target="_blank"
-                       :title="listing.title">Giao dịch nhanh</a>
+                       :title="listing.title">Bán nhanh</a>
                     <a v-if="listing.status == 'sold'" :href="getListingDetailURL(listing.id)" target="_blank"
-                       :title="listing.title">Đã giao dịch</a>
+                       :title="listing.title">Đã bán</a>
                     <a v-if="listing.status == 'stop_selling'" :href="getListingDetailURL(listing.id)" target="_blank"
-                       :title="listing.title">Dừng giao dịch</a>
+                       :title="listing.title">Dừng bán</a>
                     <a :href="getListingDetailURL(listing.id)" target="_blank"
                        :title="listing.title">
                         {% comment %}                        <b>{{ listing.house_type|get_house_type }}</b>
