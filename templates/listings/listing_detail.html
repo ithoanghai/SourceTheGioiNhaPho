@@ -795,7 +795,7 @@
                less="Thu gọn">Xem thêm</a>
           </p>{% endcomment %}
 
-                {% if listing.photos %}
+                {% comment %} {% if listing.photos %}
                     <div class="heading-02">Hình ảnh</div>
                     <div class="gallery-property collapsed" data-height="900">
                         {% for photo in listing.photos %}
@@ -811,19 +811,21 @@
                         {% endfor %}
                         <div class="last-div"></div>
                     </div>
-                    {% comment %}<p class="view-more-gray more">
+                    <p class="view-more-gray more">
           <a href="#" title="Xem thêm / thu gọn" style="text-underline: none" class="collapse pdt-0"
              is-more="true" more="Xem thêm" less="Thu gọn">Xem tất cả</a>
-        </p>{% endcomment %}
-                {% endif %}
+        </p>
+                {% endif %}{% endcomment %}
 
                 <div class="heading-02">Vị trí Bất động sản</div>
                 <section class="mgt-15 map-detail gmap-render">
                     {#            background-image: url(https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap)#}
                     <div class="_map-bg openBtn img-map"
                          style="">
+                        <a href="http://maps.google.com/?q={{ listing.location.y}},{{listing.location.x}}">
                         <img src="{{ listing.id|location_image }}"
                              title="{{ listing.title }}" alt="{{ listing.code }}"/>
+                        </a>
                         <div class="tooltip-map">
                             <a>Nhấn vào để xem chi tiết</a>
                         </div>
@@ -866,6 +868,8 @@
                         </div>
                     </div>
                 </section>
+
+            <div class="zalo-comment-plugin" data-appid="4421936851919043973" data-size="5" data-href=""></div>
             </div>
             <div class="right-content visible-pc">
                 <div v-pre class="form-real-estate">

@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n get_cadastral load_static listing %}
+{% load static humanize i18n get_cadastral load_static listing hitcount_tags %}
 
-{% block title %}<title> Thế giới Nhà Phố Việt Nam | {{ listing.title }}</title>{% endblock %}
-
+{% block title %}{{ listing.title }}{% endblock %}
 
 {% block head %}
     {{ block.super }}
@@ -101,6 +100,8 @@
 {% endblock %}
 
 {% block content %}
+    {% get_hit_count_js_variables for listing as hitcount %}
+    {% get_hit_count for listing as total_hits %}
     <!-- Search menu -->
     {% include 'menu/_menuSearch.html' %}
 
@@ -434,24 +435,30 @@
                                     </li> {% endif %}
                             </ul>
                             <ul class="listing-price">
-                                <li title="Giá">$<b>{{ listing.price.normalize }}</b> {%if listing.transaction_type == "rent" %}{% trans "triệu/tháng" %} {% else %} {% trans "tỷ" %} {% endif %} </li>
+                                <li title="Giá">$<b>{{ listing.price.normalize }}</b>
+                                    {% if listing.transaction_type == "rent" %}{% trans "triệu/tháng" %} {% else %}
+                                        {% trans "tỷ" %} {% endif %} </li>
                                 {% if listing.sale_price  and listing.sale_price < listing.price and listing.transaction_type != "rent" %}
                                     &nbsp ⇔ &nbsps
                                     <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price.normalize }}</strong>
                                         tỷ
                                     </li> {% endif %}
-                             {% if listing.price > 0 and listing.area and listing.transaction_type != "rent"%}
-                                &nbsp ⇔ &nbsp
-                                <li title="Giá/m2">$<b>{% widthratio listing.price listing.area 1000 %}</b> triệu/m2
-                                </li>
-                            {% endif %}
+                                {% if listing.price > 0 and listing.area and listing.transaction_type != "rent" %}
+                                    &nbsp ⇔ &nbsp
+                                    <li title="Giá/m2">$<b>{% widthratio listing.price listing.area 1000 %}</b> triệu/m2
+                                    </li>
+                                {% endif %}
                             </ul>
                             <div class="listing-id">
                                 <span>Mã nhà đất: </span>
                                 <span style="padding-left: 0px">{{ listing.code }}</span>
-                                <span>{{ listing.status|get_listing_status }} <b style="color: blue">{%if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</b></span>
-
+                                <span>{{ listing.status|get_listing_status }} {%if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</span>
                             </div>
+                            <div class="listing-id">
+                                <span>Lượt xem: </span>
+                                <span style="padding-left: 0px">{{ total_hits }}</span>
+                            </div>
+                          <div class="zalo-share-button" data-href="https://thegioinhaphovietnam.com.vn{% url "listing_detail" listing.id %}" data-oaid="579745863508352884" data-layout="1" data-color="blue" data-customize="false"></div>
                         </div>
                     </header>
                 </div>
@@ -561,7 +568,9 @@
                         {% endif %}
                         <li>
                             <p class="left">Giá</p>
-                            <p class="right">{{ listing.price.normalize }}  {%if listing.transaction_type == "rent" %}{% trans "triệu" %} {% else %} {% trans "tỷ" %} {% endif %}</p>
+                            <p class="right">{{ listing.price.normalize }}
+                                {% if listing.transaction_type == "rent" %}{% trans "triệu" %} {% else %}
+                                    {% trans "tỷ" %} {% endif %}</p>
                         </li>
                         {% if listing.sale_price and listing.transaction_type != "rent" %}
                             <li>
@@ -786,7 +795,7 @@
                less="Thu gọn">Xem thêm</a>
           </p>{% endcomment %}
 
-                {% if listing.photos %}
+                {% comment %} {% if listing.photos %}
                     <div class="heading-02">Hình ảnh</div>
                     <div class="gallery-property collapsed" data-height="900">
                         {% for photo in listing.photos %}
@@ -802,19 +811,21 @@
                         {% endfor %}
                         <div class="last-div"></div>
                     </div>
-                    {% comment %}<p class="view-more-gray more">
+                    <p class="view-more-gray more">
           <a href="#" title="Xem thêm / thu gọn" style="text-underline: none" class="collapse pdt-0"
              is-more="true" more="Xem thêm" less="Thu gọn">Xem tất cả</a>
-        </p>{% endcomment %}
-                {% endif %}
+        </p>
+                {% endif %}{% endcomment %}
 
                 <div class="heading-02">Vị trí Bất động sản</div>
                 <section class="mgt-15 map-detail gmap-render">
                     {#            background-image: url(https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap)#}
                     <div class="_map-bg openBtn img-map"
                          style="">
+                        <a href="http://maps.google.com/?q={{ listing.location.y}},{{listing.location.x}}">
                         <img src="{{ listing.id|location_image }}"
                              title="{{ listing.title }}" alt="{{ listing.code }}"/>
+                        </a>
                         <div class="tooltip-map">
                             <a>Nhấn vào để xem chi tiết</a>
                         </div>
@@ -857,6 +868,8 @@
                         </div>
                     </div>
                 </section>
+
+            <div class="zalo-comment-plugin" data-appid="4421936851919043973" data-size="5" data-href=""></div>
             </div>
             <div class="right-content visible-pc">
                 <div v-pre class="form-real-estate">
@@ -1142,8 +1155,8 @@
                                         </div>
                                         <div class="form-element">
                                             <input type="text" name="email" v-model="data.email"
-                                                   input="e => handleInputChange('email', e)"
-                                                   onblur="validateEmail"/>
+                                                   oninput="e => handleInputChange('email', e)"
+                                                   blur="validateEmail"/>
                                             <span class="text-error">[[errors.email]]</span>
                                             <label>Email (không bắt buộc)</label>
                                         </div>
@@ -1172,8 +1185,6 @@
             </div>
         </script>
     </div>
-
-
 {% endblock %}
 
 {% block scripts %}
@@ -1200,4 +1211,20 @@
         <script type="text/javascript" src="{% load_static 'js/youtube_video.min.js' %}"></script>
     {% endif %}"
 
+    <script src="{% static 'hitcount/jquery.postcsrf.js' %}"></script>
+
+    {% get_hit_count_js_variables for listing as hitcount %}
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $.postCSRF("{{ hitcount.ajax_url }}", {hitcountPK: "{{ hitcount.pk }}"})
+                .done(function (data) {
+                    $('<i />').text(data.hit_counted).attr('id', 'hit-counted-value').appendTo('#hit-counted');
+                    $('#hit-response').text(data.hit_message);
+                }).fail(function (data) {
+                console.log('POST failed');
+                console.log(data);
+            });
+        });
+    </script>
 {% endblock %}
+
