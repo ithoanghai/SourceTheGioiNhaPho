@@ -839,7 +839,7 @@
                     </div>
 
                     <div class="map-wrapper">
-                        <a href="" class="full-screen-act" title="Fullscreen"></a>
+                        <a href="#" class="full-screen-act" title="Fullscreen"></a>
                         <div id="render-map"></div>
                         <div class="cover-nearby">
                             <div class="nearby">
@@ -869,7 +869,7 @@
                     </div>
                 </section>
 
-            <div class="zalo-comment-plugin" data-appid="4421936851919043973" data-size="5" data-href=""></div>
+            <div class="zalo-comment-plugin" data-appid="4421936851919043973" data-size="5" data-href="#"></div>
             </div>
             <div class="right-content visible-pc">
                 <div v-pre class="form-real-estate">
@@ -1190,7 +1190,7 @@
 {% block scripts %}
     {{ block.super }}
     <script async src="{% load_static 'js/listing.js' %}"></script>
-    <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
+    {% comment %}<script defer src="{% load_static 'js/favorite.min.js' %}"></script>{% endcomment %}
     <script defer src="{% load_static 'js/home-recent-view.min.js' %}"></script>
     <script defer src="{% load_static 'js/listing-detail.js' %}"></script>
     <script>

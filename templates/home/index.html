@@ -177,7 +177,7 @@
             integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{% load_static 'js/homepage-search.js' %}"></script>
-    <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
+    {% comment %}<script defer src="{% load_static 'js/favorite.min.js' %}"></script>{% endcomment %}
     <script async type="text/javascript" src="{% load_static 'js/property-contact-box.js' %}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

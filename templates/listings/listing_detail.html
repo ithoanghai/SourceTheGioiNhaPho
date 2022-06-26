@@ -3,6 +3,10 @@
 {% load static humanize i18n get_cadastral load_static listing hitcount_tags %}
 
 {% block title %}{{ listing.title }}{% endblock %}
+{% block meta %}
+    <meta property="og:image" content="{% with listing.main_photo as photo %}{{ photo.url }}{% endwith %}"/>
+    <meta property="og:image:url" content="{% with listing.main_photo as photo %}{{ photo.url }}{% endwith %}"/>
+  {% endblock %}
 
 {% block head %}
     {{ block.super }}
@@ -822,7 +826,7 @@
                     {#            background-image: url(https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing,places,geometry&language=vi&callback=callbackInitMap)#}
                     <div class="_map-bg openBtn img-map"
                          style="">
-                        <a href="http://maps.google.com/?q={{ listing.location.y}},{{listing.location.x}}">
+                        <a href="http://maps.google.com/?q={{ listing.location.y }},{{ listing.location.x }}">
                         <img src="{{ listing.id|location_image }}"
                              title="{{ listing.title }}" alt="{{ listing.code }}"/>
                         </a>
@@ -839,7 +843,7 @@
                     </div>
 
                     <div class="map-wrapper">
-                        <a href="" class="full-screen-act" title="Fullscreen"></a>
+                        <a class="full-screen-act" title="Fullscreen"></a>
                         <div id="render-map"></div>
                         <div class="cover-nearby">
                             <div class="nearby">
@@ -869,7 +873,7 @@
                     </div>
                 </section>
 
-            <div class="zalo-comment-plugin" data-appid="4421936851919043973" data-size="5" data-href=""></div>
+            <div class="zalo-comment-plugin" data-appid="4421936851919043973" data-size="5"></div>
             </div>
             <div class="right-content visible-pc">
                 <div v-pre class="form-real-estate">
@@ -1190,7 +1194,7 @@
 {% block scripts %}
     {{ block.super }}
     <script async src="{% load_static 'js/listing.js' %}"></script>
-    <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
+    {% comment %}<script defer src="{% load_static 'js/favorite.min.js' %}"></script>{% endcomment %}
     <script defer src="{% load_static 'js/home-recent-view.min.js' %}"></script>
     <script defer src="{% load_static 'js/listing-detail.js' %}"></script>
     <script>

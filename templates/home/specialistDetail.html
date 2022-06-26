@@ -198,7 +198,7 @@
         </div>
         <section class="bg-black call-now">
             <div class="img-call">
-                <a href="">
+                <a href="#">
                     {% if realtor.user.avatar %}
                         <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
                     {% else %}
@@ -227,7 +227,7 @@
 {% endblock %}
 
 {% block scripts %}
-    <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
+    {% comment %}<script defer src="{% load_static 'js/favorite.min.js' %}"></script>{% endcomment %}
 
     <script>
         window.AGENT_PREFIX = "[Cần chuyên viên Hoàng Hải [email=hoanghai.bdsvn@gmail.com, phone=0916286256] tư vấn]\n";

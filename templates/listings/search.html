@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static humanize i18n load_static %}
-{% block title %} {% trans "Tìm kiếm, mua bán nhà tốt nhất" %} {% endblock %}
+{% block title %} {% url 'listing_search' %} {% endblock %}
 {% block head %}
   {{ block.super }}
   <link rel="canonical" href="{% url 'listing_search' %}"/>
@@ -117,7 +117,7 @@
 
   </script>
   <script src="{% load_static 'js/ion.rangeSlider.min.js' %}"></script>
-  <script defer src="{% load_static 'js/favorite.min.js' %}"></script>
+  {% comment %}<script defer src="{% load_static 'js/favorite.min.js' %}"></script>{% endcomment %}
   <script async src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
           integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>

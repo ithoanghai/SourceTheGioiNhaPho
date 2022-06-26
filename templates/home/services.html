@@ -39,7 +39,7 @@
         <div class="row">
           <div class="col-left">
             <div class="all-service-cover">
-              <a href=sellwithus target="_blank">
+              <a href={% url 'sell_lease_with_us' %} target="_blank">
                 <img src="{% static 'images/all-service-sale-tgnp.jpg' %}" alt="TGNP">
               </a>
             </div>
@@ -59,13 +59,13 @@
             <ul class="all-service-list">
               <p class="title-list">Dịch vụ đi kèm:</p>
               <li>
-                <a href="tgnp-photo.html" target="_blank">Chụp hình chuyên nghiệp</a>
+                <a href="#" target="_blank">Chụp hình chuyên nghiệp</a>
               </li>
               {% comment %}                            <li>
                                 <a href="3d.html" target="_blank">Thực tế ảo (3D)</a>
                             </li>{% endcomment %}
               <li>
-                <a href="thu-tuc-giay-to.html" target="_blank">Hoàn tất thủ tục giấy tờ</a>
+                <a href="#" target="_blank">Hoàn tất thủ tục giấy tờ</a>
               </li>
             </ul>
             <a href="{% url 'sell_lease_with_us' %}" class="s-btn-red research" target="_blank">Tìm hiểu thêm</a>
@@ -148,6 +148,6 @@
 {% endblock %}
 
 {% block scripts %}
-
+<script defer src="{% load_static 'js/service-sale.min.js' %}"></script>
 {% endblock %}
 

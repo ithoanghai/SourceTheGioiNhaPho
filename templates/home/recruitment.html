@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static humanize i18n load_static %}
-{% block title %} {% trans "Khám phá TGNP" %} {% endblock %}
+{% block title %} {% trans "Tuyển dụng TGNP" %} {% endblock %}
 {% block head %}
   {{ block.super }}
   <link rel="canonical" href="{% url 'specialist_us' %}"/>
@@ -18,9 +18,12 @@
     {% include 'menu/_secondMenu2.html' %}
 
     <!-- Main Content  -->
+      <h1 class="title-career">Tuyển dụng</h1>
     <section class="header-career"
              style="background-image: url({% static 'images/background-tuyen-dung.jpg' %});">
+
       <div class="bg-career width1140">
+
         <div class="title">Với Thế giới Nhà Phố, công việc là đam mê</div>
         <div class="sumary">Bạn yêu thích môi trường làm việc trẻ trung và đậm tinh thần Startup? Gia nhập TGNP
           và khám phá ngay!
