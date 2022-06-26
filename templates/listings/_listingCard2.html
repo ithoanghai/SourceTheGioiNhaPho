@@ -71,15 +71,15 @@
 
         <div class="listing-address">
             {% if listing.urban_area %}
-                <h4>
+                <h3>
                     <a href="{% url 'listing_search' %}?keywords={{ listing.urban_area }}&sort=priority"
                        title="">{{ listing.urban_area }}</a>
-                </h4>
+                </h3>
             {% endif %}
-            <h4>
+            <h3>
                 <a href="{% url 'listing_search' %}?keywords={{ listing.street }}&sort=priority"
                    title="">{{ listing.street }}</a>
-            </h4>
+            </h3>
             {% comment %}{% if listing.ward %}
                 <h4>
                     <a href="{% url 'listing_search' %}?ward={{ listing.ward }}&sort=priority"

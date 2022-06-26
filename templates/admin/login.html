@@ -3,6 +3,9 @@
 {% load static i18n socialaccount %}
 
 {% block title %} Đăng nhập Thế Giới Nhà Phố {% endblock title %}
+{% block head %} <meta name="description"
+      content="Đăng nhập Thế Giới Nhà Phố. ĐT:0916286256 - 0971841941"/>
+{% endblock head %}
 
 {% block content %}
 
@@ -24,6 +27,7 @@
 
                             {% csrf_token %}
                             <p><h1>Đăng nhập trang quản trị:</h1></p>
+                            <p><h5>Mời bạn sử dụng tài khoản đã đăng ký và cấp quyền truy cập vào trang quản trị hệ thống Thế Giới Nhà Phố</h5></p>
                             <div class="form-group mb-3">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
