@@ -73,13 +73,15 @@
             {% if listing.urban_area %}
                 <h3>
                     <a href="{% url 'listing_search' %}?keywords={{ listing.urban_area }}&sort=priority"
-                       title="">{{ listing.urban_area }}</a>
+                       title="{{ listing.urban_area }}">{{ listing.urban_area }}</a>
                 </h3>
             {% endif %}
+            {% if listing.street %}
             <h3>
                 <a href="{% url 'listing_search' %}?keywords={{ listing.street }}&sort=priority"
-                   title="">{{ listing.street }}</a>
+                   title="{{ listing.street }}">{{ listing.street }}</a>
             </h3>
+        {% endif %}
             {% comment %}{% if listing.ward %}
                 <h4>
                     <a href="{% url 'listing_search' %}?ward={{ listing.ward }}&sort=priority"
@@ -87,15 +89,16 @@
                 </h4>
             {% endif %}{% endcomment %}
             {% if listing.district %}
-                <h4><b><a href="{% url 'listing_search' %}?district={{ listing.district }}&sort=priority"
-                          title=""> {% get_district listing.district %}</a></b></h4>
+                <h3><b><a href="{% url 'listing_search' %}?district={{ listing.district }}&sort=priority"
+                          title="{% get_district listing.district %}">&nbsp {% get_district listing.district %}</a></b></h3>
             {% endif %}
             {% if listing.state %}
-                <h4><b><a href="{% url 'listing_search' %}?state={{ listing.state }}&sort=priority"
-                          title=""> {% get_state listing.state %}</a></b></h4>
+                <h3><b><a href="{% url 'listing_search' %}?state={{ listing.state }}&sort=priority"
+                          title="{% get_state listing.state %}">&nbsp{% get_state listing.state %}</a></b></h3>
             {% endif %}
         </div>
 
+        <div class="listing-name"><h4><a href="{% url 'listing_detail' listing.id %}">{{ listing.title }}</a> </h4></div>
         {% comment %}<div class="listing-name"><i class="zmdi zmdi-key"></i><b><a href="{% url 'listing_detail' listing.id %}">{{ listing.code }}</a> </b></div>{% endcomment %}
     </div>
 </article>

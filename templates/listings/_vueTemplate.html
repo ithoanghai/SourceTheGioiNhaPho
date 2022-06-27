@@ -56,9 +56,9 @@
                         </ul>
 
                     </div>
-                    <h3>
+                    <h4>
                         <a class="listing-name" :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.title]]</a>
-                    </h3>
+                    </h4>
                     <div class="listing-address">
                         <h4 v-if="listing.urban_area">
                             <a :href="`/listings/search?keywords=${listing.urban_area}&sort=priority`" title="">[[listing.urban_area]]</a>
@@ -120,25 +120,23 @@
             <th class="col-md-2 col-sm-2">Số tầng</th>
             <th class="col-md-2 col-sm-2">Mặt tiền</th>
             <th class="col-md-1 col-sm-1">Giá</th>
-            <th class="col-md-2 col-sm-2">TB</th>
-            <th class="unique col-md-2 col-sm-2"></th>
+            <th class="col-md-2 col-sm-2">Trung bình</th>
+            {% comment %}<th class="unique col-md-2 col-sm-2"></th>{% endcomment %}
             <tbody>
             <tr v-for="listing in listings" :key="listing.id" :id="`property-tgnp-${listing.id}`"
-                :title="listing.title" style="border-top: dotted 0.5px;" :href="`/listings/search?id=${listing.id}`"
-                           title="">
+                :title="listing.title" style="border-top: dotted 0.5px;" :href="getListingDetailURL(listing.id)">
                 <td class="unique">
                     <label v-if="listing.urban_area">
-                        <a :href="`/listings/search?keywords=${listing.urban_area}&sort=priority`"
-                           title="">[[listing.urban_area]]</a>
+                        <a :href="getListingDetailURL(listing.id)" :title="listing.title"
+                           >[[listing.urban_area]]</a>
                     </label>
                     <label v-if="listing.street">
-                        <a :href="`/listings/search?keywords=${listing.street}&sort=priority`" title="">[[listing.street]]</a>
+                        <a :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.street]]</a>
                     </label>
-                    <label v-if="listing.ward"><a :href="`/listings/search?ward=${listing.ward}&sort=priority`" title="Phường/Xã">[[listing.ward_name]]</a>
+                    <label v-if="listing.ward"><a :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.ward_name]]</a>
                     </label>
                     <label v-if="listing.district">
-                        <a :href="`/listings/search?district=${listing.district}&sort=priority`"
-                           title=""><b>[[listing.district_name]]</b></a>
+                        <a :href="getListingDetailURL(listing.id)" :title="listing.title"><b>[[listing.district_name]]</b></a>
                     </label>
                     {% comment %}<span v-if="listing.state">
                         <a :href="`/listings/search?state=${listing.state}&sort=priority`"
@@ -163,7 +161,7 @@
                 <td><a :href="getListingDetailURL(listing.id)" target="_blank"
                                                       :title="listing.title">[[ listing.average_price ]] {% trans "tr/m" %}</a>
                 </td>
-                <td style="word-wrap: break-word; ">
+{% comment %}                <td style="word-wrap: break-word; ">
                     <a v-if="listing.status == 'selling'" :href="getListingDetailURL(listing.id)" target="_blank"
                        :title="listing.title">Đang giao dịch</a>
                     <a v-if="listing.status == 'sale'" :href="getListingDetailURL(listing.id)" target="_blank"
@@ -174,7 +172,7 @@
                        :title="listing.title">Dừng bán</a>
                     <a :href="getListingDetailURL(listing.id)" target="_blank"
                        :title="listing.title">
-                        {% comment %}                        <b>{{ listing.house_type|get_house_type }}</b>
+                                                <b>{{ listing.house_type|get_house_type }}</b>
                         {% if listing.house_type == HouseType.VILLA %} <b>Biệt thự</b>
                         {% elif listing.house_type == HouseType.VILLA_REST %} <b>Biệt thự nghỉ dưỡng</b>
                         {% elif listing.house_type == HouseType.LAND or HouseType.INDUSTRIAL_LAND %} <b>Đất</b>
@@ -189,9 +187,9 @@
                         {% elif listing.house_type == HouseType.STREET_HOUSE %} <b>Nhà mặt phố</b>
                         {% elif listing.house_type == 'town_house' %} <b>Nhà trong ngõ</b>
                         {% elif listing.house_type == HouseType.STREET_HOUSE %} <b>Loại khác</b>
-                        {% endif %}{% endcomment %}
+                        {% endif %}
                     </a>
-                </td>
+                </td>{% endcomment %}
             </tr>
             </tbody>
         </table>
@@ -258,7 +256,7 @@
                     <a target="_blank"
                        :href="getListingDetailURL(listing.id)"
                        :title="listing.title">
-                        <h2 class="title"> [[listing.title]]</h2>
+                        <h3 class="title"> [[listing.title]]</h3>
                     </a>
                     <div>
                         <ul>

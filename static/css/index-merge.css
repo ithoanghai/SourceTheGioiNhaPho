@@ -1309,7 +1309,7 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
     color: #838383;
     display: -webkit-box;
     -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+    -webkit-box-orient: horizontal;
     overflow: hidden
 }
 
