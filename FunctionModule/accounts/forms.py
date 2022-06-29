@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.forms import UserChangeForm
 from django.forms import Textarea, TextInput, EmailInput
-from .models import User, phone_regex, Group
+from .models import User, phone_regex, CustomGroup
 
 
 class MyUserChangeForm(UserChangeForm):
@@ -18,8 +18,9 @@ class MyUserChangeForm(UserChangeForm):
 
 class GroupAdminForm(forms.ModelForm):
     class Meta:
-        model = Group
+        model = CustomGroup
         exclude = []
+        fields = ('name','permissions')
 
 
 class UserRegisterForm(UserChangeForm):

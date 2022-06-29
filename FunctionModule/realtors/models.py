@@ -35,7 +35,7 @@ class Realtor(models.Model):
         verbose_name = "Chuyên viên"
         verbose_name_plural = "DS Chuyên viên"
 
-    user = models.OneToOneField(User, on_delete=models.RESTRICT, verbose_name=_("Tài khoản đăng nhập của chuyên viên"), blank=True, null=True)
+    user = models.OneToOneField(to=User, on_delete=models.RESTRICT, verbose_name=_("Tài khoản đăng nhập của chuyên viên"), blank=True, null=True)
     name = models.CharField(max_length=50,  null=True,  verbose_name=_("Họ và tên"))
     position = models.CharField(max_length=20, choices=Position.choices, verbose_name=_("Chức danh"),default=Position.EXPERT)
     birthyear = models.IntegerField(_('Năm sinh'), blank=True, null=True, choices=year_dropdown, default=timezone.now().year - 15)

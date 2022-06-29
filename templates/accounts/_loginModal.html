@@ -30,8 +30,11 @@
                         </button>
                         <div class="btn-group__account">
                             <a class="btn-facebook" href="{% provider_login_url "facebook" method="oauth2" %}">
-                                Đăng nhập với tài khoản Facebook của bạn
+                                Đăng nhập bằng Facebook
                             </a>
+                            {% comment %}<a class="btn-blue" href="{% url 'login_zalo'%}">
+                                Đăng nhập bằng Zalo
+                            </a>{% endcomment %}
                             {#            <a href="#" class="btn-google">Đăng nhập với Google</a>#}
                             {#            <a href="#" class="btn-apple" style="opacity: 1;">Đăng nhập với Apple</a>#}
                         </div>

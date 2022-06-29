@@ -1,6 +1,8 @@
 from datetime import datetime
 
-from django.contrib.auth.models import AbstractUser, Permission, GroupManager, UserManager
+from django.contrib.auth.models import AbstractUser, GroupManager, UserManager, PermissionManager, \
+    _user_has_module_perms, _user_get_permissions, _user_has_perm
+from django.contrib.contenttypes.models import ContentType
 from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
 from django.db import models
 from django.urls import reverse
@@ -18,7 +20,168 @@ phone_regex = RegexValidator(regex=r'^(09|03|07|08|05)+([0-9]{8})$',
                              message="Số điện thoại 10 số với chỉ các đầu số 09|03|07|08|05")
 
 
-class User(AbstractUser):
+class Permission(models.Model):
+    """
+    The permissions system provides a way to assign permissions to specific
+    users and groups of users.
+
+    The permission system is used by the Django admin site, but may also be
+    useful in your own code. The Django admin site uses permissions as follows:
+
+        - The "add" permission limits the user's ability to view the "add" form
+          and add an object.
+        - The "change" permission limits a user's ability to view the change
+          list, view the "change" form and change an object.
+        - The "delete" permission limits the ability to delete an object.
+        - The "view" permission limits the ability to view an object.
+
+    Permissions are set globally per type of object, not per specific object
+    instance. It is possible to say "Mary may change news stories," but it's
+    not currently possible to say "Mary may change news stories, but only the
+    ones she created herself" or "Mary may only change news stories that have a
+    certain status or publication date."
+
+    The permissions listed above are automatically created for each model.
+    """
+    name = models.CharField(_('Tên quyền'), max_length=255)
+    content_type = models.ForeignKey(
+        ContentType,
+        models.CASCADE,
+        verbose_name=_('Chức năng'),
+        related_name='django'
+    )
+    codename = models.CharField(_('Mã chức năng'), max_length=100)
+
+    objects = PermissionManager()
+
+    class Meta:
+        verbose_name = _('Quyền sử dụng')
+        verbose_name_plural = _('DS Quyền sử dụng')
+        unique_together = [['content_type', 'codename']]
+        ordering = ['content_type__app_label', 'content_type__model', 'codename']
+
+    def __str__(self):
+        return '%s | %s' % (self.content_type, self.name)
+
+    def natural_key(self):
+        return (self.codename,) + self.content_type.natural_key()
+    natural_key.dependencies = ['contenttypes.contenttype']
+
+
+class CustomGroup(models.Model):
+    """
+    Overwrites original Django Group.
+    """
+    class Meta:
+        verbose_name = "Nhóm người dùng"
+        verbose_name_plural = "DS Nhóm người dùng"
+
+    name = models.CharField(_('Tên nhóm'), max_length=150, unique=True)
+    permissions = models.ManyToManyField(
+        to='auth.Permission',
+        verbose_name=_('Quyền sử dụng'),
+        blank=True,
+        related_name='customgroup'
+    )
+
+    objects = GroupManager()
+
+    def __str__(self):
+        return self.name
+
+    def natural_key(self):
+        return (self.name,)
+
+
+class PermissionsMixin(models.Model):
+    """
+    Add the fields and methods necessary to support the Group and Permission
+    models using the ModelBackend.
+    """
+    is_superuser = models.BooleanField(
+        _('superuser status'),
+        default=False,
+        help_text=_(
+            'Designates that this user has all permissions without '
+            'explicitly assigning them.'
+        ),
+    )
+    customgroup = models.ManyToManyField(
+        CustomGroup,
+        verbose_name=_('Nhóm người dùng'),
+        blank=True,
+        help_text=_(
+            'Nhóm quyền mà người dùng này được phân quyền.'
+        ),
+        related_name="user_set",
+        related_query_name="user",
+    )
+    permissions = models.ManyToManyField(
+        Permission,
+        verbose_name=_('Quyền người dùng'),
+        blank=True,
+        help_text=_('Xác định quyền cho người dùng này.'),
+        related_name="user_set",
+        related_query_name="user",
+    )
+
+    class Meta:
+        abstract = True
+
+    def get_user_permissions(self, obj=None):
+        """
+        Return a list of permission strings that this user has directly.
+        Query all available auth backends. If an object is passed in,
+        return only permissions matching this object.
+        """
+        return _user_get_permissions(self, obj, 'user')
+
+    def get_group_permissions(self, obj=None):
+        """
+        Return a list of permission strings that this user has through their
+        groups. Query all available auth backends. If an object is passed in,
+        return only permissions matching this object.
+        """
+        return _user_get_permissions(self, obj, 'customgroup')
+
+    def get_all_permissions(self, obj=None):
+        return _user_get_permissions(self, obj, 'all')
+
+    def has_perm(self, perm, obj=None):
+        """
+        Return True if the user has the specified permission. Query all
+        available auth backends, but return immediately if any backend returns
+        True. Thus, a user who has permission from a single auth backend is
+        assumed to have permission in general. If an object is provided, check
+        permissions for that object.
+        """
+        # Active superusers have all permissions.
+        if self.is_active and self.is_superuser:
+            return True
+
+        # Otherwise we need to check the backends.
+        return _user_has_perm(self, perm, obj)
+
+    def has_perms(self, perm_list, obj=None):
+        """
+        Return True if the user has each of the specified permissions. If
+        object is passed, check if the user has all required perms for it.
+        """
+        return all(self.has_perm(perm, obj) for perm in perm_list)
+
+    def has_module_perms(self, app_label):
+        """
+        Return True if the user has any permissions in the given app label.
+        Use similar logic as has_perm(), above.
+        """
+        # Active superusers have all permissions.
+        if self.is_active and self.is_superuser:
+            return True
+
+        return _user_has_module_perms(self, app_label)
+
+
+class User(AbstractUser, PermissionsMixin):
     class Meta:
         verbose_name = "Người dùng"
         verbose_name_plural = "DS Người dùng"
@@ -55,6 +218,7 @@ class User(AbstractUser):
     # Metadata
     first_time = models.BooleanField(_('Đăng nhập lần đầu'), default=True)
     date_joined = models.DateField(_('Ngày gia nhập'), default=timezone.now, blank=True, null=True)
+    last_login = models.DateTimeField(_('Đăng nhập lần cuối'), default=timezone.now, blank=True, null=True)
 
     objects = UserManager()
 
@@ -75,31 +239,6 @@ class User(AbstractUser):
         return '<img src="%s"/>' % self.avatar
 
     user_image.allow_tags = True
-
-
-class Group(models.Model):
-    """
-    Overwrites original Django Group.
-    """
-    class Meta:
-        verbose_name = "Nhóm người dùng"
-        verbose_name_plural = "DS Nhóm người dùng"
-
-    name = models.CharField(_('Tên nhóm'), max_length=150, unique=True)
-    permissions = models.ManyToManyField(
-        to='auth.Permission',
-        verbose_name=_('Quyền sử dụng'),
-        blank=True,
-        related_name='permissions2permissions'
-    )
-
-    objects = GroupManager()
-
-    def __str__(self):
-        return self.name
-
-    def natural_key(self):
-        return (self.name,)
 
 
 class Point(models.Model):

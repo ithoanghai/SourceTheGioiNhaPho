@@ -7,8 +7,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from adminplus.sites import AdminSitePlus
 
-from FunctionModule.admin.sites import site
-
 admin.site = AdminSitePlus()
 admin.autodiscover()
 admin.site.site_header = 'Quản trị hệ thống thế giới nhà phố'

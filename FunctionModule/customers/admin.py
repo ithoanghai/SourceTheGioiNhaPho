@@ -1,10 +1,8 @@
 from django.contrib import admin
-from django.contrib.admin import DateFieldListFilter, BooleanFieldListFilter
 from django.db.models import Q
-
 from .forms import CustomerAdminForm
 from .models import Customer
-from ..listings.filters import ChoiceDropdownFilter, RelatedDropdownFilter
+from ..filters import DropdownFilter, DateFieldFilter
 from ..realtors.models import Realtor
 
 
@@ -27,12 +25,13 @@ class CustomerAdmin(admin.ModelAdmin):
     search_fields = ('name', 'phone', 'email', 'address', 'financial_range', 'request', 'descriptions', 'district', 'custormer_type', 'status', 'classify')
     list_per_page = 100
     ordering = ('financial_range', 'district', 'name', 'hire_date')
+    list_filter = ('transactionStatus', 'custormer_type', 'classify', 'status', 'hire_date',)
     list_filter = (
-        ('transactionStatus', ChoiceDropdownFilter),
-        ('custormer_type', ChoiceDropdownFilter),
-        ('classify', ChoiceDropdownFilter),
-        ('status', ChoiceDropdownFilter),
-        ('hire_date', DateFieldListFilter),
+        ('transactionStatus', DropdownFilter),
+        ('custormer_type', DropdownFilter),
+        ('classify', DropdownFilter),
+        ('status', DropdownFilter),
+        ('hire_date', DateFieldFilter),
     )
     form = CustomerAdminForm
 

@@ -1,18 +1,27 @@
+import datetime
+import urllib
+from email.charset import BASE64
+
 from django.contrib import messages, auth
 from django.contrib.admin import site
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash, authenticate
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from allauth.account.views import get_adapter
 from gevent import os
+import json
 
+from FunctionModule.accounts.auth import RealEstateAuthBackend
 from FunctionModule.accounts.models import User, Point
 from FunctionModule.accounts.forms import UserRegisterForm, UserProfileForm
 from FunctionModule.transactions.models import Transaction
-from TownhouseWorldRealestate.settings import MEDIA_ROOT
+from FunctionModule.zalo.app import ZaloAppInfo, Zalo3rdAppClient
+from FunctionModule.zalo.oa import ZaloOaClient
+from TownhouseWorldRealestate.settings import MEDIA_ROOT, ZALO_APP_ID, ZALO_APP_CALLBACK_URL, ZALO_CODE_CHALLENGE, \
+    ZALO_STATE, ZALO_APP_SECRET, ZALO_REFRESH_TOKEN
 
 
 def register(request):
@@ -250,3 +259,43 @@ def password_change(request):
 def social_login_cancelled(request):
     messages.warning(request, 'Bạn đã hủy đăng nhập. Xin đăng nhập lại.')
     return redirect('/')
+
+
+def login_zalo_callback(request):
+    try:
+        # user id Hải user_id	8748099517921268204
+        zalo_info = ZaloAppInfo.ZaloAppInfo(app_id=ZALO_APP_ID, secret_key=ZALO_APP_SECRET, callback_url=ZALO_APP_CALLBACK_URL)
+        zalo_3rd_app_client = Zalo3rdAppClient.Zalo3rdAppClient(zalo_info)
+        #authorization_code = "https://oauth.zaloapp.com/v4/permission?app_id=%d&redirect_uri=%s&code_challenge=%s&state=%s" %(zalo_info.app_id, zalo_info.callback_url, ZALO_CODE_CHALLENGE,'yes')
+        #print(authorization_code)
+        login_url = zalo_3rd_app_client.get_login_url()
+        profile = zalo_3rd_app_client.get('/me', ZALO_REFRESH_TOKEN, {'fields': 'id, name, birthday, gender, picture, phone'})
+        print(profile)
+        if profile is not None:
+            user = User()
+            user.first_name = profile["name"]
+            user.username = profile["id"]
+            user.set_password(user.username)
+            user.phone = profile["id"]
+            cr_date = profile["birthday"]
+            cr_date = datetime.datetime.strptime(cr_date, '%d/%m/%Y')
+            user.dob = cr_date.strftime("%Y-%m-%d")
+            user.gender = profile["gender"]
+            picture = profile["picture"]
+            #avatar = json.loads(picture)
+            #print(avatar)
+
+            user_check = User.objects.filter(username=user.username).first()
+            if user_check is None:
+                user.save()
+            else:
+                user = user_check
+            adapter = get_adapter(request)
+            adapter.login(request, user)
+            messages.success(request, 'Bạn đã đăng nhập thành công')
+
+        return redirect('index')
+
+    except (ObjectDoesNotExist, MultipleObjectsReturned):
+        messages.error(request, 'Xuất hiện lỗi khi đăng nhập, bạn cần liên hệ quản trị viên')
+        return redirect('login')

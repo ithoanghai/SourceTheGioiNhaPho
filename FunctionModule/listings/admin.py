@@ -1,20 +1,15 @@
 import fractions
 
-from advanced_filters.admin import AdminAdvancedFiltersMixin
 from django.contrib import admin
-from django.contrib.admin import FieldListFilter, BooleanFieldListFilter, DateFieldListFilter
 from django.core.files.storage import default_storage
 from django.core.files.uploadedfile import UploadedFile
 from django import forms
 from django.http import HttpRequest, JsonResponse
-
 from FunctionModule.listings.import_csv import handle_import, logger
-from TownhouseWorldRealestate.settings import BASE_DIR, MEDIA_ROOT
-from .filters import DropdownFilter, RelatedDropdownFilter, ChoiceDropdownFilter, IsWithinRangeFilter, \
-    SimpleDropdownFilter, AreaFilter
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage, ListingHistory
 from .choices import district_default_choices
+from ..filters import DropdownFilter, DateFieldFilter, BooleanFieldFilter
 from ..realtors.models import Realtor
 from django.db.models import Q
 from fractions import *
@@ -58,28 +53,23 @@ class ListingAdmin(admin.ModelAdmin):
             'fields': (('status', 'priority','list_date'), ('is_published', 'is_verified', 'is_exclusive'),)}),
     )
 
-    list_display = (
-    'address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status',
-     'district',)
+    list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status', 'district',)
     list_display_links = ('code', 'address',)
     list_filter = (
-        ('status', ChoiceDropdownFilter),
-        ('house_type', ChoiceDropdownFilter),
-        ('road_type', ChoiceDropdownFilter),
-        #('floors', ChoiceDropdownFilter),
-        ('registration_type', ChoiceDropdownFilter),
-        #('realtor', RelatedDropdownFilter),
-        ('transaction_type', ChoiceDropdownFilter),
-        ('list_date', DateFieldListFilter),
-        ('is_published', BooleanFieldListFilter),
-        ('is_advertising', BooleanFieldListFilter),
+        ('house_type', DropdownFilter), ('transaction_type', DropdownFilter),
+        ('road_type', DropdownFilter),
+        ('floors', DropdownFilter),
+        ('registration_type', DropdownFilter),
+        ('status', DropdownFilter),
+        ('list_date', DateFieldFilter),
+        ('is_published', BooleanFieldFilter),
+        ('is_advertising', BooleanFieldFilter),
         #AreaFilter,
     )
     #advanced_filter_fields = ('status', ('house_type', 'road_type'))
     list_editable = ('price',)
-    search_fields = (
-    'id', 'title', 'code', 'address', 'area', 'price', 'house_type', 'road_type', 'urban_area', 'street', 'ward',
-    'district', 'state', 'list_date',)
+    search_fields = ('id', 'title', 'code', 'address', 'area', 'price', 'house_type', 'road_type', 'urban_area',
+                     'street', 'ward', 'district', 'state', 'list_date',)
     list_per_page = 200
     inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
     actions = ['make_published', 'unpublished']
@@ -170,9 +160,10 @@ class ListingHistoryAdmin(admin.ModelAdmin):
 
     list_display = ('listing', 'area', 'floors', 'width', 'price', 'bedrooms', 'bathrooms', 'warehouse', 'list_date',)
     list_display_links = ('listing',)
+    list_filter = ('list_date', 'listing', )
     list_filter = (
-        ('list_date', DateFieldListFilter),
-        ('listing', ChoiceDropdownFilter),
+        ('floors', DropdownFilter),
+        ('list_date', DateFieldFilter),
     )
     list_editable = ()
     search_fields = ('id', 'area', 'price', 'list_date',)

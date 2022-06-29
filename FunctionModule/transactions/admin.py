@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .forms import TransactionAdminForm, TransactionHistoryAdminForm
 from .models import Transaction, TransactionHistory
+from ..filters import DropdownFilter, DateFieldFilter
 
 
 class TransactionAdmin(admin.ModelAdmin):
@@ -20,6 +21,12 @@ class TransactionAdmin(admin.ModelAdmin):
   list_display = ('id', 'trantype', 'message', 'caring_area', 'request_price', 'house_type', 'listing', 'customer', 'user', 'date', 'status')
   list_display_links = ('id', 'trantype', 'message',)
   search_fields = ('listing', 'message', 'customer', 'user',)
+  list_filter = (
+    ('trantype', DropdownFilter),
+    ('house_type', DropdownFilter),
+    ('status', DropdownFilter),
+    ('date', DateFieldFilter),
+  )
   list_per_page = 100
   form = TransactionAdminForm
 

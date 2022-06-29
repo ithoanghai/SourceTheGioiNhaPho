@@ -46,6 +46,7 @@ MODULES = [
     'FunctionModule.customers.apps.CustomersConfig',
     'FunctionModule.cadastral.apps.CadastralConfig',
     'FunctionModule.blog.apps.BlogConfig',
+    'FunctionModule.zalo.apps.ZaloConfig',
 ]
 
 THIRD_PARTIES = [
@@ -63,7 +64,6 @@ THIRD_PARTIES = [
     'django_filters',
     'adminplus',
     'cachalot',
-    'advanced_filters',
     'hitcount'
 ]
 
@@ -321,3 +321,11 @@ HITCOUNT_KEEP_HIT_ACTIVE = {'minutes': 60}
 HITCOUNT_HITS_PER_IP_LIMIT = 0  # unlimited
 HITCOUNT_EXCLUDE_USER_GROUP = ()  # not used
 HITCOUNT_KEEP_HIT_IN_DATABASE = {'seconds': 10}
+
+ZALO_APP_ID = 4421936851919043973
+ZALO_APP_SECRET = '2QuDKw9NrSy8g5n2O3MI'
+ZALO_APP_CALLBACK_URL = '/accounts/social/login-zalo-callback'
+ZALO_CODE_CHALLENGE = 'MTQ4OTkyQkE1NTUwQjBDM0EwNjIwRTczNjc1NUIzRjBFMzIwMjUwOTkzOUNBMERCREQ5NzNBMzMyQkY4RThFMA=='
+ZALO_STATE = 'yes'
+ZALO_ACCESS_TOKEN = 'DSz52EH7GbSnnaaAwqvELZp4IGtiKqObJgah2zj9SpuCXICMcaXvBIYm0WYH958e0jShCQu-Mm9wwoyKzpbq5oNAFHsyGdKG6P47Dva5I6mquo0veXSk1YdzNX-eTWr3CVb5LvOO50r3cHW5-X9V8Ntb9NNpE4fFNUuWH8TYQMyHYZf1nqDtTMA226hO3KnYK_enMUCwG6P4qaffboOGCZ7tJpM1VJ8eCBm-49P2Opink0u4epb7EWtgAHgz5sG-DTis5ES8J21quJS8-szzK5oV3LJU4Lv9KUaX5UEvFcpYM4zG'
+ZALO_REFRESH_TOKEN = '5Mp9Y3PSGMWfUflF5ZXjS3bEWAHRS6T4La_5a0Lb4q4KPOkIEqPfHoquf-0vUKiqNqgcx2TFQ098QhZOMcOZ2NDF-9rSA0So6rtRtMbJ3pbcRlpN3qiW1Xn7ZCK85dDG3q6Bp1GLx4fc53EVjIPoC-yrbjhjKNvkr0MogVuc4s__0kN2XKeJH-m2XhppDJ1mX5x1jK-9xMHBTIrX'

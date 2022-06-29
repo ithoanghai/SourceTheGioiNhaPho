@@ -1,23 +1,40 @@
 {% load i18n %}
-<div class="actions">
-  {% block actions %}
-    {% block actions-form %}
-    {% for field in action_form %}{% if field.label %}<label>{% comment %}{{ field.label }}{% endcomment %} Hành động {% endif %}{{ field }}{% if field.label %}</label>{% endif %}{% endfor %}
-    {% endblock %}
-    {% block actions-submit %}
-    <button type="submit" class="button" title="{% translate "Thực hiện lựa chọn" %}" name="index" value="{{ action_index|default:0 }}">{% translate "Thực hiện" %}</button>
-    {% endblock %}
-    {% block actions-counter %}
-    {% if actions_selection_counter %}
-        <span class="action-counter" data-actions-icnt="{{ cl.result_list|length }}">{{ selection_note }}</span>
-        {% if cl.result_count != cl.result_list|length %}
-        <span class="all hidden">{{ selection_note_all }}</span>
-        <span class="question hidden">
-            <a href="#" title="{% translate "Lựa chọn đối tượng trên tất cả các trang" %}">{% blocktranslate with cl.result_count as total_count %} Chọn toàn bộ {{ total_count }} trong {{ module_name }}{% endblocktranslate %}</a>
+<div class="actions" style="margin-left: 30px">
+    {% block actions %}
+        <div class="row col-12">
+            <div>
+                {% block actions-form %}
+                    <div class="row">
+                        <span>Hành động:</span>
+                    {% for field in action_form %}
+                        {% if field.label %}<label>{% comment %}{{ field.label }} {% endcomment %}{{ field }}</label>
+                    {% endif %}
+                    {% endfor %}
+                    </div>
+                {% endblock %}
+</div>
+        <div style="margin-left: 20px">
+                {% block actions-submit %}
+                    <button type="submit" class="button" title="{% translate "Thực hiện lựa chọn" %}" name="index"
+                            value="{{ action_index|default:0 }}">{% translate "Thực hiện" %}</button>
+                {% endblock %}
+
+                {% block actions-counter %}
+                    {% if actions_selection_counter %}
+                        <span class="action-counter"
+                              data-actions-icnt="{{ cl.result_list|length }}">{{ selection_note }}</span>
+                        {% if cl.result_count != cl.result_list|length %}
+                            <span class="all hidden">{{ selection_note_all }}</span>
+                            <span class="question hidden">
+            <a href="#"
+               title="{% translate "Lựa chọn đối tượng trên tất cả các trang" %}">{% blocktranslate with cl.result_count as total_count %}
+                Chọn toàn bộ {{ total_count }} trong {{ module_name }}{% endblocktranslate %}</a>
         </span>
-        <span class="clear hidden"><a href="#">{% translate "Huỷ lựa chợn" %}</a></span>
-        {% endif %}
-    {% endif %}
+                            <span class="clear hidden"><a href="#">{% translate "Huỷ lựa chọn" %}</a></span>
+                        {% endif %}
+                    {% endif %}
+                {% endblock %}
+                </div>
+        </div>
     {% endblock %}
-  {% endblock %}
 </div>

@@ -29,16 +29,6 @@ pg_restore -c --dbname=postgresql://postgres:postgres@127.0.0.1/tgnp tgnp-2021-0
 Login Server:
     psql -h db -d tgnp -U postgres
 
-Setup next id when save database
-    BEGIN;
-    SELECT setval(pg_get_serial_sequence('"auth_permission"','id'), coalesce(max("id"), 1), max("id") IS NOT null) FROM "auth_permission";
-    SELECT setval(pg_get_serial_sequence('"auth_group_permissions"','id'), coalesce(max("id"), 1), max("id") IS NOT null) FROM "auth_group_permissions";
-    SELECT setval(pg_get_serial_sequence('"auth_group"','id'), coalesce(max("id"), 1), max("id") IS NOT null) FROM "auth_group";
-    SELECT setval(pg_get_serial_sequence('"accounts_user_groups"','id'), coalesce(max("id"), 1), max("id") IS NOT null) FROM "accounts_user_groups";
-    SELECT setval(pg_get_serial_sequence('"accounts_user_user_permissions"','id'), coalesce(max("id"), 1), max("id") IS NOT null) FROM "accounts_user_user_permissions";
-    SELECT setval(pg_get_serial_sequence('"accounts_user"','id'), coalesce(max("id"), 1), max("id") IS NOT null) FROM "accounts_user";
-    COMMIT;
-
 Show Log docker
     docker logs -f --tail 5 app_web_1
 

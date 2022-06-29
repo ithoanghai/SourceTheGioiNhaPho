@@ -6,6 +6,8 @@ from .import_realtor import handle_import
 from .models import Realtor
 from django.http import HttpRequest, JsonResponse
 
+from ..filters import DropdownFilter, DateFieldFilter
+
 
 class RealtorAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'birthyear', 'position', 'phone1', 'countryside', 'department', 'work_area', 'facebook')
@@ -13,8 +15,13 @@ class RealtorAdmin(admin.ModelAdmin):
     search_fields = ('id', 'name','phone1','phone2', 'email', 'birthyear', 'position', 'countryside', 'workplace', 'department', 'work_area', 'facebook', 'hire_date')
     list_per_page = 200
     ordering = ('name', 'hire_date')
-    #filter_horizontal = ('user','position',)
-    list_filter = ('position', 'workplace', 'title',  'hire_date')
+    #filter_vertical = ('user',)
+    list_filter = (
+        ('position', DropdownFilter),
+        ('workplace', DropdownFilter),
+        ('birthyear', DropdownFilter),
+        ('hire_date', DateFieldFilter),
+    )
     readonly_fields = []
     add_fieldsets = (
         ('THÔNG TIN CƠ BẢN CHUYÊN VIÊN', {

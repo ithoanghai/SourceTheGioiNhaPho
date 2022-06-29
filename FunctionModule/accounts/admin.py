@@ -1,6 +1,8 @@
 from typing import Set
 
 from django.contrib import admin, messages
+from django.contrib.admin.options import IS_POPUP_VAR
+from django.contrib.admin.utils import unquote
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.core.exceptions import PermissionDenied
@@ -14,9 +16,8 @@ from rest_framework.authtoken.models import TokenProxy
 from django.utils.translation import ugettext_lazy as _
 
 from .forms import MyUserChangeForm, GroupAdminForm
-from .models import User, Group
-from ..admin.options import IS_POPUP_VAR
-from ..admin.utils import unquote
+from .models import User, CustomGroup, Permission
+from ..filters import DateFieldFilter, BooleanFieldFilter
 
 
 class AccountAdmin(AuthUserAdmin):
@@ -40,21 +41,27 @@ class AccountAdmin(AuthUserAdmin):
             ('address', 'dob', 'gender'),
             'avatar', 'bio', ('is_broker', 'is_investor',))}),
         ('PHÂN QUYỀN SỬ DỤNG', {
-            'fields': (('is_active', 'is_staff', 'is_superuser'), ('groups', 'user_permissions'))
+            'fields': (('is_active', 'is_staff', 'is_superuser'), ('customgroup', 'permissions'))
         }),
-        ('THỜI GIAN HOẠT ĐỘNG', {'fields': ('first_time', 'date_joined',)}),
+        ('THỜI GIAN HOẠT ĐỘNG', {'fields': ('first_time', 'date_joined','last_login')}),
     )
 
     list_display = ('id', 'name', 'phone', 'email', 'date_joined', 'is_staff', 'is_broker', 'is_investor')
     list_display_links = ('name', 'phone')
     search_fields = ['username', 'first_name', 'last_name', 'email', 'phone']
-    list_filter = ('date_joined', 'is_broker', 'is_investor', 'is_staff', 'is_active', 'groups')
+    list_filter = ('date_joined', 'is_broker', 'is_investor', 'is_staff', 'is_active')
+    list_filter = (
+        ('date_joined', DateFieldFilter),
+        ('is_broker', BooleanFieldFilter),
+        ('is_investor', BooleanFieldFilter),
+        ('is_active', BooleanFieldFilter),
+    )
     list_per_page = 200
     readonly_fields = [
         'date_joined', 'user_image',
     ]
     ordering = ('last_name', 'date_joined', )
-    filter_horizontal = ('groups', 'user_permissions',)
+    filter_horizontal = ('customgroup', 'permissions')
 
     def get_fieldsets(self, request, obj=None):
         if not obj:
@@ -82,7 +89,7 @@ class AccountAdmin(AuthUserAdmin):
         if not is_superuser:
             disabled_fields |= {
                 'is_superuser',
-                'user_permissions'
+                'permissions'
             }
 
         for f in disabled_fields:
@@ -203,7 +210,8 @@ class GroupAdmin(admin.ModelAdmin):
         return super().formfield_for_manytomany(db_field, request=request, **kwargs)
 
 
-admin.site.register(Group, GroupAdmin)
+admin.site.register(Permission)
+admin.site.register(CustomGroup, GroupAdmin)
 admin.site.register(User, AccountAdmin)
 admin.site.unregister(TokenProxy)
 #admin.site.unregister(SocialToken)

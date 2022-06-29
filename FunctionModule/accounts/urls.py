@@ -15,4 +15,5 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
     path('password_change', views.password_change, name='password_change'),
     path('social/login/cancelled/', views.social_login_cancelled),
+    path('social/login-zalo-callback', views.login_zalo_callback, name='login_zalo'),
 ]
