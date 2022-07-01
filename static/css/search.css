@@ -289,8 +289,8 @@
     font-family: Material-Design-Iconic-Font;
     content: '\f26b';
     position: absolute;
-    left: 3px;
-    top: -2px;
+    left: 2px;
+    top: 5px;
     color: #fff;
     font-size: 14px;
     line-height: 20px
@@ -4836,7 +4836,7 @@ div > img {
 
 .heading-02 {
     font-family: tgnp-font2, Arial, Helvetica, sans-serif;
-    padding: 40px 0 20px;
+    padding: 20px 0 20px;
     font-size: 24px;
     font-weight: 400;
     position: relative;

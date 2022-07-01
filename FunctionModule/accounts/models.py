@@ -78,7 +78,7 @@ class CustomGroup(models.Model):
 
     name = models.CharField(_('Tên nhóm'), max_length=150, unique=True)
     permissions = models.ManyToManyField(
-        to='auth.Permission',
+        to='accounts.Permission',
         verbose_name=_('Quyền sử dụng'),
         blank=True,
         related_name='customgroup'

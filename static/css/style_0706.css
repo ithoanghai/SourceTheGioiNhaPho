@@ -1223,23 +1223,6 @@ ul.slidemap li a.img:hover {
     padding-top: 0
 }
 
-.heading-02 {
-    font-family: 'Tiempos', Arial, Helvetica, sans-serif;
-    padding: 40px 0 20px;
-    font-size: 24px;
-    font-weight: 400;
-    position: relative;
-    line-height: 30px
-}
-
-.heading-02 .rating-show {
-    position: absolute;
-    right: 0;
-    width: 200px;
-    height: 45px;
-    top: 40px
-}
-
 .left-content .rating-value li {
     float: left;
     padding: 15px 0;

@@ -174,6 +174,7 @@ new Vue({
             maxArea: 500,
             bedroomFilter: [],
             bathroomFilter: '',
+            viewtypeFilter: '',
             directionFilters: [],
             isVerifiedFilter: undefined,
             isExclusiveFilter: undefined,
@@ -248,6 +249,12 @@ new Vue({
             curLength += this.countOtherFilter();
 
             return curLength
+        },
+        viewResultsMark: function () {
+            let curLength = 0;
+            if (this.viewtypeFilter === 'grid' || this.viewtypeFilter === 'list')
+                curLength += 1;
+            return curLength;
         },
     },
     methods: {
@@ -462,6 +469,26 @@ new Vue({
             this.toggleFilterType('otherFilters');
             await this.getListings();
             this.setMarkers();
+        },
+        setViewResultsFilters: function (parentSelector) {
+            const asview = parentSelector.find('input[name="asView"]:checked').first().val()
+            if (!asview) return;
+            if (this.viewtypeFilter === asview) return;
+            this.viewtypeFilter = asview;
+            if (asview !== 'grid'){
+                this.updateQueryParams({'asview': asview});
+                this.viewAsList()
+            }
+            else{
+                this.removeQueryParams('asview');
+                this.viewAsGrid()}
+        },
+        applyViewResultsFilter: async function () {
+            alert('alo');
+            this.setViewResultsFilters($('#viewResults'));
+            this.toggleFilterType('viewResults');
+            /*await this.getListings();*/
+            alert('blo');
         },
         setBedroomFilter: function (filters) {
             if (!filters) return;

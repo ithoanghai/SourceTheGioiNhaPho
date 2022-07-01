@@ -56,42 +56,42 @@
 }
 
 input::-webkit-input-placeholder {
-    color: rgba(131, 131, 131, .7);
+    color: rgba(131, 131, 131, .8);
     font-size: 14px
 }
 
 input:-moz-placeholder {
-    color: rgba(131, 131, 131, .7);
+    color: rgba(131, 131, 131, .8);
     font-size: 14px
 }
 
 input::-moz-placeholder {
-    color: rgba(131, 131, 131, .7);
+    color: rgba(131, 131, 131, .8);
     font-size: 14px
 }
 
 input:-ms-input-placeholder {
-    color: rgba(131, 131, 131, .7);
+    color: rgba(131, 131, 131, .8);
     font-size: 14px
 }
 
 ::-webkit-input-placeholder {
-    color: rgba(131, 131, 131, .7);
+    color: rgba(131, 131, 131, .8);
     font-size: 14px
 }
 
 ::-moz-placeholder {
-    color: rgba(131, 131, 131, .7);
+    color: rgba(131, 131, 131, .8);
     font-size: 14px
 }
 
 :-ms-input-placeholder {
-    color: rgba(131, 131, 131, .7);
+    color: rgba(131, 131, 131, .8);
     font-size: 14px
 }
 
 :-moz-placeholder {
-    color: rgba(131, 131, 131, .7);
+    color: rgba(131, 131, 131, .8);
     font-size: 14px
 }
 
@@ -1237,4 +1237,45 @@ textarea:focus, input:focus {
 }
 .recent-search .search-result a {
     text-decoration: none;
+}
+
+.heading-01 {
+    font-size: 40px;
+    line-height: normal;
+    font-weight: 500
+}
+
+.heading-02 {
+    font-size: 30px;
+    line-height: normal;
+    font-family: 'Tiempos', Arial, Helvetica, sans-serif;
+    padding: 20px 0 20px;
+    font-weight: 400;
+    position: relative;
+}
+
+.heading-03 {
+    font-size: 26px;
+    line-height: normal;
+    font-weight: 400
+}
+
+.heading-04 {
+    font-size: 22px;
+    line-height: normal;
+    font-weight: 400
+}
+
+.heading-05 {
+    font-size: 18px;
+    line-height: normal;
+    font-weight: 400
+}
+
+.heading-02 .rating-show {
+    position: absolute;
+    right: 0;
+    width: 200px;
+    height: 45px;
+    top: 40px
 }
