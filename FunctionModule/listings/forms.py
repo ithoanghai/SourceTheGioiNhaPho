@@ -24,7 +24,7 @@ class ListingAdminForm(forms.ModelForm):
             'living_facilities': Textarea(attrs={'class': '???', 'rows': 3}),
             'residential_community': Textarea(attrs={'class': '???', 'rows': 3}),
             'regional_welfare': Textarea(attrs={'class': '???', 'rows': 3}),
-            'extra_data': Textarea(attrs={'class': '???', 'rows': 12}),
+            'extra_data': Textarea(attrs={'class': '???', 'rows': 10}),
         }
 
     # users_list = User.objects.values_list('last_name',flat=True).order_by('last_name').distinct()
@@ -43,12 +43,14 @@ class ListingAdminForm(forms.ModelForm):
 
 
 class ListingHistoryAdminForm(forms.ModelForm):
+    list_date = forms.DateField(label='Ngày khởi tạo lịch sử BĐS',widget=forms.DateInput(format='%d-%m-%Y'))
+
     class Meta:
         model = ListingHistory
         fields = '__all__'
 
         widgets = {
-            'extra_data': Textarea(attrs={'class': '???', 'rows': 12}),
+
         }
 
     def __init__(self, *args, **kwargs):

@@ -357,7 +357,7 @@ class ListingHistory(models.Model):
                                   help_text="Ghi các thông tin mô tả đầy đủ của đầu chủ về chủ nhà hoặc các yếu tố khác liên quan đến tương tác với Chuyên viên...")
 
     warehouse = models.CharField(max_length=100, blank=True, verbose_name=_("Kho hàng"))
-    list_date = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày khởi tạo BĐS"))
+    list_date = models.DateField(default=datetime.now, verbose_name=_("Ngày tạo lịch sử BĐS"))
 
     def __str__(self):
         return f'%s' % (self.listing)

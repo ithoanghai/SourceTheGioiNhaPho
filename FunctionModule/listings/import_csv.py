@@ -117,9 +117,10 @@ def get_direction(direction: str) -> str:
 
 def handle_import(request, file_path, listing_type):
     line_count = 0
-    with open('saved_search.json', 'r', encoding='utf-8') as f:
-        searched_locations = json.load(f)
     try:
+        with open('saved_search.json', 'r', encoding='utf-8') as f:
+            searched_locations = json.load(f)
+
         if request.user is not None:
             user = request.user
             query = Q(phone1=user.phone) or Q(user_id=user.id)
@@ -136,25 +137,25 @@ def handle_import(request, file_path, listing_type):
                 if len(fone) == 9:
                     fone = f'0{fone}'
                 realtor_dict[fone] = obj
-            else:
-                queryset_list = Listing.objects.filter(realtor=obj)
-                usr_list = {}
-                if obj.user is not None:
-                    usr_list = User.objects.filter(last_name=obj.user.last_name)
-                for usr in usr_list:
-                    if len(usr.phone) == 10:
-                        fone = usr.phone
-                for listing in queryset_list:
-                    if (len(fone) == 10 and fone[0] == '0') or len(fone) == 9:
-                        rel = Realtor.objects.filter(user__phone=fone)
-                        listing.realtor = rel
-                        listing.save()
-                        print(f"cập nhật listing có realtor lỗi sang realtor đầy đủ: {listing.realtor}, phone {fone}")
-                    else:
-                        listing.delete()
-                        print(f"xóa listing rác do không có realtor phù hợp: {listing}")
+            # else:
+            #     queryset_list = Listing.objects.filter(realtor=obj)
+            #     usr_list = {}
+            #     if obj.user is not None:
+            #         usr_list = User.objects.filter(last_name=obj.user.last_name)
+            #     for usr in usr_list:
+            #         if len(usr.phone) == 10:
+            #             fone = usr.phone
+            #     for listing in queryset_list:
+            #         if (len(fone) == 10 and fone[0] == '0') or len(fone) == 9:
+            #             rel = Realtor.objects.filter(user__phone=fone)
+            #             listing.realtor = rel
+            #             listing.save()
+            #             print(f"cập nhật listing có realtor lỗi sang realtor đầy đủ: {listing.realtor}, phone {fone}")
+            #         else:
+            #             listing.delete()
+            #             print(f"xóa listing rác do không có realtor phù hợp: {listing}")
 
-                obj.delete()
+            #    obj.delete()
         realtor = Realtor.objects.filter(pk=1).first()
 
         listing_count = Listing.objects.count()
@@ -621,7 +622,7 @@ def handle_import(request, file_path, listing_type):
 
                         # nếu listing mới import cũ hơn listing trong kho thì chỉ đẩy listing này sang bảng listing history
                         if listing.list_date >= new_listing.list_date:
-                            querylist_listhistory = ListingHistory.objects.filter(listing=listing_fisrt, list_date=new_listing.list_date)
+                            querylist_listhistory = ListingHistory.objects.filter(listing_id=listing_fisrt.id, list_date=new_listing.list_date)
                             #Kiểm tra trong listing history đã có trùng lặp chưa, nếu chưa có thì đẩy vào, nếu có rồi bỏ qua
                             if not querylist_listhistory.exists() and count_update >= 1:
                                 new_listhis = ListingHistory.objects.create(listing=listing_fisrt, user=new_listing.user,
