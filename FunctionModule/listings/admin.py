@@ -1,6 +1,7 @@
 import fractions
 
 from django.contrib import admin
+from django.contrib.admin.actions import delete_selected
 from django.core.files.storage import default_storage
 from django.core.files.uploadedfile import UploadedFile
 from django import forms
@@ -53,7 +54,7 @@ class ListingAdmin(admin.ModelAdmin):
             'fields': (('status', 'priority','list_date'), ('is_published', 'is_verified', 'is_exclusive'),)}),
     )
 
-    list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status', 'district',)
+    list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status', 'district','list_date')
     list_display_links = ('code', 'address',)
     list_filter = (
         ('house_type', DropdownFilter), ('transaction_type', DropdownFilter),
@@ -72,9 +73,10 @@ class ListingAdmin(admin.ModelAdmin):
                      'street', 'ward', 'district', 'state', 'list_date',)
     list_per_page = 200
     inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
-    actions = ['make_published', 'unpublished']
+    actions = ['make_published', 'unpublished', 'sold']
     form = ListingAdminForm
     ordering = ('-list_date',)
+    #delete_selected.short_description = 'Xóa bất động sản đã chọn trong %(verbose_name_plural)'
 
     class Media:
         js = ('admin/js/dropzone.js', 'admin/js/listing.js', 'admin/js/filepond-4.28.2.min.js',
@@ -138,13 +140,20 @@ class ListingAdmin(admin.ModelAdmin):
     #     except TypeError:
     #         return to_exclude
 
+    #@admin.actions(short_description='Đăng bán công khai')
     def make_published(self, request, queryset):
         updated = queryset.update(is_published=True)
-        self.message_user(request, f'Đã đổi trạng thái cho {updated} căn')
+        self.message_user(request, f'Chuyển sang chế độ đăng công khai cho {updated} căn')
 
+    #@admin.actions(short_description='Không đăng bán')
     def unpublished(self, request, queryset):
         updated = queryset.update(is_published=False)
-        self.message_user(request, f'Đã đổi trạng thái cho {updated} căn')
+        self.message_user(request, f'Đã đổi trạng thái riêng tư cho {updated} căn')
+
+    #@admin.actions(short_description='Chuyển sang trạng thái đã bán')
+    def sold(self, request, queryset):
+        updated = queryset.update(status='sold')
+        self.message_user(request, f'Đã đổi trạng thái đã bán cho {updated} căn')
 
 
 class ListingHistoryAdmin(admin.ModelAdmin):

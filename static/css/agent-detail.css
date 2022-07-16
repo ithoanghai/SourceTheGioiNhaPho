@@ -815,6 +815,7 @@
 }
 .listingCard .info-container .listing-info {
     margin-top: 9px;
+    padding-left: 5px;
 }
 .listingCard .info-container .listing-info li {
     display: inline-block;

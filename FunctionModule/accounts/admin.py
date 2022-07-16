@@ -98,23 +98,6 @@ class AccountAdmin(AuthUserAdmin):
 
         return form
 
-    def get_urls(self):
-        return [
-            path(
-                '<id>/password/',
-                self.admin_site.admin_view(self.user_change_password),
-                name='auth_user_password_change',
-            ),
-        ] + super().get_urls()
-
-    def lookup_allowed(self, lookup, value):
-        # Don't allow lookups involving passwords.
-        return not lookup.startswith('password') and super().lookup_allowed(lookup, value)
-
-    def add_view(self, request, form_url='', extra_context=None):
-        with transaction.atomic(using=router.db_for_write(self.model)):
-            return self._add_view(request, form_url, extra_context)
-
     def user_change_password(self, request, id, form_url=''):
         user = self.get_object(request, unquote(id))
         if not self.has_change_permission(request, user):
@@ -177,22 +160,6 @@ class AccountAdmin(AuthUserAdmin):
             context,
         )
 
-    def response_add(self, request, obj, post_url_continue=None):
-        """
-        Determine the HttpResponse for the add_view stage. It mostly defers to
-        its superclass implementation but is customized because the User model
-        has a slightly different workflow.
-        """
-        # We should allow further modification of the user just added i.e. the
-        # 'Save' button should behave like the 'Save and continue editing'
-        # button except in two scenarios:
-        # * The user has pressed the 'Save and add another' button
-        # * We are adding a user in a popup
-        if '_addanother' not in request.POST and IS_POPUP_VAR not in request.POST:
-            request.POST = request.POST.copy()
-            request.POST['_continue'] = 1
-        return super().response_add(request, obj, post_url_continue)
-
 
 class GroupAdmin(admin.ModelAdmin):
     search_fields = ('name',)
@@ -200,14 +167,6 @@ class GroupAdmin(admin.ModelAdmin):
     filter_horizontal = ('permissions',)
     verbose_name = "Quản trị nhóm người dùng"
     form = GroupAdminForm
-
-    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
-        if db_field.name == 'permissions':
-            qs = kwargs.get('queryset', db_field.remote_field.model.objects)
-            # Avoid a major performance hit resolving permission names which
-            # triggers a content_type load:
-            kwargs['queryset'] = qs.select_related('content_type')
-        return super().formfield_for_manytomany(db_field, request=request, **kwargs)
 
 
 admin.site.register(Permission)

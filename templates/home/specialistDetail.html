@@ -42,15 +42,15 @@
                         </div>
                         <table>
                         {% if realtor.birthyear %}
-                            <tr>
-                                <td>Ngày sinh:</td>
+                            <tr class="row">
+                                <td >Ngày sinh:</td>
                                 <td>{{ realtor.birthyear }}</td>
                             </tr>
                         {% endif %}
                         {% if realtor.email %}
-                            <tr>
-                                <td>Email:</td>
-                                <td><a href="mailto: {{ realtor.email }}"
+                            <tr class="row">
+                                <td >Email:</td>
+                                <td ><a href="mailto: {{ realtor.email }}"
                                        title="{{ realtor.email }}"><span class=""
                                                                               data-cfemail="">{{ realtor.email }}</span></a>
                                 </td>
@@ -116,6 +116,7 @@
                                 <td width="100px">Trình độ:</td>
                                 <td>Chuyên môn BĐS cấp {{ realtor.level }}</td>
                             </tr>
+                            {% if realtor.work_area %}
                             <tr>
                                 <td>Địa bàn chính:</td>
                                 <td>
@@ -123,6 +124,7 @@
                                        title="Các BĐS tại {{ realtor.work_area }}">{{ realtor.work_area }}</a>
                                 </td>
                             </tr>
+                            {% endif %}
                         </table>
                     </div>
                     {% if realtor.user.bio %}
@@ -142,8 +144,8 @@
         {% if listings %}
             <section class="bg-grey all-project">
                 <div class="agents-container col-12">
-                    <div class="row">
-                        <h2 class="pd-t-55 pd-bt-10">Nhà đất bán của {{ realtor.name }}</h2>
+                    <div>
+                        <h3 class="pd-t-55 pd-bt-10">Nhà đất bán của {{ realtor.name }}</h3>
                         <div class="agents-inner block-project">
                             <div class="col-12">
                                 <div ref="propertyForSaleWrapper">
@@ -199,11 +201,11 @@
         <section class="bg-black call-now">
             <div class="img-call">
                 <a href="#">
-                    {% if realtor.user.avatar %}
-                        <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                    {% else %}
-                        <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
-                    {% endif %}
+                    {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' %}
+                                <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                            {% else %}
+                                <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                            {% endif %}
                 </a>
             </div>
             <div class="question">

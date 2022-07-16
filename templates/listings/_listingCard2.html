@@ -41,8 +41,7 @@
     </div>
     <div class="info-container">
         <div class="flex align-items-center justify-content-space-between">
-            <div class="listing-price">{{ listing.price.normalize }} {%if listing.transaction_type == "rent" %}{% trans "triệu" %} {% else %} {% trans "tỷ" %} {% endif %}</div>
-                   <ul class="listing-info">
+                <ul class="listing-info">
                 {% if listing.area > 0 %}
                 <li>
                     <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area.normalize }}{% trans "m2" %}
@@ -62,8 +61,11 @@
                 {% if listing.bathrooms %}
                     <li><i class="fa fa-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %}
                     </li> {% endif %}
+                <li><b>{{ listing.price.normalize }} {%if listing.transaction_type == "rent" %}{% trans "triệu" %} {% else %} {% trans "tỷ" %} {% endif %}</b></li>
+
             </ul>
         </div>
+
         {% comment %}    <h3>
       <a class="listing-name" href="{% url 'listing' listing.id %}"
          title="{{ listing.title }}">{{ listing.title }}</a>
@@ -71,16 +73,16 @@
 
         <div class="listing-address">
             {% if listing.urban_area %}
-                <h3>
+                <h4>
                     <a href="{% url 'listing_search' %}?keywords={{ listing.urban_area }}&sort=priority"
                        title="{{ listing.urban_area }}">{{ listing.urban_area }}</a>
-                </h3>
+                </h4>
             {% endif %}
             {% if listing.street %}
-            <h3>
+            <h4>
                 <a href="{% url 'listing_search' %}?keywords={{ listing.street }}&sort=priority"
                    title="{{ listing.street }}">{{ listing.street }}</a>
-            </h3>
+            </h4>
         {% endif %}
             {% comment %}{% if listing.ward %}
                 <h4>
@@ -89,16 +91,16 @@
                 </h4>
             {% endif %}{% endcomment %}
             {% if listing.district %}
-                <h3><b><a href="{% url 'listing_search' %}?district={{ listing.district }}&sort=priority"
-                          title="{% get_district listing.district %}">&nbsp {% get_district listing.district %}</a></b></h3>
+                <h4><b><a href="{% url 'listing_search' %}?district={{ listing.district }}&sort=priority"
+                          title="{% get_district listing.district %}">&nbsp {% get_district listing.district %}</a></b></h4>
             {% endif %}
             {% if listing.state %}
-                <h3><b><a href="{% url 'listing_search' %}?state={{ listing.state }}&sort=priority"
-                          title="{% get_state listing.state %}">&nbsp{% get_state listing.state %}</a></b></h3>
+                <h4><b><a href="{% url 'listing_search' %}?state={{ listing.state }}&sort=priority"
+                          title="{% get_state listing.state %}">&nbsp{% get_state listing.state %}</a></b></h4>
             {% endif %}
         </div>
 
-        <div class="listing-name"><h4><a href="{% url 'listing_detail' listing.id %}">{{ listing.title }}</a> </h4></div>
+        <div class="listing-name"><a href="{% url 'listing_detail' listing.id %}">{{ listing.title }}</a></div>
         {% comment %}<div class="listing-name"><i class="zmdi zmdi-key"></i><b><a href="{% url 'listing_detail' listing.id %}">{{ listing.code }}</a> </b></div>{% endcomment %}
     </div>
 </article>
