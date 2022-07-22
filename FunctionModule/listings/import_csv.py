@@ -160,22 +160,6 @@ def handle_import(request, file_path, listing_type):
             #    obj.delete()
         realtor = Realtor.objects.filter(pk=1).first()
 
-        listing_count = Listing.objects.count()
-        limit = 1000
-        listing_obj = {}
-        api_key = getattr(settings, 'GEOEARTH_API_KEY', '')
-        if listing_count > limit:
-            cur = 0
-            while cur < listing_count:
-                listings = Listing.objects.all()[cur:limit + cur]
-                for item in listings:  # type: Listing
-                    listing_obj[item.code] = item
-                cur = limit + cur
-        else:
-            listings = Listing.objects.all()
-            for item in listings:  # type: Listing
-                listing_obj[item.code] = item
-
     # get a list of all districts in Hanoi
         state_code = "01"
         hanoi_district_list = district_data[state_code]
