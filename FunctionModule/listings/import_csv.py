@@ -118,6 +118,7 @@ def get_direction(direction: str) -> str:
 def handle_import(request, file_path, listing_type):
     line_count = 0
     try:
+        print(f"open saved_search.json")
         with open('saved_search.json', 'r', encoding='utf-8') as f:
             searched_locations = json.load(f)
 
@@ -129,6 +130,7 @@ def handle_import(request, file_path, listing_type):
                 Realtor.objects.create(user_id=user.id, phone1=user.phone, name=user.name, email=user.email, address=user.address, is_cooperate=True)
 
     # realtor scan and reorder
+        print(f"load realtor scan and reorder")
         realtors = Realtor.objects.all()
         realtor_dict = {}
         for obj in realtors:
@@ -183,6 +185,7 @@ def handle_import(request, file_path, listing_type):
 
     #Open the listing file and import it into the system
         with open(file_path, 'r', encoding="utf-8", errors='ignore') as fp:
+            print('start open file')
             csv_reader = csv.reader(fp, delimiter=',')
             header_dict = read_header(next(csv_reader), listing_type)
             new_listings = []
@@ -468,13 +471,13 @@ def handle_import(request, file_path, listing_type):
                         geolocator = Nominatim(user_agent="thegioinhaphovietnam.com.vn")
                         #GeocodeEarth.geocoders.options.default_user_agent = "my-application"
                         hanoi_bounds = ((21.097341, 105.929947), (20.920105, 105.702667))
-                        #location = geolocator.geocode(add_search_map, timeout=None, bounded=True, viewbox=hanoi_bounds)
-                        location = geolocator.geocode(add_search_map, timeout=None)
+                        location = geolocator.geocode(add_search_map, timeout=None, bounded=True, viewbox=hanoi_bounds)
+                        #location = geolocator.geocode(add_search_map, timeout=None)
                         if location and location.point:
                             listing_loc = Point(location.point.longitude, location.point.latitude)
-                            #searched_locations[add_search_map] = [location.point.longitude, location.point.latitude]
-                        #else:
-                        #    searched_locations[add_search_map] = None
+                            searched_locations[add_search_map] = [location.point.longitude, location.point.latitude]
+                        else:
+                            searched_locations[add_search_map] = None
                 except ValueError:
                     logger.info(f"error search location {add_search_map}")
 
