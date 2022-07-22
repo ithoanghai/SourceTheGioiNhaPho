@@ -2,7 +2,7 @@
 <script type="text/javascript">var go_from_select = function(opt) { window.location = window.location.pathname + opt };</script>
 <div class="row" style="margin-left: 10px">
 <label class="col-2 col-lg-2">{{ title }}:</label>
-<div class="admin-filter-{{ title|cut:' ' }} col-4">
+<div class="admin-filter-{{ title|cut:' ' }} col-5">
 {% if choices|slice:"1:" %}
     <select style="width: 95%;"
         onchange="go_from_select(this.options[this.selectedIndex].value)">

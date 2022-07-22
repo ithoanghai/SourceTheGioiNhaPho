@@ -74,20 +74,20 @@ class Listing(models.Model, HitCountMixin):
                                      verbose_name=_("Chiều rộng đường/ngõ (m)"))
     parking_type = models.CharField(max_length=20, choices=ParkingType.choices, blank=True,
                                     null=True, verbose_name=_("Có chỗ đỗ ô tô không?"))
-    area = models.DecimalField(max_digits=10, decimal_places=1, verbose_name=_("Diện tích (m2)"))
+    area = models.DecimalField(max_digits=10, decimal_places=1, verbose_name=_("Diện tích"))
     floors = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], null=True, default="0",
                                  choices=([(i, i) for i in range(1, 50)]), verbose_name=_("Số tầng"))
-    width = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Mặt tiền (m)"), null=True)
-    price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá bán (tỷ), Giá thuê (triệu)"))
+    width = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Mặt tiền"), null=True)
+    price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá"))
     receive_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá thu về (tỷ)"),
                                         blank=True, null=True)
     sale_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá Hạ chào (tỷ)"),
                                      blank=True, null=True)
-    average_price = models.DecimalField(max_digits=9, decimal_places=0, verbose_name=_("Giá TB/m2 (triệu)"),
+    average_price = models.DecimalField(max_digits=9, decimal_places=0, verbose_name=_("Giá/m2 (triệu)"),
                                      blank=True, null=True)
-    length = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Chiều dài (m)"), null=True,
+    length = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Chiều dài"), null=True,
                                  blank=True)
-    area_real = models.DecimalField(max_digits=10, decimal_places=1, verbose_name=_("Diện tích thực tế(m2)"),
+    area_real = models.DecimalField(max_digits=10, decimal_places=1, verbose_name=_("Diện tích thực tế"),
                                     null=True, blank=True)
     bedrooms = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)],
                                    choices=([(i, i) for i in range(1, 100)]), verbose_name=_("Số phòng ngủ"),

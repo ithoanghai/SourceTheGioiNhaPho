@@ -14,7 +14,8 @@ from .filters import RangeFilter
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage, ListingHistory
 from .choices import district_default_choices
-from ..filters import DropdownFilter, DateFieldFilter, BooleanFieldFilter
+from ..filters import DropdownFilter, DateFieldFilter, BooleanFieldFilter, DateRangeFilter, RangeNumericFilter, \
+    SliderNumericFilter
 from ..realtors.models import Realtor
 from django.db.models import Q
 from fractions import *
@@ -59,18 +60,19 @@ class ListingAdmin(admin.ModelAdmin):
     )
 
     list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'district','list_date')
-    list_display_links = ('address',)
+    list_display_links = ('address','price',)
     list_filter = (
         ('status', DropdownFilter),
         ('house_type', DropdownFilter),
         ('transaction_type', DropdownFilter),
         ('road_type', DropdownFilter),
-        ('floors', DropdownFilter),
         ('registration_type', DropdownFilter),
-        ('list_date', DateFieldFilter),
         ('is_published', BooleanFieldFilter),
         ('is_advertising', BooleanFieldFilter),
-        #AreaFilter,
+        ('floors', RangeNumericFilter),
+        ('price', RangeNumericFilter),
+        ('average_price', RangeNumericFilter),
+       # ('list_date', DateRangeFilter),
     )
     #advanced_filter_fields = ('status', ('house_type', 'road_type'))
     list_editable = ()
@@ -85,9 +87,11 @@ class ListingAdmin(admin.ModelAdmin):
 
     class Media:
         js = ('admin/js/dropzone.js', 'admin/js/listing.js', 'admin/js/filepond-4.28.2.min.js',
-              'admin/js/micromodal-0.4.6.min.js')
+              'admin/js/micromodal-0.4.6.min.js', 'admin/js/admin-numeric-filter.js',
+              'admin/js/nouislider.min.js','admin/js/wNumb.min.js')
         css = {
-            'all': ('admin/css/dropzone.css', 'admin/css/listing.css', 'admin/css/filepond.min.css')
+            'all': ('admin/css/dropzone.css', 'admin/css/listing.css', 'admin/css/filepond.min.css',
+                    'admin/css/admin-numeric-filter.css', 'admin/css/nouislider.min.css')
         }
 
     def get_form(self, request, obj=None, change=False, **kwargs):

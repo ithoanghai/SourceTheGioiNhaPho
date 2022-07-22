@@ -3,12 +3,11 @@ from io import BytesIO
 
 from PIL import Image
 from django import forms
+from django.forms import Media, Textarea, ModelForm, BaseInlineFormSet
 from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.forms import Textarea, ModelForm, BaseInlineFormSet
 
 from .models import Listing, ListingImage, ListingHistory
-from ..accounts.models import User
-from ..realtors.models import Realtor
+from django.utils.translation import gettext_lazy as _
 
 
 class ListingAdminForm(forms.ModelForm):
@@ -111,3 +110,37 @@ class ImageFormSet(BaseInlineFormSet):
             pass
 
         return super().save_new_objects(commit)
+
+
+class SingleNumericForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        name = kwargs.pop('name')
+        super().__init__(*args, **kwargs)
+
+        self.fields[name] = forms.FloatField(label='', required=False,
+            widget=forms.NumberInput(attrs={'placeholder': _('Value')}))
+
+    @property
+    def media(self):
+        return super().media + Media(css=[self.NUMERIC_FILTER_CSS])
+
+
+class RangeNumericForm(forms.Form):
+    name = None
+
+    def __init__(self, *args, **kwargs):
+        self.name = kwargs.pop('name')
+        super().__init__(*args, **kwargs)
+
+        self.fields[self.name + '_from'] = forms.FloatField(label='', required=False,
+            widget=forms.NumberInput(attrs={'placeholder': _('From')}))
+        self.fields[self.name + '_to'] = forms.FloatField(label='', required=False,
+            widget=forms.NumberInput(attrs={'placeholder': _('To')}))
+
+    @property
+    def media(self):
+        return super().media + Media(css=[self.NUMERIC_FILTER_CSS])
+
+
+class SliderNumericForm(RangeNumericForm):
+    pass

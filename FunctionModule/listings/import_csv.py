@@ -130,7 +130,6 @@ def handle_import(request, file_path, listing_type):
                 Realtor.objects.create(user_id=user.id, phone1=user.phone, name=user.name, email=user.email, address=user.address, is_cooperate=True)
 
     # realtor scan and reorder
-        print(f"load realtor scan and reorder")
         realtors = Realtor.objects.all()
         realtor_dict = {}
         for obj in realtors:
@@ -169,7 +168,6 @@ def handle_import(request, file_path, listing_type):
 
     #Open the listing file and import it into the system
         with open(file_path, 'r', encoding="utf-8", errors='ignore') as fp:
-            print('start open file')
             csv_reader = csv.reader(fp, delimiter=',')
             header_dict = read_header(next(csv_reader), listing_type)
             new_listings = []

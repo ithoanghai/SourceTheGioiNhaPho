@@ -6,7 +6,11 @@ Each filter subclass knows how to display a filter for a field that passes a
 certain test -- e.g. being a DateField or ForeignKey.
 """
 import datetime
+from collections import OrderedDict
 
+import django
+import pytz
+from django.conf import settings
 from django.contrib.admin import ChoicesFieldListFilter, DateFieldListFilter, AllValuesFieldListFilter, \
     RelatedOnlyFieldListFilter, EmptyFieldListFilter, RelatedFieldListFilter, FieldListFilter, SimpleListFilter, \
     BooleanFieldListFilter
@@ -14,10 +18,18 @@ from django.contrib.admin.options import IncorrectLookupParameters
 from django.contrib.admin.utils import (
     get_model_from_relation, prepare_lookup_value, reverse_field_path,
 )
+from django.contrib.admin.widgets import AdminDateWidget, AdminSplitDateTime
 from django.core.exceptions import ImproperlyConfigured, ValidationError
-from django.db import models
+from django.db.models.fields import DecimalField, FloatField, IntegerField, AutoField
+from django.db.models import Max, Min, BooleanField, DateTimeField, Q
+from django.forms import SplitDateTimeField, DateField
+from django.forms.forms import BaseForm
 from django.utils import timezone
+from django.utils.encoding import force_str
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
+
+from FunctionModule.listings.forms import SingleNumericForm, RangeNumericForm, SliderNumericForm
 
 
 class ListFilter:
@@ -126,7 +138,7 @@ class FieldListFilter(FieldListFilter):
         self.field = field
         self.field_path = field_path
         self.title = getattr(field, 'verbose_name', field_path)
-        super().__init__(request, params, model, model_admin)
+        super().__init__(field, request, params, model, model_admin, field_path)
         for p in self.expected_parameters():
             if p in params:
                 value = params.pop(p)
@@ -264,7 +276,7 @@ class BooleanFieldListFilter(BooleanFieldListFilter):
             }
 
 
-FieldListFilter.register(lambda f: isinstance(f, models.BooleanField), BooleanFieldListFilter)
+FieldListFilter.register(lambda f: isinstance(f, BooleanField), BooleanFieldListFilter)
 
 
 class ChoicesFieldListFilter(ChoicesFieldListFilter):
@@ -316,7 +328,7 @@ class DateFieldListFilter(DateFieldListFilter):
         if timezone.is_aware(now):
             now = timezone.localtime(now)
 
-        if isinstance(field, models.DateTimeField):
+        if isinstance(field, DateTimeField):
             today = now.replace(hour=0, minute=0, second=0, microsecond=0)
         else:       # field is a models.DateField
             today = now.date()
@@ -372,7 +384,7 @@ class DateFieldListFilter(DateFieldListFilter):
 
 
 FieldListFilter.register(
-    lambda f: isinstance(f, models.DateField), DateFieldListFilter)
+    lambda f: isinstance(f, DateField), DateFieldListFilter)
 
 
 # This should be registered last, because it's a last resort. For example,
@@ -452,11 +464,11 @@ class EmptyFieldListFilter(EmptyFieldListFilter):
         if self.lookup_val not in ('0', '1'):
             raise IncorrectLookupParameters
 
-        lookup_condition = models.Q()
+        lookup_condition = Q()
         if self.field.empty_strings_allowed:
-            lookup_condition |= models.Q(**{self.field_path: ''})
+            lookup_condition |= Q(**{self.field_path: ''})
         if self.field.null:
-            lookup_condition |= models.Q(**{'%s__isnull' % self.field_path: True})
+            lookup_condition |= Q(**{'%s__isnull' % self.field_path: True})
         if self.lookup_val == '1':
             return queryset.filter(lookup_condition)
         return queryset.exclude(lookup_condition)
@@ -487,3 +499,351 @@ class BooleanFieldFilter(BooleanFieldListFilter):
 
 class DateFieldFilter(DateFieldListFilter):
     template = 'admin/dropdown_filter.html'
+
+
+class DateRangeFilter(FieldListFilter):
+    _request_key = "DJANGO_RANGEFILTER_ADMIN_JS_LIST"
+
+    def __init__(self, field, request, params, model, model_admin, field_path):
+        self.lookup_kwarg_gte = "{0}__range__gte".format(field_path)
+        self.lookup_kwarg_lte = "{0}__range__lte".format(field_path)
+
+        self.default_gte, self.default_lte = self._get_default_values(
+            request, model_admin, field_path
+        )
+
+        super(DateRangeFilter, self).__init__(
+            field, request, params, model, model_admin, field_path
+        )
+        self.request = request
+        self.model_admin = model_admin
+        self.form = self.get_form(request)
+
+        custom_title = self._get_custom_title(request, model_admin, field_path)
+        if custom_title:
+            self.title = custom_title
+
+    def get_timezone(self, _request):
+        return timezone.get_default_timezone()
+
+    @staticmethod
+    def _get_custom_title(request, model_admin, field_path):
+        title_method_name = "get_rangefilter_{0}_title".format(field_path)
+        title_method = getattr(model_admin, title_method_name, None)
+
+        if not callable(title_method):
+            return None
+
+        return title_method(request, field_path)
+
+    @staticmethod
+    def _get_default_values(request, model_admin, field_path):
+        default_method_name = "get_rangefilter_{0}_default".format(field_path)
+        default_method = getattr(model_admin, default_method_name, None)
+
+        if not callable(default_method):
+            return None, None
+
+        return default_method(request)
+
+    @staticmethod
+    def make_dt_aware(value, tzname):
+        if django.VERSION <= (4, 0, 0):
+            if settings.USE_TZ and pytz is not None:
+                default_tz = tzname
+                if value.tzinfo is not None:
+                    value = default_tz.normalize(value)
+                else:
+                    value = default_tz.localize(value)
+        else:
+            value = value.replace(tzinfo=tzname)
+        return value
+
+    def choices(self, changelist):
+        yield {
+            # slugify converts any non-unicode characters to empty characters
+            # but system_name is required, if title converts to empty string use id
+            # https://github.com/silentsokolov/django-admin-rangefilter/issues/18
+            "system_name": force_str(
+                slugify(self.title) if slugify(self.title) else id(self.title)
+            ),
+            "query_string": changelist.get_query_string({}, remove=self._get_expected_fields()),
+        }
+
+    def expected_parameters(self):
+        return self._get_expected_fields()
+
+    def queryset(self, request, queryset):
+        if self.form.is_valid():
+            validated_data = dict(self.form.cleaned_data.items())
+            if validated_data:
+                return queryset.filter(**self._make_query_filter(request, validated_data))
+        return queryset
+
+    def _get_expected_fields(self):
+        return [self.lookup_kwarg_gte, self.lookup_kwarg_lte]
+
+    def _make_query_filter(self, request, validated_data):
+        query_params = {}
+        date_value_gte = validated_data.get(self.lookup_kwarg_gte, None)
+        date_value_lte = validated_data.get(self.lookup_kwarg_lte, None)
+
+        if date_value_gte:
+            query_params["{0}__gte".format(self.field_path)] = self.make_dt_aware(
+                datetime.datetime.combine(date_value_gte, datetime.time.min),
+                self.get_timezone(request),
+            )
+        if date_value_lte:
+            query_params["{0}__lte".format(self.field_path)] = self.make_dt_aware(
+                datetime.datetime.combine(date_value_lte, datetime.time.max),
+                self.get_timezone(request),
+            )
+
+        return query_params
+
+    def get_template(self):
+        if django.VERSION[:2] <= (1, 8):
+            return "admin/date_filter_1_8.html"
+
+        return "admin/date_filter.html"
+
+    template = property(get_template)
+
+    def get_form(self, _request):
+        form_class = self._get_form_class()
+        return form_class(self.used_parameters or None)
+
+    def _get_form_class(self):
+        fields = self._get_form_fields()
+
+        form_class = type(str("DateRangeForm"), (BaseForm,), {"base_fields": fields})
+
+        # lines below ensure that the js static files are loaded just once
+        # even if there is more than one DateRangeFilter in use
+        js_list = getattr(self.request, self._request_key, None)
+
+        form_class.js = js_list
+
+        return form_class
+
+    def _get_form_fields(self):
+        return OrderedDict(
+            (
+                (
+                    self.lookup_kwarg_gte,
+                    DateField(
+                        label="",
+                        widget=AdminDateWidget(attrs={"placeholder": _("Từ ngày")}),
+                        localize=True,
+                        required=False,
+                        initial=self.default_gte,
+                    ),
+                ),
+                (
+                    self.lookup_kwarg_lte,
+                    DateField(
+                        label="",
+                        widget=AdminDateWidget(attrs={"placeholder": _("Đến ngày")}),
+                        localize=True,
+                        required=False,
+                        initial=self.default_lte,
+                    ),
+                ),
+            )
+        )
+
+
+class DateTimeRangeFilter(DateRangeFilter):
+    def _get_expected_fields(self):
+        expected_fields = []
+        for field in [self.lookup_kwarg_gte, self.lookup_kwarg_lte]:
+            for i in range(2):
+                expected_fields.append("{}_{}".format(field, i))
+
+        return expected_fields
+
+    def _get_form_fields(self):
+        return OrderedDict(
+            (
+                (
+                    self.lookup_kwarg_gte,
+                    SplitDateTimeField(
+                        label="",
+                        widget=AdminSplitDateTime(attrs={"placeholder": _("Từ ngày")}),
+                        localize=True,
+                        required=False,
+                        initial=self.default_gte,
+                    ),
+                ),
+                (
+                    self.lookup_kwarg_lte,
+                    SplitDateTimeField(
+                        label="",
+                        widget=AdminSplitDateTime(attrs={"placeholder": _("Đến ngày")}),
+                        localize=True,
+                        required=False,
+                        initial=self.default_lte,
+                    ),
+                ),
+            )
+        )
+
+    def _make_query_filter(self, request, validated_data):
+        query_params = {}
+        date_value_gte = validated_data.get(self.lookup_kwarg_gte, None)
+        date_value_lte = validated_data.get(self.lookup_kwarg_lte, None)
+
+        if date_value_gte:
+            query_params["{0}__gte".format(self.field_path)] = self.make_dt_aware(
+                date_value_gte, self.get_timezone(request)
+            )
+        if date_value_lte:
+            query_params["{0}__lte".format(self.field_path)] = self.make_dt_aware(
+                date_value_lte, self.get_timezone(request)
+            )
+
+        return query_params
+
+
+class SingleNumericFilter(FieldListFilter):
+    request = None
+    parameter_name = None
+    template = 'admin/filter_numeric_single.html'
+
+    def __init__(self, field, request, params, model, model_admin, field_path):
+        super().__init__(field, request, params, model, model_admin, field_path)
+        if not isinstance(field, (DecimalField, IntegerField, FloatField, AutoField)):
+            raise TypeError('Class {} is not supported for {}.'.format(type(self.field), self.__class__.__name__))
+
+        self.request = request
+        if self.parameter_name is None:
+
+            self.parameter_name = self.field_path
+        if self.parameter_name in params:
+            value = params.pop(self.parameter_name)
+            self.used_parameters[self.parameter_name] = value
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(**{self.parameter_name: self.value()})
+
+    def value(self):
+        return self.used_parameters.get(self.parameter_name, None)
+
+    def expected_parameters(self):
+        return [self.parameter_name]
+
+    def choices(self, changelist):
+        return ({
+            'request': self.request,
+            'parameter_name': self.parameter_name,
+            'form': SingleNumericForm(name=self.parameter_name, data={self.parameter_name: self.value()}),
+        }, )
+
+
+class RangeNumericFilter(FieldListFilter):
+    request = None
+    parameter_name = None
+    template = 'admin/filter_numeric_range.html'
+
+    def __init__(self, field, request, params, model, model_admin, field_path):
+        super().__init__(field, request, params, model, model_admin, field_path)
+        if not isinstance(field, (DecimalField, IntegerField, FloatField, AutoField)):
+            raise TypeError('Class {} is not supported for {}.'.format(type(self.field), self.__class__.__name__))
+        self.request = request
+        if self.parameter_name is None:
+            self.parameter_name = self.field_path
+
+        if self.parameter_name + '_from' in params:
+            value = params.pop(self.field_path + '_from')
+            self.used_parameters[self.field_path + '_from'] = value
+
+        if self.parameter_name + '_to' in params:
+            value = params.pop(self.field_path + '_to')
+            self.used_parameters[self.field_path + '_to'] = value
+
+    def queryset(self, request, queryset):
+        filters = {}
+
+        value_from = self.used_parameters.get(self.parameter_name + '_from', None)
+        if value_from is not None and value_from != '':
+            filters.update({
+                self.parameter_name + '__gte': self.used_parameters.get(self.parameter_name + '_from', None),
+            })
+
+        value_to = self.used_parameters.get(self.parameter_name + '_to', None)
+        if value_to is not None and value_to != '':
+            filters.update({
+                self.parameter_name + '__lte': self.used_parameters.get(self.parameter_name + '_to', None),
+            })
+
+        return queryset.filter(**filters)
+
+    def expected_parameters(self):
+        return [
+            '{}_from'.format(self.parameter_name),
+            '{}_to'.format(self.parameter_name),
+        ]
+
+    def choices(self, changelist):
+        return ({
+            'request': self.request,
+            'parameter_name': self.parameter_name,
+            'form': RangeNumericForm(name=self.parameter_name, data={
+                self.parameter_name + '_from': self.used_parameters.get(self.parameter_name + '_from', None),
+                self.parameter_name + '_to': self.used_parameters.get(self.parameter_name + '_to', None),
+            }),
+        }, )
+
+
+class SliderNumericFilter(RangeNumericFilter):
+    MAX_DECIMALS = 7
+    STEP = None
+
+    template = 'admin/filter_numeric_slider.html'
+    field = None
+
+    def __init__(self, field, request, params, model, model_admin, field_path):
+        super().__init__(field, request, params, model, model_admin, field_path)
+
+        self.field = field
+        self.q = model_admin.get_queryset(request)
+
+    def choices(self, changelist):
+        total = self.q.all().count()
+        min_value = self.q.all().aggregate(
+            min=Min(self.parameter_name)
+        ).get('min', 0)
+
+        if total > 1:
+            max_value = self.q.all().aggregate(
+                max=Max(self.parameter_name)
+            ).get('max', 0)
+        else:
+            max_value = None
+
+        if isinstance(self.field, (FloatField, DecimalField)):
+            decimals = self.MAX_DECIMALS
+            step = self.STEP if self.STEP else self._get_min_step(self.MAX_DECIMALS)
+        else:
+            decimals = 0
+            step = self.STEP if self.STEP else 1
+
+        return ({
+            'decimals': decimals,
+            'step': step,
+            'parameter_name': self.parameter_name,
+            'request': self.request,
+            'min': min_value,
+            'max': max_value,
+            'value_from': self.used_parameters.get(self.parameter_name + '_from', min_value),
+            'value_to': self.used_parameters.get(self.parameter_name + '_to', max_value),
+            'form': SliderNumericForm(name=self.parameter_name, data={
+                self.parameter_name + '_from': self.used_parameters.get(self.parameter_name + '_from', min_value),
+                self.parameter_name + '_to': self.used_parameters.get(self.parameter_name + '_to', max_value),
+            })
+        }, )
+
+    def _get_min_step(self, precision):
+        result_format = '{{:.{}f}}'.format(precision - 1)
+        return float(result_format.format(0) + '1')
