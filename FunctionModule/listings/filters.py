@@ -1,7 +1,7 @@
 from datetime import date
 
 from django.contrib.admin import SimpleListFilter
-from django_filters import FilterSet, CharFilter, BaseInFilter, RangeFilter
+from django_filters import FilterSet, CharFilter, BaseInFilter, RangeFilter, NumberFilter
 
 from FunctionModule.filters import ChoicesFieldListFilter, BooleanFieldListFilter, DateFieldListFilter
 from FunctionModule.listings.models import Listing
@@ -12,14 +12,19 @@ class MultipleCharFilter(BaseInFilter, CharFilter):
 
 
 class ListingFilter(FilterSet):
-    realtor = CharFilter(field_name='realtor', lookup_expr='iexact')
-    transaction_type = MultipleCharFilter(field_name='transaction_type')
+    price = NumberFilter()
+    price__gt = NumberFilter(field_name='price', lookup_expr='gt')
+    price__lt = NumberFilter(field_name='price', lookup_expr='lt')
+
+    list_date = NumberFilter(field_name='list_date', lookup_expr='year')
+    list_date__gt = NumberFilter(field_name='list_date', lookup_expr='year__gt')
+    list_date__lt = NumberFilter(field_name='list_date', lookup_expr='year__lt')
 
     class Meta:
         model = Listing
         fields = {
-            'realtor': ['exact'],
-            'transaction_type': ['exact'],
+            'price': ['lt', 'gt'],
+            'list_date': ['exact', 'year__gt'],
         }
 
 
@@ -47,7 +52,7 @@ class AreaFilter(SimpleListFilter):
             )
 
 
-class IsWithinRangeFilter(SimpleListFilter):
+class RangeFilter(SimpleListFilter):
     title = 'Lọc theo khoảng'
     parameter_name = 'scoreRange'
     template = 'admin/input_filter.html'

@@ -6,7 +6,11 @@ from django.core.files.storage import default_storage
 from django.core.files.uploadedfile import UploadedFile
 from django import forms
 from django.http import HttpRequest, JsonResponse
+from django_filters import RangeFilter
+
 from FunctionModule.listings.import_csv import handle_import, logger
+from . import Status
+from .filters import RangeFilter
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage, ListingHistory
 from .choices import district_default_choices
@@ -54,21 +58,22 @@ class ListingAdmin(admin.ModelAdmin):
             'fields': (('status', 'priority','list_date'), ('is_published', 'is_verified', 'is_exclusive'),)}),
     )
 
-    list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'code', 'status', 'district','list_date')
-    list_display_links = ('code', 'address',)
+    list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'district','list_date')
+    list_display_links = ('address',)
     list_filter = (
-        ('house_type', DropdownFilter), ('transaction_type', DropdownFilter),
+        ('status', DropdownFilter),
+        ('house_type', DropdownFilter),
+        ('transaction_type', DropdownFilter),
         ('road_type', DropdownFilter),
         ('floors', DropdownFilter),
         ('registration_type', DropdownFilter),
-        ('status', DropdownFilter),
         ('list_date', DateFieldFilter),
         ('is_published', BooleanFieldFilter),
         ('is_advertising', BooleanFieldFilter),
         #AreaFilter,
     )
     #advanced_filter_fields = ('status', ('house_type', 'road_type'))
-    list_editable = ('price',)
+    list_editable = ()
     search_fields = ('id', 'title', 'code', 'address', 'area', 'price', 'house_type', 'road_type', 'urban_area',
                      'street', 'ward', 'district', 'state', 'list_date',)
     list_per_page = 200
@@ -152,7 +157,7 @@ class ListingAdmin(admin.ModelAdmin):
 
     #@admin.actions(short_description='Chuyển sang trạng thái đã bán')
     def sold(self, request, queryset):
-        updated = queryset.update(status='sold')
+        updated = queryset.update(status=Status.SOLD)
         self.message_user(request, f'Đã đổi trạng thái đã bán cho {updated} căn')
 
 
@@ -175,7 +180,7 @@ class ListingHistoryAdmin(admin.ModelAdmin):
         ('list_date', DateFieldFilter),
     )
     list_editable = ()
-    search_fields = ('id', 'area', 'price', 'list_date',)
+    search_fields = ('id','listing', 'area', 'price', 'list_date',)
     list_per_page = 200
     inlines = []
     actions = []
