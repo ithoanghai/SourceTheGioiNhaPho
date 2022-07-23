@@ -22,7 +22,9 @@
                 />
             {% endif %}
     </div>
-  </a>
+   <b>{{ listing.status|get_listing_status }} {%if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</b>
+
+     </a>
   <header>
     <a href="{% url 'listing_detail' listing.id %}"
        title="{{ listing.title }}" data-imp-click>
@@ -55,7 +57,8 @@
         <li title="Phòng tắm" class="icon-bath-room"><span></span> {{ listing.bathrooms }} </li>
       {% endif %}
     </ul>
-    <div class="price">{{ listing.price.normalize }} tỷ</div>
-     <div class="unique p-1"><i class="zmdi zmdi-key"></i><b>{{listing.code}} &nbsp;({{ listing.status|get_listing_status }})</b></div>
+    <div class="unique price">{{ listing.price.normalize }} tỷ</div>
+     {% comment %}<div class="unique p-1"><i class="zmdi zmdi-key"></i><b>{{listing.code}}</b></div>{% endcomment %}
   </header>
+
 </li>

@@ -1574,7 +1574,7 @@ select.form-control:focus::-ms-value {
 }
 
 .flexslider.main-content {
-    padding-bottom: 60px !important
+    padding-bottom: 20px !important
 }
 
 .fullscreen.flexslider {
@@ -5389,7 +5389,7 @@ ul.detailroom li div span:hover + div.detail-house-info {
 }
 
 .main-content {
-    padding-bottom: 60px
+    padding-bottom: 20px
 }
 
 .compare-house .article div.title h2, .compare-house .article div.title h3, .compare-house .article div.title h4 {

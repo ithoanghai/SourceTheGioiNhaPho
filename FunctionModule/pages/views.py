@@ -88,7 +88,7 @@ def specialist_us(request):
 
 def specialist(request):
     specialists = Realtor.objects.filter(is_published=True, is_cooperate=True).order_by('-hire_date')
-    paginator = Paginator(specialists, 10)
+    paginator = Paginator(specialists, 16)
     page = request.GET.get('page')
     paged_spect = paginator.get_page(page)
     context = {
