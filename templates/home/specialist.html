@@ -36,39 +36,35 @@
                     <div class="agents-inner">
                         <div class="col-12 agents__grid">
                             {% for realtor in specialists %}
-                                <div class="agents-listing">
-                                    <div class="agents-image">
-                                        <a href="{% url "specialistDetail" realtor.id %}">
-                                            {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' %}
-                                                <img src="/media/{{ realtor.user.avatar }}"
-                                                     alt="Chuyên viên Thế giới Nhà Phố"/>
-                                            {% else %}
-                                                <img src="{% static 'img/logo tgnp brown.jpg' %}"
-                                                     alt="Chuyên viên Thế giới Nhà Phố"/>
-                                            {% endif %}
-                                            <button data-action="favorite" data-id="{{ realtor.id }}"
-                                                    data-alias="{{ realtor.name }}"
-                                                    data-type="sale_property" data-favorited="false"
-                                                    class="btn-favorite zmdi zmdi-favorite-outline"></button>
-                                        </a>
-                                    </div>
-                                    <div class="agents-content">
-                                        <a href="{% url "specialistDetail" realtor.id %}"><h3
-                                                class="font-tiempos">{{ realtor.name }}</h3></a>
-                                        <p class="team-name-sale">{{ realtor.position|get_position_type }}</p>
-                                        <div class="agents-email">
-                                            <a href="mailto:{{ realtor.user.email }}"><span class="__cf_email__"
-                                                                                            data-cfemail="">[email&#160;protected]</span></a>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% include "home/_specialist_card.html" %}
                             {% endfor %}
                             <component v-for="html in moreAgentHTML" :is="html"></component>
+                        {% if specialists %}
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if specialists.has_previous %}
+                            <a href="?page={{ specialists.previous_page_number }}">Trước </a> &nbsp;
+                        {% endif %}
+                    </span>
+
+                    <span class="current">
+                        (trang {{ specialists.number }} / {{ specialists.paginator.num_pages }})
+                    </span>
+
+                    <span>
+                        {% if specialists.has_next %}
+                            &nbsp;<a href="?page={{ specialists.next_page_number }}"> Tiếp theo</a>
+                        {% endif %}
+                    </span>
+                </div>
+                {% endif %}
                         </div>
                         <span class="view-more-agent">  <div v-show="loadingMoreAgent" v-cloak
                                                              class="loading-gif"></div> </span>
+
                     </div>
                 </div>
+
             </section>
             <section class="agents-contact">
                 <div class="agents-container col-12">

@@ -6,7 +6,7 @@ from .import_realtor import handle_import
 from .models import Realtor
 from django.http import HttpRequest, JsonResponse
 
-from ..filters import DropdownFilter, DateFieldFilter
+from ..filters import DropdownFilter, DateFieldFilter, BooleanFieldFilter
 
 
 class RealtorAdmin(admin.ModelAdmin):
@@ -21,8 +21,8 @@ class RealtorAdmin(admin.ModelAdmin):
         ('position', DropdownFilter),
         ('workplace', DropdownFilter),
         ('birthyear', DropdownFilter),
-        ('is_cooperate', DropdownFilter),
-        ('is_published', DropdownFilter),
+        ('is_cooperate', BooleanFieldFilter),
+        ('is_published', BooleanFieldFilter),
         ('hire_date', DateFieldFilter),
     )
     readonly_fields = []

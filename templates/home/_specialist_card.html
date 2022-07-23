@@ -1,0 +1,29 @@
+{#{% load text_money %}#}
+{% load static load_static listing humanize i18n %}
+
+<div class="agents-listing">
+    <div class="agents-image">
+        <a href="{% url "specialistDetail" realtor.id %}">
+            {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' %}
+                <img src="/media/{{ realtor.user.avatar }}"
+                     alt="Chuyên viên Thế giới Nhà Phố"/>
+            {% else %}
+                <img src="{% static 'img/logo tgnp brown.jpg' %}"
+                     alt="Chuyên viên Thế giới Nhà Phố"/>
+            {% endif %}
+            <button data-action="favorite" data-id="{{ realtor.id }}"
+                    data-alias="{{ realtor.name }}"
+                    data-type="sale_property" data-favorited="false"
+                    class="btn-favorite zmdi zmdi-favorite-outline"></button>
+        </a>
+    </div>
+    <div class="agents-content">
+        <a href="{% url "specialistDetail" realtor.id %}"><h3
+                class="font-tiempos">{{ realtor.name }}</h3></a>
+        <p class="team-name-sale">{{ realtor.position|get_position_type }}</p>
+        <div class="agents-email">
+            <a href="mailto:{{ realtor.user.email }}"><span class="__cf_email__"
+                                                            data-cfemail="">[email&#160;protected]</span></a>
+        </div>
+    </div>
+</div>

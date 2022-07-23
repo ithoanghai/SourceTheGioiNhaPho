@@ -40,53 +40,37 @@
                             <h1>{{ realtor.name }}</h1>
                             <p>{{ realtor.position|get_position_type }}</p>
                         </div>
-                        <table>
+                        <div class="agent-name">
                         {% if realtor.birthyear %}
-                            <tr class="row">
-                                <td >Ngày sinh:</td>
-                                <td>{{ realtor.birthyear }}</td>
-                            </tr>
+                                <p >Ngày sinh: {{ realtor.birthyear }}</p>
                         {% endif %}
                         {% if realtor.email %}
-                            <tr>
-                                <td >Email:</td>
-                                <td ><a href="mailto: {{ realtor.email }}"
+                                <p >Email: <a href="mailto: {{ realtor.email }}"
                                        title="{{ realtor.email }}"><span class=""
                                                                               data-cfemail="">{{ realtor.email }}</span></a>
-                                </td>
-                            </tr>
+                                </p>
                         {% endif %}
                         {% if realtor.address %}
-                            <tr>
-                                <td>Địa chỉ:</td>
-                                <td>{{ realtor.address }}</td>
-                            </tr>
-                            <tr>
-                                <td>Điện thoại</td>
-                                <td>{{ realtor.phone1 }} {% if realtor.phone2%}- {{ realtor.phone2 }}{% endif %}</td>
-                            </tr>
+                                <p>Địa chỉ: {{ realtor.address }}</p>
+                         {% endif %}
+                        {% if realtor.phone %}
+                                <p>Điện thoại: {{ realtor.phone1 }} {% endif %}{% if realtor.phone2%}- {{ realtor.phone2 }}</p>
                         {% endif %}
-                        </table>
-                        <ul class="agent-social">
+                        </div>
+                        <div class="agent-social">
                             {% if realtor.facebook %}
-                                <li>
                                     <a href="{{ realtor.facebook }}" target="_blank"><i
                                             class="zmdi zmdi-facebook"></i>{{ realtor.facebook }}</a>
-                                </li>
                             {% endif %}
                             {% if realtor.website %}
-                                <li>
                                     <a href="{{ realtor.website }}" target="_blank"><i
                                             class="zmdi zmdi-view-web"></i>{{ realtor.website }}</a>
-                                </li>
                             {% endif %}
                             {% if realtor.youtube %}
-                                <li>
                                     <a href="{{ realtor.youtube }}" target="_blank"><i
                                             class="zmdi zmdi-youtube"></i>{{ realtor.youtube }}</a>
-                                </li>
                             {% endif %}
-                        </ul>
+                        </div>
                         <div class="agent-btn">
                             <a class="btn-primary-agent btn-red" href="tel:{{ realtor.phone1 }}"
                                title="{{ realtor.phone1 }}"><i

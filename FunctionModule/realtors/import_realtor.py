@@ -170,6 +170,13 @@ def handle_import(request, file_path):
                     realtor.is_cooperate = False
             realtor.training = cols[16]
             realtor.referral = cols[17]
+
+            query = Q(name=realtor.name)
+            if realtor.email is not None:
+                query = query or Q(email=realtor.email)
+            if realtor.facebook is not None:
+                query = query or Q(facebook=realtor.facebook)
+
             if realtor.phone1 != realtor.name:
                 if not Realtor.objects.filter(phone1=realtor.phone1).exists():
                     realtor.save()
@@ -193,9 +200,15 @@ def handle_import(request, file_path):
                     real.is_published = realtor.is_published
                     real.save()
                     print(f"Cập nhật realtor {real}")
-            elif not Realtor.objects.filter(name=realtor.name).exists():
-                    realtor.save()
-                    print(f"Thêm Realtor {realtor} chưa có số")
+            elif not Realtor.objects.filter(query).exists():
+                realtor.save()
+                print(f"Thêm Realtor {realtor} chưa có số")
+            elif realtor.phone1 == realtor.name:
+                reals = Realtor.objects.filter(facebook=realtor.facebook)
+                if reals.count() > 1:
+                    for r in reals:
+                        if not r.phone1.isalnum():
+                            r.delete()
 
         workbook.close()
 
