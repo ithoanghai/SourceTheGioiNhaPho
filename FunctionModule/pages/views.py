@@ -1,4 +1,5 @@
 from itertools import groupby
+from random import random
 
 from django import template
 from django.contrib.admin import site

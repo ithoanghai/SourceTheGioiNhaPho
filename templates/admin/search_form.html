@@ -4,10 +4,10 @@
         <form id="changelist-search" method="get">
             <div class="col-12"><!-- DIV needed for valid HTML -->
                 <label for="searchbar"><img src="{% static "admin/img/search.svg" %}" alt="Tìm kiếm"></label>
-                <input class="col-3" type="text" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" autofocus>
+                <input class="col-5" type="text" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" autofocus>
                 <input type="submit" value="{% translate 'Tìm kiếm' %}">
                 {% if show_result_count %}
-                    <span class="small quiet" style="width: fit-contents">{% blocktranslate count counter=cl.result_count %}{{ counter }} kết quả
+                    <span class="small quiet" style="width: -moz-fit-content">{% blocktranslate count counter=cl.result_count %}{{ counter }} kết quả
                         {% plural %} {{ counter }} kết quả {% endblocktranslate %} (<a
                             href="?{% if cl.is_popup %}_popup=1{% endif %}">{% if cl.show_full_result_count %}
                         {% blocktranslate with full_result_count=cl.full_result_count %} trên tổng số

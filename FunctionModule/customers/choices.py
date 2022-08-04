@@ -16,7 +16,7 @@ class CustomerStatus(models.TextChoices):
 
 
 class CustomerClassify(models.TextChoices):
-    FOCUSED_CARE = 'focused_care', _("Cần chăm tập trung")
+    FOCUSED_CARE = 'focused_care', _("Khách nét. Cần chăm tập trung")
     NORMAL_CARE = 'normal_care', _("Chăm bình thường")
     SLOWLY_CARE = 'slowly_care', _("Chăm từ từ")
     STOP_CARE = 'stop_care', _("Dừng chăm sóc")

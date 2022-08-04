@@ -136,4 +136,16 @@ class Direction(models.TextChoices):
     north_east = 'north-east', _("Đông - Bắc")
 
 
+class Exhaustive(models.TextChoices):
+    NOT = 'not', _("Chưa khảo sát")
+    PREPARE = 'prepare', _("Lên lịch chuẩn bị khảo sát")
+    INVESTIGATED = 'investigated', _("Đã khảo sát")
 
+
+class LiquidClass(models.TextChoices):
+    SUPER = 'super', _("A+_Cực dễ bán")
+    EASY = 'easy', _("A_Dễ bán")
+    NORMAL = 'normal', _("B_Bình thường")
+    HARD = 'hard', _("C_Khó bán")
+    VERY_HARD = 'very_hard', _("C_Rất khó bán")
+    NOT_RATE = 'not_rate', _("Chưa đánh giá")

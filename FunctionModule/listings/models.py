@@ -22,7 +22,7 @@ from FunctionModule.realtors.models import Realtor
 from . import get_house_type_short
 from .choices import (TransactionType, HouseType, RegistrationType,
                       RoadType, Status, Direction, Condition, FurnishType, ParkingType, Construction, city_choices,
-                      district_choices,
+                      district_choices, Exhaustive, LiquidClass,
                       )
 
 
@@ -147,10 +147,17 @@ class Listing(models.Model, HitCountMixin):
     priority = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)],
                                    choices=([(i, i) for i in range(1, 10)]), verbose_name=_("Thứ tự ưu tiên đăng"),
                                    null=True, blank=True, default=1)
-    is_verified = models.BooleanField(default=False, verbose_name=_("ĐÃ XÁC MINH THÔNG TIN"))
+
     is_exclusive = models.BooleanField(default=False, verbose_name=_("THẾ GIỚI NHÀ PHỐ ĐỘC QUYỀN"))
     is_advertising = models.BooleanField(default=False, verbose_name=_("LÀ TIN RAO VẶT"))
     is_published = models.BooleanField(default=True, verbose_name=_("CHO PHÉP ĐĂNG"))
+
+    is_verified = models.BooleanField(default=False, verbose_name=_("ĐÃ XÁC THỰC"))
+    exhaustive = models.CharField(max_length=20, choices=Exhaustive.choices, default=Exhaustive.NOT,
+                              verbose_name=_("Trạng thái khảo sát"))
+    expert_comments = models.TextField(verbose_name=_("Nhận xét khảo sát"), null=True, blank=True, help_text=_("Chuyên gia đi khảo sát viết nhận xét nối tiếp ở đây"))
+    liquidity_classification = models.CharField(max_length=20, choices=LiquidClass.choices, default=LiquidClass.NOT_RATE,
+                              verbose_name=_("Phân loại thanh khoản"))
 
     location = LocationField(based_fields=['address'], zoom=7, null=True,
                              default=Point(105.83549388560711,20.976795401917798), verbose_name=_("Toạ độ vị trí BĐS"),

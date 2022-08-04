@@ -1,5 +1,4 @@
-{% load static %}
-{% load humanize i18n get_cadastral listing %}
+{% load static humanize i18n get_cadastral listing %}
 
 <article class="listingCard">
     <div class="cover-image">
@@ -27,10 +26,17 @@
 
         </a>
         <div class="label-group">
-            <label class="label-primary p-3" style="color: brown; font-family: 'tgnp-font2'"><b>{{ listing.status|get_listing_status }} {%if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</b></label>
+         <label class="label-primary unique"
+                   style="font-family: 'tgnp-font2'"><b>{{ listing.status|get_listing_status }}
+                {% if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %}
+                    {% trans "BÁN" %} {% endif %}</b></label>
+            <label class="label-primary unique">
+                <b>{{ listing.price.normalize }} tỷ</b>
+            </label>
+
             {% if listing.average_price and listing.transaction_type != "rent" %}
-            <label class="label-primary p-3" title="Giá/m2">{{ listing.average_price }} tr/m2</label>
-           {% endif %}
+                <label class="label-primary unique" title="Giá/m2"><b>{{ listing.average_price }} tr/m2</b></label>
+            {% endif %}
             {% if listing.is_exclusive %}
                 <label class="label-primary unique p-3">{% trans "Độc quyền" %}</label>
             {% endif %}
@@ -40,17 +46,18 @@
                 class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>{% endcomment %}
     </div>
     <div class="info-container">
-        <div class="card-img-overlay">
-        <h2 style="font-size: larger">
-            <span class="badge badge-secondary text-white">{{ listing.price.normalize }} tỷ</span>
-        </h2>
-        </div>
+
         <div class="flex align-items-center justify-content-space-between">
-                <ul class="listing-info">
+            <ul class="listing-info">
+                <li><b style="font-size: medium; color: limegreen">{{ listing.price.normalize }}
+                    {% if listing.transaction_type == "rent" %}{% trans "triệu" %} {% else %}
+                        {% trans "tỷ" %} {% endif %}</b></li>
+                &nbsp;
+                &nbsp;
                 {% if listing.area > 0 %}
-                <li>
-                    <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area.normalize }}{% trans "m2" %}
-                </li>
+                    <li>
+                        <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area.normalize }}{% trans "m2" %}
+                    </li>
                 {% endif %}
                 {% if listing.width > 0 %}
                     <li><i class="zmdi zmdi-home"></i>{{ listing.floors }} {% trans "tầng" %}
@@ -66,8 +73,6 @@
                 {% if listing.bathrooms %}
                     <li><i class="fa fa-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %}
                     </li> {% endif %}
-                <li><b>{{ listing.price.normalize }} {%if listing.transaction_type == "rent" %}{% trans "triệu" %} {% else %} {% trans "tỷ" %} {% endif %}</b></li>
-
             </ul>
         </div>
 
@@ -80,15 +85,15 @@
             {% if listing.urban_area %}
                 <h4>
                     <a href="{% url 'listing_search' %}?keywords={{ listing.urban_area }}&sort=priority"
-                       title="{{ listing.urban_area }}">{{ listing.urban_area }}</a>
+                       title="{{ listing.urban_area }}">{{ listing.urban_area }},</a>
                 </h4>
             {% endif %}
             {% if listing.street %}
-            <h4>
-                <a href="{% url 'listing_search' %}?keywords={{ listing.street }}&sort=priority"
-                   title="{{ listing.street }}">{{ listing.street }}</a>
-            </h4>
-        {% endif %}
+                <h4>
+                    <a href="{% url 'listing_search' %}?keywords={{ listing.street }}&sort=priority"
+                       title="{{ listing.street }}">{{ listing.street }},</a>
+                </h4>
+            {% endif %}
             {% comment %}{% if listing.ward %}
                 <h4>
                     <a href="{% url 'listing_search' %}?ward={{ listing.ward }}&sort=priority"
@@ -97,7 +102,8 @@
             {% endif %}{% endcomment %}
             {% if listing.district %}
                 <h4><b><a href="{% url 'listing_search' %}?district={{ listing.district }}&sort=priority"
-                          title="{% get_district listing.district %}">&nbsp {% get_district listing.district %}</a></b></h4>
+                          title="{% get_district listing.district %}">&nbsp{% get_district listing.district %},</a></b>
+                </h4>
             {% endif %}
             {% if listing.state %}
                 <h4><b><a href="{% url 'listing_search' %}?state={{ listing.state }}&sort=priority"

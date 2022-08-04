@@ -48,15 +48,17 @@ class ListingAdmin(admin.ModelAdmin):
             'classes': ('wide',),
             'fields': (('realtor', 'user'),)}),
         ('THÔNG TIN GIAO DỊCH', {'fields': (
-            ('transaction_type', 'house_type'),)}),
+            ('transaction_type', 'house_type', 'is_exclusive', 'is_verified', ),)}),
         ('THÔNG TIN BẤT ĐỘNG SẢN', {'fields': (
             ('title', 'code'), ('description', 'extra_data'),
             ('area', 'floors', 'width'), ('price', 'registration_type', 'road_type'),
         )}),
+        ('TRẠNG THÁI KHẢO SÁT', {'fields': (
+            ('exhaustive', 'liquidity_classification'), ('expert_comments',))}),
         ('ĐỊA CHỈ & VỊ TRÍ BĐS', {'fields': (
             ('state', 'district', 'ward'), ('street', 'address', 'location'))}),
         ('TRẠNG THÁI ĐĂNG TIN', {
-            'fields': (('status', 'priority','list_date'), ('is_published', 'is_verified', 'is_exclusive'),)}),
+            'fields': (('status', 'list_date'), ('is_published', 'priority'),)}),
     )
 
     list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'district','list_date')
@@ -69,6 +71,8 @@ class ListingAdmin(admin.ModelAdmin):
         ('registration_type', DropdownFilter),
         ('is_published', BooleanFieldFilter),
         ('is_advertising', BooleanFieldFilter),
+        ('exhaustive', DropdownFilter),
+        ('liquidity_classification', DropdownFilter),
         ('area', RangeNumericFilter),
         ('floors', RangeNumericFilter),
         ('width', RangeNumericFilter),

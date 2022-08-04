@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db.models import Q
 from .forms import CustomerAdminForm
 from .models import Customer
-from ..filters import DropdownFilter, DateFieldFilter
+from ..filters import DropdownFilter, DateFieldFilter, RangeNumericFilter
 from ..realtors.models import Realtor
 
 
@@ -12,15 +12,16 @@ class CustomerAdmin(admin.ModelAdmin):
             'classes': ('wide',),
             'fields': (('realtor', 'user'),)}),
         ('THÔNG TIN KHÁCH HÀNG', {'fields': (
-            ('custormer_type','status'), ('name', 'phone','email'),
-            ('address', 'financial_range'),
-            ('contact_from','district',), 'descriptions', 'listing_watched', )}),
+            ('transactionStatus', 'custormer_type', 'status'), ('name', 'phone','email'),
+            ('address', 'financial_range','district'),
+            ('descriptions', 'listing_watched'), )}),
+        ('GIỚI THIỆU & LIÊN HỆ', {'fields': (('contact_from'),)}),
         ('THỜI GIAN HOẠT ĐỘNG', {'fields': (('hire_date','last_interaction'),)}),
         ('NHẬN ĐỊNH CỦA CHUYÊN VIÊN', {
-            'fields': (('transactionStatus', 'classify'),)
+            'fields': (('classify'),)
         }),
     )
-    list_display = ('id', 'name', 'phone', 'financial_range', 'district', 'request', 'custormer_type', 'classify', )
+    list_display = ('id', 'name', 'phone', 'financial_range', 'district', 'request', 'custormer_type', 'transactionStatus', 'classify', )
     list_display_links = ('name', 'phone',)
     search_fields = ('name', 'phone', 'email', 'address', 'financial_range', 'request', 'descriptions', 'district', 'custormer_type', 'status', 'classify')
     list_per_page = 100
@@ -32,6 +33,7 @@ class CustomerAdmin(admin.ModelAdmin):
         ('classify', DropdownFilter),
         ('status', DropdownFilter),
         ('hire_date', DateFieldFilter),
+        ('financial_range', RangeNumericFilter),
     )
     form = CustomerAdminForm
 
