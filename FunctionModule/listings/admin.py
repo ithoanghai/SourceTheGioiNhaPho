@@ -13,7 +13,7 @@ from . import Status
 from .filters import RangeFilter
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage, ListingHistory
-from .choices import district_default_choices
+from .choices import district_default_choices, Exhaustive
 from ..filters import DropdownFilter, DateFieldFilter, BooleanFieldFilter, DateRangeFilter, RangeNumericFilter, \
     SliderNumericFilter
 from ..realtors.models import Realtor
@@ -86,7 +86,7 @@ class ListingAdmin(admin.ModelAdmin):
                      'street', 'ward', 'district', 'state', 'list_date',)
     list_per_page = 200
     inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
-    actions = ['make_published', 'unpublished', 'sold']
+    actions = ['make_published', 'unpublished', 'sold', 'exhaustive']
     form = ListingAdminForm
     ordering = ('-list_date',)
     #delete_selected.short_description = 'Xóa bất động sản đã chọn trong %(verbose_name_plural)'
@@ -169,6 +169,11 @@ class ListingAdmin(admin.ModelAdmin):
     def sold(self, request, queryset):
         updated = queryset.update(status=Status.SOLD)
         self.message_user(request, f'Đã đổi trạng thái đã bán cho {updated} căn')
+
+    # @admin.actions(short_description='Chuyển sang trạng thái chuẩn bị đi khảo sát')
+    def exhaustive(self, request, queryset):
+        updated = queryset.update(exhaustive=Exhaustive.PREPARE)
+        self.message_user(request, f'Đã lên lịch khảo sát {updated} căn')
 
 
 class ListingHistoryAdmin(admin.ModelAdmin):

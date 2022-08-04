@@ -98,7 +98,7 @@ class Listing(models.Model, HitCountMixin):
     direction = models.CharField(max_length=20, blank=True, null=True, choices=Direction.choices, verbose_name=_("Hướng"))
     code = models.CharField(max_length=80, verbose_name=_("Mã BĐS (VIẾT HOA)"), help_text=_(
         "Chữ cái đầu Loại BĐS + 2 số cuối Năm Tháng + tên viết tắt Chuyên viên + Số BĐS của ĐC"),
-                            default="NP2204HVH001", unique=True)
+                            default="NP2206HH001", unique=True)
     title = models.CharField(max_length=200, verbose_name=_("Tiêu đề đăng (VIẾT HOA)"),
                              help_text=_("Gợi ý: Từ khoá + Vị trí (Đường/Phố/Khu) + Diện tích + Tiện ích + Giá + Sổ"))
     description = models.TextField(verbose_name=_("Mô tả cho khách về bất động sản"), default=" Chú ý: Tất cả thông tin được đăng bởi TGNP đều là thông tin thật, xác thực chính xác.", help_text=_(
