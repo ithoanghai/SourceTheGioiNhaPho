@@ -13,6 +13,7 @@ class RealtorAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'birthyear', 'position', 'phone1', 'countryside', 'department', 'work_area','is_cooperate','is_published','email', 'facebook')
     list_display_links = ('name',)
     search_fields = ('id', 'name','phone1','phone2', 'email', 'birthyear', 'position', 'countryside', 'workplace', 'department', 'work_area', 'facebook', 'hire_date')
+    autocomplete_fields = ['user']
     list_per_page = 200
     ordering = ('name', 'hire_date')
     #filter_vertical = ('user',)

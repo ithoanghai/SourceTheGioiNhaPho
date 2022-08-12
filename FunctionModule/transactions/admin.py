@@ -2,14 +2,14 @@ from django.contrib import admin
 
 from .forms import TransactionAdminForm, TransactionHistoryAdminForm
 from .models import Transaction, TransactionHistory
-from ..filters import DropdownFilter, DateFieldFilter
+from ..filters import DropdownFilter, DateFieldFilter, RangeNumericFilter
 
 
 class TransactionAdmin(admin.ModelAdmin):
   fieldsets = (
     ('THÔNG TIN CHUYÊN VIÊN', {
       'classes': ('wide',),
-      'fields': ('realtor',)}),
+      'fields': (('realtor', 'user'),)}),
     ('THÔNG TIN GIAO DỊCH', {'fields': (
       ('trantype', 'status','date'),)}),
     ('THÔNG TIN BẤT ĐỘNG SẢN', {'fields': (
@@ -20,15 +20,37 @@ class TransactionAdmin(admin.ModelAdmin):
 
   list_display = ('id', 'trantype', 'message', 'caring_area', 'request_price', 'house_type', 'listing', 'customer', 'user', 'date', 'status')
   list_display_links = ('id', 'trantype', 'message',)
-  search_fields = ('listing', 'message', 'customer', 'user',)
+  ordering = ('-date',)
+  search_fields = ('message','caring_area', 'request_price','comment')
+  autocomplete_fields = ['listing', 'customer', 'user', 'realtor']
   list_filter = (
     ('trantype', DropdownFilter),
     ('house_type', DropdownFilter),
     ('status', DropdownFilter),
     ('date', DateFieldFilter),
+    ('request_price', RangeNumericFilter),
   )
   list_per_page = 100
   form = TransactionAdminForm
+
+  def get_form(self, request, obj=None, change=False, **kwargs):
+    form = super(TransactionAdmin, self).get_form(request, obj, **kwargs)
+    form.base_fields['user'].initial = request.user
+    disabled_fields = set()  # type: Set[str]
+    disabled_fields |= {
+      'user',
+    }
+    if request.user.is_superuser:
+      form.base_fields['user'].disabled = True
+    elif request.user.is_staff:
+      for f in disabled_fields:
+        if f in form.base_fields:
+          form.base_fields[f].disabled = True
+    else:
+      for f in disabled_fields:
+        if f in form.base_fields:
+          form.base_fields[f].disabled = True
+    return form
 
 
 class TransactionHistoryAdmin(admin.ModelAdmin):

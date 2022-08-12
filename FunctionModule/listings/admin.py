@@ -95,6 +95,7 @@ class ListingAdmin(admin.ModelAdmin):
     actions = ['make_published', 'unpublished', 'sold', 'exhaustive']
     form = ListingAdminForm
     ordering = ('-list_date',)
+    autocomplete_fields = ['user','realtor']
     #delete_selected.short_description = 'Xóa bất động sản đã chọn trong %(verbose_name_plural)'
 
     class Media:

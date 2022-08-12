@@ -5,6 +5,7 @@ from django.contrib.admin.options import IS_POPUP_VAR
 from django.contrib.admin.utils import unquote
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
+from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
 from django.db import transaction, router
 from django.http import Http404, HttpResponseRedirect
@@ -18,6 +19,12 @@ from django.utils.translation import ugettext_lazy as _
 from .forms import MyUserChangeForm, GroupAdminForm
 from .models import User, CustomGroup, Permission
 from ..filters import DateFieldFilter, BooleanFieldFilter
+
+
+class PermissionAdmin(admin.ModelAdmin):
+    search_fields = ('name', 'content_type', 'codename')
+    ordering = ('content_type','name')
+    verbose_name = "Quản trị Quyền người dùng"
 
 
 class AccountAdmin(AuthUserAdmin):
@@ -169,7 +176,8 @@ class GroupAdmin(admin.ModelAdmin):
     form = GroupAdminForm
 
 
-admin.site.register(Permission)
+admin.site.register(Permission,PermissionAdmin)
+admin.site.register(ContentType)
 admin.site.register(CustomGroup, GroupAdmin)
 admin.site.register(User, AccountAdmin)
 admin.site.unregister(TokenProxy)

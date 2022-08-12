@@ -23,7 +23,7 @@ class ListingAdminForm(forms.ModelForm):
             'living_facilities': Textarea(attrs={'class': '???', 'rows': 3}),
             'residential_community': Textarea(attrs={'class': '???', 'rows': 3}),
             'regional_welfare': Textarea(attrs={'class': '???', 'rows': 3}),
-            'extra_data': Textarea(attrs={'class': '???', 'rows': 10}),
+            'extra_data': Textarea(attrs={'class': '???', 'rows': 12}),
         }
 
     # users_list = User.objects.values_list('last_name',flat=True).order_by('last_name').distinct()
