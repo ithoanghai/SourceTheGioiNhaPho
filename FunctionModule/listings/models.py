@@ -258,7 +258,7 @@ class ListingImage(models.Model):
 
 class ContractImage(models.Model):
     class Meta:
-        verbose_name = "Ảnh chụp hợp đồng, sổ đỏ"
+        verbose_name = "Ảnh chụp hợp đồng, sổ đỏ, mặt tiền"
         verbose_name_plural = "Ảnh hợp đồng, sổ đỏ"
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE,
                                 verbose_name=_("ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"))
