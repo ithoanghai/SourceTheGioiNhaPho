@@ -14,7 +14,7 @@ class CustomerAdmin(admin.ModelAdmin):
         ('THÔNG TIN KHÁCH HÀNG', {'fields': (
             ('transactionStatus', 'custormer_type', 'status'), ('name', 'phone','email'),
             ('address', 'financial_range','district'),
-            ('descriptions', 'listing_watched'), )}),
+            ('descriptions', 'request' , 'listing_watched'), )}),
         ('GIỚI THIỆU & LIÊN HỆ', {'fields': (('contact_from'),)}),
         ('THỜI GIAN HOẠT ĐỘNG', {'fields': (('hire_date','last_interaction'),)}),
         ('NHẬN ĐỊNH CỦA CHUYÊN VIÊN', {
