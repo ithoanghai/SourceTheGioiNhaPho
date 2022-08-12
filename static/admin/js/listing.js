@@ -243,8 +243,99 @@ function multipleImages($) {
         labelIdle: "<span class=\"filepond--label-action\">Nhấp để chọn hoặc kéo ảnh vào đây</span>",
         acceptedFileTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'],
         files: existingImages,
-        maxFiles: 20,
-        maxFileSize: '10MB',
+        maxFiles: 25,
+        maxFileSize: '20MB',
+        // beforeRemoveFile: async function (item) {
+        //     const imgId = item.getMetadata('id');
+        //     if (imgId) {
+        //         MicroModal.show('warning-modal');
+        //         return new Promise(function (resolve) {
+        //             setTimeout(resolve.bind(null, true), 3000)
+        //         });
+        //     }
+        // }
+    });
+
+    const fixNameAttr = (el$, name) => {
+        el$.attr('name', name)
+    }
+    pond.on('addfile', function (error, file) {
+        // Add saved tag to existing pics
+        if (file.file.constructor.name === 'Blob') {
+            $(`#filepond--item-${file.id} .filepond--file-info-main`).append(' (Đã lưu)')
+        }
+        fixNameAttr(selector$.find('input.filepond--browser'), nameAttr);
+
+        const lst = new DataTransfer();
+        pond.getFiles().map(item => {
+            const fileType = item.file.constructor.name;
+            if (fileType === 'File') {
+                lst.items.add(item.file)
+            }
+        })
+        selector$.find("input.filepond--browser").prop("files", lst.files);
+    });
+
+    pond.on('removefile', (error, file) => {
+        const imgId = file.getMetadata('id');
+        deleteBoxes$[imgId].attr('checked', true);
+        fixNameAttr(selector$.find('input.filepond--browser'), nameAttr);
+    });
+
+    if (isEdit) {
+        selector$.find('table').first().hide();
+    }
+
+    // selector$.html(
+    //     '<h2>Listing images</h2>'
+    // );
+    selector$.append(pond.element);
+
+}
+
+function multipleContractImages($) {
+    // Delete link available  -> is editing listing
+    const isEdit = $('p.deletelink-box .deletelink').length > 0;
+    const selector$ = $('#contractimage_set-group .module');
+    let deleteBoxes$ = {};
+    const existingContractImages = $('.has_original.dynamic-contractimage_set').map(function (i, el) {
+        const el$ = $(el)
+        const imgId = el$.find('.original [id$="-id"]').val();
+        deleteBoxes$[imgId] = el$.find(`#id_${el$.attr('id')}-DELETE`).first();
+        const url = el$.find('.field-image a').attr('href');
+        const name = url.split('/').pop();
+        // return url;
+        return {
+            source: url,
+            options: {
+                metadata: {
+                    id: imgId,
+                    name: name
+                }
+            }
+        }
+    }).get();
+    FilePond.registerPlugin(
+        FilePondPluginImagePreview,
+        FilePondPluginImageExifOrientation,
+        FilePondPluginFileValidateSize,
+        FilePondPluginFileValidateType
+    );
+
+    MicroModal.init({})
+
+    const nameAttr = 'contractimage_set';
+
+    // FilePond.create(document.querySelector('.filepond'));
+
+    const pond = FilePond.create({
+        allowMultiple: true,
+        name: nameAttr,
+        labelIdle: "<span class=\"filepond--label-action\">Nhấp để chọn hoặc kéo ảnh sổ đỏ, mặt tiền nhà vào đây</span>",
+        acceptedFileTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'],
+        files: existingContractImages,
+        maxFiles: 10,
+        maxFileSize: '20MB',
         // beforeRemoveFile: async function (item) {
         //     const imgId = item.getMetadata('id');
         //     if (imgId) {
@@ -420,5 +511,6 @@ window.addEventListener("load", function () {
         // priceToText(jQuery);
         addressSelect(jQuery);
         multipleImages(jQuery)
+        multipleContractImages(jQuery)
     })(django.jQuery);
 });

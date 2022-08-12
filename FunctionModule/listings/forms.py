@@ -6,7 +6,7 @@ from django import forms
 from django.forms import Media, Textarea, ModelForm, BaseInlineFormSet
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
-from .models import Listing, ListingImage, ListingHistory
+from .models import Listing, ListingImage, ListingHistory, ContractImage
 from django.utils.translation import gettext_lazy as _
 
 
@@ -69,10 +69,49 @@ class ImageForm(ModelForm):
         #fields = '__all__'
 
 
+class ContractImageForm(ModelForm):
+    image = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+
+    class Meta:
+        model = ContractImage
+        fields = ['image', ]
+        #fields = '__all__'
+
+
 TOTAL_FORM_COUNT = 'TOTAL_FORMS'
 INITIAL_FORM_COUNT = 'INITIAL_FORMS'
 MIN_NUM_FORM_COUNT = 'MIN_NUM_FORMS'
 MAX_NUM_FORM_COUNT = 'MAX_NUM_FORMS'
+
+
+class ImageFormSet(BaseInlineFormSet):
+    form = ImageForm
+
+    def save_new_objects(self, commit=True):
+        try:
+            files = self.files.getlist('listingimage_set')
+            for f in files:  # type: InMemoryUploadedFile
+                new_img = compress_image(f)
+                ListingImage(photo=new_img, listing=self.instance).save()
+        except AttributeError:
+            pass
+
+        return super().save_new_objects(commit)
+
+
+class ContractImageFormSet(BaseInlineFormSet):
+    form = ContractImageForm
+
+    def save_new_objects(self, commit=True):
+        try:
+            files = self.files.getlist('contractimage_set')
+            for f in files:  # type: InMemoryUploadedFile
+                new_img = compress_image(f)
+                ContractImage(image=new_img, listing=self.instance).save()
+        except AttributeError:
+            pass
+
+        return super().save_new_objects(commit)
 
 
 def compress_image(f: InMemoryUploadedFile):
@@ -95,21 +134,6 @@ def compress_image(f: InMemoryUploadedFile):
     new_img = InMemoryUploadedFile(output, 'ImageField', new_name, f.content_type,
                                    sys.getsizeof(output), None, f.content_type_extra)
     return new_img
-
-
-class ImageFormSet(BaseInlineFormSet):
-    form = ImageForm
-
-    def save_new_objects(self, commit=True):
-        try:
-            files = self.files.getlist('listingimage_set')
-            for f in files:  # type: InMemoryUploadedFile
-                new_img = compress_image(f)
-                ListingImage(photo=new_img, listing=self.instance).save()
-        except AttributeError:
-            pass
-
-        return super().save_new_objects(commit)
 
 
 class SingleNumericForm(forms.Form):

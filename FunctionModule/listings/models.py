@@ -97,8 +97,8 @@ class Listing(models.Model, HitCountMixin):
                                     null=True, blank=True)
     direction = models.CharField(max_length=20, blank=True, null=True, choices=Direction.choices, verbose_name=_("Hướng"))
     code = models.CharField(max_length=80, verbose_name=_("Mã BĐS (VIẾT HOA)"), help_text=_(
-        "Chữ cái đầu Loại BĐS + 2 số cuối Năm Tháng + tên viết tắt Chuyên viên + Số BĐS của ĐC"),
-                            default="NP2206HH001", unique=True)
+        "Chữ cái đầu Loại BĐS + tên viết tắt Chuyên viên + 2 số cuối Năm Tháng + Diện tích + Giá"),
+                            default="NPHH22083030", unique=True)
     title = models.CharField(max_length=200, verbose_name=_("Tiêu đề đăng (VIẾT HOA)"),
                              help_text=_("Gợi ý: Từ khoá + Vị trí (Đường/Phố/Khu) + Diện tích + Tiện ích + Giá + Sổ"))
     description = models.TextField(verbose_name=_("Mô tả cho khách về bất động sản"), default=" Chú ý: Tất cả thông tin được đăng bởi TGNP đều là thông tin thật, xác thực chính xác.", help_text=_(
@@ -256,14 +256,6 @@ class ListingImage(models.Model):
         return super().delete(using, keep_parents)
 
 
-class ListingVideo(models.Model):
-    class Meta:
-        verbose_name = "Đường dẫn video Youtube"
-        verbose_name_plural = "Đường dẫn video Youtube"
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("BĐS"))
-    video = EmbedVideoField(blank=True, null=True, verbose_name=_("Link video"))
-
-
 class ContractImage(models.Model):
     class Meta:
         verbose_name = "Ảnh chụp hợp đồng, sổ đỏ"
@@ -272,19 +264,27 @@ class ContractImage(models.Model):
                                 verbose_name=_("ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"))
     sort = models.IntegerField(default=0, verbose_name=_("Thứ tự hiện"))
     description = models.CharField(max_length=255, blank=True, default="", verbose_name=_("Thông tin"))
-    photo = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Link Ảnh"))
+    image = models.ImageField(upload_to=get_image_path, blank=False, verbose_name=_("Link Ảnh"))
 
     def __str__(self):
-        return f'{self.listing_id}_{self.sort}__{self.photo.url}'
+        return f'{self.listing_id}_{self.sort}__{self.image.url}'
 
     @property
     def url(self):
-        return self.photo.url
+        return self.image.url
 
     def delete(self, using=None, keep_parents=False):
-        if os.path.isfile(self.photo.path):
-            os.remove(self.photo.path)
+        if os.path.isfile(self.image.path):
+            os.remove(self.image.path)
         return super().delete(using, keep_parents)
+
+
+class ListingVideo(models.Model):
+    class Meta:
+        verbose_name = "Đường dẫn video Youtube"
+        verbose_name_plural = "Đường dẫn video Youtube"
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("BĐS"))
+    video = EmbedVideoField(blank=True, null=True, verbose_name=_("Link video"))
 
 
 class TimestampField(serializers.Field):

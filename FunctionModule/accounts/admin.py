@@ -60,7 +60,7 @@ class AccountAdmin(AuthUserAdmin):
     readonly_fields = [
         'date_joined', 'user_image',
     ]
-    ordering = ('last_name', 'date_joined', )
+    ordering = ('first_name', 'last_name', 'date_joined', )
     filter_horizontal = ('customgroup', 'permissions')
 
     def get_fieldsets(self, request, obj=None):

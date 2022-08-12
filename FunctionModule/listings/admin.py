@@ -11,7 +11,7 @@ from django_filters import RangeFilter
 from FunctionModule.listings.import_csv import handle_import, logger
 from . import Status
 from .filters import RangeFilter
-from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet
+from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet, ContractImageForm, ContractImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage, ListingHistory
 from .choices import district_default_choices, Exhaustive
 from ..filters import DropdownFilter, DateFieldFilter, BooleanFieldFilter, DateRangeFilter, RangeNumericFilter, \
@@ -21,24 +21,29 @@ from django.db.models import Q
 from fractions import *
 
 
-class ContractPhotoAdmin(admin.TabularInline):
-    model = ContractImage
-    verbose_name = "ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"
-
-
 class ListingPhotoAdmin(admin.TabularInline):
     model = ListingImage
     verbose_name = "HÌNH ẢNH CHỤP BĐS"
     form = ImageForm
     formset = ImageFormSet
 
-    max_num = 20
+    max_num = 25
+    extra = 0
+
+
+class ContractPhotoAdmin(admin.TabularInline):
+    model = ContractImage
+    verbose_name = "ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"
+    form = ContractImageForm
+    formset = ContractImageFormSet
+
+    max_num = 10
     extra = 0
 
 
 class ListingVideoAdmin(admin.TabularInline):
     model = ListingVideo
-    extra = 1
+    extra = 0
     verbose_name = "VIDEO QUAY BĐS"
 
 
@@ -68,6 +73,7 @@ class ListingAdmin(admin.ModelAdmin):
         ('house_type', DropdownFilter),
         ('transaction_type', DropdownFilter),
         ('road_type', DropdownFilter),
+        ('list_date', DateFieldFilter),
         ('registration_type', DropdownFilter),
         ('is_published', BooleanFieldFilter),
         ('is_advertising', BooleanFieldFilter),
@@ -85,7 +91,7 @@ class ListingAdmin(admin.ModelAdmin):
     search_fields = ('id', 'title', 'code', 'address', 'area', 'price', 'house_type', 'road_type', 'urban_area',
                      'street', 'ward', 'district', 'state', 'list_date',)
     list_per_page = 200
-    inlines = [ListingPhotoAdmin, ListingVideoAdmin, ContractPhotoAdmin]
+    inlines = [ListingPhotoAdmin, ContractPhotoAdmin, ListingVideoAdmin,]
     actions = ['make_published', 'unpublished', 'sold', 'exhaustive']
     form = ListingAdminForm
     ordering = ('-list_date',)
