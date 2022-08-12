@@ -652,9 +652,9 @@ new Vue({
             }, 500)
         },
         initMap: function () {
-            if (!google) return;
+            /*if (!google) return;*/
             const mapOptions = {
-                zoom: 12,
+                zoom: 8,
                 center: new google.maps.LatLng(21.0334474, 105.8401439),  // Hanoi
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
