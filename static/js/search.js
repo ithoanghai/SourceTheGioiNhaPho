@@ -682,7 +682,7 @@ new Vue({
     },
     created() {
         this.checkingInterval = setInterval(this.checkIntervalCallback, 200);
-        window.initMap = this.initMap;
+        window.initMap = this.initMap();
 
         let htFilter = {};
         this.houseTypes.map(ht => {

@@ -76,6 +76,9 @@
 
 {% block scripts %}
   {{ block.super }}
+
+  <script src="{% load_static 'js/search.js' %}"></script>
+
   <script type="text/javascript">
       var map;
       var markerData = [];
@@ -94,6 +97,7 @@
       function initialize() {
           if (window.initMap) {
               window.initMap();
+              alert('init map');
           } else {
               setTimeout(initialize, 200);
           }
@@ -132,8 +136,6 @@
     </script>
   {% endif %}
 
-
-  <script src="{% load_static 'js/search.js' %}"></script>
 
   {#  <script defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>#}
 
