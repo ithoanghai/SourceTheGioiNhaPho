@@ -14,14 +14,14 @@ class CustomerAdmin(admin.ModelAdmin):
         ('THÔNG TIN KHÁCH HÀNG', {'fields': (
             ('transactionStatus', 'custormer_type', 'status'), ('name', 'phone','email'),
             ('address', 'financial_range','district'),
-            ('descriptions', 'request' , 'listing_watched'), )}),
+            ('descriptions', 'listing_watched'), )}),
         ('GIỚI THIỆU & LIÊN HỆ', {'fields': (('contact_from'),)}),
         ('THỜI GIAN HOẠT ĐỘNG', {'fields': (('hire_date','last_interaction'),)}),
         ('NHẬN ĐỊNH CỦA CHUYÊN VIÊN', {
             'fields': (('classify'),)
         }),
     )
-    list_display = ('id', 'name', 'phone', 'financial_range', 'district', 'request', 'custormer_type', 'transactionStatus', 'classify', )
+    list_display = ('id', 'name', 'phone', 'financial_range', 'district', 'descriptions', 'custormer_type', 'transactionStatus', 'classify', )
     list_display_links = ('name', 'phone',)
     search_fields = ('name', 'phone', 'email', 'address', 'financial_range', 'district', 'request', 'descriptions', 'district', 'contact_from', 'listing_watched', 'classify')
     autocomplete_fields = ['user', 'realtor']

@@ -13,7 +13,7 @@ class CustomerAdminForm(forms.ModelForm):
         widgets = {
             'description': Textarea(attrs={'class': '???', 'rows': 12}),
             'request': Textarea(attrs={'class': '???', 'rows': 10}),
-            'listing_watched': Textarea(attrs={'class': '???', 'rows': 3}),
+            'listing_watched': Textarea(attrs={'class': '???', 'rows': 5}),
         }
 
     def __init__(self, *args, **kwargs):
