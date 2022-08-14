@@ -203,6 +203,7 @@ class ListingHistoryAdmin(admin.ModelAdmin):
     )
     list_editable = ()
     search_fields = ('id','listing', 'area', 'price', 'list_date',)
+    autocomplete_fields = ['listing','user', 'realtor']
     list_per_page = 200
     inlines = []
     actions = []

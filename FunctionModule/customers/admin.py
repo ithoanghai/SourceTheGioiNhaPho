@@ -45,7 +45,7 @@ class CustomerAdmin(admin.ModelAdmin):
         #else:
         queryset_list = Customer.objects.order_by('-hire_date')
         query = Q(realtor__user=request.user.id)
-        query = query | Q(user=request.user)
+        query = query | Q(user=request.user) | Q(realtor__user=request.user)
         queryset_list = queryset_list.filter(query)
         return queryset_list
 
