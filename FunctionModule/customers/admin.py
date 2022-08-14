@@ -56,9 +56,6 @@ class CustomerAdmin(admin.ModelAdmin):
         disabled_fields |= {
             'user'
         }
-        if request.user.is_superuser:
-            realtor = Realtor.objects.filter(user=request.user)
-            form.base_fields['realtor'].initial = realtor
 
         for f in disabled_fields:
             if f in form.base_fields:
