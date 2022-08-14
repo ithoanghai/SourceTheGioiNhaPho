@@ -23,10 +23,10 @@ class CustomerAdmin(admin.ModelAdmin):
     )
     list_display = ('id', 'name', 'phone', 'financial_range', 'district', 'descriptions', 'custormer_type', 'transactionStatus', 'classify', )
     list_display_links = ('name', 'phone',)
-    search_fields = ('name', 'phone', 'email', 'address', 'financial_range', 'district', 'request', 'descriptions', 'district', 'contact_from', 'listing_watched', 'classify')
+    search_fields = ('name', 'phone', 'email', 'address', 'financial_range', 'district', 'descriptions', 'district', 'contact_from', 'listing_watched', 'classify')
     autocomplete_fields = ['user', 'realtor']
     list_per_page = 100
-    ordering = ('hire_date', 'financial_range', 'district', 'name',)
+    ordering = ('-hire_date', 'financial_range', 'district', 'name',)
     list_filter = ('transactionStatus', 'custormer_type', 'classify', 'status', 'hire_date',)
     list_filter = (
         ('transactionStatus', DropdownFilter),
