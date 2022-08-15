@@ -84,6 +84,7 @@ class ListingAdmin(admin.ModelAdmin):
         ('width', RangeNumericFilter),
         ('price', RangeNumericFilter),
         ('average_price', RangeNumericFilter),
+        ('bedrooms', RangeNumericFilter),
        # ('list_date', DateRangeFilter),
     )
     #advanced_filter_fields = ('status', ('house_type', 'road_type'))
@@ -189,8 +190,10 @@ class ListingHistoryAdmin(admin.ModelAdmin):
             'classes': ('wide',),
             'fields': (('realtor', 'user'),)}),
         ('THÔNG TIN BẤT ĐỘNG SẢN', {'fields': (
-            'listing', ('warehouse', 'list_date'), ('reward_person', 'reward_person_mobile', 'extra_data'),
+            ('listing','address'),
+            'extra_data',
             ('area', 'floors', 'width'), ('price', 'bedrooms', 'bathrooms'),
+            ('warehouse', 'list_date'), ('reward_person', 'reward_person_mobile'),
         )}),
     )
 
@@ -198,11 +201,15 @@ class ListingHistoryAdmin(admin.ModelAdmin):
     list_display_links = ('listing',)
     list_filter = ('list_date', 'listing', )
     list_filter = (
-        ('floors', DropdownFilter),
+        ('area', RangeNumericFilter),
+        ('floors', RangeNumericFilter),
+        ('width', RangeNumericFilter),
+        ('price', RangeNumericFilter),
+        ('bedrooms', RangeNumericFilter),
         ('list_date', DateFieldFilter),
     )
     list_editable = ()
-    search_fields = ('id','listing', 'area', 'price', 'list_date',)
+    search_fields = ('id', 'address', 'list_date', 'reward_person', 'reward_person_mobile','extra_data','warehouse')
     autocomplete_fields = ['listing','user', 'realtor']
     list_per_page = 200
     inlines = []
