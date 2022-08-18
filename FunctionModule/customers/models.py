@@ -34,7 +34,7 @@ class Customer(models.Model):
         'unique': _("Email này đã được sử dụng trên hệ thống.")})
     address = models.CharField(_('Địa chỉ thường trú'), null=True, blank=True, max_length=255)
     financial_range = models.DecimalField(max_digits=5, decimal_places=2, null=True, verbose_name=_("Tầm tài chính (tỷ)"), help_text=_("Tài chính khách thu xếp được"))
-    district = models.CharField(max_length=500, null=True, blank=True, verbose_name=_("Khu vực quan tâm"), help_text=_("Khu vực khách quan tâm. Dùng dấu phảy (,) để ngăn cách"))
+    district = models.CharField(max_length=500, null=True, blank=True, verbose_name=_("Quận/Huyện quan tâm"), help_text=_("Khu vực khách quan tâm. Dùng dấu phảy (,) để ngăn cách"))
     descriptions = models.TextField(_('Thông tin, Nhu cầu cơ bản'), null=True, blank=True, help_text=_(
         "Nơi ở, nơi làm việc, nghề nghiệp, tình trạng hôn nhân,...Mục đích mua nhà (Để ở, đầu tư, để kinh doanh, vừa ở vừa kinh doanh). Khu vực nào? Vị trí mong muốn (gần đường, ngõ rộng,...)?. Có nhu cầu về ô tô hay không?,Khách có yêu cầu đi xem luôn hay không?,..."))
     contact_from = models.CharField(_('Liên hệ từ đâu'), max_length=500, null=True, blank=True, help_text=_(

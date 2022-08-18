@@ -4,7 +4,8 @@ from django.utils.translation import gettext as _
 
 class CustomerType(models.TextChoices):
     BUY_LIVE = 'buy_to_live', _("Mua ở")
-    KEEP_MONEY = 'keep_money', _("Giữ tiền")
+    KEEP_MONEY = 'keep_money', _("Đầu tư Giữ dòng tiền")
+    REPAIR_CONSTRUCTION = 'repair_construction', _("Đầu tư sửa bán")
     INVESTMENT_CONSTRUCTION = 'invest_construction', _("Đầu tư xây bán")
     SURF_INVESTMENT = 'surf_investment', _("Đầu tư lướt sóng")
 
@@ -12,6 +13,7 @@ class CustomerType(models.TextChoices):
 class CustomerStatus(models.TextChoices):
     NEW = 'new', _("Mới đi xem nhà")
     SEE_MORE = 'see_more', _("Xem đã nhiều nhưng chưa ưng BĐS nào")
+    HAVE_BUYING = 'have_buying', _("Đã từng mua bđs")
     MISSED_PURCHASE = 'missed_purchase', _("Đã từng chốt hụt")
 
 

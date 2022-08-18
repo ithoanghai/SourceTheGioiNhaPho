@@ -6,7 +6,7 @@ from .import_realtor import handle_import
 from .models import Realtor
 from django.http import HttpRequest, JsonResponse
 
-from ..filters import DropdownFilter, DateFieldFilter, BooleanFieldFilter
+from ..filters import DropdownFilter, DateFieldFilter, BooleanFieldFilter, RangeNumericFilter
 
 
 class RealtorAdmin(admin.ModelAdmin):
@@ -15,16 +15,16 @@ class RealtorAdmin(admin.ModelAdmin):
     search_fields = ('id', 'name','phone1','phone2', 'email', 'birthyear', 'position', 'countryside', 'workplace', 'department', 'work_area', 'facebook', 'hire_date')
     autocomplete_fields = ['user']
     list_per_page = 200
-    ordering = ('name', 'hire_date')
+    ordering = ('name', '-hire_date')
     #filter_vertical = ('user',)
     list_editable = ('email','is_cooperate','is_published',)
     list_filter = (
         ('position', DropdownFilter),
         ('workplace', DropdownFilter),
-        ('birthyear', DropdownFilter),
         ('is_cooperate', BooleanFieldFilter),
         ('is_published', BooleanFieldFilter),
         ('hire_date', DateFieldFilter),
+        ('birthyear', RangeNumericFilter),
     )
     readonly_fields = []
     add_fieldsets = (

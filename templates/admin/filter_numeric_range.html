@@ -8,10 +8,10 @@
             {% endif %}
         {% endfor %}
 
-        <div class="row" style="margin-left: 10px">
+        <div class="row" style="margin-left: 15px">
             <label class="col-2 col-lg-2">{% blocktrans with filter_title=title %}{{ filter_title }}{% endblocktrans %}:</label>
             <div class="admin-filter-{{ title|cut:' ' }} col-auto">
-                <div class="admin-numeric-filter-wrapper-group">
+                <div class="admin-numeric-filter-wrapper-group row">
                     {{ choice.form.as_p }}
                 </div><!-- /.filter-numeric-filter-wrapper-group -->
 

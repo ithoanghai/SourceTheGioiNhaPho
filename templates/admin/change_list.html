@@ -62,7 +62,6 @@
                         <div>{% admin_list_filter cl spec %}</div>{% endfor %}
                 </div>
             {% endif %}
-            {{ advanced_filters }} {{ advanced_filters.formset }}
         {% endblock %}
         {% if cl.formset and cl.formset.errors %}
             <p class="errornote">

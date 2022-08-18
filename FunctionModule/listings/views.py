@@ -37,7 +37,7 @@ class ListingSearchQuery(BaseModel):
 
 
 def index(request):
-    listings = Listing.objects.order_by('priority', '-list_date').filter(is_published=True, is_advertising=False)
+    listings = Listing.objects.order_by('priority', 'price', '-list_date').filter(is_published=True, is_advertising=False)
 
     paginator = Paginator(listings, 100)
     page = request.GET.get('page')

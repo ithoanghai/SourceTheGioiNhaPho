@@ -17,7 +17,7 @@ from rest_framework.authtoken.models import TokenProxy
 from django.utils.translation import ugettext_lazy as _
 
 from .forms import MyUserChangeForm, GroupAdminForm
-from .models import User, CustomGroup, Permission
+from .models import User, Group, Permission
 from ..filters import DateFieldFilter, BooleanFieldFilter
 
 
@@ -48,7 +48,7 @@ class AccountAdmin(AuthUserAdmin):
             ('address', 'dob', 'gender'),
             'avatar', 'bio', ('is_broker', 'is_investor',))}),
         ('PHÂN QUYỀN SỬ DỤNG', {
-            'fields': (('is_active', 'is_staff', 'is_superuser'), ('customgroup', 'permissions'))
+            'fields': (('is_active', 'is_staff', 'is_superuser'), ('groups', 'permissions'))
         }),
         ('THỜI GIAN HOẠT ĐỘNG', {'fields': ('first_time', 'date_joined','last_login')}),
     )
@@ -68,7 +68,7 @@ class AccountAdmin(AuthUserAdmin):
         'date_joined', 'user_image',
     ]
     ordering = ('first_name', 'last_name', 'date_joined', )
-    filter_horizontal = ('customgroup', 'permissions')
+    filter_horizontal = ('groups', 'permissions')
 
     def get_fieldsets(self, request, obj=None):
         if not obj:
@@ -178,7 +178,7 @@ class GroupAdmin(admin.ModelAdmin):
 
 admin.site.register(Permission,PermissionAdmin)
 admin.site.register(ContentType)
-admin.site.register(CustomGroup, GroupAdmin)
+admin.site.register(Group, GroupAdmin)
 admin.site.register(User, AccountAdmin)
 admin.site.unregister(TokenProxy)
 #admin.site.unregister(SocialToken)

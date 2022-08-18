@@ -68,7 +68,7 @@ class Permission(models.Model):
     natural_key.dependencies = ['contenttypes.contenttype']
 
 
-class CustomGroup(models.Model):
+class Group(models.Model):
     """
     Overwrites original Django Group.
     """
@@ -81,7 +81,7 @@ class CustomGroup(models.Model):
         to='accounts.Permission',
         verbose_name=_('Quyền sử dụng'),
         blank=True,
-        related_name='customgroup'
+        related_name='Group'
     )
 
     def __str__(self):
@@ -104,8 +104,8 @@ class PermissionsMixin(models.Model):
             'explicitly assigning them.'
         ),
     )
-    customgroup = models.ManyToManyField(
-        CustomGroup,
+    groups = models.ManyToManyField(
+        Group,
         verbose_name=_('Nhóm người dùng'),
         blank=True,
         help_text=_(

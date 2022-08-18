@@ -85,12 +85,13 @@ class ListingAdmin(admin.ModelAdmin):
         ('price', RangeNumericFilter),
         ('average_price', RangeNumericFilter),
         ('bedrooms', RangeNumericFilter),
+        ('priority', RangeNumericFilter),
        # ('list_date', DateRangeFilter),
     )
     #advanced_filter_fields = ('status', ('house_type', 'road_type'))
     list_editable = ()
     search_fields = ('id', 'title', 'code', 'address', 'area', 'price', 'house_type', 'road_type', 'urban_area',
-                     'street', 'ward', 'district', 'state', 'list_date',)
+                     'street', 'ward', 'district', 'state', 'list_date', 'extra_data')
     list_per_page = 200
     inlines = [ListingPhotoAdmin, ContractPhotoAdmin, ListingVideoAdmin,]
     actions = ['make_published', 'unpublished', 'sold', 'exhaustive']
