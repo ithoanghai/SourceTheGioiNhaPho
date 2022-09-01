@@ -20,16 +20,10 @@
                     <div class="label-group">
                         <label v-if="listing.is_exclusive"
                                class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
-                        <label class="label-primary unique p-1">
-                            <a v-if="listing.status == 'selling'" :href="getListingDetailURL(listing.id)" target="_blank"
-                               :title="listing.title">Đang GD</a>
-                            <a v-if="listing.status == 'sold'" :href="getListingDetailURL(listing.id)" target="_blank"
-                               :title="listing.title">Đã GD</a>
-                            <a v-if="listing.status == 'stop_selling'" :href="getListingDetailURL(listing.id)"
-                               target="_blank"
-                               :title="listing.title">Dừng GD</a>
-                            <a v-if="listing.status == 'sale'" :href="getListingDetailURL(listing.id)" target="_blank"
-                               :title="listing.title">Hạ giá</a></label>
+                        <label v-if="listing.status == 'selling'" class="label-primary unique p-1">{% trans "Đang GD" %}</label>
+                        <label v-if="listing.status == 'sold'" class="label-primary unique p-1">{% trans "Đã GD" %}</label>
+                        <label v-if="listing.status == 'stop_selling'" class="label-primary unique p-1">{% trans "Dừng GD" %}</label>
+                        <label v-if="listing.status == 'sale'" class="label-primary unique p-1">{% trans "Hạ giá" %}</label>
                          <label v-if="listing.average_price && listing.transaction_type != 'rent'" class="label-primary unique p-1">[[ listing.average_price ]] tr/m2</label>
                     </div>
                 </div>

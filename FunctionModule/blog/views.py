@@ -23,7 +23,7 @@ class PostMixinDetailView(object):
 
 
 class IndexView(PostMixinDetailView, TemplateView):
-    template_name = 'blog/index.html'
+    template_name = 'blog/home.html'
 
 
 class PostDetailJSONView(PostMixinDetailView, DetailView):

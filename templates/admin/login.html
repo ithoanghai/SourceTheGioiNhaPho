@@ -1,6 +1,6 @@
 {% extends 'admin/includes/_layout_simple.html' %}
 
-{% load static i18n socialaccount %}
+{% load static i18n account %}
 
 {% block title %} Đăng nhập Thế Giới Nhà Phố {% endblock title %}
 {% block head %} <meta name="description"
@@ -58,10 +58,10 @@
                             </div>
                         </form>
                         <div class="btn-wrapper text-center">
-                            <a href="{% provider_login_url "facebook" method="oauth2" %}" class="btn btn-neutral btn-icon">
+                            {% comment %}<a href="{% provider_login_url "facebook" method="oauth2" %}" class="btn btn-neutral btn-icon">
                                 <span class="btn-inner--icon"><img src="{% static 'img/Facebook.svg' %} "></span>
                                 <span class="btn-inner--text">Đăng nhập với tài khoản Facebook</span>
-                            </a>
+                            </a>{% endcomment %}
                             {% comment %}<a href="#" class="btn btn-neutral btn-icon">
                                 <span class="btn-inner--icon"><img src="{% static 'img/google.svg' %} "></span>
                                 <span class="btn-inner--text">Google</span>

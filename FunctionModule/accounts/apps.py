@@ -1,5 +1,4 @@
 from django.apps import AppConfig
-from django.apps import AppConfig
 
 
 class AccountsConfig(AppConfig):
@@ -9,6 +8,4 @@ class AccountsConfig(AppConfig):
     def ready(self):
         import FunctionModule.accounts.signals  # noqa
 
-class CustomAuthConfig(AppConfig):
-    name = 'django.contrib.auth'
-    verbose_name = "Xác thực & Phân quyền"
+

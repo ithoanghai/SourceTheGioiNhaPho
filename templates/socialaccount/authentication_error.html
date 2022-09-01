@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "socialaccount/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Social Network Login Failure" %}{% endblock %}
 
 {% block content %}
-  {% include 'menu/_menuSearch.html' %}
-  <h2>Đăng nhập lỗi</h2>
-  <p class="alert alert-danger" style="position: relative;top: auto">
-    Xin lỗi, Đăng nhập của bạn đã xảy ra vấn đề. Xin hãy liên hệ lại cho chúng tôi ngay
-  </p>
-  <p>Code: {{ auth_error.code }}</p>
-  <p>Error: {{ auth_error.exception }}</p>
+<h1>{% trans "Social Network Login Failure" %}</h1>
+
+<p>{% trans "An error occurred while attempting to login via your social network account." %}</p>
 {% endblock %}

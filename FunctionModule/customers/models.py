@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from FunctionModule.accounts.models import User, phone_regex
 from FunctionModule.customers.choices import CustomerStatus, CustomerClassify, TransactionStatus, CustomerType
+from FunctionModule.listings import HouseType
 from FunctionModule.listings.choices import district_choices, city_choices
 from FunctionModule.realtors.models import Realtor
 
@@ -27,6 +28,8 @@ class Customer(models.Model):
     realtor = models.ForeignKey(Realtor, null=True, blank=True, on_delete=models.RESTRICT, verbose_name=_("Giao Chuyên viên chăm sóc"))
     custormer_type = models.CharField(max_length=20, choices=CustomerType.choices, default=CustomerType.BUY_LIVE,
                                  verbose_name=_("Loại khách"))
+    house_type = models.CharField(max_length=20, choices=HouseType.choices, default=HouseType.TOWN_HOUSE,
+                                  verbose_name=_("Loại BĐS"))
     name = models.CharField(_('Tên khách hàng'), null=True, max_length=150)
     phone = models.CharField(_('Điện thoại'), max_length=20, db_index=True, unique=True, validators=[phone_regex],
                              error_messages={'unique': _("Số điện thoại này đã được người khác sử dụng trên hệ thống.")})
@@ -44,7 +47,7 @@ class Customer(models.Model):
     status = models.CharField(max_length=50, choices=CustomerStatus.choices, default=CustomerStatus.SEE_MORE, verbose_name=_("Tình trạng chốt"),
                                 help_text=_("Mới đi xem nhà. Cần mua gấp. Xem đã nhiều nhưng chưa ưng BĐS nào? Chốt hụt căn nào không?"))
     transactionStatus = models.CharField(max_length=50, choices=TransactionStatus.choices, default=TransactionStatus.NOT_YET, verbose_name=_("Trạng thái giao dịch"),)
-    classify = models.CharField(max_length=50, choices=CustomerClassify.choices, default=CustomerClassify.FOCUSED_CARE, verbose_name=_("Kết luận chăm khách"),
+    classify = models.CharField(max_length=50, choices=CustomerClassify.choices, default=CustomerClassify.NORMAL_CARE, verbose_name=_("Kết luận chăm khách"),
                               help_text=_("Cần chăm tập trung? Chăm bình thường? Chăm từ từ?"))
     #potential_points = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], blank=True, default='0', verbose_name=_("Điểm tiềm năng"))
     hire_date = models.DateField(verbose_name=_("Thời điểm thêm"), default=default_hire_date, blank=True)

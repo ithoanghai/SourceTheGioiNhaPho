@@ -4,7 +4,7 @@ from . import views
 from .views import IndexView, PostDetailJSONView, PostDetailView, PostCountHitDetailView
 
 urlpatterns = [
-    #url(r'^$', IndexView.as_view(), name="index"),
+    url(r'^$', IndexView.as_view(), name="home"),
 
     url(r'^generic-detail-view-ajax/(?P<pk>\d+)/$',
         PostDetailJSONView.as_view(), name="ajax"),

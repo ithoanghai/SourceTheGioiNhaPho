@@ -8,12 +8,16 @@ class CustomerType(models.TextChoices):
     REPAIR_CONSTRUCTION = 'repair_construction', _("Đầu tư sửa bán")
     INVESTMENT_CONSTRUCTION = 'invest_construction', _("Đầu tư xây bán")
     SURF_INVESTMENT = 'surf_investment', _("Đầu tư lướt sóng")
+    RENT_LIVE = 'rent_to_live', _("Thuê ở")
+    RENT_OFFICE = 'rent_to_office', _("Thuê làm văn phòng")
+    RENT_RESTAURANT = 'rent_to_restaurant', _("Thuê làm nhà hàng")
+    RENT_SHOP = 'rent_to_shop', _("Thuê làm cửa hàng")
 
 
 class CustomerStatus(models.TextChoices):
     NEW = 'new', _("Mới đi xem nhà")
-    SEE_MORE = 'see_more', _("Xem đã nhiều nhưng chưa ưng BĐS nào")
-    HAVE_BUYING = 'have_buying', _("Đã từng mua bđs")
+    SEE_MORE = 'see_more', _("Xem nhiều nhưng chưa ưng BĐS nào")
+    HAVE_BUYING = 'have_buying', _("Đã từng mua/bán bđs")
     MISSED_PURCHASE = 'missed_purchase', _("Đã từng chốt hụt")
 
 
@@ -26,8 +30,8 @@ class CustomerClassify(models.TextChoices):
 
 
 class TransactionStatus(models.TextChoices):
-    NEED = 'need', _("Cần mua gấp")
-    NOT_YET = 'not_yet', _("Chưa mua")
-    PAUSE_BUYING = 'pause_buying', _("Tạm dừng mua")
-    BOUGHT = 'bought', _("Đã mua")
+    NEED = 'need', _("Cần mua/thuê gấp")
+    NOT_YET = 'not_yet', _("Chưa mua/thuê")
+    PAUSE_BUYING = 'pause_buying', _("Tạm dừng mua/thuê")
+    BOUGHT = 'bought', _("Đã mua/thuê")
     STOP_BUYING = 'stop_buying', _("Dừng quan tâm")

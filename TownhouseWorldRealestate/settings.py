@@ -50,11 +50,11 @@ MODULES = [
 ]
 
 THIRD_PARTIES = [
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.google',
+    #'allauth',
+    #'allauth.account',
+    #'allauth.socialaccount',
+    #'allauth.socialaccount.providers.facebook',
+    #'allauth.socialaccount.providers.google',
     'location_field.apps.DefaultConfig',
     'ajax_select',
     'rolepermissions',
@@ -140,15 +140,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', },
 ]
 
-AUTH_USER_MODEL = 'accounts.User'
-
 if ENVIRONMENT == 'production':
     ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
 AUTHENTICATION_BACKENDS = [
     'FunctionModule.accounts.auth.RealEstateAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    'FunctionModule.accounts.auth_backends.AuthenticationBackend',
 ]
 
 # Internationalization
@@ -305,6 +303,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 LOGIN_REDIRECT_URL = '/'
+AUTH_USER_MODEL = 'accounts.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

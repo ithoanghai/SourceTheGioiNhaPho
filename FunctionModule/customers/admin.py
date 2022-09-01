@@ -12,7 +12,7 @@ class CustomerAdmin(admin.ModelAdmin):
             'classes': ('wide',),
             'fields': (('realtor', 'user'),)}),
         ('THÔNG TIN KHÁCH HÀNG', {'fields': (
-            ('transactionStatus', 'custormer_type', 'status'), ('name', 'phone','email'),
+            ('transactionStatus', 'custormer_type'), ('house_type', 'status'), ('name', 'phone','email'),
             ('address', 'financial_range','district'),
             ('descriptions', 'listing_watched'), )}),
         ('GIỚI THIỆU & LIÊN HỆ', {'fields': (('contact_from'),)}),
@@ -31,6 +31,7 @@ class CustomerAdmin(admin.ModelAdmin):
     list_filter = (
         ('transactionStatus', DropdownFilter),
         ('custormer_type', DropdownFilter),
+        ('house_type', DropdownFilter),
         ('classify', DropdownFilter),
         ('status', DropdownFilter),
         ('hire_date', DateFieldFilter),

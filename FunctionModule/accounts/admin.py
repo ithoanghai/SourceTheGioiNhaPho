@@ -4,7 +4,7 @@ from django.contrib import admin, messages
 from django.contrib.admin.options import IS_POPUP_VAR
 from django.contrib.admin.utils import unquote
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
+from django.contrib.auth.admin import UserAdmin as AuthUserAdmin, GroupAdmin
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
 from django.db import transaction, router
@@ -168,7 +168,7 @@ class AccountAdmin(AuthUserAdmin):
         )
 
 
-class GroupAdmin(admin.ModelAdmin):
+class GroupAdmin(GroupAdmin):
     search_fields = ('name',)
     ordering = ('name',)
     filter_horizontal = ('permissions',)
