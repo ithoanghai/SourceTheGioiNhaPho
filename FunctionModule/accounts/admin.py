@@ -5,9 +5,7 @@ from django.contrib.admin.options import IS_POPUP_VAR
 from django.contrib.admin.utils import unquote
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin, GroupAdmin
-from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
-from django.db import transaction, router
 from django.http import Http404, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.urls import path, reverse
@@ -16,8 +14,9 @@ from django.utils.translation import gettext
 from rest_framework.authtoken.models import TokenProxy
 from django.utils.translation import ugettext_lazy as _
 
-from .forms import MyUserChangeForm, GroupAdminForm
+from .forms import GroupAdminForm, UserCreationForm, UserChangeForm
 from .models import User, Groups, Permissions
+from ..admin.forms import AdminPasswordChangeForm
 from ..filters import DateFieldFilter, BooleanFieldFilter
 
 
@@ -28,7 +27,7 @@ class PermissionAdmin(admin.ModelAdmin):
 
 
 class AccountAdmin(AuthUserAdmin):
-    form = MyUserChangeForm
+    form = UserChangeForm
     add_fieldsets = (
         ('THÔNG TIN CƠ BẢN', {
             'classes': ('wide',),
@@ -46,13 +45,15 @@ class AccountAdmin(AuthUserAdmin):
         ('THÔNG TIN BỔ SUNG', {'fields': (
             ('first_name', 'last_name'),
             ('address', 'dob', 'gender'),
-            'avatar', 'bio', ('is_broker', 'is_investor',))}),
+            ('avatar', 'bio'), ('is_broker', 'is_investor',))}),
         ('PHÂN QUYỀN SỬ DỤNG', {
             'fields': (('is_active', 'is_staff', 'is_superuser'), ('groups', 'permissions'))
         }),
-        ('THỜI GIAN HOẠT ĐỘNG', {'fields': ('first_time', 'date_joined','last_login')}),
+        ('THỜI GIAN HOẠT ĐỘNG', {'fields': (('first_time','last_login'), 'date_joined')}),
     )
-
+    add_form = UserCreationForm
+    change_form = UserChangeForm
+    change_password_form = AdminPasswordChangeForm
     list_display = ('id', 'name', 'phone', 'email', 'date_joined', 'is_staff', 'is_broker', 'is_investor')
     list_display_links = ('name', 'phone')
     search_fields = ['username', 'first_name', 'last_name', 'email', 'phone']
@@ -68,7 +69,7 @@ class AccountAdmin(AuthUserAdmin):
         'date_joined', 'user_image',
     ]
     ordering = ('first_name', 'last_name', 'date_joined', )
-    filter_horizontal = ('groups',)
+    filter_horizontal = ('groups', 'permissions')
 
     def get_fieldsets(self, request, obj=None):
         if not obj:

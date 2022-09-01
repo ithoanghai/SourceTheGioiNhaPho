@@ -3,9 +3,8 @@ from datetime import datetime
 from django.core import signing
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import AbstractUser, GroupManager, UserManager, PermissionManager, \
-    _user_has_module_perms, _user_get_permissions, _user_has_perm, Group, Permission
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import AbstractUser, Group, Permission, PermissionsMixin, _user_get_permissions, \
+    GroupManager
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
@@ -16,7 +15,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_str
 
-import FunctionModule
 from .constants import GENDER_CHOICES
 from . import app_settings, signals, providers
 from .managers import EmailAddressManager, EmailConfirmationManager
@@ -51,11 +49,46 @@ class Groups(Group):
         verbose_name = "Nhóm người dùng"
         verbose_name_plural = "DS Nhóm người dùng"
 
+    objects = GroupManager()
+
     Group._meta.get_field('name').verbose_name = 'Tên nhóm'
     Group._meta.get_field('permissions').verbose_name = 'Quyền sử dụng'
 
 
 class PermissionsMixin(models.Model):
+    """
+    Add the fields and methods necessary to support the Group and Permission
+    models using the ModelBackend.
+    """
+    is_superuser = models.BooleanField(
+        _('superuser status'),
+        default=False,
+        help_text=_(
+            'Designates that this user has all permissions without '
+            'explicitly assigning them.'
+        ),
+    )
+
+    groups = models.ManyToManyField(
+        Groups,
+        verbose_name=_('Nhóm của người dùng'),
+        blank=True,
+        help_text=_(
+            'Các nhóm mà người dùng này có mặt. Một người dùng có tất cả các quyền được cấp trong các nhóm họ tham gia.'
+        ),
+        related_name="user_groups",
+        related_query_name="user",
+    )
+
+    permissions = models.ManyToManyField(
+        Permissions,
+        verbose_name=_('Quyền người dùng'),
+        blank=True,
+        help_text=_('Xác định quyền cho người dùng này.'),
+        related_name="user_permissions",
+        related_query_name="user",
+    )
+
     class Meta:
         abstract = True
 
@@ -73,6 +106,7 @@ class User(AbstractUser, PermissionsMixin):
             'Bắt buộc nhập. Không quá 150 ký tự. Có thể bao gồm ký tự, chữ số và chỉ ký tự đặc biệt @/./+/-/_.'),
         error_messages={'unique': _("Người dùng này đã tồn tại trên hệ thống.")},
     )
+    password = models.CharField(_('Mật khẩu'), max_length=128)
     email = models.EmailField(_('Email'), blank=True, unique=True, error_messages={
         'unique': _("Email này đã được sử dụng trên hệ thống.")})
 
