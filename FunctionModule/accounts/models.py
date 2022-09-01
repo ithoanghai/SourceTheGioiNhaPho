@@ -4,7 +4,7 @@ from django.core import signing
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import AbstractUser, GroupManager, UserManager, PermissionManager, \
-    _user_has_module_perms, _user_get_permissions, _user_has_perm
+    _user_has_module_perms, _user_get_permissions, _user_has_perm, Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
@@ -36,109 +36,26 @@ phone_regex = RegexValidator(regex=r'^(09|03|07|08|05)+([0-9]{8})$',
                              message="Số điện thoại 10 số với chỉ các đầu số 09|03|07|08|05")
 
 
-class Permission(models.Model):
-    """
-    The permissions system provides a way to assign permissions to specific
-    users and groups of users.
-
-    The permission system is used by the Django admin site, but may also be
-    useful in your own code. The Django admin site uses permissions as follows:
-
-        - The "add" permission limits the user's ability to view the "add" form
-          and add an object.
-        - The "change" permission limits a user's ability to view the change
-          list, view the "change" form and change an object.
-        - The "delete" permission limits the ability to delete an object.
-        - The "view" permission limits the ability to view an object.
-
-    Permissions are set globally per type of object, not per specific object
-    instance. It is possible to say "Mary may change news stories," but it's
-    not currently possible to say "Mary may change news stories, but only the
-    ones she created herself" or "Mary may only change news stories that have a
-    certain status or publication date."
-
-    The permissions listed above are automatically created for each model.
-    """
-    name = models.CharField(_('Tên quyền'), max_length=255)
-    content_type = models.ForeignKey(
-        ContentType,
-        models.CASCADE,
-        verbose_name=_('Chức năng'),
-        related_name='django'
-    )
-    codename = models.CharField(_('Mã chức năng'), max_length=100)
-
-    objects = PermissionManager()
-
+class Permissions(Permission):
     class Meta:
         verbose_name = _('Quyền sử dụng')
         verbose_name_plural = _('DS Quyền sử dụng')
-        unique_together = [['content_type', 'codename']]
-        ordering = ['content_type__app_label', 'content_type__model', 'codename']
 
-    def __str__(self):
-        return '%s | %s' % (self.content_type, self.name)
-
-    def natural_key(self):
-        return (self.codename,) + self.content_type.natural_key()
-    natural_key.dependencies = ['contenttypes.contenttype']
+    Permission._meta.get_field('name').verbose_name = 'Tên quyền'
+    Permission._meta.get_field('content_type').verbose_name = 'Module chức năng'
+    Permission._meta.get_field('codename').verbose_name = 'Mã chức năng'
 
 
-class Group(models.Model):
-    """
-    Overwrites original Django Group.
-    """
+class Groups(Group):
     class Meta:
         verbose_name = "Nhóm người dùng"
         verbose_name_plural = "DS Nhóm người dùng"
 
-    name = models.CharField(_('Tên nhóm'), max_length=150, unique=True)
-    permissions = models.ManyToManyField(
-        to='accounts.Permission',
-        verbose_name=_('Quyền sử dụng'),
-        blank=True,
-        related_name='Group'
-    )
-
-    def __str__(self):
-        return self.name
-
-    def natural_key(self):
-        return (self.name,)
+    Group._meta.get_field('name').verbose_name = 'Tên nhóm'
+    Group._meta.get_field('permissions').verbose_name = 'Quyền sử dụng'
 
 
 class PermissionsMixin(models.Model):
-    """
-    Add the fields and methods necessary to support the Group and Permission
-    models using the ModelBackend.
-    """
-    is_superuser = models.BooleanField(
-        _('superuser status'),
-        default=False,
-        help_text=_(
-            'Designates that this user has all permissions without '
-            'explicitly assigning them.'
-        ),
-    )
-    groups = models.ManyToManyField(
-        Group,
-        verbose_name=_('Nhóm người dùng'),
-        blank=True,
-        help_text=_(
-            'Nhóm quyền mà người dùng này được phân quyền.'
-        ),
-        related_name="user_set",
-        related_query_name="user",
-    )
-    permissions = models.ManyToManyField(
-        Permission,
-        verbose_name=_('Quyền người dùng'),
-        blank=True,
-        help_text=_('Xác định quyền cho người dùng này.'),
-        related_name="user_set",
-        related_query_name="user",
-    )
-
     class Meta:
         abstract = True
 

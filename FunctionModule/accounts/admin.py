@@ -17,7 +17,7 @@ from rest_framework.authtoken.models import TokenProxy
 from django.utils.translation import ugettext_lazy as _
 
 from .forms import MyUserChangeForm, GroupAdminForm
-from .models import User, Group, Permission
+from .models import User, Groups, Permissions
 from ..filters import DateFieldFilter, BooleanFieldFilter
 
 
@@ -68,7 +68,7 @@ class AccountAdmin(AuthUserAdmin):
         'date_joined', 'user_image',
     ]
     ordering = ('first_name', 'last_name', 'date_joined', )
-    filter_horizontal = ('groups', 'permissions')
+    filter_horizontal = ('groups',)
 
     def get_fieldsets(self, request, obj=None):
         if not obj:
@@ -176,9 +176,9 @@ class GroupAdmin(GroupAdmin):
     form = GroupAdminForm
 
 
-admin.site.register(Permission,PermissionAdmin)
-admin.site.register(ContentType)
-admin.site.register(Group, GroupAdmin)
+admin.site.register(Permissions,PermissionAdmin)
+#admin.site.register(ContentType)
+admin.site.register(Groups, GroupAdmin)
 admin.site.register(User, AccountAdmin)
 admin.site.unregister(TokenProxy)
 #admin.site.unregister(SocialToken)
