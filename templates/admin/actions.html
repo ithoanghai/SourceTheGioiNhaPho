@@ -6,16 +6,17 @@
                 {% block actions-form %}
                     <div class="row">
                         <span>Hành động:</span>
-                    {% for field in action_form %}
-                        {% if field.label %}<label>{% comment %}{{ field.label }} {% endcomment %}{{ field }}</label>
-                    {% endif %}
-                    {% endfor %}
+                        {% for field in action_form %}
+                            {% if field.label %}
+                                <label>{% comment %}{{ field.label }}{% endcomment %} {{ field }}</label>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 {% endblock %}
-</div>
-        <div style="margin-left: 20px">
+            </div>
+            <div style="margin-left: 20px">
                 {% block actions-submit %}
-                    <button type="submit" class="button" title="{% translate "Thực hiện lựa chọn" %}" name="index"
+                    <button type="submit" class="button" title="{% translate "Thực hiện hành động lựa chọn" %}" name="index"
                             value="{{ action_index|default:0 }}">{% translate "Thực hiện" %}</button>
                 {% endblock %}
 
@@ -34,7 +35,7 @@
                         {% endif %}
                     {% endif %}
                 {% endblock %}
-                </div>
+            </div>
         </div>
     {% endblock %}
 </div>

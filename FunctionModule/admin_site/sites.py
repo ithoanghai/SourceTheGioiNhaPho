@@ -356,7 +356,7 @@ class AdminSites:
         `extra_context` is unused but present for consistency with the other
         admin views.
         """
-        return JavaScriptCatalog.as_view(packages=['FunctionModule.admin_site'])(request)
+        return JavaScriptCatalog.as_view(packages=['django.contrib.admin'])(request)
 
     @never_cache
     def logout(self, request, extra_context=None):

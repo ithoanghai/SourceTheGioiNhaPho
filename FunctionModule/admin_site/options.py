@@ -8,7 +8,6 @@ from urllib.parse import quote as urlquote
 from django import forms
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.admin import helpers
 
 from FunctionModule.admin_site import helpers, widgets
 from FunctionModule.admin_site.checks import (
@@ -200,7 +199,7 @@ class BaseModelAdmin(metaclass=forms.MediaDefiningClass):
             if 'choices' not in kwargs:
                 kwargs['choices'] = db_field.get_choices(
                     include_blank=db_field.blank,
-                    blank_choice=[('', _('None'))]
+                    blank_choice=[('', _('Trống'))]
                 )
         return db_field.formfield(**kwargs)
 
@@ -232,7 +231,7 @@ class BaseModelAdmin(metaclass=forms.MediaDefiningClass):
                 kwargs['widget'] = widgets.AdminRadioSelect(attrs={
                     'class': get_ul_class(self.radio_fields[db_field.name]),
                 })
-                kwargs['empty_label'] = _('None') if db_field.blank else None
+                kwargs['empty_label'] = _('Trống') if db_field.blank else None
 
         if 'queryset' not in kwargs:
             queryset = self.get_field_queryset(db, db_field, request)
@@ -278,7 +277,7 @@ class BaseModelAdmin(metaclass=forms.MediaDefiningClass):
         form_field = db_field.formfield(**kwargs)
         if (isinstance(form_field.widget, SelectMultiple) and
                 not isinstance(form_field.widget, (CheckboxSelectMultiple, AutocompleteSelectMultiple))):
-            msg = _('Hold down “Control”, or “Command” on a Mac, to select more than one.')
+            msg = _('Giữ phím “Control”, hoặc “Command” trên máy tính Mac, để chọn nhiều hơn.')
             help_text = form_field.help_text
             form_field.help_text = format_lazy('{} {}', help_text, msg) if help_text else msg
         return form_field
@@ -912,7 +911,9 @@ class ModelAdmin(BaseModelAdmin):
         tuple (name, description).
         """
         choices = [] + default_choices
-
+        for func, name, description in self.get_actions(request).values():
+            choice = (name, description % model_format_dict(self.opts))
+            choices.append(choice)
         return choices
 
     def get_action(self, action):
@@ -1217,9 +1218,9 @@ class ModelAdmin(BaseModelAdmin):
                 "_saveasnew" in request.POST and self.save_as_continue and
                 self.has_change_permission(request, obj)
         ):
-            msg = _('The {name} “{obj}” was added successfully.')
+            msg = _('{name} “{obj}” đã được thêm thành công.')
             if self.has_change_permission(request, obj):
-                msg += ' ' + _('You may edit it again below.')
+                msg += ' ' + _('Bạn có thể thay đổi nó lại.')
             self.message_user(request, format_html(msg, **msg_dict), messages.SUCCESS)
             if post_url_continue is None:
                 post_url_continue = obj_url
@@ -1231,7 +1232,7 @@ class ModelAdmin(BaseModelAdmin):
 
         elif "_addanother" in request.POST:
             msg = format_html(
-                _('The {name} “{obj}” was added successfully. You may add another {name} below.'),
+                _('{name} “{obj}” đã được thêm thành công. Bạn có thể thêm {name} khác ở dưới.'),
                 **msg_dict
             )
             self.message_user(request, msg, messages.SUCCESS)
@@ -1241,7 +1242,7 @@ class ModelAdmin(BaseModelAdmin):
 
         else:
             msg = format_html(
-                _('The {name} “{obj}” was added successfully.'),
+                _('{name} “{obj}” đã được thêm thành công.'),
                 **msg_dict
             )
             self.message_user(request, msg, messages.SUCCESS)
@@ -1281,7 +1282,7 @@ class ModelAdmin(BaseModelAdmin):
         }
         if "_continue" in request.POST:
             msg = format_html(
-                _('The {name} “{obj}” was changed successfully. You may edit it again below.'),
+                _('{name} “{obj}” đã được thay đổi. Bạn có thể thay đổi chúng ở dưới.'),
                 **msg_dict
             )
             self.message_user(request, msg, messages.SUCCESS)
@@ -1291,7 +1292,7 @@ class ModelAdmin(BaseModelAdmin):
 
         elif "_saveasnew" in request.POST:
             msg = format_html(
-                _('The {name} “{obj}” was added successfully. You may edit it again below.'),
+                _('{name} “{obj}” đã được thêm thành công. Bạn có thể thay đổi chúng ở dưới.'),
                 **msg_dict
             )
             self.message_user(request, msg, messages.SUCCESS)
@@ -1304,7 +1305,7 @@ class ModelAdmin(BaseModelAdmin):
 
         elif "_addanother" in request.POST:
             msg = format_html(
-                _('The {name} “{obj}” was changed successfully. You may add another {name} below.'),
+                _('{name} “{obj}” đã được thay đổi. Bạn có thể thêm {name} dưới đây.'),
                 **msg_dict
             )
             self.message_user(request, msg, messages.SUCCESS)
@@ -1316,7 +1317,7 @@ class ModelAdmin(BaseModelAdmin):
 
         else:
             msg = format_html(
-                _('The {name} “{obj}” was changed successfully.'),
+                _('{name} “{obj}” đã được thay đổi.'),
                 **msg_dict
             )
             self.message_user(request, msg, messages.SUCCESS)
@@ -1393,8 +1394,7 @@ class ModelAdmin(BaseModelAdmin):
             selected = request.POST.getlist(helpers.ACTION_CHECKBOX_NAME)
             if not selected and not select_across:
                 # Reminder that something needs to be selected or nothing will happen
-                msg = _("Items must be selected in order to perform "
-                        "actions on them. No items have been changed.")
+                msg = _("Cần lựa chọn mục để hành động. Hiện tại không có mục nào được thay đổi")
                 self.message_user(request, msg, messages.WARNING)
                 return None
 
@@ -1412,7 +1412,7 @@ class ModelAdmin(BaseModelAdmin):
             else:
                 return HttpResponseRedirect(request.get_full_path())
         else:
-            msg = _("No action selected.")
+            msg = _("Không có hành động nào được chọn.")
             self.message_user(request, msg, messages.WARNING)
             return None
 
@@ -1437,7 +1437,7 @@ class ModelAdmin(BaseModelAdmin):
 
         self.message_user(
             request,
-            _('The %(name)s “%(obj)s” was deleted successfully.') % {
+            _('%(name)s “%(obj)s” đã được xóa thành công.') % {
                 'name': opts.verbose_name,
                 'obj': obj_display,
             },
@@ -1523,7 +1523,7 @@ class ModelAdmin(BaseModelAdmin):
         Create a message informing the user that the object doesn't exist
         and return a redirect to the admin index page.
         """
-        msg = _('%(name)s with ID “%(key)s” doesn’t exist. Perhaps it was deleted?') % {
+        msg = _('%(name)s với ID “%(key)s” không có. Có thể đã bị xóa?') % {
             'name': opts.verbose_name,
             'key': unquote(object_id),
         }
@@ -1618,11 +1618,11 @@ class ModelAdmin(BaseModelAdmin):
             media = media + inline_formset.media
 
         if add:
-            title = _('Add %s')
+            title = _('Thêm %s')
         elif self.has_change_permission(request, obj):
-            title = _('Change %s')
+            title = _('Thay đổi %s')
         else:
-            title = _('View %s')
+            title = _('Xem %s')
         context = {
             **self.admin_site.each_context(request),
             'title': title % opts.verbose_name,
@@ -1703,7 +1703,7 @@ class ModelAdmin(BaseModelAdmin):
             # page.
             if ERROR_FLAG in request.GET:
                 return SimpleTemplateResponse('admin/invalid_setup.html', {
-                    'title': _('Database error'),
+                    'title': _('Cơ sở dữ liệu bị lỗi'),
                 })
             return HttpResponseRedirect(request.path + '?' + ERROR_FLAG + '=1')
 
@@ -1725,8 +1725,7 @@ class ModelAdmin(BaseModelAdmin):
                 else:
                     action_failed = True
             else:
-                msg = _("Items must be selected in order to perform "
-                        "actions on them. No items have been changed.")
+                msg = _("Cần chọn các mục để thực hiện hành động. Không có mục nào được thay đổi.")
                 self.message_user(request, msg, messages.WARNING)
                 action_failed = True
 
@@ -1772,8 +1771,8 @@ class ModelAdmin(BaseModelAdmin):
 
                 if changecount:
                     msg = ngettext(
-                        "%(count)s %(name)s was changed successfully.",
-                        "%(count)s %(name)s were changed successfully.",
+                        "%(count)s %(name)s đã được thay đổi thành công.",
+                        "%(count)s %(name)s đã được thay đổi thành công.",
                         changecount
                     ) % {
                         'count': changecount,
@@ -1803,15 +1802,15 @@ class ModelAdmin(BaseModelAdmin):
             action_form = None
 
         selection_note_all = ngettext(
-            '%(total_count)s selected',
-            'All %(total_count)s selected',
+            '%(total_count)s đã được chọn',
+            'Tất cả %(total_count)s đã được chọn',
             cl.result_count
         )
 
         context = {
             **self.admin_site.each_context(request),
             'module_name': str(opts.verbose_name_plural),
-            'selection_note': _('0 of %(cnt)s selected') % {'cnt': len(cl.result_list)},
+            'selection_note': _('0 của %(cnt)s đã được chọn') % {'cnt': len(cl.result_list)},
             'selection_note_all': selection_note_all % {'total_count': cl.result_count},
             'title': cl.title,
             'is_popup': cl.is_popup,
@@ -1883,9 +1882,9 @@ class ModelAdmin(BaseModelAdmin):
         object_name = str(opts.verbose_name)
 
         if perms_needed or protected:
-            title = _("Cannot delete %(name)s") % {"name": object_name}
+            title = _("Không thể xóa %(name)s") % {"name": object_name}
         else:
-            title = _("Are you sure?")
+            title = _("Bạn chắc chứ?")
 
         context = {
             **self.admin_site.each_context(request),
@@ -1929,7 +1928,7 @@ class ModelAdmin(BaseModelAdmin):
 
         context = {
             **self.admin_site.each_context(request),
-            'title': _('Change history: %s') % obj,
+            'title': _('Thay đổi lịch sử: %s') % obj,
             'action_list': action_list,
             'module_name': str(capfirst(opts.verbose_name_plural)),
             'object': obj,

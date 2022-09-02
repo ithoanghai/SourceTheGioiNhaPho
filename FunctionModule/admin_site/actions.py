@@ -38,7 +38,7 @@ def delete_selected(modeladmin, request, queryset):
                 obj_display = str(obj)
                 modeladmin.log_deletion(request, obj, obj_display)
             modeladmin.delete_queryset(request, queryset)
-            modeladmin.message_user(request, _("Successfully deleted %(count)d %(items)s.") % {
+            modeladmin.message_user(request, _("Đã xóa thành công %(count)d %(items)s lựa chọn.") % {
                 "count": n, "items": model_ngettext(modeladmin.opts, n)
             }, messages.SUCCESS)
         # Return None to display the change list page again.
@@ -47,9 +47,9 @@ def delete_selected(modeladmin, request, queryset):
     objects_name = model_ngettext(queryset)
 
     if perms_needed or protected:
-        title = _("Cannot delete %(name)s") % {"name": objects_name}
+        title = _("Không thể xóa %(name)s") % {"name": objects_name}
     else:
-        title = _("Are you sure?")
+        title = _("Bạn chắc chắn chứ?")
 
     context = {
         **modeladmin.admin_site.each_context(request),
@@ -76,4 +76,4 @@ def delete_selected(modeladmin, request, queryset):
 
 
 delete_selected.allowed_permissions = ('delete',)
-delete_selected.short_description = gettext_lazy("Xóa %(verbose_name_plural) đã chọn")
+delete_selected.short_description = gettext_lazy("Xóa %(verbose_name_plural)s đã chọn")
