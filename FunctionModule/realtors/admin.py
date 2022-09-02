@@ -1,5 +1,3 @@
-from django.contrib import admin
-
 from FunctionModule import admin_site
 from django.core.files.uploadedfile import UploadedFile
 
@@ -8,7 +6,7 @@ from .import_realtor import handle_import
 from .models import Realtor
 from django.http import HttpRequest, JsonResponse
 
-from FunctionModule.admin_site.filters import DropdownFilter, RangeNumericFilter
+from ..admin_site.filters import ChoicesFieldListFilter, RangeNumericFilter
 from ..admin_site import BooleanFieldListFilter, DateFieldListFilter
 
 
@@ -22,8 +20,8 @@ class RealtorAdmin(admin_site.ModelAdmin):
     #filter_vertical = ('user',)
     list_editable = ('email','is_cooperate','is_published',)
     list_filter = (
-        ('position', DropdownFilter),
-        ('workplace', DropdownFilter),
+        ('position', ChoicesFieldListFilter),
+        ('workplace', ChoicesFieldListFilter),
         ('is_cooperate', BooleanFieldListFilter),
         ('is_published', BooleanFieldListFilter),
         ('hire_date', DateFieldListFilter),

@@ -2,7 +2,7 @@ from FunctionModule import admin_site
 from django.db.models import Q
 from .forms import CustomerAdminForm
 from .models import Customer
-from FunctionModule.admin_site.filters import DropdownFilter, RangeNumericFilter
+from FunctionModule.admin_site.filters import ChoicesFieldListFilter, RangeNumericFilter
 from ..admin_site import DateFieldListFilter
 from ..realtors.models import Realtor
 
@@ -30,11 +30,11 @@ class CustomerAdmin(admin_site.ModelAdmin):
     ordering = ('-hire_date', 'financial_range', 'district', 'name',)
     list_filter = ('transactionStatus', 'custormer_type', 'classify', 'status', 'hire_date',)
     list_filter = (
-        ('transactionStatus', DropdownFilter),
-        ('custormer_type', DropdownFilter),
-        ('house_type', DropdownFilter),
-        ('classify', DropdownFilter),
-        ('status', DropdownFilter),
+        ('transactionStatus', ChoicesFieldListFilter),
+        ('custormer_type', ChoicesFieldListFilter),
+        ('house_type', ChoicesFieldListFilter),
+        ('classify', ChoicesFieldListFilter),
+        ('status', ChoicesFieldListFilter),
         ('hire_date', DateFieldListFilter),
         ('financial_range', RangeNumericFilter),
     )

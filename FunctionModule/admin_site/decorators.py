@@ -13,6 +13,7 @@ def register(*models, site=None):
     from FunctionModule.admin_site.sites import site as default_site, AdminSite
 
     def _model_admin_wrapper(admin_class):
+        print('register')
         if not models:
             raise ValueError('At least one model must be passed to register.')
 

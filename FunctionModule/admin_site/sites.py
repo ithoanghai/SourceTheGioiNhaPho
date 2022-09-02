@@ -65,9 +65,10 @@ class AdminSite:
     password_change_template = None
     password_change_done_template = None
 
-    def __init__(self, name='admin'):
+    def __init__(self, name='admin_site'):
         self._registry = {}  # model_class class -> admin_class instance
         self.name = name
+        print('Khoi tao AdminSite')
         self._actions = {'delete_selected': actions.delete_selected}
         self._global_actions = self._actions.copy()
         all_sites.add(self)
@@ -102,6 +103,7 @@ class AdminSite:
 
         If a model is abstract, raise ImproperlyConfigured.
         """
+        print('register')
         admin_class = admin_class or ModelAdmin
         if isinstance(model_or_iterable, ModelBase):
             model_or_iterable = [model_or_iterable]
@@ -321,7 +323,7 @@ class AdminSite:
         """
         Handle the "change password" task -- both form display and validation.
         """
-        from FunctionModule.admin_site.forms import AdminPasswordChangeForm
+        from FunctionModule.accounts.forms import AdminPasswordChangeForm
         from django.contrib.auth.views import PasswordChangeView
         url = reverse('admin:password_change_done', current_app=self.name)
         defaults = {
@@ -354,7 +356,7 @@ class AdminSite:
         `extra_context` is unused but present for consistency with the other
         admin views.
         """
-        return JavaScriptCatalog.as_view(packages=['django.contrib.admin'])(request)
+        return JavaScriptCatalog.as_view(packages=['FunctionModule.admin_site'])(request)
 
     @never_cache
     def logout(self, request, extra_context=None):
@@ -390,8 +392,8 @@ class AdminSite:
 
         # Since this module gets imported in the application's root package,
         # it cannot import models from other applications at the module level,
-        # and django.contrib.admin.forms eventually imports User.
-        from FunctionModule.admin_site.forms import AdminAuthenticationForm
+        # and FunctionModule.admin_site.forms eventually imports User.
+        from FunctionModule.accounts.forms import AdminAuthenticationForm
         from django.contrib.auth.views import LoginView
         context = {
             **self.each_context(request),
@@ -494,6 +496,7 @@ class AdminSite:
         for app in app_list:
             app['models'].sort(key=lambda x: x['name'])
 
+        print('get_app_list')
         return app_list
 
     @never_cache

@@ -60,7 +60,7 @@ def check_dependencies(**kwargs):
     Check that the admin's dependencies are correctly installed.
     """
     from FunctionModule.admin_site.sites import all_sites
-    if not apps.is_installed('django.contrib.admin'):
+    if not apps.is_installed('FunctionModule.admin_site'):
         return []
     errors = []
     app_dependencies = (

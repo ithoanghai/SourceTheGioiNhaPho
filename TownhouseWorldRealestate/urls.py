@@ -10,7 +10,7 @@ from FunctionModule.accounts import providers
 from FunctionModule import admin_site
 from FunctionModule.admin_site.sites import AdminSitePlus
 
-#admin_site.site = AdminSitePlus()
+admin_site.site = AdminSitePlus()
 admin_site.autodiscover()
 admin_site.site.site_header = 'Quản trị hệ thống thế giới nhà phố'
 

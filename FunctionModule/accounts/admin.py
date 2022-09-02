@@ -1,6 +1,8 @@
 from typing import Set
 
-from django.contrib import messages
+from django.contrib import messages, admin
+from rest_framework.authtoken.models import TokenProxy
+
 from FunctionModule import admin_site
 from FunctionModule.admin_site.options import IS_POPUP_VAR
 from FunctionModule.admin_site.utils import unquote
@@ -14,10 +16,9 @@ from django.utils.html import escape
 from django.utils.translation import gettext
 from django.utils.translation import ugettext_lazy as _
 
-from .forms import GroupAdminForm, UserCreationForm, UserChangeForm
+from .forms import GroupAdminForm, UserCreationForm, UserChangeForm, AdminPasswordChangeForm
 from .models import User, Groups, Permissions
 from ..admin_site import DateFieldListFilter, BooleanFieldListFilter
-from ..admin_site.forms import AdminPasswordChangeForm
 
 
 class PermissionAdmin(admin_site.ModelAdmin):
@@ -186,6 +187,6 @@ admin_site.site.register(Permissions, PermissionAdmin)
 #admin.site.register(ContentType)
 admin_site.site.register(Groups, GroupAdmin)
 admin_site.site.register(User, AccountAdmin)
-#admin_site.site.unregister(TokenProxy)
+admin.site.unregister(TokenProxy)
 #admin.site.unregister(SocialToken)
 #admin.site.unregister(EmailAddress)

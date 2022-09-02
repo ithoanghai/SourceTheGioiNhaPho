@@ -19,10 +19,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from FunctionModule.cadastral.lookups import get_all_states, get_all_districts
-from django.db.models import Q
 
 from . import HouseType
-from .choices import district_choices
 from .filters import ListingFilter
 from .models import ListingImage
 from .serializers import *

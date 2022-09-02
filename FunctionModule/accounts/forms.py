@@ -1,11 +1,11 @@
 from __future__ import absolute_import
 from django import forms
-from django.contrib.auth import password_validation, authenticate
 from django.core import exceptions, validators
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.utils.text import capfirst
 from django.utils.translation import gettext, gettext_lazy as _, pgettext
+from django.contrib.auth import password_validation, authenticate
 from django.contrib.auth.forms import UserChangeForm, UsernameField, ReadOnlyPasswordHashField
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
@@ -886,3 +886,30 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class AdminAuthenticationForm(AuthenticationForm):
+    """
+    A custom authentication form used in the admin app.
+    """
+    error_messages = {
+        **AuthenticationForm.error_messages,
+        'invalid_login': _(
+            "Please enter the correct %(username)s and password for a staff "
+            "account. Note that both fields may be case-sensitive."
+        ),
+    }
+    required_css_class = 'required'
+
+    def confirm_login_allowed(self, user):
+        super().confirm_login_allowed(user)
+        if not user.is_staff:
+            raise ValidationError(
+                self.error_messages['invalid_login'],
+                code='invalid_login',
+                params={'username': self.username_field.verbose_name}
+            )
+
+
+class AdminPasswordChangeForm(ChangePasswordForm):
+    required_css_class = 'required'

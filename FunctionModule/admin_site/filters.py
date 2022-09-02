@@ -10,24 +10,22 @@ import django
 import pytz
 from collections import OrderedDict
 
-from django.db.models import Max, Min
-
-from FunctionModule.admin_site.options import IncorrectLookupParameters
-from FunctionModule.admin_site.utils import (
-    get_model_from_relation, prepare_lookup_value, reverse_field_path,
-)
-from FunctionModule.admin_site.widgets import AdminDateWidget, AdminSplitDateTime
-
 from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.db import models
+from django.db.models import Max, Min
 from django.db.models.fields import DecimalField, FloatField, IntegerField, AutoField
 from django.conf import settings
-from django.forms.forms import BaseForm
 from django.forms import SplitDateTimeField, DateField
+from django.forms.forms import BaseForm
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.utils.encoding import force_str
 from django.utils.text import slugify
+
+from FunctionModule.admin_site.forms import RangeNumericForm, SliderNumericForm
+from .options import IncorrectLookupParameters
+from .utils import (get_model_from_relation, prepare_lookup_value, reverse_field_path,)
+from .widgets import AdminDateWidget, AdminSplitDateTime
 
 
 class ListFilter:
@@ -279,6 +277,7 @@ FieldListFilter.register(lambda f: isinstance(f, models.BooleanField), BooleanFi
 
 
 class ChoicesFieldListFilter(FieldListFilter):
+    template = 'admin/dropdown_filter.html'
     def __init__(self, field, request, params, model, model_admin, field_path):
         self.lookup_kwarg = '%s__exact' % field_path
         self.lookup_kwarg_isnull = '%s__isnull' % field_path
@@ -487,10 +486,6 @@ class EmptyFieldListFilter(FieldListFilter):
                 'query_string': changelist.get_query_string({self.lookup_kwarg: lookup}),
                 'display': title,
             }
-
-
-class DropdownFilter(ChoicesFieldListFilter):
-    template = 'admin/dropdown_filter.html'
 
 
 class DateRangeFilter(FieldListFilter):
@@ -750,6 +745,9 @@ class RangeNumericFilter(FieldListFilter):
                 self.parameter_name + '_to': self.used_parameters.get(self.parameter_name + '_to', None),
             }),
         }, )
+
+
+FieldListFilter.register(lambda f: isinstance(f, models.DecimalField), RangeNumericFilter)
 
 
 class SliderNumericFilter(RangeNumericFilter):

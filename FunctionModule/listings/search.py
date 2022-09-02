@@ -1,9 +1,7 @@
-from django.contrib.postgres.search import SearchVector, SearchQuery
 from django.db.models import Q
 from django.utils.text import slugify
 
 from TownhouseWorldRealestate.search_engine import listing_search, suggestions_search
-from .choices import Status
 from .models import Listing
 from ..cadastral.constants import district_data
 from ..cadastral.lookups import get_district, get_state, get_state_name, get_ward

@@ -1,8 +1,8 @@
 import datetime
 from gevent import os
 
-from django.contrib import messages, auth
 from FunctionModule.admin_site import site
+from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash, authenticate
 from django.contrib.sites.shortcuts import get_current_site
@@ -29,7 +29,6 @@ from TownhouseWorldRealestate.settings import MEDIA_ROOT, ZALO_APP_ID, ZALO_APP_
 
 from FunctionModule.transactions.models import Transaction
 from FunctionModule.zalo.app import ZaloAppInfo, Zalo3rdAppClient
-from FunctionModule.zalo.oa import ZaloOaClient
 
 from . import app_settings, signals, helpers
 from .adapter import get_adapter
@@ -58,10 +57,8 @@ from .utils import (
     url_str_to_user_pk,
 )
 
-
 INTERNAL_RESET_URL_KEY = "set-password"
 INTERNAL_RESET_SESSION_KEY = "_password_reset_key"
-
 
 sensitive_post_parameters_m = method_decorator(
     sensitive_post_parameters("oldpassword", "password", "password1", "password2")

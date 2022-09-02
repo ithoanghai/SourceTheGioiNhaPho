@@ -2,7 +2,7 @@ from FunctionModule import admin_site
 
 from .forms import TransactionAdminForm, TransactionHistoryAdminForm
 from .models import Transaction, TransactionHistory
-from FunctionModule.admin_site.filters import DropdownFilter, RangeNumericFilter
+from FunctionModule.admin_site.filters import ChoicesFieldListFilter, RangeNumericFilter
 from ..admin_site import DateFieldListFilter
 
 
@@ -25,9 +25,9 @@ class TransactionAdmin(admin_site.ModelAdmin):
   search_fields = ('message','caring_area', 'request_price','comment')
   autocomplete_fields = ['listing', 'customer', 'user', 'realtor']
   list_filter = (
-    ('trantype', DropdownFilter),
-    ('house_type', DropdownFilter),
-    ('status', DropdownFilter),
+    ('trantype', ChoicesFieldListFilter),
+    ('house_type', ChoicesFieldListFilter),
+    ('status', ChoicesFieldListFilter),
     ('date', DateFieldListFilter),
     ('request_price', RangeNumericFilter),
   )

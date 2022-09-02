@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 class SimpleAdminConfig(AppConfig):
     """Simple AppConfig which does not do automatic discovery."""
 
-    default_site = 'FunctionModule.admin_site.sites.AdminSite'
+    default_site = 'FunctionModule.admin_site.sites.AdminSitePlus'
     name = 'FunctionModule.admin_site'
     verbose_name = _("Quản trị hệ thống")
 

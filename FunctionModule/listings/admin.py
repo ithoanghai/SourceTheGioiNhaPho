@@ -2,16 +2,15 @@ from FunctionModule import admin_site
 from django.core.files.uploadedfile import UploadedFile
 from django import forms
 from django.http import HttpRequest, JsonResponse
+from django.db.models import Q
 
 from FunctionModule.listings.import_csv import handle_import, logger
 from . import Status
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet, ContractImageForm, ContractImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage, ListingHistory
 from .choices import district_default_choices, Exhaustive
-from FunctionModule.admin_site.filters import DropdownFilter, RangeNumericFilter
-from ..admin_site import DateFieldListFilter, BooleanFieldListFilter
+from ..admin_site.filters import DateFieldListFilter, BooleanFieldListFilter, ChoicesFieldListFilter, RangeNumericFilter
 from ..realtors.models import Realtor
-from django.db.models import Q
 
 
 class ListingPhotoAdmin(admin_site.TabularInline):
@@ -62,16 +61,16 @@ class ListingAdmin(admin_site.ModelAdmin):
     list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'district','list_date')
     list_display_links = ('address','price',)
     list_filter = (
-        ('status', DropdownFilter),
-        ('house_type', DropdownFilter),
-        ('transaction_type', DropdownFilter),
-        ('road_type', DropdownFilter),
+        ('status', ChoicesFieldListFilter),
+        ('house_type', ChoicesFieldListFilter),
+        ('transaction_type', ChoicesFieldListFilter),
+        ('road_type', ChoicesFieldListFilter),
         ('list_date', DateFieldListFilter),
-        ('registration_type', DropdownFilter),
+        ('registration_type', ChoicesFieldListFilter),
         ('is_published', BooleanFieldListFilter),
         ('is_advertising', BooleanFieldListFilter),
-        ('exhaustive', DropdownFilter),
-        ('liquidity_classification', DropdownFilter),
+        ('exhaustive', ChoicesFieldListFilter),
+        ('liquidity_classification', ChoicesFieldListFilter),
         ('area', RangeNumericFilter),
         ('floors', RangeNumericFilter),
         ('width', RangeNumericFilter),
