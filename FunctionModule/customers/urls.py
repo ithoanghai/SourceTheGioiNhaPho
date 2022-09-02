@@ -1,9 +1,9 @@
-from django.contrib import admin
+from FunctionModule import admin_site
 from django.urls import path
 
 from . import views
 
-admin.autodiscover()
+admin_site.autodiscover()
 
 urlpatterns = [
     path('', views.index, name='customer'),

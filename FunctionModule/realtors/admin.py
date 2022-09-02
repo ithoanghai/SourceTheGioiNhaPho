@@ -1,4 +1,6 @@
 from django.contrib import admin
+
+from FunctionModule import admin_site
 from django.core.files.uploadedfile import UploadedFile
 
 from .forms import ImportRealtorForm
@@ -6,10 +8,11 @@ from .import_realtor import handle_import
 from .models import Realtor
 from django.http import HttpRequest, JsonResponse
 
-from ..filters import DropdownFilter, DateFieldFilter, BooleanFieldFilter, RangeNumericFilter
+from FunctionModule.admin_site.filters import DropdownFilter, RangeNumericFilter
+from ..admin_site import BooleanFieldListFilter, DateFieldListFilter
 
 
-class RealtorAdmin(admin.ModelAdmin):
+class RealtorAdmin(admin_site.ModelAdmin):
     list_display = ('id', 'name', 'birthyear', 'position', 'phone1', 'countryside', 'department', 'work_area','is_cooperate','is_published','email', 'facebook')
     list_display_links = ('name',)
     search_fields = ('id', 'name','phone1','phone2', 'email', 'birthyear', 'position', 'countryside', 'workplace', 'department', 'work_area', 'facebook', 'hire_date')
@@ -21,9 +24,9 @@ class RealtorAdmin(admin.ModelAdmin):
     list_filter = (
         ('position', DropdownFilter),
         ('workplace', DropdownFilter),
-        ('is_cooperate', BooleanFieldFilter),
-        ('is_published', BooleanFieldFilter),
-        ('hire_date', DateFieldFilter),
+        ('is_cooperate', BooleanFieldListFilter),
+        ('is_published', BooleanFieldListFilter),
+        ('hire_date', DateFieldListFilter),
         ('birthyear', RangeNumericFilter),
     )
     readonly_fields = []
@@ -60,7 +63,7 @@ class RealtorAdmin(admin.ModelAdmin):
         }
 
 
-@admin.site.register_view('realtors/realtor/import-export')
+@admin_site.site.register_view('realtors/realtor/import-export')
 def import_csv_view(request: HttpRequest) -> JsonResponse:
     if request.method == 'POST':
         form = ImportRealtorForm(request.POST or None, request.FILES)
@@ -75,4 +78,4 @@ def import_csv_view(request: HttpRequest) -> JsonResponse:
     return JsonResponse({})
 
 
-admin.site.register(Realtor, RealtorAdmin)
+admin_site.site.register(Realtor, RealtorAdmin)

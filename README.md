@@ -33,16 +33,16 @@ Show Log docker
     docker logs -f --tail 5 app_web_1
 
 Restart certificate on docker server
-    docker-compose -f docker-compose.production.yml exec -it certbot /bin/sh
+    docker-compose -f docker-compose.production.yml exec nginx bash -c "nginx -s reload"
     docker-compose -f docker-compose.production.yml up -d certbot  
     docker-compose -f docker-compose.production.yml restart web
-    docker-compose -f docker-compose.production.yml exec nginx bash -c "nginx -s reload"
 
 gộp dữ liệu
     python manage.py makemigrations
     python manage.py migrate
 
 #auto update & build new code on localserver
+    docker-compose -f docker-compose.production.yml exec nginx bash -c "nginx -s reload"
     docker-compose exec web bash -c "pip install -r requirements.txt"
     docker-compose exec web bash -c "python manage.py collectstatic --noinput"
     docker-compose exec web bash -c "npx gulp build"
@@ -53,7 +53,6 @@ gộp dữ liệu
     docker-compose exec web bash -c "python manage.py migrate --fake customers"
     docker-compose exec web bash -c "python manage.py migrate listings"
     docker-compose exec web bash -c "python manage.py migrate --fake transactions"
-    docker-compose exec web bash -c "python manage.py migrate advanced_filters"
     docker-compose exec web bash -c "python manage.py migrate --fake-initial"
     docker-compose restart web
     docker-compose up -d search_engine

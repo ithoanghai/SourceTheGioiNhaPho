@@ -1,23 +1,24 @@
 import debug_toolbar
 from importlib import import_module
 
-from django.conf.urls import url
 from django.shortcuts import redirect
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib import admin
-from adminplus.sites import AdminSitePlus
 
 from FunctionModule.accounts import providers
+from FunctionModule import admin_site
+from FunctionModule.admin_site.sites import AdminSitePlus
 
-admin.site = AdminSitePlus()
-admin.autodiscover()
-admin.site.site_header = 'Quản trị hệ thống thế giới nhà phố'
+#admin_site.site = AdminSitePlus()
+admin_site.autodiscover()
+admin_site.site.site_header = 'Quản trị hệ thống thế giới nhà phố'
+
 
 def redirect_view(request):
     response = redirect('/admin/')
     return response
+
 
 urlpatterns = [
     path('', include('FunctionModule.pages.urls')),
@@ -29,7 +30,7 @@ urlpatterns = [
     path('accounts/', include('FunctionModule.accounts.urls')),
     path('cadastral/', include('FunctionModule.cadastral.urls')),
     path('admin', redirect_view, name='admin'),
-    path('admin/', admin.site.urls),
+    path('admin/', admin_site.site.urls),
     #path('admin/', site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
 

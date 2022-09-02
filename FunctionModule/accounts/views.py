@@ -2,8 +2,7 @@ import datetime
 from gevent import os
 
 from django.contrib import messages, auth
-from django.contrib.admin import site
-from django.contrib.auth.forms import PasswordChangeForm
+from FunctionModule.admin_site import site
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash, authenticate
 from django.contrib.sites.shortcuts import get_current_site
@@ -159,15 +158,15 @@ def login_handler(request):
             adapter = get_adapter(request)
 
             if user is not None:
-                is_correct = user.check_password(password)
-                if not is_correct:
-                    messages.error(request, 'Thông tin đăng nhập không hợp lệ')
-
                 adapter.login(request, user)
-                messages.success(request, 'Bạn đã đăng nhập thành công')
                 if user.is_authenticated and (user.is_staff or user.is_superuser):
+                    messages.success(request, 'Bạn đã đăng nhập thành công')
                     return redirect('/admin/')
-                else:
+                elif user.is_authenticated:
+                    messages.success(request, 'Bạn đã đăng nhập thành công')
+                    return redirect('index')
+                elif not user.is_authenticated:
+                    messages.success(request, 'Thông tin đăng nhập không hợp lệ')
                     return redirect('index')
             else:
                 messages.error(request, 'Người dùng không tồn tại')
@@ -285,7 +284,7 @@ def save_file(file, path=''):
 
 
 def password_change(request):
-    form = PasswordChangeForm(request.user, request.POST)
+    form = ChangePasswordForm(request.user, request.POST)
     app_list = site.get_app_list(request)
     context = {
         'available_apps': app_list,
@@ -300,7 +299,7 @@ def password_change(request):
         else:
             messages.error(request, 'Hãy hoàn thành các lỗi ở dưới.')
     else:
-        form = PasswordChangeForm(request.user)
+        form = ChangePasswordForm(request.user)
     return render(request, 'accounts/change_password.html', context)
 
 

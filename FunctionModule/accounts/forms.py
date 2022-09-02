@@ -6,12 +6,11 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.utils.text import capfirst
 from django.utils.translation import gettext, gettext_lazy as _, pgettext
-from django.contrib.admin.widgets import FilteredSelectMultiple
-from django.contrib.auth.forms import UserChangeForm, UsernameField, AuthenticationForm, ReadOnlyPasswordHashField
+from django.contrib.auth.forms import UserChangeForm, UsernameField, ReadOnlyPasswordHashField
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
 from django.forms import Textarea, TextInput, EmailInput
-from .models import User, phone_regex, Group, SocialAccount
+from .models import User, phone_regex, Groups, SocialAccount
 
 import warnings
 from importlib import import_module
@@ -41,7 +40,7 @@ UserModel = get_user_model()
 
 class GroupAdminForm(forms.ModelForm):
     class Meta:
-        model = Group
+        model = Groups
         exclude = []
         fields = ('name','permissions')
 

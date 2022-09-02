@@ -1,10 +1,10 @@
-from django.contrib import admin
+from FunctionModule import admin_site
 from django.urls import path, re_path, include
 from django.contrib.auth import views as auth_views
 
 from . import views
 
-admin.autodiscover()
+admin_site.autodiscover()
 
 urlpatterns = [
     path('register', views.register, name='register'),

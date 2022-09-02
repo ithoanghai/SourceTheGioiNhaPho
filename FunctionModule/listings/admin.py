@@ -1,27 +1,20 @@
-import fractions
-
-from django.contrib import admin
-from django.contrib.admin.actions import delete_selected
-from django.core.files.storage import default_storage
+from FunctionModule import admin_site
 from django.core.files.uploadedfile import UploadedFile
 from django import forms
 from django.http import HttpRequest, JsonResponse
-from django_filters import RangeFilter
 
 from FunctionModule.listings.import_csv import handle_import, logger
 from . import Status
-from .filters import RangeFilter
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet, ContractImageForm, ContractImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage, ListingHistory
 from .choices import district_default_choices, Exhaustive
-from ..filters import DropdownFilter, DateFieldFilter, BooleanFieldFilter, DateRangeFilter, RangeNumericFilter, \
-    SliderNumericFilter
+from FunctionModule.admin_site.filters import DropdownFilter, RangeNumericFilter
+from ..admin_site import DateFieldListFilter, BooleanFieldListFilter
 from ..realtors.models import Realtor
 from django.db.models import Q
-from fractions import *
 
 
-class ListingPhotoAdmin(admin.TabularInline):
+class ListingPhotoAdmin(admin_site.TabularInline):
     model = ListingImage
     verbose_name = "HÌNH ẢNH CHỤP BĐS"
     form = ImageForm
@@ -31,7 +24,7 @@ class ListingPhotoAdmin(admin.TabularInline):
     extra = 0
 
 
-class ContractPhotoAdmin(admin.TabularInline):
+class ContractPhotoAdmin(admin_site.TabularInline):
     model = ContractImage
     verbose_name = "ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"
     form = ContractImageForm
@@ -41,13 +34,13 @@ class ContractPhotoAdmin(admin.TabularInline):
     extra = 0
 
 
-class ListingVideoAdmin(admin.TabularInline):
+class ListingVideoAdmin(admin_site.TabularInline):
     model = ListingVideo
     extra = 0
     verbose_name = "VIDEO QUAY BĐS"
 
 
-class ListingAdmin(admin.ModelAdmin):
+class ListingAdmin(admin_site.ModelAdmin):
     fieldsets = (
         ('THÔNG TIN CHUYÊN VIÊN', {
             'classes': ('wide',),
@@ -73,10 +66,10 @@ class ListingAdmin(admin.ModelAdmin):
         ('house_type', DropdownFilter),
         ('transaction_type', DropdownFilter),
         ('road_type', DropdownFilter),
-        ('list_date', DateFieldFilter),
+        ('list_date', DateFieldListFilter),
         ('registration_type', DropdownFilter),
-        ('is_published', BooleanFieldFilter),
-        ('is_advertising', BooleanFieldFilter),
+        ('is_published', BooleanFieldListFilter),
+        ('is_advertising', BooleanFieldListFilter),
         ('exhaustive', DropdownFilter),
         ('liquidity_classification', DropdownFilter),
         ('area', RangeNumericFilter),
@@ -185,7 +178,7 @@ class ListingAdmin(admin.ModelAdmin):
         self.message_user(request, f'Đã lên lịch khảo sát {updated} căn')
 
 
-class ListingHistoryAdmin(admin.ModelAdmin):
+class ListingHistoryAdmin(admin_site.ModelAdmin):
     fieldsets = (
         ('THÔNG TIN CHUYÊN VIÊN', {
             'classes': ('wide',),
@@ -207,7 +200,7 @@ class ListingHistoryAdmin(admin.ModelAdmin):
         ('width', RangeNumericFilter),
         ('price', RangeNumericFilter),
         ('bedrooms', RangeNumericFilter),
-        ('list_date', DateFieldFilter),
+        ('list_date', DateFieldListFilter),
     )
     list_editable = ()
     search_fields = ('id', 'address', 'list_date', 'reward_person', 'reward_person_mobile','extra_data','warehouse')
@@ -265,7 +258,7 @@ class ListingHistoryAdmin(admin.ModelAdmin):
             return queryset_list
 
 
-@admin.site.register_view('listings/listing/import-export')
+@admin_site.site.register_view('listings/listing/import-export')
 def import_csv_view(request: HttpRequest) -> JsonResponse:
     if request.method == 'POST':
         form = ImportListingForm(request.POST or None, request.FILES)
@@ -289,5 +282,5 @@ def import_csv_view(request: HttpRequest) -> JsonResponse:
     return JsonResponse({})
 
 
-admin.site.register(Listing, ListingAdmin)
-admin.site.register(ListingHistory, ListingHistoryAdmin)
+admin_site.site.register(Listing, ListingAdmin)
+admin_site.site.register(ListingHistory, ListingHistoryAdmin)

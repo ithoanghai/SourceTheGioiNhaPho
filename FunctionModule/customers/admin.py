@@ -1,12 +1,13 @@
-from django.contrib import admin
+from FunctionModule import admin_site
 from django.db.models import Q
 from .forms import CustomerAdminForm
 from .models import Customer
-from ..filters import DropdownFilter, DateFieldFilter, RangeNumericFilter
+from FunctionModule.admin_site.filters import DropdownFilter, RangeNumericFilter
+from ..admin_site import DateFieldListFilter
 from ..realtors.models import Realtor
 
 
-class CustomerAdmin(admin.ModelAdmin):
+class CustomerAdmin(admin_site.ModelAdmin):
     fieldsets = (
         ('THÔNG TIN CHUYÊN VIÊN', {
             'classes': ('wide',),
@@ -34,7 +35,7 @@ class CustomerAdmin(admin.ModelAdmin):
         ('house_type', DropdownFilter),
         ('classify', DropdownFilter),
         ('status', DropdownFilter),
-        ('hire_date', DateFieldFilter),
+        ('hire_date', DateFieldListFilter),
         ('financial_range', RangeNumericFilter),
     )
     form = CustomerAdminForm
@@ -75,4 +76,4 @@ class CustomerAdmin(admin.ModelAdmin):
             return to_exclude
 
 
-admin.site.register(Customer, CustomerAdmin)
+admin_site.site.register(Customer, CustomerAdmin)

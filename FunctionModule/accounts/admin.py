@@ -1,26 +1,26 @@
 from typing import Set
 
-from django.contrib import admin, messages
-from django.contrib.admin.options import IS_POPUP_VAR
-from django.contrib.admin.utils import unquote
+from django.contrib import messages
+from FunctionModule import admin_site
+from FunctionModule.admin_site.options import IS_POPUP_VAR
+from FunctionModule.admin_site.utils import unquote
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.admin import UserAdmin as AuthUserAdmin, GroupAdmin
+from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.core.exceptions import PermissionDenied
 from django.http import Http404, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.urls import path, reverse
 from django.utils.html import escape
 from django.utils.translation import gettext
-from rest_framework.authtoken.models import TokenProxy
 from django.utils.translation import ugettext_lazy as _
 
 from .forms import GroupAdminForm, UserCreationForm, UserChangeForm
 from .models import User, Groups, Permissions
-from ..admin.forms import AdminPasswordChangeForm
-from ..filters import DateFieldFilter, BooleanFieldFilter
+from ..admin_site import DateFieldListFilter, BooleanFieldListFilter
+from ..admin_site.forms import AdminPasswordChangeForm
 
 
-class PermissionAdmin(admin.ModelAdmin):
+class PermissionAdmin(admin_site.ModelAdmin):
     search_fields = ('name', 'content_type', 'codename')
     ordering = ('content_type','name')
     verbose_name = "Quản trị Quyền người dùng"
@@ -59,10 +59,7 @@ class AccountAdmin(AuthUserAdmin):
     search_fields = ['username', 'first_name', 'last_name', 'email', 'phone']
     list_filter = ('date_joined', 'is_broker', 'is_investor', 'is_staff', 'is_active')
     list_filter = (
-        ('date_joined', DateFieldFilter),
-        ('is_broker', BooleanFieldFilter),
-        ('is_investor', BooleanFieldFilter),
-        ('is_active', BooleanFieldFilter),
+
     )
     list_per_page = 200
     readonly_fields = [
@@ -138,7 +135,7 @@ class AccountAdmin(AuthUserAdmin):
             form = self.change_password_form(user)
 
         fieldsets = [(None, {'fields': list(form.base_fields)})]
-        adminForm = admin.helpers.AdminForm(form, fieldsets, {})
+        adminForm = admin_site.helpers.AdminForm(form, fieldsets, {})
 
         context = {
             'title': _('Thay đổi mật khẩu cho người dùng: %s') % escape(user.get_username()),
@@ -169,18 +166,26 @@ class AccountAdmin(AuthUserAdmin):
         )
 
 
-class GroupAdmin(GroupAdmin):
+class GroupAdmin(admin_site.ModelAdmin):
     search_fields = ('name',)
     ordering = ('name',)
     filter_horizontal = ('permissions',)
     verbose_name = "Quản trị nhóm người dùng"
     form = GroupAdminForm
 
+    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
+        if db_field.name == 'permissions':
+            qs = kwargs.get('queryset', db_field.remote_field.model.objects)
+            # Avoid a major performance hit resolving permission names which
+            # triggers a content_type load:
+            kwargs['queryset'] = qs.select_related('content_type')
+        return super().formfield_for_manytomany(db_field, request=request, **kwargs)
 
-admin.site.register(Permissions,PermissionAdmin)
+
+admin_site.site.register(Permissions, PermissionAdmin)
 #admin.site.register(ContentType)
-admin.site.register(Groups, GroupAdmin)
-admin.site.register(User, AccountAdmin)
-admin.site.unregister(TokenProxy)
+admin_site.site.register(Groups, GroupAdmin)
+admin_site.site.register(User, AccountAdmin)
+#admin_site.site.unregister(TokenProxy)
 #admin.site.unregister(SocialToken)
 #admin.site.unregister(EmailAddress)

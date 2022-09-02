@@ -1,12 +1,12 @@
 from rest_framework.authtoken.views import obtain_auth_token 
-from django.contrib import admin
+from FunctionModule import admin_site
 from django.urls import path, include
 from django.conf.urls import url
 
 from . import views
 from .views import ListingDetailJSONView
 
-admin.autodiscover()
+admin_site.autodiscover()
 
 urlpatterns = [
     path('', views.index, name='listings'),

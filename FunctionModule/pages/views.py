@@ -2,7 +2,7 @@ from itertools import groupby
 from random import random
 
 from django import template
-from django.contrib.admin import site
+from FunctionModule.admin_site import site
 from django.core.paginator import Paginator
 from django.db.models import QuerySet, Count
 from django.http import HttpResponse

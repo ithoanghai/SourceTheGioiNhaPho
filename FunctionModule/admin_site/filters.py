@@ -6,30 +6,28 @@ Each filter subclass knows how to display a filter for a field that passes a
 certain test -- e.g. being a DateField or ForeignKey.
 """
 import datetime
-from collections import OrderedDict
-
 import django
 import pytz
-from django.conf import settings
-from django.contrib.admin import ChoicesFieldListFilter, DateFieldListFilter, AllValuesFieldListFilter, \
-    RelatedOnlyFieldListFilter, EmptyFieldListFilter, RelatedFieldListFilter, FieldListFilter, SimpleListFilter, \
-    BooleanFieldListFilter
-from django.contrib.admin.options import IncorrectLookupParameters
-from django.contrib.admin.utils import (
+from collections import OrderedDict
+
+from django.db.models import Max, Min
+
+from FunctionModule.admin_site.options import IncorrectLookupParameters
+from FunctionModule.admin_site.utils import (
     get_model_from_relation, prepare_lookup_value, reverse_field_path,
 )
-from django.contrib.admin.widgets import AdminDateWidget, AdminSplitDateTime
+from FunctionModule.admin_site.widgets import AdminDateWidget, AdminSplitDateTime
+
 from django.core.exceptions import ImproperlyConfigured, ValidationError
+from django.db import models
 from django.db.models.fields import DecimalField, FloatField, IntegerField, AutoField
-from django.db.models import Max, Min, BooleanField, DateTimeField, Q
-from django.forms import SplitDateTimeField, DateField
+from django.conf import settings
 from django.forms.forms import BaseForm
+from django.forms import SplitDateTimeField, DateField
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from django.utils.encoding import force_str
 from django.utils.text import slugify
-from django.utils.translation import gettext_lazy as _
-
-from FunctionModule.listings.forms import SingleNumericForm, RangeNumericForm, SliderNumericForm
 
 
 class ListFilter:
@@ -74,7 +72,7 @@ class ListFilter:
         raise NotImplementedError('subclasses of ListFilter must provide an expected_parameters() method')
 
 
-class SimpleListFilter(SimpleListFilter):
+class SimpleListFilter(ListFilter):
     # The parameter that should be used in the query string for that filter.
     parameter_name = None
 
@@ -82,7 +80,7 @@ class SimpleListFilter(SimpleListFilter):
         super().__init__(request, params, model, model_admin)
         if self.parameter_name is None:
             raise ImproperlyConfigured(
-                "Bộ lọc '%s' không xác định được 'parameter_name'."
+                "The list filter '%s' does not specify a 'parameter_name'."
                 % self.__class__.__name__
             )
         if self.parameter_name in params:
@@ -120,7 +118,7 @@ class SimpleListFilter(SimpleListFilter):
         yield {
             'selected': self.value() is None,
             'query_string': changelist.get_query_string(remove=[self.parameter_name]),
-            'display': _('Tất cả'),
+            'display': _('All'),
         }
         for lookup, title in self.lookup_choices:
             yield {
@@ -130,7 +128,7 @@ class SimpleListFilter(SimpleListFilter):
             }
 
 
-class FieldListFilter(FieldListFilter):
+class FieldListFilter(ListFilter):
     _field_list_filters = []
     _take_priority_index = 0
 
@@ -138,7 +136,7 @@ class FieldListFilter(FieldListFilter):
         self.field = field
         self.field_path = field_path
         self.title = getattr(field, 'verbose_name', field_path)
-        super().__init__(field, request, params, model, model_admin, field_path)
+        super().__init__(request, params, model, model_admin)
         for p in self.expected_parameters():
             if p in params:
                 value = params.pop(p)
@@ -174,7 +172,7 @@ class FieldListFilter(FieldListFilter):
                 return list_filter_class(field, request, params, model, model_admin, field_path=field_path)
 
 
-class RelatedFieldListFilter(RelatedFieldListFilter):
+class RelatedFieldListFilter(FieldListFilter):
     def __init__(self, field, request, params, model, model_admin, field_path):
         other_model = get_model_from_relation(field)
         self.lookup_kwarg = '%s__%s__exact' % (field_path, field.target_field.name)
@@ -225,7 +223,7 @@ class RelatedFieldListFilter(RelatedFieldListFilter):
         yield {
             'selected': self.lookup_val is None and not self.lookup_val_isnull,
             'query_string': changelist.get_query_string(remove=[self.lookup_kwarg, self.lookup_kwarg_isnull]),
-            'display': _('Tất cả'),
+            'display': _('All'),
         }
         for pk_val, val in self.lookup_choices:
             yield {
@@ -244,7 +242,8 @@ class RelatedFieldListFilter(RelatedFieldListFilter):
 FieldListFilter.register(lambda f: f.remote_field, RelatedFieldListFilter)
 
 
-class BooleanFieldListFilter(BooleanFieldListFilter):
+class BooleanFieldListFilter(FieldListFilter):
+    template = 'admin/dropdown_filter.html'
     def __init__(self, field, request, params, model, model_admin, field_path):
         self.lookup_kwarg = '%s__exact' % field_path
         self.lookup_kwarg2 = '%s__isnull' % field_path
@@ -260,9 +259,9 @@ class BooleanFieldListFilter(BooleanFieldListFilter):
 
     def choices(self, changelist):
         for lookup, title in (
-                (None, _('Tất cả')),
-                ('1', _('Có')),
-                ('0', _('Không'))):
+                (None, _('All')),
+                ('1', _('Yes')),
+                ('0', _('No'))):
             yield {
                 'selected': self.lookup_val == lookup and not self.lookup_val2,
                 'query_string': changelist.get_query_string({self.lookup_kwarg: lookup}, [self.lookup_kwarg2]),
@@ -272,14 +271,14 @@ class BooleanFieldListFilter(BooleanFieldListFilter):
             yield {
                 'selected': self.lookup_val2 == 'True',
                 'query_string': changelist.get_query_string({self.lookup_kwarg2: 'True'}, [self.lookup_kwarg]),
-                'display': _('Không xác định'),
+                'display': _('Unknown'),
             }
 
 
-FieldListFilter.register(lambda f: isinstance(f, BooleanField), BooleanFieldListFilter)
+FieldListFilter.register(lambda f: isinstance(f, models.BooleanField), BooleanFieldListFilter)
 
 
-class ChoicesFieldListFilter(ChoicesFieldListFilter):
+class ChoicesFieldListFilter(FieldListFilter):
     def __init__(self, field, request, params, model, model_admin, field_path):
         self.lookup_kwarg = '%s__exact' % field_path
         self.lookup_kwarg_isnull = '%s__isnull' % field_path
@@ -294,7 +293,7 @@ class ChoicesFieldListFilter(ChoicesFieldListFilter):
         yield {
             'selected': self.lookup_val is None,
             'query_string': changelist.get_query_string(remove=[self.lookup_kwarg, self.lookup_kwarg_isnull]),
-            'display': _('Chọn tất cả')
+            'display': _('All')
         }
         none_title = ''
         for lookup, title in self.field.flatchoices:
@@ -317,7 +316,8 @@ class ChoicesFieldListFilter(ChoicesFieldListFilter):
 FieldListFilter.register(lambda f: bool(f.choices), ChoicesFieldListFilter)
 
 
-class DateFieldListFilter(DateFieldListFilter):
+class DateFieldListFilter(FieldListFilter):
+    template = 'admin/dropdown_filter.html'
     def __init__(self, field, request, params, model, model_admin, field_path):
         self.field_generic = '%s__' % field_path
         self.date_params = {k: v for k, v in params.items() if k.startswith(self.field_generic)}
@@ -328,7 +328,7 @@ class DateFieldListFilter(DateFieldListFilter):
         if timezone.is_aware(now):
             now = timezone.localtime(now)
 
-        if isinstance(field, DateTimeField):
+        if isinstance(field, models.DateTimeField):
             today = now.replace(hour=0, minute=0, second=0, microsecond=0)
         else:       # field is a models.DateField
             today = now.date()
@@ -343,19 +343,19 @@ class DateFieldListFilter(DateFieldListFilter):
         self.lookup_kwarg_until = '%s__lt' % field_path
         self.links = (
             (_('Ngày bất kỳ'), {}),
-            (_('Hôm nay'), {
+            (_('Today'), {
                 self.lookup_kwarg_since: str(today),
                 self.lookup_kwarg_until: str(tomorrow),
             }),
-            (_('7 ngày trước'), {
+            (_('Past 7 days'), {
                 self.lookup_kwarg_since: str(today - datetime.timedelta(days=7)),
                 self.lookup_kwarg_until: str(tomorrow),
             }),
-            (_('Trong tháng này'), {
+            (_('This month'), {
                 self.lookup_kwarg_since: str(today.replace(day=1)),
                 self.lookup_kwarg_until: str(next_month),
             }),
-            (_('Trong năm nay'), {
+            (_('This year'), {
                 self.lookup_kwarg_since: str(today.replace(month=1, day=1)),
                 self.lookup_kwarg_until: str(next_year),
             }),
@@ -363,8 +363,8 @@ class DateFieldListFilter(DateFieldListFilter):
         if field.null:
             self.lookup_kwarg_isnull = '%s__isnull' % field_path
             self.links += (
-                (_('Không có ngày'), {self.field_generic + 'isnull': 'True'}),
-                (_('Có ngày'), {self.field_generic + 'isnull': 'False'}),
+                (_('No date'), {self.field_generic + 'isnull': 'True'}),
+                (_('Has date'), {self.field_generic + 'isnull': 'False'}),
             )
         super().__init__(field, request, params, model, model_admin, field_path)
 
@@ -384,13 +384,13 @@ class DateFieldListFilter(DateFieldListFilter):
 
 
 FieldListFilter.register(
-    lambda f: isinstance(f, DateField), DateFieldListFilter)
+    lambda f: isinstance(f, models.DateField), DateFieldListFilter)
 
 
 # This should be registered last, because it's a last resort. For example,
 # if a field is eligible to use the BooleanFieldListFilter, that'd be much
 # more appropriate, and the AllValuesFieldListFilter won't get used for it.
-class AllValuesFieldListFilter(AllValuesFieldListFilter):
+class AllValuesFieldListFilter(FieldListFilter):
     def __init__(self, field, request, params, model, model_admin, field_path):
         self.lookup_kwarg = field_path
         self.lookup_kwarg_isnull = '%s__isnull' % field_path
@@ -413,7 +413,7 @@ class AllValuesFieldListFilter(AllValuesFieldListFilter):
         yield {
             'selected': self.lookup_val is None and self.lookup_val_isnull is None,
             'query_string': changelist.get_query_string(remove=[self.lookup_kwarg, self.lookup_kwarg_isnull]),
-            'display': _('Tất cả'),
+            'display': _('All'),
         }
         include_none = False
         for val in self.lookup_choices:
@@ -437,14 +437,14 @@ class AllValuesFieldListFilter(AllValuesFieldListFilter):
 FieldListFilter.register(lambda f: True, AllValuesFieldListFilter)
 
 
-class RelatedOnlyFieldListFilter(RelatedOnlyFieldListFilter):
+class RelatedOnlyFieldListFilter(RelatedFieldListFilter):
     def field_choices(self, field, request, model_admin):
         pk_qs = model_admin.get_queryset(request).distinct().values_list('%s__pk' % self.field_path, flat=True)
         ordering = self.field_admin_ordering(field, request, model_admin)
         return field.get_choices(include_blank=False, limit_choices_to={'pk__in': pk_qs}, ordering=ordering)
 
 
-class EmptyFieldListFilter(EmptyFieldListFilter):
+class EmptyFieldListFilter(FieldListFilter):
     def __init__(self, field, request, params, model, model_admin, field_path):
         if not field.empty_strings_allowed and not field.null:
             raise ImproperlyConfigured(
@@ -464,11 +464,11 @@ class EmptyFieldListFilter(EmptyFieldListFilter):
         if self.lookup_val not in ('0', '1'):
             raise IncorrectLookupParameters
 
-        lookup_condition = Q()
+        lookup_condition = models.Q()
         if self.field.empty_strings_allowed:
-            lookup_condition |= Q(**{self.field_path: ''})
+            lookup_condition |= models.Q(**{self.field_path: ''})
         if self.field.null:
-            lookup_condition |= Q(**{'%s__isnull' % self.field_path: True})
+            lookup_condition |= models.Q(**{'%s__isnull' % self.field_path: True})
         if self.lookup_val == '1':
             return queryset.filter(lookup_condition)
         return queryset.exclude(lookup_condition)
@@ -478,9 +478,9 @@ class EmptyFieldListFilter(EmptyFieldListFilter):
 
     def choices(self, changelist):
         for lookup, title in (
-            (None, _('Tất cả')),
-            ('1', _('Rỗng')),
-            ('0', _('Không rỗng')),
+            (None, _('All')),
+            ('1', _('Empty')),
+            ('0', _('Not empty')),
         ):
             yield {
                 'selected': self.lookup_val == lookup,
@@ -490,14 +490,6 @@ class EmptyFieldListFilter(EmptyFieldListFilter):
 
 
 class DropdownFilter(ChoicesFieldListFilter):
-    template = 'admin/dropdown_filter.html'
-
-
-class BooleanFieldFilter(BooleanFieldListFilter):
-    template = 'admin/dropdown_filter.html'
-
-
-class DateFieldFilter(DateFieldListFilter):
     template = 'admin/dropdown_filter.html'
 
 
@@ -703,42 +695,6 @@ class DateTimeRangeFilter(DateRangeFilter):
             )
 
         return query_params
-
-
-class SingleNumericFilter(FieldListFilter):
-    request = None
-    parameter_name = None
-    template = 'admin/filter_numeric_single.html'
-
-    def __init__(self, field, request, params, model, model_admin, field_path):
-        super().__init__(field, request, params, model, model_admin, field_path)
-        if not isinstance(field, (DecimalField, IntegerField, FloatField, AutoField)):
-            raise TypeError('Class {} is not supported for {}.'.format(type(self.field), self.__class__.__name__))
-
-        self.request = request
-        if self.parameter_name is None:
-
-            self.parameter_name = self.field_path
-        if self.parameter_name in params:
-            value = params.pop(self.parameter_name)
-            self.used_parameters[self.parameter_name] = value
-
-    def queryset(self, request, queryset):
-        if self.value():
-            return queryset.filter(**{self.parameter_name: self.value()})
-
-    def value(self):
-        return self.used_parameters.get(self.parameter_name, None)
-
-    def expected_parameters(self):
-        return [self.parameter_name]
-
-    def choices(self, changelist):
-        return ({
-            'request': self.request,
-            'parameter_name': self.parameter_name,
-            'form': SingleNumericForm(name=self.parameter_name, data={self.parameter_name: self.value()}),
-        }, )
 
 
 class RangeNumericFilter(FieldListFilter):

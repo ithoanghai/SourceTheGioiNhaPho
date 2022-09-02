@@ -62,15 +62,15 @@ THIRD_PARTIES = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
-    'adminplus',
+    #'adminplus',
     'cachalot',
     'hitcount'
 ]
 
 BUILT_IN_APPS = [
     # 'admin_numeric_filter',
-    # 'django.contrib.admin',
-    'django.contrib.admin.apps.SimpleAdminConfig',
+    #'django.contrib.admin',
+    'FunctionModule.admin_site.apps.AdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

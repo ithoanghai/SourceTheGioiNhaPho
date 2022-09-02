@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.contrib import admin
+from FunctionModule import admin_site
 from FunctionModule.blog.models import Post
 
-admin.site.register(Post)
+admin_site.site.register(Post)

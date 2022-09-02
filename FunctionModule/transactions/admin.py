@@ -1,11 +1,12 @@
-from django.contrib import admin
+from FunctionModule import admin_site
 
 from .forms import TransactionAdminForm, TransactionHistoryAdminForm
 from .models import Transaction, TransactionHistory
-from ..filters import DropdownFilter, DateFieldFilter, RangeNumericFilter
+from FunctionModule.admin_site.filters import DropdownFilter, RangeNumericFilter
+from ..admin_site import DateFieldListFilter
 
 
-class TransactionAdmin(admin.ModelAdmin):
+class TransactionAdmin(admin_site.ModelAdmin):
   fieldsets = (
     ('THÔNG TIN CHUYÊN VIÊN', {
       'classes': ('wide',),
@@ -27,7 +28,7 @@ class TransactionAdmin(admin.ModelAdmin):
     ('trantype', DropdownFilter),
     ('house_type', DropdownFilter),
     ('status', DropdownFilter),
-    ('date', DateFieldFilter),
+    ('date', DateFieldListFilter),
     ('request_price', RangeNumericFilter),
   )
   list_per_page = 100
@@ -53,7 +54,7 @@ class TransactionAdmin(admin.ModelAdmin):
     return form
 
 
-class TransactionHistoryAdmin(admin.ModelAdmin):
+class TransactionHistoryAdmin(admin_site.ModelAdmin):
   fieldsets = (
     ('THÔNG TIN GIAO DỊCH', {'fields': (
       'transaction', ('status','reason'),)}),
@@ -70,5 +71,5 @@ class TransactionHistoryAdmin(admin.ModelAdmin):
   form = TransactionHistoryAdminForm
 
 
-admin.site.register(Transaction, TransactionAdmin)
+admin_site.site.register(Transaction, TransactionAdmin)
 #admin.site.register(TransactionHistory, TransactionHistoryAdmin)
