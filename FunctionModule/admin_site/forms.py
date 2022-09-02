@@ -1,5 +1,5 @@
-from django.core.exceptions import ValidationError
 from django.forms import forms, Media
+from django.forms import Textarea, TextInput, EmailInput, NumberInput
 
 from django.utils.translation import gettext_lazy as _
 
@@ -11,10 +11,10 @@ class RangeNumericForm(forms.Form):
         self.name = kwargs.pop('name')
         super().__init__(*args, **kwargs)
 
-        self.fields[self.name + '_from'] = forms.FloatField(label='', required=False,
-            widget=forms.NumberInput(attrs={'placeholder': _('From')}))
-        self.fields[self.name + '_to'] = forms.FloatField(label='', required=False,
-            widget=forms.NumberInput(attrs={'placeholder': _('To')}))
+        self.fields[self.name + '_from'] = forms.Field(label='', required=False,
+            widget=NumberInput(attrs={'placeholder': _('From')}))
+        self.fields[self.name + '_to'] = forms.Field(label='', required=False,
+            widget=NumberInput(attrs={'placeholder': _('To')}))
 
     @property
     def media(self):

@@ -337,6 +337,7 @@ class DateFieldListFilter(FieldListFilter):
         else:
             next_month = today.replace(month=today.month + 1, day=1)
         next_year = today.replace(year=today.year + 1, month=1, day=1)
+        prev_year = today.replace(year=today.year - 1, month=1, day=1)
 
         self.lookup_kwarg_since = '%s__gte' % field_path
         self.lookup_kwarg_until = '%s__lt' % field_path
@@ -346,17 +347,21 @@ class DateFieldListFilter(FieldListFilter):
                 self.lookup_kwarg_since: str(today),
                 self.lookup_kwarg_until: str(tomorrow),
             }),
-            (_('Past 7 days'), {
+            (_('7 ngày trước'), {
                 self.lookup_kwarg_since: str(today - datetime.timedelta(days=7)),
                 self.lookup_kwarg_until: str(tomorrow),
             }),
-            (_('This month'), {
+            (_('Tháng này'), {
                 self.lookup_kwarg_since: str(today.replace(day=1)),
                 self.lookup_kwarg_until: str(next_month),
             }),
-            (_('This year'), {
+            (_('Năm này'), {
                 self.lookup_kwarg_since: str(today.replace(month=1, day=1)),
                 self.lookup_kwarg_until: str(next_year),
+            }),
+            (_('Năm trước'), {
+                self.lookup_kwarg_since: str(prev_year.replace(month=1, day=1)),
+                self.lookup_kwarg_until: str(prev_year),
             }),
         )
         if field.null:
