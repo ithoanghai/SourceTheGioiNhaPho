@@ -8,6 +8,8 @@ from urllib.parse import quote as urlquote
 from django import forms
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.admin import helpers
+
 from FunctionModule.admin_site import helpers, widgets
 from FunctionModule.admin_site.checks import (
     BaseModelAdminChecks, InlineModelAdminChecks, ModelAdminChecks,
@@ -717,7 +719,7 @@ class ModelAdmin(BaseModelAdmin):
         """
         Return the ChangeList class for use on the changelist page.
         """
-        from FunctionModule.admin_site.viewsffs.main import ChangeList
+        from FunctionModule.admin_site.views.main import ChangeList
         return ChangeList
 
     def get_changelist_instance(self, request):
@@ -1683,7 +1685,7 @@ class ModelAdmin(BaseModelAdmin):
         """
         The 'change list' admin view for this model.
         """
-        from FunctionModule.admin_site.viewsffs.main import ERROR_FLAG
+        from FunctionModule.admin_site.views.main import ERROR_FLAG
         opts = self.model._meta
         app_label = opts.app_label
         if not self.has_view_or_change_permission(request):

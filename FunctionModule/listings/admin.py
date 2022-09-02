@@ -1,3 +1,5 @@
+from django.contrib import admin
+
 from FunctionModule import admin_site
 from django.core.files.uploadedfile import UploadedFile
 from django import forms

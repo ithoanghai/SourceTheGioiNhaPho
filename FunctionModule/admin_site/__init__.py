@@ -7,12 +7,12 @@ from FunctionModule.admin_site.filters import (
 from FunctionModule.admin_site.options import (
     HORIZONTAL, VERTICAL, ModelAdmin, StackedInline, TabularInline,
 )
-from FunctionModule.admin_site.sites import AdminSite, site
+from FunctionModule.admin_site.sites import AdminSites, site
 from django.utils.module_loading import autodiscover_modules
 
 __all__ = [
     "register", "ModelAdmin", "HORIZONTAL", "VERTICAL", "StackedInline",
-    "TabularInline", "AdminSite", "site", "ListFilter", "SimpleListFilter",
+    "TabularInline", "AdminSites", "site", "ListFilter", "SimpleListFilter",
     "FieldListFilter", "BooleanFieldListFilter", "RelatedFieldListFilter",
     "ChoicesFieldListFilter", "DateFieldListFilter",
     "AllValuesFieldListFilter", "EmptyFieldListFilter",
@@ -21,7 +21,7 @@ __all__ = [
 
 
 def autodiscover():
-    autodiscover_modules('admin_site', register_to=site)
+    autodiscover_modules('FunctionModule', register_to=site)
 
 
 default_app_config = 'FunctionModule.admin_site.apps.AdminConfig'

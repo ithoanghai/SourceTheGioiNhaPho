@@ -32,7 +32,7 @@ class NotRegistered(Exception):
     pass
 
 
-class AdminSite:
+class AdminSites:
     """
     An AdminSite object encapsulates an instance of the Django admin application, ready
     to be hooked in to your URLconf. Models are registered with the AdminSite using the
@@ -68,7 +68,7 @@ class AdminSite:
     def __init__(self, name='admin_site'):
         self._registry = {}  # model_class class -> admin_class instance
         self.name = name
-        print('Khoi tao AdminSite')
+        #print('Khoi tao AdminSite')
         self._actions = {'delete_selected': actions.delete_selected}
         self._global_actions = self._actions.copy()
         all_sites.add(self)
@@ -103,11 +103,11 @@ class AdminSite:
 
         If a model is abstract, raise ImproperlyConfigured.
         """
-        print('register')
         admin_class = admin_class or ModelAdmin
         if isinstance(model_or_iterable, ModelBase):
             model_or_iterable = [model_or_iterable]
         for model in model_or_iterable:
+            print('test_register model', model)
             if model._meta.abstract:
                 raise ImproperlyConfigured(
                     'The model %s is abstract, so it cannot be registered with admin.' % model.__name__
@@ -616,7 +616,7 @@ class AdminPlusMixin(object):
         return super(AdminPlusMixin, self).index(request, extra_context)
 
 
-class AdminSitePlus(AdminPlusMixin, AdminSite):
+class AdminSitePlus(AdminPlusMixin, AdminSites):
     """A Django AdminSite with the AdminPlusMixin to allow registering custom
     views not connected to models."""
 

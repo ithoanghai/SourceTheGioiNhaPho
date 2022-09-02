@@ -67,10 +67,10 @@
           {% block sidebar %}
           {{ block.super }}
 
-          {% if custom_list %}
+          {% comment %}{% if custom_list %}
           <div class="module" style="float: left; width: 498px">
             <table style="width: 100%">
-              <caption>Custom Views</caption>
+              <caption>Tính năng bổ sung</caption>
               <tbody>
                 {% for path, name in custom_list %}
                   <tr><td><a href="{{ path }}">{{ name }}</a></td></tr>
@@ -78,7 +78,7 @@
               </tbody>
             </table>
           </div>
-          {% endif %}
+          {% endif %}{% endcomment %}
         {% endblock %}
         </div>
           <br class="clear">

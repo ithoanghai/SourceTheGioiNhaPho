@@ -18,7 +18,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from .forms import GroupAdminForm, UserCreationForm, UserChangeForm, AdminPasswordChangeForm
 from .models import User, Groups, Permissions
-from ..admin_site import DateFieldListFilter, BooleanFieldListFilter
 
 
 class PermissionAdmin(admin_site.ModelAdmin):
@@ -185,8 +184,9 @@ class GroupAdmin(admin_site.ModelAdmin):
 
 admin_site.site.register(Permissions, PermissionAdmin)
 #admin.site.register(ContentType)
-admin_site.site.register(Groups, GroupAdmin)
+admin_site.site.register(Groups)
+admin_site.site.register_view(Groups, GroupAdminForm)
 admin_site.site.register(User, AccountAdmin)
-admin.site.unregister(TokenProxy)
+#admin.site.unregister(TokenProxy)
 #admin.site.unregister(SocialToken)
 #admin.site.unregister(EmailAddress)

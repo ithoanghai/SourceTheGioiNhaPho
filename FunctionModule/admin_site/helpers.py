@@ -18,7 +18,7 @@ ACTION_CHECKBOX_NAME = '_selected_action'
 
 
 class ActionForm(forms.Form):
-    action = forms.ChoiceField(label=_('Action:'))
+    action = forms.ChoiceField(label=_('Hành động:'))
     select_across = forms.BooleanField(
         label='',
         required=False,
