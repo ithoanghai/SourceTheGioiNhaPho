@@ -116,7 +116,7 @@ class SimpleListFilter(ListFilter):
         yield {
             'selected': self.value() is None,
             'query_string': changelist.get_query_string(remove=[self.parameter_name]),
-            'display': _('All'),
+            'display': _('Tất cả'),
         }
         for lookup, title in self.lookup_choices:
             yield {
@@ -221,7 +221,7 @@ class RelatedFieldListFilter(FieldListFilter):
         yield {
             'selected': self.lookup_val is None and not self.lookup_val_isnull,
             'query_string': changelist.get_query_string(remove=[self.lookup_kwarg, self.lookup_kwarg_isnull]),
-            'display': _('All'),
+            'display': _('Tất cả'),
         }
         for pk_val, val in self.lookup_choices:
             yield {
@@ -257,9 +257,9 @@ class BooleanFieldListFilter(FieldListFilter):
 
     def choices(self, changelist):
         for lookup, title in (
-                (None, _('All')),
-                ('1', _('Yes')),
-                ('0', _('No'))):
+                (None, _('Tất cả')),
+                ('1', _('Có')),
+                ('0', _('Không'))):
             yield {
                 'selected': self.lookup_val == lookup and not self.lookup_val2,
                 'query_string': changelist.get_query_string({self.lookup_kwarg: lookup}, [self.lookup_kwarg2]),
@@ -292,7 +292,7 @@ class ChoicesFieldListFilter(FieldListFilter):
         yield {
             'selected': self.lookup_val is None,
             'query_string': changelist.get_query_string(remove=[self.lookup_kwarg, self.lookup_kwarg_isnull]),
-            'display': _('All')
+            'display': _('Tất cả')
         }
         none_title = ''
         for lookup, title in self.field.flatchoices:
@@ -417,7 +417,7 @@ class AllValuesFieldListFilter(FieldListFilter):
         yield {
             'selected': self.lookup_val is None and self.lookup_val_isnull is None,
             'query_string': changelist.get_query_string(remove=[self.lookup_kwarg, self.lookup_kwarg_isnull]),
-            'display': _('All'),
+            'display': _('Tất cả'),
         }
         include_none = False
         for val in self.lookup_choices:
@@ -482,9 +482,9 @@ class EmptyFieldListFilter(FieldListFilter):
 
     def choices(self, changelist):
         for lookup, title in (
-            (None, _('All')),
-            ('1', _('Empty')),
-            ('0', _('Not empty')),
+            (None, _('Tất cả')),
+            ('1', _('Giá trị trống')),
+            ('0', _('Giá trị không trống')),
         ):
             yield {
                 'selected': self.lookup_val == lookup,

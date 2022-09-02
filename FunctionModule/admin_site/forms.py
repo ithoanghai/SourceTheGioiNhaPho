@@ -12,9 +12,9 @@ class RangeNumericForm(forms.Form):
         super().__init__(*args, **kwargs)
 
         self.fields[self.name + '_from'] = forms.Field(label='', required=False,
-            widget=NumberInput(attrs={'placeholder': _('From')}))
+            widget=NumberInput(attrs={'placeholder': _('Từ')}))
         self.fields[self.name + '_to'] = forms.Field(label='', required=False,
-            widget=NumberInput(attrs={'placeholder': _('To')}))
+            widget=NumberInput(attrs={'placeholder': _('Đến')}))
 
     @property
     def media(self):
