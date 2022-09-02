@@ -334,8 +334,10 @@ class DateFieldListFilter(FieldListFilter):
         tomorrow = today + datetime.timedelta(days=1)
         if today.month == 12:
             next_month = today.replace(year=today.year + 1, month=1, day=1)
+            prev_month = today.replace(year=today.year - 1, month=1, day=1)
         else:
             next_month = today.replace(month=today.month + 1, day=1)
+            prev_month = today.replace(month=today.month - 1, day=1)
         next_year = today.replace(year=today.year + 1, month=1, day=1)
         prev_year = today.replace(year=today.year - 1, month=1, day=1)
 
@@ -355,20 +357,24 @@ class DateFieldListFilter(FieldListFilter):
                 self.lookup_kwarg_since: str(today.replace(day=1)),
                 self.lookup_kwarg_until: str(next_month),
             }),
+            (_('Tháng trước'), {
+                self.lookup_kwarg_since: str(prev_month),
+                self.lookup_kwarg_until: str(today.replace(day=1)),
+            }),
             (_('Năm này'), {
                 self.lookup_kwarg_since: str(today.replace(month=1, day=1)),
                 self.lookup_kwarg_until: str(next_year),
             }),
             (_('Năm trước'), {
-                self.lookup_kwarg_since: str(prev_year.replace(month=1, day=1)),
-                self.lookup_kwarg_until: str(prev_year),
+                self.lookup_kwarg_since: str(prev_year),
+                self.lookup_kwarg_until: str(today.replace(month=1, day=1)),
             }),
         )
         if field.null:
             self.lookup_kwarg_isnull = '%s__isnull' % field_path
             self.links += (
-                (_('No date'), {self.field_generic + 'isnull': 'True'}),
-                (_('Has date'), {self.field_generic + 'isnull': 'False'}),
+                (_('Không có ngày'), {self.field_generic + 'isnull': 'True'}),
+                (_('Có ngày'), {self.field_generic + 'isnull': 'False'}),
             )
         super().__init__(field, request, params, model, model_admin, field_path)
 
