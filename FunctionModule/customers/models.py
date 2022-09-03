@@ -17,7 +17,7 @@ def default_hire_date():
 class Customer(models.Model):
     class Meta:
         verbose_name = "Khách hàng"
-        verbose_name_plural = "DS Khách hàng"
+        verbose_name_plural = "Khách hàng"
 
     indexes = (
         # Exact search

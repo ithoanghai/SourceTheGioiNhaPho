@@ -46,7 +46,7 @@ class Reason(models.TextChoices):
 class Transaction(models.Model):
     class Meta:
         verbose_name = "Giao dịch BĐS"
-        verbose_name_plural = "DS Giao dịch"
+        verbose_name_plural = "Giao dịch BĐS"
         ordering = ['date']
 
     trantype = models.CharField(max_length=25, choices=TransTypeInit.choices, default=TransTypeInit.CONTACT, verbose_name='Loại giao dịch')
@@ -73,8 +73,8 @@ class Transaction(models.Model):
 
 class TransactionHistory(models.Model):
     class Meta:
-        verbose_name = "Lịch sử Giao dịch"
-        verbose_name_plural = "Lịch sử Giao dịch"
+        verbose_name = "Giao dịch BĐS--Tương tác khách hàng"
+        verbose_name_plural = "Giao dịch BĐS--Tương tác khách hàng"
         ordering = ['date']
 
     transaction = models.ForeignKey(Transaction, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name=_("Giao dịch"))

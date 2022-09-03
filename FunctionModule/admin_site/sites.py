@@ -5,6 +5,7 @@ from weakref import WeakSet
 
 from django.apps import apps
 
+import FunctionModule
 from FunctionModule.admin_site import ModelAdmin, actions
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.core.exceptions import ImproperlyConfigured
@@ -42,10 +43,10 @@ class AdminSites:
     """
 
     # Text to put at the end of each page's <title>.
-    site_title = gettext_lazy('Trang quản trị Django')
+    site_title = gettext_lazy('Trang quản trị')
 
     # Text to put in each page's <h1>.
-    site_header = gettext_lazy('Django administration')
+    site_header = gettext_lazy('administration')
 
     # Text to put at the top of the admin index page.
     index_title = gettext_lazy('Trang quản trị')
@@ -262,6 +263,8 @@ class AdminSites:
             path('', wrap(self.index), name='index'),
             path('login/', self.login, name='login'),
             path('logout/', wrap(self.logout), name='logout'),
+            path('logout/', wrap(self.logout), name='logout'),
+
             path('password_change/', wrap(self.password_change, cacheable=True), name='password_change'),
             path(
                 'password_change/done/',
@@ -496,7 +499,6 @@ class AdminSites:
         for app in app_list:
             app['models'].sort(key=lambda x: x['name'])
 
-        print('get_app_list')
         return app_list
 
     @never_cache
@@ -539,7 +541,6 @@ class AdminSites:
             'admin/%s/app_index.html' % app_label,
             'admin/app_index.html'
         ], context)
-
 
 class DefaultAdminSite(LazyObject):
     def _setup(self):

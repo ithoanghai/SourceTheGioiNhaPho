@@ -31,8 +31,8 @@ urlpatterns = [
     path('customers/', include('FunctionModule.customers.urls')),
     path('accounts/', include('FunctionModule.accounts.urls')),
     path('cadastral/', include('FunctionModule.cadastral.urls')),
-    path('admin_site', redirect_view, name='admin'),
-    path('admin_site/', admin_site.site.urls),
+    path('admin', redirect_view, name='admin'),
+    path('admin/', admin_site.site.urls),
     #path('admin/', site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
 

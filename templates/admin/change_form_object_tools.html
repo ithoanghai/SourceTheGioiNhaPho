@@ -1,8 +1,27 @@
 {% load i18n admin_urls %}
 {% block object-tools-items %}
-<li>
-    {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
-    <a href="{% add_preserved_filters history_url %}" class="historylink">{% translate "Lịch sử truy cập" %}</a>
-</li>
-{% if site_url %}<li><a href="{{ site_url }}" class="viewsitelink">{% translate "Xem trang" %}</a></li>{% endif %}
+    {% if show_save_and_add_history %}
+        <li>
+            {% url opts|admin_urlname:'historylisting' original.pk|admin_urlquote as history_listing_url %}
+            <a href="{% add_preserved_filters history_listing_url %}" class="historylink">{% translate "Lịch sử biến động BĐS" %}</a>
+        </li>
+    {% endif %}
+    {% if transaction_history %}
+        <li>
+            {% url opts|admin_urlname:'historytransaction' original.pk|admin_urlquote as history_transaction_url %}
+            <a href="{% add_preserved_filters history_transaction_url %}" class="historylink">{% translate "Lịch sử giao dịch" %}</a>
+        </li>
+    {% endif %}
+    {% if transaction_interact_history %}
+        <li>
+            {% url opts|admin_urlname:'historytraninter' original.pk|admin_urlquote as history_interact_transaction_url %}
+            <a href="{% add_preserved_filters history_interact_transaction_url %}" class="historylink">{% translate "Lịch sử tương tác giao dịch" %}</a>
+        </li>
+    {% endif %}
+    <li>
+        {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+        <a href="{% add_preserved_filters history_url %}" class="historylink">{% translate "Lịch sử truy cập" %}</a>
+    </li>
+    {% if site_url %}
+        <li><a href="{{ site_url }}" class="viewsitelink">{% translate "Xem trang" %}</a></li>{% endif %}
 {% endblock %}

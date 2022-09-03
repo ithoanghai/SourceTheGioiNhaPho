@@ -623,6 +623,9 @@ class ModelAdmin(BaseModelAdmin):
             path('add/', wrap(self.add_view), name='%s_%s_add' % info),
             path('autocomplete/', wrap(self.autocomplete_view), name='%s_%s_autocomplete' % info),
             path('<path:object_id>/history/', wrap(self.history_view), name='%s_%s_history' % info),
+            path('<path:object_id>/historylisting/', wrap(self.history_listing_view), name='%s_%s_historylisting' % info),
+            path('<path:object_id>/historytransaction/', wrap(self.transaction_history_url_view), name='%s_%s_historytransaction' % info),
+            path('<path:object_id>/historytraninter/', wrap(self.transaction_interact_history_url_view), name='%s_%s_historytraninter' % info),
             path('<path:object_id>/delete/', wrap(self.delete_view), name='%s_%s_delete' % info),
             path('<path:object_id>/change/', wrap(self.change_view), name='%s_%s_change' % info),
             # For backwards compatibility (was the change url before 1.9)
@@ -1220,7 +1223,7 @@ class ModelAdmin(BaseModelAdmin):
         ):
             msg = _('{name} “{obj}” đã được thêm thành công.')
             if self.has_change_permission(request, obj):
-                msg += ' ' + _('Bạn có thể thay đổi nó lại.')
+                msg += ' ' + _('Bạn có thể chỉnh sửa.')
             self.message_user(request, format_html(msg, **msg_dict), messages.SUCCESS)
             if post_url_continue is None:
                 post_url_continue = obj_url
@@ -1292,7 +1295,7 @@ class ModelAdmin(BaseModelAdmin):
 
         elif "_saveasnew" in request.POST:
             msg = format_html(
-                _('{name} “{obj}” đã được thêm thành công. Bạn có thể thay đổi chúng ở dưới.'),
+                _('{name} “{obj}” đã được thêm thành công. Bạn có thể thay đổi nó bên dưới.'),
                 **msg_dict
             )
             self.message_user(request, msg, messages.SUCCESS)
@@ -1311,6 +1314,19 @@ class ModelAdmin(BaseModelAdmin):
             self.message_user(request, msg, messages.SUCCESS)
             redirect_url = reverse('admin:%s_%s_add' %
                                    (opts.app_label, opts.model_name),
+                                   current_app=self.admin_site.name)
+            redirect_url = add_preserved_filters({'preserved_filters': preserved_filters, 'opts': opts}, redirect_url)
+            return HttpResponseRedirect(redirect_url)
+
+        elif "_addhistory" in request.POST:
+            msg = format_html(
+                _('{name} “{obj}” đã được thêm lịch sử thành công. Bạn có thể sửa dữ liệu {name} ở dưới.'),
+                **msg_dict
+            )
+            self.message_user(request, msg, messages.SUCCESS)
+            redirect_url = reverse('admin:%s_%s_change' %
+                                   (opts.app_label, opts.model_name),
+                                   args=(obj.pk,),
                                    current_app=self.admin_site.name)
             redirect_url = add_preserved_filters({'preserved_filters': preserved_filters, 'opts': opts}, redirect_url)
             return HttpResponseRedirect(redirect_url)
@@ -1943,6 +1959,123 @@ class ModelAdmin(BaseModelAdmin):
             "admin/%s/%s/object_history.html" % (app_label, opts.model_name),
             "admin/%s/object_history.html" % app_label,
             "admin/object_history.html"
+        ], context)
+
+    def history_listing_view(self, request, object_id, extra_context=None):
+        "The 'history listing' admin view for this model."
+        from FunctionModule.listings.models import ListingHistory
+
+        # First check if the user can see this history.
+        model = self.model
+        obj = self.get_object(request, unquote(object_id))
+        if obj is None:
+            return self._get_obj_does_not_exist_redirect(request, model._meta, object_id)
+
+        if not self.has_view_or_change_permission(request, obj):
+            raise PermissionDenied
+
+        # Then get the history for this object.
+        opts = model._meta
+        app_label = opts.app_label
+        action_list = ListingHistory.objects.filter(
+            listing_id=unquote(object_id),
+        ).order_by('-list_date')
+
+        context = {
+            **self.admin_site.each_context(request),
+            'title': _('Dòng thời gian: %s') % obj,
+            'action_list': action_list,
+            'module_name': str(capfirst(opts.verbose_name_plural)),
+            'object': obj,
+            'opts': opts,
+            'preserved_filters': self.get_preserved_filters(request),
+            **(extra_context or {}),
+        }
+
+        request.current_app = self.admin_site.name
+
+        return TemplateResponse(request, self.object_history_template or [
+            "admin/%s/%s/object_history_listing.html" % (app_label, opts.model_name),
+            "admin/%s/object_history_listing.html" % app_label,
+            "admin/object_history_listing.html"
+        ], context)
+
+    def transaction_history_url_view(self, request, object_id, extra_context=None):
+        "The 'history transaction listing' admin view for this model."
+        from FunctionModule.transactions.models import Transaction
+
+        # First check if the user can see this history.
+        model = self.model
+        obj = self.get_object(request, unquote(object_id))
+        if obj is None:
+            return self._get_obj_does_not_exist_redirect(request, model._meta, object_id)
+
+        if not self.has_view_or_change_permission(request, obj):
+            raise PermissionDenied
+
+        # Then get the history for this object.
+        opts = model._meta
+        app_label = opts.app_label
+        action_list = Transaction.objects.filter(
+            listing_id=unquote(object_id),
+        ).order_by('-date')
+
+        context = {
+            **self.admin_site.each_context(request),
+            'title': _('Dòng thời gian: %s') % obj,
+            'action_list': action_list,
+            'module_name': str(capfirst(opts.verbose_name_plural)),
+            'object': obj,
+            'opts': opts,
+            'preserved_filters': self.get_preserved_filters(request),
+            **(extra_context or {}),
+        }
+
+        request.current_app = self.admin_site.name
+
+        return TemplateResponse(request, self.object_history_template or [
+            "admin/%s/%s/object_history_transaction.html" % (app_label, opts.model_name),
+            "admin/%s/object_history_transaction.html" % app_label,
+            "admin/object_history_transaction.html"
+        ], context)
+
+    def transaction_interact_history_url_view(self, request, object_id, extra_context=None):
+        "The 'history transaction listing' admin view for this model."
+        from FunctionModule.transactions.models import TransactionHistory
+
+        # First check if the user can see this history.
+        model = self.model
+        obj = self.get_object(request, unquote(object_id))
+        if obj is None:
+            return self._get_obj_does_not_exist_redirect(request, model._meta, object_id)
+
+        if not self.has_view_or_change_permission(request, obj):
+            raise PermissionDenied
+
+        # Then get the history for this object.
+        opts = model._meta
+        app_label = opts.app_label
+        action_list = TransactionHistory.objects.filter(
+            transaction_id=unquote(object_id),
+        ).order_by('date')
+
+        context = {
+            **self.admin_site.each_context(request),
+            'title': _('Dòng thời gian: %s') % obj,
+            'action_list': action_list,
+            'module_name': str(capfirst(opts.verbose_name_plural)),
+            'object': obj,
+            'opts': opts,
+            'preserved_filters': self.get_preserved_filters(request),
+            **(extra_context or {}),
+        }
+
+        request.current_app = self.admin_site.name
+
+        return TemplateResponse(request, self.object_history_template or [
+            "admin/%s/%s/object_history_interact_transaction.html" % (app_label, opts.model_name),
+            "admin/%s/object_history_interact_transaction.html" % app_label,
+            "admin/object_history_interact_transaction.html"
         ], context)
 
     def _create_formsets(self, request, obj, change):

@@ -12,7 +12,7 @@ from hitcount.settings import MODEL_HITCOUNT
 class Post(models.Model, HitCountMixin):
     class Meta:
         verbose_name = "Tin bài"
-        verbose_name_plural = "DS Bài viết"
+        verbose_name_plural = "Tin bài"
         indexes = (
             # Full text search index
             GinIndex(fields=["title", "content"]),

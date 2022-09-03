@@ -28,6 +28,6 @@ urlpatterns = [
     path('ListingAPIAllView', views.ListingAPIAllView.as_view()),
     path('listings-api-token-auth/', obtain_auth_token, name='listings_api_token_auth'),
 
-    #path('advanced_filters/', include('advanced_filters.urls')),
+    path('listinghistory/add/', views.listinghistoryadd, name='history_add'),
 
 ]

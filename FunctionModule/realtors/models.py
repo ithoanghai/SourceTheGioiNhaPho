@@ -33,7 +33,7 @@ for y in range(1950, (timezone.now().year - 15)):
 class Realtor(models.Model):
     class Meta:
         verbose_name = "Chuyên viên"
-        verbose_name_plural = "DS Chuyên viên"
+        verbose_name_plural = "Chuyên viên"
 
     user = models.OneToOneField(to=User, on_delete=models.RESTRICT, verbose_name=_("Tài khoản đăng nhập của chuyên viên"), blank=True, null=True)
     name = models.CharField(max_length=50,  null=True,  verbose_name=_("Họ và tên"))

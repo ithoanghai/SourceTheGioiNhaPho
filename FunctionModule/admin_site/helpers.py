@@ -309,10 +309,10 @@ class InlineAdminFormSet:
             'name': '#%s' % self.formset.prefix,
             'options': {
                 'prefix': self.formset.prefix,
-                'addText': gettext('Add another %(verbose_name)s') % {
+                'addText': gettext('Thêm %(verbose_name)s khác') % {
                     'verbose_name': capfirst(verbose_name),
                 },
-                'deleteText': gettext('Remove'),
+                'deleteText': gettext('Gỡ bỏ'),
             }
         })
 

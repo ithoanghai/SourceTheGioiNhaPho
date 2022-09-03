@@ -2,6 +2,10 @@
 
 {% block object-tools-items %}
   {% if has_add_permission %}
+     {% if extrabutton %}
+        <span class="extrabutton">
+        </span>
+    {% endif %}
   <li>
     {% url cl.opts|admin_urlname:'add' as add_url %}
     <a href="{% add_preserved_filters add_url is_popup to_field %}" class="addlink">

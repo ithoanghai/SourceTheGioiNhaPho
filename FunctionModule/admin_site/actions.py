@@ -38,7 +38,7 @@ def delete_selected(modeladmin, request, queryset):
                 obj_display = str(obj)
                 modeladmin.log_deletion(request, obj, obj_display)
             modeladmin.delete_queryset(request, queryset)
-            modeladmin.message_user(request, _("Đã xóa thành công %(count)d %(items)s lựa chọn.") % {
+            modeladmin.message_user(request, _("Đã xóa thành công %(count)d %(items)s đã chọn.") % {
                 "count": n, "items": model_ngettext(modeladmin.opts, n)
             }, messages.SUCCESS)
         # Return None to display the change list page again.

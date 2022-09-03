@@ -4,7 +4,7 @@ from django.core.files.uploadedfile import UploadedFile
 from .forms import ImportRealtorForm
 from .import_realtor import handle_import
 from .models import Realtor
-from django.http import HttpRequest, JsonResponse
+from django.http import HttpRequest, JsonResponse, HttpResponse
 
 from ..admin_site.filters import ChoicesFieldListFilter, RangeNumericFilter
 from ..admin_site import BooleanFieldListFilter, DateFieldListFilter
@@ -59,6 +59,19 @@ class RealtorAdmin(admin_site.ModelAdmin):
         css = {
             'all': ('admin/css/dropzone.css', 'admin/css/listing.css', 'admin/css/filepond.min.css')
         }
+
+    def changelist_view(
+        self,
+        request: HttpRequest,
+        form_url: str = '',
+        extra_context: dict = None
+    ) -> HttpResponse:
+
+        extra_context = extra_context or {}
+        extra_context.update({
+            'extrabutton': True,
+        })
+        return super().changelist_view(request, extra_context=extra_context)
 
 
 @admin_site.site.register_view('realtors/realtor/import-export')

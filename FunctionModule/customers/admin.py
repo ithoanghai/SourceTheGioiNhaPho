@@ -1,3 +1,5 @@
+from django.http import HttpRequest, HttpResponse
+
 from FunctionModule import admin_site
 from django.db.models import Q
 from .forms import CustomerAdminForm
@@ -63,6 +65,20 @@ class CustomerAdmin(admin_site.ModelAdmin):
             if f in form.base_fields:
                 form.base_fields[f].disabled = True
         return form
+
+    def changeform_view(
+        self,
+        request: HttpRequest,
+        object_id: int = None,
+        form_url: str = '',
+        extra_context: dict = None
+    ) -> HttpResponse:
+
+        extra_context = extra_context or {}
+        extra_context.update({
+            'show_save_as_copy': True,
+        })
+        return super().changeform_view(request, object_id, extra_context=extra_context)
 
     def get_exclude(self, request, obj=None):
         excluded = super().get_exclude(request, obj)

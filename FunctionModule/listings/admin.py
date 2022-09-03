@@ -3,8 +3,9 @@ from django.contrib import admin
 from FunctionModule import admin_site
 from django.core.files.uploadedfile import UploadedFile
 from django import forms
-from django.http import HttpRequest, JsonResponse
+from django.http import HttpRequest, JsonResponse, HttpResponse
 from django.db.models import Q
+from django.utils.translation import gettext as _, gettext_lazy
 
 from FunctionModule.listings.import_csv import handle_import, logger
 from . import Status
@@ -131,6 +132,34 @@ class ListingAdmin(admin_site.ModelAdmin):
                     form.base_fields[f].disabled = True
         return form
 
+    def changeform_view(
+        self,
+        request: HttpRequest,
+        object_id: int = None,
+        form_url: str = '',
+        extra_context: dict = None
+    ) -> HttpResponse:
+
+        extra_context = extra_context or {}
+        extra_context.update({
+            'show_save_and_add_history': True,
+            'transaction_history': True,
+        })
+        return super().changeform_view(request, object_id, extra_context=extra_context)
+
+    def changelist_view(
+        self,
+        request: HttpRequest,
+        form_url: str = '',
+        extra_context: dict = None
+    ) -> HttpResponse:
+
+        extra_context = extra_context or {}
+        extra_context.update({
+            'extrabutton': True,
+        })
+        return super().changelist_view(request, extra_context=extra_context)
+
     def get_queryset(self, request):
         if request.user.is_superuser or request.user.is_staff:
             queryset = super().get_queryset(request)
@@ -161,23 +190,27 @@ class ListingAdmin(admin_site.ModelAdmin):
     #@admin.actions(short_description='Đăng bán công khai')
     def make_published(self, request, queryset):
         updated = queryset.update(is_published=True)
-        self.message_user(request, f'Chuyển sang chế độ đăng công khai cho {updated} căn')
+        self.message_user(request, f'Chuyển sang chế độ đăng công khai cho {updated} bất động sản')
 
     #@admin.actions(short_description='Không đăng bán')
     def unpublished(self, request, queryset):
         updated = queryset.update(is_published=False)
-        self.message_user(request, f'Đã đổi trạng thái riêng tư cho {updated} căn')
+        self.message_user(request, f'Đã đổi trạng thái riêng tư cho {updated} bất động sản')
 
     #@admin.actions(short_description='Chuyển sang trạng thái đã bán')
     def sold(self, request, queryset):
         updated = queryset.update(status=Status.SOLD)
-        self.message_user(request, f'Đã đổi trạng thái đã bán cho {updated} căn')
+        self.message_user(request, f'Đã đổi trạng thái đã bán cho {updated} bất động sản')
 
     # @admin.actions(short_description='Chuyển sang trạng thái chuẩn bị đi khảo sát')
     def exhaustive(self, request, queryset):
         updated = queryset.update(exhaustive=Exhaustive.PREPARE)
-        self.message_user(request, f'Đã lên lịch khảo sát {updated} căn')
+        self.message_user(request, f'Đã lên lịch khảo sát {updated} bất động sản')
 
+    make_published.short_description = _("Đăng công khai")
+    unpublished.short_description = _("Hủy đăng công khai")
+    sold.short_description = _("Đã bán/cho thuê")
+    exhaustive.short_description = _("Lên lịch đi khảo sát")
 
 class ListingHistoryAdmin(admin_site.ModelAdmin):
     fieldsets = (

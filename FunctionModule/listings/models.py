@@ -33,7 +33,7 @@ def get_image_path(instance, filename: str):
 class Listing(models.Model, HitCountMixin):
     class Meta:
         verbose_name = "Bất động sản"
-        verbose_name_plural = "DS Bất động sản"
+        verbose_name_plural = "Bất động sản"
         indexes = (
             # Full text search index
             GinIndex(fields=["street", "address"]),
@@ -336,8 +336,8 @@ class ListingIndexSerializer(ListingSerializer):
 
 class ListingHistory(models.Model):
     class Meta:
-        verbose_name = "Lịch sử Bất động sản"
-        verbose_name_plural = "Lịch sử bất động sản"
+        verbose_name = "Bất động sản--Biến động"
+        verbose_name_plural = "Bất động sản--Biến động"
 
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("Bất động sản gốc"))
     user = models.ForeignKey(User,  on_delete=models.RESTRICT, blank=True, null=True, verbose_name=_("Người thêm BĐS"))

@@ -36,8 +36,8 @@ phone_regex = RegexValidator(regex=r'^(09|03|07|08|05)+([0-9]{8})$',
 
 class Permissions(Permission):
     class Meta:
-        verbose_name = _('Quyền sử dụng')
-        verbose_name_plural = _('DS Quyền sử dụng')
+        verbose_name = _('Người dùng--Quyền sử dụng')
+        verbose_name_plural = _('Người dùng--Quyền sử dụng')
 
     Permission._meta.get_field('name').verbose_name = 'Tên quyền'
     Permission._meta.get_field('content_type').verbose_name = 'Module chức năng'
@@ -46,8 +46,8 @@ class Permissions(Permission):
 
 class Groups(Group):
     class Meta:
-        verbose_name = "Nhóm người dùng"
-        verbose_name_plural = "DS Nhóm người dùng"
+        verbose_name = "Người dùng--Nhóm"
+        verbose_name_plural = "Người dùng--Nhóm"
 
     objects = GroupManager()
 
@@ -96,7 +96,7 @@ class PermissionsMixin(models.Model):
 class User(AbstractUser, PermissionsMixin):
     class Meta:
         verbose_name = "Người dùng"
-        verbose_name_plural = "DS Người dùng"
+        verbose_name_plural = "Người dùng"
         ordering = ["first_name", "last_name"]
 
     # These two fields are for backend (admin) login form to display correctly

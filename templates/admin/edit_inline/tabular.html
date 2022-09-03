@@ -17,7 +17,7 @@
          </th>
        {% endif %}
      {% endfor %}
-     {% if inline_admin_formset.formset.can_delete and inline_admin_formset.has_delete_permission %}<th>{% translate "Delete?" %}</th>{% endif %}
+     {% if inline_admin_formset.formset.can_delete and inline_admin_formset.has_delete_permission %}<th>{% translate "Bạn xóa không?" %}</th>{% endif %}
      </tr></thead>
 
      <tbody>
@@ -33,7 +33,7 @@
           {{ inline_admin_form.original }}
           {% if inline_admin_form.model_admin.show_change_link and inline_admin_form.model_admin.has_registered_model %}<a href="{% url inline_admin_form.model_admin.opts|admin_urlname:'change' inline_admin_form.original.pk|admin_urlquote %}" class="{% if inline_admin_formset.has_change_permission %}inlinechangelink{% else %}inlineviewlink{% endif %}">{% if inline_admin_formset.has_change_permission %}{% translate "Thay đổi" %}{% else %}{% translate "Xem" %}{% endif %}</a>{% endif %}
           {% endif %}
-          {% if inline_admin_form.show_url %}<a href="{{ inline_admin_form.absolute_url }}">{% translate "Xên trên site" %}</a>{% endif %}
+          {% if inline_admin_form.show_url %}<a href="{{ inline_admin_form.absolute_url }}">{% translate "Xem trên site" %}</a>{% endif %}
             </p>{% endif %}
           {% if inline_admin_form.needs_explicit_pk_field %}{{ inline_admin_form.pk_field.field }}{% endif %}
           {% if inline_admin_form.fk_field %}{{ inline_admin_form.fk_field.field }}{% endif %}

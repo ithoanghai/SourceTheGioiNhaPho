@@ -289,3 +289,69 @@ class ListingDetailView(ListingMixinDetailView, HitCountDetailView):
     Generic hitcount class based view.
     """
     pass
+
+
+def listinghistoryadd(request, extra_context=None):
+    # code tạo nhân bản lịch sử bất động sản tại đây
+    try:
+        houseTypes = HouseType.choices
+        state_code = "01"
+        hanoi_district_list = district_data[state_code]
+        district_choices = {}
+        alphabet = string.ascii_letters + string.digits
+        code = f'POST'.join(random.choice(alphabet) for i in range(2))
+        for item in district_choices:  # type: dict
+            district_choices[item['name']] = item['code']
+        context = {
+            'houseTypes': houseTypes,
+            'district_choices': district_choices
+        }
+        if request.user.is_authenticated:
+            if request.method == 'GET':
+                return render(request, 'listings/postListing.html', context)
+            elif request.method == 'POST':
+                trantypes = request.POST['trantypes']
+                housetype = request.POST['housetype']
+                title = request.POST['title']
+                description = request.POST['description']
+                street = request.POST['street']
+                address = request.POST['address']
+                district = '008'
+                area = request.POST['area']
+                width = request.POST['width']
+                floor = request.POST['floor']
+                price = request.POST['price']
+                if request.FILES.get('photomain', None) is not None:
+                    photomain = request.FILES.get('photomain')
+                else:
+                    photomain = request.POST['photomain']
+                list_date = timezone.now()
+                # #  Check if user has made inquiry already
+                user_id = request.user.id
+                has_listing = Listing.objects.filter(address=address, user_id=user_id,
+                                                     list_date__gte=list_date)
+                if has_listing:
+                    messages.error(request,
+                                   'Bạn đã gửi yêu cầu tới chúng tôi về tin đăng này. Xin thử gửi lại yêu cầu sau.')
+                    return redirect('post_listings')
+                if area.isnumeric() and width.isnumeric() and floor.isnumeric() and price.isnumeric():
+                    listing = Listing.objects.create(user_id=user_id, is_advertising=True, is_published=False,
+                                                     transaction_type=trantypes, house_type=housetype, code=code,
+                                                     title=title,
+                                                     description=description, street=street, district=district,
+                                                     address=address, area=area, width=width, floors=int(floor),
+                                                     price=price)
+                else:
+                    messages.error(request, 'Bạn nhập sai dữ liệu.')
+                    return redirect('post_listings')
+
+                if request.FILES.get('photomain', None) is not None:
+                    ListingImage.objects.create(listing_id=listing.id, photo=photomain)
+                    messages.success(request, 'Bạn đã gửi tin đăng thành công. Quản trị viên sẽ kiểm duyệt trước khi đăng.')
+                    return render(request, 'listings/postListingSuccess.html', context)
+        else:
+            return redirect('login')
+
+    except ValidationError:
+        messages.error(request, 'Thông tin bạn nhập không đúng.')
+        return redirect('post_listings')
