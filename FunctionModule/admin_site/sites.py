@@ -108,7 +108,6 @@ class AdminSites:
         if isinstance(model_or_iterable, ModelBase):
             model_or_iterable = [model_or_iterable]
         for model in model_or_iterable:
-            print('test_register model', model)
             if model._meta.abstract:
                 raise ImproperlyConfigured(
                     'The model %s is abstract, so it cannot be registered with admin.' % model.__name__

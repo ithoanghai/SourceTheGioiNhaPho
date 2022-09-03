@@ -6,7 +6,13 @@ from .forms import CustomerAdminForm
 from .models import Customer
 from FunctionModule.admin_site.filters import ChoicesFieldListFilter, RangeNumericFilter
 from ..admin_site import DateFieldListFilter
-from ..realtors.models import Realtor
+from ..transactions.models import Transaction
+
+
+class TransactionInline(admin_site.TabularInline):
+    model = Transaction
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('date', 'status', 'trantype', 'request_price','listing', 'realtor',)
 
 
 class CustomerAdmin(admin_site.ModelAdmin):
@@ -41,6 +47,7 @@ class CustomerAdmin(admin_site.ModelAdmin):
         ('financial_range', RangeNumericFilter),
     )
     form = CustomerAdminForm
+    inlines = [TransactionInline ]
 
     def get_queryset(self, request):
         #if request.user.is_superuser:

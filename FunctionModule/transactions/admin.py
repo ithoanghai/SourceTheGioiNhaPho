@@ -1,3 +1,4 @@
+from django.forms import Textarea
 from django.http import HttpRequest, HttpResponse
 
 from FunctionModule import admin_site
@@ -6,6 +7,12 @@ from .forms import TransactionAdminForm, TransactionHistoryAdminForm
 from .models import Transaction, TransactionHistory
 from ..admin_site import DateFieldListFilter
 from ..realtors.models import Realtor
+
+
+class TransactionHistoryInline(admin_site.TabularInline):
+    model = TransactionHistory
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('date', 'transaction', 'status', 'reason', 'comment',  'realtor', )
 
 
 class TransactionAdmin(admin_site.ModelAdmin):
@@ -37,6 +44,7 @@ class TransactionAdmin(admin_site.ModelAdmin):
     )
     list_per_page = 100
     form = TransactionAdminForm
+    inlines = [TransactionHistoryInline, ]
 
     def get_form(self, request, obj=None, change=False, **kwargs):
         form = super(TransactionAdmin, self).get_form(request, obj, **kwargs)

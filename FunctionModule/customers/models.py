@@ -54,6 +54,6 @@ class Customer(models.Model):
     last_interaction = models.DateField(verbose_name=_("Thời điểm tương tác gần nhất"), default=default_hire_date, blank=True)
 
     def __str__(self):
-        return str(self.name)
+        return f'%s - %s' % (self.name, self.phone)
 
 

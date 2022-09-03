@@ -18,12 +18,46 @@ from django.utils.translation import ugettext_lazy as _
 
 from .forms import GroupAdminForm, UserCreationForm, UserChangeForm, AdminPasswordChangeForm
 from .models import User, Groups, Permissions
+from ..blog.models import Post
+from ..customers.models import Customer
+from ..listings.models import Listing, ListingHistory
+from ..transactions.models import Transaction
 
 
 class PermissionAdmin(admin_site.ModelAdmin):
     search_fields = ('name', 'content_type', 'codename')
     ordering = ('content_type','name')
     verbose_name = "Quản trị Quyền người dùng"
+
+
+class BlogInline(admin_site.TabularInline):
+    model = Post
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('date', 'title', )
+
+
+class ListingHistoryInline(admin_site.TabularInline):
+    model = ListingHistory
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('list_date', 'area','floors', 'price', 'warehouse', )
+
+
+class CustomerInline(admin_site.TabularInline):
+    model = Customer
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('hire_date', 'custormer_type', 'transactionStatus', 'name', 'phone', 'district', 'financial_range', )
+
+
+class ListingInline(admin_site.TabularInline):
+    model = Listing
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('list_date', 'status', 'address', 'area','floors', 'price', )
+
+
+class TransactionInline(admin_site.TabularInline):
+    model = Transaction
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('date', 'status', 'trantype', 'request_price','listing','customer', 'realtor',)
 
 
 class AccountAdmin(AuthUserAdmin):
@@ -67,6 +101,7 @@ class AccountAdmin(AuthUserAdmin):
     ]
     ordering = ('first_name', 'last_name', 'date_joined', )
     filter_horizontal = ('groups', 'permissions')
+    inlines = [CustomerInline, TransactionInline, BlogInline, ListingHistoryInline, ]
 
     def get_fieldsets(self, request, obj=None):
         if not obj:

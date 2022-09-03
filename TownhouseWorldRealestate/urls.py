@@ -10,7 +10,6 @@ from django.conf.urls.static import static
 from FunctionModule.accounts import providers
 from FunctionModule import admin_site
 from FunctionModule.admin_site.sites import AdminSitePlus
-#from adminplus.sites import AdminSitePlus
 
 admin.site = AdminSitePlus()
 admin.autodiscover()

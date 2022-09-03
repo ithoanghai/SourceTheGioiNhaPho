@@ -6,8 +6,8 @@
     {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
     <p class="deletelink-box"><a href="{% add_preserved_filters delete_url %}" class="deletelink">{% translate "Xoá" %}</a></p>
 {% endif %}
-{% if show_save_and_add_history %}<input type="submit" value="{% translate 'Lưu và Tạo lịch sử bđs' %}" name="_addhistory" {{ onclick_attrib }}/>{% endif %}
-{% if transaction_interact_history %}<input type="submit" value="{% translate 'Trả lời Khách hàng' %}" name="_addhistory" {{ onclick_attrib }}/>{% endif %}
+
+
 {% if show_save_as_copy %}<input type="submit" value="{% translate 'Tạo bản sao' %}" name="_saveasnew" {{ onclick_attrib }}/>{% endif %}
 {% if show_save_and_add_another %}<input type="submit" value="{% translate 'Lưu và Thêm mới' %}" name="_addanother">{% endif %}
 {% if show_save_and_continue %}<input type="submit" value="{% if can_change %}{% translate 'Lưu và Sửa tiếp' %}{% else %}{% translate 'Lưu và Xem danh sách' %}{% endif %}" name="_continue">{% endif %}

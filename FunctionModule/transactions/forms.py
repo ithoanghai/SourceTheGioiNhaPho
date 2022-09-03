@@ -11,8 +11,8 @@ class TransactionAdminForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-            'message': Textarea(attrs={'class': '???', 'rows': 5}),
-            'comment': Textarea(attrs={'class': '???', 'rows': 5}),
+            'message': Textarea(attrs={'class': '???', 'rows': 3}),
+            'comment': Textarea(attrs={'class': '???', 'rows': 3}),
         }
 
 class TransactionHistoryAdminForm(forms.ModelForm):
@@ -21,7 +21,7 @@ class TransactionHistoryAdminForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-            'comment': Textarea(attrs={'class': '???', 'rows': 5}),
+            'comment': Textarea(attrs={'class': '???', 'rows': 2}),
         }
 
 class RequestQuoteForm(forms.Form):

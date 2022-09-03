@@ -14,6 +14,7 @@ from .models import Listing, ListingImage, ListingVideo, ContractImage, ListingH
 from .choices import district_default_choices, Exhaustive
 from ..admin_site.filters import DateFieldListFilter, BooleanFieldListFilter, ChoicesFieldListFilter, RangeNumericFilter
 from ..realtors.models import Realtor
+from ..transactions.models import Transaction
 
 
 class ListingPhotoAdmin(admin_site.TabularInline):
@@ -40,6 +41,18 @@ class ListingVideoAdmin(admin_site.TabularInline):
     model = ListingVideo
     extra = 0
     verbose_name = "VIDEO QUAY BĐS"
+
+
+class ListingHistoryInline(admin_site.TabularInline):
+    model = ListingHistory
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('list_date', 'area','floors', 'price', 'extra_data', 'warehouse', )
+
+
+class TransactionInline(admin_site.TabularInline):
+    model = Transaction
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('date', 'status', 'trantype', 'request_price', 'customer', 'realtor',)
 
 
 class ListingAdmin(admin_site.ModelAdmin):
@@ -81,14 +94,14 @@ class ListingAdmin(admin_site.ModelAdmin):
         ('average_price', RangeNumericFilter),
         ('bedrooms', RangeNumericFilter),
         ('priority', RangeNumericFilter),
-       # ('list_date', DateRangeFilter),
     )
     #advanced_filter_fields = ('status', ('house_type', 'road_type'))
     list_editable = ()
     search_fields = ('id', 'title', 'code', 'address', 'area', 'price', 'house_type', 'road_type', 'urban_area',
                      'street', 'ward', 'district', 'state', 'list_date', 'extra_data')
     list_per_page = 200
-    inlines = [ListingPhotoAdmin, ContractPhotoAdmin, ListingVideoAdmin,]
+    inlines = [ListingPhotoAdmin, ContractPhotoAdmin, ListingVideoAdmin, ListingHistoryInline, TransactionInline]
+
     actions = ['make_published', 'unpublished', 'sold', 'exhaustive']
     form = ListingAdminForm
     ordering = ('-list_date',)
@@ -142,6 +155,7 @@ class ListingAdmin(admin_site.ModelAdmin):
 
         extra_context = extra_context or {}
         extra_context.update({
+            'show_save_as_copy': True,
             'show_save_and_add_history': True,
             'transaction_history': True,
         })
@@ -212,6 +226,7 @@ class ListingAdmin(admin_site.ModelAdmin):
     sold.short_description = _("Đã bán/cho thuê")
     exhaustive.short_description = _("Lên lịch đi khảo sát")
 
+
 class ListingHistoryAdmin(admin_site.ModelAdmin):
     fieldsets = (
         ('THÔNG TIN CHUYÊN VIÊN', {
@@ -241,6 +256,9 @@ class ListingHistoryAdmin(admin_site.ModelAdmin):
     autocomplete_fields = ['listing','user', 'realtor']
     list_per_page = 200
     inlines = []
+    # usual admin stuff goes here
+    inline_type = 'tabular'  # or could be 'stacked'
+    inline_reverse = ['listing']
     actions = []
     form = ListingAdminForm
     ordering = ('-list_date',)

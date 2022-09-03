@@ -8,6 +8,39 @@ from django.http import HttpRequest, JsonResponse, HttpResponse
 
 from ..admin_site.filters import ChoicesFieldListFilter, RangeNumericFilter
 from ..admin_site import BooleanFieldListFilter, DateFieldListFilter
+from ..customers.models import Customer
+from ..listings.models import ListingHistory, Listing
+from ..transactions.models import Transaction, TransactionHistory
+
+
+class ListingInline(admin_site.TabularInline):
+    model = Listing
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('list_date', 'status', 'address', 'area','floors', 'price', )
+
+
+class ListingHistoryInline(admin_site.TabularInline):
+    model = ListingHistory
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('list_date', 'area','floors', 'price', 'warehouse', )
+
+
+class CustomerInline(admin_site.TabularInline):
+    model = Customer
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('hire_date', 'custormer_type', 'transactionStatus', 'name', 'phone', 'district', 'financial_range', )
+
+
+class TransactionInline(admin_site.TabularInline):
+    model = Transaction
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('date', 'status', 'trantype', 'request_price', 'customer',)
+
+
+class TransactionHistoryInline(admin_site.TabularInline):
+    model = TransactionHistory
+    extra = 0  # If you have a fixed number number of answers, set it here.
+    fields = ('date', 'transaction', 'status', 'reason', 'comment',  'realtor', )
 
 
 class RealtorAdmin(admin_site.ModelAdmin):
@@ -28,6 +61,8 @@ class RealtorAdmin(admin_site.ModelAdmin):
         ('birthyear', RangeNumericFilter),
     )
     readonly_fields = []
+    inlines = [TransactionInline, TransactionHistoryInline, CustomerInline, ListingInline, ListingHistoryInline,  ]
+
     add_fieldsets = (
         ('THÔNG TIN CƠ BẢN CHUYÊN VIÊN', {
             'classes': ('wide',),
