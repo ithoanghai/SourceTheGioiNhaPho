@@ -7,7 +7,7 @@ class ListingSerializer(serializers.HyperlinkedModelSerializer):
         model = Listing 
         #fields =  '__all__' 
         fields = ('id', 'address', 'area', 'area_unit', 'bathrooms','bedrooms','code','description','direction','district','extra_data','floors',
-                    'house_type', 'registration_type', 'lane_width', 'length', 'list_date','location','lot_size', 
+                    'house_type', 'registration_type', 'lane_width', 'length', 'date_created','location','lot_size',
                     'price','sale_price','road_type','state','status','street','title','urban_area','transaction_type',
                     'ward','width','is_exclusive','is_published','is_verified')
         #, 'listingimage', 'listingvideo'

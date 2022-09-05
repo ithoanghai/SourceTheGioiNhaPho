@@ -9,5 +9,6 @@ User-agent: YandexBot
 User-agent: MJ12bot
 User-agent: SiteSucker
 User-agent: HTTrack
-Disallow: /
 https://thegioinhaphovietnam.com.vn/sitemap.xml
+http://thegioinhaphovietnam.com.vn/sitemap.xml
+Disallow: /

@@ -573,7 +573,7 @@ def handle_import(request, file_path, listing_type):
 
                 new_listing = Listing(user=user, realtor=realtor, code=code, status=status, title=title,
                                       street=street, address=full_addr, area=area, transaction_type=trans_type,
-                                      house_type=house_type, road_type=road_type, list_date=created,
+                                      house_type=house_type, road_type=road_type, date_created=created,
                                       direction=direction, price=price, priority=priority,
                                       reward_person_mobile=phone, reward=reward, bonus_rate=bonus_rate,
                                       extra_data=extra_data, state=state_code, district=district_code, is_published=is_published,
@@ -590,7 +590,7 @@ def handle_import(request, file_path, listing_type):
 
                 query = (Q(address__contains=so_nha[0]) & Q(area=area) & Q(floors=floor) & Q(width=width) & Q(price=price))| \
                         (Q(address__contains=so_nha[0]) & Q(area=area) & Q(street=street) & Q(state=state_code))
-                querylist_list = Listing.objects.filter(Q(code=code) | Q(address=full_addr) | query).order_by('-list_date')
+                querylist_list = Listing.objects.filter(Q(code=code) | Q(address=full_addr) | query).order_by('-date_created')
                 #Nếu kho đã tồn tại bđs
                 if querylist_list.exists():
                     count_update = 0
@@ -605,19 +605,19 @@ def handle_import(request, file_path, listing_type):
                             listing_fisrt = Listing.objects.get(id=listing.id)
 
                         # nếu listing mới import cũ hơn listing trong kho thì chỉ đẩy listing này sang bảng listing history
-                        if listing.list_date > new_listing.list_date:
-                            querylist_listhistory = ListingHistory.objects.filter(listing_id=listing_fisrt.id, list_date=new_listing.list_date)
+                        if listing.date_created > new_listing.date_created:
+                            querylist_listhistory = ListingHistory.objects.filter(listing_id=listing_fisrt.id, date_created=new_listing.date_created)
                             #Kiểm tra trong listing history đã có trùng lặp chưa, nếu chưa có thì đẩy vào, nếu có rồi bỏ qua
                             if not querylist_listhistory.exists() and count_update >= 1:
                                 new_listhis = ListingHistory.objects.create(listing=listing_fisrt, user=new_listing.user,
                                               realtor=new_listing.realtor, area=new_listing.area, floors=new_listing.floors, width=new_listing.width, address=new_listing.address,
                                               bathrooms=new_listing.bathrooms, bedrooms=new_listing.bedrooms, price=new_listing.price, reward_person_mobile=new_listing.reward_person_mobile,
                                               reward_person=new_listing.reward_person, extra_data=new_listing.extra_data,
-                                              warehouse=listing_type, list_date=new_listing.list_date)
+                                              warehouse=listing_type, date_created=new_listing.date_created)
                                 new_listhis.save()
                                 logger.info(f"row {line_count}: tạo mới lịch sử bđs {new_listhis} từ listing import cũ hơn {new_listing}, bđs gốc {listing_fisrt}")
                         #Nếu listing đưa vào là mới nhất là lần đầu thì cập nhật thông tin mới cho listing
-                        elif listing.list_date == new_listing.list_date:
+                        elif listing.date_created == new_listing.date_created:
                             # Cập nhật thông tin mới nhất cho listing đang có
                             if listing.priority == 1 or listing.priority == 2:
                                 if listing_fisrt.user is None:
@@ -632,7 +632,7 @@ def handle_import(request, file_path, listing_type):
                                 listing_fisrt.reward_person = new_listing.reward_person
                                 listing_fisrt.reward_person_mobile = new_listing.reward_person_mobile
                                 listing_fisrt.extra_data = new_listing.extra_data
-                                listing_fisrt.list_date = new_listing.list_date
+                                listing_fisrt.date_created = new_listing.date_created
                                 listing_fisrt.is_published = new_listing.is_published
                                 listing_fisrt.save()
                                 logger.info(
@@ -657,20 +657,20 @@ def handle_import(request, file_path, listing_type):
                                 listing_fisrt.address = new_listing.address
                                 listing_fisrt.location = new_listing.location
                                 listing_fisrt.status = new_listing.status
-                                listing_fisrt.list_date = new_listing.list_date
+                                listing_fisrt.date_created = new_listing.date_created
                                 listing_fisrt.is_published = new_listing.is_published
                                 listing_fisrt.save()
                                 logger.info(
                                     f"row {line_count}: cập nhật {listing.code} ưu tiên {listing.priority} từ {new_listing}")
-                        elif listing.list_date < new_listing.list_date:
-                            querylist_listhistory = ListingHistory.objects.filter(listing=listing_fisrt, list_date=listing.list_date)
+                        elif listing.date_created < new_listing.date_created:
+                            querylist_listhistory = ListingHistory.objects.filter(listing=listing_fisrt, date_created=listing.date_created)
                             # Kiểm tra trong listing history đã có trùng lặp chưa, nếu chưa có thì đẩy vào, nếu có rồi bỏ qua
                             if not querylist_listhistory.exists() and count_update >= 1:
                                 #Đẩy thông tin listing cũ vào lịch sử listing
                                 new_listhis = ListingHistory.objects.create(listing=listing_fisrt, user=listing.user, address=listing.address,
                                               realtor=listing.realtor, area=listing.area, floors=listing.floors, width=listing.width,
                                               bathrooms=listing.bathrooms, bedrooms=listing.bedrooms, price=listing.price, reward_person_mobile=listing.reward_person_mobile,
-                                              reward_person=listing.reward_person, extra_data=listing.extra_data, warehouse=listing_type, list_date=listing.list_date)
+                                              reward_person=listing.reward_person, extra_data=listing.extra_data, warehouse=listing_type, date_created=listing.date_created)
                                 new_listhis.save()
                                 logger.info(f"row {line_count}: Đẩy thông tin listing {listing} cũ hơn trên server vào lịch sử listing {new_listhis}")
                             #Cập nhật thông tin mới nhất cho listing đang có
@@ -688,7 +688,7 @@ def handle_import(request, file_path, listing_type):
                                 listing_fisrt.reward_person = new_listing.reward_person
                                 listing_fisrt.reward_person_mobile = new_listing.reward_person_mobile
                                 listing_fisrt.extra_data = new_listing.extra_data
-                                listing_fisrt.list_date = new_listing.list_date
+                                listing_fisrt.date_created = new_listing.date_created
                                 listing_fisrt.is_published = new_listing.is_published
                                 listing_fisrt.save()
                                 logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} từ {new_listing}")
@@ -713,7 +713,7 @@ def handle_import(request, file_path, listing_type):
                                 listing_fisrt.location = new_listing.location
                                 listing_fisrt.code = new_listing.code
                                 listing_fisrt.status = new_listing.status
-                                listing_fisrt.list_date = new_listing.list_date
+                                listing_fisrt.date_created = new_listing.date_created
                                 listing_fisrt.is_published = new_listing.is_published
                                 if Listing.objects.filter(code=listing_fisrt.code).exists():
                                     listing_fisrt.code = new_listing.code + deep_address[0]

@@ -66,7 +66,7 @@ class AdminSites:
     password_change_template = None
     password_change_done_template = None
 
-    def __init__(self, name='admin_site'):
+    def __init__(self, name='admin'):
         self._registry = {}  # model_class class -> admin_class instance
         self.name = name
         #print('Khoi tao AdminSite')

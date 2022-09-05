@@ -16,13 +16,13 @@ from ..transactions.models import Transaction, TransactionHistory
 class ListingInline(admin_site.TabularInline):
     model = Listing
     extra = 0  # If you have a fixed number number of answers, set it here.
-    fields = ('list_date', 'status', 'address', 'area','floors', 'price', )
+    fields = ('date_created', 'status', 'address', 'area','floors', 'price', )
 
 
 class ListingHistoryInline(admin_site.TabularInline):
     model = ListingHistory
     extra = 0  # If you have a fixed number number of answers, set it here.
-    fields = ('list_date', 'area','floors', 'price', 'warehouse', )
+    fields = ('date_created', 'area','floors', 'price', 'warehouse', )
 
 
 class CustomerInline(admin_site.TabularInline):

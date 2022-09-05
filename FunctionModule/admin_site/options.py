@@ -1980,7 +1980,7 @@ class ModelAdmin(BaseModelAdmin):
         app_label = opts.app_label
         action_list = ListingHistory.objects.filter(
             listing_id=unquote(object_id),
-        ).order_by('-list_date')
+        ).order_by('-date_created')
 
         context = {
             **self.admin_site.each_context(request),

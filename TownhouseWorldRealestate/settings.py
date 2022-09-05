@@ -79,6 +79,7 @@ BUILT_IN_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.postgres',
+    'django.contrib.sitemaps',
 ]
 
 INSTALLED_APPS = BUILT_IN_APPS + THIRD_PARTIES + MODULES

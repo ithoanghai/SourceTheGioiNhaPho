@@ -46,7 +46,7 @@ class ListingVideoAdmin(admin_site.TabularInline):
 class ListingHistoryInline(admin_site.TabularInline):
     model = ListingHistory
     extra = 0  # If you have a fixed number number of answers, set it here.
-    fields = ('list_date', 'area','floors', 'price', 'extra_data', 'warehouse', )
+    fields = ('date_created', 'area','floors', 'price', 'extra_data', 'warehouse', )
 
 
 class TransactionInline(admin_site.TabularInline):
@@ -71,17 +71,17 @@ class ListingAdmin(admin_site.ModelAdmin):
         ('ĐỊA CHỈ & VỊ TRÍ BĐS', {'fields': (
             ('state', 'district', 'ward'), ('street', 'address', 'location'))}),
         ('TRẠNG THÁI ĐĂNG TIN', {
-            'fields': (('status', 'list_date'), ('is_published', 'priority'),)}),
+            'fields': (('status', 'date_created'), ('is_published', 'priority'),)}),
     )
 
-    list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'district','list_date')
+    list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'district','date_created')
     list_display_links = ('address','price',)
     list_filter = (
         ('status', ChoicesFieldListFilter),
         ('house_type', ChoicesFieldListFilter),
         ('transaction_type', ChoicesFieldListFilter),
         ('road_type', ChoicesFieldListFilter),
-        ('list_date', DateFieldListFilter),
+        ('date_created', DateFieldListFilter),
         ('registration_type', ChoicesFieldListFilter),
         ('is_published', BooleanFieldListFilter),
         ('is_advertising', BooleanFieldListFilter),
@@ -98,13 +98,13 @@ class ListingAdmin(admin_site.ModelAdmin):
     #advanced_filter_fields = ('status', ('house_type', 'road_type'))
     list_editable = ()
     search_fields = ('id', 'title', 'code', 'address', 'area', 'price', 'house_type', 'road_type', 'urban_area',
-                     'street', 'ward', 'district', 'state', 'list_date', 'extra_data')
+                     'street', 'ward', 'district', 'state', 'date_created', 'extra_data')
     list_per_page = 200
     inlines = [ListingPhotoAdmin, ContractPhotoAdmin, ListingVideoAdmin, ListingHistoryInline, TransactionInline]
 
     actions = ['make_published', 'unpublished', 'sold', 'exhaustive']
     form = ListingAdminForm
-    ordering = ('-list_date',)
+    ordering = ('-date_created',)
     autocomplete_fields = ['user','realtor']
     #delete_selected.short_description = 'Xóa bất động sản đã chọn trong %(verbose_name_plural)'
 
@@ -179,7 +179,7 @@ class ListingAdmin(admin_site.ModelAdmin):
             queryset = super().get_queryset(request)
             return queryset
         else:
-            queryset_list = Listing.objects.order_by('-list_date')
+            queryset_list = Listing.objects.order_by('-date_created')
             query = Q(realtor__user=request.user.id)
             query = query | Q(user=request.user)
             queryset_list = queryset_list.filter(query)
@@ -236,23 +236,23 @@ class ListingHistoryAdmin(admin_site.ModelAdmin):
             ('listing','address'),
             'extra_data',
             ('area', 'floors', 'width'), ('price', 'bedrooms', 'bathrooms'),
-            ('warehouse', 'list_date'), ('reward_person', 'reward_person_mobile'),
+            ('warehouse', 'date_created'), ('reward_person', 'reward_person_mobile'),
         )}),
     )
 
-    list_display = ('listing', 'area', 'floors', 'width', 'price', 'bedrooms', 'bathrooms', 'warehouse', 'list_date',)
+    list_display = ('listing', 'area', 'floors', 'width', 'price', 'bedrooms', 'bathrooms', 'warehouse', 'date_created',)
     list_display_links = ('listing',)
-    list_filter = ('list_date', 'listing', )
+    list_filter = ('date_created', 'listing', )
     list_filter = (
         ('area', RangeNumericFilter),
         ('floors', RangeNumericFilter),
         ('width', RangeNumericFilter),
         ('price', RangeNumericFilter),
         ('bedrooms', RangeNumericFilter),
-        ('list_date', DateFieldListFilter),
+        ('date_created', DateFieldListFilter),
     )
     list_editable = ()
-    search_fields = ('id', 'address', 'list_date', 'reward_person', 'reward_person_mobile','extra_data','warehouse')
+    search_fields = ('id', 'address', 'date_created', 'reward_person', 'reward_person_mobile','extra_data','warehouse')
     autocomplete_fields = ['listing','user', 'realtor']
     list_per_page = 200
     inlines = []
@@ -261,7 +261,7 @@ class ListingHistoryAdmin(admin_site.ModelAdmin):
     inline_reverse = ['listing']
     actions = []
     form = ListingAdminForm
-    ordering = ('-list_date',)
+    ordering = ('-date_created',)
     #filter_horizontal = ('realtor')
 
     class Media:
@@ -303,7 +303,7 @@ class ListingHistoryAdmin(admin_site.ModelAdmin):
             queryset = super().get_queryset(request)
             return queryset
         else:
-            queryset_list = Listing.objects.order_by('-list_date')
+            queryset_list = Listing.objects.order_by('-date_created')
             query = Q(realtor__user=request.user.id)
             query = query | Q(user=request.user)
             queryset_list = queryset_list.filter(query)

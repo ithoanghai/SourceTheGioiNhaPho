@@ -37,7 +37,7 @@ def get_suggestions(q: str, limit: int = 50, offset: int = 0, ):
 
 
 def prepare_listing_queryset(input_params):
-    queryset_list = Listing.objects.order_by('priority','-list_date').filter(is_published=True)
+    queryset_list = Listing.objects.order_by('priority','-date_created').filter(is_published=True)
     hn_district = district_data['01']
 
     # trans_type
@@ -165,7 +165,7 @@ def prepare_listing_queryset(input_params):
         elif sort_by == 'price_descend':
             queryset_list = queryset_list.order_by('-price')
         elif sort_by == 'created':
-            queryset_list = queryset_list.order_by('-list_date')
+            queryset_list = queryset_list.order_by('-date_created')
         else:
             queryset_list = queryset_list.order_by('priority')
 

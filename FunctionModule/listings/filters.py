@@ -15,13 +15,13 @@ class ListingFilter(FilterSet):
     price__gt = NumberFilter(field_name='price', lookup_expr='gt')
     price__lt = NumberFilter(field_name='price', lookup_expr='lt')
 
-    list_date = NumberFilter(field_name='list_date', lookup_expr='year')
-    list_date__gt = NumberFilter(field_name='list_date', lookup_expr='year__gt')
-    list_date__lt = NumberFilter(field_name='list_date', lookup_expr='year__lt')
+    date_created = NumberFilter(field_name='date_created', lookup_expr='year')
+    date_created__gt = NumberFilter(field_name='date_created', lookup_expr='year__gt')
+    date_created__lt = NumberFilter(field_name='date_created', lookup_expr='year__lt')
 
     class Meta:
         model = Listing
         fields = {
             'price': ['lt', 'gt'],
-            'list_date': ['exact', 'year__gt'],
+            'date_created': ['exact', 'year__gt'],
         }

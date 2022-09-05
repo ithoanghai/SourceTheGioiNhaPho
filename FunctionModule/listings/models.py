@@ -48,6 +48,7 @@ class Listing(models.Model, HitCountMixin):
         )
         #ordering = ["state", "district"]
 
+    full_path = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User,  on_delete=models.RESTRICT, blank=True, null=True, verbose_name=_("Người thêm BĐS"))
     realtor = models.ForeignKey(Realtor, on_delete=models.RESTRICT, blank=True, null=True, verbose_name=_("Chuyên viên quản lý BĐS"))
     transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,
@@ -142,7 +143,7 @@ class Listing(models.Model, HitCountMixin):
 
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING,
                               verbose_name=_("Trạng thái giao dịch"))
-    list_date = models.DateField(default=datetime.now, verbose_name=_("Ngày đăng bán/cho thuê"))
+    date_created = models.DateField(default=datetime.now, verbose_name=_("Ngày đăng bán/cho thuê"))
 
     priority = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)],
                                    choices=([(i, i) for i in range(1, 10)]), verbose_name=_("Thứ tự ưu tiên đăng"),
@@ -316,7 +317,7 @@ class ListingSerializer(serializers.ModelSerializer):
     state_name = serializers.CharField()
     district_name = serializers.CharField()
     main_photo = serializers.SerializerMethodField()
-    list_date = TimestampField()
+    date_created = TimestampField()
     priority = serializers.IntegerField()
 
     def get_main_photo(self, obj):
@@ -364,7 +365,7 @@ class ListingHistory(models.Model):
                                   help_text="Ghi các thông tin mô tả đầy đủ của đầu chủ về chủ nhà hoặc các yếu tố khác liên quan đến tương tác với Chuyên viên...")
 
     warehouse = models.CharField(max_length=100, blank=True, verbose_name=_("Kho hàng"))
-    list_date = models.DateField(default=datetime.now, verbose_name=_("Ngày tạo lịch sử BĐS"))
+    date_created = models.DateField(default=datetime.now, verbose_name=_("Ngày tạo lịch sử BĐS"))
 
     def __str__(self):
         return f'%s' % (self.listing)

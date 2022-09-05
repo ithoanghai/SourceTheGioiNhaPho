@@ -1,6 +1,7 @@
 import debug_toolbar
 from importlib import import_module
 
+from django.conf.urls import url
 from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import path, include
@@ -10,11 +11,18 @@ from django.conf.urls.static import static
 from FunctionModule.accounts import providers
 from FunctionModule import admin_site
 from FunctionModule.admin_site.sites import AdminSitePlus
+from django.contrib.sitemaps.views import sitemap
+
+from FunctionModule.pages.sitemaps import Listing_Sitemap, Static_Sitemap
 
 admin.site = AdminSitePlus()
 admin.autodiscover()
 admin.site.site_header = 'Quản trị hệ thống thế giới nhà phố'
 
+sitemaps = {
+    'listing': Listing_Sitemap(),
+    'static': Static_Sitemap(),
+}
 
 def redirect_view(request):
     response = redirect('/admin_site/')
@@ -34,7 +42,7 @@ urlpatterns = [
     path('admin/', admin_site.site.urls),
     #path('admin/', site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
-
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

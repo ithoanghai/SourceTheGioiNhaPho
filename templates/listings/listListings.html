@@ -32,7 +32,7 @@
                         <td>{{ listing.address }}</td>
                         <td>{{ listing.transaction_type | get_transaction_type }}</td>
                         <td>{{ listing.house_type | get_house_type }}</td>
-                        <td>{{ listing.list_date }}</td>
+                        <td>{{ listing.date_created }}</td>
                         <td>
                             <a class="btn btn-light"
                                href="{% url "listing_detail" listing.id %}">{% trans "Chi tiết" %}</a>

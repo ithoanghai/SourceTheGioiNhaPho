@@ -520,7 +520,7 @@ new Vue({
             const sort_price_ascend = (a, b) => a.price - b.price;
             const sort_price_descend = (a, b) => b.price - a.price;
             const sort_priority = (a, b) => a.priority - b.priority;
-            const sort_created = (a, b) => a.list_date - b.list_date;
+            const sort_created = (a, b) => a.date_created - b.date_created;
 
             switch (sortOption) {
                 case 'price_ascend':

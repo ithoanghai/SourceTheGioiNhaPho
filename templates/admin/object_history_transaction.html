@@ -33,7 +33,7 @@
         <tbody>
         {% for action in action_list %}
         <tr>
-            {% comment %}<th scope="row">{{ action.list_date|date:"DATETIME_FORMAT" }}</th>{% endcomment %}
+            {% comment %}<th scope="row">{{ action.date_created|date:"DATETIME_FORMAT" }}</th>{% endcomment %}
             <th scope="row">{{ action.date}}</th>
              <td>{{ action.customer }}</td>
              <td>{{ action.listing }}</td>

@@ -26,11 +26,12 @@ class Post(models.Model, HitCountMixin):
         )
         #ordering = ["state", "district"]
 
+    full_path = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User,  on_delete=models.RESTRICT, blank=True, null=True, verbose_name=_("Người đăng tin"))
     title = models.CharField(max_length=200)
     content = models.TextField()
     is_published = models.BooleanField(default=True, verbose_name=_("CHO PHÉP ĐĂNG"))
-    date = models.DateField(default=datetime.now, verbose_name=_("Thời gian đăng"))
+    date_created = models.DateField(default=datetime.now, verbose_name=_("Thời gian đăng"))
     hit_count_generic = GenericRelation(
         MODEL_HITCOUNT, object_id_field='object_pk',
         related_query_name='hit_count_generic_relation')

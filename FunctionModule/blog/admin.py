@@ -9,18 +9,18 @@ from FunctionModule.blog.models import Post
 
 class PostAdmin(admin_site.ModelAdmin):
     form = PostAdminForm
-    list_display = ('date', 'title', 'is_published', 'user')
+    list_display = ('date_created', 'title', 'is_published', 'user')
     list_display_links = ('title',)
     list_filter = (
-        ('date', DateFieldListFilter),
+        ('date_created', DateFieldListFilter),
     )
     list_editable = ()
-    search_fields = ('id', 'title', 'content', 'date')
+    search_fields = ('id', 'title', 'content', 'date_created')
     autocomplete_fields = ['user']
     list_per_page = 200
     inlines = []
     actions = ['make_published', 'unpublished',]
-    ordering = ('-date',)
+    ordering = ('-date_created',)
 
     def get_form(self, request, obj=None, change=False, **kwargs):
         form = super(PostAdmin, self).get_form(request, obj, **kwargs)

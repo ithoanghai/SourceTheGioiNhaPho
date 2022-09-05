@@ -35,7 +35,7 @@ class ListingSearchQuery(BaseModel):
 
 
 def index(request):
-    listings = Listing.objects.order_by('priority', 'price', '-list_date').filter(is_published=True, is_advertising=False)
+    listings = Listing.objects.order_by('priority', 'price', '-date_created').filter(is_published=True, is_advertising=False)
 
     paginator = Paginator(listings, 100)
     page = request.GET.get('page')
@@ -53,9 +53,9 @@ def listing(request, listing_id):
     ListingDetailJSONView()
     listing_detail = get_object_or_404(Listing, pk=listing_id)
     listings_neighborhood = (
-    Listing.objects.order_by('priority', '-list_date').filter(is_published=True, is_advertising=False,
+    Listing.objects.order_by('priority', '-date_created').filter(is_published=True, is_advertising=False,
                                                               state=listing_detail.state)[:10])
-    listings_same = (Listing.objects.order_by('priority', '-list_date').filter(is_published=True, is_advertising=False,
+    listings_same = (Listing.objects.order_by('priority', '-date_created').filter(is_published=True, is_advertising=False,
                                                                                house_type=listing_detail.house_type,
                                                                                area=listing_detail.area)[:30])
 
@@ -116,11 +116,11 @@ def post_listing(request):
                     photomain = request.FILES.get('photomain')
                 else:
                     photomain = request.POST['photomain']
-                list_date = timezone.now()
+                date_created = timezone.now()
                 # #  Check if user has made inquiry already
                 user_id = request.user.id
                 has_listing = Listing.objects.filter(address=address, user_id=user_id,
-                                                     list_date__gte=list_date)
+                                                     date_created__gte=date_created)
                 if has_listing:
                     messages.error(request,
                                    'Bạn đã gửi yêu cầu tới chúng tôi về tin đăng này. Xin thử gửi lại yêu cầu sau.')
@@ -150,7 +150,7 @@ def post_listing(request):
 
 def my_listing_post(request):
     if request.user.is_authenticated and request.method == 'GET':
-        listings = Listing.objects.filter(user=request.user, is_advertising=True).order_by('-list_date')
+        listings = Listing.objects.filter(user=request.user, is_advertising=True).order_by('-date_created')
         paginator = Paginator(listings, 10)
         page = request.GET.get('page')
         paged_listings = paginator.get_page(page)
@@ -165,7 +165,7 @@ def my_listing_post(request):
 
 def my_listing(request):
     if request.user.is_authenticated and request.method == 'GET':
-        listings = Listing.objects.filter(user=request.user, is_advertising=False).order_by('-list_date')
+        listings = Listing.objects.filter(user=request.user, is_advertising=False).order_by('-date_created')
         paginator = Paginator(listings, 10)
         page = request.GET.get('page')
         paged_listings = paginator.get_page(page)
@@ -232,7 +232,7 @@ class ListingsAPIView(generics.ListCreateAPIView):
         id_pk = self.kwargs.get('id', None)
         # queryset = Listing.objects.filter(id=id_pk)
         queryset = Listing.objects.all()
-        return queryset.order_by('list_date')
+        return queryset.order_by('date_created')
 
     def post(self, request, *args, **kwargs):
         id_pk = self.kwargs.get('id', None)
@@ -325,11 +325,11 @@ def listinghistoryadd(request, extra_context=None):
                     photomain = request.FILES.get('photomain')
                 else:
                     photomain = request.POST['photomain']
-                list_date = timezone.now()
+                date_created = timezone.now()
                 # #  Check if user has made inquiry already
                 user_id = request.user.id
                 has_listing = Listing.objects.filter(address=address, user_id=user_id,
-                                                     list_date__gte=list_date)
+                                                     date_created__gte=date_created)
                 if has_listing:
                     messages.error(request,
                                    'Bạn đã gửi yêu cầu tới chúng tôi về tin đăng này. Xin thử gửi lại yêu cầu sau.')
