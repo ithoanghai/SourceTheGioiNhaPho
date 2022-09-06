@@ -29,9 +29,9 @@ class Title(models.TextChoices):
 
 
 class Workplace(models.TextChoices):
-    TGNP = 'tgnp', _("Thế Giới Nhà Phố")
+    TGNP = 'tgnp', _("Thế Giới Nhà Phố Việt Nam")
     THIENKHOI = 'thienkhoi', _("Thiên Khôi")
-    NHAPHO = 'nhapho', _("Nhà Phố VN")
+    NHAPHO = 'nhapho', _("Nhà Phố Việt Nam")
     KIMLAND = 'kimland', _("Kim Land")
     TUAN123 = 'tuan123',_("Tuấn 123")
     PHOXANH = 'phoxanh', _("Phố Xanh")

@@ -25,7 +25,7 @@ sitemaps = {
 }
 
 def redirect_view(request):
-    response = redirect('/admin_site/')
+    response = redirect('/admin/')
     return response
 
 

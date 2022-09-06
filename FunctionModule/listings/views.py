@@ -124,7 +124,7 @@ def post_listing(request):
                 if has_listing:
                     messages.error(request,
                                    'Bạn đã gửi yêu cầu tới chúng tôi về tin đăng này. Xin thử gửi lại yêu cầu sau.')
-                    return redirect('post_listings')
+                    return redirect('admin')
                 if area.isnumeric() and width.isnumeric() and floor.isnumeric() and price.isnumeric():
                     listing = Listing.objects.create(user_id=user_id, is_advertising=True, is_published=False,
                                                      transaction_type=trantypes, house_type=housetype, code=code,
@@ -134,18 +134,18 @@ def post_listing(request):
                                                      price=price)
                 else:
                     messages.error(request, 'Bạn nhập sai dữ liệu.')
-                    return redirect('post_listings')
+                    return redirect('admin')
 
                 if request.FILES.get('photomain', None) is not None:
                     ListingImage.objects.create(listing_id=listing.id, photo=photomain)
                     messages.success(request, 'Bạn đã gửi tin đăng thành công. Quản trị viên sẽ kiểm duyệt trước khi đăng.')
                     return render(request, 'listings/postListingSuccess.html', context)
         else:
-            return redirect('login')
+            return redirect('admin')
 
     except ValidationError:
         messages.error(request, 'Thông tin bạn nhập không đúng.')
-        return redirect('post_listings')
+        return redirect('admin')
 
 
 def my_listing_post(request):
@@ -343,14 +343,14 @@ def listinghistoryadd(request, extra_context=None):
                                                      price=price)
                 else:
                     messages.error(request, 'Bạn nhập sai dữ liệu.')
-                    return redirect('post_listings')
+                    return redirect('admin')
 
                 if request.FILES.get('photomain', None) is not None:
                     ListingImage.objects.create(listing_id=listing.id, photo=photomain)
                     messages.success(request, 'Bạn đã gửi tin đăng thành công. Quản trị viên sẽ kiểm duyệt trước khi đăng.')
                     return render(request, 'listings/postListingSuccess.html', context)
         else:
-            return redirect('login')
+            return redirect('admin')
 
     except ValidationError:
         messages.error(request, 'Thông tin bạn nhập không đúng.')
