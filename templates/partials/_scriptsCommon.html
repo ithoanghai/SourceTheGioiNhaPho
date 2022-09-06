@@ -1,24 +1,24 @@
 {% load static i18n load_static %}
 <!-- Scripts -->
-<script type="text/javascript" src="{% load_static 'js/jquery-3.3.1.min.js' %}"></script>
-<script type="text/javascript" src="{% load_static "js/vue-2.16.12.min.js" %}"></script>
-<script type="text/javascript" src="{% load_static 'js/vue-resource-1.5.2.min.js' %}"></script>
+<script async type="text/javascript" src="{% load_static 'js/jquery-3.3.1.min.js' %}"></script>
+<script async type="text/javascript" src="{% load_static "js/vue-2.16.12.min.js" %}"></script>
+<script async type="text/javascript" src="{% load_static 'js/vue-resource-1.5.2.min.js' %}"></script>
 
-<script defer src="{% load_static 'js/feedback-modal.js' %}"></script>
-<script defer src="{% load_static 'js/header-v2.min.js' %}"></script>
+<script defer type="text/javascript" src="{% load_static 'js/feedback-modal.js' %}"></script>
+<script defer type="text/javascript" src="{% load_static 'js/header-v2.min.js' %}"></script>
 <script defer type="text/javascript" src="{% load_static 'js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% load_static 'js/vendors.min.js' %}"></script>
-<script defer src="{% load_static 'js/service-sale.min.js' %}"></script>
-<script defer src="{% load_static 'js/login-popup.js' %}"></script>
+<script defer type="text/javascript" src="{% load_static 'js/vendors.min.js' %}"></script>
+<script defer type="text/javascript" src="{% load_static 'js/service-sale.min.js' %}"></script>
+<script defer type="text/javascript" src="{% load_static 'js/login-popup.js' %}"></script>
 
 {% comment %}<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 {% comment %}<script defer src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>{% endcomment %}
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60d864aab9d3c079"></script>
+<script defer type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60d864aab9d3c079"></script>
 
 <!-- Facebook Pixel Code -->
-<script>
+<script defer type="text/javascript">
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -41,7 +41,7 @@
 <!-- Your Plugin chat code -->
 <div id="fb-customer-chat" class="fb-customerchat">
 </div>
-<script>
+<script async type="text/javascript">
     Vue.directive('click-outside', VueClickOutside());
     const removeElements = (elms) => [...elms].forEach(el => el.remove());
     function hideAlert(timeout=5000) {
@@ -54,7 +54,7 @@
     })
 
 </script>
-<script>
+<script defer type="text/javascript">
     var chatbox = document.getElementById('fb-customer-chat');
     chatbox.setAttribute("page_id", "108470991299693");
     chatbox.setAttribute("attribution", "biz_inbox");
@@ -75,7 +75,7 @@
     }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=643586863046523&autoLogAppEvents=1" nonce="9cBklp8z"></script>
+<script defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=643586863046523&autoLogAppEvents=1" nonce="9cBklp8z"></script>
 
 <!-- Chống sao chép website-->
 {% comment %}
@@ -93,7 +93,7 @@
 {% endcomment %}
 <!-- End of HubSpot Embed Code -->
 
-<script>
+<script defer type="text/javascript">
     window["_au_api"] = "thue/api.html";
     window['fap_url'] = "../thegioinhaphovietnam.com.vn/p/v2.33.55/js/fap.min90ca.js?v=1617780824171";
     window['fap.server'] = '//analytics.thegioinhaphovietnam.com.vn/fap';
@@ -115,7 +115,7 @@
     }
 </script>
 
-<script type="text/javascript">
+<script defer type="text/javascript">
     var callbackInitMap = function () {
         if (window.vinitMap) {
             window.vinitMap();
@@ -128,7 +128,7 @@
     }
 </script>
 
-<script>
+<script defer type="text/javascript">
     (function () {
         var formQueue = [];
 
@@ -165,7 +165,7 @@
 
 </script>
 
-<script>
+<script defer type="text/javascript">
     function createHSForm(opt) {
         function getClientId() {
             try {
@@ -485,4 +485,4 @@
 </script>
 <script>Defer.dom('img.lazy', 200, 'loaded');</script>
 
-<script src="https://sp.zalo.me/plugins/sdk.js"></script>
+<script defer src="https://sp.zalo.me/plugins/sdk.js"></script>
