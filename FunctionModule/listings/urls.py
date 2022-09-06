@@ -9,7 +9,7 @@ from .views import ListingDetailJSONView
 admin_site.autodiscover()
 
 urlpatterns = [
-    path('', views.index, name='home'),
+    path('', views.index),
     path('<int:listing_id>', views.listing,  name='listing_detail'),
     #url(r'^(?P<pk>\d+)/$', ListingDetailJSONView.as_view(), name='listing_detail'),
     path('my_listing', views.my_listing, name='my_listing'),
