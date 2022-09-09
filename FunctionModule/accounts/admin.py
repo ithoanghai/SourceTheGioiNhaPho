@@ -33,7 +33,7 @@ class PermissionAdmin(admin_site.ModelAdmin):
 class BlogInline(admin_site.TabularInline):
     model = Post
     extra = 0  # If you have a fixed number number of answers, set it here.
-    fields = ('date', 'title', )
+    fields = ('date_created', 'title', )
 
 
 class ListingHistoryInline(admin_site.TabularInline):
