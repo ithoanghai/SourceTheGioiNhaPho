@@ -47,7 +47,7 @@ class CustomerAdmin(admin_site.ModelAdmin):
         ('financial_range', RangeNumericFilter),
     )
     form = CustomerAdminForm
-    inlines = [TransactionInline ]
+    inlines = [TransactionInline]
 
     def get_queryset(self, request):
         #if request.user.is_superuser:
