@@ -8,6 +8,14 @@ from FunctionModule.blog.models import Post
 
 
 class PostAdmin(admin_site.ModelAdmin):
+    fieldsets = (
+        ('NỘI DUNG TIN ĐĂNG', {
+            'classes': ('wide',),
+            'fields': ('post_type', 'title', 'content')}),
+        ('TÌNH TRẠNG TIN ĐĂNG', {'fields':
+            ('user', ('is_published', 'date_created'))}),
+    )
+
     form = PostAdminForm
     list_display = ('date_created', 'title', 'is_published', 'user')
     list_display_links = ('title',)

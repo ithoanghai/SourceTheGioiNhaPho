@@ -10,6 +10,7 @@ from hitcount.models import HitCountMixin
 from hitcount.settings import MODEL_HITCOUNT
 
 from FunctionModule.accounts.models import User
+from FunctionModule.blog.choices import PostType
 
 
 class Post(models.Model, HitCountMixin):
@@ -28,8 +29,10 @@ class Post(models.Model, HitCountMixin):
 
     full_path = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User,  on_delete=models.RESTRICT, blank=True, null=True, verbose_name=_("Người đăng tin"))
-    title = models.CharField(max_length=200)
-    content = models.TextField()
+    post_type = models.CharField(max_length=20, choices=PostType.choices,
+                                        default=PostType.MARKET, verbose_name=_("Loại tin tức"))
+    title = models.CharField(max_length=200, verbose_name=_("Tiêu đề tin"))
+    content = models.TextField( verbose_name=_("Nội dung tin"))
     is_published = models.BooleanField(default=True, verbose_name=_("CHO PHÉP ĐĂNG"))
     date_created = models.DateField(default=datetime.now, verbose_name=_("Thời gian đăng"))
     hit_count_generic = GenericRelation(
