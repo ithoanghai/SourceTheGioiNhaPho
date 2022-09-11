@@ -20,9 +20,3 @@ class CustomerAdminForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # self.fields['ward'].widget = forms.Select()
         #self.fields['realtor'].disabled = False
-
-
-TOTAL_FORM_COUNT = 'TOTAL_FORMS'
-INITIAL_FORM_COUNT = 'INITIAL_FORMS'
-MIN_NUM_FORM_COUNT = 'MIN_NUM_FORMS'
-MAX_NUM_FORM_COUNT = 'MAX_NUM_FORMS'

@@ -101,7 +101,7 @@ class AccountAdmin(AuthUserAdmin):
     ]
     ordering = ('first_name', 'last_name', 'date_joined', )
     filter_horizontal = ('groups', 'permissions')
-    inlines = [CustomerInline, TransactionInline, BlogInline, ListingHistoryInline, ]
+    inlines = [CustomerInline, BlogInline, ListingHistoryInline, ]
 
     def get_fieldsets(self, request, obj=None):
         if not obj:
