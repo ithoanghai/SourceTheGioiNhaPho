@@ -4,18 +4,18 @@
 <script type="text/javascript" src="{% load_static "js/vue-2.16.12.min.js" %}"></script>
 <script type="text/javascript" src="{% load_static 'js/vue-resource-1.5.2.min.js' %}"></script>
 
-<script defer type="text/javascript" src="{% load_static 'js/feedback-modal.js' %}"></script>
-<script defer type="text/javascript" src="{% load_static 'js/header-v2.min.js' %}"></script>
+<script defer src="{% load_static 'js/feedback-modal.js' %}"></script>
+<script defer src="{% load_static 'js/header-v2.min.js' %}"></script>
 <script defer type="text/javascript" src="{% load_static 'js/bootstrap.bundle.min.js' %}"></script>
-<script defer type="text/javascript" src="{% load_static 'js/vendors.min.js' %}"></script>
-<script defer type="text/javascript" src="{% load_static 'js/service-sale.min.js' %}"></script>
-<script defer type="text/javascript" src="{% load_static 'js/login-popup.js' %}"></script>
+<script src="{% load_static 'js/vendors.min.js' %}"></script>
+<script defer src="{% load_static 'js/service-sale.min.js' %}"></script>
+<script defer src="{% load_static 'js/login-popup.js' %}"></script>
 
 {% comment %}<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 {% comment %}<script defer src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>{% endcomment %}
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script defer type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60d864aab9d3c079"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60d864aab9d3c079"></script>
 
 <!-- Facebook Pixel Code -->
 <script>
@@ -75,7 +75,7 @@
     }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<script defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=643586863046523&autoLogAppEvents=1" nonce="9cBklp8z"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=643586863046523&autoLogAppEvents=1" nonce="9cBklp8z"></script>
 
 <!-- Chống sao chép website-->
 {% comment %}
@@ -115,7 +115,7 @@
     }
 </script>
 
-<script defer type="text/javascript">
+<script type="text/javascript">
     var callbackInitMap = function () {
         if (window.vinitMap) {
             window.vinitMap();
@@ -128,7 +128,7 @@
     }
 </script>
 
-<script defer type="text/javascript">
+<script>
     (function () {
         var formQueue = [];
 
@@ -165,7 +165,7 @@
 
 </script>
 
-<script defer type="text/javascript">
+<script>
     function createHSForm(opt) {
         function getClientId() {
             try {
@@ -485,4 +485,4 @@
 </script>
 <script>Defer.dom('img.lazy', 200, 'loaded');</script>
 
-<script defer src="https://sp.zalo.me/plugins/sdk.js"></script>
+<script src="https://sp.zalo.me/plugins/sdk.js"></script>

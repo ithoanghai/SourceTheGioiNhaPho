@@ -72,4 +72,3 @@ gộp dữ liệu
     docker-compose -f docker-compose.production.yml restart web
     docker-compose -f docker-compose.production.yml up -d search_engine
     docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py index_area"
-    docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py index_area" to create indexer
