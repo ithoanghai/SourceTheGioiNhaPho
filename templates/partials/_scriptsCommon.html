@@ -1,8 +1,8 @@
 {% load static i18n load_static %}
 <!-- Scripts -->
-<script async type="text/javascript" src="{% load_static 'js/jquery-3.3.1.min.js' %}"></script>
-<script async type="text/javascript" src="{% load_static "js/vue-2.16.12.min.js" %}"></script>
-<script async type="text/javascript" src="{% load_static 'js/vue-resource-1.5.2.min.js' %}"></script>
+<script type="text/javascript" src="{% load_static 'js/jquery-3.3.1.min.js' %}"></script>
+<script type="text/javascript" src="{% load_static "js/vue-2.16.12.min.js" %}"></script>
+<script type="text/javascript" src="{% load_static 'js/vue-resource-1.5.2.min.js' %}"></script>
 
 <script defer type="text/javascript" src="{% load_static 'js/feedback-modal.js' %}"></script>
 <script defer type="text/javascript" src="{% load_static 'js/header-v2.min.js' %}"></script>
@@ -18,7 +18,7 @@
 <script defer type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60d864aab9d3c079"></script>
 
 <!-- Facebook Pixel Code -->
-<script defer type="text/javascript">
+<script>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -41,7 +41,7 @@
 <!-- Your Plugin chat code -->
 <div id="fb-customer-chat" class="fb-customerchat">
 </div>
-<script async type="text/javascript">
+<script>
     Vue.directive('click-outside', VueClickOutside());
     const removeElements = (elms) => [...elms].forEach(el => el.remove());
     function hideAlert(timeout=5000) {
@@ -54,7 +54,7 @@
     })
 
 </script>
-<script defer type="text/javascript">
+<script>
     var chatbox = document.getElementById('fb-customer-chat');
     chatbox.setAttribute("page_id", "108470991299693");
     chatbox.setAttribute("attribution", "biz_inbox");
@@ -93,7 +93,7 @@
 {% endcomment %}
 <!-- End of HubSpot Embed Code -->
 
-<script defer type="text/javascript">
+<script>
     window["_au_api"] = "thue/api.html";
     window['fap_url'] = "../thegioinhaphovietnam.com.vn/p/v2.33.55/js/fap.min90ca.js?v=1617780824171";
     window['fap.server'] = '//analytics.thegioinhaphovietnam.com.vn/fap';
