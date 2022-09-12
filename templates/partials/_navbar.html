@@ -22,10 +22,18 @@
                         <input type="radio" name="trans_type" value="rent" id="rent-house">
                         <label for="rent-house">Thuê nhà</label>
                     </div>
+                    <div class="tab">
+                        <input type="radio" name="trans_type" value="project" id="project">
+                        <label for="project">Dự án</label>
+                    </div>
+                                <div class="tab">
+                <input type="radio" name="trans_type" value="post" id="post">
+                <label for="post">Tin rao vặt</label>
+            </div>
                 </div>
                 <input type="hidden" placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà"
                        id="hidServiceTypeChecked"
-                       name="searchData"/>
+                       name="searchData" data-default-show="Hà Nội"/>
                 <div class="search-container">
                     <i class="zmdi zmdi-search" style="opacity: 0.3"></i>
                     <input disabled style="cursor: progress"
@@ -427,7 +435,14 @@
                 <input type="radio" name="trans_type" value="rent" id="rent-house">
                 <label for="rent-house">Thuê nhà</label>
             </div>
-
+            <div class="tab">
+                <input type="radio" name="trans_type" value="project" id="project">
+                <label for="project">Dự án</label>
+            </div>
+            <div class="tab">
+                <input type="radio" name="trans_type" value="post" id="post">
+                <label for="post">Tin rao vặt</label>
+            </div>
         </div>
         <div class="search-container" v-click-outside="handleFocus">
             <i v-show="!isLoading" class="zmdi zmdi-search" style="opacity: 0.3"></i>
@@ -438,7 +453,7 @@
                     v-bind:class="{ inputInProgress: isLoading, }"
                     v-on:focus="handleFocus"
                     class="search-input" type="search" autocomplete="off"
-                    spellcheck="false" dir="auto" placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà">
+                    spellcheck="false" dir="auto" placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà" data-default-show="Hà Nội">
             <button type="submit" class="btn-primary btn-ultra btn-search" style="background-color: orange">
                 <i class="zmdi zmdi-search"></i>
                 <span>TÌM KIẾM</span>

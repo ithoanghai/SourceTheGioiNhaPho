@@ -174,6 +174,7 @@ new Vue({
             maxArea: 500,
             bedroomFilter: [],
             bathroomFilter: '',
+            viewtypeFilter: '',
             directionFilters: [],
             isVerifiedFilter: undefined,
             isExclusiveFilter: undefined,
@@ -248,6 +249,12 @@ new Vue({
             curLength += this.countOtherFilter();
 
             return curLength
+        },
+        viewResultsMark: function () {
+            let curLength = 0;
+            if (this.viewtypeFilter === 'grid' || this.viewtypeFilter === 'list')
+                curLength += 1;
+            return curLength;
         },
     },
     methods: {
@@ -463,6 +470,26 @@ new Vue({
             await this.getListings();
             this.setMarkers();
         },
+        setViewResultsFilters: function (parentSelector) {
+            const asview = parentSelector.find('input[name="asView"]:checked').first().val()
+            if (!asview) return;
+            if (this.viewtypeFilter === asview) return;
+            this.viewtypeFilter = asview;
+            if (asview !== 'grid'){
+                this.updateQueryParams({'asview': asview});
+                this.viewAsList()
+            }
+            else{
+                this.removeQueryParams('asview');
+                this.viewAsGrid()}
+        },
+        applyViewResultsFilter: async function () {
+            alert('alo');
+            this.setViewResultsFilters($('#viewResults'));
+            this.toggleFilterType('viewResults');
+            /*await this.getListings();*/
+            alert('blo');
+        },
         setBedroomFilter: function (filters) {
             if (!filters) return;
             if (JSON.stringify(this.bedroomFilter) === JSON.stringify(filters)) return;
@@ -520,7 +547,7 @@ new Vue({
             const sort_price_ascend = (a, b) => a.price - b.price;
             const sort_price_descend = (a, b) => b.price - a.price;
             const sort_priority = (a, b) => a.priority - b.priority;
-            const sort_created = (a, b) => a.date_created - b.date_created;
+            const sort_created = (a, b) => a.list_date - b.list_date;
 
             switch (sortOption) {
                 case 'price_ascend':
@@ -652,9 +679,9 @@ new Vue({
             }, 500)
         },
         initMap: function () {
-            /*if (!google) return;*/
+            if (!google) return;
             const mapOptions = {
-                zoom: 8,
+                zoom: 12,
                 center: new google.maps.LatLng(21.0334474, 105.8401439),  // Hanoi
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
@@ -682,7 +709,7 @@ new Vue({
     },
     created() {
         this.checkingInterval = setInterval(this.checkIntervalCallback, 200);
-        window.initMap = this.initMap();
+        window.initMap = this.initMap;
 
         let htFilter = {};
         this.houseTypes.map(ht => {

@@ -110,11 +110,11 @@ function importRealtor($) {
         '    </div>\n' +
         '  </div>\n' +
         '</div>')
-    $('.extrabutton').append('<li><button onclick="importToDB($)" class="button" type="button" data-toggle="modal" data-target="#importRealtorModal">Nhập dữ liệu Chuyên viên từ file Excel</button></li>');
+    $('.object-tools').append('<li><button onclick="importToDB($)" class="button" type="button" data-toggle="modal" data-target="#importRealtorModal">Nhập dữ liệu Chuyên viên từ file Excel</button></li>');
 }
 
 function exportRealtor($) {
-    $('.extrabutton').append('<li><button class="button" onclick="exportRealtorData($)" type="button">Xuất dữ liệu Chuyên viên ra Excel</button></li>');
+    $('.object-tools').append('<li><button class="button" onclick="exportRealtorData($)" type="button">Xuất dữ liệu Chuyên viên ra Excel</button></li>');
 }
 
 window.addEventListener("load", function () {

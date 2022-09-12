@@ -463,7 +463,7 @@ function importListing($) {
         '    </div>\n' +
         '  </div>\n' +
         '</div>')
-    $('.extrabutton').append('<li><button onclick="importToDB($)" class="button" type="button" data-toggle="modal" data-target="#importListingModal">Nhập dữ liệu từ file Excel</button></li>');
+    $('.object-tools').append('<li><button onclick="importToDB($)" class="button" type="button" data-toggle="modal" data-target="#importListingModal">Nhập dữ liệu từ file Excel</button></li>');
 }
 
 function exportFBData($) {
@@ -493,7 +493,7 @@ function exportFBData($) {
 }
 
 function exportListing($) {
-    $('.extrabutton').append('<li><button class="button" onclick="exportFBData($)" type="button">Xuất dữ liệu csv (Facebook)</button></li>');
+    $('.object-tools').append('<li><button class="button" onclick="exportFBData($)" type="button">Xuất dữ liệu csv (Facebook)</button></li>');
 }
 
 window.addEventListener("load", function () {

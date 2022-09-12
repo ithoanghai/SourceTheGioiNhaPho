@@ -76,9 +76,6 @@
 
 {% block scripts %}
   {{ block.super }}
-
-  <script src="{% load_static 'js/search.js' %}"></script>
-
   <script type="text/javascript">
       var map;
       var markerData = [];
@@ -135,6 +132,8 @@
     </script>
   {% endif %}
 
+
+  <script src="{% load_static 'js/search.js' %}"></script>
 
   {#  <script defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>#}
 

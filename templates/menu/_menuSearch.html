@@ -39,22 +39,25 @@
         <div class="top-search" id="topSearchForm">
             <a href="#"></a>
             <form action="{% url 'listing_search' %}">
-                <div tabindex="1" class="search-type top-menu"><span>Mua nhà</span>
-                    <ul class="hide">
-                        <li class="sub-menu">
+                <div tabindex="1" class="search-type top-menu">
+                        <span>Mua nhà</span>
+                        <ul class="hide">
+                        <li class="top-menu">
                             Thuê nhà
                         </li>
                         <li>
                             Dự án
                         </li>
-                    </ul>
+                </ul>
+
+
                 </div>
                 <i class="zmdi zmdi-search"></i>
                 <div class="search-type-mobile">
-                    Mua •
+                    <span>Mua</span>
                     <ul class="hide">
                         <li class="sub-menu">>
-                            Thuê nhà
+                            Thuê
                         </li>
                         <li>
                             Dự án
@@ -106,7 +109,7 @@
         <form action="{% url "listing_search" %}">
             <div tabindex="0" class="search-type"><span>Mua nhà</span>
                 <ul class="hide">
-                    <li class="sub-menu">>
+                    <li class="sub-menu">
                         Thuê nhà
                     </li>
                     <li>
