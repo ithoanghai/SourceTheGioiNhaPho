@@ -293,11 +293,6 @@ class TimestampField(serializers.Field):
         return value.timestamp()
 
 
-class TimestampField(serializers.Field):
-    def to_representation(self, value):
-        return value.timestamp()
-
-
 class ListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Listing

@@ -56,6 +56,7 @@ gộp dữ liệu
     docker-compose exec web bash -c "python manage.py migrate --fake-initial"
     docker-compose restart web
     docker-compose up -d search_engine
+    docker-compose exec web bash -c "python manage.py index_area"
 
 #update and build release on server
     cd app
