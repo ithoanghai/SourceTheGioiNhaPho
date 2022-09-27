@@ -11,7 +11,7 @@
         <div class="banner-content-inner">
             <h1 class="heading-01">TÌM KIẾM NGÔI NHÀ TỐT NHẤT, NHANH NHẤT</h1>
 
-            <form id="searchForm" class="search-desktop-component" action="{% url "listing_search" %}">
+            <form id="searchFormHome" class="search-desktop-component" action="{% url "listing_search" %}">
                 {% csrf_token %}
                 <div class="tab-container">
                     <div class="tab">
@@ -50,7 +50,7 @@
 
             </form>
 
-            <div id="search-content" v-cloak>
+            {% comment %}<div id="search-content" v-cloak>
                 <div class="actionBar" v-cloak>
                     <div class="filter">
                         <ul>
@@ -413,7 +413,7 @@
 
                 </div>
 
-            </div>
+            </div>{% endcomment %}
 
             <p class="heading-04" style="color: white">Thế Giới Nhà Phố có hơn 30.000 BĐS đang bán với các thông số, giá
                 BĐS chính xác 100% </p>

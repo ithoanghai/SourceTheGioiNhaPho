@@ -4,7 +4,7 @@
 <html lang="{{ LANGUAGE_CODE|default:"vi" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 
 <head>
-  <title> Thế giới Nhà Phố Việt Nam|{% block title %}Mua Bán Bất Động Sản Tốt Nhất{% endblock %}</title>
+  <title> Thế Giới Nhà Phố Việt Nam|{% block title %}Mua Bán Bất Động Sản Tốt Nhất HN{% endblock %}</title>
   {% block meta %}
     <meta http-equiv="Cache-Control: max-age=86400" content="public">
     <meta http-equiv="Content-Encoding: deflate, gzip" content="public">
@@ -41,7 +41,6 @@
 </head>
 
 <body>
-
 <!-- Alerts -->
 {% include 'partials/_alerts.html' %}
 
@@ -53,17 +52,17 @@
 
 <div id="fb-root"></div>
 
-<!-- Your Plugin chat code -->
-<div class="fb-customerchat"
-     attribution="biz_inbox"
-     page_id="108470991299693">
-</div>
-
 <!-- Scripts -->
 {% include 'partials/_scriptsCommon.html' %}
 
 {% block scripts %}
 {% endblock %}
+
+<!-- Your Plugin chat code -->
+<div class="fb-customerchat"
+     attribution="biz_inbox"
+     page_id="108470991299693">
+</div>
 
 </body>
 

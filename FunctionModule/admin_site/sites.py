@@ -261,6 +261,7 @@ class AdminSites:
         urlpatterns = [
             path('', wrap(self.index), name='index'),
             path('login/', self.login, name='login'),
+            #path("login/", FunctionModule.accounts.views.login, name="account_login"),
             path('logout/', wrap(self.logout), name='logout'),
             path('logout/', wrap(self.logout), name='logout'),
 

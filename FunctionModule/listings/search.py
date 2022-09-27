@@ -22,10 +22,11 @@ def search_by_keywords(q: str, limit: int = 50, offset: int = 0, filters=None):
     return results
 
 
-def get_suggestions(q: str, limit: int = 50, offset: int = 0, ):
+def get_suggestions(q: str, limit: int = 20, offset: int = 0, ):
     if not q:
         return []
     try:
+
         results = suggestions_search.search(q, {
             'limit': limit,
             'offset': offset
