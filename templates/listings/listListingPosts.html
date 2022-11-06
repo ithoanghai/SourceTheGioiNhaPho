@@ -20,7 +20,7 @@
                     <th scope="col">{% trans "Địa chỉ" %}</th>
                     <th scope="col">{% trans "Giao dịch" %}</th>
                     <th>{% trans "Loại BĐS" %}</th>
-                    <th>{% trans "Ngày đăng" %}</th>
+                    <th>{% trans "Ngày" %}</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -31,7 +31,7 @@
                         <td>{{ listing.address }}</td>
                         <td>{{ listing.transaction_type | get_transaction_type }}</td>
                         <td>{{ listing.house_type | get_house_type }}</td>
-                        <td>{{ listing.date_created }}</td>
+                        <td>{% if action.date_update %}{{ action.date_update}}{% else %}{{ action.date_created}}{% endif %}</td>
                         <td>
                             <a class="btn btn-light"
                                href="{% url "listing_detail" listing.id %}">{% trans "Chi tiết" %}</a>

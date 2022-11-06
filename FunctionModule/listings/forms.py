@@ -41,8 +41,6 @@ class ListingAdminForm(forms.ModelForm):
 
 
 class ListingHistoryAdminForm(forms.ModelForm):
-    date_created = forms.DateField(label='Ngày khởi tạo lịch sử BĐS',widget=forms.DateInput(format='%d-%m-%Y'))
-
     class Meta:
         model = ListingHistory
         fields = '__all__'

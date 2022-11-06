@@ -26,14 +26,14 @@ def get_client_ip(request):
 
 def home_view(request):
     listings_for_sale = (Listing.objects
-                             .order_by('priority','-date_created')
+                             .order_by('priority','-date_update')
                              .filter(is_published=True, transaction_type=TransactionType.SELL)[:60])
 
     listings_for_rent = (Listing.objects
-                             .order_by('priority','-date_created')
+                             .order_by('priority','-date_update')
                              .filter(is_published=True, transaction_type=TransactionType.FOR_RENT)[:30])
     listings_project = (Listing.objects
-                            .order_by('priority','-date_created')
+                            .order_by('priority','-date_update')
                             .filter(is_published=True, transaction_type=TransactionType.PROJECT)[:15])
     listing_by_group_forsale = (Listing.objects
               .values('district')
@@ -100,7 +100,7 @@ def specialist(request):
 
 
 def specialist_detail(request, realtor_id):
-    listings = Listing.objects.filter(realtor__id=realtor_id).order_by('-date_created')
+    listings = Listing.objects.filter(realtor__id=realtor_id).order_by('-date_update')
     paginator = Paginator(listings, 9)
     page = request.GET.get('page')
     paged_listings = paginator.get_page(page)

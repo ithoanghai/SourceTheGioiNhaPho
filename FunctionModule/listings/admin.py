@@ -71,10 +71,10 @@ class ListingAdmin(admin_site.ModelAdmin):
         ('ĐỊA CHỈ & VỊ TRÍ BĐS', {'fields': (
             ('state', 'district', 'ward'), ('street', 'address', 'location'))}),
         ('TRẠNG THÁI ĐĂNG TIN', {
-            'fields': (('status', 'date_created'), ('is_published', 'priority'),)}),
+            'fields': (('status', 'date_created', 'date_update'), ('is_published', 'priority'),)}),
     )
 
-    list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'district','date_created')
+    list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'district','created_date')
     list_display_links = ('address','price',)
     list_filter = (
         ('status', ChoicesFieldListFilter),
@@ -82,6 +82,7 @@ class ListingAdmin(admin_site.ModelAdmin):
         ('transaction_type', ChoicesFieldListFilter),
         ('road_type', ChoicesFieldListFilter),
         ('date_created', DateFieldListFilter),
+        ('date_update', DateFieldListFilter),
         ('registration_type', ChoicesFieldListFilter),
         ('is_published', BooleanFieldListFilter),
         ('is_advertising', BooleanFieldListFilter),
@@ -98,13 +99,13 @@ class ListingAdmin(admin_site.ModelAdmin):
     #advanced_filter_fields = ('status', ('house_type', 'road_type'))
     list_editable = ()
     search_fields = ('id', 'title', 'code', 'address', 'area', 'price', 'house_type', 'road_type', 'urban_area',
-                     'street', 'ward', 'district', 'state', 'date_created', 'extra_data')
+                     'street', 'ward', 'district', 'state', 'date_created', 'date_update', 'extra_data')
     list_per_page = 200
     inlines = [ListingPhotoAdmin, ContractPhotoAdmin, ListingVideoAdmin, ListingHistoryInline, TransactionInline]
 
     actions = ['make_published', 'unpublished', 'sold', 'exhaustive']
     form = ListingAdminForm
-    ordering = ('-date_created',)
+    ordering = ('-date_update',)
     autocomplete_fields = ['user','realtor']
     #delete_selected.short_description = 'Xóa bất động sản đã chọn trong %(verbose_name_plural)'
 
@@ -179,7 +180,7 @@ class ListingAdmin(admin_site.ModelAdmin):
             queryset = super().get_queryset(request)
             return queryset
         else:
-            queryset_list = Listing.objects.order_by('-date_created')
+            queryset_list = Listing.objects.order_by('-date_update')
             query = Q(realtor__user=request.user.id)
             query = query | Q(user=request.user)
             queryset_list = queryset_list.filter(query)
@@ -242,7 +243,6 @@ class ListingHistoryAdmin(admin_site.ModelAdmin):
 
     list_display = ('listing', 'area', 'floors', 'width', 'price', 'bedrooms', 'bathrooms', 'warehouse', 'date_created',)
     list_display_links = ('listing',)
-    list_filter = ('date_created', 'listing', )
     list_filter = (
         ('area', RangeNumericFilter),
         ('floors', RangeNumericFilter),
@@ -303,7 +303,7 @@ class ListingHistoryAdmin(admin_site.ModelAdmin):
             queryset = super().get_queryset(request)
             return queryset
         else:
-            queryset_list = Listing.objects.order_by('-date_created')
+            queryset_list = Listing.objects.order_by('-date_update')
             query = Q(realtor__user=request.user.id)
             query = query | Q(user=request.user)
             queryset_list = queryset_list.filter(query)

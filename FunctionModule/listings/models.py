@@ -143,10 +143,11 @@ class Listing(models.Model, HitCountMixin):
 
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING,
                               verbose_name=_("Trạng thái giao dịch"))
-    date_created = models.DateField(default=datetime.now, verbose_name=_("Ngày đăng bán/cho thuê"))
+    date_created = models.DateField(default=datetime.now, verbose_name=_("Ngày lên hàng"))
+    date_update = models.DateField(default=datetime.now, verbose_name=_("Ngày cập nhật"))
 
     priority = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)],
-                                   choices=([(i, i) for i in range(1, 10)]), verbose_name=_("Thứ tự ưu tiên đăng"),
+                                   choices=([(i, i) for i in range(1, 10)]), verbose_name=_("Ưu tiên đăng"),
                                    null=True, blank=True, default=1)
 
     is_exclusive = models.BooleanField(default=False, verbose_name=_("THẾ GIỚI NHÀ PHỐ ĐỘC QUYỀN"))
@@ -175,6 +176,8 @@ class Listing(models.Model, HitCountMixin):
         if float(self.area) > 0:
             ave = float(self.price)/float(self.area)*1000
             self.average_price = Decimal(round(ave, 4))
+
+        self.date_update = datetime.now()
 
         super().save(*args, **kwargs)
 
@@ -233,6 +236,11 @@ class Listing(models.Model, HitCountMixin):
             return f'{price.normalize} tỷ'
         else:
             return f'{price:.2f} tỷ'
+
+    def created_date(self):
+        if self.date_created:
+            return self.date_created.strftime('%d/%m/%Y')
+        return ''
 
 
 class ListingImage(models.Model):

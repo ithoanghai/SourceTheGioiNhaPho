@@ -35,9 +35,14 @@ class Post(models.Model, HitCountMixin):
     content = models.TextField( verbose_name=_("Nội dung tin"))
     is_published = models.BooleanField(default=True, verbose_name=_("CHO PHÉP ĐĂNG"))
     date_created = models.DateField(default=datetime.now, verbose_name=_("Thời gian đăng"))
+    date_update = models.DateField(default=datetime.now, verbose_name=_("Cập nhật"))
     hit_count_generic = GenericRelation(
         MODEL_HITCOUNT, object_id_field='object_pk',
         related_query_name='hit_count_generic_relation')
 
     def __str__(self):
         return "Tiêu đề bài viết: %s" % self.title
+
+    def save(self, *args, **kwargs):
+        self.date_update = datetime.now()
+        super().save(*args, **kwargs)

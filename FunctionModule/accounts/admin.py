@@ -33,7 +33,7 @@ class PermissionAdmin(admin_site.ModelAdmin):
 class BlogInline(admin_site.TabularInline):
     model = Post
     extra = 0  # If you have a fixed number number of answers, set it here.
-    fields = ('date_created', 'title', )
+    fields = ('date_created','date_update', 'title', )
 
 
 class ListingHistoryInline(admin_site.TabularInline):
@@ -51,7 +51,7 @@ class CustomerInline(admin_site.TabularInline):
 class ListingInline(admin_site.TabularInline):
     model = Listing
     extra = 0  # If you have a fixed number number of answers, set it here.
-    fields = ('date_created', 'status', 'address', 'area','floors', 'price', )
+    fields = ('date_created','date_update', 'status', 'address', 'area','floors', 'price', )
 
 
 class TransactionInline(admin_site.TabularInline):

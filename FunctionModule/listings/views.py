@@ -35,7 +35,7 @@ class ListingSearchQuery(BaseModel):
 
 
 def index(request):
-    listings = Listing.objects.order_by('priority', 'price', '-date_created').filter(is_published=True, is_advertising=False)
+    listings = Listing.objects.order_by('priority', 'price', '-date_update').filter(is_published=True, is_advertising=False)
 
     paginator = Paginator(listings, 100)
     page = request.GET.get('page')
@@ -53,9 +53,9 @@ def listing(request, listing_id):
     ListingDetailJSONView()
     listing_detail = get_object_or_404(Listing, pk=listing_id)
     listings_neighborhood = (
-    Listing.objects.order_by('priority', '-date_created').filter(is_published=True, is_advertising=False,
+    Listing.objects.order_by('priority', '-date_update').filter(is_published=True, is_advertising=False,
                                                               state=listing_detail.state)[:10])
-    listings_same = (Listing.objects.order_by('priority', '-date_created').filter(is_published=True, is_advertising=False,
+    listings_same = (Listing.objects.order_by('priority', '-date_update').filter(is_published=True, is_advertising=False,
                                                                                house_type=listing_detail.house_type,
                                                                                area=listing_detail.area)[:30])
 
@@ -117,6 +117,7 @@ def post_listing(request):
                 else:
                     photomain = request.POST['photomain']
                 date_created = timezone.now()
+                date_update = timezone.now()
                 # #  Check if user has made inquiry already
                 user_id = request.user.id
                 has_listing = Listing.objects.filter(address=address, user_id=user_id,
@@ -150,7 +151,7 @@ def post_listing(request):
 
 def my_listing_post(request):
     if request.user.is_authenticated and request.method == 'GET':
-        listings = Listing.objects.filter(user=request.user, is_advertising=True).order_by('-date_created')
+        listings = Listing.objects.filter(user=request.user, is_advertising=True).order_by('-date_update')
         paginator = Paginator(listings, 10)
         page = request.GET.get('page')
         paged_listings = paginator.get_page(page)
@@ -165,7 +166,7 @@ def my_listing_post(request):
 
 def my_listing(request):
     if request.user.is_authenticated and request.method == 'GET':
-        listings = Listing.objects.filter(user=request.user, is_advertising=False).order_by('-date_created')
+        listings = Listing.objects.filter(user=request.user, is_advertising=False).order_by('-date_update')
         paginator = Paginator(listings, 10)
         page = request.GET.get('page')
         paged_listings = paginator.get_page(page)
@@ -232,7 +233,7 @@ class ListingsAPIView(generics.ListCreateAPIView):
         id_pk = self.kwargs.get('id', None)
         # queryset = Listing.objects.filter(id=id_pk)
         queryset = Listing.objects.all()
-        return queryset.order_by('date_created')
+        return queryset.order_by('-date_update')
 
     def post(self, request, *args, **kwargs):
         id_pk = self.kwargs.get('id', None)

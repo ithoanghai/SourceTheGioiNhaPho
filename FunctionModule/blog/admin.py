@@ -13,22 +13,23 @@ class PostAdmin(admin_site.ModelAdmin):
             'classes': ('wide',),
             'fields': ('post_type', 'title', 'content')}),
         ('TÌNH TRẠNG TIN ĐĂNG', {'fields':
-            ('user', ('is_published', 'date_created'))}),
+            ('user', ('is_published', 'date_update'))}),
     )
 
     form = PostAdminForm
-    list_display = ('date_created', 'title', 'is_published', 'user')
+    list_display = ('date_created','date_update', 'title', 'is_published', 'user')
     list_display_links = ('title',)
     list_filter = (
         ('date_created', DateFieldListFilter),
+        ('date_update', DateFieldListFilter),
     )
     list_editable = ()
-    search_fields = ('id', 'title', 'content', 'date_created')
+    search_fields = ('id', 'title', 'content', 'date_created', 'date_update')
     autocomplete_fields = ['user']
     list_per_page = 200
     inlines = []
     actions = ['make_published', 'unpublished',]
-    ordering = ('-date_created',)
+    ordering = ('-date_update',)
 
     def get_form(self, request, obj=None, change=False, **kwargs):
         form = super(PostAdmin, self).get_form(request, obj, **kwargs)

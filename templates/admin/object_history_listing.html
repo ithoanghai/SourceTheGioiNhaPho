@@ -19,7 +19,7 @@
     <table id="change-history">
         <thead>
         <tr>
-            <th scope="col">{% translate 'Ngày tạo' %}</th>
+            <th scope="col">{% translate 'Ngày' %}</th>
             <th scope="col">{% translate 'Giá bán' %}</th>
             <th scope="col">{% translate 'Mô tả Bất động sản' %}</th>
             <th scope="col">{% translate 'Kho hàng' %}</th>
@@ -31,7 +31,7 @@
         {% for action in action_list %}
         <tr>
             {% comment %}<th scope="row">{{ action.date_created|date:"DATETIME_FORMAT" }}</th>{% endcomment %}
-            <th scope="row">{{ action.date_created}}</th>
+            <th scope="row">{% if action.date_update %}{{ action.date_update}}{% else %}{{ action.date_created}}{% endif %}</th>
              <td>{{ action.price }}</td>
              <td>{{ action.extra_data }}</td>
              <td>{{ action.warehouse }}</td>
