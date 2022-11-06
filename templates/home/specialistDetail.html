@@ -53,9 +53,10 @@
                         {% if realtor.address %}
                                 <p>Địa chỉ: {{ realtor.address }}</p>
                          {% endif %}
-                        {% if realtor.phone %}
+                        {% if realtor.phone1 %}
                                 <p>Điện thoại: {{ realtor.phone1 }} {% endif %}{% if realtor.phone2%}- {{ realtor.phone2 }}</p>
                         {% endif %}
+
                         </div>
                         <div class="agent-social">
                             {% if realtor.facebook %}
@@ -74,7 +75,7 @@
                         <div class="agent-btn">
                             <a class="btn-primary-agent btn-red" href="tel:{{ realtor.phone1 }}"
                                title="{{ realtor.phone1 }}"><i
-                                    class="zmdi zmdi-phone"></i>{{ realtor.phone1 }}</a>
+                                    class="zmdi zmdi-phone"></i>Gọi ngay</a>
                             <div class="btn-contact">
                                 <a class="agent-contact-modal btn-primary-agent btn-transparent"
                                    data-target="contact-agent"><i class="zmdi zmdi-email-open"></i>Liên hệ tư vấn</a>
@@ -229,6 +230,7 @@
             totalPropertyForRent: 1,
             totalPropertyTraded: 0,
         }
+
     </script>
 
 {% endblock %}

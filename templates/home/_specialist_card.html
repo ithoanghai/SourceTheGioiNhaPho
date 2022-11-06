@@ -21,9 +21,13 @@
         <a href="{% url "specialistDetail" realtor.id %}"><h3
                 class="font-tiempos">{{ realtor.name }}</h3></a>
         <p class="team-name-sale">{{ realtor.position|get_position_type }}</p>
-        <div class="agents-email">
+        {% comment %}<div class="agents-email">
             <a href="mailto:{{ realtor.user.email }}"><span class="__cf_email__"
                                                             data-cfemail="">[email&#160;protected]</span></a>
-        </div>
+        </div>{% endcomment %}
+{% comment %}    <a data-phone-hidden="category: ContactProperty, event: ClickHiddenHotline" style="opacity: 0.6"
+                       href="tel:{{ realtor.phone1 }}"
+                       class="btn-primary btn-large btn-phone phone-hidden"><i
+                            class="zmdi zmdi-phone"></i><span class="text">Gọi ngay</span></a>{% endcomment %}
     </div>
 </div>

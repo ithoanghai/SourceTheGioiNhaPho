@@ -143,7 +143,7 @@ class Listing(models.Model, HitCountMixin):
 
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING,
                               verbose_name=_("Trạng thái giao dịch"))
-    date_created = models.DateTimeField(default=datetime.now, verbose_name=_("Ngày đăng bán/cho thuê"))
+    date_created = models.DateField(default=datetime.now, verbose_name=_("Ngày đăng bán/cho thuê"))
 
     priority = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)],
                                    choices=([(i, i) for i in range(1, 10)]), verbose_name=_("Thứ tự ưu tiên đăng"),

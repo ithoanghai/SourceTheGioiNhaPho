@@ -28,9 +28,14 @@
                                data-mix-header-click="group: info, action: select_guideline_sell_info">Kiến thức môi giới</a>
                         </li>{% endcomment %}
     <li class="divide"></li>
-    <li>
+    {% comment %}<li>
       <a href="{% url 'specialist' %}"
-         data-mix-header-click="group: buy, action: select_agent_buy">Gặp chuyên viên tư
+         data-mix-header-click="group: buy, action: select_agent_buy">Danh sách chuyên viên tư
+        vấn</a>
+    </li>{% endcomment %}
+      <li>
+       <a href="{% url 'realtor_search' %}"
+         data-mix-header-click="group: buy, action: select_agent_buy">Danh sách chuyên viên tư
         vấn</a>
     </li>
     <li>

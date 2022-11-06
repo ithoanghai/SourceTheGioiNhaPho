@@ -44,6 +44,7 @@ class Realtor(models.Model):
                              error_messages={'unique': _("Số điện thoại chính này đã được sử dụng trên hệ thống.")})
     phone2 = models.CharField(_('Điện thoại phụ'), max_length=40, db_index=True, blank=True, null=True, validators=[phone_regex],
                              error_messages={'unique': _("Số điện thoại phụ này đã được sử dụng trên hệ thống.")})
+    avatar = models.ImageField(_("Ảnh đại diện"), upload_to="photos/%Y%m%d/", blank=True)
     identifier = models.CharField(_('Căn cước công dân'), blank=True, null=True, max_length=15)
     workplace = models.CharField(max_length=50, choices=Workplace.choices, verbose_name=_("Đơn vị"),
                                  default=Workplace.TGNP)
@@ -81,6 +82,10 @@ class Realtor(models.Model):
     @property
     def website_url_name(self):
         return split_url(self.website)
+
+    def birth(self):
+        if self.birthyear:
+            return f"{self.birthyear}"
 
 
 class RealtorSerializer(serializers.ModelSerializer):

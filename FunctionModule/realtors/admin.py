@@ -44,9 +44,9 @@ class TransactionHistoryInline(admin_site.TabularInline):
 
 
 class RealtorAdmin(admin_site.ModelAdmin):
-    list_display = ('id', 'name', 'birthyear', 'position', 'phone1', 'countryside', 'department', 'work_area','is_cooperate','is_published','email', 'facebook')
+    list_display = ('name', 'birthyear', 'position', 'phone1', 'countryside', 'department', 'work_area','is_cooperate','status','is_published', 'facebook')
     list_display_links = ('name',)
-    search_fields = ('id', 'name','phone1','phone2', 'email', 'birthyear', 'position', 'countryside', 'workplace', 'department', 'work_area', 'facebook', 'hire_date')
+    search_fields = ('id', 'name','phone1','phone2', 'email', 'address','title','birthyear','identifier', 'position', 'countryside', 'workplace', 'department', 'work_area', 'facebook','referral', 'hire_date')
     autocomplete_fields = ['user']
     list_per_page = 200
     ordering = ('name', '-hire_date')
@@ -57,8 +57,10 @@ class RealtorAdmin(admin_site.ModelAdmin):
         ('workplace', ChoicesFieldListFilter),
         ('is_cooperate', BooleanFieldListFilter),
         ('is_published', BooleanFieldListFilter),
+        ('status', ChoicesFieldListFilter),
         ('hire_date', DateFieldListFilter),
         ('birthyear', RangeNumericFilter),
+        ('level', RangeNumericFilter),
     )
     readonly_fields = []
     inlines = [TransactionInline, TransactionHistoryInline, CustomerInline, ListingInline, ListingHistoryInline,  ]
@@ -66,7 +68,7 @@ class RealtorAdmin(admin_site.ModelAdmin):
     add_fieldsets = (
         ('THÔNG TIN CƠ BẢN CHUYÊN VIÊN', {
             'classes': ('wide',),
-            'fields': ('user', ( 'name', 'birthyear', 'position'), ('countryside', 'address'), ('phone1', 'phone2','email')),
+            'fields': ('user', ( 'name', 'birthyear', 'position'), ('avatar', 'countryside', 'address'), ('phone1', 'phone2','email')),
         }), ('THÔNG TIN BỔ SUNG', {'fields': (
             ('workplace', 'department', 'work_area'),
             'facebook', 'story',)})
@@ -75,7 +77,7 @@ class RealtorAdmin(admin_site.ModelAdmin):
     fieldsets = (
         ('THÔNG TIN CƠ BẢN CHUYÊN VIÊN', {
             'classes': ('wide',),
-            'fields': ('user', ('name', 'birthyear', 'position'), ('countryside', 'address'), ('phone1', 'phone2', 'email')),
+            'fields': ('user', ('name', 'birthyear', 'position'), ('avatar','countryside', 'address'), ('phone1', 'phone2', 'email')),
         }),
         ('THÔNG TIN BỔ SUNG', {'fields': (
             ('workplace', 'department', 'work_area'),

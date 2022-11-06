@@ -34,6 +34,7 @@ urlpatterns = [
     path('api/', include('FunctionModule.api.urls')),
     path('blog/', include('FunctionModule.blog.urls')),
     path('listings/', include('FunctionModule.listings.urls')),
+    path('realtors/', include('FunctionModule.realtors.urls')),
     path('transactions/', include('FunctionModule.transactions.urls')),
     path('customers/', include('FunctionModule.customers.urls')),
     path('accounts/', include('FunctionModule.accounts.urls')),
