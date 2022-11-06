@@ -33,23 +33,24 @@
             </div>
 
             <section class="block-agents">
-
-                <div class="agents-container col-12">
-
-                    <div class="agents-inner">
-                        <div class="top-search" id="topSearchForm">
+                        <div class="top-search" id="topSearchForm" style="text-align: center">
                         <form action="{% url 'realtor_search' %}">
                             <div tabindex="1" class="search-type top-menu">
-                                    <strong>Tìm chuyên tư vấn BĐS</strong>
+                                    <h5>Tìm chuyên gia tư vấn BĐS</h5>
                             </div>
                             <i class="zmdi zmdi-search"></i>
-                            <input placeholder="Nhập tên, SĐT chuyên viên cần tìm" type="search" autocomplete="disabled"
+                            <input style="width: 300px" placeholder="Nhập tên, SĐT chuyên viên cần tìm" type="search" autocomplete="disabled"
                                    v-model="query" v-on:input="handleQueryChange"
                                    v-bind:class="{ inputInProgress: isLoading, }"
                                    v-on:focus="handleFocus"
                                    spellcheck="false" dir="auto" name="keywords">
                         </form>
                     </div>
+            <br/>
+                <div class="agents-container col-12">
+
+                    <div class="agents-inner">
+
                         <div class="col-12 agents__grid">
                             {% for realtor in specialists %}
                                 {% include "home/_specialist_card.html" %}
