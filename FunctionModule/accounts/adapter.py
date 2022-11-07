@@ -12,7 +12,7 @@ from django.contrib.auth import (
     authenticate,
     get_backends,
     login as django_login,
-    logout as django_logout,
+    logout as django_logout, get_user_model,
 )
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.password_validation import validate_password
@@ -33,11 +33,7 @@ from TownhouseWorldRealestate.utils import (
     deserialize_instance,
     serialize_instance,
     build_absolute_uri,
-    email_address_exists,
-    generate_unique_username,
-    get_user_model,
     import_attribute,
-    valid_email_or_none,
 )
 from . import app_settings
 
@@ -219,7 +215,7 @@ class DefaultAccountAdapter(object):
             )
 
     def generate_unique_username(self, txts, regex=None):
-        return generate_unique_username(txts, regex)
+        return app_settings.generate_unique_username(txts, regex)
 
     def save_user(self, request, user, form, commit=True):
         """
@@ -307,7 +303,7 @@ class DefaultAccountAdapter(object):
         return password
 
     def validate_unique_email(self, email):
-        if email_address_exists(email):
+        if app_settings.email_address_exists(email):
             raise forms.ValidationError(self.error_messages["email_taken"])
         return email
 
@@ -622,7 +618,7 @@ class DefaultSocialAccountAdapter(object):
         phone = data.get("phone")
         user = sociallogin.user
         FunctionModule.accounts.utils.user_username(user, username or "")
-        FunctionModule.accounts.utils.user_email(user, valid_email_or_none(email) or "")
+        FunctionModule.accounts.utils.user_email(user, app_settings.valid_email_or_none(email) or "")
         name_parts = (name or "").partition(" ")
         FunctionModule.accounts.utils.user_field(user, "first_name", first_name or name_parts[0])
         FunctionModule.accounts.utils.user_field(user, "last_name", last_name or name_parts[2])
@@ -666,7 +662,7 @@ class DefaultSocialAccountAdapter(object):
             # Let's check if auto_signup is really possible...
             if email:
                 if app_settings.UNIQUE_EMAIL:
-                    if email_address_exists(email):
+                    if app_settings.email_address_exists(email):
                         # Oops, another user already has this address.
                         # We cannot simply connect this social account
                         # to the existing user. Reason is that the

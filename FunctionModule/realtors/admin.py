@@ -15,35 +15,35 @@ from ..transactions.models import Transaction, TransactionHistory
 
 class ListingInline(admin_site.TabularInline):
     model = Listing
-    per_page = 10
+    max_num = 10
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date_created','date_update', 'status', 'address', 'area','floors', 'price', )
 
 
 class ListingHistoryInline(admin_site.TabularInline):
     model = ListingHistory
-    per_page = 10
+    max_num = 10
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date_created', 'area','floors', 'price', 'warehouse', )
 
 
 class CustomerInline(admin_site.TabularInline):
     model = Customer
-    per_page = 10
+    max_num = 10
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('hire_date', 'custormer_type', 'transactionStatus', 'name', 'phone', 'district', 'financial_range', )
 
 
 class TransactionInline(admin_site.TabularInline):
     model = Transaction
-    per_page = 10
+    max_num = 10
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date', 'status', 'trantype', 'request_price', 'customer',)
 
 
 class TransactionHistoryInline(admin_site.TabularInline):
     model = TransactionHistory
-    per_page = 10
+    max_num = 10
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date', 'transaction', 'status', 'reason', 'comment',  'realtor', )
 

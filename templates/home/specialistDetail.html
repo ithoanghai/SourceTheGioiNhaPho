@@ -190,21 +190,25 @@
         <section class="bg-black call-now">
             <div class="img-call">
                 <a href="#">
-                    {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' %}
+                    {% if realtor.avatar %}
+                            <img src="/media/{{ realtor.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                        {% else %}
+                            {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' or realtor.avatar %}
                                 <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
                             {% else %}
                                 <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
                             {% endif %}
+                        {% endif %}
                 </a>
             </div>
             <div class="question">
                 <h3 class="team_title">Bạn có nhu cầu về bất động sản, bạn muốn được tư vấn, <br/> bạn cần hỏi thêm
                     thông
-                    tin thị trường? Liên hệ với {{ realtor.position|get_position_type }} {{ realtor.user.name }} ngay!
+                    tin thị trường? Liên hệ với Bộ phận kinh doanh hoặc {{ realtor.position|get_position_type }} {{ realtor.name }} ngay!
                 </h3>
-                <a class="btn-primary-agent btn-red" href="tel:{{ realtor.user.phone }}"
-                   title="{{ realtor.user.phone }}"><i
-                        class="zmdi zmdi-phone"></i>{{ realtor.user.phone }}</a>
+                <a class="btn-primary-agent btn-red" href="tel:{{ realtor.phone1 }}"
+                   title="{{ realtor.phone1 }}"><i
+                        class="zmdi zmdi-phone"></i>{{ realtor.phone1 }}</a>
                 <a class="btn-contact agent-contact-modal btn-primary-agent btn-red s-btn-red mgb-0"
                    data-target="contact-agent">Liên hệ tư vấn</a>
             </div>

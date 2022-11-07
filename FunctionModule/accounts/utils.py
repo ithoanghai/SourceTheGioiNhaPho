@@ -1,13 +1,17 @@
 import unicodedata
+import string
+import re
+import random
 from collections import OrderedDict
 from datetime import timedelta
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash, get_user_model
 from django.core.exceptions import FieldDoesNotExist, ValidationError
+from django.core.validators import validate_email
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, EmailField
 from django.http import HttpResponseRedirect
 from django.utils.encoding import force_str
 from django.utils.http import base36_to_int, int_to_base36, urlencode
@@ -16,9 +20,7 @@ from django.utils.timezone import now
 from TownhouseWorldRealestate.exceptions import ImmediateHttpResponse
 from TownhouseWorldRealestate.utils import (
     get_request_param,
-    get_user_model,
     import_callable,
-    valid_email_or_none,
 )
 from . import app_settings, signals
 from .adapter import get_adapter
@@ -478,3 +480,122 @@ def url_str_to_user_pk(s):
     except ValidationError:
         pk = base36_to_int(s)
     return pk
+
+
+# Magic number 7: if you run into collisions with this number, then you are
+# of big enough scale to start investing in a decent user model...
+MAX_USERNAME_SUFFIX_LENGTH = 7
+USERNAME_SUFFIX_CHARS = [string.digits] * 4 + [string.ascii_letters] * (
+    MAX_USERNAME_SUFFIX_LENGTH - 4
+)
+
+
+def _generate_unique_username_base(txts, regex=None):
+    from FunctionModule.accounts.adapter import get_adapter
+
+    adapter = get_adapter()
+    username = None
+    regex = regex or r"[^\w\s@+.-]"
+    for txt in txts:
+        if not txt:
+            continue
+        username = unicodedata.normalize("NFKD", force_str(txt))
+        username = username.encode("ascii", "ignore").decode("ascii")
+        username = force_str(re.sub(regex, "", username).lower())
+        # Django allows for '@' in usernames in order to accomodate for
+        # project wanting to use e-mail for username. In allauth we don't
+        # use this, we already have a proper place for putting e-mail
+        # addresses (EmailAddress), so let's not use the full e-mail
+        # address and only take the part leading up to the '@'.
+        username = username.split("@")[0]
+        username = username.strip()
+        username = re.sub(r"\s+", "_", username)
+        # Finally, validating base username without database lookups etc.
+        try:
+            username = adapter.clean_username(username, shallow=True)
+            break
+        except ValidationError:
+            pass
+    return username or "user"
+
+
+def get_username_max_length():
+
+    if app_settings.USER_MODEL_USERNAME_FIELD is not None:
+        User = get_user_model()
+        max_length = User._meta.get_field(app_settings.USER_MODEL_USERNAME_FIELD).max_length
+    else:
+        max_length = 0
+    return max_length
+
+
+def generate_username_candidate(basename, suffix_length):
+    max_length = get_username_max_length()
+    suffix = "".join(
+        random.choice(USERNAME_SUFFIX_CHARS[i]) for i in range(suffix_length)
+    )
+    return basename[0 : max_length - len(suffix)] + suffix
+
+
+def generate_username_candidates(basename):
+    if len(basename) >= app_settings.USERNAME_MIN_LENGTH:
+        ret = [basename]
+    else:
+        ret = []
+    min_suffix_length = max(1, app_settings.USERNAME_MIN_LENGTH - len(basename))
+    max_suffix_length = min(get_username_max_length(), MAX_USERNAME_SUFFIX_LENGTH)
+    for suffix_length in range(min_suffix_length, max_suffix_length):
+        ret.append(generate_username_candidate(basename, suffix_length))
+    return ret
+
+
+def generate_unique_username(txts, regex=None):
+    from FunctionModule.accounts.utils import filter_users_by_username
+
+    from FunctionModule.accounts.adapter import get_adapter
+
+    adapter = get_adapter()
+    basename = _generate_unique_username_base(txts, regex)
+    candidates = generate_username_candidates(basename)
+    existing_usernames = filter_users_by_username(*candidates).values_list(
+        app_settings.USER_MODEL_USERNAME_FIELD, flat=True
+    )
+    existing_usernames = set([n.lower() for n in existing_usernames])
+    for candidate in candidates:
+        if candidate.lower() not in existing_usernames:
+            try:
+                return adapter.clean_username(candidate, shallow=True)
+            except ValidationError:
+                pass
+    # This really should not happen
+    raise NotImplementedError("Unable to find a unique username")
+
+
+def valid_email_or_none(email):
+    ret = None
+    try:
+        if email:
+            validate_email(email)
+            if len(email) <= EmailField().max_length:
+                ret = email
+    except ValidationError:
+        pass
+    return ret
+
+
+def email_address_exists(email, exclude_user=None):
+    from FunctionModule.accounts import app_settings as account_settings
+    from FunctionModule.accounts.models import EmailAddress
+
+    emailaddresses = EmailAddress.objects
+    if exclude_user:
+        emailaddresses = emailaddresses.exclude(user=exclude_user)
+    ret = emailaddresses.filter(email__iexact=email).exists()
+    if not ret:
+        email_field = account_settings.USER_MODEL_EMAIL_FIELD
+        if email_field:
+            users = get_user_model().objects
+            if exclude_user:
+                users = users.exclude(pk=exclude_user.pk)
+            ret = users.filter(**{email_field + "__iexact": email}).exists()
+    return ret

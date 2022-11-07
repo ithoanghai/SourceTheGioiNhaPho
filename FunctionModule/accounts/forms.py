@@ -17,7 +17,6 @@ from importlib import import_module
 
 from TownhouseWorldRealestate.utils import (
     build_absolute_uri,
-    get_username_max_length,
     set_form_field_order,
 )
 from . import app_settings, signals
@@ -25,6 +24,7 @@ from .adapter import get_adapter
 from .models import EmailAddress
 from .utils import (
     filter_users_by_email,
+    get_username_max_length,
     get_user_model,
     perform_login,
     setup_user_email,

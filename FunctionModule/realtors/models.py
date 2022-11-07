@@ -1,15 +1,20 @@
 import sys
 from io import BytesIO
+import os.path
 
 from PIL import Image
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.validators import MinValueValidator, MaxValueValidator, RegexValidator
 from django.db import models
+from django.db.models.signals import pre_delete, post_delete, pre_save
+from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import gettext as _
 from rest_framework import serializers
 from FunctionModule.accounts.models import User
 from FunctionModule.realtors.choices import Position, Title, Workplace, Status
+from TownhouseWorldRealestate.settings import AVATAR_PHOTO_URL
+from TownhouseWorldRealestate.utils import file_cleanup
 
 
 def split_url(url: str) -> str:
@@ -49,7 +54,8 @@ class Realtor(models.Model):
                              error_messages={'unique': _("Số điện thoại chính này đã được sử dụng trên hệ thống.")})
     phone2 = models.CharField(_('Điện thoại phụ'), max_length=40, db_index=True, blank=True, null=True, validators=[phone_regex],
                              error_messages={'unique': _("Số điện thoại phụ này đã được sử dụng trên hệ thống.")})
-    avatar = models.ImageField(_("Ảnh đại diện"), upload_to="photos/%Y%m%d/", blank=True)
+    avatar = models.ImageField(_("Ảnh đại diện"), upload_to=AVATAR_PHOTO_URL, blank=True)
+
     identifier = models.CharField(_('Căn cước công dân'), blank=True, null=True, max_length=15)
     workplace = models.CharField(max_length=50, choices=Workplace.choices, verbose_name=_("Đơn vị"),
                                  default=Workplace.TGNP)
@@ -92,32 +98,62 @@ class Realtor(models.Model):
         if self.birthyear:
             return f"{self.birthyear}"
 
-    def save(self, *args, **kwargs):
+    def user_image(self):
+        return '<img src="%s"/>' % self.avatar
+
+    user_image.allow_tags = True
+
+    @receiver(post_delete, sender=Image)
+    def post_save_image(sender, instance, *args, **kwargs):
+        """ Clean Old Image file """
         try:
-            self.avatar = compress_image(self.avatar)
-        except AttributeError:
+            instance.avatar.delete(save=False)
+        except:
             pass
 
-        super().save(*args, **kwargs)
+    @receiver(pre_save, sender=Image)
+    def pre_save_image(sender, instance, *args, **kwargs):
+        """ instance old image file will delete from os """
+        try:
+            old_img = instance.__class__.objects.get(id=instance.id).avatar.path
+            try:
+                new_img = instance.image.path
+            except:
+                new_img = None
+            if new_img != old_img:
+                import os
+                if os.path.exists(old_img):
+                    os.remove(old_img)
+        except:
+            pass
 
+    def save(self, *args, **kwargs):
+        #self.remove_on_image_update()
+        # is the object in the database yet?
+        obj = Realtor.objects.get(id=self.id)
+        # is the save due to an update of the actual image file?
+        if obj.avatar and self.avatar and obj.avatar != self.avatar:
+            # delete the old image file from the storage in favor of the new file
+            obj.avatar.delete(save=True)
+        if self.avatar and obj.avatar != self.avatar:
+            # Opening the uploaded image
+            im = Image.open(self.avatar)
+            output = BytesIO()
 
-def compress_image(f: InMemoryUploadedFile):
-    if 'png' in f.content_type.lower():
-        image_type = 'PNG'
-    else:
-        image_type = 'JPEG'
+            if im.width > 400 or im.height > 600:
+                # Resize/modify the image
+                output_size = (400, 600)
+                im.thumbnail(output_size)
 
-    img = Image.open(f.file)
-    output = BytesIO()
-    #if f.size > 3029237:
-    quality = 25
+            # after modifications, save it to the output
+            im.save(output, format='JPEG', quality=90)
+            output.seek(0)
 
-    img.save(output, image_type, quality=quality)
-    output.seek(0)
-    new_name = f"{f.name.split('.')[0]}.{image_type.lower()}"
-    new_img = InMemoryUploadedFile(output, 'ImageField', new_name, f.content_type,
-                                   sys.getsizeof(output), None, f.content_type_extra)
-    return new_img
+            # change the imagefield value to be the newley modifed image value
+            self.avatar = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.avatar.name.split('.')[0], 'image/jpeg',
+                                              sys.getsizeof(output), None)
+
+        return super(Realtor, self).save(*args, **kwargs)
 
 
 class RealtorSerializer(serializers.ModelSerializer):

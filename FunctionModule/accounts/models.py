@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from datetime import datetime
 from django.core import signing
 from django.core.exceptions import PermissionDenied
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import AbstractUser, Group, Permission, PermissionsMixin, _user_get_permissions, \
     GroupManager
 from django.contrib.sites.models import Site
@@ -20,8 +20,8 @@ from . import app_settings, signals, providers
 from .managers import EmailAddressManager, EmailConfirmationManager
 from .utils import get_next_redirect_url, setup_user_email, user_email
 from .adapter import get_adapter
-from TownhouseWorldRealestate.utils import get_user_model, get_request_param
-from TownhouseWorldRealestate.settings import AUTH_USER_MODEL
+from TownhouseWorldRealestate.utils import get_request_param
+from TownhouseWorldRealestate.settings import AUTH_USER_MODEL, AVATAR_PHOTO_URL
 
 from .fields import JSONField
 
@@ -121,7 +121,7 @@ class User(AbstractUser, PermissionsMixin):
     gender = models.CharField(_('Giới tính'), max_length=20, choices=GENDER_CHOICES, blank=True,
                               default='male')
     bio = models.TextField(_('Giới thiệu bản thân'), blank=True)
-    avatar = models.ImageField(_("Ảnh đại diện"), upload_to="photos/%Y%m%d/", blank=True)
+    avatar = models.ImageField(_("Ảnh đại diện"), upload_to=AVATAR_PHOTO_URL, blank=True)
 
     is_broker = models.BooleanField(default=False, verbose_name=_("MUỐN LÀM MÔI GIỚI"))
     is_investor = models.BooleanField(default=False, verbose_name=_("MUỐN LÀM ĐẦU TƯ"))
