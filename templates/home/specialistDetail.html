@@ -28,12 +28,16 @@
                 <div class="info-staff">
                     <div class="agent-img-staff">
                         <a class="img-info">
-                            {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' %}
+                        {% if realtor.avatar %}
+                            <img src="/media/{{ realtor.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                        {% else %}
+                            {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' or realtor.avatar %}
                                 <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
                             {% else %}
                                 <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
                             {% endif %}
-                        </a>
+                        {% endif %}
+                          </a>
                     </div>
                     <div class="agent-contact">
                         <div class="agent-name">

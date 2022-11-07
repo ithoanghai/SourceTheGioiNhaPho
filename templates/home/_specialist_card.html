@@ -4,12 +4,14 @@
 <div class="agents-listing">
     <div class="agents-image">
         <a href="{% url "specialistDetail" realtor.id %}">
-            {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' %}
-                <img src="/media/{{ realtor.user.avatar }}"
-                     alt="Chuyên viên Thế giới Nhà Phố"/>
+            {% if realtor.avatar %}
+                <img src="/media/{{ realtor.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
             {% else %}
-                <img src="{% static 'img/logo tgnp brown.jpg' %}"
-                     alt="Chuyên viên Thế giới Nhà Phố"/>
+                {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' or realtor.avatar %}
+                    <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                {% else %}
+                    <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                {% endif %}
             {% endif %}
             <button data-action="favorite" data-id="{{ realtor.id }}"
                     data-alias="{{ realtor.name }}"
@@ -25,7 +27,7 @@
             <a href="mailto:{{ realtor.user.email }}"><span class="__cf_email__"
                                                             data-cfemail="">[email&#160;protected]</span></a>
         </div>{% endcomment %}
-{% comment %}    <a data-phone-hidden="category: ContactProperty, event: ClickHiddenHotline" style="opacity: 0.6"
+        {% comment %}    <a data-phone-hidden="category: ContactProperty, event: ClickHiddenHotline" style="opacity: 0.6"
                        href="tel:{{ realtor.phone1 }}"
                        class="btn-primary btn-large btn-phone phone-hidden"><i
                             class="zmdi zmdi-phone"></i><span class="text">Gọi ngay</span></a>{% endcomment %}

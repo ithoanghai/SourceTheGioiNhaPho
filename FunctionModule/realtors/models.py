@@ -1,3 +1,8 @@
+import sys
+from io import BytesIO
+
+from PIL import Image
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.validators import MinValueValidator, MaxValueValidator, RegexValidator
 from django.db import models
 from django.utils import timezone
@@ -86,6 +91,33 @@ class Realtor(models.Model):
     def birth(self):
         if self.birthyear:
             return f"{self.birthyear}"
+
+    def save(self, *args, **kwargs):
+        try:
+            self.avatar = compress_image(self.avatar)
+        except AttributeError:
+            pass
+
+        super().save(*args, **kwargs)
+
+
+def compress_image(f: InMemoryUploadedFile):
+    if 'png' in f.content_type.lower():
+        image_type = 'PNG'
+    else:
+        image_type = 'JPEG'
+
+    img = Image.open(f.file)
+    output = BytesIO()
+    #if f.size > 3029237:
+    quality = 25
+
+    img.save(output, image_type, quality=quality)
+    output.seek(0)
+    new_name = f"{f.name.split('.')[0]}.{image_type.lower()}"
+    new_img = InMemoryUploadedFile(output, 'ImageField', new_name, f.content_type,
+                                   sys.getsizeof(output), None, f.content_type_extra)
+    return new_img
 
 
 class RealtorSerializer(serializers.ModelSerializer):
