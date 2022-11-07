@@ -1,10 +1,9 @@
 from threading import local
 
+from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
-
-from TownhouseWorldRealestate.utils import get_user_model
 from . import app_settings
-from .app_settings import AuthenticationMethod
+
 from .utils import filter_users_by_email, filter_users_by_username
 
 
@@ -14,9 +13,9 @@ _stash = local()
 class AuthenticationBackend(ModelBackend):
     def authenticate(self, request, **credentials):
         ret = None
-        if app_settings.AUTHENTICATION_METHOD == AuthenticationMethod.EMAIL:
+        if app_settings.AUTHENTICATION_METHOD == app_settings.AuthenticationMethod.EMAIL:
             ret = self._authenticate_by_email(**credentials)
-        elif app_settings.AUTHENTICATION_METHOD == AuthenticationMethod.USERNAME_EMAIL:
+        elif app_settings.AUTHENTICATION_METHOD == app_settings.AuthenticationMethod.USERNAME_EMAIL:
             ret = self._authenticate_by_email(**credentials)
             if not ret:
                 ret = self._authenticate_by_username(**credentials)
