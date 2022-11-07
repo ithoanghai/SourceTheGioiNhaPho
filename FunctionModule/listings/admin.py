@@ -100,7 +100,7 @@ class ListingAdmin(admin_site.ModelAdmin):
     list_editable = ()
     search_fields = ('id', 'title', 'code', 'address', 'area', 'price', 'house_type', 'road_type', 'urban_area',
                      'street', 'ward', 'district', 'state', 'date_created', 'date_update', 'extra_data')
-    list_per_page = 200
+    list_per_page = 100
     inlines = [ListingPhotoAdmin, ContractPhotoAdmin, ListingVideoAdmin, ListingHistoryInline, TransactionInline]
 
     actions = ['make_published', 'unpublished', 'sold', 'exhaustive']

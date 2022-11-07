@@ -1,5 +1,6 @@
 from FunctionModule import admin_site
 from django.core.files.uploadedfile import UploadedFile
+from django.db.models import Q
 
 from .forms import ImportRealtorForm
 from .import_realtor import handle_import
@@ -9,43 +10,73 @@ from django.http import HttpRequest, JsonResponse, HttpResponse
 from ..admin_site.filters import ChoicesFieldListFilter, RangeNumericFilter
 from ..admin_site import BooleanFieldListFilter, DateFieldListFilter
 from ..customers.models import Customer
+from ..listings import TransactionType, Status
 from ..listings.models import ListingHistory, Listing
 from ..transactions.models import Transaction, TransactionHistory
 
 
 class ListingInline(admin_site.TabularInline):
     model = Listing
-    max_num = 10
     extra = 0  # If you have a fixed number number of answers, set it here.
-    fields = ('date_created','date_update', 'status', 'address', 'area','floors', 'price', )
+    fields = ('date_created','date_update', 'status', 'address', 'area','floors', 'price','is_published' )
+
+    def get_queryset(self, request):
+        """Alter the queryset to return no existing entries"""
+        # get the existing query set, then empty it.
+        LIMIT_SEARCH = 20
+        queryset = super(ListingInline, self).get_queryset(request)
+        ids = queryset.order_by('-id').values('pk')[:LIMIT_SEARCH]
+        qs = Listing.objects.filter(~Q(status=Status.SOLD),pk__in=ids).order_by('date_created')
+        #return qs.filter(user=request.user)
+        return qs
 
 
 class ListingHistoryInline(admin_site.TabularInline):
     model = ListingHistory
-    max_num = 10
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date_created', 'area','floors', 'price', 'warehouse', )
+
+    def get_queryset(self, request):
+        """Alter the queryset to return no existing entries"""
+        # get the existing query set, then empty it.
+        qs = super(ListingHistoryInline, self).get_queryset(request)
+        return qs.none()
 
 
 class CustomerInline(admin_site.TabularInline):
     model = Customer
-    max_num = 10
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('hire_date', 'custormer_type', 'transactionStatus', 'name', 'phone', 'district', 'financial_range', )
+
+    def get_queryset(self, request):
+        """Alter the queryset to return no existing entries"""
+        # get the existing query set, then empty it.
+        qs = super(CustomerInline, self).get_queryset(request)
+        return qs.none()
 
 
 class TransactionInline(admin_site.TabularInline):
     model = Transaction
-    max_num = 10
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date', 'status', 'trantype', 'request_price', 'customer',)
+
+    def get_queryset(self, request):
+        """Alter the queryset to return no existing entries"""
+        # get the existing query set, then empty it.
+        qs = super(TransactionInline, self).get_queryset(request)
+        return qs.none()
 
 
 class TransactionHistoryInline(admin_site.TabularInline):
     model = TransactionHistory
-    max_num = 10
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date', 'transaction', 'status', 'reason', 'comment',  'realtor', )
+
+    def get_queryset(self, request):
+        """Alter the queryset to return no existing entries"""
+        # get the existing query set, then empty it.
+        qs = super(TransactionHistoryInline, self).get_queryset(request)
+        return qs.none()
 
 
 class RealtorAdmin(admin_site.ModelAdmin):
