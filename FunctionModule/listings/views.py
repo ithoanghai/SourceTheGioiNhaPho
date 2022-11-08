@@ -1,6 +1,6 @@
 import random
 import string
-
+from django.db.models import Q
 from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ValidationError
@@ -52,13 +52,20 @@ def index(request):
 def listing(request, listing_id):
     ListingDetailJSONView()
     listing_detail = get_object_or_404(Listing, pk=listing_id)
-    listings_neighborhood = (
-    Listing.objects.order_by('priority', '-date_update').filter(is_published=True, is_advertising=False,
-                                                              state=listing_detail.state)[:10])
+    listings_neighborhood = Listing.objects.order_by('priority', '-date_update').filter(is_published=True, is_advertising=False,
+                                                                    state__icontains=listing_detail.state)
+    if listing_detail.district:
+        listings_neighborhood = listings_neighborhood.filter(Q(district__icontains=listing_detail.district))
+    if listing_detail.ward:
+        listings_neighborhood = listings_neighborhood.filter(Q(ward__icontains=listing_detail.ward))
+    if listing_detail.street:
+        listings_neighborhood = listings_neighborhood | listings_neighborhood.filter(Q(street__icontains=listing_detail.street))
+    if listing_detail.urban_area:
+        listings_neighborhood = listings_neighborhood | listings_neighborhood.filter(Q(urban_area__icontains=listing_detail.urban_area))
+    listings_neighborhood = ((listings_neighborhood)[:10])
     listings_same = (Listing.objects.order_by('priority', '-date_update').filter(is_published=True, is_advertising=False,
-                                                                               house_type=listing_detail.house_type,
+                                          price__gt=listing_detail.price-1, price__lt=listing_detail.price+1 , house_type=listing_detail.house_type,
                                                                                area=listing_detail.area)[:30])
-
     context = {
         'listing': listing_detail,
         'environment': settings.ENVIRONMENT,

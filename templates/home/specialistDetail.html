@@ -95,7 +95,7 @@
                 </div>
                 <div class="intro-exp-agent">
                     <div class="experience">
-                        <h2>Kinh nghiệm</h2>
+                        <h4>Kinh nghiệm</h4>
                         <table class="exp">
                             <tr>
                                 <td width="100px">Danh hiệu:</td>
@@ -118,13 +118,13 @@
                     </div>
                     {% if realtor.user.bio %}
                     <div class="intro-staff" id="staff">
-                        <h2>Giới thiệu bản thân</h2>
+                        <h4>Giới thiệu bản thân</h4>
                         <p class="more-p normal">{{ realtor.user.bio }}</p>
                     </div>
                     {% endif %}
                     {% if realtor.story %}
                     <div class="intro-staff" id="staff">
-                        <h2>Kinh nghiệm hoạt động</h2>
+                        <h4>Kinh nghiệm hoạt động</h4>
                         <p class="more-p normal">{{ realtor.story }}</p>
                     </div>
                     {% endif %}
@@ -134,7 +134,7 @@
             <section class="bg-grey all-project">
                 <div class="agents-container col-12">
                     <div>
-                        <h3 class="pd-t-55 pd-bt-10">Nhà đất bán của {{ realtor.name }}</h3>
+                        <h4 class="pd-t-55 pd-bt-10">Nhà đất bán của {{ realtor.name }}</h4>
                         <div class="agents-inner block-project">
                             <div class="col-12">
                                 <div ref="propertyForSaleWrapper">

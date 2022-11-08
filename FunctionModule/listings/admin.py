@@ -76,7 +76,7 @@ class ListingAdmin(admin_site.ModelAdmin):
             'fields': (('status', 'date_created', 'date_update'), ('is_published', 'priority'),)}),
     )
 
-    list_display = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'district','created_date')
+    list_display = ('status', 'address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'district','created_date')
     list_display_links = ('address','price',)
     list_filter = (
         ('status', ChoicesFieldListFilter),
@@ -109,6 +109,7 @@ class ListingAdmin(admin_site.ModelAdmin):
     form = ListingAdminForm
     ordering = ('-date_update',)
     autocomplete_fields = ['user','realtor']
+    sortable_by = ('address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'district','created_date')
     #delete_selected.short_description = 'Xóa bất động sản đã chọn trong %(verbose_name_plural)'
 
     class Media:
