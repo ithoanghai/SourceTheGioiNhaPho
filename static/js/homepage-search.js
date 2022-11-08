@@ -66,7 +66,7 @@ new Vue({
                                 code: item.id,
                                 text: item.text,
                                 subText: item.sub_text,
-                                link: `/listings/search?trans_type=sell&keywords=${item.text}`,
+                                link: `/listings/search?trans_type=${item.type}&keywords=${item.text}`,
                                 isHeader: false,
                             })
                         }

@@ -25,33 +25,37 @@ def get_client_ip(request):
 
 
 def home_view(request):
-    listings_for_sale = (Listing.objects
-                             .order_by('priority','-date_update')
-                             .filter(is_published=True, transaction_type=TransactionType.SELL)[:60])
+    listings_for_sale = (Listing.objects.order_by('priority','-date_update')
+                             .filter(is_published=True, transaction_type=TransactionType.SELL)[:30])
 
-    listings_for_rent = (Listing.objects
-                             .order_by('priority','-date_update')
+    listings_for_rent = (Listing.objects.order_by('priority','-date_update')
                              .filter(is_published=True, transaction_type=TransactionType.FOR_RENT)[:30])
-    listings_project = (Listing.objects
-                            .order_by('priority','-date_update')
+    listings_project = (Listing.objects.order_by('priority','-date_update')
                             .filter(is_published=True, transaction_type=TransactionType.PROJECT)[:15])
+    listing_advertising = (Listing.objects.order_by('priority','-date_update')
+                            .filter(is_published=True, is_advertising=True)[:30])
     listing_by_group_forsale = (Listing.objects
-              .values('district')
-              .annotate(dcount=Count('district'))
-              .filter(is_published=True, transaction_type=TransactionType.SELL)
-              )
-    listing_by_group_forrent = (Listing.objects
-                                .values('district')
+              .values('district').annotate(dcount=Count('district'))
+              .filter(is_published=True, transaction_type=TransactionType.SELL))
+    listing_by_group_forrent = (Listing.objects.values('district')
                                 .annotate(dcount=Count('district'))
-                                .filter(is_published=True, transaction_type=TransactionType.FOR_RENT)
-                                )
+                                .filter(is_published=True, transaction_type=TransactionType.FOR_RENT))
+    listing_by_group_project = (Listing.objects.values('district')
+                                .annotate(dcount=Count('district'))
+                                .filter(is_published=True, transaction_type=TransactionType.PROJECT))
+    listing_by_group_advertising = (Listing.objects.values('district')
+                                .annotate(dcount=Count('district'))
+                                .filter(is_published=True, is_advertising=True))
     list_district_hn = get_all_districts()
     context = {
         'listings_for_sale': listings_for_sale,
         'listings_for_rent': listings_for_rent,
         'listings_project': listings_project,
+        'listing_advertising': listing_advertising,
         'listing_by_group_forsale': listing_by_group_forsale,
         'listing_by_group_forrent': listing_by_group_forrent,
+        'listing_by_group_project': listing_by_group_project,
+        'listing_by_group_advertising': listing_by_group_advertising,
         'state_data': get_all_states(),
         'district_data': list_district_hn,
         'bedroom_choices': bedroom_choices,

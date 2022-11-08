@@ -109,14 +109,14 @@ label {
 
 @media only screen and (max-width: 1366px) {
     .pd-top-bottom-block {
-        padding-top: 20px;
+        padding-top: 5px;
         padding-bottom: 20px
     }
 }
 
 @media only screen and (max-width: 1024px) {
     .pd-top-bottom-block {
-        padding-top: 20px;
+        padding-top: 5px;
         padding-bottom: 20px
     }
 }

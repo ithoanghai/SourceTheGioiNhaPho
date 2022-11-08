@@ -44,15 +44,16 @@ def prepare_listing_queryset(input_params):
     # trans_type
     if 'trans_type' in input_params:
         trans_type = input_params.get('trans_type')
-        if trans_type:
+        if trans_type == 'advertising':
+            queryset_list = queryset_list.filter(is_advertising=bool(True))
+        else:
             queryset_list = queryset_list.filter(transaction_type=trans_type)
+
     #check listing is post
     if 'advertising' in input_params:
         is_advertising = input_params.get('advertising', None)
         if is_advertising:
             queryset_list = queryset_list.filter(is_advertising=bool(is_advertising))
-    else:
-        queryset_list = queryset_list.filter(is_advertising=bool(False))
 
     is_verified = input_params.get('is_verified', None)
     if is_verified:

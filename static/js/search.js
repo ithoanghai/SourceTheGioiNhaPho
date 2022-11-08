@@ -52,6 +52,8 @@ new Vue({
                     let suggestions = [];
                     let headers = {};
                     for (const item of resp.data) {
+                        //hide smaller div
+                        //console.log("bigger");
                         if (!(item.type in headers)) {
                             suggestions.push({
                                 code: "",
@@ -67,7 +69,7 @@ new Vue({
                                 code: item.id,
                                 text: item.text,
                                 subText: item.sub_text,
-                                link: `/listings/search?keywords=${item.text}`,
+                                link: "/listings/search?trans_type=${item.type}&keywords=${item.text}",
                                 isHeader: false,
                             })
                         }
