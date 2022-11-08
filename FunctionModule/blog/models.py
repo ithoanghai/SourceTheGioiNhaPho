@@ -46,3 +46,13 @@ class Post(models.Model, HitCountMixin):
     def save(self, *args, **kwargs):
         self.date_update = datetime.now()
         super().save(*args, **kwargs)
+
+    def created_date(self):
+        if self.date_created:
+            return self.date_created.strftime('%d/%m/%Y')
+        return ''
+
+    def update_date(self):
+        if self.date_update:
+            return self.date_update.strftime('%d/%m/%Y')
+        return ''

@@ -57,7 +57,7 @@ class Transaction(models.Model):
     caring_area = models.CharField(max_length=100, null=True, blank=True, verbose_name=_("Khu vực quan tâm"))
     request_price = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name=_("Giá kỳ vọng/Giá chào"))
     message = models.TextField(blank=True, null=True, verbose_name="Thông điệp khách hàng")
-    comment = models.TextField(max_length=100, blank=True, null=True, verbose_name="Mô tả thêm")
+    comment = models.TextField(max_length=100, blank=True, null=True, verbose_name="Mô tả")
     date = models.DateField(default=timezone.now, blank=True, verbose_name="Ngày giao dịch")
     status = models.CharField(max_length=25, choices=Status.choices, default=Status.ACTIVE, verbose_name='Trạng thái giao dịch')
     realtor = models.ForeignKey(Realtor, null=True, blank=True, on_delete=models.RESTRICT, verbose_name=_("Chuyên viên quản lý"))
@@ -70,19 +70,29 @@ class Transaction(models.Model):
     def housetype_verbose(self):
         return dict(HouseType.choices)[self.house_type]
 
+    def created_date(self):
+        if self.date:
+            return self.date.strftime('%d/%m/%Y')
+        return ''
+
 
 class TransactionHistory(models.Model):
     class Meta:
-        verbose_name = "Giao dịch BĐS--Tương tác khách hàng"
-        verbose_name_plural = "Giao dịch BĐS--Tương tác khách hàng"
+        verbose_name = "Xử lý Giao dịch"
+        verbose_name_plural = "Xử lý Giao dịch"
         ordering = ['date']
 
     transaction = models.ForeignKey(Transaction, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name=_("Giao dịch"))
     realtor = models.ForeignKey(Realtor, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name=_("Chuyên viên thực hiện"))
     reason = models.CharField(max_length=25, choices=Reason.choices, default=Reason.FEEDBACK, verbose_name='Lý do giao dịch')
     status = models.CharField(max_length=25, choices=Status.choices, default=Status.ACTIVE, verbose_name='Trạng thái giao dịch')
-    comment = models.TextField(max_length=100, blank=True, null=True, verbose_name="Diễn giải thêm")
-    date = models.DateField(default=timezone.now, blank=True, verbose_name="Thời gian tương tác")
+    comment = models.TextField(max_length=100, blank=True, null=True, verbose_name="Diễn giải")
+    date = models.DateField(default=timezone.now, blank=True, verbose_name="Thời gian phản hồi")
 
     def __str__(self):
         return f'%s - %s' % (self.status, self.comment)
+
+    def answer_date(self):
+        if self.date:
+            return self.date.strftime('%d/%m/%Y')
+        return ''

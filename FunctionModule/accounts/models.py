@@ -36,8 +36,8 @@ phone_regex = RegexValidator(regex=r'^(09|03|07|08|05)+([0-9]{8})$',
 
 class Permissions(Permission):
     class Meta:
-        verbose_name = _('Người dùng--Quyền sử dụng')
-        verbose_name_plural = _('Người dùng--Quyền sử dụng')
+        verbose_name = _('Phân Quyền Người dùng')
+        verbose_name_plural = _('Phân Quyền Người dùng')
 
     Permission._meta.get_field('name').verbose_name = 'Tên quyền'
     Permission._meta.get_field('content_type').verbose_name = 'Module chức năng'
@@ -46,8 +46,8 @@ class Permissions(Permission):
 
 class Groups(Group):
     class Meta:
-        verbose_name = "Người dùng--Nhóm"
-        verbose_name_plural = "Người dùng--Nhóm"
+        verbose_name = "Phân Nhóm Người dùng"
+        verbose_name_plural = "Phân Nhóm Người dùng"
 
     objects = GroupManager()
 
@@ -151,6 +151,11 @@ class User(AbstractUser, PermissionsMixin):
 
     user_image.allow_tags = True
 
+    def joined_date(self):
+        if self.date_joined:
+            return self.date_joined.strftime('%d/%m/%Y')
+        return ''
+
 
 class Point(models.Model):
     class Meta:
@@ -173,22 +178,22 @@ class Point(models.Model):
 class EmailAddress(models.Model):
 
     user = models.ForeignKey(AUTH_USER_MODEL,
-        verbose_name=_("user"),
+        verbose_name=_("người sử dụng"),
         on_delete=models.CASCADE,
     )
     email = models.EmailField(
         unique=app_settings.UNIQUE_EMAIL,
         max_length=app_settings.EMAIL_MAX_LENGTH,
-        verbose_name=_("e-mail address"),
+        verbose_name=_("địa chỉ e-mail"),
     )
-    verified = models.BooleanField(verbose_name=_("verified"), default=False)
-    primary = models.BooleanField(verbose_name=_("primary"), default=False)
+    verified = models.BooleanField(verbose_name=_("đã xác minh"), default=False)
+    primary = models.BooleanField(verbose_name=_("chính"), default=False)
 
     objects = EmailAddressManager()
 
     class Meta:
-        verbose_name = _("email address")
-        verbose_name_plural = _("email addresses")
+        verbose_name = _("địa chỉ email")
+        verbose_name_plural = _("địa chỉ email")
         if not app_settings.UNIQUE_EMAIL:
             unique_together = [("user", "email")]
 
@@ -234,21 +239,21 @@ class EmailConfirmation(models.Model):
 
     email_address = models.ForeignKey(
         EmailAddress,
-        verbose_name=_("e-mail address"),
+        verbose_name=_("địa chỉ e-mail"),
         on_delete=models.CASCADE,
     )
-    created = models.DateTimeField(verbose_name=_("created"), default=timezone.now)
-    sent = models.DateTimeField(verbose_name=_("sent"), null=True)
+    created = models.DateTimeField(verbose_name=_("Tạo"), default=timezone.now)
+    sent = models.DateTimeField(verbose_name=_("Gửi"), null=True)
     key = models.CharField(verbose_name=_("key"), max_length=64, unique=True)
 
     objects = EmailConfirmationManager()
 
     class Meta:
-        verbose_name = _("email confirmation")
-        verbose_name_plural = _("email confirmations")
+        verbose_name = _("Xác nhận email")
+        verbose_name_plural = _("Xác nhận email")
 
     def __str__(self):
-        return "confirmation for %s" % self.email_address
+        return "xác nhận cho %s" % self.email_address
 
     @classmethod
     def create(cls, email_address):
@@ -380,8 +385,8 @@ class SocialApp(models.Model):
     certificate_key = None
 
     class Meta:
-        verbose_name = _("social application")
-        verbose_name_plural = _("social applications")
+        verbose_name = _("ứng dụng xã hội")
+        verbose_name_plural = _("ứng dụng xã hội")
 
     def __str__(self):
         return self.name

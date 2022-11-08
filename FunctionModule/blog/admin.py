@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpRequest
-
+from django.utils.translation import gettext as _, gettext_lazy
 from FunctionModule import admin_site
 from FunctionModule.admin_site import DateFieldListFilter
 from FunctionModule.blog.forms import PostAdminForm
@@ -17,7 +17,7 @@ class PostAdmin(admin_site.ModelAdmin):
     )
 
     form = PostAdminForm
-    list_display = ('date_created','date_update', 'title', 'is_published', 'user')
+    list_display = ('title', 'is_published', 'created_date','update_date',  'user')
     list_display_links = ('title',)
     list_filter = (
         ('date_created', DateFieldListFilter),
@@ -26,7 +26,7 @@ class PostAdmin(admin_site.ModelAdmin):
     list_editable = ()
     search_fields = ('id', 'title', 'content', 'date_created', 'date_update')
     autocomplete_fields = ['user']
-    list_per_page = 200
+    list_per_page = 100
     inlines = []
     actions = ['make_published', 'unpublished',]
     ordering = ('-date_update',)
@@ -75,5 +75,8 @@ class PostAdmin(admin_site.ModelAdmin):
         updated = queryset.update(is_published=False)
         self.message_user(request, f'Chuyển riêng tư cho {updated} tin bài')
 
+
+    make_published.short_description = _("Đăng công khai")
+    unpublished.short_description = _("Hủy đăng công khai")
 
 admin_site.site.register(Post, PostAdmin)

@@ -315,7 +315,7 @@ MEILI_MASTER_KEY = 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a2
 MEILI_HOST = os.getenv('MEILI_HOST', 'search_engine')
 MEILI_PORT = os.getenv('MEILI_PORT', 7700)
 
-DATE_FORMAT = ( ( 'd/m/Y' ))
+DATE_FORMAT = ( ( '%d/%m/%Y' ))
 DATE_INPUT_FORMATS = ( ('%d/%m/%Y'),)
 DATETIME_FORMAT = (( 'd/m/Y H:i' ))
 DATETIME_INPUT_FORMATS = (('%d/%m/%Y %H:%i'),)

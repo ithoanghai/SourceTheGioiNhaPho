@@ -18,6 +18,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .forms import GroupAdminForm, UserCreationForm, UserChangeForm, AdminPasswordChangeForm
 from .models import User, Groups, Permissions
+from ..admin_site import ChoicesFieldListFilter, BooleanFieldListFilter, DateFieldListFilter
 from ..blog.models import Post
 from ..customers.models import Customer
 from ..listings.models import Listing, ListingHistory
@@ -88,17 +89,26 @@ class AccountAdmin(AuthUserAdmin):
     add_form = UserCreationForm
     change_form = UserChangeForm
     change_password_form = AdminPasswordChangeForm
-    list_display = ('id', 'name', 'phone', 'email', 'date_joined', 'is_staff', 'is_broker', 'is_investor')
+    list_display = ('id','username', 'name', 'phone', 'email', 'joined_date', 'is_staff', 'is_broker', 'is_investor', 'is_active')
     list_display_links = ('name', 'phone')
     search_fields = ['username', 'first_name', 'last_name', 'email', 'phone']
-    list_filter = ('date_joined', 'is_broker', 'is_investor', 'is_staff', 'is_active')
+    #list_filter = ('date_joined', 'is_broker', 'is_investor', 'is_staff', 'is_active')
     list_filter = (
-
+        ('date_joined', DateFieldListFilter),
+        ('last_login', DateFieldListFilter),
+        ('dob', DateFieldListFilter),
+        ('gender', ChoicesFieldListFilter),
+        ('is_broker', BooleanFieldListFilter),
+        ('is_investor', BooleanFieldListFilter),
+        ('is_staff', BooleanFieldListFilter),
+        ('is_superuser', BooleanFieldListFilter),
+        ('is_active', BooleanFieldListFilter),
     )
-    list_per_page = 200
+    list_per_page = 100
     readonly_fields = [
         'date_joined', 'user_image',
     ]
+    list_editable = ('is_staff', 'is_active',)
     ordering = ('first_name', 'last_name', 'date_joined', )
     filter_horizontal = ('groups', 'permissions')
     inlines = [CustomerInline, BlogInline, ListingHistoryInline, ]

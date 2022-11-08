@@ -1,7 +1,9 @@
 from django import forms
 from django.forms import Textarea
+from django.http import request
 
 from FunctionModule.listings import HouseType
+from FunctionModule.realtors.models import Realtor
 from FunctionModule.transactions.models import Transaction
 
 
@@ -11,9 +13,10 @@ class TransactionAdminForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-            'message': Textarea(attrs={'class': '???', 'rows': 3}),
-            'comment': Textarea(attrs={'class': '???', 'rows': 3}),
+            'message': Textarea(attrs={'class': '???', 'rows': 2}),
+            'comment': Textarea(attrs={'class': '???', 'rows': 2}),
         }
+
 
 class TransactionHistoryAdminForm(forms.ModelForm):
     class Meta:
@@ -23,6 +26,7 @@ class TransactionHistoryAdminForm(forms.ModelForm):
         widgets = {
             'comment': Textarea(attrs={'class': '???', 'rows': 2}),
         }
+
 
 class RequestQuoteForm(forms.Form):
     firstname = forms.CharField(max_length=100)
@@ -37,5 +41,6 @@ class RequestQuoteForm(forms.Form):
 
 class TransactionForm(forms.Form):
     house_type = forms.ChoiceField(choices=HouseType,required=False)
+
 
 

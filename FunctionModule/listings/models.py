@@ -268,8 +268,8 @@ class ListingImage(models.Model):
 
 class ContractImage(models.Model):
     class Meta:
-        verbose_name = "Ảnh chụp hợp đồng, sổ đỏ, mặt tiền"
-        verbose_name_plural = "Ảnh hợp đồng, sổ đỏ"
+        verbose_name = "Ảnh kín bđs"
+        verbose_name_plural = "Ảnh hợp đồng, sổ đỏ,..."
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE,
                                 verbose_name=_("ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"))
     sort = models.IntegerField(default=0, verbose_name=_("Thứ tự hiện"))
@@ -341,8 +341,8 @@ class ListingIndexSerializer(ListingSerializer):
 
 class ListingHistory(models.Model):
     class Meta:
-        verbose_name = "Bất động sản--Biến động"
-        verbose_name_plural = "Bất động sản--Biến động"
+        verbose_name = "Biến động Bất động sản"
+        verbose_name_plural = "Biến động Bất động sản"
 
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("Bất động sản gốc"))
     user = models.ForeignKey(User,  on_delete=models.RESTRICT, blank=True, null=True, verbose_name=_("Người thêm BĐS"))

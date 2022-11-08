@@ -13,6 +13,8 @@ class TransactionHistoryInline(admin_site.TabularInline):
     model = TransactionHistory
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date', 'transaction', 'status', 'reason', 'comment',  'realtor', )
+    readonly_fields = ('date', 'realtor',)
+    can_delete = False
 
 
 class TransactionAdmin(admin_site.ModelAdmin):
@@ -29,12 +31,13 @@ class TransactionAdmin(admin_site.ModelAdmin):
     )
 
     list_display = (
-    'id', 'trantype', 'message', 'caring_area', 'request_price', 'house_type', 'listing', 'customer', 'user', 'date',
+    'id', 'trantype', 'message', 'caring_area', 'request_price', 'house_type', 'listing', 'customer', 'created_date',
     'status')
     list_display_links = ('id', 'trantype', 'message',)
     ordering = ('-date',)
     search_fields = ('message', 'caring_area', 'request_price', 'comment')
     autocomplete_fields = ['listing', 'customer', 'user', 'realtor']
+    readonly_fields = ('trantype', 'message', 'comment', 'caring_area', 'request_price', 'house_type', 'listing', 'customer', 'date',)
     list_filter = (
         ('trantype', ChoicesFieldListFilter),
         ('house_type', ChoicesFieldListFilter),
@@ -45,6 +48,11 @@ class TransactionAdmin(admin_site.ModelAdmin):
     list_per_page = 100
     form = TransactionAdminForm
     inlines = [TransactionHistoryInline, ]
+    delete_confirmation_template = None
+    delete_selected_confirmation_template = None
+    actions_on_top = False
+    actions_on_bottom = False
+    actions_selection_counter = False
 
     def get_form(self, request, obj=None, change=False, **kwargs):
         form = super(TransactionAdmin, self).get_form(request, obj, **kwargs)
@@ -90,7 +98,7 @@ class TransactionHistoryAdmin(admin_site.ModelAdmin):
             'realtor', 'date',)}),
     )
 
-    list_display = ('id', 'transaction', 'status', 'comment', 'reason', 'realtor', 'date')
+    list_display = ('id', 'transaction', 'status', 'comment', 'reason', 'realtor', 'answer_date')
     list_display_links = ('id', 'transaction', 'comment',)
     search_fields = ('transaction', 'comment', 'realtor',)
     autocomplete_fields = ['transaction', 'realtor']

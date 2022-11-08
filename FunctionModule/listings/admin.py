@@ -53,6 +53,8 @@ class TransactionInline(admin_site.TabularInline):
     model = Transaction
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date', 'status', 'trantype', 'request_price', 'customer', 'realtor',)
+    can_delete = False
+    readonly_fields = ('date', 'realtor', 'customer',)
 
 
 class ListingAdmin(admin_site.ModelAdmin):
