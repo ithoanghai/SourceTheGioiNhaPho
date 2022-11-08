@@ -65,7 +65,7 @@ def listing(request, listing_id):
     listings_neighborhood = ((listings_neighborhood)[:10])
     listings_same = (Listing.objects.order_by('priority', '-date_update').filter(is_published=True, is_advertising=False,
                                           price__gt=listing_detail.price-1, price__lt=listing_detail.price+1 , house_type=listing_detail.house_type,
-                                                                               area=listing_detail.area)[:30])
+                                                                               area__gt=listing_detail.area-2, area__lt=listing_detail.area+2)[:30])
     context = {
         'listing': listing_detail,
         'environment': settings.ENVIRONMENT,
