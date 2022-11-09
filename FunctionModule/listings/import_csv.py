@@ -569,7 +569,7 @@ def handle_import(request, file_path, listing_type):
                         extra_data = f'{addr} {area} {floor} {width} {price_k2} {district} {dau_chu} {don_vi} {phone} HH {hoa_hong}.\n{extra_add}'
 
                 starter = get_house_type_short(house_type)
-                code = f'{starter}{listing_type}{created.strftime("%y%m")}{int(area)}{int(floor)}{price}'
+                code = f'{starter}{listing_type}{created.strftime("%y%m")}{int(area)}{price}'
 
                 new_listing = Listing(user=user, realtor=realtor, code=code, status=status, title=title,
                                       street=street, address=full_addr, area=area, transaction_type=trans_type,

@@ -285,7 +285,7 @@
 #footer .inner .row .info-container > li ul li a {
     display: block;
     font-size: 14px;
-    color: rgba(255, 255, 255, .5)
+    color: rgba(255, 255, 255, .8)
 }
 
 @media (min-width: 1024px) {
@@ -315,7 +315,7 @@
 
 #footer .inner .row .info-container .address p {
     font-size: 12px;
-    color: rgba(255, 255, 255, .5);
+    color: rgba(255, 255, 255, .8);
     line-height: 1.4;
     margin-bottom: 10px
 }
