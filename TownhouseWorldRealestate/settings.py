@@ -198,7 +198,6 @@ STATICFILES_DIRS = [
 # Media Folder Settings
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-PHOTO_URL = '/photos/'
 AVATAR_PHOTO_URL = 'photos/avatar/'
 
 # Messages

@@ -19,7 +19,6 @@ from rest_framework import serializers
 from FunctionModule.accounts.models import User
 from FunctionModule.cadastral.lookups import get_state_name, get_district_name, get_ward_name
 from FunctionModule.realtors.models import Realtor
-from TownhouseWorldRealestate.settings import PHOTO_URL
 from . import get_house_type_short
 from .choices import (TransactionType, HouseType, RegistrationType,
                       RoadType, Status, Direction, Condition, FurnishType, ParkingType, Construction, city_choices,
@@ -28,7 +27,7 @@ from .choices import (TransactionType, HouseType, RegistrationType,
 
 
 def get_image_path(instance, filename: str):
-    return ''+ PHOTO_URL+ '/listings/' + str(instance.listing.id) + '/' + filename
+    return ''+ 'photos/listings/' + str(instance.listing.id) + '/' + filename
 
 
 class Listing(models.Model, HitCountMixin):

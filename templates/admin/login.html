@@ -23,7 +23,7 @@
                             {% endif %}
                         </div>
 
-                        <form method="POST">
+                        <form method="POST" action="{% url 'login' %}">
 
                             {% csrf_token %}
                             <p><h1>Đăng nhập trang quản trị:</h1></p>

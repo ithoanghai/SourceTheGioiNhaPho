@@ -166,6 +166,7 @@ def login_handler(request):
                     messages.success(request, 'Thông tin đăng nhập không hợp lệ')
                     return redirect('index')
             else:
+                print('test')
                 messages.error(request, 'Người dùng không tồn tại')
                 return render(request, 'accounts/_logged_out.html')
 
@@ -174,6 +175,7 @@ def login_handler(request):
             return render(request, 'accounts/_logged_out.html')
 
     else:
+
         return redirect('/admin/')
 
 
