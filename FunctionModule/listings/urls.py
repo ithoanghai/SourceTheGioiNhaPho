@@ -2,6 +2,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from FunctionModule import admin_site
 from django.urls import path, include
 from django.conf.urls import url
+from ajax_select import urls as ajax_select_urls
 
 from . import views
 from .views import ListingDetailJSONView
@@ -15,7 +16,7 @@ urlpatterns = [
     path('my_listing', views.my_listing, name='my_listing'),
 
     path('my_listing_post', views.my_listing_post, name='my_listing_post'),
-    path('post_listing', views.post_listing, name='post_listings'),
+    path('post_listing', views.ListingCreateView.as_view(), name='post_listings'),
 
     path('search', views.search, name='listing_search'),
 
@@ -29,5 +30,7 @@ urlpatterns = [
     path('listings-api-token-auth/', obtain_auth_token, name='listings_api_token_auth'),
 
     path('listinghistory/add/', views.listinghistoryadd, name='history_add'),
+
+    path('ajax/load-districts/', views.load_districts, name='ajax_load_districts'),
 
 ]

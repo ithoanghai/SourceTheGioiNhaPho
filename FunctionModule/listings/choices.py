@@ -1,11 +1,12 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
-from FunctionModule.cadastral.constants import state_data, ward_data, all_districts, district_data
+from FunctionModule.cadastral.constants import state_data, ward_data, all_districts, district_data, all_wards
 
 city_choices = [(k, v['name']) for k, v in state_data.items()]
 city_choices.sort()
 district_choices = [(k, v['name']) for k, v in all_districts.items()]
+district_choices.sort()
 district_default_choices = [(d['code'], d['name']) for d in district_data['01']]
 ward_default_choices = [(d['code'], d['name']) for d in ward_data['008']]
 

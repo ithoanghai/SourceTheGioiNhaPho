@@ -2,11 +2,31 @@ import sys
 from io import BytesIO
 
 from PIL import Image
+from ajax_select.fields import AutoCompleteSelectField, AutoCompleteSelectMultipleField
 from django import forms
 from django.forms import Textarea, ModelForm, BaseInlineFormSet
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from .models import Listing, ListingImage, ListingHistory, ContractImage
+from ..cadastral.lookups import get_district, get_wards_by_district, get_all_districts
+
+
+class ListingForm(forms.ModelForm):
+    class Meta:
+        model = Listing
+        fields = (
+        'transaction_type', 'house_type', 'state', 'district', 'ward', 'street', 'urban_area', 'address', 'title',
+        'description', 'area', 'price', 'registration_type', 'bedrooms', 'bathrooms', 'floors', 'direction',
+        'lane_width', 'width', 'furniture_design', 'regional_welfare')
+
+    #district = AutoCompleteSelectField('districts', required=False, help_text=None)
+    #ward = AutoCompleteSelectMultipleField('wards', required=False, help_text=None)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        #self.fields['district'].queryset = None
+        #self.fields['ward'].queryset = get_wards_by_district(self.district)
+        #self.fields['ward'].widget = forms.Select()
 
 
 class ListingAdminForm(forms.ModelForm):

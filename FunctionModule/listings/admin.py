@@ -79,15 +79,15 @@ class ListingAdmin(admin_site.ModelAdmin):
     list_display = ('status', 'address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'district','created_date', 'is_advertising', 'is_published')
     list_display_links = ('address','price',)
     list_filter = (
+        ('transaction_type', ChoicesFieldListFilter),
         ('status', ChoicesFieldListFilter),
         ('house_type', ChoicesFieldListFilter),
-        ('transaction_type', ChoicesFieldListFilter),
         ('road_type', ChoicesFieldListFilter),
         ('date_created', DateFieldListFilter),
         ('date_update', DateFieldListFilter),
-        ('registration_type', ChoicesFieldListFilter),
         ('is_published', BooleanFieldListFilter),
         ('is_advertising', BooleanFieldListFilter),
+        ('registration_type', ChoicesFieldListFilter),
         ('exhaustive', ChoicesFieldListFilter),
         ('liquidity_classification', ChoicesFieldListFilter),
         ('area', RangeNumericFilter),

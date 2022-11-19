@@ -22,8 +22,7 @@ from FunctionModule.realtors.models import Realtor
 from . import get_house_type_short
 from .choices import (TransactionType, HouseType, RegistrationType,
                       RoadType, Status, Direction, Condition, FurnishType, ParkingType, Construction, city_choices,
-                      district_choices, Exhaustive, LiquidClass,
-                      )
+                      district_choices, Exhaustive, LiquidClass,)
 
 
 def get_image_path(instance, filename: str):
@@ -52,17 +51,17 @@ class Listing(models.Model, HitCountMixin):
     user = models.ForeignKey(User,  on_delete=models.RESTRICT, blank=True, null=True, verbose_name=_("Người thêm BĐS"))
     realtor = models.ForeignKey(Realtor, on_delete=models.RESTRICT, blank=True, null=True, verbose_name=_("Chuyên viên quản lý BĐS"))
     transaction_type = models.CharField(max_length=20, choices=TransactionType.choices,
-                                        default=TransactionType.SELL, verbose_name=_("Hình thức giao dịch"))
+                                        default=TransactionType.SELL, verbose_name=_("Hình thức giao dịch *"))
     house_type = models.CharField(max_length=20, choices=HouseType.choices, default=HouseType.TOWN_HOUSE,
-                                  verbose_name=_("Loại BĐS"))
-    state = models.CharField(max_length=50, choices=city_choices, default="01", verbose_name=_("Thành phố/Tỉnh"))
-    district = models.CharField(max_length=50, choices=district_choices, verbose_name=_("Quận/Huyện"))
-    ward = models.CharField(max_length=50, verbose_name=_("Phường/Xã"), blank=True, null=True)
+                                  verbose_name=_("Loại BĐS *"))
+    state = models.CharField(max_length=50, choices=city_choices, default="01", verbose_name=_("Thành phố/Tỉnh *"))
+    district = models.CharField(max_length=50, choices=district_choices, verbose_name=_("Quận/Huyện *"))
+    ward = models.CharField(max_length=50, choices=None, verbose_name=_("Phường/Xã"), blank=True, null=True)
     urban_area = models.CharField(max_length=100, verbose_name=_("Khu đô thị/Khu dân cư"), blank=True, null=True)
-    street = models.CharField(max_length=125, verbose_name=_("Tên đường, phố"),
+    street = models.CharField(max_length=125, verbose_name=_("Tên đường, phố *"),
                               help_text=_("Nhập tên Đường/Phố/Thôn/Xóm"), null=True)
-    address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ"),
-                               help_text=_("Nhập theo định dạng: Ngõ.Ngách.Hẻm.Số nhà, Khu dân cư, Phố, Quận/Huyện, Tỉnh/TP"))
+    address = models.CharField(max_length=255, verbose_name=_("Địa chỉ đầy đủ *"),
+                               help_text=_("Đầy đủ định dạng sau mới được duyệt: Ngõ/Ngách/Hẻm/Số nhà, Khu dân cư, Phố, Quận/Huyện, Tỉnh/TP"))
     condition = models.CharField(max_length=20, choices=Condition.choices,
                                  verbose_name=_("Tình trạng BĐS"), blank=True, null=True)
     construction = models.CharField(max_length=20, choices=Construction.choices,
@@ -70,16 +69,16 @@ class Listing(models.Model, HitCountMixin):
     year = models.CharField(max_length=50, verbose_name=_("Năm xây dựng và tỉ lệ sử dụng còn lại"), blank=True, null=True,
                             help_text=_("Điền năm hoàn thành xây dựng và Tỷ lệ % sử dụng còn lại"))
     road_type = models.CharField(max_length=20, choices=RoadType.choices, default=RoadType.ALLEY_CAR_TRIBIKE,
-                                 verbose_name=_("Đường/Ngõ trước nhà"))
+                                 verbose_name=_("Đường/Ngõ trước nhà *"))
     lane_width = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True,
                                      verbose_name=_("Chiều rộng đường/ngõ (m)"))
     parking_type = models.CharField(max_length=20, choices=ParkingType.choices, blank=True,
                                     null=True, verbose_name=_("Có chỗ đỗ ô tô không?"))
-    area = models.DecimalField(max_digits=10, decimal_places=1, verbose_name=_("Diện tích"))
+    area = models.DecimalField(max_digits=10, decimal_places=1, verbose_name=_("Diện tích *"))
     floors = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], null=True, default="0",
-                                 choices=([(i, i) for i in range(1, 50)]), verbose_name=_("Số tầng"))
-    width = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Mặt tiền"), null=True)
-    price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá"))
+                                 choices=([(i, i) for i in range(1, 50)]), verbose_name=_("Số tầng *"))
+    width = models.DecimalField(max_digits=5, decimal_places=1, verbose_name=_("Mặt tiền *"), null=True)
+    price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá *"), help_text=_("Nếu Bán đơn vị tính là Tỷ, Cho thuê đơn vị là Triệu"))
     receive_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá thu về (tỷ)"),
                                         blank=True, null=True)
     sale_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_("Giá Hạ chào (tỷ)"),
@@ -97,13 +96,13 @@ class Listing(models.Model, HitCountMixin):
                                     choices=([(i, i) for i in range(1, 100)]), verbose_name=_("Số phòng tắm"),
                                     null=True, blank=True)
     direction = models.CharField(max_length=20, blank=True, null=True, choices=Direction.choices, verbose_name=_("Hướng"))
-    code = models.CharField(max_length=80, verbose_name=_("Mã BĐS (VIẾT HOA)"), help_text=_(
+    code = models.CharField(max_length=80, verbose_name=_("Mã BĐS (VIẾT HOA) *"), help_text=_(
         "Chữ cái đầu Loại BĐS + tên viết tắt Chuyên viên + 2 số cuối Năm Tháng + Diện tích + Giá"),
                             default="NPHH22083030", unique=True)
-    title = models.CharField(max_length=200, verbose_name=_("Tiêu đề đăng (VIẾT HOA)"),
+    title = models.CharField(max_length=200, verbose_name=_("Tiêu đề (VIẾT HOA) *"),
                              help_text=_("Gợi ý: Từ khoá + Vị trí (Đường/Phố/Khu) + Diện tích + Tiện ích + Giá + Sổ"))
-    description = models.TextField(verbose_name=_("Mô tả cho khách về bất động sản"), default=" Chú ý: Tất cả thông tin được đăng bởi TGNP đều là thông tin thật, xác thực chính xác.", help_text=_(
-        "Mô tả giới thiệu về BĐS "))
+    description = models.TextField(verbose_name=_("Mô tả bất động sản cho khách hàng *"), default="=> Chú ý: Thông tin được đăng bởi/trên Thế Giới Nhà Phố đều là thật, xác thực chính xác.", help_text=_(
+        ""))
     salient_features = models.TextField(blank=True, null=True, verbose_name=_("Đặc điểm nổi bật"),
                                         help_text=_(
                                             "Nêu tất cả các ưu điểm nổi bật của BĐS"))
@@ -113,20 +112,20 @@ class Listing(models.Model, HitCountMixin):
     furniture_design = models.TextField(blank=True, null=True, verbose_name=_("Nội thất, thiết kế"),
                                         help_text=_(
                                             "Thiết kế hiện đại, đầy đủ công năng, khung cột bê tông chắc chắn hay không, Có hay không có nội thất kèm theo, kèm theo những nội thất"))
-    living_facilities = models.TextField(blank=True, null=True, verbose_name=_("Tiện ích sinh hoạt"),
+    living_facilities = models.TextField(blank=True, null=True, verbose_name=_("Tiện ích sinh hoạt trong nhà"),
                                          help_text=_(
                                              "Có bể bơi, phòng xông hơi, xem phim, thể thao, có chỗ đỗ xe hơi,..."))
     residential_community = models.TextField(blank=True, null=True, verbose_name=_("Cộng đồng dân cư"),
                                              help_text=_(
                                                  "Cộng đồng dân cư dân trí cao, văn minh, an ninh, thân thiện hay không"))
-    regional_welfare = models.TextField(blank=True, null=True, verbose_name=_("An sinh khu vực"), help_text=_(
+    regional_welfare = models.TextField(blank=True, null=True, verbose_name=_("An sinh, tiện ích khu vực"), help_text=_(
         "Gần trường mầm non, tiểu học, THCS,...Bệnh viện, Trung tâm spa, chăm sóc sức khoẻ, sắc đẹp..."))
 
     furnish_type = models.CharField(max_length=20, choices=FurnishType.choices, blank=True,
                                     null=True, default=FurnishType.SEMI_FURNISHED,
                                     verbose_name=_("Có kèm đồ đạc?"))
     registration_type = models.CharField(max_length=20, choices=RegistrationType.choices, default=RegistrationType.RED_PINK_BOOK,
-                                         verbose_name=_("Loại chứng nhận"))
+                                         verbose_name=_("Loại chứng nhận *"))
     bonus_rate = models.DecimalField(max_digits=2, decimal_places=1, verbose_name=_("Tỷ lệ trích thưởng (%)"),
                                      default="3", blank=True, null=True)
     reward = models.DecimalField(max_digits=5, decimal_places=0,
@@ -142,9 +141,9 @@ class Listing(models.Model, HitCountMixin):
                                   help_text="Ghi các thông tin mô tả đầy đủ của đầu chủ về chủ nhà hoặc các yếu tố khác liên quan đến tương tác với Chuyên viên...")
 
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.SELLING,
-                              verbose_name=_("Trạng thái giao dịch"))
-    date_created = models.DateField(default=datetime.now, verbose_name=_("Ngày lên hàng"))
-    date_update = models.DateField(default=datetime.now, verbose_name=_("Ngày cập nhật"))
+                              verbose_name=_("Trạng thái giao dịch *"))
+    date_created = models.DateField(default=datetime.now, verbose_name=_("Ngày lên hàng *"))
+    date_update = models.DateField(default=datetime.now, verbose_name=_("Ngày cập nhật *"))
 
     priority = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)],
                                    choices=([(i, i) for i in range(1, 10)]), verbose_name=_("Ưu tiên đăng"),

@@ -3776,6 +3776,8 @@ ul.slideimg li a.img:hover {
 #carousel {
     position: relative;
     width: 50%;
+    max-width: 60%;
+    height: 76px;
     margin: 8px 0 0;
     border-radius: 0;
     border: 0;
@@ -3882,7 +3884,9 @@ ul.slideimg li a.img:hover {
 
 @media (max-width: 1080px) {
     #carousel {
-        width: 40%
+        width: 50%;
+        max-width: 60%;
+        height: 76px;
     }
 }
 
@@ -3987,7 +3991,7 @@ ul.slideimg li a.img:hover {
 
 @media (max-width: 979px) {
     .fix-widthcell .naviicon {
-        width: 50%
+        width: 40%
     }
 }
 

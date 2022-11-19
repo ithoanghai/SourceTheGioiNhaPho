@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static i18n %}
+{% load static i18n get_cadastral load_static listing %}
 {% block title %} {% trans 'TIN RAO ĐĂNG CHÍNH CHỦ' %} {% endblock title %}
 
 {% block content %}
@@ -27,12 +27,16 @@
         </div>
 
         <div class="container-fluid mt--6">
-
+            {% block messages %}
+                {% if messages %}
+                    <ul class="messagelist">{% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+                    {% endfor %}</ul>
+                {% endif %}
+            {% endblock messages %}
             <div class="row col-xl-12">
-                <div class="col-xl-3 order-xl-2 mb-5 mb-xl-0">
-                    {% include 'accounts/_profilePanelRight.html' %}
-                </div>
-                <div class="col-xl-8 order-xl-1">
+
+                <div class="col-xl-9 order-xl-2 mb-7" style="overflow-y: scroll; height:700px;">
                     <div class="card bg-secondary shadow">
                         <div class="card-header bg-white border-0">
                             <div class="row align-items-center">
@@ -45,29 +49,31 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="{% url 'post_listings' %}" method="POST" enctype='multipart/form-data'>
-                                {% csrf_token %}
+
+                            <form method="POST" action="{% url 'post_listings' %}" id="listingForm" enctype='multipart/form-data' data-districts-url="{% url 'ajax_load_districts' %}">
+                           {% comment %} <form id="listingForm" action="{% url 'post_listings' %}" method="POST" enctype='multipart/form-data' data-districts-url="{% url 'ajax_load_districts' %}" novalidate>
+                          {% endcomment %}      {% csrf_token %}
                                 {% comment %}<h5 class="h5 heading-small text-muted mb-4">CHI TIẾT TIN ĐĂNG:</h5>{% endcomment %}
-                                <div class="pl-lg-4">
+                                {% comment %}<div class="pl-lg-4">
                                     <div class="row">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-12">
                                             <div class="form-group">
-                                                <label for="trantype">{% trans "Loại giao dịch:" %}</label>
-                                                <select name="trantypes" id="trantypes" class="form-control">
-                                                    <option value="sell"
-                                                            {% if reg_user.trantype == "sell" or listing.trantype == "sell" %}
-                                                            selected{% endif %}>{% trans "Bán" %}</option>
-                                                    <option value="rent"
-                                                            {% if reg_user.trantype == "rent" or transaction.trantype == "rent" %}
-                                                            selected{% endif %}>{% trans "Cho thuê" %}</option>
-                                                </select>
-                                                {% if form.trantype.errors %}
-                                                    <span style="color: red; font-size: 12px">{{ form.trantype.errors.as_text }}</span>{% endif %}
+                                                <input type="radio" name="trans_type" value="sell" checked
+                                                       id="buy-house">
+                                                Bán &nbsp;&nbsp;
+                                                <input type="radio" name="trans_type" value="rent" id="rent-house"> Cho
+                                                thuê
+                                                &nbsp;&nbsp;
+                                                <input type="radio" name="trans_type" value="project" id="project"> Dự
+                                                án
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+
+                                    </div>
+                                                                        <div class="row">
+                                        <div class="col-lg-12">
                                             <div class="form-group">
-                                                <label for="housetype">{% trans "Loại bất động sản:" %}</label>
+                                                <label for="housetype">{% trans "Loại bất động sản " %}<span style="color: red">*</span></label>
                                                 <select name="housetype" id="housetype" class="form-control">
                                                     <option value="town_house"
                                                             {% if reg_user.housetype == "town_house" or transaction.housetype == "town_house" %}
@@ -229,9 +235,9 @@
                                         <div class="col-lg-2">
                                             <label class="form-control-label" for="price">Đơn vị tính:</label>
                                             <select class="form-control">
-                                            <option value="ty">Tỷ</option>
-                                            <option value="trieu">Triệu</option>
-                                        </select></div>
+                                                <option value="ty">Tỷ</option>
+                                                <option value="trieu">Triệu</option>
+                                            </select></div>
 
                                     </div>
                                     <div class="row">
@@ -243,28 +249,36 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>{% endcomment %}
+                                {% comment %}{{ form.as_p }}{% endcomment %}
+                                <table>
+                                    {{ form.as_table }}
+                                </table>
+
+
+                                <div class="card-footer text-center border-0">
+                                    <input type="submit" value="{% trans "Đăng ngay" %}" class="btn btn-primary">
                                 </div>
 
+                            </form>
 
-
-                        <div class="card-footer text-center border-0">
-                            <input type="submit" value="{% trans "Đăng ngay" %}" class="btn btn-primary">
                         </div>
+                        <div class="card-footer text-center border-0">
 
-                        </form>
+                        </div>
                     </div>
-                    <div class="card-footer text-center border-0">
-
-                    </div>
+                </div>
+                <div class="col-xl-3 order-xl-1 mb-5 mb-xl-0">
+                    {% include 'accounts/_profilePanelRight.html' %}
                 </div>
             </div>
         </div>
-    </div>
-    <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
+        <div id="withUs_PopupContact">{% include "listings/_contactPopupTemplate.html" %}</div>
 
     </div>
     <br/>
     <!-- Footer content below-->
+
 {% endblock %}
 
 

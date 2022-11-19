@@ -1,15 +1,19 @@
 import random
 import string
+import datetime
+
 from django.db.models import Q
 from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
-from django.urls import reverse
+from django.template.defaultfilters import upper
+from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.utils.encoding import force_text
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 from django_filters.rest_framework import DjangoFilterBackend
 from hitcount.views import HitCountDetailView
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -18,10 +22,11 @@ from rest_framework import status, generics, mixins, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from FunctionModule.cadastral.lookups import get_all_states, get_all_districts
+from FunctionModule.cadastral.lookups import get_all_states, get_all_districts, get_district
 
 from . import HouseType
 from .filters import ListingFilter
+from .forms import ListingForm
 from .models import ListingImage
 from .serializers import *
 from ..cadastral.constants import district_data
@@ -90,70 +95,44 @@ def search(request):
     return render(request, 'listings/search.html', context)
 
 
-def post_listing(request):
-    try:
-        houseTypes = HouseType.choices
-        state_code = "01"
-        hanoi_district_list = district_data[state_code]
-        district_choices = {}
-        alphabet = string.ascii_letters + string.digits
-        code = f'POST'.join(random.choice(alphabet) for i in range(2))
-        for item in district_choices:  # type: dict
-            district_choices[item['name']] = item['code']
-        context = {
-            'houseTypes': houseTypes,
-            'district_choices': district_choices
+class ListingCreateView(CreateView):
+    model = Listing
+    form_class = ListingForm
+    success_url = reverse_lazy('my_listing_post')
+
+    def get_initial(self):
+        return {
+            'user': self.request.user
         }
-        if request.user.is_authenticated:
-            if request.method == 'GET':
-                return render(request, 'listings/postListing.html', context)
-            elif request.method == 'POST':
-                trantypes = request.POST['trantypes']
-                housetype = request.POST['housetype']
-                title = request.POST['title']
-                description = request.POST['description']
-                street = request.POST['street']
-                address = request.POST['address']
-                district = '008'
-                area = request.POST['area']
-                width = request.POST['width']
-                floor = request.POST['floor']
-                price = request.POST['price']
-                if request.FILES.get('photomain', None) is not None:
-                    photomain = request.FILES.get('photomain')
-                else:
-                    photomain = request.POST['photomain']
-                date_created = timezone.now()
-                date_update = timezone.now()
-                # #  Check if user has made inquiry already
-                user_id = request.user.id
-                has_listing = Listing.objects.filter(address=address, user_id=user_id,
-                                                     date_created__gte=date_created)
-                if has_listing:
-                    messages.error(request,
-                                   'Bạn đã gửi yêu cầu tới chúng tôi về tin đăng này. Xin thử gửi lại yêu cầu sau.')
-                    return redirect('admin')
-                if area.isnumeric() and width.isnumeric() and floor.isnumeric() and price.isnumeric():
-                    listing = Listing.objects.create(user_id=user_id, is_advertising=True, is_published=False,
-                                                     transaction_type=trantypes, house_type=housetype, code=code,
-                                                     title=title,
-                                                     description=description, street=street, district=district,
-                                                     address=address, area=area, width=width, floors=int(floor),
-                                                     price=price)
-                else:
-                    messages.error(request, 'Bạn nhập sai dữ liệu.')
-                    return redirect('admin')
 
-                if request.FILES.get('photomain', None) is not None:
-                    ListingImage.objects.create(listing_id=listing.id, photo=photomain)
-                    messages.success(request, 'Bạn đã gửi tin đăng thành công. Quản trị viên sẽ kiểm duyệt trước khi đăng.')
-                    return render(request, 'listings/postListingSuccess.html', context)
-        else:
-            return redirect('admin')
+    def form_valid(self, form):
+        try:
+            created = datetime.datetime.now()
+            code = f'POST{created.strftime("%y%m")}'.join(random.choice(string.ascii_letters + string.digits) for i in range(2))
+            self.object = form.save(commit=False)
+            # any manual settings go here
+            self.object.user = self.request.user
+            self.object.code = upper(code)
+            self.object.is_advertising = True
+            self.object.is_published = False
+            self.object.save()
+            messages.success(self.request, 'Bạn đã gửi tin đăng thành công. Quản trị viên sẽ kiểm duyệt trước khi đăng.')
+        except Listing.DoesNotExist:
+            messages.error(self.request,
+                             'Tin đăng của bạn bị lỗi. Xin hãy đăng lại hoặc liên hệ hotline để được hỗ trợ.')
+            HttpResponseRedirect(reverse('post_listings'))
 
-    except ValidationError:
-        messages.error(request, 'Thông tin bạn nhập không đúng.')
-        return redirect('admin')
+        return render(self.request, 'listings/postListingSuccess.html')
+
+
+def load_districts(request):
+    state = request.GET.get('state')
+    print(state)
+    if state is not None:
+        districts = get_district(state)
+    else:
+        districts = get_all_districts()
+    return render(request, 'listings/district_ddl_options.html', {'districts': districts})
 
 
 def my_listing_post(request):
@@ -316,7 +295,7 @@ def listinghistoryadd(request, extra_context=None):
         }
         if request.user.is_authenticated:
             if request.method == 'GET':
-                return render(request, 'listings/postListing.html', context)
+                return render(request, 'listings/listing_form.html.html', context)
             elif request.method == 'POST':
                 trantypes = request.POST['trantypes']
                 housetype = request.POST['housetype']

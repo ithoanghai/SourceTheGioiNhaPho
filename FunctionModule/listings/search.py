@@ -173,6 +173,7 @@ def prepare_listing_queryset(input_params):
 
     return queryset_list
 
+
 def prepare_index_from_listing(listing):
     suggestions_data = []
     street = listing.street

@@ -1279,3 +1279,122 @@ textarea:focus, input:focus {
     height: 45px;
     top: 40px
 }
+
+/*
+PHẦN BỔ SUNG 11/2022*/
+
+.avatar {
+    color: #fff;
+    background-color: #adb5bd;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    height: auto;
+    width: 120px;
+    max-width: 160px;
+}
+
+@media (max-width: 576px) {
+.avatar {
+    color: #fff;
+    background-color: #adb5bd;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    height: auto;
+    width: 60px;
+}
+}
+
+.avatar img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.avatar + .avatar-content {
+    display: inline-block;
+    margin-left: .75rem;
+}
+
+.avatar-lg {
+    width: 58px;
+    height: 58px;
+    font-size: 0.875rem;
+}
+
+.avatar-sm {
+    width: 36px;
+    height: 36px;
+    font-size: 0.875rem;
+}
+
+.avatar-group .avatar {
+    position: center;
+    z-index: 2;
+    border: 2px solid #fff;
+}
+
+.avatar-group .avatar:hover {
+    z-index: 3;
+}
+
+.avatar-group .avatar + .avatar {
+    margin-left: -1rem;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/*header {
+  background-color: black;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  position: fixed;
+  top: 0;
+  height:80px;
+}*/
+
+.flex-container {
+  display: flex;
+  flex: 1 1 0;
+  text-align: center;
+  height: 1000px;
+  top:80px;
+}
+
+.flex-container h2 {
+  margin-top: 30px;
+  font-size: 2rem;
+}
+
+.main-section {
+  background-color: rgb(255, 222, 144);
+  width: calc(100% / 3);
+  position:absolute;
+  bottom:0;
+  right:calc(100% / 3);
+  left:calc(100% / 3);
+  top: 0px;
+  height: inherit;
+  z-index: -1;
+  top:80px;
+}
+
+.secondary-section {
+  background-color: rgb(114, 181, 245);
+  width: calc(100% / 3);
+  height: 100vh;
+  position: relative;
+  top:80px;
+}
+.secondary-section.right{
+  right:0;
+}
+

@@ -3,7 +3,7 @@ import functools
 from ajax_select import register, LookupChannel
 
 from .constants import (DISTRICT_LOOKUP_CHANNEL, WARD_LOOKUP_CHANNEL, ward_data, state_data, district_data,
-                        all_districts)
+                        all_districts, all_wards)
 
 
 @register(DISTRICT_LOOKUP_CHANNEL)
@@ -74,7 +74,13 @@ def get_ward_name(district, ward):
         ward = get_ward(district, ward)
         return ward['name']
     except (KeyError, IndexError):
+
         return ""
+
+
+@functools.cache
+def get_all_wards():
+    return all_wards
 
 
 def get_state(code):

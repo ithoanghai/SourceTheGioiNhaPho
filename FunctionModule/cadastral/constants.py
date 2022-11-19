@@ -5,6 +5,7 @@ state_data = {}
 district_data = {}
 all_districts = {}
 ward_data = {}
+all_wards = {}
 DISTRICT_LOOKUP_CHANNEL = 'districts'
 WARD_LOOKUP_CHANNEL = 'wards'
 
