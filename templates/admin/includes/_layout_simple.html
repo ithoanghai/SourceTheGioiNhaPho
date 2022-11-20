@@ -5,7 +5,14 @@
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
 
 <!-- Head html-->
-{% include 'admin/includes/_head.html' %}
+  {% include 'admin/includes/_head.html' %}
+
+
+  {% block stylesheets %} {% endblock %}
+
+  {% block extrahead %}{% endblock %}
+
+  {% block extrastyle %}{% endblock %}
 <!-- End head html -->
 
 <body>

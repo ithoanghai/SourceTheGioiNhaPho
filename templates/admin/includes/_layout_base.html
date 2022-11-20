@@ -6,7 +6,6 @@
 <html lang="{{ LANGUAGE_CODE|default:"vi" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 
 <!-- Head html-->
-<head>
   {% include 'admin/includes/_head.html' %}
 
   {% block stylesheets %} {% endblock %}
@@ -14,7 +13,6 @@
   {% block extrahead %}{% endblock %}
 
   {% block extrastyle %}{% endblock %}
-</head>
 <!-- End head html -->
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
