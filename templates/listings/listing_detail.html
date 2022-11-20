@@ -6,7 +6,7 @@
 {% block meta %}
     <meta property="og:image" content="{% with listing.main_photo as photo %}{{ photo.url }}{% endwith %}"/>
     <meta property="og:image:url" content="{% with listing.main_photo as photo %}{{ photo.url }}{% endwith %}"/>
-  {% endblock %}
+{% endblock %}
 
 {% block head %}
     {{ block.super }}
@@ -30,77 +30,6 @@
         }
     </style>
 
-    <style>
-        .detail-content-news img:before, .thumb-duan img:before, .cover img:not([src]):before {
-            background-image: none !important;
-        }
-
-        .info-sketch {
-            height: auto;
-            min-height: 190px;
-        }
-
-        @media screen and (max-width: 480px) {
-            .info-sketch {
-                padding-top: 20px;
-            }
-
-            .floorplan-property .content {
-                padding-bottom: 0;
-            }
-        }
-
-        .gallery-property div img {
-            object-fit: cover;
-            object-position: center;
-        }
-    </style>
-
-    <style>
-        .gmap-render.full-screen {
-            max-width: 100% !important;
-        }
-
-        ._map-bg {
-            background: url({% static 'images/map-detail.png' %}) center / cover no-repeat;
-            cursor: pointer;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-        }
-
-        /*Mặc định sẽ ẩn map render*/
-        .map-detail .map-wrapper {
-            display: none
-        }
-
-        /* Khi fullscreen thì sẽ hiện map render lên */
-        .map-detail.full-screen .map-wrapper {
-            display: block;
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Khi fullscreen thì ẩn cái ảnh map đi */
-        .map-detail.full-screen .img-map {
-            display: none
-        }
-
-        /* Mặc định sẽ ẩn nút fullscreen đi */
-        .map-wrapper .full-screen-act {
-            display: none
-        }
-
-        /* Và sẽ hiện fullscreen khi đang ở chế độ fullscreen */
-        .map-detail.full-screen .full-screen-act {
-            display: block
-        }
-    </style>
-
-    <style>
-
-    </style>
 {% endblock %}
 
 {% block content %}
@@ -262,15 +191,15 @@
                 <div id="slider8" class="flexslider fullscreen">
                     <div class="slider-buttons">
                         <a href="#" title="next"><span class="but-nextdetail flex-next"></span> </a>
-                        <a href="#" title="prev"><span class="but-predetail flex-prev"></span> </a>
+                        <a href="#" title="prev"><span class="but-predetail flex-prev" tabindex="-1"></span> </a>
                     </div>
-                    <ul class="slides">
+
+                    <ul class="slides sleimg">
                         {% for photo in listing.photos %}
                             <li>
                                 <a href="#" class="cover"
                                    title="{{ listing.title }}">
-                                    <img src="{{ photo.url }}"
-                                         pos="0"
+                                    <img src="{{ photo.url }}" pos="0"
                                          alt="{{ listing.title }}"
                                          title="{{ listing.title }}">
                                 </a>
@@ -291,62 +220,37 @@
                             </li>
                         {% endfor %}
                     </ul>
+
                 </div>
                 <div id="carousel1" class="flexslider img-list-slide">
                     <ul class="slides slideimg" style="width: 100%">
-                            {% for photo in listing.photos %}
-                                <li class="flex-active-slide">
-                                    <a class="img cover" href="javascript:void(0)"
-                                       title="{{ listing.title }}">
-                                        <img class="lazy image-normalized fade"
-                                             data-src="{{ photo.url }}"
-                                             title="{{ listing.title }}"
-                                             alt="{{ listing.title }}"
-                                             draggable="false">
-                                    </a>
-                                </li>
-                            {% empty %}
-                                <li class="flex-active-slide">
-                                    <a class="img cover" href="javascript:void(0)"
-                                       title="{{ listing.title }}">
-                                        <img class="lazy image-normalized fade"
-                                             data-src="{{ listing.house_type|default_img_by_house_type }}"
-                                             title="{{ listing.title }}"
-                                             alt="{{ listing.title }}"
-                                             draggable="false"
-                                             onerror="this.src='{% static "img/default.png" %}'"
-                                        />
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
                         {% for photo in listing.photos %}
                             <li>
-                                <a class="img cover" href="#" title="{{ listing.title }}">
-                                    {% if forloop.first %}
-                                        <img class="lazy image-normalized fade"
-                                             src="{{ photo.url }}"
-                                             alt="{{ listing.title }}"
-                                             title="{{ listing.title }}"/>
-                                    {% else %}
-                                        <img class="lazy image-normalized fade"
-                                             data-src="{{ photo.url }}"
-                                             alt="{{ listing.title }}"
-                                             title="{{ listing.title }}"/>
-                                    {% endif %}
+                                <a class="img cover" href="javascript:void(0)"
+                                   title="{{ listing.title }}">
+                                    <img class="lazy image-normalized fade"
+                                         data-src="{{ photo.url }}"
+                                         title="{{ listing.title }}"
+                                         alt="{{ listing.title }}"
+                                         draggable="false">
                                 </a>
                             </li>
                         {% empty %}
                             <li>
-                                <img class="lazy image-normalized fade"
-                                     data-src="{{ listing.house_type|default_img_by_house_type }}"
-                                     alt="{{ listing.title }}"
-                                     title="{{ listing.title }}"
-                                     onerror="this.src='{% static "img/default.png" %}'"
-                                />
+                                <a class="img cover" href="javascript:void(0)"
+                                   title="{{ listing.title }}">
+                                    <img class="lazy image-normalized fade"
+                                         data-src="{{ listing.house_type|default_img_by_house_type }}"
+                                         title="{{ listing.title }}"
+                                         alt="{{ listing.title }}"
+                                         draggable="false"
+                                         onerror="this.src='{% static "img/default.png" %}'"
+                                    />
+                                </a>
                             </li>
                         {% endfor %}
                     </ul>
+
                     <div class="slider-buttons2">
                         <a class="font-icon icon-presmall flex-prev" href="#" title="prev"></a>
                         <a class="font-icon icon-nextsmall flex-next" href="#" title="next"></a>
@@ -366,7 +270,7 @@
                     <div class="flex-viewport">
                         <ul class="slides slideimg" style="width: 100%">
                             {% for photo in listing.photos %}
-                                <li class="flex-active-slide">
+                                <li>
                                     <a class="img cover" href="javascript:void(0)"
                                        title="{{ listing.title }}">
                                         <img class="lazy image-normalized fade"
@@ -377,7 +281,7 @@
                                     </a>
                                 </li>
                             {% empty %}
-                                <li class="flex-active-slide">
+                                <li>
                                     <a class="img cover" href="javascript:void(0)"
                                        title="{{ listing.title }}">
                                         <img class="lazy image-normalized fade"
@@ -482,18 +386,22 @@
                             <div class="listing-id">
                                 <span>Mã nhà đất: </span>
                                 <span style="padding-left: 0px">{{ listing.code }}</span>
-                                <span>{{ listing.status|get_listing_status }} {%if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</span>
+                                <span>{{ listing.status|get_listing_status }} {% if listing.transaction_type == "rent" %}
+                                    {% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</span>
                             </div>
                             {% comment %}<div class="listing-id">
                                 <span>Lượt xem: </span>
                                 <span style="padding-left: 0px">{{ total_hits }}</span>
                             </div>{% endcomment %}
-                        <div class="listing-id">
+                            <div class="listing-id">
                                 {% if listing.is_advertising == 'True' %}
-                                <span>{% translate 'Rao vặt bởi khách hàng - Chưa được xác thực' %}</span>
+                                    <span>{% translate 'Rao vặt bởi khách hàng - Chưa được xác thực' %}</span>
                                 {% else %} {% translate 'Đăng bởi TGNP - Đã xác thực' %}  {% endif %}
                             </div>
-                        <div class="zalo-share-button" data-href="https://thegioinhaphovietnam.com.vn{% url "listing_detail" listing.id %}" data-oaid="579745863508352884" data-layout="1" data-color="blue" data-customize="false"></div>
+                            <div class="zalo-share-button"
+                                 data-href="https://thegioinhaphovietnam.com.vn{% url "listing_detail" listing.id %}"
+                                 data-oaid="579745863508352884" data-layout="1" data-color="blue"
+                                 data-customize="false"></div>
 
                     </header>
                 </div>
@@ -617,7 +525,9 @@
                 </div>
                 <div class="list-advantage clear">
                     <h6>Trạng thái BĐS:
-                        <b style="color: green">{{ listing.status|get_listing_status }} {%if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</b>
+                        <b style="color: green">{{ listing.status|get_listing_status }}
+                            {% if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %}
+                                {% trans "BÁN" %} {% endif %}</b>
 
                     </h6>
                 </div>
@@ -858,8 +768,8 @@
                     <div class="_map-bg openBtn img-map"
                          style="">
                         <a href="http://maps.google.com/?q={{ listing.location.y }},{{ listing.location.x }}">
-                        <img src="{{ listing.id|location_image }}"
-                             title="{{ listing.title }}" alt="{{ listing.code }}"/>
+                            <img src="{{ listing.id|location_image }}"
+                                 title="{{ listing.title }}" alt="{{ listing.code }}"/>
                         </a>
                         {% comment %}<div class="tooltip-map">
                             <a>Nhấn vào để xem chi tiết</a>
@@ -906,7 +816,7 @@
 
                 <div class="zalo-comment-plugin" data-appid="4421936851919043973" data-size="5" data-href=""></div>
             </div>
-                    <div class="right-content visible-pc">
+            <div class="right-content visible-pc">
                 <div v-pre class="form-real-estate">
                     <h3 class="font-tiempos">Liên hệ tư vấn</h3>
                     <div class="cover__isa">

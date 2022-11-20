@@ -3918,7 +3918,7 @@ ul.slideimg li a.img:hover {
     #carousel {
         width: 50%;
         max-width: 60%;
-        height: 76px;
+        /*height: 76px;*/
     }
 }
 
@@ -4907,7 +4907,6 @@ ul.detailroom li div span:hover + div.detail-house-info {
 }
 
 
-
 .gallery-property div:first-child {
     width: 100%;
     height: 400px
@@ -5036,6 +5035,42 @@ ul.detailroom li div span:hover + div.detail-house-info {
 ._map-bg .address-property strong {
     font-size: 16px;
     line-height: 24px
+}
+
+._map-bg {
+    background: url(../images/map-detail.png) center / cover no-repeat;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+/*Mặc định sẽ ẩn map render*/
+.map-detail .map-wrapper {
+    display: none
+}
+
+/* Khi fullscreen thì sẽ hiện map render lên */
+.map-detail.full-screen .map-wrapper {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Khi fullscreen thì ẩn cái ảnh map đi */
+.map-detail.full-screen .img-map {
+    display: none
+}
+
+/* Mặc định sẽ ẩn nút fullscreen đi */
+.map-wrapper .full-screen-act {
+    display: none
+}
+
+/* Và sẽ hiện fullscreen khi đang ở chế độ fullscreen */
+.map-detail.full-screen .full-screen-act {
+    display: block
 }
 
 .z-index-top {
@@ -6528,7 +6563,6 @@ ul.exclusive li.featured header .heading {
 }
 
 
-
 .page-listing-detail .heading-01 {
     width: 100%;
     margin: 0;
@@ -6547,7 +6581,6 @@ ul.exclusive li.featured header .heading {
     line-height: normal;
     font-family: tgnp-font2, Arial, Helvetica, sans-serif
 }
-
 
 
 .page-listing-detail .heading-03 {
@@ -7066,7 +7099,7 @@ ul.exclusive li.featured header .heading {
 
 
 #carousel1 .slides li a {
-    overflow: hidden
+    overflow: hidden;
 }
 
 #carousel1 .slides li a img {
@@ -7078,7 +7111,11 @@ ul.exclusive li.featured header .heading {
     border: 2px solid #fff;
     box-sizing: border-box;
     overflow: hidden;
-    height: 61px
+    height: 61px;
+    width: 90px;
+    margin-right: 8px;
+    float: left;
+    display: block;
 }
 
 .bg-e1e2e6 {
@@ -7251,7 +7288,7 @@ ul.exclusive li.featured header .heading {
         text-decoration: none
     }
 
- }
+}
 
 @media (max-width: 640px) {
     .list-part-t {
@@ -7696,4 +7733,28 @@ ul.exclusive li.featured header .heading {
         width: 80px;
         height: 80px
     }
+}
+
+.detail-content-news img:before, .thumb-duan img:before, .cover img:not([src]):before {
+    background-image: none !important;
+}
+
+.info-sketch {
+    height: auto;
+    min-height: 190px;
+}
+
+@media screen and (max-width: 480px) {
+    .info-sketch {
+        padding-top: 20px;
+    }
+
+    .floorplan-property .content {
+        padding-bottom: 0;
+    }
+}
+
+.gallery-property div img {
+    object-fit: cover;
+    object-position: center;
 }
