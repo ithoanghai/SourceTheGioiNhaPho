@@ -93,6 +93,9 @@ def search(request):
         'environment': settings.ENVIRONMENT,
         "pagination": {},
         'sortOption': 'priority',
+        'state': request.GET.get('state'),
+        'district': request.GET.get('district'),
+        'word': request.GET.get('keywords'),
     }
 
     return render(request, 'listings/search.html', context)
@@ -130,7 +133,6 @@ class ListingCreateView(LoginRequiredMixin, CreateView):
 
 def load_districts(request):
     state = request.GET.get('state')
-    print(state)
     if state is not None:
         districts = get_district(state)
     else:
