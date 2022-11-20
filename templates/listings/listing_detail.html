@@ -293,7 +293,33 @@
                     </ul>
                 </div>
                 <div id="carousel1" class="flexslider img-list-slide">
-                    <ul class="slides slideimg">
+                    <ul class="slides slideimg" style="width: 100%">
+                            {% for photo in listing.photos %}
+                                <li class="flex-active-slide">
+                                    <a class="img cover" href="javascript:void(0)"
+                                       title="{{ listing.title }}">
+                                        <img class="lazy image-normalized fade"
+                                             data-src="{{ photo.url }}"
+                                             title="{{ listing.title }}"
+                                             alt="{{ listing.title }}"
+                                             draggable="false">
+                                    </a>
+                                </li>
+                            {% empty %}
+                                <li class="flex-active-slide">
+                                    <a class="img cover" href="javascript:void(0)"
+                                       title="{{ listing.title }}">
+                                        <img class="lazy image-normalized fade"
+                                             data-src="{{ listing.house_type|default_img_by_house_type }}"
+                                             title="{{ listing.title }}"
+                                             alt="{{ listing.title }}"
+                                             draggable="false"
+                                             onerror="this.src='{% static "img/default.png" %}'"
+                                        />
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
                         {% for photo in listing.photos %}
                             <li>
                                 <a class="img cover" href="#" title="{{ listing.title }}">
@@ -338,7 +364,7 @@
                         <a class="font-icon icon-nextsmall flex-next" href="#" title="next"></a>
                     </div>
                     <div class="flex-viewport">
-                        <ul class="slides slideimg">
+                        <ul class="slides slideimg" style="width: 100%">
                             {% for photo in listing.photos %}
                                 <li class="flex-active-slide">
                                     <a class="img cover" href="javascript:void(0)"
@@ -458,12 +484,17 @@
                                 <span style="padding-left: 0px">{{ listing.code }}</span>
                                 <span>{{ listing.status|get_listing_status }} {%if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</span>
                             </div>
-                            <div class="listing-id">
+                            {% comment %}<div class="listing-id">
                                 <span>Lượt xem: </span>
                                 <span style="padding-left: 0px">{{ total_hits }}</span>
+                            </div>{% endcomment %}
+                        <div class="listing-id">
+                                {% if listing.is_advertising == 'True' %}
+                                <span>{% translate 'Rao vặt bởi khách hàng - Chưa được xác thực' %}</span>
+                                {% else %} {% translate 'Đăng bởi TGNP - Đã xác thực' %}  {% endif %}
                             </div>
-                          <div class="zalo-share-button" data-href="https://thegioinhaphovietnam.com.vn{% url "listing_detail" listing.id %}" data-oaid="579745863508352884" data-layout="1" data-color="blue" data-customize="false"></div>
-                        </div>
+                        <div class="zalo-share-button" data-href="https://thegioinhaphovietnam.com.vn{% url "listing_detail" listing.id %}" data-oaid="579745863508352884" data-layout="1" data-color="blue" data-customize="false"></div>
+
                     </header>
                 </div>
                 <div class="heading-02">Mô tả:</div>

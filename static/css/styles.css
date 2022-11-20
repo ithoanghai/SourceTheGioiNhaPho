@@ -46,6 +46,12 @@
     font-display: swap
 }
 
+body {
+    font-family: 'harmonia', Arial, Helvetica, sans-serif;
+    /*    line-height: 2em;*/
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
 
 .title-ft {
     padding: 5px 15px 8px !important;
@@ -171,8 +177,17 @@ li {
     display: none
 }
 
-.main-content .view-more-gray.more {
-    display: none
+
+
+
+.bg-gray:after {
+    content: '';
+    display: table;
+    clear: both
+}
+
+.bg-gray-f4 {
+    background: #f4f5f9
 }
 
 .bg-gray-e6 {
@@ -876,9 +891,7 @@ textarea:focus, input:focus {
 }
 
 @media only screen and (max-width: 360px) {
-    .right-content-sell {
-        padding: 20px 0 0
-    }
+
 
     .form-contact {
         width: 100%;
@@ -964,17 +977,6 @@ textarea:focus, input:focus {
 }
 
 @media only screen and (max-width: 600px) {
-    .main-content .view-more-gray.more {
-        margin-top: 10px;
-        border: 1px solid #ccc;
-        background: 0 0;
-        display: block
-    }
-
-    .main-content .view-more-gray.more a {
-        text-decoration: none
-    }
-
     .width1140 .contact-form {
         padding-bottom: 30px
     }
@@ -993,16 +995,6 @@ textarea:focus, input:focus {
 
     .career-form, .contact-form .hs-form {
         max-width: 100%
-    }
-
-    .right-content-sell-gray {
-        width: 100%;
-        padding: 20px 0
-    }
-
-    .right-content-sell {
-        width: 100%;
-        padding: 20px 0 0
     }
 
     .cover-left-sell {
@@ -1398,3 +1390,78 @@ PHẦN BỔ SUNG 11/2022*/
   right:0;
 }
 
+.changeimg-box {
+    width: 100%;
+    text-align: center;
+    font-size: 1.6em;
+    height: 76px;
+    background: #262626
+}
+
+.changeimg-box .fix-widthcell {
+    max-width: 1140px;
+    margin: 0 auto
+}
+
+.checkbox {
+    position: relative;
+    vertical-align: middle;
+    float: left
+}
+
+.checkbox input {
+    margin: 0;
+    display: inline;
+    opacity: 0;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    z-index: 9999;
+    cursor: pointer
+}
+
+.checkbox input + label {
+    margin-bottom: 0;
+    padding-left: 30px;
+    cursor: pointer
+}
+
+.checkbox input + label:after {
+    content: '';
+    font-family: 'tgnp-icon';
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 0;
+    color: #999;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    background: #fff;
+    position: absolute;
+    left: 0;
+    top: 5px
+}
+
+.checkbox input + label:hover {
+    color: orange
+}
+
+.checkbox input:checked + label:after {
+    content: '\f125';
+    color: #fff;
+    opacity: 1;
+    visibility: visible;
+    border: 1px solid #00779a;
+    background: #00779a;
+    text-align: center
+}
+
+.font-icon {
+    font-family: 'tgnp-icon', Verdana, Geneva, sans-serif;
+    text-rendering: auto;
+    line-height: 20px;
+    font-size: 18px;
+    font-style: normal;
+    vertical-align: middle
+}

@@ -26,10 +26,6 @@ body {
     content: "\f115"
 }
 
-.email-icon-pro:before {
-    content: "\f114"
-}
-
 .btn-primary-agent {
     display: inline-block;
     width: 100%;
