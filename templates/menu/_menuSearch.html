@@ -26,7 +26,10 @@
                     <li class="sub-menu">
                         <a href="{% url 'index' %}">Trang chủ</a>
                     </li>
-
+                    <li>
+                        <a href="{% url "post_listings" %}"> <i
+                                class="fa fa-pencil-alt"></i> {% translate 'Đăng Bán/Cho thuê miễn phí' %}</a>
+                    </li>
                     {% include "menu/_subMenuBuy.html" %}
                     {% include "menu/_subMenuRent.html" %}
                     {% include "menu/_subMenuBuySellNews.html" %}
@@ -45,7 +48,7 @@
                     <option value="sell"><span>Mua nhà</span></option>
                     <option value="rent">Thuê nhà</option>
                     <option value="project">Dự án</option>
-                    <option value="advertising" >Tin rao vặt</option>
+                    <option value="advertising">Tin rao vặt</option>
                 </select>
                 <i class="zmdi zmdi-search"></i>
 
@@ -80,7 +83,7 @@
         <div class="top-menu login">
             <div class="agency-tgnp">
                 <a href="{% url "post_listings" %}" title="Đăng tin nhà đất"><i
-                        class="fa fa-pencil-alt"></i> {% translate 'Đăng tin miễn phí' %}</a>
+                        class="fa fa-pencil-alt"></i> {% translate 'Đăng Bán/Cho thuê miễn phí' %}</a>
             </div>
         </div>
     </div>

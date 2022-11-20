@@ -454,11 +454,17 @@
                                 <span style="padding-left: 0px">{{ listing.code }}</span>
                                 <span>{{ listing.status|get_listing_status }} {%if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</span>
                             </div>
+
                             <div class="listing-id">
                                 <span>Lượt xem: </span>
                                 <span style="padding-left: 0px">{{ total_hits }}</span>
                             </div>
                           <div class="zalo-share-button" data-href="https://thegioinhaphovietnam.com.vn{% url "listing_detail" listing.id %}" data-oaid="579745863508352884" data-layout="1" data-color="blue" data-customize="false"></div>
+                            <div class="listing-id">{{ listing.is_advertising }}
+                                {% if listing.is_advertising == 'True' %}
+                                <span>{% translate 'Loại tin: Rao vặt bởi khách hàng - Chưa được xác thực' %}</span>
+                                {% else %} {% translate 'Loại tin: Đăng bởi TGNP - Đã xác thực' %}  {% endif %}
+                            </div>
                         </div>
                     </header>
                 </div>

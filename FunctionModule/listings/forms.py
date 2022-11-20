@@ -18,12 +18,17 @@ class ListingForm(forms.ModelForm):
         'transaction_type', 'house_type', 'state', 'district', 'ward', 'street', 'urban_area', 'address', 'title',
         'description', 'area', 'price', 'registration_type', 'bedrooms', 'bathrooms', 'floors', 'direction',
         'lane_width', 'width', 'furniture_design', 'regional_welfare')
+        widgets = {
+            'furniture_design': Textarea(attrs={'class': '???', 'rows': 3}),
+            'regional_welfare': Textarea(attrs={'class': '???', 'rows': 3}),
+        }
 
     #district = AutoCompleteSelectField('districts', required=False, help_text=None)
     #ward = AutoCompleteSelectMultipleField('wards', required=False, help_text=None)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         #self.fields['district'].queryset = None
         #self.fields['ward'].queryset = get_wards_by_district(self.district)
         #self.fields['ward'].widget = forms.Select()

@@ -2,6 +2,7 @@ import random
 import string
 import datetime
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.conf import settings
 from django.contrib import messages
@@ -29,6 +30,8 @@ from .filters import ListingFilter
 from .forms import ListingForm
 from .models import ListingImage
 from .serializers import *
+from ..accounts import app_settings
+from ..accounts.views import _ajax_response
 from ..cadastral.constants import district_data
 
 
@@ -95,15 +98,15 @@ def search(request):
     return render(request, 'listings/search.html', context)
 
 
-class ListingCreateView(CreateView):
+class ListingCreateView(LoginRequiredMixin, CreateView):
     model = Listing
     form_class = ListingForm
     success_url = reverse_lazy('my_listing_post')
+    login_url = '/accounts/login'
+    redirect_field_name = 'redirect_to'
 
     def get_initial(self):
-        return {
-            'user': self.request.user
-        }
+        return {'user': self.request.user}
 
     def form_valid(self, form):
         try:
