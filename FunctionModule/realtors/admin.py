@@ -95,12 +95,13 @@ class TransactionHistoryInline(admin_site.TabularInline):
 
 
 class RealtorAdmin(admin_site.ModelAdmin):
-    list_display = ('name', 'position', 'phone1', 'department', 'work_area','is_cooperate','status','is_published', 'facebook')
+    list_display = ('join_date','name', 'position', 'phone1', 'department', 'work_area','is_cooperate','status','is_published', 'facebook')
     list_display_links = ('name',)
     search_fields = ('id', 'name','phone1','phone2', 'email', 'address','title','birthyear','identifier', 'position', 'countryside', 'workplace', 'department', 'work_area', 'facebook','referral', 'hire_date')
     autocomplete_fields = ['user']
-    list_per_page = 100
+    list_per_page = 50
     ordering = ('-name', '-hire_date')
+    sortable_by = ('position')
     #filter_vertical = ('user',)
     list_editable = ('email','is_cooperate','is_published',)
     list_filter = (
@@ -110,6 +111,7 @@ class RealtorAdmin(admin_site.ModelAdmin):
         ('is_published', BooleanFieldListFilter),
         ('status', ChoicesFieldListFilter),
         ('hire_date', DateFieldListFilter),
+        ('date_join', DateFieldListFilter),
         ('birthyear', RangeNumericFilter),
         ('level', RangeNumericFilter),
     )

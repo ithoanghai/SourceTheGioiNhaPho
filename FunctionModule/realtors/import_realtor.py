@@ -179,8 +179,9 @@ def handle_import(request, file_path):
 
             if realtor.phone1 != realtor.name:
                 if not Realtor.objects.filter(phone1=realtor.phone1).exists():
-                    realtor.save()
-                    print(f"Thêm Realtor {realtor} chưa có")
+                    if realtor.phone1 is not None:
+                        realtor.save()
+                        print(f"Thêm Realtor {realtor} chưa có")
                 else:
                     real = Realtor.objects.filter(phone1=realtor.phone1).first()
                     real.name = realtor.name
@@ -200,7 +201,7 @@ def handle_import(request, file_path):
                     real.is_published = realtor.is_published
                     real.save()
                     print(f"Cập nhật realtor {real}")
-            elif not Realtor.objects.filter(query).exists():
+            elif not Realtor.objects.filter(query).exists() and realtor.phone1 is not None:
                 realtor.save()
                 print(f"Thêm Realtor {realtor} chưa có số")
             elif realtor.phone1 == realtor.name:

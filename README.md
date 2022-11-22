@@ -29,8 +29,13 @@ pg_restore -c --dbname=postgresql://postgres:postgres@127.0.0.1/tgnp tgnp-2021-0
 Login Server:
     psql -h db -d tgnp -U postgres
 
-Show Log docker
-    docker logs -f --tail 5 app_web_1
+Docker command
+    sudo systemctl start docker         start docker
+    docker restart $(docker ps -a -q)    restart all container
+    docker logs -f --tail 5 app_web_1       showlog
+    docker container ls         list container
+    docker container start [OPTIONS] CONTAINER [CONTAINER...]
+    docker container restart [OPTIONS] CONTAINER [CONTAINER...]
 
 Restart certificate on docker server
     docker-compose -f docker-compose.production.yml exec nginx bash -c "nginx -s reload"
