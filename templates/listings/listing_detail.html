@@ -2,7 +2,22 @@
 
 {% load static humanize i18n get_cadastral load_static listing hitcount_tags %}
 
-{% block title %}{{ listing.title }}{% endblock %}
+{% block title %}
+    <title>{{ listing.title }}</title>
+    <meta name="title" content="{{ listing.title }}"/>
+    <meta property="og:title" content="{{ listing.title }}"/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="{{ listing.title }} {% if listing.district %} {% get_district listing.district %} {% endif %} {% if listing.state %} {% get_state listing.state %} {% endif %}. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="{{ listing.title }} {% if listing.district %} {% get_district listing.district %} {% endif %} {% if listing.state %} {% get_state listing.state %} {% endif %}. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="0916286256, 0964399436, {% if listing.district %} {% get_district listing.district %} {% endif %} {% if listing.state %} {% get_state listing.state %} {% endif %}, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="0916286256, 0964399436, {% if listing.district %} {% get_district listing.district %} {% endif %} {% if listing.state %} {% get_state listing.state %} {% endif %}, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
 {% block meta %}
     <meta property="og:image" content="{% with listing.main_photo as photo %}{{ photo.url }}{% endwith %}"/>
     <meta property="og:image:url" content="{% with listing.main_photo as photo %}{{ photo.url }}{% endwith %}"/>

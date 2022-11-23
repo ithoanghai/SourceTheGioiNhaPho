@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
 
 {% load static humanize i18n %}
-{% block title %} Thế Giới Nhà Phố Việt Nam|{% trans "Điều khoản sử dụng" %} {% endblock %}
+
+{% block title %}
+    <title>{% trans "Thế Giới Nhà Phố Việt Nam|Điều khoản sử dụng" %}</title>
+    <meta name="title" content="{% trans "Thế Giới Nhà Phố Việt Nam|Điều khoản sử dụng" %}"/>
+    <meta property="og:title" content="{% trans "Thế Giới Nhà Phố Việt Nam|Điều khoản sử dụng" %}"/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Điều khoản sử dụng này được ký kết bởi/giữa thegioinhaphovietnam.com.vn với bất kỳ một cá nhân
+                tổ chức. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="Điều khoản sử dụng này được ký kết bởi/giữa thegioinhaphovietnam.com.vn với bất kỳ một cá nhân
+                tổ chức. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="Điều khoản sử dụng, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="Điều khoản sử dụng, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
 {% block head %}
     {{ block.super }}
 
@@ -163,7 +181,7 @@
                     <a href="{% url 'specialist' %}">Gặp chuyên viên tư vấn</a>
                 </div>
                 <div class="s-cell s-btn">
-                    <a href="{% url 'sell_lease_with_us' %}">Đăng bán, cho thuê</a>
+                    <a href="{% url 'sellLeaseUs' %}">Đăng bán, cho thuê</a>
                 </div>
                 <div class="s-cell s-btn">
                     <a href="https://forms.gle/LM41QBEMSZvwmSta7">Gia nhập TGNP</a>

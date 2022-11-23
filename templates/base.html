@@ -4,40 +4,8 @@
 <html lang="{{ LANGUAGE_CODE|default:"vi" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 
 <head>
-  <title>{% block title %}Thế Giới Nhà Phố Việt Nam|Mua Bán Bất Động Sản Tốt Nhất HN{% endblock %}</title>
-  {% block meta %}
-    <meta http-equiv="Cache-Control: max-age=86400" content="public">
-    <meta http-equiv="Content-Encoding: deflate, gzip" content="public">
-    <meta property="og:image" content="{% static '/img/logo.svg' %}"/>
-    <meta property="og:image:url" content="{% static '/img/logo.svg' %}"/>
-  {% endblock %}
   {% include 'partials/_head.html' %}
   {% block head %} {% endblock %}
-  {% block head_script %}
-    <script>
-        const vnf_regex = /^((09|03|07|08|05)+([0-9]{8})\b)/;
-        const phone12 = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-        const email_regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        const houseTypes = [
-            {type: 'town_house', text: 'Nhà phố'},
-            {type: 'shop_house', text: 'Cửa hàng'},
-            {type: 'apartment', text: 'Căn hộ'},
-            {type: 'land', text: 'Đất nền'},
-            {type: 'land_business', text: 'Mặt bằng kinh doanh'},
-            {type: 'villa', text: 'Biệt thự'}
-        ];
-
-        function waitFor(variable, callback) {
-            const waitInterval = setInterval(function () {
-                if (window[variable]) {
-                    clearInterval(waitInterval);
-                    callback();
-                }
-            }, 200);
-        }
-    </script>
-  {% endblock %}
-  {% block optional_styles %}{% endblock %}
 </head>
 
 <body>

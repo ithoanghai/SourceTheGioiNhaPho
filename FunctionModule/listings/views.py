@@ -104,7 +104,7 @@ def search(request):
 class ListingCreateView(LoginRequiredMixin, CreateView):
     model = Listing
     form_class = ListingForm
-    success_url = reverse_lazy('my_listing_post')
+    success_url = reverse_lazy('myListingPost')
     login_url = '/accounts/login'
     redirect_field_name = 'redirect_to'
 
@@ -126,7 +126,7 @@ class ListingCreateView(LoginRequiredMixin, CreateView):
         except Listing.DoesNotExist:
             messages.error(self.request,
                              'Tin đăng của bạn bị lỗi. Xin hãy đăng lại hoặc liên hệ hotline để được hỗ trợ.')
-            HttpResponseRedirect(reverse('post_listings'))
+            HttpResponseRedirect(reverse('postListings'))
 
         return render(self.request, 'listings/postListingSuccess.html')
 
@@ -140,7 +140,7 @@ def load_districts(request):
     return render(request, 'listings/district_ddl_options.html', {'districts': districts})
 
 
-def my_listing_post(request):
+def myListingPost(request):
     if request.user.is_authenticated and request.method == 'GET':
         listings = Listing.objects.filter(user=request.user, is_advertising=True).order_by('-date_update')
         paginator = Paginator(listings, 10)
@@ -155,7 +155,7 @@ def my_listing_post(request):
         return render(request, 'accounts/_profile.html')
 
 
-def my_listing(request):
+def myListing(request):
     if request.user.is_authenticated and request.method == 'GET':
         listings = Listing.objects.filter(user=request.user, is_advertising=False).order_by('-date_update')
         paginator = Paginator(listings, 10)
@@ -170,7 +170,7 @@ def my_listing(request):
         return render(request, 'accounts/_profile.html')
 
 
-def sell_lease_with_us(request):
+def sellLeaseUs(request):
     context = {
         'path': request.path,
     }
@@ -178,7 +178,7 @@ def sell_lease_with_us(request):
     return render(request, 'listings/sellLeaseWithUs.html', context)
 
 
-def buy_with_us(request):
+def buyWithUs(request):
     context = {
         'path': request.path,
     }
@@ -186,7 +186,7 @@ def buy_with_us(request):
     return render(request, 'listings/buyWithUs.html', context)
 
 
-def rent_with_us(request):
+def rentWithUs(request):
     context = {
         'path': request.path,
     }
@@ -325,7 +325,7 @@ def listinghistoryadd(request, extra_context=None):
                 if has_listing:
                     messages.error(request,
                                    'Bạn đã gửi yêu cầu tới chúng tôi về tin đăng này. Xin thử gửi lại yêu cầu sau.')
-                    return redirect('post_listings')
+                    return redirect('postListings')
                 if area.isnumeric() and width.isnumeric() and floor.isnumeric() and price.isnumeric():
                     listing = Listing.objects.create(user_id=user_id, is_advertising=True, is_published=False,
                                                      transaction_type=trantypes, house_type=housetype, code=code,
@@ -346,4 +346,4 @@ def listinghistoryadd(request, extra_context=None):
 
     except ValidationError:
         messages.error(request, 'Thông tin bạn nhập không đúng.')
-        return redirect('post_listings')
+        return redirect('postListings')

@@ -1,7 +1,22 @@
 {% extends 'base.html' %}
 
 {% load load_static listing i18n %}
-{% block title %} Thế Giới Nhà Phố Việt Nam|{% trans 'Danh sách tin rao bất động sản của tôi' %} {% endblock title %}
+{% block title %}
+    <title>{% trans "Thế Giới Nhà Phố Việt Nam|Danh sách tin rao bất động sản của tôi" %}</title>
+    <meta name="title" content="{% trans "Thế Giới Nhà Phố Việt Nam|Danh sách tin rao bất động sản của tôin" %}"/>
+    <meta property="og:title" content="{% trans "Thế Giới Nhà Phố Việt Nam|Danh sách tin rao bất động sản của tôi" %}"/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Danh sách tin rao bất động sản của tôi! Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="Danh sách tin rao bất động sản của tôi! Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="Danh sách tin rao bất động sản của tôi, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="Danh sách tin rao bất động sản của tôi, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
 
 {% block content %}
     <div id="wrap">

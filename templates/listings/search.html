@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
 
 {% load static humanize i18n load_static get_cadastral %}
-{% block title %} Thế Giới Nhà Phố Việt Nam|Tìm kiếm BĐS {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %}  tốt nhất {% endblock %}
+{% block title %}
+    <title>Thế Giới Nhà Phố Việt Nam|Tìm kiếm BĐS {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất</title>
+    <meta name="title" content="Thế Giới Nhà Phố Việt Nam|Tìm kiếm BĐS {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất"/>
+    <meta property="og:title" content="Thế Giới Nhà Phố Việt Nam|Tìm kiếm BĐS {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất"/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Tìm kiếm BĐS {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất, nhanh chóng và tiện lợi, với chi phí
+                        thấp và đội ngũ hỗ trợ mọi lúc. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="{% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất, nhanh chóng và tiện lợi, với chi phí
+                        thấp và đội ngũ hỗ trợ mọi lúc. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="{% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %}, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="{% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %}, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
+
 {% block head %}
   {{ block.super }}
   <link rel="canonical" href="{% url 'listing_search' %}"/>

@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
 
 {% load static humanize i18n %}
-{% block title %} {% trans "Bán nhà tốt nhất với Thế Giới Nhà Phố" %} {% endblock %}
+
+{% block title %}
+    <title>{% trans "Bán nhà tốt nhất với Thế Giới Nhà Phố" %}</title>
+    <meta name="title" content="{% trans "Bán nhà tốt nhất với Thế Giới Nhà Phố" %}"/>
+    <meta property="og:title" content="{% trans "Bán nhà tốt nhất với Thế Giới Nhà Phố" %}"/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Bán nhà đất với các dịch vụ hỗ trợ nhanh chóng và tiện lợi, với chi phí thấp và đội
+            ngũ hỗ trợ mọi lúc. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="Bán nhà đất với các dịch vụ hỗ trợ nhanh chóng và tiện lợi, với chi phí thấp và đội
+            ngũ hỗ trợ mọi lúc. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="Bán nhà tốt nhất, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="Bán nhà tốt nhất, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
 {% block head %}
   {{ block.super }}
 
@@ -41,10 +59,10 @@
               <a href="{% url 'sell_with_us' %}">Bán BĐS với Thế giới Nhà Phố</a>
             </li>
             <li class="s-menu-items ">
-              <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
+              <a href="{% url 'buyWithUs' %}">Mua với TGNP</a>
             </li>
             <li class="s-menu-items ">
-              <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
+              <a href="{% url 'rentWithUs' %}">Thuê với TGNP</a>
             </li>
             <li class="s-menu-items ">
               <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>
@@ -82,10 +100,10 @@
               <a href="{% url 'sell_with_us' %}">Bán với TG Nhà Phố</a>
             </li>
             <li class="s-menu-items ">
-              <a href="{% url 'buy_with_us' %}">Mua với TGNP</a>
+              <a href="{% url 'buyWithUs' %}">Mua với TGNP</a>
             </li>
             <li class="s-menu-items ">
-              <a href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
+              <a href="{% url 'rentWithUs' %}">Thuê với TGNP</a>
             </li>
             <li class="s-menu-items ">
               <a href="{% url 'specialist_us' %}">Chuyên viên TGNP</a>

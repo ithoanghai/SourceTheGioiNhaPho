@@ -1,7 +1,29 @@
 {% extends 'base.html' %}
 
 {% load static load_static listing humanize i18n %}
-{% block title %} {% trans "Danh sách chuyên viên Thế Giới Nhà Phố" %} {% endblock %}
+{% block title %}
+    <title>{% trans "Danh sách Chuyên viên Thế Giới Nhà Phố" %} </title>
+    <meta name="title" content="{% trans "Danh sách Chuyên viên Thế Giới Nhà Phố" %} "/>
+    <meta property="og:title" content="{% trans "Danh sách Chuyên viên Thế Giới Nhà Phố" %} "/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Chuyên viên của TGNP mang đến sự khác biệt so với thị trường chung, đó là sự tin cậy, tận
+                            tâm, được đào tạo kỹ càng, và am hiểu thị trường. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="Chuyên viên của TGNP mang đến sự khác biệt so với thị trường chung, đó là sự tin cậy, tận
+                            tâm, được đào tạo kỹ càng, và am hiểu thị trường. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="chuyên viên thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="chuyên viên thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
+{% block head %}
+    {{ block.super }}
+    <link rel="canonical" href="{% url 'services' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
+{% endblock %}
 {% block head %}
     {{ block.super }}
     <link rel="canonical" href="{% url 'specialist' %}"/>

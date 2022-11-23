@@ -1,7 +1,22 @@
 {% extends 'base.html' %}
 
 {% load static humanize i18n load_static %}
-{% block title %} {% trans "Các chính sách với TGNP" %} {% endblock %}
+{% block title %}
+    <title>{% trans "Các chính sách với TGNP" %}</title>
+    <meta name="title" content="{% trans "Các chính sách với TGNP" %}"/>
+    <meta property="og:title" content="{% trans "Các chính sách với TGNP" %}"/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Các chính sách với TGNP. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="Các chính sách với TGNP. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="chính sách, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="chính sách, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
 {% block head %}
   {{ block.super }}
 
@@ -113,7 +128,7 @@
           <a href="{% url 'specialist' %}">Gặp chuyên viên tư vấn</a>
         </div>
         <div class="s-cell s-btn">
-          <a href="{% url 'sell_lease_with_us' %}">Đăng bán, cho thuê</a>
+          <a href="{% url 'sellLeaseUs' %}">Đăng bán, cho thuê</a>
         </div>
         <div class="s-cell s-btn">
           <a href="https://forms.gle/LM41QBEMSZvwmSta7">Gia nhập TGNP</a>

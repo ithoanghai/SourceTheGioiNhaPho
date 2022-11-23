@@ -60,7 +60,7 @@
         <ul>
 
             <li>
-                <a href="{% url 'my_listing' %}"> <i class="fa fa-newspaper"></i> {% translate 'Danh sách tin đăng của tôi' %}</a>
+                <a href="{% url 'myListing' %}"> <i class="fa fa-newspaper"></i> {% translate 'Danh sách tin đăng của tôi' %}</a>
             </li>
             <li class="dropdown-divider divide"></li>
             {% if user.is_staff or user.is_superuser %}
@@ -80,7 +80,7 @@
                 <a href="{% url 'customer' %}"> <i class="fa fa-passport"></i> {% translate 'Danh sách khách hàng' %}</a>
             </li>
             <li>
-                <a href="{% url 'my_listing' %}"> <i class="fa fa-building"></i> {% translate 'Danh sách bất động sản' %}</a>
+                <a href="{% url 'myListing' %}"> <i class="fa fa-building"></i> {% translate 'Danh sách bất động sản' %}</a>
             </li>
             {% if user.is_active and user.is_staff %}
                 {% url 'django-admindocs-docroot' as docsroot %}

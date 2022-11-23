@@ -1,7 +1,23 @@
 {% extends 'base.html' %}
 
 {% load static load_static listing humanize i18n %}
-{% block title %} Thế Giới Nhà Phố Việt Nam|{% trans "Thông tin chi tiết chuyên viên " %}{{ realtor.name }} {{ realtor.phone1 }} {% endblock %}
+{% block title %}
+    <title>{% trans "Thế Giới Nhà Phố Việt Nam|Thông tin chi tiết chuyên viên " %}{{ realtor.name }} </title>
+    <meta name="title" content="{% trans "Thế Giới Nhà Phố Việt Nam|Thông tin chi tiết chuyên viên " %}{{ realtor.name }}"/>
+    <meta property="og:title" content="{% trans "Thế Giới Nhà Phố Việt Nam|Thông tin chi tiết chuyên viên " %}{{ realtor.name }}"/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Trải nghiệm hoàn hảo cùng chuyên viên {{ realtor.name }} được đào tạo kỹ càng, và am hiểu thị trường. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="Trải nghiệm hoàn hảo cùng {{ realtor.name }} được đào tạo kỹ càng, và am hiểu thị trường. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="{{ realtor.name }}, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="{{ realtor.name }}, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
+
 {% block head %}
     {{ block.super }}
     <link rel="canonical" href="{% url 'specialistDetail' realtor.id %}"/>
@@ -46,7 +62,7 @@
                         </div>
                         <div class="agent-name">
                         {% if realtor.birthyear %}
-                                <p >Ngày sinh: {{ realtor.birthyear }}</p>
+                                <p >Năm sinh: {{ realtor.birthyear }}</p>
                         {% endif %}
                         {% if realtor.email %}
                                 <p >Email: <a href="mailto: {{ realtor.email }}"

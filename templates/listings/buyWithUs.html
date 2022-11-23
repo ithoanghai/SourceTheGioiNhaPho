@@ -2,12 +2,26 @@
 
 {% load static humanize i18n load_static %}
 
-{% block title %}Thế Giới Nhà Phố Việt Nam|Mua bán nhà trên hệ thống{% endblock %}
-
+{% block title %}
+    <title>{% trans "Thế Giới Nhà Phố Việt Nam|Mua bán nhà trên hệ thống" %}</title>
+    <meta name="title" content="{% trans "Thế Giới Nhà Phố Việt Nam|Mua bán nhà trên hệ thống" %}"/>
+    <meta property="og:title" content="{% trans "Thế Giới Nhà Phố Việt Nam|Mua bán nhà trên hệ thống" %}"/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Tìm nhà dễ dàng, mua nhanh chóng, được hỗ trợ mọi lúc bởi chuyên viên. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="Tìm nhà dễ dàng, mua nhanh chóng, được hỗ trợ mọi lúc bởi chuyên viên. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="mua bán bất động sản, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="mua bán bất động sản, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
 {% block head %}
 
   {{ block.super }}
-  <link rel="canonical" href="{% url 'buy_with_us' %}"/>
+  <link rel="canonical" href="{% url 'buyWithUs' %}"/>
   <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
 
 {% endblock %}

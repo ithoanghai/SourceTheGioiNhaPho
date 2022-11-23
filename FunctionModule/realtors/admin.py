@@ -123,7 +123,7 @@ class RealtorAdmin(admin_site.ModelAdmin):
             'classes': ('wide',),
             'fields': ('user', ( 'name', 'birthyear', 'position'), ('avatar', 'countryside', 'address'), ('phone1', 'phone2','email')),
         }), ('THÔNG TIN BỔ SUNG', {'fields': (
-            ('workplace', 'department', 'work_area'),
+            ( 'workplace', 'department', 'work_area','identifier',),
             'facebook', 'story',)})
     )
 
@@ -133,10 +133,10 @@ class RealtorAdmin(admin_site.ModelAdmin):
             'fields': ('user', ('name', 'birthyear', 'position'), ('avatar','countryside', 'address'), ('phone1', 'phone2', 'email')),
         }),
         ('THÔNG TIN BỔ SUNG', {'fields': (
-            ('workplace', 'department', 'work_area'),
+            ('workplace', 'department', 'work_area','identifier',),
             ('facebook', 'website', 'youtube'),
-            ('title', 'level', 'training'),
-            ('referral', 'story'))}),
+            ('title', 'level', 'training','referral',),
+            ('story'))}),
         ('THÔNG TIN KHÁC', {
             'fields': (('status', 'is_cooperate', 'is_published'),)
         }),

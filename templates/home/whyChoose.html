@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
 
 {% load static load_static humanize i18n %}
-{% block title %} {% trans "Vì sao chọn dịch vụ Thế Giới Nhà Phố" %} {% endblock %}
+
+{% block title %}
+    <title>{% trans "Vì sao chọn dịch vụ Thế Giới Nhà Phố" %}</title>
+    <meta name="title" content="{% trans "Vì sao chọn dịch vụ Thế Giới Nhà Phố" %}"/>
+    <meta property="og:title" content="{% trans "Vì sao chọn dịch vụ Thế Giới Nhà Phố" %}"/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="TGNP mong muốn mang đến cho bạn trải nghiệm tốt nhất trong việc tìm kiếm và giao
+                        dịch bất động sản. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="TGNP mong muốn mang đến cho bạn trải nghiệm tốt nhất trong việc tìm kiếm và giao
+                        dịch bất động sản. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="Vì sao chọn dịch vụ Thế Giới Nhà Phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="Vì sao chọn dịch vụ Thế Giới Nhà Phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
 {% block head %}
     {{ block.super }}
     <link rel="canonical" href="{% url 'whyChoose' %}"/>
@@ -112,7 +130,7 @@
                                 người có nhu cầu phù hợp giúp cho chủ nhà tìm được khách mua | thuê nhanh nhất.
                             </p>
                             <p class="s-btn-inner">
-                                <a class="s-btn-red" href="{% url 'sell_lease_with_us' %}">Bán & Cho thuê với TGNP</a>
+                                <a class="s-btn-red" href="{% url 'sellLeaseUs' %}">Bán & Cho thuê với TGNP</a>
                             </p>
                         </div>
                     </div>
@@ -133,8 +151,8 @@
                                 chủ nhà. Bạn có thể đăng ký xem nhà, thương lượng giá và nhận tư vấn nhanh chóng ngay trên web và ứng dụng.
                                 Dịch vụ TGNP sẽ hỗ trợ bạn mọi thứ phát sinh trong quá trình giao dịch (giấy tờ, pháp lý và vay ngân hàng...)</p>
                             <div class="s-btn-inner">
-                                <a class="s-btn-red s-btn-red2" href="{% url 'buy_with_us' %}">Mua với TGNP</a>
-                                <a class="s-btn-red s-btn-red2" href="{% url 'rent_with_us' %}">Thuê với TGNP</a>
+                                <a class="s-btn-red s-btn-red2" href="{% url 'buyWithUs' %}">Mua với TGNP</a>
+                                <a class="s-btn-red s-btn-red2" href="{% url 'rentWithUs' %}">Thuê với TGNP</a>
                             </div>
                         </div>
                     </div>

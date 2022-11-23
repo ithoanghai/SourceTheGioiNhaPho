@@ -50,8 +50,8 @@
                         </div>
                         <div class="card-body">
 
-                            <form method="POST" action="{% url 'post_listings' %}" id="listingForm" enctype='multipart/form-data' data-districts-url="{% url 'ajax_load_districts' %}">
-                           {% comment %} <form id="listingForm" action="{% url 'post_listings' %}" method="POST" enctype='multipart/form-data' data-districts-url="{% url 'ajax_load_districts' %}" novalidate>
+                            <form method="POST" action="{% url 'postListings' %}" id="listingForm" enctype='multipart/form-data' data-districts-url="{% url 'ajax_load_districts' %}">
+                           {% comment %} <form id="listingForm" action="{% url 'postListings' %}" method="POST" enctype='multipart/form-data' data-districts-url="{% url 'ajax_load_districts' %}" novalidate>
                           {% endcomment %}      {% csrf_token %}
                                 {% comment %}<h5 class="h5 heading-small text-muted mb-4">CHI TIẾT TIN ĐĂNG:</h5>{% endcomment %}
                                 {% comment %}<div class="pl-lg-4">

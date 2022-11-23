@@ -2,7 +2,22 @@
 
 {% load humanize i18n %}
 
-{% block title %} Thế Giới Nhà Phố Việt Nam|{% trans "Danh sách sản phẩm BĐS" %} {% endblock %}
+{% block title %}
+    <title>{% trans "Thế Giới Nhà Phố Việt Nam|DS Bất động sản của bạn" %}</title>
+    <meta name="title" content="{% trans "Thế Giới Nhà Phố Việt Nam|DS Bất động sản của bạn" %}"/>
+    <meta property="og:title" content="{% trans "Thế Giới Nhà Phố Việt Nam|DS Bất động sản của bạn" %}"/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Hàng nghìn căn nhà được chúng tôi cập nhật liên tục! Tìm nhà dễ dàng, mua nhanh chóng, được hỗ trợ mọi lúc bởi chuyên viên. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="Hàng nghìn căn nhà được chúng tôi cập nhật liên tục! Tìm nhà dễ dàng, mua nhanh chóng, được hỗ trợ mọi lúc bởi chuyên viên. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="mua bán bất động sản, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="mua bán bất động sản, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
 
 {% block content %}
 <section id="showcase-inner" class="py-5  text-white">

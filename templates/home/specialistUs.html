@@ -1,7 +1,22 @@
 {% extends 'base.html' %}
 
 {% load static load_static humanize i18n %}
-{% block title %} Thế Giới Nhà Phố Việt Nam|{% trans "Chuyên viên chăm sóc nhiệt tình, chu đáo" %} {% endblock %}
+{% block title %}
+    <title>{% trans "Chuyên viên Thế Giới Nhà Phố nhiệt tình, chu đáo" %} </title>
+    <meta name="title" content="{% trans "Chuyên viên Thế Giới Nhà Phố nhiệt tình, chu đáo" %} "/>
+    <meta property="og:title" content="{% trans "Chuyên viên Thế Giới Nhà Phố nhiệt tình, chu đáo" %} "/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Trải nghiệm hoàn hảo cùng với chuyên viên TGNP được đào tạo kỹ càng, và am hiểu thị trường. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="Trải nghiệm hoàn hảo cùng với chuyên viên TGNP được đào tạo kỹ càng, và am hiểu thị trường. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="về chuyên viên thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="về chuyên viên thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
 {% block head %}
 {{ block.super }}
     <link rel="canonical" href="{% url 'specialist_us' %}"/>
