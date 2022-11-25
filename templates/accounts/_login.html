@@ -2,10 +2,22 @@
 
 {% load static i18n account %}
 
-{% block title %} Đăng nhập Thế Giới Nhà Phố {% endblock title %}
-{% block description %} <meta name="description" content="Mời bạn sử dụng tài khoản đã đăng ký và cấp quyền truy cập vào trang quản trị hệ thống Thế Giới Nhà Phố. ĐT:0916286256 - 0964399436"/>
-{% endblock description %}
-
+{% block title %}
+    <title>{% trans "Đăng nhập hệ thống Thế Giới Nhà Phố" %} </title>
+    <meta name="title" content="{% trans "Đăng nhập hệ thống Thế Giới Nhà Phố" %}"/>
+    <meta property="og:title" content="{% trans "Đăng nhập hệ thống Thế Giới Nhà Phố" %} "/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Sử dụng tài khoản đã đăng ký và cấp quyền truy cập vào trang quản trị hệ thống Thế Giới Nhà Phố. ĐT:0916286256 - 0964399436"/>
+<meta property="og:description"
+      content="Sử dụng tài khoản đã đăng ký và cấp quyền truy cập vào trang quản trị hệ thống Thế Giới Nhà Phố. ĐT:0916286256 - 0964399436"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="đăng nhập thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="đăng nhập thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
 {% block content %}
 
     <!-- Page content -->

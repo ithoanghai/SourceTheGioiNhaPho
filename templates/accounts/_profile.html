@@ -1,8 +1,22 @@
 {% extends 'base.html' %}
 
 {% load static listing i18n %}
-{% block title %} Thế Giới Nhà Phố Việt Nam|{% trans 'Thông tin cá nhân' %} {% endblock title %}
-
+{% block title %}
+    <title>{% trans "Thông tin cá nhân" %} </title>
+    <meta name="title" content="{% trans "Thông tin cá nhân" %}"/>
+    <meta property="og:title" content="{% trans "Thông tin cá nhân" %} "/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Thông tin cá nhân trong hệ thống Thế Giới Nhà Phố. ĐT:0916286256 - 0964399436"/>
+<meta property="og:description"
+      content="Thông tin cá nhân trong hệ thống Thế Giới Nhà Phố. ĐT:0916286256 - 0964399436"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="đăng ký thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="đăng ký thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
 {% block content %}
     <div id="wrap">
         <!-- Search menu -->

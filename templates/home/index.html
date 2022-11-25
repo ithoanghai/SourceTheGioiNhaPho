@@ -22,11 +22,11 @@
             <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
                 <i class="zmdi zmdi-close"></i>
             </button>
-            <a href="javascript:void(0)" class="cover">
+            <a href="{{ site_url }}" class="cover">
                 <img src="{% static 'img/logo.svg' %}" alt="Thế giới Nhà Phố">
             </a>
             <div class="banner-app-info">
-                <a href="javascript:void(0)">Thế giới Nhà Phố</a>
+                <a href="{{ site_url }}">Thế giới Nhà Phố</a>
                 <p>Mua bán, tìm kiếm Bất động sản thật, nhanh chóng, tin cậy</p>
                 <div class="rating-star">
                     <i class="zmdi zmdi-star evaluated"></i>
@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <a href="javascript:void(0)" class="btn-install">Mở</a>
+        <a href="{{ site_url }}" class="btn-install">Mở</a>
     </div>
 
     {% if listings_for_sale %}
@@ -264,7 +264,7 @@
                         Dù bạn đang có nhu cầu bán / cho thuê căn nhà của mình hoặc đang tìm nhà để mua / thuê, TGNP đều có những dịch vụ môi giới phù hợp với nhu cầu của bạn, cùng hàng loạt các dịch vụ bổ sung đi kèm mang lại trải nghiệm tốt nhất, đạt được kết quả nhanh nhất và chi phí tiết kiệm nhất so với trung bình thị trường.
                     </p>
                     <div class="option-group">
-                        <a class="btn-contact btn-primary btn-large btn-black-outline" style="margin-left: 0px" data-target="contact-agent"><i
+                        <a href="#" class="btn-contact btn-primary btn-large btn-black-outline" style="margin-left: 0px" data-target="contact-agent"><i
                                     class="zmdi zmdi-email-open"></i>Liên hệ tư vấn</a>
                    </div>
                 </div>

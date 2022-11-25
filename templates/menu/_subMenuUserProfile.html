@@ -3,7 +3,7 @@
 <li class="sub-menu">
 
     {% if user.is_authenticated %}
-        <a style="{% comment %} line-height: 1em;{% endcomment %} color: orange">
+        <a style="{% comment %} line-height: 1em;{% endcomment %} color: orange" href="{% url "profile" %}">
                      Chào bạn {{ user.name }}&nbsp;<i class="zmdi zmdi-chevron-down"> </i></a>
     {% else %}
         <div class="login">

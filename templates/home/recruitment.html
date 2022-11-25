@@ -193,13 +193,13 @@
         </div>
         <div class="career-img">
           <ul>
-            <li><a href="javascript:void(0)"><img src="{% static 'images/career1.jpg' %}" alt="Tuyển dụng"></a>
+            <li><a href="{% url "recruitment" %}"><img src="{% static 'images/career1.jpg' %}" alt="Tuyển dụng"></a>
             </li>
-            <li><a href="javascript:void(0)"><img
+            <li><a href="{% url "recruitment" %}"><img
               src=".{% static 'images/career/2.jpg' %}"></a>
             </li>
-            <li><a href="javascript:void(0)"><img src="{% static 'images/career6.jpg' %}" alt="Tuyển dụng"></a></li>
-            <li><a href="javascript:void(0)"><img src="{% static 'images/career7.jpg' %}" alt="Tuyển dụng"></a></li>
+            <li><a href="{% url "recruitment" %}"><img src="{% static 'images/career6.jpg' %}" alt="Tuyển dụng"></a></li>
+            <li><a href="{% url "recruitment" %}"><img src="{% static 'images/career7.jpg' %}" alt="Tuyển dụng"></a></li>
           </ul>
         </div>
       </div>
@@ -217,23 +217,21 @@
         <div class="form-career-detail">
           <div class="detail">
             <div class="name">
-              <a href="apply?position=sale" target="_blank">
-                Chuyên viên kinh doanh bất động sản Đầu Chủ/Đầu Khách
+              <a href="https://forms.gle/tjhswtmDUQbb1My88" target="_blank">
+                Chuyên viên kinh doanh BĐS
               </a>
             </div>
             <div class="pos">Chính thức/Cộng tác</div>
             <div class="loc"></div>
             <div class="btn-app btn-red-boder">
               <a style="display: block"
-                {% comment %}href="apply?position=sale"{% endcomment %}
-                {% comment %} href="{% url 'contacts' %}"{% endcomment %}
                  href="https://forms.gle/tjhswtmDUQbb1My88"
                  target="_blank">ỨNG TUYỂN</a>
             </div>
           </div>
           <div class="detail">
             <div class="name">
-              <a href="apply?position=sales-director" target="_blank">
+              <a href="https://forms.gle/tjhswtmDUQbb1My88" target="_blank">
                 Giám đốc Khu vực
               </a>
             </div>
@@ -241,8 +239,6 @@
             <div class="loc"></div>
             <div class="btn-app btn-red-boder">
               <a style="display: block"
-                {% comment %}href="apply?position=sale"{% endcomment %}
-                {% comment %} href="{% url 'contacts' %}"{% endcomment %}
                  href="https://forms.gle/tjhswtmDUQbb1My88"
                  target="_blank">ỨNG
                 TUYỂN</a>
@@ -250,7 +246,7 @@
           </div>
           <div class="detail">
             <div class="name">
-              <a href="apply?position=software-engineer" target="_blank">
+              <a href="https://forms.gle/tjhswtmDUQbb1My88" target="_blank">
                 Lập trình viên phần mềm & Hỗ trợ kỹ thuật
               </a>
             </div>
@@ -264,105 +260,7 @@
                 TUYỂN</a>
             </div>
           </div>
-          {% comment %}                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=data-engineer" target="_blank">
-                                Data Engineer
-                            </a>
-                        </div>
-                        <div class="pos">Tech &amp; Product</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block" href="apply?position=data-engineer"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=qa-specialist" target="_blank">
-                                QA Specialist
-                            </a>
-                            <button onclick="showDescription('QA Specialist', '1EwZzpzfa9_q3LzUUVJ9UDRiiGYOwCOVu', 'apply?position=qa-specialist')"
-                                    class="job-desc">Mô tả công việc
-                            </button>
-                        </div>
-                        <div class="pos">CE</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block" href="apply?position=qa-specialist"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=isa-outbound%2Finbound"
-                               target="_blank">
-                                ISA Outbound/Inbound
-                            </a>
-                            <button onclick="showDescription('ISA Outbound/Inbound', '1TkzWWPYr1ZUOj5RtlCTM6ulefdPClGMZ', 'apply?position=isa-outbound%2Finbound')"
-                                    class="job-desc">Mô tả công việc
-                            </button>
-                        </div>
-                        <div class="pos">CE</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=isa-outbound%2Finbound"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=customer-service-executive"
-                               target="_blank">
-                                Customer Service Executive
-                            </a>
-                            <button onclick="showDescription('Customer Service Executive', '1xUwW0mkDXn53FzkKZl-UUSIq1j6O4JHd', 'apply?position=customer-service-executive')"
-                                    class="job-desc">Mô tả công việc
-                            </button>
-                        </div>
-                        <div class="pos">CE</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=customer-service-executive"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=content-research-analyst"
-                               target="_blank">
-                                Content Research Analyst
-                            </a>
-                        </div>
-                        <div class="pos">Marketing</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=content-research-analyst"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="name">
-                            <a href="apply?position=digital-marketing-specialist"
-                               target="_blank">
-                                Digital Marketing Specialist
-                            </a>
-                            <button onclick="showDescription('Digital Marketing Specialist', '1M8OoIp9LTa7XdWmSTwvnlTmSY1vrrzwm', 'apply?position=digital-marketing-specialist')"
-                                    class="job-desc">Mô tả công việc
-                            </button>
-                        </div>
-                        <div class="pos">Marketing</div>
-                        <div class="loc"></div>
-                        <div class="btn-app btn-red-boder">
-                            <a style="display: block"
-                               href="apply?position=digital-marketing-specialist"
-                               target="_blank">ỨNG TUYỂN</a>
-                        </div>
-                    </div>{% endcomment %}
-        </div>
+         </div>
       </div>
     </section>
 
