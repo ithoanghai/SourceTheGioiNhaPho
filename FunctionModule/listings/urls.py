@@ -16,7 +16,7 @@ urlpatterns = [
     path('myListing', views.myListing, name='myListing'),
 
     path('mylistingpost', views.mylistingpost, name='mylistingpost'),
-    path('postListing', views.ListingCreateView.as_view(), name='postListings'),
+    path('postlisting', views.ListingCreateView.as_view(), name='postlistings'),
 
     path('search', views.search, name='listing_search'),
 
