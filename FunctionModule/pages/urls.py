@@ -24,8 +24,8 @@ urlpatterns = [
     path('services', views.services, name='services'),
     path('contacts', views.contacts, name='contacts'),
     path('recruitment', views.recruitment, name='recruitment'),
-    path('termsOfUse', views.termsOfUse, name='termsOfUse'),
-    path('privacyPolicy', views.privacyPolicy, name='privacyPolicy'),
+    path('termsofuse', views.termsofuse, name='termsofuse'),
+    path('privacypolicy', views.privacypolicy, name='privacypolicy'),
     path('page-not-found-test', views.error404home, name='page-not-found-test'),
 
     # Url for Backend

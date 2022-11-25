@@ -144,14 +144,14 @@ def recruitment(request):
 
     return render(request, 'home/recruitment.html', context)
 
-def termsOfUse(request):
+def termsofuse(request):
     context = {
     }
 
     return render(request, 'home/termsOfUse.html', context)
 
 
-def privacyPolicy(request):
+def privacypolicy(request):
     context = {
     }
 
