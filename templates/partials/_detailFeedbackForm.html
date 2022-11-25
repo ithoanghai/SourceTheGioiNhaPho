@@ -22,7 +22,7 @@
                   </ul>
                 </div>
                 <div class="emotion">
-                  <img :src="'{% static 'images/' %}' + step1Icon" alt="">
+                  <img src="'{% static 'images/' %}' + step1Icon" alt="Tôi sẽ giới thiệu ngay">
                   <p v-text="step1Msg" style="display: block">Tôi sẽ giới thiệu ngay</p>
                 </div>
               </div>
@@ -169,7 +169,7 @@
           </button>
         </div>
         <div class="popup-contain">
-          <img class="img-success" src="{% static 'images/icon-success.svg' %}">
+          <img class="img-success" src="{% static 'images/icon-success.svg' %}" alt="Đã gửi thành công">
           <div class="send-success">
             <h3>Đã gửi thành công!</h3>
             <p>Cảm ơn bạn đã gửi phản hồi cho TGNP, ý kiến của bạn sẽ giúp Thế giới Nhà Phố từng

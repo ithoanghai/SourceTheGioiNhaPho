@@ -1002,7 +1002,7 @@
                                     href="javascript:void(0)">
                                 {% if listing.main_photo %}
                                     {% with listing.main_photo as photo %}
-                                        <img src=""
+                                        <img src="{% static "img/default.png" %}"
                                              data-src="{{ photo.url }}"
                                              alt="{{ listing.title }}"
                                              title="{{ listing.title }}"
@@ -1011,7 +1011,7 @@
                                         />
                                     {% endwith %}
                                 {% else %}
-                                    <img src=""
+                                    <img src="{% static "img/default.png" %}"
                                          data-src="{{ listing.house_type|default_img_by_house_type }}"
                                          alt="{{ listing.title }}"
                                          title="{{ listing.title }}"
@@ -1046,7 +1046,7 @@
                                 </div>
                                 <div class="popup-body">
                                     <div class="popup-right-rva">
-                                        <div class="rva-cover"><img src="/static/images/isa-team-v2.png"
+                                        <div class="rva-cover"><img src="{% static "images/isa-team-v2.png" %}/"
                                                                     alt="TGNP"></div>
                                         <div class="rva-info">
                                             <h3 class="rva-info-name">Chuyên viên đã sẵn sàng hỗ trợ!</h3>

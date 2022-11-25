@@ -26,6 +26,7 @@ urlpatterns = [
     path('recruitment', views.recruitment, name='recruitment'),
     path('termsOfUse', views.termsOfUse, name='termsOfUse'),
     path('privacyPolicy', views.privacyPolicy, name='privacyPolicy'),
+    path('page-not-found-test', views.error404, name='page-not-found-test'),
 
     # Url for Backend
     path('admin/map', views.map, name='map'),
