@@ -220,13 +220,14 @@ def handle_import(request, file_path, listing_type):
 
                 #Read information about date and time listing
                 created_date = row[header_dict['tgian']]
-                created = datetime.datetime.now(tz=timezone).date()
+                #created = datetime.datetime.now(tz=timezone).date()
                 try:
                     if listing_type == "K1":
-                        created_date = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M:%S')
+                        created = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M:%S')
                     elif listing_type == "K2":
-                        created_date = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M')
-                    created_date = created_date.replace(tzinfo=timezone).date()
+                        created = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M')
+                    created_date = created.replace(tzinfo=timezone).date()
+
                 except ValueError:
                     logger.info(f"error date create {created_date}")
                     created_date = datetime.datetime.now(tz=timezone).date()
@@ -265,17 +266,17 @@ def handle_import(request, file_path, listing_type):
                     if listing_type != "K1":
                         width = row[header_dict['mat-tien']]
                     else:
-                        width = None
-                    if width is not None:
-                        width = Decimal(width.replace(',', '.').replace(' ', ''))
+                        width = 0
+                    if width is not None and not width==0:
+                        width = Decimal(width.replace(' ', '').replace(',', '.'))
                 except ValueError:
                     logger.info(f"error width  {width}")
-                    pass
+                    continue
 
                 # Read real estate price information
                 price = row[header_dict['gia']]
                 try:
-                    if price == '#VALUE!':
+                    if price == '#VALUE!' or price == '':
                         continue
                     price_k2 = price
                     price = price.split(' ')[0]
@@ -607,8 +608,7 @@ def handle_import(request, file_path, listing_type):
                             if listing_fisrt is None:
                                 listing_fisrt = Listing.objects.get(pk=listing.id)
                             # nếu listing mới import cũ hơn listing trong kho thì chỉ đẩy listing này sang bảng listing history
-                            print(listing.date_created)
-                            print(new_listing.date_created)
+
                             if listing.date_created is None:
                                 listing.date_created = new_listing.date_created
                             if listing.date_created > new_listing.date_created:
