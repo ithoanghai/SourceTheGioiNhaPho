@@ -226,7 +226,7 @@ def handle_import(request, file_path, listing_type):
                         created_date = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M:%S')
                     elif listing_type == "K2":
                         created_date = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M')
-                    created_date = created_date.replace(tz=timezone).date()
+                    created_date = created_date.replace(tzinfo=timezone).date()
                 except ValueError:
                     logger.info(f"error date create {created_date}")
                     created_date = datetime.datetime.now(tz=timezone).date()
