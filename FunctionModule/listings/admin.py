@@ -244,7 +244,7 @@ class ListingHistoryAdmin(admin_site.ModelAdmin):
         )}),
     )
 
-    list_display = ('listing', 'area', 'floors', 'width', 'price', 'bedrooms', 'bathrooms', 'warehouse', 'date_created',)
+    list_display = ('listing', 'area', 'floors', 'width', 'price', 'warehouse', 'date_created',)
     list_display_links = ('listing',)
     list_filter = (
         ('area', RangeNumericFilter),

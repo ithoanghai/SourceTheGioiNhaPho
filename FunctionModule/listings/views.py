@@ -131,7 +131,7 @@ class ListingCreateView(LoginRequiredMixin, CreateView):
     model = Listing
     form_class = ListingForm
     success_url = reverse_lazy('mylistingpost')
-    login_url = HttpResponseRedirect(reverse('admin'))
+    login_url = 'admin'
     redirect_field_name = 'redirect_to'
 
     def get_initial(self):

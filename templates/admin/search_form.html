@@ -4,7 +4,7 @@
         <form id="changelist-search" method="get">
             <div class="col-12"><!-- DIV needed for valid HTML -->
                 <label for="searchbar"><img src="{% static "admin/img/search.svg" %}" alt="Tìm kiếm"></label>
-                <input class="col-5" type="text" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" autofocus>
+                <input class="col-6" type="text" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" autofocus>
                 <input type="submit" value="{% translate 'Tìm kiếm' %}">
                 {% if show_result_count %}
                     <span class="small quiet" style="width: -moz-fit-content">{% blocktranslate count counter=cl.result_count %}{{ counter }} kết quả
