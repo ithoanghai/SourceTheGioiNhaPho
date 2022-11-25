@@ -131,7 +131,7 @@ class ListingCreateView(LoginRequiredMixin, CreateView):
     model = Listing
     form_class = ListingForm
     success_url = reverse_lazy('mylistingpost')
-    login_url = '/accounts/login'
+    login_url = HttpResponseRedirect(reverse('admin'))
     redirect_field_name = 'redirect_to'
 
     def get_initial(self):
@@ -152,7 +152,7 @@ class ListingCreateView(LoginRequiredMixin, CreateView):
         except Listing.DoesNotExist:
             messages.error(self.request,
                              'Tin đăng của bạn bị lỗi. Xin hãy đăng lại hoặc liên hệ hotline để được hỗ trợ.')
-            HttpResponseRedirect(reverse('postListings'))
+            return HttpResponseRedirect(reverse('postListings'))
 
         return render(self.request, 'listings/postListingSuccess.html')
 
@@ -351,7 +351,7 @@ def listinghistoryadd(request, extra_context=None):
                 if has_listing:
                     messages.error(request,
                                    'Bạn đã gửi yêu cầu tới chúng tôi về tin đăng này. Xin thử gửi lại yêu cầu sau.')
-                    return redirect('postListings')
+                    render(request, 'listings/postListingSuccess.html', context)
                 if area.isnumeric() and width.isnumeric() and floor.isnumeric() and price.isnumeric():
                     listing = Listing.objects.create(user_id=user_id, is_advertising=True, is_published=False,
                                                      transaction_type=trantypes, house_type=housetype, code=code,
@@ -361,15 +361,15 @@ def listinghistoryadd(request, extra_context=None):
                                                      price=price)
                 else:
                     messages.error(request, 'Bạn nhập sai dữ liệu.')
-                    return redirect('admin')
+                    return HttpResponseRedirect(reverse('admin'))
 
                 if request.FILES.get('photomain', None) is not None:
                     ListingImage.objects.create(listing_id=listing.id, photo=photomain)
                     messages.success(request, 'Bạn đã gửi tin đăng thành công. Quản trị viên sẽ kiểm duyệt trước khi đăng.')
                     return render(request, 'listings/postListingSuccess.html', context)
         else:
-            return redirect('admin')
+            return HttpResponseRedirect(reverse('admin'))
 
     except ValidationError:
         messages.error(request, 'Thông tin bạn nhập không đúng.')
-        return redirect('postListings')
+        return HttpResponseRedirect(reverse('postListings'))

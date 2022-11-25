@@ -1,8 +1,22 @@
 {% extends 'base.html' %}
 
 {% load static i18n get_cadastral load_static listing %}
-{% block title %} Thế Giới Nhà Phố Việt Nam|{% trans 'TIN RAO ĐĂNG CHÍNH CHỦ' %} {% endblock title %}
-
+{% block title  %}
+    <title>{% trans "Tin đăng rao vặt chính chủ" %} </title>
+    <meta name="title" content="{% trans "Tin đăng rao vặt chính chủ" %}"/>
+    <meta property="og:title" content="{% trans "Tin đăng rao vặt chính chủ" %} "/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Đăng tin rao vặt BĐS chính chủ miễn phí với Thế Giới Nhà Phố, bạn sẽ được trải nghiệm và hưởng rất nhiều lợi ích trong lĩnh vực bđs. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="Đăng tin rao vặt BĐS chính chủ miễn phí với Thế Giới Nhà Phố, bạn sẽ được trải nghiệm và hưởng rất nhiều lợi ích trong lĩnh vực bđs. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="Đăng tin rao vặt miễn phí Thế Giới Nhà Phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="Đăng tin rao vặt BĐS chính chủ miễn phí với Thế Giới Nhà Phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
 {% block content %}
     <div id="wrap">
         <!-- Search menu -->

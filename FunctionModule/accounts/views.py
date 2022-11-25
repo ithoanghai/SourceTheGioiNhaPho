@@ -128,7 +128,7 @@ def register(request):
             Point.objects.create_base(user__id=user.id, investment_point=0, investment_account=0, prestige_points=1, potential_points=1, bds_referral_point=0, customer_referral_point=0)
             messages.success(request,
                              'Bạn đã đăng ký người dùng thành công và có thể đăng nhập. (chú ý: Để trở thành Chuyên viên và sử dụng các tính năng của Chuyên viên TGNP, bạn cần liên hệ với admin.)')
-            return redirect('register_success')
+            return HttpResponseRedirect(reverse('register_success'))
         else:
             messages.error(request,'Đã xảy ra lỗi. Bạn đăng ký chưa được!')
 
@@ -158,13 +158,13 @@ def login_handler(request):
                 adapter.login(request, user)
                 if user.is_authenticated and (user.is_staff or user.is_superuser):
                     messages.success(request, 'Bạn đã đăng nhập thành công')
-                    return redirect('/admin/')
+                    return HttpResponseRedirect(reverse('admin'))
                 elif user.is_authenticated:
                     messages.success(request, 'Bạn đã đăng nhập thành công')
-                    return redirect('index')
+                    return HttpResponseRedirect(reverse('index'))
                 elif not user.is_authenticated:
                     messages.success(request, 'Thông tin đăng nhập không hợp lệ')
-                    return redirect('index')
+                    return HttpResponseRedirect(reverse('index'))
             else:
                 messages.error(request, 'Người dùng không tồn tại')
                 return render(request, 'accounts/_logged_out.html')
@@ -174,8 +174,7 @@ def login_handler(request):
             return render(request, 'accounts/_logged_out.html')
 
     else:
-
-        return redirect('/admin/')
+        return HttpResponseRedirect(reverse('admin'))
 
 
 def logout_handler(request):
@@ -262,8 +261,7 @@ def profile(request):
                 user = form.save()
                 update_session_auth_hash(request, user)  # Important!
                 messages.success(request, 'Bạn đã lưu thông tin thành công')
-
-                return redirect('profile')
+                return HttpResponseRedirect(reverse('profile'))
 
             return render(request, 'accounts/_profile.html', {'reg_user': reg_user, 'form': form})
     else:
@@ -293,7 +291,7 @@ def password_change(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Mật khẩu của bạn đã được thay đổi, cập nhật thành công!')
-            return redirect('profile')
+            return HttpResponseRedirect(reverse('profile'))
         else:
             messages.error(request, 'Hãy hoàn thành các lỗi ở dưới.')
     else:
@@ -303,7 +301,7 @@ def password_change(request):
 
 def social_login_cancelled(request):
     messages.warning(request, 'Bạn đã hủy đăng nhập. Xin đăng nhập lại.')
-    return redirect('/')
+    return HttpResponseRedirect(reverse('index'))
 
 
 def login_zalo_callback(request):
@@ -338,12 +336,11 @@ def login_zalo_callback(request):
             adapter = get_adapter(request)
             adapter.login(request, user)
             messages.success(request, 'Bạn đã đăng nhập thành công')
-
-        return redirect('index')
+        return HttpResponseRedirect(reverse('index'))
 
     except (ObjectDoesNotExist, MultipleObjectsReturned):
         messages.error(request, 'Xuất hiện lỗi khi đăng nhập, bạn cần liên hệ quản trị viên')
-        return redirect('login')
+        return HttpResponseRedirect(reverse('login'))
 
 
 def _ajax_response(request, response, form=None, data=None):

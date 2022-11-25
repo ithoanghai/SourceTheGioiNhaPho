@@ -2604,7 +2604,7 @@ function (_Emitter) {
 
       var headers = {
         "Accept": "application/json",
-        "Cache-Control": "no-cache",
+        "Cache-Control": "max-age=86400",
         "X-Requested-With": "XMLHttpRequest"
       };
 

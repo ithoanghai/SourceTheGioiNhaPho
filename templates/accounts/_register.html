@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
-{% load i18n %}
-{% block title %} Thế Giới Nhà Phố Việt Nam| {% trans "Đăng ký gia nhập Nhà Phố" %} {% endblock %}
-
+{% load static humanize i18n %}
+{% block title  %}
+    <title>{% trans "Đăng ký gia nhập Thế Giới Nhà Phố" %} </title>
+    <meta name="title" content="{% trans "Đăng ký gia nhập Thế Giới Nhà Phố" %}"/>
+    <meta property="og:title" content="{% trans "Đăng ký gia nhập Thế Giới Nhà Phố" %} "/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Đăng ký gia nhập Thế Giới Nhà Phố, bạn sẽ được trải nghiệm và hưởng rất nhiều lợi ích trong lĩnh vực bđs. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="Đăng ký gia nhập Thế Giới Nhà Phố, bạn sẽ được trải nghiệm và hưởng rất nhiều lợi ích trong lĩnh vực bđs. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="Đăng ký gia nhập Thế Giới Nhà Phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="Đăng ký gia nhập Thế Giới Nhà Phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
 {% block content %}
     <section id="register" class="bg-light py-5">
         <div class="container">
