@@ -431,7 +431,7 @@ class LoginView(
     RedirectAuthenticatedUserMixin, AjaxCapableProcessFormViewMixin, FormView
 ):
     form_class = LoginForm
-    template_name = "accounts/login." + app_settings.TEMPLATE_EXTENSION
+    template_name = "accounts/_login." + app_settings.TEMPLATE_EXTENSION
     success_url = None
     redirect_field_name = "next"
 
