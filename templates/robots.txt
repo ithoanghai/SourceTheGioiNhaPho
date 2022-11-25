@@ -1,4 +1,5 @@
 User-Agent: *
+Sitemap: http://thegioinhaphovietnam.com.vn/sitemap.xml
 Disallow: /admin
 
 User-agent: AhrefsBot

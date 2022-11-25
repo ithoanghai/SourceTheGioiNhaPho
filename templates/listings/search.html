@@ -3,15 +3,15 @@
 {% load static humanize i18n load_static get_cadastral listing %}
 
 {% block title %}
-    <title>Thế Giới Nhà Phố Việt Nam|Tìm kiếm {{ advertising }} BĐS {{ transtype }} {{ housetype }} {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất</title>
-    <meta name="title" content="Thế Giới Nhà Phố Việt Nam|Tìm kiếm BĐS {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất"/>
-    <meta property="og:title" content="Thế Giới Nhà Phố Việt Nam|Tìm kiếm BĐS {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất"/>
+    <title>TGNP Việt Nam|Tìm kiếm {{ advertising }} BĐS {{ transtype }} {{ housetype }} {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất</title>
+    <meta name="title" content="TGNP Việt Nam|Tìm {{ advertising }} BĐS {{ transtype }} {{ housetype }} {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất"/>
+    <meta property="og:title" content="TGNP Việt Nam|Tìm {{ advertising }} BĐS {{ transtype }} {{ housetype }} {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất"/>
 {% endblock %}
 {% block description %}
-    <meta name="description" content="Tìm kiếm BĐS {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất, nhanh chóng và tiện lợi, với chi phí
+    <meta name="description" content="Tìm kiếm {{ advertising }} BĐS {{ transtype }} {{ housetype }} {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất, nhanh chóng và tiện lợi, với chi phí
                         thấp và đội ngũ hỗ trợ mọi lúc. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
 <meta property="og:description"
-      content="{% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất, nhanh chóng và tiện lợi, với chi phí
+      content="ìm kiếm {{ advertising }} BĐS {{ transtype }} {{ housetype }} {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất, nhanh chóng và tiện lợi, với chi phí
                         thấp và đội ngũ hỗ trợ mọi lúc. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
 {% endblock %}
 {% block keywords %}
