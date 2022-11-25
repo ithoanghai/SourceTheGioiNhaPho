@@ -242,7 +242,7 @@
             </div>
             <div class="col-12">
                 {% for district in listing_by_group_project %}
-                        <a href="{% url 'listing_search' %}?trans_type=rent&district={{ district.district }}&sort=priority"
+                        <a href="{% url 'listing_search' %}?trans_type=project&district={{ district.district }}&sort=priority"
                            title=""> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
                 {% endfor %}
             </div>

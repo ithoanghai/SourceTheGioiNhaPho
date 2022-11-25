@@ -24,6 +24,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from FunctionModule.cadastral.lookups import get_all_states, get_all_districts, get_district
+from FunctionModule.listings import get_short_title_from_house_type, get_short_title_from_road_type, get_short_title_from_transaction_type
 
 from . import HouseType
 from .filters import ListingFilter
@@ -85,6 +86,18 @@ def listing(request, listing_id):
 
 
 def search(request):
+    if request.GET.get('trans_type'):
+        transtype = get_short_title_from_transaction_type(request.GET.get('trans_type'))
+    else:
+        transtype=''
+    if request.GET.get('house_type'):
+        housetype = get_short_title_from_house_type(request.GET.get('house_type'))
+    else:
+        housetype=''
+    if request.GET.get('advertising'):
+        advertising = "rao vặt"
+    else:
+        advertising=''
     context = {
         'listings': [],
         'state_data': get_all_states(),
@@ -96,6 +109,9 @@ def search(request):
         'state': request.GET.get('state'),
         'district': request.GET.get('district'),
         'word': request.GET.get('keywords'),
+        'transtype': transtype,
+        'housetype': housetype,
+        'advertising': advertising,
     }
 
     return render(request, 'listings/search.html', context)

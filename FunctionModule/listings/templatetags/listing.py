@@ -19,9 +19,9 @@ def tag_get_listing_location_image(value):
     return settings.MEDIA_URL + img_path
 
 
-@register.filter(name='get_transaction_type')
-def tag_get_transaction_type(transaction_type):
-    return get_short_title_from_transaction_type(transaction_type)
+@register.filter(name='get_road_type')
+def tag_get_road_type(road_type):
+    return get_short_title_from_road_type(road_type)
 
 
 @register.filter(name='get_house_type')
@@ -29,9 +29,9 @@ def tag_get_house_type(house_type):
     return get_short_title_from_house_type(house_type)
 
 
-@register.filter(name='get_road_type')
-def tag_get_road_type(road_type):
-    return get_short_title_from_road_type(road_type)
+@register.filter(name='get_transaction_type')
+def tag_get_transaction_type(transaction_type):
+    return get_short_title_from_transaction_type(transaction_type)
 
 
 @register.filter(name='get_listing_status')

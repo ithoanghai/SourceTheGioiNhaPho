@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n load_static get_cadastral %}
+{% load static humanize i18n load_static get_cadastral listing %}
+
 {% block title %}
-    <title>Thế Giới Nhà Phố Việt Nam|Tìm kiếm BĐS {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất</title>
+    <title>Thế Giới Nhà Phố Việt Nam|Tìm kiếm {{ advertising }} BĐS {{ transtype }} {{ housetype }} {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất</title>
     <meta name="title" content="Thế Giới Nhà Phố Việt Nam|Tìm kiếm BĐS {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất"/>
     <meta property="og:title" content="Thế Giới Nhà Phố Việt Nam|Tìm kiếm BĐS {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất"/>
 {% endblock %}
