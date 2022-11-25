@@ -731,9 +731,9 @@ def handle_import(request, file_path, listing_type):
                                     for hislist in findlisthistory:
                                         hislist.listing = listing_fisrt
                                         hislist.save()
-                            else:
-                                listing.delete()
-                            print(f"row {line_count}: xóa listing thừa: {listing}")
+                                else:
+                                    listing.delete()
+                                    print(f"row {line_count}: xóa listing thừa: {listing}")
 
                         count_update += 1
                 else:
