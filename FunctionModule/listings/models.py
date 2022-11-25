@@ -319,7 +319,8 @@ class ListingSerializer(serializers.ModelSerializer):
     state_name = serializers.CharField()
     district_name = serializers.CharField()
     main_photo = serializers.SerializerMethodField()
-    date_created = TimestampField()
+    date_created = serializers.DateField()
+    date_update = serializers.DateField()
     priority = serializers.IntegerField()
 
     def get_main_photo(self, obj):
