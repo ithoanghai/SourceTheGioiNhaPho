@@ -84,7 +84,7 @@ def about(request):
     return render(request, 'home/about.html', context)
 
 
-def specialist_us(request):
+def specialistus(request):
     context = {
     }
 
@@ -172,6 +172,11 @@ def error404(request):
     }
     return render(request, 'admin/page-404.html', context)
 
+def error404home(request):
+    context = {
+
+    }
+    return render(request, 'home/page-404.html', context)
 
 def error500(request):
     context = {

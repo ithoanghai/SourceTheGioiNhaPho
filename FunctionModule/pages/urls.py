@@ -17,7 +17,7 @@ urlpatterns = [
     # re_path('^.*\.*', views.pages, name='pages'),
     # url menu
 
-    path('specialistUs', views.specialist_us, name='specialist_us'),
+    path('specialistus', views.specialistus, name='specialistus'),
     path('specialist', views.specialist, name='specialist'),
     path('specialist/<int:realtor_id>', views.specialist_detail, name='specialistDetail'),
     path('whychoose', views.whychoose, name='whychoose'),
@@ -26,7 +26,7 @@ urlpatterns = [
     path('recruitment', views.recruitment, name='recruitment'),
     path('termsOfUse', views.termsOfUse, name='termsOfUse'),
     path('privacyPolicy', views.privacyPolicy, name='privacyPolicy'),
-    path('page-not-found-test', views.error404, name='page-not-found-test'),
+    path('page-not-found-test', views.error404home, name='page-not-found-test'),
 
     # Url for Backend
     path('admin/map', views.map, name='map'),

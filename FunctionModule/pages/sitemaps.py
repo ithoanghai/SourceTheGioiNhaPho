@@ -12,7 +12,7 @@ class Static_Sitemap(Sitemap):
 
 
     def items(self):
-        return ['blogs', 'index', 'about','message','specialist_us','specialist','whychoose','services','contacts','recruitment']
+        return ['blogs', 'index', 'about','message','specialistus','specialist','whychoose','services','contacts','recruitment']
 
     def location(self, item):
         return reverse(item)

@@ -23,7 +23,7 @@
 
 {% block head %}
   {{ block.super }}
-  <link rel="canonical" href="{% url 'listing_search' %}"/>
+  <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/listing_search"/>
 
   <link rel="stylesheet" href="{% load_static 'css/search-transition.css' %}"/>
   <link rel="stylesheet" href="{% load_static 'css/loading.min.css' %}"/>
@@ -36,7 +36,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="hidden">TGNP Việt Nam|Tìm kiếm {{ advertising }} BĐS {{ transtype }} {{ housetype }} {{ keywords }} {% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất</h1>
+    <h1 class="hidden">TGNP Việt Nam|Tìm kiếm {{ advertising }}BĐS {{ transtype }}{{ housetype }}{{ keywords }}{{ sort }}{% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất</h1>
   <!-- Search menu -->
   {% include 'menu/_menuSearch.html' %}
 
