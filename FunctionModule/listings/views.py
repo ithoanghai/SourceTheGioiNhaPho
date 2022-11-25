@@ -102,6 +102,10 @@ def search(request):
         keywords = request.GET.get('keywords')+' '
     else:
         keywords=''
+    if request.GET.get('sort'):
+        sort = 'hàng đầu '
+    else:
+        sort=''
     context = {
         'listings': [],
         'state_data': get_all_states(),
@@ -117,6 +121,7 @@ def search(request):
         'housetype': housetype,
         'advertising': advertising,
         'keywords': keywords,
+        'sort': sort,
     }
 
     return render(request, 'listings/search.html', context)
