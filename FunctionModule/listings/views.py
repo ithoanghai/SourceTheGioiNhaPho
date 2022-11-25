@@ -176,7 +176,7 @@ def mylistingpost(request):
             'listings': paged_listings,
         }
 
-        return render(request, 'listings/mylistingposts.html', context)
+        return render(request, 'listings/myListingPosts.html', context)
     else:
         return render(request, 'accounts/_profile.html')
 
@@ -209,7 +209,7 @@ def buywithus(request):
         'path': request.path,
     }
 
-    return render(request, 'listings/buywithus.html', context)
+    return render(request, 'listings/buyWithUs.html', context)
 
 
 def rentwithus(request):
@@ -217,7 +217,7 @@ def rentwithus(request):
         'path': request.path,
     }
 
-    return render(request, 'listings/rentwithus.html', context)
+    return render(request, 'listings/rentWithUs.html', context)
 
 
 @api_view(['GET', 'POST'])

@@ -121,7 +121,7 @@ def whychoose(request):
     context = {
     }
 
-    return render(request, 'home/whychoose.html', context)
+    return render(request, 'home/whyChoose.html', context)
 
 
 def services(request):
