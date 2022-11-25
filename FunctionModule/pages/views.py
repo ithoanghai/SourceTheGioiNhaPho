@@ -117,11 +117,11 @@ def specialist_detail(request, realtor_id):
     return render(request, 'home/specialistDetail.html', context)
 
 
-def whyChoose(request):
+def whychoose(request):
     context = {
     }
 
-    return render(request, 'home/whyChoose.html', context)
+    return render(request, 'home/whychoose.html', context)
 
 
 def services(request):

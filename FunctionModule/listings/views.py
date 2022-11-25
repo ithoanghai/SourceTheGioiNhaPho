@@ -120,7 +120,7 @@ def search(request):
 class ListingCreateView(LoginRequiredMixin, CreateView):
     model = Listing
     form_class = ListingForm
-    success_url = reverse_lazy('myListingPost')
+    success_url = reverse_lazy('mylistingpost')
     login_url = '/accounts/login'
     redirect_field_name = 'redirect_to'
 
@@ -156,7 +156,7 @@ def load_districts(request):
     return render(request, 'listings/district_ddl_options.html', {'districts': districts})
 
 
-def myListingPost(request):
+def mylistingpost(request):
     if request.user.is_authenticated and request.method == 'GET':
         listings = Listing.objects.filter(user=request.user, is_advertising=True).order_by('-date_update')
         paginator = Paginator(listings, 10)
@@ -166,7 +166,7 @@ def myListingPost(request):
             'listings': paged_listings,
         }
 
-        return render(request, 'listings/myListingPosts.html', context)
+        return render(request, 'listings/mylistingposts.html', context)
     else:
         return render(request, 'accounts/_profile.html')
 
@@ -186,7 +186,7 @@ def myListing(request):
         return render(request, 'accounts/_profile.html')
 
 
-def sellLeaseUs(request):
+def sellleaseus(request):
     context = {
         'path': request.path,
     }
@@ -194,20 +194,20 @@ def sellLeaseUs(request):
     return render(request, 'listings/sellLeaseWithUs.html', context)
 
 
-def buyWithUs(request):
+def buywithus(request):
     context = {
         'path': request.path,
     }
 
-    return render(request, 'listings/buyWithUs.html', context)
+    return render(request, 'listings/buywithus.html', context)
 
 
-def rentWithUs(request):
+def rentwithus(request):
     context = {
         'path': request.path,
     }
 
-    return render(request, 'listings/rentWithUs.html', context)
+    return render(request, 'listings/rentwithus.html', context)
 
 
 @api_view(['GET', 'POST'])

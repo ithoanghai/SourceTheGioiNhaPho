@@ -15,14 +15,14 @@ urlpatterns = [
     #url(r'^(?P<pk>\d+)/$', ListingDetailJSONView.as_view(), name='listing_detail'),
     path('myListing', views.myListing, name='myListing'),
 
-    path('myListingPost', views.myListingPost, name='myListingPost'),
+    path('mylistingpost', views.mylistingpost, name='mylistingpost'),
     path('postListing', views.ListingCreateView.as_view(), name='postListings'),
 
     path('search', views.search, name='listing_search'),
 
-    path('sellLeaseUs', views.sellLeaseUs, name='sellLeaseUs'),
-    path('buyWithUs', views.buyWithUs, name='buyWithUs'),
-    path('rentWithUs', views.rentWithUs, name='rentWithUs'),
+    path('sellleaseus', views.sellleaseus, name='sellleaseus'),
+    path('buywithus', views.buywithus, name='buywithus'),
+    path('rentwithus', views.rentwithus, name='rentwithus'),
 
     path('ListingsAPIView/', views.ListingsAPIView.as_view(), name='ListingsAPIView'),
     path('listingsAPI', views.listing_api_view),
