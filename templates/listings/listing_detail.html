@@ -25,13 +25,7 @@
 
 {% block head %}
     {{ block.super }}
-
     <link rel="canonical" href="{{ listing.id }}"/>
-
-{% endblock %}
-
-{% block head_script %}
-
     <link rel="stylesheet" href="{% load_static 'css/listing-detail-page.css' %}"/>
     <style>
         img.fade {

@@ -226,11 +226,10 @@ def handle_import(request, file_path, listing_type):
                         created_date = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M:%S')
                     elif listing_type == "K2":
                         created_date = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M')
-                    created_date = created_date.replace(tzinfo=timezone)
-                    created = created_date.date()
+                    created_date = created_date.replace(tz=timezone).date()
                 except ValueError:
                     logger.info(f"error date create {created_date}")
-                    created_date = datetime.datetime.now(tz=timezone)
+                    created_date = datetime.datetime.now(tz=timezone).date()
 
                 #Read information about area
                 area = row[header_dict['dt']]
@@ -610,6 +609,8 @@ def handle_import(request, file_path, listing_type):
                             # nếu listing mới import cũ hơn listing trong kho thì chỉ đẩy listing này sang bảng listing history
                             print(listing.date_created)
                             print(new_listing.date_created)
+                            if listing.date_created is None:
+                                listing.date_created = new_listing.date_created
                             if listing.date_created > new_listing.date_created:
                                 querylist_listhistory = ListingHistory.objects.filter(listing_id=listing_fisrt.id, date_created=new_listing.date_created)
                                 #Kiểm tra trong listing history đã có trùng lặp chưa, nếu chưa có thì đẩy vào, nếu có rồi bỏ qua
