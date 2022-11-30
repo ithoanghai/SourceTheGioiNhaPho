@@ -146,10 +146,9 @@ def register_success(request):
 
 def login_handler(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-
         try:
+            username = request.POST['username']
+            password = request.POST['password']
             query = Q(username=username) | Q(phone=username) | Q(email=username)
             user = User.objects.get(query)
             adapter = get_adapter(request)
