@@ -62,7 +62,9 @@ def home_view(request):
         'price_choices': price_choices,
     }
 
-    return render(request, 'home/index.html', context)
+    response = render(request, 'home/index.html', context)
+    response.status_code = 307
+    return response
 
 
 def message(request):
@@ -251,6 +253,3 @@ def handler500(request):
     response.status_code = 500
     return response
 
-
-def test404(request):
-    return HttpResponseNotFound("hello")

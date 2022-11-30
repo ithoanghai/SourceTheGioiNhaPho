@@ -411,7 +411,7 @@
                                  data-href="https://thegioinhaphovietnam.com.vn{% url "listing_detail" listing.id %}"
                                  data-oaid="579745863508352884" data-layout="1" data-color="blue"
                                  data-customize="false"></div>
-
+                        </div>
                     </header>
                 </div>
                 <div class="heading-02">Mô tả:</div>
@@ -456,8 +456,9 @@
                             <p class="left">Số phòng tắm</p>
                             <p class="right">
                                 {{ listing.bathrooms }} </p>
+                            </li>
                         {% endif %}
-                        </li>
+
                         {% if listing.area > 0 %}
                             <li>
                                 <p class="left">Diện tích</p>
