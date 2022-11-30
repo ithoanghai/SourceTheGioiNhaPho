@@ -1,8 +1,26 @@
 {% extends 'base.html' %}
 
 {% load static listing i18n %}
-{% block title %} Thế Giới Nhà Phố Việt Nam|{% trans 'Danh sách giao dịch' %} {% endblock title %}
-
+{% block title %}
+    <title>Thế Giới Nhà Phố Việt Nam|{% trans 'Danh sách giao dịch' %}</title>
+    <meta name="title" content="Thế Giới Nhà Phố Việt Nam|{% trans 'Danh sách giao dịch' %}"/>
+    <meta property="og:title" content="Thế Giới Nhà Phố Việt Nam|{% trans 'Danh sách giao dịch' %}"/>
+{% endblock %}
+{% block description %}
+    <meta name="description" content="Danh sachs các giao dịch bất động sản đã được thực hiện bởi Khách hàng. Thế Giới Nhà Phố: Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="Danh sachs các giao dịch bất động sản đã được thực hiện bởi Khách hàng. Thế Giới Nhà Phố: Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="giao dịch bất động sản thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="giao dịch bất động sản thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
+{% block head %}
+  {{ block.super }}
+  <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/transactions"/>
+{% endblock %}
 {% block content %}
     <div id="wrap">
         <!-- Search menu -->

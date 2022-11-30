@@ -1480,3 +1480,7 @@ PHẦN BỔ SUNG 11/2022*/
 .helptext:hover {
   visibility: visible;
 }
+
+.hidden {
+    display: none
+}

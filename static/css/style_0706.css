@@ -8456,17 +8456,9 @@ section.browsing article.featured {
     }
 }
 
-.hidden {
-    display: none
-}
-
 .mdialog .close:before {
     position: absolute;
     top: 0
-}
-
-.hidden {
-    display: none
 }
 
 a.actmore-filter {

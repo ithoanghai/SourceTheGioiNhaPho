@@ -28,7 +28,7 @@ sitemaps = {
 }
 
 def redirect_view(request):
-    response = HttpResponseRedirect(reverse('admin'))
+    response = HttpResponseRedirect('/admin/')
     return response
 
 
@@ -44,7 +44,6 @@ urlpatterns = [
     path('cadastral/', include('FunctionModule.cadastral.urls')),
     path('admin', redirect_view, name='admin'),
     path('admin/', admin_site.site.urls),
-    #path('admin/', site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),

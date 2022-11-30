@@ -2487,10 +2487,6 @@ h2 {
     font-weight: 500
 }
 
-.hidden {
-    display: none
-}
-
 div > img {
     max-width: 100%
 }
