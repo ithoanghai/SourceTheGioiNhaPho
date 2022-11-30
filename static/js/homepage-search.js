@@ -53,9 +53,9 @@ new Vue({
 
                         if (!(item.type in headers)) {
                             suggestions.push({
-                                code: "",
+                                code: item.id,
                                 text: getHeaderText(item.type),
-                                subText: "",
+                                subText: item.text,
                                 link: "",
                                 isHeader: true,
                             })
@@ -65,12 +65,11 @@ new Vue({
                             suggestions.push({
                                 code: item.id,
                                 text: item.text,
-                                subText: item.sub_text,
+                                subText: item.text,
                                 link: `/listings/search?trans_type=${item.type}&keywords=${item.text}`,
                                 isHeader: false,
                             })
                         }
-
                     }
                     this.suggestions = suggestions;
                 }
