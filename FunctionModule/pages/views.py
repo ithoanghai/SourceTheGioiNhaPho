@@ -63,7 +63,7 @@ def home_view(request):
     }
 
     response = render(request, 'home/index.html', context)
-    response.status_code = 307
+    #response.status_code = 307
     return response
 
 
