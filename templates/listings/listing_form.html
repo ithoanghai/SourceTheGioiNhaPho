@@ -273,8 +273,9 @@
                                 <h5 class="text-info">Ảnh bất động sản</h5>
                                  {{ listing_image_formset.management_form|crispy }}
 
-                                  {% for form in listing_image_formset.forms %}
-                                       <tr class="row {% cycle 'row1' 'row2' %} formset_row-{{listing_image_formset.prefix }}">
+                                  {% for form1 in listing_image_formset.forms %}
+                                      {{ form1.as_table }}
+                                       {% comment %}<tr class="row {% cycle 'row1' 'row2' %} formset_row-{{listing_image_formset.prefix }}">
                                          {% for field in form.visible_fields %}
                                                 <td>
                                                     {# Include the hidden fields in the form #}
@@ -287,7 +288,7 @@
                                                      {{ field|as_crispy_field }}
                                                </td>
                                           {% endfor %}
-                                     </tr>
+                                     </tr>{% endcomment %}
                                   {% endfor %}
 
                                 <div class="card-footer text-center border-0">

@@ -148,6 +148,7 @@ class ListingCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         try:
+            form.instance.created_by = self.request.user
             created = datetime.datetime.now()
             code = f'POST{created.strftime("%y%m")}'.join(random.choice(string.ascii_letters + string.digits) for i in range(2))
             self.object = form.save(commit=False)
@@ -158,6 +159,7 @@ class ListingCreateView(LoginRequiredMixin, CreateView):
             self.object.is_published = False
             self.object.save()
             messages.success(self.request, 'Bạn đã gửi tin đăng thành công. Quản trị viên sẽ kiểm duyệt trước khi đăng.')
+            return super().form_valid(form)
         except Listing.DoesNotExist:
             messages.error(self.request,
                              'Tin đăng của bạn bị lỗi. Xin hãy đăng lại hoặc liên hệ hotline để được hỗ trợ.')
