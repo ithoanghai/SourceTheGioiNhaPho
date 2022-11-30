@@ -2,9 +2,9 @@
 
 {% load static load_static listing humanize i18n %}
 {% block title %}
-    <title>{% trans "Thế Giới Nhà Phố Việt Nam|Thông tin chi tiết chuyên viên " %}{{ realtor.name }} </title>
-    <meta name="title" content="{% trans "Thế Giới Nhà Phố Việt Nam|Thông tin chi tiết chuyên viên " %}{{ realtor.name }}"/>
-    <meta property="og:title" content="{% trans "Thế Giới Nhà Phố Việt Nam|Thông tin chi tiết chuyên viên " %}{{ realtor.name }}"/>
+    <title>{% trans "Thế Giới Nhà Phố VN|Thông tin chuyên viên " %}{{ realtor.name }} </title>
+    <meta name="title" content="{% trans "Thế Giới Nhà Phố VN|Thông tin chuyên viên " %}{{ realtor.name }}"/>
+    <meta property="og:title" content="{% trans "Thế Giới Nhà Phố VN|Thông tin chuyên viên " %}{{ realtor.name }}"/>
 {% endblock %}
 {% block description %}
     <meta name="description" content="Trải nghiệm hoàn hảo cùng chuyên viên {{ realtor.name }} được đào tạo kỹ càng, và am hiểu thị trường. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
@@ -20,7 +20,7 @@
 
 {% block head %}
     {{ block.super }}
-    <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/specialistDetail' realtor.id %}"/>
+    <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/specialist/{{ realtor.id }}"/>
     <link rel="stylesheet" href="{% static 'css/browse-agent.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/agent-detail.css' %}"/>
 
@@ -48,9 +48,9 @@
                             <img src="/media/{{ realtor.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
                         {% else %}
                             {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' or realtor.avatar %}
-                                <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                                <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố" title="Chuyên viên Thế giới Nhà Phố"/>
                             {% else %}
-                                <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                                <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố" title="Chuyên viên Thế giới Nhà Phố"/>
                             {% endif %}
                         {% endif %}
                           </a>
@@ -210,9 +210,9 @@
                             <img src="/media/{{ realtor.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
                         {% else %}
                             {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' or realtor.avatar %}
-                                <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                                <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố" title="Chuyên viên Thế giới Nhà Phố"/>
                             {% else %}
-                                <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                                <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố" title="Chuyên viên Thế giới Nhà Phố"/>
                             {% endif %}
                         {% endif %}
                 </a>

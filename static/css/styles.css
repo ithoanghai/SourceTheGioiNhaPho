@@ -1465,3 +1465,18 @@ PHẦN BỔ SUNG 11/2022*/
     font-style: normal;
     vertical-align: middle
 }
+
+/* helptext container */
+.helptext {
+    position: relative;
+    display: inline-block;
+    font-size: 11px;
+
+    /* Position the tooltip text - see examples below! */
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.helptext:hover {
+  visibility: visible;
+}

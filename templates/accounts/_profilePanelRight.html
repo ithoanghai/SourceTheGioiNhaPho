@@ -8,10 +8,10 @@
 
                 {% if user.avatar and user.avatar != 'img/logo tgnp brown.jpg' %}
                     <img alt="{{ user.first_name }} {{ user.last_name }}" src="/media/{{ user.avatar }}"
-                         class="rounded-circle avatar">
+                         class="rounded-circle avatar" title="{{ user.last_name }}">
                 {% else %}
                     <img alt="{{ user.first_name }} {{ user.last_name }}" src="{% static '/img/logo tgnp brown.jpg' %}"
-                         class="rounded-circle avatar">
+                         class="rounded-circle avatar" title="{{ user.last_name }}">
                 {% endif %}
 
                 {% if not is_popup %}
@@ -108,7 +108,7 @@
                     <a href="{% url 'customer' %}"><i class="fa fa-passport"></i> {% translate 'DS Khách hàng' %}</a>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <a href="{% url 'myListing' %}"><i class="fa fa-building"></i> {% translate 'DS Bất động sản' %}
+                    <a href="{% url 'mylisting' %}"><i class="fa fa-building"></i> {% translate 'DS Bất động sản' %}
                     </a>
                     <a href="{% url 'mylistingpost' %}"><i class="fa fa-newspaper"></i> {% translate 'DS Tin rao' %}
                     </a>

@@ -5,12 +5,12 @@
     <div class="agents-image">
         <a href="{% url "specialistDetail" realtor.id %}">
             {% if realtor.avatar %}
-                <img src="/media/{{ realtor.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                <img src="/media/{{ realtor.avatar }}"  alt="{{ user.last_name }}" title="{{ user.last_name }}"/>
             {% else %}
                 {% if realtor.user.avatar and realtor.user.avatar != 'img/logo tgnp brown.jpg' or realtor.avatar %}
-                    <img src="/media/{{ realtor.user.avatar }}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                    <img src="/media/{{ realtor.user.avatar }}" alt="{{ user.last_name }}" title="{{ user.last_name }}/>
                 {% else %}
-                    <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố"/>
+                    <img src="{% static 'img/logo tgnp brown.jpg' %}" alt="Chuyên viên Thế giới Nhà Phố" title="Chuyên viên Thế giới Nhà Phố"/>
                 {% endif %}
             {% endif %}
             <button data-action="favorite" data-id="{{ realtor.id }}"

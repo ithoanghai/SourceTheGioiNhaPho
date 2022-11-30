@@ -5,7 +5,7 @@ from django import template
 from FunctionModule.admin_site import site
 from django.core.paginator import Paginator
 from django.db.models import QuerySet, Count
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 
@@ -159,32 +159,6 @@ def privacypolicy(request):
 
 
 """Admin url here"""
-def error403(request):
-    context = {
-
-    }
-    return render(request, 'admin/page-403.html', context)
-
-
-def error404(request):
-    context = {
-
-    }
-    return render(request, 'admin/page-404.html', context)
-
-def error404home(request):
-    context = {
-
-    }
-    return render(request, 'home/page-404.html', context)
-
-def error500(request):
-    context = {
-
-    }
-    return render(request, 'admin/page-500.html', context)
-
-
 def pages(request):
     context = {}
     # All resource paths end in .html.
@@ -241,3 +215,42 @@ def pageblank(request):
         'available_apps': app_list
     }
     return render(request, 'admin/page-blank.html', context)
+
+
+def error403(request):
+    context = {
+
+    }
+    return render(request, 'admin/page-403.html', context)
+
+
+def error404(request):
+    context = {
+
+    }
+    return render(request, 'admin/page-404.html', context)
+
+
+def error500(request):
+    context = {
+
+    }
+    return render(request, 'admin/page-500.html', context)
+
+
+def handler404(request, exception, template_name='home/page-404.html'):
+    response = render(request, 'home/page-404.html')
+    response.status_code = 404
+    return response
+
+
+def handler500(request):
+    context = {
+    }
+    response = render(request, 'home/page-500.html',context)
+    response.status_code = 500
+    return response
+
+
+def test404(request):
+    return HttpResponseNotFound("hello")

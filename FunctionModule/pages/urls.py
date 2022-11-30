@@ -3,6 +3,7 @@ from django.conf.urls import include, url
 from django.views.generic import TemplateView
 
 from . import views
+from .views import handler404, handler500
 
 urlpatterns = [
     # Url for FrontEnd
@@ -26,7 +27,7 @@ urlpatterns = [
     path('recruitment', views.recruitment, name='recruitment'),
     path('termsofuse', views.termsofuse, name='termsofuse'),
     path('privacypolicy', views.privacypolicy, name='privacypolicy'),
-    path('page-not-found-test', views.error404home, name='page-not-found-test'),
+    path('page-not-found-test', views.test404, name='page-not-found-test'),
 
     # Url for Backend
     path('admin/map', views.map, name='map'),

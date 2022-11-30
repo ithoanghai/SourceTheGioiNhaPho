@@ -107,12 +107,12 @@
 
             </article>
         </div>
-        <div v-if="!isViewGrid" class="col" style="padding-top: 20px">
-           <table class="col-md-12 col-sm-12" style="border-style: dotted; border: 1px solid; font-size: small;" >
+        <div v-if="!isViewGrid" class="col col-md-12 col-sm-12" >
+           <table class="col-md-12 col-sm-12" style="border-style: dotted; border: 1px solid; font-size: small; width: 98%" >
             <th class="col-md-4 col-sm-4">Địa chỉ</th>
             <th class="col-md-2 col-sm-2">Diện tích</th>
             <th class="col-md-2 col-sm-2">Số tầng</th>
-            <th class="col-md-2 col-sm-2">Mặt tiền</th>
+            <th class="col-md-2 col-sm-2 listingwidth">Mặt tiền</th>
             <th class="col-md-1 col-sm-1">Giá</th>
             <th class="col-md-2 col-sm-2">Trung bình</th>
             {% comment %}<th class="unique col-md-2 col-sm-2"></th>{% endcomment %}
@@ -143,16 +143,16 @@
                 <td>
                     <i class="fa fa-h-square"></i> [[listing.floors]] {% trans "tầng" %}
                 </td>
-                <td>
+                <td class="listingwidth">
                     <span v-if="listing.width > 3.2 && listing.width != 0"><i class="fa fas fa-arrows-alt-h"></i> [[listing.width]] {% trans "m" %}</span>
                 </td>
-                <td ><a  v-if="listing.status != 'rent'" :href="getListingDetailURL(listing.id)" target="_blank"
+                <td style="text-align: right"><a  v-if="listing.status != 'rent'" :href="getListingDetailURL(listing.id)" target="_blank"
                                                       :title="listing.title">[[ listing.price ]] {% trans "tỷ" %}</a>
                     <a  v-if="listing.status == 'rent'" :href="getListingDetailURL(listing.id)" target="_blank"
                                                       :title="listing.title">[[ listing.price ]] {% trans "tỷ" %}</a>
 
                 </td>
-                <td><a :href="getListingDetailURL(listing.id)" target="_blank"
+                <td style="text-align: right"><a :href="getListingDetailURL(listing.id)" target="_blank"
                                                       :title="listing.title">[[ listing.average_price ]] {% trans "tr/m" %}</a>
                 </td>
 {% comment %}                <td style="word-wrap: break-word; ">
@@ -188,8 +188,8 @@
             </tbody>
         </table>
         </div>
-        <div class="search-noresult">
-            <div v-if="!listings.length && !isLoading" class="search-noresult-main">
+        <div v-if="!listings.length && !isLoading" class="search-noresult">
+            <div class="search-noresult-main">
                 <img src="{% static 'images/icon-home-empty.svg' %}" alt="No data"/><br/>
                 <h2>Không tìm thấy bất động sản nào!</h2>
                 <ul> Vui lòng thử lại bằng cách:

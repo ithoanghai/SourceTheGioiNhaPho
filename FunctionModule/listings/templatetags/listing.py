@@ -1,11 +1,11 @@
 from django import template
-from django.conf import settings
 
 from FunctionModule.listings import get_short_title_from_house_type, get_short_title_from_road_type, \
     get_listing_status_title_from_code, get_short_title_from_transaction_type, get_menu_from_choices
 from FunctionModule.listings.models import Listing
 from FunctionModule.transactions.helpers import get_short_title_from_trans_type, get_short_title_from_customer_type, \
     get_short_title_from_position_type, get_short_title_type
+from TownhouseWorldRealestate import settings
 
 register = template.Library()
 

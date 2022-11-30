@@ -1,10 +1,6 @@
 {% extends "base.html" %}
-{% load static i18n%}
-{% block title %}
-    <title>{% trans "Trang không còn tồn tại" %} </title>
-    <meta name="title" content="{% trans "Trang không còn tồn tại" %}"/>
-    <meta property="og:title" content="{% trans "Trang không còn tồn tại" %} "/>
-{% endblock %}
+
+{% block title %} Lỗi 500 {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -16,11 +12,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="text-center mt-4">
-                        <img class="mb-4 img-error" src="{% static 'img/error-404-monochrome.svg' %}" />
-                        <p class="lead">URL được yêu cầu này không được tìm thấy trên máy chủ này.</p>
+                        <h1 class="display-1">500</h1>
+                        <p class="lead">Lỗi máy chủ nội bộ</p>
                         <a href="/">
                             <i class="fas fa-arrow-left mr-1"></i>
-                            Quay lại Trang
+                            Quay lại Trang tổng quan
                         </a>
                     </div>
                 </div>

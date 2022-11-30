@@ -4,12 +4,11 @@ import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, render
 from django.template.defaultfilters import upper
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
@@ -25,10 +24,11 @@ from rest_framework.response import Response
 
 from FunctionModule.cadastral.lookups import get_all_states, get_all_districts, get_district
 from FunctionModule.listings import get_short_title_from_house_type, get_short_title_from_road_type, get_short_title_from_transaction_type
+from TownhouseWorldRealestate import settings
 
 from . import HouseType
 from .filters import ListingFilter
-from .forms import ListingForm
+from .forms import ListingForm, ListingImageFormSet
 from .models import ListingImage
 from .serializers import *
 from ..accounts import app_settings
@@ -131,11 +131,20 @@ class ListingCreateView(LoginRequiredMixin, CreateView):
     model = Listing
     form_class = ListingForm
     success_url = reverse_lazy('mylistingpost')
+    template_name = 'listings/listing_form.html'
     #login_url = 'admin'
     #redirect_field_name = 'redirect_to'
 
     def get_initial(self):
         return {'user': self.request.user}
+
+    def get_context_data(self, **kwargs):
+        context = super(ListingCreateView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            context['listing_image_formset'] = ListingImageFormSet(self.request.POST, **self.request.FILES)
+        else:
+            context['listing_image_formset'] = ListingImageFormSet()
+        return context
 
     def form_valid(self, form):
         try:
@@ -181,7 +190,7 @@ def mylistingpost(request):
         return render(request, 'accounts/_profile.html')
 
 
-def myListing(request):
+def mylisting(request):
     if request.user.is_authenticated and request.method == 'GET':
         listings = Listing.objects.filter(user=request.user, is_advertising=False).order_by('-date_update')
         paginator = Paginator(listings, 10)

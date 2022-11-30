@@ -13,7 +13,7 @@ urlpatterns = [
     path('', views.index),
     path('<int:listing_id>', views.listing,  name='listing_detail'),
     #url(r'^(?P<pk>\d+)/$', ListingDetailJSONView.as_view(), name='listing_detail'),
-    path('myListing', views.myListing, name='myListing'),
+    path('mylisting', views.mylisting, name='mylisting'),
 
     path('mylistingpost', views.mylistingpost, name='mylistingpost'),
     path('postlisting', views.ListingCreateView.as_view(), name='postlistings'),

@@ -92,7 +92,23 @@ def handle_import(request, file_path):
             line_count += 1
             realtor = Realtor()
             cols = [c.value for c in row]
-            realtor.name = cols[0]
+            if "khối" in cols[0].lower():
+                name = cols[0].lower().split('khối')
+                realtor.name = name[0]
+                realtor.department = "khối "+name[1]
+            elif "k." in cols[0].lower():
+                name = cols[0].lower().split('k.')
+                realtor.name = name[0]
+                realtor.department = "khối "+name[1]
+            elif "phòng" in cols[0].lower():
+                name = cols[0].lower().split('phòng')
+                realtor.name = name[0]
+                realtor.department = "phòng "+name[1]
+            elif "p." in cols[0].lower():
+                name = cols[0].lower().split('p.')
+                realtor.name = name[0]
+                realtor.department = "phòng "+name[1]
+
             if cols[1] is not None:
                 year = cols[1].strftime("%Y")
                 realtor.birthyear = int(str(year))
@@ -115,9 +131,9 @@ def handle_import(request, file_path):
                     realtor.position = Position.SECRETARY
                     realtor.title = Title.COMPETENTLY
                     realtor.level = 6
-                elif "đầu chủ" in cols[5].lower() or "ứng viên đầu chủ" in cols[5].lower():
-                    realtor.position = Position.EXPERT_HOME
-                    realtor.title = Title.MASTER
+                elif "bá tước" in cols[5].lower():
+                    realtor.position = Position.REGIONAL_DIRECTOR
+                    realtor.title = Title.EXPERT
                     realtor.level = 7
                 elif "giám đốc" in cols[5].lower():
                     realtor.position = Position.MANAGING_DIRECTOR
@@ -128,6 +144,10 @@ def handle_import(request, file_path):
                     realtor.position = Position.MANAGER
                     realtor.title = Title.EXPERT
                     realtor.level = 8
+                elif "đầu chủ" in cols[5].lower() or "ứng viên đầu chủ" in cols[5].lower():
+                    realtor.position = Position.EXPERT_HOME
+                    realtor.title = Title.MASTER
+                    realtor.level = 7
             if cols[6] is not None:
                 if "nhà phố việt nam" in cols[6].lower():
                     realtor.workplace = Workplace.NHAPHO
@@ -145,7 +165,8 @@ def handle_import(request, file_path):
                     realtor.workplace = Workplace.VUDA
                 elif "khác" in cols[6].lower():
                     realtor.workplace = Workplace.OTHER
-            realtor.department = cols[7]
+            if cols[7] is not None:
+                realtor.department = cols[7]
             realtor.facebook = cols[8]
             realtor.email = cols[9]
             realtor.countryside = cols[10]
@@ -183,7 +204,13 @@ def handle_import(request, file_path):
                         realtor.save()
                         print(f"Thêm Realtor {realtor} chưa có")
                 else:
-                    real = Realtor.objects.filter(phone1=realtor.phone1).first()
+                    if realtor.email is not None:
+                        query = query or Q(email=realtor.email)
+                    if realtor.phone1 is not None:
+                        query = query or Q(phone1=realtor.phone1) or Q(phone2=realtor.phone1) or Q(story__contains=realtor.phone1)
+                    if realtor.phone2 is not None:
+                        query = query or Q(phone2=realtor.phone2) or Q(phone1=realtor.phone2) or Q(story__contains=realtor.phone2)
+                    real = Realtor.objects.filter(query).first()
                     real.name = realtor.name
                     real.phone1 = realtor.phone1
                     real.identifier = realtor.identifier

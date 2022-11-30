@@ -73,7 +73,7 @@ class ListingAdmin(admin_site.ModelAdmin):
         ('ĐỊA CHỈ & VỊ TRÍ BĐS', {'fields': (
             ('state', 'district', 'ward'), ('street', 'address', 'location'))}),
         ('TRẠNG THÁI ĐĂNG TIN', {
-            'fields': (('status', 'date_created', 'date_update'), ('is_published', 'priority'),)}),
+            'fields': (('date_created', 'date_update'), ('status', 'is_published', 'priority'),)}),
     )
 
     list_display = ('status', 'address', 'area', 'floors', 'width', 'price', 'average_price', 'road_type', 'house_type', 'district','created_date', 'is_advertising', 'is_published')

@@ -3,10 +3,11 @@ from importlib import import_module
 
 from django.conf.urls import url
 from django.contrib import admin
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
-from django.urls import path, include
-from django.conf import settings
+from django.urls import path, include, reverse
 from django.conf.urls.static import static
+from django.views.static import serve
 
 from FunctionModule.accounts import providers
 from FunctionModule import admin_site
@@ -14,6 +15,8 @@ from FunctionModule.admin_site.sites import AdminSitePlus
 from django.contrib.sitemaps.views import sitemap
 
 from FunctionModule.pages.sitemaps import Listing_Sitemap, Static_Sitemap
+from FunctionModule.pages.views import handler404, handler500
+from TownhouseWorldRealestate import settings
 
 admin.site = AdminSitePlus()
 admin.autodiscover()
@@ -25,7 +28,7 @@ sitemaps = {
 }
 
 def redirect_view(request):
-    response = redirect('/admin/')
+    response = HttpResponseRedirect(reverse('admin'))
     return response
 
 
@@ -44,7 +47,9 @@ urlpatterns = [
     #path('admin/', site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+]
 
 
 # Provider urlpatterns, as separate attribute (for reusability).
@@ -58,3 +63,6 @@ for provider in providers.registry.get_list():
     if prov_urlpatterns:
         provider_urlpatterns += prov_urlpatterns
 urlpatterns += provider_urlpatterns
+
+handler404 = handler404
+handler500 = handler500

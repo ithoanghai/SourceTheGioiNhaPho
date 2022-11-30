@@ -7,7 +7,6 @@ from decimal import Decimal
 from string import digits
 
 import pytz
-from django.conf import settings
 from django.contrib.gis.geos import Point
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
@@ -400,6 +399,8 @@ def handle_import(request, file_path, listing_type):
                         if len(phone) == 9:
                             phone = f'0{phone}'
                         query = Q(phone=phone) | Q(phone=tmp_phone)
+                        if phone2 is not None or not phone2 == "":
+                            query = Q(phone=phone2) | Q(phone2=phone2)
                         user_tmp = User.objects.filter(query).first()
                         email = f'{phone}@gmail.com'
                         story = f'{dau_chu}, {phone}, {don_vi}.'
@@ -415,6 +416,8 @@ def handle_import(request, file_path, listing_type):
                             print(f"cập nhật user: {user_tmp} cho realtor {realtor}")
 
                         query = Q(phone1=phone) | Q(phone2=phone)
+                        if phone2 is not None or not phone2 == "":
+                            query = Q(phone=phone2) | Q(phone2=phone2)
                         rl = Realtor.objects.filter(query).first()
                         if rl.is_cooperate:
                             realtor = rl

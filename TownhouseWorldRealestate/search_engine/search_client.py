@@ -1,5 +1,6 @@
 import meilisearch
-from django.conf import settings
+
+from TownhouseWorldRealestate import settings
 
 _client = None
 

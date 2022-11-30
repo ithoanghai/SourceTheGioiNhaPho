@@ -4,7 +4,7 @@ from io import BytesIO
 from PIL import Image
 from ajax_select.fields import AutoCompleteSelectField, AutoCompleteSelectMultipleField
 from django import forms
-from django.forms import Textarea, ModelForm, BaseInlineFormSet
+from django.forms import Textarea, ModelForm, BaseInlineFormSet, inlineformset_factory
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from .models import Listing, ListingImage, ListingHistory, ContractImage
@@ -21,7 +21,9 @@ class ListingForm(forms.ModelForm):
         widgets = {
             'furniture_design': Textarea(attrs={'class': '???', 'rows': 3}),
             'regional_welfare': Textarea(attrs={'class': '???', 'rows': 3}),
+            'expert_comments': Textarea(attrs={'class': '???', 'rows': 3}),
         }
+
 
     #district = AutoCompleteSelectField('districts', required=False, help_text=None)
     #ward = AutoCompleteSelectMultipleField('wards', required=False, help_text=None)
@@ -134,6 +136,9 @@ class ContractImageFormSet(BaseInlineFormSet):
             pass
 
         return super().save_new_objects(commit)
+
+
+ListingImageFormSet = inlineformset_factory(Listing, ListingImage, fields=('photo',), extra=5)
 
 
 def compress_image(f: InMemoryUploadedFile):

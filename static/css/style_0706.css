@@ -7721,29 +7721,6 @@ section.browsing article.featured {
     padding: 15px
 }
 
-.content-popup-res {
-    padding: 45px 45px 10px
-}
-
-.content-popup-res input, textarea {
-    width: 100%;
-    border-radius: 2px;
-    padding: 15px 10px 5px;
-    border: 1px solid rgba(131, 131, 131, .3)
-}
-
-.content-popup-res input, textarea {
-    width: 100%;
-    border-radius: 2px;
-    padding: 17px 10px 5px;
-    border: 1px solid rgba(131, 131, 131, .3)
-}
-
-.content-popup-res .large-btn-red {
-    width: 100%;
-    text-align: center
-}
-
 .date-icon-absolute {
     position: absolute;
     right: 8px;

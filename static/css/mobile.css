@@ -1,5 +1,9 @@
 @media only screen and (max-width: 800px) {
 
+    .result-body .row:not(.grid) .col .listingwidth{
+        display: none;
+    }
+
     .qc-tgnp-bs .right-home-50 .title-36 {
         font-size: 24px;
         line-height: 34px
@@ -988,10 +992,6 @@
     .info-form-up {
         width: 100%;
         z-index: 11
-    }
-
-    .content-popup-res {
-        padding: 20px 20px
     }
 
     .price-redRV {

@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import Textarea
 
 from ..realtors.models import Realtor
 
@@ -9,6 +10,7 @@ class RealtorAdminForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
+            'story': Textarea(attrs={'class': '???', 'rows': 3}),
         }
 
     def __init__(self, *args, **kwargs):

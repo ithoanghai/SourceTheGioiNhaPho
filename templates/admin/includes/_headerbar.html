@@ -39,12 +39,12 @@
 
                                       {% if user.avatar %}
                                           {% if user.avatar == 'img/logo tgnp brown.jpg' %}
-                                              <img alt="" src="{% static 'admin/img/team-4-800x800.jpg' %}">
+                                              <img alt="{{ user.last_name }}" src="{% static 'admin/img/team-4-800x800.jpg' %}" title="{{ user.last_name }}">
                                           {% else %}
-                                              <img alt="" src="/media/{{ user.avatar }} ">
+                                              <img alt="{{ user.last_name }}" src="/media/{{ user.avatar }} ">
                                           {% endif %}
                                       {% else %}
-                                          <img alt="" src="{% static 'admin/img/team-4-800x800.jpg' %}">
+                                          <img alt="{{ user.last_name }}" src="{% static 'admin/img/team-4-800x800.jpg' %}" title="{{ user.last_name }}">
                                       {% endif %}
                                     </span>
                                     <div class="media-body ml-2 d-none d-lg-block">
