@@ -161,7 +161,6 @@ class ListingCreateView(LoginRequiredMixin, CreateView):
         except Listing.DoesNotExist:
             messages.error(self.request,
                              'Tin đăng của bạn bị lỗi. Xin hãy đăng lại hoặc liên hệ hotline để được hỗ trợ.')
-            return HttpResponseRedirect(reverse('postlistings'))
 
         return render(self.request, 'listings/postListingSuccess.html')
 

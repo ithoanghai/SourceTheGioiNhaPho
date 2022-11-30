@@ -274,7 +274,6 @@
                                  {{ listing_image_formset.management_form|crispy }}
 
                                   {% for form in listing_image_formset.forms %}
-                                      {{ form.as_table }}
                                        <tr class="row {% cycle 'row1' 'row2' %} formset_row-{{listing_image_formset.prefix }}">
                                          {% for field in form.visible_fields %}
                                                 <td>
