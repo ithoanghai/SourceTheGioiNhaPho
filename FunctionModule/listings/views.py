@@ -127,12 +127,13 @@ def search(request):
     return render(request, 'listings/search.html', context)
 
 
-class ListingCreateView(LoginRequiredMixin, CreateView):
+#class ListingCreateView(LoginRequiredMixin, CreateView):
+class ListingCreateView(CreateView):
     model = Listing
     form_class = ListingForm
     success_url = reverse_lazy('mylistingpost')
     template_name = 'listings/listing_form.html'
-    #login_url = 'admin'
+    login_url = 'admin'
     #redirect_field_name = 'redirect_to'
 
     def get_initial(self):

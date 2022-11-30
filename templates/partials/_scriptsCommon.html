@@ -1,9 +1,5 @@
 {% load static i18n load_static %}
 <!-- Scripts -->
-<script type="text/javascript" src="{% load_static 'js/jquery-3.3.1.min.js' %}"></script>
-<script type="text/javascript" src="{% load_static "js/vue-2.16.12.min.js" %}"></script>
-<script type="text/javascript" src="{% load_static 'js/vue-resource-1.5.2.min.js' %}"></script>
-
 <script type="text/javascript" src="{% load_static 'js/feedback-modal.js' %}"></script>
 <script type="text/javascript" src="{% load_static 'js/header-v2.min.js' %}"></script>
 <script defer type="text/javascript" src="{% load_static 'js/bootstrap.bundle.min.js' %}"></script>
@@ -35,26 +31,7 @@
 /></noscript>
 <!-- End Facebook Pixel Code -->
 
-<!-- Messenger Plugin chat Code -->
-<div id="fb-root"></div>
-
-<!-- Your Plugin chat code -->
-<div id="fb-customer-chat" class="fb-customerchat">
-</div>
-<script>
-    Vue.directive('click-outside', VueClickOutside());
-    const removeElements = (elms) => [...elms].forEach(el => el.remove());
-    function hideAlert(timeout=5000) {
-        setTimeout(() => {
-           removeElements(document.getElementsByClassName('alert'));
-        }, timeout)
-    }
-    window.addEventListener("load", function () {
-        hideAlert();
-    })
-
-</script>
-<script>
+<script defer>
     var chatbox = document.getElementById('fb-customer-chat');
     chatbox.setAttribute("page_id", "108470991299693");
     chatbox.setAttribute("attribution", "biz_inbox");
@@ -75,7 +52,7 @@
     }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=643586863046523&autoLogAppEvents=1" nonce="9cBklp8z"></script>
+<script defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=643586863046523&autoLogAppEvents=1" nonce="9cBklp8z"></script>
 
 <!-- Chống sao chép website-->
 {% comment %}
@@ -112,19 +89,6 @@
         name: "",
         phone: "",
         ip: "10.244.0.0"
-    }
-</script>
-
-<script type="text/javascript">
-    var callbackInitMap = function () {
-        if (window.vinitMap) {
-            window.vinitMap();
-        }
-        if (window.initMap) {
-            initMap.call(this);
-        } else {
-            setTimeout(callbackInitMap, 500);
-        }
     }
 </script>
 
@@ -485,4 +449,4 @@
 </script>
 <script>Defer.dom('img.lazy', 200, 'loaded');</script>
 
-<script src="https://sp.zalo.me/plugins/sdk.js"></script>
+<script src="https://sp.zalo.me/plugins/sdk.js" defer></script>
