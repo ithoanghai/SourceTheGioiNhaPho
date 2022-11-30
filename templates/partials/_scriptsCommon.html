@@ -1,381 +1,21 @@
 {% load static i18n load_static %}
 <!-- Scripts -->
-<script type="text/javascript" src="{% load_static 'js/feedback-modal.js' %}"></script>
-<script type="text/javascript" src="{% load_static 'js/header-v2.min.js' %}"></script>
-<script defer type="text/javascript" src="{% load_static 'js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% load_static 'js/vendors.min.js' %}"></script>
-<script type="text/javascript" src="{% load_static 'js/service-sale.min.js' %}"></script>
-<script defer src="{% load_static 'js/login-popup.js' %}"></script>
-
-{% comment %}<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-{% comment %}<script defer src="https://www.google.com/recaptcha/apib091.js?render=explicit"></script>{% endcomment %}
-
-<!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60d864aab9d3c079"></script>
-
+<script src=/static/js/feedback-modal.js></script>
+<script src=/static/js/header-v2.min.js></script>
+<script src=/static/js/bootstrap.bundle.min.js defer></script>
+<script src=/static/js/vendors.min.js></script>
+<script src=/static/js/service-sale.min.js></script>
+<script src=/static/js/login-popup.js defer></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60d864aab9d3c079"></script>
 <!-- Facebook Pixel Code -->
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '425964015350296');
-  fbq('track', 'PageView');
-</script>
-{% comment %}<noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=425964015350296&ev=PageView&noscript=1" alt="facebook.com"
-/></noscript>{% endcomment %}
-<!-- End Facebook Pixel Code -->
-
-<script defer>
-    var chatbox = document.getElementById('fb-customer-chat');
-    chatbox.setAttribute("page_id", "108470991299693");
-    chatbox.setAttribute("attribution", "biz_inbox");
-    window.fbAsyncInit = function () {
-        FB.init({
-            xfbml: true,
-            version: 'v11.0'
-        });
-    };
-
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<script defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=643586863046523&autoLogAppEvents=1" nonce="9cBklp8z"></script>
-
-<!-- Chống sao chép website-->
-{% comment %}
-    <script type="text/javascript">
-    $(document).ready(function(){
-    $('*').bind('cut copy paste contextmenu', function (e) {
-        e.preventDefault();
-    })});
-    </script>
-{% endcomment %}
-
-<!-- Start of HubSpot Embed Code -->
-{% comment %}
-<script type="text/javascript" id="hs-script-loader" async src="//js-na1.hs-scripts.com/19875873.js"></script>
-{% endcomment %}
-<!-- End of HubSpot Embed Code -->
-
-<script>
-    window["_au_api"] = "thue/api.html";
-    window['fap_url'] = "../thegioinhaphovietnam.com.vn/p/v2.33.55/js/fap.min90ca.js?v=1617780824171";
-    window['fap.server'] = '//analytics.thegioinhaphovietnam.com.vn/fap';
-    window['favorite_api'] = 'api/favorite';
-    window['googleClientId'] = '539423642927.apps.googleusercontent.com';
-    window['staticUrl'] = '../thegioinhaphovietnam.com.vn/p/v2.33.55';
-    //window['hotline'] = '0971 841 941';
-
-    window['isLoggedIn'] = false;
-    window.hsConversationsSettings = {
-        loadImmediately: false // Delay the load of the chat widget
-    };
-    window.RFeedback = {
-        API: "https://thegioinhaphovietnam.com.vn/mapi",
-        email: "",
-        name: "",
-        phone: "",
-        ip: "10.244.0.0"
-    }
-</script>
-
-<script>
-    (function () {
-        var formQueue = [];
-
-        function queuedForm(opt) {
-            if (formQueue && !(hbspt && hbspt.forms && hbspt.forms.deps)) {
-                formQueue.push(opt);
-            }
-        }
-
-        var awaitTimeout = 0;
-        var awaitHSForm = function () {
-            awaitHSForm.called = true;
-            if (formQueue && hbspt && hbspt.forms && hbspt.forms.deps) {
-                formQueue.forEach(function (_opt) {
-                    hbspt.forms.create(_opt);
-                });
-                clearTimeout(awaitTimeout);
-                delete formQueue;
-            } else {
-                awaitTimeout = setTimeout(awaitHSForm, 500);
-            }
-        };
-        window['hbspt'] = {
-            forms: {
-                create: function (opt) {
-                    if (!awaitHSForm.called) {
-                        awaitHSForm();
-                    }
-                    queuedForm(opt);
-                }
-            }
-        };
-    })();
-
-</script>
-
-<script>
-    function createHSForm(opt) {
-        function getClientId() {
-            try {
-                return ga.getAll()[0].get('clientId');
-            } catch (e) {
-                return ""
-            }
-        }
-
-        var optFS = opt['onFormSubmit'];
-        var defaultOpt = Object.create(opt);
-        defaultOpt.onFormSubmit = function () {
-            var $gaClientId = $('[name=ga_client_id]');
-            if ($gaClientId[0]) {
-                $gaClientId.val(getClientId());
-            }
-            if (typeof optFS === 'function') {
-                optFS.apply(this, arguments)
-            }
-        };
-        return hbspt.forms.create(defaultOpt);
-    }
-
-    var dialogManager = (function DialogService() {
-        var fact = this;
-        fact.bodyClassSpecs = "mdialog-body";
-        fact.bodyLoadingClass = "mdialog-loading";
-        fact.cachedBodyStyle = null;
-        fact.styleOptions = {
-            zindex: 99999,
-            width: 300,
-            minHeight: 100,
-            background: "rgba(0,0,0,.5)",
-            opacity: 0.5
-        };
-        fact.key = {
-            cachedStyle: "cached-style"
-        };
-        var v0 = 0.05;
-        var a = 0.0002;
-        fact.show = function (selectorId, options, hideFn, showFn) {
-            options = $.extend(true, {
-                outSideClick: true
-            }, options || {});
-            options.maxWidth = "100%";
-            var dialog, oldStyle = document.body.getAttribute("style");
-            document.body.setAttribute(fact.key.cachedStyle, oldStyle);
-            if (selectorId && typeof selectorId === 'string') {
-                dialog = $(document.getElementById(selectorId));
-            } else {
-                dialog = selectorId;
-            }
-            dialog.css("opacity", 0);
-            dialog.css("overflow-y", "auto");
-            dialog.css("overflow-x", "hidden");
-            dialog.addClass("opened");
-            var bodyClass = (options ? options.body : "") || ".body";
-            dialog.find(bodyClass).css(options);
-            dialog.find(bodyClass).addClass(fact.bodyClassSpecs)
-            dialog[0] ? dialog[0]["$dialogCallback"] = hideFn : null;
-            dialog[0] ? dialog[0]["$dialogInitTime"] = +new Date() : null;
-            if (options && options.close) {
-                dialog.find(bodyClass + " " + options.close).off().click(function (e) {
-                    e.preventDefault();
-                    fact.hide(selectorId, hideFn);
-                });
-            }
-            if (options && options.outSideClick) {
-                dialog.off().click(function () {
-                    fact.hide(selectorId, hideFn);
-                });
-            }
-            dialog.find(bodyClass).click(function (e) {
-                e.stopPropagation();
-            });
-            //.preventParentScroll();
-            fact.animation(dialog, 0, 0, 1, function () {
-                showFn ? showFn() : null;
-            });
-            fact.loadingEnd(dialog);
-            return dialog;
-        };
-        fact.animation = function (dialog, opa, t, delta, callback) {
-            dialog.css("opacity", opa);
-            if ((delta > 0 && opa > 1) || (delta < 0 && opa < 0)) {
-                if (callback) {
-                    callback();
-                }
-                return;
-            }
-            setTimeout(function () {
-                opa += delta * (v0 * t + 1 / 2 * a * t * t);
-                fact.animation(dialog, opa, t + 1, delta, callback);
-            }, 10);
-        };
-        fact.hide = function (selectorId, fn) {
-            var dialog;
-            if (!selectorId) {
-                dialog = $(".mdialog.opened");
-            } else if (typeof selectorId === 'string') {
-                dialog = $(document.getElementById(selectorId));
-            } else {
-                dialog = selectorId;
-            }
-            fact.animation(dialog, 1, 0, -1, function () {
-                dialog.removeClass("opened");
-                fn ? fn(dialog) : null;
-            });
-        };
-        fact.loadingStart = function (selectorId) {
-            var dialog;
-            if (!selectorId) {
-                dialog = $(".mdialog.opened");
-            } else if (typeof selectorId === 'string') {
-                dialog = $(document.getElementById(selectorId));
-            } else {
-                dialog = selectorId;
-            }
-            dialog.find("." + fact.bodyClassSpecs).addClass(fact.bodyLoadingClass);
-        };
-        fact.loadingEnd = function (selectorId) {
-            var dialog;
-            if (!selectorId) {
-                dialog = $(".mdialog.opened");
-            } else if (typeof selectorId === 'string') {
-                dialog = $(document.getElementById(selectorId));
-            } else {
-                dialog = selectorId;
-            }
-            dialog.find("." + fact.bodyClassSpecs + "." + fact.bodyLoadingClass).removeClass(fact.bodyLoadingClass);
-        };
-        $(window).keydown(function (e) {
-            var openedDialog = $(".mdialog.opened");
-            if (openedDialog.length && e.keyCode == 27) {
-                var arr = [];
-                arr.length = openedDialog.length;
-                for (var i = 0; i < openedDialog.length; i++) {
-                    for (var j = i; j < openedDialog.length; j++) {
-                        if (openedDialog[i]["$dialogInitTime"] > openedDialog[j]["$dialogInitTime"]) {
-                            arr[j] = openedDialog[i];
-                            arr[i] = openedDialog[j];
-                        } else {
-                            arr[i] = openedDialog[i];
-                            arr[j] = openedDialog[j];
-                        }
-                    }
-                }
-                var lastedOpen = arr[arr.length - 1];
-                if (lastedOpen) {
-                    fact.hide($(lastedOpen), lastedOpen ? lastedOpen["$dialogCallback"] : null);
-                }
-            }
-        });
-        fact.initStyles = function () {
-            var css = "";
-            var style = document.createElement("STYLE");
-            var head = document.head || document.getElementsByTagName("head")[0];
-            style.type = "text/css";
-            if (style.styleSheet) {
-                style.styleSheet.cssText = css;
-            } else {
-                style.appendChild(document.createTextNode(this.getCss()));
-            }
-            head.appendChild(style);
-        };
-        fact.getCss = function () {
-            var options = fact.styleOptions;
-            var css = "";
-            var dialog = {};
-            dialog["display"] = "none";
-            dialog["position"] = "fixed";
-            dialog["top"] = "0";
-            dialog["height"] = "100%";
-            dialog["left"] = "0";
-            dialog["width"] = "100%";
-            dialog["z-index"] = options.zindex;
-            dialog["background"] = options.background;
-            css += fact.assignStyle(".mdialog", dialog);
-            css += ".mdialog.opened{display: block;}";
-            var body = {};
-            body["width"] = options.width + "px";
-            body["min-height"] = options.minHeight + "px";
-            body["background"] = "#fff";
-            body["margin"] = "60px auto 140px auto";
-            css += fact.assignStyle(".mdialog .body", body);
-            var bodySpecs = {};
-            bodySpecs["position"] = "relative"
-            css += fact.assignStyle("." + fact.bodyLoadingClass, bodySpecs);
-            var loadingFrame = {};
-            loadingFrame["content"] = "' '";
-            loadingFrame["top"] = 0;
-            loadingFrame["left"] = 0;
-            loadingFrame["width"] = "100%";
-            loadingFrame["height"] = "100%";
-            loadingFrame["position"] = "absolute";
-            loadingFrame["background"] = "#fff";
-            loadingFrame["opacity"] = 0.4;
-            loadingFrame["z-index"] = 1;
-            css += fact.assignStyle("." + fact.bodyLoadingClass + ":before", loadingFrame);
-            var loading = {};
-            loading["content"] = "' '";
-            loading["border"] = "2px solid #303339";
-            loading["border-top"] = "2px solid #fff;";
-            loading["border-radius"] = "50%";
-            loading["width"] = "30px";
-            loading["height"] = "30px";
-            loading["position"] = "absolute";
-            loading["top"] = "calc(50% - 15px)";
-            loading["left"] = "calc(50% - 15px)";
-            loading["-webkit-animation"] = "spin 2s linear infinite";
-            loading["animation"] = "spin 2s linear infinite";
-            loading["z-index"] = 1;
-            css += fact.assignStyle("." + fact.bodyLoadingClass + ":after", loading);
-            css += "@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }";
-            return css;
-        };
-        fact.assignStyle = function (name, cssobj) {
-            var res = name + "{";
-            for (var key in cssobj) {
-                var val = cssobj[key];
-                res += key + ":" + val + ";";
-            }
-            res += "}";
-            return res;
-        };
-        fact.initStyles();
-        return fact;
-    })();
-
-    if (!window['showDialog']) {
-        window['showDialog'] = function (id, closeClass, bodyClass) {
-            dialogManager.show("contact-now", {
-                close: closeClass,
-                body: bodyClass
-            }, function hideFn() {
-            }, function showFn(dialog) {
-                $('#' + id).find("input").first().focus();
-                $(bodyClass).css("max-width", "").css("width", "100%")
-                    .find(".popup-contact").scrollTop(0);
-            });
-        }
-    }
-</script>
-
-<script type="deferjs">
-        createHSForm({
+<script>!function(e,t,n,c,o,a,f){e.fbq||(o=e.fbq=function(){o.callMethod?o.callMethod.apply(o,arguments):o.queue.push(arguments)},e._fbq||(e._fbq=o),(o.push=o).loaded=!0,o.version="2.0",o.queue=[],(a=t.createElement(n)).async=!0,a.src="https://connect.facebook.net/en_US/fbevents.js",(f=t.getElementsByTagName(n)[0]).parentNode.insertBefore(a,f))}(window,document,"script"),fbq("init","425964015350296"),fbq("track","PageView")</script>
+<script defer>var chatbox=document.getElementById("fb-customer-chat");chatbox.setAttribute("page_id","108470991299693"),chatbox.setAttribute("attribution","biz_inbox"),window.fbAsyncInit=function(){FB.init({xfbml:!0,version:"v11.0"})},function(t,e,n){var o,c=t.getElementsByTagName(e)[0];t.getElementById(n)||((o=t.createElement(e)).id=n,o.src="https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js",c.parentNode.insertBefore(o,c))}(document,"script","facebook-jssdk")</script>
+<script src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=643586863046523&autoLogAppEvents=1"defer crossorigin=anonymous nonce=9cBklp8z></script>
+<script>window._au_api="thue/api.html",window.fap_url="../thegioinhaphovietnam.com.vn/p/v2.33.55/js/fap.min90ca.js?v=1617780824171",window["fap.server"]="//analytics.thegioinhaphovietnam.com.vn/fap",window.favorite_api="api/favorite",window.googleClientId="539423642927.apps.googleusercontent.com",window.staticUrl="../thegioinhaphovietnam.com.vn/p/v2.33.55",window.isLoggedIn=!1,window.hsConversationsSettings={loadImmediately:!1},window.RFeedback={API:"https://thegioinhaphovietnam.com.vn/mapi",email:"",name:"",phone:"",ip:"10.244.0.0"}</script>
+<script>!function(){var s=[];var t=0,e=function(){e.called=!0,s&&hbspt&&hbspt.forms&&hbspt.forms.deps?(s.forEach(function(t){hbspt.forms.create(t)}),clearTimeout(t),delete s):t=setTimeout(e,500)};window.hbspt={forms:{create:function(t){e.called||e(),function(t){!s||hbspt&&hbspt.forms&&hbspt.forms.deps||s.push(t)}(t)}}}}()</script>
+<script>function createHSForm(t){var e=t.onFormSubmit,n=Object.create(t);return n.onFormSubmit=function(){var t=$("[name=ga_client_id]");t[0]&&t.val(function(){try{return ga.getAll()[0].get("clientId")}catch(t){return""}}()),"function"==typeof e&&e.apply(this,arguments)},hbspt.forms.create(n)}var dialogManager=function(){var s=this;s.bodyClassSpecs="mdialog-body",s.bodyLoadingClass="mdialog-loading",s.cachedBodyStyle=null,s.styleOptions={zindex:99999,width:300,minHeight:100,background:"rgba(0,0,0,.5)",opacity:.5},s.key={cachedStyle:"cached-style"};return s.show=function(e,t,n,o){(t=$.extend(!0,{outSideClick:!0},t||{})).maxWidth="100%";var i,a=document.body.getAttribute("style");document.body.setAttribute(s.key.cachedStyle,a),(i=e&&"string"==typeof e?$(document.getElementById(e)):e).css("opacity",0),i.css("overflow-y","auto"),i.css("overflow-x","hidden"),i.addClass("opened");var d=(t?t.body:"")||".body";return i.find(d).css(t),i.find(d).addClass(s.bodyClassSpecs),i[0]&&(i[0].$dialogCallback=n),i[0]&&(i[0].$dialogInitTime=+new Date),t&&t.close&&i.find(d+" "+t.close).off().click(function(t){t.preventDefault(),s.hide(e,n)}),t&&t.outSideClick&&i.off().click(function(){s.hide(e,n)}),i.find(d).click(function(t){t.stopPropagation()}),s.animation(i,0,0,1,function(){o&&o()}),s.loadingEnd(i),i},s.animation=function(t,e,n,o,i){t.css("opacity",e),0<o&&1<e||o<0&&e<0?i&&i():setTimeout(function(){e+=o*(.05*n+1e-4*n*n),s.animation(t,e,n+1,o,i)},10)},s.hide=function(t,e){var n;n=t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened"),s.animation(n,1,0,-1,function(){n.removeClass("opened"),e&&e(n)})},s.loadingStart=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+s.bodyClassSpecs).addClass(s.bodyLoadingClass)},s.loadingEnd=function(t){(t?"string"==typeof t?$(document.getElementById(t)):t:$(".mdialog.opened")).find("."+s.bodyClassSpecs+"."+s.bodyLoadingClass).removeClass(s.bodyLoadingClass)},$(window).keydown(function(t){var e=$(".mdialog.opened");if(e.length&&27==t.keyCode){var n=[];n.length=e.length;for(var o=0;o<e.length;o++)for(var i=o;i<e.length;i++)e[o].$dialogInitTime>e[i].$dialogInitTime?(n[i]=e[o],n[o]=e[i]):(n[o]=e[o],n[i]=e[i]);var a=n[n.length-1];a&&s.hide($(a),a?a.$dialogCallback:null)}}),s.initStyles=function(){var t=document.createElement("STYLE"),e=document.head||document.getElementsByTagName("head")[0];t.type="text/css",t.styleSheet?t.styleSheet.cssText="":t.appendChild(document.createTextNode(this.getCss())),e.appendChild(t)},s.getCss=function(){var t=s.styleOptions,e="",n={display:"none",position:"fixed",top:"0",height:"100%",left:"0",width:"100%"};n["z-index"]=t.zindex,n.background=t.background,e+=s.assignStyle(".mdialog",n),e+=".mdialog.opened{display: block;}";var o={};o.width=t.width+"px",o["min-height"]=t.minHeight+"px",o.background="#fff",o.margin="60px auto 140px auto",e+=s.assignStyle(".mdialog .body",o);var i={position:"relative"};e+=s.assignStyle("."+s.bodyLoadingClass,i);var a={content:"' '",top:0,left:0,width:"100%",height:"100%",position:"absolute",background:"#fff",opacity:.4,"z-index":1};e+=s.assignStyle("."+s.bodyLoadingClass+":before",a);var d={content:"' '",border:"2px solid #303339","border-top":"2px solid #fff;","border-radius":"50%",width:"30px",height:"30px",position:"absolute",top:"calc(50% - 15px)",left:"calc(50% - 15px)","-webkit-animation":"spin 2s linear infinite",animation:"spin 2s linear infinite","z-index":1};return e+=s.assignStyle("."+s.bodyLoadingClass+":after",d),e+="@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }"},s.assignStyle=function(t,e){var n=t+"{";for(var o in e){n+=o+":"+e[o]+";"}return n+="}"},s.initStyles(),s}();window.showDialog||(window.showDialog=function(e,t,n){dialogManager.show("contact-now",{close:t,body:n},function(){},function(t){$("#"+e).find("input").first().focus(),$(n).css("max-width","").css("width","100%").find(".popup-contact").scrollTop(0)})})</script>
+<script type=deferjs>
+createHSForm({
             css: '',
             target: '#sell-now-form-body',
             portalId: '2775524',
@@ -386,11 +26,9 @@
                 });
             }
         });
-
-  </script>
-
+</script>
 <script>
-    /*Footer*/
+/*Footer*/
     let footerContent = $("#footer .info-container li")
 
     toggleFooterContent()
@@ -428,10 +66,8 @@
 
     /*Footer - END*/
 </script>
-
 <script>
-
-    function show3DTour(src) {
+function show3DTour(src) {
         let $wrapper = $(".full-3d-tour")
         $wrapper.find('iframe').attr('src', src)
         $wrapper.show()
@@ -447,6 +83,15 @@
         show3DTour("https://my.matterport.com/show/?m=yYDQY6WGVXi")
     })
 </script>
-<script>Defer.dom('img.lazy', 200, 'loaded');</script>
+<script>Defer.dom("img.lazy",200,"loaded")</script>
+<!-- Chống sao chép website-->
+{% comment %}
+    <script type="text/javascript">
+    $(document).ready(function(){
+    $('*').bind('cut copy paste contextmenu', function (e) {
+        e.preventDefault();
+    })});
+    </script>
+{% endcomment %}
 
-<script src="https://sp.zalo.me/plugins/sdk.js" defer></script>
+<script src=https://sp.zalo.me/plugins/sdk.js defer></script>

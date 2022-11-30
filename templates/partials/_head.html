@@ -3,13 +3,12 @@
 <meta name="google-site-verification" content="ub40cGSr2akmTjdOou5m2oPDxr2-hJw8kjCVsp7x_dE" />
 <meta name="zalo-platform-site-verification" content="Me2wU97_A2TWrVu5lz5F2Jx7oG3IjnbSC3K" />
 <meta http-equiv="Cache-Control: max-age=86400" content="public">
-<meta http-equiv="Content-Encoding: deflate, gzip" content="public">
+<meta http-equiv="Content-Encoding: gzip, deflate" content="public">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta http-equiv = "Content-Security-Policy" content = "">
 <meta http-equiv="audience" content="general" />
 <meta charset="UTF-8"/>
 
-<link href="{% static 'img/favicon.ico' %}" rel="icon" type="image/x-icon"/>
 <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
 {% comment %}<link rel="canonical" href="https://thegioinhaphovietnam.com.vn" />{% endcomment %}
 <link rel="alternate" media="only screen and (max-width: 640px)"  href="https://thegioinhaphovietnam.com.vn">
@@ -38,44 +37,8 @@
 <meta property="og:type" content="article"/>
 <meta property="hotline" content="0964399436"/>
 
-
-<style>
-    [v-cloak] {
-        display: none !important;
-    }
-
-    /* Ẩn các element khi vue chưa load */
-    picture img {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-    /*hide tracking img*/
-    img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"], img[src^="/fap/debug/track"] {
-        display: none;
-    }
-
-    ._hj_feedback_container button { /* Fix lỗi hotjar */
-        text-align: center;
-    }
-
-    #msform a.butt-primary[disabled] {
-        opacity: 0.4
-    }
-
-</style>
-<style>
-    img {
-        max-width: 100%;
-    }
-
-    @media screen and (max-width: 600px) {
-        picture img {
-            width: 100%;
-        }
-    }
-
-</style>
+<style>[v-cloak]{display:none!important}picture img{display:inline-block;vertical-align:middle}img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"],img[src^="/fap/debug/track"]{display:none}._hj_feedback_container button{text-align:center}#msform a.butt-primary[disabled]{opacity:.4}</style>
+<style>img{max-width:100%}@media screen and (max-width:600px){picture img{width:100%}}</style>
 <link rel="stylesheet" type="text/css" href="{% load_static "css/bootstrap.css" %}">
 <link rel="stylesheet" type="text/css" href="{% load_static 'css/pop-up.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% load_static 'css/fonts.min.css' %}">
@@ -121,13 +84,7 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-43789503-1"></script>
 <script src="https://www.googleoptimize.com/optimize.js?id=OPT-M3WV93M"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-43789503-1');
-</script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-43789503-1")</script>
 <script>
     Vue.directive('click-outside', VueClickOutside());
     const removeElements = (elms) => [...elms].forEach(el => el.remove());
@@ -155,7 +112,7 @@
     }
 </script>
 <script>
-        const vnf_regex = /^((09|03|07|08|05)+([0-9]{8})\b)/;
+const vnf_regex = /^((09|03|07|08|05)+([0-9]{8})\b)/;
         const phone12 = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
         const email_regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         const houseTypes = [
@@ -175,4 +132,4 @@
                 }
             }, 200);
         }
-    </script>
+</script>
