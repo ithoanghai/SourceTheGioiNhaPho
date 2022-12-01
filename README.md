@@ -36,6 +36,12 @@ Docker command
     docker container ls         list container
     docker container start [OPTIONS] CONTAINER [CONTAINER...]
     docker container restart [OPTIONS] CONTAINER [CONTAINER...]
+            docker container restart app_nginx_1
+            docker container restart app_web_1
+            docker container restart app_db_1
+
+Simple way to Reload Nginx in Docker container
+    docker exec -it {container_name} nginx -s reload
 
 Restart certificate on docker server
     docker-compose -f docker-compose.production.yml exec nginx bash -c "nginx -s reload"
@@ -47,7 +53,6 @@ gộp dữ liệu
     python manage.py migrate
 
 #auto update & build new code on localserver
-    docker-compose -f docker-compose.production.yml exec nginx bash -c "nginx -s reload"
     docker-compose exec web bash -c "pip install -r requirements.txt"
     docker-compose exec web bash -c "python manage.py collectstatic --noinput"
     docker-compose exec web bash -c "npx gulp build"
@@ -64,6 +69,7 @@ gộp dữ liệu
     docker-compose exec web bash -c "python manage.py index_area"
 
 #update and build release on server
+    docker-compose -f docker-compose.production.yml exec nginx bash -c "nginx -s reload"
     cd app
     git reset --hard
     git clean -fd

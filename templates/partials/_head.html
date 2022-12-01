@@ -5,7 +5,8 @@
 <meta http-equiv="Cache-Control: max-age=86400" content="public">
 <meta http-equiv="Content-Encoding: gzip, deflate" content="public">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8; X-Content-Type-Options=nosniff" />
-<meta http-equiv = "Content-Security-Policy" content = "default-src 'self'; img-src https://*; child-src 'none';X-XSS-Protection: 0;">
+{% comment %}<meta http-equiv = "Content-Security-Policy" content = "default-src 'self'; img-src https://*; child-src 'none';X-XSS-Protection: 0;">{% endcomment %}
+<meta http-equiv = "Content-Security-Policy" content = "X-XSS-Protection: 0;">
 <meta http-equiv="audience" content="general" />
 <meta charset="UTF-8"/>
 
@@ -39,15 +40,15 @@
 
 <style>[v-cloak]{display:none!important}picture img{display:inline-block;vertical-align:middle}img[src^="//analytics.thegioinhaphovietnam.com.vn/fap"],img[src^="/fap/debug/track"]{display:none}._hj_feedback_container button{text-align:center}#msform a.butt-primary[disabled]{opacity:.4}</style>
 <style>img{max-width:100%}@media screen and (max-width:600px){picture img{width:100%}}</style>
-<link rel="stylesheet" href="{% load_static "css/bootstrap.css" %}">
-<link rel="stylesheet" href="{% load_static 'css/pop-up.css' %}"/>
-<link rel="stylesheet" href="{% load_static 'css/fonts.min.css' %}">
-<link rel="stylesheet" href="{% load_static 'css/header-live.css' %}"/>
-<link rel="stylesheet" href="{% load_static 'css/footer.css' %}"/>
-<link rel="stylesheet" href="{% load_static 'css/style_0706.css' %}"/>
-<link rel="stylesheet" href="{% load_static 'css/styles.css' %}"/>
-<link rel="stylesheet" href="{% load_static 'css/mobile.css' %}"/>
-<link rel="stylesheet" href="{% load_static 'css/flexslider.min.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% load_static "css/bootstrap.css" %}">
+<link rel="stylesheet" type="text/css" href="{% load_static 'css/pop-up.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% load_static 'css/fonts.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% load_static 'css/header-live.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% load_static 'css/footer.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% load_static 'css/style_0706.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% load_static 'css/styles.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% load_static 'css/mobile.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% load_static 'css/flexslider.min.css' %}"/>
 
 <!-- Scripts Important-->
 <script src="{% load_static 'js/jquery-3.3.1.min.js' %}" async></script>
