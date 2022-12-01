@@ -641,7 +641,7 @@
 }
 
 .actionBar .filter-item .DropdownMenu .row:last-child .btn-reset.disabled {
-    color: #838383;
+    color: #676767;
     pointer-events: none
 }
 
@@ -988,10 +988,10 @@ body {
 }
 
 .btn-outline-secondary {
-    color: #838383;
+    color: #676767;
     background-color: transparent;
     background-image: none;
-    border-color: #838383
+    border-color: #676767
 }
 
 .label-primary {
@@ -1007,7 +1007,7 @@ body {
 }
 
 .label-primary.sold-out {
-    background: #838383
+    background: #676767
 }
 
 .label-primary.unique {
@@ -1105,7 +1105,7 @@ body {
 }
 
 .label .sold-out {
-    background: #838383;
+    background: #676767;
     color: #fff
 }
 
@@ -1777,7 +1777,7 @@ label {
     position: relative;
     display: inline-block;
     width: auto;
-    color: #838383;
+    color: #676767;
     vertical-align: text-bottom;
     font-size: 14px
 }
@@ -2093,7 +2093,7 @@ label {
     width: 100%;
     margin-bottom: 8px;
     padding-right: 16px;
-    color: #838383;
+    color: #676767;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden
@@ -2106,7 +2106,7 @@ label {
 .promote-block .promote-detail .info .left .address h4 a {
     font-size: 14px;
     font-weight: 400;
-    color: #838383
+    color: #676767
 }
 
 .promote-block .promote-detail .info .left .address h4 a:hover {
@@ -2126,7 +2126,7 @@ label {
 .promote-block .promote-detail .info .left .price span {
     display: block;
     float: left;
-    color: #838383
+    color: #676767
 }
 
 .promote-block .promote-detail .info .left .price span:last-child strong::after {
@@ -2141,7 +2141,7 @@ label {
     content: "";
     width: 1px;
     height: 10px;
-    background: #838383;
+    background: #676767;
     display: inline-block;
     margin: 0 15px
 }
@@ -2388,7 +2388,7 @@ label {
     font-size: 14px;
     line-height: 1.5;
     font-weight: 400;
-    color: #838383;
+    color: #676767;
     white-space: normal;
     margin: 5px;
 }
@@ -2577,14 +2577,14 @@ label {
     font-size: 14px;
     line-height: 1.5;
     font-weight: 400;
-    color: #838383
+    color: #676767
 }
 
 .result-body .row:not(.grid) .listView.box .info-container .listing-address h4 a {
     font-size: 14px;
     line-height: 1.5;
     font-weight: 400;
-    color: #838383
+    color: #676767
 }
 
 .result-body .row:not(.grid) .listView.box .info-container .listing-address h4 a:hover {
@@ -2686,7 +2686,7 @@ label {
 }
 
 .result-body .row:not(.grid) .listView.box .info-container .action-group--cta .btn-favorite__v2:before {
-    color: #838383
+    color: #676767
 }
 
 .result-body .row:not(.grid) .listView.box .info-container .action-group--cta button {
@@ -2702,7 +2702,7 @@ label {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    color: #838383;
+    color: #676767;
     background: #fff;
     border: 1px solid rgba(131, 131, 131, .5);
     border-radius: 2px
@@ -2902,7 +2902,7 @@ label {
     width: 100%;
     display: block;
     margin-top: 6px;
-    color: #838383;
+    color: #676767;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden
@@ -2915,7 +2915,7 @@ label {
 }
 
 .result-body .row.grid .listView.box .info-container .listing-address h4 a {
-    color: #838383
+    color: #676767
 }
 
 .result-body .row.grid .listView.box .info-container .listing-address h4 a:hover {
@@ -2934,7 +2934,7 @@ label {
     width: auto;
     font-size: 14px;
     margin-right: 15px;
-    color: #838383
+    color: #676767
 }
 
 .result-body .row.grid .listView.box .info-container .listing-info li:nth-child(n+3) {
@@ -3767,7 +3767,7 @@ label {
 .search-relative .inner .row .relative-group.tags .item a {
     display: block;
     width: 100%;
-    color: #838383;
+    color: #676767;
     text-align: center;
     font-weight: 400
 }
@@ -4300,7 +4300,7 @@ div > img {
 
 .mobileFilter .inner .topFilter .btnBack .zmdi {
     font-size: 24px;
-    color: #838383;
+    color: #676767;
     padding: 0
 }
 
@@ -4321,14 +4321,14 @@ div > img {
 .mobileFilter .inner .topFilter .btnReset .zmdi {
     padding: 0 5px 4px 0;
     font-size: 20px;
-    color: #838383
+    color: #676767
 }
 
 .mobileFilter .inner .topFilter .btnReset span {
     font-size: 14px;
     line-height: 18px;
     font-weight: 400;
-    color: #838383
+    color: #676767
 }
 
 .mobileFilter .inner .bodyFilter {
@@ -4668,7 +4668,7 @@ div > img {
 .info-u p {
     font-size: 14px;
     line-height: 22px;
-    color: #838383
+    color: #676767
 }
 
 .btn-call-bt-ql {
@@ -5667,7 +5667,7 @@ div > img {
 
 .page--search .or-direct-call p {
     font-size: 12px;
-    color: #838383
+    color: #676767
 }
 
 .map__fullscreen {
@@ -5778,7 +5778,7 @@ div > img {
 .results-sc span, .results-sc strong {
     font-size: 16px;
     line-height: 1.5;
-    color: #838383
+    color: #676767
 }
 
 .results-sc strong {
@@ -5824,7 +5824,7 @@ div > img {
 .map-area-breadcrumb .breadcrumb li + li::before {
     font-family: Material-Design-Iconic-Font;
     content: '\f2fb';
-    color: #838383;
+    color: #676767;
     font-size: 14px;
     line-height: 1.5
 }
@@ -6101,7 +6101,7 @@ div > img {
     font-size: 16px;
     line-height: 1.5;
     font-weight: 400;
-    color: #838383
+    color: #676767
 }
 
 .project-area .table {
@@ -6118,7 +6118,7 @@ div > img {
 }
 
 .project-area .table thead th {
-    color: #838383
+    color: #676767
 }
 
 .project-area .table tr {
@@ -6200,7 +6200,7 @@ div > img {
     font-size: 14px;
     line-height: 1.4;
     font-weight: 400;
-    color: #838383
+    color: #676767
 }
 
 .faq-section .answer-text a {
@@ -6313,14 +6313,14 @@ div > img {
     font-size: 14px;
     line-height: 1.5;
     font-weight: 400;
-    color: #838383
+    color: #676767
 }
 
 .project-marker__address li a {
     font-size: 14px;
     line-height: 1.5;
     font-weight: 400;
-    color: #838383;
+    color: #676767;
     -webkit-transition: color .2s;
     transition: color .2s
 }
@@ -6626,7 +6626,7 @@ div > img {
     }
 
     .project-area .table td:nth-child(2) {
-        color: #838383
+        color: #676767
     }
 
     .project-area .table td a {
@@ -6904,7 +6904,7 @@ div > img {
 
     .popup-save-search .topFilter .btnBack .zmdi {
         font-size: 24px;
-        color: #838383;
+        color: #676767;
         padding: 0
     }
 
@@ -6918,7 +6918,7 @@ div > img {
 
     .popup-save-search .topFilter .btnReset .zmdi {
         font-size: 20px;
-        color: #838383;
+        color: #676767;
         padding: 0 5px 4px 0
     }
 
@@ -7073,7 +7073,7 @@ div > img {
         margin-right: 15px;
         font-size: 14px;
         line-height: 1.5;
-        color: #838383
+        color: #676767
     }
 
     .result-body .row:not(.grid) .listView.box .info-container .listing-info li .zmdi {
@@ -7243,7 +7243,7 @@ div > img {
         display: block;
         width: 100%;
         margin-top: 5px;
-        color: #838383;
+        color: #676767;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
@@ -7341,7 +7341,7 @@ div > img {
     .result-body .row:not(.grid) .listView.box .info-container .listing-address {
         margin-top: 5.5px;
         display: block;
-        color: #838383;
+        color: #676767;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
@@ -7355,7 +7355,7 @@ div > img {
     }
 
     .result-body .row:not(.grid) .listView.box .info-container .listing-address h4 a {
-        color: #838383
+        color: #676767
     }
 
     .result-body .row:not(.grid) .listView.box .info-container .listing-info {
@@ -7372,7 +7372,7 @@ div > img {
         width: auto;
         font-size: 14px;
         margin-right: 11px;
-        color: #838383
+        color: #676767
     }
 
     .result-body .row:not(.grid) .listView.box .info-container .listing-info li .zmdi {
@@ -7599,7 +7599,7 @@ div > img {
     .result-body .row:not(.grid) .projectCard-list.box .info-container .project-info .item span {
         font-size: 14px;
         font-weight: 400;
-        color: #838383
+        color: #676767
     }
 
     .result-body .row:not(.grid) .projectCard-list.box .info-container .project-info .item strong {
@@ -7761,7 +7761,7 @@ div > img {
     }
 
     .result-body .row:not(.grid) .projectCard-list.box .info-container .action-group .contact .btn-gray {
-        color: #838383;
+        color: #676767;
         background: #fff;
         border: 1px solid rgba(131, 131, 131, .5)
     }

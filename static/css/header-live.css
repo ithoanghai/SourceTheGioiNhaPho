@@ -735,7 +735,7 @@
 .main-header .search-mobile .search-block .btn-search-mobile .zmdi {
     padding: 0;
     font-size: 24px;
-    color: #838383
+    color: #676767
 }
 
 .main-header .search-mobile .search-block .form-search-mobile input {
@@ -779,7 +779,7 @@
 
 .main-header .search-mobile .search-suggest-list li a span i,
 .main-header .col-left .top-search form .search-suggest-list li a span i {
-    color: #838383
+    color: #676767
 }
 
 header#home::before {
@@ -2392,7 +2392,7 @@ header#home::before {
 }
 
 .main-header .col-left .top-search form .search-suggest-list li a span i {
-    color: #838383
+    color: #676767
 }
 
 @media (max-width: 480px) {
@@ -2931,7 +2931,7 @@ header#home::before {
 .main-header .search-mobile .search-block .btn-search-mobile .zmdi {
     padding: 0;
     font-size: 24px;
-    color: #838383
+    color: #676767
 }
 
 .main-header .search-mobile .search-block .form-search-mobile input {
@@ -2993,7 +2993,7 @@ header#home::before {
 }
 
 .main-header .search-mobile .search-suggest-list li a span i {
-    color: #838383
+    color: #676767
 }
 
 /*for other menu*/

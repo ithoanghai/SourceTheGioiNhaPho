@@ -159,7 +159,7 @@
     font-family: Material-Design-Iconic-Font;
     text-align: center;
     font-size: 22px;
-    color: #838383
+    color: #676767
 }
 
 .s-form-heading {
@@ -664,7 +664,7 @@
 
 .s-col-3 .item p {
     font-size: 16px;
-    color: #838383;
+    color: #676767;
     line-height: 1.62;
     margin-top: 10px
 }
@@ -846,7 +846,7 @@
     font-size: 50px;
     padding: 5px;
     z-index: 999;
-    color: #838383
+    color: #676767
 }
 
 .s-customer-rating .s-customer-rating-btn .btn-next:before {
@@ -861,7 +861,7 @@
     font-size: 50px;
     padding: 5px;
     z-index: 999;
-    color: #838383
+    color: #676767
 }
 
 .s-customer-rating .s-customer-rating-btn .btn-pre:before {
@@ -970,7 +970,7 @@
 
 .step-content .detail {
     font-size: 16px;
-    color: #838383;
+    color: #676767;
     line-height: 1.62;
     font-weight: 400
 }
@@ -1261,7 +1261,7 @@
     width: 65%;
     float: left;
     text-align: left;
-    color: #838383
+    color: #676767
 }
 
 .staff-info .name {
@@ -1345,7 +1345,7 @@
 
 .photo-detail-wrapper .content {
     font-size: 1.6em;
-    color: #838383;
+    color: #676767;
     overflow: hidden;
     line-height: 1.6;
     max-width: 100%
@@ -1353,7 +1353,7 @@
 
 .photo-detail-wrapper .content > a {
     font-weight: 500;
-    color: #838383
+    color: #676767
 }
 
 .photo-detail-wrapper .read-more {
@@ -1488,7 +1488,7 @@
     font-size: 16px;
     color: rgba(68, 76, 89, .7);
     line-height: 55px;
-    border: 1px solid #838383;
+    border: 1px solid #676767;
     flex-grow: 1;
     margin: 0 5px;
     cursor: pointer;
@@ -1552,7 +1552,7 @@
 }
 
 .s-dropdown.active .s-dropdown-content {
-    border-top: 1px solid #838383;
+    border-top: 1px solid #676767;
     max-height: 170px;
     overflow-y: scroll;
     padding: 10px 0
@@ -1690,7 +1690,7 @@
 
 .flex-viewport .section-container .section-content p {
     font-size: 1.3em;
-    color: #838383;
+    color: #676767;
     line-height: 1.62;
     max-width: 85%
 }
@@ -3122,7 +3122,7 @@ ul.product-received li .zmdi:before {
 .item-service-sale p {
     font-size: 16px;
     line-height: 24px;
-    color: #838383;
+    color: #676767;
     font-weight: 400;
     margin-top: 10px;
     display: block;
@@ -3152,7 +3152,7 @@ ul.product-received li .zmdi:before {
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
-    color: #838383;
+    color: #676767;
     margin-top: 24px;
     display: block;
     width: 100%;
@@ -3279,7 +3279,7 @@ ul.product-received li .zmdi:before {
     width: 100%;
     font-size: 14px;
     line-height: 22px;
-    color: #838383
+    color: #676767
 }
 
 .service-pack-content .bottom a {
@@ -3789,7 +3789,7 @@ ul.product-received li .zmdi:before {
     font-size: 16px;
     line-height: 1.5;
     font-weight: 400;
-    color: #838383;
+    color: #676767;
     text-align: left
 }
 

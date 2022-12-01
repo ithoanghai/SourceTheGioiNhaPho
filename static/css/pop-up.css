@@ -794,7 +794,7 @@
     font-size: 14px;
     line-height: 1.5;
     font-weight: 400;
-    color: #838383;
+    color: #676767;
     text-align: center
 }
 
@@ -1367,7 +1367,7 @@
 
 .popup-feedback .popup-body-fb .popup-contain .emotion p {
     font-size: 14px;
-    color: #838383;
+    color: #676767;
     font-family: rv-font1, Arial, Helvetica, sans-serif;
     line-height: 1.71;
     padding-top: 10px
@@ -1480,7 +1480,7 @@
 }
 
 .choose-number ul li a {
-    color: #838383;
+    color: #676767;
     font-size: 14px;
     padding: 10px 19px 6px 19px;
     width: 50px;
@@ -1602,7 +1602,7 @@
     position: absolute;
     top: 3px;
     left: 10px;
-    color: #838383;
+    color: #676767;
     padding: 15px;
     font: initial
 }
@@ -1786,7 +1786,7 @@
     font-size: 16px;
     line-height: 1.5;
     font-weight: 400;
-    color: #838383
+    color: #676767
 }
 
 .popup-confirm-modal-body .popup-description > span {

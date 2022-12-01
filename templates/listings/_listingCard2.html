@@ -2,7 +2,6 @@
 
 <article class="listingCard">
     <div class="cover-image">
-
         <a href="{% url "listing_detail" listing.id %}" title="{{ listing.title }}">
             {% if listing.main_photo %}
                 {% with listing.main_photo as photo %}
@@ -30,10 +29,6 @@
                    style="font-family: 'tgnp-font2'"><b>{{ listing.status|get_listing_status }}
                 {% if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %}
                     {% trans "BÁN" %} {% endif %}</b></label>
-            <label class="label-primary unique">
-                <b>{{ listing.price.normalize }} tỷ</b>
-            </label>
-
             {% if listing.average_price and listing.transaction_type != "rent" %}
                 <label class="label-primary unique" title="Giá/m2"><b>{{ listing.average_price }} tr/m2</b></label>
             {% endif %}

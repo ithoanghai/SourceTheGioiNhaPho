@@ -682,7 +682,7 @@ section div.width1140 div div.flex-viewport ul.slides li div.title {
     font-size: .875rem;
     line-height: 1.5;
     font-weight: 400;
-    color: #838383
+    color: #676767
 }
 
 .cta-bottom-wrapper.listing__cta--bottom p strong {
@@ -1225,7 +1225,7 @@ textarea:focus, input:focus {
 
 .recent-search .search-result i {
     padding-left: 4px;
-    color: #838383;
+    color: #676767;
 }
 .recent-search .search-result a {
     text-decoration: none;
@@ -1562,7 +1562,7 @@ PHẦN BỔ SUNG 11/2022*/
 }
 .listingCard .info-container .listing-address {
     display: block;
-    color: #838383;
+    color: #676767;
     white-space: nowrap;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
@@ -1579,7 +1579,7 @@ PHẦN BỔ SUNG 11/2022*/
     font-weight: 400;
 }
 .listingCard .info-container .listing-address h4 a {
-    color: #838383;
+    color: #676767;
 }
 .listingCard .info-container .listing-address h4 a:hover{
     color: #c72528;
@@ -1589,7 +1589,7 @@ PHẦN BỔ SUNG 11/2022*/
     width: auto;
     font-size: 14px;
     margin-right: 15px;
-    color: #838383;
+    color: #676767;
 }
 .listingCard .info-container .listing-info li:last-child {
     margin-right: 0;
@@ -1699,7 +1699,7 @@ PHẦN BỔ SUNG 11/2022*/
     font-size: 14px;
     line-height: 22px;
     letter-spacing: normal;
-    color: #838383;
+    color: #676767;
 }
 
 .block-project>div .listingCard.info-market{

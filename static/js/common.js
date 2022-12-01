@@ -189,3 +189,16 @@ window.isLoggedIn = !1, window.hsConversationsSettings = {
         t.preventDefault();
     });
 });
+
+window.addEventListener("message", function(t) {
+	if (t.data && t.data.cmd == "zchat_widget_toggle_sticker") {
+		const f = document.getElementById("chatiframe");
+		if (t.data.width) {
+			f.style.width = t.data.width;
+			f.style.height = t.data.height;
+		} else {
+			f.style.width = "440px";
+			f.style.height = "85vh";
+		}
+	}
+});

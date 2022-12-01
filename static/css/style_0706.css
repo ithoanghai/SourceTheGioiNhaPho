@@ -152,7 +152,7 @@ ul li.list-filter a {
     display: block;
     position: relative;
     width: 100%;
-    color: #838383
+    color: #676767
 }
 
 ul li.list-filter > a.active {
@@ -2915,7 +2915,7 @@ article.featured .cover {
 }
 
 .gray {
-    color: #838383 !important
+    color: #676767 !important
 }
 
 .tgnp-app-ios img {
@@ -3084,7 +3084,7 @@ a.tgnp-app-ios img:hover {
 }
 
 .header-filter a {
-    color: #838383;
+    color: #676767;
     font-size: 14px;
     display: block;
     padding: 5px
@@ -3732,7 +3732,7 @@ a.tgnp-app-ios img:hover {
     border: 1px solid rgba(48, 51, 58, .2);
     border-radius: 2px;
     width: auto !important;
-    color: #838383;
+    color: #676767;
     font-weight: 500 !important;
     margin-right: 8px
 }
@@ -3860,7 +3860,7 @@ a.tgnp-app-ios img:hover {
 
 .follow-button {
     padding: 6px 6px 2px 9px !important;
-    color: #838383;
+    color: #676767;
     font-size: 14px
 }
 
@@ -6550,7 +6550,7 @@ section.project article.featured {
 
 .sold {
     padding: 3px 10px 2px !important;
-    background: #838383;
+    background: #676767;
     color: #fff;
     border-radius: 2px;
     font-size: 14px
@@ -6609,7 +6609,7 @@ section.project article.featured {
 
 .info-bs .lable-sold {
     padding: 3px 10px 1px !important;
-    background: #838383;
+    background: #676767;
     color: #fff;
     border-radius: 2px;
     font-size: 14px
@@ -6650,7 +6650,7 @@ section.project article.featured {
     text-align: center;
     font-size: 14px;
     float: left;
-    color: #838383
+    color: #676767
 }
 
 .fix-btn-map-filter .maps-btn {
@@ -6660,7 +6660,7 @@ section.project article.featured {
     font-size: 14px;
     float: left;
     position: relative;
-    color: #838383
+    color: #676767
 }
 
 .fix-btn-map-filter .maps-btn:after {
@@ -6969,7 +6969,7 @@ section.project article.featured {
 }
 
 .info-dt-bd table tr td:nth-child(2n) {
-    color: #838383;
+    color: #676767;
     opacity: .86;
     text-align: right
 }
@@ -7174,7 +7174,7 @@ section.project article.featured {
 }
 
 .user-owner-list p {
-    color: #838383
+    color: #676767
 }
 
 .user-owner-list .ava-user {
@@ -7223,7 +7223,7 @@ section.project article.featured {
 
 .or-direct-call p {
     font-size: 12px;
-    color: #838383
+    color: #676767
 }
 
 .or-direct-call p.phone-number {
@@ -7594,11 +7594,11 @@ section.browsing article.featured {
 .adress-rv-pu h4 {
     display: inline-block;
     font-weight: 400;
-    color: #838383
+    color: #676767
 }
 
 .adress-rv-pu h4 a {
-    color: #838383;
+    color: #676767;
     font-weight: 400
 }
 
@@ -7717,7 +7717,7 @@ section.browsing article.featured {
     position: absolute;
     top: 15px;
     left: 20px;
-    color: #838383;
+    color: #676767;
     padding: 15px
 }
 

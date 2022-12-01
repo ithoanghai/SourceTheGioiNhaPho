@@ -429,17 +429,17 @@ btn-blue {
 }
 
 .btn-outline-secondary {
-    color: #838383;
+    color: #676767;
     background-color: transparent;
     background-image: none;
-    border-color: #838383
+    border-color: #676767
 }
 
 .label-primary {
     border-radius: 2px;
     display: inline-block;
     float: left;
-    color: #fff;
+    color: rgba(212, 207, 213 , 1.0);
     font-size: .875rem;
     line-height: 1.5;
     font-weight: 500;
@@ -448,11 +448,11 @@ btn-blue {
 }
 
 .label-primary.sold-out {
-    background: #838383
+    background: #676767
 }
 
 .label-primary.unique {
-    background-color: rgba(212, 207, 213 , 0.2);
+    background-color: rgba(212, 207, 213 , 0.3);
 }
 
 .label-primary.free {
@@ -546,7 +546,7 @@ btn-blue {
 }
 
 .label .sold-out {
-    background: #838383;
+    background: #676767;
     color: #fff
 }
 
@@ -810,7 +810,7 @@ hide {
 
 .banner-app-content .banner-app-info .rating-star .zmdi {
     font-size: 12px;
-    color: #838383;
+    color: #676767;
     cursor: pointer
 }
 
@@ -1491,7 +1491,7 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 }
 
 .banner-content-inner form .search-container .recent-search li a span i {
-    color: #838383
+    color: #676767
 }
 
 @media screen and (max-width: 480px) {
@@ -1978,7 +1978,7 @@ input:focus, textarea:focus {
 }
 
 .butt-gray {
-    background: #838383;
+    background: #676767;
     color: #fff
 }
 
@@ -2231,7 +2231,7 @@ input:focus, textarea:focus {
 
 .large-butt-grey {
     padding: 13px 40px;
-    color: #838383;
+    color: #676767;
     background: #f3f4f7;
     border-radius: 2px;
     font-size: 16px;
@@ -2297,7 +2297,7 @@ input:focus, textarea:focus {
     font-size: 14px;
     line-height: 22px;
     text-align: center;
-    color: #838383;
+    color: #676767;
     padding: 15px 83px
 }
 
@@ -3037,7 +3037,7 @@ input:focus, textarea:focus {
 
 .mobileFilter .inner .topFilter .btnBack .zmdi {
     font-size: 24px;
-    color: #838383;
+    color: #676767;
     padding: 0
 }
 
@@ -3058,14 +3058,14 @@ input:focus, textarea:focus {
 .mobileFilter .inner .topFilter .btnReset .zmdi {
     padding: 0 5px 4px 0;
     font-size: 20px;
-    color: #838383
+    color: #676767
 }
 
 .mobileFilter .inner .topFilter .btnReset span {
     font-size: 14px;
     line-height: 18px;
     font-weight: 400;
-    color: #838383
+    color: #676767
 }
 
 .mobileFilter .inner .bodyFilter {
