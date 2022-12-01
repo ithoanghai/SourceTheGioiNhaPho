@@ -283,6 +283,9 @@ CACHES = {
     }
 }
 
+SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SECURE = True
+
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_FORMS = {
     'signup': 'accounts.forms.CustomUserCreationForm'

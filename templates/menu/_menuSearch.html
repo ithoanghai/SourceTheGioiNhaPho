@@ -42,7 +42,7 @@
         </div>
         <div class="top-search" id="topSearchForm">
             <a href="#"></a>
-            <form action="{% url 'listing_search' %}">
+            <form action="{% url 'listing_search' %}" accept-charset="UTF-8">
                 {% csrf_token %}
                 <select id="searchoptions" name="trans_type" class="search-type top-menu" style="border: none">
                     <option value="sell"><span>Mua nhà</span></option>
@@ -94,7 +94,7 @@
 
 <script type="text/x-template" id="topSearchTemplate">
     <div class="top-search">
-        <form action="{% url "listing_search" %}">
+        <form action="{% url "listing_search" %}" accept-charset="UTF-8">
             <select id="topSearch" name="trans_type" class="search-type top-menu" style="border: none">
                 <option value="sell"><span>Mua nhà</span></option>
                 <option value="rent">Thuê nhà</option>

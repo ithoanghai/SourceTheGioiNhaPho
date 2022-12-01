@@ -443,7 +443,23 @@
             nextText: "<i class='zmdi zmdi-chevron-right'></i>",
         });
     </script>
+<script>
+function show3DTour(src) {
+        let $wrapper = $(".full-3d-tour")
+        $wrapper.find('iframe').attr('src', src)
+        $wrapper.show()
+    }
 
+    $(".close-3d-tour").click(function (e) {
+        $(".full-3d-tour").hide();
+        e.stopPropagation()
+    });
+
+    //Show demo căn hộ
+    $("#demo-apart").click(function () {
+        show3DTour("https://my.matterport.com/show/?m=yYDQY6WGVXi")
+    })
+</script>
 {% endblock %}
 
 
