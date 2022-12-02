@@ -135,7 +135,7 @@ class ListingCreateView(LoginRequiredMixin, CreateView):
     success_url = None
     template_name = 'listings/listing_form.html'
     #login_url = 'admin'
-    redirect_field_name = "next"
+    #redirect_field_name = "next"
 
     def get_initial(self):
         return {'user': self.request.user}

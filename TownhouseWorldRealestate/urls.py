@@ -28,8 +28,8 @@ sitemaps = {
 }
 
 def redirect_view(request):
-    response = HttpResponseRedirect('/admin/')
-    return response
+    index_path = reverse('admin:index')
+    return HttpResponseRedirect(index_path)
 
 
 urlpatterns = [

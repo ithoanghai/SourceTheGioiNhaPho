@@ -263,7 +263,7 @@ class AdminSites:
             path('login/', self.login, name='login'),
             #path("login/", FunctionModule.accounts.views.login, name="account_login"),
             path('logout/', wrap(self.logout), name='logout'),
-            path('logout/', wrap(self.logout), name='logout'),
+            #path('logout/', wrap(self.logout), name='logout'),
 
             path('password_change/', wrap(self.password_change, cacheable=True), name='password_change'),
             path(
