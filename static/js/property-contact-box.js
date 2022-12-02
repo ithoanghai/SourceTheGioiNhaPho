@@ -1,345 +1,260 @@
-const setupContactBox = (() => {
-    const popUpContactComponent = new Vue({
-        el: '#withUs_PopupContact',
-        template: '#withUs_ContactPopupTemplate',
-        delimiters: ["[[", "]]"],
-        data: {
-            showContactPopup: false,
-            data: {
-                firstname: '',
-                lastname: '',
-                phone: '',
-                email: '',
-                message: ''
+const setupContactBox = function() {
+    const t = (new Vue({
+        "el": "#withUs_PopupContact",
+        "template": "#withUs_ContactPopupTemplate",
+        "delimiters": [ "[[", "]]" ],
+        "data": {
+            "showContactPopup": !1,
+            "data": {
+                "firstname": "",
+                "lastname": "",
+                "phone": "",
+                "email": "",
+                "message": ""
             },
-            errors: {
-                firstname: '',
-                lastname: '',
-                phone: '',
-                email: '',
-                message: ''
+            "errors": {
+                "firstname": "",
+                "lastname": "",
+                "phone": "",
+                "email": "",
+                "message": ""
             }
         },
-        beforeMount() {
+        "beforeMount": function() {
             this.data.message = $('#contact-now-form input[name="message"]').val();
         },
-        mounted() {
-            const e = this;
-            document.querySelectorAll(".btn-contact").forEach(function (t) {
-                t.style.opacity = "1", t.addEventListener("click", e.onClickContactMe.bind(e))
-            });
-            document.addEventListener('keydown', this.closePopupOnKey);
+        "mounted": function() {
+            const t = this;
+            document.querySelectorAll(".btn-contact").forEach(function(e) {
+                e.style.opacity = "1", e.addEventListener("click", t.onClickContactMe.bind(t));
+            }), document.addEventListener("keydown", this.closePopupOnKey);
         },
-        methods: {
+        "methods": {
+            "onClickContactMe": function() {
+                this.showContactPopup = !0;
+            },
+            "closePopup": function() {
+                this.showContactPopup = !1;
+            },
+            "closePopupOnKey": function(t) {
+                this.showContactPopup && "Escape" === t.key && (this.showContactPopup = !1);
+            },
+            "shouldFocusedClass": function(t) {
+                return this.focusedField === t || "" !== this.data[t];
+            },
+            "onFocusField": function(t) {
+                this.focusedField = t;
+            },
+            "toggleFocusField": function(t) {
+                this.focusedField == t ? this.focusedField = "" : this.focusedField = t;
+            },
+            "onBlur": function(t) {
+                switch (this.focusedField = "", t) {
+                  case "phone":
+                    this.validatePhone();
+                    break;
 
-            onClickContactMe: function () {
-                this.showContactPopup = true;
-            },
-            closePopup: function () {
-                this.showContactPopup = false;
-            },
-            closePopupOnKey: function (e) {
-                if (this.showContactPopup) {
-                    if (e.key === 'Escape') {
-                        this.showContactPopup = false;
-                    }
-                }
-            },
+                  case "email":
+                    this.validateEmail();
+                    break;
 
-            shouldFocusedClass(field) {
-                return this.focusedField === field || this.data[field] !== '';
-            },
-            onFocusField(field) {
-                this.focusedField = field;
-            },
-            toggleFocusField(field) {
-                if (this.focusedField == field) {
-                    this.focusedField = ''
-                } else {
-                    this.focusedField = field;
+                  case "requestPrice":
+                    this.validatePrice();
+                    break;
+
+                  default:
+                    this.validateRequired(t);
                 }
             },
-            onBlur(field) {
-                this.focusedField = '';
-                switch (field) {
-                    case 'phone':
-                        this.validatePhone();
-                        break;
-                    case 'email':
-                        this.validateEmail();
-                        break;
-                    case 'requestPrice':
-                        this.validatePrice();
-                        break;
-                    default:
-                        this.validateRequired(field);
-                        break;
+            "onSelectHouseType": function(t) {
+                this.data.houseType = t, this.onBlur("houseType");
+            },
+            "getSelectedHouseTypeText": function(t) {
+                return this.houseTypes.find(t.type === this.data.houseType).text;
+            },
+            "onSelectDistrict": function(t) {
+                this.data.district = t;
+            },
+            "handleInputChange": function(t, e) {
+                this.errors[t] = "";
+            },
+            "validateRequired": function(t) {
+                this.data[t] || (this.errors[t] = "Thông tin bắt buộc");
+            },
+            "validatePhone": function() {
+                const t = $('#contact-now-form input[name="phone"]').val();
+                if (t) {
+                    const e = vnf_regex.test(t.trim());
+                    if (!e) return void (this.errors.phone = "Số điện thoại không hợp lệ.");
+                    this.errors.phone = "", this.data.phone = t;
+                } else this.errors.phone = "Vui lòng điền số điện thoại.";
+            },
+            "validateEmail": function() {
+                if (this.data.email = $('#contact-now-form input[name="email"]').val(), this.data.email) {
+                    const t = email_regex.test(this.data.email);
+                    if (!t) return this.errors.email = "Email không hợp lệ.", this.errors.email;
                 }
             },
-            onSelectHouseType(type) {
-                this.data.houseType = type;
-                this.onBlur('houseType');
+            "validatePrice": function() {
+                if (!this.data.requestPrice) return void (this.errors.requestPrice = "");
+                const t = parseFloat(this.data.requestPrice);
+                isNaN(t) ? this.errors.requestPrice = "Xin điền số hợp lệ" : this.errors.requestPrice = "";
             },
-            getSelectedHouseTypeText() {
-                return (this.houseTypes.find(item => item.type === this.data.houseType)).text;
-            },
-            onSelectDistrict(district) {
-                this.data.district = district
-            },
-            handleInputChange(field, e) {
-                this.errors[field] = '';
-            },
-            validateRequired(field) {
-                if (!this.data[field]) {
-                    this.errors[field] = "Thông tin bắt buộc";
+            "handleFormSubmit": function(t) {
+                var e, n;
+                t.preventDefault(), e = !1;
+                for (n in Object.keys(this.errors)) this.onBlur(n), this.errors[n] && (e = !0);
+                if (!e) {
+                    const r = $("#contact-now-form form"), i = r.serialize();
+                    $.ajax({
+                        "method": r.attr("method"),
+                        "url": r.attr("action"),
+                        "data": i,
+                        "beforeSend": function() {
+                            r.find("button").attr("disabled", "disabled").addClass("running");
+                        }
+                    }).fail(function() {}).done(function(t) {
+                        setTimeout(function() {
+                            $("#search-content").prepend('<div style="text-align: center;padding-bottom: 0;" class="alert alert-success">\n                    <p class="blink">${resp.message}</p>\n                </div>'),
+                            this.closePopup(), hideAlert(8e3);
+                        }, 2e3);
+                    }).always(function() {
+                        setTimeout(function() {
+                            r.find("button").removeClass("running").removeAttr("disabled");
+                        }, 1500);
+                    });
                 }
-            },
-            validatePhone() {
-                //Auto Input
-                const phone = $('#contact-now-form input[name="phone"]').val();
-                if (phone) {
-                    const isValid = vnf_regex.test(phone.trim());
-                    if (!isValid) {
-                        this.errors.phone = 'Số điện thoại không hợp lệ.'
-                        return;
-                    }
-                    this.errors.phone = '';
-                    this.data.phone = phone;
-                } else {
-                    this.errors.phone = 'Vui lòng điền số điện thoại.'
-                }
-            },
-            validateEmail() {
-                this.data.email = $('#contact-now-form input[name="email"]').val();
-                if (this.data.email) {
-                    const isValid = email_regex.test(this.data.email);
-                    if (!isValid) {
-                        this.errors.email = 'Email không hợp lệ.'
-                        return this.errors.email;
-                    }
-                }
-            },
-            validatePrice() {
-                if (!this.data.requestPrice) {
-                    this.errors.requestPrice = '';
-                    return;
-                }
-                const price = parseFloat(this.data.requestPrice);
-                if (isNaN(price)) {
-                    this.errors.requestPrice = 'Xin điền số hợp lệ';
-                } else {
-                    this.errors.requestPrice = '';
-                }
-            },
-            handleFormSubmit(e) {
-                e.preventDefault();
-                let hasError = false;
-                for (let field of Object.keys(this.errors)) {
-                    this.onBlur(field);
-                    if (this.errors[field]) {
-                        hasError = true;
-                    }
-                }
-                if (hasError) {
-                    return;
-                }
-                // const data = this.data;
-                const $form = $('#contact-now-form form');
-                const formData = $form.serialize();
-                $.ajax({
-                    method: $form.attr('method'),
-                    url: $form.attr('action'),
-                    data: formData,
-                    beforeSend: () => {
-                        $form.find('button').attr('disabled', 'disabled').addClass('running');
-                    }
-                }).fail(() => {
-                }).done((resp) => {
-                    setTimeout(() => {
-                        $('#search-content').prepend(`<div style="text-align: center;padding-bottom: 0;" class="alert alert-success">
-                    <p class="blink">${resp.message}</p>
-                </div>`)
-                        this.closePopup();
-                        hideAlert(8000);
-                    }, 2000)
-                }).always(() => {
-                    setTimeout(() => {
-                        $form.find('button').removeClass('running').removeAttr('disabled');
-                    }, 1500)
-                })
             }
         },
-        destroyed() {
-            document.removeEventListener('keydown', this.closePopupOnKey)
+        "destroyed": function() {
+            document.removeEventListener("keydown", this.closePopupOnKey);
         }
-    })
+    }), Vue.extend({
+        "template": "#contactPopupTemplate",
+        "delimiters": [ "[[", "]]" ],
+        "props": {
+            "showContactPopup": {
+                "type": Boolean,
+                "default": !0
+            },
+            "closePopup": Function
+        },
+        "data": {
+            "data": {
+                "firstname": "",
+                "lastname": "",
+                "phone": "",
+                "email": "",
+                "district": {
+                    "code": "",
+                    "text": ""
+                },
+                "houseType": "apartment",
+                "requestPrice": "",
+                "message": ""
+            },
+            "errors": {
+                "firstname": "",
+                "lastname": "",
+                "phone": "",
+                "email": "",
+                "district": "",
+                "houseType": "",
+                "requestPrice": "",
+                "message": ""
+            },
+            "focusedField": "",
+            "houseTypes": houseTypes,
+            "districtData": districts,
+        },
+        "computed": {},
+        "methods": {
+            "shouldFocusedClass": function(t) {
+                return this.focusedField === t || "" !== this.data[t];
+            },
+            "onFocusField": function(t) {
+                this.focusedField = t;
+            },
+            "toggleFocusField": function(t) {
+                this.focusedField == t ? this.focusedField = "" : this.focusedField = t;
+            },
+            "onBlur": function(t) {
+                switch (this.focusedField = "", t) {
+                  case "phone":
+                    this.validatePhone();
+                    break;
 
-    const ContactPopUpComponent = Vue.extend({
-        template: '#contactPopupTemplate',
-        delimiters: ["[[", "]]"],
-        props: {
-            showContactPopup: {
-                type: Boolean,
-                default: true
-            },
-            closePopup: Function
-        },
-        data() {
-            return {
-                data: {
-                    firstname: '',
-                    lastname: '',
-                    phone: '',
-                    email: '',
-                    district: {
-                        code: '',
-                        text: ''
-                    },
-                    houseType: 'apartment',
-                    requestPrice: '',
-                    message: ''
-                },
-                errors: {
-                    firstname: '',
-                    lastname: '',
-                    phone: '',
-                    email: '',
-                    district: '',
-                    houseType: '',
-                    requestPrice: '',
-                    message: ''
-                },
-                focusedField: '',
-                houseTypes: houseTypes,
-                districtData: districts,
-            }
-        },
-        computed: {},
-        methods: {
-            shouldFocusedClass(field) {
-                return this.focusedField === field || this.data[field] !== '';
-            },
-            onFocusField(field) {
-                this.focusedField = field;
-            },
-            toggleFocusField(field) {
-                if (this.focusedField == field) {
-                    this.focusedField = ''
-                } else {
-                    this.focusedField = field;
+                  case "email":
+                    this.validateEmail();
+                    break;
+
+                  case "requestPrice":
+                    this.validatePrice();
+                    break;
+
+                  default:
+                    this.validateRequired(t);
                 }
             },
-            onBlur(field) {
-                this.focusedField = '';
-                switch (field) {
-                    case 'phone':
-                        this.validatePhone();
-                        break;
-                    case 'email':
-                        this.validateEmail();
-                        break;
-                    case 'requestPrice':
-                        this.validatePrice();
-                        break;
-                    default:
-                        this.validateRequired(field);
-                        break;
+            "onSelectHouseType": function(t) {
+                this.data.houseType = t, this.onBlur("houseType");
+            },
+            "getSelectedHouseTypeText": function(t) {
+                return this.houseTypes.find(t.type === this.data.houseType).text;
+            },
+            "onSelectDistrict": function(t) {
+                this.data.district = t;
+            },
+            "handleInputChange": function(t, e) {
+                this.errors[t] = "";
+            },
+            "validateRequired": function(t) {
+                this.data[t] || (this.errors[t] = "Thông tin bắt buộc");
+            },
+            "validatePhone": function() {
+                const t = $('#contact-now-form-body input[name="phone"]').val();
+                if (t) {
+                    const e = vnf_regex.test(t.trim());
+                    if (!e) return void (this.errors.phone = "Số điện thoại không hợp lệ.");
+                    this.errors.phone = "", this.data.phone = t;
+                } else this.errors.phone = "Vui lòng điền số điện thoại.";
+            },
+            "validateEmail": function() {
+                this.data.email = $('#contact-now-form-body input[name="email"]').val(), this.data.email && email_regex.test(this.data.email) === !1 && (this.errors.email = "Email không hợp lệ.");
+            },
+            "validatePrice": function() {
+                if (!this.data.requestPrice) return void (this.errors.requestPrice = "");
+                const t = parseFloat(this.data.requestPrice);
+                isNaN(t) ? this.errors.requestPrice = "Xin điền số hợp lệ" : this.errors.requestPrice = "";
+            },
+            "handleFormSubmit": function(t) {
+                var e, n;
+                t.preventDefault(), e = !1;
+                for (n in Object.keys(this.errors)) this.onBlur(n), this.errors[n] && (e = !0);
+                if (!e) {
+                    const r = $("#contact-now-form form"), i = r.serialize();
+                    $.ajax({
+                        "method": r.attr("method"),
+                        "url": r.attr("action"),
+                        "data": i,
+                        "beforeSend": function() {
+                            r.find("button").attr("disabled", "disabled").addClass("running");
+                        }
+                    }).fail(function() {}).done(function(t) {
+                        setTimeout(function() {
+                            $("#search-content").prepend('<div style="text-align: center;padding-bottom: 0;" class="alert alert-success">\n                    <p class="blink">${resp.message}</p>\n</div>'),
+                            this.closePopup(), hideAlert(8e3);
+                        }, 2e3);
+                    }).always(function() {
+                        setTimeout(function() {
+                            r.find("button").removeClass("running").removeAttr("disabled");
+                        }, 1500);
+                    });
                 }
-            },
-            onSelectHouseType(type) {
-                this.data.houseType = type;
-                this.onBlur('houseType');
-            },
-            getSelectedHouseTypeText() {
-                return (this.houseTypes.find(item => item.type === this.data.houseType)).text;
-            },
-            onSelectDistrict(district) {
-                this.data.district = district
-            },
-            handleInputChange(field, e) {
-                this.errors[field] = '';
-            },
-            validateRequired(field) {
-                if (!this.data[field]) {
-                    this.errors[field] = "Thông tin bắt buộc";
-                }
-            },
-            validatePhone() {
-                //Auto Input
-                const phone = $('#contact-now-form-body input[name="phone"]').val();
-                if (phone) {
-                    const isValid = vnf_regex.test(phone.trim());
-                    if (!isValid) {
-                        this.errors.phone = 'Số điện thoại không hợp lệ.'
-                        return;
-                    }
-                    this.errors.phone = '';
-                    this.data.phone = phone;
-                } else {
-                    this.errors.phone = 'Vui lòng điền số điện thoại.'
-                }
-            },
-            validateEmail() {
-                this.data.email = $('#contact-now-form-body input[name="email"]').val();
-                if (this.data.email) {
-                    if (email_regex.test(this.data.email) === false) {
-                        this.errors.email = 'Email không hợp lệ.'
-                    }
-                }
-            },
-            validatePrice() {
-                if (!this.data.requestPrice) {
-                    this.errors.requestPrice = '';
-                    return;
-                }
-                const price = parseFloat(this.data.requestPrice);
-                if (isNaN(price)) {
-                    this.errors.requestPrice = 'Xin điền số hợp lệ';
-                } else {
-                    this.errors.requestPrice = '';
-                }
-            },
-            handleFormSubmit(e) {
-                e.preventDefault();
-                let hasError = false;
-                for (let field of Object.keys(this.errors)) {
-                    this.onBlur(field);
-                    if (this.errors[field]) {
-                        hasError = true;
-                    }
-                }
-                if (hasError) {
-                    return;
-                }
-                // const data = this.data;
-                const $form = $('#contact-now-form form');
-                const formData = $form.serialize();
-                $.ajax({
-                    method: $form.attr('method'),
-                    url: $form.attr('action'),
-                    data: formData,
-                    beforeSend: () => {
-                        $form.find('button').attr('disabled', 'disabled').addClass('running');
-                    }
-                }).fail(() => {
-                }).done((resp) => {
-                    setTimeout(() => {
-                        $('#search-content').prepend(`<div style="text-align: center;padding-bottom: 0;" class="alert alert-success">
-                    <p class="blink">${resp.message}</p>
-                </div>`)
-                        this.closePopup();
-                        hideAlert(8000);
-                    }, 2000)
-                }).always(() => {
-                    setTimeout(() => {
-                        $form.find('button').removeClass('running').removeAttr('disabled');
-                    }, 1500)
-                })
             }
         }
-    })
-    Vue.component('contact-popup', ContactPopUpComponent);
-})
+    }));
+    Vue.component("contact-popup", t);
+};
 
-waitFor('Vue', setupContactBox)
-
+waitFor("Vue", setupContactBox);

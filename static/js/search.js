@@ -750,4 +750,3 @@ new Vue({
         this.$priceSlider.destroy()
     }
 })
-

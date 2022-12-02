@@ -8516,10 +8516,6 @@ a.actmore-filter {
     content: ','
 }
 
-div > img {
-    max-width: 100%
-}
-
 .border-top-ccc {
     border-top: 1px solid #ccc
 }

@@ -1,29 +1,25 @@
 new Vue({
-    el: '#login-modal',
+    el: "#login-modal",
     template: "#LoginPopupTemplate",
-    delimiters: ['[[', ']]'],
+    delimiters: [ "[[", "]]" ],
     data: {
-        isShowPopup: false,
+        isShowPopup: !1
     },
     methods: {
-        showPopupModal: function () {
-            this.isShowPopup = true;
+        showPopupModal: function() {
+            this.isShowPopup = !0;
         },
-        closeModal: function () {
-            this.isShowPopup = false;
+        closeModal: function() {
+            this.isShowPopup = !1;
         },
-        closePopupOnKey: function (e) {
-            if (e.key === 'Escape') {
-                this.isShowPopup = false;
-            }
-        },
+        closePopupOnKey: function(t) {
+            "Escape" === t.key && (this.isShowPopup = !1);
+        }
     },
-    mounted() {
+    mounted: function() {
         const t = this;
-        $("a[href='#login']").each(function (index, el) {
-            $(el).on('click', t.showPopupModal);
-        });
-        document.addEventListener('keydown', this.closePopupOnKey);
+        $("a[href='#login']").each(function(e, n) {
+            $(n).on("click", t.showPopupModal);
+        }), document.addEventListener("keydown", this.closePopupOnKey);
     }
-
-})
+});

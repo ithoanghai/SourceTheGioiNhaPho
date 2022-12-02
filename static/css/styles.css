@@ -1506,7 +1506,7 @@ PHẦN BỔ SUNG 11/2022*/
     position: relative;
 }
 .listingCard .cover-image a {
-    width: 100%;
+    /*width: 100%;*/
     display: block;
     overflow: hidden;
     height: 0;

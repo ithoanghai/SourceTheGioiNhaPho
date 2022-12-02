@@ -21,7 +21,7 @@
 {% block head %}
 
   {{ block.super }}
-  <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/buywithus"/>
+  <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/listings/buywithus"/>
   <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
 
 {% endblock %}
@@ -46,7 +46,7 @@
             <a href="javascript:void(0)" style="opacity: 0.6" class="s-btn-red ">Liên hệ Mua ngay</a>
           </div>
         </div>
-        <div id="whybuy-search-form" class="s-sreach-cover">
+       {% comment %} <div id="whybuy-search-form" class="s-sreach-cover">
           <form id="search-form-app" ref="searchFormApp" @submit.prevent="startSearch" action="#"
                 class="s-sreach-cover-inner">
             <div class="s-sreach-type s-dropdown">
@@ -93,7 +93,7 @@
             </div>
 
           </form>
-        </div>
+        </div>{% endcomment %}
       </div>
     </div>
 
