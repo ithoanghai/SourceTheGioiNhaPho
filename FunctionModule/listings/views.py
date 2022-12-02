@@ -87,11 +87,11 @@ def listing(request, listing_id):
 
 def search(request):
     if request.GET.get('trans_type'):
-        transtype = get_short_title_from_transaction_type(request.GET.get('trans_type'))+' '
+        transtype = get_short_title_from_transaction_type(request.GET.get('trans_type'))
     else:
         transtype=''
     if request.GET.get('house_type'):
-        housetype = get_short_title_from_house_type(request.GET.get('house_type'))+' '
+        housetype = get_short_title_from_house_type(request.GET.get('house_type'))
     else:
         housetype=''
     if request.GET.get('advertising'):
@@ -99,7 +99,7 @@ def search(request):
     else:
         advertising=''
     if request.GET.get('keywords'):
-        keywords = request.GET.get('keywords')+' '
+        keywords = request.GET.get('keywords')
     else:
         keywords=''
     if request.GET.get('sort'):
@@ -128,13 +128,14 @@ def search(request):
 
 
 #class ListingCreateView(LoginRequiredMixin, CreateView):
-class ListingCreateView(CreateView):
+class ListingCreateView(LoginRequiredMixin, CreateView):
     model = Listing
     form_class = ListingForm
-    success_url = reverse_lazy('mylistingpost')
+    #success_url = reverse_lazy('mylistingpost')
+    success_url = None
     template_name = 'listings/listing_form.html'
-    login_url = 'admin'
-    #redirect_field_name = 'redirect_to'
+    #login_url = 'admin'
+    redirect_field_name = "next"
 
     def get_initial(self):
         return {'user': self.request.user}

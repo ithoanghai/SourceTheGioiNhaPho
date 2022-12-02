@@ -2,14 +2,27 @@
 
 {% load static humanize i18n %}
 
-{% block head %}
-    {{ block.super }}
-
-    <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/about"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
-
+{% block title %}
+    <title>{% trans "Đăng xuất hệ thống Thế Giới Nhà Phố" %} </title>
+    <meta name="title" content="{% trans "Đăng xuất hệ thống Thế Giới Nhà Phố" %}"/>
+    <meta property="og:title" content="{% trans "Đăng xuất hệ thống Thế Giới Nhà Phố" %} "/>
 {% endblock %}
-
+{% block description %}
+    <meta name="description" content="Đăng xuất tài khoản đã đăng ký hệ thống Thế Giới Nhà Phố. ĐT:0916286256 - 0964399436"/>
+<meta property="og:description"
+      content="Đăng xuất tài khoản đã đăng ký hệ thống Thế Giới Nhà Phố. ĐT:0916286256 - 0964399436"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="đăng xuẩt thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="đăng xuất thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
+{% block head %}
+  {{ block.super }}
+  <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/accounts/logout"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
+{% endblock %}
 {% block content %}
 
     <div id="wraps">
@@ -21,6 +34,7 @@
 
         <!-- Main Content  -->
         <section class="background-gray">
+            <p><h1>Đăng xuất hệ thống thành công</h1></p>
             <div class="width1140 s-padding-tb">
                 <div>
                     <h4>{% translate "Bạn là thành viên tích cực. Cảm ơn bạn đã hợp tác nhiệt tình với THẾ GIỚI NHÀ PHỐ." %}</h4>

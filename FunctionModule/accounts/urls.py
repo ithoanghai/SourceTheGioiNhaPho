@@ -9,7 +9,7 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('register_success', views.register_success, name='register_success'),
     path("signup/", views.signup, name="account_signup"),
-    path("login/", views.login, name="account_login"),
+    path("login/", views.login_handler, name="account_login"),
     path('login', views.login_handler, name='login'),
     #path('logout', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     #path('logout', auth_views.LogoutView.next_page('/successfully_logged_out/'), name='logout'),

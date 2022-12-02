@@ -35,7 +35,7 @@
     <!-- Breadcrumbs -->
     {% block breadcrumbs %}
         <div class="breadcrumbs">
-            <a href="{% url 'admin:index' %}"><i class="fas fa-home"></i></i> {% translate 'Trang chủ quản trị' %}</a>
+            <a href="{% url 'admin:index' %}"><i class="fas fa-home"></i> {% translate 'Trang chủ quản trị' %}</a>
             {% if title %} &rsaquo; {{ title }}{% endif %}
         </div>
     {% endblock %}
