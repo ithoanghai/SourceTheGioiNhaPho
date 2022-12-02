@@ -67,6 +67,7 @@ gộp dữ liệu
     docker-compose restart web
     docker-compose up -d search_engine
     docker-compose exec web bash -c "python manage.py index_area"
+    docker-compose exec web bash -c "python manage.py index_listing"
 
 #update and build release on server
     docker-compose -f docker-compose.production.yml exec nginx bash -c "nginx -s reload"
@@ -84,3 +85,4 @@ gộp dữ liệu
     docker-compose -f docker-compose.production.yml restart web
     docker-compose -f docker-compose.production.yml up -d search_engine
     docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py index_area"
+    docker-compose -f docker-compose.production.yml exec web bash -c "python manage.py index_listing"

@@ -14,7 +14,11 @@ class SearchEngineClient(object):
 
     def _create_client(self):
         client = meilisearch.Client(f'http://{settings.MEILI_HOST}:{settings.MEILI_PORT}',settings.MEILI_MASTER_KEY)
-
+        #client.get_keys('6062abda-a5aa-4414-ac91-ecd7944c0f8d')
+        
+        #client.update_key(key_or_uid='6062abda-a5aa-4414-ac91-ecd7944c0f8d', options={
+        #    'description': 'Default Search API Key'
+        #})
         return client
 
     def get_client(self):

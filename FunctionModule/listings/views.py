@@ -131,8 +131,8 @@ def search(request):
 class ListingCreateView(LoginRequiredMixin, CreateView):
     model = Listing
     form_class = ListingForm
-    #success_url = reverse_lazy('mylistingpost')
-    success_url = None
+    success_url = reverse_lazy('mylistingpost')
+    #success_url = None
     template_name = 'listings/listing_form.html'
     #login_url = 'admin'
     #redirect_field_name = "next"

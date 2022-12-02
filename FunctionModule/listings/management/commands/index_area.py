@@ -13,6 +13,12 @@ class Command(BaseCommand):
         # client.create_index('suggestions', {'primaryKey': 'id'})
         index = client.index('suggestions')
         index.update_searchable_attributes(['text'])
+        # Current version of meilisearch python (0.15.1) use wrong url
+        #index.config.paths.attributes_for_faceting = 'filterable-attributes'
+        #index.update_attributes_for_faceting(['text'])
+        # See docs.meilisearch.com/learn/core_concepts/relevancy.html#default-order
+        #index.update_ranking_rules(
+        #    ["words", "proximity", "exactness", "attribute", "typo", "wordsPosition"])
         index.delete_all_documents()
 
         suggestion_data = []
