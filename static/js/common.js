@@ -1,3 +1,9 @@
+var headers = {
+        "Accept": "application/json",
+        "Cache-Control": "max-age=86400",
+        "X-Requested-With": "XMLHttpRequest"
+      };
+
 function createHSForm(t) {
     var e = t.onFormSubmit, n = Object.create(t);
     return n.onFormSubmit = function() {
