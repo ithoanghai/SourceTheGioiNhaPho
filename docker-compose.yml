@@ -27,12 +27,15 @@ services:
       - MEILI_NO_SENTRY=true
     restart: on-failure
   web:
-    build: .
+    restart: always
+    build:
+        context: .
+        dockerfile: dockerfile
     env_file:
       - ./.env
     environment:
       - DB_HOST=db
-    command:  bash -c "service ssh restart;python manage.py runserver 0.0.0.0:8888"
+    command: bash -c "service ssh restart;python manage.py runserver 0.0.0.0:8888"
     volumes:
       - .:/app
     ports:
@@ -43,3 +46,4 @@ services:
       - db
       - redis
       - search_engine
+    tty: true

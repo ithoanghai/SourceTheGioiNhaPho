@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY', 'w6rm%l&xim0ivll-li$u6fg8)6k8-$7uar^f#33ht5sutw8e!#')
 
 DEBUG = strtobool(os.getenv('DEBUG', 'false'))
-DEBUG = False
+DEBUG = True
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 SITE_ID = 1
@@ -66,7 +66,6 @@ THIRD_PARTIES = [
     #'adminplus',
     'cachalot',
     'hitcount',
-    'crispy_forms',
 ]
 
 BUILT_IN_APPS = [
@@ -336,7 +335,7 @@ HITCOUNT_HITS_PER_IP_LIMIT = 0  # unlimited
 HITCOUNT_EXCLUDE_USER_GROUP = ()  # not used
 HITCOUNT_KEEP_HIT_IN_DATABASE = {'seconds': 10}
 
-ZALO_APP_ID = 4421936851919043973
+ZALO_APP_ID = '4421936851919043973'
 ZALO_APP_SECRET = '2QuDKw9NrSy8g5n2O3MI'
 ZALO_APP_CALLBACK_URL = '/accounts/social/login-zalo-callback'
 ZALO_CODE_CHALLENGE = 'MTQ4OTkyQkE1NTUwQjBDM0EwNjIwRTczNjc1NUIzRjBFMzIwMjUwOTkzOUNBMERCREQ5NzNBMzMyQkY4RThFMA=='
