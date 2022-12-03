@@ -17,7 +17,7 @@ services:
     #  - "5432"
     restart: on-failure
   redis:
-    image: 'redis:6.2'
+    image: 'redis:7.0'
     restart: on-failure
     expose:
       - "6379"
