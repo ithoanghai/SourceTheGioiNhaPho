@@ -4,6 +4,23 @@ services:
   redis:
      image: 'redis:latest'
      restart: on-failure
+  nginx:
+    restart: always
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - './deploy/nginx/conf.d.production:/etc/nginx/conf.d'
+      - './deploy/nginx/nginx.conf:/etc/nginx/nginx.conf'
+      - './compiled_staticfiles:/staticfiles'
+      - './media:/media'
+      - '/data/certbot/conf:/etc/letsencrypt'
+      - '/data/certbot/www:/var/www/certbot'
+    depends_on:
+      - web
+    #command: "nginx -s reload"
+    tty: true
   db:
     image: 'kartoza/postgis:13-3.1'
     environment:

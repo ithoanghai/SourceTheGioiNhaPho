@@ -47,11 +47,11 @@ def get_user(r: request.Request, **kwargs):
 def query_params_to_filters(input_params):
     query = []
 
-    is_verified = input_params.get('is_verified', None)
+    is_verified = input_params.get('veri', None)
     if is_verified:
         query.append(['is_verified=true'])
 
-    is_exclusive = input_params.get('is_exclusive', None)
+    is_exclusive = input_params.get('ecl', None)
     if is_exclusive:
         query.append(['is_exclusive=true'])
 
@@ -68,19 +68,19 @@ def query_params_to_filters(input_params):
     if directions:
         directions = directions.split(',')
         if len(directions):
-            direction_query = [f'status={s}' for s in directions]
+            direction_query = [f'direction={s}' for s in directions]
             query.append(direction_query)
 
     # House type: List
-    house_type = input_params.get('house_type', None)
+    house_type = input_params.get('hoty', None)
     if house_type:
         house_type = house_type.split(',')
         if len(house_type):
-            ht_query = [f'status={s}' for s in house_type]
+            ht_query = [f'house_type={s}' for s in house_type]
             query.append(ht_query)
 
     # Bedrooms: List
-    bedrooms = input_params.get('bedrooms', None)
+    bedrooms = input_params.get('bed', None)
     if bedrooms:
         bedrooms = bedrooms.split(',')
         to_filter = []
@@ -93,7 +93,7 @@ def query_params_to_filters(input_params):
             query.append(to_filter)
 
     # Bathrooms: Single string
-    bathrooms = input_params.get('bathrooms', None)
+    bathrooms = input_params.get('bath', None)
     if bathrooms:
         if bathrooms == 'all':
             pass

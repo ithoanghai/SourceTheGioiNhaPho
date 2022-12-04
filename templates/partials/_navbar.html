@@ -15,20 +15,20 @@
                 {% csrf_token %}
                 <div class="tab-container">
                     <div class="tab">
-                        <input type="radio" name="trans_type" style="color: red" value="sell" checked id="buy-house">
+                        <input type="radio" name="trans" style="color: red" value="sell" checked id="buy-house">
                         <label for="buy-house">Mua nhà</label>
                     </div>
                     <div class="tab">
-                        <input type="radio" name="trans_type" value="rent" id="rent-house">
+                        <input type="radio" name="trans" value="rent" id="rent-house">
                         <label for="rent-house">Thuê nhà</label>
                     </div>
                     <div class="tab">
-                        <input type="radio" name="trans_type" value="project" id="project">
+                        <input type="radio" name="trans" value="project" id="project">
                         <label for="project">Dự án</label>
                     </div>
                     <div class="tab">
-                        <input type="radio" name="trans_type" value="advertising" id="advertising">
-                        <label for="advertising">Tin rao vặt</label>
+                        <input type="radio" name="trans" value="adver" id="adver">
+                        <label for="adver">Tin rao vặt</label>
                     </div>
                 </div>
                 <input type="hidden" placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà"
@@ -428,20 +428,20 @@
     <form class="search-desktop-component" action="{% url "listing_search" %}">
         <div class="tab-container">
             <div class="tab">
-                <input type="radio" name="trans_type" value="sell" checked id="buy-house">
+                <input type="radio" name="trans" value="sell" checked id="buy-house">
                 <label for="buy-house">Mua nhà</label>
             </div>
             <div class="tab">
-                <input type="radio" name="trans_type" value="rent" id="rent-house">
+                <input type="radio" name="trans" value="rent" id="rent-house">
                 <label for="rent-house">Thuê nhà</label>
             </div>
             <div class="tab">
-                <input type="radio" name="trans_type" value="project" id="project">
+                <input type="radio" name="trans" value="project" id="project">
                 <label for="project">Dự án</label>
             </div>
             <div class="tab">
-                <input type="radio" name="trans_type" value="advertising" id="advertising">
-                <label for="advertising">Tin rao vặt</label>
+                <input type="radio" name="trans" value="adver" id="adver">
+                <label for="adver">Tin rao vặt</label>
             </div>
         </div>
         <div class="search-container" v-click-outside="handleFocus">

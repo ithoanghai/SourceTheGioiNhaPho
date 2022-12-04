@@ -86,23 +86,23 @@ def listing(request, listing_id):
 
 
 def search(request):
-    if request.GET.get('trans_type'):
-        transtype = get_short_title_from_transaction_type(request.GET.get('trans_type'))
+    if request.GET.get('trans'):
+        transtype = get_short_title_from_transaction_type(request.GET.get('trans'))
     else:
         transtype=''
-    if request.GET.get('house_type'):
-        housetype = get_short_title_from_house_type(request.GET.get('house_type'))
+    if request.GET.get('hoty'):
+        housetype = get_short_title_from_house_type(request.GET.get('hoty'))
     else:
         housetype=''
-    if request.GET.get('advertising'):
+    if request.GET.get('adv'):
         advertising = "rao vặt "
     else:
         advertising=''
-    if request.GET.get('keywords'):
-        keywords = request.GET.get('keywords')
+    if request.GET.get('keys'):
+        keywords = request.GET.get('keys')
     else:
         keywords=''
-    if request.GET.get('sort'):
+    if request.GET.get('so'):
         sort = 'hàng đầu '
     else:
         sort=''
@@ -116,7 +116,7 @@ def search(request):
         'sortOption': 'priority',
         'state': request.GET.get('state'),
         'district': request.GET.get('district'),
-        'word': request.GET.get('keywords'),
+        'word': request.GET.get('keys'),
         'transtype': transtype,
         'housetype': housetype,
         'advertising': advertising,
@@ -134,7 +134,7 @@ class ListingCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('mylistingpost')
     #success_url = None
     template_name = 'listings/listing_form.html'
-    #login_url = 'admin'
+    login_url = 'admin/'
     #redirect_field_name = "next"
 
     def get_initial(self):

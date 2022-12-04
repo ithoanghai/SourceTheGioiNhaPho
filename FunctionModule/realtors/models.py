@@ -58,7 +58,7 @@ class Realtor(models.Model):
                              error_messages={'unique': _("Số điện thoại phụ này đã được sử dụng trên hệ thống.")})
     avatar = models.ImageField(verbose_name=_("Ảnh đại diện"), upload_to=AVATAR_PHOTO_URL, blank=True)
 
-    identifier = models.CharField(verbose_name=_('Căn cước công dân'), blank=True, null=True, max_length=15)
+    identifier = models.CharField(verbose_name=_('Căn cước công dân'), blank=True, null=True, max_length=25)
     workplace = models.CharField(max_length=50, choices=Workplace.choices, verbose_name=_("Đơn vị"),
                                  default=Workplace.TGNP)
     department = models.CharField(max_length=100, verbose_name=_("Bộ phận/Phòng/Ban"), null=True, blank=True)

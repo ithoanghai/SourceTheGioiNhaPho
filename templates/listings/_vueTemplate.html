@@ -55,19 +55,19 @@
                     </h4>
                     <div class="listing-address">
                         <h4 v-if="listing.urban_area">
-                            <a :href="`/listings/search?keywords=${listing.urban_area}&sort=priority`" title="">[[listing.urban_area]]</a>
+                            <a :href="`/listings/search?keys=${listing.urban_area}&so=priority`" title="">[[listing.urban_area]]</a>
                         </h4>
                         <h4>
-                            <a :href="`/listings/search?keywords=${listing.street}&sort=priority`" title="">[[listing.street]]</a>
+                            <a :href="`/listings/search?keys=${listing.street}&so=priority`" title="">[[listing.street]]</a>
                         </h4>
-                        {% comment %}<h4 v-if="listing.ward"><a :href="`/listings/search?ward=${listing.ward}&sort=priority`" title="Phường/Xã">[[listing.ward_name]]</a>
+                        {% comment %}<h4 v-if="listing.ward"><a :href="`/listings/search?ward=${listing.ward}&so=priority`" title="Phường/Xã">[[listing.ward_name]]</a>
                         </h4>{% endcomment %}
                         <h4 v-if="listing.district">
-                            <a :href="`/listings/search?district=${listing.district}&sort=priority`"
+                            <a :href="`/listings/search?district=${listing.district}&so=priority`"
                                title=""><b>[[listing.district_name]]</b></a>
                         </h4>
                         <h4 v-if="listing.state">
-                            <a :href="`/listings/search?state=${listing.state}&sort=priority`"
+                            <a :href="`/listings/search?state=${listing.state}&so=priority`"
                                title=""><b>[[listing.state_name]]</b></a>
                         </h4>
                     </div>
@@ -133,7 +133,7 @@
                         <a :href="getListingDetailURL(listing.id)" :title="listing.title"><b>[[listing.district_name]]</b></a>
                     </label>
                     {% comment %}<span v-if="listing.state">
-                        <a :href="`/listings/search?state=${listing.state}&sort=priority`"
+                        <a :href="`/listings/search?state=${listing.state}&so=priority`"
                            title=""><b>[[listing.state_name]]</b></a>
                     </span>{% endcomment %}
                 </td>

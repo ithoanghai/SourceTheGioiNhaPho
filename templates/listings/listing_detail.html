@@ -424,7 +424,7 @@
                     <ul class="detail-more">
                         <li>
                             <p class="left">Loại hình</p>
-                            <p class="right"><a href="{% url 'listing_search' %}?house_type={{ listing.house_type }}"
+                            <p class="right"><a href="{% url 'listing_search' %}?hoty={{ listing.house_type }}"
                                                 target="_blank">
                                 {% if listing.house_type == 'town_house' %}{% translate 'Nhà Phố' %}
                                 {% elif listing.house_type == 'street_house' %} {% translate 'Nhà mặt phố' %}

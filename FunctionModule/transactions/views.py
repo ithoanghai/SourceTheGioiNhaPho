@@ -115,7 +115,7 @@ def request_quote(request):
     email = form.cleaned_data.get('email')
     phone = form.cleaned_data.get('phone')
     message = form.cleaned_data.get('message')
-    house_type = form.cleaned_data.get('house_type')
+    house_type = form.cleaned_data.get('hoty')
     district = form.cleaned_data.get('district')
     request_price = form.cleaned_data.get('request_price')
     yesterday = timezone.now() - timedelta(days=1)

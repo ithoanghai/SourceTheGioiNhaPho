@@ -7,7 +7,7 @@ from FunctionModule.realtors.models import Realtor
 
 
 def search(request):
-    query = request.GET.get("keywords")
+    query = request.GET.get("keys")
     if query is not None:
         specialists = Realtor.objects.filter(
             Q(name__icontains=query)

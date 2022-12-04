@@ -38,7 +38,7 @@
 
 #auto update & build new code on localserver
     docker-compose -f docker-compose.yml up -d
-    docker-compose -f docker-compose.yml up --build web
+    docker-compose up --build web
     docker-compose -f docker-compose.yml "pip install -r requirements.txt"
     docker-compose -f docker-compose.yml exec web bash -c "python manage.py collectstatic --noinput"
     docker-compose -f docker-compose.yml exec web bash -c "npx gulp build"

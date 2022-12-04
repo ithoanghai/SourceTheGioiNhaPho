@@ -71,7 +71,7 @@ new Vue({
                                 code: item.id,
                                 text: item.text,
                                 subText: item.sub_text,
-                                link: "/listings/search?trans_type=${item.type}&keywords=${item.text}",
+                                link: "/listings/search?trans=${item.type}&keys=${item.text}",
                                 isHeader: false,
                             })
                         }
@@ -334,9 +334,9 @@ new Vue({
             const houseFilterItems = Object.values(houseTypeFilter).filter(item => item !== '');
             if (houseFilterItems.length > 0) {
                 const houseParam = houseFilterItems.join(',');
-                this.updateQueryParams({'house_type': houseParam})
+                this.updateQueryParams({'hoty': houseParam})
             } else {
-                this.removeQueryParams('house_type')
+                this.removeQueryParams('hoty')
             }
         },
         applyHouseFilter: async function () {
@@ -488,26 +488,24 @@ new Vue({
                 this.viewAsGrid()}
         },
         applyViewResultsFilter: async function () {
-            alert('alo');
             this.setViewResultsFilters($('#viewResults'));
             this.toggleFilterType('viewResults');
             /*await this.getListings();*/
-            alert('blo');
         },
         setBedroomFilter: function (filters) {
             if (!filters) return;
             if (JSON.stringify(this.bedroomFilter) === JSON.stringify(filters)) return;
             this.bedroomFilter = filters;
-            this.updateQueryParams({'bedrooms': filters})
+            this.updateQueryParams({'bed': filters})
         },
         setBathroomFilter: function (filter) {
             if (!filter) return;
             if (this.bathroomFilter === filter) return;
             this.bathroomFilter = filter;
             if (filter !== 'all')
-                this.updateQueryParams({'bathrooms': filter})
+                this.updateQueryParams({'bath': filter})
             else
-                this.removeQueryParams('bathrooms')
+                this.removeQueryParams('bath')
         },
         setDirectionFilter: function (filters) {
             if (!filters) return;
@@ -520,19 +518,19 @@ new Vue({
             if (this.isVerifiedFilter === value) return;
             this.isVerifiedFilter = value;
             if (value === true) {
-                this.updateQueryParams({'is_verified': value});
+                this.updateQueryParams({'veri': value});
             } else {
-                this.removeQueryParams('is_verified')
+                this.removeQueryParams('veri')
             }
         },
         setIsExclusiveFilter: function (value) {
             if (this.isExclusiveFilter === value) return;
             this.isExclusiveFilter = value;
             if (value === true) {
-                this.updateQueryParams({'is_exclusive': value});
+                this.updateQueryParams({'ecl': value});
 
             } else {
-                this.removeQueryParams('is_exclusive')
+                this.removeQueryParams('ecl')
             }
         },
         setStatusFilter: function (filters) {

@@ -1,11 +1,26 @@
 {% extends 'admin/includes/_layout_base.html' %}
 
 {% load static i18n account %}
-
-{% block title %} Đăng nhập Thế Giới Nhà Phố {% endblock title %}
-{% block description %} <meta name="description" content="Mời bạn sử dụng tài khoản đã đăng ký và cấp quyền truy cập vào trang quản trị hệ thống Thế Giới Nhà Phố. ĐT:0916286256 - 0964399436"/>
-{% endblock description %}
-
+ {% block title %}
+        <title>{% trans "Đăng nhập Thế Giới Nhà Phố" %} </title>
+        <meta name="title" content="{% trans "Đăng nhập Thế Giới Nhà Phố" %}"/>
+        <meta property="og:title" content="{% trans "Đăng nhập Thế Giới Nhà Phố" %} "/>
+    {% endblock %}
+    {% block description %}
+        <meta name="description" content="Mời bạn sử dụng tài khoản đã đăng ký và cấp quyền truy cập vào trang Quản trị hệ thống Thế giới Nhà phố. Uy tín - Tận tâm - Chân thành. ĐT:0916286256 - 0964399436"/>
+    <meta property="og:description"
+          content="Mời bạn sử dụng tài khoản đã đăng ký và cấp quyền truy cập vào trang Quản trị hệ thống Thế giới Nhà phố. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+    {% endblock %}
+    {% block keywords %}
+        <meta name="keywords"
+          content="đăng nhập quản trị hệ thống thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+        <meta property="og:keywords"
+          content="đăng nhập quản trị hệ thống về thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    {% endblock %}
+{% block head %}
+      {{ block.super }}
+      <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/admin/login"/>
+    {% endblock %}
 {% block content %}
 
     <!-- Page content -->
@@ -21,12 +36,14 @@
                                 <p>{{ msg | safe }}</p>
                             {% endif %}
                         </div>
+                    <p><h1>Đăng nhập hệ thống quản trị Thế Giới Nhà Phố</h1></p>
+                   <p><h5>Chào mừng bạn đến với bất động sản Thế Giới Nhà Phố</h5></p>
+                   <p><h5>Mời bạn sử dụng tài khoản đã đăng ký và cấp quyền truy cập vào trang quản trị hệ thống Thế Giới Nhà Phố</h5></p>
 
                         <form method="POST" action="{% url 'login' %}">
 
                             {% csrf_token %}
-                            <p><h1>Đăng nhập trang quản trị:</h1></p>
-                            <p><h5>Mời bạn sử dụng tài khoản đã đăng ký và cấp quyền truy cập vào trang quản trị hệ thống Thế Giới Nhà Phố</h5></p>
+                            <p><h5>Đăng nhập quản trị</h5></p>
                             <div class="form-group mb-3">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">

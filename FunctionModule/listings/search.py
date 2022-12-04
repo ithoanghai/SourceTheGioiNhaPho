@@ -42,24 +42,24 @@ def prepare_listing_queryset(input_params):
     hn_district = district_data['01']
 
     # trans_type
-    if 'trans_type' in input_params:
-        trans_type = input_params.get('trans_type')
-        if trans_type == 'advertising':
+    if 'trans' in input_params:
+        trans_type = input_params.get('trans')
+        if trans_type == 'adver':
             queryset_list = queryset_list.filter(is_advertising=bool(True))
         else:
             queryset_list = queryset_list.filter(transaction_type=trans_type)
 
     #check listing is post
-    if 'advertising' in input_params:
-        is_advertising = input_params.get('advertising', None)
+    if 'adv' in input_params:
+        is_advertising = input_params.get('adv', None)
         if is_advertising:
             queryset_list = queryset_list.filter(is_advertising=bool(is_advertising))
 
-    is_verified = input_params.get('is_verified', None)
+    is_verified = input_params.get('veri', None)
     if is_verified:
         queryset_list = queryset_list.filter(is_verified=bool(is_verified))
 
-    is_exclusive = input_params.get('is_exclusive', None)
+    is_exclusive = input_params.get('ecl', None)
     if is_exclusive:
         queryset_list = queryset_list.filter(is_exclusive=bool(is_exclusive))
 
@@ -73,7 +73,7 @@ def prepare_listing_queryset(input_params):
         directions = directions.split(',')
         queryset_list = queryset_list.filter(direction__in=directions)
 
-    house_type = input_params.get('house_type', None)
+    house_type = input_params.get('hoty', None)
     if house_type:
         ht = house_type.split(',')
         queryset_list = queryset_list.filter(house_type__in=ht)
@@ -84,10 +84,10 @@ def prepare_listing_queryset(input_params):
             queryset_list = queryset_list.filter(urban_area__in=urban_area)
 
     # Keywords
-    if 'keywords' in input_params:
-        keywords = input_params.get('keywords')
-        if keywords:
-            query = Q(address__icontains=keywords) | Q(street__icontains=keywords) | Q(code__icontains= keywords)
+    if 'keys' in input_params:
+        keys = input_params.get('keys')
+        if keys:
+            query = Q(address__icontains=keys) | Q(street__icontains=keys) | Q(code__icontains= keys)
             queryset_list = queryset_list.filter(query)
     # District
     if 'street' in input_params:
@@ -114,7 +114,7 @@ def prepare_listing_queryset(input_params):
         queryset_list = queryset_list.filter(ward=ward)
 
     # Bedrooms
-    bedrooms = input_params.get('bedrooms', None)
+    bedrooms = input_params.get('bed', None)
     if bedrooms:
         bedrooms = bedrooms.split(',')
         to_filter = []
@@ -129,7 +129,7 @@ def prepare_listing_queryset(input_params):
             query = query | Q(bedrooms__gte=6)
         queryset_list = queryset_list.filter(query)
 
-    bathrooms = input_params.get('bathrooms', None)
+    bathrooms = input_params.get('bath', None)
     if bathrooms:
         if bathrooms == 'all':
             pass

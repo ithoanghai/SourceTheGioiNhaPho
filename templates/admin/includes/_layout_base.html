@@ -7,7 +7,7 @@
 
 <!-- Head html-->
   {% include 'admin/includes/_head.html' %}
-
+  {% block head %} {% endblock %}
   {% block stylesheets %} {% endblock %}
 
   {% block extrahead %}{% endblock %}
@@ -26,9 +26,7 @@
             {% include "admin/includes/_headerbar.html" %}
         </div>
         {% block nav-global %}{% endblock %}
-
-              {% comment %}{% if not is_popup and is_nav_sidebar_enabled %}{% endcomment %}
-
+             {% comment %}{% if not is_popup and is_nav_sidebar_enabled %}{% endcomment %}
     {% endblock %}
     <!-- END Header -->
 
