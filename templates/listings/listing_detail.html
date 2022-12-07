@@ -26,7 +26,7 @@
 {% block head %}
     {{ block.super }}
     <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/listings/{{ listing.id }}"/>
-    <link rel="stylesheet" href="{% load_static 'css/listing-detail-page.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/listing-detail-page.css' %}"/>
     <style>
         img.fade {
             transition: opacity 500ms ease-in-out;
@@ -1141,10 +1141,10 @@
 
 {% block scripts %}
     {{ block.super }}
-    <script async src="{% load_static 'js/listing.js' %}"></script>
-    {% comment %}<script defer src="{% load_static 'js/favorite.min.js' %}"></script>{% endcomment %}
-    <script defer src="{% load_static 'js/home-recent-view.min.js' %}"></script>
-    <script defer src="{% load_static 'js/listing-detail.js' %}"></script>
+    <script async src="{% static 'js/listing.js' %}"></script>
+    {% comment %}<script defer src="{% static 'js/favorite.min.js' %}"></script>{% endcomment %}
+    <script defer src="{% static 'js/home-recent-view.min.js' %}"></script>
+    <script defer src="{% static 'js/listing-detail.js' %}"></script>
     <script>
         window['isListing'] = true;
         window['favorite_api'] = 'api/favorite';
@@ -1160,7 +1160,7 @@
     {% if listing.videos %}
         <link href="//vjs.zencdn.net/7.10.2/video-js.min.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="//vjs.zencdn.net/7.10.2/video.min.js"></script>
-        <script type="text/javascript" src="{% load_static 'js/youtube_video.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/youtube_video.min.js' %}"></script>
     {% endif %}"
 
     <script src="{% static 'hitcount/jquery.postcsrf.js' %}"></script>

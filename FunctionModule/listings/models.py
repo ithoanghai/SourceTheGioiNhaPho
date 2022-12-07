@@ -11,8 +11,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 from embed_video.fields import EmbedVideoField
 from geopy import location
-from hitcount.settings import MODEL_HITCOUNT
-from hitcount.models import HitCountMixin
+from FunctionModule.hitcount.models import HitCountMixin, HitCount
 from location_field.models.spatial import LocationField
 from pydantic.errors import Decimal
 from rest_framework import serializers
@@ -163,7 +162,7 @@ class Listing(models.Model, HitCountMixin):
     location = LocationField(based_fields=['address'], zoom=7, null=True,
                              default=Point(105.83549388560711,20.976795401917798), verbose_name=_("Toạ độ vị trí BĐS"),
                              help_text="Nhập toạ độ hoặc chọn vị trí trên bản đồ")
-    hit_count_generic = GenericRelation(MODEL_HITCOUNT, object_id_field='object_pk',
+    hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
                             related_query_name='hit_count_generic_relation')
 
     def __str__(self):

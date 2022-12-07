@@ -12,10 +12,10 @@ from django.shortcuts import get_object_or_404, render
 from django.template.defaultfilters import upper
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.views.generic import DetailView, CreateView
 from django_filters.rest_framework import DjangoFilterBackend
-from hitcount.views import HitCountDetailView
+from FunctionModule.hitcount.views import HitCountDetailView
 from django.views.decorators.csrf import ensure_csrf_cookie
 from pydantic import BaseModel
 from rest_framework import status, generics, mixins, permissions
@@ -267,7 +267,7 @@ class ListingsAPIView(generics.ListCreateAPIView):
     def post(self, request, *args, **kwargs):
         id_pk = self.kwargs.get('id', None)
         url = reverse('listing-detail', kwargs={'id': id_pk})
-        request.data.update({force_text('listing'): force_text(url)})
+        request.data.update({force_str('listing'): force_str(url)})
 
         return super(ListingsAPIView, self).post(request, *args, **kwargs)
 

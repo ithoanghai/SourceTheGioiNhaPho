@@ -272,7 +272,7 @@ class AdminSites:
                 name='password_change_done',
             ),
             path('jsi18n/', wrap(self.i18n_javascript, cacheable=True), name='jsi18n'),
-            path(
+            re_path(
                 'r/<int:content_type_id>/<path:object_id>/',
                 wrap(contenttype_views.shortcut),
                 name='view_on_site',
@@ -588,10 +588,10 @@ class AdminPlusMixin(object):
     def get_urls(self):
         """Add our custom views to the admin urlconf."""
         urls = super(AdminPlusMixin, self).get_urls()
-        from django.conf.urls import url
+        from django.urls import re_path
         for path, view, name, urlname, visible in self.custom_views:
             urls = [
-                url(r'^%s$' % path, self.admin_view(view), name=urlname),
+                re_path(r'^%s$' % path, self.admin_view(view), name=urlname),
             ] + urls
         return urls
 

@@ -6,9 +6,7 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
 from django.utils.translation import gettext as _
 
-from hitcount.models import HitCountMixin
-from hitcount.settings import MODEL_HITCOUNT
-
+from FunctionModule.hitcount.models import HitCountMixin, HitCount
 from FunctionModule.accounts.models import User
 from FunctionModule.blog.choices import PostType
 
@@ -37,7 +35,7 @@ class Post(models.Model, HitCountMixin):
     date_created = models.DateField(default=datetime.now, verbose_name=_("Thời gian đăng"))
     date_update = models.DateField(default=datetime.now, verbose_name=_("Cập nhật"))
     hit_count_generic = GenericRelation(
-        MODEL_HITCOUNT, object_id_field='object_pk',
+        HitCount, object_id_field='object_pk',
         related_query_name='hit_count_generic_relation')
 
     def __str__(self):

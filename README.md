@@ -18,12 +18,18 @@
     psql -h db -d tgnp -U postgres
     python manage.py makemigrations
     python manage.py migrate
+    python manage.py check
     pg_restore -c --dbname=postgresql://postgres:postgres@127.0.0.1/tgnp tgnp-2021-08-24.dump
     pg_basebackup -h --dbname=postgresql://postgres:postgres@127.0.0.1/tgnp -D /usr/app/data
     Open/Close port DB, update status server(comment/uncomment 2 dòng ports, comment 2 dòng expose DB trong file docker-compose.production.yml)
         docker-compose -f docker-compose.yml up -d db
 
 #Docker command
+    docker system df
+    docker image prune -a
+    docker volume prune -a
+    docker cache prune -a
+    sudo sh -c 'truncate -s 0 /var/lib/docker/containers/*/*-json.log'
     sudo systemctl start docker         start docker
     docker restart $(docker ps -a -q)    restart all container
     docker logs -f --tail 5 app_web_1       showlog
@@ -37,18 +43,16 @@
         docker rm -f app_nginx_1
 
 #auto update & build new code on localserver
+    docker-compose -f docker-compose.yml exec nginx bash -c "nginx -s reload"
     docker-compose -f docker-compose.yml up -d
     docker-compose up --build web
-    docker-compose -f docker-compose.yml "pip install -r requirements.txt"
+    docker-compose -f docker-compose.yml exec web bash -c "pip install -r requirements.txt"
     docker-compose -f docker-compose.yml exec web bash -c "python manage.py collectstatic --noinput"
     docker-compose -f docker-compose.yml exec web bash -c "npx gulp build"
-    docker-compose -f docker-compose.yml exec web bash -c "python manage.py makemigrations --merge"
+    docker-compose -f docker-compose.yml exec web bash -c "python manage.py makemigrations"
     docker-compose -f docker-compose.yml exec web bash -c "python manage.py showmigrations"
-    docker-compose -f docker-compose.yml exec web bash -c "python manage.py migrate --fake contenttypes"
-    docker-compose -f docker-compose.yml exec web bash -c "python manage.py migrate --fake accounts"
-    docker-compose -f docker-compose.yml exec web bash -c "python manage.py migrate --fake customers"
+    docker-compose -f docker-compose.yml exec web bash -c "python manage.py migrate --fake"
     docker-compose -f docker-compose.yml exec web bash -c "python manage.py migrate --noinput"
-    docker-compose -f docker-compose.yml exec web bash -c "python manage.py migrate --fake transactions"
     docker-compose -f docker-compose.yml exec web bash -c "python manage.py migrate --fake-initial"
     docker-compose -f docker-compose.yml restart web
     docker-compose -f docker-compose.yml up -d search_engine

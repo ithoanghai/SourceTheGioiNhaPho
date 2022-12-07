@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.utils import timezone
 from datetime import timedelta
 
-from hitcount.views import HitCountDetailView
+from FunctionModule.hitcount.views import HitCountDetailView
 
 from .forms import RequestQuoteForm
 from .models import TransTypeInit

@@ -66,7 +66,7 @@ services:
       dockerfile: deploy/dockerfile.production
     command: bash -c "gunicorn --bind 0.0.0.0:8888 TownhouseWorldRealestate.wsgi:application -k gevent"
     env_file:
-    - .env
+      - .env
     volumes:
       - ./:/app
     #ports:

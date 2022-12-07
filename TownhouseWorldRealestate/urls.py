@@ -1,10 +1,9 @@
 import debug_toolbar
 from importlib import import_module
 
-from django.conf.urls import url
+from django.urls import re_path
 from django.contrib import admin
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
 from django.urls import path, include, reverse
 from django.conf.urls.static import static
 from django.views.static import serve
@@ -27,6 +26,7 @@ sitemaps = {
     'static': Static_Sitemap(),
 }
 
+
 def redirect_view(request):
     response = HttpResponseRedirect('/admin/')
     return response
@@ -45,10 +45,10 @@ urlpatterns = [
     path('admin', redirect_view, name='admin'),
     path('admin/', admin_site.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
-    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
-    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
-]
+    re_path(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 # Provider urlpatterns, as separate attribute (for reusability).

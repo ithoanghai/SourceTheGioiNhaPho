@@ -1,26 +1,6 @@
 version: "3.9"
 
 services:
-  redis:
-     image: 'redis:latest'
-     restart: on-failure
-  nginx:
-    restart: always
-    image: nginx:latest
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - './deploy/nginx/conf.d.production:/etc/nginx/conf.d'
-      - './deploy/nginx/nginx.conf:/etc/nginx/nginx.conf'
-      - './compiled_staticfiles:/staticfiles'
-      - './media:/media'
-      - '/data/certbot/conf:/etc/letsencrypt'
-      - '/data/certbot/www:/var/www/certbot'
-    depends_on:
-      - web
-    #command: "nginx -s reload"
-    tty: true
   db:
     image: 'kartoza/postgis:13-3.1'
     environment:
@@ -31,6 +11,40 @@ services:
       - ./data/db:/var/lib/postgresql
     ports:
       - "5432:5432"
+    #expose:
+      #  - "5432"
+    restart: on-failure
+  redis:
+     image: 'redis:latest'
+     restart: on-failure
+     expose:
+      - "6379"
+#  nginx:
+#    restart: always
+#    image: nginx:latest
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    volumes:
+#      - '/deploy/nginx/conf.d:/etc/nginx/conf.d'
+#      - '/deploy/nginx:/etc/nginx'
+#      - '/compiled_staticfiles:/staticfiles'
+#      - '/media:/media'
+#      - '/deploy/certbot/conf:/etc/letsencrypt'
+#      - '/deploy/certbot/www:/var/www/certbot'
+#    depends_on:
+#      - web
+#    command: "nginx -s reload"
+#    tty: true
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - '/deploy/certbot/conf:/etc/letsencrypt'
+      - '/deploy/certbot/www:/var/www/certbot'
+      - '/deploy/renew.sh:/renew.sh'
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    #network_mode: "host"
+    #tty: true
   search_engine:
     image: 'getmeili/meilisearch:v0.21.0rc3'
     ports:
@@ -46,19 +60,22 @@ services:
   web:
     restart: always
     build:
-        context: .
-        dockerfile: dockerfile
+      context: .
+      dockerfile: dockerfile
+    command: bash -c "service ssh restart;python manage.py runserver 0.0.0.0:8888"
+    #command: bash -c "gunicorn --bind 0.0.0.0:8888 TownhouseWorldRealestate.wsgi:application -k gevent"
     env_file:
       - ./.env
-    environment:
-      - DB_HOST=db
-    command: bash -c "service ssh restart;python manage.py runserver 0.0.0.0:8888"
     volumes:
       - .:/app
     ports:
       - "8888:8888"
       - "8889:8889"
       - "2222:22"
+    #expose:
+    #  - "8888"
+    environment:
+      - DB_HOST=db
     depends_on:
       - db
       - redis

@@ -1,7 +1,9 @@
+from django.conf.urls.static import static
 from django.urls import path
-from django.conf.urls import include, url
+from django.conf.urls import include
 from django.views.generic import TemplateView
 
+from TownhouseWorldRealestate import settings
 from . import views
 from .views import handler404, handler500
 
@@ -39,6 +41,6 @@ urlpatterns = [
     path('admin/error500', views.error500, name='error500'),
 
     # for our built-in ajax post view
-    url(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
+    path(r'hitcount/', include('FunctionModule.hitcount.urls', namespace='hitcount')),
 
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import DetailView, TemplateView
 
-from hitcount.views import HitCountDetailView
+from FunctionModule.hitcount.views import HitCountDetailView
 
 from FunctionModule.blog.models import Post
 

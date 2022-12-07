@@ -13,8 +13,7 @@ from django.http import Http404, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.urls import path, reverse
 from django.utils.html import escape
-from django.utils.translation import gettext
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _, gettext
 
 from .forms import GroupAdminForm, UserCreationForm, UserChangeForm, AdminPasswordChangeForm
 from .models import User, Groups, Permissions
