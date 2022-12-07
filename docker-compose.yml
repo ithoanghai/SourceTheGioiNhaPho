@@ -62,8 +62,8 @@ services:
     build:
       context: .
       dockerfile: dockerfile
-    command: bash -c "service ssh restart;python manage.py runserver 0.0.0.0:8888"
-    #command: bash -c "gunicorn --bind 0.0.0.0:8888 TownhouseWorldRealestate.wsgi:application -k gevent"
+    #command: bash -c "service ssh restart;python manage.py runserver 0.0.0.0:8888"
+    command: bash -c "gunicorn --bind 0.0.0.0:8888 TownhouseWorldRealestate.wsgi:application -k gevent"
     env_file:
       - ./.env
     volumes:

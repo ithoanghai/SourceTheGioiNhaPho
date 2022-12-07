@@ -448,7 +448,7 @@
             <i v-show="!isLoading" class="zmdi zmdi-search" style="opacity: 0.3"></i>
             <i v-show="isLoading" class="zmdi zmdi-refresh zmdi-hc-spin"></i>
             <input
-                    name="keywords"
+                    name="keys"
                     v-model="query" v-on:input="handleQueryChange"
                     v-bind:class="{ inputInProgress: isLoading, }"
                     v-on:focus="handleFocus"

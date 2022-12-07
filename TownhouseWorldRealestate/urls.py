@@ -1,10 +1,9 @@
 import debug_toolbar
 from importlib import import_module
 
-from django.urls import re_path
+from django.urls import re_path, path, include
 from django.contrib import admin
 from django.http import HttpResponseRedirect
-from django.urls import path, include, reverse
 from django.conf.urls.static import static
 from django.views.static import serve
 
@@ -42,7 +41,7 @@ urlpatterns = [
     path('customers/', include('FunctionModule.customers.urls')),
     path('accounts/', include('FunctionModule.accounts.urls')),
     path('cadastral/', include('FunctionModule.cadastral.urls')),
-    path('admin', redirect_view, name='admin'),
+    #path('admin', redirect_view, name='admin'),
     path('admin/', admin_site.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
     re_path(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),

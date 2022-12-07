@@ -16,6 +16,7 @@ ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 ROOT_URLCONF = 'TownhouseWorldRealestate.urls'
 WSGI_APPLICATION = 'TownhouseWorldRealestate.wsgi.application'
 
+
 ########################################
 # APPS
 ########################################
@@ -157,9 +158,22 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomUserCreationForm'}
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ""
-LOGIN_REDIRECT_URL = reverse_lazy("admin:index")
-LOGIN_URL = reverse_lazy("accounts_login")
-EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+#LOGIN_REDIRECT_URL = reverse_lazy("admin:index")
+#LOGIN_URL = reverse_lazy("accounts_login")
+
+
+########################################
+# AUTHENTICATION
+########################################
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = '***' #my gmail password
+EMAIL_HOST_USER = 'thegioinhaphovietnam@gmail.com' #my gmail username
+DEFAULT_FROM_EMAIL = 'thegioinhaphovietnam@gmail.com'
+SERVER_EMAIL = 'thegioinhaphovietnam@gmail.com'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 ########################################
@@ -171,13 +185,9 @@ USE_I18N = False
 #USE_L10N = True
 USE_TZ = False
 APPEND_SLASH = False
-
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale/'),)
-
 COMPRESS_OFFLINE = True
-COMPRESS_OFFLINE_CONTEXT = [
-    {"LANGUAGE_BIDI": True},
-]
+
 LANGUAGES = [
     ('vi', gettext_noop('Vietnamese')),
     ('en-us', gettext_noop('English')),
@@ -190,7 +200,6 @@ LANGUAGE_COOKIE_PATH = '/'
 LANGUAGE_COOKIE_SECURE = False
 LANGUAGE_COOKIE_HTTPONLY = False
 LANGUAGE_COOKIE_SAMESITE = None
-
 DATE_FORMAT = ( ( '%d/%m/%Y' ))
 DATE_INPUT_FORMATS = ( ('%d/%m/%Y'),)
 DATETIME_FORMAT = (( 'd/m/Y H:i' ))
@@ -305,7 +314,6 @@ LOCATION_FIELD = {
     # 'provider.mapbox.access_token': 'pk.eyJ1Ijoia2llbm5ndXllbjExMDEiLCJhIjoiY2ttaHRqZTgzMGF0YzJ3bXVvYW9ncnh0ZiJ9.xar2mZcYZJ1qK4i2mRDa0Q',
     'provider.google.api_key': GOOGLE_MAP_API_KEY
 }
-
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
         'METHOD': 'oauth2',
@@ -333,9 +341,6 @@ MEILI_MASTER_KEY = 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a2
 MEILI_HOST = os.getenv('MEILI_HOST', 'search_engine')
 MEILI_PORT = os.getenv('MEILI_PORT', 7700)
 
-# DJANGO HITCOUNT SPECIFIC VARIABLES
-
-# As of v1.1.1 this setting is no longer needed
 # SESSION_SAVE_EVERY_REQUEST = True
 HITCOUNT_KEEP_HIT_ACTIVE = {'minutes': 60}
 HITCOUNT_HITS_PER_IP_LIMIT = 0  # unlimited
