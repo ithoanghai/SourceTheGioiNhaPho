@@ -84,9 +84,9 @@
                 </h4>
             {% endif %}
             {% if listing.street %}
-                <h4>
+                <h4><b>
                     <a href="{% url 'listing_search' %}?keys={{ listing.street }}&so=priority"
-                       title="{{ listing.street }}">{{ listing.street }},</a>
+                       title="{{ listing.street }}">{{ listing.street }},</a></b>
                 </h4>
             {% endif %}
             {% comment %}{% if listing.ward %}
@@ -101,8 +101,8 @@
                 </h4>
             {% endif %}
             {% if listing.state %}
-                <h4><b><a href="{% url 'listing_search' %}?state={{ listing.state }}&so=priority"
-                          title="{% get_state listing.state %}">&nbsp{% get_state listing.state %}</a></b></h4>
+                <h4><a href="{% url 'listing_search' %}?state={{ listing.state }}&so=priority"
+                          title="{% get_state listing.state %}">&nbsp{% get_state listing.state %}</a></h4>
             {% endif %}
         </div>
 

@@ -1,17 +1,23 @@
 {% load static load_static i18n %}
 
 <head>
+    <!-- Favicon - loaded as static -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon" type="image/x-icon"/>
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %} " type="image/x-icon"/>
 
-    <title> {% block title %}Quản trị hệ thống Thế giới Nhà phố{% endblock %}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=1, width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     {% block title %}
         <title>{% trans "Quản trị hệ thống Thế giới Nhà phố" %} </title>
         <meta name="title" content="{% trans "Quản trị hệ thống Thế giới Nhà phố" %}"/>
         <meta property="og:title" content="{% trans "Quản trị hệ thống Thế giới Nhà phố" %} "/>
     {% endblock %}
     {% block description %}
-        <meta name="description" content="Quản trị hệ thống Thế giới Nhà phố. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
-    <meta property="og:description"
-          content="Quản trị hệ thống Thế giới Nhà phố. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+        <meta name="description" content="sử dụng tài khoản đã đăng ký và cấp quyền truy cập vào trang Quản trị hệ thống Thế giới Nhà phố. Uy tín - Tận tâm - Chân thành. ĐT:0916286256 - 0964399436"/>
+        <meta property="og:description"
+          content="sử dụng tài khoản đã đăng ký và cấp quyền truy cập vào trang Quản trị hệ thống Thế giới Nhà phố. Uy tín - Tận tâm - Chân thành. ĐT:0916286256 - 0964399436"/>
     {% endblock %}
     {% block keywords %}
         <meta name="keywords"
@@ -20,15 +26,6 @@
           content="quản trị hệ thống về thế giới nhà phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
     {% endblock %}
     {% block head %}{% endblock %}
-    <!-- Favicon - loaded as static -->
-    <link href="{% static 'img/favicon.ico' %}" rel="icon" type="image/x-icon"/>
-    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %} " type="image/x-icon"/>
-
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=1, width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% block description %} <meta name="description" content="Mời bạn sử dụng tài khoản đã đăng ký và cấp quyền truy cập vào trang quản trị hệ thống Thế Giới Nhà Phố. {{ redirect_field_value }}"/>
-{% endblock description %}
     {% block blockbots %}
         <meta name="robots" content="NONE,NOARCHIVE">
     {% endblock %}
@@ -63,5 +60,12 @@
   {% block extrahead %}{% endblock %}
 
   {% block extrastyle %}{% endblock %}
+
+    <!-- Core -->
+    {% block javascripts %}
+        <!--   Core   -->
+        <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous" async></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous" async></script>
+    {% endblock javascripts %}
 
 </head>

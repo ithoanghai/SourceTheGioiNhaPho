@@ -1,31 +1,81 @@
-{% extends "blog/base.html" %}
+{% extends "base.html" %}
+
+{% block head %}
+    {{ block.super }}
+
+    <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/blog"/>
+    <title>django-hitcount example project</title>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        body {
+            padding-top: 70px;
+            padding-bottom: 30px;
+        }
+
+        .theme-showcase .navbar .container {
+            width: auto;
+        }
+    </style>
+
+{% endblock %}
 
 {% block content %}
 
-<div class="jumbotron">
-<h1>django-hitcount</h1>
-<p>Welcome to the django-hitcount example project.  Three different views are demonstrated:
-<dl class="dl-horizontal">
-    <dt>ajax</dt><dd> for a jQuery based implementation using the hitcount template tags</dd>
-    <dt>detail</dt><dd> for a generic detail view that injects the hitcount into the context</dd>
-    <dt>detail-with-count</dt><dd> for a second generic detail view that also process/counts the request as a hit or not</dd>
-</dl></p>
-<p>Please post any questions or issues on GitHub.  Enjoy!</p>
-{% if post_list %}
-<ul>
-{% for posturl in post_views %}
-<li>{{posturl}}
-<ul>
-{% for post in post_list %}
-<li><a href="{% url posturl post.pk %}">{{ post.title }}</a></li>
-{% endfor %}
-</ul>
-</li>
-{% endfor %}
-</ul>
-{% else %}
-    <p>No posts are available.</p>
-{% endif %}
-</div>
-
-{%endblock%}
+                    {% if post_list %}
+                        {% for posturl in post_views %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    {{ posturl }} <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    {% for post in post_list %}
+                                        <li><a href="{% url posturl post.pk %}">{{ post.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %} {% endif %}
+                    <li><a href="/admin/">Admin</a></li>
+                    <li><a href="https://github.com/thornomad/django-hitcount">Github</a></li>
+                    <li><a href="https://django-hitcount.rtfd.org">Docs</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+    <div class="container theme-showcase" role="main">
+        <div class="jumbotron">
+            <h1>django-hitcount</h1>
+            <p>Welcome to the django-hitcount example project. Three different views are demonstrated:
+            <dl class="dl-horizontal">
+                <dt>ajax</dt>
+                <dd> for a jQuery based implementation using the hitcount template tags</dd>
+                <dt>detail</dt>
+                <dd> for a generic detail view that injects the hitcount into the context</dd>
+                <dt>detail-with-count</dt>
+                <dd> for a second generic detail view that also process/counts the request as a hit or not</dd>
+            </dl>
+            </p>
+            <p>Please post any questions or issues on GitHub. Enjoy!</p>
+            {% if post_list %}
+                <ul>
+                    {% for posturl in post_views %}
+                        <li>{{ posturl }}
+                            <ul>
+                                {% for post in post_list %}
+                                    <li><a href="{% url posturl post.pk %}">{{ post.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No posts are available.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -41,6 +41,6 @@ urlpatterns = [
     path('admin/error500', views.error500, name='error500'),
 
     # for our built-in ajax post view
-    path(r'hitcount/', include('FunctionModule.hitcount.urls', namespace='hitcount')),
+    path('hitcount/', include('FunctionModule.hitcount.urls', namespace='hitcount')),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

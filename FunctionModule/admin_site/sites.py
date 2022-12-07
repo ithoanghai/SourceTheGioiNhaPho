@@ -272,7 +272,7 @@ class AdminSites:
                 name='password_change_done',
             ),
             path('jsi18n/', wrap(self.i18n_javascript, cacheable=True), name='jsi18n'),
-            re_path(
+            path(
                 'r/<int:content_type_id>/<path:object_id>/',
                 wrap(contenttype_views.shortcut),
                 name='view_on_site',

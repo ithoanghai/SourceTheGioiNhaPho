@@ -13,7 +13,7 @@ from FunctionModule.admin_site.sites import AdminSitePlus
 from django.contrib.sitemaps.views import sitemap
 
 from FunctionModule.pages.sitemaps import Listing_Sitemap, Static_Sitemap
-from FunctionModule.pages.views import handler404, handler500
+from FunctionModule.pages.views import handler404, handler500, pages
 from TownhouseWorldRealestate import settings
 
 admin.site = AdminSitePlus()

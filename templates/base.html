@@ -1,7 +1,7 @@
 {% load static i18n %}
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE|default:"vi" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<html lang="{{ LANGUAGE_CODE|default:"vi" }}" {% if LANGUAGE_BIDI %}{% comment %}dir="rtl"{% endcomment %}{% endif %}>
 
 <head>
   {% include 'partials/_head.html' %}
@@ -28,32 +28,27 @@
 </head>
 
 <body>
-<!-- Alerts -->
-{% include 'partials/_alerts.html' %}
+    <!-- Alerts -->
+    {% include 'partials/_alerts.html' %}
 
-<!-- Main Content -->
-{% block content %} {% endblock %}
+    <!-- Main Content -->
+    {% block content %} {% endblock %}
 
-<!-- Footer -->
-{% include 'partials/_footer.html' %}
+    <!-- Footer -->
+    {% include 'partials/_footer.html' %}
 
-<!-- Your Plugin chat code -->
-<div id="fb-customer-chat" class="fb-customerchat"
-     attribution="biz_inbox"
-     page_id="108470991299693">
-</div>
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat"
+         attribution="biz_inbox" page_id="108470991299693">
+    </div>
+    <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
 
-<!-- Messenger Plugin chat Code -->
-<div id="fb-root"></div>
+    <!-- Scripts -->
+    {% include 'partials/_scriptsCommon.html' %}
 
-<!-- Scripts -->
-{% include 'partials/_scriptsCommon.html' %}
-
-{% block scripts %}
-{% endblock %}
-
-
+    {% block scripts %}{% endblock %}
+    {% block inline_javascript %}{% endblock %}
 </body>
-
 
 </html>
