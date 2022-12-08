@@ -1,90 +1,10 @@
-new Vue({
-    el: '#searchFormHome',
-    delimiters: ['${', '}$'],
-    template: '#searchFormTemplate',
-    data() {
-        return {
-            isLoading: false,
-            isFocus: false,
-            suggestions: [],
-        }
-    },
-    props: {
-        query: String
-    },
-    methods: {
-        getAutoComplete: () => {
-        },
-        handleQueryChange: function (e) {
-            const q = e.target.value;
-            if (q.length == 0) {
-                this.isLoading = false;
-                this.suggestions = [];
-            }
-            if (q.length >= 2) {
-                this.isLoading = true;
-                this.getAutoComplete(q);
-            }
-        },
-        handleFocus: function (e) {
-            this.isFocus = !this.isFocus;
-        },
-        setupAutoComplete: function () {
-            clearInterval(this.interval);
-            const getHeaderText = (itemType) => {
-                switch (itemType) {
-                    case 'area':
-                        return 'Khu vực';
-                    case 'street':
-                        return 'Đường';
-                    case 'urban_area':
-                        return 'Khu dân cư'
-                    default:
-                        return 'Khu vực'
-                }
-            }
-
-            this.getAutoComplete = _.debounce(async (q) => {
-                const resp = await axios.get(`/api/s-suggest/sell/${q}`)
-                if (resp && resp.status && resp.status == 200) {
-                    let suggestions = [];
-                    let headers = {};
-                    for (const item of resp.data) {
-
-                        if (!(item.type in headers)) {
-                            suggestions.push({
-                                code: item.id,
-                                text: getHeaderText(item.type),
-                                subText: item.text,
-                                link: "",
-                                isHeader: true,
-                            })
-                            headers[item.type] = 1
-                        }
-                        if (item.sub_type !== 'state') {
-                            suggestions.push({
-                                code: item.id,
-                                text: item.text,
-                                subText: item.text,
-                                link: `/listings/search?trans=${item.type}&keys=${item.text}`,
-                                isHeader: false,
-                            })
-                        }
-                    }
-                    this.suggestions = suggestions;
-                }
-                setTimeout(() => {
-                    this.isLoading = false;
-                }, 200);
-                return resp;
-            }, 300);
-        },
-    },
-    created() {
-       this.interval = setInterval(() => {
-           if (window._ && axios) {
-               this.setupAutoComplete();
-           }
-       }, 100)
-    }
-})
+new Vue({el:"#searchFormHome",delimiters:["${","}$"],template:"#searchFormTemplate",data:{isLoading:!1,isFocus:!1,suggestions:[]},props:{query:String},methods:{getAutoComplete:function(){},handleQueryChange:function(t){const e=t.target.value
+0==e.length&&(this.isLoading=!1,this.suggestions=[]),e.length>=2&&(this.isLoading=!0,this.getAutoComplete(e))},handleFocus:function(t){this.isFocus=!this.isFocus},setupAutoComplete:function(){clearInterval(this.interval)
+const t=function(t){switch(t){case"area":return"Khu vực"
+case"street":return"Đường"
+case"urban_area":return"Khu dân cư"
+default:return"Khu vực"}}
+this.getAutoComplete=_.debounce(function(e){const n=axios.get("/api/s-suggest/sell/${q}")
+if(n&&n.status&&200==n.status){var r=[],i={}
+for(var o in n.data)o.type in i||(r.push({code:o.id,text:t(o.type),subText:o.text,link:"",isHeader:!0}),i[o.type]=1),"state"!==o.sub_type&&r.push({code:o.id,text:o.text,subText:o.text,link:"/listings/search?trans=${item.type}&keys=${item.text}",isHeader:!1})
+this.suggestions=r}return setTimeout(function(){this.isLoading=!1},200),n},300)}},created:{setInterval:100}})
