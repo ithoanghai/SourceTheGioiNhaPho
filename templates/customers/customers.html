@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% load static i18n %}
 
 {% block title %}
@@ -18,6 +17,10 @@
     <meta property="og:keywords"
       content="danh sách khách hàng bất động sản,mua bán bất động sản, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
 {% endblock %}
+{% block head %}
+  {{ block.super }}
+  <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/customers"/>
+ {% endblock %}
 {% block content %}
     <div id="wrap">
         <!-- Search menu -->

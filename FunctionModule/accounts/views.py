@@ -9,7 +9,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, resolve_url
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.debug import sensitive_post_parameters
@@ -157,23 +157,24 @@ def login_handler(request):
                 adapter.login(request, user)
                 if user.is_authenticated and (user.is_staff or user.is_superuser):
                     messages.success(request, 'Bạn đã đăng nhập thành công')
-                    return HttpResponseRedirect(reverse('admin'))
+                    return HttpResponseRedirect(reverse('profile'))
                 elif user.is_authenticated:
                     messages.success(request, 'Bạn đã đăng nhập thành công')
-                    return HttpResponseRedirect(reverse('index'))
+                    return HttpResponseRedirect(reverse('profile'))
                 elif not user.is_authenticated:
-                    messages.success(request, 'Thông tin đăng nhập không hợp lệ')
-                    return HttpResponseRedirect(reverse('index'))
+                    messages.warning(request, 'Thông tin đăng nhập không hợp lệ')
+                    return HttpResponseRedirect(reverse('login'))
+
             else:
                 messages.error(request, 'Người dùng không tồn tại')
                 return render(request, 'accounts/_logged_out.html')
 
         except (ObjectDoesNotExist, MultipleObjectsReturned):
-            messages.success(request, 'Xuất hiện lỗi khi đăng nhập, bạn cần liên hệ quản trị viên')
+            messages.warning(request, 'Xuất hiện lỗi khi đăng nhập, bạn cần liên hệ quản trị viên')
             return render(request, 'accounts/_logged_out.html')
 
-    else:
-        return HttpResponseRedirect(reverse('admin'))
+    elif request.method == 'GET':
+        return HttpResponseRedirect(reverse('index'))
 
 
 def logout_handler(request):
@@ -558,7 +559,7 @@ class SignupView(
             for email_key in email_keys:
                 form.fields[email_key].initial = email
         login_url = passthrough_next_redirect_url(
-            self.request, reverse("account_login"), self.redirect_field_name
+            self.request, reverse("login"), self.redirect_field_name
         )
         redirect_field_name = self.redirect_field_name
         site = get_current_site(self.request)
@@ -986,7 +987,7 @@ class PasswordResetView(AjaxCapableProcessFormViewMixin, FormView):
     def get_context_data(self, **kwargs):
         ret = super(PasswordResetView, self).get_context_data(**kwargs)
         login_url = passthrough_next_redirect_url(
-            self.request, reverse("account_login"), self.redirect_field_name
+            self.request, reverse("login"), self.redirect_field_name
         )
         # NOTE: For backwards compatibility
         ret["password_reset_form"] = ret.get("form")
@@ -1194,7 +1195,7 @@ class SignupView(
         if data:
             self.sociallogin = SocialLogin.deserialize(data)
         if not self.sociallogin:
-            return HttpResponseRedirect(reverse("account_login"))
+            return HttpResponseRedirect(reverse("login"))
         return super(SignupView, self).dispatch(request, *args, **kwargs)
 
     def is_open(self):

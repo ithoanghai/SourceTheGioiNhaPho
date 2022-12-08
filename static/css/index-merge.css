@@ -1264,7 +1264,7 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 
 .banner-top-bg {
     width: 100%;
-    height: 600px;
+    height: 500px;
     position: relative;
     z-index: 10
 }
@@ -1597,7 +1597,7 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 
 @media (max-width: 640px) {
     .banner-top-bg {
-        height: 400px
+        height: 500px
     }
 
     .banner-content-inner form .search-container .zmdi {
@@ -1614,7 +1614,8 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
     }
 
     .banner-content-inner form .search-container .btn-search {
-        max-width: fit-content
+        max-width: fit-content;
+        background-color: darkgreen
     }
 
     .banner-content-inner form .search-container .btn-search .zmdi {
@@ -1658,6 +1659,13 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
     .btn-use:last-child {
         margin-right: 0
     }
+
+    .banner-content-inner .heading-04 {
+    font-family: "UTM Facebook K&T", Arial, Helvetica, sans-serif;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 10px
+}
 }
 
 .quickly-sell {

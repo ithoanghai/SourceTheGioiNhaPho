@@ -5,7 +5,6 @@ import uuid
 from datetime import timedelta
 
 from django import forms
-from django.conf import settings
 from django.contrib.auth.models import AbstractUser, AnonymousUser
 from django.contrib.sites.models import Site
 from django.core import mail, validators
@@ -27,6 +26,7 @@ from allauth.account.models import (
 from allauth.tests import Mock, TestCase, patch
 from allauth.utils import get_user_model, get_username_max_length
 
+from TownhouseWorldRealestate import settings
 from . import app_settings
 from .adapter import get_adapter
 from .auth_backends import AuthenticationBackend
@@ -59,7 +59,7 @@ class AccountTests(TestCase):
     def setUp(self):
         if "allauth.socialaccount" in settings.INSTALLED_APPS:
             # Otherwise ImproperlyConfigured exceptions may occur
-            from ..socialaccount.models import SocialApp
+            from allauth.socialaccount.models import SocialApp
 
             sa = SocialApp.objects.create(name="testfb", provider="facebook")
             sa.sites.add(Site.objects.get_current())
@@ -78,7 +78,7 @@ class AccountTests(TestCase):
             verified=True,
         )
         resp = self.client.post(
-            reverse("account_login"),
+            reverse("login"),
             {"login": "@raymond.penners", "password": "psst"},
         )
         self.assertRedirects(
@@ -207,7 +207,7 @@ class AccountTests(TestCase):
     def test_redirect_when_authenticated(self):
         self._create_user_and_login()
         c = self.client
-        resp = c.get(reverse("account_login"))
+        resp = c.get(reverse("login"))
         self.assertRedirects(resp, "/accounts/profile/", fetch_redirect_response=False)
 
     def test_password_reset_get(self):
@@ -411,7 +411,7 @@ class AccountTests(TestCase):
             user=user2, email=user2.email, primary=True, verified=True
         )
         resp = self.client.post(
-            reverse("account_login"),
+            reverse("login"),
             {
                 "login": user2.email,
                 "password": "doe",
@@ -498,7 +498,7 @@ class AccountTests(TestCase):
         # Attempt to login, unverified
         for attempt in [1, 2]:
             resp = c.post(
-                reverse("account_login"),
+                reverse("login"),
                 {"login": "johndoe", "password": "johndoe"},
                 follow=True,
             )
@@ -536,7 +536,7 @@ class AccountTests(TestCase):
         )
         c.post(reverse("account_confirm_email", args=[confirmation.key]))
         resp = c.post(
-            reverse("account_login"),
+            reverse("login"),
             {"login": "johndoe", "password": "johndoe"},
         )
         self.assertRedirects(
@@ -564,7 +564,7 @@ class AccountTests(TestCase):
             user=user, email="user@example.com", primary=True, verified=False
         )
         resp = self.client.post(
-            reverse("account_login"), {"login": "john", "password": "doe"}
+            reverse("login"), {"login": "john", "password": "doe"}
         )
         self.assertRedirects(
             resp, settings.LOGIN_REDIRECT_URL, fetch_redirect_response=False
@@ -585,7 +585,7 @@ class AccountTests(TestCase):
             is_valid_attempt = i == 4
             is_locked = i >= 3
             resp = self.client.post(
-                reverse("account_login"),
+                reverse("login"),
                 {
                     "login": ["john", "John", "JOHN", "JOhn", "joHN"][i],
                     "password": ("doe" if is_valid_attempt else "wrong"),
@@ -619,7 +619,7 @@ class AccountTests(TestCase):
         )
 
         resp = self.client.post(
-            reverse("account_login"), {"login": user.email, "password": "bad"}
+            reverse("login"), {"login": user.email, "password": "bad"}
         )
         self.assertFormError(
             resp,
@@ -629,7 +629,7 @@ class AccountTests(TestCase):
         )
 
         resp = self.client.post(
-            reverse("account_login"), {"login": user.email, "password": "bad"}
+            reverse("login"), {"login": user.email, "password": "bad"}
         )
         self.assertFormError(
             resp,
@@ -669,7 +669,7 @@ class AccountTests(TestCase):
         self.assertTrue(user.check_password(new_password))
 
         resp = self.client.post(
-            reverse("account_login"),
+            reverse("login"),
             {"login": user.email, "password": new_password},
         )
 
@@ -697,7 +697,7 @@ class AccountTests(TestCase):
         )
 
         resp = self.client.post(
-            reverse("account_login"), {"login": "john@example.com", "password": "doe"}
+            reverse("login"), {"login": "john@example.com", "password": "doe"}
         )
         self.assertRedirects(
             resp,
@@ -716,7 +716,7 @@ class AccountTests(TestCase):
             user=user, email="user@example.com", primary=True, verified=False
         )
         resp = self.client.post(
-            reverse("account_login"), {"login": "john", "password": "doe"}
+            reverse("login"), {"login": "john", "password": "doe"}
         )
         self.assertRedirects(resp, reverse("account_email_verification_sent"))
 
@@ -735,7 +735,7 @@ class AccountTests(TestCase):
             user=user, email="john@example.com", primary=True, verified=True
         )
         resp = self.client.post(
-            reverse("account_login"), {"login": "john", "password": "doe"}
+            reverse("login"), {"login": "john", "password": "doe"}
         )
         self.assertRedirects(resp, reverse("account_inactive"))
 
@@ -747,7 +747,7 @@ class AccountTests(TestCase):
             user=user, email="user@example.com", primary=True, verified=False
         )
         resp = self.client.post(
-            reverse("account_login"), {"login": "doe", "password": "john"}
+            reverse("login"), {"login": "doe", "password": "john"}
         )
         self.assertRedirects(resp, reverse("account_inactive"))
 
@@ -766,7 +766,7 @@ class AccountTests(TestCase):
 
     def test_ajax_login_fail(self):
         resp = self.client.post(
-            reverse("account_login"),
+            reverse("login"),
             {},
             HTTP_X_REQUESTED_WITH="XMLHttpRequest",
         )
@@ -782,7 +782,7 @@ class AccountTests(TestCase):
         user.set_password("doe")
         user.save()
         resp = self.client.post(
-            reverse("account_login"),
+            reverse("login"),
             {"login": "john", "password": "doe"},
             HTTP_X_REQUESTED_WITH="XMLHttpRequest",
         )
@@ -859,7 +859,7 @@ class AccountTests(TestCase):
         EmailConfirmation.objects.update(sent=now() - timedelta(days=1))
         # Signup
         resp = c.post(
-            reverse("account_login"),
+            reverse("login"),
             {"login": "johndoe", "password": "johndoe"},
         )
         self.assertRedirects(
@@ -874,7 +874,7 @@ class AccountTests(TestCase):
     @override_settings(ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS=False)
     def test_account_authenticated_login_redirects_is_false(self):
         self._create_user_and_login()
-        resp = self.client.get(reverse("account_login"))
+        resp = self.client.get(reverse("login"))
         self.assertEqual(resp.status_code, 200)
 
     @override_settings(
@@ -980,7 +980,7 @@ class AccountTests(TestCase):
             user=user2, email=user2.email, primary=True, verified=True
         )
         resp = self.client.post(
-            reverse("account_login"),
+            reverse("login"),
             {
                 "login": user2.email,
                 "password": "doe",

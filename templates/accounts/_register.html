@@ -16,8 +16,11 @@
     <meta property="og:keywords"
       content="Đăng ký gia nhập Thế Giới Nhà Phố, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
 {% endblock %}
+{% block head %}
+  {{ block.super }}
+  <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/accounts/register"/>
+ {% endblock %}
 {% block content %}
-    <section id="register" class="bg-light py-5">
         <div class="container">
             {% comment %}   <div><h6>{% trans "Chào mừng bạn. Hãy tham gia hệ thống Thế giới Nhà phố ngay bây giờ với từng vai trò, thương vụ đặt mua, mua, bán, giới thiệu, đầu tư BĐS. Bạn sẽ được hưởng quyền lợi cao không ngờ tới mà hệ thống mang đến cho bạn." %}</h6></div>
    {% endcomment %}
@@ -115,5 +118,4 @@
                 </div>
             </div>
         </div>
-    </section>
 {% endblock %}

@@ -4,64 +4,64 @@
         <i class="zmdi zmdi-chevron-down"></i>
     </a>
     <ul>
-    <li>
-      <a href="{% url 'listing_search' %}?trans=sell&so=priority"
-         data-mix-header-click="group: buy, action: select_all_buy">Tất cả nhà đất TGNP bán</a>
-    </li>
-{% comment %}        {% for v in housetypes.values %}
+        <li>
+            <a href="{% url 'listing_search' %}?trans=sell&so=priority"
+               data-mix-header-click="group: buy, action: select_all_buy">Tất cả nhà đất TGNP bán</a>
+        </li>
+        {% comment %}        {% for v in housetypes.values %}
             <li>
       <a href="{% url 'listing_search' %}?trans=sell&hoty=apartment&so=priority"
          data-mix-header-click="group: buy, action: select_apartment_buy">{{ v }}</a>
     </li>
 {% endfor %}{% endcomment %}
-    <li>
-      <a href="{% url 'listing_search' %}?trans=sell&hoty=town_house&so=priority"
-         data-mix-header-click="group: buy, action: select_house_buy">Nhà phố</a>
-    </li>
         <li>
-      <a href="{% url 'listing_search' %}?trans=sell&hoty=street_house&so=priority"
-         data-mix-header-click="group: buy, action: select_street_house_buy">Nhà mặt phố</a>
-    </li>
+            <a href="{% url 'listing_search' %}?trans=sell&hoty=town_house&so=priority"
+               data-mix-header-click="group: buy, action: select_house_buy">Nhà phố</a>
+        </li>
         <li>
-      <a href="{% url 'listing_search' %}?trans=sell&hoty=apartment&so=priority"
-         data-mix-header-click="group: buy, action: select_apartment_buy">Căn hộ tập thể/chung cư</a>
-    </li>
-    <li>
-      <a href="{% url 'listing_search' %}?trans=sell&hoty=shop_house&so=priority"
-         data-mix-header-click="group: buy, action: select_shophouse_buy">Cửa hàng</a>
-    </li>
-     <li>
-      <a href="{% url 'listing_search' %}?trans=sell&hoty=villa&so=priority"
-         data-mix-header-click="group: buy, action: select_villa_buy">Biệt thự</a>
-    </li>
+            <a href="{% url 'listing_search' %}?trans=sell&hoty=street_house&so=priority"
+               data-mix-header-click="group: buy, action: select_street_house_buy">Nhà mặt phố</a>
+        </li>
         <li>
-      <a href="{% url 'listing_search' %}?trans=sell&hoty=plot&so=priority"
-         data-mix-header-click="group: buy, action: select_plot_buy">Liền kề/Phân lô</a>
-    </li>
-    <li>
-      <a href="{% url 'listing_search' %}?trans=sell&hoty=land&so=priority"
-         data-mix-header-click="group: buy, action: select_land_buy">Đất nền</a>
-    </li>
-    <li>
-      <a href="{% url 'listing_search' %}?trans=sell&hoty=office&so=priority"
-         data-mix-header-click="group: buy, action: select_office_buy">Văn phòng</a>
-    </li>
-    <li>
-      <a href="{% url 'listing_search' %}?trans=sell&hoty=building&so=priority"
-         data-mix-header-click="group: buy, action: select_building_buy">Tòa nhà</a>
-    </li>
-    <li class="divide"></li>
-    {% comment %}<li>
+            <a href="{% url 'listing_search' %}?trans=sell&hoty=apartment&so=priority"
+               data-mix-header-click="group: buy, action: select_apartment_buy">Căn hộ tập thể/chung cư</a>
+        </li>
+        <li>
+            <a href="{% url 'listing_search' %}?trans=sell&hoty=shop_house&so=priority"
+               data-mix-header-click="group: buy, action: select_shophouse_buy">Cửa hàng</a>
+        </li>
+        <li>
+            <a href="{% url 'listing_search' %}?trans=sell&hoty=villa&so=priority"
+               data-mix-header-click="group: buy, action: select_villa_buy">Biệt thự</a>
+        </li>
+        <li>
+            <a href="{% url 'listing_search' %}?trans=sell&hoty=plot&so=priority"
+               data-mix-header-click="group: buy, action: select_plot_buy">Liền kề/Phân lô</a>
+        </li>
+        <li>
+            <a href="{% url 'listing_search' %}?trans=sell&hoty=land&so=priority"
+               data-mix-header-click="group: buy, action: select_land_buy">Đất nền</a>
+        </li>
+        <li>
+            <a href="{% url 'listing_search' %}?trans=sell&hoty=office&so=priority"
+               data-mix-header-click="group: buy, action: select_office_buy">Văn phòng</a>
+        </li>
+        <li>
+            <a href="{% url 'listing_search' %}?trans=sell&hoty=building&so=priority"
+               data-mix-header-click="group: buy, action: select_building_buy">Tòa nhà</a>
+        </li>
+        <li class="divide"></li>
+        {% comment %}<li>
        <a href="{% url 'listing_search' %}?trans=sell&urban_area=' '"
          data-mix-header-click="group: buy, action: select_zone_buy">Khu dân cư</a>
     </li>{% endcomment %}
-    <li>
-      <a href="{% url 'buywithus' %}"
-         data-mix-header-click="group: buy, action: select_lp_buy">Đặt Mua BĐS với TGNP</a>
-    </li>
-    {% comment %}<li>
+        <li>
+            <a href="{% url 'buywithus' %}"
+               data-mix-header-click="group: buy, action: select_lp_buy">Đặt Mua BĐS với TGNP</a>
+        </li>
+        {% comment %}<li>
       <a href="{% url 'buywithus' %}"
          data-mix-header-click="group: buy, action: select_lp_buy">Giới thiệu Khách mua</a>
     </li>{% endcomment %}
-  </ul>
+    </ul>
 </li>

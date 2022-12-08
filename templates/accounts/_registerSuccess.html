@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
 
 {% load static humanize i18n %}
-
-{% block head %}
-    {{ block.super }}
-
-    <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/register"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
-
+{% block title  %}
+    <title>{% trans "Đăng ký gia nhập Thế Giới Nhà Phố thành công" %} </title>
+    <meta name="title" content="{% trans "Đăng ký gia nhập Thế Giới Nhà Phố thành công" %}"/>
+    <meta property="og:title" content="{% trans "Đăng ký gia nhập Thế Giới Nhà Phố thành công" %} "/>
 {% endblock %}
-
+{% block description %}
+    <meta name="description" content="Đăng ký gia nhập Thế Giới Nhà Phố thành công, bạn sẽ được trải nghiệm và hưởng rất nhiều lợi ích trong lĩnh vực bđs. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+<meta property="og:description"
+      content="Đăng ký gia nhập Thế Giới Nhà Phố thành công, bạn sẽ được trải nghiệm và hưởng rất nhiều lợi ích trong lĩnh vực bđs. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords"
+      content="Đăng ký gia nhập Thế Giới Nhà Phố thành công, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+    <meta property="og:keywords"
+      content="Đăng ký gia nhập Thế Giới Nhà Phố thành công, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+{% endblock %}
+{% block head %}
+  {{ block.super }}
+  <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/accounts/register_success"/>
+{% endblock %}
 {% block content %}
-
     <div id="wraps">
         <!-- Search menu -->
         {% include 'menu/_menuSearch.html' %}

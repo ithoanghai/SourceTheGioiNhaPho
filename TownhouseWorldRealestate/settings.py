@@ -275,6 +275,11 @@ LOGGING = {
         },
     },
 }
+
+
+########################################
+# CACHES
+########################################
 DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 15  # 15M
 FILE_UPLOAD_MAX_MEMORY_SIZE = DATA_UPLOAD_MAX_MEMORY_SIZE
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 4000  # higher than the count of fields

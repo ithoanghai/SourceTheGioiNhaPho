@@ -58,7 +58,6 @@ services:
       - MEILI_NO_SENTRY=true
     restart: on-failure
   web:
-    restart: always
     build:
       context: .
       dockerfile: dockerfile
@@ -81,3 +80,4 @@ services:
       - redis
       - search_engine
     tty: true
+    restart: always

@@ -21,7 +21,6 @@
 {% block head %}
   {{ block.super }}
   <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/accounts/logout"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/service.css' %}"/>
 {% endblock %}
 {% block content %}
 
@@ -34,12 +33,12 @@
 
         <!-- Main Content  -->
         <section class="background-gray">
-            <p><h1>Đăng xuất hệ thống thành công</h1></p>
             <div class="width1140 s-padding-tb">
-                <div>
-                    <h4>{% translate "Bạn là thành viên tích cực. Cảm ơn bạn đã hợp tác nhiệt tình với THẾ GIỚI NHÀ PHỐ." %}</h4>
+                <div><p>
+                    <h1>Đăng xuất hệ thống thành công</h1>
+                    <h4>{% translate "Cảm ơn bạn đã hợp tác với THẾ GIỚI NHÀ PHỐ. Chúc bạn sức khỏe. Hẹn gặp lại!" %}</h4>
                     <br/>
-                    <p><a class="btn btn-primary" href="#login">{% translate 'Đăng nhập lại' %}</a></p>
+                    <a class="btn btn-primary" href="#login">{% translate 'Đăng nhập lại' %}</a></p>
                     <br/><br/>
                 </div>
                 <div class="s-grid s-column-4 s-gutters">

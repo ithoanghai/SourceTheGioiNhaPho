@@ -41,7 +41,7 @@ urlpatterns = [
     path('customers/', include('FunctionModule.customers.urls')),
     path('accounts/', include('FunctionModule.accounts.urls')),
     path('cadastral/', include('FunctionModule.cadastral.urls')),
-    #path('admin', redirect_view, name='admin'),
+    path('admin', redirect_view, name='admin'),
     path('admin/', admin_site.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
     re_path(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
