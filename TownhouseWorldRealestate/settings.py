@@ -289,7 +289,7 @@ CACHES = {
         'LOCATION': os.getenv('REDIS_URL', default='redis://redis:6379/1')
     }
 }
-SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'Strict'
 SESSION_COOKIE_SECURE = True
 
 
