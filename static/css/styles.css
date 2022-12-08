@@ -28,7 +28,6 @@
     src: url(../fonts/RV-Harmonia-Boldd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/RV-Harmonia-Bold.woff) format("woff"), url(../fonts/RV-Harmonia-Bold.ttf) format("truetype"), url(../fonts/RV-Harmonia-Bold.svg#roboto_condensedregular) format("svg");
     font-weight: 600;
     font-display: swap
-
 }
 
 @font-face {
@@ -42,15 +41,14 @@
 @font-face {
     font-family: tgnp-icon;
     src: url(../fonts/TGNPIcons.eot);
-    src: url(../fonts/TGNPIconsd41d.eot?#iefix) format('embedded-opentype'), url(../fonts/TGNPIcons.woff) format('woff'), url(../fonts/TGNPIcons.ttf) format('truetype'), url(../fonts/TGNPIcons.svg#roboto_condensedregular) format('svg');
+    src: url(../fonts/TGNPIconsd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/TGNPIcons.woff) format("woff"), url(../fonts/TGNPIcons.ttf) format("truetype"), url(../fonts/TGNPIcons.svg#roboto_condensedregular) format("svg");
     font-display: swap
 }
 
 body {
-    font-family: 'harmonia', Arial, Helvetica, sans-serif;
-    /*    line-height: 2em;*/
+    font-family: "harmonia", Arial, Helvetica, sans-serif;
     -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
 }
 
 .title-ft {
@@ -61,7 +59,7 @@ body {
     width: 100% !important
 }
 
-input::-webkit-input-placeholder {
+::-webkit-input-placeholder, input::-webkit-input-placeholder {
     color: rgba(131, 131, 131, .8);
     font-size: 14px
 }
@@ -71,27 +69,12 @@ input:-moz-placeholder {
     font-size: 14px
 }
 
-input::-moz-placeholder {
+::-moz-placeholder, input::-moz-placeholder {
     color: rgba(131, 131, 131, .8);
     font-size: 14px
 }
 
-input:-ms-input-placeholder {
-    color: rgba(131, 131, 131, .8);
-    font-size: 14px
-}
-
-::-webkit-input-placeholder {
-    color: rgba(131, 131, 131, .8);
-    font-size: 14px
-}
-
-::-moz-placeholder {
-    color: rgba(131, 131, 131, .8);
-    font-size: 14px
-}
-
-:-ms-input-placeholder {
+:-ms-input-placeholder, input:-ms-input-placeholder {
     color: rgba(131, 131, 131, .8);
     font-size: 14px
 }
@@ -101,9 +84,9 @@ input:-ms-input-placeholder {
     font-size: 14px
 }
 
-input[type=text], input[type=email] {
+input[type=email], input[type=text] {
     -webkit-appearance: textfield;
-    background-color: white;
+    background-color: #fff;
     border-image-source: initial;
     border-image-slice: initial;
     border-image-repeat: initial;
@@ -125,7 +108,7 @@ li {
     display: block
 }
 
-.visible-sm {
+.title.title-res, .visible-sm {
     display: none
 }
 
@@ -173,35 +156,21 @@ li {
     display: none !important
 }
 
-.title.title-res {
-    display: none
-}
-
-
-
-
-.bg-gray:after {
-    content: '';
-    display: table;
-    clear: both
-}
-
 .bg-gray-f4 {
     background: #f4f5f9
 }
 
 .bg-gray-e6 {
-    background: #edeef2;
     width: 100%
 }
 
-.bg-gray-e6:after {
+.bg-gray-e6:after, .bg-gray:after {
     clear: both;
     display: table;
-    content: ''
+    content: ""
 }
 
-.bg-gray-e6-d {
+.bg-gray-e6, .bg-gray-e6-d {
     background: #edeef2
 }
 
@@ -210,20 +179,13 @@ section.bg-gray-e6 div.more-info-black {
     padding: 0 20px
 }
 
-.slides-sketch {
+.s-col-3 .item .icon-wrapper .cover img, .slides-sketch, .slides-sketch li, .slides-sketch li a {
     width: 100%;
     height: 100%
 }
 
 .slides-sketch li a {
-    width: 100%;
-    height: 100%;
     display: block
-}
-
-.slides-sketch li {
-    width: 100%;
-    height: 100%
 }
 
 .career-form {
@@ -255,37 +217,33 @@ section.bg-gray-e6 div.more-info-black {
     margin: 10px 0 20px
 }
 
-.career-form .hs_upload_cv input[type=file] {
-    display: none;
+.career-form .hs_upload_cv .hs-field-desc, .career-form .hs_upload_cv input[type=file] {
     font-size: 16px;
-    width: 150px;
     height: 40px;
-    margin: 0 auto;
     background: #dadada;
-    padding: 10px 0;
     clear: both;
     cursor: pointer;
     box-sizing: border-box;
     transform-origin: 50% 50% 0
 }
 
+.career-form .hs_upload_cv input[type=file] {
+    display: none;
+    width: 150px;
+    margin: 0 auto;
+    padding: 10px 0
+}
+
 .career-form .hs_upload_cv .hs-field-desc {
-    font-size: 16px;
     min-width: 150px;
-    height: 40px;
-    background: #dadada;
     padding: 10px 20px;
     font-weight: 400;
-    clear: both;
-    cursor: pointer;
     -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
-    transform-origin: 50% 50% 0;
     -webkit-appearance: initial
 }
 
-.career-form .hs_upload_cv .hs-field-desc:hover {
+.btn-red-boder a, .career-form .hs_upload_cv .hs-field-desc:hover, .checkbox input + label:hover {
     color: orange
 }
 
@@ -295,11 +253,11 @@ section.bg-gray-e6 div.more-info-black {
     margin: 0 auto;
     background: #303339;
     color: #fff;
-    padding: 10px 0 6px 0;
+    padding: 10px 0 6px;
     clear: both;
     font-weight: 500;
     text-align: center;
-    border: none;
+    border: 0;
     font-size: 16px;
     -webkit-transition: height 2s
 }
@@ -337,7 +295,7 @@ section.bg-gray-e6 div.more-info-black {
 }
 
 .fone-b:before {
-    content: "\f115";
+    content: "";
     font-size: 1em
 }
 
@@ -354,10 +312,6 @@ section.bg-gray-e6 div.more-info-black {
     float: right;
     text-align: center;
     font-weight: 600
-}
-
-.btn-red-boder a {
-    color: orange
 }
 
 .btn-red-boder:hover {
@@ -377,25 +331,21 @@ section.bg-gray-e6 div.more-info-black {
     height: 50px;
     background-image: url(../images/map_fullscreen_50x50.png);
     opacity: .8;
-    transition: opacity linear 0.25s;
-    -webkit-transition: opacity linear 0.25s;
-    -moz-transition: opacity linear 0.25s
+    transition: opacity linear .25s;
+    -webkit-transition: opacity linear .25s;
+    -moz-transition: opacity linear .25s
 }
 
 .full-screen-act.view3d {
     right: 50px
 }
 
-.full-screen-act:hover {
+.full-screen-act.close:hover, .full-screen-act:hover {
     opacity: 1
 }
 
 .full-screen-act.close {
     background-image: url(../images/map_close_50x50.png)
-}
-
-.full-screen-act.close:hover {
-    opacity: 1
 }
 
 .form-element {
@@ -409,7 +359,7 @@ section.bg-gray-e6 div.more-info-black {
 .form-element:before {
     clear: both;
     width: 100%;
-    content: '';
+    content: "";
     display: table
 }
 
@@ -454,7 +404,7 @@ section.bg-gray-e6 div.more-info-black {
     margin-top: 5px
 }
 
-.contact-form .hs-form fieldset.form-columns-1 .input {
+.block-project > div .listingCard .label-group label, .contact-form .hs-form fieldset.form-columns-1 .input {
     margin: 0
 }
 
@@ -479,7 +429,7 @@ section.bg-gray-e6 div.more-info-black {
     padding-bottom: 20px
 }
 
-.contact-form .hs-input{
+.contact-form .hs-input {
     font-size: 16px;
     line-height: 24px;
     padding: 8px;
@@ -551,7 +501,7 @@ section.bg-gray-e6 div.more-info-black {
     margin: 0 auto;
     background: #303339;
     color: #fff;
-    padding: 16px 0 12px 0;
+    padding: 16px 0 12px;
     clear: both;
     font-weight: 500;
     text-align: center;
@@ -585,12 +535,12 @@ section.bg-gray-e6 div.more-info-black {
 }
 
 .form-info .first-name {
-    width: 48%;;
+    width: 48%;
     float: left
 }
 
 .form-info .last-name {
-    width: 48%;;
+    width: 48%;
     float: right
 }
 
@@ -604,13 +554,13 @@ section.bg-gray-e6 div.more-info-black {
 }
 
 .popup-520 > .form-info .email-field {
-    width: 48%;;
+    width: 48%;
     float: left;
     margin-bottom: 20px
 }
 
 .popup-520 > .form-info .phone-field {
-    width: 48%;;
+    width: 48%;
     float: right;
     margin-bottom: 20px
 }
@@ -622,12 +572,12 @@ section.bg-gray-e6 div.more-info-black {
 .container {
     width: 100%;
     padding-top: 20px;
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0;
+    padding-right: 0;
     margin-right: auto;
     margin-left: auto;
     display: block;
-    max-width: 1140px;
+    max-width: 1140px
 }
 
 .container .inner {
@@ -637,7 +587,7 @@ section.bg-gray-e6 div.more-info-black {
 
 .container:after, .container:before {
     display: table;
-    content: '';
+    content: "";
     line-height: 0;
     clear: both
 }
@@ -647,7 +597,7 @@ section div.width1140 div div.flex-viewport ul.slides li div.title {
     color: #000;
     line-height: 24px;
     text-align: center;
-    padding: 20px 0 60px 0
+    padding: 20px 0 60px
 }
 
 .cta-bottom-wrapper {
@@ -662,7 +612,6 @@ section div.width1140 div div.flex-viewport ul.slides li div.title {
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
     overflow: hidden;
     -webkit-transition: opacity .5s ease-in-out, -webkit-transform .5s ease-in-out;
-    transition: opacity .5s ease-in-out, -webkit-transform .5s ease-in-out;
     transition: opacity .5s ease-in-out, transform .5s ease-in-out;
     transition: opacity .5s ease-in-out, transform .5s ease-in-out, -webkit-transform .5s ease-in-out;
     font-size: 16px;
@@ -714,7 +663,7 @@ section div.width1140 div div.flex-viewport ul.slides li div.title {
     flex: 1
 }
 
-.cta-bottom-wrapper.listing__cta--bottom .cta-bottom-inner div + div {
+.block-project > div .listingCard .label-group label + .label-primary, .cta-bottom-wrapper.listing__cta--bottom .cta-bottom-inner div + div {
     margin-left: 10px
 }
 
@@ -788,7 +737,7 @@ section div.width1140 div div.flex-viewport ul.slides li div.title {
 .background-gray:after {
     clear: both;
     display: table;
-    content: ''
+    content: ""
 }
 
 .background-gray .width1140 h5 {
@@ -814,7 +763,7 @@ section.background-gray div.width1140 div ul.icon li p {
     font-size: 16px
 }
 
-input, textarea, keygen, select, button {
+button, input, keygen, select, textarea {
     text-rendering: auto;
     color: initial;
     letter-spacing: normal;
@@ -825,15 +774,15 @@ input, textarea, keygen, select, button {
     display: inline-block;
     text-align: start;
     margin: 0;
-    font-family: 'harmonia', Arial, Helvetica, sans-serif
+    font-family: "harmonia", Arial, Helvetica, sans-serif
 }
 
-textarea:focus, button:focus, input:focus {
-    outline: none
+button:focus, input:focus, textarea:focus {
+    outline: 0
 }
 
-textarea:focus, input:focus {
-    border: 1px solid rgba(131, 131, 131, 1) !important
+input:focus, textarea:focus {
+    border: 1px solid #838383 !important
 }
 
 #wrap {
@@ -887,12 +836,9 @@ textarea:focus, input:focus {
     section.background-gray div.width1140 div ul.icon {
         width: 43%
     }
-
 }
 
 @media only screen and (max-width: 360px) {
-
-
     .form-contact {
         width: 100%;
         padding: 0
@@ -900,7 +846,7 @@ textarea:focus, input:focus {
 
     section.background-gray div.width1140 div ul.icon {
         width: 44%;
-        padding: 0 0 20px 0
+        padding: 0 0 20px
     }
 }
 
@@ -908,7 +854,6 @@ textarea:focus, input:focus {
     .visible-ts {
         display: block
     }
-
 }
 
 @media only screen and (max-width: 480px) {
@@ -927,7 +872,7 @@ textarea:focus, input:focus {
         text-align: center
     }
 
-    #slider8 .slides .title .number {
+    #slider8 .slides .title .number, .popup-overlay .full-screen-act.close {
         display: none
     }
 
@@ -942,10 +887,6 @@ textarea:focus, input:focus {
         font-weight: 500;
         overflow: hidden;
         top: 0
-    }
-
-    .popup-overlay .full-screen-act.close {
-        display: none
     }
 
     .listing-img {
@@ -973,48 +914,37 @@ textarea:focus, input:focus {
     .contact-form .hs-richtext > p {
         max-width: 100%
     }
-
 }
 
 @media only screen and (max-width: 600px) {
-    .width1140 .contact-form {
+    .content-detail, .news-pro-detail, .width1140 .contact-form {
         padding-bottom: 30px
-    }
-
-    .news-pro-detail {
-        padding-bottom: 30px
-    }
-
-    .content-detail {
-        padding-bottom: 30px
-    }
-
-    .news-pro-detail li {
-        width: 100%
     }
 
     .career-form, .contact-form .hs-form {
         max-width: 100%
     }
 
-    .cover-left-sell {
+    .cover-left-sell, .news-pro-detail li {
         width: 100%
     }
-
- }
+}
 
 @media (max-width: 640px) {
     .visible-pc {
         display: none
     }
 
-    .visible-sm {
-        display: block;
-        text-align: left;
+    .visible-sm, .visible-sm .header-sm h4 {
         font-family: rv-font1, Arial, Helvetica, sans-serif
     }
 
-   .visible-sm .header-sm {
+    .visible-sm {
+        display: block;
+        text-align: left
+    }
+
+    .visible-sm .header-sm {
         padding: 21px;
         box-shadow: 0 2px 10px 0 #e4e4e4
     }
@@ -1023,7 +953,6 @@ textarea:focus, input:focus {
         font-size: 14px;
         line-height: 1.29;
         text-align: center;
-        font-family: rv-font1, Arial, Helvetica, sans-serif;
         text-transform: uppercase;
         font-weight: 400
     }
@@ -1083,12 +1012,11 @@ textarea:focus, input:focus {
         height: 40px;
         line-height: 40px;
         color: #fff;
-        border: none;
+        border: 0;
         width: 100%;
         max-width: 100%;
         font-family: rv-font1, Arial, Helvetica, sans-serif
     }
-
 }
 
 @media (min-width: 768px) {
@@ -1106,7 +1034,7 @@ textarea:focus, input:focus {
 }
 
 @media only screen and (max-width: 800px) {
-    .popup-overlay .slider-buttons {
+    #location, .popup-overlay .slider-buttons, div.share {
         display: none
     }
 
@@ -1114,10 +1042,6 @@ textarea:focus, input:focus {
         display: table;
         padding-bottom: 20px;
         overflow: hidden
-    }
-
-    #location {
-        display: none
     }
 
     .listpro-content {
@@ -1156,10 +1080,6 @@ textarea:focus, input:focus {
         max-width: 100%
     }
 
-    div.share {
-        display: none
-    }
-
     .stickyTrigger {
         position: fixed;
         right: 0;
@@ -1185,7 +1105,6 @@ textarea:focus, input:focus {
     section.background-gray div.width1140 div ul.icon {
         margin-right: 17px
     }
-
 }
 
 @media only screen and (max-width: 1080px) {
@@ -1225,13 +1144,14 @@ textarea:focus, input:focus {
 
 .recent-search .search-result i {
     padding-left: 4px;
-    color: #676767;
-}
-.recent-search .search-result a {
-    text-decoration: none;
+    color: #676767
 }
 
-.heading-01 {
+.recent-search .search-result a {
+    text-decoration: none
+}
+
+.heading-01, .heading-02 {
     font-size: 40px;
     line-height: normal;
     font-weight: 500
@@ -1239,29 +1159,24 @@ textarea:focus, input:focus {
 
 .heading-02 {
     font-size: 30px;
-    line-height: normal;
-    font-family: 'Tiempos', Arial, Helvetica, sans-serif;
-    padding: 20px 0 20px;
+    font-family: "Tiempos", Arial, Helvetica, sans-serif;
+    padding: 20px 0;
     font-weight: 400;
-    position: relative;
+    position: relative
 }
 
-.heading-03 {
+.heading-03, .heading-04, .heading-05 {
     font-size: 26px;
     line-height: normal;
     font-weight: 400
 }
 
-.heading-04 {
-    font-size: 22px;
-    line-height: normal;
-    font-weight: 400
+.heading-04, .heading-05 {
+    font-size: 22px
 }
 
 .heading-05 {
-    font-size: 18px;
-    line-height: normal;
-    font-weight: 400
+    font-size: 18px
 }
 
 .heading-02 .rating-show {
@@ -1272,9 +1187,6 @@ textarea:focus, input:focus {
     top: 40px
 }
 
-/*
-PHẦN BỔ SUNG 11/2022*/
-
 .avatar {
     color: #fff;
     background-color: #adb5bd;
@@ -1284,110 +1196,98 @@ PHẦN BỔ SUNG 11/2022*/
     border-radius: 50%;
     height: auto;
     width: 120px;
-    max-width: 160px;
+    max-width: 160px
 }
 
 @media (max-width: 576px) {
-.avatar {
-    color: #fff;
-    background-color: #adb5bd;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100%;
-    height: auto;
-    width: 60px;
-}
+    .avatar {
+        color: #fff;
+        background-color: #adb5bd;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+        height: auto;
+        width: 60px
+    }
 }
 
 .avatar img {
     width: 100%;
-    border-radius: 50%;
+    border-radius: 50%
 }
 
 .avatar + .avatar-content {
     display: inline-block;
-    margin-left: .75rem;
+    margin-left: .75rem
 }
 
-.avatar-lg {
+.avatar-lg, .avatar-sm {
     width: 58px;
     height: 58px;
-    font-size: 0.875rem;
+    font-size: .875rem
 }
 
 .avatar-sm {
     width: 36px;
-    height: 36px;
-    font-size: 0.875rem;
+    height: 36px
 }
 
 .avatar-group .avatar {
     position: center;
     z-index: 2;
-    border: 2px solid #fff;
+    border: 2px solid #fff
 }
 
 .avatar-group .avatar:hover {
-    z-index: 3;
+    z-index: 3
 }
 
 .avatar-group .avatar + .avatar {
-    margin-left: -1rem;
+    margin-left: -1rem
 }
-
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
 }
-/*header {
-  background-color: black;
-  width: 100%;
-  padding: 20px;
-  text-align: center;
-  color: white;
-  position: fixed;
-  top: 0;
-  height:80px;
-}*/
 
 .flex-container {
-  display: flex;
-  flex: 1 1 0;
-  text-align: center;
-  height: 1000px;
-  top:80px;
+    display: flex;
+    flex: 1 1 0;
+    text-align: center;
+    height: 1000px;
+    top: 80px
 }
 
 .flex-container h2 {
-  margin-top: 30px;
-  font-size: 2rem;
+    margin-top: 30px;
+    font-size: 2rem
 }
 
 .main-section {
-  background-color: rgb(255, 222, 144);
-  width: calc(100% / 3);
-  position:absolute;
-  bottom:0;
-  right:calc(100% / 3);
-  left:calc(100% / 3);
-  top: 0px;
-  height: inherit;
-  z-index: -1;
-  top:80px;
+    background-color: #ffde90;
+    width: calc(100% / 3);
+    position: absolute;
+    bottom: 0;
+    right: calc(100% / 3);
+    left: calc(100% / 3);
+    height: inherit;
+    z-index: -1;
+    top: 80px
 }
 
 .secondary-section {
-  background-color: rgb(114, 181, 245);
-  width: calc(100% / 3);
-  height: 100vh;
-  position: relative;
-  top:80px;
+    background-color: #72b5f5;
+    width: calc(100% / 3);
+    height: 100vh;
+    position: relative;
+    top: 80px
 }
-.secondary-section.right{
-  right:0;
+
+.secondary-section.right {
+    right: 0
 }
 
 .changeimg-box {
@@ -1427,8 +1327,8 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 .checkbox input + label:after {
-    content: '';
-    font-family: 'tgnp-icon';
+    content: "";
+    font-family: "tgnp-icon";
     font-size: 11px;
     line-height: 16px;
     margin-bottom: 0;
@@ -1443,12 +1343,8 @@ PHẦN BỔ SUNG 11/2022*/
     top: 5px
 }
 
-.checkbox input + label:hover {
-    color: orange
-}
-
 .checkbox input:checked + label:after {
-    content: '\f125';
+    content: "";
     color: #fff;
     opacity: 1;
     visibility: visible;
@@ -1458,7 +1354,7 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 .font-icon {
-    font-family: 'tgnp-icon', Verdana, Geneva, sans-serif;
+    font-family: "tgnp-icon", Verdana, Geneva, sans-serif;
     text-rendering: auto;
     line-height: 20px;
     font-size: 18px;
@@ -1466,19 +1362,15 @@ PHẦN BỔ SUNG 11/2022*/
     vertical-align: middle
 }
 
-/* helptext container */
 .helptext {
     position: relative;
     display: inline-block;
     font-size: 11px;
-
-    /* Position the tooltip text - see examples below! */
-    z-index: 1;
+    z-index: 1
 }
 
-/* Show the tooltip text when you mouse over the tooltip container */
 .helptext:hover {
-  visibility: visible;
+    visibility: visible
 }
 
 .hidden {
@@ -1488,31 +1380,32 @@ PHẦN BỔ SUNG 11/2022*/
 .listingCard {
     width: 100%;
     max-width: 360px;
-    position: relative;
     float: left;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    border: 1px solid rgba(131, 131, 131, 0.2);
-    -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
-    -webkit-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    transition: all 0.3s;
+    border: 1px solid rgba(131, 131, 131, .2);
+    -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, .15);
+    box-shadow: 0 0 6px rgba(0, 0, 0, .15);
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
     border-radius: 4px;
     overflow: hidden;
-    margin: 5px;
+    margin: 5px
 }
-.listingCard .cover-image {
-    position: relative;
+
+.listingCard, .listingCard .cover-image {
+    position: relative
 }
+
 .listingCard .cover-image a {
-    /*width: 100%;*/
     display: block;
     overflow: hidden;
     height: 0;
-    padding-top: 66.67%;
-    cursor: pointer;
+    padding-top: 100%;
+    cursor: pointer
 }
+
 .listingCard .cover-image a img {
     position: absolute;
     display: block;
@@ -1527,7 +1420,10 @@ PHẦN BỔ SUNG 11/2022*/
     margin: auto;
     -o-object-fit: cover;
     object-fit: cover;
+    -o-object-position: 0% 0%;
+    object-position: 0% 0%;
 }
+
 .listingCard .cover-image .label-group {
     position: absolute;
     bottom: 10px;
@@ -1537,64 +1433,68 @@ PHẦN BỔ SUNG 11/2022*/
     padding: 0 10px;
     z-index: 2
 }
+
 .listingCard .cover-image .label-group span {
-    margin: 5px 5px 0 0;
+    margin: 5px 5px 0 0
 }
+
 .listingCard .info-container {
     width: 100%;
     padding: 15px;
-    background: white;
+    background: #fff
 }
-.listingCard .info-container .listing-name {
+
+.listingCard .info-container .listing-address, .listingCard .info-container .listing-name {
     display: block;
-    font-family: 'Tiempos', Arial, Helvetica, sans-serif;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    margin-top: 6px;
+    overflow: hidden
+}
+
+.listingCard .info-container .listing-name {
+    font-family: "Tiempos", Arial, Helvetica, sans-serif;
     font-size: 16px;
     color: #30333a;
     font-weight: 400;
-    white-space: nowrap;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    margin-top: 6px;
     line-height: 1.5
 }
-.listingCard .info-container .listing-name:hover{
-    color: #c72528;
+
+.listingCard.info-market .info-container .listing-name:hover {
+    color: #c72528
 }
+
 .listingCard .info-container .listing-address {
-    display: block;
     color: #676767;
-    white-space: nowrap;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
     width: 100%;
-    margin-top: 6px;
     display: -webkit-box;
     -webkit-line-clamp: 1;
-    -webkit-box-orient: horizontal;
-    overflow: hidden
+    -webkit-box-orient: horizontal
 }
+
 .listingCard .info-container .listing-address h4 {
     display: inline-block;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 400
 }
+
 .listingCard .info-container .listing-address h4 a {
-    color: #676767;
+    color: #676767
 }
-.listingCard .info-container .listing-address h4 a:hover{
-    color: #c72528;
-}
+
 .listingCard .info-container .listing-info li {
     display: inline-block;
     width: auto;
     font-size: 14px;
     margin-right: 15px;
-    color: #676767;
+    color: #676767
 }
-.listingCard .info-container .listing-info li:last-child {
-    margin-right: 0;
+
+.listingCard .info-container .listing-info li:last-child, .s-form-col2 > input:last-child {
+    margin-right: 0
 }
+
 .listingCard .info-container .listing-price {
     display: block;
     position: absolute;
@@ -1609,26 +1509,22 @@ PHẦN BỔ SUNG 11/2022*/
     font-size: 22px;
     line-height: 1.5;
     color: orange;
-    font-weight: bold;
+    font-weight: 700
 }
+
 @media (min-width: 768px) {
-    .optionCard:hover, .listingCard:hover {
+    .listingCard:hover, .optionCard:hover {
         -webkit-transform: translate(0, -2px);
         -ms-transform: translate(0, -2px);
-        transform: translate(0, -2px);
-    }
-    .optionCard:hover .btn-favorite-two, .listingCard:hover .btn-favorite-two, .agents-listing:hover .btn-favorite-two {
-        display: block;
-    }
-    .btn-favorite.active {
-        display: block;
+        transform: translate(0, -2px)
     }
 
+    .agents-listing:hover .btn-favorite-two, .btn-favorite.active, .listingCard:hover .btn-favorite-two, .optionCard:hover .btn-favorite-two {
+        display: block
+    }
 }
-.listingCard .info-container .listing-name:hover {
-    color: orange
-}
-.listingCard .info-container .listing-address h4 a:hover {
+
+.listingCard .info-container .listing-address h4 a:hover, .listingCard .info-container .listing-name:hover, .s-col-3 .s-blog:hover a {
     color: orange
 }
 
@@ -1642,19 +1538,19 @@ PHẦN BỔ SUNG 11/2022*/
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
-    /* width: 60%;*/
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    margin: 0;
-    margin-top: 9px;
-    padding-left: 5px;
+    margin: 9px 0 0;
+    padding-left: 5px
 }
+
 .listingCard .info-container .listing-info li .zmdi {
     color: #30333a;
     padding-right: 5px;
     vertical-align: text-bottom
 }
+
 .listingCard .info-container .listing-info li.icon-bath-room {
     position: relative;
     padding-left: 25px
@@ -1667,6 +1563,7 @@ PHẦN BỔ SUNG 11/2022*/
     top: 0;
     z-index: 2
 }
+
 @media (min-width: 1024px) {
     .listingCard .info-container .listing-price:hover {
         color: orange
@@ -1681,42 +1578,44 @@ PHẦN BỔ SUNG 11/2022*/
 
 @media (min-width: 768px) {
     .listingCard {
-        height: 360px;
+        height: 360px
     }
+
     .listingCard:hover {
         -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .3);
         box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .3)
     }
 }
 
-.listingCard.info-market .info-container .listing-info{
-    margin-top: 10px;
+.listingCard.info-market .info-container .listing-info {
+    margin-top: 10px
 }
-.listingCard.info-market .info-container .listing-name:hover{
-    color: #c72528;
-}
-.listingCard.info-market .info-container .listing-info p{
-    opacity: 0.7;
+
+.listingCard.info-market .info-container .listing-info p {
+    opacity: .7;
     font-size: 14px;
     line-height: 22px;
     letter-spacing: normal;
-    color: #676767;
+    color: #676767
 }
 
-.block-project>div .listingCard.info-market{
-    margin-bottom: 25px;
+.block-project > div .listingCard.info-market {
+    margin-bottom: 25px
 }
-.listingCard.info-market .info-container{
-    padding: 15px 0 0;
+
+.listingCard.info-market .info-container {
+    padding: 15px 0 0
 }
-.listingCard.info-market{
+
+.listingCard.info-market {
     border: unset;
     -webkit-box-shadow: unset;
-    box-shadow: unset;
+    box-shadow: unset
 }
+
 .listingCard.info-market .info-container .listing-name {
     display: block;
-    font-family: 'Tiempos', Arial, Helvetica, sans-serif;
+    font-family: "Tiempos", Arial, Helvetica, sans-serif;
     font-size: 16px;
     color: #30333a;
     font-weight: 400;
@@ -1724,10 +1623,10 @@ PHẦN BỔ SUNG 11/2022*/
     white-space: unset;
     -o-text-overflow: unset;
     text-overflow: unset;
-    overflow: unset;
+    overflow: unset
 }
 
-.block-project>div .optionCard{
+.block-project > div .optionCard {
     width: 100%;
     margin-bottom: 30px;
     display: -moz-flex;
@@ -1735,147 +1634,119 @@ PHẦN BỔ SUNG 11/2022*/
     display: -o-flex;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
+    display: flex
 }
-.block-project>div .listingCard {
-    width: calc(33.33% - 20px);
-    margin-right: 30px;
-    margin-bottom: 30px;
-}
-.block-project>div .listingCard:nth-child(3n) {
-    margin-right: 0;
-}
-.block-project>div .more {
-    font-size: 18px;
-    font-weight: 600;
-    display: block;
-    float: left;
-    clear: both;
-}
-.block-project>div .more a {
+
+.block-project > div .more a {
     color: #337588;
     font-weight: 400;
     text-decoration: unset;
-    font-size: 18px;
+    font-size: 18px
 }
-.block-project>div .more a:hover{
+
+.block-project > div .more a:hover {
     color: #337588;
-    opacity: 1;
+    opacity: 1
 }
-.block-project>div .more a .zmdi {
-    padding: 0 0 0 5px;
-}@media only screen and (max-width: 1024px) {
-    .block-project>div .optionCard{
+
+.block-project > div .more a .zmdi {
+    padding: 0 0 0 5px
+}
+
+@media only screen and (max-width: 1024px) {
+    .block-project > div .optionCard {
         max-width: inherit;
         margin-right: 30px;
         display: block;
         width: calc(33.33% - 20px);
-        margin-bottom: 30px;
+        margin-bottom: 30px
     }
-    .block-project>div .optionCard:nth-child(2n){
-        /*margin-right: 0 !important;*/
+
+    .block-project > div .optionCard:nth-child(3n) {
+        margin-right: 0
     }
-    .block-project>div .optionCard:nth-child(3n){
-        margin-right: 0;
-    }
-    .optionCard .cover-image{
-        max-width: unset;
+
+    .optionCard .cover-image {
         width: 100%;
         max-width: 100%;
         float: none;
         min-height: 226px;
-        max-height: 226px;
+        max-height: 226px
     }
-    .optionCard .cover-image a img{
+
+    .optionCard .cover-image a img {
         max-width: 100%;
-        height: 100%;
+        height: 100%
     }
 }
+
 @media only screen and (max-width: 960px) {
-    .block-project>div .optionCard, .block-project>div .listingCard {
+    .block-project > div .listingCard, .block-project > div .optionCard {
         width: calc(50% - 15px);
-        max-width: inherit;
+        max-width: inherit
     }
-    .block-project>div .optionCard:nth-child(2n), .block-project>div .listingCard:nth-child(2n) {
-        margin-right: 0 !important;
+
+    .block-project > div .listingCard:nth-child(2n), .block-project > div .optionCard:nth-child(2n) {
+        margin-right: 0 !important
     }
-    .block-project>div .optionCard:nth-child(3n), .block-project>div .listingCard:nth-child(3n) {
-        margin-right: 30px;
+
+    .block-project > div .listingCard:nth-child(3n), .block-project > div .optionCard:nth-child(3n) {
+        margin-right: 30px
     }
 }
+
 @media only screen and (max-width: 640px) {
     .block-introduce .col-8 {
-        width: 100%;
+        width: 100%
     }
-    .block-project>div .optionCard, .block-project>div .listingCard {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-    .btn-view-all{
-        display: block;
-    }
-}
-@media (max-width: 425px){
-    .block-project>div .optionCard:nth-child(2n){
-        margin-bottom: 20px;
-    }
-    .block-project>div .listingCard:nth-child(3n){
-        margin-bottom: 20px;
-    }
-    .optionCard .info-container .title{
-        font-size: 16px;
-    }
-    body{
-        font-size: 14px;
-    }
-    .mgr-t-46{
-        margin-top: 0;
-    }
-}
-/*.block-project>div .optionCard:last-child{
-  margin-bottom: 0;
-}*/
-@media (max-width: 640px){
-    .block-project.block-project-listing>div .listingCard:nth-child(n+4) {
-        display: block;
-    }
-    .block-project>div .more{
-        display: none;
-    }
-        .block-project > div .projectCard {
+
+    .block-project > div .listingCard, .block-project > div .optionCard {
         width: 100%;
         margin-bottom: 20px
     }
 
-    .block-project > div .projectCard:nth-child(n+4) {
-        display: none
+    .btn-view-all {
+        display: block
     }
+}
 
-    .block-project > div .listingCard {
-        width: 100%;
+@media (max-width: 425px) {
+    .block-project > div .listingCard:nth-child(3n), .block-project > div .optionCard:nth-child(2n) {
         margin-bottom: 20px
     }
 
-    .block-project > div .listingCard:nth-child(n+7) {
-        display: none
+    .optionCard .info-container .title {
+        font-size: 16px
+    }
+
+    body {
+        font-size: 14px
+    }
+
+    .mgr-t-46 {
+        margin-top: 0
+    }
+}
+
+@media (max-width: 640px) {
+    .block-project.block-project-listing > div .listingCard:nth-child(n+4) {
+        display: block
     }
 
     .block-project > div .more {
-        font-size: 14px;
-        width: 100%;
-        height: 40px;
-        line-height: 40px;
-        border-radius: 2px;
-        border: 1px solid rgba(51, 117, 136, .5);
-        text-align: center;
-        margin-top: 10px
-    }
-
-    .block-project > div .more .zmdi {
         display: none
     }
 
-    .block-project .more {
+    .block-project > div .listingCard, .block-project > div .projectCard {
+        width: 100%;
+        margin-bottom: 20px
+    }
+
+    .block-project > div .listingCard:nth-child(n+7), .block-project > div .projectCard:nth-child(n+4) {
+        display: none
+    }
+
+    .block-project .more, .block-project > div .more {
         font-size: 14px;
         width: 100%;
         height: 40px;
@@ -1886,10 +1757,11 @@ PHẦN BỔ SUNG 11/2022*/
         margin-top: 10px
     }
 
-    .block-project .more .zmdi {
+    .block-project .more .zmdi, .block-project > div .more .zmdi {
         display: none
     }
 }
+
 .block-project .heading-03 {
     font-family: tgnp-font2, Arial, Helvetica, sans-serif;
     margin-bottom: 20px;
@@ -1905,7 +1777,7 @@ PHẦN BỔ SUNG 11/2022*/
     }
 }
 
-.block-project > div {
+.block-project > div, .grid-item--image img {
     width: 100%
 }
 
@@ -1928,7 +1800,7 @@ PHẦN BỔ SUNG 11/2022*/
     width: calc(33.33% - 20px);
     margin-right: 30px;
     margin-bottom: 30px;
-    height: 320px;
+    height: 320px
 }
 
 .block-project > div .listingCard:nth-child(3n) {
@@ -1944,14 +1816,6 @@ PHẦN BỔ SUNG 11/2022*/
     left: 10px;
     display: inline-block;
     padding: 0
-}
-
-.block-project > div .listingCard .label-group label {
-    margin: 0
-}
-
-.block-project > div .listingCard .label-group label + .label-primary {
-    margin-left: 10px
 }
 
 .block-project > div .listingCard .label-group .label-primary {
@@ -1971,7 +1835,7 @@ PHẦN BỔ SUNG 11/2022*/
     margin-left: 5px;
     font-size: 12px;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: 700
 }
 
 .block-project > div .item .listingCard:nth-child(3n) {
@@ -1993,7 +1857,7 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 @media (max-width: 960px) {
-    .block-project > div .projectCard {
+    .block-project > div .listingCard, .block-project > div .projectCard {
         width: calc(50% - 15px);
         max-width: inherit
     }
@@ -2006,11 +1870,6 @@ PHẦN BỔ SUNG 11/2022*/
         margin-right: 30px
     }
 
-    .block-project > div .listingCard {
-        width: calc(50% - 15px);
-        max-width: inherit
-    }
-
     .block-project > div .listingCard:nth-child(2n) {
         margin-right: 0 !important
     }
@@ -2020,7 +1879,7 @@ PHẦN BỔ SUNG 11/2022*/
     }
 }
 
-.font-tiempos {
+.font-tiempos, .s-heading-inner h2 {
     font-family: Tiempos, Arial, Helvetica, sans-serif
 }
 
@@ -2049,7 +1908,6 @@ PHẦN BỔ SUNG 11/2022*/
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column
 }
@@ -2063,9 +1921,12 @@ PHẦN BỔ SUNG 11/2022*/
     text-align: center
 }
 
+.grid, .grid.grid--2col {
+    -webkit-box-direction: normal
+}
+
 .grid.grid--2col {
     -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
     -ms-flex-direction: row;
     flex-direction: row
 }
@@ -2078,10 +1939,6 @@ PHẦN BỔ SUNG 11/2022*/
 .grid .grid-item .grid-item--image, .grid .grid-item.grid-item--video {
     -ms-flex-preferred-size: 90%;
     flex-basis: 90%
-}
-
-.grid-item--image img {
-    width: 100%
 }
 
 .grid.grid--center {
@@ -2126,7 +1983,7 @@ PHẦN BỔ SUNG 11/2022*/
     }
 }
 
-.zmdi.zmdi-check::before {
+.zmdi.zmdi-check::before, ul.product-received li .zmdi:before {
     color: #337588
 }
 
@@ -2148,16 +2005,19 @@ PHẦN BỔ SUNG 11/2022*/
     box-shadow: rgba(45, 45, 45, .05) 0 0 0, rgba(49, 49, 49, .05) 0 1px 1px, rgba(42, 42, 42, .05) 0 2px 2px, rgba(32, 32, 32, .05) 0 4px 4px
 }
 
-.s-form-close-btn::before {
-    content: "\f136";
+.s-form-back-btn::before, .s-form-close-btn::before {
     font-family: Material-Design-Iconic-Font;
     text-align: center;
+    font-size: 22px
+}
+
+.s-form-close-btn::before {
+    content: "";
     height: 36px;
     width: 36px;
     display: block;
     line-height: 36px;
-    box-sizing: border-box;
-    font-size: 22px
+    box-sizing: border-box
 }
 
 .s-form-back-btn {
@@ -2169,10 +2029,7 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 .s-form-back-btn::before {
-    content: "\f2ea";
-    font-family: Material-Design-Iconic-Font;
-    text-align: center;
-    font-size: 22px;
+    content: "";
     color: #676767
 }
 
@@ -2190,7 +2047,6 @@ PHẦN BỔ SUNG 11/2022*/
 
 .s-heading-inner h2 {
     font-size: 20px;
-    font-family: Tiempos, Arial, Helvetica, sans-serif;
     font-weight: 500
 }
 
@@ -2248,7 +2104,7 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 .s-form-checkbox + label:before {
-    content: '';
+    content: "";
     margin-right: 10px;
     display: inline-block;
     vertical-align: bottom;
@@ -2265,7 +2121,7 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 .s-form-checkbox:checked + label:after {
-    content: '';
+    content: "";
     position: absolute;
     left: 5px;
     top: 6px;
@@ -2277,7 +2133,7 @@ PHẦN BỔ SUNG 11/2022*/
     transform: rotate(45deg)
 }
 
-.s-form-col {
+.s-col .img-wrapper a img, .s-form-col {
     width: 100%
 }
 
@@ -2285,10 +2141,6 @@ PHẦN BỔ SUNG 11/2022*/
     width: 49%;
     margin-right: 2%;
     float: left
-}
-
-.s-form-col2 > input:last-child {
-    margin-right: 0
 }
 
 .s-form-btn {
@@ -2309,11 +2161,14 @@ PHẦN BỔ SUNG 11/2022*/
     padding-bottom: 60px
 }
 
-.s-banner-bg {
-    width: 100%;
-    height: auto;
-    position: relative;
+.s-banner-bg, .s-banner-bg-inner {
     z-index: 1;
+    position: relative;
+    width: 100%
+}
+
+.s-banner-bg {
+    height: auto;
     padding: 150px 0
 }
 
@@ -2329,10 +2184,7 @@ PHẦN BỔ SUNG 11/2022*/
 
 .s-banner-bg-inner {
     height: 100%;
-    z-index: 1;
-    position: relative;
     display: table;
-    width: 100%;
     top: 0;
     left: 0;
     max-width: 1140px;
@@ -2406,12 +2258,6 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 .s-padding-tb:nth-child(even) .guide-item .s-col:last-child, .s-padding-tb:nth-child(odd) .guide-item .s-col:first-child {
-    -webkit-box-ordinal-group: 3;
-    -ms-flex-order: 2;
-    order: 2
-}
-
-.s-padding-tb:nth-child(even) .guide-item .s-col:last-child, .s-padding-tb:nth-child(odd) .guide-item .s-col:first-child {
     -webkit-box-ordinal-group: 2;
     -ms-flex-order: 1;
     order: 1
@@ -2430,9 +2276,12 @@ PHẦN BỔ SUNG 11/2022*/
     font-weight: 600
 }
 
-.s-col {
+.s-col, .s-content ul li {
     position: relative;
-    display: block;
+    display: block
+}
+
+.s-col {
     width: 50%;
     margin: 0;
     padding: 0
@@ -2443,10 +2292,6 @@ PHẦN BỔ SUNG 11/2022*/
     position: relative;
     width: 100%;
     line-height: 0
-}
-
-.s-col .img-wrapper a img {
-    width: 100%
 }
 
 .s-content {
@@ -2511,9 +2356,7 @@ PHẦN BỔ SUNG 11/2022*/
 
 .s-content ul li {
     padding-left: 30px;
-    padding-top: 10px;
-    position: relative;
-    display: block
+    padding-top: 10px
 }
 
 .s-content ul li:before {
@@ -2544,23 +2387,26 @@ PHẦN BỔ SUNG 11/2022*/
     margin-left: 10px
 }
 
-.s-btn-black {
-    display: block;
-    width: 100%;
-    float: left;
+.s-btn-black, .s-btn-red {
     height: 50px;
     line-height: 50px;
     margin: 0 auto;
-    background: #fff;
-    border: 1px solid #30333a;
-    color: #30333a;
-    padding: 0 10px;
     cursor: pointer;
-    clear: both;
     font-weight: 600;
     text-align: center;
     border-radius: 2px;
     font-size: 18px
+}
+
+.s-btn-black {
+    display: block;
+    width: 100%;
+    float: left;
+    background: #fff;
+    border: 1px solid #30333a;
+    color: #30333a;
+    padding: 0 10px;
+    clear: both
 }
 
 .s-btn-black:hover {
@@ -2570,17 +2416,9 @@ PHẦN BỔ SUNG 11/2022*/
 .s-btn-red {
     display: inline-block;
     width: auto;
-    height: 50px;
-    line-height: 50px;
-    margin: 0 auto;
     background: orange;
     color: #fff;
     padding: 0 20px;
-    cursor: pointer;
-    font-weight: 600;
-    text-align: center;
-    border-radius: 2px;
-    font-size: 18px;
     min-width: 200px
 }
 
@@ -2589,7 +2427,7 @@ PHẦN BỔ SUNG 11/2022*/
     color: #fff
 }
 
-.s-col-2 {
+.s-col-2, .s-col-3 {
     width: 46%;
     margin-right: 7%;
     display: block;
@@ -2598,9 +2436,7 @@ PHẦN BỔ SUNG 11/2022*/
 
 .s-col-3 {
     width: 31.33%;
-    margin-right: 2%;
-    display: block;
-    float: left
+    margin-right: 2%
 }
 
 .s-col-3 .item {
@@ -2617,11 +2453,6 @@ PHẦN BỔ SUNG 11/2022*/
 
 .s-col-3 .item .icon-wrapper .cover {
     height: 90px
-}
-
-.s-col-3 .item .icon-wrapper .cover img {
-    width: 100%;
-    height: 100%
 }
 
 .s-col-3 .item .icon-wrapper img {
@@ -2790,16 +2621,17 @@ PHẦN BỔ SUNG 11/2022*/
         background: linear-gradient(45deg, #00c9ff, #55dbff)
     }
 
-    .circle:before {
-        content: '';
+    .circle .wrapcontent, .circle:before {
         display: inline-block;
-        height: 100%;
         vertical-align: middle
     }
 
+    .circle:before {
+        content: "";
+        height: 100%
+    }
+
     .circle .wrapcontent {
-        display: inline-block;
-        vertical-align: middle;
         font-family: Tiempos, Verdana, Geneva, sans-serif
     }
 
@@ -2834,11 +2666,7 @@ PHẦN BỔ SUNG 11/2022*/
     content: ""
 }
 
-.s-customer-rating .flex-direction-nav .flex-prev {
-    font-size: 20px
-}
-
-.s-customer-rating .flex-direction-nav .flex-next {
+.s-customer-rating .flex-direction-nav .flex-next, .s-customer-rating .flex-direction-nav .flex-prev {
     font-size: 20px
 }
 
@@ -2852,34 +2680,30 @@ PHẦN BỔ SUNG 11/2022*/
     }
 }
 
-.s-customer-rating .s-customer-rating-btn .btn-next {
+.s-customer-rating .s-customer-rating-btn .btn-next, .s-customer-rating .s-customer-rating-btn .btn-pre {
     position: absolute;
     top: 60%;
-    right: 0;
     font-family: tgnp-icon, arial;
     font-size: 50px;
     padding: 5px;
     z-index: 999;
     color: #676767
+}
+
+.s-customer-rating .s-customer-rating-btn .btn-next {
+    right: 0
 }
 
 .s-customer-rating .s-customer-rating-btn .btn-next:before {
-    content: "\f119"
+    content: ""
 }
 
 .s-customer-rating .s-customer-rating-btn .btn-pre {
-    position: absolute;
-    top: 60%;
-    left: 0;
-    font-family: tgnp-icon, arial;
-    font-size: 50px;
-    padding: 5px;
-    z-index: 999;
-    color: #676767
+    left: 0
 }
 
 .s-customer-rating .s-customer-rating-btn .btn-pre:before {
-    content: "\f118"
+    content: ""
 }
 
 .s-customer-rating .description {
@@ -3008,7 +2832,6 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 .btn-contact {
-    max-width: fit-content;
     min-width: -moz-fit-content;
     max-width: fit-content;
     max-width: -moz-fit-content;
@@ -3036,10 +2859,6 @@ PHẦN BỔ SUNG 11/2022*/
 
 .s-col-3 .s-blog:hover {
     border: 1px solid orange
-}
-
-.s-col-3 .s-blog:hover a {
-    color: orange
 }
 
 .s-col-3:nth-child(n+4) .s-blog {
@@ -3106,7 +2925,7 @@ PHẦN BỔ SUNG 11/2022*/
 
 .service-heading {
     background: #f4f5f9;
-    padding: 50px 0 50px !important
+    padding: 50px 0 !important
 }
 
 .service-heading > .heading-wrapper {
@@ -3125,14 +2944,17 @@ PHẦN BỔ SUNG 11/2022*/
     padding: 70px 0
 }
 
-.bg-about:before {
-    background-color: rgba(48, 51, 58, .4);
+.bg-about:before, .heading-wrapper {
     height: 100%;
     width: 100%;
+    top: 0;
+    left: 0
+}
+
+.bg-about:before {
+    background-color: rgba(48, 51, 58, .4);
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
     right: 0;
     bottom: 0
 }
@@ -3142,12 +2964,8 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 .heading-wrapper {
-    height: 100%;
     z-index: 1;
     position: relative;
-    width: 100%;
-    top: 0;
-    left: 0;
     max-width: 1140px;
     margin: auto
 }
@@ -3172,7 +2990,7 @@ PHẦN BỔ SUNG 11/2022*/
     color: rgba(255, 255, 255, .8);
     line-height: 1.5;
     display: block;
-    padding: 20px 0 20px;
+    padding: 20px 0;
     text-align: center
 }
 
@@ -3236,8 +3054,7 @@ PHẦN BỔ SUNG 11/2022*/
     display: block;
     padding: 20px;
     font-size: 16px;
-    border: solid 1px rgba(131, 131, 131, .2);
-    font-family: Tiempos, Verdana, Geneva, sans-serif
+    border: solid 1px rgba(131, 131, 131, .2)
 }
 
 .s-cell-content {
@@ -3249,16 +3066,13 @@ PHẦN BỔ SUNG 11/2022*/
     margin: 10px;
     flex-grow: 1;
     flex-shrink: 1;
-    flex-basis: 0%
-}
-
-.s-column {
+    flex-basis: 0;
     padding: 20px;
     text-align: center;
     font-size: 16px
 }
 
-.s-column a {
+.s-column a, .s-gutters .s-cell > a {
     font-family: Tiempos, Verdana, Geneva, sans-serif
 }
 
@@ -3492,23 +3306,24 @@ PHẦN BỔ SUNG 11/2022*/
     align-items: center
 }
 
+.s-sreach-input input, .s-sreach-type {
+    outline: 0;
+    border: 0;
+    font-size: 16px;
+    border-radius: 2px
+}
+
 .s-sreach-type {
     position: relative;
     display: inline-block;
     height: 55px;
     background: #fff;
-    border-radius: 2px;
-    outline: 0;
-    font-size: 16px;
     color: rgba(68, 76, 89, .7);
     line-height: 55px;
-    border: 1px solid #676767;
     flex-grow: 1;
     margin: 0 5px;
     cursor: pointer;
     box-sizing: border-box;
-    outline: 0;
-    border: 0;
     flex-basis: 130px
 }
 
@@ -3517,7 +3332,7 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 .s-dropdown:after {
-    content: "\f2f9";
+    content: "";
     font-family: Material-Design-Iconic-Font;
     position: absolute;
     right: 10px;
@@ -3579,12 +3394,7 @@ PHẦN BỔ SUNG 11/2022*/
 .s-sreach-input input {
     width: 100%;
     height: 100%;
-    outline: 0;
-    border: 0;
-    padding: 0 10px;
-    font-size: 16px;
-    border-radius: 2px;
-    padding-top: 5px
+    padding: 5px 10px 0
 }
 
 .s-sreach-input input:focus {
@@ -3596,12 +3406,15 @@ PHẦN BỔ SUNG 11/2022*/
     color: rgba(68, 76, 89, .7)
 }
 
-.s-sreach-btn {
-    text-align: center;
-    max-width: 160px;
+.s-sreach-btn, .s-sreach-btn button {
+    width: 100%;
     background: orange;
-    border: 2px;
-    width: 100%
+    text-align: center
+}
+
+.s-sreach-btn {
+    max-width: 160px;
+    border: 2px
 }
 
 .s-sreach-btn button {
@@ -3609,13 +3422,10 @@ PHẦN BỔ SUNG 11/2022*/
     display: block;
     font-weight: 500;
     cursor: pointer;
-    width: 100%;
     height: 100%;
-    background: orange;
     outline: 0;
     border: 0;
     border-radius: 2px;
-    text-align: center;
     font-size: 18px
 }
 
@@ -3625,12 +3435,10 @@ PHẦN BỔ SUNG 11/2022*/
 
 .flex-viewport {
     display: -moz-inline-box;
-    display: inline-block;
     zoom: 1;
     padding: 0;
     overflow: hidden;
-    vertical-align: middle;
-    width: 100%
+    vertical-align: middle
 }
 
 #service-all {
@@ -3656,7 +3464,7 @@ PHẦN BỔ SUNG 11/2022*/
     box-sizing: border-box
 }
 
-.flex-viewport ul li {
+.flex-viewport, .flex-viewport ul li {
     display: inline-block;
     width: 100%
 }
@@ -3670,7 +3478,7 @@ PHẦN BỔ SUNG 11/2022*/
     max-height: 500px
 }
 
-.flex-viewport .section-container .img {
+.contact-warpper, .flex-viewport .section-container .img {
     display: block;
     width: 100%
 }
@@ -3714,8 +3522,6 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 .contact-warpper {
-    display: block;
-    width: 100%;
     padding: 0 97px
 }
 
@@ -3763,15 +3569,18 @@ PHẦN BỔ SUNG 11/2022*/
     font-weight: 600
 }
 
+.contact-btn-items, .contact-right {
+    background: #fff;
+    border: 1px solid rgba(131, 131, 131, .2);
+    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, .05)
+}
+
 .contact-right {
     width: 50%;
     max-width: 415px;
     float: right;
-    background: #fff;
-    border: 1px solid rgba(131, 131, 131, .2);
     padding: 50px;
-    -webkit-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, .05);
-    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, .05)
+    -webkit-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, .05)
 }
 
 .contact-right div[data-fr=success-box] {
@@ -3789,12 +3598,9 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 .contact-btn-items {
-    background: #fff;
-    border: 1px solid rgba(131, 131, 131, .2);
     padding: 25px;
     display: flex;
     margin-top: 30px;
-    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, .05);
     transition: box-shadow .3s ease-out, transform .3s ease-out, opacity .2s ease-out, background .2s ease-out;
     transition-delay: .1s;
     cursor: pointer
@@ -3936,16 +3742,14 @@ PHẦN BỔ SUNG 11/2022*/
     border: 0
 }
 
-.investor-item {
+.investor-item, .investor-item .left {
     width: 100%;
     display: block;
     overflow: hidden
 }
 
 .investor-item .left {
-    display: block;
     float: left;
-    overflow: hidden;
     width: 194px;
     margin-right: 30px
 }
@@ -4076,11 +3880,7 @@ PHẦN BỔ SUNG 11/2022*/
         flex-flow: row wrap
     }
 
-    .s-col {
-        width: 100%
-    }
-
-    .s-col .img-wrapper img {
+    .s-col, .s-col .img-wrapper img {
         width: 100%
     }
 
@@ -4149,15 +3949,12 @@ PHẦN BỔ SUNG 11/2022*/
     }
 
     .s-sreach-cover {
-        padding: 30px 10px
+        padding: 30px 10px;
+        bottom: -175px
     }
 
     .photo-detail-wrapper .content, .photo-detail-wrapper .title {
         max-width: 100%
-    }
-
-    .s-sreach-cover {
-        bottom: -175px
     }
 
     .s-content .s-btn-inner .s-btn-red {
@@ -4166,7 +3963,7 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 @media only screen and (max-width: 630px) {
-    .serivce-slider {
+    .contact-left > img, .serivce-slider {
         display: none
     }
 
@@ -4182,10 +3979,6 @@ PHẦN BỔ SUNG 11/2022*/
         width: 100%;
         max-width: 100%;
         margin: 0 0 20px
-    }
-
-    .contact-left > img {
-        display: none
     }
 
     .contact-right {
@@ -4275,11 +4068,7 @@ PHẦN BỔ SUNG 11/2022*/
         display: none
     }
 
-    #sell-photo .s-content .s-btn-inner {
-        display: block
-    }
-
-    .service-all .s-content .s-btn-inner {
+    #sell-photo .s-content .s-btn-inner, .service-all .s-content .s-btn-inner {
         display: block
     }
 
@@ -4328,7 +4117,7 @@ PHẦN BỔ SUNG 11/2022*/
         width: 100%
     }
 
-    .s-form-close-btn {
+    #s-rv-buy .s-banner-bg-inner .btn-contact, .s-benifit-bg-mb .table table tbody .row .free:before, .s-body-inner .row > span, .s-form-close-btn {
         display: none
     }
 
@@ -4348,10 +4137,6 @@ PHẦN BỔ SUNG 11/2022*/
 
     .s-body-inner .row > .s-form-col2:nth-child(2) {
         margin-bottom: 0
-    }
-
-    .s-body-inner .row > span {
-        display: none
     }
 
     .s-body-inner .row ul li {
@@ -4389,10 +4174,6 @@ PHẦN BỔ SUNG 11/2022*/
         font-weight: 400;
         font-family: harmonia, Arial, Helvetica, sans-serif;
         text-transform: uppercase
-    }
-
-    .s-benifit-bg-mb .table table tbody .row .free:before {
-        display: none
     }
 
     .s-banner-header-wrapper h1 {
@@ -4438,7 +4219,7 @@ PHẦN BỔ SUNG 11/2022*/
         margin-top: 0
     }
 
-    .photo-category {
+    #s-rv-buy .s-banner-bg-inner, .photo-category {
         display: block
     }
 
@@ -4458,14 +4239,6 @@ PHẦN BỔ SUNG 11/2022*/
         padding: 20px
     }
 
-    #s-rv-buy .s-banner-bg-inner {
-        display: block
-    }
-
-    #s-rv-buy .s-banner-bg-inner .btn-contact {
-        display: none
-    }
-
     .s-sreach-cover {
         position: relative;
         background: 0 0;
@@ -4476,10 +4249,7 @@ PHẦN BỔ SUNG 11/2022*/
     .s-sreach-type {
         margin: 0 0 10px;
         width: 100%;
-        flex-basis: 100%
-    }
-
-    .s-sreach-type {
+        flex-basis: 100%;
         max-width: 100%
     }
 
@@ -4581,12 +4351,7 @@ PHẦN BỔ SUNG 11/2022*/
 }
 
 @media (max-width: 768px) {
-    .section-padding-50 {
-        padding-top: 40px;
-        padding-bottom: 40px
-    }
-
-    .section-padding-60 {
+    .section-padding-50, .section-padding-60 {
         padding-top: 40px;
         padding-bottom: 40px
     }
@@ -4600,8 +4365,8 @@ PHẦN BỔ SUNG 11/2022*/
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin-right: 0px;
-    margin-left: 0px
+    margin-right: 0;
+    margin-left: 0
 }
 
 .col {
@@ -4625,7 +4390,7 @@ PHẦN BỔ SUNG 11/2022*/
     max-width: 50%
 }
 
-.col-12 {
+.col-12, .service-image-mobile img {
     width: 100%
 }
 
@@ -4642,7 +4407,7 @@ PHẦN BỔ SUNG 11/2022*/
     }
 }
 
-.row > [class^=col-] {
+.about-service-photo .row > [class^=col-], .row > [class^=col-] {
     padding: 15px
 }
 
@@ -4682,10 +4447,6 @@ PHẦN BỔ SUNG 11/2022*/
     }
 }
 
-.about-service-photo .row > [class^=col-] {
-    padding: 15px
-}
-
 .about-service-photo .title {
     color: #30333a;
     font-size: 1.5em;
@@ -4709,11 +4470,7 @@ PHẦN BỔ SUNG 11/2022*/
         font-size: 24px
     }
 
-    .about-service-photo .title {
-        text-align: center
-    }
-
-    .about-service-photo p {
+    .about-service-photo .title, .about-service-photo p {
         text-align: center
     }
 }
@@ -4754,10 +4511,6 @@ ul.product-received li .zmdi {
     color: #337588;
     font-weight: 600;
     left: 0
-}
-
-ul.product-received li .zmdi:before {
-    color: #337588
 }
 
 .tour-matterp .img-wrapper {
@@ -4886,10 +4639,6 @@ ul.product-received li .zmdi:before {
     display: none
 }
 
-.service-image-mobile img {
-    width: 100%
-}
-
 @media (max-width: 768px) {
     .service-image-mobile {
         display: block
@@ -4912,7 +4661,7 @@ ul.product-received li .zmdi:before {
     display: flex;
     width: 100%;
     position: relative;
-    padding: 0 18px 0
+    padding: 0 18px
 }
 
 .service-sale-compare .col-left {
@@ -4944,7 +4693,7 @@ ul.product-received li .zmdi:before {
     padding-left: 44px
 }
 
-.service-sale-compare .title {
+.item-service-sale h3, .service-sale-compare .title {
     font-size: 20px;
     line-height: normal;
     color: #30333a;
@@ -4955,11 +4704,7 @@ ul.product-received li .zmdi:before {
     margin-left: auto
 }
 
-.service-sale-compare .col-left .title {
-    position: relative
-}
-
-.service-sale-compare .col-right .title {
+.service-sale-compare .col-left .title, .service-sale-compare .col-right .title, .service-sale-compare .col-right ul {
     position: relative
 }
 
@@ -4988,10 +4733,6 @@ ul.product-received li .zmdi:before {
     font-size: 16px;
     color: rgba(68, 76, 89, .35);
     padding: 0 0 0 16px
-}
-
-.service-sale-compare .col-right ul {
-    position: relative
 }
 
 .service-sale-compare .col-right ul::after {
@@ -5060,7 +4801,7 @@ ul.product-received li .zmdi:before {
         flex: 0
     }
 
-    .service-sale-compare .col-left .title {
+    .service-sale-compare .col-left .title, .service-sale-compare .col-right .title {
         text-align: center
     }
 
@@ -5068,35 +4809,23 @@ ul.product-received li .zmdi:before {
         flex-direction: row-tgnpse
     }
 
-    .service-sale-compare .zmdi {
+    .service-sale-compare .col-right .zmdi, .service-sale-compare .zmdi {
         padding: 0 10px 0 0
     }
 
     .service-sale-compare .col-right {
-        padding: 60px 0 0 0;
+        padding: 60px 0 0;
         border: 0;
         width: 100%;
         max-width: 100%;
         flex: 0
     }
 
-    .service-sale-compare .col-right .title {
-        text-align: center
-    }
-
-    .service-sale-compare .col-right .zmdi {
-        padding: 0 10px 0 0
-    }
-
     .service-sale-compare .col-left .title::after {
         left: 0
     }
 
-    .service-sale-compare .col-left::after {
-        display: none
-    }
-
-    .service-sale-compare .col-right ul:after {
+    .service-sale-compare .col-left::after, .service-sale-compare .col-right ul:after {
         display: none
     }
 }
@@ -5116,21 +4845,15 @@ ul.product-received li .zmdi:before {
     margin: 0 auto
 }
 
-.item-service-sale .cover img {
+.item-service-sale .cover img, .service-pack-content .cover img {
     width: 100%;
     height: 100%;
     object-fit: contain
 }
 
 .item-service-sale h3 {
-    font-size: 20px;
     line-height: 28px;
-    color: #30333a;
-    font-weight: 600;
-    margin-top: 25px;
-    display: block;
-    width: 100%;
-    text-align: center
+    margin-top: 25px
 }
 
 .item-service-sale p {
@@ -5138,10 +4861,7 @@ ul.product-received li .zmdi:before {
     line-height: 24px;
     color: #676767;
     font-weight: 400;
-    margin-top: 10px;
-    display: block;
-    width: 100%;
-    text-align: center
+    margin-top: 10px
 }
 
 .service-pack {
@@ -5150,14 +4870,17 @@ ul.product-received li .zmdi:before {
     padding: 60px 0
 }
 
+.item-service-sale h3, .item-service-sale p, .service-pack .desc, .service-pack .title {
+    display: block;
+    width: 100%;
+    text-align: center
+}
+
 .service-pack .title {
     font-size: 36px;
     line-height: 46px;
     font-weight: 500;
     color: #30333a;
-    display: block;
-    text-align: center;
-    width: 100%;
     padding: 0;
     margin: 0
 }
@@ -5167,10 +4890,7 @@ ul.product-received li .zmdi:before {
     line-height: 24px;
     font-weight: 400;
     color: #676767;
-    margin-top: 24px;
-    display: block;
-    width: 100%;
-    text-align: center
+    margin-top: 24px
 }
 
 .service-pack-grid {
@@ -5194,7 +4914,7 @@ ul.product-received li .zmdi:before {
 }
 
 .service-pack-item:last-child::after {
-    content: url( '../images/icon-pack-top.svg');
+    content: url(../images/icon-pack-top.svg);
     position: absolute;
     top: -8px;
     left: 24px
@@ -5224,12 +4944,6 @@ ul.product-received li .zmdi:before {
     min-width: 124px;
     height: 108px;
     margin: 0 auto
-}
-
-.service-pack-content .cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain
 }
 
 .service-pack-content .title {
@@ -5328,10 +5042,7 @@ ul.product-received li .zmdi:before {
     }
 
     .service-pack-content .bottom a {
-        max-width: 248px
-    }
-
-    .service-pack-content .bottom a {
+        max-width: 248px;
         font-size: 16px;
         height: 40px;
         line-height: 40px
@@ -5375,12 +5086,12 @@ ul.product-received li .zmdi:before {
     }
 }
 
-.list-check-red {
+.list-check-blue, .list-check-red {
     display: block;
     list-style: none
 }
 
-.list-check-red li {
+.list-check-blue li, .list-check-red li {
     display: flex;
     flex-flow: wrap;
     float: none;
@@ -5393,11 +5104,11 @@ ul.product-received li .zmdi:before {
     text-align: left
 }
 
-.list-check-red li + li {
+.list-check-blue li + li, .list-check-red li + li {
     margin-top: 10px
 }
 
-.list-check-red li .zmdi {
+.list-check-blue li .zmdi, .list-check-red li .zmdi {
     color: orange;
     position: absolute;
     left: 1px;
@@ -5410,35 +5121,8 @@ ul.product-received li .zmdi:before {
     color: orange !important
 }
 
-.list-check-blue {
-    display: block;
-    list-style: none
-}
-
-.list-check-blue li {
-    display: flex;
-    flex-flow: wrap;
-    float: none;
-    width: 100%;
-    font-size: 16px;
-    line-height: normal;
-    color: #444c59;
-    padding-left: 25px;
-    position: relative;
-    text-align: left
-}
-
-.list-check-blue li + li {
-    margin-top: 10px
-}
-
 .list-check-blue li .zmdi {
-    color: #00a6bd !important;
-    position: absolute;
-    left: 1px;
-    top: 2px;
-    font-size: 14px;
-    z-index: 2
+    color: #00a6bd !important
 }
 
 .list-check-blue li .zmdi.zmdi-check:before {
@@ -5535,11 +5219,7 @@ ul.product-received li .zmdi:before {
         text-align: center
     }
 
-    .service-sale-photo .grid-item:first-child {
-        padding: 1.5rem 0
-    }
-
-    .service-sale-3dview .grid-item:first-child {
+    .service-sale-3dview .grid-item:first-child, .service-sale-photo .grid-item:first-child {
         padding: 1.5rem 0
     }
 }
@@ -5593,7 +5273,7 @@ ul.product-received li .zmdi:before {
     padding: 60px 18px
 }
 
-.all-service .col-left {
+.all-service .col-left, .all-service .col-right {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 40.3508771%;
     flex: 0 0 40.3508771%;
@@ -5602,11 +5282,9 @@ ul.product-received li .zmdi:before {
 }
 
 .all-service .col-right {
-    -webkit-box-flex: 0;
     -ms-flex: 0 0 59.6491228%;
     flex: 0 0 59.6491228%;
-    max-width: 59.6491228%;
-    padding: 0
+    max-width: 59.6491228%
 }
 
 .all-service .col-right .s-heading {
@@ -5662,7 +5340,7 @@ ul.product-received li .zmdi:before {
 
 .all-service-list li::before {
     font-family: Material-Design-Iconic-Font;
-    content: '\f26d';
+    content: "";
     font-size: 10px;
     color: #337588;
     padding: 0 10px 0 0
@@ -5672,7 +5350,7 @@ ul.product-received li .zmdi:before {
     margin-top: 0
 }
 
-.all-service-list li a {
+.all-service-list li a, .title-list {
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
@@ -5695,8 +5373,6 @@ ul.product-received li .zmdi:before {
     line-height: 26px;
     font-weight: 600;
     color: #444c59;
-    display: block;
-    width: 100%;
     margin-bottom: 6px
 }
 
@@ -5709,7 +5385,7 @@ ul.product-received li .zmdi:before {
         flex-flow: column
     }
 
-    .all-service .col-left {
+    .all-service .col-left, .all-service .col-right {
         -webkit-box-flex: 0;
         -ms-flex: 0 0 100%;
         flex: 0 0 100%;
@@ -5717,10 +5393,6 @@ ul.product-received li .zmdi:before {
     }
 
     .all-service .col-right {
-        -webkit-box-flex: 0;
-        -ms-flex: 0 0 100%;
-        flex: 0 0 100%;
-        max-width: 100%;
         padding: 0;
         margin-top: 24px
     }
@@ -5812,17 +5484,13 @@ ul.product-received li .zmdi:before {
 }
 
 @media (max-width: 1024px) {
-    .control--panel {
+    .control--panel, .control--panel__group {
         padding: 34px 0
     }
 
     .control--panel .s-content .s-heading {
         font-size: 24px;
         text-align: center
-    }
-
-    .control--panel__group {
-        padding: 34px 0
     }
 
     .control--panel__group .grid + .grid {
