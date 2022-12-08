@@ -2,6 +2,9 @@ from collections import namedtuple
 
 from django import template
 from django.contrib.contenttypes.models import ContentType
+
+from FunctionModule.hitcount.models import HitCount
+
 try:
     from django.core.urlresolvers import reverse
 except ImportError:
@@ -33,7 +36,7 @@ def get_hit_count_from_obj_variable(context, obj_variable, tag_name):
     except AttributeError:
         raise error_to_raise
 
-    hit_count, created = Hitcount.objects.get_or_create(
+    hit_count, created = HitCount.objects.get_or_create(
         content_type=ctype, object_pk=obj.pk)
 
     return hit_count
