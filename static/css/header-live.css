@@ -865,7 +865,7 @@ header#home::before {
 }
 
 #home .col-left .top-menu ul .sub-menu > a {
-    pointer-events: none;
+    /*pointer-events: none;*/
     cursor: pointer;
 }
 

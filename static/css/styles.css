@@ -1511,6 +1511,7 @@ PHẦN BỔ SUNG 11/2022*/
     overflow: hidden;
     height: 0;
     padding-top: 66.67%;
+    cursor: pointer;
 }
 .listingCard .cover-image a img {
     position: absolute;

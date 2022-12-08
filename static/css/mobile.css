@@ -1,7 +1,6 @@
 @media only screen and (max-width: 800px) {
-
-    .result-body .row:not(.grid) .col .listingwidth{
-        display: none;
+    .result-body .row:not(.grid) .col .listingwidth {
+        display: none
     }
 
     .qc-tgnp-bs .right-home-50 .title-36 {
@@ -35,14 +34,17 @@
         display: none
     }
 
+    .info-form-up .title-w-back, .title-mobile-contact h3 {
+        line-height: 60px;
+        text-transform: uppercase;
+        font-size: 14px
+    }
+
     .info-form-up .title-w-back {
         background: #fff;
         box-shadow: 0 2px 10px 0 #e4e4e4;
         height: 60px;
-        line-height: 60px;
-        font-family: harmonia, Arial, Helvetica, sans-serif;
-        text-transform: uppercase;
-        font-size: 14px
+        font-family: harmonia, Arial, Helvetica, sans-serif
     }
 
     .info-form-up .back-btn-title {
@@ -50,11 +52,7 @@
         left: 10px
     }
 
-    .content-pu-rv .large-btn-red {
-        padding: 10px
-    }
-
-    .content-pu-rv .large-btn-border-black {
+    .content-pu-rv .large-btn-border-black, .content-pu-rv .large-btn-red {
         padding: 10px
     }
 
@@ -68,10 +66,7 @@
     }
 
     .title-mobile-contact h3 {
-        line-height: 60px;
-        text-transform: uppercase;
         color: #30333a;
-        font-size: 14px;
         font-weight: 400;
         top: 0;
         left: 0;
@@ -88,7 +83,7 @@
         padding: 20px
     }
 
-    .left-popup-rv {
+    .content-detail-house .width1140 .right-content, .left-popup-rv, .list-part-t a span {
         display: none
     }
 
@@ -108,24 +103,12 @@
         width: 410px
     }
 
-    .content-detail-house .width1140 .right-content {
-        display: none
-    }
-
     .info-cta p {
         padding: 20px 0 40px
     }
 
-    section.browsing article.featured {
+    article.featured .cover img, section.browsing article.featured {
         width: 100%
-    }
-
-    .list-part-t a span {
-        display: none
-    }
-
-    .list-part-t li {
-        width: 14%
     }
 
     .fixed-form-r {
@@ -138,7 +121,7 @@
         height: 100%
     }
 
-    .search-sum {
+    .right-content .booking-tour, .search-sum {
         display: none
     }
 
@@ -153,12 +136,7 @@
         height: 226px
     }
 
-    .copyright-left {
-        float: none;
-        text-align: center
-    }
-
-    .copyright-right {
+    .copyright-left, .copyright-right {
         float: none;
         text-align: center
     }
@@ -171,20 +149,12 @@
         display: block
     }
 
-    .right-content .booking-tour {
-        display: none
-    }
-
     article.featured .cover {
-        height: 220px
+        height: 226px
     }
 
     .width-70-ber {
         width: 50%
-    }
-
-    article.featured .cover img {
-        width: 100%
     }
 
     .ads3d-box-right .like-button {
@@ -226,19 +196,11 @@
         background: #fff
     }
 
-    article.featured .cover {
-        height: 226px
-    }
-
     ul.slidemap li {
         width: 24%
     }
 
-    .right-filter {
-        display: none
-    }
-
-    .slideimg {
+    .booking-tour .save-favorite-box p, .right-filter, .slideimg {
         display: none
     }
 
@@ -265,29 +227,12 @@
         opacity: .6
     }
 
-    #slider3 {
+    #slider3, #slider4 {
         width: 83%;
         margin: 0 auto
     }
 
-    #slider4 {
-        width: 83%;
-        margin: 0 auto
-    }
-
-    .icon-presmall-gray {
-        top: 35px
-    }
-
-    .icon-nextsmall-gray {
-        top: 35px
-    }
-
-    .left-content {
-        width: 100%
-    }
-
-    .content-detail-house header.detail-house {
+    .content-detail-house header.detail-house, .left-content {
         width: 100%
     }
 
@@ -326,46 +271,33 @@
         margin: 0
     }
 
-    .booking-tour .save-favorite-box p {
-        display: none
-    }
-
     .booking-tour .save-favorite-box .like-button {
         width: 50%;
         float: left;
         background: #fff;
-        padding: 12px 0 12px 0;
+        padding: 12px 0;
         border-radius: 0;
         border-bottom: none;
         border-left: none;
         border-right: none
     }
 
-    .list-but {
-        display: none
-    }
-
-    .agent-detail-house {
+    #carousel, .agent-detail-house, .list-but {
         display: none
     }
 
     ul.slidemap li a.img {
-        height: 100px
-    }
-
-    #carousel {
-        display: none
+        display: block;
+        border: 1px solid #eee;
+        width: 100%;
+        height: 100%
     }
 
     .fix-widthcell .naviicon li {
         padding: 0 15px
     }
 
-    .fix-widthcell .naviicon {
-        height: 68px
-    }
-
-    .changeimg-box {
+    .changeimg-box, .fix-widthcell .naviicon {
         height: 68px
     }
 
@@ -386,7 +318,7 @@
         margin-top: 30px
     }
 
-    .bank-form .left-form {
+    .bank-form .left-form, .bank-form .right-form .arrow-right {
         display: none
     }
 
@@ -394,27 +326,12 @@
         width: 100%
     }
 
-    .bank-form .right-form .arrow-right {
-        display: none
-    }
-
-    ul.slidemap li a.img {
-        display: block;
-        border: 1px solid #eee;
-        width: 100%;
-        height: 100%
-    }
-
     ul.slidemap li a {
         height: 76px !important;
         display: block
     }
 
-    .icon-presmall-gray {
-        top: 22px
-    }
-
-    .icon-nextsmall-gray {
+    .icon-nextsmall-gray, .icon-presmall-gray {
         top: 22px
     }
 
@@ -444,7 +361,7 @@
         margin: 10px auto
     }
 
-    .ads3d-box-left .cover {
+    .ads3d-box-left .cover, .detail-more li {
         width: 100%
     }
 
@@ -514,7 +431,7 @@
 
     .left-content-news article.featured header {
         width: 100%;
-        padding: 20px 0 0 0
+        padding: 20px 0 0
     }
 
     .right-content-news {
@@ -563,10 +480,6 @@
         padding-top: 60px
     }
 
-    .detail-more li {
-        width: 100%
-    }
-
     .detail-commodities li {
         width: 50%
     }
@@ -594,7 +507,7 @@
     }
 
     .but-search-home:before {
-        content: ''
+        content: ""
     }
 
     .sort-home {
@@ -608,15 +521,7 @@
         margin-right: 0
     }
 
-    .right-content {
-        width: 100%
-    }
-
-    .Mortgage .Mortgage-left {
-        width: 100%
-    }
-
-    .Mortgage .Mortgage-right {
+    .Mortgage .Mortgage-left, .Mortgage .Mortgage-right, .right-content {
         width: 100%
     }
 
@@ -649,11 +554,7 @@
         height: auto !important
     }
 
-    .hidemobile {
-        display: none !important
-    }
-
-    .left-filter ul li.list-filter {
+    .hidemobile, .left-filter ul li.list-filter {
         display: none !important
     }
 
@@ -667,31 +568,21 @@
     }
 
     .popup {
-        overflow: auto
+        overflow: auto;
+        padding: 0 15px
     }
 
     .different li {
         width: 100%;
-        padding: 20px 0 !important
+        padding: 20px 0 !important;
+        border-right: 0
     }
 
     article.featured .cover {
         height: 200px
     }
 
-    .different li {
-        border-right: 0
-    }
-
-    .popup {
-        padding: 0 15px
-    }
-
-    .col-ms-7 {
-        width: 100%
-    }
-
-    .col-ms-3 {
+    .col-ms-3, .col-ms-7 {
         width: 100%
     }
 
@@ -704,19 +595,13 @@
     }
 
     .info-duan {
-        height: auto;
         float: left;
-        width: 55%;
-        padding: 16px 32px
-    }
-
-    .info-duan .content {
-        height: auto
-    }
-
-    .info-duan {
         width: 100%;
         padding: 20px
+    }
+
+    .info-duan, .info-duan .content {
+        height: auto
     }
 
     .info-duan .more {
@@ -725,18 +610,17 @@
         margin: 10px 0
     }
 
-    .headerNoScroll .secondaryBar, .headerNoScroll .actionBar {
-        position: static;
+    .headerNoScroll .actionBar, .headerNoScroll .secondaryBar {
+        position: static
     }
 
-    .main-header, .secondaryBar, .actionBar {
+    .actionBar, .main-header, .secondaryBar {
         backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
+        -webkit-backface-visibility: hidden
     }
 }
 
 @media only screen and (max-width: 600px) {
-
     .info-duan .btn-more {
         bottom: 0;
         padding: 20px 0 0
@@ -754,16 +638,12 @@
         margin-right: 0
     }
 
-    .exclusive > .more-button-box {
+    .exclusive > .more-button-box, .main-content > .more-button-box {
         padding-top: 20px
     }
 
     .main-content {
         padding-bottom: 30px
-    }
-
-    .main-content > .more-button-box {
-        padding-top: 20px
     }
 
     .width1140 > h1 {
@@ -791,10 +671,7 @@
 
     .common-info p {
         font-size: 16px;
-        padding-bottom: 20px
-    }
-
-    .common-info p {
+        padding-bottom: 20px;
         font-weight: 400;
         line-height: 26px
     }
@@ -808,7 +685,7 @@
     }
 
     article.featured .cover {
-        height: 160px
+        height: 380px
     }
 
     article.featured header h3 a {
@@ -824,10 +701,6 @@
         display: none
     }
 
-    article.featured .cover {
-        height: 380px
-    }
-
     .search-sidebar {
         width: 320px
     }
@@ -836,11 +709,7 @@
         width: calc(100% - 320px)
     }
 
-    .but-pre {
-        font-size: 3.5em
-    }
-
-    .but-next {
+    .but-next, .but-pre {
         font-size: 3.5em
     }
 
@@ -875,17 +744,12 @@
 
     .info-duan {
         float: left;
-        width: 55%;
-        padding: 16px 32px
+        width: 100%;
+        padding: 20px
     }
 
     .info-duan .content {
         height: auto
-    }
-
-    .info-duan {
-        width: 100%;
-        padding: 20px
     }
 
     .info-duan h2, .info-duan h3 {
@@ -908,7 +772,7 @@
 
     .left-content-news article.featured header {
         width: 100%;
-        padding: 20px 0 0 0
+        padding: 20px 0 0
     }
 
     .right-content-news {
@@ -950,11 +814,7 @@
         font-size: 18px
     }
 
-    .form-info .per50-left {
-        width: 100%
-    }
-
-    .form-info .per50-right {
+    .form-info .per50-left, .form-info .per50-right {
         width: 100%
     }
 
@@ -1016,7 +876,7 @@
         max-height: 65px
     }
 
-    .p-doc-relative-wrapper .info ul {
+    .p-doc-relative-wrapper .info ul, .sum-picture button span {
         display: none
     }
 
@@ -1036,11 +896,7 @@
         float: none
     }
 
-    .sum-picture button span {
-        display: none
-    }
-
-    .or-call {
+    .content-document li p, .info-cta p, .or-call {
         display: none
     }
 
@@ -1056,10 +912,6 @@
         border: 0;
         box-shadow: none;
         margin: 60px 0 0
-    }
-
-    .info-cta p {
-        display: none
     }
 
     .logo-tgnp {
@@ -1081,15 +933,16 @@
     }
 
     article.featured header h3 {
-        padding: 6px 0 0
+        padding: 0;
+        height: auto
     }
 
-    .search-sum-no {
+    .search-sum-no, article.featured header h3 {
         line-height: 20px;
         font-size: 14px
     }
 
-    .search-sum-no .total-result {
+    .content-document li h4, .search-sum-no .total-result {
         font-size: 14px
     }
 
@@ -1192,26 +1045,14 @@
         padding-top: 0
     }
 
-    .bed-sort {
+    .bed-sort, .left-70 {
         width: 100%
-    }
-
-    .content-document li h4 {
-        font-size: 14px
-    }
-
-    .content-document li p {
-        display: none
     }
 
     .content-document li .sub-title {
         display: block;
         font-size: 14px;
         font-weight: 400
-    }
-
-    .left-70 {
-        width: 100%
     }
 
     .info-sticky-header {
@@ -1224,11 +1065,7 @@
         font-size: 14px
     }
 
-    .imageScroller {
-        height: 240px
-    }
-
-    .imageScroller img {
+    .imageScroller, .imageScroller img {
         height: 240px
     }
 
@@ -1297,7 +1134,7 @@
     }
 
     .h-3d {
-        padding: 0 6px 0 !important;
+        padding: 0 6px !important;
         font-size: 12px;
         line-height: 12px
     }
@@ -1334,21 +1171,11 @@
         bottom: 10px
     }
 
-    .info-bs-price .price-list {
+    .info-bs-price .price-list, .view-history table td {
         font-size: 14px
     }
 
-    .info-bs .lable-sold {
-        font-size: 12px;
-        padding: 0 10px !important
-    }
-
-    .info-bs .lable-monopoly {
-        font-size: 12px;
-        padding: 0 10px !important
-    }
-
-    .info-bs .lable-free-m {
+    .info-bs .lable-free-m, .info-bs .lable-monopoly, .info-bs .lable-sold {
         font-size: 12px;
         padding: 0 10px !important
     }
@@ -1382,7 +1209,7 @@
     .left-tabmenu-search li {
         width: 50%;
         text-align: center;
-        padding: 4px 0 0 0;
+        padding: 4px 0 0;
         display: block;
         float: left;
         position: relative
@@ -1391,7 +1218,7 @@
     .left-tabmenu-search li:before {
         height: 20px;
         border-left: 1px solid rgba(48, 51, 58, .2);
-        content: '';
+        content: "";
         position: absolute;
         left: 0;
         top: 10px
@@ -1433,7 +1260,7 @@
         height: 40px
     }
 
-    .sort-topdetail {
+    .compare-house .article div.title p, .sort-topdetail {
         display: none
     }
 
@@ -1467,10 +1294,6 @@
         padding: 19px 19px 12px
     }
 
-    .compare-house .article div.title p {
-        display: none
-    }
-
     .lang-select {
         margin: 5px 0 0;
         width: 127px
@@ -1483,19 +1306,15 @@
     .copyright-right:after {
         width: 100%;
         clear: both;
-        content: '';
+        content: "";
         display: table
     }
 
     .most-update {
-        margin: 15px 0 0 0
+        margin: 15px 0 0
     }
 
-    .good-price {
-        margin-top: 15px
-    }
-
-    .collection-box-right {
+    .collection-box-right, .good-price {
         margin-top: 15px
     }
 
@@ -1503,11 +1322,7 @@
         margin-bottom: 20px
     }
 
-    section.whysell-project div.width1140 div.pdb-20 {
-        padding-bottom: 0 !important
-    }
-
-    section.pdb-30 {
+    section.pdb-30, section.whysell-project div.width1140 div.pdb-20 {
         padding-bottom: 0 !important
     }
 
@@ -1522,10 +1337,6 @@
 
     .booking-tour, .booking-tour .bg-gray {
         background: 0 0 !important
-    }
-
-    .booking-tour {
-        z-index: 220
     }
 
     li article.featured {
@@ -1548,17 +1359,6 @@
         left: -6%;
         padding-left: 25px
     }
-
-    article.featured .cover {
-        height: 250px
-    }
-
-    article.featured header {
-        padding: 20px
-    } {
-    margin-top: 0;
-    padding-top: 0
-}
 
     article.featured header {
         float: left;
@@ -1583,25 +1383,18 @@
 
     .search-sum-no {
         float: none;
-        padding: 15px 15px 5px 15px;
+        padding: 15px 15px 5px;
         width: 100%
     }
 
     .search-sum-no:after {
-        content: '';
+        content: "";
         width: 100%;
         display: table
     }
 
-    .show-hide-bnt {
+    .compare-house .article div.abc, .show-hide-bnt {
         display: none
-    }
-
-    article.featured header h3 {
-        padding-top: 0;
-        font-size: 14px;
-        line-height: 20px;
-        height: auto
     }
 
     article.featured header h4 {
@@ -1614,7 +1407,7 @@
     article.featured header ul li {
         padding: 0;
         font-size: 12px;
-        color: grey
+        color: gray
     }
 
     article.featured .price {
@@ -1637,12 +1430,8 @@
         text-align: center
     }
 
-    .info-prop .info {
+    .info-prop .info, .tttn img {
         width: 100%
-    }
-
-    .compare-house .article div.abc {
-        display: none
     }
 
     .compare-house .article div.abc + .img {
@@ -1732,7 +1521,9 @@
     }
 
     article.kdc-new {
-        position: relative
+        position: relative;
+        margin-right: 15px !important;
+        margin-left: 15px !important
     }
 
     .header-background-full {
@@ -1744,11 +1535,11 @@
     }
 
     .more-news-list {
-        padding: 0 0
+        padding: 0
     }
 
     .lage-btn-black {
-        padding: 10px 10px 8px 10px;
+        padding: 10px 10px 8px;
         font-size: 16px;
         margin: 10px 0
     }
@@ -1778,14 +1569,6 @@
         padding-top: 30px !important
     }
 
-    .view-history table td {
-        font-size: 14px
-    }
-
-    .tttn img {
-        width: 100%
-    }
-
     .tttn .right-content {
         width: 100%;
         margin-top: 20px
@@ -1798,7 +1581,6 @@
     .pd-tb-30 {
         padding: 15px 0 !important
     }
-
 
     .font-36 {
         font-size: 26px !important
@@ -1814,7 +1596,6 @@
 
     .thumb-duan {
         float: left;
-        width: 100%;
         height: auto;
         min-height: 0;
         max-height: none
@@ -1822,46 +1603,42 @@
 
     .info-duan {
         float: left;
-        width: 55%;
-        padding: 16px 32px
+        width: 100%;
+        padding: 20px
     }
 
     .info-duan .content {
         height: auto
     }
 
-    .info-duan {
-        width: 100%;
-        padding: 20px
-    }
-
     .language {
         float: none;
-        margin: 10px 0 20px 0;
+        margin: 10px 0 20px;
         width: 100%
     }
 
     .language:after {
         clear: both;
         display: table;
-        content: ''
+        content: ""
     }
 
     .qtda {
         padding: 0 0 10px
     }
 
-    .text-qt {
+    .bnt-redlh, .text-qt {
         text-align: center;
-        float: none;
+        float: none
+    }
+
+    .text-qt {
         font-size: 26px;
         padding-top: 20px
     }
 
     .bnt-redlh {
-        text-align: center;
-        padding: 10px 0 30px 0;
-        float: none;
+        padding: 10px 0 30px;
         width: 100%
     }
 
@@ -1871,8 +1648,7 @@
         margin: 0 auto !important
     }
 
-
-    .detail-more {
+    .banve, .detail-more, .owner {
         padding: 0
     }
 
@@ -1880,39 +1656,34 @@
         padding-bottom: 20px
     }
 
-    .banve {
-        padding: 0
-    }
-
     .owner {
-        padding: 0;
         margin-bottom: 20px
     }
 
-    .qtda h3 {
+    .news-detailpage h2, .notfound404 h2, .qtda h3, .width1140 > h2 {
         font-size: 26px
     }
 
     .owner img {
         width: 100%;
-        margin: 0 auto 20px auto
+        margin: 0 auto 20px
     }
 
     .owner .main-agency-summary {
         width: 100%
     }
 
-    .qtdan {
+    .content-detail-house header.detail-house ul.submenu-detail, .qtdan {
         display: none
     }
 
     .background-gray .width1140 > h3 {
-        padding: 20px 0 0 0
+        padding: 20px 0 0
     }
 
     .colum3 li {
         width: 100%;
-        padding: 50px 0 0 0
+        padding: 50px 0 0
     }
 
     .colum3 {
@@ -1930,7 +1701,8 @@
 
     .width1140 > h6 {
         font-size: 22px;
-        line-height: 30px
+        line-height: 30px;
+        padding: 15px 5px 0 !important
     }
 
     .whybuy-building li {
@@ -1940,7 +1712,7 @@
 
     .about-us .left-about img {
         width: 60%;
-        padding: 5px 0 20px 0
+        padding: 5px 0 20px
     }
 
     .headquanters {
@@ -1966,20 +1738,12 @@
         display: none
     }
 
-    .news-detailpage {
+    .left-content .heading-02, .news-detailpage {
         padding-top: 30px
     }
 
-    .news-detailpage h2 {
-        font-size: 26px
-    }
-
     .news-postter {
-        margin: 20px 0 40px 0
-    }
-
-    .width1140 > h2 {
-        font-size: 26px
+        margin: 20px 0 40px
     }
 
     .content-detail-house header.detail-house .price {
@@ -2021,17 +1785,9 @@
         color: #fff !important
     }
 
-    article.featured .cover {
-        height: 256px
-    }
-
     .menu-footer ul li {
         font-size: 1.4em;
         width: 50%
-    }
-
-    .customer-review .box-reviewer .reviewer .reviewer-info {
-        text-align: center
     }
 
     .customer-review .box-reviewer .reviewer {
@@ -2041,8 +1797,6 @@
     }
 
     .customer-review .box-reviewer .reviewer .avatar {
-        display: inline-block;
-        margin-right: 2%;
         border-radius: 50%;
         -moz-border-radius: 50%;
         -webkit-border-radius: 50%;
@@ -2094,7 +1848,7 @@
         font-size: 2em
     }
 
-    .customer-review .box-reviewer .reviewer .reviewer-info ul li a {
+    .customer-review .box-reviewer .reviewer .reviewer-info ul li a, ul.slidemap li a.img {
         display: block;
         width: 100%;
         height: 100%
@@ -2109,7 +1863,7 @@
     }
 
     ul.slidemap li a.img {
-        height: 100px
+        border: 1px solid #eee
     }
 
     .search-map {
@@ -2132,25 +1886,18 @@
         margin-top: 10px
     }
 
-    .content-detail-house header.detail-house ul.submenu-detail {
-        display: none
-    }
-
     .content-detail-house header.detail-house {
-        padding: 30px 0 0 0;
+        padding: 30px 0 0;
         width: 100%
     }
 
     .uer-reviews li:first-child {
-        width: 100%
+        width: 100%;
+        margin-bottom: -120px
     }
 
-    .uer-reviews li {
+    .about-us .left-about, .about-us .right-about, .uer-reviews li {
         width: 100%
-    }
-
-    .left-content .heading-02 {
-        padding-top: 30px
     }
 
     .uer-reviews li .uer-rate p {
@@ -2159,7 +1906,8 @@
     }
 
     .uer-reviews li .uer-rate {
-        position: static
+        position: static;
+        padding-left: 90px
     }
 
     article.featured:nth-child(3n+3) {
@@ -2170,30 +1918,13 @@
         padding: 10px 10px 20px
     }
 
-    .about-us .left-about {
-        width: 100%
-    }
-
-    .about-us .right-about {
-        width: 100%
-    }
-
     .about-us .right-about .project ul li {
-        margin: 0;
-        margin-top: 20px
+        margin: 20px 0 0
     }
 
     .uer-reviews li h3 {
         padding: 0 0 20px 90px;
         clear: both
-    }
-
-    .uer-reviews li .uer-rate {
-        padding-left: 90px
-    }
-
-    .uer-reviews li:first-child {
-        margin-bottom: -120px
     }
 
     .slidemap {
@@ -2224,34 +1955,23 @@
         width: 100%
     }
 
-    .save-favorite-box {
+    .agent-detail-house, .list-but, .save-favorite-box {
         display: none
     }
 
-    .list-but {
-        display: none
-    }
-
-    .agent-detail-house {
-        display: none
-    }
-
-    .different li input[type=text] {
+    .different li input[type=text], .question-form .right-form a.sms-button {
         width: 100%;
         margin: 0
     }
 
     .map-and-sidebar {
         height: 100%;
-        border: 0
+        border: 0;
+        background: 0 0
     }
 
     body {
         height: auto !important
-    }
-
-    .map-and-sidebar {
-        background: 0 0
     }
 
     .search-sidebar {
@@ -2306,22 +2026,12 @@
         height: 450px
     }
 
-    #slider3 {
+    #slider3, #slider4 {
         width: 83%;
         margin: 0 auto
     }
 
-    #slider4 {
-        width: 83%;
-        margin: 0 auto
-    }
-
-    #slider {
-        height: 276px;
-        width: 100%
-    }
-
-    .background-detail {
+    #slider, .background-detail {
         height: 276px
     }
 
@@ -2333,28 +2043,25 @@
         padding: 10px 10px 10px 0
     }
 
-    .most-update {
+    #slider, .most-update {
         width: 100%
     }
 
     .most-view {
         width: 100%;
-        height: 240px;
         margin-top: 15px
     }
 
-    .high-rating {
+    .high-rating, .most-view {
         height: 240px
     }
 
-    .copyright-left {
+    .copyright-left, .copyright-right {
         float: none;
         text-align: center
     }
 
     .copyright-right {
-        float: none;
-        text-align: center;
         margin-bottom: 25px
     }
 
@@ -2363,20 +2070,12 @@
         margin: 50px 0 0
     }
 
-    .address-tgnp li {
-        width: 100%;
-        padding-top: 20px
-    }
-
-    .about-tgnp {
-        padding-top: 20px
-    }
-
-    .address-tgnp {
+    .about-tgnp, .address-tgnp li {
+        padding-top: 20px;
         width: 100%
     }
 
-    .about-tgnp {
+    .address-tgnp, .right-content-agent .infoagent .sms-button {
         width: 100%
     }
 
@@ -2391,16 +2090,13 @@
         margin-left: -350px
     }
 
-    .collection-box h2.bottomlable {
-        font-size: 1.8em
-    }
-
-    .collection-box h2.centerlable {
+    .collection-box h2.bottomlable, .collection-box h2.centerlable {
         font-size: 1.8em
     }
 
     .fix-widthcell .naviicon li a {
-        padding: 5px 0
+        padding: 5px 0;
+        font-size: .9em
     }
 
     .reverland {
@@ -2441,23 +2137,13 @@
         margin: 30px 0
     }
 
-    .question-form .left-form {
-        width: 100%;
-        clear: both
-    }
-
-    .question-form .right-form {
+    .question-form .left-form, .question-form .right-form {
         width: 100%;
         clear: both
     }
 
     .question-form {
         display: block
-    }
-
-    .question-form .right-form a.sms-button {
-        width: 100%;
-        margin: 0
     }
 
     .bank-form .right-form p {
@@ -2468,10 +2154,6 @@
 
     .right-content-agent .infoagent h3 {
         font-size: 1.2em
-    }
-
-    .right-content-agent .infoagent .sms-button {
-        width: 100%
     }
 
     .pd50 {
@@ -2496,23 +2178,12 @@
         padding: 20px 15px
     }
 
-    ul.slidemap li a.img {
-        display: block;
-        border: 1px solid #eee;
-        width: 100%;
-        height: 100%
-    }
-
     ul.slidemap li a {
         height: 83px !important;
         display: block
     }
 
-    .icon-presmall-gray {
-        top: 25px
-    }
-
-    .icon-nextsmall-gray {
+    .icon-nextsmall-gray, .icon-presmall-gray {
         top: 25px
     }
 
@@ -2523,7 +2194,7 @@
     .ads3d-box-left {
         width: 100%;
         margin-right: 0;
-        padding: 10px 0 30px 0;
+        padding: 10px 0 30px;
         border: 0;
         border-bottom: 1px solid #ebebeb
     }
@@ -2537,7 +2208,7 @@
         margin: 20px auto 0
     }
 
-    .ads3d-box-left .cover {
+    .ads3d-box-left .cover, .img-scale img {
         width: 100%
     }
 
@@ -2554,11 +2225,7 @@
         border: 0
     }
 
-    .fix-widthcell .naviicon li a {
-        font-size: .9em
-    }
-
-    .suggest-result > li .detail-room {
+    .suggest-result > li .detail-room, .wswb-menu-fixed .right-menu {
         display: none
     }
 
@@ -2572,30 +2239,14 @@
         padding: 40px 20px
     }
 
-    .notfound404 h2 {
-        font-size: 26px
-    }
-
-    .wswb-menu-fixed .right-menu {
-        display: none
-    }
-
-    .img-scale img {
-        width: 100%
-    }
-
-    .colum3 h4 {
-        padding-top: 10px
-    }
-
     .cover-left-sell {
         width: 100%;
         height: 267px
     }
 
-    .right-content-sell {
+    .left-content-news article.featured header, .right-content-sell {
         width: 100%;
-        padding: 20px 0 0 0
+        padding: 20px 0 0
     }
 
     .right-content-sell-gray {
@@ -2603,9 +2254,7 @@
         padding-right: 0
     }
 
-    .hitech li {
-        width: 100%;
-        margin: 0;
+    .colum3 h4, .hitech li {
         padding-top: 10px
     }
 
@@ -2621,21 +2270,17 @@
         font-size: 20px
     }
 
-    .tgnp-market .value {
+    .hitech li, .tgnp-market .value {
         width: 100%;
         margin: 0
     }
 
-    .tgnp-market .speed {
-        width: 100%
-    }
-
-    .left-sell {
+    .left-sell, .tgnp-market .speed {
         width: 100%
     }
 
     .canho {
-        padding: 30px 0 20px 0
+        padding: 30px 0 20px
     }
 
     .founder .avatar {
@@ -2697,7 +2342,7 @@
     }
 
     .left-content-news article.featured {
-        padding: 0 0 20px 0
+        padding: 0 0 20px
     }
 
     .left-content-news article.featured .cover {
@@ -2705,18 +2350,9 @@
         height: auto
     }
 
-    .left-content-news article.featured header {
-        width: 100%;
-        padding: 20px 0 0 0
-    }
-
     .right-content-news {
         display: block;
         width: 100%
-    }
-
-    .width1140 > h6 {
-        padding: 15px 5px 0 5px !important
     }
 
     .thumb-duan {
@@ -2776,11 +2412,6 @@
         margin-top: 5px
     }
 
-    article.kdc-new {
-        margin-right: 15px !important;
-        margin-left: 15px !important
-    }
-
     .bgw {
         margin-top: 0
     }
@@ -2788,24 +2419,19 @@
 
 @media only screen and (max-width: 375px) {
     .price {
-        position: static;
         padding-top: 0
     }
 
-    .searchlisting article.featured header .price {
+    .price, .searchlisting article.featured header .price {
         position: static
     }
 
-    .searchlisting {
+    .nearby, .searchlisting {
         width: 300px
     }
 
     .searchlisting article.featured header ul {
         display: none
-    }
-
-    article.featured .cover {
-        height: 230px
     }
 
     article.featured .cover {
@@ -2821,10 +2447,6 @@
         padding-right: 5px
     }
 
-    .nearby {
-        width: 300px
-    }
-
     .cover-nearby-off {
         transform: translateX(300px);
         -moz-transform: translateX(300px);
@@ -2836,21 +2458,12 @@
         margin-left: -300px
     }
 
-    #slider3 {
+    #slider3, #slider4 {
         width: 80%;
         margin: 0 auto
     }
 
-    #slider4 {
-        width: 80%;
-        margin: 0 auto
-    }
-
-    #slider {
-        height: 250px
-    }
-
-    .background-detail {
+    #slider, .background-detail {
         height: 250px
     }
 
@@ -2867,16 +2480,12 @@
         white-space: nowrap
     }
 
-    .changeimg-box {
+    .changeimg-box, .fix-widthcell .naviicon {
         height: 60px
     }
 
     .price-detail {
         font-size: .9em
-    }
-
-    .fix-widthcell .naviicon {
-        height: 60px
     }
 
     .team-member .member-detail .cover img {
@@ -2887,10 +2496,7 @@
     .team-member .member-detail header {
         height: 120px;
         font-size: 1.4em;
-        padding: 20px 0 20px 15px
-    }
-
-    .team-member .member-detail header {
+        padding: 20px 0 20px 15px;
         width: calc(100% - 120px)
     }
 
@@ -2935,21 +2541,16 @@
 
     .info-duan {
         float: left;
-        width: 55%;
-        padding: 16px 32px
+        width: 100%;
+        padding: 20px
     }
 
     .info-duan .content {
         height: auto
     }
 
-    .info-duan {
-        width: 100%;
-        padding: 20px
-    }
-
     .width1140 > h6 {
-        padding: 15px 10px 0 10px !important
+        padding: 15px 10px 0 !important
     }
 
     .browsing-tab label {
@@ -2989,12 +2590,7 @@
         -webkit-transform: translateX(300px)
     }
 
-    .collection-box h2.bottomlable {
-        font-size: 1.8em;
-        letter-spacing: 1px
-    }
-
-    .collection-box h2.centerlable {
+    .collection-box h2.bottomlable, .collection-box h2.centerlable {
         font-size: 1.8em;
         letter-spacing: 1px
     }
@@ -3009,11 +2605,7 @@
         line-height: 3.2em
     }
 
-    .notfound404 p {
-        font-size: 12px
-    }
-
-    .notfound404 a {
+    .notfound404 a, .notfound404 p {
         font-size: 12px
     }
 
@@ -3032,23 +2624,17 @@
 
     .info-duan {
         float: left;
-        width: 55%;
-        padding: 16px 32px
+        width: 100%;
+        padding: 20px
     }
 
     .info-duan .content {
         height: auto
     }
-
-    .info-duan {
-        width: 100%;
-        padding: 20px
-    }
 }
 
 @media only screen and (max-width: 320px) {
-
-    .tab-choose ul li {
+    .fix-widthcell .naviicon li, .tab-choose ul li {
         padding: 0 10px
     }
 
@@ -3085,46 +2671,21 @@
         width: 26%
     }
 
-    #slider3 {
+    #slider3, #slider4 {
         width: 79%;
         margin: 0 auto
-    }
-
-    #slider4 {
-        width: 79%;
-        margin: 0 auto
-    }
-
-    .background-detail {
-        height: 320px
-    }
-
-    #slider {
-        height: 320px
     }
 
     #slider .slides > li a {
-        height: 320px !important
+        height: 213px !important
     }
 
     .nearby {
         width: 260px
     }
 
-    .fix-widthcell .naviicon li {
-        padding: 0 10px
-    }
-
-    #slider {
+    #slider, .background-detail {
         height: 213px
-    }
-
-    .background-detail {
-        height: 213px
-    }
-
-    #slider .slides > li a {
-        height: 213px !important
     }
 
     .cover-nearby {
@@ -3143,7 +2704,7 @@
         float: none
     }
 
-    .agent-list {
+    .agent-list, .bank-form .right-form .sms-button {
         width: 100%
     }
 
@@ -3161,10 +2722,6 @@
 
     .list-but a {
         font-size: .8em
-    }
-
-    .bank-form .right-form .sms-button {
-        width: 100%
     }
 
     .marketing li {
@@ -3208,21 +2765,15 @@
 
     .info-duan {
         float: left;
-        width: 55%;
-        padding: 16px 32px
+        width: 100%;
+        padding: 20px
     }
 
     .info-duan .content {
         height: auto
     }
 
-    .info-duan {
-        width: 100%;
-        padding: 20px
-    }
-
     .info-bs-price {
         position: initial
     }
-
 }

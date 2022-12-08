@@ -1,119 +1,119 @@
 {% load static listing i18n %}
 
 
-    <div class="row card-body justify-content-center pt-0 pt-md-4 " style="overflow-y: scroll; height:700px;">
-        <div class="text-center">
+<div class="row card-body justify-content-center pt-0 pt-md-4 " style="overflow-y: scroll; height:700px;">
+    <div class="text-center">
         <a class="nav-link pr-0" href="{% url "profile" %}" role="button" data-toggle="dropdown" aria-haspopup="true"
            aria-expanded="false">
 
-                {% if user.avatar and user.avatar != 'img/logo tgnp brown.jpg' %}
-                    <img alt="{{ user.first_name }} {{ user.last_name }}" src="/media/{{ user.avatar }}"
-                         class="rounded-circle avatar" title="{{ user.last_name }}">
-                {% else %}
-                    <img alt="{{ user.first_name }} {{ user.last_name }}" src="{% static '/img/logo tgnp brown.jpg' %}"
-                         class="rounded-circle avatar" title="{{ user.last_name }}">
-                {% endif %}
+            {% if user.avatar and user.avatar != 'img/logo tgnp brown.jpg' %}
+                <img alt="{{ user.first_name }} {{ user.last_name }}" src="/media/{{ user.avatar }}"
+                     class="rounded-circle avatar" title="{{ user.last_name }}">
+            {% else %}
+                <img alt="{{ user.first_name }} {{ user.last_name }}" src="{% static '/img/logo tgnp brown.jpg' %}"
+                     class="rounded-circle avatar" title="{{ user.last_name }}">
+            {% endif %}
 
-                {% if not is_popup %}
-                    <!-- User -->
-                    {% block usertools %}
-                        <ul class="d-md-flex">
-                            <li class="nav-item dropdown">
-                                <div class="dropdown-menu">
-                                    <a href="{% url "profile" %}" class="dropdown-item">
-                                        <i class="fa fa-user-alt"></i>
-                                        <span>Thông tin cá nhân</span>
-                                    </a>
-                                    {% block userlinks %}
-                                        {% if site_url %}
-                                            <a href="{{ site_url }}" target="_blank"
-                                               class="dropdown-item">
-                                                <i class="fa fa-shopping-cart"></i><span> {% translate 'Trang sản phẩm' %}</span>
-                                            </a>
+            {% if not is_popup %}
+                <!-- User -->
+                {% block usertools %}
+                    <ul class="d-md-flex">
+                        <li class="nav-item dropdown">
+                            <div class="dropdown-menu">
+                                <a href="{% url "profile" %}" class="dropdown-item">
+                                    <i class="fa fa-user-alt"></i>
+                                    <span>Thông tin cá nhân</span>
+                                </a>
+                                {% block userlinks %}
+                                    {% if site_url %}
+                                        <a href="{{ site_url }}" target="_blank"
+                                           class="dropdown-item">
+                                            <i class="fa fa-shopping-cart"></i><span> {% translate 'Trang sản phẩm' %}</span>
+                                        </a>
+                                    {% endif %}
+                                    {% if user.is_active and user.is_staff %}
+                                        {% url 'django-admindocs-docroot' as docsroot %}
+                                        {% if docsroot %}
+                                            <a href="{{ docsroot }}"> {% translate 'Tài liệu' %}</a>
                                         {% endif %}
-                                        {% if user.is_active and user.is_staff %}
-                                            {% url 'django-admindocs-docroot' as docsroot %}
-                                            {% if docsroot %}
-                                                <a href="{{ docsroot }}"> {% translate 'Tài liệu' %}</a>
-                                            {% endif %}
-                                        {% endif %}
-                                        {% if user.has_usable_password %}
-                                            <a href="{% url 'password_change' %}" target="_blank"
-                                               class="dropdown-item">
-                                                <i class="fa fa-user-cog"></i><span> {% translate 'Đổi mật khẩu' %}</span>
-                                            </a>
-                                        {% endif %}
-                                    {% endblock %}
-                                    <div class="dropdown-divider"></div>
-                                    <a href="{% url 'logout' %}" class="dropdown-item">
-                                        <i class="fa fa-user-lock"></i>
-                                        <span>{% translate 'Đăng xuất' %}</span>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    {% endblock %}
+                                    {% endif %}
+                                    {% if user.has_usable_password %}
+                                        <a href="{% url 'password_change' %}" target="_blank"
+                                           class="dropdown-item">
+                                            <i class="fa fa-user-cog"></i><span> {% translate 'Đổi mật khẩu' %}</span>
+                                        </a>
+                                    {% endif %}
+                                {% endblock %}
+                                <div class="dropdown-divider"></div>
+                                <a href="{% url 'logout' %}" class="dropdown-item">
+                                    <i class="fa fa-user-lock"></i>
+                                    <span>{% translate 'Đăng xuất' %}</span>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                {% endblock %}
 
-                {% endif %}
+            {% endif %}
 
         </a>
-            <h6>
-                {{ user.realtor.position | get_position_type }}
-            </h6><h5>
-            {{ user.first_name }} {{ user.last_name }}
-        </h5>
-            <div class="mt-4">
-                <i class="fa fa-users"></i><label>Tham gia TGNP vào {{ request.user.date_joined }}</label>
+        <br><h6>
+        {{ user.realtor.position | get_position_type }}
+    </h6><h5>
+        {{ user.first_name }} {{ user.last_name }}
+    </h5>
+        <div class="mt-4">
+            <i class="fa fa-users"></i><label>Tham gia TGNP vào {{ request.user.date_joined }}</label>
+        </div>
+        {% if user.realtor %}
+            <div class="h6 mt-4">
+                <i class="fa fa-dollar-sign"></i> {% translate 'Đẳng cấp chuyên môn: Cấp ' %} {{ user.realtor.level }}
             </div>
-            {% if user.realtor %}
-                <div class="h6 mt-4">
-                    <i class="fa fa-dollar-sign"></i> {% translate 'Đẳng cấp chuyên môn: Cấp ' %} {{ user.realtor.level }}
-                </div>
 
-                <div class="h6 mt-4">
-                    <i class="fa fa-star"></i>{% translate 'Danh hiệu:' %} {{ user.realtor.title | get_title_type }}
-                </div>
-            {% endif %}
-            <hr class="my-4"/>
-            {% if point %}
-                <div>
-                    <span class="description">{% translate 'Điểm đầu tư' %}</span>
-                    <span class="heading">{{ point.investment_point }}</span>
+            <div class="h6 mt-4">
+                <i class="fa fa-star"></i>{% translate 'Danh hiệu:' %} {{ user.realtor.title | get_title_type }}
+            </div>
+        {% endif %}
+        <hr class="my-4"/>
+        {% if point %}
+            <div>
+                <span class="description">{% translate 'Điểm đầu tư' %}</span>
+                <span class="heading">{{ point.investment_point }}</span>
 
-                    <span class="description">{% translate 'Điểm uy tín' %}</span>
-                    <span class="heading">{{ point.prestige_points }}</span>
+                <span class="description">{% translate 'Điểm uy tín' %}</span>
+                <span class="heading">{{ point.prestige_points }}</span>
 
-                    <span class="description">{% translate 'Điểm tiềm năng' %}</span>
-                    <span class="heading">{{ point.potential_points }}</span>
+                <span class="description">{% translate 'Điểm tiềm năng' %}</span>
+                <span class="heading">{{ point.potential_points }}</span>
 
-                    <span class="description">{% translate 'Điểm giới thiệu BĐS' %}</span>
-                    <span class="heading">{{ point.bds_referral_point }}</span>
+                <span class="description">{% translate 'Điểm giới thiệu BĐS' %}</span>
+                <span class="heading">{{ point.bds_referral_point }}</span>
 
-                    <span class="description">{% translate 'Điểm giới thiệu khách' %}</span>
-                    <span class="heading">{{ point.customer_referral_point }}</span>
+                <span class="description">{% translate 'Điểm giới thiệu khách' %}</span>
+                <span class="heading">{{ point.customer_referral_point }}</span>
 
-                </div>
+            </div>
 
-                <div class="h6 mt-4">
+            <div class="h6 mt-4">
 
-                    <i class="ni business_briefcase-24 mr-2"></i>Tài khoản đầu tư:
-                    <span class="heading">{{ point.investment_account }} triệu</span>
-                </div>
-            {% endif %}
-
-            <div class="card-header text-center border-0 pt-8 pb-0 pb-md-4">
-                <div class="d-flex justify-content-between">
-                    <a href="{% url 'transaction' %}"><i class="fa fa-exchange-alt"></i> {% translate 'DS Giao dịch ' %}
-                    </a>
-                    <a href="{% url 'customer' %}"><i class="fa fa-passport"></i> {% translate 'DS Khách hàng' %}</a>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <a href="{% url 'mylisting' %}"><i class="fa fa-building"></i> {% translate 'DS Bất động sản' %}
-                    </a>
-                    <a href="{% url 'mylistingpost' %}"><i class="fa fa-newspaper"></i> {% translate 'DS Tin rao' %}
-                    </a>
-                </div>
+                <i class="ni business_briefcase-24 mr-2"></i>Tài khoản đầu tư:
+                <span class="heading">{{ point.investment_account }} triệu</span>
+            </div>
+        {% endif %}
+<br>
+        <div class="card-header text-center border-0 pt-8 pb-0 pb-md-4">
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'transaction' %}"><i class="fa fa-exchange-alt"></i> {% translate 'DS Giao dịch ' %}
+                </a>
+                <a href="{% url 'customer' %}"><i class="fa fa-passport"></i> {% translate 'DS Khách hàng' %}</a>
+            </div>
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'mylisting' %}"><i class="fa fa-building"></i> {% translate 'DS Bất động sản' %}
+                </a>
+                <a href="{% url 'mylistingpost' %}"><i class="fa fa-newspaper"></i> {% translate 'DS Tin rao' %}
+                </a>
             </div>
         </div>
     </div>
+</div>
 

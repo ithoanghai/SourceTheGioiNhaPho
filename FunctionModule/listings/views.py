@@ -128,7 +128,7 @@ def search(request):
 
 
 #class ListingCreateView(LoginRequiredMixin, CreateView):
-class ListingCreateView(LoginRequiredMixin, CreateView):
+class ListingCreateView(CreateView):
     model = Listing
     form_class = ListingForm
     success_url = reverse_lazy('mylistingpost')
