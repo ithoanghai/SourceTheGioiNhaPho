@@ -15,3 +15,11 @@
 <script src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=643586863046523&autoLogAppEvents=1" async crossorigin=anonymous></script>
 {% endcomment %}
 
+/* vue click outside */
+<script>
+    function VueClickOutside() {
+    const e = "__v-click-outside", t = "undefined" != typeof window, n = "undefined" != typeof navigator,
+        a = t && ("ontouchstart" in window || n && navigator.msMaxTouchPoints > 0) ? ["touchstart"] : ["click"];
+}
+    Vue.directive('click-outside', VueClickOutside());
+</script>
