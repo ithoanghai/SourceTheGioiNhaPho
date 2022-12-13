@@ -6,9 +6,9 @@
     {{ block.super }}
     <meta http-equiv="Content-Encoding: gzip, deflate" content="public">
     <meta name="facebook-domain-verification" content="3g449o0k74keromcp6ksrzkk4t8fxm"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/index-merge.css' %}"/>
+    {% comment %}<link rel="stylesheet" type="text/css" href="{% static 'css/index-merge.css' %}"/>{% endcomment %}
     <link rel="canonical" href="https://thegioinhaphovietnam.com.vn"/>
-     <link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}"/>
+     {% comment %}<link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}"/>{% endcomment %}
 {% endblock %}
 
 {% block content %}
@@ -294,11 +294,9 @@
     {{ block.super }}
     <script src=https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js defer crossorigin=anonymous integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" referrerpolicy=no-referrer></script>
     <script src=https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js defer crossorigin=anonymous integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" referrerpolicy=no-referrer></script>
-    <script src="{% static 'js/homepage-search.js' %}" async></script>
+    {% comment %}<script src="{% static 'js/homepage-search.js' %}" async></script>{% endcomment %}
     {% comment %}<script>document.addEventListener("DOMContentLoaded",function(){applyImageLazyLoad(document)})</script>{% endcomment %}
     <script>window.hsConversationsSettings={loadImmediately:!1},window.RFeedback={API:"https://thegioinhaphovietnam.com.vn/mapi",email:"",name:"",phone:"",ip:"10.244.0.0"}</script>
-
-    <style>.search-suggest-list{display:block;position:absolute;background:#fff;top:76%;right:0;width:100%;max-width:400px;z-index:10;border:1px solid rgba(131,131,131,.2);border-radius:2px;padding:5px 0;font-size:14px}.search-suggest-list li{height:auto;min-height:40px}.search-suggest-list li:hover{background:#f3f4f7}.search-suggest-list li a{width:100%;display:block;padding:10px 15px;color:#30333a}.search-suggest-list li a span{display:block;line-height:20px}</style>
-    <script src=/static/js/ion.rangeSlider.min.js></script>
+    {% comment %}<script src=/static/js/ion.rangeSlider.min.js></script>{% endcomment %}
 
 {% endblock %}
