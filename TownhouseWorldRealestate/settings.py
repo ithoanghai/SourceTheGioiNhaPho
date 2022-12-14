@@ -45,11 +45,12 @@ THIRD_PARTIES = [
     'debug_toolbar',
     'rest_framework',
     'rest_framework.authtoken',
+    #'corsheaders',
     'django_filters',
     #'adminplus',
     'cachalot',
     'crispy_forms',
-]
+    ]
 BUILT_IN_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -72,6 +73,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    #'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -218,7 +220,19 @@ DEBUG = bool(os.getenv("DJANGO_DEBUG", "False").lower() in ["true", "1"])
 DEBUG = False
 DEBUG_PROPAGATE_EXCEPTIONS = True
 ALLOWED_HOSTS = ['*']
-
+CORS_ALLOWED_ORIGINS = [
+        'https://thegioinhaphovietnam.com.vn',
+        'http://localhost:8888',
+    ]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    'https://thegioinhaphovietnam.com.vn',
+    'http://localhost:8888',
+    ]
+CSRF_TRUSTED_ORIGINS = [
+        'https://thegioinhaphovietnam.com.vn',
+        'http://localhost:8888',
+    ]
 
 ########################################
 # SITE SETTINGS

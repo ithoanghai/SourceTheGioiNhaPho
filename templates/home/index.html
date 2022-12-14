@@ -45,7 +45,7 @@
         <section class="container col-12">
             <div class="inner pd-top-bottom-block block-project-listing">
                 <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
-                    <b><a href="{% url 'listing_search' %}?trans=sell {{ key }}">{% comment %}{{ listings_for_sale.count }}{% endcomment %}BẤT ĐỘNG SẢN BÁN MỚI NHẤT</a></b>
+                    <b><a href="{% url 'listing_search' %}?trans=sell {{ key }}" style="padding-bottom:10px; font-size: 50px;">{% comment %}{{ listings_for_sale.count }}{% endcomment %}BẤT ĐỘNG SẢN BÁN MỚI NHẤT</a></b>
                 </div>
 
                 <div class="col-12">
@@ -70,7 +70,7 @@
             <div class="col-12">
                 {% for district in listing_by_group_forsale %}
                         <a href="{% url 'listing_search' %}?district={{ district.district }}&so=priority"
-                           title=""> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
+                           title="{{ district.dcount }}"> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
                 {% endfor %}
             </div>
         </div>
@@ -260,7 +260,7 @@
             </div>
             <div class="detail-block">
                 <div class="content-detail-block">
-                    <h2 class="font-tiempos-h2" style="color: #007fff">Các giải pháp toàn diện cho các nhu cầu giao dịch bất động sản</h2>
+                    <h2 class="font-tiempos-h2" >Các giải pháp toàn diện cho các nhu cầu giao dịch bất động sản</h2>
                     <p class="font-rvharmonia" style="color: #007fff">
                         Dù bạn đang có nhu cầu bán / cho thuê căn nhà của mình hoặc đang tìm nhà để mua / thuê, TGNP đều có những dịch vụ môi giới phù hợp với nhu cầu của bạn, cùng hàng loạt các dịch vụ bổ sung đi kèm mang lại trải nghiệm tốt nhất, đạt được kết quả nhanh nhất và chi phí tiết kiệm nhất so với trung bình thị trường.
                     </p>
