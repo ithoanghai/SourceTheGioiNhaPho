@@ -61,19 +61,19 @@
         <div class="top-menu">
             <ul>
                 <li>
-                    <a href="tel:0964399436" aria-label="0964399436">
+                    <a href="tel:0964399436" aria-label="0964399436" title="Gọi 0964399436">
                         <i class="zmdi zmdi-phone"></i>
                         <span>0964399436</span>
                     </a>
-                    <a href="javascript:void(0)" aria-label="Menu" class="menu-humber" style="opacity: 0.8">
-                        <i class="zmdi zmdi-menu"></i>
-                    </a>
+                    <button title="Menu" class="menu-humber">
+                        <i class="zmdi zmdi-menu" style="color: white;"></i>
+                    </button>
                 </li>
             </ul>
         </div>
 
-        <div class="top-menu login col-10">
-            <ul class="col-6" {% comment %} class="welcome-user"{% endcomment %}>
+        <div class="login">
+            <ul {% comment %} class="welcome-user"{% endcomment %}>
                 {% include "menu/_subMenuUserProfile.html" %}
             </ul>
             <div class="agency-tgnp col-5">
