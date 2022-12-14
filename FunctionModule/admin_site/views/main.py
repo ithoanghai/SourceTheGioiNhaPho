@@ -22,7 +22,7 @@ from django.db.models.expressions import Combinable
 from django.urls import reverse
 from django.utils.http import urlencode
 from django.utils.timezone import make_aware
-from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy
 
 # Changelist settings
 ALL_VAR = 'all'

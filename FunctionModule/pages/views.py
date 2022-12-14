@@ -2,6 +2,8 @@ from itertools import groupby
 from random import random
 
 from django import template
+from django.views.decorators.cache import cache_page
+
 from FunctionModule.admin_site import site
 from django.core.paginator import Paginator
 from django.db.models import QuerySet, Count
@@ -24,6 +26,7 @@ def get_client_ip(request):
     return ip
 
 
+@cache_page(60 * 60)
 def home_view(request):
     listings_for_sale = (Listing.objects.order_by('priority','-date_update')
                              .filter(is_published=True, transaction_type=TransactionType.SELL)[:30])

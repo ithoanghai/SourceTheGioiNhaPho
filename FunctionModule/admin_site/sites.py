@@ -16,7 +16,7 @@ from django.urls import NoReverseMatch, reverse
 from django.utils.functional import LazyObject
 from django.utils.module_loading import import_string
 from django.utils.text import capfirst
-from django.utils.translation import gettext as _, gettext_lazy
+from django.utils.translation import gettext_lazy  as _, gettext_lazy
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.i18n import JavaScriptCatalog

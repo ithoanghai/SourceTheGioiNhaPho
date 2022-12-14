@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpRequest
-from django.utils.translation import gettext as _, gettext_lazy
+from django.utils.translation import gettext_lazy as _, gettext_lazy
 from FunctionModule import admin_site
 from FunctionModule.admin_site import DateFieldListFilter
 from FunctionModule.blog.forms import PostAdminForm

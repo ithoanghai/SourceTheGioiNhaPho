@@ -4,7 +4,7 @@ from datetime import datetime
 from django.contrib.postgres.indexes import GinIndex, BTreeIndex
 from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 from FunctionModule.hitcount.models import HitCountMixin, HitCount
 from FunctionModule.accounts.models import User

@@ -8,7 +8,7 @@ from django.contrib.gis.geos import Point
 from django.contrib.postgres.indexes import GinIndex, BTreeIndex
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from embed_video.fields import EmbedVideoField
 from geopy import location
 from FunctionModule.hitcount.models import HitCountMixin, HitCount

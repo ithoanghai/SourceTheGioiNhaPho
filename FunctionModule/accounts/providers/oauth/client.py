@@ -10,7 +10,7 @@ from urllib.parse import parse_qsl, urlparse
 
 from django.http import HttpResponseRedirect
 from django.utils.http import urlencode
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 from requests_oauthlib import OAuth1
 

@@ -165,7 +165,7 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ""
 
 
 ########################################
-# AUTHENTICATION
+# EMAIL
 ########################################
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -183,9 +183,9 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 ########################################
 LANGUAGE_CODE = 'vi'
 TIME_ZONE = 'Asia/Ho_Chi_Minh'
-USE_I18N = False
+USE_I18N = True
 #USE_L10N = True
-USE_TZ = False
+USE_TZ = True
 APPEND_SLASH = False
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale/'),)
 COMPRESS_OFFLINE = True
@@ -287,8 +287,8 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = DATA_UPLOAD_MAX_MEMORY_SIZE
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 4000  # higher than the count of fields
 CACHES = {
     'default': {
-        "BACKEND": "django_redis.cache.RedisCache",
-        'LOCATION': os.getenv('REDIS_URL', default='redis://redis:6379/1')
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        'LOCATION': os.getenv('REDIS_URL', default='redis://redis:6379')
     }
 }
 SESSION_COOKIE_SAMESITE = 'Strict'

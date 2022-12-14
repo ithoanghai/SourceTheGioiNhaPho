@@ -7,7 +7,7 @@ from FunctionModule.admin_site import helpers
 from FunctionModule.admin_site.utils import model_ngettext
 from django.core.exceptions import PermissionDenied
 from django.template.response import TemplateResponse
-from django.utils.translation import gettext as _, gettext_lazy
+from django.utils.translation import gettext_lazy as _, gettext_lazy
 
 
 def delete_selected(modeladmin, request, queryset):

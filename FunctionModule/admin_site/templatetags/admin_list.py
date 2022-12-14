@@ -18,7 +18,7 @@ from django.utils import formats, timezone
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.text import capfirst
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy  as _
 
 from .base import InclusionAdminNode
 

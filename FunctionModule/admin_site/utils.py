@@ -13,7 +13,7 @@ from django.utils import formats, timezone
 from django.utils.html import format_html
 from django.utils.regex_helper import _lazy_re_compile
 from django.utils.text import capfirst
-from django.utils.translation import ngettext, override as translation_override
+from django.utils.translation import gettext_lazy, override as translation_override
 
 QUOTE_MAP = {i: '_%02X' % i for i in b'":/_#?;@&=+$,"[]<>%\n\\'}
 UNQUOTE_MAP = {v: chr(k) for k, v in QUOTE_MAP.items()}

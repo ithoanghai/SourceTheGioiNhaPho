@@ -47,7 +47,7 @@ from django.utils.html import format_html
 from django.utils.http import urlencode
 from django.utils.safestring import mark_safe
 from django.utils.text import capfirst, format_lazy, get_text_list
-from django.utils.translation import gettext as _, ngettext
+from django.utils.translation import gettext_lazy as _, ngettext
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import RedirectView
 

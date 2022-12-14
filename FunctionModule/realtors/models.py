@@ -9,7 +9,7 @@ from django.db import models
 from django.db.models.signals import pre_delete, post_delete, pre_save
 from django.dispatch import receiver
 from django.utils import timezone
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 from rest_framework.generics import get_object_or_404
 
