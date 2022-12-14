@@ -47,11 +47,11 @@
       <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
         <i class="zmdi zmdi-close"></i>
       </button>
-      <a href="javascript:void(0)" class="cover">
+      <a href="{% url 'index' %}" class="cover">
         <img src="{% static 'img/logo.svg' %}" alt="Thế giới Nhà Phố">
       </a>
       <div class="banner-app-info">
-        <a href="javascript:void(0)">TGNP</a>
+        <a href="{% url 'index' %}">TGNP</a>
         <h2>Mua bán Bất động sản nhanh chóng, chính xác, tin cậy</h2>
         <div class="rating-star">
           <i class="zmdi zmdi-star evaluated"></i>
@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <a href="javascript:void(0)" class="btn-install">Mở</a>
+
   </div>
 
   <div id="search-content" class="block-search-noresult page--search" v-cloak>

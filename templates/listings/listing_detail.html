@@ -53,11 +53,11 @@
                 <button onclick="AppPrompt.closePrompt()" class="close-banner-app">
                     <i class="zmdi zmdi-close"></i>
                 </button>
-                <a href="javascript:void(0)" class="cover">
+                <a href="#" class="cover">
                     <img src="{% static 'img/logo.svg' %}" alt="Thế giới Nhà Phố">
                 </a>
                 <div class="banner-app-info">
-                    <a href="javascript:void(0)">TGNP</a>
+                    <a href="#">TGNP</a>
                     <p>Mua bán nhà dễ dàng</p>
                     <div class="rating-star">
                         <i class="zmdi zmdi-star evaluated"></i>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            <a href="javascript:void(0)" class="btn-install">Mở</a>
+
         </div>
 
         <input name="recent-view-property-id" type="hidden" value="{{ listing.id }}">
@@ -235,7 +235,7 @@
                     <ul class="slides slideimg" style="width: 100%">
                         {% for photo in listing.photos %}
                             <li>
-                                <a class="img cover" href="javascript:void(0)"
+                                <a class="img cover" href="#"
                                    title="{{ listing.title }}">
                                     <img class="lazy image-normalized fade"
                                          data-src="{{ photo.url }}"
@@ -246,7 +246,7 @@
                             </li>
                         {% empty %}
                             <li>
-                                <a class="img cover" href="javascript:void(0)"
+                                <a class="img cover" href="#"
                                    title="{{ listing.title }}">
                                     <img class="lazy image-normalized fade"
                                          data-src="{{ listing.house_type|default_img_by_house_type }}"
@@ -280,7 +280,7 @@
                         <ul class="slides slideimg" style="width: 100%">
                             {% for photo in listing.photos %}
                                 <li>
-                                    <a class="img cover" href="javascript:void(0)"
+                                    <a class="img cover" href="#"
                                        title="{{ listing.title }}">
                                         <img class="lazy image-normalized fade"
                                              data-src="{{ photo.url }}"
@@ -844,12 +844,10 @@
                     <div class="divive">hoặc</div>
                     <ul class="group-cta">
                         {% comment %}            <li>
-              <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-hubspot-chat">Trò chuyện với TGNP</a>
+              <a href="#" style="opacity: 0.3" class="btn-property btn-hubspot-chat">Trò chuyện với TGNP</a>
             </li>{% endcomment %}
                         <li>
-                            <a href="javascript:void(0)" style="opacity: 0.3" class="btn-property btn-contact-me">Liên
-                                hệ lại
-                                tôi</a>
+                            <a href="#" style="opacity: 0.3" class="btn-property btn-contact-me">Liên hệ lại tôi</a>
                         </li>
                     </ul>
                 </div>
@@ -860,7 +858,7 @@
             </p>
             <div class="cta-bottom-inner">
                 {% comment %}        <div class="listing__chat">
-          <a name="chathub" class="cta-form request-info btn-hubspot-chat" style="opacity: 0.3" href="javascript:void(0)"><i
+          <a name="chathub" class="cta-form request-info btn-hubspot-chat" style="opacity: 0.3" href="#"><i
             class="zmdi zmdi-comment-text-alt"></i>Trò chuyện</a>
         </div>{% endcomment %}
                 <div class="phone">
@@ -997,7 +995,7 @@
                         </button>
                         <div class="popup-left">
                             <div class="popup-left-cover" style="padding-left: 5px; padding-top: 5px "><a
-                                    href="javascript:void(0)">
+                                    href="#">
                                 {% if listing.main_photo %}
                                     {% with listing.main_photo as photo %}
                                         <img src="{% static "img/default.png" %}"
@@ -1020,7 +1018,7 @@
                             </a> <label class="status status-top status-monopoly" style="display: none;">Độc
                                 quyền</label></div>
                             <div class="popup-left-content"><h3 class="popup-left-title"><a
-                                    href="javascript:void(0)">{{ listing.title }}</a></h3>
+                                    href="#">{{ listing.title }}</a></h3>
                                 <div class="popup-left-address">Mã: <b>{{ listing.code }}</b></div>
                                 <ul class="popup-left-info">
                                     {% if listing.floors %}

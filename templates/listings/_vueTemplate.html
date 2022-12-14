@@ -196,7 +196,10 @@
                     <li>Kiểm tra lại địa điểm được nhập hoặc mở rộng phạm vi tìm kiếm bằng cách di chuyển bản đồ.</li>
                     <li>Thay đổi hoặc huỷ bỏ bộ lọc đang áp dụng.</li>
                 </ul>
-                <a class="btn-primary btn-view-agent" @click.prevent="showContactProject">Liên hệ tư vấn</a>
+                <div class="btn-contact" style="opacity: 1;">
+                            <a href="{% url 'contacts' %}" class="agent-contact-modal btn-primary-agent btn-red s-btn-red mgb-0" data-target="contact-agent">Liên hệ tư vấn</a>
+                        </div>
+                {% comment %}<a class="btn-primary btn-view-agent" @click.prevent="showContactProject">Liên hệ tư vấn</a>{% endcomment %}
             </div>
         </div>
         <div v-if="listings.length" class="paginator-search">

@@ -52,8 +52,8 @@
         <div class="row" style="color: orange">
             <ul class="info-container">
                 <li class="address" style="color: #85aee2">
-                    <a href="{% url 'index' %}" title="Thế giới Nhà Phố" style="margin-left: 30px">
-                        <img style="height: 200px; width: 200px" src="{% static 'img/logo-nen-trang-co-chu.svg' %}"
+                    <a href="{% url 'index' %}" class="btn-menu" title="Thế giới Nhà Phố" style="margin-left: 30px">
+                        <img style="height: 60px; width: 60px" src="{% static 'img/logo-nen-trang-co-chu.svg' %}"
                              alt="Thế giới Nhà Phố" title="Thế giới Nhà Phố">
                     </a>
                     <br>
@@ -61,9 +61,9 @@
                     {% comment %}          <p> MST/ĐKKD: 0109548789</p>{% endcomment %}
                     <p>thegioinhaphovietnam@gmail.com</p>
                     <div>
-                        <a class="facebook-color" title="Share Facebook"> <i
+                        <a class="facebook-color" href="https://www.facebook.com/TheGioiNhaPhoVietNam/" title="Share Facebook"> <i
                                 class="zmdi zmdi-facebook-box"></i></a>
-                        <a class="twitter-color" title="Share Messenger"><i class="zmdi zmdi-twitter"></i></a>
+                        {% comment %}<a class="twitter-color" title="Share Messenger"><i class="zmdi zmdi-twitter"></i></a>{% endcomment %}
                         <a class="twitter-color" href="https://www.instagram.com/thegioinhaphovietnam"
                            title="Instagram TGNP" target="_blank"><i class="zmdi zmdi-instagram"></i></a>
                         <a class="twitter-color"
@@ -107,7 +107,7 @@
                     <span class="link-ud"> LIÊN HỆ <i class="zmdi zmdi-chevron-down"></i> </span>
                     <ul id="mn-04">
                         <li>
-                            <a class="btn-contact" style="margin-left: 0px" data-target="contact-agent"><i
+                            <a href="#" class="btn-contact" style="margin-left: 0px" data-target="contact-agent"><i
                                     class="zmdi zmdi-email-open"></i>Liên hệ đăng ký dịch vụ</a>
                         </li>
                         <li>

@@ -5,7 +5,7 @@
         <div class="top-menu">
             <ul>
                 <li class="sub-menu">
-                    <a href="{% url 'index' %}">Trang chủ</a>
+                    <a href="{% url 'index' %}" class="btn-menu">Trang chủ</a>
                 </li>
 
                 {% include "menu/_subMenuBuy.html" %}
@@ -17,14 +17,14 @@
         </div>
 
         <div class="logo">
-            <a href="{% url 'index' %}" title="Thế giới Nhà Phố logo">
+            <a href="{% url 'index' %}" class="btn-menu" title="Thế giới Nhà Phố logo">
                 <img src="{% static 'img/logo-nen-trang.svg' %}" alt="Thế giới Nhà Phố">
             </a>
         </div>
 
         <div class="main-nav-menu">
             <div class="main-nav-menu__head">
-                <a href="{% url 'index' %}" class="logo">
+                <a href="{% url 'index' %}" class="logo btn-menu">
                     <img src="{% static 'img/logo-ko-chu.svg' %}" alt="Thế giới Nhà Phố" title="thegioinhaphovietnam.com.vn">
                 </a>
                 <button class="close__main-menu" title="Đóng">
@@ -33,10 +33,10 @@
             </div>
             <ul>
                 <li class="sub-menu">
-                    <a href="{% url 'index' %}">Trang chủ</a>
+                    <a href="{% url 'index' %}" class="btn-menu">Trang chủ</a>
                 </li>
                 <li>
-                    <a href="{% url "postlistings" %}"> <i
+                    <a href="{% url "postlistings" %}" class="btn-menu"> <i
                             class="fa fa-pencil-alt"></i> {% translate 'Đăng Bán/Cho thuê miễn phí' %}</a>
                 </li>
                 {% include "menu/_subMenuBuy.html" %}
@@ -52,7 +52,7 @@
     </div>
     <div class="col-center">
         <div class="logo-large">
-            <a href="{% url 'index' %}" title="Thế giới Nhà Phố logo">
+            <a href="{% url 'index' %}" title="Thế giới Nhà Phố logo" class="btn-menu">
                 <img src="{% static 'img/logo-nen-trang-co-chu.svg' %}" style="height: 100px; width: 100px" alt="Thế giới Nhà Phố" title="Thế giới Nhà Phố">
             </a>
         </div>
@@ -76,7 +76,7 @@
             <ul {% comment %} class="welcome-user"{% endcomment %}>
                 {% include "menu/_subMenuUserProfile.html" %}
             </ul>
-            <div class="agency-tgnp col-5">
+            <div class="agency-tgnp">
                 <a href="{% url "postlistings" %}" title="Đăng tin nhà đất"><i
                         class="fa fa-pencil-alt"></i> {% translate 'Đăng tin BĐS miễn phí' %}</a>
             </div>

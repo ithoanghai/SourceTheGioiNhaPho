@@ -16,7 +16,7 @@
                   <ul>
                     <li v-for="i in 10" @mouseover="onMouseOverRate(i)"
                         @mouseleave="onMouseLeaveRate(i)" @click="selectStep1Rate(i)">
-                      <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                      <a :class="{active: step1.rate == i}" href="#"
                          v-text="i"></a>
                     </li>
                   </ul>
@@ -81,10 +81,10 @@
               </div>
                 <div>
               <a @click="gotoStep(step - 1)" v-show="step > 1"
-                 class="butt-primary butt-transparent prev" href="javascript:void(0)"
+                 class="butt-primary butt-transparent prev" href="#"
                  id="prev">Trước</a>
               <a @click="onClickNext()" v-show="step < 3" :disabled="!canNext"
-                 class="butt-primary btn-grey next" href="javascript:void(0)" id="next">Tiếp</a>
+                 class="butt-primary btn-grey next" href="#" id="next">Tiếp</a>
               <button @click="onClickSend" v-show="step == 3" class="butt-primary btn-grey">
                 <span v-show="!isSending" class="send">Gửi</span>
                 <span v-show="isSending">Đang gửi...</span>
@@ -105,7 +105,7 @@
               <div class="choose-number">
                 <ul>
                   <li v-for="i in 10" @click="selectStep1Rate(i)">
-                    <a :class="{active: step1.rate == i}" href="javascript:void(0)"
+                    <a :class="{active: step1.rate == i}" href="#"
                        v-text="i"></a>
                   </li>
                 </ul>
@@ -178,7 +178,7 @@
           </div>
         </div>
         <div class="popup-footer">
-          <a @click="hideModal()" class="butt-primary butt-red btn-red" href="javascript:void(0)">Đóng</a>
+          <a @click="hideModal()" class="butt-primary butt-red btn-red" href="#">Đóng</a>
         </div>
       </div>
     </div>
