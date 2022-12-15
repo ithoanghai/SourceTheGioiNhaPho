@@ -1,5 +1,5 @@
 
-new Vue({
+var detailPopupContact = new Vue({
     el: '#detailPopupContact',
     template: '#detailPopupContactTemplate',
     delimiters: ["[[", "]]"],
@@ -21,7 +21,7 @@ new Vue({
         }
     },
     beforeMount() {
-        this.data.message = $('#detailContactForm input[name="message"]').val();
+        this.data.data.message = $('#detailContactForm input[name="message"]').val();
     },
     mounted() {
         const e = this;
