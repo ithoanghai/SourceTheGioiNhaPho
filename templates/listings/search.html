@@ -24,10 +24,6 @@
 {% block head %}
   {{ block.super }}
   <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/listings/search"/>
-
-  {% comment %}<link rel="stylesheet" href="{% static 'css/loading.min.css' %}"/>
-  <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
-  <link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}"/>{% endcomment %}
     <link rel="preload" href="{% static 'css/search.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{% static 'css/search.css' %}"></noscript>
   {% include 'listings/_vueTemplate.html' %}
@@ -97,7 +93,6 @@
 {% block scripts %}
   {{ block.super }}
     <script src="{% static 'js/search.js' %}" async></script>
-    <script src="{% static 'js/ion.rangeSlider.min.js' %}" defer></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default" defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKbev18w2O63PfjhgpyU6DWvL6G4DCCc&libraries=drawing%2Cplaces%2Cgeometry&language=vi&callback=callbackInitMap" async></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" async crossorigin=anonymous integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" referrerpolicy=no-referrer></script>

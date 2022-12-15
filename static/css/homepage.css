@@ -1,8 +1,23 @@
 @font-face {
-    font-family: "Material-Design-Iconic-Font";
-    src: url(../fonts/Material-Design-Iconic-Fontd1f1.woff2?v=2.2.0) format("woff2"), url(../fonts/Material-Design-Iconic-Fontd1f1.woff?v=2.2.0) format("woff"), url(../fonts/Material-Design-Iconic-Fontd1f1.ttf?v=2.2.0) format("truetype");
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'Material-Design-Iconic-Font';
+  src: url('../fonts/Material-Design-Iconic-Font.woff2?v=2.2.0') format('woff2'), url('../fonts/Material-Design-Iconic-Font.woff?v=2.2.0') format('woff'), url('../fonts/Material-Design-Iconic-Font.ttf?v=2.2.0') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+    font-family: Tiempos;
+    src: url(../fonts/TiemposHeadline-Medium.eot);
+    src: url(../fonts/TiemposHeadline-Mediumd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/TiemposHeadline-Medium.woff) format("woff"), url(../fonts/TiemposHeadline-Medium.ttf) format("truetype"), url(../fonts/TiemposHeadline-Medium.svg#roboto_condensedregular) format("svg");
+    font-weight: 500;
+    font-display: swap
+}
+
+@font-face {
+    font-family: tgnp-icon;
+    src: url(../fonts/TGNPIcons.eot);
+    src: url(../fonts/TGNPIconsd41d.eot?#iefix) format("embedded-opentype"), url(../fonts/TGNPIcons.woff) format("woff"), url(../fonts/TGNPIcons.ttf) format("truetype"), url(../fonts/TGNPIcons.svg#roboto_condensedregular) format("svg");
     font-display: swap
 }
 
@@ -518,6 +533,10 @@
     content: ""
 }
 
+.zmdi-chevron-up:before {
+    content: ""
+}
+
 .zmdi-long-arrow-left:before {
     content: ""
 }
@@ -540,6 +559,18 @@
 
 .zmdi-youtube:before {
     content: ""
+}
+
+.zmdi-bath:before{
+    content: '\f2cd';
+}
+
+.zmdi-lock:before {
+    content: ""
+}
+
+.zmdi-edit:before {
+    content: ""
 }
 
 .headerNoScroll {
@@ -837,6 +868,12 @@ header#home::before {
 @media (max-width: 1024px) {
     .main-header .col-right .top-menu ul li:first-of-type .menu-humber:hover .zmdi {
         color: initial
+    }
+}
+
+@media (min-width: 1096px) {
+    .main-header .col-left .logo {
+        display: none
     }
 }
 
@@ -2023,12 +2060,29 @@ label {
     cursor: pointer
 }
 
+@media screen and (max-width: 480px) {
+    .banner-content-inner form .search-container {
+        position: inherit;
+        height: 50px;
+        display: inline-block;
+        overflow: hidden
+    }
+}
+
 .banner-content-inner form .search-container {
     position: relative;
     width: 100%;
     -webkit-box-shadow: 8px 60px 45px 7px rgba(0, 0, 0, .4);
     box-shadow: 8px 60px 45px 7px rgba(0, 0, 0, .4);
     clear: both
+}
+
+.banner-content-inner form .search-container > a {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 50px
 }
 
 .banner-content-inner form .search-container .zmdi {
@@ -2051,6 +2105,10 @@ label {
     padding: 0 20px 0 60px;
     float: left;
     -webkit-appearance: none
+}
+
+.banner-content-inner form .search-container .search-input:disabled {
+    color: rgba(68, 76, 89, .15)
 }
 
 .banner-content-inner form .search-container .search-input::-webkit-input-placeholder {
@@ -2078,6 +2136,11 @@ label {
     padding: 0;
     color: #fff;
     display: none
+}
+
+.banner-content-inner form .search-container .btn-search:focus {
+    border: 0;
+    outline: 0
 }
 
 .banner-content-inner form .search-container .recent-search {

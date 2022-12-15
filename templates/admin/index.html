@@ -24,12 +24,12 @@
                             dưới:</h6>
                     </div>
                     <a class="dropdown-item" href="{% url "postlistings" %}"> <i
-                            class="fa fa-pencil-alt"></i> {% translate 'Đăng tin BĐS' %}</a>
+                            class="zmdi zmdi-edit"></i> {% translate 'Đăng tin BĐS' %}</a>
                     <div class="dropdown-divider"></div>
                     {% include 'admin/app_list.html' with app_list=available_apps show_changelinks=True %}
                     <div class="dropdown-divider"></div>
                     <a href="{% url "profile" %}" class="dropdown-item">
-                        <i class="fa fa-user-edit"></i>
+                        <i class="zmdi zmdi-account-box-o"></i>
                         <span>Quản lý cá nhân</span>
                     </a>
                     {% comment %}<a href="{% url "profile" %}" class="dropdown-item">
@@ -55,7 +55,7 @@
                         {% if user.has_usable_password %}
                             <a href="{% url 'password_change' %}" target="_blank"
                                class="dropdown-item">
-                                <i class="fa fa-user-lock"></i><span>{% translate 'Đổi mật khẩu' %}</span>
+                                <i class="zmdi zmdi-lock"></i><span>{% translate 'Đổi mật khẩu' %}</span>
                             </a>
                         {% endif %}
                     {% endblock %}
@@ -91,7 +91,7 @@
                                     </div>
                                 </div>
                                 <p class="mt-3 mb-0 text-muted text-sm">
-                                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                                    <span class="text-success mr-2"><i class="zmdi zmdi-long-arrow-up"></i> 3.48%</span>
                                     <span class="text-nowrap">Since last month</span>
                                 </p>
                             </div>

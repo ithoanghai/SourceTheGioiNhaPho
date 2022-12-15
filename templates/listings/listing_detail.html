@@ -363,7 +363,7 @@
                                     </li>
                                 {% endif %}
                                 {% if listing.floors %}
-                                    <li><i class="fa fa-h-square"></i> {{ listing.floors }} {% trans "tầng" %}
+                                    <li><i class="zmdi zmdi-layers"></i> {{ listing.floors }} {% trans "tầng" %}
                                     </li> {% endif %}
                                 {% if listing.width != 0 and listing.width > 3.5 %}
                                     <li>
@@ -376,7 +376,7 @@
                                     </li>
                                 {% endif %}
                                 {% if listing.bathrooms %}
-                                    <li><i class="fa fa-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %}
+                                    <li><i class="zmdi zmdi-bath zmdi-b"></i>{{ listing.bathrooms }} {% trans "tắm" %}
                                     </li> {% endif %}
                             </ul>
                             <ul class="listing-price">
@@ -1140,9 +1140,8 @@
 {% block scripts %}
     {{ block.super }}
     <script async src="{% static 'js/listing.js' %}"></script>
-    {% comment %}<script defer src="{% static 'js/favorite.min.js' %}"></script>{% endcomment %}
-    <script defer src="{% static 'js/home-recent-view.min.js' %}"></script>
-    <script defer src="{% static 'js/listing-detail.js' %}"></script>
+{% comment %}    <script defer src="{% static 'js/home-recent-view.min.js' %}"></script>
+    <script defer src="{% static 'js/listing-detail.js' %}"></script>{% endcomment %}
     <script>
         window['isListing'] = true;
         window['favorite_api'] = 'api/favorite';
@@ -1158,7 +1157,7 @@
     {% if listing.videos %}
         <link href="//vjs.zencdn.net/7.10.2/video-js.min.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="//vjs.zencdn.net/7.10.2/video.min.js"></script>
-        <script type="text/javascript" src="{% static 'js/youtube_video.min.js' %}"></script>
+        {% comment %}<script type="text/javascript" src="{% static 'js/youtube_video.min.js' %}"></script>{% endcomment %}
     {% endif %}"
 
     <script src="{% static 'hitcount/jquery.postcsrf.js' %}"></script>

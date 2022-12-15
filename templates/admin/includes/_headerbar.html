@@ -62,7 +62,7 @@
                                     <h6 class="text-overflow m-0">CHỨC NĂNG CHÍNH!</h6>
                                 </div>
                                 <a class="dropdown-item" href="{% url "postlistings" %}"> <i
-                                        class="fa fa-pencil-alt"></i>{% translate 'Đăng tin BĐS' %}</a>
+                                        class="zmdi zmdi-edit"></i>{% translate 'Đăng tin BĐS' %}</a>
                                 {% block userlinks %}
                                     {% if site_url %}
                                         <a href="{{ site_url }}" target="_blank" class="dropdown-item">
@@ -70,7 +70,7 @@
                                         </a>
                                     {% endif %}
                                     <a href="{% url "profile" %}" class="dropdown-item">
-                                        <i class="fa fa-user-edit"></i><span>{% translate 'Trang cá nhân' %}</span>
+                                        <i class="zmdi zmdi-account-box-o"></i><span>{% translate 'Trang cá nhân' %}</span>
                                     </a>
                                     {% if user.is_active and user.is_staff %}
                                         {% url 'django-admindocs-docroot' as docsroot %}

@@ -11,29 +11,29 @@
         <ul>
             <li>
                 <a href="{% url 'mylistingpost' %}"> <i
-                        class="fa fa-newspaper"></i> {% translate 'Tin đăng rao vặt của tôi' %}</a>
+                        class="zmdi zmdi-collection-textr"></i> {% translate 'Tin đăng rao vặt của tôi' %}</a>
             </li>
             <li class="dropdown-divider divide"></li>
             {% if user.is_staff or user.is_superuser %}
                 <li>
-                    <a href="{% url "admin" %}"> <i class="fa fa-chart-area"></i> {% translate 'Trang quản trị' %}
+                    <a href="{% url "admin" %}"> <i class="zmdi zmdi-settings"></i> {% translate 'Trang quản trị' %}
                     </a>
                 </li>
             {% endif %}
             <li>
-                <a href="{% url "profile" %}"> <i class="fa fa-user-edit"></i> {% translate 'Trang cá nhân' %}</a>
+                <a href="{% url "profile" %}"> <i class="zmdi zmdi-account-box-o"></i> {% translate 'Trang cá nhân' %}</a>
             </li>
             <li class="dropdown-divider divide"></li>
             <li>
                 <a href="{% url 'transaction' %}"> <i
-                        class="fa fa-exchange-alt"></i> {% translate 'Danh sách giao dịch' %} </a>
+                        class="zmdi zmdi-swap"></i> {% translate 'Danh sách giao dịch' %} </a>
             </li>
             <li>
-                <a href="{% url 'customer' %}"> <i class="fa fa-passport"></i> {% translate 'Danh sách khách hàng' %}
+                <a href="{% url 'customer' %}"> <i class="zmdi zmdi-accounts-alt"></i> {% translate 'Danh sách khách hàng' %}
                 </a>
             </li>
             <li>
-                <a href="{% url 'mylisting' %}"> <i class="fa fa-building"></i> {% translate 'Danh sách bất động sản' %}
+                <a href="{% url 'mylisting' %}"> <i class="zmdi zmdi-shopping-basket"></i> {% translate 'Danh sách bất động sản' %}
                 </a>
             </li>
             {% if user.is_active and user.is_staff %}
@@ -51,17 +51,17 @@
             {% if user.has_usable_password %}
                 <li>
                     <a href="{% url 'password_change' %}"><i
-                            class="fa fa-user-cog"></i> {% translate 'Đổi mật khẩu' %}</a>
+                            class="zmdi zmdi-shield-security"></i> {% translate 'Đổi mật khẩu' %}</a>
                 </li>
             {% endif %}
             <li>
-                <a href="{% url 'logout' %}"><i class="fa fa-user-lock"></i> {% translate 'Đăng xuất' %}</a>
+                <a href="{% url 'logout' %}"><i class="zmdi zmdi-lock"></i> {% translate 'Đăng xuất' %}</a>
             </li>
 
         </ul>
     {% else %}
         <div>
-            <a href="#login" title="Đăng nhập / Đăng ký" class="btn-login"><i class="fa fa-user-lock"></i> {% translate 'Đăng nhập/ Đăng ký' %}</a>
+            <a href="#login" title="Đăng nhập / Đăng ký" class="btn-login"><i class="zmdi zmdi-lock"></i> {% translate 'Đăng nhập/ Đăng ký' %}</a>
         </div>
     {% endif %}
 

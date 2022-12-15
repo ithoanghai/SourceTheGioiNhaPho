@@ -21,14 +21,14 @@
                         <li class="nav-item dropdown">
                             <div class="dropdown-menu">
                                 <a href="{% url "profile" %}" class="dropdown-item">
-                                    <i class="fa fa-user-alt"></i>
+                                    <i class="zmdi zmdi-account-box"></i>
                                     <span>Thông tin cá nhân</span>
                                 </a>
                                 {% block userlinks %}
                                     {% if site_url %}
                                         <a href="{{ site_url }}" target="_blank"
                                            class="dropdown-item">
-                                            <i class="fa fa-shopping-cart"></i><span> {% translate 'Trang sản phẩm' %}</span>
+                                            <i class="zmdi zmdi-shopping-cart"></i><span> {% translate 'Trang sản phẩm' %}</span>
                                         </a>
                                     {% endif %}
                                     {% if user.is_active and user.is_staff %}
@@ -40,13 +40,13 @@
                                     {% if user.has_usable_password %}
                                         <a href="{% url 'password_change' %}" target="_blank"
                                            class="dropdown-item">
-                                            <i class="fa fa-user-cog"></i><span> {% translate 'Đổi mật khẩu' %}</span>
+                                            <i class="zmdi zmdi-shield-security"></i><span> {% translate 'Đổi mật khẩu' %}</span>
                                         </a>
                                     {% endif %}
                                 {% endblock %}
                                 <div class="dropdown-divider"></div>
                                 <a href="{% url 'logout' %}" class="dropdown-item">
-                                    <i class="fa fa-user-lock"></i>
+                                    <i class="zmdi zmdi-lock"></i>
                                     <span>{% translate 'Đăng xuất' %}</span>
                                 </a>
                             </div>
@@ -63,15 +63,15 @@
         {{ user.first_name }} {{ user.last_name }}
     </h5>
         <div class="mt-4">
-            <i class="fa fa-users"></i><label>Tham gia TGNP vào {{ request.user.date_joined }}</label>
+            <i class="zmdi zmdi-accounts-add"></i><label>Tham gia TGNP vào {{ request.user.date_joined }}</label>
         </div>
         {% if user.realtor %}
             <div class="h6 mt-4">
-                <i class="fa fa-dollar-sign"></i> {% translate 'Đẳng cấp chuyên môn: Cấp ' %} {{ user.realtor.level }}
+                <i class="zmdi zmdi-ticket-star"></i> {% translate 'Đẳng cấp chuyên môn: Cấp ' %} {{ user.realtor.level }}
             </div>
 
             <div class="h6 mt-4">
-                <i class="fa fa-star"></i>{% translate 'Danh hiệu:' %} {{ user.realtor.title | get_title_type }}
+                <i class="zmdi zmdi-star"></i>{% translate 'Danh hiệu:' %} {{ user.realtor.title | get_title_type }}
             </div>
         {% endif %}
         <hr class="my-4"/>
@@ -103,14 +103,14 @@
 <br>
         <div class="card-header text-center border-0 pt-8 pb-0 pb-md-4">
             <div class="d-flex justify-content-between">
-                <a href="{% url 'transaction' %}"><i class="fa fa-exchange-alt"></i> {% translate 'DS Giao dịch ' %}
+                <a href="{% url 'transaction' %}"><i class="zmdi zmdi-swap"></i> {% translate 'DS Giao dịch ' %}
                 </a>
-                <a href="{% url 'customer' %}"><i class="fa fa-passport"></i> {% translate 'DS Khách hàng' %}</a>
+                <a href="{% url 'customer' %}"><i class="zmdi zmdi-accounts-alt"></i> {% translate 'DS Khách hàng' %}</a>
             </div>
             <div class="d-flex justify-content-between">
-                <a href="{% url 'mylisting' %}"><i class="fa fa-building"></i> {% translate 'DS Bất động sản' %}
+                <a href="{% url 'mylisting' %}"><i class="zmdi zmdi-shopping-basket"></i> {% translate 'DS Bất động sản' %}
                 </a>
-                <a href="{% url 'mylistingpost' %}"><i class="fa fa-newspaper"></i> {% translate 'DS Tin rao' %}
+                <a href="{% url 'mylistingpost' %}"><i class="zmdi zmdi-collection-textr"></i> {% translate 'DS Tin rao' %}
                 </a>
             </div>
         </div>
