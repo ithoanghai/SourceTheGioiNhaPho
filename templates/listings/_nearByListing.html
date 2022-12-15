@@ -8,7 +8,7 @@
             {% if listing.main_photo %}
                 {% with listing.main_photo as photo %}
                     <img src="{% static "img/default.png" %}"
-                         data-src="{{ photo.url }}"
+                         src="{{ photo.url }}"
                          alt="{{ listing.title }}"
                          title="{{ listing.title }}"
                          class="lazy" draggable="false"
@@ -17,7 +17,7 @@
                 {% endwith %}
             {% else %}
                 <img src="{% static "img/default.png" %}"
-                     data-src="{{ listing.house_type|default_img_by_house_type }}"
+                     src="{{ listing.house_type|default_img_by_house_type }}"
                      alt="{{ listing.title }}"
                      title="{{ listing.title }}"
                      class="lazy" draggable="false"

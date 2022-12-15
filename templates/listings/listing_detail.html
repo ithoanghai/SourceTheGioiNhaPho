@@ -136,7 +136,7 @@
                                                  draggable="false"/>
                                         {% else %}
                                             <img class="lazy fade image-normalized"
-                                                 data-src="{{ photo.url }}"
+                                                 src="{{ photo.url }}"
                                                  alt="{{ listing.title }}"
                                                  title="{{ listing.title }}"
                                                  draggable="false"
@@ -149,7 +149,7 @@
                                     <a href="#" class="cover">
                                         {% if forloop.first %}
                                             <img class="image-normalized"
-                                                 data-src="{{ listing.house_type|default_img_by_house_type }}"
+                                                 src="{{ listing.house_type|default_img_by_house_type }}"
                                                  alt="{{ listing.title }}"
                                                  title="{{ listing.title }}"
                                                  draggable="false"
@@ -157,7 +157,7 @@
                                             />
                                         {% else %}
                                             <img class="lazy fade image-normalized"
-                                                 data-src="{{ listing.house_type|default_img_by_house_type }}"
+                                                 src="{{ listing.house_type|default_img_by_house_type }}"
                                                  alt="{{ listing.title }}"
                                                  title="{{ listing.title }}"
                                                  draggable="false"
@@ -238,9 +238,10 @@
                                 <a class="img cover" href="#"
                                    title="{{ listing.title }}">
                                     <img class="lazy image-normalized fade"
-                                         data-src="{{ photo.url }}"
+                                         src="{{ photo.url }}"
                                          title="{{ listing.title }}"
                                          alt="{{ listing.title }}"
+                                         onerror="this.src='{% static "img/default.png" %}'"
                                          draggable="false">
                                 </a>
                             </li>
@@ -249,7 +250,7 @@
                                 <a class="img cover" href="#"
                                    title="{{ listing.title }}">
                                     <img class="lazy image-normalized fade"
-                                         data-src="{{ listing.house_type|default_img_by_house_type }}"
+                                         src="{{ listing.house_type|default_img_by_house_type }}"
                                          title="{{ listing.title }}"
                                          alt="{{ listing.title }}"
                                          draggable="false"
@@ -283,9 +284,10 @@
                                     <a class="img cover" href="#"
                                        title="{{ listing.title }}">
                                         <img class="lazy image-normalized fade"
-                                             data-src="{{ photo.url }}"
+                                             src="{{ photo.url }}"
                                              title="{{ listing.title }}"
                                              alt="{{ listing.title }}"
+                                             onerror="this.src='{% static "img/default.png" %}'"
                                              draggable="false">
                                     </a>
                                 </li>
@@ -294,7 +296,7 @@
                                     <a class="img cover" href="javascript:void(0)"
                                        title="{{ listing.title }}">
                                         <img class="lazy image-normalized fade"
-                                             data-src="{{ listing.house_type|default_img_by_house_type }}"
+                                             src="{{ listing.house_type|default_img_by_house_type }}"
                                              title="{{ listing.title }}"
                                              alt="{{ listing.title }}"
                                              draggable="false"
@@ -543,7 +545,7 @@
                     <div class="form-real-estate__row">
                         <div class="col-left">
                             <div class="cover__isa">
-                                <img class="lazy" data-src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
+                                <img class="lazy" src="{% static 'images/isa-team-v2.png' %}" alt="Chuyên viên đã sẵn sàng hỗ trợ">
                             </div>
                             <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
                         </div>
@@ -754,7 +756,7 @@
                             <div class="cover">
                                 <a href="#" title="{{ listing.title }}">
                                     <img class="lazy fadeout"
-                                         data-src="{{ photo.url }}"
+                                         src="{{ photo.url }}"
                                          alt="{{ listing.title }}"
                                          title="{{ listing.title }}">
                                     <span>Hình sản phẩm</span>
@@ -827,7 +829,7 @@
                 <div v-pre class="form-real-estate">
                     <h3 class="font-tiempos">Liên hệ tư vấn</h3>
                     <div class="cover__isa">
-                        <img class="lazy fade" data-src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
+                        <img class="lazy fade" src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
                     </div>
                     <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
                     <p class="advisory__sub-title">Tư vấn hoàn toàn miễn phí</p>
@@ -943,7 +945,7 @@
               <source
                       srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
                       media="(min-width: 375px)">
-              <img alt="TGNP 3D View" data-src="{% static 'images/service-3dview.png' %}"
+              <img alt="TGNP 3D View" src="{% static 'images/service-3dview.png' %}"
                    srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
                    title="TGNP 3D View">
               </picture>
@@ -963,7 +965,7 @@
                         <div class="clear">
                             <div class="cover">
                                 <img class="lazy" style="object-fit: cover; object-position: center center"
-                                     data-src="{% static 'img/logo-ko-chu.svg' %}"
+                                     src="{% static 'img/logo-ko-chu.svg' %}"
                                      alt="thegioinhaphovietnam.com.vn" title="thegioinhaphovietnam.com.vn">
                             </div>
                             <div class="infoagent">
@@ -998,8 +1000,7 @@
                                     href="#">
                                 {% if listing.main_photo %}
                                     {% with listing.main_photo as photo %}
-                                        <img src="{% static "img/default.png" %}"
-                                             data-src="{{ photo.url }}"
+                                        <img src="{{ photo.url }}"
                                              alt="{{ listing.title }}"
                                              title="{{ listing.title }}"
                                              class="card-img-top" draggable="false"
@@ -1007,8 +1008,7 @@
                                         />
                                     {% endwith %}
                                 {% else %}
-                                    <img src="{% static "img/default.png" %}"
-                                         data-src="{{ listing.house_type|default_img_by_house_type }}"
+                                    <img src="{{ listing.house_type|default_img_by_house_type }}"
                                          alt="{{ listing.title }}"
                                          title="{{ listing.title }}"
                                          class="card-img-top" draggable="false"

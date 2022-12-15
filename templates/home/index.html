@@ -6,9 +6,10 @@
     {{ block.super }}
     <meta http-equiv="Content-Encoding: gzip, deflate" content="public">
     <meta name="facebook-domain-verification" content="3g449o0k74keromcp6ksrzkk4t8fxm"/>
-    {% comment %}<link rel="stylesheet" type="text/css" href="{% static 'css/index-merge.css' %}"/>{% endcomment %}
     <link rel="canonical" href="https://thegioinhaphovietnam.com.vn"/>
-     {% comment %}<link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}"/>{% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+    {% comment %}<link rel="preload" href="{% static 'css/homepage.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{% static 'css/homepage.css' %}"></noscript>{% endcomment %}
 {% endblock %}
 
 {% block content %}
@@ -45,36 +46,39 @@
         <section class="container col-12">
             <div class="inner pd-top-bottom-block block-project-listing">
                 <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
-                    <b><a href="{% url 'listing_search' %}?trans=sell {{ key }}" style="padding-bottom:10px; font-size: 20px;">{% comment %}{{ listings_for_sale.count }}{% endcomment %}BẤT ĐỘNG SẢN BÁN MỚI NHẤT</a></b>
+                    <b><a href="{% url 'listing_search' %}?trans=sell {{ key }}"
+                          style="padding-bottom:10px; font-size: 20px;">{% comment %}{{ listings_for_sale.count }}{% endcomment %}BẤT
+                        ĐỘNG SẢN BÁN MỚI NHẤT</a></b>
                 </div>
 
                 <div class="col-12">
-                        {% for listing in listings_for_sale %}
-                                {% include "listings/_listingCard2.html" %}
-                        {% endfor %}
+                    {% for listing in listings_for_sale %}
+                        {% include "listings/_listingCard2.html" %}
+                    {% endfor %}
                 </div>
-            <div><a class="more" href="{% url "listing_search" %}?trans=sell">
-                        <span >Xem thêm nhà đất bán<i class="zmdi zmdi-chevron-right"></i></span>
-                    </a></div>
+                <div><a class="more" href="{% url "listing_search" %}?trans=sell">
+                    <span>Xem thêm nhà đất bán<i class="zmdi zmdi-chevron-right"></i></span>
+                </a></div>
 
             </div>
         </section>
     {% endif %}
 
-    {%if listing_by_group_forsale %}
-     <section class="container col-12">
-        <div class="inner pd-top-bottom-block block-project-listing">
-            <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
-                <b>NHÀ ĐẤT HÀ NỘI BÁN THEO QUẬN:</b>
-            </div>
-            <div class="col-12">
-                {% for district in listing_by_group_forsale %}
+    {% if listing_by_group_forsale %}
+        <section class="container col-12">
+            <div class="inner pd-top-bottom-block block-project-listing">
+                <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
+                    <b>NHÀ ĐẤT HÀ NỘI BÁN THEO QUẬN:</b>
+                </div>
+                <div class="col-12">
+                    {% for district in listing_by_group_forsale %}
                         <a href="{% url 'listing_search' %}?district={{ district.district }}&so=priority"
-                           title="{{ district.dcount }}"> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
-                {% endfor %}
+                           title="{% get_district district.district %}"> {% get_district district.district %}
+                            ({{ district.dcount }})</a> &ensp;
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     {% endif %}
 
     <section class="container col-12">
@@ -98,40 +102,40 @@
                 </div>
 
                 <div class="col-12">
-                        {% for listing in listings_for_rent %}
-                                {% include "listings/_listingCard2.html" %}
-                        {% endfor %}
+                    {% for listing in listings_for_rent %}
+                        {% include "listings/_listingCard2.html" %}
+                    {% endfor %}
                 </div>
-            <div><a class="more" href="{% url "listing_search" %}?trans=rent">
-                        <span >Xem thêm <i class="zmdi zmdi-chevron-right"></i></span>
-                    </a></div>
+                <div><a class="more" href="{% url "listing_search" %}?trans=rent">
+                    <span>Xem thêm <i class="zmdi zmdi-chevron-right"></i></span>
+                </a></div>
 
             </div>
         </section>
     {% endif %}
 
-    {%if listing_by_group_forrent %}
-     <section class="container col-12">
-        <div class="inner pd-top-bottom-block block-project-listing">
-            <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
-                <b>NHÀ ĐẤT HÀ NỘI CHO THUÊ THEO ĐỊA BÀN:</b>
-            </div>
-            <div class="col-12">
-                {% for district in listing_by_group_forrent %}
+    {% if listing_by_group_forrent %}
+        <section class="container col-12">
+            <div class="inner pd-top-bottom-block block-project-listing">
+                <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
+                    <b>NHÀ ĐẤT HÀ NỘI CHO THUÊ THEO ĐỊA BÀN:</b>
+                </div>
+                <div class="col-12">
+                    {% for district in listing_by_group_forrent %}
                         <a href="{% url 'listing_search' %}?trans=rent&district={{ district.district }}&so=priority"
-                           title=""> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
-                {% endfor %}
+                           title="{% get_district district.district %}"> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     {% endif %}
 
     <section class="container col-12">
         <div class="inner pd-top-bottom-block quickly-sell">
             <div class="quickly-sell-cover">
-                <img data-src="{% static 'images/background-quick-sell-small@1x.jpg' %}"
-                     data-srcset="{% static 'images/background-quick-sell-small@1x.jpg' %} 600w, {% static 'images/background-quick-sell-small@1x.jpg' %} 1920w"
-                     class="lazy" alt="TGNP">
+                <img src="{% static 'images/background-quick-sell-small@1x.jpg' %}"
+                     srcset="{% static 'images/background-quick-sell-small@1x.jpg' %} 600w, {% static 'images/background-quick-sell-small@1x.jpg' %} 1920w"
+                     class="lazy" alt="Thế Giới Nhà Phố - Bán nhanh nhất, cho thuê giá tốt nhất!">
             </div>
             <div class="detail-block">
                 <div class="content-detail-block">
@@ -156,59 +160,63 @@
         <section class="container col-12">
             <div class="inner pd-top-bottom-block block-project-listing">
                 <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
-                    <b><a href="{% url 'listing_search' %}?trans=sell&adv=True {{ key }}">TIN RAO BÁN/CHO THUÊ (Chưa xác thực)</a></b>
+                    <b><a href="{% url 'listing_search' %}?trans=sell&adv=True {{ key }}">TIN RAO BÁN/CHO THUÊ (Chưa xác
+                        thực)</a></b>
                 </div>
 
                 <div class="col-12">
-                        {% for listing in listing_advertising %}
-                                {% include "listings/_listingCard2.html" %}
-                        {% endfor %}
+                    {% for listing in listing_advertising %}
+                        {% include "listings/_listingCard2.html" %}
+                    {% endfor %}
                 </div>
-            <div><a class="more" href="{% url "listing_search" %}?trans=rent">
-                        <span >Xem thêm tin rao khác <i class="zmdi zmdi-chevron-right"></i></span>
-                    </a></div>
+                <div><a class="more" href="{% url "listing_search" %}?trans=rent">
+                    <span>Xem thêm tin rao khác <i class="zmdi zmdi-chevron-right"></i></span>
+                </a></div>
 
             </div>
         </section>
     {% endif %}
 
-    {%if listing_by_group_advertising %}
-     <section class="container col-12">
-        <div class="inner pd-top-bottom-block block-project-listing">
-            <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
-                <b>TIN RAO BĐS THEO QUẬN/HUYỆN:</b>
-            </div>
-            <div class="col-12">
-                {% for district in listing_by_group_advertising %}
+    {% if listing_by_group_advertising %}
+        <section class="container col-12">
+            <div class="inner pd-top-bottom-block block-project-listing">
+                <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
+                    <b>TIN RAO BĐS THEO QUẬN/HUYỆN:</b>
+                </div>
+                <div class="col-12">
+                    {% for district in listing_by_group_advertising %}
                         <a href="{% url 'listing_search' %}?trans=rent&district={{ district.district }}&so=priority"
-                           title=""> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
-                {% endfor %}
+                           title="{% get_district district.district %}"> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     {% endif %}
 
     <section class="container col-12">
         <div class="inner pd-top-bottom-block quickly-sell">
             <div class="quickly-sell-cover">
-                <img data-src="{% static 'images/slide01.jpg' %}"
-                     data-srcset="{% static 'images/slide01.jpg' %} 600w, {% static 'images/slide01.jpg' %} 1920w"
-                     class="lazy" alt="TGNP">
+                <img src="{% static 'images/slide01.jpg' %}"
+                     srcset="{% static 'images/slide01.jpg' %} 600w, {% static 'images/slide01.jpg' %} 1920w"
+                     class="lazy" alt="Thế Giới Nhà Phố - Nhanh chóng tìm được ngôi nhà ưng ý với giá hợp lý!">
             </div>
             <div class="detail-block">
                 <div class="content-detail-block">
                     <h2 class="font-tiempos-h2">Nhanh chóng tìm được ngôi nhà ưng ý với giá hợp lý</h2>
                     <p class="font-rvharmonia">
                         Nhà đất giá tốt được cập nhật liên tục trên TGNP với thông tin và hình ảnh chính xác đến từ
-                                chủ nhà.
-                         Bạn có thể đăng ký xem nhà, thương lượng giá và nhận tư vấn nhanh chóng ngay trên web và ứng dụng.
-                                Dịch vụ TGNP sẽ hỗ trợ bạn mọi thứ phát sinh trong quá trình giao dịch (giấy tờ, pháp lý và vay ngân hàng...)
+                        chủ nhà.
+                        Bạn có thể đăng ký xem nhà, thương lượng giá và nhận tư vấn nhanh chóng ngay trên web và ứng
+                        dụng.
+                        Dịch vụ TGNP sẽ hỗ trợ bạn mọi thứ phát sinh trong quá trình giao dịch (giấy tờ, pháp lý và vay
+                        ngân hàng...)
                     </p>
                     <div class="option-group">
                         <a class="btn-primary btn-large btn-black-outline" href="{% url 'buywithus' %}">
                             Mua với TGNP
                         </a> &nbsp;
-                        <a class="btn-primary btn-large btn-black-outline" href="{% url 'rentwithus' %}">Thuê với TGNP</a>
+                        <a class="btn-primary btn-large btn-black-outline" href="{% url 'rentwithus' %}">Thuê với
+                            TGNP</a>
                     </div>
                 </div>
             </div>
@@ -223,51 +231,55 @@
                 </div>
 
                 <div class="col-12">
-                        {% for listing in listings_project %}
-                                {% include "listings/_listingCard2.html" %}
-                        {% endfor %}
+                    {% for listing in listings_project %}
+                        {% include "listings/_listingCard2.html" %}
+                    {% endfor %}
                 </div>
-            <div><a class="more" href="{% url "listing_search" %}?trans=rent">
-                        <span >Xem thêm dự án khác <i class="zmdi zmdi-chevron-right"></i></span>
-                    </a></div>
+                <div><a class="more" href="{% url "listing_search" %}?trans=rent">
+                    <span>Xem thêm dự án khác <i class="zmdi zmdi-chevron-right"></i></span>
+                </a></div>
 
             </div>
         </section>
     {% endif %}
 
-    {%if listing_by_group_project %}
-     <section class="container col-12">
-        <div class="inner pd-top-bottom-block block-project-listing">
-            <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
-                <b>DỰ ÁN ĐANG GIAO DỊCH THEO ĐỊA BÀN:</b>
-            </div>
-            <div class="col-12">
-                {% for district in listing_by_group_project %}
+    {% if listing_by_group_project %}
+        <section class="container col-12">
+            <div class="inner pd-top-bottom-block block-project-listing">
+                <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
+                    <b>DỰ ÁN ĐANG GIAO DỊCH THEO ĐỊA BÀN:</b>
+                </div>
+                <div class="col-12">
+                    {% for district in listing_by_group_project %}
                         <a href="{% url 'listing_search' %}?trans=project&district={{ district.district }}&so=priority"
-                           title=""> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
-                {% endfor %}
+                           title="{% get_district district.district %}"> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     {% endif %}
 
-        <section class="container col-12">
+    <section class="container col-12">
         <div class="inner pd-top-bottom-block quickly-sell">
             <div class="quickly-sell-cover">
-                <img data-src="{% static 'images/slide001.jpg' %}"
-                     data-srcset="{% static 'images/slide001.jpg' %} 600w, {% static 'images/slide001.jpg' %} 1920w"
-                     class="lazy" alt="TGNP">
+                <img src="{% static 'images/slide001.jpg' %}"
+                     srcset="{% static 'images/slide001.jpg' %} 600w, {% static 'images/slide001.jpg' %} 1920w"
+                     class="lazy" alt="Thế Giới Nhà Phố - Giải pháp toàn diện cho các nhu cầu giao dịch bất động sản">
             </div>
             <div class="detail-block">
                 <div class="content-detail-block">
-                    <h2 class="font-tiempos-h2" >Các giải pháp toàn diện cho các nhu cầu giao dịch bất động sản</h2>
+                    <h2 class="font-tiempos-h2">Các giải pháp toàn diện cho các nhu cầu giao dịch bất động sản</h2>
                     <p class="font-rvharmonia" style="color: #007fff">
-                        Dù bạn đang có nhu cầu bán / cho thuê căn nhà của mình hoặc đang tìm nhà để mua / thuê, TGNP đều có những dịch vụ môi giới phù hợp với nhu cầu của bạn, cùng hàng loạt các dịch vụ bổ sung đi kèm mang lại trải nghiệm tốt nhất, đạt được kết quả nhanh nhất và chi phí tiết kiệm nhất so với trung bình thị trường.
+                        Dù bạn đang có nhu cầu bán / cho thuê căn nhà của mình hoặc đang tìm nhà để mua / thuê, TGNP đều
+                        có những dịch vụ môi giới phù hợp với nhu cầu của bạn, cùng hàng loạt các dịch vụ bổ sung đi kèm
+                        mang lại trải nghiệm tốt nhất, đạt được kết quả nhanh nhất và chi phí tiết kiệm nhất so với
+                        trung bình thị trường.
                     </p>
                     <div class="option-group">
-                        <a href="#" class="btn-contact btn-primary btn-large btn-black-outline" style="margin-left: 0px" data-target="contact-agent"><i
-                                    class="zmdi zmdi-email-open"></i>Liên hệ tư vấn</a>
-                   </div>
+                        <a href="#" class="btn-contact btn-primary btn-large btn-black-outline" style="margin-left: 0px"
+                           data-target="contact-agent"><i
+                                class="zmdi zmdi-email-open"></i>Liên hệ tư vấn</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -292,8 +304,12 @@
 
 {% block scripts %}
     {{ block.super }}
-    <script src=https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js defer crossorigin=anonymous integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" referrerpolicy=no-referrer></script>
-    <script src=https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js defer crossorigin=anonymous integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" referrerpolicy=no-referrer></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js defer crossorigin=anonymous
+            integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+            referrerpolicy=no-referrer></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js defer crossorigin=anonymous
+            integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+            referrerpolicy=no-referrer></script>
     {% comment %}<script src="{% static 'js/homepage-search.js' %}" async></script>{% endcomment %}
     {% comment %}<script>document.addEventListener("DOMContentLoaded",function(){applyImageLazyLoad(document)})</script>{% endcomment %}
     {% comment %}<script src=/static/js/ion.rangeSlider.min.js></script>{% endcomment %}
