@@ -76,16 +76,16 @@
 
         <div class="listing-address">
             {% if listing.urban_area %}
-                <h3>
+                <div>
                     <a href="{% url 'listing_search' %}?keys={{ listing.urban_area }}&so=priority"
                        title="{{ listing.urban_area }}" style="padding-bottom:10px; font-size: 18px; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">{{ listing.urban_area }},</a>
-                </h3>
+                </div>
             {% endif %}
             {% if listing.street %}
-                <h4><b>
+                <div><b>
                     <a href="{% url 'listing_search' %}?keys={{ listing.street }}&so=priority"
                        title="{{ listing.street }}" style="padding-bottom:10px; font-size: 16px;; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">{{ listing.street }},</a></b>
-                </h4>
+                </div>
             {% endif %}
             {% comment %}{% if listing.ward %}
                 <h4>
@@ -94,13 +94,13 @@
                 </h4>
             {% endif %}{% endcomment %}
             {% if listing.district %}
-                <h4><b><a href="{% url 'listing_search' %}?district={{ listing.district }}&so=priority"
+                <div><b><a href="{% url 'listing_search' %}?district={{ listing.district }}&so=priority"
                           title="{% get_district listing.district %}" style="padding-bottom:10px; font-size: 16px;; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">&nbsp{% get_district listing.district %},</a></b>
-                </h4>
+                </div>
             {% endif %}
             {% if listing.state %}
-                <h4><a href="{% url 'listing_search' %}?state={{ listing.state }}&so=priority"
-                          title="{% get_state listing.state %}" style="padding-bottom:10px; font-size: 16px;; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">&nbsp{% get_state listing.state %}</a></h4>
+                <div><a href="{% url 'listing_search' %}?state={{ listing.state }}&so=priority"
+                          title="{% get_state listing.state %}" style="padding-bottom:10px; font-size: 16px;; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">&nbsp{% get_state listing.state %}</a></div>
             {% endif %}
         </div>
 
