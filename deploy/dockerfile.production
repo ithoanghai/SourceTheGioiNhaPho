@@ -3,7 +3,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get -qq update \
     && apt-get -y --no-install-recommends install apt-utils \
     && apt-get -y install curl libgdal-dev \
-    && apt-get -qqy install python-gdal \
+    && apt-get -qqy install python3-gdal \
     && apt-get -y install pypy gdal-bin \
     && apt-get -y install nodejs yarn
 RUN pip install gunicorn gevent uwsgi
@@ -13,6 +13,7 @@ WORKDIR /app
 COPY requirements.txt package.json yarn.lock ./
 RUN pip install -r requirements.txt
 RUN rm -rf node_modules/
+RUN yarn install
 RUN npm install
 
 COPY . /app
