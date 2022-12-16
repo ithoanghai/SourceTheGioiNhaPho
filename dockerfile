@@ -10,7 +10,8 @@ WORKDIR /app
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN pip install --upgrade pip
 RUN pip install gunicorn gevent
-#RUN npm install
+RUN rm -rf node_modules/
+RUN npm install
 RUN apt update
 RUN apt install -y nodejs yarn
 RUN apt-get -qq update \

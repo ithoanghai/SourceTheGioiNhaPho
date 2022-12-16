@@ -642,6 +642,12 @@
     white-space: nowrap
 }
 
+@media (max-width: 960px){
+    .main-header .col-right .login, .main-header .col-right span {
+        display: none;
+    }
+}
+
 .main-header .col-right .top-menu ul li:first-child:hover a:first-child .zmdi, .main-header .col-right .top-menu ul li:first-child:hover a:first-child span {
     color: orange
 }
@@ -906,7 +912,7 @@ header#home::before {
         text-align: right;
         cursor: pointer;
         padding-left: 30px;
-        padding-right: 40px
+        padding-right: 20px
     }
 
     .main-header .col-right {

@@ -14,6 +14,7 @@ django-allauth==0.51.0
 django-etc>=1.2.0
 django-crispy-forms==1.14.0
 django-simple-pwa==2.2.1
+django_gulp==4.1.0
 gunicorn==20.1.0
 gevent==22.10.2
 paytmchecksum==1.7.0

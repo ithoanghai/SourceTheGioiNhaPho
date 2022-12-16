@@ -12,6 +12,7 @@ RUN mkdir -p /app
 WORKDIR /app
 COPY requirements.txt package.json yarn.lock ./
 RUN pip install -r requirements.txt
+RUN rm -rf node_modules/
 RUN npm install
 
 COPY . /app
