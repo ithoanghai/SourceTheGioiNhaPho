@@ -24,8 +24,8 @@
 {% block head %}
   {{ block.super }}
   <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/listings/search"/>
-    <link rel="preload" href="{% static 'css/search.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{% static 'css/search.css' %}"></noscript>
+    <link rel="preload" type="text/css" href="{% static 'css/search.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}"></noscript>
   {% include 'listings/_vueTemplate.html' %}
 {% endblock %}
 {% block optional_styles %}
