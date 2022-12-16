@@ -44,6 +44,7 @@ urlpatterns = [
     path('admin', redirect_view, name='admin'),
     path('admin/', admin_site.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
+    path('', include('pwa.urls')),
     re_path(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),

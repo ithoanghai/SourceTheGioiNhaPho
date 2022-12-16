@@ -1,8 +1,8 @@
-{% load static humanize i18n load_static %}
+{% load static humanize i18n load_static pwa %}
 <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
 {% comment %}<link rel="canonical" href="https://thegioinhaphovietnam.com.vn" />{% endcomment %}
 <link rel="alternate" media="only screen and (max-width: 640px)"  href="https://thegioinhaphovietnam.com.vn">
-<link rel="manifest" href="~/manifest.json">
+{% pwa_meta_data %}
 <meta http-equiv="Cache-Control" content="max-age=31536000;public">
 <meta http-equiv="Content-Encoding" content=" gzip, deflate;public">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

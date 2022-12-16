@@ -50,6 +50,7 @@ THIRD_PARTIES = [
     #'adminplus',
     'cachalot',
     'crispy_forms',
+    'pwa',
     ]
 BUILT_IN_APPS = [
     'django.contrib.admin',
