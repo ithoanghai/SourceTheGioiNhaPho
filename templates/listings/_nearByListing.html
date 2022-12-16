@@ -13,8 +13,7 @@
                          alt="{{ listing.title }}"
                          title="{{ listing.title }}"
                          class="lazy" loading="lazy" draggable="false"
-                         onerror="this.src='{% static "img/default.png" %}'"
-                    />
+                         onerror="this.src='{% static "img/default.png" %}'"/>
                 {% endwith %}
             {% else %}
                 <img
@@ -22,9 +21,8 @@
                      srcset="{{ listing.house_type|default_img_by_house_type }}"
                      alt="{{ listing.title }}"
                      title="{{ listing.title }}"
-                     class="lazy" draggable="false"
-                     onerror="this.src='{% static "img/default.png" %}'"
-                />
+                     class="lazy" loading="lazy" draggable="false"
+                     onerror="this.src='{% static "img/default.png" %}'"/>
             {% endif %}
     </a>
   </div>
@@ -35,25 +33,25 @@
   <div class="info">
     <ul>
         {% if listing.average_price %}
-             <li title="Giá/m2"><strong>$</strong><b>{{ listing.average_price.normalize }} tr/m2</b></li>
+             <li title="Giá trung bình /m2"><strong>$</strong><b>{{ listing.average_price.normalize }} tr/m2</b></li>
         {% endif %}
       <li class="marea" title="Diện tích"><span
         class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area.normalize }} m2
       </li>
           {% if listing.floors %}
-          <li><span class="zmdi zmdi-layers"></span> {{ listing.floors }} tầng
+          <li title="Số tầng"><span class="zmdi zmdi-layers"></span> {{ listing.floors }} tầng
           </li> {% endif %}
       {% if listing.bedrooms %}
-        <li title="Phòng ngủ">
+        <li title="Số phòng ngủ">
           <span class="zmdi zmdi-airline-seat-individual-suite"></span> {{ listing.bedrooms }}
         </li>
       {% endif %}
       {% if listing.bathrooms %}
-        <li title="Phòng tắm" class="icon-bath-room"><span></span> {{ listing.bathrooms }} </li>
+        <li title="Số phòng tắm" class="icon-bath-room"><span></span> {{ listing.bathrooms }} </li>
       {% endif %}
-        <li title="Giá"><b>{{ listing.price.normalize }} tỷ</b></li>
+        <li title="Giá bán/thuê"><b>{{ listing.price.normalize }} tỷ</b></li>
       {% if listing.sale_price and listing.sale_price < listing.price %}
-        <li title="Bán nhanh">Còn {{ listing.sale_price.normalize }} tỷ</li> {% endif %}
+        <li title="Giá tốt nhất">Giảm còn {{ listing.sale_price.normalize }} tỷ</li> {% endif %}
     </ul>
 
   </div>

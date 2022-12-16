@@ -8,15 +8,16 @@
     <meta property="og:title" content="{{ listing.title }}"/>
 {% endblock %}
 {% block description %}
-    <meta name="description" content="{{ listing.title }} {% if listing.district %} {% get_district listing.district %} {% endif %} {% if listing.state %} {% get_state listing.state %} {% endif %}. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
-<meta property="og:description"
-      content="{{ listing.title }} {% if listing.district %} {% get_district listing.district %} {% endif %} {% if listing.state %} {% get_state listing.state %} {% endif %}. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+    <meta name="description"
+          content="{{ listing.title }} {% if listing.district %} {% get_district listing.district %} {% endif %} {% if listing.state %} {% get_state listing.state %} {% endif %}. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
+    <meta property="og:description"
+          content="{{ listing.title }} {% if listing.district %} {% get_district listing.district %} {% endif %} {% if listing.state %} {% get_state listing.state %} {% endif %}. Uy tín - Tận tâm - Chân thành. ĐT:0916286256"/>
 {% endblock %}
 {% block keywords %}
     <meta name="keywords"
-      content="0916286256, 0964399436, {% if listing.district %} {% get_district listing.district %} {% endif %} {% if listing.state %} {% get_state listing.state %} {% endif %}, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+          content="0916286256, 0964399436, {% if listing.district %} {% get_district listing.district %} {% endif %} {% if listing.state %} {% get_state listing.state %} {% endif %}, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
     <meta property="og:keywords"
-      content="0916286256, 0964399436, {% if listing.district %} {% get_district listing.district %} {% endif %} {% if listing.state %} {% get_state listing.state %} {% endif %}, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
+          content="0916286256, 0964399436, {% if listing.district %} {% get_district listing.district %} {% endif %} {% if listing.state %} {% get_state listing.state %} {% endif %}, siêu thị nhà phố, nhà phố việt nam, thế giới nhà phố, thổ cư Hà Nội, nhà đẹp, nhà rẻ, bán nhà Hoàng Mai, bán nhà Thanh Xuân, bán nhà Hà Nội, bất động sản, bán đất, cho thuê, bán nhà"/>
 {% endblock %}
 {% block meta %}
     <meta property="og:image" content="{% with listing.main_photo as photo %}{{ photo.url }}{% endwith %}"/>
@@ -131,16 +132,19 @@
                                         {% if forloop.first %}
                                             <img class="image-normalized"
                                                  src="{{ photo.url }}"
+                                                 srcset="{{ photo.url }}"
                                                  alt="{{ listing.title }}"
                                                  title="{{ listing.title }}"
-                                                 draggable="false"/>
+                                                 class="lazy" loading="lazy" draggable="false"
+                                                 onerror="this.src='{% static 'img/default.png' %}'"/>
                                         {% else %}
                                             <img class="lazy fade image-normalized"
                                                  src="{{ photo.url }}"
+                                                 srcset="{{ photo.url }}"
                                                  alt="{{ listing.title }}"
                                                  title="{{ listing.title }}"
-                                                 draggable="false"
-                                            />
+                                                 loading="lazy" draggable="false"
+                                                 onerror="this.src='{% static 'img/default.png' %}'"/>
                                         {% endif %}
                                     </a>
                                 </li>
@@ -150,19 +154,19 @@
                                         {% if forloop.first %}
                                             <img class="image-normalized"
                                                  src="{{ listing.house_type|default_img_by_house_type }}"
+                                                 srcset="{{ listing.house_type|default_img_by_house_type }}"
                                                  alt="{{ listing.title }}"
                                                  title="{{ listing.title }}"
-                                                 draggable="false"
-                                                 onerror="this.src='{% static "img/default.png" %}'"
-                                            />
+                                                 class="lazy" loading="lazy" draggable="false"
+                                                 onerror="this.src='{% static "img/default.png" %}'"/>
                                         {% else %}
                                             <img class="lazy fade image-normalized"
                                                  src="{{ listing.house_type|default_img_by_house_type }}"
+                                                 srcset="{{ listing.house_type|default_img_by_house_type }}"
                                                  alt="{{ listing.title }}"
                                                  title="{{ listing.title }}"
-                                                 draggable="false"
-                                                 onerror="this.src='{% static "img/default.png" %}'"
-                                            />
+                                                 loading="lazy" draggable="false"
+                                                 onerror="this.src='{% static "img/default.png" %}'"/>
                                         {% endif %}
 
                                     </a>
@@ -178,8 +182,7 @@
                         class="video-js vjs-default-skin hidden"
                         controls
                         preload="auto"
-                        data-setup="{'techOrder': ['youtube'],}"
-                >
+                        data-setup="{'techOrder': ['youtube'],}">
                     {% for video in listing.videos %}
                         <source src="{{ video.video }}" type="video/youtube">
                     {% endfor %}
@@ -208,22 +211,22 @@
                             <li>
                                 <a href="#" class="cover"
                                    title="{{ listing.title }}">
-                                    <img src="{{ photo.url }}" pos="0"
+                                    <img src="{{ photo.url }}" srcset="{{ photo.url }}" pos="0"
                                          alt="{{ listing.title }}"
-                                         title="{{ listing.title }}">
+                                         title="{{ listing.title }}"
+                                         onerror="this.src='{% static "img/default.png" %}'"/>
                                 </a>
                             </li>
                         {% empty %}
                             <li>
                                 <a href="#" class="cover"
                                    title="{{ listing.title }}">
-                                    <img
-                                            src="{{ listing.house_type|default_img_by_house_type }}"
-                                            pos="0"
-                                            alt="{{ listing.title }}"
-                                            title="{{ listing.title }}"
-                                            onerror="this.src='{% static "img/default.png" %}'"
-                                    />
+                                    <img src="{{ listing.house_type|default_img_by_house_type }}"
+                                        srcset="{{ listing.house_type|default_img_by_house_type }}"
+                                        pos="0"
+                                        alt="{{ listing.title }}"
+                                        title="{{ listing.title }}"
+                                        onerror="this.src='{% static "img/default.png" %}'"/>
                                 </a>
 
                             </li>
@@ -235,14 +238,14 @@
                     <ul class="slides slideimg" style="width: 100%">
                         {% for photo in listing.photos %}
                             <li>
-                                <a class="img cover" href="#"
-                                   title="{{ listing.title }}">
+                                <a class="img cover" href="#" title="{{ listing.title }}">
                                     <img class="lazy image-normalized fade"
                                          src="{{ photo.url }}"
+                                         srcset="{{ photo.url }}"
                                          title="{{ listing.title }}"
                                          alt="{{ listing.title }}"
                                          onerror="this.src='{% static "img/default.png" %}'"
-                                         draggable="false">
+                                         loading="lazy" draggable="false"/>
                                 </a>
                             </li>
                         {% empty %}
@@ -251,11 +254,11 @@
                                    title="{{ listing.title }}">
                                     <img class="lazy image-normalized fade"
                                          src="{{ listing.house_type|default_img_by_house_type }}"
+                                         srcset="{{ listing.house_type|default_img_by_house_type }}"
                                          title="{{ listing.title }}"
                                          alt="{{ listing.title }}"
-                                         draggable="false"
-                                         onerror="this.src='{% static "img/default.png" %}'"
-                                    />
+                                         class="lazy" loading="lazy"
+                                         onerror="this.src='{% static "img/default.png" %}'"/>
                                 </a>
                             </li>
                         {% endfor %}
@@ -285,10 +288,11 @@
                                        title="{{ listing.title }}">
                                         <img class="lazy image-normalized fade"
                                              src="{{ photo.url }}"
+                                             srcset="{{ photo.url }}"
                                              title="{{ listing.title }}"
                                              alt="{{ listing.title }}"
                                              onerror="this.src='{% static "img/default.png" %}'"
-                                             draggable="false">
+                                             loading="lazy" draggable="false"/>
                                     </a>
                                 </li>
                             {% empty %}
@@ -297,11 +301,11 @@
                                        title="{{ listing.title }}">
                                         <img class="lazy image-normalized fade"
                                              src="{{ listing.house_type|default_img_by_house_type }}"
+                                             srcset="{{ listing.house_type|default_img_by_house_type }}"
                                              title="{{ listing.title }}"
                                              alt="{{ listing.title }}"
-                                             draggable="false"
-                                             onerror="this.src='{% static "img/default.png" %}'"
-                                        />
+                                             loading="lazy" draggable="false"
+                                             onerror="this.src='{% static "img/default.png" %}'"/>
                                     </a>
                                 </li>
                             {% endfor %}
@@ -311,12 +315,12 @@
                 <ul class="naviicon">
                     <li class="active ">
                         <a href="#photos" title="Photo" no-prevent>
-                            <span class="font-icon photo"></span> Photo
+                            <span class="font-icon photo">Photo</span>
                         </a>
                     </li>
                     <li class="{% if not listing.videos %}disable{% endif %}">
                         <a href="#video" title="Video" no-prevent>
-                            <span class="font-icon video"></span> Video
+                            <span class="font-icon video">Video</span>
                         </a>
                     </li>
                     {#                    <li class="">#}
@@ -338,17 +342,17 @@
                     <header class="detail-house">
                         <div class="address">
                             {% if listing.urban_area %}
-                                <h2><a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}"
-                                       title="Khu đô thị/ khu dân cư">{{ listing.urban_area }}</a></h2>
+                                <h2><b><a href="{% url 'listing_search' %}?urban_area={{ listing.urban_area }}"
+                                       title="Khu đô thị/ khu dân cư">{{ listing.urban_area }}</a></b></h2>
                             {% endif %}
-                            <h2><a href="{% url 'listing_search' %}?street={{ listing.street }}"
-                                   title="Đường">{{ listing.street }}</a></h2>
+                            <h2><b><a href="{% url 'listing_search' %}?street={{ listing.street }}"
+                                   title="Đường">{{ listing.street }}</a></b></h2>
                             {% if listing.ward %}
-                                <h2><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
-                                       title="Phường/Xã">{{ listing.ward_name }}</a></h2>
+                                <h2><b><a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
+                                       title="Phường/Xã">{{ listing.ward_name }}</a></b></h2>
                             {% endif %}
-                            <h2><a href="{% url 'listing_search' %}?district={{ listing.district }}"
-                                   title="Quận/Huyện">{% get_district listing.district %}</a></h2>
+                            <h2><b><a href="{% url 'listing_search' %}?district={{ listing.district }}"
+                                   title="Quận/Huyện">{% get_district listing.district %}</a></b></h2>
                             <h2><a href="{% url 'listing_search' %}?state={{ listing.state }}"
                                    title="Tỉnh/Thành phố">{% get_state listing.state %}</a></h2>
 
@@ -358,47 +362,47 @@
                             <ul class="detailroom">
                                 {% if listing.area.normalize > 0 %}
                                     <li title="Diện tích"><span
-                                            class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area.normalize }}
-                                        m2
+                                            class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area.normalize }} m2
                                     </li>
                                 {% endif %}
                                 {% if listing.floors %}
-                                    <li><i class="zmdi zmdi-layers"></i> {{ listing.floors }} {% trans "tầng" %}
+                                    <li title="Số tầng"><i class="zmdi zmdi-layers"></i> {{ listing.floors }} {% trans "tầng" %}
                                     </li> {% endif %}
                                 {% if listing.width != 0 and listing.width > 3.5 %}
-                                    <li>
-                                        <i class="fa fas fa-arrows-alt-h"></i> {{ listing.width.normalize }} {% trans "m" %}
+                                    <li title="Độ rộng đường/ngõ">
+                                        <i class="zmdi zmdi-ruler"></i> {{ listing.width.normalize }} {% trans "m" %}
                                     </li>
                                 {% endif %}
                                 {% if listing.bedrooms %}
-                                    <li>
+                                    <li title="Số phòng ngủ">
                                         <i class="zmdi zmdi-airline-seat-individual-suite"></i>{{ listing.bedrooms }} {% trans "ngủ" %}
                                     </li>
                                 {% endif %}
                                 {% if listing.bathrooms %}
-                                    <li><i class="zmdi zmdi-bath zmdi-b"></i>{{ listing.bathrooms }} {% trans "tắm" %}
+                                    <li title="Số phòng tắm"><i class="zmdi zmdi-bath zmdi-b"></i>{{ listing.bathrooms }} {% trans "tắm" %}
                                     </li> {% endif %}
                             </ul>
                             <ul class="listing-price">
-                                <li title="Giá">$<b>{{ listing.price.normalize }}</b>
+                                <li title="Giá bán/cho thuê">$<b>{{ listing.price.normalize }}</b>
                                     {% if listing.transaction_type == "rent" %}{% trans "triệu/tháng" %} {% else %}
                                         {% trans "tỷ" %} {% endif %} </li>
                                 {% if listing.sale_price  and listing.sale_price < listing.price and listing.transaction_type != "rent" %}
                                     &nbsp ⇔ &nbsps
-                                    <li title="Bán nhanh"><strong>Bán nhanh {{ listing.sale_price.normalize }}</strong>
+                                    <li title="Giá tốt"><strong>Bán nhanh {{ listing.sale_price.normalize }}</strong>
                                         tỷ
                                     </li> {% endif %}
                                 {% if listing.price > 0 and listing.area and listing.transaction_type != "rent" %}
                                     &nbsp ⇔ &nbsp
-                                    <li title="Giá/m2">$<b>{% widthratio listing.price listing.area 1000 %}</b> triệu/m2
+                                    <li title="Giá trung bình /m2">$<b>{% widthratio listing.price listing.area 1000 %}</b> triệu/m2
                                     </li>
                                 {% endif %}
                             </ul>
-                            <div class="listing-id">
+                            <div class="listing-id" title="Bạn hãy gửi mã này để biết thêm thông tin!">
                                 <span>Mã nhà đất: </span>
                                 <span style="padding-left: 0px">{{ listing.code }}</span>
-                                <span>{{ listing.status|get_listing_status }} {% if listing.transaction_type == "rent" %}
-                                    {% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</span>
+                                <span>{{ listing.status|get_listing_status }}
+                                    {% if listing.transaction_type == "rent" %}
+                                        {% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</span>
                             </div>
                             {% comment %}<div class="listing-id">
                                 <span>Lượt xem: </span>
@@ -409,11 +413,14 @@
                                     <span>{% translate 'Rao vặt bởi khách hàng - Chưa được xác thực' %}</span>
                                 {% else %} {% translate 'Đăng bởi TGNP - Đã xác thực' %}  {% endif %}
                             </div>
-                            <div class="zalo-share-button" data-href="https://thegioinhaphovietnam.com.vn{% url "listing_detail" listing.id %}" data-oaid="3185197174223735931" data-layout="1" data-color="blue" data-customize="false"></div>
+                            <div class="zalo-share-button"
+                                 data-href="https://thegioinhaphovietnam.com.vn{% url "listing_detail" listing.id %}"
+                                 data-oaid="3185197174223735931" data-layout="1" data-color="blue"
+                                 data-customize="false"></div>
                         </div>
                     </header>
                 </div>
-                <div class="heading-02">Mô tả:</div>
+                <div class="heading-02">Mô tả bất động sản:</div>
                 <div class="content collapsed pdb-0" data-height="150">
                     <p class="summary">{{ listing.description }}</p>
                 </div>
@@ -421,21 +428,14 @@
                     <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="true" more="Xem thêm"
                        less="Thu gọn">Xem thêm</a>
                 </p>{% endcomment %}
-                <div class="heading-02">Thông tin cơ bản:</div>
+                <div class="heading-02">Thông số cơ bản:</div>
                 <div class="content">
                     <ul class="detail-more">
                         <li>
                             <p class="left">Loại hình</p>
                             <p class="right"><a href="{% url 'listing_search' %}?hoty={{ listing.house_type }}"
-                                                target="_blank">
-                                {% if listing.house_type == 'town_house' %}{% translate 'Nhà Phố' %}
-                                {% elif listing.house_type == 'street_house' %} {% translate 'Nhà mặt phố' %}
-                                {% elif listing.house_type == 'shop_house' %} {% translate 'Cửa hàng' %}
-                                {% elif listing.house_type == 'building' %} {% translate 'Toà nhà' %}
-                                {% elif listing.house_type == 'apartment' %} {% translate 'Căn hộ CC' %}
-                                {% elif listing.house_type == 'villa' %} {% translate 'Biệt thự' %}
-                                {% elif listing.house_type == 'office' %} {% translate 'Văn phòng' %}
-                                {% else %} {% translate 'Đất' %}  {% endif %}
+                                                target="_blank" title="Nhấp chọn để tìm theo loại bất động sản {{ listing.house_type|get_house_type }} này">
+                                {{ listing.house_type|get_house_type }}
                             </a></p>
                         </li>
                         {% if listing.floors %}
@@ -452,9 +452,9 @@
                         {% endif %}
                         {% if listing.bathrooms %}
                             <li>
-                            <p class="left">Số phòng tắm</p>
-                            <p class="right">
-                                {{ listing.bathrooms }} </p>
+                                <p class="left">Số phòng tắm</p>
+                                <p class="right">
+                                    {{ listing.bathrooms }} </p>
                             </li>
                         {% endif %}
 
@@ -472,49 +472,27 @@
                         {% endif %}
                         {% if listing.width != 0 and listing.width > 3.2 %}
                             <li>
-                                <p class="left">Mặt tiền </p>
+                                <p class="left">Mặt tiền</p>
                                 <p class="right">{{ listing.width.normalize }} m</p>
                             </li>
                         {% endif %}
                         {% if listing.direction %}
                             <li>
                                 <p class="left">Hướng</p>
-                                {% if listing.direction == 'east' %}<p class="right">{% translate 'Đông' %}</p>
-                                {% elif listing.direction == 'south_east' %}
-                                    <p class="right">{% translate 'Đông - Nam' %}</p>
-                                {% elif listing.direction == 'south' %} <p class="right">{% translate 'Nam' %}</p>
-                                {% elif listing.direction == 'south-west' %}
-                                    <p class="right">{% translate 'Tây - Nam' %}</p>
-                                {% elif listing.direction == 'west' %} <p class="right">{% translate 'Tây' %}</p>
-                                {% elif listing.direction == 'north-west' %}
-                                    <p class="right">{% translate 'Tây - Bắc' %}</p>
-                                {% elif listing.direction == 'north' %} <p class="right">{% translate 'Bắc' %}</p>
-                                {% elif listing.direction == 'north-east' %}
-                                    <p class="right">{% translate 'Đông - Bắc' %}</p>
-                                {% endif %}
+                                {{ listing.direction|get_direction}}
                             </li>
                         {% endif %}
                         <li>
                             <p class="left">Loại chứng nhận</p>
-                            <p class="right"><a
-                                    href="{% url 'listing_search' %}?registration_type={{ listing.registration_type }}"
-                                    target="_blank">
-                                {% if listing.registration_type == 'red_pink_book' %}{% translate 'Sổ đỏ/ Sổ hồng' %}
-                                {% elif listing.registration_type == 'valid_documents' %}
-                                    {% translate 'Giấy tờ hợp lệ' %}
-                                {% elif listing.registration_type == 'construction_license' %}
-                                    {% translate 'Giấy phép xây dựng' %}
-                                {% elif listing.registration_type == 'business_license' %}
-                                    {% translate 'Giấy phép kinh doanh' %}
-                                {% elif listing.registration_type == 'prepare_book' %} {% translate 'Chuẩn bị làm sổ' %}
-                                {% elif listing.registration_type == 'dont_book' %} {% translate 'Chưa có sổ' %}
-                                {% else %} {% translate 'Khác' %}  {% endif %}</a></p>
+                            <p class="right"><a href="{% url 'listing_search' %}?registration_type={{ listing.registration_type }}"
+                                    title="Nhấp để chọn tìm bất động sản theo loại chứng nhận {{ listing.registration_type|get_registration_type }}" target="_blank">
+                                {{ listing.registration_type|get_registration_type }}</a></p>
                         </li>
                         {% if listing.road_type %}
                             <li>
                                 <p class="left">Đường đi</p>
                                 <p class="right"><a href="{% url 'listing_search' %}?road_type={{ listing.road_type }}"
-                                                    target="_blank"><span>{{ listing.road_type|get_road_type }}</span></a>
+                                                    target="_blank" title="Nhấp để chọn tìm bất động sản theo đường/ngõ {{ listing.road_type|get_road_type }}"><span>{{ listing.road_type|get_road_type }}</span></a>
                                 </p>
                             </li>
                         {% endif %}
@@ -537,7 +515,6 @@
                         <b style="color: green">{{ listing.status|get_listing_status }}
                             {% if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %}
                                 {% trans "BÁN" %} {% endif %}</b>
-
                     </h6>
                 </div>
                 <div class="form-real-estate visible-sm">
@@ -545,7 +522,8 @@
                     <div class="form-real-estate__row">
                         <div class="col-left">
                             <div class="cover__isa">
-                                <img class="lazy" src="{% static 'images/isa-team-v2.png' %}" alt="Chuyên viên đã sẵn sàng hỗ trợ">
+                                <img class="lazy" src="{% static 'images/isa-team-v2.png' %}"
+                                     alt="Chuyên viên đã sẵn sàng hỗ trợ">
                             </div>
                             <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
                         </div>
@@ -939,15 +917,13 @@
                         <div class="promo-3d-vid cover">
               <span data-origin="8IP1dKqq298" class="popup-yt-video">
               <picture>
-              <source
-                      srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
-                      media="(max-width: 374px)">
-              <source
-                      srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
-                      media="(min-width: 375px)">
+              <source srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
+                      media="(max-width: 374px)"/>
+              <source srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
+                      media="(min-width: 375px)"/>
               <img alt="TGNP 3D View" src="{% static 'images/service-3dview.png' %}"
                    srcset="{% static 'images/service-3dview.png' %}, {% static 'images/service-3dview.png' %} 2x"
-                   title="TGNP 3D View">
+                   title="TGNP 3D View"/>
               </picture>
               </span>
                         </div>
@@ -966,7 +942,7 @@
                             <div class="cover">
                                 <img class="lazy" style="object-fit: cover; object-position: center center"
                                      src="{% static 'img/logo-ko-chu.svg' %}"
-                                     alt="thegioinhaphovietnam.com.vn" title="thegioinhaphovietnam.com.vn">
+                                     alt="thegioinhaphovietnam.com.vn" title="thegioinhaphovietnam.com.vn"/>
                             </div>
                             <div class="infoagent">
                                 <h4>thegioinhaphovietnam.com.vn</h4>
@@ -979,9 +955,9 @@
                             </div>
                         </div>
                         <a class="like-button" href="{% url 'contacts' %}" title="Liên hệ">Liên hệ</a>
-                        <input type="hidden" name="contact-agent" value="thegioinhaphovietnam@gmail.com">
+                        <input type="hidden" name="contact-agent" value="thegioinhaphovietnam@gmail.com"/>
                         <input type="hidden" name="contact-agent-msg"
-                               value="Tôi có nhu cầu muốn bán nhà thông qua TGNP. Liên lạc với tôi ngay.">
+                               value="Tôi có nhu cầu muốn bán nhà thông qua TGNP. Liên lạc với tôi ngay."/>
                     </div>
                 </div>
             </section>
@@ -1001,40 +977,36 @@
                                 {% if listing.main_photo %}
                                     {% with listing.main_photo as photo %}
                                         <img src="{{ photo.url }}"
-                                            srcset="{{ photo.url }}"
+                                             srcset="{{ photo.url }}"
                                              alt="{{ listing.title }}"
                                              title="{{ listing.title }}"
                                              class="card-img-top lazy" loading="lazy" draggable="false"
-                                             onerror="this.src='{% static "img/default.png" %}'"
-                                        />
+                                             onerror="this.src='{% static "img/default.png" %}'"/>
                                     {% endwith %}
                                 {% else %}
-                                    <img
-                                        src="{{ listing.house_type|default_img_by_house_type }}"
-                                        srcset="{{ listing.house_type|default_img_by_house_type }}"
-                                         alt="{{ listing.title }}"
-                                         title="{{ listing.title }}"
-                                         class="card-img-top" class="card-img-top lazy" loading="lazy" draggable="false"
-                                         onerror="this.src='{% static "img/default.png" %}'"
-                                    />
+                                    <img  src="{{ listing.house_type|default_img_by_house_type }}"
+                                            srcset="{{ listing.house_type|default_img_by_house_type }}"
+                                            alt="{{ listing.title }}"
+                                            title="{{ listing.title }}"
+                                            class="card-img-top lazy" loading="lazy" draggable="false"
+                                            onerror="this.src='{% static "img/default.png" %}'"/>
                                 {% endif %}
-                            </a> <label class="status status-top status-monopoly" style="display: none;">Độc
-                                quyền</label></div>
+                            </a> <label class="status status-top status-monopoly" style="display: none;">Độc quyền</label></div>
                             <div class="popup-left-content"><h3 class="popup-left-title"><a
                                     href="#">{{ listing.title }}</a></h3>
                                 <div class="popup-left-address">Mã: <b>{{ listing.code }}</b></div>
                                 <ul class="popup-left-info">
                                     {% if listing.floors %}
-                                        <li><p>Số tầng:</p> <strong>{{ listing.floors }}</strong></li>
+                                        <li title="Số tầng"><p>Số tầng:</p> <strong>{{ listing.floors }}</strong></li>
                                     {% endif %}
                                     {% if listing.bedrooms %}
-                                        <li><p>Phòng ngủ:</p> <strong>{{ listing.bedrooms }}</strong></li>
+                                        <li title="Số phòng ngủ"><p>Phòng ngủ:</p> <strong>{{ listing.bedrooms }}</strong></li>
                                     {% endif %}
-                                    <li><p>Diện tích:</p> <strong>{{ listing.area.normalize }} m2</strong></li>
+                                    <li title="Diện tích"><p>Diện tích:</p> <strong>{{ listing.area.normalize }} m2</strong></li>
                                     {% if listing.bathrooms > 0 %}
-                                        <li><p>Phòng tắm:</p> <strong>{{ listing.bathrooms }}</strong></li>
+                                        <li title="Số phòng tắm"><p>Phòng tắm:</p> <strong>{{ listing.bathrooms }}</strong></li>
                                     {% endif %}
-                                    <li><p>Giá:</p> <strong class="color-red-base">{{ listing.price.normalize }}
+                                    <li title="Giá bán/thuê"><p>Giá:</p> <strong class="color-red-base">{{ listing.price.normalize }}
                                         tỷ</strong></li>
                                 </ul>
                             </div>
@@ -1143,7 +1115,7 @@
 {% block scripts %}
     {{ block.super }}
     <script async src="{% static 'js/listing.js' %}"></script>
-{% comment %}    <script defer src="{% static 'js/home-recent-view.min.js' %}"></script>
+    {% comment %}    <script defer src="{% static 'js/home-recent-view.min.js' %}"></script>
     <script defer src="{% static 'js/listing-detail.js' %}"></script>{% endcomment %}
     <script>
         window['isListing'] = true;

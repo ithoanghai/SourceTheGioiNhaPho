@@ -5954,10 +5954,9 @@ ul.exclusive li.featured .price {
 }
 
 ul.exclusive li.featured .cover {
-    height: 230px;
     position: relative;
     display: block;
-    border-top: 2px solid #444c59;
+    border-top: 2px solid #95a9ca;
     background-repeat: no-repeat;
     background-size: cover !important;
     background-position: 50% top;
@@ -5967,6 +5966,17 @@ ul.exclusive li.featured .cover {
 
 ul.exclusive li.featured .cover img {
     min-height: 100%
+}
+
+ul.exclusive li.featured .cover .label-group {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0 10px;
+    z-index: 2;
+    text-align: center
 }
 
 ul.exclusive li.featured .cover:hover {
@@ -6109,7 +6119,7 @@ ul.exclusive li.featured header .heading {
     font-family: tgnp-font2;
     font-size: 22px;
     line-height: 1.5;
-    font-weight: 500
+    /*font-weight: 500*/
 }
 
 #similar-property ul.exclusive li.featured header .price span {

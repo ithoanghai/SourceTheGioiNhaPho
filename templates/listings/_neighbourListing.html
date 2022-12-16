@@ -1,66 +1,90 @@
-{% load get_cadastral i18n static listing%}
+{% load get_cadastral i18n static listing %}
 <li class="featured">
-  <a href="{% url 'listing_detail' listing.id %}"
-     title="{{ listing.title }}" data-imp-click>
-    <div class="cover">
+    <a href="{% url 'listing_detail' listing.id %}"
+       title="{{ listing.title }}" data-imp-click>
+        <div class="cover">
             {% if listing.main_photo %}
                 {% with listing.main_photo as photo %}
                     <img
-                         src="{{ photo.url }}"
-                         srcset="{{ photo.url }}"
-                         alt="{{ listing.title }}"
-                         title="{{ listing.title }}"
-                         class="lazy" loading="lazy" draggable="false"
-                         onerror="this.src='{% static "img/default.png" %}'"/>
+                            src="{{ photo.url }}"
+                            srcset="{{ photo.url }}"
+                            alt="{{ listing.title }}"
+                            title="{{ listing.title }}"
+                            class="lazy" loading="lazy" draggable="false"
+                            onerror="this.src='{% static "img/default.png" %}'"/>
                 {% endwith %}
             {% else %}
                 <img
-                     src="{{ listing.house_type|default_img_by_house_type }}"
-                     srcset="{{ listing.house_type|default_img_by_house_type }}"
-                     alt="{{ listing.title }}"
-                     title="{{ listing.title }}"
-                     class="lazy" loading="lazy" draggable="false"
-                     onerror="this.src='{% static "img/default.png" %}'"
+                        src="{{ listing.house_type|default_img_by_house_type }}"
+                        srcset="{{ listing.house_type|default_img_by_house_type }}"
+                        alt="{{ listing.title }}"
+                        title="{{ listing.title }}"
+                        class="lazy" loading="lazy" draggable="false"
+                        onerror="this.src='{% static "img/default.png" %}'"
                 />
             {% endif %}
-    </div>
-   <b>{{ listing.status|get_listing_status }} {%if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %} {% trans "BÁN" %} {% endif %}</b>
-
-     </a>
-  <header>
-    <a href="{% url 'listing_detail' listing.id %}"
-       title="{{ listing.title }}" data-imp-click>
-      <h3 class="heading">{{ listing.title }}</h3>
+            <div class="label-group">
+                <label class="label-primary unique"
+                       style="font-family: 'tgnp-font2'"><b>{{ listing.status|get_listing_status }}
+                    {% if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %}
+                        {% trans "BÁN" %} {% endif %}</b></label>
+                {% comment %}{% if listing.average_price and listing.transaction_type != "rent" %}
+                    <label class="label-primary unique" title="Giá/m2"><b>{{ listing.average_price }} tr/m2</b></label>
+                {% endif %}{% endcomment %}
+                {% if listing.is_exclusive %}
+                    <label class="label-primary unique p-3">{% trans "Độc quyền" %}</label>
+                {% endif %}
+            </div>
+        </div>
     </a>
-    <a href="{% url 'listing_search' %}?street={{ listing.street }}"
-           title="Đường">{{ listing.street }}</a>
-    {% if listing.ward %}
-      <a href="{% url 'listing_search' %}?ward={{ listing.ward }}"
-             title="Phường/Xã">{{ listing.ward_name }}</a>
-    {% endif %}
-    <b><a href="{% url 'listing_search' %}?district={{ listing.district }}"
-           title="Quận/Huyện">{% get_district listing.district %}</a></b>
-    <ul>
-      {% if listing.average_price %}
-             <li title="Giá/m2"><strong>$</strong><b>{{ listing.average_price.normalize }} tr/m2</b></li>
+    <header>
+        <b><a href="{% url 'listing_detail' listing.id %}"
+           title="{{ listing.title }}" data-imp-click>
+            <h3 class="heading">{{ listing.title }}</h3>
+        </a></b>
+        {% if listing.street %}
+            <b>
+                <a href="{% url 'listing_search' %}?keys={{ listing.street }}&so=priority"
+                   title="Đường"
+                   style="padding-bottom:10px; font-size: 16px;; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">{{ listing.street }},</a></b>
         {% endif %}
-      <li title="Diện tích"><span
-        class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area.normalize }}m2
-      </li>
-      {% if listing.floors %}
-          <li><span class="zmdi zmdi-layers"></span> {{ listing.floors }} tầng
-          </li> {% endif %}
-      {% if listing.bedrooms %}
-        <li title="Phòng ngủ">
-          <span class="zmdi zmdi-airline-seat-individual-suite"></span> {{ listing.bedrooms }}
-        </li>
-      {% endif %}
-      {% if listing.bathrooms %}
-        <li title="Phòng tắm" class="icon-bath-room"><span></span> {{ listing.bathrooms }} </li>
-      {% endif %}
-    </ul>
-    <div class="unique price">{{ listing.price.normalize }} tỷ</div>
-     {% comment %}<div class="unique p-1"><i class="zmdi zmdi-key"></i><b>{{listing.code}}</b></div>{% endcomment %}
-  </header>
+        {% if listing.ward %}
+            <b>
+                <a href="{% url 'listing_search' %}?ward={{ listing.ward }}&so=priority"
+                   title="Phường/Xã">{{ listing.ward_name }}</a></b>
+        {% endif %}
+        {% if listing.district %}
+            <b><a href="{% url 'listing_search' %}?district={{ listing.district }}&so=priority"
+                       title="Quận/Huyện"
+                       style="padding-bottom:10px; font-size: 16px;; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">&nbsp{% get_district listing.district %},</a></b>
+        {% endif %}
+        {% if listing.state %}
+            <a href="{% url 'listing_search' %}?state={{ listing.state }}&so=priority"
+                    title="Tỉnh/Thành phố"
+                    style="padding-bottom:10px; font-size: 16px;; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">&nbsp{% get_state listing.state %}</a>
+        {% endif %}
+        <ul>
+            {% if listing.average_price %}
+                <li title="Giá trung bình /m2"><strong>$</strong><b>{{ listing.average_price.normalize }} tr/m2</b></li>
+            {% endif %}
+            <li title="Diện tích"><span
+                    class="zmdi zmdi-photo-size-select-small"></span> {{ listing.area.normalize }}m2
+            </li>
+            {% if listing.floors %}
+                <li title="Số tầng"><span class="zmdi zmdi-layers"></span> {{ listing.floors }} tầng
+                </li> {% endif %}
+            {% if listing.bedrooms %}
+                <li title="Số phòng ngủ">
+                    <span class="zmdi zmdi-airline-seat-individual-suite"></span> {{ listing.bedrooms }}
+                </li>
+            {% endif %}
+            {% if listing.bathrooms %}
+                <li title="Số phòng tắm" class="icon-bath-room"><span></span> {{ listing.bathrooms }} </li>
+            {% endif %}
+        </ul>
+        <div class="unique price" title="Giá bán hoặc giá thuê">{{ listing.price.normalize }} {% if listing.transaction_type == "rent" %}{% trans "triệu" %} {% else %}
+                        {% trans "tỷ" %} {% endif %}</div>
+        {% comment %}<div class="unique p-1"><i class="zmdi zmdi-key"></i><b>{{listing.code}}</b></div>{% endcomment %}
+    </header>
 
 </li>

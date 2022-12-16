@@ -52,7 +52,7 @@
                 </select>
                 <i class="zmdi zmdi-search"></i>
 
-                <input placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà" type="search" autocomplete="disabled"
+                <input placeholder="Nhập mã BĐS, đường, địa điểm, khu dân cư" type="search" autocomplete="disabled"
                        v-model="query" v-on:input="handleQueryChange"
                        v-bind:class="{ inputInProgress: isLoading, }"
                        v-on:focus="handleFocus"
@@ -106,7 +106,7 @@
             <i v-show="isLoading" class="zmdi zmdi-refresh zmdi-hc-spin"></i>
 
             <div style="width: 100%" v-click-outside="handleFocus">
-                <input placeholder="Nhập mã BĐS, địa điểm, khu dân cư, tòa nhà"
+                <input placeholder="Nhập mã BĐS, đường, địa điểm, khu dân cư"
                        type="search" autocomplete="disabled"
                        name="keys"
                        spellcheck="false" dir="auto"

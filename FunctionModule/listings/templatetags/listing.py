@@ -1,7 +1,8 @@
 from django import template
 
 from FunctionModule.listings import get_short_title_from_house_type, get_short_title_from_road_type, \
-    get_listing_status_title_from_code, get_short_title_from_transaction_type, get_menu_from_choices
+    get_listing_status_title_from_code, get_short_title_from_transaction_type, get_menu_from_choices, \
+    get_short_title_from_direction, get_short_title_from_registration_type
 from FunctionModule.listings.models import Listing
 from FunctionModule.transactions.helpers import get_short_title_from_trans_type, get_short_title_from_customer_type, \
     get_short_title_from_position_type, get_short_title_type
@@ -72,3 +73,13 @@ def tag_get_title_type(title_type):
 @register.filter(name='get_listing_count')
 def tag_get_listing_count():
     return Listing.objects.all().count()
+
+
+@register.filter(name='get_direction')
+def tag_get_direction(direction):
+    return get_short_title_from_direction(direction)
+
+
+@register.filter(name='get_registration_type')
+def tag_get_registration_type(registration_type):
+    return get_short_title_from_registration_type(registration_type)

@@ -4,7 +4,7 @@ const changed = require('gulp-changed');
 const cleanCSS = require("gulp-clean-css");
 const rev = require('gulp-rev');
 const revFormat = require('gulp-rev-format');
-const sourcemaps = require('gulp-sourcemaps');
+/*const sourcemaps = require('gulp-sourcemaps');*/
 
 const CSS_DESTINATION = 'compiled_staticfiles/css';
 const JS_DESTINATION = 'compiled_staticfiles/js';
@@ -27,7 +27,7 @@ function minifyCSS() {
 function minifyJS() {
     return (
         gulp.src(['./static/js/*.js', '!./static/js/*.min.js'])
-            .pipe(sourcemaps.init({loadMaps: true, largeFile: true}))
+            /*.pipe(sourcemaps.init({loadMaps: true, largeFile: true}))*/
             .pipe(changed(JS_DESTINATION))
             .pipe(uglify())
             .pipe(rev())
@@ -35,7 +35,7 @@ function minifyJS() {
                 prefix: '.',
                 suffix: '.min'
             }))
-            .pipe(sourcemaps.write())
+            /*.pipe(sourcemaps.write())*/
             .pipe(rev.manifest('manifest.json'))
             .pipe(gulp.dest(JS_DESTINATION))
     )

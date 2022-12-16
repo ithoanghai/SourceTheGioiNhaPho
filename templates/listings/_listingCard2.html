@@ -1,8 +1,9 @@
 {% load static humanize i18n get_cadastral listing %}
 
 <article class="listingCard">
-    <div class="cover-image">
-        <a href="{% url "listing_detail" listing.id %}" title="{{ listing.title }}">
+        <div class="cover-image">
+    <a href="{% url "listing_detail" listing.id %}" title="{{ listing.title }}">
+
             {% if listing.main_photo %}
                 {% with listing.main_photo as photo %}
                     <img src="{{ photo.url }}"
@@ -23,50 +24,51 @@
                 />
             {% endif %}
 
-        </a>
-        <div class="label-group">
-         <label class="label-primary unique"
-                   style="font-family: 'tgnp-font2'"><b>{{ listing.status|get_listing_status }}
-                {% if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %}
-                    {% trans "BÁN" %} {% endif %}</b></label>
-            {% if listing.average_price and listing.transaction_type != "rent" %}
-                <label class="label-primary unique" title="Giá/m2"><b>{{ listing.average_price }} tr/m2</b></label>
-            {% endif %}
-            {% if listing.is_exclusive %}
-                <label class="label-primary unique p-3">{% trans "Độc quyền" %}</label>
-            {% endif %}
-        </div>
-        {% comment %}<button data-action="favorite" data-id="{{ listing.id }}" data-alias="{{ listing.title }}"
+            <div class="label-group">
+                <label class="label-primary unique"
+                       style="font-family: 'tgnp-font2'"><b>{{ listing.status|get_listing_status }}
+                    {% if listing.transaction_type == "rent" %}{% trans "CHO THUÊ" %} {% else %}
+                        {% trans "BÁN" %} {% endif %}</b></label>
+                {% if listing.average_price and listing.transaction_type != "rent" %}
+                    <label class="label-primary unique" title="Giá trung bình /m2"><b>{{ listing.average_price }} tr/m2</b></label>
+                {% endif %}
+                {% if listing.is_exclusive %}
+                    <label class="label-primary unique p-3">{% trans "Độc quyền" %}</label>
+                {% endif %}
+            </div>
+            {% comment %}<button data-action="favorite" data-id="{{ listing.id }}" data-alias="{{ listing.title }}"
                 data-type="sale_property" data-favorited="false"
                 class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>{% endcomment %}
-    </div>
+
+    </a>
+                </div>
     <div class="info-container">
 
         <div class="flex align-items-center justify-content-space-between">
             <ul class="listing-info">
-                <li><b style="font-size: medium; color: #1c345d">{{ listing.price.normalize }}
+                <li title="Giá bán hoặc giá thuê"><b style="font-size: medium; color: #1c345d">{{ listing.price.normalize }}
                     {% if listing.transaction_type == "rent" %}{% trans "triệu" %} {% else %}
                         {% trans "tỷ" %} {% endif %}</b></li>
                 &nbsp;
                 &nbsp;
                 {% if listing.area > 0 %}
-                    <li>
+                    <li title="Diện tích">
                         <i class="zmdi zmdi-photo-size-select-small"></i>{{ listing.area.normalize }}{% trans "m2" %}
                     </li>
                 {% endif %}
                 {% if listing.width > 0 %}
-                    <li><i class="zmdi zmdi-home"></i>{{ listing.floors }} {% trans "tầng" %}
+                    <li title="Số tầng"><i class="zmdi zmdi-layers"></i>{{ listing.floors }} {% trans "tầng" %}
                     </li> {% endif %}
                 {% if listing.width != 0 and listing.width > 3.5 %}
-                    <li><i class="fa fas fa-road"></i>{{ listing.width.normalize }}{% trans "m" %}</li>
+                    <li title="Mặt tiền"><i class="zmdi zmdi-ruler"></i>{{ listing.width.normalize }}{% trans "m" %}</li>
                 {% endif %}
                 {% if listing.bedrooms %}
-                    <li>
+                    <li title="Số phòng ngủ">
                         <i class="zmdi zmdi-airline-seat-individual-suite"></i>{{ listing.bedrooms }} {% trans "ngủ" %}
                     </li>
                 {% endif %}
                 {% if listing.bathrooms %}
-                    <li><i class="zmdi zmdi-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %}
+                    <li title="Số phòng tắm"><i class="zmdi zmdi-bath"></i>{{ listing.bathrooms }} {% trans "tắm" %}
                     </li> {% endif %}
             </ul>
         </div>
@@ -80,13 +82,15 @@
             {% if listing.urban_area %}
                 <div>
                     <a href="{% url 'listing_search' %}?keys={{ listing.urban_area }}&so=priority"
-                       title="{{ listing.urban_area }}" style="padding-bottom:10px; font-size: 18px; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">{{ listing.urban_area }},</a>
+                       title="Khu đô thị/Khu dân cư"
+                       style="padding-bottom:10px; font-size: 18px; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">{{ listing.urban_area }},</a>
                 </div>
             {% endif %}
             {% if listing.street %}
                 <div><b>
                     <a href="{% url 'listing_search' %}?keys={{ listing.street }}&so=priority"
-                       title="{{ listing.street }}" style="padding-bottom:10px; font-size: 16px;; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">{{ listing.street }},</a></b>
+                       title="Đường"
+                       style="padding-bottom:10px; font-size: 16px;; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">{{ listing.street }},</a></b>
                 </div>
             {% endif %}
             {% comment %}{% if listing.ward %}
@@ -97,12 +101,15 @@
             {% endif %}{% endcomment %}
             {% if listing.district %}
                 <div><b><a href="{% url 'listing_search' %}?district={{ listing.district }}&so=priority"
-                          title="{% get_district listing.district %}" style="padding-bottom:10px; font-size: 16px;; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">&nbsp{% get_district listing.district %},</a></b>
+                           title="Quận/Huyện"
+                           style="padding-bottom:10px; font-size: 16px;; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">&nbsp{% get_district listing.district %},</a></b>
                 </div>
             {% endif %}
             {% if listing.state %}
                 <div><a href="{% url 'listing_search' %}?state={{ listing.state }}&so=priority"
-                          title="{% get_state listing.state %}" style="padding-bottom:10px; font-size: 16px;; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">&nbsp{% get_state listing.state %}</a></div>
+                        title="Tỉnh/Thành phố"
+                        style="padding-bottom:10px; font-size: 16px;; height: 26px; width: auto; padding-top: 15px; padding-bottom: 10px">&nbsp{% get_state listing.state %}</a>
+                </div>
             {% endif %}
         </div>
 

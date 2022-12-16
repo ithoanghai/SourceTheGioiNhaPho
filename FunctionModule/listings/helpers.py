@@ -1,7 +1,7 @@
 import sys
 import traceback
 
-from FunctionModule.listings.choices import HouseType, RoadType, Status, TransactionType
+from FunctionModule.listings.choices import HouseType, RoadType, Status, TransactionType, Direction, RegistrationType
 
 
 def get_house_type_short(house_type: str) -> str:
@@ -95,6 +95,42 @@ def get_listing_status_title_from_code(listing_status: str):
         return 'DỪNG'
     elif listing_status == Status.SALE:
         return 'GIẢM'
+
+
+def get_short_title_from_direction(direction: str):
+    if direction == Direction.east:
+        return 'Đông'
+    elif direction == Direction.south_east:
+        return 'Đông - Nam'
+    elif direction == Direction.south:
+        return 'Nam'
+    elif direction == Direction.south_west:
+        return 'Tây - Nam'
+    elif direction == Direction.west:
+        return 'Tây'
+    elif direction == Direction.north_west:
+        return 'Tây - Bắc'
+    elif direction == Direction.north:
+        return 'Bắc'
+    elif direction == HouseType.north_east:
+        return 'Đông - Bắc'
+
+
+def get_short_title_from_registration_type(registration_type: str):
+    if registration_type == RegistrationType.RED_PINK_BOOK:
+        return 'Sổ Đỏ/ Sổ hồng'
+    elif registration_type == RegistrationType.VALID_DOCUMENTS:
+        return 'Giấy tờ hợp lệ'
+    elif registration_type == RegistrationType.CONSTRUCTION_LICENSE:
+        return 'Giấy phép xây dựng'
+    elif registration_type == RegistrationType.BUSINESS_LICENSE:
+        return 'Giấy phép kinh doanh'
+    elif registration_type == RegistrationType.PREPARE_BOOK:
+        return 'Chuẩn bị làm sổ'
+    elif registration_type == RegistrationType.DONT_BOOK:
+        return 'Chưa có sổ'
+    elif registration_type == RegistrationType.OTHER:
+        return 'Khác'
 
 
 def print_trace(e: Exception):
