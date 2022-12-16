@@ -6,17 +6,19 @@
             {% if listing.main_photo %}
                 {% with listing.main_photo as photo %}
                     <img src="{{ photo.url }}"
+                         srcset="{{ photo.url }}"
                          alt="{{ listing.title }}"
                          title="{{ listing.title }}"
-                         class="lazy" draggable="false"
+                         class="lazy" loading="lazy" draggable="false"
                          onerror="this.src='{% static 'img/default.png' %}'"
                     />
                 {% endwith %}
             {% else %}
                 <img src="{{ listing.house_type|default_img_by_house_type }}"
+                     srcset="{{ listing.house_type|default_img_by_house_type }}"
                      alt="{{ listing.title }}"
                      title="{{ listing.title }}"
-                     class="lazy" draggable="false"
+                     class="lazy" loading="lazy" draggable="false"
                      onerror="this.src='{% static 'img/default.png' %}'"
                 />
             {% endif %}
