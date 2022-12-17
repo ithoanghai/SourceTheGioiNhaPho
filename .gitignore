@@ -93,4 +93,4 @@ data/
 
 media/
 *.sh
-/compiled_staticfiles/
+compiled_staticfiles/

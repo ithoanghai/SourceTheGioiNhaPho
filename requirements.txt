@@ -21,7 +21,6 @@ paytmchecksum==1.7.0
 pillow==9.3.0
 pycryptodome==3.10.1
 whitenoise==5.2.0
-psycopg2==2.9.5
 psycopg2-binary==2.9.5
 geopy==2.1.0
 pydantic==1.10.2
