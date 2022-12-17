@@ -23,7 +23,7 @@ services:
       - "6379"
   nginx:
     restart: always
-    image: nginx:latest
+    image: nginx:1.22
     ports:
       - "80:80"
       - "443:443"
