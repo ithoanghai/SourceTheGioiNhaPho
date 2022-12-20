@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n load_static get_cadastral listing %}
+{% load static humanize i18n  get_cadastral listing %}
 
 {% block title %}
     <title>Tìm {{ advertising }}BĐS {{ keywords }}{{ transtype }}{{ housetype }}{{ sort }}{% if district %} {% get_district district %} {% endif %} {% if state %} {% get_state state %} {% endif %} tốt nhất</title>

@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% load static humanize i18n get_cadastral load_static %}
+{% load static humanize i18n get_cadastral %}
 
 {% block head %}
     {{ block.super }}
     <meta http-equiv="Content-Encoding: gzip, deflate" content="public">
     <meta name="facebook-domain-verification" content="3g449o0k74keromcp6ksrzkk4t8fxm"/>
     <link rel="canonical" href="https://thegioinhaphovietnam.com.vn"/>
-    <link rel="stylesheet" type="text/css" href="{% load_static 'css/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}">
     {% comment %}<link rel="preload" href="{% static 'css/homepage.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{% static 'css/homepage.css' %}"></noscript>{% endcomment %}
 {% endblock %}
