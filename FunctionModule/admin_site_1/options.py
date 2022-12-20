@@ -9,20 +9,21 @@ from django import forms
 from django.conf import settings
 from django.contrib import messages
 from django.template import context
+from django.views.decorators.cache import cache_control
 
-from FunctionModule.admin_site import helpers, widgets
-from FunctionModule.admin_site.checks import (
+from django.contrib.admin import helpers, widgets
+from django.contrib.admin.checks import (
     BaseModelAdminChecks, InlineModelAdminChecks, ModelAdminChecks,
 )
-from FunctionModule.admin_site.exceptions import DisallowedModelAdminToField
-from FunctionModule.admin_site.templatetags.admin_urls import add_preserved_filters
-from FunctionModule.admin_site.utils import (
+from django.contrib.admin.exceptions import DisallowedModelAdminToField
+from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
+from FunctionModule.admin_site_1.utils import (
     NestedObjects, construct_change_message, flatten_fieldsets,
     get_deleted_objects, lookup_needs_distinct, model_format_dict,
     model_ngettext, quote, unquote,
 )
-from FunctionModule.admin_site.views.autocomplete import AutocompleteJsonView
-from FunctionModule.admin_site.widgets import (
+from django.contrib.admin.views.autocomplete import AutocompleteJsonView
+from django.contrib.admin.widgets import (
     AutocompleteSelect, AutocompleteSelectMultiple,
 )
 from django.contrib.auth import get_permission_codename
@@ -94,6 +95,7 @@ FORMFIELD_FOR_DBFIELD_DEFAULTS = {
     models.UUIDField: {'widget': widgets.AdminUUIDInputWidget},
 }
 
+
 csrf_protect_m = method_decorator(csrf_protect)
 
 
@@ -161,7 +163,7 @@ class BaseModelAdmin(metaclass=forms.MediaDefiningClass):
             # rendered output. formfield can be None if it came from a
             # OneToOneField with parent_link=True or a M2M intermediary.
             if formfield and db_field.name not in self.raw_id_fields:
-                related_modeladmin = self.admin_site._registry.get(db_field.remote_field.model)
+                related_modeladmin = self.admin._registry.get(db_field.remote_field.model)
                 wrapper_kwargs = {}
                 if related_modeladmin:
                     wrapper_kwargs.update(
@@ -171,7 +173,7 @@ class BaseModelAdmin(metaclass=forms.MediaDefiningClass):
                         can_view_related=related_modeladmin.has_view_permission(request),
                     )
                 formfield.widget = widgets.RelatedFieldWidgetWrapper(
-                    formfield.widget, db_field.remote_field, self.admin_site, **wrapper_kwargs
+                    formfield.widget, db_field.remote_field, self.admin, **wrapper_kwargs
                 )
 
             return formfield
@@ -210,7 +212,7 @@ class BaseModelAdmin(metaclass=forms.MediaDefiningClass):
         ordering.  Otherwise don't specify the queryset, let the field decide
         (return None in that case).
         """
-        related_admin = self.admin_site._registry.get(db_field.remote_field.model)
+        related_admin = self.admin._registry.get(db_field.remote_field.model)
         if related_admin is not None:
             ordering = related_admin.get_ordering(request)
             if ordering is not None and ordering != ():
@@ -225,9 +227,9 @@ class BaseModelAdmin(metaclass=forms.MediaDefiningClass):
 
         if 'widget' not in kwargs:
             if db_field.name in self.get_autocomplete_fields(request):
-                kwargs['widget'] = AutocompleteSelect(db_field.remote_field, self.admin_site, using=db)
+                kwargs['widget'] = AutocompleteSelect(db_field.remote_field, self.admin, using=db)
             elif db_field.name in self.raw_id_fields:
-                kwargs['widget'] = widgets.ForeignKeyRawIdWidget(db_field.remote_field, self.admin_site, using=db)
+                kwargs['widget'] = widgets.ForeignKeyRawIdWidget(db_field.remote_field, self.admin, using=db)
             elif db_field.name in self.radio_fields:
                 kwargs['widget'] = widgets.AdminRadioSelect(attrs={
                     'class': get_ul_class(self.radio_fields[db_field.name]),
@@ -256,13 +258,13 @@ class BaseModelAdmin(metaclass=forms.MediaDefiningClass):
             if db_field.name in autocomplete_fields:
                 kwargs['widget'] = AutocompleteSelectMultiple(
                     db_field.remote_field,
-                    self.admin_site,
+                    self.admin,
                     using=db,
                 )
             elif db_field.name in self.raw_id_fields:
                 kwargs['widget'] = widgets.ManyToManyRawIdWidget(
                     db_field.remote_field,
-                    self.admin_site,
+                    self.admin,
                     using=db,
                 )
             elif db_field.name in [*self.filter_vertical, *self.filter_horizontal]:
@@ -310,7 +312,7 @@ class BaseModelAdmin(metaclass=forms.MediaDefiningClass):
         try:
             return mark_safe(self.empty_value_display)
         except AttributeError:
-            return mark_safe(self.admin_site.empty_value_display)
+            return mark_safe(self.admin.empty_value_display)
 
     def get_exclude(self, request, obj=None):
         """
@@ -375,7 +377,7 @@ class BaseModelAdmin(metaclass=forms.MediaDefiningClass):
         return self.sortable_by if self.sortable_by is not None else self.get_list_display(request)
 
     def lookup_allowed(self, lookup, value):
-        from FunctionModule.admin_site.filters import SimpleListFilter
+        from django.contrib.admin.filters import SimpleListFilter
 
         model = self.model
         # Check FKey lookups that are allowed, so that popups produced by
@@ -454,7 +456,7 @@ class BaseModelAdmin(metaclass=forms.MediaDefiningClass):
         # Make sure at least one of the models registered for this site
         # references this field through a FK or a M2M relationship.
         registered_models = set()
-        for model, admin in self.admin_site._registry.items():
+        for model, admin in self.admin._registry.items():
             registered_models.add(model)
             for inline in admin.inlines:
                 registered_models.add(inline.model)
@@ -584,7 +586,7 @@ class ModelAdmin(BaseModelAdmin):
     actions_selection_counter = True
     checks_class = ModelAdminChecks
 
-    def __init__(self, model, admin_site):
+    def __init__(self, model, admin):
         self.model = model
         self.opts = model._meta
         self.admin_site = admin_site
@@ -722,7 +724,7 @@ class ModelAdmin(BaseModelAdmin):
         """
         Return the ChangeList class for use on the changelist page.
         """
-        from FunctionModule.admin_site.views.main import ChangeList
+        from django.contrib.admin.views.main import ChangeList
         return ChangeList
 
     def get_changelist_instance(self, request):
@@ -811,7 +813,7 @@ class ModelAdmin(BaseModelAdmin):
 
         The default implementation creates an admin LogEntry object.
         """
-        from FunctionModule.admin_site.models import ADDITION
+        from django.contrib.admin.models import ADDITION
         from django.contrib.admin.models import LogEntry
         return LogEntry.objects.log_action(
             user_id=request.user.pk,
@@ -828,7 +830,7 @@ class ModelAdmin(BaseModelAdmin):
 
         The default implementation creates an admin LogEntry object.
         """
-        from FunctionModule.admin_site.models import CHANGE
+        from django.contrib.admin.models import CHANGE
         from django.contrib.admin.models import LogEntry
         return LogEntry.objects.log_action(
             user_id=request.user.pk,
@@ -846,7 +848,7 @@ class ModelAdmin(BaseModelAdmin):
 
         The default implementation creates an admin LogEntry object.
         """
-        from FunctionModule.admin_site.models import DELETION
+        from django.contrib.admin.models import DELETION
         from django.contrib.admin.models import LogEntry
         return LogEntry.objects.log_action(
             user_id=request.user.pk,
@@ -1703,7 +1705,7 @@ class ModelAdmin(BaseModelAdmin):
         """
         The 'change list' admin view for this model.
         """
-        from FunctionModule.admin_site.views.main import ERROR_FLAG
+        from django.contrib.admin.views.main import ERROR_FLAG
         opts = self.model._meta
         app_label = opts.app_label
         if not self.has_view_or_change_permission(request):

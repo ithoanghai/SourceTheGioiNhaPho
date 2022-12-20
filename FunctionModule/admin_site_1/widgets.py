@@ -124,23 +124,23 @@ class ForeignKeyRawIdWidget(forms.TextInput):
     """
     template_name = 'admin/widgets/foreign_key_raw_id.html'
 
-    def __init__(self, rel, admin_site, attrs=None, using=None):
+    def __init__(self, rel, admin, attrs=None, using=None):
         self.rel = rel
-        self.admin_site = admin_site
+        self.admin = admin
         self.db = using
         super().__init__(attrs)
 
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
         rel_to = self.rel.model
-        if rel_to in self.admin_site._registry:
+        if rel_to in self.admin._registry:
             # The related object is registered with the same AdminSite
             related_url = reverse(
                 'admin:%s_%s_changelist' % (
                     rel_to._meta.app_label,
                     rel_to._meta.model_name,
                 ),
-                current_app=self.admin_site.name,
+                current_app=self.admin.name,
             )
 
             params = self.url_parameters()
@@ -180,7 +180,7 @@ class ForeignKeyRawIdWidget(forms.TextInput):
         try:
             url = reverse(
                 '%s:%s_%s_change' % (
-                    self.admin_site.name,
+                    self.admin.name,
                     obj._meta.app_label,
                     obj._meta.object_name.lower(),
                 ),
@@ -201,7 +201,7 @@ class ManyToManyRawIdWidget(ForeignKeyRawIdWidget):
 
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
-        if self.rel.model in self.admin_site._registry:
+        if self.rel.model in self.admin._registry:
             # The related object is registered with the same AdminSite
             context['widget']['attrs']['class'] = 'vManyToManyRawIdAdminField'
         return context
@@ -228,7 +228,7 @@ class RelatedFieldWidgetWrapper(forms.Widget):
     """
     template_name = 'admin/widgets/related_widget_wrapper.html'
 
-    def __init__(self, widget, rel, admin_site, can_add_related=None,
+    def __init__(self, widget, rel, admin, can_add_related=None,
                  can_change_related=False, can_delete_related=False,
                  can_view_related=False):
         self.needs_multipart_form = widget.needs_multipart_form
@@ -239,7 +239,7 @@ class RelatedFieldWidgetWrapper(forms.Widget):
         # Backwards compatible check for whether a user can add related
         # objects.
         if can_add_related is None:
-            can_add_related = rel.model in admin_site._registry
+            can_add_related = rel.model in admin._registry
         self.can_add_related = can_add_related
         # XXX: The UX does not support multiple selected values.
         multiple = getattr(widget, 'allow_multiple_selected', False)
@@ -249,7 +249,7 @@ class RelatedFieldWidgetWrapper(forms.Widget):
         self.can_delete_related = not multiple and not cascade and can_delete_related
         self.can_view_related = not multiple and can_view_related
         # so we can check if the related object is registered with this AdminSite
-        self.admin_site = admin_site
+        self.admin = admin
 
     def __deepcopy__(self, memo):
         obj = copy.copy(self)
@@ -268,7 +268,7 @@ class RelatedFieldWidgetWrapper(forms.Widget):
 
     def get_related_url(self, info, action, *args):
         return reverse("admin:%s_%s_%s" % (info + (action,)),
-                       current_app=self.admin_site.name, args=args)
+                       current_app=self.admin.name, args=args)
 
     def get_context(self, name, value, attrs):
         from django.contrib.admin.views.main import IS_POPUP_VAR, TO_FIELD_VAR
@@ -382,9 +382,9 @@ class AutocompleteMixin:
     """
     url_name = '%s:%s_%s_autocomplete'
 
-    def __init__(self, rel, admin_site, attrs=None, choices=(), using=None):
+    def __init__(self, rel, admin, attrs=None, choices=(), using=None):
         self.rel = rel
-        self.admin_site = admin_site
+        self.admin = admin_site
         self.db = using
         self.choices = choices
         self.attrs = {} if attrs is None else attrs.copy()

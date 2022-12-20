@@ -3,8 +3,8 @@ Built-in, globally-available admin actions.
 """
 
 from django.contrib import messages
-from FunctionModule.admin_site import helpers
-from FunctionModule.admin_site.utils import model_ngettext
+from django.contrib.admin import helpers
+from django.contrib.admin.utils import model_ngettext
 from django.core.exceptions import PermissionDenied
 from django.template.response import TemplateResponse
 from django.utils.translation import gettext_lazy as _, gettext_lazy
@@ -52,7 +52,7 @@ def delete_selected(modeladmin, request, queryset):
         title = _("Bạn chắc chắn chứ?")
 
     context = {
-        **modeladmin.admin_site.each_context(request),
+        **modeladmin.admin.each_context(request),
         'title': title,
         'objects_name': str(objects_name),
         'deletable_objects': [deletable_objects],
@@ -65,7 +65,7 @@ def delete_selected(modeladmin, request, queryset):
         'media': modeladmin.media,
     }
 
-    request.current_app = modeladmin.admin_site.name
+    request.current_app = modeladmin.admin.name
 
     # Display the confirmation page
     return TemplateResponse(request, modeladmin.delete_selected_confirmation_template or [

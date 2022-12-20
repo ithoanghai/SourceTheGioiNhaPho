@@ -1,11 +1,11 @@
 import datetime
 
-from FunctionModule.admin_site.templatetags.admin_urls import add_preserved_filters
-from FunctionModule.admin_site.utils import (
+from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
+from django.contrib.admin.utils import (
     display_for_field, display_for_value, get_fields_from_path,
     label_for_field, lookup_field,
 )
-from FunctionModule.admin_site.views.main import (
+from django.contrib.admin.views.main import (
     ALL_VAR, ORDER_VAR, PAGE_VAR, SEARCH_VAR,
 )
 from django.core.exceptions import ObjectDoesNotExist

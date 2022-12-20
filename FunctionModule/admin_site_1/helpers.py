@@ -2,7 +2,7 @@ import json
 
 from django import forms
 from django.conf import settings
-from FunctionModule.admin_site.utils import (
+from django.contrib.admin.utils import (
     display_for_field, flatten_fieldsets, help_text_for_field, label_for_field,
     lookup_field,
 )
@@ -190,7 +190,7 @@ class AdminReadonlyField:
         return format_html('<label{}>{}{}</label>', flatatt(attrs), capfirst(label), self.form.label_suffix)
 
     def contents(self):
-        from FunctionModule.admin_site.templatetags.admin_list import _boolean_icon
+        from django.contrib.admin.templatetags.admin_list import _boolean_icon
         field, obj, model_admin = self.field['field'], self.form.instance, self.model_admin
         try:
             f, attr, value = lookup_field(field, obj, model_admin)

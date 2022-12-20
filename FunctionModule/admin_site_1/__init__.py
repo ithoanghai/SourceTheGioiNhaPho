@@ -1,13 +1,13 @@
-from FunctionModule.admin_site.decorators import register
-from FunctionModule.admin_site.filters import (
+from django.contrib.admin.decorators import register
+from django.contrib.admin.filters import (
     AllValuesFieldListFilter, BooleanFieldListFilter, ChoicesFieldListFilter,
     DateFieldListFilter, EmptyFieldListFilter, FieldListFilter, ListFilter,
     RelatedFieldListFilter, RelatedOnlyFieldListFilter, SimpleListFilter,
 )
-from FunctionModule.admin_site.options import (
+from django.contrib.admin.options import (
     HORIZONTAL, VERTICAL, ModelAdmin, StackedInline, TabularInline,
 )
-from FunctionModule.admin_site.sites import AdminSites, site
+from FunctionModule.admin_site_1.sites import AdminSites, site
 from django.utils.module_loading import autodiscover_modules
 
 __all__ = [
@@ -24,4 +24,4 @@ def autodiscover():
     autodiscover_modules('FunctionModule', register_to=site)
 
 
-default_app_config = 'FunctionModule.admin_site.apps.AdminConfig'
+default_app_config = 'django.contrib.admin.apps.AdminConfig'

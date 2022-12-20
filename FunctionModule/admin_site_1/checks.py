@@ -3,7 +3,7 @@ from itertools import chain
 
 from django.apps import apps
 from django.conf import settings
-from FunctionModule.admin_site.utils import (
+from django.contrib.admin.utils import (
     NotRelationField, flatten, get_fields_from_path,
 )
 from django.core import checks
@@ -48,7 +48,7 @@ def _contains_subclass(class_path, candidate_paths):
 
 
 def check_admin_app(app_configs, **kwargs):
-    from FunctionModule.admin_site.sites import all_sites
+    from django.contrib.admin.sites import all_sites
     errors = []
     for site in all_sites:
         errors.extend(site.check(app_configs))
@@ -59,8 +59,8 @@ def check_dependencies(**kwargs):
     """
     Check that the admin's dependencies are correctly installed.
     """
-    from FunctionModule.admin_site.sites import all_sites
-    if not apps.is_installed('FunctionModule.admin_site'):
+    from django.contrib.admin.sites import all_sites
+    if not apps.is_installed('django.contrib.admin'):
         return []
     errors = []
     app_dependencies = (
@@ -184,7 +184,7 @@ class BaseModelAdminChecks:
                     'a foreign key or a many-to-many field',
                     option=label, obj=obj, id='admin.E038'
                 )
-            related_admin = obj.admin_site._registry.get(field.remote_field.model)
+            related_admin = obj.admin._registry.get(field.remote_field.model)
             if related_admin is None:
                 return [
                     checks.Error(
@@ -458,7 +458,7 @@ class BaseModelAdminChecks:
     def _check_radio_fields_value(self, obj, val, label):
         """ Check type of a value of `radio_fields` dictionary. """
 
-        from FunctionModule.admin_site.options import HORIZONTAL, VERTICAL
+        from django.contrib.admin.options import HORIZONTAL, VERTICAL
 
         if val not in (HORIZONTAL, VERTICAL):
             return [
@@ -692,7 +692,7 @@ class ModelAdminChecks(BaseModelAdminChecks):
                 )
             ]
 
-        from FunctionModule.admin_site.options import InlineModelAdmin
+        from django.contrib.admin.options import InlineModelAdmin
 
         if not _issubclass(inline, InlineModelAdmin):
             return [
@@ -713,7 +713,7 @@ class ModelAdminChecks(BaseModelAdminChecks):
         elif not _issubclass(inline.model, models.Model):
             return must_be('a Model', option='%s.model' % inline_label, obj=obj, id='admin.E106')
         else:
-            return inline(obj.model, obj.admin_site).check()
+            return inline(obj.model, obj.admin).check()
 
     def _check_list_display(self, obj):
         """ Check that list_display only contains fields or usable attributes.
@@ -763,7 +763,7 @@ class ModelAdminChecks(BaseModelAdminChecks):
     def _check_list_display_links(self, obj):
         """ Check that list_display_links is a unique subset of list_display.
         """
-        from FunctionModule.admin_site.options import ModelAdmin
+        from django.contrib.admin.options import ModelAdmin
 
         if obj.list_display_links is None:
             return []
@@ -808,7 +808,7 @@ class ModelAdminChecks(BaseModelAdminChecks):
         2. ('field', SomeFieldListFilter) - a field-based list filter class
         3. SomeListFilter - a non-field list filter class
         """
-        from FunctionModule.admin_site import FieldListFilter, ListFilter
+        from django.contrib.admin import FieldListFilter, ListFilter
 
         if callable(item) and not isinstance(item, models.Field):
             # If item is option 3, it should be a ListFilter...

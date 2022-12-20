@@ -1,7 +1,7 @@
 from urllib.parse import parse_qsl, unquote, urlparse, urlunparse
 
 from django import template
-from FunctionModule.admin_site.utils import quote
+from django.contrib.admin.utils import quote
 from django.urls import Resolver404, get_script_prefix, resolve
 from django.utils.http import urlencode
 
@@ -44,10 +44,10 @@ def add_preserved_filters(context, url, popup=False, to_field=None):
         merged_qs.update(preserved_filters)
 
     if popup:
-        from FunctionModule.admin_site.options import IS_POPUP_VAR
+        from django.contrib.admin.options import IS_POPUP_VAR
         merged_qs[IS_POPUP_VAR] = 1
     if to_field:
-        from FunctionModule.admin_site.options import TO_FIELD_VAR
+        from django.contrib.admin.options import TO_FIELD_VAR
         merged_qs[TO_FIELD_VAR] = to_field
 
     merged_qs.update(parsed_qs)

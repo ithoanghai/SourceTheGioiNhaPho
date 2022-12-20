@@ -22,7 +22,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.encoding import force_str
 from django.utils.text import slugify
 
-from FunctionModule.admin_site.forms import RangeNumericForm, SliderNumericForm
+from FunctionModule.admin_site_1.forms import RangeNumericForm, SliderNumericForm
 from .options import IncorrectLookupParameters
 from .utils import (get_model_from_relation, prepare_lookup_value, reverse_field_path,)
 from .widgets import AdminDateWidget, AdminSplitDateTime
@@ -208,7 +208,7 @@ class RelatedFieldListFilter(FieldListFilter):
         """
         Return the model admin's ordering for related field, if provided.
         """
-        related_admin = model_admin.admin_site._registry.get(field.remote_field.model)
+        related_admin = model_admin.admin._registry.get(field.remote_field.model)
         if related_admin is not None:
             return related_admin.get_ordering(request)
         return ()

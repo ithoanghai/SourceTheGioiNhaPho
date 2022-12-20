@@ -1,6 +1,6 @@
+import adminplus
 from django.contrib import admin
 
-from FunctionModule import admin_site
 from django.core.files.uploadedfile import UploadedFile
 from django import forms
 from django.http import HttpRequest, JsonResponse, HttpResponse
@@ -12,12 +12,13 @@ from . import Status
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet, ContractImageForm, ContractImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage, ListingHistory
 from .choices import district_default_choices, Exhaustive
-from ..admin_site.filters import DateFieldListFilter, BooleanFieldListFilter, ChoicesFieldListFilter, RangeNumericFilter
+from django.contrib.admin.filters import DateFieldListFilter, BooleanFieldListFilter, ChoicesFieldListFilter
+from FunctionModule.admin_site_1.filters import RangeNumericFilter
 from ..realtors.models import Realtor
 from ..transactions.models import Transaction
 
 
-class ListingPhotoAdmin(admin_site.TabularInline):
+class ListingPhotoAdmin(admin.TabularInline):
     model = ListingImage
     verbose_name = "HÌNH ẢNH CHỤP BĐS"
     form = ImageForm
@@ -27,7 +28,7 @@ class ListingPhotoAdmin(admin_site.TabularInline):
     extra = 0
 
 
-class ContractPhotoAdmin(admin_site.TabularInline):
+class ContractPhotoAdmin(admin.TabularInline):
     model = ContractImage
     verbose_name = "ẢNH HỢP ĐỒNG TRÍCH THƯỞNG & PHIẾU KHẢO SÁT BĐS"
     form = ContractImageForm
@@ -37,19 +38,19 @@ class ContractPhotoAdmin(admin_site.TabularInline):
     extra = 0
 
 
-class ListingVideoAdmin(admin_site.TabularInline):
+class ListingVideoAdmin(admin.TabularInline):
     model = ListingVideo
     extra = 0
     verbose_name = "VIDEO QUAY BĐS"
 
 
-class ListingHistoryInline(admin_site.TabularInline):
+class ListingHistoryInline(admin.TabularInline):
     model = ListingHistory
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date_created', 'area','floors', 'price', 'extra_data', 'warehouse', )
 
 
-class TransactionInline(admin_site.TabularInline):
+class TransactionInline(admin.TabularInline):
     model = Transaction
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date', 'status', 'trantype', 'request_price', 'customer', 'realtor',)
@@ -57,7 +58,7 @@ class TransactionInline(admin_site.TabularInline):
     readonly_fields = ('date', 'realtor', 'customer',)
 
 
-class ListingAdmin(admin_site.ModelAdmin):
+class ListingAdmin(admin.ModelAdmin):
     fieldsets = (
         ('THÔNG TIN CHUYÊN VIÊN', {
             'classes': ('wide',),
@@ -90,13 +91,13 @@ class ListingAdmin(admin_site.ModelAdmin):
         ('registration_type', ChoicesFieldListFilter),
         ('exhaustive', ChoicesFieldListFilter),
         ('liquidity_classification', ChoicesFieldListFilter),
-        ('area', RangeNumericFilter),
-        ('floors', RangeNumericFilter),
-        ('width', RangeNumericFilter),
-        ('price', RangeNumericFilter),
-        ('average_price', RangeNumericFilter),
-        ('bedrooms', RangeNumericFilter),
-        ('priority', RangeNumericFilter),
+        # ('area', RangeNumericFilter),
+        # ('floors', RangeNumericFilter),
+        # ('width', RangeNumericFilter),
+        # ('price', RangeNumericFilter),
+        # ('average_price', RangeNumericFilter),
+        # ('bedrooms', RangeNumericFilter),
+        # ('priority', RangeNumericFilter),
     )
     #advanced_filter_fields = ('status', ('house_type', 'road_type'))
     list_editable = ()
@@ -231,7 +232,7 @@ class ListingAdmin(admin_site.ModelAdmin):
     exhaustive.short_description = _("Lên lịch đi khảo sát")
 
 
-class ListingHistoryAdmin(admin_site.ModelAdmin):
+class ListingHistoryAdmin(admin.ModelAdmin):
     fieldsets = (
         ('THÔNG TIN CHUYÊN VIÊN', {
             'classes': ('wide',),
@@ -247,11 +248,11 @@ class ListingHistoryAdmin(admin_site.ModelAdmin):
     list_display = ('listing', 'area', 'floors', 'width', 'price', 'warehouse', 'date_created',)
     list_display_links = ('listing',)
     list_filter = (
-        ('area', RangeNumericFilter),
-        ('floors', RangeNumericFilter),
-        ('width', RangeNumericFilter),
-        ('price', RangeNumericFilter),
-        ('bedrooms', RangeNumericFilter),
+        # ('area', RangeNumericFilter),
+        # ('floors', RangeNumericFilter),
+        # ('width', RangeNumericFilter),
+        # ('price', RangeNumericFilter),
+        # ('bedrooms', RangeNumericFilter),
         ('date_created', DateFieldListFilter),
     )
     list_editable = ()
@@ -313,7 +314,7 @@ class ListingHistoryAdmin(admin_site.ModelAdmin):
             return queryset_list
 
 
-@admin_site.site.register_view('listings/listing/import-export')
+#@admin.register('listings/listing/import-export')
 def import_csv_view(request: HttpRequest) -> JsonResponse:
     if request.method == 'POST':
         form = ImportListingForm(request.POST or None, request.FILES)
@@ -337,5 +338,5 @@ def import_csv_view(request: HttpRequest) -> JsonResponse:
     return JsonResponse({})
 
 
-admin_site.site.register(Listing, ListingAdmin)
-admin_site.site.register(ListingHistory, ListingHistoryAdmin)
+admin.site.register(Listing, ListingAdmin)
+admin.site.register(ListingHistory, ListingHistoryAdmin)

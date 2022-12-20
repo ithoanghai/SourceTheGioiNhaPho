@@ -1,21 +1,21 @@
 from django.http import HttpRequest, HttpResponse
 
-from FunctionModule import admin_site
+from django.contrib import admin
 from django.db.models import Q
 from .forms import CustomerAdminForm
 from .models import Customer
-from FunctionModule.admin_site.filters import ChoicesFieldListFilter, RangeNumericFilter
-from ..admin_site import DateFieldListFilter
+from django.contrib.admin.filters import ChoicesFieldListFilter #, RangeNumericFilter
+from django.contrib.admin import DateFieldListFilter
 from ..transactions.models import Transaction
 
 
-class TransactionInline(admin_site.TabularInline):
+class TransactionInline(admin.TabularInline):
     model = Transaction
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date', 'status', 'trantype', 'request_price','listing', 'realtor',)
 
 
-class CustomerAdmin(admin_site.ModelAdmin):
+class CustomerAdmin(admin.ModelAdmin):
     fieldsets = (
         ('THÔNG TIN CHUYÊN VIÊN', {
             'classes': ('wide',),
@@ -44,7 +44,7 @@ class CustomerAdmin(admin_site.ModelAdmin):
         ('classify', ChoicesFieldListFilter),
         ('status', ChoicesFieldListFilter),
         ('hire_date', DateFieldListFilter),
-        ('financial_range', RangeNumericFilter),
+        # ('financial_range', RangeNumericFilter),
     )
     form = CustomerAdminForm
     #inlines = [TransactionInline]
@@ -99,4 +99,4 @@ class CustomerAdmin(admin_site.ModelAdmin):
             return to_exclude
 
 
-admin_site.site.register(Customer, CustomerAdmin)
+admin.site.register(Customer, CustomerAdmin)

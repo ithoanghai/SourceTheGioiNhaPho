@@ -4,7 +4,7 @@ from random import random
 from django import template
 from django.views.decorators.cache import cache_page
 
-from FunctionModule.admin_site import site
+from django.contrib.admin import site
 from django.core.paginator import Paginator
 from django.db.models import QuerySet, Count
 from django.http import HttpResponse, Http404, HttpResponseNotFound

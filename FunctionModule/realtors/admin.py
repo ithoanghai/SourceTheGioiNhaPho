@@ -1,4 +1,5 @@
-from FunctionModule import admin_site
+import adminplus
+from django.contrib import admin
 from django.core.files.uploadedfile import UploadedFile
 from django.db.models import Q
 
@@ -7,15 +8,15 @@ from .import_realtor import handle_import
 from .models import Realtor
 from django.http import HttpRequest, JsonResponse, HttpResponse
 
-from ..admin_site.filters import ChoicesFieldListFilter, RangeNumericFilter
-from ..admin_site import BooleanFieldListFilter, DateFieldListFilter
+from django.contrib.admin.filters import ChoicesFieldListFilter #, RangeNumericFilter
+from django.contrib.admin import BooleanFieldListFilter, DateFieldListFilter
 from ..customers.models import Customer
 from ..listings import TransactionType, Status
 from ..listings.models import ListingHistory, Listing
 from ..transactions.models import Transaction, TransactionHistory
 
 
-class ListingInline(admin_site.TabularInline):
+class ListingInline(admin.TabularInline):
     model = Listing
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date_created','date_update', 'status', 'address', 'area','floors', 'price','is_published' )
@@ -34,7 +35,7 @@ class ListingInline(admin_site.TabularInline):
         return qs
 
 
-class CustomerInline(admin_site.TabularInline):
+class CustomerInline(admin.TabularInline):
     model = Customer
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('hire_date','financial_range',  'custormer_type', 'transactionStatus', 'name', 'phone', 'district', )
@@ -53,7 +54,7 @@ class CustomerInline(admin_site.TabularInline):
         return qs
 
 
-class TransactionInline(admin_site.TabularInline):
+class TransactionInline(admin.TabularInline):
     model = Transaction
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date', 'status', 'trantype', 'message', 'request_price', 'customer',)
@@ -73,7 +74,7 @@ class TransactionInline(admin_site.TabularInline):
         return qs
 
 
-class TransactionHistoryInline(admin_site.TabularInline):
+class TransactionHistoryInline(admin.TabularInline):
     model = TransactionHistory
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date', 'status', 'transaction', 'reason', 'comment',  'realtor', )
@@ -94,7 +95,7 @@ class TransactionHistoryInline(admin_site.TabularInline):
         return qs
 
 
-class RealtorAdmin(admin_site.ModelAdmin):
+class RealtorAdmin(admin.ModelAdmin):
     list_display = ('join_date','name', 'position', 'phone1', 'department', 'work_area','is_cooperate','status','is_published', 'facebook')
     list_display_links = ('name',)
     search_fields = ('id', 'name','phone1','phone2', 'email', 'address','title','birthyear','identifier', 'position', 'countryside', 'workplace', 'department', 'work_area', 'facebook','referral', 'hire_date')
@@ -103,7 +104,7 @@ class RealtorAdmin(admin_site.ModelAdmin):
     ordering = ('-name', '-hire_date')
     sortable_by = ('position')
     #filter_vertical = ('user',)
-    list_editable = ('email','is_cooperate','is_published',)
+    list_editable = ('is_cooperate','is_published',)
     list_filter = (
         ('position', ChoicesFieldListFilter),
         ('workplace', ChoicesFieldListFilter),
@@ -112,8 +113,8 @@ class RealtorAdmin(admin_site.ModelAdmin):
         ('status', ChoicesFieldListFilter),
         ('hire_date', DateFieldListFilter),
         ('date_join', DateFieldListFilter),
-        ('birthyear', RangeNumericFilter),
-        ('level', RangeNumericFilter),
+        # ('birthyear', RangeNumericFilter),
+        # ('level', RangeNumericFilter),
     )
     readonly_fields = []
     inlines = [CustomerInline, ListingInline, TransactionInline, TransactionHistoryInline,   ]
@@ -164,7 +165,7 @@ class RealtorAdmin(admin_site.ModelAdmin):
         return super().changelist_view(request, extra_context=extra_context)
 
 
-@admin_site.site.register_view('realtors/realtor/import-export')
+#@adminplus.site.register_view('realtors/realtor/import-export')
 def import_csv_view(request: HttpRequest) -> JsonResponse:
     if request.method == 'POST':
         form = ImportRealtorForm(request.POST or None, request.FILES)
@@ -179,4 +180,4 @@ def import_csv_view(request: HttpRequest) -> JsonResponse:
     return JsonResponse({})
 
 
-admin_site.site.register(Realtor, RealtorAdmin)
+admin.site.register(Realtor, RealtorAdmin)

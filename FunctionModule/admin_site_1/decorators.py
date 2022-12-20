@@ -9,22 +9,22 @@ def register(*models, site=None):
 
     The `site` kwarg is an admin site to use instead of the default admin site.
     """
-    from FunctionModule.admin_site import ModelAdmin
-    from FunctionModule.admin_site.sites import site as default_site, AdminSites
+    from django.contrib.admin import ModelAdmin
+    from FunctionModule.admin_site_1.sites import site as default_site, AdminSites
 
     def _model_admin_wrapper(admin_class):
         if not models:
             raise ValueError('At least one model must be passed to register.')
 
-        admin_site = site or default_site
+        admin = site or default_site
 
-        if not isinstance(admin_site, AdminSites):
+        if not isinstance(admin, AdminSites):
             raise ValueError('site must subclass AdminSite')
 
         if not issubclass(admin_class, ModelAdmin):
             raise ValueError('Wrapped class must subclass ModelAdmin.')
 
-        admin_site.register(models, admin_class=admin_class)
+        admin.register(models, admin_class=admin_class)
 
         return admin_class
     return _model_admin_wrapper

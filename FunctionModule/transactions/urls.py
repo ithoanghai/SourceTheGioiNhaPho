@@ -1,9 +1,9 @@
-from FunctionModule import admin_site
+from django.contrib import admin
 from django.urls import path
 
 from . import views
 
-admin_site.autodiscover()
+admin.autodiscover()
 
 urlpatterns = [
     path('contact', views.contact, name='post_contact'),

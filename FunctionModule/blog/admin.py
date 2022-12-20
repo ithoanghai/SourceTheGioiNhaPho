@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _, gettext_lazy
-from FunctionModule import admin_site
-from FunctionModule.admin_site import DateFieldListFilter
+from django.contrib import admin
+from django.contrib.admin import DateFieldListFilter
 from FunctionModule.blog.forms import PostAdminForm
 from FunctionModule.blog.models import Post
 
 
-class PostAdmin(admin_site.ModelAdmin):
+class PostAdmin(admin.ModelAdmin):
     fieldsets = (
         ('NỘI DUNG TIN ĐĂNG', {
             'classes': ('wide',),
@@ -79,4 +79,4 @@ class PostAdmin(admin_site.ModelAdmin):
     make_published.short_description = _("Đăng công khai")
     unpublished.short_description = _("Hủy đăng công khai")
 
-admin_site.site.register(Post, PostAdmin)
+admin.site.register(Post, PostAdmin)

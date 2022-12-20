@@ -1,11 +1,11 @@
 from typing import Set
 
+import adminplus
 from django.contrib import messages, admin
 from rest_framework.authtoken.models import TokenProxy
 
-from FunctionModule import admin_site
-from FunctionModule.admin_site.options import IS_POPUP_VAR
-from FunctionModule.admin_site.utils import unquote
+from django.contrib.admin.options import IS_POPUP_VAR
+from django.contrib.admin.utils import unquote
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.core.exceptions import PermissionDenied
@@ -17,44 +17,44 @@ from django.utils.translation import gettext_lazy as _, gettext
 
 from .forms import GroupAdminForm, UserCreationForm, UserChangeForm, AdminPasswordChangeForm
 from .models import User, Groups, Permissions
-from ..admin_site import ChoicesFieldListFilter, BooleanFieldListFilter, DateFieldListFilter
+from django.contrib.admin.filters import ChoicesFieldListFilter, BooleanFieldListFilter, DateFieldListFilter
 from ..blog.models import Post
 from ..customers.models import Customer
 from ..listings.models import Listing, ListingHistory
 from ..transactions.models import Transaction
 
 
-class PermissionAdmin(admin_site.ModelAdmin):
+class PermissionAdmin(admin.ModelAdmin):
     search_fields = ('name', 'content_type', 'codename')
     ordering = ('content_type','name')
     verbose_name = "Quản trị Quyền người dùng"
 
 
-class BlogInline(admin_site.TabularInline):
+class BlogInline(admin.TabularInline):
     model = Post
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date_created','date_update', 'title', )
 
 
-class ListingHistoryInline(admin_site.TabularInline):
+class ListingHistoryInline(admin.TabularInline):
     model = ListingHistory
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date_created', 'area','floors', 'price', 'warehouse', )
 
 
-class CustomerInline(admin_site.TabularInline):
+class CustomerInline(admin.TabularInline):
     model = Customer
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('hire_date', 'custormer_type', 'transactionStatus', 'name', 'phone', 'district', 'financial_range', )
 
 
-class ListingInline(admin_site.TabularInline):
+class ListingInline(admin.TabularInline):
     model = Listing
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date_created','date_update', 'status', 'address', 'area','floors', 'price', )
 
 
-class TransactionInline(admin_site.TabularInline):
+class TransactionInline(admin.TabularInline):
     model = Transaction
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date', 'status', 'trantype', 'request_price','listing','customer', 'realtor',)
@@ -168,7 +168,7 @@ class AccountAdmin(AuthUserAdmin):
                 return HttpResponseRedirect(
                     reverse(
                         '%s:%s_%s_change' % (
-                            self.admin_site.name,
+                            self.admin.name,
                             user._meta.app_label,
                             user._meta.model_name,
                         ),
@@ -179,7 +179,7 @@ class AccountAdmin(AuthUserAdmin):
             form = self.change_password_form(user)
 
         fieldsets = [(None, {'fields': list(form.base_fields)})]
-        adminForm = admin_site.helpers.AdminForm(form, fieldsets, {})
+        adminForm = admin.helpers.AdminForm(form, fieldsets, {})
 
         context = {
             'title': _('Thay đổi mật khẩu cho người dùng: %s') % escape(user.get_username()),
@@ -197,10 +197,10 @@ class AccountAdmin(AuthUserAdmin):
             'original': user,
             'save_as': False,
             'show_save': True,
-            **self.admin_site.each_context(request),
+            **self.admin.each_context(request),
         }
 
-        request.current_app = self.admin_site.name
+        request.current_app = self.admin.name
 
         return TemplateResponse(
             request,
@@ -210,7 +210,7 @@ class AccountAdmin(AuthUserAdmin):
         )
 
 
-class GroupAdmin(admin_site.ModelAdmin):
+class GroupAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     ordering = ('name',)
     filter_horizontal = ('permissions',)
@@ -226,11 +226,11 @@ class GroupAdmin(admin_site.ModelAdmin):
         return super().formfield_for_manytomany(db_field, request=request, **kwargs)
 
 
-admin_site.site.register(Permissions, PermissionAdmin)
+admin.site.register(Permissions, PermissionAdmin)
 #admin.site.register(ContentType)
-admin_site.site.register(Groups)
-admin_site.site.register_view(Groups, GroupAdminForm)
-admin_site.site.register(User, AccountAdmin)
+#admin.site.register(Groups)
+#admin.site.register(Groups, GroupAdminForm)
+admin.site.register(User, AccountAdmin)
 #admin.site.unregister(TokenProxy)
 #admin.site.unregister(SocialToken)
 #admin.site.unregister(EmailAddress)

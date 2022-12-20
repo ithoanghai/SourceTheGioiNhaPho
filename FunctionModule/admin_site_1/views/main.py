@@ -3,14 +3,14 @@ from datetime import datetime, timedelta
 from django import forms
 from django.conf import settings
 from django.contrib import messages
-from FunctionModule.admin_site import FieldListFilter
-from FunctionModule.admin_site.exceptions import (
+from django.contrib.admin import FieldListFilter
+from django.contrib.admin.exceptions import (
     DisallowedModelAdminLookup, DisallowedModelAdminToField,
 )
-from FunctionModule.admin_site.options import (
+from django.contrib.admin.options import (
     IS_POPUP_VAR, TO_FIELD_VAR, IncorrectLookupParameters,
 )
-from FunctionModule.admin_site.utils import (
+from django.contrib.admin.utils import (
     get_fields_from_path, lookup_needs_distinct, prepare_lookup_value, quote,
 )
 from django.core.exceptions import (

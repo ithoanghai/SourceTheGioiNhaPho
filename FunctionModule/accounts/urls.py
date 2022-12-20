@@ -1,9 +1,9 @@
-from FunctionModule import admin_site
+from django.contrib import admin
 from django.urls import path, re_path, include
 
 from . import views
 
-admin_site.autodiscover()
+admin.autodiscover()
 
 urlpatterns = [
     path('register', views.register, name='register'),

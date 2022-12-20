@@ -47,7 +47,7 @@ THIRD_PARTIES = [
     'rest_framework.authtoken',
     #'corsheaders',
     'django_filters',
-    #'adminplus',
+    'adminplus',
     'cachalot',
     'crispy_forms',
     'pwa',

@@ -101,7 +101,7 @@ def flatten_fieldsets(fieldsets):
     return field_names
 
 
-def get_deleted_objects(objs, request, admin_site):
+def get_deleted_objects(objs, request, admin):
     """
     Find all objects related to ``objs`` that should also be deleted. ``objs``
     must be a homogeneous iterable of objects (e.g. a QuerySet).
@@ -121,17 +121,17 @@ def get_deleted_objects(objs, request, admin_site):
 
     def format_callback(obj):
         model = obj.__class__
-        has_admin = model in admin_site._registry
+        has_admin = model in admin._registry
         opts = obj._meta
 
         no_edit_link = '%s: %s' % (capfirst(opts.verbose_name), obj)
 
         if has_admin:
-            if not admin_site._registry[model].has_delete_permission(request, obj):
+            if not admin._registry[model].has_delete_permission(request, obj):
                 perms_needed.add(opts.verbose_name)
             try:
                 admin_url = reverse('%s:%s_%s_change'
-                                    % (admin_site.name,
+                                    % (admin.name,
                                        opts.app_label,
                                        opts.model_name),
                                     None, (quote(obj.pk),))

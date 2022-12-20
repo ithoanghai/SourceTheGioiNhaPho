@@ -6,7 +6,7 @@ from weakref import WeakSet
 from django.apps import apps
 
 import FunctionModule
-from FunctionModule.admin_site import ModelAdmin, actions
+from django.contrib.admin import ModelAdmin, actions
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models.base import ModelBase
@@ -254,7 +254,7 @@ class AdminSites:
         def wrap(view, cacheable=False):
             def wrapper(*args, **kwargs):
                 return self.admin_view(view, cacheable)(*args, **kwargs)
-            wrapper.admin_site = self
+            wrapper.admin = self
             return update_wrapper(wrapper, view)
 
         # Admin-site-wide views.
@@ -395,7 +395,7 @@ class AdminSites:
 
         # Since this module gets imported in the application's root package,
         # it cannot import models from other applications at the module level,
-        # and FunctionModule.admin_site.forms eventually imports User.
+        # and django.contrib.admin.forms eventually imports User.
         from FunctionModule.accounts.forms import AdminAuthenticationForm
         from django.contrib.auth.views import LoginView
         context = {
@@ -544,7 +544,7 @@ class AdminSites:
 
 class DefaultAdminSite(LazyObject):
     def _setup(self):
-        AdminSiteClass = import_string(apps.get_app_config('admin_site').default_site)
+        AdminSiteClass = import_string(apps.get_app_config('admin').default_site)
         self._wrapped = AdminSiteClass()
 
 

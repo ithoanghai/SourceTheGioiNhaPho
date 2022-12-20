@@ -1,6 +1,6 @@
 from datetime import date
 
-from FunctionModule.admin_site import SimpleListFilter
+from django.contrib.admin import SimpleListFilter
 from django_filters import FilterSet, CharFilter, BaseInFilter, RangeFilter, NumberFilter
 
 from FunctionModule.listings.models import Listing

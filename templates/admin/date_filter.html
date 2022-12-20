@@ -93,7 +93,7 @@ https://github.com/django/django/blob/stable/1.10.x/django/contrib/admin/templat
     //    (Note: it accumulates media in django.forms.widgets.Media object,
     //    which prevents duplicates, but the DateRangeFilter is not included yet
     //    since it's not model field related.
-    //    List of predefined widgets is in FunctionModule.admin_site.options.FORMFIELD_FOR_DBFIELD_DEFAULTS)
+    //    List of predefined widgets is in django.contrib.admin.options.FORMFIELD_FOR_DBFIELD_DEFAULTS)
     //  - After that Django starts rendering forms, which have the {{form.media}}
     //    tag. Only then the DjangoRangeFilter.get_media is called and rendered,
     //    which creates the duplicates.

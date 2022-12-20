@@ -1,15 +1,15 @@
 from django.forms import Textarea
 from django.http import HttpRequest, HttpResponse
 
-from FunctionModule import admin_site
-from FunctionModule.admin_site.filters import ChoicesFieldListFilter, RangeNumericFilter
+from django.contrib import admin
+from django.contrib.admin.filters import ChoicesFieldListFilter #, RangeNumericFilter
 from .forms import TransactionAdminForm, TransactionHistoryAdminForm
 from .models import Transaction, TransactionHistory
-from ..admin_site import DateFieldListFilter
+from django.contrib.admin import DateFieldListFilter
 from ..realtors.models import Realtor
 
 
-class TransactionHistoryInline(admin_site.TabularInline):
+class TransactionHistoryInline(admin.TabularInline):
     model = TransactionHistory
     extra = 0  # If you have a fixed number number of answers, set it here.
     fields = ('date', 'transaction', 'status', 'reason', 'comment',  'realtor', )
@@ -17,7 +17,7 @@ class TransactionHistoryInline(admin_site.TabularInline):
     can_delete = False
 
 
-class TransactionAdmin(admin_site.ModelAdmin):
+class TransactionAdmin(admin.ModelAdmin):
     fieldsets = (
         ('THÔNG TIN CHUYÊN VIÊN', {
             'classes': ('wide',),
@@ -43,7 +43,7 @@ class TransactionAdmin(admin_site.ModelAdmin):
         ('house_type', ChoicesFieldListFilter),
         ('status', ChoicesFieldListFilter),
         ('date', DateFieldListFilter),
-        ('request_price', RangeNumericFilter),
+        # ('request_price', RangeNumericFilter),
     )
     list_per_page = 100
     form = TransactionAdminForm
@@ -88,7 +88,7 @@ class TransactionAdmin(admin_site.ModelAdmin):
         return super().changeform_view(request, object_id, extra_context=extra_context)
 
 
-class TransactionHistoryAdmin(admin_site.ModelAdmin):
+class TransactionHistoryAdmin(admin.ModelAdmin):
     fieldsets = (
         ('THÔNG TIN GIAO DỊCH', {'fields': (
             'transaction', ('status', 'reason'),)}),
@@ -127,5 +127,5 @@ class TransactionHistoryAdmin(admin_site.ModelAdmin):
         return form
 
 
-admin_site.site.register(Transaction, TransactionAdmin)
-admin_site.site.register(TransactionHistory, TransactionHistoryAdmin)
+admin.site.register(Transaction, TransactionAdmin)
+admin.site.register(TransactionHistory, TransactionHistoryAdmin)
