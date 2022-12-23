@@ -23,6 +23,7 @@
     pg_basebackup -h --dbname=postgresql://postgres:postgres@127.0.0.1/tgnp -D /usr/app/data
     Open/Close port DB, update status server(comment/uncomment 2 dòng ports, comment 2 dòng expose DB trong file docker-compose.production.yml)
         docker-compose -f docker-compose.yml up -d db
+    SELECT setval('accounts_user_id_seq', (SELECT MAX(id) FROM accounts_user)); //để set id theo hiện trạng
 
 #Docker command
     docker system df

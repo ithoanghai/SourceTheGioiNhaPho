@@ -5,12 +5,14 @@ from django.contrib.messages import constants as messages
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _, gettext_noop
 from dotenv import load_dotenv
+from pathlib import Path
 
 ########################################
 # BASE SETTINGS
 ########################################
 load_dotenv()
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 SITE_ID = 1
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 ROOT_URLCONF = 'TownhouseWorldRealestate.urls'
@@ -51,7 +53,7 @@ THIRD_PARTIES = [
     'cachalot',
     'crispy_forms',
     'pwa',
-    'django_gulp',
+    #'django_gulp',
     ]
 BUILT_IN_APPS = [
     'django.contrib.admin',
@@ -166,7 +168,23 @@ ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomUserCreationForm'}
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ""
 #LOGIN_REDIRECT_URL = reverse_lazy("admin:index")
 #LOGIN_URL = reverse_lazy("accounts_login")
+# Password validation
+# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 ########################################
 # EMAIL
@@ -219,9 +237,9 @@ DATETIME_INPUT_FORMATS = (('%d/%m/%Y %H:%i'),)
 SECRET_KEY = os.getenv('SECRET_KEY', 'w6rm%l&xim0ivll-li$u6fg8)6k8-$7uar^f#33ht5sutw8e!#')
 DEBUG = bool(os.getenv("DJANGO_DEBUG", "False").lower() in ["true", "1"])
 #DEBUG = strtobool(os.getenv('DEBUG', 'True'))
-DEBUG = False
+DEBUG = True
 DEBUG_PROPAGATE_EXCEPTIONS = True
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 CORS_ALLOWED_ORIGINS = [
         'https://thegioinhaphovietnam.com.vn',
         'http://localhost:8888',

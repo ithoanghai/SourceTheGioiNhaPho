@@ -14,17 +14,17 @@
                     <div class="form-group username">
                         <input name="username" type="text" placeholder="" required/>
                         <label class="error__star"><i
-                                class="fas fa-user"></i><span> Tên đăng nhập hoặc điện thoại hoặc email</span></label>
+                                class="zmdi zmdi-account"></i><span> Tên đăng nhập hoặc điện thoại hoặc email</span></label>
                         <p class="error username-error" style="display: none;"></p>
                     </div>
                     <div class="form-group">
                         <input name="password" type="password" placeholder="" required/>
-                        <label class="error__star"><i class="fas fa-lock"></i><span> Mật khẩu</span></label>
+                        <label class="error__star"><i class="zmdi zmdi-lock"></i><span> Mật khẩu</span></label>
                         <p class="error password-error" style="display: none;"></p>
                     </div>
                     <div class="butt-groups">
                         <button type="submit" class="butt-primary large-butt-red btn-login">
-                            <i class="fas fa-users"></i>
+                            <i class="zmdi zmdi-accounts"></i>
                             &nbsp;ĐĂNG NHẬP TÀI KHOẢN
                         </button>
                         <div class="btn-group__account">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
 
-                <div class="butt-groups"> <b><button class="butt-primary large-butt-red btn-login"><i class="fas fa-registered"></i>&nbsp; <a href={% url 'register' %}>Đăng ký tài khoản thành viên mới</a></button></b>
+                <div class="butt-groups"> <b><button class="butt-primary large-butt-red btn-login"><i class="zmdi zmdi-account-add"></i>&nbsp; <a href={% url 'register' %}>Đăng ký tài khoản thành viên mới</a></button></b>
 </div>
             </form>
 

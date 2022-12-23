@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <!-- Brand -->
         <div class="navbar-brand col-md-1 col-sm-2 col-xs-2" style="width: 15%">
-            <a class="pt-0" href="{% url "admin" %}">
+            <a class="pt-0" href="admin/">
                 <img src="{% static 'img/logo.svg' %}" width="80px" class="navbar-brand-img" alt="...">
             </a>
             <div id="branding">
@@ -32,7 +32,7 @@
                     <!-- User menu-->
                     {% block usertools %}
                         <div class="nav-item dropdown">
-                            <a class="nav-link pr-0" href="{% url "profile" %}" role="button" data-toggle="dropdown"
+                            <a class="nav-link pr-0" href="#" {% comment %}href="{% url "profile" %}" {% endcomment %}role="button" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
                                 <div class="media align-items-center">
                                     <span class="avatar avatar-sm rounded-circle">
@@ -50,7 +50,7 @@
                                     <div class="media-body ml-2 d-none d-lg-block">
                                       <span class="mb-0 text-sm  font-weight-bold">
                                          {% block welcome-msg %}
-                                             {% translate 'Chào mừng bạn ' %}
+                                             {% translate 'Welcome,' %}
                                              <strong>{% firstof user.last_name user.first_name %}</strong>
                                          {% endblock %}
                                       </span>

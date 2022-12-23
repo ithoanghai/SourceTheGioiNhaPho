@@ -53,7 +53,7 @@
         <!-- Custom CSS for admin page -->
         <link href="{% static "admin/css/nucleo.css" %}" rel="stylesheet"/>
         <link href="{% static "admin/css/custom-dashboard.css" %}" rel="stylesheet" type="text/css"/>
-{#      {% endblock stylesheets %}
+  {% endblock stylesheets %}
 
   {% block extrahead %}{% endblock %}
 
@@ -62,7 +62,7 @@
     <!-- Core -->
     {% block javascripts %}
         <!--   Core   -->
-        <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous" async></script>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" crossorigin="anonymous" async></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" crossorigin="anonymous" async></script>
     {% endblock javascripts %}
 

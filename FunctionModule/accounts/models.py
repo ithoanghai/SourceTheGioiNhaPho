@@ -45,14 +45,12 @@ class Permissions(Permission):
 
 
 class Groups(Group):
-    class Meta:
-        verbose_name = "Phân Nhóm Người dùng"
-        verbose_name_plural = "Phân Nhóm Người dùng"
-
     objects = GroupManager()
 
     Group._meta.get_field('name').verbose_name = 'Tên nhóm'
     Group._meta.get_field('permissions').verbose_name = 'Quyền sử dụng'
+    Group._meta.verbose_name = "Phân Nhóm Người dùng"
+    Group._meta.verbose_name_plural = "Phân Nhóm Người dùng"
 
 
 class PermissionsMixin(models.Model):

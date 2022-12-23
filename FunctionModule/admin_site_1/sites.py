@@ -4,8 +4,6 @@ from functools import update_wrapper
 from weakref import WeakSet
 
 from django.apps import apps
-
-import FunctionModule
 from django.contrib.admin import ModelAdmin, actions
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.core.exceptions import ImproperlyConfigured

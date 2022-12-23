@@ -13,8 +13,8 @@
                         <div class="media-body ml-2 d-none d-lg-block">
                                       <span class="mb-0 text-sm  font-weight-bold">
                                          {% block welcome-msg %}
-                                             {% translate 'Chào mừng bạn ' %}
-                                             <strong>{% firstof user.first_name %} {% firstof user.last_name %}</strong>
+                                             {% translate 'Welcome,' %}
+                                             <strong>{{ user.get_full_name }}</strong>
                                          {% endblock %}
                                       </span>
                         </div>
@@ -24,12 +24,17 @@
                             dưới:</h6>
                     </div>
                     <a class="dropdown-item" href="{% url "postlistings" %}"> <i
-                            class="zmdi zmdi-edit"></i> {% translate 'Đăng tin BĐS' %}</a>
+                            class="ni ni-briefcase-24"></i> {% translate 'Đăng tin BĐS' %}</a>
                     <div class="dropdown-divider"></div>
                     {% include 'admin/app_list.html' with app_list=available_apps show_changelinks=True %}
                     <div class="dropdown-divider"></div>
+                    {% if site_url %}
+                            <a href="{{ site_url }}" target="_blank" class="dropdown-item">
+                                <i class="ni ni-shop"></i> &nbsp;<span>{% translate 'Trang sản phẩm' %}</span>
+                            </a>
+                        {% endif %}
                     <a href="{% url "profile" %}" class="dropdown-item">
-                        <i class="zmdi zmdi-account-box-o"></i>
+                        <i class="ni ni-settings"></i>
                         <span>Quản lý cá nhân</span>
                     </a>
                     {% comment %}<a href="{% url "profile" %}" class="dropdown-item">
@@ -41,11 +46,7 @@
                                 <span>Hỗ trợ</span>
                             </a>{% endcomment %}
                     {% block userlinks %}
-                        {% if site_url %}
-                            <a href="{{ site_url }}" target="_blank" class="dropdown-item">
-                                <i class="ni ni-shop"></i> &nbsp;<span>{% translate 'Trang sản phẩm' %}</span>
-                            </a>
-                        {% endif %}
+
                         {% if user.is_active and user.is_staff %}
                             {% url 'django-admindocs-docroot' as docsroot %}
                             {% if docsroot %}
@@ -55,7 +56,7 @@
                         {% if user.has_usable_password %}
                             <a href="{% url 'password_change' %}" target="_blank"
                                class="dropdown-item">
-                                <i class="zmdi zmdi-lock"></i><span>{% translate 'Đổi mật khẩu' %}</span>
+                                <i class="ni ni-key-25"></i><span>{% translate 'Đổi mật khẩu' %}</span>
                             </a>
                         {% endif %}
                     {% endblock %}

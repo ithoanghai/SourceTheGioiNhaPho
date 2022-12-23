@@ -16,7 +16,7 @@
             <li class="dropdown-divider divide"></li>
             {% if user.is_staff or user.is_superuser %}
                 <li>
-                    <a href="{% url "admin" %}"> <i class="zmdi zmdi-settings"></i> {% translate 'Trang quản trị' %}
+                    <a href="admin/"> <i class="zmdi zmdi-settings"></i> {% translate 'Trang quản trị' %}
                     </a>
                 </li>
             {% endif %}

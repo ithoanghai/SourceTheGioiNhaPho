@@ -229,7 +229,7 @@ class GroupAdmin(admin.ModelAdmin):
 admin.site.register(Permissions, PermissionAdmin)
 #admin.site.register(ContentType)
 #admin.site.register(Groups)
-#admin.site.register(Groups, GroupAdminForm)
+admin.site.register(Groups, GroupAdmin)
 admin.site.register(User, AccountAdmin)
 #admin.site.unregister(TokenProxy)
 #admin.site.unregister(SocialToken)
