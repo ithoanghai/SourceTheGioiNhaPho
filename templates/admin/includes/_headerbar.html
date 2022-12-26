@@ -5,26 +5,13 @@
     <div class="container-fluid">
         <!-- Brand -->
         <div class="navbar-brand col-md-1 col-sm-2 col-xs-2" style="width: 15%">
-            <a class="pt-0" href="admin/">
+            <a class="pt-0" href="{% url 'admin:index' %}">
                 <img src="{% static 'img/logo.svg' %}" width="80px" class="navbar-brand-img" alt="...">
             </a>
             <div id="branding">
                 {% block branding %}{% endblock %}
             </div>
         </div>
-
-        <!-- Form -->
-        <form class="navbar-search col-md-4 col-sm-3 col-xs-0 form-inline mr-3 d-none d-md-flex"
-              style="width: 50%">
-            <div class="form-group mb-0">
-                <div class="input-group input-group-alternative">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-search"></i></span>
-                    </div>
-                    <input class="form-control" placeholder="Tìm kiếm" style="border-radius: 30px;" type="text">
-                </div>
-            </div>
-        </form>
 
         {% if user.is_authenticated %}
             <div class="navbar-nav align-items-right row" style="width: auto">

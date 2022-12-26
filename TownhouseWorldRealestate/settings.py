@@ -36,17 +36,12 @@ MODULES = [
     'FunctionModule.hitcount.apps.HitcountConfig',
 ]
 THIRD_PARTIES = [
-    #'allauth',
-    #'allauth.account',
-    #'allauth.socialaccount',
-    #'allauth.socialaccount.providers.facebook',
-    #'allauth.socialaccount.providers.google',
-    'location_field.apps.DefaultConfig',
+    'allauth',
+    'location_field',
     'ajax_select',
     'rolepermissions',
     'debug_toolbar',
     'rest_framework',
-    'rest_framework.authtoken',
     #'corsheaders',
     'django_filters',
     'adminplus',
@@ -151,9 +146,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', },
 ]
 AUTHENTICATION_BACKENDS = [
-    'FunctionModule.accounts.auth.RealEstateAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
-    'FunctionModule.accounts.auth_backends.AuthenticationBackend',
 ]
 if ENVIRONMENT == 'production':
     ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'

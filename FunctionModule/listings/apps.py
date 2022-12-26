@@ -6,5 +6,5 @@ class ListingsConfig(AppConfig):
     verbose_name = "Kho hàng BĐS"
 
     def ready(self):
-        from . import signals
+        from allauth.account import signals
         pass

@@ -1,33 +1,13 @@
-from typing import Set
-
-import adminplus
 from django.contrib import messages, admin
-from rest_framework.authtoken.models import TokenProxy
-
-from django.contrib.admin.options import IS_POPUP_VAR
-from django.contrib.admin.utils import unquote
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
-from django.core.exceptions import PermissionDenied
-from django.http import Http404, HttpResponseRedirect
-from django.template.response import TemplateResponse
-from django.urls import path, reverse
-from django.utils.html import escape
-from django.utils.translation import gettext_lazy as _, gettext
-
-from .forms import GroupAdminForm, UserCreationForm, UserChangeForm, AdminPasswordChangeForm
-from .models import User, Groups, Permissions
-from django.contrib.admin.filters import ChoicesFieldListFilter, BooleanFieldListFilter, DateFieldListFilter
+from .forms import UserChangeForm
+from .models import User
+from TownhouseWorldRealestate.filters import ChoicesFieldListFilter, BooleanFieldListFilter, DateFieldListFilter
 from ..blog.models import Post
 from ..customers.models import Customer
 from ..listings.models import Listing, ListingHistory
 from ..transactions.models import Transaction
-
-
-class PermissionAdmin(admin.ModelAdmin):
-    search_fields = ('name', 'content_type', 'codename')
-    ordering = ('content_type','name')
-    verbose_name = "Quản trị Quyền người dùng"
 
 
 class BlogInline(admin.TabularInline):
@@ -81,13 +61,10 @@ class AccountAdmin(AuthUserAdmin):
             ('address', 'dob', 'gender'),
             ('avatar', 'bio'), ('is_broker', 'is_investor',))}),
         ('PHÂN QUYỀN SỬ DỤNG', {
-            'fields': (('is_active', 'is_staff', 'is_superuser'), ('groups', 'permissions'))
+            'fields': (('is_active', 'is_staff', 'is_superuser'), ('groups', 'user_permissions'))
         }),
         ('THỜI GIAN HOẠT ĐỘNG', {'fields': (('first_time','last_login'), 'date_joined')}),
     )
-    add_form = UserCreationForm
-    change_form = UserChangeForm
-    change_password_form = AdminPasswordChangeForm
     list_display = ('id','username', 'name', 'phone', 'email', 'joined_date', 'is_staff', 'is_broker', 'is_investor', 'is_active')
     list_display_links = ('name', 'phone')
     search_fields = ['username', 'first_name', 'last_name', 'email', 'phone']
@@ -109,13 +86,8 @@ class AccountAdmin(AuthUserAdmin):
     ]
     list_editable = ('is_staff', 'is_active',)
     ordering = ('first_name', 'last_name', 'date_joined', )
-    filter_horizontal = ('groups', 'permissions')
+    filter_horizontal = ('groups', 'user_permissions')
     inlines = [CustomerInline, BlogInline, ListingHistoryInline, ]
-
-    def get_fieldsets(self, request, obj=None):
-        if not obj:
-            return self.add_fieldsets
-        return super().get_fieldsets(request, obj)
 
     # change_list_template = 'admin/auth/user/change_list.html'
     def get_queryset(self, request):
@@ -125,111 +97,28 @@ class AccountAdmin(AuthUserAdmin):
         else:
             return queryset.filter(id=request.user.id)
 
-    def get_form(self, request, obj=None, **kwargs):
-        defaults = {}
-        if obj is None:
-            defaults['form'] = self.add_form
-        defaults.update(kwargs)
-
-        form = super().get_form(request, obj, **kwargs)
-        is_superuser = request.user.is_superuser
-        disabled_fields = set()  # type: Set[str]
-
-        if not is_superuser:
-            disabled_fields |= {
-                'is_superuser',
-                'permissions'
-            }
-
-        for f in disabled_fields:
-            if f in form.base_fields:
-                form.base_fields[f].disabled = True
-
-        return form
-
-    def user_change_password(self, request, id, form_url=''):
-        user = self.get_object(request, unquote(id))
-        if not self.has_change_permission(request, user):
-            raise PermissionDenied
-        if user is None:
-            raise Http404(_('%(name)s người dùng này có khóa %(key)r không tồn tại.') % {
-                'name': self.model._meta.verbose_name,
-                'key': escape(id),
-            })
-        if request.method == 'POST':
-            form = self.change_password_form(user, request.POST)
-            if form.is_valid():
-                form.save()
-                change_message = self.construct_change_message(request, form, None)
-                self.log_change(request, user, change_message)
-                msg = gettext('Mật khẩu thay đổi thành công.')
-                messages.success(request, msg)
-                update_session_auth_hash(request, form.user)
-                return HttpResponseRedirect(
-                    reverse(
-                        '%s:%s_%s_change' % (
-                            self.admin.name,
-                            user._meta.app_label,
-                            user._meta.model_name,
-                        ),
-                        args=(user.pk,),
-                    )
-                )
-        else:
-            form = self.change_password_form(user)
-
-        fieldsets = [(None, {'fields': list(form.base_fields)})]
-        adminForm = admin.helpers.AdminForm(form, fieldsets, {})
-
-        context = {
-            'title': _('Thay đổi mật khẩu cho người dùng: %s') % escape(user.get_username()),
-            'adminForm': adminForm,
-            'form_url': form_url,
-            'form': form,
-            'is_popup': (IS_POPUP_VAR in request.POST or
-                         IS_POPUP_VAR in request.GET),
-            'add': True,
-            'change': False,
-            'has_delete_permission': False,
-            'has_change_permission': True,
-            'has_absolute_url': False,
-            'opts': self.model._meta,
-            'original': user,
-            'save_as': False,
-            'show_save': True,
-            **self.admin.each_context(request),
-        }
-
-        request.current_app = self.admin.name
-
-        return TemplateResponse(
-            request,
-            self.change_user_password_template or
-            'admin/auth/user/change_password.html',
-            context,
-        )
-
 
 class GroupAdmin(admin.ModelAdmin):
-    search_fields = ('name',)
-    ordering = ('name',)
-    filter_horizontal = ('permissions',)
     verbose_name = "Quản trị nhóm người dùng"
-    form = GroupAdminForm
-
-    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
-        if db_field.name == 'permissions':
-            qs = kwargs.get('queryset', db_field.remote_field.model.objects)
-            # Avoid a major performance hit resolving permission names which
-            # triggers a content_type load:
-            kwargs['queryset'] = qs.select_related('content_type')
-        return super().formfield_for_manytomany(db_field, request=request, **kwargs)
+    Group._meta.get_field('name').verbose_name = 'Tên nhóm'
+    Group._meta.get_field('permissions').verbose_name = 'Quyền sử dụng'
+    Group._meta.verbose_name = "Nhóm Người dùng"
+    Group._meta.verbose_name_plural = "Nhóm Người dùng"
 
 
-admin.site.register(Permissions, PermissionAdmin)
+class PermissionAdmin(admin.ModelAdmin):
+    search_fields = ('name', 'content_type', 'codename')
+    ordering = ('content_type','name')
+    verbose_name = "Quản trị Quyền người dùng"
+    Permission._meta.get_field('name').verbose_name = 'Tên quyền'
+    Permission._meta.get_field('content_type').verbose_name = 'Module chức năng'
+    Permission._meta.get_field('codename').verbose_name = 'Mã chức năng'
+    Permission._meta.verbose_name = 'Quyền Người dùng'
+    Permission._meta.verbose_name_plural = 'Quyền Người dùng'
+
+admin.site.register(Permission, PermissionAdmin)
 #admin.site.register(ContentType)
-#admin.site.register(Groups)
-admin.site.register(Groups, GroupAdmin)
+#admin.site.register(Group, GroupAdmin)
 admin.site.register(User, AccountAdmin)
 #admin.site.unregister(TokenProxy)
 #admin.site.unregister(SocialToken)

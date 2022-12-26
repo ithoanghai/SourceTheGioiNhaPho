@@ -21,7 +21,7 @@ __all__ = [
 
 
 def autodiscover():
-    autodiscover_modules('FunctionModule', register_to=site)
+    autodiscover_modules('admin', register_to=site)
 
 
 default_app_config = 'django.contrib.admin.apps.AdminConfig'

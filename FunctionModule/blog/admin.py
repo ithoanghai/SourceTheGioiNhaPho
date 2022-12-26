@@ -2,7 +2,7 @@
 from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _, gettext_lazy
 from django.contrib import admin
-from django.contrib.admin import DateFieldListFilter
+from TownhouseWorldRealestate.filters import DateFieldListFilter
 from FunctionModule.blog.forms import PostAdminForm
 from FunctionModule.blog.models import Post
 

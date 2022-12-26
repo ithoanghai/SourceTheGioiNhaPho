@@ -1,7 +1,36 @@
 {% load i18n static %}
 {% if cl.search_fields %}
     <div id="toolbar" class="col-12">
-        <form id="changelist-search" method="get">
+        <!-- Form -->
+        <form id="changelist-search" method="get" class="navbar-search d-md-flex">
+            <div class="col-11">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input class="form-control col-12" type="text" size="40" name="{{ search_var }}"
+                           value="{{ cl.query }}" id="searchbar" autofocus placeholder="Nhập văn bản để tìm kiếm"
+                           style="border-radius: 30px;">
+                </div>
+                &nbsp; <input type="submit" value="{% translate 'Tìm kiếm' %}">&nbsp;
+                {% if show_result_count %}
+                    <span class="small"
+                          style="width: -moz-fit-content">{% blocktranslate count counter=cl.result_count %}
+                        {{ counter }} kết quả
+                        {% plural %} {{ counter }} kết quả {% endblocktranslate %} (<a
+                            href="?{% if cl.is_popup %}_popup=1{% endif %}">{% if cl.show_full_result_count %}
+                        {% blocktranslate with full_result_count=cl.full_result_count %} trên tổng số
+                            {{ full_result_count }} {% endblocktranslate %}{% else %}
+                        {% translate "Hiển thị tất cả" %}{% endif %}</a>)
+                    </span>
+                {% endif %}
+                {% for pair in cl.params.items %}
+                    {% if pair.0 != search_var %}<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </form>
+        {% comment %}        <form id="changelist-search" method="get">
             <div class="col-12"><!-- DIV needed for valid HTML -->
                 <label for="searchbar"><img src="{% static "admin/img/search.svg" %}" alt="Tìm kiếm"></label>
                 <input class="col-6" type="text" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" autofocus>
@@ -20,6 +49,6 @@
                     {% endif %}
                 {% endfor %}
             </div>
-        </form>
+        </form>{% endcomment %}
     </div>
 {% endif %}

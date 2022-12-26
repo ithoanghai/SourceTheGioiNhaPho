@@ -339,8 +339,8 @@ class ListingIndexSerializer(ListingSerializer):
 
 class ListingHistory(models.Model):
     class Meta:
-        verbose_name = "Biến động Bất động sản"
-        verbose_name_plural = "Biến động Bất động sản"
+        verbose_name = "Biến động BĐS"
+        verbose_name_plural = "Biến động BĐS"
 
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, verbose_name=_("Bất động sản gốc"))
     user = models.ForeignKey(User,  on_delete=models.RESTRICT, blank=True, null=True, verbose_name=_("Người thêm BĐS"))

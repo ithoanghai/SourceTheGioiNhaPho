@@ -8,8 +8,7 @@ from .import_realtor import handle_import
 from .models import Realtor
 from django.http import HttpRequest, JsonResponse, HttpResponse
 
-from django.contrib.admin.filters import ChoicesFieldListFilter #, RangeNumericFilter
-from django.contrib.admin import BooleanFieldListFilter, DateFieldListFilter
+from TownhouseWorldRealestate.filters import ChoicesFieldListFilter, DateFieldListFilter, BooleanFieldListFilter  # , RangeNumericFilter
 from ..customers.models import Customer
 from ..listings import TransactionType, Status
 from ..listings.models import ListingHistory, Listing

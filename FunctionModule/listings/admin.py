@@ -3,17 +3,19 @@ from django.contrib import admin
 
 from django.core.files.uploadedfile import UploadedFile
 from django import forms
+from django.dispatch import receiver
 from django.http import HttpRequest, JsonResponse, HttpResponse
 from django.db.models import Q
 from django.utils.translation import gettext as _, gettext_lazy
 
 from FunctionModule.listings.import_csv import handle_import, logger
+from TownhouseWorldRealestate.filters import ChoicesFieldListFilter, DateFieldListFilter, BooleanFieldListFilter
 from . import Status
 from .forms import ListingAdminForm, ImportListingForm, ImageForm, ImageFormSet, ContractImageForm, ContractImageFormSet
 from .models import Listing, ListingImage, ListingVideo, ContractImage, ListingHistory
 from .choices import district_default_choices, Exhaustive
-from django.contrib.admin.filters import DateFieldListFilter, BooleanFieldListFilter, ChoicesFieldListFilter
 from FunctionModule.admin_site_1.filters import RangeNumericFilter
+from .. import admin_site_1
 from ..realtors.models import Realtor
 from ..transactions.models import Transaction
 
@@ -91,7 +93,7 @@ class ListingAdmin(admin.ModelAdmin):
         ('registration_type', ChoicesFieldListFilter),
         ('exhaustive', ChoicesFieldListFilter),
         ('liquidity_classification', ChoicesFieldListFilter),
-        # ('area', RangeNumericFilter),
+        #('area', RangeNumericFilter),
         # ('floors', RangeNumericFilter),
         # ('width', RangeNumericFilter),
         # ('price', RangeNumericFilter),
@@ -206,7 +208,7 @@ class ListingAdmin(admin.ModelAdmin):
     #     except TypeError:
     #         return to_exclude
 
-    #@admin.actions(short_description='Đăng bán công khai')
+    #@admin.actions(description='Đăng bán công khai')
     def make_published(self, request, queryset):
         updated = queryset.update(is_published=True)
         self.message_user(request, f'Chuyển sang chế độ đăng công khai cho {updated} bất động sản')
@@ -314,7 +316,7 @@ class ListingHistoryAdmin(admin.ModelAdmin):
             return queryset_list
 
 
-#@admin.register('listings/listing/import-export')
+@admin_site_1.site.register_view('listings/listing/import-export')
 def import_csv_view(request: HttpRequest) -> JsonResponse:
     if request.method == 'POST':
         form = ImportListingForm(request.POST or None, request.FILES)

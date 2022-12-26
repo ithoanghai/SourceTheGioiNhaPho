@@ -4,8 +4,7 @@ from django.contrib import admin
 from django.db.models import Q
 from .forms import CustomerAdminForm
 from .models import Customer
-from django.contrib.admin.filters import ChoicesFieldListFilter #, RangeNumericFilter
-from django.contrib.admin import DateFieldListFilter
+from TownhouseWorldRealestate.filters import ChoicesFieldListFilter, DateFieldListFilter  # , RangeNumericFilter
 from ..transactions.models import Transaction
 
 

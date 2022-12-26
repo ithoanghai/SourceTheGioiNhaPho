@@ -1646,7 +1646,7 @@
 
 .navbar-search .form-control {
     width: 270px;
-    background-color: transparent;
+    /*background-color: transparent;*/
 }
 
 .navbar-search-dark .input-group {
@@ -1662,7 +1662,7 @@
 }
 
 .navbar-search-dark .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .navbar-search-dark .focused .input-group {

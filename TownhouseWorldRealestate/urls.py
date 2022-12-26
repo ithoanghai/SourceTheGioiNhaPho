@@ -1,13 +1,10 @@
 import debug_toolbar
 from importlib import import_module
-
 from django.urls import re_path, path, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.views.static import serve
 from django.contrib.sitemaps.views import sitemap
-from FunctionModule.accounts import providers
-#from django.contrib.admin.sites import AdminSitePlus
 from FunctionModule.pages.sitemaps import Listing_Sitemap, Static_Sitemap
 from FunctionModule.pages.views import handler404, handler500, pages
 from TownhouseWorldRealestate import settings
@@ -39,18 +36,6 @@ urlpatterns = [
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-
-# Provider urlpatterns, as separate attribute (for reusability).
-provider_urlpatterns = []
-for provider in providers.registry.get_list():
-    try:
-        prov_mod = import_module(provider.get_package() + ".urls")
-    except ImportError:
-        continue
-    prov_urlpatterns = getattr(prov_mod, "urlpatterns", None)
-    if prov_urlpatterns:
-        provider_urlpatterns += prov_urlpatterns
-urlpatterns += provider_urlpatterns
 
 handler404 = handler404
 handler500 = handler500

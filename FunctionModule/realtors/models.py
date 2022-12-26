@@ -16,7 +16,6 @@ from rest_framework.generics import get_object_or_404
 from FunctionModule.accounts.models import User
 from FunctionModule.realtors.choices import Position, Title, Workplace, Status
 from TownhouseWorldRealestate.settings import AVATAR_PHOTO_URL
-from TownhouseWorldRealestate.utils import file_cleanup
 
 
 def split_url(url: str) -> str:

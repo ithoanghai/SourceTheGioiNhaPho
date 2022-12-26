@@ -2,7 +2,6 @@ import random
 import string
 import datetime
 
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.contrib import messages
 from django.core.exceptions import ValidationError
@@ -23,16 +22,14 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from FunctionModule.cadastral.lookups import get_all_states, get_all_districts, get_district
-from FunctionModule.listings import get_short_title_from_house_type, get_short_title_from_road_type, get_short_title_from_transaction_type
+from FunctionModule.listings import get_short_title_from_house_type, get_short_title_from_transaction_type
 from TownhouseWorldRealestate import settings
 
 from . import HouseType
-from .filters import ListingFilter
+from TownhouseWorldRealestate.filters import ListingFilter
 from .forms import ListingForm, ListingImageFormSet
 from .models import ListingImage
 from .serializers import *
-from ..accounts import app_settings
-from ..accounts.views import _ajax_response
 from ..cadastral.constants import district_data
 
 

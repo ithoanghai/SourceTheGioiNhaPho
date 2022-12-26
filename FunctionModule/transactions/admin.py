@@ -2,10 +2,9 @@ from django.forms import Textarea
 from django.http import HttpRequest, HttpResponse
 
 from django.contrib import admin
-from django.contrib.admin.filters import ChoicesFieldListFilter #, RangeNumericFilter
+from TownhouseWorldRealestate.filters import ChoicesFieldListFilter, DateFieldListFilter #, RangeNumericFilter
 from .forms import TransactionAdminForm, TransactionHistoryAdminForm
 from .models import Transaction, TransactionHistory
-from django.contrib.admin import DateFieldListFilter
 from ..realtors.models import Realtor
 
 
