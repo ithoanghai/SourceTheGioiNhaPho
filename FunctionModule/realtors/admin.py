@@ -1,5 +1,8 @@
+import io
 import os
 import warnings
+from datetime import datetime
+
 import xlsxwriter
 from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
@@ -525,13 +528,12 @@ class RealtorAdmin(ImportExportModelAdmin):
             file_format = formats[
                 int(form.cleaned_data['file_format'])
             ]()
-
+            content_type = file_format.get_content_type()
             if request.POST.get('export_type') == 'Database':
                 queryset = self.get_export_queryset(request)
                 export_data = self.get_export_data(
                     file_format, queryset, request=request, encoding=self.to_encoding, export_form=form,
                 )
-                content_type = file_format.get_content_type()
                 response = HttpResponse(export_data, content_type=content_type)
                 response['Content-Disposition'] = 'attachment; filename="%s"' % (
                     self.get_export_filename(request, queryset, file_format),
@@ -540,15 +542,9 @@ class RealtorAdmin(ImportExportModelAdmin):
                 post_export.send(sender=None, model=self.model)
                 return response
             elif request.POST.get('export_type') == 'Custom':
-                # file_path = os.path.join(tempfile.gettempdir(), 'tmp.xlsx')
-                file_path = os.path.join('./media/import-export/', 'RealtorExport.xlsx')
-                # wb = Workbook()
-                # ws = wb.create_sheet("DS Chuyên viên TGNP")
-                # ws.title = "DS Chuyên viên TGNP"
-                # wb.save(file_path)
-                workbook = xlsxwriter.Workbook(file_path)
+                output = io.BytesIO()
+                workbook = xlsxwriter.Workbook(output, {'in_memory': True})
                 worksheet = workbook.add_worksheet('DS TOÀN BỘ CHUYÊN VIÊN TGNP')
-
                 # write header
                 row = 0
                 worksheet.write(row, 0, 'Họ và Tên')
@@ -581,7 +577,7 @@ class RealtorAdmin(ImportExportModelAdmin):
                     worksheet.write(row, 1, realtor.birthyear, format1)
                     worksheet.write(row, 2, realtor.phone1)
                     worksheet.write(row, 3, realtor.identifier)
-                    # worksheet.write_datetime(row, 4, realtor.date_join)
+                    worksheet.write(row, 4, realtor.date_join, format1)
                     worksheet.write(row, 5, realtor.position)
                     worksheet.write(row, 6, realtor.workplace)
                     worksheet.write(row, 7, realtor.department)
@@ -600,11 +596,15 @@ class RealtorAdmin(ImportExportModelAdmin):
                     # with each iterations.
                     row += 1
 
-                # download(file_path, dest_folder="C:/")
                 workbook.close()
+                output.seek(0)
+                resp = HttpResponse(output.read(), content_type=content_type)
+                resp[
+                    'Content-Disposition'] = f'filename=Realtor_export-{datetime.today().strftime("%Y-%m-%d")}.xlsx'
+                output.close()
+                return resp
 
         context = self.get_export_context_data()
-
         context.update(self.admin_site.each_context(request))
 
         context['title'] = _("Export")

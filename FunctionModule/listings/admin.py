@@ -1,3 +1,4 @@
+import io
 import warnings
 import json
 import csv
@@ -886,17 +887,17 @@ class ListingAdmin(ImportExportModelAdmin):
 
                                 # Read information about date and time listing
                                 created_date = row[header_dict['tgian']]
-                                # created = datetime.datetime.now(tz=timezone).date()
+                                # created = datetime.now(tz=timezone).date()
                                 try:
                                     if data_type == "K1":
-                                        created = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M:%S')
+                                        created = datetime.strptime(created_date, '%d/%m/%Y %H:%M:%S')
                                     elif data_type == "K2":
-                                        created = datetime.datetime.strptime(created_date, '%d/%m/%Y %H:%M')
+                                        created = datetime.strptime(created_date, '%d/%m/%Y %H:%M')
                                     created_date = created.replace(tzinfo=timezone).date()
 
                                 except ValueError:
                                     logger.info(f"error date create {created_date}")
-                                    created_date = datetime.datetime.now(tz=timezone).date()
+                                    created_date = datetime.now(tz=timezone).date()
 
                                 # Read information about area
                                 area = row[header_dict['dt']]
@@ -1079,7 +1080,7 @@ class ListingAdmin(ImportExportModelAdmin):
                                                                                  position=position, title=Title.MASTER,
                                                                                  level=5,
                                                                                  workplace=workplace, department=don_vi,
-                                                                                 hire_date=datetime.datetime.now(
+                                                                                 hire_date=datetime.now(
                                                                                      tz=timezone))
                                             realtor_dict[phone] = new_realtor
                                             print(f"tạo realtor: {new_realtor} chưa có")
@@ -1512,13 +1513,13 @@ class ListingAdmin(ImportExportModelAdmin):
             file_format = formats[
                 int(form.cleaned_data['file_format'])
             ]()
+            content_type = file_format.get_content_type()
 
             if request.POST.get('export_type') == 'Database':
                 queryset = self.get_export_queryset(request)
                 export_data = self.get_export_data(
                     file_format, queryset, request=request, encoding=self.to_encoding, export_form=form,
                 )
-                content_type = file_format.get_content_type()
                 response = HttpResponse(export_data, content_type=content_type)
                 response['Content-Disposition'] = 'attachment; filename="%s"' % (
                     self.get_export_filename(request, queryset, file_format),
@@ -1527,23 +1528,23 @@ class ListingAdmin(ImportExportModelAdmin):
                 post_export.send(sender=None, model=self.model)
                 return response
             elif request.POST.get('export_type') == 'Facebook':
-                file_path = os.path.join(tempfile.gettempdir(), 'tmp.csv')
-                with open(file_path, 'w', encoding='utf-8') as fp:
-                    headers = prepare_fb_headers()
-                    writer = csv.DictWriter(fp, fieldnames=headers)
-                    writer.writeheader()
-                    for listing in Listing.objects.all():
-                        listing_data = prepare_fb_listing_data(listing)
-                        writer.writerow(listing_data)
-                with open(file_path, 'r', encoding='utf-8') as fp:
-                    resp = HttpResponse(fp.read(), content_type="text/csv")
-                    resp[
-                        'Content-Disposition'] = f'filename=tgnp_bds_facebook_export-{datetime.today().strftime("%Y-%m-%d")}.csv'
-                    print("Exported listings")
-                    return resp
+                output = io.StringIO()
+                writer = csv.writer(output, quoting=csv.QUOTE_NONNUMERIC)
+                headers = prepare_fb_headers()
+                writer.writerow(headers)
+                for listing in Listing.objects.all():
+                    row = []
+                    for val in prepare_fb_listing_data(listing):
+                        row.append(val[1])
+                    writer.writerow(row)
+                output.seek(0)
+                resp = HttpResponse(output.read(), content_type=content_type)
+                resp[
+                    'Content-Disposition'] = f'filename=Listing_export_facebook-{datetime.today().strftime("%Y-%m-%d")}.csv'
+                output.close()
+                return resp
 
         context = self.get_export_context_data()
-
         context.update(self.admin_site.each_context(request))
 
         context['title'] = _("Export")
