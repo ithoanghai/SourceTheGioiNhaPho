@@ -233,14 +233,16 @@ DEBUG = bool(os.getenv("DJANGO_DEBUG", "False").lower() in ["true", "1"])
 #DEBUG = strtobool(os.getenv('DEBUG', 'True'))
 DEBUG = False
 DEBUG_PROPAGATE_EXCEPTIONS = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = [
         'https://thegioinhaphovietnam.com.vn',
+        'http://thegioinhaphovietnam.com.vn',
         'http://localhost:8888',
     ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGIN_REGEXES = [
     'https://thegioinhaphovietnam.com.vn',
+    'http://thegioinhaphovietnam.com.vn',
     'http://localhost:8888',
     ]
 CSRF_TRUSTED_ORIGINS = [
