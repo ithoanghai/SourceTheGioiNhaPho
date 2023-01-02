@@ -1090,9 +1090,9 @@ class ListingAdmin(ImportExportModelAdmin):
                                             realtor.save()
                                             print(f"cập nhật user: {user_tmp} cho realtor {realtor}")
 
-                                        query = Q(phone1=phone) | Q(phone2=phone)
+                                        query = Q(phone1=tmp_phone) | Q(phone2=tmp_phone) | Q(phone1=phone) | Q(phone2=phone)
                                         if phone2 is not None or not phone2 == "":
-                                            query = Q(phone1=phone2) | Q(phone2=phone2)
+                                            query = query | Q(phone1=phone2) | Q(phone2=phone2)
                                         rl = Realtor.objects.filter(query).first()
                                         if rl.is_cooperate:
                                             realtor = rl
