@@ -15,14 +15,14 @@ from import_export.forms import ImportExportFormBase
 from import_export.signals import post_export
 from openpyxl import load_workbook
 
-from .choices import Position, Title, Workplace, Status
+from .choices import Position, Title, Workplace
 from .forms import ImportForm, ExportForm
 from .models import Realtor
 from django.http import HttpRequest, JsonResponse, HttpResponse
 
 from TownhouseWorldRealestate.filters import ChoicesFieldListFilter, DateFieldListFilter, BooleanFieldListFilter  # , RangeNumericFilter
 from ..customers.models import Customer
-from ..listings import TransactionType, print_trace
+from ..listings import TransactionType, print_trace, Status
 from ..listings.models import ListingHistory, Listing
 from ..transactions.models import Transaction, TransactionHistory
 

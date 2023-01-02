@@ -1083,19 +1083,17 @@ class ListingAdmin(ImportExportModelAdmin):
                                                                                  hire_date=datetime.now(
                                                                                      tz=timezone))
                                             realtor_dict[phone] = new_realtor
+                                            realtor = new_realtor
                                             print(f"tạo realtor: {new_realtor} chưa có")
                                         elif user_tmp != realtor_dict[phone].user:
                                             realtor = realtor_dict[phone]
                                             realtor.user = user_tmp
                                             realtor.save()
                                             print(f"cập nhật user: {user_tmp} cho realtor {realtor}")
-
-                                        query = Q(phone1=tmp_phone) | Q(phone2=tmp_phone) | Q(phone1=phone) | Q(phone2=phone)
+                                        real = Realtor.objects.filter(Q(phone1=tmp_phone) | Q(phone2=tmp_phone) | Q(phone1=phone) | Q(phone2=phone))
                                         if phone2 is not None or not phone2 == "":
-                                            query = query | Q(phone1=phone2) | Q(phone2=phone2)
-                                        rl = Realtor.objects.filter(query).first()
-                                        if rl.is_cooperate:
-                                            realtor = rl
+                                            real = real.filter(Q(phone1=phone2) | Q(phone2=phone2))
+                                        realtor = real.first()
                                 except ValueError:
                                     logger.info(f"error phone {phone}")
 
@@ -1265,7 +1263,6 @@ class ListingAdmin(ImportExportModelAdmin):
 
                                 starter = get_house_type_short(house_type)
                                 code = f'{starter}{data_type}{created_date.strftime("%y%m")}{int(area)}{price}'
-
                                 new_listing = Listing(user=user, realtor=realtor, code=code, status=status, title=title,
                                                       street=street, address=full_addr, area=area,
                                                       transaction_type=trans_type,
@@ -1334,8 +1331,7 @@ class ListingAdmin(ImportExportModelAdmin):
                                                                                                 warehouse=data_type,
                                                                                                 date_created=new_listing.date_created)
                                                     new_listhis.save()
-                                                    logger.info(
-                                                        f"row {line_count}: tạo mới lịch sử bđs {new_listhis} từ listing import cũ hơn {new_listing}, bđs gốc {listing_fisrt}")
+                                                    logger.info(f"row {line_count}: tạo mới lịch sử bđs {new_listhis} từ listing import cũ hơn {new_listing}, bđs gốc {listing_fisrt}")
                                             # Nếu listing đưa vào là mới nhất là lần đầu thì cập nhật thông tin mới cho listing
                                             elif listing.date_created == new_listing.date_created:
                                                 # Cập nhật thông tin mới nhất cho listing đang có
@@ -1355,8 +1351,7 @@ class ListingAdmin(ImportExportModelAdmin):
                                                     listing_fisrt.date_created = new_listing.date_created
                                                     listing_fisrt.is_published = new_listing.is_published
                                                     listing_fisrt.save()
-                                                    logger.info(
-                                                        f"row {line_count}: cập nhật {listing} prior {listing.priority} từ {new_listing}")
+                                                    # logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} từ {new_listing}")
                                                 else:
                                                     listing_fisrt.user = new_listing.user
                                                     listing_fisrt.realtor = new_listing.realtor
@@ -1380,8 +1375,7 @@ class ListingAdmin(ImportExportModelAdmin):
                                                     listing_fisrt.date_created = new_listing.date_created
                                                     listing_fisrt.is_published = new_listing.is_published
                                                     listing_fisrt.save()
-                                                    logger.info(
-                                                        f"row {line_count}: cập nhật {listing.code} ưu tiên {listing.priority} từ {new_listing}")
+                                                    # logger.info(f"row {line_count}: cập nhật {listing.code} ưu tiên {listing.priority} từ {new_listing}")
                                             elif listing.date_created < new_listing.date_created:
                                                 querylist_listhistory = ListingHistory.objects.filter(listing=listing_fisrt,
                                                                                                       date_created=listing.date_created)
@@ -1424,8 +1418,7 @@ class ListingAdmin(ImportExportModelAdmin):
                                                     listing_fisrt.date_created = new_listing.date_created
                                                     listing_fisrt.is_published = new_listing.is_published
                                                     listing_fisrt.save()
-                                                    logger.info(
-                                                        f"row {line_count}: cập nhật {listing} prior {listing.priority} từ {new_listing}")
+                                                    # logger.info(f"row {line_count}: cập nhật {listing} prior {listing.priority} từ {new_listing}")
                                                 else:
                                                     listing_fisrt.user = new_listing.user
                                                     listing_fisrt.realtor = new_listing.realtor
@@ -1452,8 +1445,7 @@ class ListingAdmin(ImportExportModelAdmin):
                                                     if Listing.objects.filter(code=listing_fisrt.code).exists():
                                                         listing_fisrt.code = new_listing.code + deep_address[0]
                                                     listing_fisrt.save()
-                                                    logger.info(
-                                                        f"row {line_count}: cập nhật {listing.code} prior {listing.priority} từ {new_listing}")
+                                                    # logger.info(f"row {line_count}: cập nhật {listing.code} prior {listing.priority} từ {new_listing}")
                                             if count_update >= 1 and listing.id is not None:
                                                 findlisthistory = ListingHistory.objects.filter(listing=listing)
                                                 if findlisthistory.exists():
@@ -1461,13 +1453,15 @@ class ListingAdmin(ImportExportModelAdmin):
                                                         hislist.listing = listing_fisrt
                                                         hislist.save()
                                                 else:
-                                                    listing.delete()
-                                                    print(f"row {line_count}: xóa listing thừa: {listing}")
+                                                    qrlist = Listing.objects.filter(address=listing.address)
+                                                    if qrlist.count() > 1:
+                                                        listing.delete()
+                                                        print(f"row {line_count}: xóa listing thừa: {listing}")
 
                                         count_update += 1
                                 else:
                                     new_listing.save()
-                                    print(f"row {line_count}: tạo mới listing: {new_listing} chưa có")
+                                    # print(f"row {line_count}: tạo mới listing: {new_listing} chưa có")
 
                     except Exception as ex:
                         print(f"Lỗi ở dòng: {line_count} type {type(ex)}")
