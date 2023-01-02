@@ -131,9 +131,9 @@ class Listing(models.Model, HitCountMixin):
                                  verbose_name=_("Số tiền trích thưởng (triệu)"), default="100", blank=True,
                                  null=True)
 
-    reward_person = models.CharField(max_length=100, blank=True, verbose_name=_("Tên chủ sở hữu BĐS"),
+    reward_person = models.CharField(max_length=100, blank=True, null=True, verbose_name=_("Tên chủ sở hữu BĐS"),
                                      help_text="Tên người chủ sở hữu BĐS. Ví dụ Nguyễn Văn A. Nếu BĐS của ĐC thì ghi tên của Chuyên viên ĐC và tên Cty")
-    reward_person_mobile = models.CharField(max_length=50, blank=True, verbose_name=_("Số ĐT chủ sở hữu BĐS hoặc của Chuyên viên ĐC"),
+    reward_person_mobile = models.CharField(max_length=50, blank=True, null=True, verbose_name=_("Số ĐT chủ sở hữu BĐS hoặc của Chuyên viên ĐC"),
                                             help_text="Số ĐT chủ sở hữu BĐS, ví dụ 0916286256")
 
     extra_data = models.TextField(verbose_name=_("Mô tả bđs của chuyên viên"), null=True, blank=True,
@@ -358,7 +358,7 @@ class ListingHistory(models.Model):
     bathrooms = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)],
                                     choices=([(i, i) for i in range(1, 100)]), verbose_name=_("Số phòng tắm"),
                                     null=True, blank=True)
-    reward_person = models.CharField(max_length=100, blank=True, verbose_name=_("Tên chủ sở hữu BĐS"),
+    reward_person = models.CharField(max_length=100, null=True, blank=True, verbose_name=_("Tên chủ sở hữu BĐS"),
                                      help_text="Tên người chủ sở hữu BĐS. Ví dụ Nguyễn Văn A. Nếu BĐS của ĐC thì ghi tên của Chuyên viên ĐC và tên Cty")
     reward_person_mobile = models.CharField(max_length=50, blank=True, verbose_name=_("Số ĐT chủ sở hữu BĐS hoặc của Chuyên viên ĐC"),
                                             help_text="Số ĐT chủ sở hữu BĐS, ví dụ 0916286256")

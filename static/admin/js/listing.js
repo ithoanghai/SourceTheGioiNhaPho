@@ -399,14 +399,14 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function importToDB($) {
+/*function importToDB($) {
     const csrfCookie = document.cookie.split('; ').find(item => item.startsWith('csrftoken=')).split('=')
     let csrf = ''
     try {
         csrf = csrfCookie[1];
     } catch (e) {
     }
-    // const fileUploader = $('#fileUpload').dropzone({url: 'import-export', autoProcessQueue: false});
+    const fileUploader = $('#fileUpload').dropzone({url: 'import-export', autoProcessQueue: false});
     var myDropzone = new Dropzone("#fileUpload", {
         url: "import-export",
         autoProcessQueue: false,
@@ -464,9 +464,9 @@ function importListing($) {
         '  </div>\n' +
         '</div>')
     $('.object-tools').append('<li><button onclick="importToDB($)" class="button" type="button" data-toggle="modal" data-target="#importListingModal">Nhập dữ liệu từ file Excel</button></li>');
-}
+}*/
 
-function exportFBData($) {
+/*function exportFBData($) {
     const csrftoken = getCookie('csrftoken');
 
     function downloadURI(uri, name) {
@@ -490,23 +490,23 @@ function exportFBData($) {
         console.log(err);
     })
 
-}
+}*/
 
-function exportListing($) {
+/*function exportListing($) {
     $('.object-tools').append('<li><button class="button" onclick="exportFBData($)" type="button">Xuất dữ liệu csv (Facebook)</button></li>');
-}
+}*/
 
 window.addEventListener("load", function () {
     (function (jQuery) {
         $.ajax('/api/current_user', {
             type: 'GET'
         }).done((data, status) => {
-            if (data.can_import_listing) {
+            /*if (data.can_import_listing) {
                 importListing(jQuery);
-            }
-            if (data.can_export_listing) {
+            }*/
+            /*if (data.can_export_listing) {
                 exportListing(jQuery);
-            }
+            }*/
         })
         // priceToText(jQuery);
         addressSelect(jQuery);

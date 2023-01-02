@@ -1,24 +1,12 @@
-import csv
-import math
 import os
-import tempfile
-from datetime import date, datetime
-
-import xlsxwriter
 import requests
 from django.core.paginator import Paginator
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_protect
-from openpyxl import load_workbook, Workbook
 from rest_framework import request, response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
-from FunctionModule.listings.export_csv import prepare_fb_headers, prepare_fb_listing_data
 from FunctionModule.listings.models import ListingSerializer, Listing
 from FunctionModule.listings.search import prepare_listing_queryset, search_by_keywords, get_suggestions
-from FunctionModule.realtors.export_realtor import prepare_export_realtor_data
-from FunctionModule.realtors.models import Realtor
 
 
 @api_view(['GET'])
@@ -38,9 +26,9 @@ def get_user(r: request.Request, **kwargs):
     return response.Response({
         "username": r.user.username,
         "can_export_listing": r.user.is_superuser,
-        "can_import_listing": r.user.is_superuser,
+        # "can_import_listing": r.user.is_superuser,
         "can_export_realtor": r.user.is_superuser,
-        "can_import_realtor": r.user.is_superuser,
+        # "can_import_realtor": r.user.is_superuser,
     })
 
 
@@ -186,92 +174,6 @@ def search_listing(req: request.Request, **kwargs):
             'total': queryset_list.count()
         }
     })
-
-
-@api_view(['POST'])
-@csrf_protect
-def download_exported_listing(req: request.Request, **kwargs):
-    file_path = os.path.join(tempfile.gettempdir(), 'tmp.csv')
-    with open(file_path, 'w', encoding='utf-8') as fp:
-        headers = prepare_fb_headers()
-        writer = csv.DictWriter(fp, fieldnames=headers)
-        writer.writeheader()
-        for listing in Listing.objects.all():
-            listing_data = prepare_fb_listing_data(listing)
-            writer.writerow(listing_data)
-    with open(file_path, 'r', encoding='utf-8') as fp:
-        resp = HttpResponse(fp.read(), content_type="text/csv")
-        resp['Content-Disposition'] = f'filename=tgnp_bds_facebook_export-{datetime.today().strftime("%Y-%m-%d")}.csv'
-        print("Exported listings")
-        return resp
-
-
-@api_view(['POST'])
-@csrf_protect
-def download_export_realtor(req: request.Request, **kwargs):
-    #file_path = os.path.join(tempfile.gettempdir(), 'tmp.xlsx')
-    file_path = os.path.join('./media/import-export/', 'DS NHÂN SỰ TGNP.xlsx')
-    #wb = Workbook()
-    #ws = wb.create_sheet("DS Chuyên viên TGNP")
-    #ws.title = "DS Chuyên viên TGNP"
-    #wb.save(file_path)
-    workbook = xlsxwriter.Workbook(file_path)
-    worksheet = workbook.add_worksheet('DS TOÀN BỘ CHUYÊN VIÊN TGNP')
-
-    # write header
-    row = 0
-    worksheet.write(row, 0, 'Họ và Tên')
-    worksheet.write(row, 1, 'Ngày sinh')
-    worksheet.write(row, 2, 'Số Điện Thoại')
-    worksheet.write(row, 3, 'CMT/CCCD')
-    worksheet.write(row, 4, 'Ngày vào đơn vị')
-    worksheet.write(row, 5, 'Chức vụ')
-    worksheet.write(row, 6, 'Đơn vị')
-    worksheet.write(row, 7, 'Bộ phận/Phòng/Ban')
-    worksheet.write(row, 8, 'Facebook')
-    worksheet.write(row, 9, 'Email')
-    worksheet.write(row, 10, 'Quê quán')
-    worksheet.write(row, 11, 'Nơi ở')
-    worksheet.write(row, 12, 'Địa bàn hoạt động')
-    worksheet.write(row, 13, 'Hiện trạng')
-    worksheet.write(row, 14, 'Hợp tác với TGNP')
-    worksheet.write(row, 15, 'Công khai danh tính')
-    worksheet.write(row, 16, 'Khóa đào tạo')
-    worksheet.write(row, 17, 'Nguồn tuyển/Giới thiệu')
-
-    row = 1
-    column = 0
-    realtors = Realtor.objects.all()
-    # iterating through content list
-    for realtor in realtors:
-        # write operation perform
-        worksheet.write(row, 0, realtor.name)
-        format1 = workbook.add_format({'num_format': 'd-m-yyyy'})
-        worksheet.write(row, 1, realtor.birthyear, format1)
-        worksheet.write(row, 2, realtor.phone1)
-        worksheet.write(row, 3, realtor.identifier)
-        #worksheet.write_datetime(row, 4, realtor.date_join)
-        worksheet.write(row, 5, realtor.position)
-        worksheet.write(row, 6, realtor.workplace)
-        worksheet.write(row, 7, realtor.department)
-        worksheet.write(row, 8, realtor.facebook)
-        worksheet.write(row, 9, realtor.email)
-        worksheet.write(row, 10, realtor.countryside)
-        worksheet.write(row, 11, realtor.address)
-        worksheet.write(row, 12, realtor.work_area)
-        worksheet.write(row, 13, realtor.status)
-        worksheet.write(row, 14, realtor.is_cooperate)
-        worksheet.write(row, 15, realtor.is_published)
-        worksheet.write(row, 16, realtor.training)
-        worksheet.write(row, 17, realtor.referral)
-
-        # incrementing the value of row by one
-        # with each iterations.
-        row += 1
-
-    #download(file_path, dest_folder="C:/")
-    workbook.close()
-    return response.Response()
 
 
 def download(url: str, dest_folder: str):

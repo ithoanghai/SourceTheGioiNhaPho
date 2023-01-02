@@ -1,14 +1,37 @@
 import sys
 from io import BytesIO
-
 from PIL import Image
-from ajax_select.fields import AutoCompleteSelectField, AutoCompleteSelectMultipleField
 from django import forms
 from django.forms import Textarea, ModelForm, BaseInlineFormSet, inlineformset_factory
 from django.core.files.uploadedfile import InMemoryUploadedFile
-
+from import_export.forms import ImportForm, ExportForm
 from .models import Listing, ListingImage, ListingHistory, ContractImage
-from ..cadastral.lookups import get_district, get_wards_by_district, get_all_districts
+from django.utils.translation import gettext_lazy as _
+
+
+class ImportForm(ImportForm):
+    choices = [
+        ('0', '---'),
+        ('Database',  'Tệp sao lưu CSDL'),
+        ('K1',  'CSV Nhà phố'),
+        ('K2',  'CSV Thiên Khôi'),
+    ]
+    import_type = forms.ChoiceField(
+        label=_('File Source Type'),
+        choices=choices,
+    )
+
+
+class ExportForm(ExportForm):
+    choices = choices = [
+        ('0', '---'),
+        ('Database',  'Sao lưu CSDL'),
+        ('Facebook',  'CSV cho Facebook'),
+    ]
+    export_type = forms.ChoiceField(
+        label=_('Export Type'),
+        choices=choices,
+    )
 
 
 class ListingForm(forms.ModelForm):

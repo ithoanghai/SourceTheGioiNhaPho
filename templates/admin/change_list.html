@@ -49,6 +49,7 @@
                 {% endblock %}
             </ul>
         {% endblock %}
+
         {% block filters %}
             {% if cl.has_filters %}
                 <div id="changelist-filter" class="module filtered">
@@ -72,9 +73,6 @@
         {% endif %}
         <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
             <div class="changelist-form-container">
-                <div class="row" style="margin-left: 10px">
-                    {% block search %}{% search_form cl %}{% endblock %}
-                </div>
                 <form id="changelist-form" method="post"{% if cl.formset and cl.formset.is_multipart %}
                       enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
                     {% if cl.formset %}

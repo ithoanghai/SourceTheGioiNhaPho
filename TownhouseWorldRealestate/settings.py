@@ -49,6 +49,7 @@ THIRD_PARTIES = [
     'crispy_forms',
     'pwa',
     #'django_gulp',
+    'import_export',
     ]
 BUILT_IN_APPS = [
     'django.contrib.admin',

@@ -17005,7 +17005,6 @@ input, keygen, select, textarea {
 }
 
 .flex-viewport, .flex-viewport ul li {
-    display: inline-block;
     width: 100%
 }
 
@@ -29668,7 +29667,7 @@ a:hover .flex-disabled {
 }
 
 .flexslider .slides > li {
-    display: none;
+    display: flex;
     -webkit-backface-visibility: hidden
 }
 
@@ -30458,9 +30457,6 @@ btn-blue {
     background: orange
 }
 
-.listView .info-container .action-group .contact .btn-primary:hover .zmdi, .listView .info-container .action-group .contact .btn-primary:hover span, .status-bottom-gray:hover, .status-bottom-red:hover {
-    color: #fff
-}
 
 .status-bottom-gray {
     background: #320a0a
@@ -30765,184 +30761,6 @@ body #hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner a#hs-eu-decline
 
 .color-sky-blue:hover {
     color: #447dba !important
-}
-
-.listView {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    padding: 20px 0;
-    border-bottom: 1px solid rgba(48, 51, 58, .1) !important;
-    max-width: 100%;
-    -webkit-box-shadow: unset;
-    box-shadow: unset
-}
-
-@media (min-width: 768px) {
-    .listView:hover {
-        -webkit-transform: translate(0, 0);
-        transform: translate(0, 0)
-    }
-}
-
-.listView .cover-image {
-    width: 36%;
-    margin-right: 30px;
-    max-width: 270px;
-    min-width: 270px;
-    position: relative
-}
-
-.listView .info-container {
-    padding: 0;
-    position: relative
-}
-
-.listView .info-container .listing-name {
-    display: block;
-    font-family: tgnp-font2, Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    color: #30333a;
-    font-weight: 400;
-    line-height: 1.5;
-    width: calc(100% - 160px);
-    white-space: normal;
-    height: 60px;
-    padding: 0 0 5px;
-    vertical-align: top
-}
-
-.listView .info-container .listing-address, .listView .info-container .listing-info {
-    display: block;
-    overflow: hidden;
-    width: calc(100% - 160px);
-    white-space: nowrap;
-    text-overflow: ellipsis
-}
-
-.listView .info-container .listing-address {
-    line-height: 1.29;
-    font-size: 14px;
-    margin-top: 0
-}
-
-.listView .info-container .listing-info {
-    margin-top: 5px
-}
-
-.listView .info-container .listing-price {
-    top: 0;
-    right: 0
-}
-
-.listView .info-container .label-group {
-    position: absolute;
-    display: block;
-    top: 30px;
-    right: 0;
-    width: 130px
-}
-
-.listView .info-container .label-group .label-primary {
-    margin-bottom: 5px;
-    float: right
-}
-
-.listView .info-container .label-group .label-primary:last-child {
-    margin-bottom: 0
-}
-
-.listView .info-container .action-group, .listView .info-container .action-group .agent {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal
-}
-
-.listView .info-container .action-group {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    flex-flow: row wrap;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    width: 100%
-}
-
-.listView .info-container .action-group .agent {
-    -ms-flex-flow: row nowrap;
-    flex-flow: row nowrap;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
-    justify-content: flex-start
-}
-
-.listView .info-container .action-group .agent .avatar {
-    float: left;
-    vertical-align: sub;
-    height: 40px;
-    width: 40px;
-    overflow: hidden;
-    margin-right: 10px
-}
-
-.listView .info-container .action-group .agent .avatar img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-    -o-object-fit: cover;
-    object-fit: cover;
-    -o-object-position: 0 10%;
-    object-position: 0 10%
-}
-
-.listView .info-container .action-group .agent .detail {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-flow: column wrap;
-    flex-flow: column wrap;
-    -ms-flex-pack: distribute;
-    justify-content: space-around
-}
-
-.listView .info-container .action-group .agent .detail h5 a {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #30333a;
-    font-weight: 500
-}
-
-.listView .info-container .action-group .agent .detail .roll {
-    color: rgba(48, 51, 57, .7);
-    font-size: 12px;
-    line-height: 1.5;
-    padding: 0
-}
-
-.listView .info-container .action-group .contact {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: end;
-    -ms-flex-pack: end;
-    justify-content: flex-end
-}
-
-.listView .info-container .action-group .contact .btn-primary {
-    margin-left: 10px
-}
-
-.listView .info-container .action-group .contact .btn-primary:first-child {
-    margin-left: 0
 }
 
 .pd-top-60 {

@@ -5,7 +5,7 @@
         <div v-if="isViewGrid" v-for="listing in listings" :key="listing.id" class="col property-itemz"
              :id="`property-tgnp-${listing.id}`">
             <article class="box listView">
-                <div class="cover-image realty-search pic-realty-search" style="height: 240px;">
+                <div class="cover-image realty-search pic-realty-search">
                     <img :src="listing.main_photo || `/static/img/default_house_type/${listing.house_type}.jpg`"
                          onerror="this.src='{% static "img/default.png" %}'"
                          v-bind:alt="listing.title"/>
@@ -13,10 +13,10 @@
                        :title="listing.title">
                         <span><i>Xem chi tiết</i></span>
                     </a>
-                    {% comment %}<button data-action="favorite" data-id="{{ listing.id }}"
+                    <button data-action="favorite" data-id="{{ listing.id }}"
                             data-alias="{{ listing.title }}"
                             data-type="sale_property" data-favorited="false"
-                            class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>{% endcomment %}
+                            class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>
                     <div class="label-group">
                         <label v-if="listing.is_exclusive"
                                class="label-primary unique p-1">{% trans "Độc quyền" %}</label>

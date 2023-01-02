@@ -1635,7 +1635,7 @@
 
 .navbar-search .input-group {
     border-radius: 2rem;
-    border: 2px solid;
+    /*border: 2px solid;*/
     background-color: transparent;
 }
 

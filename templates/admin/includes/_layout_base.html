@@ -1,4 +1,4 @@
-{% load static i18n admin_urls admin_modify %}
+{% load static i18n admin_urls admin_modify admin_list%}
 
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
@@ -26,22 +26,18 @@
             {% include "admin/includes/_headerbar.html" %}
         </div>
         {% block nav-global %}{% endblock %}
-             {% comment %}{% if not is_popup and is_nav_sidebar_enabled %}{% endcomment %}
     {% endblock %}
     <!-- END Header -->
-
-    <!-- Breadcrumbs -->
-    {% block breadcrumbs %}
-        <div class="breadcrumbs">
-            <a href="{% url 'admin:index' %}"><i class="fas fa-home"></i> {% translate 'Trang chủ quản trị' %}</a>
-            {% if title %} &rsaquo; {{ title }}{% endif %}
-        </div>
-    {% endblock %}
-    <!-- END Breadcrumbs -->
-
+        <!-- Breadcrumbs -->
+        {% block breadcrumbs %}
+            <div class="breadcrumbs">
+                <a href="{% url 'admin:index' %}"><i class="fas fa-home"></i> {% translate 'Trang chủ quản trị' %}</a>
+                {% if title %} &rsaquo; {{ title }}{% endif %}
+            </div>
+        {% endblock %}
+        <!-- END Breadcrumbs -->
     <!-- Main -->
     <div class="main shifted" id="main">
-
       {% comment %}{% endif %}{% endcomment %}
       <div class="content">
         {% block messages %}

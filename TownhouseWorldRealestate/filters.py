@@ -1,17 +1,10 @@
 import datetime
 from django.contrib.admin import SimpleListFilter, ChoicesFieldListFilter, BooleanFieldListFilter, DateFieldListFilter, \
     FieldListFilter, ListFilter
-from django.contrib.admin.options import IncorrectLookupParameters
-from django.contrib.admin.utils import prepare_lookup_value
-from django.core.exceptions import ValidationError
 from django_filters import FilterSet, CharFilter, BaseInFilter, RangeFilter, NumberFilter
-from django.db.models.fields import DecimalField, FloatField, IntegerField, AutoField
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.db import models
-from django.forms import forms, NumberInput
-
-from FunctionModule.admin_site_1.forms import RangeNumericForm
 from FunctionModule.listings.models import Listing
 
 
@@ -83,7 +76,10 @@ class DateFieldListFilter(FieldListFilter):
         tomorrow = today + datetime.timedelta(days=1)
         if today.month == 12:
             next_month = today.replace(year=today.year + 1, month=1, day=1)
-            prev_month = today.replace(year=today.year - 1, month=1, day=1)
+            prev_month = today.replace(month=today.month - 1, day=1)
+        elif today.month == 1:
+            next_month = today.replace(month=today.month + 1, day=1)
+            prev_month = today.replace(year=today.year - 1, month=12, day=1)
         else:
             next_month = today.replace(month=today.month + 1, day=1)
             prev_month = today.replace(month=today.month - 1, day=1)

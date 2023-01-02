@@ -1,18 +1,18 @@
-{% load i18n static %}
+{% load i18n static admin_urls admin_list%}
 {% if cl.search_fields %}
-    <div id="toolbar" class="col-12">
+    <div id="toolbar" class="col-md-8">
         <!-- Form -->
         <form id="changelist-search" method="get" class="navbar-search d-md-flex">
-            <div class="col-11">
                 <div class="input-group input-group-alternative">
-                    <div class="input-group-prepend">
+                    <div class="input-group-prepend" style="width: 100%">
                         <span class="input-group-text"><i class="fas fa-search"></i></span>
-                    </div>
-                    <input class="form-control col-12" type="text" size="40" name="{{ search_var }}"
+                        <input class="form-control col-8" type="text" size="40" name="{{ search_var }}"
                            value="{{ cl.query }}" id="searchbar" autofocus placeholder="Nhập văn bản để tìm kiếm"
                            style="border-radius: 30px;">
+                        <input type="submit" value="{% translate 'Tìm kiếm' %}">&nbsp;
+                    </div>
                 </div>
-                &nbsp; <input type="submit" value="{% translate 'Tìm kiếm' %}">&nbsp;
+                &nbsp;
                 {% if show_result_count %}
                     <span class="small"
                           style="width: -moz-fit-content">{% blocktranslate count counter=cl.result_count %}
@@ -28,7 +28,6 @@
                     {% if pair.0 != search_var %}<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}">
                     {% endif %}
                 {% endfor %}
-            </div>
         </form>
         {% comment %}        <form id="changelist-search" method="get">
             <div class="col-12"><!-- DIV needed for valid HTML -->

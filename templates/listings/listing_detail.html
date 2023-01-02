@@ -28,18 +28,6 @@
     {{ block.super }}
     <link rel="canonical" href="https://thegioinhaphovietnam.com.vn/listings/{{ listing.id }}"/>
     <link rel="stylesheet" href="{% static 'css/listing-detail-page.css' %}"/>
-    <style>
-        img.fade {
-            transition: opacity 500ms ease-in-out;
-            opacity: 0;
-        }
-
-        img.fade.loaded {
-            background: none;
-            opacity: 1;
-        }
-    </style>
-
 {% endblock %}
 
 {% block content %}
@@ -129,7 +117,6 @@
                             {% for photo in listing.photos %}
                                 <li>
                                     <a href="#" class="cover">
-                                        {% if forloop.first %}
                                             <img class="image-normalized"
                                                  src="{{ photo.url }}"
                                                  srcset="{{ photo.url }}"
@@ -137,21 +124,11 @@
                                                  title="{{ listing.title }}"
                                                  class="lazy" loading="lazy" draggable="false"
                                                  onerror="this.src='{% static 'img/default.png' %}'"/>
-                                        {% else %}
-                                            <img class="lazy fade image-normalized"
-                                                 src="{{ photo.url }}"
-                                                 srcset="{{ photo.url }}"
-                                                 alt="{{ listing.title }}"
-                                                 title="{{ listing.title }}"
-                                                 loading="lazy" draggable="false"
-                                                 onerror="this.src='{% static 'img/default.png' %}'"/>
-                                        {% endif %}
                                     </a>
                                 </li>
                             {% empty %}
                                 <li>
                                     <a href="#" class="cover">
-                                        {% if forloop.first %}
                                             <img class="image-normalized"
                                                  src="{{ listing.house_type|default_img_by_house_type }}"
                                                  srcset="{{ listing.house_type|default_img_by_house_type }}"
@@ -159,16 +136,6 @@
                                                  title="{{ listing.title }}"
                                                  class="lazy" loading="lazy" draggable="false"
                                                  onerror="this.src='{% static "img/default.png" %}'"/>
-                                        {% else %}
-                                            <img class="lazy fade image-normalized"
-                                                 src="{{ listing.house_type|default_img_by_house_type }}"
-                                                 srcset="{{ listing.house_type|default_img_by_house_type }}"
-                                                 alt="{{ listing.title }}"
-                                                 title="{{ listing.title }}"
-                                                 loading="lazy" draggable="false"
-                                                 onerror="this.src='{% static "img/default.png" %}'"/>
-                                        {% endif %}
-
                                     </a>
                                 </li>
                             {% endfor %}
@@ -239,7 +206,7 @@
                         {% for photo in listing.photos %}
                             <li>
                                 <a class="img cover" href="#" title="{{ listing.title }}">
-                                    <img class="lazy image-normalized fade"
+                                    <img class="lazy image-normalized"
                                          src="{{ photo.url }}"
                                          srcset="{{ photo.url }}"
                                          title="{{ listing.title }}"
@@ -252,7 +219,7 @@
                             <li>
                                 <a class="img cover" href="#"
                                    title="{{ listing.title }}">
-                                    <img class="lazy image-normalized fade"
+                                    <img class="lazy image-normalized"
                                          src="{{ listing.house_type|default_img_by_house_type }}"
                                          srcset="{{ listing.house_type|default_img_by_house_type }}"
                                          title="{{ listing.title }}"
@@ -286,7 +253,7 @@
                                 <li>
                                     <a class="img cover" href="#"
                                        title="{{ listing.title }}">
-                                        <img class="lazy image-normalized fade"
+                                        <img class="lazy image-normalized"
                                              src="{{ photo.url }}"
                                              srcset="{{ photo.url }}"
                                              title="{{ listing.title }}"
@@ -299,7 +266,7 @@
                                 <li>
                                     <a class="img cover" href="javascript:void(0)"
                                        title="{{ listing.title }}">
-                                        <img class="lazy image-normalized fade"
+                                        <img class="lazy image-normalized"
                                              src="{{ listing.house_type|default_img_by_house_type }}"
                                              srcset="{{ listing.house_type|default_img_by_house_type }}"
                                              title="{{ listing.title }}"
@@ -807,7 +774,7 @@
                 <div v-pre class="form-real-estate">
                     <h3 class="font-tiempos">Liên hệ tư vấn</h3>
                     <div class="cover__isa">
-                        <img class="lazy fade" src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
+                        <img class="lazy" src="{% static 'images/isa-team-v2.png' %}" alt="tgnp">
                     </div>
                     <h5 class="advisory__title">Chuyên viên đã sẵn sàng hỗ trợ!</h5>
                     <p class="advisory__sub-title">Tư vấn hoàn toàn miễn phí</p>

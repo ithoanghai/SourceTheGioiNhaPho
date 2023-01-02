@@ -793,7 +793,7 @@ a.deletelink:focus, a.deletelink:hover {
         padding-left: 0;
         float: right;
         position: relative;
-        margin-top: -68px;
+        /*margin-top: -68px;*/
         height: 26px;
      }
 }
@@ -952,6 +952,7 @@ table#change-history tbody th {
     background: var(--header-bg);
     color: var(--header-color);
     /*overflow: hidden;*/
+    background-color: lightgreen;
 }
 
 #header a:link, #header a:visited {
