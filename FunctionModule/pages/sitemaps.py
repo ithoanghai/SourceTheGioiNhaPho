@@ -23,13 +23,16 @@ class Listing_Sitemap(Sitemap):
     priority = 0.7
 
     def items(self):
-        return Listing.objects.all()
+        list = []
+        for listing in Listing.objects.all():
+            list.append(f'/listings/{listing.id}')
+        return list
 
     def location(self, obj):
-        return obj.full_path
+        return obj
 
-    def lastmod(self, obj): 
-        return obj.date_created
+    # def lastmod(self, obj):
+    #     return obj.date_created
 
 
 class Blog_Sitemap(Sitemap):

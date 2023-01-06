@@ -78,23 +78,23 @@ def read_header(header_row, data_type):
             "motadauchu": 2,
             "anh-nha": 3,
             "anh-so": 4,
-            "dia-chi": 6,
-            "dt": 7,
-            "so-tang": 8,
-            "mat-tien": 9,
-            "gia": 10,
-            "quan": 11,
-            "dau-chu": 13,
-            "sdt": 14,
-            "hoa-hong": 15,
-            "nguon": 16,
-            "hien-trang": 17,
-            "tgian": 18,
-            "thanh-pho": 20,
-            "don-vi": 21,
-            "pho": 21,
+            "dia-chi": 5,
+            "dt": 6,
+            "so-tang": 7,
+            "mat-tien": 8,
+            "gia": 9,
+            "quan": 10,
+            "dau-chu": 11,
+            "sdt": 12,
+            "hoa-hong": 13,
+            "nguon": 14,
+            "hien-trang": 15,
+            "tgian": 16,
+            "thanh-pho": 18,
+            "don-vi": 19,
+            "pho": 20,
             "dac-diem": 21,
-            "huong": 21,
+            "huong": 22,
         }
 
     for index, field in enumerate(header_row):
@@ -1060,7 +1060,8 @@ class ListingAdmin(ImportExportModelAdmin):
                                     if not phone.isalnum():
                                         realtor_dict[phone] = Realtor.objects.filter(pk=1).first()
                                         logger.info(f"Phone invalid. Continue in line {line_count}")
-                                        continue
+                                        phone = '0916286256'
+                                        #continue
                                     elif len(phone) == 9 or (len(phone) == 10 and phone[0] == '0'):
                                         # update, delete user, realtor
                                         tmp_phone = phone
@@ -1467,7 +1468,7 @@ class ListingAdmin(ImportExportModelAdmin):
                         print(f"Lỗi ở dòng: {line_count} type {type(ex)}")
                         print_trace(ex)
                     finally:
-                        print(f'Read {line_count} lines')
+                        print(f'Read {row_count} lines')
                         with open('saved_search.json', 'w', encoding='utf-8') as f:
                             json.dump(searched_locations, f, ensure_ascii=False)
 

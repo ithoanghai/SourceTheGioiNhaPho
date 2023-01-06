@@ -1207,7 +1207,7 @@ a {
 }
 
 .agents-container {
-    max-width: 1176px;
+    /*max-width: 1176px;*/
     margin: auto;
     padding: 0 18px
 }

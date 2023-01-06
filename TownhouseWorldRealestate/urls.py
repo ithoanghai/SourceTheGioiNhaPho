@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.views.static import serve
 from django.contrib.sitemaps.views import sitemap
-from FunctionModule.pages.sitemaps import Listing_Sitemap, Static_Sitemap
+from FunctionModule.pages.sitemaps import Listing_Sitemap, Static_Sitemap, Blog_Sitemap
 from FunctionModule.pages.views import handler404, handler500, pages
 from TownhouseWorldRealestate import settings
 
@@ -15,6 +15,7 @@ admin.site.site_header = 'Quản trị hệ thống thế giới nhà phố'
 sitemaps = {
     'listing': Listing_Sitemap(),
     'static': Static_Sitemap(),
+    #'blog': Blog_Sitemap(),
 }
 
 
