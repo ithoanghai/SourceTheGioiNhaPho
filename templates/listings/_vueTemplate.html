@@ -1,23 +1,21 @@
 {% load static i18n get_cadastral listing %}
 
-<script type="text/x-template" id="propertyListTemplate" xmlns:v="http://www.w3.org/1999/html">
-    <div id="propertyList"  class="row " v-bind:class="{grid: isViewGrid}">
-        <div v-if="isViewGrid" v-for="listing in listings" :key="listing.id" class="col property-itemz"
-             :id="`property-tgnp-${listing.id}`">
-            <article class="box listView">
-                <div class="cover-image realty-search pic-realty-search">
-                    <img :src="listing.main_photo || `/static/img/default_house_type/${listing.house_type}.jpg`"
+<script type="text/x-template" id="propertyListTemplate">
+    <div id="propertyList" class="row " v-bind:class="{grid: isViewGrid}">
+        <div v-if="isViewGrid" v-for="listing in listings" :key="listing.id" :id="`property-tgnp-${listing.id}`">
+
+            <article class="listingCard">
+                <div class="cover-image">
+                    <a :href="getListingDetailURL(listing.id)" target="_blank" :title="listing.title">
+                        <span><i>Xem chi tiết</i></span>
+                        <img :src="listing.main_photo || `/static/img/default_house_type/${listing.house_type}.jpg`"
                          onerror="this.src='{% static "img/default.png" %}'"
                          v-bind:alt="listing.title"/>
-                    <a class="view-realty-search transition" :href="getListingDetailURL(listing.id)" target="_blank"
-                       :title="listing.title">
-                        <span><i>Xem chi tiết</i></span>
-                    </a>
-                    <button data-action="favorite" data-id="{{ listing.id }}"
+                            {% comment %}<button data-action="favorite" data-id="{{ listing.id }}"
                             data-alias="{{ listing.title }}"
                             data-type="sale_property" data-favorited="false"
-                            class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>
-                    <div class="label-group">
+                            class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>{% endcomment %}
+                        <div class="label-group">
                         <label v-if="listing.is_exclusive"
                                class="label-primary unique p-1">{% trans "Độc quyền" %}</label>
                         <label v-if="listing.status == 'selling'" class="label-primary unique p-1">{% trans "Đang GD" %}</label>
@@ -26,13 +24,16 @@
                         <label v-if="listing.status == 'sale'" class="label-primary unique p-1">{% trans "Hạ giá" %}</label>
                          <label v-if="listing.average_price && listing.transaction_type != 'rent'" class="label-primary unique p-1">[[ listing.average_price ]] tr/m2</label>
                     </div>
+                    </a>
+
                 </div>
                 <div class="info-container">
-                    <div class="group-grid__view">
-                         <div v-if="listing.transaction_type == 'rent'" class="price-marker" title="Giá cho thuê">[[ listing.price ]] {% trans "triệu" %} </div>
-                           <div v-if="listing.transaction_type != 'rent'" class="price-marker" title="Giá bán">[[ listing.price ]] {% trans "tỷ" %} </div>
 
+                    <div class="flex align-items-center justify-content-space-between">
                         <ul class="listing-info">
+                           <li v-if="listing.transaction_type == 'rent'" title="Giá cho thuê" style="font-size: large; font-weight: bold">[[ listing.price ]] {% trans "triệu" %} </li>
+                           <li v-if="listing.transaction_type != 'rent'" title="Giá bán" style="font-size: large; font-weight: bold">[[ listing.price ]] {% trans "tỷ" %} </li>
+
                             <li v-if="listing.area && listing.area > 0" title="Diện tích">
                                 <i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}
                             </li>
@@ -49,48 +50,34 @@
                                 <i class="zmdi zmdi-bath"></i> [[listing.bathrooms]] {% trans "tắm" %}
                             </li>
                         </ul>
-
                     </div>
-                    <h4>
-                        <b><a class="listing-name" :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.title]]</a></b>
-                    </h4>
+                    <a style="font-weight: bold;font-size: small" class="listing-name" :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.title]]</a>
                     <div class="listing-address">
                         <h4 v-if="listing.urban_area">
-                            <b><a :href="`/listings/search?keys=${listing.urban_area}&so=priority`" title="">[[listing.urban_area]]</a></b>
+                            <b><a :href="`/listings/search?keys=${listing.urban_area}&so=priority`" title="">[[listing.urban_area]]</a></b> &nbsp;
                         </h4>
                         <h4>
-                            <b><a :href="`/listings/search?keys=${listing.street}&so=priority`" title="">[[listing.street]]</a></b>
+                            <b><a :href="`/listings/search?keys=${listing.street}&so=priority`" title="">[[listing.street]]</a></b> &nbsp;
                         </h4>
-                        {% comment %}<h4 v-if="listing.ward"><a :href="`/listings/search?ward=${listing.ward}&so=priority`" title="Phường/Xã">[[listing.ward_name]]</a>
-                        </h4>{% endcomment %}
+                        <h4 v-if="listing.ward"><a :href="`/listings/search?ward=${listing.ward}&so=priority`" title="Phường/Xã">[[listing.ward_name]]</a> &nbsp;
+                        </h4>
                         <h4 v-if="listing.district">
                             <a :href="`/listings/search?district=${listing.district}&so=priority`"
-                               title=""><b>[[listing.district_name]]</b></a>
+                               title=""><b>[[listing.district_name]]</b></a> &nbsp;
                         </h4>
                         <h4 v-if="listing.state">
                             <a :href="`/listings/search?state=${listing.state}&so=priority`"
                                title="">[[listing.state_name]]</a>
                         </h4>
                     </div>
-                    <div class="listing-name" :href="getListingDetailURL(listing.id)" :title="listing.title" ><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></div>
+                    {% comment %}<div class="listing-name" :href="getListingDetailURL(listing.id)" :title="listing.title" ><i class="zmdi zmdi-key"></i><b>[[listing.code]]</b></div>
+{% endcomment %}
 
-                    <ul class="listing-info">
-                        <li v-if="listing.area && listing.area > 0" title="Diện tích"><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}</li>
-                        <li v-if="listing.floors && listing.floors > 0" title="Số tầng">
-                            <i class="zmdi zmdi-layers"></i> [[listing.floors]] {% trans "tầng" %}
-                        </li>
-                        <li v-if="listing.width > 3.2 && listing.width != 0" title="Mặt tiền">
-                           <i class="zmdi zmdi-ruler"></i> [[listing.width]] {% trans "m" %}
-                        </li>
+                    {% comment %}<div v-if="listing.transaction_type == 'rent'" class="price-marker" title="Giá cho thuê">[[ listing.price ]] {% trans "triệu" %} </div>
+                    <div v-if="listing.transaction_type != 'rent'" class="price-marker" title="Giá bán">[[ listing.price ]] {% trans "tỷ" %} </div>
+{% endcomment %}
 
-                        <li v-if="listing.bedrooms && listing.bedrooms > 0" title="Số phòng ngủ">
-                            <i class="zmdi zmdi-airline-seat-individual-suite"></i> [[listing.bedrooms]] {% trans "ngủ" %}
-                        </li>
-                        <li v-if="listing.bathrooms && listing.bathrooms > 0" title="Số phòng tắm">
-                            <i class="zmdi zmdi-bath"></i> [[listing.bathrooms]] {% trans "tắm" %}
-                        </li>
-                    </ul>
-                    <div class="action-group">
+                    {% comment %}<div class="action-group">
                         <div class="action-group--left">
                               <div v-if="listing.transaction_type == 'rent'" class="listing-price">[[ listing.price ]] {% trans "triệu" %} </div>
                             <div v-if="listing.transaction_type == 'sell' | listing.transaction_type == 'project'" class="listing-price">[[ listing.price ]] {% trans "tỷ" %} </div>
@@ -103,60 +90,63 @@
                                     data-type="sale_property" data-favorited="false"
                                     class="btn-favorite btn-favorite__v2 zmdi zmdi-favorite-outline"></button>
                         </div>
-                    </div>
+                    </div>{% endcomment %}
                 </div>
-
             </article>
         </div>
-        <div v-if="!isViewGrid" class="col col-md-12 col-sm-12" >
-           <table class="col-md-12 col-sm-12" style="border-style: dotted; border: 1px solid; font-size: small; width: 98%" >
-            <th class="col-md-4 col-sm-4">Địa chỉ</th>
-            <th class="col-md-2 col-sm-2">Diện tích</th>
-            <th class="col-md-2 col-sm-2">Số tầng</th>
-            <th class="col-md-2 col-sm-2 listingwidth">Mặt tiền</th>
-            <th class="col-md-1 col-sm-1">Giá</th>
-            <th class="col-md-2 col-sm-2">Trung bình</th>
-            {% comment %}<th class="unique col-md-2 col-sm-2"></th>{% endcomment %}
-            <tbody>
-            <tr v-for="listing in listings" :key="listing.id" :id="`property-tgnp-${listing.id}`"
-                :title="listing.title" style="border-top: dotted 0.5px;" :href="getListingDetailURL(listing.id)">
-                <td class="unique">
-                    <label v-if="listing.urban_area">
-                        <a :href="getListingDetailURL(listing.id)" :title="listing.title"
-                           >[[listing.urban_area]]</a>
-                    </label>
-                    <label v-if="listing.street">
-                        <b><a :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.street]]</a></b>
-                    </label>
-                    <label v-if="listing.ward"><b><a :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.ward_name]]</a></b>
-                    </label>
-                    <label v-if="listing.district">
-                        <a :href="getListingDetailURL(listing.id)" :title="listing.title"><b>[[listing.district_name]]</b></a>
-                    </label>
-                    {% comment %}<span v-if="listing.state">
+        <div v-if="!isViewGrid" class="col col-md-12 col-sm-12">
+            <table class="col-md-12 col-sm-12"
+                   style="border-style: dotted; border: 1px solid; font-size: small; width: 98%">
+                <th class="col-md-4 col-sm-4">Địa chỉ</th>
+                <th class="col-md-2 col-sm-2">Diện tích</th>
+                <th class="col-md-2 col-sm-2">Số tầng</th>
+                <th class="col-md-2 col-sm-2 listingwidth">Mặt tiền</th>
+                <th class="col-md-1 col-sm-1">Giá</th>
+                <th class="col-md-2 col-sm-2">Trung bình</th>
+                {% comment %}<th class="unique col-md-2 col-sm-2"></th>{% endcomment %}
+                <tbody>
+                <tr v-for="listing in listings" :key="listing.id" :id="`property-tgnp-${listing.id}`"
+                    :title="listing.title" style="border-top: dotted 0.5px;" :href="getListingDetailURL(listing.id)">
+                    <td class="unique">
+                        <label v-if="listing.urban_area">
+                            <a :href="getListingDetailURL(listing.id)" :title="listing.title"
+                            >[[listing.urban_area]]</a>
+                        </label>
+                        <label v-if="listing.street">
+                            <b><a :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.street]]</a></b>
+                        </label>
+                        <label v-if="listing.ward"><b><a :href="getListingDetailURL(listing.id)" :title="listing.title">[[listing.ward_name]]</a></b>
+                        </label>
+                        <label v-if="listing.district">
+                            <a :href="getListingDetailURL(listing.id)" :title="listing.title"><b>[[listing.district_name]]</b></a>
+                        </label>
+                        {% comment %}<span v-if="listing.state">
                         <a :href="`/listings/search?state=${listing.state}&so=priority`"
                            title=""><b>[[listing.state_name]]</b></a>
                     </span>{% endcomment %}
-                </td>
-                <td>
-                    <span v-if="listing.area > 0"><i class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}</span>
-                </td>
-                <td>
-                    <i class="zmdi zmdi-layers"></i> [[listing.floors]] {% trans "tầng" %}
-                </td>
-                <td class="listingwidth">
-                    <span v-if="listing.width > 3.2 && listing.width != 0"><i class="zmdi zmdi-ruler"></i> [[listing.width]] {% trans "m" %}</span>
-                </td>
-                <td style="text-align: right"><a  v-if="listing.status != 'rent'" :href="getListingDetailURL(listing.id)" target="_blank"
-                                                      :title="listing.title">[[ listing.price ]] {% trans "tỷ" %}</a>
-                    <a  v-if="listing.status == 'rent'" :href="getListingDetailURL(listing.id)" target="_blank"
-                                                      :title="listing.title">[[ listing.price ]] {% trans "tỷ" %}</a>
+                    </td>
+                    <td>
+                        <span v-if="listing.area > 0"><i
+                                class="zmdi zmdi-photo-size-select-small"></i>[[listing.area]] {% trans "m2" %}</span>
+                    </td>
+                    <td>
+                        <i class="zmdi zmdi-layers"></i> [[listing.floors]] {% trans "tầng" %}
+                    </td>
+                    <td class="listingwidth">
+                        <span v-if="listing.width > 3.2 && listing.width != 0"><i class="zmdi zmdi-ruler"></i> [[listing.width]] {% trans "m" %}</span>
+                    </td>
+                    <td style="text-align: right"><a v-if="listing.status != 'rent'"
+                                                     :href="getListingDetailURL(listing.id)" target="_blank"
+                                                     :title="listing.title">[[ listing.price ]] {% trans "tỷ" %}</a>
+                        <a v-if="listing.status == 'rent'" :href="getListingDetailURL(listing.id)" target="_blank"
+                           :title="listing.title">[[ listing.price ]] {% trans "tỷ" %}</a>
 
-                </td>
-                <td style="text-align: right"><a :href="getListingDetailURL(listing.id)" target="_blank"
-                                                      :title="listing.title">[[ listing.average_price ]] {% trans "tr/m" %}</a>
-                </td>
-{% comment %}                <td style="word-wrap: break-word; ">
+                    </td>
+                    <td style="text-align: right"><a :href="getListingDetailURL(listing.id)" target="_blank"
+                                                     :title="listing.title">[[ listing.average_price
+                        ]] {% trans "tr/m" %}</a>
+                    </td>
+                    {% comment %}                <td style="word-wrap: break-word; ">
                     <a v-if="listing.status == 'selling'" :href="getListingDetailURL(listing.id)" target="_blank"
                        :title="listing.title">Đang giao dịch</a>
                     <a v-if="listing.status == 'sale'" :href="getListingDetailURL(listing.id)" target="_blank"
@@ -185,9 +175,9 @@
                         {% endif %}
                     </a>
                 </td>{% endcomment %}
-            </tr>
-            </tbody>
-        </table>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div v-if="!listings.length && !isLoading" class="search-noresult">
             <div class="search-noresult-main">
@@ -198,8 +188,9 @@
                     <li>Thay đổi hoặc huỷ bỏ bộ lọc đang áp dụng.</li>
                 </ul>
                 <div class="btn-contact" style="opacity: 1;">
-                            <a href="{% url 'contacts' %}" class="agent-contact-modal btn-primary-agent btn-red s-btn-red mgb-0" data-target="contact-agent">Liên hệ tư vấn</a>
-                        </div>
+                    <a href="{% url 'contacts' %}" class="agent-contact-modal btn-primary-agent btn-red s-btn-red mgb-0"
+                       data-target="contact-agent">Liên hệ tư vấn</a>
+                </div>
                 {% comment %}<a class="btn-primary btn-view-agent" @click.prevent="showContactProject">Liên hệ tư vấn</a>{% endcomment %}
             </div>
         </div>
@@ -211,7 +202,7 @@
                     </a>
                 </li>
 
-{% comment %}                <li v-else class="page-item disabled">
+                {% comment %}                <li v-else class="page-item disabled">
                     <a class="page-link">&laquo;</a>
                 </li>{% endcomment %}
 
@@ -225,7 +216,7 @@
                     </a>
                 </li>
 
-{% comment %}                <li v-else class="page-item disabled">
+                {% comment %}                <li v-else class="page-item disabled">
                     <a class="page-link">&raquo;</a>
                 </li>{% endcomment %}
 
@@ -257,8 +248,10 @@
                         <h3 class="title"> [[listing.title]]</h3>
                     </a>
                     <div>
-                        <div v-if="listing.transaction_type == 'rent'" class="price-marker" title="Giá cho thuê">[[ listing.price ]] {% trans "triệu" %} </div>
-                        <div v-if="listing.transaction_type != 'rent'" class="price-marker" title="Giá bán">[[ listing.price ]] {% trans "tỷ" %} </div>
+                        <div v-if="listing.transaction_type == 'rent'" class="price-marker" title="Giá cho thuê">[[
+                            listing.price ]] {% trans "triệu" %} </div>
+                        <div v-if="listing.transaction_type != 'rent'" class="price-marker" title="Giá bán">[[
+                            listing.price ]] {% trans "tỷ" %} </div>
 
                         <ul>
                             <li title="Diện tích">

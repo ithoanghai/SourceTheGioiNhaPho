@@ -94,7 +94,7 @@ def get_listing_status_title_from_code(listing_status: str):
     elif listing_status == Status.STOP_SELLING:
         return 'DỪNG'
     elif listing_status == Status.SALE:
-        return 'GIẢM'
+        return 'HẠ GIÁ'
 
 
 def get_short_title_from_direction(direction: str):

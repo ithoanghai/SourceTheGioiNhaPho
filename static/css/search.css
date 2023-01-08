@@ -1,127 +1,3 @@
-.ld-ext-bottom, .ld-ext-left, .ld-ext-right, .ld-ext-top, .ld-over, .ld-over-full, .ld-over-full-inverse, .ld-over-inverse {
-    position: relative;
-    transition: all .3s;
-    transition-timing-function: ease-in
-}
-
-.ld-ext-bottom > .ld, .ld-ext-left > .ld, .ld-ext-right > .ld, .ld-ext-top > .ld, .ld-over-full-inverse > .ld, .ld-over-full > .ld, .ld-over-inverse > .ld, .ld-over > .ld {
-    position: absolute;
-    width: 1em;
-    height: 1em;
-    margin: -.5em;
-    opacity: 0;
-    z-index: -1;
-    transition: all .3s;
-    transition-timing-function: ease-in
-}
-
-.ld-over-full-inverse > .ld, .ld-over-full > .ld, .ld-over-inverse > .ld, .ld-over > .ld {
-    top: 50%;
-    left: 50%
-}
-
-.ld-ext-bottom > .ld > *, .ld-ext-left > .ld > *, .ld-ext-right > .ld > *, .ld-ext-top > .ld > *, .ld-over-full-inverse > .ld > *, .ld-over-full > .ld > *, .ld-over-inverse > .ld > *, .ld-over > .ld > * {
-    width: 1em;
-    height: 1em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-.5em, -.5em)
-}
-
-.ld-ext-bottom.running > .ld, .ld-ext-left.running > .ld, .ld-ext-right.running > .ld, .ld-ext-top.running > .ld {
-    opacity: 1;
-    z-index: auto;
-    visibility: visible
-}
-
-.ld-over-full-inverse.running > .ld, .ld-over-full.running > .ld, .ld-over-inverse.running > .ld, .ld-over.running > .ld {
-    opacity: 1;
-    visibility: visible;
-    z-index: 4001
-}
-
-.ld-ext-right.running {
-    padding-right: 2.5em !important
-}
-
-.ld-ext-right > .ld {
-    top: 50%;
-    left: auto;
-    right: 1.25em
-}
-
-.ld-ext-left.running {
-    padding-left: 2.5em !important
-}
-
-.ld-ext-left > .ld {
-    top: 50%;
-    right: auto;
-    left: 1.25em
-}
-
-.ld-ext-bottom.running {
-    padding-bottom: 2.5em !important
-}
-
-.ld-ext-bottom > .ld {
-    top: auto;
-    left: 50%;
-    bottom: 1.25em
-}
-
-.ld-ext-top.running {
-    padding-top: 2.5em !important
-}
-
-.ld-ext-top > .ld {
-    bottom: auto;
-    left: 50%;
-    top: 1.25em
-}
-
-.ld-over-full-inverse:before, .ld-over-full:before, .ld-over-inverse:before, .ld-over:before {
-    content: " ";
-    display: block;
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transition: all .3s;
-    transition-timing-function: ease-in;
-    background: rgba(240, 240, 240, .8)
-}
-
-.ld-over-full-inverse.running:before, .ld-over-full.running:before, .ld-over-inverse.running:before, .ld-over.running:before {
-    opacity: 1;
-    z-index: 4000;
-    display: block
-}
-
-.ld-over-full-inverse.running:before, .ld-over-full-inverse.running > .ld, .ld-over-full.running:before, .ld-over-full.running > .ld {
-    position: fixed
-}
-
-.ld-over-full > .ld {
-    color: rgba(0, 0, 0, .8)
-}
-
-.ld-over-full-inverse:before, .ld-over-full:before {
-    background: rgba(255, 255, 255, .8)
-}
-
-.ld-over-full-inverse > .ld, .ld-over-inverse > .ld {
-    color: rgba(255, 255, 255, .8)
-}
-
-.ld-over-full-inverse:before, .ld-over-inverse:before {
-    background: rgba(0, 0, 0, .6)
-}
-
 @keyframes fade {
     0%, to {
         opacity: 1
@@ -2817,412 +2693,6 @@
     }
 }
 
-html {
-    font-family: sans-serif;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%
-}
-
-body {
-    margin: 0;
-    font-family: tgnp-font, Arial, Helvetica, sans-serif;
-    font-size: 1rem;
-    line-height: 1;
-    color: #444c59;
-    font-weight: 400
-}
-
-.actionBar .filter-item .DropdownMenu.show, article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
-    display: block
-}
-
-audio, canvas, progress, video {
-    display: inline-block;
-    vertical-align: baseline
-}
-
-audio:not([controls]) {
-    display: none;
-    height: 0
-}
-
-[hidden], template {
-    display: none
-}
-
-a {
-    background-color: transparent
-}
-
-a:active, a:hover {
-    outline: 0
-}
-
-abbr[title] {
-    border-bottom: 1px dotted
-}
-
-b, strong {
-    font-weight: 700
-}
-
-dfn {
-    font-style: italic
-}
-
-h1 {
-    font-size: 2em;
-    margin: .67em 0
-}
-
-mark {
-    background: #ff0;
-    color: #000
-}
-
-small {
-    font-size: 80%
-}
-
-sub, sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline
-}
-
-sup {
-    top: -.5em
-}
-
-sub {
-    bottom: -.25em
-}
-
-img {
-    border: 0
-}
-
-svg:not(:root) {
-    overflow: hidden
-}
-
-figure {
-    margin: 1em 40px
-}
-
-hr {
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
-    height: 0
-}
-
-pre {
-    overflow: auto
-}
-
-code, kbd, pre, samp {
-    font-family: monospace, monospace;
-    font-size: 1em
-}
-
-button, input, optgroup, select, textarea {
-    color: inherit;
-    font: inherit;
-    margin: 0
-}
-
-button {
-    overflow: visible
-}
-
-button, select {
-    text-transform: none
-}
-
-button, html input[type=button], input[type=reset], input[type=submit] {
-    -webkit-appearance: button;
-    cursor: pointer
-}
-
-button[disabled], html input[disabled] {
-    cursor: default
-}
-
-button::-moz-focus-inner, input::-moz-focus-inner {
-    border: 0;
-    padding: 0
-}
-
-input {
-    line-height: normal
-}
-
-input[type=checkbox], input[type=radio] {
-    box-sizing: border-box;
-    padding: 0
-}
-
-input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
-    height: auto
-}
-
-input[type=search] {
-    -webkit-appearance: textfield;
-    -moz-box-sizing: content-box;
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box
-}
-
-input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration {
-    -webkit-appearance: none
-}
-
-fieldset {
-    border: 1px solid silver;
-    margin: 0 2px;
-    padding: .35em .625em .75em
-}
-
-legend {
-    border: 0
-}
-
-textarea {
-    overflow: auto
-}
-
-optgroup {
-    font-weight: 700
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0
-}
-
-legend, td, th {
-    padding: 0
-}
-
-.irs-bar-edge, .irs-line-left, .irs-line-mid, .irs-line-right, .irs-slider, Minified CSS Source map Restructure Beautify .irs-bar {
-    background: url(../img/sprite-skin-flat.png) repeat-x
-}
-
-.irs {
-    height: 40px;
-    position: relative;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none
-}
-
-.irs, .irs-line {
-    display: block
-}
-
-.irs-with-grid {
-    display: block;
-    height: 60px
-}
-
-.irs-line {
-    position: relative;
-    overflow: hidden;
-    outline: 0 !important;
-    height: 12px;
-    top: 27px
-}
-
-.irs-line-left, .irs-line-mid, .irs-line-right {
-    position: absolute;
-    display: block;
-    top: 0
-}
-
-.irs-line-left {
-    left: 0;
-    width: 11%;
-    border-bottom-left-radius: 4px;
-    border-top-left-radius: 4px
-}
-
-.irs-line-left, .irs-line-mid, .irs-line-right {
-    height: 3px;
-    background: #ddd;
-    border-top: 1px solid #c7c7c7
-}
-
-.irs-line-mid {
-    left: 9%;
-    width: 82%
-}
-
-.irs-line-right {
-    right: 0;
-    width: 11%;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px
-}
-
-.irs-bar, .irs-bar-edge {
-    position: absolute;
-    display: block;
-    left: 0
-}
-
-.irs-bar {
-    width: 0;
-    height: 4px;
-    top: 27px;
-    background: #00779a
-}
-
-.irs-bar-edge {
-    top: 25px;
-    height: 12px;
-    width: 9px;
-    background-position: 0 -90px
-}
-
-.irs-shadow {
-    position: absolute;
-    display: none;
-    left: 0;
-    width: 0;
-    height: 3px;
-    top: 34px;
-    background: #000;
-    opacity: .25
-}
-
-.lt-ie9 .irs-shadow {
-    filter: alpha(opacity=25)
-}
-
-.irs-slider {
-    position: absolute;
-    display: block;
-    z-index: 1;
-    width: 18px;
-    height: 18px;
-    top: 19px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 2px 1px 0 rgba(0, 0, 0, .35);
-    border: 2px solid #00779a;
-    cursor: pointer
-}
-
-.irs-slider.state_hover, .irs-slider:hover {
-    background-position: 0 -145px
-}
-
-.irs-from, .irs-max, .irs-min, .irs-single, .irs-to {
-    position: absolute;
-    display: block;
-    top: 0;
-    left: 0;
-    cursor: default;
-    line-height: 1.333;
-    text-shadow: none;
-    -moz-border-radius: 4px;
-    border-radius: 4px
-}
-
-.irs-max, .irs-min {
-    color: #999;
-    font-size: 10px;
-    padding: 1px 3px;
-    background: #e1e4e9
-}
-
-.irs-from, .irs-single, .irs-to {
-    white-space: nowrap;
-    color: #00779a;
-    font-size: 12px;
-    padding: 1px 5px;
-    font-weight: 600
-}
-
-.irs-grid {
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 20px
-}
-
-.irs-grid-pol {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 8px;
-    background: #000
-}
-
-.irs-grid-text {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    white-space: nowrap;
-    text-align: center;
-    font-size: 9px;
-    line-height: 9px;
-    padding: 0 3px;
-    color: #000
-}
-
-.irs-disabled {
-    opacity: .4
-}
-
-.lt-ie9 .irs-disabled {
-    filter: alpha(opacity=40)
-}
-
-.irs-hidden-input {
-    position: absolute !important;
-    display: block !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 0 !important;
-    height: 0 !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-    padding: 0 !important;
-    outline: 0 !important;
-    z-index: -9999 !important;
-    background: 0 0 !important;
-    border-style: solid !important;
-    border-color: transparent !important
-}
-
-.irs-hidden-input, .irs-with-grid span {
-    margin: 0 !important
-}
-
-.irs-grid-pol.small {
-    height: 4px
-}
-
-.irs-disable-mask {
-    position: absolute;
-    display: block;
-    top: 0;
-    left: -1%;
-    width: 102%;
-    height: 100%;
-    cursor: default;
-    background: 0 0;
-    z-index: 2
-}
-
 .actionBar, .actionBar .filter-item {
     -webkit-transition: all .3s;
     transition: all .3s
@@ -3326,6 +2796,10 @@ legend, td, th {
     box-shadow: 0 3px 6px rgba(0, 0, 0, .2);
     -webkit-transition: all .3s ease;
     transition: all .3s ease
+}
+
+.actionBar .filter-item .DropdownMenu.show {
+    display: block
 }
 
 .actionBar .filter-item .DropdownMenu .row {
@@ -3630,8 +3104,7 @@ legend, td, th {
     .actionBar {
         height: auto;
         line-height: normal;
-        padding: 12px 18px;
-        z-index: 5
+        padding: 12px 18px
     }
 
     .actionBar .filter {
@@ -3942,6 +3415,14 @@ legend, td, th {
     width: 100%;
     display: block;
     margin: 1rem 0
+}
+
+body {
+    font-family: tgnp-font, Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    line-height: 1;
+    color: #444c59;
+    font-weight: 400
 }
 
 .text-center {
@@ -4363,7 +3844,7 @@ legend, td, th {
     background: rgba(199, 37, 40, .86)
 }
 
-.listView .info-container .action-group .contact .btn-primary:hover .zmdi, .listView .info-container .action-group .contact .btn-primary:hover span, .result-body .row.grid .projectCard-list .info-container .price span strong, .status-bottom-gray:hover, .status-bottom-red:hover {
+.result-body .row.grid .projectCard-list .info-container .price span strong, .status-bottom-gray:hover, .status-bottom-red:hover {
     color: #fff
 }
 
@@ -4488,177 +3969,12 @@ legend, td, th {
     font-size: 14px
 }
 
-.listView {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    padding: 20px 0;
-    border-bottom: 1px solid rgba(48, 51, 58, .1) !important;
-    max-width: 100%;
-    border: 0;
-    -webkit-box-shadow: unset;
-    box-shadow: unset
-}
-
-.listView .cover-image {
-    width: 36%;
-    margin-right: 30px;
-    max-width: 270px;
-    min-width: 270px;
-    position: relative
-}
-
-.listView .info-container {
-    padding: 0;
-    position: relative
-}
-
-.listView .info-container .listing-name {
-    display: block;
-    font-family: rv-font2, Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    color: #30333a;
-    font-weight: 400;
-    line-height: 1.5;
-    width: calc(100% - 160px);
-    white-space: normal;
-    height: 60px;
-    padding: 0 0 5px;
-    vertical-align: top
-}
-
-.listView .info-container .listing-address, .listView .info-container .listing-info {
-    display: block;
-    overflow: hidden;
-    width: calc(100% - 160px);
-    white-space: nowrap;
-    text-overflow: ellipsis
-}
-
-.listView .info-container .listing-address {
-    line-height: 1.29;
-    font-size: 14px;
-    margin-top: 0
-}
-
-.listView .info-container .listing-info {
-    margin-top: 5px
-}
-
-.listView .info-container .listing-price {
-    top: 0;
-    right: 0
-}
-
-.listView .info-container .label-group {
-    position: absolute;
-    display: block;
-    top: 30px;
-    right: 0;
-    width: 130px
-}
-
-.listView .info-container .label-group .label-primary {
-    margin-bottom: 5px;
-    float: right
-}
-
-.form-element:last-child, .listView .info-container .label-group .label-primary:last-child {
+.form-element:last-child {
     margin-bottom: 0
 }
 
-.listView .info-container .action-group, .listView .info-container .action-group .agent {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal
-}
-
-.listView .info-container .action-group {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    width: 100%
-}
-
-.listView .info-container .action-group .agent {
-    -ms-flex-flow: row nowrap;
-    flex-flow: row nowrap;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
-    justify-content: flex-start
-}
-
-.listView .info-container .action-group .agent .avatar {
-    float: left;
-    vertical-align: sub;
-    height: 40px;
-    width: 40px;
-    overflow: hidden;
-    margin-right: 10px
-}
-
-.listView .info-container .action-group .agent .avatar img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-    -o-object-fit: cover;
-    object-fit: cover;
-    -o-object-position: 0 10%;
-    object-position: 0 10%
-}
-
-.listView .info-container .action-group .agent .detail {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-flow: column wrap;
-    flex-flow: column wrap;
-    -ms-flex-pack: distribute;
-    justify-content: space-around
-}
-
-.listView .info-container .action-group .agent .detail h5 a {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #30333a;
-    font-weight: 500
-}
-
-.listView .info-container .action-group .agent .detail .roll {
-    color: rgba(48, 51, 57, .7);
-    font-size: 12px;
-    line-height: 1.5;
-    padding: 0
-}
-
-.listView .info-container .action-group .contact {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: end;
-    -ms-flex-pack: end;
-    justify-content: flex-end
-}
-
-.group-btn-gmap a + a, .listView .info-container .action-group .contact .btn-primary, .result-body .row.grid .listView.box .cover-image .label-group label + label {
+.group-btn-gmap a + a, .result-body .row.grid .listingCard.box .cover-image .label-group label + label {
     margin-left: 10px
-}
-
-.listView .info-container .action-group .contact .btn-primary:first-child {
-    margin-left: 0
 }
 
 .form-element {
@@ -5344,10 +4660,10 @@ label {
     min-width: 790px;
     width: 790px;
     background: #fff;
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 790px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 1 790px;
     flex: 0 1 790px;
-    z-index: 3
+    z-index: 0
 }
 
 .search-result > div {
@@ -5405,6 +4721,16 @@ label {
     vertical-align: bottom
 }
 
+@media (max-width: 1170px) {
+    .search-result {
+        min-width: 410px;
+        width: 410px;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 1 410px;
+        flex: 0 1 410px
+    }
+}
+
 @media (max-width: 768px) {
     .search-result {
         min-width: 100%;
@@ -5440,7 +4766,7 @@ label {
     padding: 0 30px;
     background: #fff;
     border-bottom: 1px solid rgba(204, 204, 204, .63);
-    z-index: 1
+    z-index: 3
 }
 
 .secondaryBar .secondaryBar-left {
@@ -5596,19 +4922,19 @@ label {
     transition: all 250ms
 }
 
-.result-body .row:not(.grid) .listView.box {
+.result-body .row:not(.grid) .listingCard.box {
     border-radius: 4px;
     overflow: hidden
 }
 
-.result-body .row:not(.grid) .listView.box .info-container {
+.result-body .row:not(.grid) .listingCard.box .info-container {
     width: calc(100% - 302px);
     padding: 0;
     position: relative;
     border: transparent
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .listing-name {
+.result-body .row:not(.grid) .listingCard.box .info-container .listing-name {
     width: 100%;
     white-space: normal;
     height: unset;
@@ -5625,11 +4951,11 @@ label {
     line-height: 1.5
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .listing-address h4 a:hover, .result-body .row:not(.grid) .listView.box .info-container .listing-name:hover {
+.result-body .row:not(.grid) .listingCard.box .info-container .listing-address h4 a:hover, .result-body .row:not(.grid) .listingCard.box .info-container .listing-name:hover {
     color: orange
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .listing-address {
+.result-body .row:not(.grid) .listingCard.box .info-container .listing-address {
     display: block;
     overflow: hidden;
     width: 100%;
@@ -5638,7 +4964,7 @@ label {
     text-overflow: ellipsis
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .listing-address h4 {
+.result-body .row:not(.grid) .listingCard.box .info-container .listing-address h4 {
     display: inline;
     font-size: 14px;
     line-height: 1.5;
@@ -5646,20 +4972,20 @@ label {
     color: #676767
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .listing-address h4 a {
+.result-body .row:not(.grid) .listingCard.box .info-container .listing-address h4 a {
     font-size: 14px;
     line-height: 1.5;
     font-weight: 400;
     color: #676767
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .listing-info {
+.result-body .row:not(.grid) .listingCard.box .info-container .listing-info {
     width: 100%;
     margin-top: 6px;
     padding-left: 0
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .listing-price {
+.result-body .row:not(.grid) .listingCard.box .info-container .listing-price {
     display: block;
     font-family: tgnp-font2;
     font-size: 22px;
@@ -5668,7 +4994,7 @@ label {
     color: orange
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .listing-price span {
+.result-body .row:not(.grid) .listingCard.box .info-container .listing-price span {
     padding-left: 4px;
     font-size: 22px;
     line-height: 1.5;
@@ -5676,7 +5002,7 @@ label {
     color: #30333a
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .label-group {
+.result-body .row:not(.grid) .listingCard.box .info-container .label-group {
     position: absolute;
     display: block;
     top: 30px;
@@ -5684,17 +5010,17 @@ label {
     width: 130px
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .label-group .label-primary.sold-out {
+.result-body .row:not(.grid) .listingCard.box .info-container .label-group .label-primary.sold-out {
     opacity: 1
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group .agent .avatar a {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group .agent .avatar a {
     display: block;
     overflow: hidden;
     height: 0;
@@ -5705,7 +5031,7 @@ label {
     border-radius: 50%
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group--left {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group--left {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -5715,11 +5041,11 @@ label {
     width: calc(100% - 95px)
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group--left label {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group--left label {
     margin: 0
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group--left .label-primary {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group--left .label-primary {
     padding: 5px 8px 2px;
     font-size: 16px;
     line-height: 1.5;
@@ -5728,26 +5054,26 @@ label {
     text-transform: uppercase
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group--left .label-primary.label-white--outline {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group--left .label-primary.label-white--outline {
     padding: 3px 8px 1px;
     line-height: 1.4
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group--cta button + button, .result-body .row:not(.grid) .listView.box .info-container .action-group--left .label-primary + .label-primary, .result-body .row:not(.grid) .listView.box .info-container .action-group--left label + .label-primary {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group--cta button + button, .result-body .row:not(.grid) .listingCard.box .info-container .action-group--left .label-primary + .label-primary, .result-body .row:not(.grid) .listingCard.box .info-container .action-group--left label + .label-primary {
     margin-left: 10px
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group--cta, .result-body .row:not(.grid) .projectCard-list.box {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group--cta, .result-body .row:not(.grid) .projectCard-list.box {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group--cta .btn-favorite__v2:before {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group--cta .btn-favorite__v2:before {
     color: #676767
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group--cta button {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group--cta button {
     position: inherit;
     width: 32px;
     height: 32px;
@@ -5766,21 +5092,21 @@ label {
     border-radius: 2px
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group--cta button:hover {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group--cta button:hover {
     color: #fff;
     background: rgba(131, 131, 131, .86)
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group--cta button.active:before, .result-body .row:not(.grid) .listView.box .info-container .action-group--cta button:hover.btn-favorite__v2:before {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group--cta button.active:before, .result-body .row:not(.grid) .listingCard.box .info-container .action-group--cta button:hover.btn-favorite__v2:before {
     color: #fff
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group--cta button .zmdi {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group--cta button .zmdi {
     padding: 0;
     font-size: 24px
 }
 
-.result-body .row:not(.grid) .listView.box .info-container .action-group--cta button.active {
+.result-body .row:not(.grid) .listingCard.box .info-container .action-group--cta button.active {
     background-color: #337588;
     color: #fff
 }
@@ -5826,10 +5152,10 @@ label {
     width: 50%
 }
 
-.result-body .row.grid .listView.box {
+.result-body .row.grid .listingCard.box {
     position: relative;
     width: 100%;
-    display: flex;
+    display: block;
     padding: 0;
     border: 1px solid rgba(131, 131, 131, .2);
     -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .1);
@@ -5840,12 +5166,12 @@ label {
     transition: ease-in-out .2s
 }
 
-.result-body .row.grid .listView.box:hover {
+.result-body .row.grid .listingCard.box:hover {
     -webkit-transform: unset;
     transform: unset
 }
 
-.result-body .row.grid .listView.box .cover-image {
+.result-body .row.grid .listingCard.box .cover-image {
     position: relative;
     width: 100%;
     max-width: initial;
@@ -5853,11 +5179,11 @@ label {
     margin: 0
 }
 
-.result-body .row.grid .listView.box .cover-image a {
+.result-body .row.grid .listingCard.box .cover-image a {
     width: 100%
 }
 
-.result-body .row.grid .listView.box .cover-image img {
+.result-body .row.grid .listingCard.box .cover-image img {
     width: 100%;
     display: block;
     top: 0;
@@ -5866,11 +5192,11 @@ label {
     object-fit: cover
 }
 
-.result-body .row.grid .listView.box .cover-image .btn-favorite {
+.result-body .row.grid .listingCard.box .cover-image .btn-favorite {
     display: block
 }
 
-.result-body .row.grid .listView.box .cover-image .label-group {
+.result-body .row.grid .listingCard.box .cover-image .label-group {
     position: absolute;
     left: 10px;
     bottom: 10px;
@@ -5879,36 +5205,36 @@ label {
     display: block
 }
 
-.result-body .row.grid .listView.box .cover-image .label-group label {
+.result-body .row.grid .listingCard.box .cover-image .label-group label {
     margin: 0
 }
 
-.result-body .row.grid .listView.box .cover-image .label-group .label-primary {
+.result-body .row.grid .listingCard.box .cover-image .label-group .label-primary {
     padding: 5px 8px 2px;
     line-height: 1.5;
     font-weight: 600;
     text-transform: uppercase
 }
 
-.result-body .row.grid .listView.box .cover-image .label-group .label-primary.label-white--outline {
+.result-body .row.grid .listingCard.box .cover-image .label-group .label-primary.label-white--outline {
     padding: 3px 8px 1px;
     line-height: 1.4
 }
 
-.result-body .row.grid .listView.box .cover-image .label-group .label-primary + .label-primary {
+.result-body .row.grid .listingCard.box .cover-image .label-group .label-primary + .label-primary {
     margin-left: 5px;
     font-size: 14px;
     text-transform: uppercase;
     font-weight: 700
 }
 
-.result-body .row.grid .listView.box .info-container {
+.result-body .row.grid .listingCard.box .info-container {
     padding: 16px;
     background: #fff;
     min-height: 116px
 }
 
-.result-body .row.grid .listView.box .info-container .listing-name {
+.result-body .row.grid .listingCard.box .info-container .listing-name {
     display: block;
     width: 100%;
     height: unset;
@@ -5925,11 +5251,11 @@ label {
     overflow: hidden
 }
 
-.result-body .row.grid .listView.box .info-container .listing-address h4 a:hover, .result-body .row.grid .listView.box .info-container .listing-name:hover, .search-relative .inner .row .description a:hover *, .searchlisting article.featured header a:hover, .searchlisting article.featured header h2:hover {
+.result-body .row.grid .listingCard.box .info-container .listing-address h4 a:hover, .result-body .row.grid .listingCard.box .info-container .listing-name:hover, .search-relative .inner .row .description a:hover *, .searchlisting article.featured header a:hover, .searchlisting article.featured header h2:hover {
     color: orange
 }
 
-.result-body .row.grid .listView.box .info-container .listing-address {
+.result-body .row.grid .listingCard.box .info-container .listing-address {
     width: 100%;
     display: block;
     margin-top: 6px;
@@ -5939,24 +5265,24 @@ label {
     overflow: hidden
 }
 
-.result-body .row.grid .listView.box .info-container .listing-address h4 {
+.result-body .row.grid .listingCard.box .info-container .listing-address h4 {
     display: inline;
     font-size: 14px;
     font-weight: 400
 }
 
-.project-area .table thead th, .result-body .row.grid .listView.box .info-container .listing-address h4 a {
+.project-area .table thead th, .result-body .row.grid .listingCard.box .info-container .listing-address h4 a {
     color: #676767
 }
 
-.result-body .row.grid .listView.box .info-container .listing-info {
+.result-body .row.grid .listingCard.box .info-container .listing-info {
     display: none;
     width: 100%;
     margin-top: 15px;
     min-height: 18px
 }
 
-.result-body .row.grid .listView.box .info-container .listing-info li {
+.result-body .row.grid .listingCard.box .info-container .listing-info li {
     display: inline-block;
     width: auto;
     font-size: 14px;
@@ -5964,17 +5290,17 @@ label {
     color: #676767
 }
 
-.result-body .row.grid .listView.box .info-container .listing-info li:nth-child(n+3) {
+.result-body .row.grid .listingCard.box .info-container .listing-info li:nth-child(n+3) {
     display: none
 }
 
-.result-body .row.grid .listView.box .info-container .listing-info li .zmdi {
+.result-body .row.grid .listingCard.box .info-container .listing-info li .zmdi {
     color: #444c59;
     padding-right: 5px;
     vertical-align: text-bottom
 }
 
-.result-body .row.grid .listView.box .info-container .listing-price {
+.result-body .row.grid .listingCard.box .info-container .listing-price {
     display: block;
     position: absolute;
     right: 20px;
@@ -5986,11 +5312,11 @@ label {
     text-align: right
 }
 
-.result-body .row.grid .listView.box .info-container .action-group, .result-body .row.grid .listView.box .info-container .label-group {
+.result-body .row.grid .listingCard.box .info-container .action-group, .result-body .row.grid .listingCard.box .info-container .label-group {
     display: none
 }
 
-.result-body .row.grid .listView.box .info-container .group-grid__view {
+.result-body .row.grid .listingCard.box .info-container .group-grid__view {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -6002,7 +5328,7 @@ label {
     justify-content: space-between
 }
 
-.result-body .row.grid .listView.box .info-container .group-grid__view .listing-price {
+.result-body .row.grid .listingCard.box .info-container .group-grid__view .listing-price {
     position: relative;
     right: unset;
     bottom: unset;
@@ -6018,13 +5344,13 @@ label {
     font-family: tgnp-font2
 }
 
-.result-body .row.grid .listView.box .info-container .group-grid__view .listing-price span {
+.result-body .row.grid .listingCard.box .info-container .group-grid__view .listing-price span {
     padding-left: 4px;
     font-size: 1rem;
     line-height: 1.5
 }
 
-.result-body .row.grid .listView.box .info-container .group-grid__view .listing-info {
+.result-body .row.grid .listingCard.box .info-container .group-grid__view .listing-info {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -6040,15 +5366,15 @@ label {
     margin: 0
 }
 
-.result-body .row.grid .listView.box .info-container .group-grid__view .listing-info li {
+.result-body .row.grid .listingCard.box .info-container .group-grid__view .listing-info li {
     margin: 0
 }
 
-.result-body .row.grid .listView.box .info-container .group-grid__view .listing-info li + li {
+.result-body .row.grid .listingCard.box .info-container .group-grid__view .listing-info li + li {
     margin-left: 15px
 }
 
-.result-body .row.grid .listView.box .info-container .group-grid__view .listing-info li:nth-child(3) {
+.result-body .row.grid .listingCard.box .info-container .group-grid__view .listing-info li:nth-child(3) {
     display: block
 }
 
@@ -6179,6 +5505,7 @@ label {
     transition: all .3s;
     -webkit-box-flex: 1;
     -ms-flex: 1;
+    flex: 1
 }
 
 .search-map.active-map {
@@ -6861,11 +6188,9 @@ label {
 }
 
 .searchlisting article.featured header .price-marker {
-    position: static;
     left: 10px;
     bottom: 0;
-    width: 100px;
-    font-size: 16px
+    font-size: 14px
 }
 
 .searchlisting.add-class-marker {
@@ -7030,7 +6355,7 @@ article.featured header h2 {
 }
 
 .price-marker {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     position: absolute;
     bottom: 22px;
@@ -7074,14 +6399,14 @@ article.featured header h2 {
 }
 
 .mobileFilter {
-    z-index: 10;
+    z-index: 0;
     overflow: auto
 }
 
 .mobileFilter.show {
     display: block;
     height: 100vh;
-    z-index: 99
+    z-index: 0
 }
 
 .mobileFilter .inner {
@@ -9525,7 +8850,7 @@ article.featured header h2 {
         background: rgba(115, 175, 186, .86)
     }
 
-    .listView:hover {
+    .listingCard:hover {
         -webkit-transform: translate(0, 0);
         transform: translate(0, 0)
     }
@@ -9538,7 +8863,7 @@ article.featured header h2 {
         opacity: .86
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-info li {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-info li {
         display: inline-block;
         width: auto;
         margin-right: 15px;
@@ -9547,7 +8872,7 @@ article.featured header h2 {
         color: #676767
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-info li .zmdi {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-info li .zmdi {
         padding-right: 5px;
         color: #444c59;
         vertical-align: text-bottom
@@ -9656,8 +8981,8 @@ article.featured header h2 {
 
     .search-result {
         width: 410px;
-        -webkit-box-flex: 1;
-        -ms-flex: 1 1 410px;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 1 410px;
         flex: 0 1 410px
     }
 
@@ -9670,26 +8995,26 @@ article.featured header h2 {
         float: left
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .action-group--cta, .result-body .row:not(.grid) .listView.box .info-container .action-group--left .label-primary, .result-body .row:not(.grid) .listView.box .info-container .action-group--left label {
+    .result-body .row:not(.grid) .listingCard.box .info-container .action-group--cta, .result-body .row:not(.grid) .listingCard.box .info-container .action-group--left .label-primary, .result-body .row:not(.grid) .listingCard.box .info-container .action-group--left label {
         display: none
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-name {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-name {
         font-size: 16px;
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container, .result-body .row:not(.grid) .listView.box .info-container .listing-address {
+    .result-body .row:not(.grid) .listingCard.box .info-container, .result-body .row:not(.grid) .listingCard.box .info-container .listing-address {
         width: 100%
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-info {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-info {
         white-space: unset
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-info li {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-info li {
         display: inline-block;
         width: auto;
         font-size: 14px;
@@ -9697,7 +9022,7 @@ article.featured header h2 {
         color: #676767
     }
 
-    .result-body .row:not(.grid) .listView.box {
+    .result-body .row:not(.grid) .listingCard.box {
         position: relative;
         width: 100%;
         float: left;
@@ -9708,7 +9033,7 @@ article.featured header h2 {
         box-shadow: 0 0 6px rgba(0, 0, 0, .15)
     }
 
-    .result-body .row:not(.grid) .listView.box .cover-image {
+    .result-body .row:not(.grid) .listingCard.box .cover-image {
         width: 100%;
         position: relative;
         margin: 0;
@@ -9716,7 +9041,7 @@ article.featured header h2 {
         max-width: 100%
     }
 
-    .result-body .row:not(.grid) .listView.box .cover-image a {
+    .result-body .row:not(.grid) .listingCard.box .cover-image a {
         width: 100%;
         display: block;
         overflow: hidden;
@@ -9725,7 +9050,7 @@ article.featured header h2 {
         position: relative
     }
 
-    .result-body .row:not(.grid) .listView.box .cover-image a img {
+    .result-body .row:not(.grid) .listingCard.box .cover-image a img {
         width: 100%;
         display: block;
         position: absolute;
@@ -9737,11 +9062,11 @@ article.featured header h2 {
         object-position: center
     }
 
-    .result-body .row:not(.grid) .listView.box .cover-image .btn-favorite {
+    .result-body .row:not(.grid) .listingCard.box .cover-image .btn-favorite {
         display: block
     }
 
-    .result-body .row:not(.grid) .listView.box .cover-image .label-group {
+    .result-body .row:not(.grid) .listingCard.box .cover-image .label-group {
         position: absolute;
         left: 0;
         bottom: 10px;
@@ -9751,17 +9076,17 @@ article.featured header h2 {
         display: block
     }
 
-    .result-body .row:not(.grid) .listView.box .cover-image .label-group span {
+    .result-body .row:not(.grid) .listingCard.box .cover-image .label-group span {
         margin: 5px 5px 0 0
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container {
+    .result-body .row:not(.grid) .listingCard.box .info-container {
         position: relative;
         padding: 16px;
         background: #fff
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-name {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-name {
         display: block;
         height: auto !important;
         margin: 34px 0 0;
@@ -9775,7 +9100,7 @@ article.featured header h2 {
         line-height: 1.5
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-address {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-address {
         margin-top: 5.5px;
         display: block;
         color: #676767;
@@ -9785,17 +9110,17 @@ article.featured header h2 {
         line-height: 1.29
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-address h4 {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-address h4 {
         display: inline-block;
         font-size: 14px;
         font-weight: 400
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-address h4 a {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-address h4 a {
         color: #676767
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-info {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-info {
         position: absolute;
         right: 16px;
         top: 20px;
@@ -9804,23 +9129,23 @@ article.featured header h2 {
         text-align: right
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-info li .zmdi {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-info li .zmdi {
         color: #444c59;
         padding-right: 5px;
         vertical-align: text-bottom
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-info li.icon-bath-room {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-info li.icon-bath-room {
         position: relative;
         padding-left: 25px;
         vertical-align: text-bottom
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-info li:nth-child(n+4) {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-info li:nth-child(n+4) {
         display: none
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-price {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-price {
         position: absolute;
         left: 16px;
         top: 12px;
@@ -9835,15 +9160,15 @@ article.featured header h2 {
         text-align: left
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .listing-price span {
+    .result-body .row:not(.grid) .listingCard.box .info-container .listing-price span {
         font-size: 1rem
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .label-group {
+    .result-body .row:not(.grid) .listingCard.box .info-container .label-group {
         display: none
     }
 
-    .result-body .row:not(.grid) .listView.box .info-container .action-group {
+    .result-body .row:not(.grid) .listingCard.box .info-container .action-group {
         left: 0;
         top: 0
     }
@@ -10188,7 +9513,7 @@ article.featured header h2 {
         background: rgba(131, 131, 131, .86)
     }
 
-    .result-body .row:not(.grid) .listView.box {
+    .result-body .row:not(.grid) .listingCard.box {
         width: 100%;
         position: relative;
         padding: 20px 30px;
@@ -10197,13 +9522,13 @@ article.featured header h2 {
         transition: all .3s
     }
 
-    .result-body .row:not(.grid) .listView.box .cover-image {
+    .result-body .row:not(.grid) .listingCard.box .cover-image {
         max-width: 270px;
         min-width: 270px;
         position: relative
     }
 
-    .result-body .row:not(.grid) .listView.box .cover-image a {
+    .result-body .row:not(.grid) .listingCard.box .cover-image a {
         width: 100%;
         display: block;
         overflow: hidden;
@@ -10212,7 +9537,7 @@ article.featured header h2 {
         height: 100%
     }
 
-    .result-body .row:not(.grid) .listView.box .cover-image img {
+    .result-body .row:not(.grid) .listingCard.box .cover-image img {
         width: 100%;
         display: block;
         position: absolute;
@@ -10224,7 +9549,7 @@ article.featured header h2 {
         object-position: center
     }
 
-    .result-body .row:not(.grid) .listView.box .cover-image .btn-compare, .result-body .row:not(.grid) .listView.box .cover-image .btn-favorite, .result-body .row:not(.grid) .listView.box .cover-image .label-group {
+    .result-body .row:not(.grid) .listingCard.box .cover-image .btn-compare, .result-body .row:not(.grid) .listingCard.box .cover-image .btn-favorite, .result-body .row:not(.grid) .listingCard.box .cover-image .label-group {
         display: none
     }
 
@@ -10251,7 +9576,7 @@ article.featured header h2 {
         padding: 16px 30px
     }
 
-    .result-body .row.grid .listView.box:hover {
+    .result-body .row.grid .listingCard.box:hover {
         -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .3);
         box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .3)
     }
@@ -11020,3 +10345,4 @@ article.featured header h2 {
 [class^=vue-content-placeholders-] + .vue-content-placeholders-img {
     margin-top: 20px
 }
+

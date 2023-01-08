@@ -33259,7 +33259,7 @@ section.bg-career-white div.content div.info div.shape div.requirement-detail ul
 }
 
 .row {
-    display: flex;
+    display: block;
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: 10px;
