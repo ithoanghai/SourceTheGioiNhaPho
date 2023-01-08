@@ -12,7 +12,7 @@
             <h1 class="heading-01">TÌM KIẾM NGÔI NHÀ TỐT NHẤT, NHANH NHẤT</h1>
 
             <form id="searchFormHome" class="search-desktop-component" action="{% url "listing_search" %}">
-                {% csrf_token %}
+                {% comment %}{% csrf_token %}{% endcomment %}
                 <div class="tab-container">
                     <div class="tab">
                         <input type="radio" name="trans" style="color: red" value="sell" checked id="buy-house">

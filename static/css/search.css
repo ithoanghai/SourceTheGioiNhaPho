@@ -4766,7 +4766,7 @@ label {
     padding: 0 30px;
     background: #fff;
     border-bottom: 1px solid rgba(204, 204, 204, .63);
-    z-index: 3
+    z-index: 1
 }
 
 .secondaryBar .secondaryBar-left {
@@ -6399,14 +6399,14 @@ article.featured header h2 {
 }
 
 .mobileFilter {
-    z-index: 0;
+    z-index: 9;
     overflow: auto
 }
 
 .mobileFilter.show {
     display: block;
     height: 100vh;
-    z-index: 0
+    z-index: 9
 }
 
 .mobileFilter .inner {
@@ -6436,7 +6436,7 @@ article.featured header h2 {
     padding: 0 18px;
     -webkit-box-shadow: 0 15px 15px -15px #e4e4e4;
     box-shadow: 0 15px 15px -15px #e4e4e4;
-    z-index: 1
+    z-index: 9
 }
 
 .mobileFilter .inner .topFilter .btnBack .zmdi {
