@@ -14999,7 +14999,7 @@ input, keygen, select, textarea {
     top: 0;
     width: 100%;
     padding: 0 10px;
-    /*z-index: 2;*/
+    z-index: 2;
     text-align: center
 }
 
@@ -33259,7 +33259,7 @@ section.bg-career-white div.content div.info div.shape div.requirement-detail ul
 }
 
 .row {
-    display: block;
+    display: flex;
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: 10px;

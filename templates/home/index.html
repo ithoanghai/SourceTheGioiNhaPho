@@ -46,7 +46,7 @@
         <section class="container col-12">
             <div class="inner pd-top-bottom-block block-project-listing">
                 <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
-                    <b><a href="{% url 'listing_search' %}?trans=sell {{ key }}"
+                    <b><a href="{% url 'listing_search' trans='sell' so='priority' %}"
                           style="padding-bottom:10px; font-size: 20px;">{% comment %}{{ listings_for_sale.count }}{% endcomment %}BẤT
                         ĐỘNG SẢN BÁN MỚI NHẤT</a></b>
                 </div>
@@ -56,7 +56,7 @@
                         {% include "listings/_listingCard2.html" %}
                     {% endfor %}
                 </div>
-                <div><a class="more" href="{% url "listing_search" %}?trans=sell">
+                <div><a class="more" href="{% url 'listing_search' trans='sell' so='priority' %}">
                     <span>Xem thêm nhà đất bán<i class="zmdi zmdi-chevron-right"></i></span>
                 </a></div>
 
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-12">
                     {% for district in listing_by_group_forsale %}
-                        <a href="{% url 'listing_search' %}?district={{ district.district }}&so=priority"
+                        <a href="{% url 'listing_search' trans='sell' so='priority' %}?district={{ district.district }}"
                            title="{% get_district district.district %}"> {% get_district district.district %}
                             ({{ district.dcount }})</a> &ensp;
                     {% endfor %}
@@ -98,7 +98,7 @@
         <section class="container col-12">
             <div class="inner pd-top-bottom-block block-project-listing">
                 <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
-                    <b><a href="{% url 'listing_search' %}?trans=rent {{ key }}">BẤT ĐỘNG SẢN CHO THUÊ MỚI NHẤT</a></b>
+                    <b><a href="{% url 'listing_search' trans='rent' so='priority' %}">BẤT ĐỘNG SẢN CHO THUÊ MỚI NHẤT</a></b>
                 </div>
 
                 <div class="col-12">
@@ -106,7 +106,7 @@
                         {% include "listings/_listingCard2.html" %}
                     {% endfor %}
                 </div>
-                <div><a class="more" href="{% url "listing_search" %}?trans=rent">
+                <div><a class="more" href="{% url 'listing_search' trans='rent' so='priority' %}">
                     <span>Xem thêm <i class="zmdi zmdi-chevron-right"></i></span>
                 </a></div>
 
@@ -122,7 +122,7 @@
                 </div>
                 <div class="col-12">
                     {% for district in listing_by_group_forrent %}
-                        <a href="{% url 'listing_search' %}?trans=rent&district={{ district.district }}&so=priority"
+                        <a href="{% url 'listing_search' trans='rent' so='priority'%}?district={{ district.district }}"
                            title="{% get_district district.district %}"> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
                     {% endfor %}
                 </div>
@@ -160,7 +160,7 @@
         <section class="container col-12">
             <div class="inner pd-top-bottom-block block-project-listing">
                 <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
-                    <b><a href="{% url 'listing_search' %}?trans=sell&adv=True {{ key }}">TIN RAO BÁN/CHO THUÊ (Chưa xác
+                    <b><a href="{% url 'listing_search' trans='sell' so='priority' %}?adv=True {{ key }}">TIN RAO BÁN/CHO THUÊ (Chưa xác
                         thực)</a></b>
                 </div>
 
@@ -169,7 +169,7 @@
                         {% include "listings/_listingCard2.html" %}
                     {% endfor %}
                 </div>
-                <div><a class="more" href="{% url "listing_search" %}?trans=rent">
+                <div><a class="more" href="{% url 'listing_search' trans='rent' so='priority'%}">
                     <span>Xem thêm tin rao khác <i class="zmdi zmdi-chevron-right"></i></span>
                 </a></div>
 
@@ -185,7 +185,7 @@
                 </div>
                 <div class="col-12">
                     {% for district in listing_by_group_advertising %}
-                        <a href="{% url 'listing_search' %}?trans=rent&district={{ district.district }}&so=priority"
+                        <a href="{% url 'listing_search' trans='rent' so='priority' %}?district={{ district.district }}"
                            title="{% get_district district.district %}"> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
                     {% endfor %}
                 </div>
@@ -227,7 +227,7 @@
         <section class="container col-12">
             <div class="inner pd-top-bottom-block block-project-listing">
                 <div class="heading-05" style="text-align: center;padding-bottom: 10px;">
-                    <b><a href="{% url 'listing_search' %}?trans=project {{ key }}">CÁC DỰ ÁN BĐS TIÊU BIỂU:</a></b>
+                    <b><a href="{% url 'listing_search' trans='project' so='priority'%}?{{ key }}">CÁC DỰ ÁN BĐS TIÊU BIỂU:</a></b>
                 </div>
 
                 <div class="col-12">
@@ -235,7 +235,7 @@
                         {% include "listings/_listingCard2.html" %}
                     {% endfor %}
                 </div>
-                <div><a class="more" href="{% url "listing_search" %}?trans=rent">
+                <div><a class="more" href="{% url 'listing_search' trans='rent' so='priority'%}">
                     <span>Xem thêm dự án khác <i class="zmdi zmdi-chevron-right"></i></span>
                 </a></div>
 
@@ -251,7 +251,7 @@
                 </div>
                 <div class="col-12">
                     {% for district in listing_by_group_project %}
-                        <a href="{% url 'listing_search' %}?trans=project&district={{ district.district }}&so=priority"
+                        <a href="{% url 'listing_search' trans='project' so='priority' %}?district={{ district.district }}"
                            title="{% get_district district.district %}"> {% get_district district.district %} ({{ district.dcount }})</a> &ensp;
                     {% endfor %}
                 </div>

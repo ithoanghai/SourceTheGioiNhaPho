@@ -1060,7 +1060,7 @@ class ListingAdmin(ImportExportModelAdmin):
                                     if not phone.isalnum():
                                         realtor_dict[phone] = Realtor.objects.filter(pk=1).first()
                                         logger.info(f"Phone invalid. Continue in line {line_count}")
-                                        phone = '0916286256'
+                                        phone = '0964399436'
                                         #continue
                                     elif len(phone) == 9 or (len(phone) == 10 and phone[0] == '0'):
                                         # update, delete user, realtor

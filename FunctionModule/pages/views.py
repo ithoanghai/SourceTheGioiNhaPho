@@ -26,7 +26,7 @@ def get_client_ip(request):
     return ip
 
 
-@cache_page(60 * 60)
+#@cache_page(60 * 60)
 def home_view(request):
     listings_for_sale = (Listing.objects.order_by('priority','-date_update')
                              .filter(is_published=True, transaction_type=TransactionType.SELL)[:30])

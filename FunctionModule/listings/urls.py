@@ -25,10 +25,9 @@ urlpatterns = [
 
     path('ListingsAPIView/', views.ListingsAPIView.as_view(), name='ListingsAPIView'),
     path('listingsAPI', views.listing_api_view),
+    path('ListingsAPIView/', views.ListingsAPIView.as_view(), name='ListingsAPIView'),
     path('ListingAPIAllView', views.ListingAPIAllView.as_view()),
     path('listings-api-token-auth/', obtain_auth_token, name='listings_api_token_auth'),
-
-    path('listinghistory/add/', views.listinghistoryadd, name='history_add'),
 
     path('ajax/load-districts/', views.load_districts, name='ajax_load_districts'),
 

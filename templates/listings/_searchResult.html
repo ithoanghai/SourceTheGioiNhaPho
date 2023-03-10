@@ -27,8 +27,32 @@
 </div>
 
 <div class="result-body">
-  <div class="row " v-if="isLoading">
+  <div class="row grid" v-if="isLoading">
+    <div class="col lazy-loading">
+      <div class="box listView vue-content-placeholders vue-content-placeholders-is-animated">
+        <div class="cover-image vue-content-placeholders-img"></div>
+        <div class="info-container vue-content-placeholders-text">
+          <div class="vue-content-placeholders-text__line"></div>
+          <div class="vue-content-placeholders-text__line"></div>
+          <div class="vue-content-placeholders-text__line"></div>
+          <div class="vue-content-placeholders-text__line"></div>
+          <div class="vue-content-placeholders-text__line"></div>
         </div>
+      </div>
+    </div>
+    <div class="col lazy-loading">
+      <div class="box listView vue-content-placeholders vue-content-placeholders-is-animated">
+        <div class="cover-image vue-content-placeholders-img"></div>
+        <div class="info-container vue-content-placeholders-text">
+          <div class="vue-content-placeholders-text__line"></div>
+          <div class="vue-content-placeholders-text__line"></div>
+          <div class="vue-content-placeholders-text__line"></div>
+          <div class="vue-content-placeholders-text__line"></div>
+          <div class="vue-content-placeholders-text__line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
   <property-list v-bind:listings="listings" v-bind:is-view-grid="isViewGrid" v-bind:pagination="pagination" v-bind:sortOption="sortOption"
                  v-bind:is-loading="isLoading" v-bind:show-contact-project="showContactProject"
                  v-bind:go-to="goTo"

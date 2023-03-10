@@ -13,7 +13,7 @@ class SearchEngineClient(object):
             _client = self._create_client()
 
     def _create_client(self):
-        client = meilisearch.Client(f'http://{settings.MEILI_HOST}:{settings.MEILI_PORT}',settings.MEILI_MASTER_KEY)
+        client = meilisearch.Client(f'https://{settings.MEILI_HOST}:{settings.MEILI_PORT}',settings.MEILI_MASTER_KEY)
 
         return client
 

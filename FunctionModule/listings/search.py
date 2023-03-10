@@ -37,17 +37,16 @@ def get_suggestions(q: str, limit: int = 20, offset: int = 0, ):
         return []
 
 
-def prepare_listing_queryset(input_params):
+def prepare_listing_queryset(input_params, **kwargs):
     queryset_list = Listing.objects.order_by('priority','-date_update').filter(is_published=True)
     hn_district = district_data['01']
 
-    # trans_type
-    if 'trans' in input_params:
-        trans_type = input_params.get('trans')
-        if trans_type == 'adver':
-            queryset_list = queryset_list.filter(is_advertising=bool(True))
-        else:
-            queryset_list = queryset_list.filter(transaction_type=trans_type)
+    trans_type = kwargs.get('trans')
+    if trans_type == 'adver':
+        queryset_list = queryset_list.filter(is_advertising=bool(True))
+    else:
+        queryset_list = queryset_list.filter(transaction_type=trans_type)
+
 
     #check listing is post
     if 'adv' in input_params:

@@ -1,3 +1,5 @@
+import os
+import requests
 import random
 import string
 import datetime
@@ -16,19 +18,23 @@ from django.views.generic import DetailView, CreateView
 from django_filters.rest_framework import DjangoFilterBackend
 from FunctionModule.hitcount.views import HitCountDetailView
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django_filters.rest_framework import DjangoFilterBackend
 from pydantic import BaseModel
 from rest_framework import status, generics, mixins, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 from FunctionModule.cadastral.lookups import get_all_states, get_all_districts, get_district
 from FunctionModule.listings import get_short_title_from_house_type, get_short_title_from_transaction_type
+from FunctionModule.hitcount.views import HitCountDetailView
 from TownhouseWorldRealestate import settings
+from TownhouseWorldRealestate.filters import ListingFilter
 
 from . import HouseType
-from TownhouseWorldRealestate.filters import ListingFilter
 from .forms import ListingForm, ListingImageFormSet
 from .models import ListingImage
+from .search import get_suggestions, prepare_listing_queryset
 from .serializers import *
 from ..cadastral.constants import district_data
 
